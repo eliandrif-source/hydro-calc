@@ -134,38 +134,48 @@ function generateHTMLReport() {
   var userLogo = _safeStorage.getItem('hc_user_logo');
   var plan = AUTH.user ? (AUTH.user.plan || 'free') : 'free';
   var logoHtml = (userLogo && plan !== 'free')
-    ? '<img src="' + userLogo + '" style="height:60px;object-fit:contain">'
-    : '<div style="font-size:28px;font-weight:900;color:#0A7460;letter-spacing:-1px">HydroCalc</div>';
+    ? '<img src="' + userLogo + '" style="height:56px;object-fit:contain">'
+    : '<div style="font-size:26px;font-weight:900;color:#0A7460;letter-spacing:-1px;font-family:Georgia,serif">HydroCalc</div><div style="font-size:10px;color:#7ECABB;letter-spacing:2px;text-transform:uppercase;margin-top:2px">Application hydraulique</div>';
 
-  var calcsHtml = arr.map(function(c) {
+  var calcsHtml = arr.map(function(c, i) {
     var d = new Date(c.date);
-    var dateStr = d.toLocaleDateString('fr-FR') + ' ' + d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+    var dateStr = d.toLocaleDateString('fr-FR') + ' à ' + d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
     var detail = (c.detail||'').replace(/<br\s*\/?>/gi,'<br>').replace(/<(?!br)[^>]+>/g,'');
-    return '<div style="margin-bottom:20px;border:1px solid #DEE8E4;border-radius:10px;overflow:hidden">'
-      + '<div style="background:#E0F4F0;padding:8px 14px;display:flex;justify-content:space-between;align-items:center">'
-      + '<span style="font-weight:800;font-size:12px;color:#0A7460;text-transform:uppercase">' + c.module + '</span>'
-      + '<span style="font-size:11px;color:#617068">' + dateStr + '</span></div>'
-      + '<div style="padding:12px 14px">'
-      + '<div style="font-size:18px;font-weight:700;color:#065A48;margin-bottom:6px">' + (c.valeur||'') + '</div>'
-      + '<div style="font-size:12px;color:#3A4840;line-height:1.7">' + detail + '</div>'
+    return '<div style="margin-bottom:16px;border:1px solid #DEE8E4;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(10,116,96,.06)">'
+      + '<div style="background:linear-gradient(135deg,#0A7460,#0A5040);padding:10px 16px;display:flex;justify-content:space-between;align-items:center">'
+      + '<div style="display:flex;align-items:center;gap:8px">'
+      + '<span style="background:rgba(255,255,255,.2);color:#fff;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:20px">' + c.module + '</span>'
+      + '</div>'
+      + '<span style="font-size:10px;color:rgba(255,255,255,.7)">' + dateStr + '</span></div>'
+      + '<div style="padding:14px 16px;background:#fff">'
+      + '<div style="font-size:20px;font-weight:800;color:#065A48;margin-bottom:8px;font-family:Georgia,serif">' + (c.valeur||'') + '</div>'
+      + (detail ? '<div style="font-size:12px;color:#3A4840;line-height:1.8;padding:10px 12px;background:#F3F6F4;border-radius:8px;border-left:3px solid #0A7460">' + detail + '</div>' : '')
       + '</div></div>';
   }).join('');
 
+  var css = 'body{font-family:Arial,sans-serif;max-width:820px;margin:0 auto;padding:32px 24px;color:#141C18;background:#F3F6F4}'
+    + '.page{background:#fff;border-radius:16px;padding:32px;box-shadow:0 4px 24px rgba(0,0,0,.08)}'
+    + '.header{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:20px;margin-bottom:28px;border-bottom:2px solid #E0F4F0}'
+    + '.user-block{text-align:right}'
+    + '.user-name{font-size:16px;font-weight:800;color:#141C18}'
+    + '.user-date{font-size:11px;color:#617068;margin-top:3px}'
+    + '.section-title{font-size:13px;font-weight:800;color:#617068;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px}'
+    + '.footer{margin-top:28px;padding-top:16px;border-top:1px solid #DEE8E4;text-align:center;font-size:10px;color:#8A9890}'
+    + '@media print{body{background:#fff;padding:0}.page{box-shadow:none;border-radius:0}}';
+
   var html = '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">'
     + '<title>Rapport HydroCalc — ' + h.dateStr + '</title>'
-    + '<style>body{font-family:Arial,sans-serif;max-width:800px;margin:40px auto;padding:0 20px;color:#141C18}'
-    + '@media print{body{margin:0}}</style></head><body>'
-    + '<div style="display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px solid #0A7460;padding-bottom:14px;margin-bottom:24px">'
-    + '<div>' + logoHtml
-    + '<div style="font-size:12px;color:#617068;margin-top:4px">Application hydraulique professionnelle</div></div>'
-    + '<div style="text-align:right">'
-    + '<div style="font-weight:700;font-size:14px">' + h.userName + '</div>'
-    + '<div style="font-size:12px;color:#617068">' + h.dateStr + '</div></div></div>'
-    + '<h2 style="color:#0A7460;font-size:16px;margin-bottom:16px">Calculs enregistrés (' + arr.length + ')</h2>'
+    + '<style>' + css + '</style></head><body><div class="page">'
+    + '<div class="header">'
+    + '<div>' + logoHtml + '</div>'
+    + '<div class="user-block">'
+    + '<div class="user-name">' + h.userName + '</div>'
+    + '<div class="user-date">' + h.dateStr + '</div>'
+    + '</div></div>'
+    + '<div class="section-title">📊 Calculs enregistrés (' + arr.length + ')</div>'
     + calcsHtml
-    + '<div style="margin-top:30px;padding-top:12px;border-top:1px solid #DEE8E4;text-align:center;font-size:10px;color:#8A9890">'
-    + 'HydroCalc · hydrocalc.fr · Rapport généré le ' + new Date().toLocaleString('fr-FR') + '</div>'
-    + '</body></html>';
+    + '<div class="footer">HydroCalc · hydrocalc.fr · Rapport généré le ' + new Date().toLocaleString('fr-FR') + '</div>'
+    + '</div></body></html>';
 
   _download(new Blob([html], {type:'text/html;charset=utf-8'}), 'HydroCalc_rapport_' + _reportDate() + '.html');
   _incrementReportQuota();
@@ -173,6 +183,10 @@ function generateHTMLReport() {
 }
 
 /* ─── FORMAT ODT ─── */
+function _xmlEsc(s) {
+  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
 function generateODTReport() {
   var check = _canGenerateReport();
   if (!check.ok) { authToast(check.reason); setTimeout(openSidebar, 800); return; }
@@ -181,54 +195,92 @@ function generateODTReport() {
   if (!window.JSZip) { authToast('Bibliothèque ZIP non chargée.'); return; }
 
   var h = _reportHeader();
-  var userLogo = _safeStorage.getItem('hc_user_logo');
   var plan = AUTH.user ? (AUTH.user.plan || 'free') : 'free';
-  var logoName = (userLogo && plan !== 'free') ? 'logo_utilisateur' : 'HydroCalc';
+  var userLogo = _safeStorage.getItem('hc_user_logo');
+  var logoStr = (userLogo && plan !== 'free') ? 'Logo importé' : 'HydroCalc';
 
   var calcsXml = arr.map(function(c) {
     var d = new Date(c.date);
-    var dateStr = d.toLocaleDateString('fr-FR') + ' ' + d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
-    var valeur  = _htmlToText(c.valeur).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    var detail  = _htmlToText(c.detail).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    var module  = (c.module||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    return '<text:p text:style-name="module_header">' + module + '   ' + dateStr + '</text:p>'
-      + '<text:p text:style-name="calc_value">' + valeur + '</text:p>'
-      + (detail ? '<text:p text:style-name="calc_detail">' + detail + '</text:p>' : '')
-      + '<text:p text:style-name="separator"> </text:p>';
+    var dateStr = d.toLocaleDateString('fr-FR') + ' à ' + d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+    var valeur = _xmlEsc(_htmlToText(c.valeur));
+    var detail = _xmlEsc(_htmlToText(c.detail));
+    var module = _xmlEsc(c.module||'');
+    return '<text:p text:style-name="HC_Module">' + module + '<text:tab/>' + dateStr + '</text:p>'
+      + '<text:p text:style-name="HC_Value">' + valeur + '</text:p>'
+      + (detail ? '<text:p text:style-name="HC_Detail">' + detail + '</text:p>' : '')
+      + '<text:p text:style-name="HC_Space"> </text:p>';
   }).join('');
+
+  var styles = '<?xml version="1.0" encoding="UTF-8"?>'
+    + '<office:document-styles xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"'
+    + ' xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0"'
+    + ' xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"'
+    + ' xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"'
+    + ' xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0">'
+    + '<office:styles>'
+    + '<style:style style:name="HC_Title" style:family="paragraph" style:parent-style-name="Default Paragraph Style">'
+    + '<style:paragraph-properties fo:margin-bottom="0.2cm"/>'
+    + '<style:text-properties fo:font-size="22pt" fo:font-weight="bold" fo:color="#0A7460" style:font-name="Arial"/>'
+    + '</style:style>'
+    + '<style:style style:name="HC_Subtitle" style:family="paragraph" style:parent-style-name="Default Paragraph Style">'
+    + '<style:paragraph-properties fo:margin-bottom="0.4cm" fo:border-bottom="0.5pt solid #0A7460" fo:padding-bottom="0.2cm"/>'
+    + '<style:text-properties fo:font-size="10pt" fo:color="#617068" style:font-name="Arial"/>'
+    + '</style:style>'
+    + '<style:style style:name="HC_UserName" style:family="paragraph" style:parent-style-name="Default Paragraph Style">'
+    + '<style:paragraph-properties fo:text-align="right" fo:margin-bottom="0.1cm"/>'
+    + '<style:text-properties fo:font-size="13pt" fo:font-weight="bold" fo:color="#141C18" style:font-name="Arial"/>'
+    + '</style:style>'
+    + '<style:style style:name="HC_SectionTitle" style:family="paragraph" style:parent-style-name="Default Paragraph Style">'
+    + '<style:paragraph-properties fo:margin-top="0.4cm" fo:margin-bottom="0.3cm"/>'
+    + '<style:text-properties fo:font-size="10pt" fo:font-weight="bold" fo:color="#617068" style:font-name="Arial" fo:text-transform="uppercase" fo:letter-spacing="0.08cm"/>'
+    + '</style:style>'
+    + '<style:style style:name="HC_Module" style:family="paragraph" style:parent-style-name="Default Paragraph Style">'
+    + '<style:paragraph-properties fo:background-color="#E0F4F0" fo:padding="0.15cm" fo:margin-top="0.3cm"/>'
+    + '<style:text-properties fo:font-size="9pt" fo:font-weight="bold" fo:color="#0A7460" style:font-name="Arial"/>'
+    + '</style:style>'
+    + '<style:style style:name="HC_Value" style:family="paragraph" style:parent-style-name="Default Paragraph Style">'
+    + '<style:paragraph-properties fo:margin-left="0.3cm" fo:margin-top="0.1cm" fo:margin-bottom="0.1cm"/>'
+    + '<style:text-properties fo:font-size="16pt" fo:font-weight="bold" fo:color="#065A48" style:font-name="Arial"/>'
+    + '</style:style>'
+    + '<style:style style:name="HC_Detail" style:family="paragraph" style:parent-style-name="Default Paragraph Style">'
+    + '<style:paragraph-properties fo:margin-left="0.3cm" fo:margin-bottom="0.1cm" fo:background-color="#F3F6F4" fo:padding="0.15cm"/>'
+    + '<style:text-properties fo:font-size="9pt" fo:color="#3A4840" style:font-name="Arial" fo:line-height="150%"/>'
+    + '</style:style>'
+    + '<style:style style:name="HC_Space" style:family="paragraph" style:parent-style-name="Default Paragraph Style">'
+    + '<style:paragraph-properties fo:border-bottom="0.5pt solid #DEE8E4" fo:padding-bottom="0.15cm" fo:margin-bottom="0.15cm"/>'
+    + '</style:style>'
+    + '<style:style style:name="HC_Footer" style:family="paragraph" style:parent-style-name="Default Paragraph Style">'
+    + '<style:paragraph-properties fo:text-align="center" fo:border-top="0.5pt solid #DEE8E4" fo:padding-top="0.2cm" fo:margin-top="0.5cm"/>'
+    + '<style:text-properties fo:font-size="8pt" fo:color="#8A9890" style:font-name="Arial"/>'
+    + '</style:style>'
+    + '</office:styles></office:document-styles>';
 
   var content = '<?xml version="1.0" encoding="UTF-8"?>'
     + '<office:document-content xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"'
     + ' xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"'
     + ' xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0"'
     + ' xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0">'
-    + '<office:automatic-styles>'
-    + '<style:style style:name="title" style:family="paragraph"><style:text-properties fo:font-size="20pt" fo:font-weight="bold" fo:color="#0A7460"/></style:style>'
-    + '<style:style style:name="subtitle" style:family="paragraph"><style:text-properties fo:font-size="11pt" fo:color="#617068"/></style:style>'
-    + '<style:style style:name="module_header" style:family="paragraph"><style:paragraph-properties fo:background-color="#E0F4F0" fo:padding="4pt"/><style:text-properties fo:font-size="10pt" fo:font-weight="bold" fo:color="#0A7460"/></style:style>'
-    + '<style:style style:name="calc_value" style:family="paragraph"><style:text-properties fo:font-size="14pt" fo:font-weight="bold" fo:color="#065A48"/></style:style>'
-    + '<style:style style:name="calc_detail" style:family="paragraph"><style:text-properties fo:font-size="10pt" fo:color="#3A4840"/></style:style>'
-    + '<style:style style:name="separator" style:family="paragraph"><style:paragraph-properties fo:border-bottom="0.5pt solid #DEE8E4" fo:padding-bottom="6pt" fo:margin-bottom="10pt"/></style:style>'
-    + '<style:style style:name="footer_style" style:family="paragraph"><style:text-properties fo:font-size="9pt" fo:color="#8A9890"/></style:style>'
-    + '</office:automatic-styles>'
     + '<office:body><office:text>'
-    + '<text:p text:style-name="title">' + logoName + '</text:p>'
-    + '<text:p text:style-name="subtitle">Application hydraulique professionnelle · ' + h.dateStr + ' · ' + h.userName + '</text:p>'
-    + '<text:p text:style-name="separator"> </text:p>'
+    + '<text:p text:style-name="HC_Title">' + _xmlEsc(logoStr) + '</text:p>'
+    + '<text:p text:style-name="HC_UserName">' + _xmlEsc(h.userName) + '</text:p>'
+    + '<text:p text:style-name="HC_Subtitle">Application hydraulique professionnelle · ' + _xmlEsc(h.dateStr) + '</text:p>'
+    + '<text:p text:style-name="HC_SectionTitle">Calculs enregistrés (' + arr.length + ')</text:p>'
     + calcsXml
-    + '<text:p text:style-name="footer_style">HydroCalc · hydrocalc.fr · Généré le ' + new Date().toLocaleString('fr-FR') + '</text:p>'
+    + '<text:p text:style-name="HC_Footer">HydroCalc · hydrocalc.fr · Généré le ' + _xmlEsc(new Date().toLocaleString('fr-FR')) + '</text:p>'
     + '</office:text></office:body></office:document-content>';
 
   var manifest = '<?xml version="1.0" encoding="UTF-8"?>'
-    + '<manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0">'
+    + '<manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0" manifest:version="1.2">'
     + '<manifest:file-entry manifest:full-path="/" manifest:media-type="application/vnd.oasis.opendocument.text"/>'
     + '<manifest:file-entry manifest:full-path="content.xml" manifest:media-type="text/xml"/>'
+    + '<manifest:file-entry manifest:full-path="styles.xml" manifest:media-type="text/xml"/>'
     + '</manifest:manifest>';
 
   var zip = new JSZip();
   zip.file('mimetype', 'application/vnd.oasis.opendocument.text', {compression:'STORE'});
   zip.folder('META-INF').file('manifest.xml', manifest);
   zip.file('content.xml', content);
+  zip.file('styles.xml', styles);
 
   zip.generateAsync({type:'blob', mimeType:'application/vnd.oasis.opendocument.text'}).then(function(blob) {
     _download(blob, 'HydroCalc_rapport_' + _reportDate() + '.odt');
@@ -240,113 +292,111 @@ function generateODTReport() {
 /* ─── GÉNÉRATION RAPPORT WORD ─── */
 function generateWordReport() {
   var check = _canGenerateReport();
-  if (!check.ok) {
-    authToast(check.reason);
-    setTimeout(function(){ openSidebar(); }, 800);
-    return;
-  }
+  if (!check.ok) { authToast(check.reason); setTimeout(openSidebar, 800); return; }
   var arr = getSavedCalcs();
   if (!arr.length) { authToast('Aucun calcul à exporter. Sauvegardez d\'abord des calculs.'); return; }
-
-  if (!window.docx) { authToast('Bibliothèque Word non chargée. Vérifiez votre connexion.'); return; }
+  if (!window.docx) { authToast('Bibliothèque Word non chargée.'); return; }
 
   var D = window.docx;
+  var h = _reportHeader();
   var plan = AUTH.user ? (AUTH.user.plan || 'free') : 'free';
-  var userName = AUTH.user ? (AUTH.user.name || AUTH.user.email || '') : '';
-  var dateStr = new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' });
   var userLogo = _safeStorage.getItem('hc_user_logo');
 
-  /* ── En-tête ── */
-  var headerChildren = [];
-
+  /* ── En-tête (logo gauche, nom droite) ── */
+  var logoRun = [];
   if (userLogo && plan !== 'free') {
-    /* Logo utilisateur (base64 → ArrayBuffer) */
     try {
       var b64 = userLogo.split(',')[1];
       var ext = userLogo.split(';')[0].split('/')[1] || 'png';
       var binary = atob(b64);
       var buf = new Uint8Array(binary.length);
-      for (var i = 0; i < binary.length; i++) buf[i] = binary.charCodeAt(i);
-      headerChildren.push(new D.Paragraph({
-        children: [new D.ImageRun({
-          type: ext, data: buf.buffer,
-          transformation: { width: 120, height: 50 },
-          altText: { title: 'Logo', description: 'Logo', name: 'Logo' }
-        })]
-      }));
-    } catch(e) { /* logo invalide, on ignore */ }
+      for (var ii = 0; ii < binary.length; ii++) buf[ii] = binary.charCodeAt(ii);
+      logoRun = [new D.ImageRun({ type: ext, data: buf.buffer, transformation: { width: 110, height: 45 }, altText: { title:'Logo', description:'Logo', name:'Logo' } })];
+    } catch(e) {
+      logoRun = [new D.TextRun({ text: 'HydroCalc', bold: true, size: 40, color: '0A7460', font: 'Arial' })];
+    }
   } else {
-    /* Logo HydroCalc texte */
-    headerChildren.push(new D.Paragraph({
-      children: [new D.TextRun({ text: 'HydroCalc', bold: true, size: 36, color: '0A7460', font: 'Arial' })],
-    }));
+    logoRun = [new D.TextRun({ text: 'HydroCalc', bold: true, size: 40, color: '0A7460', font: 'Arial' })];
   }
 
-  headerChildren.push(new D.Paragraph({
-    children: [new D.TextRun({ text: 'Application hydraulique professionnelle', size: 18, color: '617068', font: 'Arial' })],
-    spacing: { after: 100 }
-  }));
-  headerChildren.push(new D.Paragraph({
-    children: [
-      new D.TextRun({ text: 'Rapport de calculs — ' + dateStr, size: 18, color: '3A4840', font: 'Arial' }),
-      new D.TextRun({ text: '     ' + userName, size: 18, color: '617068', font: 'Arial' }),
-    ],
-    border: { bottom: { style: D.BorderStyle.SINGLE, size: 6, color: '0A7460', space: 4 } },
-    spacing: { after: 200 }
-  }));
+  var bord = { style: D.BorderStyle.SINGLE, size: 1, color: 'DEE8E4' };
+  var bords = { top: bord, bottom: bord, left: bord, right: bord };
+
+  /* Tableau en-tête : logo | nom + date */
+  var headerTable = new D.Table({
+    width: { size: 9026, type: D.WidthType.DXA },
+    columnWidths: [5000, 4026],
+    borders: { top: { style: D.BorderStyle.NONE }, bottom: { style: D.BorderStyle.SINGLE, size: 6, color: '0A7460', space: 4 }, left: { style: D.BorderStyle.NONE }, right: { style: D.BorderStyle.NONE }, insideH: { style: D.BorderStyle.NONE }, insideV: { style: D.BorderStyle.NONE } },
+    rows: [new D.TableRow({ children: [
+      new D.TableCell({
+        borders: { top:{style:D.BorderStyle.NONE}, bottom:{style:D.BorderStyle.NONE}, left:{style:D.BorderStyle.NONE}, right:{style:D.BorderStyle.NONE} },
+        width: { size: 5000, type: D.WidthType.DXA },
+        verticalAlign: D.VerticalAlign.BOTTOM,
+        children: [
+          new D.Paragraph({ children: logoRun }),
+          new D.Paragraph({ children: [new D.TextRun({ text: 'Application hydraulique professionnelle', size: 16, color: '617068', font: 'Arial' })] })
+        ]
+      }),
+      new D.TableCell({
+        borders: { top:{style:D.BorderStyle.NONE}, bottom:{style:D.BorderStyle.NONE}, left:{style:D.BorderStyle.NONE}, right:{style:D.BorderStyle.NONE} },
+        width: { size: 4026, type: D.WidthType.DXA },
+        verticalAlign: D.VerticalAlign.BOTTOM,
+        children: [
+          new D.Paragraph({ alignment: D.AlignmentType.RIGHT, children: [new D.TextRun({ text: h.userName, bold: true, size: 22, color: '141C18', font: 'Arial' })] }),
+          new D.Paragraph({ alignment: D.AlignmentType.RIGHT, children: [new D.TextRun({ text: h.dateStr, size: 16, color: '617068', font: 'Arial' })] })
+        ]
+      })
+    ]})],
+  });
 
   /* ── Calculs ── */
   var calcChildren = [];
   calcChildren.push(new D.Paragraph({
-    children: [new D.TextRun({ text: 'Calculs enregistrés (' + arr.length + ')', bold: true, size: 26, color: '0A7460', font: 'Arial' })],
-    spacing: { after: 160 }
+    children: [new D.TextRun({ text: 'Calculs enregistrés (' + arr.length + ')', bold: true, size: 22, color: '617068', font: 'Arial' })],
+    spacing: { before: 240, after: 160 }
   }));
-
-  var border = { style: D.BorderStyle.SINGLE, size: 1, color: 'DEE8E4' };
-  var borders = { top: border, bottom: border, left: border, right: border };
 
   for (var j = 0; j < arr.length; j++) {
     var c = arr[j];
     var d = new Date(c.date);
-    var cDate = d.toLocaleDateString('fr-FR') + ' ' + d.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+    var cDate = d.toLocaleDateString('fr-FR') + ' à ' + d.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
     var cleanVal = _htmlToText(c.valeur);
     var cleanDet = _htmlToText(c.detail);
 
-    /* Ligne module + date */
+    /* Bandeau module + date */
     calcChildren.push(new D.Table({
       width: { size: 9026, type: D.WidthType.DXA },
       columnWidths: [5500, 3526],
       rows: [new D.TableRow({ children: [
         new D.TableCell({
-          borders: borders,
-          width: { size: 5500, type: D.WidthType.DXA },
-          shading: { fill: 'E0F4F0', type: D.ShadingType.CLEAR },
-          margins: { top: 80, bottom: 80, left: 120, right: 120 },
-          children: [new D.Paragraph({ children: [new D.TextRun({ text: c.module, bold: true, size: 18, color: '0A7460', font: 'Arial' })] })]
+          borders: bords, width: { size: 5500, type: D.WidthType.DXA },
+          shading: { fill: '0A7460', type: D.ShadingType.CLEAR },
+          margins: { top: 80, bottom: 80, left: 140, right: 140 },
+          children: [new D.Paragraph({ children: [new D.TextRun({ text: c.module, bold: true, size: 18, color: 'FFFFFF', font: 'Arial' })] })]
         }),
         new D.TableCell({
-          borders: borders,
-          width: { size: 3526, type: D.WidthType.DXA },
-          shading: { fill: 'E0F4F0', type: D.ShadingType.CLEAR },
-          margins: { top: 80, bottom: 80, left: 120, right: 120 },
-          children: [new D.Paragraph({ alignment: D.AlignmentType.RIGHT, children: [new D.TextRun({ text: cDate, size: 16, color: '617068', font: 'Arial' })] })]
+          borders: bords, width: { size: 3526, type: D.WidthType.DXA },
+          shading: { fill: '0A7460', type: D.ShadingType.CLEAR },
+          margins: { top: 80, bottom: 80, left: 140, right: 140 },
+          children: [new D.Paragraph({ alignment: D.AlignmentType.RIGHT, children: [new D.TextRun({ text: cDate, size: 16, color: 'E0F4F0', font: 'Arial' })] })]
         })
       ]})],
     }));
 
     /* Résultat */
     calcChildren.push(new D.Paragraph({
-      children: [new D.TextRun({ text: cleanVal, bold: true, size: 24, color: '065A48', font: 'Arial' })],
-      spacing: { before: 100, after: 60 },
-      indent: { left: 120 }
+      children: [new D.TextRun({ text: cleanVal, bold: true, size: 26, color: '065A48', font: 'Arial' })],
+      spacing: { before: 120, after: 80 },
+      indent: { left: 140 }
     }));
 
     /* Détail */
     if (cleanDet) {
       calcChildren.push(new D.Paragraph({
         children: [new D.TextRun({ text: cleanDet, size: 18, color: '3A4840', font: 'Arial' })],
-        spacing: { after: 160 },
-        indent: { left: 120 }
+        spacing: { after: 120 },
+        indent: { left: 140 },
+        shading: { fill: 'F3F6F4', type: D.ShadingType.CLEAR }
       }));
     }
 
@@ -373,6 +423,20 @@ function generateWordReport() {
   });
 
   /* ── Document ── */
+  /* Pied de page */
+  var footer = new D.Footer({
+    children: [new D.Paragraph({
+      alignment: D.AlignmentType.CENTER,
+      border: { top: { style: D.BorderStyle.SINGLE, size: 2, color: 'DEE8E4', space: 4 } },
+      children: [
+        new D.TextRun({ text: 'HydroCalc · hydrocalc.fr · Page ', size: 16, color: '8A9890', font: 'Arial' }),
+        new D.TextRun({ children: [D.PageNumber.CURRENT], size: 16, color: '8A9890', font: 'Arial' }),
+        new D.TextRun({ text: ' / ', size: 16, color: '8A9890', font: 'Arial' }),
+        new D.TextRun({ children: [D.PageNumber.TOTAL_PAGES], size: 16, color: '8A9890', font: 'Arial' }),
+      ]
+    })]
+  });
+
   var doc = new D.Document({
     sections: [{
       properties: {
@@ -382,7 +446,7 @@ function generateWordReport() {
         }
       },
       footers: { default: footer },
-      children: headerChildren.concat(calcChildren)
+      children: [headerTable, new D.Paragraph({ children: [new D.TextRun('')], spacing: { after: 200 } })].concat(calcChildren)
     }]
   });
 
