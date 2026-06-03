@@ -53,6 +53,49 @@ function _htmlToText(html) {
     .replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
+/* ─── FORMULES PERSONNALISÉES ─── */
+function getSavedFormulas() {
+  return JSON.parse(_safeStorage.getItem('hc_formulas_' + (AUTH.user ? AUTH.user.email : 'guest')) || '[]');
+}
+function setSavedFormulas(arr) {
+  _safeStorage.setItem('hc_formulas_' + (AUTH.user ? AUTH.user.email : 'guest'), JSON.stringify(arr));
+}
+function addFormula() {
+  var nom    = (document.getElementById('formula-nom')    || {}).value || '';
+  var expr   = (document.getElementById('formula-expr')   || {}).value || '';
+  var result = (document.getElementById('formula-result') || {}).value || '';
+  if (!nom.trim() || !expr.trim()) { authToast('Indiquez au moins un nom et une formule.'); return; }
+  var arr = getSavedFormulas();
+  arr.unshift({ nom: nom.trim(), expr: expr.trim(), result: result.trim(), date: Date.now() });
+  setSavedFormulas(arr);
+  authToast('Formule enregistrée ✓');
+  renderCalcHistory();
+}
+function deleteFormula(i) {
+  var arr = getSavedFormulas(); arr.splice(i,1); setSavedFormulas(arr); renderCalcHistory();
+}
+
+/* ─── SÉLECTION POUR RAPPORT ─── */
+function _getSelectedCalcs() {
+  var arr = getSavedCalcs();
+  var selected = [];
+  arr.forEach(function(c, i) {
+    var cb = document.getElementById('chk-calc-' + i);
+    if (cb && cb.checked) selected.push(c);
+  });
+  if (!selected.length) return arr; /* si rien coché → tout prendre */
+  return selected;
+}
+function _getSelectedFormulas() {
+  var arr = getSavedFormulas();
+  var selected = [];
+  arr.forEach(function(f, i) {
+    var cb = document.getElementById('chk-form-' + i);
+    if (cb && cb.checked) selected.push(f);
+  });
+  return selected;
+}
+
 /* ─── QUOTA RAPPORT ─── */
 function _canGenerateReport() {
   var plan = AUTH.user ? (AUTH.user.plan || 'free') : 'free';
@@ -127,8 +170,9 @@ function _reportHeader() {
 function generateHTMLReport() {
   var check = _canGenerateReport();
   if (!check.ok) { authToast(check.reason); setTimeout(openSidebar, 800); return; }
-  var arr = getSavedCalcs();
-  if (!arr.length) { authToast('Aucun calcul à exporter.'); return; }
+  var arr = _getSelectedCalcs();
+  var formulas = _getSelectedFormulas();
+  if (!arr.length && !formulas.length) { authToast('Aucun élément sélectionné à exporter.'); return; }
 
   var h = _reportHeader();
   var userLogo = _safeStorage.getItem('hc_user_logo');
@@ -163,6 +207,15 @@ function generateHTMLReport() {
     + '.footer{margin-top:28px;padding-top:16px;border-top:1px solid #DEE8E4;text-align:center;font-size:10px;color:#8A9890}'
     + '@media print{body{background:#fff;padding:0}.page{box-shadow:none;border-radius:0}}';
 
+  var formulasHtml = formulas.map(function(f) {
+    return '<div style="margin-bottom:12px;border:1px solid #DEE8E4;border-radius:10px;overflow:hidden">'
+      + '<div style="background:#E6EEF8;padding:8px 14px"><span style="font-weight:800;font-size:11px;color:#1550A0">📐 ' + f.nom + '</span></div>'
+      + '<div style="padding:10px 14px">'
+      + '<div style="font-family:\'Courier New\',monospace;font-size:13px;color:#1550A0;background:#EEF3FC;padding:6px 10px;border-radius:6px;margin-bottom:6px">' + f.expr + '</div>'
+      + (f.result ? '<div style="font-size:13px;font-weight:700;color:#166038">= ' + f.result + '</div>' : '')
+      + '</div></div>';
+  }).join('');
+
   var html = '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">'
     + '<title>Rapport HydroCalc — ' + h.dateStr + '</title>'
     + '<style>' + css + '</style></head><body><div class="page">'
@@ -172,8 +225,8 @@ function generateHTMLReport() {
     + '<div class="user-name">' + h.userName + '</div>'
     + '<div class="user-date">' + h.dateStr + '</div>'
     + '</div></div>'
-    + '<div class="section-title">📊 Calculs enregistrés (' + arr.length + ')</div>'
-    + calcsHtml
+    + (arr.length ? '<div class="section-title">📊 Calculs sélectionnés (' + arr.length + ')</div>' + calcsHtml : '')
+    + (formulas.length ? '<div class="section-title" style="margin-top:20px">📐 Formules sélectionnées (' + formulas.length + ')</div>' + formulasHtml : '')
     + '<div class="footer">HydroCalc · hydrocalc.fr · Rapport généré le ' + new Date().toLocaleString('fr-FR') + '</div>'
     + '</div></body></html>';
 
@@ -193,6 +246,10 @@ function generateODTReport() {
   var arr = getSavedCalcs();
   if (!arr.length) { authToast('Aucun calcul à exporter.'); return; }
   if (!window.JSZip) { authToast('Bibliothèque ZIP non chargée.'); return; }
+
+  var arr = _getSelectedCalcs();
+  var formulas = _getSelectedFormulas();
+  if (!arr.length && !formulas.length) { authToast('Aucun élément sélectionné.'); return; }
 
   var h = _reportHeader();
   var plan = AUTH.user ? (AUTH.user.plan || 'free') : 'free';
@@ -264,8 +321,12 @@ function generateODTReport() {
     + '<text:p text:style-name="HC_Title">' + _xmlEsc(logoStr) + '</text:p>'
     + '<text:p text:style-name="HC_UserName">' + _xmlEsc(h.userName) + '</text:p>'
     + '<text:p text:style-name="HC_Subtitle">Application hydraulique professionnelle · ' + _xmlEsc(h.dateStr) + '</text:p>'
-    + '<text:p text:style-name="HC_SectionTitle">Calculs enregistrés (' + arr.length + ')</text:p>'
-    + calcsXml
+    + (arr.length ? '<text:p text:style-name="HC_SectionTitle">Calculs sélectionnés (' + arr.length + ')</text:p>' + calcsXml : '')
+    + (formulas.length ? '<text:p text:style-name="HC_SectionTitle">Formules sélectionnées (' + formulas.length + ')</text:p>'
+      + formulas.map(function(f){ return '<text:p text:style-name="HC_Module">📐 ' + _xmlEsc(f.nom) + '</text:p>'
+        + '<text:p text:style-name="HC_Value">' + _xmlEsc(f.expr) + '</text:p>'
+        + (f.result ? '<text:p text:style-name="HC_Detail">= ' + _xmlEsc(f.result) + '</text:p>' : '')
+        + '<text:p text:style-name="HC_Space"> </text:p>'; }).join('') : '')
     + '<text:p text:style-name="HC_Footer">HydroCalc · hydrocalc.fr · Généré le ' + _xmlEsc(new Date().toLocaleString('fr-FR')) + '</text:p>'
     + '</office:text></office:body></office:document-content>';
 
@@ -296,6 +357,10 @@ function generateWordReport() {
   var arr = getSavedCalcs();
   if (!arr.length) { authToast('Aucun calcul à exporter. Sauvegardez d\'abord des calculs.'); return; }
   if (!window.docx) { authToast('Bibliothèque Word non chargée.'); return; }
+
+  var arr = _getSelectedCalcs();
+  var formulas = _getSelectedFormulas();
+  if (!arr.length && !formulas.length) { authToast('Aucun élément sélectionné.'); return; }
 
   var D = window.docx;
   var h = _reportHeader();
@@ -423,6 +488,42 @@ function generateWordReport() {
   });
 
   /* ── Document ── */
+  /* Formules sélectionnées */
+  if (formulas.length) {
+    calcChildren.push(new D.Paragraph({
+      children: [new D.TextRun({ text: 'Formules sélectionnées (' + formulas.length + ')', bold: true, size: 22, color: '617068', font: 'Arial' })],
+      spacing: { before: 320, after: 160 }
+    }));
+    formulas.forEach(function(f) {
+      var bF = { style: D.BorderStyle.SINGLE, size: 1, color: 'C5D8F0' };
+      var bFs = { top: bF, bottom: bF, left: bF, right: bF };
+      calcChildren.push(new D.Table({
+        width: { size: 9026, type: D.WidthType.DXA }, columnWidths: [9026],
+        rows: [new D.TableRow({ children: [new D.TableCell({
+          borders: bFs, width: { size: 9026, type: D.WidthType.DXA },
+          shading: { fill: '1550A0', type: D.ShadingType.CLEAR },
+          margins: { top: 80, bottom: 80, left: 140, right: 140 },
+          children: [new D.Paragraph({ children: [new D.TextRun({ text: '📐 ' + f.nom, bold: true, size: 18, color: 'FFFFFF', font: 'Arial' })] })]
+        })]})],
+      }));
+      calcChildren.push(new D.Paragraph({
+        children: [new D.TextRun({ text: f.expr, size: 20, color: '1550A0', font: 'Courier New' })],
+        spacing: { before: 80, after: 60 }, indent: { left: 140 }
+      }));
+      if (f.result) {
+        calcChildren.push(new D.Paragraph({
+          children: [new D.TextRun({ text: '= ' + f.result, bold: true, size: 20, color: '166038', font: 'Arial' })],
+          spacing: { after: 120 }, indent: { left: 140 }
+        }));
+      }
+      calcChildren.push(new D.Paragraph({
+        children: [new D.TextRun('')],
+        border: { bottom: { style: D.BorderStyle.SINGLE, size: 2, color: 'DEE8E4', space: 1 } },
+        spacing: { after: 160 }
+      }));
+    });
+  }
+
   /* Pied de page */
   var footer = new D.Footer({
     children: [new D.Paragraph({
@@ -515,12 +616,15 @@ function renderCalcHistory() {
         + '</div></div>';
     }
 
-    html += '<div style="padding-top:var(--s-3)">';
+    /* ── Calculs avec cases à cocher ── */
+    html += '<div class="section-header" style="padding-top:var(--s-3)">Mes calculs <span style="font-size:10px;color:var(--c-text-4);font-weight:400;text-transform:none">(cochez pour sélectionner)</span></div>';
+    html += '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">';
     for (var i = 0; i < arr.length; i++) {
       var c = arr[i];
       var d = new Date(c.date);
-      html += '<div class="calc-hist-item">'
+      html += '<div class="calc-hist-item" style="position:relative">'
         + '<div class="chi-head">'
+        + '<input type="checkbox" id="chk-calc-' + i + '" checked style="width:16px;height:16px;accent-color:var(--c-primary);cursor:pointer;flex-shrink:0">'
         + '<span class="chi-module">' + c.module + '</span>'
         + '<span class="chi-date">' + d.toLocaleDateString('fr-FR') + ' ' + d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}) + '</span>'
         + '<button class="chi-del" onclick="deleteCalc(' + i + ')">🗑️</button>'
@@ -530,6 +634,42 @@ function renderCalcHistory() {
         + '</div>';
     }
     html += '</div>';
+
+    /* ── Formules personnalisées ── */
+    var formulas = getSavedFormulas();
+    html += '<div class="section-header" style="padding-top:var(--s-4)">Mes formules personnalisées</div>';
+    html += '<div style="padding:0 var(--s-4);margin-bottom:var(--s-3)">';
+    /* Formulaire ajout */
+    html += '<div style="background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-md);padding:var(--s-3);margin-bottom:var(--s-3)">'
+      + '<div style="font-size:11px;font-weight:700;margin-bottom:var(--s-2)">➕ Ajouter une formule</div>'
+      + '<input id="formula-nom" type="text" placeholder="Nom (ex: Débit Manning)" style="width:100%;padding:8px 10px;border:1.5px solid var(--c-border);border-radius:var(--r-sm);font-family:var(--f-body);font-size:12px;margin-bottom:6px">'
+      + '<input id="formula-expr" type="text" placeholder="Formule (ex: Q = K × A × Rh^(2/3) × I^(1/2))" style="width:100%;padding:8px 10px;border:1.5px solid var(--c-border);border-radius:var(--r-sm);font-family:var(--f-body);font-size:12px;margin-bottom:6px">'
+      + '<input id="formula-result" type="text" placeholder="Résultat ou valeur (facultatif)" style="width:100%;padding:8px 10px;border:1.5px solid var(--c-border);border-radius:var(--r-sm);font-family:var(--f-body);font-size:12px;margin-bottom:8px">'
+      + '<button onclick="addFormula()" style="width:100%;padding:9px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-sm);font-family:var(--f-body);font-size:12px;font-weight:700;cursor:pointer">Enregistrer la formule</button>'
+      + '</div>';
+    /* Liste formules */
+    if (formulas.length) {
+      formulas.forEach(function(f, i) {
+        html += '<div style="background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-md);padding:var(--s-3);margin-bottom:var(--s-2);display:flex;align-items:flex-start;gap:var(--s-2)">'
+          + '<input type="checkbox" id="chk-form-' + i + '" checked style="width:16px;height:16px;accent-color:var(--c-primary);cursor:pointer;margin-top:2px;flex-shrink:0">'
+          + '<div style="flex:1">'
+          + '<div style="font-size:12px;font-weight:700;color:var(--c-text);margin-bottom:3px">📐 ' + f.nom + '</div>'
+          + '<div style="font-family:\'Courier New\',monospace;font-size:11px;color:var(--c-primary);background:var(--c-primary-l);padding:3px 8px;border-radius:4px;display:inline-block;margin-bottom:' + (f.result ? '3px' : '0') + '">' + f.expr + '</div>'
+          + (f.result ? '<div style="font-size:11px;font-weight:700;color:var(--c-ok);margin-top:2px">= ' + f.result + '</div>' : '')
+          + '</div>'
+          + '<button onclick="deleteFormula(' + i + ')" style="background:none;border:none;color:var(--c-danger);font-size:16px;cursor:pointer;padding:2px 4px">🗑️</button>'
+          + '</div>';
+      });
+    } else {
+      html += '<div style="text-align:center;padding:16px;color:var(--c-text-4);font-size:12px">Aucune formule enregistrée</div>';
+    }
+    html += '</div>';
+
+    /* ── Titre export + boutons ── */
+    html += '<div style="padding:0 var(--s-4) 0;margin-bottom:var(--s-2)">'
+      + '<div style="font-size:10px;font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--s-3);padding-top:var(--s-2);border-top:1px solid var(--c-border)">📤 Exportation de mon rapport</div>'
+      + '<div style="font-size:11px;color:var(--c-text-3);margin-bottom:var(--s-3)">Les éléments cochés ci-dessus seront inclus dans le rapport.</div>'
+      + '</div>';
     html += '<div style="padding:var(--s-4)"><button class="auth-btn-ghost" onclick="clearAllCalcs()" style="color:var(--c-danger);border-color:var(--c-danger)">Tout effacer</button></div>';
   }
   html += '<div class="pb-nav"></div>';
