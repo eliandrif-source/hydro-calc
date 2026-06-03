@@ -403,44 +403,61 @@ function closeSidebar() {
 
 function renderSidebarPlans() {
   var userPlan = AUTH.user ? (AUTH.user.plan || 'free') : 'free';
-  var html = '<div class="sidebar-section-title">Abonnement</div>';
+  var currentPlan = PLANS.find(function(p){ return p.id === userPlan; }) || PLANS[0];
+
+  var html =
+    '<div class="sidebar-section-title">Mon compte</div>' +
+    '<div style="background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-md);padding:var(--s-3);margin-bottom:var(--s-4);display:flex;align-items:center;gap:var(--s-3)">' +
+      '<span style="font-size:28px">' + currentPlan.ico + '</span>' +
+      '<div style="flex:1">' +
+        '<div style="font-size:var(--t-sm);font-weight:700">Plan ' + currentPlan.name + '</div>' +
+        '<div style="font-size:10px;color:var(--c-text-3)">' + currentPlan.price + (currentPlan.period || '') + '</div>' +
+      '</div>' +
+    '</div>' +
+
+    '<button onclick="togglePlansSection()" style="width:100%;padding:14px var(--s-3);background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-md);font-family:var(--f-body);font-size:var(--t-sm);font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:var(--s-2);margin-bottom:var(--s-4)">' +
+      '💎 Voir les abonnements' +
+    '</button>' +
+
+    '<div id="plans-section" style="display:none">';
 
   for (var i = 0; i < PLANS.length; i++) {
     var p = PLANS[i];
     var isCurrent = p.id === userPlan;
     var feats = p.features.map(function(f) {
-      return '<div class="plan-feat ' + (f.ok ? 'ok' : 'no') + '">' +
-        (f.ok ? '✓' : '✗') + ' ' + f.txt + '</div>';
+      return '<div class="plan-feat ' + (f.ok ? 'ok' : 'no') + '">' + (f.ok ? '✓' : '✗') + ' ' + f.txt + '</div>';
     }).join('');
-    html += '<div class="plan-card' + (isCurrent ? ' current' : '') + '">' +
-      '<div class="plan-card-top">' +
-        '<span class="plan-card-ico">' + p.ico + '</span>' +
-        '<span class="plan-card-name">' + p.name + '</span>' +
-        '<span class="plan-card-price">' + p.price + '<span>' + p.period + '</span></span>' +
-      '</div>' +
-      (p.priceBis ? '<div style="font-size:10px;color:var(--c-ok);font-weight:700;margin-bottom:6px">ou ' + p.priceBis + ' (économisez 2 mois)</div>' : '') +
-      '<div class="plan-card-desc">' + p.desc + '</div>' +
-      '<div class="plan-card-features">' + feats + '</div>' +
-      '<button class="plan-card-btn ' + (isCurrent ? 'plan-btn-current' : p.btnClass) + '">' +
-        (isCurrent ? '✓ Plan actuel' : p.btnLabel) +
-      '</button>' +
-    '</div>';
+    html +=
+      '<div class="plan-card' + (isCurrent ? ' current' : '') + '">' +
+        '<div class="plan-card-top">' +
+          '<span class="plan-card-ico">' + p.ico + '</span>' +
+          '<span class="plan-card-name">' + p.name + '</span>' +
+          '<span class="plan-card-price">' + p.price + '<span>' + p.period + '</span></span>' +
+        '</div>' +
+        (p.priceBis ? '<div style="font-size:10px;color:var(--c-ok);font-weight:700;margin-bottom:6px">ou ' + p.priceBis + ' — économisez 2 mois</div>' : '') +
+        '<div class="plan-card-desc">' + p.desc + '</div>' +
+        '<div class="plan-card-features">' + feats + '</div>' +
+        '<button class="plan-card-btn ' + (isCurrent ? 'plan-btn-current' : p.btnClass) + '">' +
+          (isCurrent ? '✓ Plan actuel' : p.btnLabel) +
+        '</button>' +
+      '</div>';
   }
 
-  html += '<div class="sidebar-section-title" style="margin-top:var(--s-4)">Comparaison des plans</div>';
+  html += '<div class="sidebar-section-title" style="margin-top:var(--s-4)">Comparatif des plans</div>';
   html += '<table class="compare-table"><thead><tr>' +
     '<th>Fonctionnalité</th><th>Gratuit</th><th>Pro</th><th>Étab.</th>' +
     '</tr></thead><tbody>';
 
   var rows = [
-    ['Publicités',            '✗','✓','✓'],
-    ['Calculateurs de base',  '✓','✓','✓'],
+    ['Sans publicité',        '✗','✓','✓'],
+    ['Calculateurs base',     '✓','✓','✓'],
     ['Calculateurs avancés',  '⚠','✓','✓'],
     ['Glossaire complet',     '⚠','✓','✓'],
     ['QCM illimités',         '✗','✓','✓'],
     ['Sauvegarde calculs',    '✗','✓','✓'],
     ['SPANC 101 depts',       '✗','✗','✓'],
-    ['Prix',                  'Gratuit','5,90 €/m','35 €/m'],
+    ['Prix mensuel',          'Gratuit','5,90 €','35 €'],
+    ['Prix annuel',           '—','—','190 €'],
   ];
 
   for (var r = 0; r < rows.length; r++) {
@@ -452,8 +469,13 @@ function renderSidebarPlans() {
     }
     html += '</tr>';
   }
-  html += '</tbody></table>';
-  html += '<div style="height:var(--s-6)"></div>';
+  html += '</tbody></table></div><div style="height:var(--s-6)"></div>';
 
   document.getElementById('sidebar-body').innerHTML = html;
+}
+
+function togglePlansSection() {
+  var s = document.getElementById('plans-section');
+  if (!s) return;
+  s.style.display = s.style.display === 'none' ? 'block' : 'none';
 }
