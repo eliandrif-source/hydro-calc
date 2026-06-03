@@ -363,7 +363,7 @@ var PLANS = [
       { ico: '📖', txt: 'Glossaire complet (200+ termes)' },
       { ico: '🎓', txt: 'QCM (10 QCM / semaine)' },
       { ico: '💾', txt: 'Sauvegarde des calculs (50 max)' },
-      { ico: '📄', txt: 'Rapports PDF illimités' },
+      { ico: '📄', txt: 'Rapports PDF (1 rapport / semaine)' },
       { ico: '🗺️', txt: 'SPANC non disponible' },
     ]
   },
@@ -455,7 +455,7 @@ function renderSidebarPlans() {
     ['Glossaire complet',     '⚠','✓','✓'],
     ['QCM',                   '10 offerts','10/sem.','Illimités'],
     ['Sauvegarde calculs',    '✗','50 max','Illimitée'],
-    ['Rapports PDF',          '✗','✓','✓'],
+    ['Rapports PDF',          '✗','1/sem.','Illimités'],
     ['SPANC 101 depts',       '✗','✗','✓'],
     ['Prix mensuel',          'Gratuit','5,90 €','35 €'],
     ['Prix annuel',           '—','—','190 €'],
