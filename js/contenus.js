@@ -759,6 +759,64 @@ function toggleFiche3(i) {
 
 function openPDF() { window.print(); }
 
+/* ─── RÉFÉRENCES & MATÉRIAUX ─── */
+function renderRefMat() {
+  var _tb = document.getElementById('tab-bar'); if (_tb) _tb.style.display = 'none';
+  document.getElementById('main-content').innerHTML =
+    '<div class="module-hero" style="--cat-color:var(--c-mat)">'
+    + '<span class="mh-icon">🔩</span>'
+    + '<div class="mh-title">Références & Matériaux</div>'
+    + '<div class="mh-sub">Glossaire · Formules · Acronymes · Matériaux · Équipements</div>'
+    + '<div class="mh-tags"><span class="mh-tag">200+ termes</span><span class="mh-tag">Formules</span><span class="mh-tag">Matériaux</span></div>'
+    + '</div>'
+    + '<div class="section-header">Référence technique</div>'
+    + '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">'
+    + [
+        {ico:'📖', name:'Glossaire hydraulique',   sub:'200+ termes · Définitions · Anglais', id:'gloss'},
+        {ico:'🔩', name:'Matériaux & Équipements', sub:'PVC · Fonte · PEHD · Pompes · SCADA', id:'mat'},
+        {ico:'🔧', name:'Ouvrages AC & EP',        sub:'Regards · Bassins · MBR · PRV',       id:'ouv'},
+      ].map(function(m){
+        return '<div class="mod-list-card" style="--cat-color:var(--c-mat)" onclick="showModule(\'' + m.id + '\')">'
+          + '<div class="mlc-icon" style="background:var(--c-mat-l)">' + m.ico + '</div>'
+          + '<div class="mlc-body"><div class="mlc-name">' + m.name + '</div><div class="mlc-sub">' + m.sub + '</div></div>'
+          + '<span class="mlc-arrow">›</span></div>';
+      }).join('')
+    + '</div><div class="pb-nav"></div>';
+}
+
+/* ─── HUB QCM ─── */
+function renderQCMHub() {
+  var _tb = document.getElementById('tab-bar'); if (_tb) _tb.style.display = 'none';
+  var formations = [
+    {ico:'🏫', name:'BTS GEMEAU / MDE',              sub:'UE1 à UE6 · Hydraulique · Eau potable · Réglementation', color:'var(--c-anc)'},
+    {ico:'🎓', name:'BUT GCCD / Eau & Environnement', sub:'Hydrologie · Hydrogéologie · Milieu naturel',            color:'var(--c-ac)'},
+    {ico:'🏛️', name:'Master & ENGEES',               sub:'Gestion de l\'eau · Politique · Institutionnel',          color:'var(--c-form)'},
+  ];
+  document.getElementById('main-content').innerHTML =
+    '<div class="module-hero" style="--cat-color:var(--c-anc)">'
+    + '<span class="mh-icon">✅</span>'
+    + '<div class="mh-title">QCM</div>'
+    + '<div class="mh-sub">720 questions · 36 thèmes · Entraînement par formation</div>'
+    + '<div class="mh-tags"><span class="mh-tag">BTS GEMEAU</span><span class="mh-tag">BUT</span><span class="mh-tag">Master</span></div>'
+    + '</div>'
+    + '<div class="section-header">Plateforme complète</div>'
+    + '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">'
+    + '<div class="mod-list-card" style="--cat-color:var(--c-anc)" onclick="window.open(\'HydroCalc_QCM_Platform.html\',\'_blank\')">'
+    + '<div class="mlc-icon" style="background:var(--c-anc-l);font-size:24px">🎓</div>'
+    + '<div class="mlc-body"><div class="mlc-name">Ouvrir la plateforme QCM</div>'
+    + '<div class="mlc-sub">Mode professeur · Mode élève · Mode visiteur · 36 QCM de 20 questions</div></div>'
+    + '<span class="mlc-arrow">›</span></div></div>'
+    + '<div class="section-header" style="margin-top:var(--s-3)">Par formation</div>'
+    + '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">'
+    + formations.map(function(m){
+        return '<div class="mod-list-card" style="--cat-color:' + m.color + '" onclick="window.open(\'HydroCalc_QCM_Platform.html\',\'_blank\')">'
+          + '<div class="mlc-icon" style="background:var(--c-anc-l)">' + m.ico + '</div>'
+          + '<div class="mlc-body"><div class="mlc-name">' + m.name + '</div><div class="mlc-sub">' + m.sub + '</div></div>'
+          + '<span class="mlc-arrow">›</span></div>';
+      }).join('')
+    + '</div><div class="pb-nav"></div>';
+}
+
 /* ─── ASSAINISSEMENT COLLECTIF ─── */
 function renderAC() {
   var _tb=document.getElementById('tab-bar'); if(_tb) _tb.style.display='none';

@@ -84,13 +84,10 @@ function renderHome() {
   document.getElementById('top-title').textContent = 'HydroCalc';
 
   var categories = [
-    { id:'ac',    ico:'🔧', name:'Assainissement collectif',     sub:'Réseaux EU/EP · Calculs · Ouvrages',         color:'var(--c-ac)',   colorl:'var(--c-ac-l)'   },
-    { id:'anc',   ico:'🏡', name:'Assainissement non collectif', sub:'Filières ANC · SPANC · Aides financières',   color:'var(--c-anc)',  colorl:'var(--c-anc-l)'  },
-    { id:'ep',    ico:'💧', name:'Eau potable',                  sub:'Potabilisation · Normes · Réseau AEP',        color:'var(--c-ep)',   colorl:'var(--c-ep-l)'   },
-    { id:'riv',   ico:'🌊', name:'Milieu naturel',               sub:'Rivières · Hydrologie · Crues · Nappes',     color:'var(--c-riv)',  colorl:'var(--c-riv-l)'  },
-    { id:'gloss', ico:'📖', name:'Formulaire & Glossaire',       sub:'200+ termes · Formules · Acronymes',         color:'var(--c-ref)',  colorl:'var(--c-ref-l)'  },
-    { id:'regl',  ico:'📋', name:'Réglementation',               sub:'Arrêtés · DCE · Police de l\'eau · REUT',   color:'var(--c-regl)', colorl:'var(--c-regl-l)' },
-    { id:'mat',   ico:'🔩', name:'Référence & Matériaux',        sub:'PVC · Fonte · Pompes · Équipements',         color:'var(--c-mat)',  colorl:'var(--c-mat-l)'  },
+    { id:'refmat', ico:'🔩', name:'Références & Matériaux',      sub:'Glossaire · Formules · Matériaux · Équipements',              color:'var(--c-mat)',  colorl:'var(--c-mat-l)'  },
+    { id:'regl',   ico:'📋', name:'Réglementation',              sub:'Arrêtés · DCE · Police de l\'eau · REUT · Normes',            color:'var(--c-regl)', colorl:'var(--c-regl-l)' },
+    { id:'cours',  ico:'🎓', name:'Cours',                       sub:'BTS GEMEAU · BUT · Master · ENGEES · Fiches de révision',     color:'var(--c-form)', colorl:'var(--c-form-l)' },
+    { id:'qcm',    ico:'✅', name:'QCM',                         sub:'720 questions · 36 thèmes · UE1 à UE6 · Entraînement',        color:'var(--c-anc)',  colorl:'var(--c-anc-l)'  },
   ];
 
   var html = `
@@ -162,7 +159,9 @@ function showModule(id) {
   if (m) document.getElementById('top-title').textContent = m.name.split('—')[0].trim();
 
   // Renderer explicite par module (pas de référence en objet)
-  if      (id === 'ac')     renderAC();
+  if      (id === 'refmat') renderRefMat();
+  else if (id === 'qcm')    renderQCMHub();
+  else if (id === 'ac')     renderAC();
   else if (id === 'calc')   renderCalc();
   else if (id === 'calca')  renderCalcAvances();
   else if (id === 'calcs')  renderCalcSuppl();
@@ -184,6 +183,8 @@ function showModule(id) {
 
   // Nav highlight
   var navMap = {
+    refmat:'nav-gloss', gloss:'nav-gloss', mat:'nav-gloss',
+    qcm:'nav-anc',
     ac:'nav-ac', calc:'nav-ac', calca:'nav-ac', calcs:'nav-ac', conv:'nav-ac', ouv:'nav-ac',
     anc:'nav-anc', nc:'nav-anc', aides:'nav-anc', spanc:'nav-anc',
     ep:'nav-ep',
