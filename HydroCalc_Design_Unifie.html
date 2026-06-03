@@ -212,6 +212,14 @@
 function getV(id){ var e=document.getElementById(id); return e?e.value:''; }
 function getEl(id){ return document.getElementById(id)||null; }
 
+/* ─── STORAGE SÉCURISÉ (fallback mémoire si localStorage bloqué) ─── */
+var _memStore = {};
+var _safeStorage = {
+  getItem: function(k){ try{ return _safeStorage.getItem(k); }catch(e){ return _memStore[k]||null; } },
+  setItem: function(k,v){ try{ _safeStorage.setItem(k,v); }catch(e){ _memStore[k]=v; } },
+  removeItem: function(k){ try{ _safeStorage.removeItem(k); }catch(e){ delete _memStore[k]; } }
+};
+
 /* ═══════════════════════════════════════════════════
    MODULES DATA
 ═══════════════════════════════════════════════════ */
@@ -3377,11 +3385,11 @@ function openPDF() { window.print(); }
 ═══════════════════════════════════════════════════ */
 function getSavedCalcs() {
   if (!AUTH.user) return [];
-  return JSON.parse(localStorage.getItem('hc_calcs_' + AUTH.user.email) || '[]');
+  return JSON.parse(_safeStorage.getItem('hc_calcs_' + AUTH.user.email) || '[]');
 }
 function setSavedCalcs(arr) {
   if (!AUTH.user) return;
-  localStorage.setItem('hc_calcs_' + AUTH.user.email, JSON.stringify(arr));
+  _safeStorage.setItem('hc_calcs_' + AUTH.user.email, JSON.stringify(arr));
 }
 
 function saveCurrentCalc() {
@@ -3483,14 +3491,14 @@ const PLANS_HC = {
 };
 
 function getHCAccounts() {
-  const a = JSON.parse(localStorage.getItem('hc_main_accounts') || '{}');
+  const a = JSON.parse(_safeStorage.getItem('hc_main_accounts') || '{}');
   if (!a['demo@hydrocalc.fr']) {
     a['demo@hydrocalc.fr'] = { name:'Utilisateur Démo', profile:'technicien', pwd:'hydro2024', plan:'pro', joined:Date.now(), lastLogin:null, favorites:[], history:[] };
-    localStorage.setItem('hc_main_accounts', JSON.stringify(a));
+    _safeStorage.setItem('hc_main_accounts', JSON.stringify(a));
   }
   return a;
 }
-function saveHCAccounts(a) { localStorage.setItem('hc_main_accounts', JSON.stringify(a)); }
+function saveHCAccounts(a) { _safeStorage.setItem('hc_main_accounts', JSON.stringify(a)); }
 
 function authShow(screenId) {
   document.querySelectorAll('.auth-screen').forEach(function(s){ s.classList.add('hidden'); });
@@ -3565,7 +3573,7 @@ function authContinueGuest() {
 
 function _doEnterApp() {
   // Sauvegarder la session
-  if (AUTH.user) localStorage.setItem('hc_current_session', JSON.stringify({ email: AUTH.user.email }));
+  if (AUTH.user) _safeStorage.setItem('hc_current_session', JSON.stringify({ email: AUTH.user.email }));
   // Cacher tous les écrans auth
   document.querySelectorAll('.auth-screen').forEach(function(s){ s.classList.add('hidden'); });
   // Bouton profil
@@ -3587,7 +3595,7 @@ function _doEnterApp() {
 }
 
 function authLogout() {
-  localStorage.removeItem('hc_current_session');
+  _safeStorage.removeItem('hc_current_session');
   AUTH.user = null;
   document.querySelectorAll('.auth-screen').forEach(function(s){ s.classList.add('hidden'); });
   var _as=document.getElementById('auth-splash'); if(_as) _as.classList.remove('hidden');
@@ -3681,7 +3689,7 @@ function selectHCPlan(planId) {
 
 /* INIT */
 (function initAuth(){
-  var saved = localStorage.getItem('hc_current_session');
+  var saved = _safeStorage.getItem('hc_current_session');
   if (saved) {
     try {
       var s = JSON.parse(saved);
