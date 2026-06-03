@@ -155,8 +155,34 @@ function showModule(id) {
   scrollToTop();
 
   // Titre top-bar
-  var m = MODULES_META.find(function(x){ return x.id === id; });
-  if (m) document.getElementById('top-title').textContent = m.name.split('—')[0].trim();
+  var TITRES = {
+    refmat:'Références & Matériaux',
+    regl:'Réglementation',
+    cours:'Cours',
+    qcm:'QCM',
+    ac:'Assainissement collectif',
+    anc:'Ouvrages ANC',
+    ep:'Eau potable',
+    riv:'Milieu naturel',
+    gloss:'Formulaire & Glossaire',
+    calc:'Calculateurs',
+    calca:'Calculateurs avancés',
+    calcs:'Calculateurs complémentaires',
+    conv:'Convertisseur d\'unités',
+    ouv:'Ouvrages AC & EP',
+    spanc:'SPANC — Départements',
+    aides:'Aides financières ANC',
+    nc:'Non conformes',
+    mat:'Matériaux & Équipements',
+    form:'Formations supérieures',
+  };
+  var titre = TITRES[id];
+  if (!titre) {
+    var m = MODULES_META.find(function(x){ return x.id === id; });
+    if (m) titre = m.name.split('—')[0].trim();
+  }
+  var titleEl = document.getElementById('top-title');
+  if (titleEl && titre) titleEl.textContent = titre;
 
   // Renderer explicite par module (pas de référence en objet)
   if      (id === 'refmat') renderRefMat();
