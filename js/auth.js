@@ -338,13 +338,13 @@ var PLANS = [
     btnClass: 'plan-btn-current',
     features: [
       { ico: '📢', txt: 'Avec publicité' },
-      { ico: '🧮', txt: 'Calculateurs de base (5 calculs/jour)' },
+      { ico: '🧮', txt: 'Calculateurs de base (10 calculs/jour)' },
       { ico: '🔒', txt: 'Calculateurs avancés non disponibles' },
       { ico: '📖', txt: 'Glossaire (50 termes offerts)' },
       { ico: '🎓', txt: 'QCM (10 QCM offerts)' },
       { ico: '💾', txt: 'Sauvegarde non disponible' },
       { ico: '📄', txt: 'Rapports PDF non disponibles' },
-      { ico: '🗺️', txt: 'SPANC non disponible' },
+      { ico: '🗺️', txt: 'SPANC (1 département au choix)' },
     ]
   },
   {
@@ -450,13 +450,13 @@ function renderSidebarPlans() {
 
   var rows = [
     ['Sans publicité',        '✗','✓','✓'],
-    ['Calculateurs base',     '⚠','✓','✓'],
+    ['Calculateurs base',     '10/jour','Illimités','Illimités'],
     ['Calculateurs avancés',  '✗','✓','✓'],
     ['Glossaire complet',     '⚠','✓','✓'],
     ['QCM',                   '10 offerts','10/sem.','Illimités'],
     ['Sauvegarde calculs',    '✗','50 max','Illimitée'],
     ['Rapports PDF',          '✗','1/sem.','Illimités'],
-    ['SPANC 101 depts',       '✗','✗','✓'],
+    ['SPANC',                 '1 dept','✗','101 depts'],
     ['Prix mensuel',          'Gratuit','5,90 €','35 €'],
     ['Prix annuel',           '—','—','190 €'],
   ];

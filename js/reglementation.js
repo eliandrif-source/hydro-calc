@@ -155,32 +155,96 @@ function filterSPANC() {
   renderSPANCList(list);
 }
 
+function _spancDeptCard(d) {
+  var taux = d.taux && d.taux !== '—' ? d.taux : null;
+  return '<div class="dept-card" style="border-left:3px solid var(--c-ep)">' +
+    '<div class="dc-head">' +
+      '<div class="dc-num" style="font-size:' + (d.num.length > 2 ? '10px' : '11px') + '">' + d.num + '</div>' +
+      '<div style="flex:1"><div class="dc-name">' + d.name + '</div><div class="dc-region">' + d.region + '</div></div>' +
+      (taux ? '<span class="badge badge-ok" style="flex-shrink:0">' + taux + '</span>' : '') +
+    '</div>' +
+    '<div style="display:flex;flex-direction:column;gap:5px">' +
+      '<div class="alert info" style="font-size:10px"><span class="alert-icon">📋</span><span>' + d.oblig + '</span></div>' +
+      '<div class="alert ok" style="font-size:10px"><span class="alert-icon">🌊</span><span>Agence : <strong>' + d.agence + '</strong>' + (taux ? ' · Taux aide : ' + d.taux : '') + '</span></div>' +
+      '<div class="alert warn" style="font-size:10px"><span class="alert-icon">🌐</span><span>' + d.contact + '</span></div>' +
+    '</div>' +
+  '</div>';
+}
+
+function _spancUpgradeBanner() {
+  return '<div style="background:linear-gradient(135deg,#1A0850,#2D1580);border-radius:var(--r-xl);padding:var(--s-4);margin:var(--s-3) 0;display:flex;align-items:center;gap:var(--s-3)">' +
+    '<span style="font-size:28px">🗺️</span>' +
+    '<div style="flex:1">' +
+      '<div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px">Accédez aux 101 départements</div>' +
+      '<div style="font-size:11px;color:rgba(255,255,255,.65);line-height:1.5">Passez à l\'abonnement Établissement pour consulter tous les SPANC sans restriction.</div>' +
+    '</div>' +
+    '<button onclick="openSidebar()" style="padding:8px 14px;background:#C8B4FF;color:#1A0850;border:none;border-radius:var(--r-pill);font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap;flex-shrink:0">Voir les offres</button>' +
+  '</div>';
+}
+
 function renderSPANCList(list) {
   if(!list) list = SPANC_DEPTS;
-  const container = document.getElementById('spanc-list');
+  var container = document.getElementById('spanc-list');
   if(!container) return;
-  if(!list.length) {
-    container.innerHTML = `<div style="text-align:center;padding:40px;color:var(--c-text-3)">Aucun département trouvé</div>`;
+
+  var plan = AUTH.user ? (AUTH.user.plan || 'free') : 'free';
+
+  // Plan Pro : pas d'accès SPANC
+  if(plan === 'pro') {
+    container.innerHTML =
+      '<div class="alert warn" style="margin-bottom:var(--s-3)"><span class="alert-icon">ℹ️</span><span>Le SPANC n\'est pas inclus dans le plan Pro. Passez au plan Établissement pour y accéder.</span></div>' +
+      _spancUpgradeBanner();
     return;
   }
-  container.innerHTML = list.map(d => {
-    const taux = d.taux && d.taux !== '—' ? d.taux : null;
-    return `<div class="dept-card" style="border-left:3px solid var(--c-ep)">
-      <div class="dc-head">
-        <div class="dc-num" style="font-size:${d.num.length>2?'10px':'11px'}">${d.num}</div>
-        <div style="flex:1">
-          <div class="dc-name">${d.name}</div>
-          <div class="dc-region">${d.region}</div>
-        </div>
-        ${taux ? `<span class="badge badge-ok" style="flex-shrink:0">${taux}</span>` : ''}
-      </div>
-      <div style="display:flex;flex-direction:column;gap:5px">
-        <div class="alert info" style="font-size:10px"><span class="alert-icon">📋</span><span>${d.oblig}</span></div>
-        <div class="alert ok" style="font-size:10px"><span class="alert-icon">🌊</span><span>Agence : <strong>${d.agence}</strong>${taux ? ' · Taux aide : '+d.taux : ''}</span></div>
-        <div class="alert warn" style="font-size:10px"><span class="alert-icon">🌐</span><span>${d.contact}</span></div>
-      </div>
-    </div>`;
-  }).join('');
+
+  // Plan Gratuit : 1 département au choix
+  if(plan === 'free') {
+    var savedDept = _safeStorage.getItem('hc_spanc_dept');
+    // Si aucun département choisi et on affiche toute la liste → proposer de choisir
+    if(!savedDept && list.length > 1) {
+      container.innerHTML =
+        '<div class="alert warn" style="margin-bottom:var(--s-3)"><span class="alert-icon">⚠️</span><span><strong>Plan Gratuit :</strong> vous pouvez choisir 1 seul département SPANC. Ce choix sera mémorisé.</span></div>' +
+        '<div style="display:flex;flex-direction:column;gap:var(--s-2)">' +
+        list.map(function(d) {
+          return '<div style="display:flex;align-items:center;gap:var(--s-2);padding:10px var(--s-3);background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-md);cursor:pointer" onclick="spancChooseDept(\'' + d.num + '\')">' +
+            '<div class="dc-num" style="font-size:' + (d.num.length > 2 ? '10px' : '11px') + ';width:36px;height:36px;background:var(--c-ep-l);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;color:var(--c-ep);font-weight:800;flex-shrink:0">' + d.num + '</div>' +
+            '<div><div style="font-size:var(--t-sm);font-weight:700">' + d.name + '</div><div style="font-size:10px;color:var(--c-text-3)">' + d.region + '</div></div>' +
+            '<span style="margin-left:auto;color:var(--c-text-4);font-size:18px">›</span>' +
+          '</div>';
+        }).join('') +
+        '</div>' +
+        _spancUpgradeBanner();
+      return;
+    }
+    // Département déjà choisi → afficher uniquement celui-là
+    if(savedDept) {
+      var chosen = SPANC_DEPTS.find(function(d){ return d.num === savedDept; });
+      if(chosen) {
+        container.innerHTML =
+          '<div class="alert warn" style="margin-bottom:var(--s-3)"><span class="alert-icon">⚠️</span><span><strong>Plan Gratuit :</strong> 1 seul département SPANC est disponible avec votre abonnement. <span style="color:var(--c-primary);font-weight:700;cursor:pointer" onclick="spancChangeDept()">Changer de département</span></span></div>' +
+          _spancDeptCard(chosen) +
+          _spancUpgradeBanner();
+        return;
+      }
+    }
+  }
+
+  // Plan Établissement ou liste vide : accès complet
+  if(!list.length) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--c-text-3)">Aucun département trouvé</div>';
+    return;
+  }
+  container.innerHTML = list.map(function(d){ return _spancDeptCard(d); }).join('');
+}
+
+function spancChooseDept(num) {
+  _safeStorage.setItem('hc_spanc_dept', num);
+  renderSPANCList();
+}
+
+function spancChangeDept() {
+  _safeStorage.removeItem('hc_spanc_dept');
+  renderSPANCList();
 }
 
 /* ─── RENDER AIDES ─── */
