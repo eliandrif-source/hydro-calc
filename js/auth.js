@@ -343,6 +343,7 @@ var PLANS = [
       { ico: '📖', txt: 'Glossaire (50 termes offerts)' },
       { ico: '🎓', txt: 'QCM (10 QCM offerts)' },
       { ico: '💾', txt: 'Sauvegarde non disponible' },
+      { ico: '📄', txt: 'Rapports PDF non disponibles' },
       { ico: '🗺️', txt: 'SPANC non disponible' },
     ]
   },
@@ -362,6 +363,7 @@ var PLANS = [
       { ico: '📖', txt: 'Glossaire complet (200+ termes)' },
       { ico: '🎓', txt: 'QCM (10 QCM / semaine)' },
       { ico: '💾', txt: 'Sauvegarde des calculs (50 max)' },
+      { ico: '📄', txt: 'Rapports PDF illimités' },
       { ico: '🗺️', txt: 'SPANC non disponible' },
     ]
   },
@@ -382,6 +384,7 @@ var PLANS = [
       { ico: '📖', txt: 'Glossaire complet illimité' },
       { ico: '🎓', txt: 'QCM illimités (720 questions)' },
       { ico: '💾', txt: 'Sauvegarde illimitée' },
+      { ico: '📄', txt: 'Rapports PDF illimités' },
       { ico: '🗺️', txt: 'SPANC 101 départements' },
     ]
   }
@@ -447,11 +450,12 @@ function renderSidebarPlans() {
 
   var rows = [
     ['Sans publicité',        '✗','✓','✓'],
-    ['Calculateurs base',     '✓','✓','✓'],
-    ['Calculateurs avancés',  '⚠','✓','✓'],
+    ['Calculateurs base',     '⚠','✓','✓'],
+    ['Calculateurs avancés',  '✗','✓','✓'],
     ['Glossaire complet',     '⚠','✓','✓'],
-    ['QCM illimités',         '✗','✓','✓'],
-    ['Sauvegarde calculs',    '✗','✓','✓'],
+    ['QCM',                   '10 offerts','10/sem.','Illimités'],
+    ['Sauvegarde calculs',    '✗','50 max','Illimitée'],
+    ['Rapports PDF',          '✗','✓','✓'],
     ['SPANC 101 depts',       '✗','✗','✓'],
     ['Prix mensuel',          'Gratuit','5,90 €','35 €'],
     ['Prix annuel',           '—','—','190 €'],

@@ -10,6 +10,17 @@ Barre latérale gauche rétractable avec bouton abonnement intégré.
 - Étape suivante : définir les restrictions de chaque plan avec l'utilisateur
 - Paiement Stripe prévu à l'étape 4 du cahier des charges
 
+## Rapports de calculs PDF (priorité haute)
+- Supprimer le bouton 🖨️ imprimante du top bar
+- Ajouter un bouton "📄 Télécharger en PDF" dans l'historique des calculs sauvegardés
+- Permettre de créer un rapport : sélectionner plusieurs calculs sauvegardés, générer un PDF mis en page (logo HydroCalc, date, résultats, formules)
+- Restrictions par plan :
+  - Gratuit : pas de rapport PDF
+  - Pro : rapports PDF illimités
+  - Établissement : rapports PDF illimités
+- Technologie : bibliothèque jsPDF (gratuite, côté client, pas de serveur)
+- À implémenter après organisation générale de l'UI
+
 ## Onglet "Cours" (priorité haute)
 Ajouter un onglet "Cours" bien visible dans la navigation principale.
 - Permettre de choisir sa formation (BTS GEMEAU, Licence pro, etc.)
