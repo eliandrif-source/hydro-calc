@@ -322,3 +322,138 @@ function selectHCPlan(planId) {
   // Afficher le splash auth
   var _as=document.getElementById('auth-splash'); if(_as) _as.classList.remove('hidden');
 })();
+
+/* ═══════════════════════════════════════════════════
+   SIDEBAR & ABONNEMENTS
+═══════════════════════════════════════════════════ */
+var PLANS = [
+  {
+    id: 'free',
+    ico: '🌱',
+    name: 'Gratuit',
+    price: '0 €',
+    period: '',
+    desc: 'Accès limité avec publicité. Idéal pour découvrir l\'application.',
+    current: true,
+    features: [
+      { ok: false, txt: 'Publicités affichées' },
+      { ok: true,  txt: 'Calculateurs de base' },
+      { ok: false, txt: 'Calculateurs avancés limités' },
+      { ok: false, txt: 'Glossaire complet' },
+      { ok: false, txt: 'QCM illimités' },
+      { ok: false, txt: 'Sauvegarde des calculs' },
+      { ok: false, txt: 'SPANC 101 départements' },
+    ],
+    btnLabel: 'Plan actuel',
+    btnClass: 'plan-btn-current'
+  },
+  {
+    id: 'pro',
+    ico: '⚡',
+    name: 'Pro',
+    price: '5,90 €',
+    period: '/mois',
+    desc: 'Sans publicité, accès étendu. Pour les professionnels et étudiants actifs.',
+    current: false,
+    features: [
+      { ok: true,  txt: 'Sans publicité' },
+      { ok: true,  txt: 'Calculateurs de base' },
+      { ok: true,  txt: 'Calculateurs avancés' },
+      { ok: true,  txt: 'Glossaire complet' },
+      { ok: true,  txt: 'QCM illimités' },
+      { ok: true,  txt: 'Sauvegarde des calculs' },
+      { ok: false, txt: 'SPANC 101 départements' },
+    ],
+    btnLabel: 'Choisir Pro',
+    btnClass: 'plan-btn-primary'
+  },
+  {
+    id: 'etab',
+    ico: '🏛️',
+    name: 'Établissement',
+    price: '35 €',
+    period: '/mois',
+    priceBis: '190 € /an',
+    desc: 'Tout illimité pour les établissements scolaires et entreprises.',
+    current: false,
+    features: [
+      { ok: true, txt: 'Sans publicité' },
+      { ok: true, txt: 'Calculateurs de base' },
+      { ok: true, txt: 'Calculateurs avancés' },
+      { ok: true, txt: 'Glossaire complet' },
+      { ok: true, txt: 'QCM illimités' },
+      { ok: true, txt: 'Sauvegarde des calculs' },
+      { ok: true, txt: 'SPANC 101 départements' },
+    ],
+    btnLabel: 'Choisir Établissement',
+    btnClass: 'plan-btn-primary'
+  }
+];
+
+function openSidebar() {
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('sidebar-overlay').classList.add('open');
+  renderSidebarPlans();
+}
+
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebar-overlay').classList.remove('open');
+}
+
+function renderSidebarPlans() {
+  var userPlan = AUTH.user ? (AUTH.user.plan || 'free') : 'free';
+  var html = '<div class="sidebar-section-title">Abonnement</div>';
+
+  for (var i = 0; i < PLANS.length; i++) {
+    var p = PLANS[i];
+    var isCurrent = p.id === userPlan;
+    var feats = p.features.map(function(f) {
+      return '<div class="plan-feat ' + (f.ok ? 'ok' : 'no') + '">' +
+        (f.ok ? '✓' : '✗') + ' ' + f.txt + '</div>';
+    }).join('');
+    html += '<div class="plan-card' + (isCurrent ? ' current' : '') + '">' +
+      '<div class="plan-card-top">' +
+        '<span class="plan-card-ico">' + p.ico + '</span>' +
+        '<span class="plan-card-name">' + p.name + '</span>' +
+        '<span class="plan-card-price">' + p.price + '<span>' + p.period + '</span></span>' +
+      '</div>' +
+      (p.priceBis ? '<div style="font-size:10px;color:var(--c-ok);font-weight:700;margin-bottom:6px">ou ' + p.priceBis + ' (économisez 2 mois)</div>' : '') +
+      '<div class="plan-card-desc">' + p.desc + '</div>' +
+      '<div class="plan-card-features">' + feats + '</div>' +
+      '<button class="plan-card-btn ' + (isCurrent ? 'plan-btn-current' : p.btnClass) + '">' +
+        (isCurrent ? '✓ Plan actuel' : p.btnLabel) +
+      '</button>' +
+    '</div>';
+  }
+
+  html += '<div class="sidebar-section-title" style="margin-top:var(--s-4)">Comparaison des plans</div>';
+  html += '<table class="compare-table"><thead><tr>' +
+    '<th>Fonctionnalité</th><th>Gratuit</th><th>Pro</th><th>Étab.</th>' +
+    '</tr></thead><tbody>';
+
+  var rows = [
+    ['Publicités',            '✗','✓','✓'],
+    ['Calculateurs de base',  '✓','✓','✓'],
+    ['Calculateurs avancés',  '⚠','✓','✓'],
+    ['Glossaire complet',     '⚠','✓','✓'],
+    ['QCM illimités',         '✗','✓','✓'],
+    ['Sauvegarde calculs',    '✗','✓','✓'],
+    ['SPANC 101 depts',       '✗','✗','✓'],
+    ['Prix',                  'Gratuit','5,90 €/m','35 €/m'],
+  ];
+
+  for (var r = 0; r < rows.length; r++) {
+    html += '<tr><td>' + rows[r][0] + '</td>';
+    for (var c = 1; c <= 3; c++) {
+      var v = rows[r][c];
+      var cls = v === '✓' ? 'ct-ok' : v === '✗' ? 'ct-no' : v === '⚠' ? 'ct-part' : '';
+      html += '<td class="' + cls + '">' + v + '</td>';
+    }
+    html += '</tr>';
+  }
+  html += '</tbody></table>';
+  html += '<div style="height:var(--s-6)"></div>';
+
+  document.getElementById('sidebar-body').innerHTML = html;
+}

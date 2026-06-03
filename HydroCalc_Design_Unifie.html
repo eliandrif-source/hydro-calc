@@ -162,6 +162,18 @@
   </div>
 </div>
 
+<!-- ═══ SIDEBAR ═══ -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-hdr">
+    <button class="sidebar-close" onclick="closeSidebar()">✕</button>
+    <div class="sidebar-logo">💧</div>
+    <div class="sidebar-app-name">HydroCalc</div>
+    <div class="sidebar-tagline">Application hydraulique professionnelle</div>
+  </div>
+  <div class="sidebar-body" id="sidebar-body"></div>
+</div>
+
 <!-- ═══ APP PRINCIPALE ═══ -->
 <div id="shell">
 
@@ -177,6 +189,7 @@
     <span class="top-bar-logo" id="top-title">HydroCalc</span>
     <button class="tb-icon-btn" onclick="openPDF()" title="Imprimer">🖨️</button>
     <button class="tb-icon-btn" id="profile-btn" onclick="openProfile()" title="Mon profil" style="display:none">👤</button>
+    <button class="tb-icon-btn" onclick="openSidebar()" title="Menu & Abonnement">☰</button>
   </div>
 
   <!-- TAB BAR (si module actif) -->
