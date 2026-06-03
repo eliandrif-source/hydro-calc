@@ -44,8 +44,161 @@ function updateFabSave() {
 // Surveiller l'apparition des résultats
 setInterval(updateFabSave, 600);
 
+function _canGeneratePDF() {
+  var plan = AUTH.user ? (AUTH.user.plan || 'free') : 'free';
+  if (plan === 'free') return { ok: false, reason: 'Les rapports PDF ne sont pas disponibles avec le plan Gratuit.' };
+  if (plan === 'admin' || plan === 'etab') return { ok: true };
+  if (plan === 'pro') {
+    var today = new Date().toISOString().slice(0,10);
+    var weekStart = new Date(); weekStart.setDate(weekStart.getDate() - weekStart.getDay());
+    var weekKey = weekStart.toISOString().slice(0,10);
+    var raw = _safeStorage.getItem('hc_pdf_quota');
+    var quota = raw ? JSON.parse(raw) : { week: weekKey, count: 0 };
+    if (quota.week !== weekKey) quota = { week: weekKey, count: 0 };
+    if (quota.count >= 1) return { ok: false, reason: 'Vous avez déjà généré votre rapport PDF de la semaine. Revenez lundi ou passez au plan Établissement.' };
+    return { ok: true, quota: quota };
+  }
+  return { ok: false, reason: 'Plan non reconnu.' };
+}
+
+function _incrementPDFQuota() {
+  var plan = AUTH.user ? (AUTH.user.plan || 'free') : 'free';
+  if (plan !== 'pro') return;
+  var weekStart = new Date(); weekStart.setDate(weekStart.getDate() - weekStart.getDay());
+  var weekKey = weekStart.toISOString().slice(0,10);
+  var raw = _safeStorage.getItem('hc_pdf_quota');
+  var quota = raw ? JSON.parse(raw) : { week: weekKey, count: 0 };
+  if (quota.week !== weekKey) quota = { week: weekKey, count: 0 };
+  quota.count++;
+  _safeStorage.setItem('hc_pdf_quota', JSON.stringify(quota));
+}
+
+function generatePDFReport() {
+  var check = _canGeneratePDF();
+  if (!check.ok) {
+    authToast(check.reason);
+    setTimeout(function(){ openSidebar(); }, 800);
+    return;
+  }
+  var arr = getSavedCalcs();
+  if (!arr.length) { authToast('Aucun calcul à exporter. Sauvegardez d\'abord des calculs.'); return; }
+
+  var jsPDF = window.jspdf ? window.jspdf.jsPDF : null;
+  if (!jsPDF) { authToast('Bibliothèque PDF non chargée. Vérifiez votre connexion.'); return; }
+
+  var doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+  var margin = 15;
+  var pageW = 210;
+  var contentW = pageW - margin * 2;
+  var y = margin;
+
+  /* ── En-tête ── */
+  doc.setFillColor(10, 116, 96);
+  doc.rect(0, 0, pageW, 35, 'F');
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(22);
+  doc.setFont('helvetica', 'bold');
+  doc.text('HydroCalc', margin, 16);
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Application hydraulique professionnelle', margin, 23);
+  doc.setFontSize(9);
+  doc.text('Rapport de calculs — ' + new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' }), margin, 30);
+
+  /* Utilisateur */
+  doc.setTextColor(255,255,255);
+  doc.setFontSize(9);
+  var userName = AUTH.user ? (AUTH.user.name || AUTH.user.email) : 'Utilisateur';
+  doc.text(userName, pageW - margin, 23, { align: 'right' });
+  doc.text('Plan : ' + (AUTH.user ? (AUTH.user.plan || 'Gratuit') : 'Invité'), pageW - margin, 30, { align: 'right' });
+
+  y = 45;
+
+  /* ── Titre section ── */
+  doc.setTextColor(10, 116, 96);
+  doc.setFontSize(13);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Calculs enregistrés (' + arr.length + ')', margin, y);
+  y += 3;
+  doc.setDrawColor(10, 116, 96);
+  doc.setLineWidth(0.4);
+  doc.line(margin, y, pageW - margin, y);
+  y += 7;
+
+  /* ── Calculs ── */
+  for (var i = 0; i < arr.length; i++) {
+    var c = arr[i];
+    var d = new Date(c.date);
+    var dateStr = d.toLocaleDateString('fr-FR') + ' ' + d.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+
+    /* Vérifier saut de page */
+    if (y > 260) {
+      doc.addPage();
+      y = margin;
+    }
+
+    /* Bandeau module */
+    doc.setFillColor(224, 244, 240);
+    doc.rect(margin, y - 4, contentW, 10, 'F');
+    doc.setTextColor(10, 116, 96);
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'bold');
+    doc.text(c.module.toUpperCase(), margin + 2, y + 2);
+    doc.setTextColor(100, 100, 100);
+    doc.setFont('helvetica', 'normal');
+    doc.text(dateStr, pageW - margin - 2, y + 2, { align: 'right' });
+    y += 10;
+
+    /* Valeur */
+    doc.setTextColor(10, 58, 40);
+    doc.setFontSize(13);
+    doc.setFont('helvetica', 'bold');
+    var cleanVal = c.valeur.replace(/[^\x00-\x7F]/g, '');
+    doc.text(cleanVal || c.valeur, margin + 2, y);
+    y += 6;
+
+    /* Détail (texte brut, on retire le HTML) */
+    var cleanDetail = (c.detail || '').replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '').trim();
+    if (cleanDetail) {
+      doc.setTextColor(80, 80, 80);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'normal');
+      var lines = doc.splitTextToSize(cleanDetail, contentW - 4);
+      doc.text(lines, margin + 2, y);
+      y += lines.length * 4 + 2;
+    }
+
+    /* Séparateur */
+    doc.setDrawColor(222, 232, 228);
+    doc.setLineWidth(0.2);
+    doc.line(margin, y, pageW - margin, y);
+    y += 6;
+  }
+
+  /* ── Pied de page ── */
+  var totalPages = doc.internal.getNumberOfPages();
+  for (var p = 1; p <= totalPages; p++) {
+    doc.setPage(p);
+    doc.setFillColor(243, 246, 244);
+    doc.rect(0, 285, pageW, 12, 'F');
+    doc.setTextColor(150, 150, 150);
+    doc.setFontSize(7);
+    doc.text('HydroCalc · hydrocalc.fr · Page ' + p + ' / ' + totalPages, pageW / 2, 291, { align: 'center' });
+    doc.text('Document généré le ' + new Date().toLocaleString('fr-FR'), margin, 291);
+  }
+
+  /* ── Téléchargement ── */
+  var fileName = 'HydroCalc_rapport_' + new Date().toISOString().slice(0,10) + '.pdf';
+  doc.save(fileName);
+  _incrementPDFQuota();
+  authToast('Rapport PDF téléchargé ✓');
+}
+
 function renderCalcHistory() {
   var arr = getSavedCalcs();
+  var plan = AUTH.user ? (AUTH.user.plan || 'free') : 'free';
+  var canPDF = plan !== 'free';
+
   var html = '<div class="profile-hero" style="background:linear-gradient(135deg,var(--c-primary-d),var(--c-primary))">'
     + '<div style="font-size:36px;margin-bottom:6px">💾</div>'
     + '<div class="profile-name">Mes calculs enregistrés</div>'
@@ -59,6 +212,21 @@ function renderCalcHistory() {
       + '<div style="font-size:12px;line-height:1.6">Faites un calcul, puis appuyez sur le bouton 💾 en bas à droite pour le sauvegarder.</div>'
       + '</div>';
   } else {
+    /* Bouton PDF */
+    if (canPDF) {
+      html += '<div style="padding:var(--s-3) var(--s-4) 0">'
+        + '<button onclick="generatePDFReport()" style="width:100%;padding:12px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-md);font-family:var(--f-body);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">'
+        + '📄 Télécharger le rapport PDF</button></div>';
+    } else {
+      html += '<div style="padding:var(--s-3) var(--s-4) 0">'
+        + '<div style="background:var(--c-surface-3);border:1px solid var(--c-border);border-radius:var(--r-md);padding:var(--s-3);display:flex;align-items:center;gap:var(--s-3)">'
+        + '<span style="font-size:24px">📄</span>'
+        + '<div style="flex:1"><div style="font-size:12px;font-weight:700;margin-bottom:2px">Rapport PDF</div>'
+        + '<div style="font-size:11px;color:var(--c-text-3)">Disponible à partir du plan Pro</div></div>'
+        + '<button onclick="openSidebar()" style="padding:6px 12px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-pill);font-size:11px;font-weight:700;cursor:pointer">Voir les offres</button>'
+        + '</div></div>';
+    }
+
     html += '<div style="padding-top:var(--s-3)">';
     for (var i = 0; i < arr.length; i++) {
       var c = arr[i];
@@ -76,7 +244,7 @@ function renderCalcHistory() {
     html += '</div>';
     html += '<div style="padding:var(--s-4)"><button class="auth-btn-ghost" onclick="clearAllCalcs()" style="color:var(--c-danger);border-color:var(--c-danger)">Tout effacer</button></div>';
   }
-  html += '<div class="pb"></div>';
+  html += '<div class="pb-nav"></div>';
   document.getElementById('profile-content').innerHTML = html;
   authShow('auth-profile');
   var hdr = document.querySelector('#auth-profile .auth-hdr-title');
