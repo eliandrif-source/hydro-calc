@@ -10,6 +10,15 @@ Barre latérale gauche rétractable avec bouton abonnement intégré.
 - Étape suivante : définir les restrictions de chaque plan avec l'utilisateur
 - Paiement Stripe prévu à l'étape 4 du cahier des charges
 
+## Tableau de bord admin "Coffre" (étape 4)
+Onglet visible uniquement pour l'administrateur (eliandrif@gmail.com).
+- Revenus du mois / de l'année
+- Liste des abonnés actifs (Pro + Établissement)
+- Historique des paiements reçus
+- Statistiques : nombre d'utilisateurs par plan
+- Données récupérées depuis Stripe (pas stockées dans l'app)
+- Nécessite Stripe + Supabase (étapes 3 et 4)
+
 ## Rapports de calculs PDF (priorité haute)
 - Supprimer le bouton 🖨️ imprimante du top bar
 - Ajouter un bouton "📄 Télécharger en PDF" dans l'historique des calculs sauvegardés
