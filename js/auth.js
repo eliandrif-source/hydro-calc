@@ -333,19 +333,18 @@ var PLANS = [
     name: 'Gratuit',
     price: '0 €',
     period: '',
-    desc: 'Accès limité avec publicité. Idéal pour découvrir l\'application.',
-    current: true,
-    features: [
-      { ok: false, txt: 'Publicités affichées' },
-      { ok: true,  txt: 'Calculateurs de base' },
-      { ok: false, txt: 'Calculateurs avancés limités' },
-      { ok: false, txt: 'Glossaire complet' },
-      { ok: false, txt: 'QCM illimités' },
-      { ok: false, txt: 'Sauvegarde des calculs' },
-      { ok: false, txt: 'SPANC 101 départements' },
-    ],
+    desc: 'Idéal pour découvrir l\'application. Accès limité avec publicité.',
     btnLabel: 'Plan actuel',
-    btnClass: 'plan-btn-current'
+    btnClass: 'plan-btn-current',
+    features: [
+      { ico: '📢', txt: 'Avec publicité' },
+      { ico: '🧮', txt: 'Calculateurs de base (5 calculs/jour)' },
+      { ico: '🔒', txt: 'Calculateurs avancés non disponibles' },
+      { ico: '📖', txt: 'Glossaire (50 termes offerts)' },
+      { ico: '🎓', txt: 'QCM (10 QCM offerts)' },
+      { ico: '💾', txt: 'Sauvegarde non disponible' },
+      { ico: '🗺️', txt: 'SPANC non disponible' },
+    ]
   },
   {
     id: 'pro',
@@ -354,18 +353,17 @@ var PLANS = [
     price: '5,90 €',
     period: '/mois',
     desc: 'Sans publicité, accès étendu. Pour les professionnels et étudiants actifs.',
-    current: false,
-    features: [
-      { ok: true,  txt: 'Sans publicité' },
-      { ok: true,  txt: 'Calculateurs de base' },
-      { ok: true,  txt: 'Calculateurs avancés' },
-      { ok: true,  txt: 'Glossaire complet' },
-      { ok: true,  txt: 'QCM illimités' },
-      { ok: true,  txt: 'Sauvegarde des calculs' },
-      { ok: false, txt: 'SPANC 101 départements' },
-    ],
     btnLabel: 'Choisir Pro',
-    btnClass: 'plan-btn-primary'
+    btnClass: 'plan-btn-primary',
+    features: [
+      { ico: '🚫', txt: 'Sans publicité' },
+      { ico: '🧮', txt: 'Calculateurs de base illimités' },
+      { ico: '🔓', txt: 'Calculateurs avancés illimités' },
+      { ico: '📖', txt: 'Glossaire complet (200+ termes)' },
+      { ico: '🎓', txt: 'QCM (10 QCM / semaine)' },
+      { ico: '💾', txt: 'Sauvegarde des calculs (50 max)' },
+      { ico: '🗺️', txt: 'SPANC non disponible' },
+    ]
   },
   {
     id: 'etab',
@@ -375,18 +373,17 @@ var PLANS = [
     period: '/mois',
     priceBis: '190 € /an',
     desc: 'Tout illimité pour les établissements scolaires et entreprises.',
-    current: false,
-    features: [
-      { ok: true, txt: 'Sans publicité' },
-      { ok: true, txt: 'Calculateurs de base' },
-      { ok: true, txt: 'Calculateurs avancés' },
-      { ok: true, txt: 'Glossaire complet' },
-      { ok: true, txt: 'QCM illimités' },
-      { ok: true, txt: 'Sauvegarde des calculs' },
-      { ok: true, txt: 'SPANC 101 départements' },
-    ],
     btnLabel: 'Choisir Établissement',
-    btnClass: 'plan-btn-primary'
+    btnClass: 'plan-btn-primary',
+    features: [
+      { ico: '🚫', txt: 'Sans publicité' },
+      { ico: '🧮', txt: 'Calculateurs de base illimités' },
+      { ico: '🔓', txt: 'Calculateurs avancés illimités' },
+      { ico: '📖', txt: 'Glossaire complet illimité' },
+      { ico: '🎓', txt: 'QCM illimités (720 questions)' },
+      { ico: '💾', txt: 'Sauvegarde illimitée' },
+      { ico: '🗺️', txt: 'SPANC 101 départements' },
+    ]
   }
 ];
 
@@ -425,7 +422,7 @@ function renderSidebarPlans() {
     var p = PLANS[i];
     var isCurrent = p.id === userPlan;
     var feats = p.features.map(function(f) {
-      return '<div class="plan-feat ' + (f.ok ? 'ok' : 'no') + '">' + (f.ok ? '✓' : '✗') + ' ' + f.txt + '</div>';
+      return '<div class="plan-feat" style="color:var(--c-text-2)">' + f.ico + ' ' + f.txt + '</div>';
     }).join('');
     html +=
       '<div class="plan-card' + (isCurrent ? ' current' : '') + '">' +
