@@ -120,6 +120,7 @@ function renderModuleSimple(id) {
 
 /* ─── CALCULATEURS ─── */
 function calcEpandage() {
+  if (!checkCalcLimit()) return;
   const eh = parseInt(getV('c-eh'))||5;
   const k = parseFloat(getV('c-k'))||3;
   const ch = Math.min(k*0.006, 0.10);
@@ -140,6 +141,7 @@ function calcEpandage() {
 }
 
 function calcManning() {
+  if (!checkCalcLimit()) return;
   const dn = parseFloat(getV('c-dn'))||300;
   const ks = parseFloat(getV('c-ks'))||90;
   const ip = parseFloat(getV('c-ip'))||3;
@@ -155,6 +157,7 @@ function calcManning() {
 }
 
 function calcFTE() {
+  if (!checkCalcLimit()) return;
   const pp = parseInt(getV('fte-pp'))||4;
   const v = pp<=5?3000:3000+(pp-5)*1000;
   const res = document.getElementById('res-fte');
@@ -401,6 +404,7 @@ function renderCalcaNPSH() {
 
 /* ─── FONCTIONS DE CALCUL AVANCÉ ─── */
 function calcCoupBelier() {
+  if (!checkCalcLimit()) return;
   var L    = parseFloat(getV('cb-l')) || 500;
   var V    = parseFloat(getV('cb-v')) || 1.2;
   var a    = parseFloat(document.getElementById('cb-mat').value) || 400;
@@ -426,6 +430,7 @@ function calcCoupBelier() {
 }
 
 function calcShields() {
+  if (!checkCalcLimit()) return;
   var V    = parseFloat(getV('sh-v')) || 2.5;
   var rhos = parseFloat(getV('sh-rhos')) || 2650;
   var beta = parseFloat(getV('sh-beta')) || 0;
@@ -447,6 +452,7 @@ function calcShields() {
 }
 
 function calcPompeHMT() {
+  if (!checkCalcLimit()) return;
   var Q   = parseFloat(getV('pm-q')) || 50;
   var Hg  = parseFloat(getV('pm-hg')) || 15;
   var hf  = parseFloat(getV('pm-hf')) || 4;
@@ -468,6 +474,7 @@ function calcPompeHMT() {
 }
 
 function calcNPSH() {
+  if (!checkCalcLimit()) return;
   var Ha   = parseFloat(getV('np-ha')) || 3;
   var hfa  = parseFloat(getV('np-hfa')) || 0.5;
   var T    = parseFloat(getV('np-t')) || 20;
@@ -491,6 +498,7 @@ function calcNPSH() {
 }
 
 function calcManningPartiel() {
+  if (!checkCalcLimit()) return;
   var D = parseFloat(getV('mp-d')) / 1000 || 0.3;
   var y = parseFloat(getV('mp-y')) / 1000 || 0.24;
   var K = parseFloat(getV('mp-k')) || 90;
@@ -514,6 +522,7 @@ function calcManningPartiel() {
 }
 
 function calcLangelierAvance() {
+  if (!checkCalcLimit()) return;
   var pH = parseFloat(getV('il-ph')) || 7.4;
   var TH = parseFloat(getV('il-th')) || 25;
   var TAC= parseFloat(getV('il-tac')) || 20;
@@ -578,7 +587,8 @@ function renderCalcSuppl() {
     <div class="pb-nav"></div>`;
 }
 
-function calcChlorationSuppl(){
+function calcChlorationSuppl() {
+  if (!checkCalcLimit()) return;
   const q=parseFloat(document.getElementById('cl-q').value)||80;
   const dem=parseFloat(document.getElementById('cl-dem').value)||0.8;
   const res=parseFloat(document.getElementById('cl-res').value)||0.2;
@@ -592,7 +602,8 @@ function calcChlorationSuppl(){
   document.getElementById('rd-cl').innerHTML=`• Demande = ${dem} mg/L · Résiduel = ${res} mg/L<br>• Débit injection : ${qinj} L/h = ${(parseFloat(qinj)*24).toFixed(0)} L/j<br>• Consommation = ${kgj} kg Cl₂/j<br>${res>0.5?'⚠ Résiduel > 0,5 mg/L : dépasse le max réglementaire':res>=0.05?'✓ Résiduel dans la plage recommandée (0,05–0,3 mg/L)':'⚠ Résiduel < 0,05 mg/L : protection insuffisante'}`;
 }
 
-function calcReservoirSuppl(){
+function calcReservoirSuppl() {
+  if (!checkCalcLimit()) return;
   const vj=parseFloat(document.getElementById('rv-j').value)||500;
   const reg=parseFloat(document.getElementById('rv-reg').value)||35;
   const inc=parseFloat(document.getElementById('rv-inc').value)||120;

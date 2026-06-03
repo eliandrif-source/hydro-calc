@@ -90,6 +90,7 @@ function renderCalcFTE() {
 }
 
 function calcFTEMain() {
+  if (!checkCalcLimit()) return;
   const pp = parseInt(getV('f-pp'))||4;
   const pers = parseInt(getV('f-pers'))||4;
   const v = pp<=5 ? 3000 : 3000+(pp-5)*1000;
@@ -172,6 +173,7 @@ function renderCalcMethodeRat() {
 }
 
 function calcMethodeRatMain() {
+  if (!checkCalcLimit()) return;
   const C = parseFloat(getV('mr-c'))||0.6;
   const A = parseFloat(getV('mr-a'))||5;
   const i = parseFloat(getV('mr-i'))||25;
@@ -213,7 +215,8 @@ function renderCalcCharges() {
     </div></div>`;
 }
 
-function calcChargesMain(){
+function calcChargesMain() {
+  if (!checkCalcLimit()) return;
   const eh=parseInt(getV('ch-eh'))||5;
   const pers=parseInt(getV('ch-pers'))||4;
   const res=document.getElementById('res-ch'); res.classList.add('show');
@@ -258,7 +261,8 @@ function renderCalcPression(){
     </div></div>`;
 }
 
-function calcHWMain(){
+function calcHWMain() {
+  if (!checkCalcLimit()) return;
   const q=parseFloat(getV('hw-q'))||10;
   const d=parseFloat(getV('hw-d'))/1000||0.15;
   const C=parseFloat(getV('hw-c'))||130;
@@ -510,7 +514,8 @@ function renderANCPretraitement() {
     </div></div>`;
 }
 
-function calcFTEAnc(){
+function calcFTEAnc() {
+  if (!checkCalcLimit()) return;
   const pp=parseInt(getV('fte-pp2'))||4;
   const pers=parseInt(getV('fte-pers2'))||4;
   const v=pp<=5?3000:3000+(pp-5)*1000;

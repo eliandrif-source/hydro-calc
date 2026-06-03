@@ -6,10 +6,46 @@ function getEl(id){ return document.getElementById(id)||null; }
 /* ─── STORAGE SÉCURISÉ (fallback mémoire si localStorage bloqué) ─── */
 var _memStore = {};
 var _safeStorage = {
-  getItem: function(k){ try{ return _safeStorage.getItem(k); }catch(e){ return _memStore[k]||null; } },
-  setItem: function(k,v){ try{ _safeStorage.setItem(k,v); }catch(e){ _memStore[k]=v; } },
-  removeItem: function(k){ try{ _safeStorage.removeItem(k); }catch(e){ delete _memStore[k]; } }
+  getItem: function(k){ try{ return localStorage.getItem(k); }catch(e){ return _memStore[k]||null; } },
+  setItem: function(k,v){ try{ localStorage.setItem(k,v); }catch(e){ _memStore[k]=v; } },
+  removeItem: function(k){ try{ localStorage.removeItem(k); }catch(e){ delete _memStore[k]; } }
 };
+
+/* ─── LIMITE CALCULS JOURNALIERS (plan gratuit : 10/jour) ─── */
+function checkCalcLimit() {
+  var plan = AUTH && AUTH.user ? (AUTH.user.plan || 'free') : 'free';
+  if (plan !== 'free') return true;
+
+  var today = new Date().toISOString().slice(0, 10);
+  var raw = _safeStorage.getItem('hc_calc_quota');
+  var quota = raw ? JSON.parse(raw) : { date: today, count: 0 };
+  if (quota.date !== today) { quota = { date: today, count: 0 }; }
+
+  if (quota.count >= 10) {
+    showCalcLimitModal();
+    return false;
+  }
+  quota.count++;
+  _safeStorage.setItem('hc_calc_quota', JSON.stringify(quota));
+  return true;
+}
+
+function showCalcLimitModal() {
+  var existing = document.getElementById('calc-limit-modal');
+  if (existing) { existing.style.display = 'flex'; return; }
+  var modal = document.createElement('div');
+  modal.id = 'calc-limit-modal';
+  modal.style.cssText = 'position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;padding:var(--s-4)';
+  modal.innerHTML =
+    '<div style="background:var(--c-surface);border-radius:var(--r-xl) var(--r-xl) var(--r-md) var(--r-md);padding:var(--s-5) var(--s-4);width:100%;max-width:400px;text-align:center">' +
+      '<div style="font-size:40px;margin-bottom:var(--s-3)">🧮</div>' +
+      '<div style="font-family:var(--f-display);font-size:20px;margin-bottom:var(--s-2)">Limite quotidienne atteinte</div>' +
+      '<div style="font-size:13px;color:var(--c-text-3);line-height:1.6;margin-bottom:var(--s-4)">Vous avez utilisé vos <strong>10 calculs gratuits</strong> du jour.<br>Revenez demain ou passez au plan Pro pour des calculs illimités.</div>' +
+      '<button onclick="openSidebar();document.getElementById(\'calc-limit-modal\').style.display=\'none\'" style="width:100%;padding:13px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-lg);font-family:var(--f-body);font-size:14px;font-weight:700;cursor:pointer;margin-bottom:var(--s-2)">💎 Voir les abonnements</button>' +
+      '<button onclick="document.getElementById(\'calc-limit-modal\').style.display=\'none\'" style="width:100%;padding:11px;background:transparent;border:1.5px solid var(--c-border);border-radius:var(--r-lg);font-family:var(--f-body);font-size:13px;color:var(--c-text-3);cursor:pointer">Fermer</button>' +
+    '</div>';
+  document.body.appendChild(modal);
+}
 
 /* ═══════════════════════════════════════════════════
    MODULES DATA
