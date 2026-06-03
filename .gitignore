@@ -1,0 +1,14 @@
+# Fichiers système Windows
+Thumbs.db
+desktop.ini
+
+# Fichiers macOS
+.DS_Store
+
+# Fichiers temporaires
+*.tmp
+*.log
+
+# Archives
+*.zip
+*.rar
