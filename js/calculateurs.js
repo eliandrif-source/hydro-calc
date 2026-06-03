@@ -7,6 +7,9 @@
 
 function switchCalcTab(idx) {
   setTabActive('module-tabs', idx);
+  var titles = ['Calcul — Épandage','Calcul — FTE','Calcul — Manning','Calcul — Méthode rat.','Calcul — Charges','Calcul — Pression'];
+  var t = document.getElementById('top-title');
+  if (t) t.textContent = titles[idx] || 'Calculs';
   if      (idx === 0) renderCalcEpandage();
   else if (idx === 1) renderCalcFTE();
   else if (idx === 2) renderCalcManning();
@@ -289,6 +292,9 @@ function renderANC() {
 
 function switchANCTab(idx) {
   setTabActive('module-tabs', idx);
+  var titles = ['ANC — Filières','ANC — Comparateur','ANC — Prétraitement','ANC — Collecte','ANC — Rejet','ANC — Ventilation'];
+  var t = document.getElementById('top-title');
+  if (t) t.textContent = titles[idx] || 'ANC';
   if      (idx === 0) renderANCFilieres();
   else if (idx === 1) renderANCComparateur();
   else if (idx === 2) renderANCPretraitement();

@@ -18,6 +18,9 @@ function renderGloss() {
 function switchGlossTab(idx) {
   setTabActive('module-tabs', idx);
   window.glossTab = idx;
+  var titles = ['Glossaire — Termes','Glossaire — Formules','Glossaire — Acronymes','Glossaire — Organismes'];
+  var t = document.getElementById('top-title');
+  if (t) t.textContent = titles[idx] || 'Glossaire';
   var si = document.getElementById('gloss-search');
   if (si) si.value = '';
   if      (idx === 0) renderGlossTermes('');
