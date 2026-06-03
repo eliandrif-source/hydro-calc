@@ -105,6 +105,138 @@ function removeUserLogo() {
   renderCalcHistory();
 }
 
+/* ─── TÉLÉCHARGEMENT GÉNÉRIQUE ─── */
+function _download(blob, filename) {
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+}
+
+function _reportDate() { return new Date().toISOString().slice(0,10); }
+
+function _reportHeader() {
+  var userName = AUTH.user ? (AUTH.user.name || AUTH.user.email || '') : '';
+  var dateStr  = new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' });
+  return { userName: userName, dateStr: dateStr };
+}
+
+/* ─── FORMAT HTML ─── */
+function generateHTMLReport() {
+  var check = _canGenerateReport();
+  if (!check.ok) { authToast(check.reason); setTimeout(openSidebar, 800); return; }
+  var arr = getSavedCalcs();
+  if (!arr.length) { authToast('Aucun calcul à exporter.'); return; }
+
+  var h = _reportHeader();
+  var userLogo = _safeStorage.getItem('hc_user_logo');
+  var plan = AUTH.user ? (AUTH.user.plan || 'free') : 'free';
+  var logoHtml = (userLogo && plan !== 'free')
+    ? '<img src="' + userLogo + '" style="height:60px;object-fit:contain">'
+    : '<div style="font-size:28px;font-weight:900;color:#0A7460;letter-spacing:-1px">HydroCalc</div>';
+
+  var calcsHtml = arr.map(function(c) {
+    var d = new Date(c.date);
+    var dateStr = d.toLocaleDateString('fr-FR') + ' ' + d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+    var detail = (c.detail||'').replace(/<br\s*\/?>/gi,'<br>').replace(/<(?!br)[^>]+>/g,'');
+    return '<div style="margin-bottom:20px;border:1px solid #DEE8E4;border-radius:10px;overflow:hidden">'
+      + '<div style="background:#E0F4F0;padding:8px 14px;display:flex;justify-content:space-between;align-items:center">'
+      + '<span style="font-weight:800;font-size:12px;color:#0A7460;text-transform:uppercase">' + c.module + '</span>'
+      + '<span style="font-size:11px;color:#617068">' + dateStr + '</span></div>'
+      + '<div style="padding:12px 14px">'
+      + '<div style="font-size:18px;font-weight:700;color:#065A48;margin-bottom:6px">' + (c.valeur||'') + '</div>'
+      + '<div style="font-size:12px;color:#3A4840;line-height:1.7">' + detail + '</div>'
+      + '</div></div>';
+  }).join('');
+
+  var html = '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">'
+    + '<title>Rapport HydroCalc — ' + h.dateStr + '</title>'
+    + '<style>body{font-family:Arial,sans-serif;max-width:800px;margin:40px auto;padding:0 20px;color:#141C18}'
+    + '@media print{body{margin:0}}</style></head><body>'
+    + '<div style="display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px solid #0A7460;padding-bottom:14px;margin-bottom:24px">'
+    + '<div>' + logoHtml
+    + '<div style="font-size:12px;color:#617068;margin-top:4px">Application hydraulique professionnelle</div></div>'
+    + '<div style="text-align:right">'
+    + '<div style="font-weight:700;font-size:14px">' + h.userName + '</div>'
+    + '<div style="font-size:12px;color:#617068">' + h.dateStr + '</div></div></div>'
+    + '<h2 style="color:#0A7460;font-size:16px;margin-bottom:16px">Calculs enregistrés (' + arr.length + ')</h2>'
+    + calcsHtml
+    + '<div style="margin-top:30px;padding-top:12px;border-top:1px solid #DEE8E4;text-align:center;font-size:10px;color:#8A9890">'
+    + 'HydroCalc · hydrocalc.fr · Rapport généré le ' + new Date().toLocaleString('fr-FR') + '</div>'
+    + '</body></html>';
+
+  _download(new Blob([html], {type:'text/html;charset=utf-8'}), 'HydroCalc_rapport_' + _reportDate() + '.html');
+  _incrementReportQuota();
+  authToast('Rapport HTML téléchargé ✓');
+}
+
+/* ─── FORMAT ODT ─── */
+function generateODTReport() {
+  var check = _canGenerateReport();
+  if (!check.ok) { authToast(check.reason); setTimeout(openSidebar, 800); return; }
+  var arr = getSavedCalcs();
+  if (!arr.length) { authToast('Aucun calcul à exporter.'); return; }
+  if (!window.JSZip) { authToast('Bibliothèque ZIP non chargée.'); return; }
+
+  var h = _reportHeader();
+  var userLogo = _safeStorage.getItem('hc_user_logo');
+  var plan = AUTH.user ? (AUTH.user.plan || 'free') : 'free';
+  var logoName = (userLogo && plan !== 'free') ? 'logo_utilisateur' : 'HydroCalc';
+
+  var calcsXml = arr.map(function(c) {
+    var d = new Date(c.date);
+    var dateStr = d.toLocaleDateString('fr-FR') + ' ' + d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+    var valeur  = _htmlToText(c.valeur).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    var detail  = _htmlToText(c.detail).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    var module  = (c.module||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    return '<text:p text:style-name="module_header">' + module + '   ' + dateStr + '</text:p>'
+      + '<text:p text:style-name="calc_value">' + valeur + '</text:p>'
+      + (detail ? '<text:p text:style-name="calc_detail">' + detail + '</text:p>' : '')
+      + '<text:p text:style-name="separator"> </text:p>';
+  }).join('');
+
+  var content = '<?xml version="1.0" encoding="UTF-8"?>'
+    + '<office:document-content xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"'
+    + ' xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"'
+    + ' xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0"'
+    + ' xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0">'
+    + '<office:automatic-styles>'
+    + '<style:style style:name="title" style:family="paragraph"><style:text-properties fo:font-size="20pt" fo:font-weight="bold" fo:color="#0A7460"/></style:style>'
+    + '<style:style style:name="subtitle" style:family="paragraph"><style:text-properties fo:font-size="11pt" fo:color="#617068"/></style:style>'
+    + '<style:style style:name="module_header" style:family="paragraph"><style:paragraph-properties fo:background-color="#E0F4F0" fo:padding="4pt"/><style:text-properties fo:font-size="10pt" fo:font-weight="bold" fo:color="#0A7460"/></style:style>'
+    + '<style:style style:name="calc_value" style:family="paragraph"><style:text-properties fo:font-size="14pt" fo:font-weight="bold" fo:color="#065A48"/></style:style>'
+    + '<style:style style:name="calc_detail" style:family="paragraph"><style:text-properties fo:font-size="10pt" fo:color="#3A4840"/></style:style>'
+    + '<style:style style:name="separator" style:family="paragraph"><style:paragraph-properties fo:border-bottom="0.5pt solid #DEE8E4" fo:padding-bottom="6pt" fo:margin-bottom="10pt"/></style:style>'
+    + '<style:style style:name="footer_style" style:family="paragraph"><style:text-properties fo:font-size="9pt" fo:color="#8A9890"/></style:style>'
+    + '</office:automatic-styles>'
+    + '<office:body><office:text>'
+    + '<text:p text:style-name="title">' + logoName + '</text:p>'
+    + '<text:p text:style-name="subtitle">Application hydraulique professionnelle · ' + h.dateStr + ' · ' + h.userName + '</text:p>'
+    + '<text:p text:style-name="separator"> </text:p>'
+    + calcsXml
+    + '<text:p text:style-name="footer_style">HydroCalc · hydrocalc.fr · Généré le ' + new Date().toLocaleString('fr-FR') + '</text:p>'
+    + '</office:text></office:body></office:document-content>';
+
+  var manifest = '<?xml version="1.0" encoding="UTF-8"?>'
+    + '<manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0">'
+    + '<manifest:file-entry manifest:full-path="/" manifest:media-type="application/vnd.oasis.opendocument.text"/>'
+    + '<manifest:file-entry manifest:full-path="content.xml" manifest:media-type="text/xml"/>'
+    + '</manifest:manifest>';
+
+  var zip = new JSZip();
+  zip.file('mimetype', 'application/vnd.oasis.opendocument.text', {compression:'STORE'});
+  zip.folder('META-INF').file('manifest.xml', manifest);
+  zip.file('content.xml', content);
+
+  zip.generateAsync({type:'blob', mimeType:'application/vnd.oasis.opendocument.text'}).then(function(blob) {
+    _download(blob, 'HydroCalc_rapport_' + _reportDate() + '.odt');
+    _incrementReportQuota();
+    authToast('Rapport ODT téléchargé ✓');
+  });
+}
+
 /* ─── GÉNÉRATION RAPPORT WORD ─── */
 function generateWordReport() {
   var check = _canGenerateReport();
@@ -303,9 +435,12 @@ function renderCalcHistory() {
         + '<button onclick="uploadUserLogo()" style="padding:5px 10px;background:var(--c-primary-l);color:var(--c-primary);border:none;border-radius:var(--r-pill);font-size:11px;font-weight:700;cursor:pointer">'
         + (userLogo ? 'Changer' : 'Importer') + '</button>'
         + '</div>';
-      /* Télécharger */
-      html += '<button onclick="generateWordReport()" style="width:100%;padding:12px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-md);font-family:var(--f-body);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">'
-        + '📄 Télécharger le rapport Word (.docx)</button></div>';
+      /* Boutons 3 formats */
+      html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--s-2)">'
+        + '<button onclick="generateHTMLReport()" style="padding:10px 6px;background:#1550A0;color:#fff;border:none;border-radius:var(--r-sm);font-family:var(--f-body);font-size:11px;font-weight:700;cursor:pointer">🌐 HTML</button>'
+        + '<button onclick="generateODTReport()" style="padding:10px 6px;background:#166038;color:#fff;border:none;border-radius:var(--r-sm);font-family:var(--f-body);font-size:11px;font-weight:700;cursor:pointer">📝 ODT</button>'
+        + '<button onclick="generateWordReport()" style="padding:10px 6px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-sm);font-family:var(--f-body);font-size:11px;font-weight:700;cursor:pointer">📄 DOCX</button>'
+        + '</div></div>';
     } else {
       html += '<div style="padding:var(--s-3) var(--s-4) 0">'
         + '<div style="background:var(--c-surface-3);border:1px solid var(--c-border);border-radius:var(--r-md);padding:var(--s-3);display:flex;align-items:center;gap:var(--s-3)">'
