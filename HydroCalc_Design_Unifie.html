@@ -67,7 +67,11 @@
       <input class="auth-input" type="email" id="login-email" placeholder="votre@email.fr" autocomplete="email">
       <label class="auth-label">Mot de passe</label>
       <input class="auth-input" type="password" id="login-pwd" placeholder="Votre mot de passe" autocomplete="current-password">
-      <div style="text-align:right;margin-top:-8px;margin-bottom:16px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:-8px;margin-bottom:16px">
+        <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--c-text-3);cursor:pointer">
+          <input type="checkbox" id="login-remember" style="width:15px;height:15px;accent-color:var(--c-primary)">
+          Se souvenir de moi
+        </label>
         <span class="auth-link" style="font-size:12px" onclick="authShow('auth-forgot')">Mot de passe oublié ?</span>
       </div>
       <button class="auth-btn-submit" onclick="authLogin()">Se connecter</button>

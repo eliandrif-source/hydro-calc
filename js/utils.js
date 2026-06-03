@@ -14,7 +14,7 @@ var _safeStorage = {
 /* ─── LIMITE CALCULS JOURNALIERS (plan gratuit : 10/jour) ─── */
 function checkCalcLimit() {
   var plan = AUTH && AUTH.user ? (AUTH.user.plan || 'free') : 'free';
-  if (plan !== 'free') return true;
+  if (plan !== 'free' || (AUTH.user && AUTH.user.isAdmin)) return true;
 
   var today = new Date().toISOString().slice(0, 10);
   var raw = _safeStorage.getItem('hc_calc_quota');

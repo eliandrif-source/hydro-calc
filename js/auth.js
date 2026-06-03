@@ -100,13 +100,26 @@ function clearAllCalcs() {
    SYSTÈME D'AUTHENTIFICATION
 ═══════════════════════════════════════════════════ */
 
-let AUTH = { user: null };
+var AUTH = { user: null };
 
-const PLANS_HC = {
-  gratuit: { name:'Gratuit', icon:'🎯', price:'0 €', color:'var(--c-text-3)', badgeClass:'plan-free-badge' },
-  pro:     { name:'Pro',     icon:'⭐', price:'9,90 €/mois', color:'#4A28A0', badgeClass:'plan-pro-badge' },
-  expert:  { name:'Expert',  icon:'🏆', price:'19,90 €/mois', color:'#065A48', badgeClass:'plan-etab-badge' },
+var PLANS_HC = {
+  free:    { name:'Gratuit',        icon:'🌱', price:'0 €',        color:'var(--c-text-3)', badgeClass:'plan-free-badge' },
+  pro:     { name:'Pro',            icon:'⚡', price:'5,90 €/mois', color:'#4A28A0',        badgeClass:'plan-pro-badge'  },
+  etab:    { name:'Établissement',  icon:'🏛️', price:'35 €/mois',  color:'#065A48',        badgeClass:'plan-etab-badge' },
+  admin:   { name:'Administrateur', icon:'🔑', price:'—',           color:'#A02020',        badgeClass:'plan-etab-badge' },
 };
+
+/* ─── HASH SHA-256 (Web Crypto API) ─── */
+function _sha256(str) {
+  var buf = new TextEncoder().encode(str);
+  return crypto.subtle.digest('SHA-256', buf).then(function(hash) {
+    return Array.from(new Uint8Array(hash)).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+  });
+}
+
+/* ─── COMPTE ADMIN (hash stocké, jamais le mot de passe en clair) ─── */
+var _ADMIN_EMAIL = 'eliandrif@gmail.com';
+var _ADMIN_HASH  = '2636c9f40f1d5e38c2a8b5b27591b78195090b360e591231eeaa34a5677b619a';
 
 function getHCAccounts() {
   const a = JSON.parse(_safeStorage.getItem('hc_main_accounts') || '{}');
@@ -133,17 +146,44 @@ function authToast(msg) {
 }
 
 function authLogin() {
-  var email = (getV('login-email') || '').trim().toLowerCase();
-  var pwd   = getV('login-pwd') || '';
-  var errEl = document.getElementById('login-err');
+  var email   = (getV('login-email') || '').trim().toLowerCase();
+  var pwd     = getV('login-pwd') || '';
+  var remember = document.getElementById('login-remember');
+  var rememberMe = remember && remember.checked;
+  var errEl   = document.getElementById('login-err');
+
+  if (errEl) errEl.style.display = 'none';
+
+  /* Compte admin : vérification par hash SHA-256 */
+  if (email === _ADMIN_EMAIL) {
+    _sha256(pwd).then(function(hash) {
+      if (hash !== _ADMIN_HASH) {
+        if (errEl) errEl.style.display = 'block'; return;
+      }
+      AUTH.user = { email: email, name: 'Administrateur', plan: 'admin', isAdmin: true };
+      if (rememberMe) {
+        _safeStorage.setItem('hc_remember', JSON.stringify({ email: email, token: _ADMIN_HASH.slice(0,16), isAdmin: true }));
+      } else {
+        _safeStorage.removeItem('hc_remember');
+      }
+      _doEnterApp();
+    });
+    return;
+  }
+
+  /* Comptes normaux */
   var accounts = getHCAccounts();
   if (!accounts[email] || accounts[email].pwd !== pwd) {
     if (errEl) errEl.style.display = 'block'; return;
   }
-  if (errEl) errEl.style.display = 'none';
   accounts[email].lastLogin = Date.now();
   saveHCAccounts(accounts);
   AUTH.user = Object.assign({ email: email }, accounts[email]);
+  if (rememberMe) {
+    _safeStorage.setItem('hc_remember', JSON.stringify({ email: email, token: accounts[email].pwd.slice(0,8) }));
+  } else {
+    _safeStorage.removeItem('hc_remember');
+  }
   _doEnterApp();
 }
 
@@ -191,7 +231,7 @@ function authContinueGuest() {
 
 function _doEnterApp() {
   // Sauvegarder la session
-  if (AUTH.user) _safeStorage.setItem('hc_current_session', JSON.stringify({ email: AUTH.user.email }));
+  if (AUTH.user) _safeStorage.setItem('hc_current_session', JSON.stringify({ email: AUTH.user.email, isAdmin: AUTH.user.isAdmin || false }));
   // Cacher tous les écrans auth
   document.querySelectorAll('.auth-screen').forEach(function(s){ s.classList.add('hidden'); });
   // Bouton profil
@@ -305,22 +345,43 @@ function selectHCPlan(planId) {
   buildProfile();
 }
 
-/* INIT */
+/* INIT — connexion automatique si "Se souvenir de moi" */
 (function initAuth(){
-  var saved = _safeStorage.getItem('hc_current_session');
-  if (saved) {
-    try {
-      var s = JSON.parse(saved);
-      var accounts = getHCAccounts();
-      if (accounts[s.email]) {
-        AUTH.user = Object.assign({ email: s.email }, accounts[s.email]);
-        _doEnterApp();
-        return;
+  try {
+    /* 1. Vérifier "Se souvenir de moi" */
+    var rem = _safeStorage.getItem('hc_remember');
+    if (rem) {
+      var r = JSON.parse(rem);
+      if (r.isAdmin && r.email === _ADMIN_EMAIL && r.token === _ADMIN_HASH.slice(0,16)) {
+        AUTH.user = { email: _ADMIN_EMAIL, name: 'Administrateur', plan: 'admin', isAdmin: true };
+        _doEnterApp(); return;
       }
-    } catch(e) {}
-  }
-  // Afficher le splash auth
-  var _as=document.getElementById('auth-splash'); if(_as) _as.classList.remove('hidden');
+      if (!r.isAdmin) {
+        var accounts = getHCAccounts();
+        if (accounts[r.email] && accounts[r.email].pwd.slice(0,8) === r.token) {
+          AUTH.user = Object.assign({ email: r.email }, accounts[r.email]);
+          _doEnterApp(); return;
+        }
+      }
+    }
+    /* 2. Session en cours (connexion standard) */
+    var saved = _safeStorage.getItem('hc_current_session');
+    if (saved) {
+      var s = JSON.parse(saved);
+      if (s.isAdmin && s.email === _ADMIN_EMAIL) {
+        AUTH.user = { email: _ADMIN_EMAIL, name: 'Administrateur', plan: 'admin', isAdmin: true };
+        _doEnterApp(); return;
+      }
+      var accs = getHCAccounts();
+      if (accs[s.email]) {
+        AUTH.user = Object.assign({ email: s.email }, accs[s.email]);
+        _doEnterApp(); return;
+      }
+    }
+  } catch(e) {}
+  /* 3. Afficher le splash auth */
+  var _as = document.getElementById('auth-splash');
+  if (_as) _as.classList.remove('hidden');
 })();
 
 /* ═══════════════════════════════════════════════════
