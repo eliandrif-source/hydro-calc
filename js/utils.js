@@ -43,64 +43,54 @@ let qcmState = { idx:0, score:0 };
 
 /* ═══ RENDER HOME ═══ */
 function renderHome() {
-  setNav('nav-home');
+  setNav('');
   document.getElementById('tab-bar').style.display = 'none';
   document.getElementById('top-title').textContent = 'HydroCalc';
 
-  const cats = ['calculs','anc','formation','reference'];
-  let html = `
+  var categories = [
+    { id:'ac',    ico:'🔧', name:'Assainissement collectif',     sub:'Réseaux EU/EP · Calculs · Ouvrages',         color:'var(--c-ac)',   colorl:'var(--c-ac-l)'   },
+    { id:'anc',   ico:'🏡', name:'Assainissement non collectif', sub:'Filières ANC · SPANC · Aides financières',   color:'var(--c-anc)',  colorl:'var(--c-anc-l)'  },
+    { id:'ep',    ico:'💧', name:'Eau potable',                  sub:'Potabilisation · Normes · Réseau AEP',        color:'var(--c-ep)',   colorl:'var(--c-ep-l)'   },
+    { id:'riv',   ico:'🌊', name:'Milieu naturel',               sub:'Rivières · Hydrologie · Crues · Nappes',     color:'var(--c-riv)',  colorl:'var(--c-riv-l)'  },
+    { id:'gloss', ico:'📖', name:'Formulaire & Glossaire',       sub:'200+ termes · Formules · Acronymes',         color:'var(--c-ref)',  colorl:'var(--c-ref-l)'  },
+    { id:'regl',  ico:'📋', name:'Réglementation',               sub:'Arrêtés · DCE · Police de l\'eau · REUT',   color:'var(--c-regl)', colorl:'var(--c-regl-l)' },
+    { id:'mat',   ico:'🔩', name:'Référence & Matériaux',        sub:'PVC · Fonte · Pompes · Équipements',         color:'var(--c-mat)',  colorl:'var(--c-mat-l)'  },
+  ];
+
+  var html = `
     <div class="home-hero">
       <div class="hh-brand">
         <div class="hh-icon">💧</div>
         <div><div class="hh-name">HydroCalc</div><div class="hh-sub">Application hydraulique professionnelle</div></div>
       </div>
       <div class="hh-stats">
-        <div class="hs-item"><div class="hs-val">14</div><div class="hs-lbl">Modules</div></div>
+        <div class="hs-item"><div class="hs-val">7</div><div class="hs-lbl">Domaines</div></div>
         <div class="hs-item"><div class="hs-val">60+</div><div class="hs-lbl">Calculateurs</div></div>
-        <div class="hs-item"><div class="hs-val">300+</div><div class="hs-lbl">Fiches</div></div>
+        <div class="hs-item"><div class="hs-val">720</div><div class="hs-lbl">Questions QCM</div></div>
       </div>
     </div>
-
-    <div class="search-container">
-      <div class="search-bar">
-        <span class="search-ico">🔍</span>
-        <input type="text" placeholder="Rechercher dans tous les modules…" readonly onclick="this.placeholder='Tapez votre recherche…'" id="global-inp">
-      </div>
-    </div>
-
-    <div class="recent-section">
-      <div class="section-header" style="padding:0 0 8px">🕒 <span style="margin-left:4px">Récemment utilisés</span></div>
-      <div class="recent-chips">
-        ${['calc','anc','gloss','cours','aides'].map(id=>{
-          const m=MODULES_META.find(x=>x.id===id);
-          return `<div class="recent-chip" onclick="showModule('${m.id}')" style="--cat-color:${m.color}">${m.ico} ${m.name.split('—')[0].trim()}</div>`;
-        }).join('')}
-      </div>
-    </div>
+    <div class="section-header">Choisissez votre domaine</div>
+    <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
   `;
 
-  cats.forEach(cat => {
-    const mods = MODULES_META.filter(m=>m.category===cat||m.cat===cat);
-    if(!mods.length) return;
-    const cfg = CATS_CONFIG[cat];
-    html += `<div class="section-header" style="color:${cfg.color}">${cfg.lbl}<span class="sh-count">${mods.length}</span></div>
-    <div class="mod-grid" style="margin-bottom:16px">`;
-    mods.forEach(m=>{
-      const tags = m.tags.map(t=>`<span class="mgc-tag">${t}</span>`).join('');
-      const featured = m.featured;
-      html += `<div class="mod-grid-card${featured?' span2':''}" style="--cat-color:${m.color}" onclick="showModule('${m.id}')">
-        ${m.isNew?'<span class="new-badge">NEW</span>':''}
-        <span class="mgc-icon">${m.ico}</span>
-        <div><div class="mgc-name">${m.name}</div><div class="mgc-sub">${m.sub}</div><div class="mgc-tags">${tags}</div></div>
-      </div>`;
-    });
-    html += '</div>';
-  });
+  for (var i=0; i<categories.length; i++) {
+    var c = categories[i];
+    html += `<div class="mod-list-card" style="--cat-color:${c.color}" onclick="showModule('${c.id}')">
+      <div class="mlc-icon" style="background:${c.colorl};font-size:22px">${c.ico}</div>
+      <div class="mlc-body">
+        <div class="mlc-name" style="font-size:var(--t-md)">${c.name}</div>
+        <div class="mlc-sub">${c.sub}</div>
+      </div>
+      <span class="mlc-arrow">›</span>
+    </div>`;
+  }
 
-  html += `<div style="text-align:center;padding:var(--s-3) var(--s-4) var(--s-2);font-size:9px;color:var(--c-text-4);letter-spacing:.03em;line-height:1.7;font-style:italic">
-    Application inspirée de notre grand maître à tous J. M. R.
-  </div>`;
-  html += '<div class="pb-nav"></div>';
+  html += `</div>
+    <div style="text-align:center;padding:var(--s-4) var(--s-4) var(--s-2);font-size:9px;color:var(--c-text-4);letter-spacing:.03em;line-height:1.7;font-style:italic">
+      Application hydraulique professionnelle · BTS GEMEAU · Techniciens eau
+    </div>
+    <div class="pb-nav"></div>`;
+
   document.getElementById('main-content').innerHTML = html;
   document.getElementById('main-content').scrollTop = 0;
 }
@@ -136,18 +126,21 @@ function showModule(id) {
   if (m) document.getElementById('top-title').textContent = m.name.split('—')[0].trim();
 
   // Renderer explicite par module (pas de référence en objet)
-  if      (id === 'calc')   renderCalc();
+  if      (id === 'ac')     renderAC();
+  else if (id === 'calc')   renderCalc();
   else if (id === 'calca')  renderCalcAvances();
   else if (id === 'calcs')  renderCalcSuppl();
   else if (id === 'conv')   renderConv();
+  else if (id === 'ouv')    renderOuvrages();
   else if (id === 'anc')    renderANC();
   else if (id === 'nc')     renderNC();
-  else if (id === 'ouv')    renderOuvrages();
+  else if (id === 'aides')  renderAides();
+  else if (id === 'spanc')  renderSPANC();
+  else if (id === 'ep')     renderEP();
+  else if (id === 'riv')    renderRiv();
   else if (id === 'gloss')  renderGloss();
   else if (id === 'cours')  renderCours();
   else if (id === 'form')   renderFormations();
-  else if (id === 'spanc')  renderSPANC();
-  else if (id === 'aides')  renderAides();
   else if (id === 'regl')   renderRegl();
   else if (id === 'mat')    renderMateriaux();
   else if (id === 'design') renderDesignSystem();
@@ -155,9 +148,11 @@ function showModule(id) {
 
   // Nav highlight
   var navMap = {
-    calc:'nav-calc', calca:'nav-calc', calcs:'nav-calc', conv:'nav-calc',
-    anc:'nav-anc', nc:'nav-anc', ouv:'nav-anc', aides:'nav-anc', spanc:'nav-anc',
-    cours:'nav-ref', form:'nav-ref', regl:'nav-more', gloss:'nav-ref', mat:'nav-ref'
+    ac:'nav-ac', calc:'nav-ac', calca:'nav-ac', calcs:'nav-ac', conv:'nav-ac', ouv:'nav-ac',
+    anc:'nav-anc', nc:'nav-anc', aides:'nav-anc', spanc:'nav-anc',
+    ep:'nav-ep',
+    riv:'nav-riv',
+    gloss:'nav-gloss', cours:'nav-gloss', form:'nav-gloss', regl:'nav-gloss', mat:'nav-gloss'
   };
   setNav(navMap[id] || '');
 }

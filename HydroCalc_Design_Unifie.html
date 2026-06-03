@@ -173,10 +173,10 @@
 
   <!-- TOP BAR -->
   <div class="top-bar" id="top-bar">
+    <button class="tb-icon-btn tb-back-btn" onclick="goHome()" title="Accueil">🏠</button>
     <span class="top-bar-logo" id="top-title">HydroCalc</span>
     <button class="tb-icon-btn" onclick="openPDF()" title="Imprimer">🖨️</button>
     <button class="tb-icon-btn" id="profile-btn" onclick="openProfile()" title="Mon profil" style="display:none">👤</button>
-    <button class="tb-icon-btn" onclick="showModule('design')" title="Design system">🎨</button>
   </div>
 
   <!-- TAB BAR (si module actif) -->
@@ -187,20 +187,20 @@
 
   <!-- BOTTOM NAV -->
   <nav class="bottom-nav">
-    <button class="nav-btn active" id="nav-home" onclick="goHome()">
-      <span class="nav-ico">🏠</span><span class="nav-lbl">Accueil</span>
-    </button>
-    <button class="nav-btn" id="nav-calc" onclick="showModule('calc')">
-      <span class="nav-ico">🧮</span><span class="nav-lbl">Calculs</span>
+    <button class="nav-btn" id="nav-ac" onclick="showModule('ac')">
+      <span class="nav-ico">🔧</span><span class="nav-lbl">A. Collectif</span>
     </button>
     <button class="nav-btn" id="nav-anc" onclick="showModule('anc')">
-      <span class="nav-ico">🏡</span><span class="nav-lbl">ANC</span>
+      <span class="nav-ico">🏡</span><span class="nav-lbl">A. Non Coll.</span>
     </button>
-    <button class="nav-btn" id="nav-ref" onclick="showModule('gloss')">
-      <span class="nav-ico">📖</span><span class="nav-lbl">Référence</span>
+    <button class="nav-btn" id="nav-ep" onclick="showModule('ep')">
+      <span class="nav-ico">💧</span><span class="nav-lbl">Eau potable</span>
     </button>
-    <button class="nav-btn" id="nav-more" onclick="showModule('regl')">
-      <span class="nav-ico">📋</span><span class="nav-lbl">Règlement.</span>
+    <button class="nav-btn" id="nav-riv" onclick="showModule('riv')">
+      <span class="nav-ico">🌊</span><span class="nav-lbl">Mil. naturel</span>
+    </button>
+    <button class="nav-btn" id="nav-gloss" onclick="showModule('gloss')">
+      <span class="nav-ico">📖</span><span class="nav-lbl">Formulaire</span>
     </button>
   </nav>
 

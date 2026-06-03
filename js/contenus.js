@@ -748,3 +748,119 @@ function toggleFiche3(i) {
 
 function openPDF() { window.print(); }
 
+/* ─── ASSAINISSEMENT COLLECTIF ─── */
+function renderAC() {
+  var _tb=document.getElementById('tab-bar'); if(_tb) _tb.style.display='none';
+  document.getElementById('main-content').innerHTML = `
+    <div class="module-hero" style="--cat-color:var(--c-ac)">
+      <span class="mh-icon">🔧</span>
+      <div class="mh-title">Assainissement collectif</div>
+      <div class="mh-sub">Réseaux EU/EP · Calculateurs · Ouvrages · Dimensionnement</div>
+      <div class="mh-tags"><span class="mh-tag">Réseaux EU</span><span class="mh-tag">Eaux pluviales</span><span class="mh-tag">Calculs</span></div>
+    </div>
+    <div class="section-header">Calculateurs</div>
+    <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
+      ${[
+        {ico:'⚡',name:'Calculateurs principaux',sub:'Manning-Strickler · FTE · EP · Charges',id:'calc'},
+        {ico:'🧮',name:'Calculateurs avancés',sub:'Manning partiel · Coup de bélier · NPSH · Shields',id:'calca'},
+        {ico:'📐',name:'Calculateurs complémentaires',sub:'Chlore · Réservoir · STEU',id:'calcs'},
+        {ico:'🔄',name:'Convertisseur d\'unités',sub:'Débit · Pression · Concentration',id:'conv'},
+      ].map(function(m){ return `
+      <div class="mod-list-card" style="--cat-color:var(--c-ac)" onclick="showModule('${m.id}')">
+        <div class="mlc-icon" style="background:var(--c-ac-l)">${m.ico}</div>
+        <div class="mlc-body"><div class="mlc-name">${m.name}</div><div class="mlc-sub">${m.sub}</div></div>
+        <span class="mlc-arrow">›</span>
+      </div>`; }).join('')}
+    </div>
+    <div class="section-header">Ouvrages & référence</div>
+    <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
+      ${[
+        {ico:'🔧',name:'Ouvrages AC & EP',sub:'Regards · Bassins · MBR · PRV',id:'ouv'},
+        {ico:'📋',name:'Réglementation',sub:'Arrêtés · DCE · Normes',id:'regl'},
+        {ico:'🔩',name:'Matériaux & Équipements',sub:'PVC · Fonte · Pompes · SCADA',id:'mat'},
+      ].map(function(m){ return `
+      <div class="mod-list-card" style="--cat-color:var(--c-ac)" onclick="showModule('${m.id}')">
+        <div class="mlc-icon" style="background:var(--c-ac-l)">${m.ico}</div>
+        <div class="mlc-body"><div class="mlc-name">${m.name}</div><div class="mlc-sub">${m.sub}</div></div>
+        <span class="mlc-arrow">›</span>
+      </div>`; }).join('')}
+    </div>
+    <div class="pb-nav"></div>`;
+}
+
+/* ─── EAU POTABLE ─── */
+function renderEP() {
+  var _tb=document.getElementById('tab-bar'); if(_tb) _tb.style.display='none';
+  document.getElementById('main-content').innerHTML = `
+    <div class="module-hero" style="--cat-color:var(--c-ep)">
+      <span class="mh-icon">💧</span>
+      <div class="mh-title">Eau potable</div>
+      <div class="mh-sub">Potabilisation · Normes · Traitement · Réseau AEP</div>
+      <div class="mh-tags"><span class="mh-tag">Normes</span><span class="mh-tag">Traitement</span><span class="mh-tag">AEP</span></div>
+    </div>
+    <div class="section-header">Outils & calculs</div>
+    <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
+      ${[
+        {ico:'📐',name:'Calculateurs eau potable',sub:'Chloration · Réservoir · Langelier',id:'calcs'},
+        {ico:'🔄',name:'Convertisseur d\'unités',sub:'mg/L · m³/h · bar',id:'conv'},
+      ].map(function(m){ return `
+      <div class="mod-list-card" style="--cat-color:var(--c-ep)" onclick="showModule('${m.id}')">
+        <div class="mlc-icon" style="background:var(--c-ep-l)">${m.ico}</div>
+        <div class="mlc-body"><div class="mlc-name">${m.name}</div><div class="mlc-sub">${m.sub}</div></div>
+        <span class="mlc-arrow">›</span>
+      </div>`; }).join('')}
+    </div>
+    <div class="section-header">Référence & réglementation</div>
+    <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
+      ${[
+        {ico:'📋',name:'Réglementation eau potable',sub:'Code santé · Limites qualité · UE',id:'regl'},
+        {ico:'📖',name:'Glossaire & formules',sub:'Termes · Paramètres physico-chimiques',id:'gloss'},
+        {ico:'🔩',name:'Matériaux & équipements AEP',sub:'Canalisations · Pompes · Compteurs',id:'mat'},
+      ].map(function(m){ return `
+      <div class="mod-list-card" style="--cat-color:var(--c-ep)" onclick="showModule('${m.id}')">
+        <div class="mlc-icon" style="background:var(--c-ep-l)">${m.ico}</div>
+        <div class="mlc-body"><div class="mlc-name">${m.name}</div><div class="mlc-sub">${m.sub}</div></div>
+        <span class="mlc-arrow">›</span>
+      </div>`; }).join('')}
+    </div>
+    <div class="pb-nav"></div>`;
+}
+
+/* ─── MILIEU NATUREL ─── */
+function renderRiv() {
+  var _tb=document.getElementById('tab-bar'); if(_tb) _tb.style.display='none';
+  document.getElementById('main-content').innerHTML = `
+    <div class="module-hero" style="--cat-color:var(--c-riv)">
+      <span class="mh-icon">🌊</span>
+      <div class="mh-title">Milieu naturel</div>
+      <div class="mh-sub">Rivières · Hydrologie · Crues · Hydrogéologie</div>
+      <div class="mh-tags"><span class="mh-tag">Hydrologie</span><span class="mh-tag">Crues</span><span class="mh-tag">Nappes</span></div>
+    </div>
+    <div class="section-header">Calculateurs</div>
+    <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
+      ${[
+        {ico:'🌊',name:'Hydraulique à surface libre',sub:'Manning · Froude · Régime fluvial',id:'calc'},
+        {ico:'🧮',name:'Calculateurs avancés',sub:'Manning partiel · Shields · Coup de bélier',id:'calca'},
+        {ico:'🔄',name:'Convertisseur d\'unités',sub:'m³/s · m³/h · L/s',id:'conv'},
+      ].map(function(m){ return `
+      <div class="mod-list-card" style="--cat-color:var(--c-riv)" onclick="showModule('${m.id}')">
+        <div class="mlc-icon" style="background:var(--c-riv-l)">${m.ico}</div>
+        <div class="mlc-body"><div class="mlc-name">${m.name}</div><div class="mlc-sub">${m.sub}</div></div>
+        <span class="mlc-arrow">›</span>
+      </div>`; }).join('')}
+    </div>
+    <div class="section-header">Référence</div>
+    <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
+      ${[
+        {ico:'📋',name:'Réglementation milieu naturel',sub:'Police de l\'eau · IOTA · DCE',id:'regl'},
+        {ico:'📖',name:'Glossaire hydrologie',sub:'Termes · Formules · Débits',id:'gloss'},
+      ].map(function(m){ return `
+      <div class="mod-list-card" style="--cat-color:var(--c-riv)" onclick="showModule('${m.id}')">
+        <div class="mlc-icon" style="background:var(--c-riv-l)">${m.ico}</div>
+        <div class="mlc-body"><div class="mlc-name">${m.name}</div><div class="mlc-sub">${m.sub}</div></div>
+        <span class="mlc-arrow">›</span>
+      </div>`; }).join('')}
+    </div>
+    <div class="pb-nav"></div>`;
+}
+
