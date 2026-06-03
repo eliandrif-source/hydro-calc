@@ -10,6 +10,13 @@ Barre latérale gauche rétractable avec bouton abonnement intégré.
 - Étape suivante : définir les restrictions de chaque plan avec l'utilisateur
 - Paiement Stripe prévu à l'étape 4 du cahier des charges
 
+## Période d'essai gratuite 7 jours (priorité haute)
+- À chaque nouvelle inscription, afficher un message pop-up proposant 7 jours d'essai gratuit et illimité
+- Le même message apparaît dans l'onglet "Abonnement" de la sidebar tant que l'essai n'est pas activé
+- Quand l'utilisateur clique "Démarrer mon essai", le message disparaît et le plan passe en "trial" (accès illimité) pendant 7 jours
+- Après 7 jours, retour automatique au plan Gratuit avec message d'expiration
+- Ne s'affiche qu'une seule fois par compte (stocké en localStorage)
+
 ## Tableau de bord admin "Coffre" (étape 4)
 Onglet visible uniquement pour l'administrateur (eliandrif@gmail.com).
 - Revenus du mois / de l'année
