@@ -926,7 +926,9 @@ function renderReglByDept(q='') {
     <div style="height:var(--s-4)"></div>`;
 }
 
-function renderRegl() {
+function renderRegl(startKey) {
+  var tabKeys  = ['anc','ac','ep','milieux','transversal','dept'];
+  var tabIdx   = startKey ? Math.max(tabKeys.indexOf(startKey), 0) : 0;
   loadModuleTabs(['🏡 ANC','🏙️ Assainissement','💧 Eau potable','🌊 Milieux','🔗 Transversal','🗺️ Par département'], 'switchReglTab');
   document.getElementById('main-content').innerHTML =
     '<div class="search-container" style="padding-top:var(--s-2)">'
@@ -935,9 +937,10 @@ function renderRegl() {
     + '</div></div>'
     + '<div id="regl-content"></div>'
     + '<div class="pb-nav"></div>';
-  window.reglTabIdx = 0;
+  window.reglTabIdx = tabIdx;
   window.reglDeptSel = '';
-  renderReglTab('anc', '');
+  setTabActive('module-tabs', tabIdx);
+  renderReglTab(tabKeys[tabIdx] || 'anc', '');
 }
 
 function switchReglTab(idx) {

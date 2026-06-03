@@ -202,7 +202,11 @@ function showModule(id) {
   else if (id === 'gloss')  renderGloss();
   else if (id === 'cours')  renderCours();
   else if (id === 'form')   renderFormations();
-  else if (id === 'regl')   renderRegl();
+  else if (id === 'regl')        renderRegl();
+  else if (id === 'regl-ep')    renderRegl('ep');
+  else if (id === 'regl-anc')   renderRegl('anc');
+  else if (id === 'regl-ac')    renderRegl('ac');
+  else if (id === 'regl-riv')   renderRegl('milieux');
   else if (id === 'mat')    renderMateriaux();
   else if (id === 'design') renderDesignSystem();
   else renderModuleSimple(id);

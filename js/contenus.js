@@ -845,7 +845,7 @@ function renderAC() {
     <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
       ${[
         {ico:'🔧',name:'Ouvrages AC & EP',sub:'Regards · Bassins · MBR · PRV',id:'ouv'},
-        {ico:'📋',name:'Réglementation',sub:'Arrêtés · DCE · Normes',id:'regl'},
+        {ico:'📋',name:'Réglementation assainissement',sub:'Arrêtés · DCE · Normes',id:'regl-ac'},
         {ico:'🔩',name:'Matériaux & Équipements',sub:'PVC · Fonte · Pompes · SCADA',id:'mat'},
       ].map(function(m){ return `
       <div class="mod-list-card" style="--cat-color:var(--c-ac)" onclick="showModule('${m.id}')">
@@ -882,7 +882,7 @@ function renderEP() {
     <div class="section-header">Référence & réglementation</div>
     <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
       ${[
-        {ico:'📋',name:'Réglementation eau potable',sub:'Code santé · Limites qualité · UE',id:'regl'},
+        {ico:'📋',name:'Réglementation eau potable',sub:'Code santé · Limites qualité · UE',id:'regl-ep'},
         {ico:'📖',name:'Glossaire & formules',sub:'Termes · Paramètres physico-chimiques',id:'gloss'},
         {ico:'🔩',name:'Matériaux & équipements AEP',sub:'Canalisations · Pompes · Compteurs',id:'mat'},
       ].map(function(m){ return `
@@ -921,7 +921,7 @@ function renderRiv() {
     <div class="section-header">Référence</div>
     <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
       ${[
-        {ico:'📋',name:'Réglementation milieu naturel',sub:'Police de l\'eau · IOTA · DCE',id:'regl'},
+        {ico:'📋',name:'Réglementation milieu naturel',sub:'Police de l\'eau · IOTA · DCE',id:'regl-riv'},
         {ico:'📖',name:'Glossaire hydrologie',sub:'Termes · Formules · Débits',id:'gloss'},
       ].map(function(m){ return `
       <div class="mod-list-card" style="--cat-color:var(--c-riv)" onclick="showModule('${m.id}')">
