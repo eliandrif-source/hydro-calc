@@ -347,7 +347,7 @@ const FORMULES_DB = [
       valeurs:'1 m CE = 0,0981 bar = 9,81 kPa · Pression service AEP : 2–6 bar = 20–61 m CE',
       src:'NF EN ISO 9906 · Karassik I. (2001). Pump Handbook.' },
     { nom:'Puissance hydraulique et absorbée',
-      formule:'P_hyd = ρ × g × Q × HMT / 3 600   (kW)   P_abs = P_hyd / η',
+      formule:'P_hyd = ρ × g × Q × HMT / 3 600 000   (kW)   P_abs = P_hyd / η',
       detail:'ρ = 1 000 kg/m³ · Q en m³/h · HMT en m · η = rendement global pompe + moteur',
       valeurs:'η petite pompe : 55–65% · Grande pompe > 50 kW : 78–85%',
       src:'NF EN ISO 9906' },
@@ -430,7 +430,7 @@ function renderGlossFormules(q='') {
         <div style="padding:var(--s-2) var(--s-3) var(--s-2)">
           <div style="font-size:var(--t-sm);font-weight:800;color:${cat.color};margin-bottom:var(--s-2)">${f.nom}</div>
           <div style="font-family:'Courier New',monospace;font-size:13px;font-weight:900;color:var(--c-primary);background:var(--c-primary-l);padding:var(--s-2) var(--s-3);border-radius:var(--r-sm);border-left:4px solid var(--c-primary);line-height:1.9;letter-spacing:.01em;margin-bottom:var(--s-2)">${f.formule}</div>
-          <div style="font-size:var(--t-xs);color:var(--c-text-3);line-height:1.75;margin-bottom:4px"><strong style="color:var(--c-text-2)">Variables :</strong> ${f.detail}</div>
+          <div style="margin-bottom:6px"><div style="font-size:10px;font-weight:700;color:var(--c-text-2);margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em">Variables</div><div style="display:flex;flex-wrap:wrap;gap:5px">${f.detail.split(' · ').map(v=>{const m=v.match(/^([^=\s]+)\s*=\s*(.+)$/);if(m){const sym=m[1].trim();const rest=m[2].trim();const unitM=rest.match(/\(([^)]+)\)\s*$/);const unit=unitM?unitM[1]:'';const desc=unitM?rest.slice(0,rest.lastIndexOf('(')).trim():rest;return`<span style="display:inline-flex;align-items:baseline;gap:4px;background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:6px;padding:3px 8px;font-size:10.5px;white-space:nowrap"><span style="font-family:'Courier New',monospace;font-weight:800;color:var(--c-primary)">${sym}</span><span style="color:var(--c-text-3)">${desc}</span>${unit?`<span style="font-family:'Courier New',monospace;font-size:9.5px;color:var(--c-text-4);background:var(--c-surface);border-radius:4px;padding:1px 4px;border:1px solid var(--c-border)">${unit}</span>`:''}</span>`;}return`<span style="display:inline-flex;background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:6px;padding:3px 8px;font-size:10.5px;color:var(--c-text-3)">${v.trim()}</span>`;}).join('')}</div></div>
           ${f.valeurs?`<div style="font-size:var(--t-xs);color:var(--c-text-3);line-height:1.75;margin-bottom:4px"><strong style="color:var(--c-text-2)">Valeurs :</strong> ${f.valeurs}</div>`:''}
           <div style="font-size:10px;color:var(--c-primary);background:var(--c-primary-l);padding:2px 9px;border-radius:var(--r-pill);display:inline-block;margin-top:4px">📖 ${f.src}</div>
         </div>

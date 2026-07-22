@@ -15,8 +15,56 @@
 <link rel="manifest" href="data:application/json,%7B%22name%22%3A%22HydroCalc%22%2C%22short_name%22%3A%22HydroCalc%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23F0F4F2%22%2C%22theme_color%22%3A%22%230A5040%22%2C%22orientation%22%3A%22portrait%22%7D">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>
+/* Applique thème + police avant le premier rendu (évite le flash) */
+(function(){
+  try {
+    var s = JSON.parse(localStorage.getItem('hc_settings_v1')||'{}');
+    var theme = s.theme||'light';
+    if(theme==='auto') theme = window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+    if(theme!=='light') document.documentElement.setAttribute('data-theme',theme);
+    if(s.font && s.font!=='normal') document.documentElement.setAttribute('data-font',s.font);
+    if(s.accent && s.accent!=='green') document.documentElement.setAttribute('data-accent',s.accent);
+  }catch(e){}
+})();
+</script>
 </head>
 <body>
+
+<!-- ═══ VERROU D'ACCÈS TEMPORAIRE (phase de test privée) ═══
+     À retirer avant la mise en ligne publique / publication Play Store. -->
+<div id="site-gate" style="position:fixed;inset:0;z-index:99999;background:linear-gradient(160deg,#061410,#0A2820,#0A5040);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;font-family:'Outfit',sans-serif">
+  <div style="font-size:48px;margin-bottom:16px">💧</div>
+  <div style="color:#fff;font-size:20px;font-weight:800;margin-bottom:6px">HydroCalc</div>
+  <div style="color:rgba(255,255,255,.65);font-size:13px;margin-bottom:24px;text-align:center">Accès réservé — phase de test privée</div>
+  <input id="site-gate-code" type="password" placeholder="Code d'accès" autocomplete="off"
+    style="width:100%;max-width:280px;padding:13px 16px;border-radius:10px;border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-size:15px;text-align:center;margin-bottom:12px;outline:none"
+    onkeydown="if(event.key==='Enter')_siteGateCheck()">
+  <div id="site-gate-err" style="display:none;color:#ff8a80;font-size:12px;margin-bottom:10px">Code incorrect.</div>
+  <button onclick="_siteGateCheck()" style="width:100%;max-width:280px;padding:13px;background:#0A7460;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer">Accéder à l'app</button>
+</div>
+<script>
+(function(){
+  var GATE_CODE = 'Hydrocalc2026';
+  var ok = localStorage.getItem('hc_site_gate_ok') === '1';
+  /* Bypass automatique pour les sessions QCM en direct (nouvel onglet prof/élève) */
+  var _urlParams = new URLSearchParams(window.location.search);
+  if (_urlParams.get('hostQCM') || _urlParams.get('joinCode')) ok = true;
+  if (ok) { var g = document.getElementById('site-gate'); if (g) g.style.display = 'none'; }
+  window._siteGateCheck = function() {
+    var input = document.getElementById('site-gate-code');
+    var err = document.getElementById('site-gate-err');
+    if (input.value === GATE_CODE) {
+      localStorage.setItem('hc_site_gate_ok', '1');
+      document.getElementById('site-gate').style.display = 'none';
+    } else {
+      err.style.display = 'block';
+      input.value = '';
+    }
+  };
+})();
+</script>
+
 <div id="auth-toast"></div>
 <button class="fab-save" id="fab-save" onclick="saveCurrentCalc()" title="Enregistrer ce calcul">💾</button>
 
@@ -66,7 +114,10 @@
       <label class="auth-label">Adresse e-mail</label>
       <input class="auth-input" type="email" id="login-email" placeholder="votre@email.fr" autocomplete="email">
       <label class="auth-label">Mot de passe</label>
-      <input class="auth-input" type="password" id="login-pwd" placeholder="Votre mot de passe" autocomplete="current-password">
+      <div class="auth-pwd-wrap">
+        <input class="auth-input" type="password" id="login-pwd" placeholder="Votre mot de passe" autocomplete="current-password">
+        <button type="button" class="auth-pwd-toggle" onclick="toggleAuthPwd('login-pwd', this)" title="Afficher/masquer le mot de passe">👁</button>
+      </div>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-top:-8px;margin-bottom:16px">
         <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--c-text-3);cursor:pointer">
           <input type="checkbox" id="login-remember" style="width:15px;height:15px;accent-color:var(--c-primary)">
@@ -117,10 +168,23 @@
         <option value="autre">Autre professionnel</option>
       </select>
       <label class="auth-label">Mot de passe</label>
-      <input class="auth-input" type="password" id="reg-pwd" placeholder="8 caractères minimum" autocomplete="new-password">
+      <div class="auth-pwd-wrap">
+        <input class="auth-input" type="password" id="reg-pwd" placeholder="8 caractères minimum" autocomplete="new-password">
+        <button type="button" class="auth-pwd-toggle" onclick="toggleAuthPwd('reg-pwd', this)" title="Afficher/masquer le mot de passe">👁</button>
+      </div>
       <label class="auth-label">Confirmer le mot de passe</label>
-      <input class="auth-input" type="password" id="reg-pwd2" placeholder="Répétez le mot de passe" autocomplete="new-password">
+      <div class="auth-pwd-wrap">
+        <input class="auth-input" type="password" id="reg-pwd2" placeholder="Répétez le mot de passe" autocomplete="new-password">
+        <button type="button" class="auth-pwd-toggle" onclick="toggleAuthPwd('reg-pwd2', this)" title="Afficher/masquer le mot de passe">👁</button>
+      </div>
       <button class="auth-btn-submit" onclick="authRegister()">Créer mon compte</button>
+      <div id="invite-code-wrap" style="margin-top:10px">
+        <button type="button" onclick="_toggleInviteCode()" style="width:100%;padding:10px;background:none;border:1.5px dashed var(--c-border);border-radius:var(--r-lg);font-family:var(--f-body);font-size:12.5px;font-weight:600;color:var(--c-text-3);cursor:pointer">🎟️ J'ai un code d'accès</button>
+        <div id="invite-code-field" style="display:none;margin-top:8px">
+          <input class="auth-input" type="text" id="reg-invite-code" placeholder="HC-XXXX-XXXX" style="text-transform:uppercase;letter-spacing:.1em;text-align:center;font-family:monospace;font-size:14px;font-weight:700">
+          <div style="font-size:11px;color:var(--c-text-3);text-align:center;margin-top:4px">Le code sera activé après la création de votre compte</div>
+        </div>
+      </div>
       <div class="auth-divider">
         <div class="auth-divider-line"></div>
         <div class="auth-divider-txt">déjà inscrit ?</div>
@@ -154,6 +218,32 @@
   </div>
 </div>
 
+<!-- NOUVEAU MOT DE PASSE (après clic sur le lien reçu par email) -->
+<div class="auth-screen hidden" id="auth-reset-password">
+  <div class="auth-form-wrap">
+    <div class="auth-form-hdr">
+      <div class="auth-hdr-title">Nouveau mot de passe</div>
+    </div>
+    <div class="auth-body">
+      <div class="auth-icon">🔑</div>
+      <div class="auth-title">Choisissez un nouveau mot de passe</div>
+      <div class="auth-sub">Vous êtes connecté via votre lien de réinitialisation. Saisissez votre nouveau mot de passe.</div>
+      <div class="auth-error" id="reset-pwd-err">Erreur.</div>
+      <label class="auth-label">Nouveau mot de passe</label>
+      <div class="auth-pwd-wrap">
+        <input class="auth-input" type="password" id="reset-pwd" placeholder="8 caractères minimum" autocomplete="new-password">
+        <button type="button" class="auth-pwd-toggle" onclick="toggleAuthPwd('reset-pwd', this)" title="Afficher/masquer le mot de passe">👁</button>
+      </div>
+      <label class="auth-label">Confirmer le mot de passe</label>
+      <div class="auth-pwd-wrap">
+        <input class="auth-input" type="password" id="reset-pwd2" placeholder="Répétez le mot de passe" autocomplete="new-password">
+        <button type="button" class="auth-pwd-toggle" onclick="toggleAuthPwd('reset-pwd2', this)" title="Afficher/masquer le mot de passe">👁</button>
+      </div>
+      <button class="auth-btn-submit" onclick="authUpdatePassword()">Valider le nouveau mot de passe</button>
+    </div>
+  </div>
+</div>
+
 <!-- PROFIL UTILISATEUR -->
 <div class="auth-screen hidden" id="auth-profile">
   <div class="auth-form-wrap">
@@ -163,6 +253,18 @@
       <button onclick="authLogout()" style="padding:4px 12px;border:1.5px solid var(--c-border);border-radius:var(--r-pill);background:none;font-size:11px;font-weight:700;cursor:pointer;color:var(--c-danger);font-family:var(--f-body)">Déconnexion</button>
     </div>
     <div style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch" id="profile-content"></div>
+  </div>
+</div>
+
+<!-- COFFRE ADMIN -->
+<div class="auth-screen hidden" id="auth-coffre">
+  <div class="auth-form-wrap">
+    <div class="auth-form-hdr">
+      <div class="auth-back" onclick="authShow('auth-profile')">←</div>
+      <div class="auth-hdr-title">🗄️ Coffre Admin</div>
+      <button onclick="buildCoffre()" style="padding:4px 12px;border:1.5px solid var(--c-border);border-radius:var(--r-pill);background:none;font-size:11px;font-weight:700;cursor:pointer;color:var(--c-primary);font-family:var(--f-body)">Actualiser</button>
+    </div>
+    <div style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch" id="coffre-content"></div>
   </div>
 </div>
 
@@ -190,10 +292,22 @@
   <!-- TOP BAR -->
   <div class="top-bar" id="top-bar">
     <button class="tb-icon-btn" onclick="openSidebar()" title="Menu">☰</button>
+    <button class="tb-icon-btn" id="btn-page-back" onclick="goBackPage()" title="Retour" style="display:none">←</button>
     <button class="tb-icon-btn tb-back-btn" onclick="goHome()" title="Accueil">🏠</button>
     <span class="top-bar-logo" id="top-title">HydroCalc</span>
+    <button class="tb-icon-btn" onclick="openSearch()" title="Recherche globale" id="btn-search">🔍</button>
     <button class="tb-icon-btn" onclick="openRapports()" title="Mes rapports PDF" id="btn-rapports" style="display:none">📄</button>
     <button class="tb-icon-btn" id="profile-btn" onclick="openProfile()" title="Mon profil" style="display:none">👤</button>
+  </div>
+
+  <!-- RECHERCHE GLOBALE -->
+  <div id="search-overlay" class="search-overlay" onclick="if(event.target===this)closeSearch()">
+    <div class="search-box">
+      <span class="search-box-ico">🔍</span>
+      <input type="text" id="search-input" placeholder="Rechercher formule, terme, réglementation…" oninput="_doSearch(this.value)" autocomplete="off" autocorrect="off">
+      <button class="search-close-btn" onclick="closeSearch()">✕</button>
+    </div>
+    <div class="search-results" id="search-results"></div>
   </div>
 
   <!-- TAB BAR (si module actif) -->
@@ -207,7 +321,7 @@
     <button class="nav-btn" id="nav-ac" onclick="showModule('ac')">
       <span class="nav-ico">🔧</span><span class="nav-lbl">A. Collectif</span>
     </button>
-    <button class="nav-btn" id="nav-anc" onclick="showModule('anc')">
+    <button class="nav-btn" id="nav-anc" onclick="showModule('anc-home')">
       <span class="nav-ico">🏡</span><span class="nav-lbl">A. Non Coll.</span>
     </button>
     <button class="nav-btn" id="nav-ep" onclick="showModule('ep')">
@@ -223,13 +337,38 @@
 
 </div><!-- /#shell -->
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script src="js/stripe-client.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="libs/docx.js"></script>
 <script src="libs/jszip.js"></script>
+<script src="js/data-store.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/calculateurs.js"></script>
 <script src="js/glossaire.js"></script>
 <script src="js/reglementation.js"></script>
 <script src="js/contenus.js"></script>
+<script src="js/outils_terrain.js"></script>
+<script src="js/cours.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://unpkg.com/peerjs@1.5.1/dist/peerjs.min.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/qcm_bank.js"></script>
+<script src="js/qcm_prof.js"></script>
 <script src="js/auth.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').then(function(reg) {
+      console.log('SW enregistré :', reg.scope);
+    }).catch(function() {});
+  });
+}
+window.addEventListener('load', function() {
+  if (typeof _loadSharedCalcFromURL === 'function') _loadSharedCalcFromURL();
+});
+</script>
 </body>
 </html>

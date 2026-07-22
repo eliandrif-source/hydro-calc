@@ -17,8 +17,7 @@ function checkCalcLimit() {
   if (plan !== 'free' || (AUTH.user && AUTH.user.isAdmin)) return true;
 
   var today = new Date().toISOString().slice(0, 10);
-  var raw = _safeStorage.getItem('hc_calc_quota');
-  var quota = raw ? JSON.parse(raw) : { date: today, count: 0 };
+  var quota = DataStore.calcQuota.get() || { date: today, count: 0 };
   if (quota.date !== today) { quota = { date: today, count: 0 }; }
 
   if (quota.count >= 10) {
@@ -26,7 +25,7 @@ function checkCalcLimit() {
     return false;
   }
   quota.count++;
-  _safeStorage.setItem('hc_calc_quota', JSON.stringify(quota));
+  DataStore.calcQuota.set(quota);
   return true;
 }
 
@@ -78,17 +77,52 @@ let currentModule = null;
 let qcmState = { idx:0, score:0 };
 
 /* ═══ RENDER HOME ═══ */
+
+var HOME_ALL_SHORTCUTS = [
+  { id:'calc',       ico:'⚡', name:'Calculateurs',      sub:'AC · EP · ANC · Riv.' },
+  { id:'calca',      ico:'🧮', name:'Calc. avancés',     sub:'Manning · Bélier · NPSH' },
+  { id:'calcs',      ico:'📐', name:'Calc. complémentaires', sub:'Chlore · Réservoir' },
+  { id:'conv',       ico:'🔄', name:'Convertisseur',     sub:'Débit · Pression' },
+  { id:'cours',      ico:'🎓', name:'Cours',             sub:'52 chapitres' },
+  { id:'form',       ico:'🏛️', name:'Formations',        sub:'BUT · Master · ENGEES' },
+  { id:'qcm',        ico:'✅', name:'QCM',               sub:'720 questions' },
+  { id:'anc',        ico:'🏡', name:'Ouvrages ANC',      sub:'31 ouvrages' },
+  { id:'ouv',        ico:'🔧', name:'Ouvrages AC & EP',  sub:'Regards · Bassins' },
+  { id:'nc',         ico:'⚠️', name:'Non conformes',     sub:'Historique · Réhab.' },
+  { id:'spanc',      ico:'🗺️', name:'SPANC',             sub:'101 départements' },
+  { id:'aides',      ico:'💰', name:'Aides ANC',         sub:'Éco-PTZ · TVA 5,5%' },
+  { id:'gloss',      ico:'📖', name:'Glossaire',         sub:'200+ termes' },
+  { id:'mat',        ico:'🔩', name:'Matériaux',         sub:'PVC · Fonte · Pompes' },
+  { id:'regl',       ico:'📋', name:'Réglementation',    sub:'Arrêtés · DCE · REUT' },
+  { id:'outils-anc', ico:'🔬', name:'Terrain ANC',       sub:'Mesures · Rapports' },
+  { id:'outils-ac',  ico:'🏗️', name:'Terrain AC',        sub:'Mesures · Rapports' },
+  { id:'outils-ep',  ico:'💧', name:'Terrain EP',        sub:'Mesures · Rapports' },
+  { id:'outils-riv', ico:'🌊', name:'Terrain Rivières',  sub:'Mesures · Rapports' },
+];
+
+var HOME_DEFAULT_SHORTCUTS = ['calc','cours','qcm','outils-anc'];
+
+function _homeGetShortcuts() {
+  try {
+    var saved = localStorage.getItem('home_shortcuts');
+    if (saved) {
+      var arr = JSON.parse(saved);
+      if (Array.isArray(arr) && arr.length === 4) return arr;
+    }
+  } catch(e) {}
+  return HOME_DEFAULT_SHORTCUTS.slice();
+}
+
+function _homeSaveShortcuts(arr) {
+  try { localStorage.setItem('home_shortcuts', JSON.stringify(arr)); } catch(e) {}
+}
+
 function renderHome() {
   setNav('');
   document.getElementById('tab-bar').style.display = 'none';
   document.getElementById('top-title').textContent = 'HydroCalc';
 
-  var categories = [
-    { id:'refmat', ico:'🔩', name:'Références & Matériaux',      sub:'Glossaire · Formules · Matériaux · Équipements',              color:'var(--c-mat)',  colorl:'var(--c-mat-l)'  },
-    { id:'regl',   ico:'📋', name:'Réglementation',              sub:'Arrêtés · DCE · Police de l\'eau · REUT · Normes',            color:'var(--c-regl)', colorl:'var(--c-regl-l)' },
-    { id:'cours',  ico:'🎓', name:'Cours',                       sub:'BTS GEMEAU · BUT · Master · ENGEES · Fiches de révision',     color:'var(--c-form)', colorl:'var(--c-form-l)' },
-    { id:'qcm',    ico:'✅', name:'QCM',                         sub:'720 questions · 36 thèmes · UE1 à UE6 · Entraînement',        color:'var(--c-anc)',  colorl:'var(--c-anc-l)'  },
-  ];
+  var shortcuts = _homeGetShortcuts();
 
   var html = `
     <div class="home-hero">
@@ -97,26 +131,51 @@ function renderHome() {
         <div><div class="hh-name">HydroCalc</div><div class="hh-sub">Application hydraulique professionnelle</div></div>
       </div>
       <div class="hh-stats">
-        <div class="hs-item"><div class="hs-val">7</div><div class="hs-lbl">Domaines</div></div>
+        <div class="hs-item"><div class="hs-val">14</div><div class="hs-lbl">Modules</div></div>
         <div class="hs-item"><div class="hs-val">60+</div><div class="hs-lbl">Calculateurs</div></div>
-        <div class="hs-item"><div class="hs-val">720</div><div class="hs-lbl">Questions QCM</div></div>
+        <div class="hs-item"><div class="hs-val">720</div><div class="hs-lbl">QCM</div></div>
       </div>
     </div>
-    <div class="section-header">Choisissez votre domaine</div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0 var(--s-4) 0;margin-top:var(--s-3)">
+      <div class="section-header" style="margin:0;padding:0;border:none">Accès rapide</div>
+      <button onclick="homeEditShortcuts()" style="background:none;border:none;cursor:pointer;font-size:11px;color:var(--c-primary);font-family:var(--f-body);padding:4px 8px;border-radius:8px;border:1px solid var(--c-primary);opacity:.8">✏️ Modifier</button>
+    </div>
+
+    <div style="padding:var(--s-2) var(--s-4) 0;display:grid;grid-template-columns:1fr 1fr;gap:var(--s-2)">
+  `;
+
+  shortcuts.forEach(function(sid) {
+    var s = HOME_ALL_SHORTCUTS.find(function(x){ return x.id === sid; }) || { id:sid, ico:'📌', name:sid, sub:'' };
+    html += `<div class="home-sc-card" onclick="showModule('${s.id}')">
+      <div class="hsc-ico">${s.ico}</div>
+      <div class="hsc-name">${s.name}</div>
+      <div class="hsc-sub">${s.sub}</div>
+    </div>`;
+  });
+
+  html += `</div>
+
+    <div class="section-header" style="margin-top:var(--s-4)">Ressources</div>
     <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
   `;
 
-  for (var i=0; i<categories.length; i++) {
-    var c = categories[i];
-    html += `<div class="mod-list-card" style="--cat-color:${c.color}" onclick="showModule('${c.id}')">
-      <div class="mlc-icon" style="background:${c.colorl};font-size:22px">${c.ico}</div>
+  var resources = [
+    { id:'gloss',  ico:'📖', name:'Formules & Glossaire', sub:'200+ termes · 90+ acronymes · Toutes les formules', colorl:'var(--c-ref-l)'  },
+    { id:'regl',   ico:'📋', name:'Réglementation',       sub:'Arrêtés · DCE · Police de l\'eau · REUT · Normes',  colorl:'var(--c-regl-l)' },
+    { id:'mat',    ico:'🔩', name:'Matériaux & Équipements', sub:'PVC · Fonte · Pompes · SCADA · Filtres',         colorl:'var(--c-mat-l)'  },
+  ];
+
+  resources.forEach(function(r) {
+    html += `<div class="mod-list-card" onclick="showModule('${r.id}')">
+      <div class="mlc-icon" style="background:${r.colorl};font-size:22px">${r.ico}</div>
       <div class="mlc-body">
-        <div class="mlc-name" style="font-size:var(--t-md)">${c.name}</div>
-        <div class="mlc-sub">${c.sub}</div>
+        <div class="mlc-name" style="font-size:var(--t-md)">${r.name}</div>
+        <div class="mlc-sub">${r.sub}</div>
       </div>
       <span class="mlc-arrow">›</span>
     </div>`;
-  }
+  });
 
   html += `</div>
     <div style="text-align:center;padding:var(--s-4) var(--s-4) var(--s-2);font-size:9px;color:var(--c-text-4);letter-spacing:.03em;line-height:1.7;font-style:italic">
@@ -126,6 +185,57 @@ function renderHome() {
 
   document.getElementById('main-content').innerHTML = html;
   document.getElementById('main-content').scrollTop = 0;
+}
+
+function homeEditShortcuts() {
+  var current = _homeGetShortcuts();
+
+  var rows = HOME_ALL_SHORTCUTS.map(function(s) {
+    var checked = current.indexOf(s.id) !== -1;
+    return `<label style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--c-border);cursor:pointer">
+      <input type="checkbox" data-sid="${s.id}" ${checked?'checked':''} style="width:18px;height:18px;accent-color:var(--c-primary);flex-shrink:0">
+      <span style="font-size:20px">${s.ico}</span>
+      <span style="flex:1">
+        <span style="display:block;font-size:13px;font-weight:600;color:var(--c-text-1)">${s.name}</span>
+        <span style="font-size:11px;color:var(--c-text-3)">${s.sub}</span>
+      </span>
+    </label>`;
+  }).join('');
+
+  var modal = document.createElement('div');
+  modal.id = 'home-sc-modal';
+  modal.style.cssText = 'position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center';
+  modal.innerHTML = `
+    <div style="background:var(--c-surface);border-radius:var(--r-xl) var(--r-xl) 0 0;width:100%;max-width:480px;max-height:85vh;display:flex;flex-direction:column">
+      <div style="padding:var(--s-4) var(--s-4) var(--s-2);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--c-border)">
+        <div style="font-size:16px;font-weight:700;color:var(--c-text-1)">Personnaliser les raccourcis</div>
+        <button onclick="document.getElementById('home-sc-modal').remove()" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--c-text-3);line-height:1">×</button>
+      </div>
+      <div style="padding:0 var(--s-4) 4px;font-size:11px;color:var(--c-text-3);margin-top:var(--s-2)">Sélectionnez exactement 4 raccourcis</div>
+      <div style="overflow-y:auto;flex:1;padding:0 var(--s-4)" id="hsc-list">${rows}</div>
+      <div style="padding:var(--s-3) var(--s-4);border-top:1px solid var(--c-border)">
+        <div id="hsc-warn" style="font-size:11px;color:#e53;margin-bottom:6px;display:none">Sélectionnez exactement 4 raccourcis.</div>
+        <button onclick="homeApplyShortcuts()" style="width:100%;padding:13px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-lg);font-size:14px;font-weight:700;cursor:pointer;font-family:var(--f-body)">Enregistrer</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  modal.addEventListener('click', function(e){ if(e.target===modal) modal.remove(); });
+}
+
+function homeApplyShortcuts() {
+  var checked = document.querySelectorAll('#hsc-list input[type=checkbox]:checked');
+  if (checked.length !== 4) {
+    var w = document.getElementById('hsc-warn');
+    if (w) w.style.display = 'block';
+    return;
+  }
+  var ids = [];
+  checked.forEach(function(cb){ ids.push(cb.dataset.sid); });
+  _homeSaveShortcuts(ids);
+  var modal = document.getElementById('home-sc-modal');
+  if (modal) modal.remove();
+  renderHome();
 }
 
 /* ═══ RENDER MODULE ═══ */
@@ -193,12 +303,14 @@ function showModule(id) {
   else if (id === 'calcs')  renderCalcSuppl();
   else if (id === 'conv')   renderConv();
   else if (id === 'ouv')    renderOuvrages();
+  else if (id === 'anc-home') renderANCHome();
   else if (id === 'anc')    renderANC();
   else if (id === 'nc')     renderNC();
   else if (id === 'aides')  renderAides();
   else if (id === 'spanc')  renderSPANC();
   else if (id === 'ep')     renderEP();
   else if (id === 'riv')    renderRiv();
+  else if (id === 'pap')    renderPassesPoissons();
   else if (id === 'gloss')  renderGloss();
   else if (id === 'cours')  renderCours();
   else if (id === 'form')   renderFormations();
@@ -207,6 +319,10 @@ function showModule(id) {
   else if (id === 'regl-anc')   renderRegl('anc');
   else if (id === 'regl-ac')    renderRegl('ac');
   else if (id === 'regl-riv')   renderRegl('milieux');
+  else if (id === 'outils-anc') renderOutilsTerrain('anc');
+  else if (id === 'outils-ac')  renderOutilsTerrain('ac');
+  else if (id === 'outils-ep')  renderOutilsTerrain('ep');
+  else if (id === 'outils-riv') renderOutilsTerrain('riv');
   else if (id === 'mat')    renderMateriaux();
   else if (id === 'design') renderDesignSystem();
   else renderModuleSimple(id);
@@ -216,9 +332,10 @@ function showModule(id) {
     refmat:'nav-gloss', gloss:'nav-gloss', mat:'nav-gloss',
     qcm:'nav-anc',
     ac:'nav-ac', calc:'nav-ac', calca:'nav-ac', calcs:'nav-ac', conv:'nav-ac', ouv:'nav-ac',
-    anc:'nav-anc', nc:'nav-anc', aides:'nav-anc', spanc:'nav-anc',
+    'anc-home':'nav-anc', anc:'nav-anc', nc:'nav-anc', aides:'nav-anc', spanc:'nav-anc', 'outils-anc':'nav-anc',
+    'outils-ac':'nav-ac', 'outils-ep':'nav-ep', 'outils-riv':'nav-riv',
     ep:'nav-ep',
-    riv:'nav-riv',
+    riv:'nav-riv', pap:'nav-riv',
     gloss:'nav-gloss', cours:'nav-gloss', form:'nav-gloss', regl:'nav-gloss', mat:'nav-gloss'
   };
   setNav(navMap[id] || '');
@@ -230,6 +347,80 @@ function setNav(id) {
 }
 
 function goHome() { currentModule=null; renderHome(); }
+
+/* ═══════════════════════════════════════════════════
+   BOUTON RETOUR GÉNÉRIQUE (toutes pages)
+   Intercepte chaque écriture dans #main-content pour
+   garder un historique, sans modifier les fonctions
+   render* existantes une par une.
+═══════════════════════════════════════════════════ */
+(function() {
+  var _pageStack = [];
+  var _restoring = false;
+
+  function _initBackHistory() {
+    var el = document.getElementById('main-content');
+    if (!el || el.__backHistoryInit) return;
+    el.__backHistoryInit = true;
+
+    var proto = Object.getPrototypeOf(el);
+    var desc = Object.getOwnPropertyDescriptor(proto, 'innerHTML')
+      || Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML');
+
+    Object.defineProperty(el, 'innerHTML', {
+      get: function() { return desc.get.call(this); },
+      set: function(html) {
+        if (!_restoring) {
+          var prevHtml = desc.get.call(this);
+          if (prevHtml && prevHtml.trim()) {
+            var titleEl = document.getElementById('top-title');
+            _pageStack.push({
+              html: prevHtml,
+              scrollTop: this.scrollTop,
+              title: titleEl ? titleEl.textContent : ''
+            });
+            if (_pageStack.length > 30) _pageStack.shift();
+          }
+        }
+        desc.set.call(this, html);
+        _updateBackBtn();
+      },
+      configurable: true
+    });
+  }
+
+  function _updateBackBtn() {
+    var btn = document.getElementById('btn-page-back');
+    if (btn) btn.style.display = _pageStack.length ? 'flex' : 'none';
+  }
+
+  window.goBackPage = function() {
+    if (!_pageStack.length) return;
+    var prev = _pageStack.pop();
+    var el = document.getElementById('main-content');
+    _restoring = true;
+    el.innerHTML = prev.html;
+    _restoring = false;
+    el.scrollTop = prev.scrollTop;
+    var titleEl = document.getElementById('top-title');
+    if (titleEl) titleEl.textContent = prev.title;
+    _updateBackBtn();
+  };
+
+  /* Le clic sur Accueil / Menu vide l'historique (nouveau point de départ) */
+  var _origGoHome = window.goHome;
+  window.goHome = function() {
+    _pageStack = [];
+    _updateBackBtn();
+    _origGoHome();
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', _initBackHistory);
+  } else {
+    _initBackHistory();
+  }
+})();
 
 /* ─── RENDER CALC ─── */
 /* ─── HELPERS ONGLETS — tabs dans #tab-bar (hors main-content) ─── */
@@ -252,4 +443,228 @@ function setTabActive(group, idx) {
 }
 
 const CALC_TAB_LBLS = ['Surface épandage','Fosse toutes eaux','Débit Manning','Méthode rationnelle','Charges polluantes','Pression AEP'];
+
+/* ═══════════════════════════════════════════════════
+   BOUTON COPIER + PARTAGER SUR LES RESULT-BOX
+═══════════════════════════════════════════════════ */
+function _injectCopyBtns() {
+  document.querySelectorAll('.result-box.show').forEach(function(box) {
+    if (box.querySelector('.result-copy-btn')) return;
+    var val = box.querySelector('.result-value');
+    if (!val || !val.textContent.trim()) return;
+
+    var shareBtn = document.createElement('button');
+    shareBtn.className = 'result-share-btn';
+    shareBtn.title = 'Partager ce calcul';
+    shareBtn.textContent = '🔗';
+    shareBtn.onclick = function(e) { e.stopPropagation(); shareCurrentCalc(); };
+    box.appendChild(shareBtn);
+
+    var copyBtn = document.createElement('button');
+    copyBtn.className = 'result-copy-btn';
+    copyBtn.title = 'Copier le résultat';
+    copyBtn.textContent = '📋';
+    copyBtn.onclick = function(e) {
+      e.stopPropagation();
+      var det = box.querySelector('.result-detail');
+      var text = (val ? val.textContent : '') +
+                 (det ? '\n' + _htmlToText(det.innerHTML) : '') +
+                 '\n— HydroCalc';
+      function _confirm() {
+        copyBtn.textContent = '✓'; copyBtn.classList.add('copied');
+        setTimeout(function() { copyBtn.textContent = '📋'; copyBtn.classList.remove('copied'); }, 1600);
+      }
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(_confirm).catch(function() {
+          _fallbackCopy(text); _confirm();
+        });
+      } else { _fallbackCopy(text); _confirm(); }
+    };
+    box.appendChild(copyBtn);
+  });
+}
+function _fallbackCopy(text) {
+  var ta = document.createElement('textarea');
+  ta.value = text; ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); } catch(e) {}
+  document.body.removeChild(ta);
+}
+setInterval(_injectCopyBtns, 700);
+
+/* ═══════════════════════════════════════════════════
+   PARTAGE PAR LIEN (URL HASH)
+═══════════════════════════════════════════════════ */
+function shareCurrentCalc() {
+  var mc = document.getElementById('main-content');
+  var inputs = {};
+  if (mc) {
+    mc.querySelectorAll('input[id], select[id]').forEach(function(el) {
+      if (el.id && el.value !== undefined) inputs[el.id] = el.value;
+    });
+  }
+  var module = typeof currentModule !== 'undefined' ? (currentModule || '') : '';
+  try {
+    var hash = btoa(encodeURIComponent(JSON.stringify({ m: module, i: inputs })));
+    var url = window.location.origin + window.location.pathname + '#calc=' + hash;
+    function _done() { authToast('Lien copié ✓ — Partagez-le pour pré-remplir les champs'); }
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(_done).catch(function() { _fallbackCopy(url); _done(); });
+    } else { _fallbackCopy(url); _done(); }
+  } catch(e) { authToast('Impossible de générer le lien'); }
+}
+
+function _loadSharedCalcFromURL() {
+  try {
+    var hash = window.location.hash;
+    if (!hash || hash.indexOf('#calc=') !== 0) return;
+    var data = JSON.parse(decodeURIComponent(atob(hash.slice(6))));
+    if (!data) return;
+    history.replaceState(null, '', window.location.pathname);
+    var doLoad = function() {
+      if (data.i) {
+        Object.keys(data.i).forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) el.value = data.i[id];
+        });
+      }
+      authToast('Calcul partagé chargé ✓');
+    };
+    if (data.m) { setTimeout(function() { showModule(data.m); setTimeout(doLoad, 350); }, 900); }
+  } catch(e) {}
+}
+
+/* ═══════════════════════════════════════════════════
+   RECHERCHE GLOBALE
+═══════════════════════════════════════════════════ */
+var _searchIndex = null;
+
+function _buildSearchIndex() {
+  var idx = [];
+  if (typeof TERMES_DB !== 'undefined') {
+    TERMES_DB.forEach(function(item) {
+      idx.push({ title: item.t || item.terme || '', body: item.d || item.def || '', section: 'glossaire', label: '📖 Glossaire', color: 'var(--c-ref)', action: function() { showModule('gloss'); } });
+    });
+  }
+  if (typeof FORMULES_DB !== 'undefined') {
+    FORMULES_DB.forEach(function(item) {
+      idx.push({ title: item.nom || item.t || '', body: (item.expr || '') + ' ' + (item.ref || ''), section: 'formules', label: '🔢 Formules', color: 'var(--c-mat)', action: function() { showModule('gloss'); } });
+    });
+  }
+  if (typeof ACROS_DB !== 'undefined') {
+    ACROS_DB.forEach(function(item) {
+      idx.push({ title: item.a || '', body: item.d || '', section: 'acronymes', label: '🔤 Acronymes', color: 'var(--c-ref)', action: function() { showModule('gloss'); } });
+    });
+  }
+  if (typeof REGL_CATALOGUE !== 'undefined') {
+    Object.keys(REGL_CATALOGUE).forEach(function(key) {
+      var r = REGL_CATALOGUE[key];
+      idx.push({ title: r.name || '', body: (r.detail || '') + ' ' + (r.ref || ''), section: 'reglementation', label: '📋 Réglementation', color: 'var(--c-regl)', action: function() { showModule('regl'); } });
+    });
+  }
+  MODULES_META.forEach(function(m) {
+    idx.push({ title: m.name, body: m.sub + ' ' + m.tags.join(' '), section: 'modules', label: '📦 Module', color: m.color, action: (function(id) { return function() { showModule(id); }; })(m.id) });
+  });
+  if (typeof COURS_DATA !== 'undefined') {
+    Object.keys(COURS_DATA).forEach(function(fId) {
+      var f = COURS_DATA[fId];
+      if (!f || !f.chapitres) return;
+      f.chapitres.forEach(function(chap) {
+        if (chap.titre) idx.push({ title: chap.titre, body: chap.desc || '', section: 'cours', label: '🎓 Cours', color: 'var(--c-form)', action: function() { showModule('cours'); } });
+        if (chap.flashcards) chap.flashcards.slice(0, 30).forEach(function(fc) {
+          idx.push({ title: fc.q || '', body: fc.a || '', section: 'cours', label: '🎓 Flashcards', color: 'var(--c-form)', action: function() { showModule('cours'); } });
+        });
+      });
+    });
+  }
+  var formulas = typeof getSavedFormulas === 'function' ? getSavedFormulas() : [];
+  formulas.forEach(function(f) {
+    idx.push({ title: f.nom, body: f.expr + ' ' + (f.result || ''), section: 'mes-formules', label: '🏛️ Mes formules', color: 'var(--c-mat)', action: function() { showModule('gloss'); } });
+  });
+  _searchIndex = idx;
+}
+
+function openSearch() {
+  _searchIndex = null;
+  _buildSearchIndex();
+  var overlay = document.getElementById('search-overlay');
+  if (!overlay) return;
+  overlay.classList.add('open');
+  setTimeout(function() {
+    var inp = document.getElementById('search-input');
+    if (inp) { inp.value = ''; inp.focus(); }
+    var r = document.getElementById('search-results');
+    if (r) r.innerHTML = '<div class="search-empty">Commencez à taper pour rechercher…</div>';
+  }, 60);
+}
+
+function closeSearch() {
+  var overlay = document.getElementById('search-overlay');
+  if (overlay) overlay.classList.remove('open');
+}
+
+function _highlight(text, q) {
+  if (!q || !text) return text || '';
+  var escaped = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return ('' + text).replace(new RegExp('(' + escaped + ')', 'gi'), '<mark>$1</mark>');
+}
+
+function _doSearch(q) {
+  var container = document.getElementById('search-results');
+  if (!container) return;
+  if (!q || q.trim().length < 2) {
+    container.innerHTML = '<div class="search-empty">Commencez à taper pour rechercher…</div>';
+    return;
+  }
+  if (!_searchIndex) _buildSearchIndex();
+  var ql = q.toLowerCase().trim();
+  var results = _searchIndex.filter(function(item) {
+    return ((item.title || '') + ' ' + (item.body || '')).toLowerCase().indexOf(ql) !== -1;
+  });
+  if (!results.length) {
+    container.innerHTML = '<div class="search-empty">Aucun résultat pour "<strong>' + _escHtml(q) + '</strong>"</div>';
+    return;
+  }
+  var grouped = {};
+  results.slice(0, 60).forEach(function(r) {
+    if (!grouped[r.section]) grouped[r.section] = { label: r.label, color: r.color, items: [] };
+    grouped[r.section].items.push(r);
+  });
+  var html = '';
+  Object.keys(grouped).forEach(function(sec) {
+    var g = grouped[sec];
+    html += '<div class="search-section-title">' + g.label + ' — ' + g.items.length + ' résultat' + (g.items.length > 1 ? 's' : '') + '</div>';
+    g.items.slice(0, 8).forEach(function(item, i) {
+      var absIdx = _searchIndex.indexOf(item);
+      var snippet = (item.body || '').substring(0, 110);
+      html += '<div class="search-item" style="border-left-color:' + g.color + '" onclick="_searchItemClick(' + absIdx + ')">' +
+        '<div class="search-item-title">' + _highlight(_escHtml(item.title), q) + '</div>' +
+        (snippet ? '<div class="search-item-sub">' + _highlight(_escHtml(snippet), q) + '…</div>' : '') +
+        '</div>';
+    });
+  });
+  container.innerHTML = html;
+}
+
+function _escHtml(s) {
+  return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function _searchItemClick(idx) {
+  if (!_searchIndex || !_searchIndex[idx]) return;
+  closeSearch();
+  setTimeout(function() { _searchIndex[idx].action(); }, 200);
+}
+
+/* ═══════════════════════════════════════════════════
+   HELPER SETTINGS
+═══════════════════════════════════════════════════ */
+function _getSettings() {
+  return DataStore.settings.get();
+}
+function _isPratique() { return _getSettings().units === 'pratique'; }
+function _fmtDebit(ls) {
+  if (_isPratique()) return (ls * 3.6).toFixed(2) + ' m³/h';
+  return (ls / 1000).toFixed(4) + ' m³/s';
+}
 

@@ -1,8 +1,160 @@
 ﻿function renderCalc() {
-  loadModuleTabs(CALC_TAB_LBLS, 'switchCalcTab');
-  document.getElementById('main-content').innerHTML =
-    '<div id="calc-content"></div><div class="pb-nav"></div>';
-  renderCalcEpandage();
+  renderCalcHub();
+}
+
+function renderCalcHub() {
+  var _tb = document.getElementById('tab-bar');
+  if (_tb) _tb.style.display = 'none';
+  var t = document.getElementById('top-title');
+  if (t) t.textContent = 'Calculateurs';
+
+  var themes = [
+    {
+      ico:'🏡', name:'ANC — Assainissement non collectif',
+      color:'var(--c-anc)', colorl:'var(--c-anc-l)',
+      items:[
+        { id:'epandage',  ico:'🌾', name:'Surface d\'épandage',  desc:'Filière par K Porchet · EH · Tranchées · FPR' },
+        { id:'fte',       ico:'🪣', name:'Fosse toutes eaux',    desc:'Volume · Vidange · Dimensionnement DTU 64.1' },
+        { id:'charges',   ico:'⚗️', name:'Charges polluantes',  desc:'DBO₅ · DCO · MES · Azote · NTK' },
+      ]
+    },
+    {
+      ico:'🌊', name:'Hydraulique — Réseaux & canalisations',
+      color:'var(--c-ac)', colorl:'var(--c-ac-l)',
+      items:[
+        { id:'manning',   ico:'🔵', name:'Manning-Strickler',        desc:'Débit plein · Vitesse · Pente' },
+        { id:'mp',        ico:'〇', name:'Manning section partielle', desc:'Section circulaire en charge partielle' },
+        { id:'rationnelle',ico:'🌧️',name:'Méthode rationnelle',      desc:'Débit de pointe · Bassins versants · Q = CiA' },
+        { id:'belier',    ico:'💥', name:'Coup de bélier',           desc:'Surpression · Célérité · Protection réseau' },
+        { id:'shields',   ico:'🪨', name:'Transport solide Shields', desc:'Contrainte critique · Charriage · Fond mobile' },
+      ]
+    },
+    {
+      ico:'💧', name:'Eau potable — AEP',
+      color:'var(--c-ep)', colorl:'var(--c-ep-l)',
+      items:[
+        { id:'pression',   ico:'📊', name:'Pression AEP',      desc:'Pertes de charge · Hazen-Williams · HMT réseau' },
+        { id:'chloration', ico:'🟡', name:'Chloration',        desc:'Dose totale · Débit injection · Javel' },
+        { id:'reservoir',  ico:'🏗️', name:'Réservoir AEP',    desc:'Volume · Temps de séjour · Réserve incendie' },
+        { id:'pompe',      ico:'⚙️', name:'Pompe — HMT',      desc:'Hauteur manométrique totale · Point de fonctionnement' },
+        { id:'npsh',       ico:'🔩', name:'NPSH — Cavitation', desc:'Hauteur d\'aspiration max · Sécurité pompe' },
+      ]
+    },
+    {
+      ico:'🧪', name:'Qualité de l\'eau',
+      color:'var(--c-form)', colorl:'var(--c-form-l)',
+      items:[
+        { id:'langelier', ico:'🧫', name:'Indice de Langelier', desc:'Saturation calcaire · Agressivité · pH équilibre' },
+      ]
+    },
+  ];
+
+  var html = `
+    <div class="module-hero" style="--cat-color:var(--c-ac)">
+      <span class="mh-icon">⚡</span>
+      <div class="mh-title">Calculateurs</div>
+      <div class="mh-sub">14 outils · ANC · Hydraulique · AEP · Qualité eau</div>
+      <div class="mh-tags"><span class="mh-tag">ANC</span><span class="mh-tag">AC</span><span class="mh-tag">EP</span><span class="mh-tag">Rivières</span></div>
+    </div>
+  `;
+
+  themes.forEach(function(theme) {
+    html += `<div class="section-header">${theme.ico} ${theme.name}</div>`;
+    html += `<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">`;
+    theme.items.forEach(function(c) {
+      html += `<div class="mod-list-card" onclick="showCalcById('${c.id}')">
+        <div class="mlc-icon" style="background:${theme.colorl};font-size:20px">${c.ico}</div>
+        <div class="mlc-body">
+          <div class="mlc-name">${c.name}</div>
+          <div class="mlc-sub">${c.desc}</div>
+        </div>
+        <span class="mlc-arrow">›</span>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+
+  html += `<div class="pb-nav"></div>`;
+  document.getElementById('main-content').innerHTML = html;
+  document.getElementById('main-content').scrollTop = 0;
+}
+
+function showCalcById(id) {
+  var mc = document.getElementById('main-content');
+  var titles = {
+    'epandage':'Surface d\'épandage ANC', 'fte':'Fosse toutes eaux',
+    'manning':'Manning-Strickler', 'rationnelle':'Méthode rationnelle',
+    'charges':'Charges polluantes', 'pression':'Pression AEP',
+    'mp':'Manning section partielle', 'belier':'Coup de bélier',
+    'langelier':'Indice de Langelier', 'shields':'Transport solide Shields',
+    'pompe':'Pompe — HMT', 'npsh':'NPSH — Cavitation',
+    'chloration':'Chloration', 'reservoir':'Réservoir AEP',
+  };
+  var te = document.getElementById('top-title');
+  if (te && titles[id]) te.textContent = titles[id];
+
+  var calcaIds = { 'mp':renderCalcaManning, 'belier':renderCalcaBelier, 'langelier':renderCalcaLangelier, 'shields':renderCalcaShields, 'pompe':renderCalcaPompeHMT, 'npsh':renderCalcaNPSH };
+  var calcIds  = { 'epandage':renderCalcEpandage, 'fte':renderCalcFTE, 'manning':renderCalcManning, 'rationnelle':renderCalcMethodeRat, 'charges':renderCalcCharges, 'pression':renderCalcPression };
+
+  if (id === 'chloration' || id === 'reservoir') {
+    renderCalcSuppl();
+    if (id === 'reservoir') {
+      setTimeout(function() {
+        var cards = document.querySelectorAll('#main-content .card');
+        if (cards[1]) cards[1].scrollIntoView({ behavior:'smooth', block:'start' });
+      }, 80);
+    }
+    return;
+  }
+  if (calcaIds[id]) {
+    mc.innerHTML = '<div id="calca-content"></div><div class="pb-nav"></div>';
+    calcaIds[id]();
+    return;
+  }
+  if (calcIds[id]) {
+    mc.innerHTML = '<div id="calc-content"></div><div class="pb-nav"></div>';
+    calcIds[id]();
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   COMPARATEUR FILIÈRES ANC
+═══════════════════════════════════════════════════ */
+function renderComparateurFilieres() {
+  var wrap = document.getElementById('comparateur-filieres-wrap');
+  if (!wrap) return;
+  var eh = parseInt(getV('c-eh')) || 5;
+  var k  = parseFloat(getV('c-k')) || 3;
+
+  var filieres = [
+    { nom:'Tranchées d\'épandage',       ch:0.06, kMin:1,  kMax:15, surface: eh*150/(0.06*1000), empreinte:'Grande', entretien:'Faible', cout:'★★☆', sol:'Normal' },
+    { nom:'Filtre à sable non drainé',   ch:0.08, kMin:0,  kMax:50, surface: eh*150/(0.08*1000), empreinte:'Moyenne', entretien:'Faible', cout:'★★☆', sol:'Perméable' },
+    { nom:'Filtre à sable drainé',       ch:0.10, kMin:0,  kMax:99, surface: eh*150/(0.10*1000), empreinte:'Moyenne', entretien:'Faible', cout:'★★★', sol:'Tout terrain' },
+    { nom:'Tertre d\'infiltration',      ch:0.12, kMin:0,  kMax:99, surface: eh*150/(0.12*1000), empreinte:'Grande', entretien:'Moyen', cout:'★★★', sol:'Sol inapte' },
+    { nom:'FPR vertical',                ch:null,  kMin:0,  kMax:99, surface: eh*5, empreinte:'Faible', entretien:'Moyen', cout:'★★★', sol:'Tout terrain' },
+    { nom:'FPR horizontal',              ch:null,  kMin:0,  kMax:99, surface: eh*3, empreinte:'Faible', entretien:'Moyen', cout:'★★★', sol:'Tout terrain' },
+    { nom:'Microstation agréée CE',      ch:null,  kMin:0,  kMax:99, surface: 2,    empreinte:'Très faible', entretien:'Élevé', cout:'★★★', sol:'Tout terrain' },
+  ];
+
+  var rows = filieres.map(function(f) {
+    var compatible = (k >= f.kMin && k <= f.kMax);
+    var rowClass = compatible ? 'row-hl' : '';
+    var compatBadge = compatible
+      ? '<span class="cf-ok">✓ Compatible</span>'
+      : '<span class="cf-no">✗ Inadapté</span>';
+    var surf = f.surface ? f.surface.toFixed(1) + ' m²' : '—';
+    return '<tr class="' + rowClass + '"><td>' + f.nom + '</td><td>' + compatBadge + '</td><td>' + surf + '</td><td>' + f.empreinte + '</td><td>' + f.entretien + '</td><td>' + f.cout + '</td></tr>';
+  }).join('');
+
+  wrap.innerHTML = '<div style="padding:0 var(--s-4) var(--s-2)"><div class="card card-p">' +
+    '<div style="font-size:var(--t-xs);font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--s-2)">🗂 Comparateur filières — ' + eh + ' EH · K = ' + k + ' mm/min</div>' +
+    '<div style="overflow-x:auto"><table class="comparateur-table">' +
+    '<thead><tr><th>Filière</th><th>Compatibilité</th><th>Surface</th><th>Empreinte</th><th>Entretien</th><th>Coût relatif</th></tr></thead>' +
+    '<tbody>' + rows + '</tbody></table></div>' +
+    '<div style="font-size:10px;color:var(--c-text-4);margin-top:var(--s-2)">Lignes vertes = filières adaptées au K mesuré · Surface calculée pour ' + eh + ' EH · Arrêté 07/09/2009 · DTU 64.1</div>' +
+    '</div></div>';
+
+  wrap.scrollIntoView({ behavior:'smooth', block:'nearest' });
 }
 
 function switchCalcTab(idx) {
@@ -43,8 +195,10 @@ function renderCalcEpandage() {
           <div class="result-formula">S = EH × 150 L/j / (Ch × 1 000) · Ch = f(K)</div>
           <div class="result-src">📖 DTU 64.1 · Arrêté 07/09/2009</div>
         </div>
+        <button class="btn btn-ghost" style="margin-top:var(--s-2);font-size:12px" onclick="renderComparateurFilieres()">🗂 Comparer toutes les filières</button>
       </div>
     </div></div>
+    <div id="comparateur-filieres-wrap"></div>
     <div style="padding:var(--s-2) var(--s-4)"><div class="card card-p">
       <div style="font-size:var(--t-xs);font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--s-2)">📐 Charges hydrauliques par filière</div>
       <div class="kv-grid">
@@ -610,6 +764,284 @@ function toggleFicheANC(prefix, i) {
   if (!b) return;
   var open = b.classList.toggle('open');
   if (a) { a.style.transform = open ? 'rotate(90deg)' : ''; a.style.transition = 'transform .2s'; }
+}
+
+/* ═══ PASSES À POISSONS ═══ */
+function renderPassesPoissons() {
+  loadModuleTabs(['🐟 Types de passes', '📐 Calculateur'], 'switchPAPTab');
+  document.getElementById('main-content').innerHTML =
+    '<div id="pap-content"></div><div class="pb-nav"></div>';
+  renderPAPTypes();
+}
+
+function switchPAPTab(idx) {
+  setTabActive('module-tabs', idx);
+  if      (idx === 0) renderPAPTypes();
+  else if (idx === 1) renderPAPCalc();
+  scrollToTop();
+}
+
+var PAP_TYPES = [
+  {
+    ico:'🪜', name:'Passe à bassins successifs', color:'var(--c-riv)', colorl:'var(--c-riv-l)',
+    sub:'Type le plus répandu en France · Espèces cyprinicoles & salmonicoles',
+    specs:{
+      'Principe':"Bassins en cascade reliés par des échancrures ou déversoirs · Dissipation de l'énergie par turbulence",
+      'Dénivelé/bassin':'0,10–0,30 m (salmonidés) · 0,10–0,20 m (cyprinidés)',
+      'Débit unitaire':'0,02–0,10 m³/s selon largeur échancrure',
+      'Vitesse eau':'< 1,5 m/s passage échancrure · < 0,5 m/s zone repos',
+      'Dimensions bassin':'min. 2 m × 1,5 m × 1,0 m (petits cours d\'eau)',
+      'Largeur échancrure':'0,30–0,50 m (salmonidés) · 0,20–0,40 m (cyprinidés)',
+      'Espèces cibles':'Salmonidés · Cyprinidés · Anguilles · Aloses',
+      'Norme':'Guide ICE 2014 · Arrêté du 11/09/2015'
+    },
+    avantages:['Robuste et peu sensible aux variations de débit','Facile d\'entretien','Adapté à de nombreuses espèces'],
+    inconvenients:['Longueur importante pour forts dénivelés','Coût élevé sur grands ouvrages']
+  },
+  {
+    ico:'⛵', name:'Passe à ralentisseurs (rampe rugueuse)', color:'var(--c-riv)', colorl:'var(--c-riv-l)',
+    sub:'Rampe avec blocs et rugosités · Aspect naturel · Seuils faibles',
+    specs:{
+      'Principe':'Rampe à forte rugosité (blocs, gabions) imitant un radier naturel · Faible hauteur d\'eau',
+      'Pente':'5–12% selon espèces et débit',
+      'Épaisseur lame d\'eau':'0,20–0,40 m au-dessus des blocs',
+      'Vitesse':'< 1,5 m/s entre les blocs (zones refuge 0,3–0,5 m/s)',
+      'Granulométrie blocs':'Ø 0,5–1,0 m · Masse > 300 kg (stabilité)',
+      'Usage':'Seuils faible hauteur < 2 m · Remplacement seuil naturel',
+      'Espèces cibles':'Salmonidés principalement · Loche · Lamproie',
+      'Norme':'Onema 2011 · Guide technique blocs'
+    },
+    avantages:['Aspect naturel intégré','Continuité sédimentaire possible','Efficace pour espèces rhéophiles'],
+    inconvenients:['Peu efficace pour cyprinidés','Sensible à la végétation','Débit minimum permanent requis']
+  },
+  {
+    ico:'💧', name:'Passe à fentes verticales', color:'var(--c-riv)', colorl:'var(--c-riv-l)',
+    sub:'Haute performance · Tolérante aux variations de niveau aval',
+    specs:{
+      'Principe':'Cloisons avec fente verticale pleine hauteur · Fonctionnement indépendant du niveau aval',
+      'Dénivelé/bassin':'0,10–0,20 m',
+      'Largeur fente':'0,15–0,30 m selon espèces · min. 0,10 m',
+      'Vitesse fente':'0,8–1,2 m/s (recommandé < 1,0 m/s pour cyprinidés)',
+      'Débit':'0,015–0,05 m³/s par fente',
+      'Dimensions bassin':'L ≥ 8 × largeur fente · l ≥ 2 × L',
+      'Espèces cibles':'Toutes espèces · Particulièrement adaptée anguilles et lamproies',
+      'Norme':'Guide ICE 2014 · Clay & Chaloner 1995'
+    },
+    avantages:['Très tolérant aux variations de niveau (±30 cm)','Efficace pour toutes espèces','Pas d\'envasement'],
+    inconvenients:['Conception complexe','Coût supérieur aux bassins classiques']
+  },
+  {
+    ico:'🔩', name:'Ascenseur à poissons', color:'var(--c-riv)', colorl:'var(--c-riv-l)',
+    sub:'Solution mécanique · Grands barrages H > 10 m',
+    specs:{
+      'Principe':'Bac collecteur rempli d\'eau remonte mécaniquement (écluse ou élévateur à poissons)',
+      'Hauteur franchissable':'Illimitée · Principalement H > 10 m',
+      'Volume bac':'5–50 m³ selon espèces et effectifs',
+      'Débit attrait':'0,5–3 m³/s',
+      'Fréquence cycle':'1–4 fois/jour selon période de migration',
+      'Espèces cibles':'Grands migrateurs (Saumon, Alose, Esturgeon) · Anguilles',
+      'Exemples France':'Barrages de Strasbourg (Rhin) · Saint-Agne (Garonne)',
+      'Contrainte':'Nécessite exploitation active et surveillance quotidienne'
+    },
+    avantages:['Seule solution viable pour très grands ouvrages','Efficace si bien géré'],
+    inconvenients:['Coût exploitation élevé','Nécessite personnel dédié','Panne = blocage complet']
+  },
+  {
+    ico:'🌿', name:'Rivière de contournement', color:'var(--c-riv)', colorl:'var(--c-riv-l)',
+    sub:'Bras artificiel naturalisé · Solution la plus écologique',
+    specs:{
+      'Principe':'Canal ou bras naturalisé contournant le barrage · Restauration continuité complète',
+      'Longueur':'Variable · Typiquement 5–50× hauteur à franchir',
+      'Pente':'0,5–3% selon espèces et terrain',
+      'Débit':'10–30% du module (min. 1/10e débit réservé)',
+      'Profil en travers':'Trapézoïdal naturalisé · Berges végétalisées · Substrat diversifié',
+      'Espèces cibles':'Toutes espèces · Idéal pour benthos et sédiments',
+      'Coût':'Élevé mais fonctionnalité maximale',
+      'Norme':'Arrêté du 11/09/2015 · DCE continuité écologique'
+    },
+    avantages:['Solution la plus complète (faune benthique + poissons + sédiments)','Entretien réduit','Fort gain biodiversité'],
+    inconvenients:['Foncier disponible requis','Coût initial élevé','Entretien végétation régulier']
+  },
+  {
+    ico:'🐍', name:'Passe à anguilles', color:'var(--c-riv)', colorl:'var(--c-riv-l)',
+    sub:'Spécifique Anguilla anguilla · Rampe à substrat brsse ou gravier',
+    specs:{
+      'Principe':'Rampe à substrat (brosse, galets) permettant de ramper hors de l\'eau · Comportement benthique',
+      'Pente':'30–50% (rampe courte) · 15–25% (longue)',
+      'Largeur':'min. 0,20 m (recommandé 0,30 m)',
+      'Substrat':'Brosses synthétiques Ø 15 mm · ou galets 10–30 mm',
+      'Lame d\'eau':'2–5 mm sur substrat (humidification suffisante)',
+      'Longueur max.':'6 m par tronçon (palier intermédiaire au-delà)',
+      'Réglementation':'Plan national anguille 2010 · Règlement CE 1100/2007',
+      'Obligation':'Tout ouvrage classé L1 en zone anguille'
+    },
+    avantages:['Spécifique et très efficace pour anguilles','Peu coûteux','Compact'],
+    inconvenients:['Réservé aux anguilles uniquement','Entretien anti-colmatage fréquent']
+  }
+];
+
+function renderPAPTypes() {
+  var z = document.getElementById('pap-content');
+  if (!z) return;
+  var html = '<div style="padding:var(--s-2) var(--s-4) 0">'
+    + '<div class="alert info"><span class="alert-icon">ℹ</span><span>6 types de dispositifs de franchissement réglementés en France · Obligation issue de la Loi sur l\'eau 2006 (L.214-17 Code env.) · Classement cours d\'eau liste 1 et 2.</span></div>'
+    + '</div>'
+    + '<div class="section-header">6 dispositifs de franchissement<span class="sh-count">6</span></div>'
+    + '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">';
+
+  PAP_TYPES.forEach(function(p, i) {
+    html += '<div class="regl-card" style="border-left:3px solid ' + p.color + '">'
+      + '<div onclick="togglePAP(' + i + ')" style="cursor:pointer;display:flex;align-items:flex-start;gap:var(--s-3);padding:var(--s-3) var(--s-4)">'
+        + '<div class="rc-icon" style="background:' + p.colorl + ';font-size:22px;flex-shrink:0">' + p.ico + '</div>'
+        + '<div style="flex:1;min-width:0">'
+          + '<div class="rc-name">' + p.name + '</div>'
+          + '<div class="rc-ref" style="margin-top:2px">' + p.sub + '</div>'
+        + '</div>'
+        + '<span id="pap-a-' + i + '" style="font-size:22px;color:var(--c-text-4);transition:transform .22s;line-height:1;font-weight:300;flex-shrink:0">&#x203A;</span>'
+      + '</div>'
+      + '<div id="pap-b-' + i + '" style="display:none;border-top:1px solid var(--c-border);padding:var(--s-3) var(--s-4)">'
+        + '<div class="kv-grid">'
+        + Object.entries(p.specs).map(function(kv) {
+            return '<div class="kv-item"><div class="kv-key">' + kv[0] + '</div><div class="kv-val" style="font-size:11px">' + kv[1] + '</div></div>';
+          }).join('')
+        + '</div>'
+        + '<div style="margin-top:var(--s-3);display:grid;grid-template-columns:1fr 1fr;gap:var(--s-2)">'
+          + '<div style="background:var(--c-ok-l);border:1px solid var(--c-ok);border-radius:var(--r-md);padding:var(--s-2)">'
+            + '<div style="font-size:10px;font-weight:800;color:var(--c-ok);text-transform:uppercase;margin-bottom:var(--s-1)">Avantages</div>'
+            + p.avantages.map(function(a) { return '<div style="font-size:10px;color:var(--c-text-2);line-height:1.6">· ' + a + '</div>'; }).join('')
+          + '</div>'
+          + '<div style="background:var(--c-warn-l);border:1px solid var(--c-warn);border-radius:var(--r-md);padding:var(--s-2)">'
+            + '<div style="font-size:10px;font-weight:800;color:var(--c-warn);text-transform:uppercase;margin-bottom:var(--s-1)">Limites</div>'
+            + p.inconvenients.map(function(a) { return '<div style="font-size:10px;color:var(--c-text-2);line-height:1.6">· ' + a + '</div>'; }).join('')
+          + '</div>'
+        + '</div>'
+      + '</div>'
+    + '</div>';
+  });
+
+  html += '</div><div style="height:var(--s-4)"></div>';
+  z.innerHTML = html;
+}
+
+function togglePAP(i) {
+  var b = document.getElementById('pap-b-' + i);
+  var a = document.getElementById('pap-a-' + i);
+  if (!b) return;
+  var open = b.style.display === 'block';
+  b.style.display = open ? 'none' : 'block';
+  if (a) a.style.transform = open ? '' : 'rotate(90deg)';
+}
+
+function renderPAPCalc() {
+  var z = document.getElementById('pap-content');
+  if (!z) return;
+  z.innerHTML = '<div style="padding:var(--s-3) var(--s-4) 0">'
+    + '<div class="alert info"><span class="alert-icon">ℹ</span><span>Dimensionnement pour <strong>passe à bassins successifs</strong> et <strong>passe à fentes verticales</strong> · Méthodes ICE 2014 et Larinier et al. 2002.</span></div>'
+    + '</div>'
+    + '<div class="section-header">Paramètres</div>'
+    + '<div style="padding:0 var(--s-4)">'
+      + '<div class="card card-p">'
+        + '<div class="field"><label class="field-label">Hauteur totale à franchir (H)</label>'
+          + '<div class="field-row"><input type="number" id="pap-H" value="2.0" step="0.1" min="0.1" oninput="calcPAP()"><span class="field-unit">m</span></div></div>'
+        + '<div class="field"><label class="field-label">Type de passe</label>'
+          + '<select id="pap-type" class="field-inp" onchange="calcPAP()">'
+            + '<option value="bassins">Bassins successifs (dénivelé 0,20 m/bassin)</option>'
+            + '<option value="fentes">Fentes verticales (dénivelé 0,15 m/bassin)</option>'
+          + '</select></div>'
+        + '<div class="field"><label class="field-label">Espèces cibles</label>'
+          + '<select id="pap-esp" class="field-inp" onchange="calcPAP()">'
+            + '<option value="saumon">Salmonidés (Saumon, Truite fario)</option>'
+            + '<option value="cyprin">Cyprinidés (Barbeau, Gardon, Brochet)</option>'
+            + '<option value="anguille">Anguille</option>'
+            + '<option value="alose">Grande Alose / Alose feinte</option>'
+          + '</select></div>'
+        + '<div class="field"><label class="field-label">Débit disponible pour la passe (Q)</label>'
+          + '<div class="field-row"><input type="number" id="pap-Q" value="0.5" step="0.05" min="0.01" oninput="calcPAP()"><span class="field-unit">m³/s</span></div></div>'
+      + '</div>'
+    + '</div>'
+    + '<div id="pap-result" style="padding:0 var(--s-4);margin-top:var(--s-2)"></div>';
+  calcPAP();
+}
+
+function calcPAP() {
+  var Hel  = document.getElementById('pap-H');
+  var Qel  = document.getElementById('pap-Q');
+  var tel  = document.getElementById('pap-type');
+  var eel  = document.getElementById('pap-esp');
+  var res  = document.getElementById('pap-result');
+  if (!Hel || !res) return;
+
+  var H    = parseFloat(Hel.value)  || 2.0;
+  var Q    = parseFloat(Qel.value)  || 0.5;
+  var type = tel ? tel.value : 'bassins';
+  var esp  = eel ? eel.value : 'saumon';
+
+  var deltah, wFente, vFente, lBassin, wBassin;
+  if (type === 'bassins') {
+    deltah  = (esp === 'saumon' || esp === 'alose') ? 0.20 : 0.15;
+    lBassin = (esp === 'alose') ? 3.0 : 2.5;
+    wBassin = (esp === 'alose') ? 2.0 : 1.5;
+  } else {
+    deltah  = (esp === 'saumon' || esp === 'alose') ? 0.15 : 0.12;
+    wFente  = (esp === 'saumon' || esp === 'alose') ? 0.25 : 0.20;
+    vFente  = (esp === 'saumon') ? 1.0 : 0.8;
+    lBassin = Math.round(wFente * 8 * 100) / 100;
+    wBassin = Math.round(wFente * 16 * 100) / 100;
+  }
+
+  var hautBassin   = 1.0;
+  var nBassins     = Math.ceil(H / deltah);
+  var longueurTot  = (nBassins * (lBassin + 0.3)).toFixed(1);
+  var vEch         = type === 'bassins' ? (Math.sqrt(2 * 9.81 * deltah) * 0.62).toFixed(2) : (vFente || 1.0).toFixed(2);
+  var puissBas     = (1000 * 9.81 * Q * deltah).toFixed(0);
+  var puissVol     = (parseFloat(puissBas) / (wBassin * lBassin * hautBassin)).toFixed(0);
+
+  var alerts = [];
+  if (Q < 0.02)  alerts.push({t:'danger', v:'Débit trop faible — attrait insuffisant (minimum recommandé : 0,02 m³/s)'});
+  if (H > 5)     alerts.push({t:'warn',   v:'Hauteur > 5 m — envisager un ascenseur à poissons ou une rivière de contournement'});
+  if (esp === 'anguille') alerts.push({t:'info', v:'Pour les anguilles, une passe à anguilles spécifique (rampe à substrat) est souvent plus efficace'});
+  if (parseFloat(puissVol) > 200) alerts.push({t:'danger', v:'Puissance volumique > 200 W/m³ — turbulences excessives · Réduire le dénivelé/bassin'});
+
+  var espCrit = {
+    saumon:  {n:'Salmonidés',   vmax:'2,0 m/s', repos:'< 0,5 m/s', hmin:'0,30 m', dmin:'35 m',  norm:'Arrêté 11/09/2015 · Liste 1'},
+    cyprin:  {n:'Cyprinidés',   vmax:'1,2 m/s', repos:'< 0,3 m/s', hmin:'0,20 m', dmin:'10 m',  norm:'Arrêté 11/09/2015 · Liste 2'},
+    anguille:{n:'Anguille',     vmax:'0,8 m/s', repos:'< 0,3 m/s', hmin:'0,10 m', dmin:'—',     norm:'Plan national anguille 2010'},
+    alose:   {n:'Grande Alose', vmax:'1,5 m/s', repos:'< 0,4 m/s', hmin:'0,30 m', dmin:'50 m',  norm:'Plan gestion alose · PDM DCE'}
+  }[esp];
+
+  var html = alerts.map(function(a) {
+    return '<div class="alert ' + a.t + '" style="margin-bottom:var(--s-2)"><span class="alert-icon">' + (a.t==='danger'?'⛔':a.t==='warn'?'⚠':'ℹ') + '</span><span>' + a.v + '</span></div>';
+  }).join('');
+
+  html += '<div class="card card-p" style="background:linear-gradient(135deg,var(--c-riv-l),#fff);margin-bottom:var(--s-2)">'
+    + '<div style="font-size:var(--t-xs);font-weight:800;color:var(--c-riv);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--s-2)">Dimensionnement — ' + (type === 'bassins' ? 'Bassins successifs' : 'Fentes verticales') + '</div>'
+    + '<div class="kv-grid">'
+      + '<div class="kv-item"><div class="kv-key">Nombre de bassins</div><div class="kv-val" style="font-size:var(--t-lg);color:var(--c-riv)">' + nBassins + '</div></div>'
+      + '<div class="kv-item"><div class="kv-key">Dénivelé / bassin</div><div class="kv-val">' + deltah + ' m</div></div>'
+      + '<div class="kv-item"><div class="kv-key">Longueur totale estimée</div><div class="kv-val" style="color:var(--c-riv)">' + longueurTot + ' m</div></div>'
+      + '<div class="kv-item"><div class="kv-key">Dimensions 1 bassin (L×l×h)</div><div class="kv-val">' + lBassin + ' × ' + wBassin + ' × ' + hautBassin + ' m</div></div>'
+      + (type === 'bassins'
+          ? '<div class="kv-item"><div class="kv-key">Vitesse échancrure</div><div class="kv-val">' + vEch + ' m/s</div></div>'
+          : '<div class="kv-item"><div class="kv-key">Largeur fente</div><div class="kv-val">' + wFente + ' m</div></div>'
+            + '<div class="kv-item"><div class="kv-key">Vitesse en fente</div><div class="kv-val">' + vEch + ' m/s</div></div>')
+      + '<div class="kv-item"><div class="kv-key">Puissance dissipée / bassin</div><div class="kv-val">' + puissBas + ' W</div></div>'
+      + '<div class="kv-item"><div class="kv-key">Puissance volumique</div>'
+        + '<div class="kv-val' + (parseFloat(puissVol) > 200 ? '' : '') + '" style="' + (parseFloat(puissVol) > 200 ? 'color:var(--c-danger)' : '') + '">' + puissVol + ' W/m³</div></div>'
+    + '</div>'
+  + '</div>'
+  + '<div class="card card-p" style="margin-bottom:var(--s-2)">'
+    + '<div style="font-size:var(--t-xs);font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--s-2)">Critères espèce cible — ' + espCrit.n + '</div>'
+    + '<div class="kv-grid">'
+      + '<div class="kv-item"><div class="kv-key">Vitesse max admissible</div><div class="kv-val">' + espCrit.vmax + '</div></div>'
+      + '<div class="kv-item"><div class="kv-key">Zone de repos</div><div class="kv-val">' + espCrit.repos + '</div></div>'
+      + '<div class="kv-item"><div class="kv-key">Tirant d\'eau minimum</div><div class="kv-val">' + espCrit.hmin + '</div></div>'
+      + '<div class="kv-item"><div class="kv-key">Distance passe/barrage</div><div class="kv-val">' + espCrit.dmin + '</div></div>'
+      + '<div class="kv-item" style="grid-column:1/-1"><div class="kv-key">Réglementation applicable</div><div class="kv-val">' + espCrit.norm + '</div></div>'
+    + '</div>'
+  + '</div>'
+  + '<div class="alert info"><span class="alert-icon">📖</span><span>Sources : ICE 2014 · Larinier et al. (2002) <em>Passes à poissons</em> · OFB · Arrêté du 11/09/2015 · Art. L.214-17 Code de l\'environnement</span></div>';
+
+  res.innerHTML = html;
 }
 
 

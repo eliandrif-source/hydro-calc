@@ -149,11 +149,64 @@ function calcManning() {
   const A = Math.PI*D*D/4, Rh = D/4;
   const Q = ks*A*Math.pow(Rh,2/3)*Math.pow(I,0.5);
   const V = Q/A;
+  const pratique = typeof _isPratique === 'function' && _isPratique();
   const res = document.getElementById('res-mann');
   res.classList.add('show');
-  document.getElementById('rv-mn').textContent = `Q = ${(Q*1000).toFixed(2)} L/s = ${(Q*3600).toFixed(2)} m³/h`;
+  var unitBadge = '<span class="unit-badge">' + (pratique ? 'Pratique' : 'SI') + '</span>';
+  var qDisplay = pratique
+    ? 'Q = ' + (Q*3600).toFixed(2) + ' m³/h = ' + (Q*1000).toFixed(2) + ' L/s'
+    : 'Q = ' + (Q*1000).toFixed(2) + ' L/s = ' + Q.toFixed(5) + ' m³/s';
+  document.getElementById('rv-mn').innerHTML = qDisplay + unitBadge;
   document.getElementById('rd-mn').innerHTML = `• DN = ${dn} mm · K = ${ks} · I = ${ip}‰<br>• A = ${A.toFixed(4)} m² · Rh = ${(Rh*1000).toFixed(0)} mm<br>• V pleine section = ${V.toFixed(3)} m/s ${V>=0.6?'✓ Auto-curage':'⚠ < 0,6 m/s → risque dépôts'}`;
   res.style.borderLeftColor = V>=0.6?'var(--c-ok)':'var(--c-warn)';
+  setTimeout(function() { _drawManningChart(dn, ks, I); }, 50);
+}
+
+function _drawManningChart(dnRef, ks, I) {
+  var res = document.getElementById('res-mann');
+  if (!res) return;
+  var existing = document.getElementById('manning-chart-wrap');
+  if (existing) existing.remove();
+  var DNS = [150, 200, 250, 300, 400, 500, 600, 800];
+  var Qs = DNS.map(function(dn) {
+    var d = dn/1000, A = Math.PI*d*d/4, Rh = d/4;
+    return ks * A * Math.pow(Rh, 2/3) * Math.pow(I, 0.5) * 1000;
+  });
+  var wrap = document.createElement('div');
+  wrap.id = 'manning-chart-wrap';
+  wrap.className = 'chart-wrap';
+  wrap.innerHTML = '<div class="chart-title">📊 Débit pleine section par DN (K=' + ks + ', I=' + (I*1000).toFixed(1) + '‰) — L/s</div><canvas id="manning-canvas" height="120" style="width:100%"></canvas>';
+  res.appendChild(wrap);
+  var canvas = document.getElementById('manning-canvas');
+  var rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = Math.max(rect.width || 280, 280);
+  var ctx = canvas.getContext('2d');
+  var w = canvas.width, h = canvas.height;
+  var pad = {l:8, r:8, t:6, b:20};
+  var n = DNS.length;
+  var bw = Math.floor((w - pad.l - pad.r) / n) - 3;
+  var maxQ = Math.max.apply(null, Qs);
+  var chartH = h - pad.t - pad.b;
+  ctx.clearRect(0, 0, w, h);
+  DNS.forEach(function(dn, i) {
+    var q = Qs[i];
+    var bh = Math.max(2, chartH * q / maxQ);
+    var x = pad.l + i * ((w - pad.l - pad.r) / n) + 1;
+    var y = h - pad.b - bh;
+    var isActive = dn === dnRef;
+    ctx.fillStyle = isActive ? '#0A7460' : '#BDD8D0';
+    if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(x, y, bw, bh, [3,3,0,0]); ctx.fill(); }
+    else { ctx.fillRect(x, y, bw, bh); }
+    ctx.fillStyle = isActive ? '#065A48' : '#8A9890';
+    ctx.font = (isActive ? 'bold ' : '') + '9px Outfit,sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(dn, x + bw/2, h - pad.b + 13);
+    if (bh > 16) {
+      ctx.fillStyle = '#fff';
+      ctx.font = '8px Outfit,sans-serif';
+      ctx.fillText(q.toFixed(0), x + bw/2, y + 11);
+    }
+  });
 }
 
 function calcFTE() {
@@ -194,7 +247,7 @@ function toggleFiche(i) {
 function renderConv() {
   var _tb=document.getElementById('tab-bar'); if(_tb) _tb.style.display='none';
   const CONVS = {
-    debit:{ name:'Débit', units:[{id:'ls',l:'L/s',f:v=>v},{id:'m3h',l:'m³/h',f:v=>v*3.6},{id:'m3j',l:'m³/j',f:v=>v*86.4},{id:'lmin',l:'L/min',f:v=>v*60},{id:'m3s',l:'m³/s',f:v=>v/1000},{id:'galmin',l:'gal US/min',f:v=>v*15.85},{id:'lh',l:'L/h',f:v=>v*3600}], fromLs:[v=>v,v=>v/3.6,v=>v/86.4,v=>v/60,v=>v*1000,v=>v/15.85,v=>v/3600], ref:'1 L/s = 3,6 m³/h = 86,4 m³/j = 60 L/min' },
+    debit:{ name:'Débit', units:[{id:'ls',l:'L/s',f:v=>v},{id:'m3h',l:'m³/h',f:v=>v*3.6},{id:'m3j',l:'m³/j',f:v=>v*86.4},{id:'lmin',l:'L/min',f:v=>v*60},{id:'m3s',l:'m³/s',f:v=>v/1000},{id:'galmin',l:'gal US/min',f:v=>v*15.85},{id:'lh',l:'L/h',f:v=>v*3600}], toLs:[v=>v,v=>v/3.6,v=>v/86.4,v=>v/60,v=>v*1000,v=>v/15.85,v=>v/3600], fromLs:[v=>v,v=>v*3.6,v=>v*86.4,v=>v*60,v=>v/1000,v=>v*15.85,v=>v*3600], ref:'1 L/s = 3,6 m³/h = 86,4 m³/j = 60 L/min' },
     pression:{ name:'Pression', units:[{id:'bar',l:'bar'},{id:'mce',l:'m CE'},{id:'kpa',l:'kPa'},{id:'psi',l:'psi'},{id:'atm',l:'atm'},{id:'mbar',l:'mbar'}], toLs:[v=>v,v=>v/10.197,v=>v/100,v=>v/14.504,v=>v/0.9869,v=>v/1000], fromLs:[v=>v,v=>v*10.197,v=>v*100,v=>v*14.504,v=>v*0.9869,v=>v*1000], ref:'1 bar = 10,197 m CE = 100 kPa = 14,504 psi · Pression service AEP : 2–6 bar' },
     concentration:{ name:'Concentration', units:[{id:'mgl',l:'mg/L'},{id:'gm3',l:'g/m³'},{id:'ugl',l:'µg/L'},{id:'gl',l:'g/L'},{id:'ppm',l:'ppm'}], toLs:[v=>v,v=>v,v=>v/1000,v=>v*1000,v=>v], fromLs:[v=>v,v=>v,v=>v*1000,v=>v/1000,v=>v], ref:'1 mg/L = 1 g/m³ = 1000 µg/L = 0,001 g/L · PFAS < 0,1 µg/L · Nitrates < 50 mg/L' },
     surface:{ name:'Surface', units:[{id:'m2',l:'m²'},{id:'ha',l:'ha'},{id:'km2',l:'km²'},{id:'cm2',l:'cm²'}], toLs:[v=>v,v=>v*10000,v=>v*1e6,v=>v/10000], fromLs:[v=>v,v=>v/10000,v=>v/1e6,v=>v*10000], ref:'1 ha = 10 000 m² · 1 km² = 100 ha · ANC : tranchées 20–60 m² · FPR : 5 m²/EH' },
@@ -664,12 +717,12 @@ function toggleFiche2(i) {
 function renderFormations() {
   var _tb=document.getElementById('tab-bar'); if(_tb) _tb.style.display='none';
   const formations = [
-    {ico:'💧',sigle:'BTS MDE',name:'BTS Métiers de l\'Eau',orga:'MEN · Lycées techniques',niveau:'Bac+2',color:'var(--c-ac)',desc:'Forme des techniciens en AEP, assainissement, STEU, contrôle qualité. Modules : hydraulique, traitement, instrumentation, réglementation, gestion.'},
-    {ico:'🌊',sigle:'BTSA GEMEAU',name:'BTSA Gestion et Maîtrise de l\'Eau',orga:'Ministère Agriculture · Lycées agricoles',niveau:'Bac+2',color:'var(--c-anc)',desc:'Hydraulique agricole, ANC, milieux aquatiques, réglementation. 6 UE. Fort contenu terrain et SPANC.'},
-    {ico:'🎓',sigle:'LP EAU',name:'Licence Pro Métiers de l\'Eau',orga:'Universités · IUT',niveau:'Bac+3',color:'var(--c-ep)',desc:'Spécialisation après BTS/BUT. Exploitation réseau, traitement avancé, milieux aquatiques, droit de l\'eau. Souvent en alternance.'},
-    {ico:'🔬',sigle:'M2 EAU',name:'Master Sciences de l\'Eau',orga:'Universités · AgroParisTech · SupAgro',niveau:'Bac+5',color:'var(--c-aides)',desc:'Hydrologie, hydrogéologie, qualité des eaux, modélisation (MODFLOW). Theis/Cooper-Jacob, PFAS, NDWI. Débouche sur BRGM, bureaux d\'études, Agences.'},
-    {ico:'🏛️',sigle:'ENGEES',name:'Ingénieur ENGEES',orga:'ENGEES Strasbourg',niveau:'Bac+5/6',color:'var(--c-form)',desc:'Seule école d\'ingénieur spécialisée eau. Saint-Venant, Bishop, marchés publics, changement climatique. Partenariats OFB, INRAE, Agences de l\'eau.'},
-    {ico:'🏆',sigle:'MS EPA',name:'Mastère Spécialisé® EPA',orga:'ENGEES · Accréditation CGE',niveau:'Post-ingénieur',color:'var(--c-regl)',desc:'Formation d\'excellence post-ingénieur. PSE/HACCP, SDG6, tarification, coopération internationale. Référence nationale cadres du secteur eau.'},
+    {ico:'💧',sigle:'BTS MDE',name:'BTS Métiers de l\'Eau',orga:'MEN · Lycées techniques',niveau:'Bac+2',color:'var(--c-ac)',desc:'Forme des techniciens en AEP, assainissement, STEU, contrôle qualité. Modules : hydraulique, traitement, instrumentation, réglementation, gestion.',coursId:'bts-gemeau'},
+    {ico:'🌊',sigle:'BTSA GEMEAU',name:'BTSA Gestion et Maîtrise de l\'Eau',orga:'Ministère Agriculture · Lycées agricoles',niveau:'Bac+2',color:'var(--c-anc)',desc:'Hydraulique agricole, ANC, milieux aquatiques, réglementation. 6 UE. Fort contenu terrain et SPANC.',coursId:'bts-gemeau'},
+    {ico:'🎓',sigle:'LP EAU',name:'Licence Pro Métiers de l\'Eau',orga:'Universités · IUT',niveau:'Bac+3',color:'var(--c-ep)',desc:'Spécialisation après BTS/BUT. Exploitation réseau, traitement avancé, milieux aquatiques, droit de l\'eau. Souvent en alternance.',coursId:'licence-pro'},
+    {ico:'🔬',sigle:'M2 EAU',name:'Master Sciences de l\'Eau',orga:'Universités · AgroParisTech · SupAgro',niveau:'Bac+5',color:'var(--c-aides)',desc:'Hydrologie, hydrogéologie, qualité des eaux, modélisation (MODFLOW). Theis/Cooper-Jacob, PFAS, NDWI. Débouche sur BRGM, bureaux d\'études, Agences.',coursId:'master-eau'},
+    {ico:'🏛️',sigle:'ENGEES',name:'Ingénieur ENGEES',orga:'ENGEES Strasbourg',niveau:'Bac+5/6',color:'var(--c-form)',desc:'Seule école d\'ingénieur spécialisée eau. Saint-Venant, Bishop, marchés publics, changement climatique. Partenariats OFB, INRAE, Agences de l\'eau.',coursId:null},
+    {ico:'🏆',sigle:'MS EPA',name:'Mastère Spécialisé® EPA',orga:'ENGEES · Accréditation CGE',niveau:'Post-ingénieur',color:'var(--c-regl)',desc:'Formation d\'excellence post-ingénieur. PSE/HACCP, SDG6, tarification, coopération internationale. Référence nationale cadres du secteur eau.',coursId:null},
   ];
   document.getElementById('main-content').innerHTML = `
     <div class="module-hero" style="--cat-color:var(--c-form)">
@@ -681,15 +734,19 @@ function renderFormations() {
     <div class="section-header">Toutes les formations<span class="sh-count">${formations.length}</span></div>
     <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
       ${formations.map(f=>`
-      <div class="mod-list-card" style="--cat-color:${f.color}">
+      <div class="mod-list-card" style="--cat-color:${f.color}" ${f.coursId ? `onclick="renderCoursFormation('${f.coursId}')"` : ''}>
         <div class="mlc-icon">${f.ico}</div>
         <div class="mlc-body">
           <div style="font-size:10px;font-weight:800;color:${f.color};letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px">${f.sigle}</div>
           <div class="mlc-name">${f.name}</div>
           <div class="mlc-sub">${f.orga}</div>
           <div style="font-size:11px;color:var(--c-text-3);margin-top:5px;line-height:1.6">${f.desc}</div>
-          <div class="mlc-tags" style="margin-top:6px"><span class="mlc-tag">${f.niveau}</span></div>
+          <div class="mlc-tags" style="margin-top:6px">
+            <span class="mlc-tag">${f.niveau}</span>
+            ${f.coursId ? '<span class="mlc-tag" style="background:var(--c-ok-l);color:var(--c-ok)">📚 Cours disponibles</span>' : ''}
+          </div>
         </div>
+        ${f.coursId ? '<span class="mlc-arrow">›</span>' : ''}
       </div>`).join('')}
     </div>
     <div class="pb-nav"></div>`;
@@ -698,57 +755,213 @@ function renderFormations() {
 /* ─── RENDER MATÉRIAUX ─── */
 function renderMateriaux() {
   var _tb=document.getElementById('tab-bar'); if(_tb) _tb.style.display='none';
-  const mats = [
-    {ico:'🔵',name:'PVC assainissement (PVC-U)',sub:'NF EN 1401 · Réseau EU/EP gravitaire',color:'var(--c-ac)',colorl:'var(--c-ac-l)',avantages:['K = 90–100 : excellentes perf. hydrauliques','Léger, facile à poser, économique','Résistance chimique aux effluents domestiques'],inconvenients:['Fragile aux chocs à basse température','Sensible aux hydrocarbures concentrés'],specs:{'Norme':'NF EN 1401','DN courants':'100–400 mm','Strickler K':'90–100','Durée de vie':'≥ 50 ans'}},
-    {ico:'🟤',name:'PEHD (Polyéthylène HD)',sub:'NF EN 13244 · Réseau sous pression AEP',color:'var(--c-ep)',colorl:'var(--c-ep-l)',avantages:['Soudable → tuyauterie continue sans joints','Très bonne résistance chimique','Souple : pose en courbe, forage dirigé'],inconvenients:['Soudage exige matériel et opérateur formé','Sensible aux UV si exposé'],specs:{'Norme':'NF EN 13244','Classes':'PE80 · PE100 · PE100-RC','PN courants':'PN6 à PN25','Durée de vie':'≥ 50 ans'}},
-    {ico:'⚙️',name:'Fonte ductile (FD)',sub:'NF EN 545 · Grands diamètres sous pression',color:'var(--c-ref)',colorl:'var(--c-ref-l)',avantages:['Résistance mécanique exceptionnelle','Durée de vie > 100 ans','Joints anti-traction'],inconvenients:['Très lourd (DN300 ≈ 95 kg/m)','Coûteux · Délai approvisionnement long'],specs:{'Norme AEP':'NF EN 545','Norme EU':'NF EN 598','Strickler K':'100–130 neuf','Durée de vie':'> 100 ans'}},
-    {ico:'⚠️',name:'Amiante-ciment (AC)',sub:'INTERDIT à neuf · EPI FFP3 obligatoire',color:'var(--c-nc)',colorl:'var(--c-nc-l)',avantages:['Aucun avantage · Matériau interdit'],inconvenients:['Interdit depuis Décret 96-1133 (1996)','Manipulation = risque fibres cancérogènes','Déchet dangereux → filière agréée obligatoire'],specs:{'Statut':'INTERDIT à neuf','EPI':'FFP3 + combinaison type 5','Entreprise':'SS4 certifiée obligatoire','Déchet':'Dangereux · Sac PEHD double'}},
+
+  var cats = [
+    {
+      id:'canal', ico:'🔵', title:'Canalisations', color:'var(--c-ac)',
+      items:[
+        {ico:'🔵',name:'PVC assainissement (PVC-U)',sub:'NF EN 1401 · EU/EP gravitaire · DN 100–630',color:'var(--c-ac)',colorl:'var(--c-ac-l)',
+          specs:{'Norme':'NF EN 1401','DN courants':'100–630 mm','Strickler K':'90–100','Pression':'Gravitaire (SDR 34–51)','Durée de vie':'≥ 50 ans','Marques':'Nicoll · Wavin · Saint-Gobain PAM'},
+          avantages:['Excellent coefficient de Manning-Strickler K = 90–100','Très léger : pose rapide, économie de main-d\'œuvre','Résistance chimique aux effluents domestiques et industriels légers','Disponible en SN4, SN8, SN16 selon la profondeur','Assemblage rapide par emboîtement à joints à lèvres'],
+          inconvenients:['Fragile aux chocs à basse température (< −5 °C)','Sensible aux hydrocarbures concentrés et solvants','Résistance au feu limitée (usage intérieur)','DN > 630 mm peu disponible'],
+          note:'Utiliser SN8 minimum en voirie, SN16 sous forte charge (route nationale, voie ferrée).'},
+        {ico:'🟤',name:'PEHD (Polyéthylène Haute Densité)',sub:'NF EN 13244 · AEP sous pression · Forage dirigé',color:'var(--c-ep)',colorl:'var(--c-ep-l)',
+          specs:{'Norme':'NF EN 13244','Classes':'PE80 · PE100 · PE100-RC','PN courants':'PN6 à PN25','DN':'20–1 200 mm','Durée de vie':'≥ 50 ans','Marques':'Uponor · Wavin · Georg Fischer (GF)'},
+          avantages:['Soudage bout-à-bout → conduite monobloc sans points faibles','Souple : pose en courbe, forage dirigé, microtunneling','Excellente résistance chimique (pH 2–14)','Légèreté : DN110 PN10 ≈ 1,5 kg/m','PE100-RC : résistance à la fissuration par contrainte'],
+          inconvenients:['Soudage exige opérateur qualifié + machine thermofusion','Sensible aux UV (protection bitume ou enfouissement)','Coefficient de dilatation élevé (gestion en surface)','Moins rigide que fonte sous forte pression externe'],
+          note:'PE100 recommandé pour l\'AEP. PE100-RC obligatoire pour pose sans lit de sable (tranchée étroite).'},
+        {ico:'⚙️',name:'Fonte ductile (FD)',sub:'NF EN 545/598 · Grands DN · Durée > 100 ans',color:'var(--c-ref)',colorl:'var(--c-ref-l)',
+          specs:{'Norme AEP':'NF EN 545','Norme EU':'NF EN 598','DN':'80–2 000 mm','Revêtement int.':'Mortier de ciment centrifugé','Strickler K':'100–130 (neuf)','Durée de vie':'> 100 ans','Marques':'Saint-Gobain PAM · Pont-à-Mousson · Tyton'},
+          avantages:['Résistance mécanique exceptionnelle (allongement rupture > 10%)','Joints automatiques anti-traction (Tyton, Express)','Durée de vie > 100 ans avec revêtement zinc + mortier','DN très grands disponibles (jusqu\'à DN2 000)','Résistance aux coups de bélier'],
+          inconvenients:['Très lourd : DN300 ≈ 95 kg/m → engins nécessaires','Coût élevé : 2–5× le PEHD','Délai d\'approvisionnement long pour grands DN','Corrosion externe possible en sol agressif'],
+          note:'Privilégier la fonte pour DN > 300 mm en AEP, zones sismiques, et traversées de cours d\'eau.'},
+        {ico:'🟫',name:'Grès cérame (GC)',sub:'NF EN 295 · EU gravitaire · Très longue durée',color:'var(--c-anc)',colorl:'var(--c-anc-l)',
+          specs:{'Norme':'NF EN 295','DN courants':'100–600 mm','Strickler K':'70–90','Résistance':'Très haute aux acides','Durée de vie':'> 100 ans','Marques':'Steinzeug-Keramo · Naylor'},
+          avantages:['Résistance chimique exceptionnelle (acides, bases, H2S)','Durée de vie > 100 ans sans entretien','Surface lisse intérieure : bonnes performances hydrauliques','Aucune corrosion, aucun vieillissement'],
+          inconvenients:['Fragile aux chocs et aux efforts mécaniques','Assemblage par manchons : attention à l\'étanchéité','Lourd : DN200 ≈ 35 kg/m','Peu utilisé au-delà de DN 600 mm'],
+          note:'Usage privilégié en assainissement industriel (acides, effluents agressifs) et en réhabilitation de réseaux anciens.'},
+        {ico:'🏗️',name:'Béton armé (BAC)',sub:'NF EN 1916 · Collecteurs EU/EP DN ≥ 400',color:'var(--c-riv)',colorl:'var(--c-riv-l)',
+          specs:{'Norme':'NF EN 1916','DN courants':'400–3 000 mm','Strickler K':'60–80','Revêtement':'Ciment alumineux ou PEHD','Durée de vie':'50–80 ans','Marques':'Prefaest · Bonna Sabla · Vicat'},
+          avantages:['Adapté aux très grands diamètres','Résistance aux charges importantes','Coût matière réduit pour grands ouvrages','Disponible en forme ovoïde, circulaire, rectangulaire'],
+          inconvenients:['Sensible au H2S (attaque bactérienne du ciment)','Joints = points sensibles à l\'infiltration','Lourd → pose longue et coûteuse','Réhabilitation complexe'],
+          note:'Protection obligatoire contre le H2S par revêtement ciment alumineux ou chemisage PEHD pour tout ouvrage EU à forte charge organique.'},
+        {ico:'🔧',name:'Acier inoxydable (Inox)',sub:'EN 10217-7 · Installations industrielles · Potable',color:'var(--c-ep)',colorl:'var(--c-ep-l)',
+          specs:{'Grades courants':'304 (L) · 316 (L)','DN':'15–600 mm','Pression':'PN6 à PN40','Assemblage':'Soudage TIG · Raccords DIN','Durée de vie':'> 50 ans','Marques':'Georg Fischer · Viega · Buderus'},
+          avantages:['Hygiénique : conforme contact alimentaire ACS','Résistance à la corrosion même en milieu chloré','Haute résistance mécanique et thermique (−200°C à +800°C)','Recyclable à 100%'],
+          inconvenients:['Coût élevé (5–10× PVC)','Soudage nécessite atmosphère inerte (TIG)','Corrosion par piqûres en milieu chloruré si grade inadapté'],
+          note:'Grade 316L obligatoire en eau de mer ou milieu riche en chlorures. 304L suffisant pour eau potable standard.'},
+        {ico:'⚠️',name:'Amiante-ciment (AC)',sub:'INTERDIT à neuf · EPI FFP3 · Déchet dangereux',color:'var(--c-nc)',colorl:'var(--c-nc-l)',
+          specs:{'Statut':'INTERDIT à neuf (Décret 96-1133)','EPI':'Masque FFP3 + combinaison type 5','Entreprise':'Certifiée SS4 obligatoire','Déchet':'DIS → sac PEHD double + BSDa','Remplacement':'PEHD ou Fonte ductile'},
+          avantages:['Aucun avantage pour un matériau interdit'],
+          inconvenients:['Fibres d\'amiante cancérogènes (mésothéliome)','Tout travail sans protection = délit pénal','Traçabilité déchets obligatoire (BSDa)','Coût de dépose et traitement très élevé'],
+          note:'Tout réseau en AC rencontré en travaux doit faire l\'objet d\'un plan de retrait SS4. Ne jamais casser, scier ou meulre sans EPI FFP3.'},
+      ]
+    },
+    {
+      id:'pompes', ico:'⚡', title:'Pompes & Surpresseurs', color:'var(--c-ep)',
+      items:[
+        {ico:'⚡',name:'Pompes centrifuges immergées',sub:'Grundfos · KSB · Flygt (Xylem) · Sulzer',color:'var(--c-ep)',colorl:'var(--c-ep-l)',
+          specs:{'Principaux fabricants':'Grundfos · KSB · Flygt (Xylem) · Sulzer','Gammes AEP':'Grundfos SP · KSB Boa · Flygt NB','Gammes EU':'Grundfos S · Flygt N · Sulzer ABS','Courbe':'Q-H caractéristique fournie constructeur','Rendement':'65–90% selon point de fonctionnement','Régulation':'Vitesse variable (VFD) recommandée'},
+          avantages:['Compact : installation dans la bâche','Pas de problème d\'amorçage','Large plage de débit et HMT','Moteur refroidi par le liquide pompé'],
+          inconvenients:['Maintenance complexe (extraction de la pompe)','Coût d\'entretien élevé pour les eaux chargées','Câblage électrique immergé = contrainte'],
+          note:'Grundfos domine le marché AEP (série SP pour forages). Flygt (Xylem) leader sur le marché EU/eaux usées avec les séries N et C.'},
+        {ico:'🔄',name:'Surpresseurs & Groupes de pompage',sub:'Grundfos Hydro MPC · DAB · Wilo · Ebara',color:'var(--c-ep)',colorl:'var(--c-ep-l)',
+          specs:{'Marques':'Grundfos Hydro MPC · DAB · Wilo · Ebara','Régulation':'Variateur de fréquence intégré','Pression consigne':'Réglable 1–16 bar selon modèle','Redondance':'Pompe secours automatique','Certification AEP':'ACS obligatoire pour contact eau potable'},
+          avantages:['Maintien de pression constant (0±0,1 bar)','Économie d\'énergie par variateur intégré','Démarrage progressif → pas de coup de bélier','Supervision intégrée (alarmes, compteurs)'],
+          inconvenients:['Coût d\'investissement élevé','Nécessite alimentation électrique de qualité','Risque légionelles si eau stagne (T > 25°C)'],
+          note:'Pour les réseaux AEP, choisir uniquement des matériaux ACS (acier inox 304/316, EPDM). Vérifier la certification sur le site du Ministère.'},
+        {ico:'🌊',name:'Pompes de relevage EU/EP',sub:'Flygt · Grundfos · Jung Pumpen · Sulzer ABS',color:'var(--c-ac)',colorl:'var(--c-ac-l)',
+          specs:{'Marques EU':'Flygt (Xylem) · Grundfos S · Sulzer ABS','Marques EP':'Jung Pumpen · Wilo · Lowara','Roue':'Vortex (EU chargée) · Canal (EU diluée)','Dégrillage':'Automatique sur certains modèles','Sondes':'Niveau flotteur ou ultrasons'},
+          avantages:['Roue vortex : passage des matières en suspension','Auto-nettoyage de la roue sur certains modèles','Résine époxy anticorrosion en standard','Surveillance à distance possible (SCADA)'],
+          inconvenients:['Entretien régulier obligatoire (garnitures mécaniques)','Accumulation de graisses → curage périodique','Bruit possible en cas de cavitation'],
+          note:'Pour EU chargées (restaurant, industriel), toujours choisir une roue vortex ou à canal libre. Le Flygt N est la référence mondiale sur ce segment.'},
+      ]
+    },
+    {
+      id:'vannes', ico:'🔩', title:'Vannes & Robinetterie', color:'var(--c-ref)',
+      items:[
+        {ico:'🔩',name:'Vannes guillotine (à opercule)',sub:'NF EN 1171 · Réseau AEP · Isolement DN50–DN600',color:'var(--c-ref)',colorl:'var(--c-ref-l)',
+          specs:{'Norme':'NF EN 1171','DN courants':'50–600 mm','Pression':'PN10 à PN25','Corps':'Fonte ductile · Inox','Étanchéité':'Siège caoutchouc EPDM','Marques':'AVK · Hawle · Saint-Gobain · Belgicast'},
+          avantages:['Très faible perte de charge en position ouverte','Résistance aux corps étrangers','Longue durée de vie (> 30 ans)','Disponible télécommandable'],
+          inconvenients:['Ne règle pas le débit (tout ou rien)','Opercule fragile si manœuvre trop fréquente'],
+          note:'Standard sur les réseaux AEP de DN50 à DN600. AVK et Hawle sont les marques dominantes en France.'},
+        {ico:'🔵',name:'Vannes papillon (à disque)',sub:'NF EN 593 · Grands DN · Isolement rapide',color:'var(--c-ep)',colorl:'var(--c-ep-l)',
+          specs:{'Norme':'NF EN 593','DN courants':'50–2 000 mm','Pression':'PN6 à PN25','Manœuvre':'Manuel · Motorisé · Pneumatique','Marques':'Ebro · Keystone · Alfa Laval · Georg Fischer'},
+          avantages:['Compact et léger → économique pour grands DN','Ouverture/fermeture rapide (90°)','Motorisable facilement','Faible coût'],
+          inconvenients:['Perte de charge plus élevée que vanne guillotine','Siège sensible aux corps abrasifs'],
+          note:'Privilégier en sortie de station de pompage ou en collecteur principal. Motorisation AUMA ou Rotork pour télécommande SCADA.'},
+        {ico:'🟡',name:'Réducteurs de pression (PRV)',sub:'NF EN 1567 · Maintien aval constant · 1–16 bar',color:'var(--c-anc)',colorl:'var(--c-anc-l)',
+          specs:{'Norme':'NF EN 1567','DN courants':'25–300 mm','Pression aval':'Réglable 1–10 bar','Précision':'± 0,2 bar','Marques':'Watts · Bermad · Singer · Cla-Val','Entretien':'Révision membrane tous les 5 ans'},
+          avantages:['Protection du réseau aval contre les surpressions','Réduction des pertes par fuites','Amélioration durée de vie des équipements aval','Versions pilotées pour télégestion'],
+          inconvenients:['Nécessite by-pass pour maintenance','Colmatage possible par dépôts calcaires','Réglage délicat en zone de faible débit'],
+          note:'Indispensable en zone de relief (pression statique > 6 bar). Bermad et Cla-Val sont les références pour les applications sous pression variable.'},
+        {ico:'🔴',name:'Clapets anti-retour',sub:'NF EN 12334 · Protection contre le refoulement',color:'var(--c-nc)',colorl:'var(--c-nc-l)',
+          specs:{'Norme':'NF EN 12334','Types':'Battant · Double battant · À ressort','DN courants':'15–600 mm','Pression max':'PN25','Marques':'Watts · AVK · Hawle · Socla'},
+          avantages:['Protection indispensable contre les retours de canalisation','Faible coût','Pas de maintenance si milieu propre'],
+          inconvenients:['Coup de bélier au claquement si fermeture rapide','Colmatage possible en EU chargée'],
+          note:'Toujours installer un clapet à ressort en sortie de pompe pour éviter le coup de bélier. Clapet double battant recommandé pour DN > 200 mm.'},
+      ]
+    },
+    {
+      id:'compteurs', ico:'📊', title:'Comptage & Instrumentation', color:'var(--c-riv)',
+      items:[
+        {ico:'📊',name:'Compteurs d\'eau volumétriques',sub:'NF EN 14154 · AEP · Relève manuelle ou radio',color:'var(--c-riv)',colorl:'var(--c-riv-l)',
+          specs:{'Norme':'NF EN 14154 · OIML R49','Types':'Woltmann · Vitesse · Electromagnétique','Classe':'C (Qmin = Q3/100) · D (Q3/200)','Télé-relève':'Module radio M-Bus · NB-IoT','Marques':'Itron (Actaris) · Kamstrup · Sensus · Diehl'},
+          avantages:['Mesure précise de la consommation (classe C ou D)','Modules radio pour relève à distance','Détection des fuites nocturnes','Longue durée de vie (10–15 ans)'],
+          inconvenients:['Classe C insuffisante pour les petits débits','Remplacement obligatoire à échéance métrologique (10 ans en général)','Sensible aux impuretés (filtration amont recommandée)'],
+          note:'Kamstrup Multical et Itron Cyble dominent le marché français. Pour la télé-relève, le protocole M-Bus (EN 13757) est le standard européen.'},
+        {ico:'🌊',name:'Débitmètres électromagnétiques',sub:'Krohne · Endress+Hauser · Siemens · ABB',color:'var(--c-ep)',colorl:'var(--c-ep-l)',
+          specs:{'Principe':'Loi de Faraday (effet électromagnétique)','DN courants':'15–3 000 mm','Précision':'± 0,5%','Fluide':'Eau (σ ≥ 5 µS/cm) · EU · Boues diluées','Marques':'Krohne Optiflux · E+H Promag · Siemens Sitrans · ABB ProcessMaster'},
+          avantages:['Aucune perte de charge (conduit plein lisse)','Précision ± 0,5% sur grande plage de débit','Mesure bidirectionnelle','Pas de pièce mobile → pas d\'usure'],
+          inconvenients:['Nécessite conduit plein en permanence','Ne fonctionne pas sur fluides non conducteurs (eau déminéralisée)','Coût élevé pour grands DN'],
+          note:'Endress+Hauser Promag W et Krohne Optiflux sont les références en France pour l\'AEP et l\'assainissement. Prévoir 5× DN de droite amont, 3× DN aval.'},
+        {ico:'📡',name:'Sondes de niveau ultrasoniques',sub:'Endress+Hauser · VEGA · Siemens · Emerson',color:'var(--c-anc)',colorl:'var(--c-anc-l)',
+          specs:{'Principe':'Temps de vol ultrasonique','Plage':'0,2–15 m (selon modèle)','Précision':'± 5 mm','Température':'−40 à +80°C','Sorties':'4–20 mA · HART · Profibus','Marques':'E+H Micropilot · VEGA Vegapuls · Siemens Milltronics'},
+          avantages:['Sans contact → aucune usure ni colmatage','Installation simple (piquage DN 80)','Adapté aux bassins, canaux, cuves','Visualisation niveau + débit (loi de déversoir)'],
+          inconvenients:['Zone aveugle (0,2–0,5 m en surface)','Interférences possibles avec turbulences, vapeur, mousse'],
+          note:'VEGA Vegapuls 64 (radar 80 GHz) a largement remplacé l\'ultrasonique en milieu difficile. Toujours vérifier la zone aveugle par rapport au niveau maxi.'},
+        {ico:'🖥️',name:'Automates & SCADA',sub:'Schneider · Siemens · ABB · Sofrel · Lacroix',color:'var(--c-ref)',colorl:'var(--c-ref-l)',
+          specs:{'Automates':'Schneider M340 · Siemens S7 · ABB AC500','RTU terrain':'Sofrel S550 · Lacroix Sofrel · Carel','Protocoles':'Modbus · DNP3 · IEC 60870-5 · IEC 61850','Supervision':'Topkapi · IGS · PCVUE · Intouch · WinCC','Communication':'GSM/GPRS · LoRaWAN · Fibre'},
+          avantages:['Supervision temps réel de tous les ouvrages','Alertes automatiques (alarmes, dépassements)','Traçabilité des données (obligation réglementaire)','Optimisation énergétique par régulation automatique'],
+          inconvenients:['Coût d\'infrastructure élevé','Cybersécurité : réseaux OT à protéger (IEC 62443)','Nécessite des techniciens spécialisés'],
+          note:'Sofrel (Lacroix) est le leader français pour les RTU en eau et assainissement. La communication LoRaWAN se développe pour les points isolés.'},
+      ]
+    },
+    {
+      id:'anc_equip', ico:'🌿', title:'Équipements ANC', color:'var(--c-anc)',
+      items:[
+        {ico:'🌿',name:'Microstations d\'épuration agréées',sub:'BioRoc · Orenco · Roth · Klaro · Infiltrea',color:'var(--c-anc)',colorl:'var(--c-anc-l)',
+          specs:{'Agrément':'CE + Ministère MTES obligatoire','Procédés':'SBR · Cultures fixées · Cultures libres','EH':'3 à 20 EH (résidentiel)','Rejet':'< 30 mg/L DBO5 · < 125 mg/L DCO','Entretien':'Contrat 1×/an obligatoire','Marques':'BioRoc · Orenco AdvanTex · Roth · Klaro'},
+          avantages:['Petite surface nécessaire (< 5 m²)','Performant en DBO5 et DCO','Adapté aux contraintes d\'espace','Agréé pour parcelles non drainantes'],
+          inconvenients:['Coût élevé (8 000–15 000 €)','Contrat de maintenance obligatoire','Énergie électrique nécessaire (100–300 W)','Sensible aux absences prolongées (biologie)'],
+          note:'BioRoc (technologie cultures fixées) et Orenco AdvanTex (filtration textile) sont parmi les plus fiables. Vérifier l\'agrément sur la liste officielle du MTES.'},
+        {ico:'🏺',name:'Fosses toutes eaux (FTE)',sub:'DTU 64.1 · Béton · PEHD · Fibre de verre',color:'var(--c-anc)',colorl:'var(--c-anc-l)',
+          specs:{'Norme':'DTU 64.1 · NF EN 12566-1','Volume ≤ 5 pp':'3 000 L','Volume > 5 pp':'+1 000 L/pp supplémentaire','Matériaux':'Béton · PEHD · PRV','Vidange':'Tous les 4 ans minimum (contractuelle)','Marques':'Sotralentz · Graf · Roth · Siplast'},
+          avantages:['Prétraitement efficace (décantation + fermentation)','Durée de vie > 30 ans si entretenu','Nombreux fabricants → prix compétitif','Facilement vérifiable par vidange'],
+          inconvenients:['Odeurs possibles si ventilation insuffisante','Colmatage si surcharge organique','Obligation de vidange non respectée fréquemment'],
+          note:'La ventilation primaire (Ø 100 mm) et secondaire est OBLIGATOIRE. Sans ventilation correcte, les gaz corrodent la fosse et créent des odeurs.'},
+        {ico:'🌾',name:'Filtres compacts agréés CE',sub:'Filtre à tourbe · Zéolithe · Coco · BioRoc',color:'var(--c-anc)',colorl:'var(--c-anc-l)',
+          specs:{'Agrément':'CE selon NF EN 12566-3','Matériaux filtrants':'Tourbe · Coco · Zéolithe · Pouzzolane','Surface':'4–20 m² selon EH et agrément','Rejet':'DBO5 < 35 mg/L','Durée matériau':'5–15 ans selon type','Marques':'BioRoc · Biofiltre · Epur Nature · Eparco'},
+          avantages:['Surface réduite vs épandage classique','Pas d\'eau électrique nécessaire (gravitaire)','Performances homologuées CE'],
+          inconvenients:['Remplacement du matériau filtrant nécessaire','Coût du matériau à long terme','Non adapté à toutes les perméabilités de sol'],
+          note:'Toujours respecter la notice d\'installation du fabricant pour l\'agrément. Une installation non conforme annule l\'agrément et engage la responsabilité de l\'installateur.'},
+      ]
+    },
   ];
-  document.getElementById('main-content').innerHTML = `
-    <div class="module-hero" style="--cat-color:var(--c-mat)">
-      <span class="mh-icon">🔩</span>
-      <div class="mh-title">Matériaux & Équipements</div>
-      <div class="mh-sub">PVC · PEHD · Fonte · Béton · Amiante-ciment · Pompes · Instrumentation · SCADA</div>
-      <div class="mh-tags"><span class="mh-tag">NF EN</span><span class="mh-tag">Comparatif</span><span class="mh-tag">Normes</span></div>
-    </div>
-    <div style="padding:var(--s-2) var(--s-4) 0">
-      <div class="card card-p">
-        <div style="font-size:var(--t-xs);font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--s-2)">Tableau comparatif rapide</div>
-        <div style="overflow-x:auto">
-          <table style="width:100%;border-collapse:collapse;font-size:11px">
-            <tr style="background:var(--c-mat);color:#fff"><th style="padding:6px 8px;text-align:left">Matériau</th><th style="padding:6px 8px;text-align:center">K</th><th style="padding:6px 8px;text-align:center">Durée vie</th><th style="padding:6px 8px;text-align:center">Statut</th></tr>
-            ${[['PVC-U','90–100','≥ 50 ans','✓','var(--c-ok)'],['PEHD','90–100','≥ 50 ans','✓','var(--c-ok)'],['Fonte ductile','100–130','> 100 ans','✓','var(--c-ok)'],['Grès cérame','70–90','> 100 ans','✓','var(--c-ok)'],['Béton armé','60–80','50–80 ans','✓','var(--c-ok)'],['Amiante-ciment','—','INTERDIT','⛔','var(--c-danger)']].map(([m,k,d,s,c])=>`
-            <tr style="border-bottom:1px solid var(--c-border)">
-              <td style="padding:6px 8px;font-weight:600">${m}</td>
-              <td style="padding:6px 8px;text-align:center;color:var(--c-text-3)">${k}</td>
-              <td style="padding:6px 8px;text-align:center;color:var(--c-text-3)">${d}</td>
-              <td style="padding:6px 8px;text-align:center;color:${c};font-weight:700">${s}</td>
-            </tr>`).join('')}
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class="section-header" style="margin-top:var(--s-3)">Fiches matériaux<span class="sh-count">${mats.length}</span></div>
-    <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
-      ${mats.map((m,i)=>`
-      <div class="fiche-card" style="--cat-color:${m.color}" id="fm-${i}">
-        <div class="fiche-stripe" style="background:${m.color}"></div>
-        <div class="fiche-head" onclick="toggleFiche3(${i})">
-          <div class="fiche-icon" style="background:${m.colorl}">${m.ico}</div>
-          <div style="flex:1"><div class="fiche-name">${m.name}</div><div class="fiche-sub">${m.sub}</div></div>
-          <span class="fiche-arrow" id="fm-a-${i}">›</span>
-        </div>
-        <div class="fiche-body" id="fm-b-${i}">
-          <div class="kv-grid" style="margin-bottom:var(--s-2)">${Object.entries(m.specs).map(([k,v])=>`<div class="kv-item"><div class="kv-key">${k}</div><div class="kv-val">${v}</div></div>`).join('')}</div>
-          <div style="display:flex;flex-direction:column;gap:4px">
-            ${m.avantages.map(a=>`<div class="alert ok" style="font-size:10px"><span class="alert-icon">✓</span><span>${a}</span></div>`).join('')}
-            ${m.inconvenients.map(a=>`<div class="alert ${a.includes('INTERDIT')||a.includes('danger')?'danger':'warn'}" style="font-size:10px"><span class="alert-icon">⚠</span><span>${a}</span></div>`).join('')}
-          </div>
-        </div>
-      </div>`).join('')}
-    </div>
-    <div class="pb-nav"></div>`;
+
+  var html = '<div class="module-hero" style="--cat-color:var(--c-mat)">'
+    + '<span class="mh-icon">🔩</span>'
+    + '<div class="mh-title">Matériaux & Équipements</div>'
+    + '<div class="mh-sub">Canalisations · Pompes · Vannes · Comptage · ANC · Marques & Normes</div>'
+    + '<div class="mh-tags"><span class="mh-tag">NF EN</span><span class="mh-tag">Marques</span><span class="mh-tag">Comparatif</span></div>'
+    + '</div>';
+
+  html += '<div style="padding:var(--s-2) var(--s-4) 0"><div class="card card-p">'
+    + '<div style="font-size:var(--t-xs);font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--s-2)">Tableau comparatif — Canalisations</div>'
+    + '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:11px">'
+    + '<tr style="background:var(--c-mat);color:#fff">'
+    + '<th style="padding:6px 8px;text-align:left">Matériau</th>'
+    + '<th style="padding:6px 8px;text-align:center">K (Strickler)</th>'
+    + '<th style="padding:6px 8px;text-align:center">Durée de vie</th>'
+    + '<th style="padding:6px 8px;text-align:center">Pression max</th>'
+    + '<th style="padding:6px 8px;text-align:center">Statut</th>'
+    + '</tr>'
+    + [
+        ['PVC-U','90–100','≥ 50 ans','Gravitaire','✓','var(--c-ok)'],
+        ['PEHD PE100','90–100','≥ 50 ans','PN25','✓','var(--c-ok)'],
+        ['Fonte ductile','100–130','> 100 ans','PN25+','✓','var(--c-ok)'],
+        ['Grès cérame','70–90','> 100 ans','Gravitaire','✓','var(--c-ok)'],
+        ['Béton armé','60–80','50–80 ans','Gravitaire','✓','var(--c-ok)'],
+        ['Acier inox 316L','120–140','> 50 ans','PN40','✓','var(--c-ok)'],
+        ['Amiante-ciment','—','INTERDIT','—','⛔','var(--c-danger)'],
+      ].map(function(r){return '<tr style="border-bottom:1px solid var(--c-border)">'
+        +'<td style="padding:6px 8px;font-weight:600">'+r[0]+'</td>'
+        +'<td style="padding:6px 8px;text-align:center;color:var(--c-text-3)">'+r[1]+'</td>'
+        +'<td style="padding:6px 8px;text-align:center;color:var(--c-text-3)">'+r[2]+'</td>'
+        +'<td style="padding:6px 8px;text-align:center;color:var(--c-text-3)">'+r[3]+'</td>'
+        +'<td style="padding:6px 8px;text-align:center;color:'+r[5]+';font-weight:700">'+r[4]+'</td>'
+        +'</tr>';}).join('')
+    + '</table></div></div></div>';
+
+  cats.forEach(function(cat, ci) {
+    html += '<div class="section-header" style="margin-top:var(--s-3)">'
+      + cat.ico + ' ' + cat.title
+      + '<span class="sh-count">' + cat.items.length + '</span></div>';
+    html += '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">';
+    cat.items.forEach(function(m, i) {
+      var uid = 'fm-' + ci + '-' + i;
+      html += '<div class="fiche-card" style="--cat-color:' + m.color + '" id="' + uid + '">'
+        + '<div class="fiche-stripe" style="background:' + m.color + '"></div>'
+        + '<div class="fiche-head" onclick="toggleFicheM(\'' + uid + '\')">'
+        + '<div class="fiche-icon" style="background:' + m.colorl + '">' + m.ico + '</div>'
+        + '<div style="flex:1"><div class="fiche-name">' + m.name + '</div><div class="fiche-sub">' + m.sub + '</div></div>'
+        + '<span class="fiche-arrow" id="' + uid + '-a">›</span>'
+        + '</div>'
+        + '<div class="fiche-body" id="' + uid + '-b">'
+        + '<div class="kv-grid" style="margin-bottom:var(--s-2)">'
+        + Object.entries(m.specs).map(function(e){return '<div class="kv-item"><div class="kv-key">'+e[0]+'</div><div class="kv-val">'+e[1]+'</div></div>';}).join('')
+        + '</div>'
+        + '<div style="display:flex;flex-direction:column;gap:4px">'
+        + m.avantages.map(function(a){return '<div class="alert ok" style="font-size:10px"><span class="alert-icon">✓</span><span>'+a+'</span></div>';}).join('')
+        + m.inconvenients.map(function(a){return '<div class="alert '+(a.includes('INTERDIT')||a.includes('interdit')?'danger':'warn')+'" style="font-size:10px"><span class="alert-icon">⚠</span><span>'+a+'</span></div>';}).join('')
+        + (m.note ? '<div class="alert info" style="font-size:10px;margin-top:4px"><span class="alert-icon">ℹ</span><span><b>Note :</b> '+m.note+'</span></div>' : '')
+        + '</div></div></div>';
+    });
+    html += '</div>';
+  });
+
+  html += '<div class="pb-nav"></div>';
+  document.getElementById('main-content').innerHTML = html;
 }
+
+function toggleFicheM(uid) {
+  var b = document.getElementById(uid + '-b');
+  var a = document.getElementById(uid + '-a');
+  if (!b) return;
+  var open = b.classList.toggle('open');
+  if (a) { a.style.transform = open ? 'rotate(90deg)' : ''; a.style.transition = 'transform .2s'; }
+}
+
 function toggleFiche3(i) {
   var b = document.getElementById('fm-b-' + i);
   var a = document.getElementById('fm-a-' + i);
@@ -787,34 +1000,100 @@ function renderRefMat() {
 /* ─── HUB QCM ─── */
 function renderQCMHub() {
   var _tb = document.getElementById('tab-bar'); if (_tb) _tb.style.display = 'none';
-  var formations = [
-    {ico:'🏫', name:'BTS GEMEAU / MDE',              sub:'UE1 à UE6 · Hydraulique · Eau potable · Réglementation', color:'var(--c-anc)'},
-    {ico:'🎓', name:'BUT GCCD / Eau & Environnement', sub:'Hydrologie · Hydrogéologie · Milieu naturel',            color:'var(--c-ac)'},
-    {ico:'🏛️', name:'Master & ENGEES',               sub:'Gestion de l\'eau · Politique · Institutionnel',          color:'var(--c-form)'},
-  ];
-  document.getElementById('main-content').innerHTML =
-    '<div class="module-hero" style="--cat-color:var(--c-anc)">'
+
+  var html = '<div class="module-hero" style="--cat-color:var(--c-anc)">'
     + '<span class="mh-icon">✅</span>'
     + '<div class="mh-title">QCM</div>'
     + '<div class="mh-sub">720 questions · 36 thèmes · Entraînement par formation</div>'
     + '<div class="mh-tags"><span class="mh-tag">BTS GEMEAU</span><span class="mh-tag">BUT</span><span class="mh-tag">Master</span></div>'
-    + '</div>'
-    + '<div class="section-header">Plateforme complète</div>'
-    + '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">'
-    + '<div class="mod-list-card" style="--cat-color:var(--c-anc)" onclick="window.open(\'HydroCalc_QCM_Platform.html\',\'_blank\')">'
-    + '<div class="mlc-icon" style="background:var(--c-anc-l);font-size:24px">🎓</div>'
-    + '<div class="mlc-body"><div class="mlc-name">Ouvrir la plateforme QCM</div>'
-    + '<div class="mlc-sub">Mode professeur · Mode élève · Mode visiteur · 36 QCM de 20 questions</div></div>'
-    + '<span class="mlc-arrow">›</span></div></div>'
-    + '<div class="section-header" style="margin-top:var(--s-3)">Par formation</div>'
-    + '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">'
-    + formations.map(function(m){
-        return '<div class="mod-list-card" style="--cat-color:' + m.color + '" onclick="window.open(\'HydroCalc_QCM_Platform.html\',\'_blank\')">'
-          + '<div class="mlc-icon" style="background:var(--c-anc-l)">' + m.ico + '</div>'
-          + '<div class="mlc-body"><div class="mlc-name">' + m.name + '</div><div class="mlc-sub">' + m.sub + '</div></div>'
-          + '<span class="mlc-arrow">›</span></div>';
-      }).join('')
-    + '</div><div class="pb-nav"></div>';
+    + '</div>';
+
+  /* ── Espace prof / session en direct ── */
+  html += '<div class="section-header">Sessions en direct</div>';
+  html += '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">';
+  if (typeof AUTH !== 'undefined' && AUTH.user && (AUTH.user.plan === 'etab' || AUTH.user.plan === 'admin')) {
+    html += '<div class="mod-list-card" style="--cat-color:var(--c-anc)" onclick="openQCMManager()">'
+      + '<div class="mlc-icon" style="background:var(--c-anc-l);font-size:24px">📝</div>'
+      + '<div class="mlc-body"><div class="mlc-name">Mes QCM</div>'
+      + '<div class="mlc-sub">Créer un QCM personnalisé · Lancer une session en direct</div></div>'
+      + '<span class="mlc-arrow">›</span></div>';
+  }
+  html += '<div class="mod-list-card" style="--cat-color:var(--c-ac)" onclick="openQCMJoinPage()">'
+    + '<div class="mlc-icon" style="background:var(--c-ac-l);font-size:24px">📡</div>'
+    + '<div class="mlc-body"><div class="mlc-name">Espace élève / professeur (session en direct)</div>'
+    + '<div class="mlc-sub">Rejoindre une session avec un code · Connexion professeur</div></div>'
+    + '<span class="mlc-arrow">›</span></div>';
+  html += '</div>';
+
+  /* ── Banque de QCM (36 QCM / 720 questions), groupée par thème ── */
+  var access = typeof _qcmBankAccess === 'function' ? _qcmBankAccess() : 'none';
+  html += '<div class="section-header" style="margin-top:var(--s-3)">Banque de QCM par thème</div>';
+  html += '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">';
+  if (typeof QCM_BANK !== 'undefined') {
+    var themes = [];
+    QCM_BANK.forEach(function(q) {
+      if (!themes.some(function(t){ return t.theme === q.theme; })) {
+        themes.push({ theme: q.theme, themeName: q.themeName, ico: q.ico, color: q.color, colorl: q.colorl, count: 0 });
+      }
+    });
+    themes.forEach(function(t) {
+      t.count = QCM_BANK.filter(function(q){ return q.theme === t.theme; }).length;
+      var locked = access === 'none';
+      html += '<div class="mod-list-card" style="--cat-color:' + t.color + (locked?';opacity:.6':'') + '" onclick="' + (locked ? 'authToast(\'QCM réservés au plan Pro, Établissement ou Admin\')' : 'renderQCMBankTheme(\'' + t.theme + '\')') + '">'
+        + '<div class="mlc-icon" style="background:' + t.colorl + '">' + (locked ? '🔒' : t.ico) + '</div>'
+        + '<div class="mlc-body"><div class="mlc-name">' + t.themeName + '</div><div class="mlc-sub">' + t.count + ' QCM · ' + (t.theme) + '</div></div>'
+        + '<span class="mlc-arrow">›</span></div>';
+    });
+  }
+  html += '</div>';
+  if (access === 'limited') {
+    var rem = (typeof _qcmBankWeekRemaining === 'function') ? _qcmBankWeekRemaining() : 0;
+    html += '<div style="padding:0 var(--s-4);margin-top:6px;font-size:11px;color:var(--c-text-4);text-align:center">⚡ ' + rem + ' QCM restant' + (rem>1?'s':'') + ' cette semaine · Illimité avec Établissement</div>';
+  }
+
+  html += '<div class="pb-nav"></div>';
+
+  document.getElementById('main-content').innerHTML = html;
+}
+
+/* ─── ASSAINISSEMENT NON COLLECTIF — Page d'accueil ─── */
+function renderANCHome() {
+  var _tb=document.getElementById('tab-bar'); if(_tb) _tb.style.display='none';
+  document.getElementById('main-content').innerHTML = `
+    <div class="module-hero" style="--cat-color:var(--c-anc)">
+      <span class="mh-icon">🏡</span>
+      <div class="mh-title">Assainissement non collectif</div>
+      <div class="mh-sub">Filières · SPANC · Réglementation · Aides · Non conformes</div>
+      <div class="mh-tags"><span class="mh-tag">31 ouvrages</span><span class="mh-tag">101 depts SPANC</span><span class="mh-tag">Aides cumulables</span></div>
+    </div>
+    <div class="section-header">Ouvrages & filières</div>
+    <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
+      ${[
+        {ico:'🏡',name:'Ouvrages ANC complets',sub:'31 ouvrages · Filières · Comparateur · Rejet · Ventilation',id:'anc'},
+        {ico:'⚠️',name:'Installations non conformes',sub:'Puisard · Fosse septique · Guide réhabilitation',id:'nc'},
+      ].map(function(m){ return `
+      <div class="mod-list-card" style="--cat-color:var(--c-anc)" onclick="showModule('${m.id}')">
+        <div class="mlc-icon" style="background:var(--c-anc-l)">${m.ico}</div>
+        <div class="mlc-body"><div class="mlc-name">${m.name}</div><div class="mlc-sub">${m.sub}</div></div>
+        <span class="mlc-arrow">›</span>
+      </div>`; }).join('')}
+    </div>
+    <div class="section-header">Référence & réglementation</div>
+    <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
+      ${[
+        {ico:'📋',name:'Réglementation ANC',sub:'Arrêtés 2009/2021/2024 · Vente immobilière',id:'regl-anc'},
+        {ico:'🗺️',name:'SPANC — 101 départements',sub:'Contacts · Obligations · Taux d\'aide locaux',id:'spanc'},
+        {ico:'💰',name:'Aides financières ANC',sub:'Éco-PTZ · TVA 5,5% · Agences eau · ANAH',id:'aides'},
+        {ico:'🔩',name:'Matériaux & équipements ANC',sub:'Canalisations · Microstations · FPR',id:'mat'},
+        {ico:'🔧',name:'Outils de terrain ANC',sub:'Perméamètre · Piézomètre · Caméra · Kit chimie',id:'outils-anc'},
+      ].map(function(m){ return `
+      <div class="mod-list-card" style="--cat-color:var(--c-anc)" onclick="showModule('${m.id}')">
+        <div class="mlc-icon" style="background:var(--c-anc-l)">${m.ico}</div>
+        <div class="mlc-body"><div class="mlc-name">${m.name}</div><div class="mlc-sub">${m.sub}</div></div>
+        <span class="mlc-arrow">›</span>
+      </div>`; }).join('')}
+    </div>
+    <div class="pb-nav"></div>`;
 }
 
 /* ─── ASSAINISSEMENT COLLECTIF ─── */
@@ -847,6 +1126,7 @@ function renderAC() {
         {ico:'🔧',name:'Ouvrages AC & EP',sub:'Regards · Bassins · MBR · PRV',id:'ouv'},
         {ico:'📋',name:'Réglementation assainissement',sub:'Arrêtés · DCE · Normes',id:'regl-ac'},
         {ico:'🔩',name:'Matériaux & Équipements',sub:'PVC · Fonte · Pompes · SCADA',id:'mat'},
+        {ico:'🔧',name:'Outils de terrain AC',sub:'Caméra ITV · Débitmètre · Détecteur gaz · Corrélateur fuites',id:'outils-ac'},
       ].map(function(m){ return `
       <div class="mod-list-card" style="--cat-color:var(--c-ac)" onclick="showModule('${m.id}')">
         <div class="mlc-icon" style="background:var(--c-ac-l)">${m.ico}</div>
@@ -885,6 +1165,7 @@ function renderEP() {
         {ico:'📋',name:'Réglementation eau potable',sub:'Code santé · Limites qualité · UE',id:'regl-ep'},
         {ico:'📖',name:'Glossaire & formules',sub:'Termes · Paramètres physico-chimiques',id:'gloss'},
         {ico:'🔩',name:'Matériaux & équipements AEP',sub:'Canalisations · Pompes · Compteurs',id:'mat'},
+        {ico:'🔧',name:'Outils de terrain EP',sub:'Chlorimètre · Turbidimètre · Corrélateur fuites · Kit bactério',id:'outils-ep'},
       ].map(function(m){ return `
       <div class="mod-list-card" style="--cat-color:var(--c-ep)" onclick="showModule('${m.id}')">
         <div class="mlc-icon" style="background:var(--c-ep-l)">${m.ico}</div>
@@ -910,6 +1191,7 @@ function renderRiv() {
       ${[
         {ico:'🌊',name:'Hydraulique à surface libre',sub:'Manning · Froude · Régime fluvial',id:'calc'},
         {ico:'🧮',name:'Calculateurs avancés',sub:'Manning partiel · Shields · Coup de bélier',id:'calca'},
+        {ico:'🐟',name:'Passes à poissons',sub:'6 types · Bassins · Fentes verticales · Anguilles · Dimensionnement',id:'pap'},
         {ico:'🔄',name:'Convertisseur d\'unités',sub:'m³/s · m³/h · L/s',id:'conv'},
       ].map(function(m){ return `
       <div class="mod-list-card" style="--cat-color:var(--c-riv)" onclick="showModule('${m.id}')">
@@ -923,6 +1205,7 @@ function renderRiv() {
       ${[
         {ico:'📋',name:'Réglementation milieu naturel',sub:'Police de l\'eau · IOTA · DCE',id:'regl-riv'},
         {ico:'📖',name:'Glossaire hydrologie',sub:'Termes · Formules · Débits',id:'gloss'},
+        {ico:'🔧',name:'Outils de terrain milieu naturel',sub:'Limnimètre · Courantomètre · Surber · Multi-sonde · ADCP',id:'outils-riv'},
       ].map(function(m){ return `
       <div class="mod-list-card" style="--cat-color:var(--c-riv)" onclick="showModule('${m.id}')">
         <div class="mlc-icon" style="background:var(--c-riv-l)">${m.ico}</div>
