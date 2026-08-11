@@ -34,6 +34,7 @@ function saveCurrentCalc() {
     detail: det ? det.innerHTML : '',
     inputs: inputs,
     moduleId: typeof currentModule !== 'undefined' ? (currentModule || '') : '',
+    calcId:   typeof currentCalcId !== 'undefined' ? (currentCalcId || '') : '',
     date: Date.now()
   };
   if (!calc.valeur) { authToast('Aucun résultat à enregistrer'); return; }
@@ -206,7 +207,13 @@ function _reportDate() { return new Date().toISOString().slice(0,10); }
 function _reportHeader() {
   var userName = AUTH.user ? (AUTH.user.name || AUTH.user.email || '') : '';
   var dateStr  = new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' });
-  return { userName: userName, dateStr: dateStr };
+  var projectTitle = '';
+  if (_hcProjectView) {
+    var _projs = getSavedProjects();
+    var _p = _projs.find(function(x){ return x.id === _hcProjectView; });
+    if (_p) projectTitle = (_p.icon ? _p.icon + ' ' : '') + _p.name;
+  }
+  return { userName: userName, dateStr: dateStr, projectTitle: projectTitle };
 }
 
 /* ─── FORMAT HTML ─── */
@@ -233,13 +240,13 @@ function generateHTMLReport() {
       var tColors = {ok:'#166038', warn:'#886000', danger:'#A82018'};
       var tBg     = {ok:'#EAF8F0', warn:'#FDF0D8', danger:'#FDECEA'};
       var interpHtml = o.interpretation.map(function(r) {
-        return '<tr style="border-bottom:1px solid #E8EEE8">'
-          + '<td style="padding:5px 8px;font-size:10px;font-family:\'Courier New\',monospace;color:' + (tColors[r.t]||'#333') + ';background:' + (tBg[r.t]||'#fff') + '">' + r.val + '</td>'
-          + '<td style="padding:5px 8px;font-size:10px;font-weight:700;color:' + (tColors[r.t]||'#333') + '">' + r.label + '</td>'
-          + '<td style="padding:5px 8px;font-size:10px;color:#3A4840">' + r.action + '</td>'
+        return '<tr style="border-bottom:1px solid var(--c-border)">'
+          + '<td style="padding:5px 8px;font-size:10px;font-family:\'Courier New\',monospace;color:' + (tColors[r.t]||'var(--c-text)') + ';background:' + (tBg[r.t]||'var(--c-surface-2)') + '">' + r.val + '</td>'
+          + '<td style="padding:5px 8px;font-size:10px;font-weight:700;color:' + (tColors[r.t]||'var(--c-text)') + '">' + r.label + '</td>'
+          + '<td style="padding:5px 8px;font-size:10px;color:var(--c-text-2)">' + r.action + '</td>'
           + '</tr>';
       }).join('');
-      return '<div style="margin-bottom:16px;border:1px solid #C8DEDD;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(10,80,90,.08)">'
+      return '<div style="margin-bottom:16px;border:1px solid var(--c-border);border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(10,80,90,.08)">'
         + '<div style="background:linear-gradient(135deg,#0A5090,#0A3060);padding:10px 16px;display:flex;justify-content:space-between;align-items:center">'
           + '<div style="display:flex;align-items:center;gap:8px">'
             + '<span style="font-size:18px">' + o.ico + '</span>'
@@ -248,28 +255,28 @@ function generateHTMLReport() {
           + '</div>'
           + '<span style="font-size:10px;color:rgba(255,255,255,.65)">' + dateStr + '</span>'
         + '</div>'
-        + '<div style="padding:14px 16px;background:#fff">'
-          + '<div style="font-size:11px;color:#3A4840;line-height:1.7;margin-bottom:10px;padding:8px 12px;background:#F0F6F8;border-radius:6px;border-left:3px solid #0A5090">' + o.usage + '</div>'
-          + '<div style="font-size:10px;font-weight:800;color:#617068;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Principe</div>'
-          + '<div style="font-size:11px;color:#3A4840;line-height:1.6;margin-bottom:12px">' + o.principe + '</div>'
-          + '<div style="font-size:10px;font-weight:800;color:#617068;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Protocole terrain</div>'
-          + '<ol style="margin:0 0 12px 16px;padding:0;font-size:11px;color:#3A4840;line-height:1.7">'
+        + '<div style="padding:14px 16px;background:var(--c-surface)">'
+          + '<div style="font-size:11px;color:var(--c-text-2);line-height:1.7;margin-bottom:10px;padding:8px 12px;background:var(--c-surface-2);border-radius:6px;border-left:3px solid #0A5090">' + o.usage + '</div>'
+          + '<div style="font-size:10px;font-weight:800;color:var(--c-text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Principe</div>'
+          + '<div style="font-size:11px;color:var(--c-text-2);line-height:1.6;margin-bottom:12px">' + o.principe + '</div>'
+          + '<div style="font-size:10px;font-weight:800;color:var(--c-text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Protocole terrain</div>'
+          + '<ol style="margin:0 0 12px 16px;padding:0;font-size:11px;color:var(--c-text-2);line-height:1.7">'
             + o.protocole.map(function(p) { return '<li style="margin-bottom:3px">' + p + '</li>'; }).join('')
           + '</ol>'
-          + '<div style="font-size:10px;font-weight:800;color:#617068;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Interprétation</div>'
-          + '<table style="width:100%;border-collapse:collapse;font-size:10px;margin-bottom:12px;border:1px solid #DEE8E4;border-radius:6px;overflow:hidden">'
-            + '<thead><tr style="background:#F0F6F8">'
-              + '<th style="padding:5px 8px;text-align:left;font-size:9px;color:#617068">Valeur mesurée</th>'
-              + '<th style="padding:5px 8px;text-align:left;font-size:9px;color:#617068">Diagnostic</th>'
-              + '<th style="padding:5px 8px;text-align:left;font-size:9px;color:#617068">Action</th>'
+          + '<div style="font-size:10px;font-weight:800;color:var(--c-text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Interprétation</div>'
+          + '<table style="width:100%;border-collapse:collapse;font-size:10px;margin-bottom:12px;border:1px solid var(--c-border);border-radius:6px;overflow:hidden">'
+            + '<thead><tr style="background:var(--c-surface-2)">'
+              + '<th style="padding:5px 8px;text-align:left;font-size:9px;color:var(--c-text-3)">Valeur mesurée</th>'
+              + '<th style="padding:5px 8px;text-align:left;font-size:9px;color:var(--c-text-3)">Diagnostic</th>'
+              + '<th style="padding:5px 8px;text-align:left;font-size:9px;color:var(--c-text-3)">Action</th>'
             + '</tr></thead>'
             + '<tbody>' + interpHtml + '</tbody>'
           + '</table>'
           + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:10px">'
-            + '<div style="background:#F3F6F4;border-radius:6px;padding:8px"><div style="font-weight:800;color:#617068;margin-bottom:3px">Matériel</div>' + o.materiel + '</div>'
-            + '<div style="background:#FEF0E2;border-radius:6px;padding:8px"><div style="font-weight:800;color:#A82018;margin-bottom:3px">⚠ Précautions</div>' + o.precautions + '</div>'
+            + '<div style="background:var(--c-surface-2);border-radius:6px;padding:8px"><div style="font-weight:800;color:var(--c-text-3);margin-bottom:3px">Matériel</div>' + o.materiel + '</div>'
+            + '<div style="background:var(--c-warn-l,#FEF0E2);border-radius:6px;padding:8px"><div style="font-weight:800;color:var(--c-danger);margin-bottom:3px">⚠ Précautions</div>' + o.precautions + '</div>'
           + '</div>'
-          + '<div style="margin-top:8px;font-size:10px;color:#617068;font-style:italic">📖 ' + o.norme + '</div>'
+          + '<div style="margin-top:8px;font-size:10px;color:var(--c-text-3);font-style:italic">📖 ' + o.norme + '</div>'
         + '</div>'
       + '</div>';
     }
@@ -282,9 +289,9 @@ function generateHTMLReport() {
       + '<span style="background:rgba(255,255,255,.2);color:#fff;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:20px">' + c.module + '</span>'
       + '</div>'
       + '<span style="font-size:10px;color:rgba(255,255,255,.7)">' + dateStr + '</span></div>'
-      + '<div style="padding:14px 16px;background:#fff">'
-      + '<div style="font-size:20px;font-weight:800;color:#065A48;margin-bottom:8px;font-family:Georgia,serif">' + (c.valeur||'') + '</div>'
-      + (detail ? '<div style="font-size:12px;color:#3A4840;line-height:1.8;padding:10px 12px;background:#F3F6F4;border-radius:8px;border-left:3px solid #0A7460">' + detail + '</div>' : '')
+      + '<div style="padding:14px 16px;background:var(--c-surface)">'
+      + '<div style="font-size:20px;font-weight:800;color:var(--c-primary);margin-bottom:8px;font-family:Georgia,serif">' + (c.valeur||'') + '</div>'
+      + (detail ? '<div style="font-size:12px;color:var(--c-text-2);line-height:1.8;padding:10px 12px;background:var(--c-surface-2);border-radius:8px;border-left:3px solid var(--c-primary)">' + detail + '</div>' : '')
       + '</div></div>';
   }).join('');
 
@@ -294,6 +301,7 @@ function generateHTMLReport() {
     + '.user-block{text-align:right}'
     + '.user-name{font-size:16px;font-weight:800;color:#141C18}'
     + '.user-date{font-size:11px;color:#617068;margin-top:3px}'
+    + '.user-project{font-size:12px;font-weight:700;color:#0A7460;margin-top:4px;padding-top:4px;border-top:1px solid #E0F4F0}'
     + '.section-title{font-size:13px;font-weight:800;color:#617068;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px}'
     + '.footer{margin-top:28px;padding-top:16px;border-top:1px solid #DEE8E4;text-align:center;font-size:10px;color:#8A9890}'
     + '@media print{body{background:#fff;padding:0}.page{box-shadow:none;border-radius:0}}';
@@ -315,6 +323,7 @@ function generateHTMLReport() {
     + '<div class="user-block">'
     + '<div class="user-name">' + h.userName + '</div>'
     + '<div class="user-date">' + h.dateStr + '</div>'
+    + (h.projectTitle ? '<div class="user-project">' + h.projectTitle + '</div>' : '')
     + '</div></div>'
     + (arr.length ? '<div class="section-title">📊 Calculs sélectionnés (' + arr.length + ')</div>' + calcsHtml : '')
     + (formulas.length ? '<div class="section-title" style="margin-top:20px">📐 Formules sélectionnées (' + formulas.length + ')</div>' + formulasHtml : '')
@@ -328,6 +337,10 @@ function generateHTMLReport() {
 
 /* ─── FORMAT PDF (jsPDF) ─── */
 function generatePDFReport() {
+  previewReport('pdf');
+}
+
+function _doGeneratePDFReport() {
   var check = _canGenerateReport();
   if (!check.ok) { authToast(check.reason); setTimeout(openSidebar, 800); return; }
 
@@ -387,7 +400,15 @@ function generatePDFReport() {
   doc.setFontSize(13);
   doc.setTextColor.apply(doc, DGRAY);
   doc.text('Rapport de calculs hydrauliques', MARGIN, y);
-  y += 8;
+  y += 7;
+  if (h.projectTitle) {
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor.apply(doc, GREEN);
+    doc.text(h.projectTitle, MARGIN, y);
+    y += 6;
+  }
+  y += 1;
 
   /* ── Ligne de séparation ── */
   doc.setDrawColor.apply(doc, GREEN);
@@ -589,7 +610,23 @@ function generateODTReport() {
   var h = _reportHeader();
   var plan = AUTH.user ? (AUTH.user.plan || 'free') : 'free';
   var userLogo = DataStore.userLogo.get();
-  var logoStr = (userLogo && plan !== 'free') ? 'Logo importé' : 'HydroCalc';
+  var _odtLogoXml = 'HydroCalc';
+  var _odtImgBuf = null;
+  var _odtImgExt = 'png';
+  if (userLogo && plan !== 'free') {
+    try {
+      var _ol_b64 = userLogo.split(',')[1];
+      var _ol_ext = userLogo.split(';')[0].split('/')[1] || 'png';
+      if (_ol_ext === 'jpeg') _ol_ext = 'jpg';
+      _odtImgExt = _ol_ext;
+      var _ol_bin = atob(_ol_b64);
+      _odtImgBuf = new Uint8Array(_ol_bin.length);
+      for (var _oli = 0; _oli < _ol_bin.length; _oli++) _odtImgBuf[_oli] = _ol_bin.charCodeAt(_oli);
+      _odtLogoXml = '<draw:frame draw:name="logo" svg:width="3.86cm" svg:height="1.59cm" text:anchor-type="as-char" draw:z-index="0">'
+        + '<draw:image xlink:href="Pictures/logo.' + _ol_ext + '" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/>'
+        + '</draw:frame>';
+    } catch(e) { _odtImgBuf = null; _odtLogoXml = 'HydroCalc'; }
+  }
 
   var calcsXml = arr.map(function(c) {
     var d = new Date(c.date);
@@ -662,6 +699,10 @@ function generateODTReport() {
     + '<style:style style:name="HC_Space" style:family="paragraph" style:parent-style-name="Default Paragraph Style">'
     + '<style:paragraph-properties fo:border-bottom="0.5pt solid #DEE8E4" fo:padding-bottom="0.15cm" fo:margin-bottom="0.15cm"/>'
     + '</style:style>'
+    + '<style:style style:name="HC_Project" style:family="paragraph" style:parent-style-name="Default Paragraph Style">'
+    + '<style:paragraph-properties fo:margin-bottom="0.3cm" fo:border-top="0.5pt solid #E0F4F0" fo:padding-top="0.2cm"/>'
+    + '<style:text-properties fo:font-size="12pt" fo:font-weight="bold" fo:color="#0A7460" style:font-name="Arial"/>'
+    + '</style:style>'
     + '<style:style style:name="HC_Footer" style:family="paragraph" style:parent-style-name="Default Paragraph Style">'
     + '<style:paragraph-properties fo:text-align="center" fo:border-top="0.5pt solid #DEE8E4" fo:padding-top="0.2cm" fo:margin-top="0.5cm"/>'
     + '<style:text-properties fo:font-size="8pt" fo:color="#8A9890" style:font-name="Arial"/>'
@@ -672,11 +713,15 @@ function generateODTReport() {
     + '<office:document-content xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"'
     + ' xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"'
     + ' xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0"'
-    + ' xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0">'
+    + ' xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"'
+    + ' xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0"'
+    + ' xmlns:xlink="http://www.w3.org/1999/xlink"'
+    + ' xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0">'
     + '<office:body><office:text>'
-    + '<text:p text:style-name="HC_Title">' + _xmlEsc(logoStr) + '</text:p>'
+    + '<text:p text:style-name="HC_Title">' + _odtLogoXml + '</text:p>'
     + '<text:p text:style-name="HC_UserName">' + _xmlEsc(h.userName) + '</text:p>'
     + '<text:p text:style-name="HC_Subtitle">Application hydraulique professionnelle · ' + _xmlEsc(h.dateStr) + '</text:p>'
+    + (h.projectTitle ? '<text:p text:style-name="HC_Project">' + _xmlEsc(h.projectTitle) + '</text:p>' : '')
     + (arr.length ? '<text:p text:style-name="HC_SectionTitle">Calculs sélectionnés (' + arr.length + ')</text:p>' + calcsXml : '')
     + (formulas.length ? '<text:p text:style-name="HC_SectionTitle">Formules sélectionnées (' + formulas.length + ')</text:p>'
       + formulas.map(function(f){ return '<text:p text:style-name="HC_Module">📐 ' + _xmlEsc(f.nom) + '</text:p>'
@@ -691,6 +736,7 @@ function generateODTReport() {
     + '<manifest:file-entry manifest:full-path="/" manifest:media-type="application/vnd.oasis.opendocument.text"/>'
     + '<manifest:file-entry manifest:full-path="content.xml" manifest:media-type="text/xml"/>'
     + '<manifest:file-entry manifest:full-path="styles.xml" manifest:media-type="text/xml"/>'
+    + (_odtImgBuf ? '<manifest:file-entry manifest:full-path="Pictures/" manifest:media-type=""/><manifest:file-entry manifest:full-path="Pictures/logo.' + _odtImgExt + '" manifest:media-type="image/' + _odtImgExt + '"/>' : '')
     + '</manifest:manifest>';
 
   var zip = new JSZip();
@@ -698,6 +744,7 @@ function generateODTReport() {
   zip.folder('META-INF').file('manifest.xml', manifest);
   zip.file('content.xml', content);
   zip.file('styles.xml', styles);
+  if (_odtImgBuf) zip.folder('Pictures').file('logo.' + _odtImgExt, _odtImgBuf);
 
   zip.generateAsync({type:'blob', mimeType:'application/vnd.oasis.opendocument.text'}).then(function(blob) {
     _download(blob, 'HydroCalc_rapport_' + _reportDate() + '.odt');
@@ -729,6 +776,7 @@ function generateWordReport() {
     try {
       var b64 = userLogo.split(',')[1];
       var ext = userLogo.split(';')[0].split('/')[1] || 'png';
+      if (ext === 'jpeg') ext = 'jpg';
       var binary = atob(b64);
       var buf = new Uint8Array(binary.length);
       for (var ii = 0; ii < binary.length; ii++) buf[ii] = binary.charCodeAt(ii);
@@ -765,7 +813,7 @@ function generateWordReport() {
         children: [
           new D.Paragraph({ alignment: D.AlignmentType.RIGHT, children: [new D.TextRun({ text: h.userName, bold: true, size: 22, color: '141C18', font: 'Arial' })] }),
           new D.Paragraph({ alignment: D.AlignmentType.RIGHT, children: [new D.TextRun({ text: h.dateStr, size: 16, color: '617068', font: 'Arial' })] })
-        ]
+        ].concat(h.projectTitle ? [new D.Paragraph({ alignment: D.AlignmentType.RIGHT, children: [new D.TextRun({ text: h.projectTitle, bold: true, size: 18, color: '0A7460', font: 'Arial' })] })] : [])
       })
     ]})],
   });
@@ -1057,11 +1105,13 @@ function _renderProjectHome() {
 
   if (unassigned.length) {
     html += '<div class="section-header" style="padding-top:var(--s-3)">Sans dossier<span class="sh-count">' + unassigned.length + '</span></div>';
-    html += '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">';
-    allCalcs.forEach(function(c, globalIdx) {
-      if (c.projectId) return;
-      html += _calcItemHtml(c, globalIdx, projects, true);
-    });
+    html += _calcSearchBar();
+    html += '<div style="padding:0 var(--s-4)">';
+    var groups = _groupCalcsByDate(unassigned);
+    html += _renderCalcGroup('Aujourd\'hui', groups.today, allCalcs, projects, true);
+    html += _renderCalcGroup('Cette semaine', groups.week, allCalcs, projects, true);
+    html += _renderCalcGroup('Ce mois-ci', groups.month, allCalcs, projects, true);
+    html += _renderCalcGroup('Plus anciens', groups.older, allCalcs, projects, true);
     html += '</div>';
   }
 
@@ -1125,11 +1175,14 @@ function openProject(projectId) {
       + '</div>';
   } else {
     html += '<div class="section-header" style="padding-top:var(--s-3)">Calculs du projet<span class="sh-count">' + calcs.length + '</span></div>';
-    html += '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">';
-    allCalcs.forEach(function(c, globalIdx) {
-      if (c.projectId !== projectId) return;
-      html += _calcItemHtml(c, globalIdx, getSavedProjects(), false);
-    });
+    html += _calcSearchBar();
+    html += '<div style="padding:0 var(--s-4)">';
+    var projGroups = _groupCalcsByDate(calcs);
+    var projProjects = getSavedProjects();
+    html += _renderCalcGroup('Aujourd\'hui', projGroups.today, allCalcs, projProjects, false);
+    html += _renderCalcGroup('Cette semaine', projGroups.week, allCalcs, projProjects, false);
+    html += _renderCalcGroup('Ce mois-ci', projGroups.month, allCalcs, projProjects, false);
+    html += _renderCalcGroup('Plus anciens', projGroups.older, allCalcs, projProjects, false);
     html += '</div>';
   }
 
@@ -1152,63 +1205,133 @@ function openProject(projectId) {
 /* ─── RENDU D'UN ITEM CALCUL ─── */
 function _calcItemHtml(c, idx, projects, showMoveBtn) {
   var d = new Date(c.date);
-  var dateStr = d.toLocaleDateString('fr-FR') + ' ' + d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+  var now = new Date();
+  var isToday = d.toDateString() === now.toDateString();
+  var timeStr = isToday
+    ? d.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' })
+    : d.toLocaleDateString('fr-FR', { day:'2-digit', month:'short' }) + ' ' + d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+
   var assignedProject = c.projectId ? projects.find(function(p){ return p.id === c.projectId; }) : null;
-  var col = assignedProject ? (PROJECT_COLORS.find(function(c){ return c.id === assignedProject.color; }) || PROJECT_COLORS[0]) : null;
+  var col = assignedProject ? (PROJECT_COLORS.find(function(cc){ return cc.id === assignedProject.color; }) || PROJECT_COLORS[0]) : null;
 
-  var projBadge = (assignedProject && showMoveBtn)
-    ? '<span style="font-size:9px;background:' + col.light + ';color:' + col.bg + ';border:1px solid ' + col.bg + ';border-radius:var(--r-pill);padding:2px 6px;font-weight:700">' + (assignedProject.icon||'📁') + ' ' + assignedProject.name + '</span>'
+  var isOutil = c.type === 'outil';
+  var accentColor = isOutil ? 'var(--c-riv)' : 'var(--c-primary)';
+  var accentLight = isOutil ? 'var(--c-riv-l)' : 'var(--c-primary-l)';
+  var moduleLabel = isOutil ? ('🔧 ' + c.module) : c.module;
+
+  /* Badge projet */
+  var projBadge = (assignedProject && showMoveBtn && col)
+    ? '<span style="font-size:9px;background:' + col.light + ';color:' + col.bg + ';border:1px solid ' + col.bg + ';border-radius:var(--r-pill);padding:2px 7px;font-weight:700;white-space:nowrap">' + (assignedProject.icon||'📁') + ' ' + assignedProject.name + '</span>'
     : '';
 
-  var moveBtn = showMoveBtn && projects.length
-    ? '<button onclick="event.stopPropagation();showMoveMenu(' + idx + ',this)" style="background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-pill);padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;color:var(--c-text-3);flex-shrink:0">📁</button>'
-    : '';
-
-  if (c.type === 'outil') {
-    var o = c.outil || {};
-    return '<div class="calc-hist-item" style="position:relative;border-left:3px solid var(--c-riv)">'
-      + '<div class="chi-head">'
-        + '<input type="checkbox" id="chk-calc-' + idx + '" checked style="width:16px;height:16px;accent-color:var(--c-primary);cursor:pointer;flex-shrink:0">'
-        + '<span class="chi-module" style="background:var(--c-riv-l);color:var(--c-riv)">🔧 ' + c.module + '</span>'
-        + projBadge
-        + '<span class="chi-date">' + dateStr + '</span>'
-        + moveBtn
-        + '<button class="chi-del" onclick="deleteCalc(' + idx + ')">🗑️</button>'
-      + '</div>'
-      + '<div class="chi-value">' + c.valeur + '</div>'
-      + '<div class="chi-detail" style="font-size:11px;color:var(--c-text-3)">' + (o.cat ? '<span class="badge badge-ok" style="font-size:9px;margin-right:4px">' + o.cat + '</span>' : '') + (o.usage ? o.usage.split('·')[0].trim() : '') + '</div>'
-      + '<div id="move-menu-' + idx + '" style="display:none"></div>'
-    + '</div>';
-  }
+  /* Inputs chips */
   var inputsHtml = '';
-  if (c.inputs && Object.keys(c.inputs).length) {
-    var pairs = Object.keys(c.inputs).slice(0, 5).map(function(k) {
+  if (!isOutil && c.inputs && Object.keys(c.inputs).length) {
+    var pairs = Object.keys(c.inputs).slice(0, 4).map(function(k) {
       var inp = c.inputs[k];
-      return '<span style="display:inline-flex;align-items:center;gap:3px;background:var(--c-surface-3);border:1px solid var(--c-border);border-radius:4px;padding:2px 6px;font-size:10px;color:var(--c-text-3)">'
-        + (inp.label || k) + ' : <strong style="color:var(--c-text-2)">' + inp.value + '</strong>'
-        + (inp.unit ? '<span style="color:var(--c-text-4)">' + inp.unit + '</span>' : '')
+      return '<span style="display:inline-flex;align-items:center;gap:3px;background:var(--c-surface-3);border:1px solid var(--c-border);border-radius:4px;padding:2px 7px;font-size:10px;color:var(--c-text-3)">'
+        + (inp.label || k) + ' <strong style="color:var(--c-text-2)">' + inp.value + '</strong>'
+        + (inp.unit ? '<span style="color:var(--c-text-4);margin-left:1px">' + inp.unit + '</span>' : '')
         + '</span>';
     }).join('');
-    inputsHtml = '<div style="display:flex;flex-wrap:wrap;gap:4px;margin:4px 0 2px">' + pairs + '</div>';
+    inputsHtml = '<div style="display:flex;flex-wrap:wrap;gap:3px;margin:6px 0 4px">' + pairs + '</div>';
   }
-  var relaunchBtn = c.moduleId
-    ? '<button onclick="event.stopPropagation();_relaunchCalc(' + idx + ')" style="padding:3px 8px;background:var(--c-primary-l);color:var(--c-primary);border:1.5px solid var(--c-primary);border-radius:var(--r-pill);font-size:10px;font-weight:700;cursor:pointer;font-family:var(--f-body);margin-top:4px">▶ Relancer</button>'
+  if (isOutil) {
+    var o = c.outil || {};
+    inputsHtml = o.usage ? '<div style="font-size:11px;color:var(--c-text-3);margin:4px 0 2px">' + o.usage.split('·')[0].trim() + '</div>' : '';
+  }
+
+  /* Bouton déplacer */
+  var moveBtn = showMoveBtn && projects.length
+    ? '<button onclick="event.stopPropagation();showMoveMenu(' + idx + ',this)" title="Déplacer dans un dossier" style="flex-shrink:0;background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-pill);padding:4px 9px;font-size:10px;font-weight:700;cursor:pointer;color:var(--c-text-3)">📁</button>'
     : '';
-  return '<div class="calc-hist-item" style="position:relative">'
-    + '<div class="chi-head">'
-      + '<input type="checkbox" id="chk-calc-' + idx + '" checked style="width:16px;height:16px;accent-color:var(--c-primary);cursor:pointer;flex-shrink:0">'
-      + '<span class="chi-module">' + c.module + '</span>'
+
+  /* Bouton relancer */
+  var relaunchBtn = c.moduleId
+    ? '<button onclick="event.stopPropagation();_relaunchCalc(' + idx + ')" style="padding:5px 12px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-pill);font-size:11px;font-weight:700;cursor:pointer;font-family:var(--f-body)">▶ Relancer</button>'
+    : '';
+
+  return '<div class="calc-hist-item" style="position:relative;border-left:3px solid ' + accentColor + ';border-radius:var(--r-md);background:var(--c-surface);border:1.5px solid var(--c-border);border-left:4px solid ' + accentColor + ';padding:var(--s-3);margin-bottom:var(--s-2)">'
+
+    /* Ligne 1 : module + date + actions */
+    + '<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;flex-wrap:wrap">'
+      + '<input type="checkbox" id="chk-calc-' + idx + '" checked style="width:15px;height:15px;accent-color:var(--c-primary);cursor:pointer;flex-shrink:0">'
+      + '<span style="font-size:10px;font-weight:800;background:' + accentLight + ';color:' + accentColor + ';border-radius:var(--r-pill);padding:3px 9px;flex-shrink:0">' + moduleLabel + '</span>'
       + projBadge
-      + '<span class="chi-date">' + dateStr + '</span>'
-      + moveBtn
-      + '<button class="chi-del" onclick="deleteCalc(' + idx + ')">🗑️</button>'
+      + '<span style="font-size:10px;color:var(--c-text-4);margin-left:auto;white-space:nowrap">🕐 ' + timeStr + '</span>'
     + '</div>'
-    + '<div class="chi-value">' + c.valeur + '</div>'
+
+    /* Résultat principal — bien visible */
+    + '<div style="font-size:16px;font-weight:800;color:var(--c-text);margin-bottom:2px;line-height:1.3">' + c.valeur + '</div>'
+
+    /* Inputs / détail */
     + inputsHtml
-    + '<div class="chi-detail">' + c.detail + '</div>'
-    + relaunchBtn
+    + (c.detail && !isOutil ? '<div style="font-size:11px;color:var(--c-text-3);line-height:1.5;margin-top:2px">' + c.detail + '</div>' : '')
+
+    /* Actions */
+    + '<div style="display:flex;align-items:center;gap:6px;margin-top:8px">'
+      + relaunchBtn
+      + moveBtn
+      + '<button onclick="event.stopPropagation();deleteCalc(' + idx + ')" title="Supprimer" style="flex-shrink:0;margin-left:auto;background:none;border:1px solid var(--c-border);border-radius:var(--r-pill);padding:4px 10px;font-size:10px;font-weight:700;cursor:pointer;color:var(--c-danger)">🗑 Supprimer</button>'
+    + '</div>'
+
     + '<div id="move-menu-' + idx + '" style="display:none"></div>'
   + '</div>';
+}
+
+/* ─── BARRE DE RECHERCHE CALCULS ─── */
+function _calcSearchBar() {
+  return '<div style="padding:var(--s-3) var(--s-4) 0">'
+    + '<div style="display:flex;align-items:center;gap:8px;background:var(--c-surface-2);border:1.5px solid var(--c-border);border-radius:var(--r-lg);padding:8px 12px">'
+    + '<span style="font-size:15px">🔍</span>'
+    + '<input id="calc-search" type="text" placeholder="Rechercher un calcul…" oninput="_filterCalcs(this.value)" '
+    + 'style="border:none;background:transparent;font-family:var(--f-body);font-size:13px;outline:none;flex:1;color:var(--c-text)" autocomplete="off">'
+    + '<button onclick="document.getElementById(\'calc-search\').value=\'\';_filterCalcs(\'\')" style="background:none;border:none;cursor:pointer;font-size:14px;color:var(--c-text-4);padding:0">✕</button>'
+    + '</div>'
+    + '</div>';
+}
+
+function _filterCalcs(q) {
+  q = (q || '').toLowerCase().trim();
+  var items = document.querySelectorAll('#profile-content .calc-hist-item');
+  var groups = document.querySelectorAll('#profile-content .calc-date-group');
+  items.forEach(function(el) {
+    var text = el.textContent.toLowerCase();
+    el.style.display = (!q || text.includes(q)) ? '' : 'none';
+  });
+  groups.forEach(function(g) {
+    var visible = Array.from(g.querySelectorAll('.calc-hist-item')).some(function(el){ return el.style.display !== 'none'; });
+    g.style.display = visible ? '' : 'none';
+  });
+}
+
+/* ─── GROUPEMENT PAR DATE ─── */
+function _renderCalcGroup(label, calcs, allCalcs, projects, showMoveBtn) {
+  if (!calcs.length) return '';
+  var html = '<div class="calc-date-group">'
+    + '<div style="font-size:10px;font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.06em;padding:10px var(--s-4) 4px;display:flex;align-items:center;gap:6px">'
+    + '<span>' + label + '</span><span style="font-weight:500;color:var(--c-text-5)">· ' + calcs.length + '</span></div>';
+  calcs.forEach(function(c) {
+    var globalIdx = allCalcs.indexOf(c);
+    html += _calcItemHtml(c, globalIdx, projects, showMoveBtn);
+  });
+  return html + '</div>';
+}
+
+function _groupCalcsByDate(calcs) {
+  var now = new Date();
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var weekAgo = new Date(today - 6 * 86400000);
+  var monthAgo = new Date(today - 29 * 86400000);
+  var groups = { today:[], week:[], month:[], older:[] };
+  calcs.forEach(function(c) {
+    var d = new Date(c.date);
+    if (d >= today)    groups.today.push(c);
+    else if (d >= weekAgo)  groups.week.push(c);
+    else if (d >= monthAgo) groups.month.push(c);
+    else groups.older.push(c);
+  });
+  return groups;
 }
 
 /* ─── FORMULES ─── */
@@ -1489,18 +1612,33 @@ function deleteCalc(i) {
 function _relaunchCalc(i) {
   var arr = getSavedCalcs();
   var c = arr[i];
-  if (!c || !c.moduleId) return;
+  if (!c) return;
+  var hasCalcId  = c.calcId && typeof showCalcById === 'function';
+  var hasModule  = c.moduleId && typeof showModule === 'function';
+  if (!hasCalcId && !hasModule) return;
+
   closeProfile();
   setTimeout(function() {
-    showModule(c.moduleId);
-    if (c.inputs) setTimeout(function() {
-      Object.keys(c.inputs).forEach(function(id) {
-        var el = document.getElementById(id);
-        if (el) el.value = c.inputs[id].value;
-      });
-      authToast('Paramètres rechargés ✓ — Relancez le calcul');
-    }, 400);
-  }, 200);
+    if (hasCalcId) {
+      showCalcById(c.calcId);
+    } else {
+      showModule(c.moduleId);
+    }
+    if (c.inputs && Object.keys(c.inputs).length) {
+      setTimeout(function() {
+        var filled = 0;
+        Object.keys(c.inputs).forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) { el.value = c.inputs[id].value; filled++; }
+        });
+        if (filled > 0) {
+          authToast('✓ ' + filled + ' champ' + (filled > 1 ? 's' : '') + ' rechargé' + (filled > 1 ? 's' : '') + ' — cliquez sur Calculer');
+        } else {
+          authToast('Calculateur ouvert — saisissez vos valeurs');
+        }
+      }, 350);
+    }
+  }, 150);
 }
 function clearAllCalcs() {
   if (confirm('Effacer tous les calculs enregistrés ?')) {
@@ -1519,7 +1657,7 @@ var AUTH = { user: null };
 var PLANS_HC = {
   free:    { name:'Gratuit',        icon:'🌱', price:'0 €',        color:'var(--c-text-3)', badgeClass:'plan-free-badge' },
   pro:     { name:'Pro',            icon:'⚡', price:'5,90 €/mois', color:'#4A28A0',        badgeClass:'plan-pro-badge'  },
-  etab:    { name:'Établissement',  icon:'🏛️', price:'35 €/mois',  color:'#065A48',        badgeClass:'plan-etab-badge' },
+  etab:    { name:'Établissement',  icon:'🏛️', price:'24 €/mois',  color:'#065A48',        badgeClass:'plan-etab-badge' },
   admin:   { name:'Administrateur', icon:'🔑', price:'—',           color:'#A02020',        badgeClass:'plan-etab-badge' },
 };
 
@@ -1572,10 +1710,7 @@ function _fetchProfileWithRetry(userId, attemptsLeft) {
 
 function getHCAccounts() {
   const a = DataStore.accounts.getAll();
-  if (!a['demo@hydrocalc.fr']) {
-    a['demo@hydrocalc.fr'] = { name:'Utilisateur Démo', profile:'technicien', pwd:'hydro2024', plan:'pro', joined:Date.now(), lastLogin:null, favorites:[], history:[] };
-    DataStore.accounts.saveAll(a);
-  }
+  delete a['demo@hydrocalc.fr'];
   return a;
 }
 function saveHCAccounts(a) { DataStore.accounts.saveAll(a); }
@@ -1615,22 +1750,16 @@ function authLogin() {
   var btnEl      = document.querySelector('#auth-login .auth-btn-submit');
   if (errEl) errEl.style.display = 'none';
 
-  /* Compte démo : reste en localStorage (pas dans Supabase) */
-  if (email === 'demo@hydrocalc.fr') {
-    var accounts = getHCAccounts();
-    if (!accounts[email] || accounts[email].pwd !== pwd) {
-      if (errEl) errEl.style.display = 'block'; return;
-    }
-    AUTH.user = Object.assign({ email: email }, accounts[email]);
-    _doEnterApp(); return;
-  }
 
   if (!SupaDB) { authToast('Connexion impossible (hors-ligne)'); return; }
   if (btnEl) { btnEl.disabled = true; btnEl.textContent = 'Connexion…'; }
 
+  var _supaLoginUser = null;
   SupaDB.auth.signInWithPassword({ email: email, password: pwd })
     .then(function(res) {
       if (res.error) throw new Error('auth');
+      AUTH._uid = res.data.user.id;
+      _supaLoginUser = res.data.user;
       return _fetchProfileWithRetry(res.data.user.id);
     })
     .then(function(res) {
@@ -1642,8 +1771,10 @@ function authLogin() {
         isAdmin:    p.is_admin   || false,
         profile:    p.profile    || '',
         trialUsed:  p.trial_used || false,
-        trialStart: p.trial_start ? new Date(p.trial_start).getTime() : null
+        trialStart: p.trial_start ? new Date(p.trial_start).getTime() : null,
+        invite_code: p.invite_code || null
       });
+      _applyMetaCodeOverride(_supaLoginUser);
       if (rememberMe) DataStore.session.setRemember({ email: email, supa: true });
       else DataStore.session.clearRemember();
       _doEnterApp();
@@ -1656,13 +1787,6 @@ function authLogin() {
     });
 }
 
-function authDemoFill() {
-  var emailEl = document.getElementById('login-email');
-  var pwdEl   = document.getElementById('login-pwd');
-  if (emailEl) emailEl.value = 'demo@hydrocalc.fr';
-  if (pwdEl)   pwdEl.value   = 'hydro2024';
-  authToast('Champs pré-remplis · Cliquez sur Se connecter');
-}
 
 function authRegister() {
   var name    = (getV('reg-name') || '').trim();
@@ -1687,7 +1811,7 @@ function authRegister() {
   var planInit     = isAdminEmail ? 'admin' : (inviteCode ? 'etab' : 'free');
 
   /* Vérifier le code d'invitation si fourni */
-  var codeCheck = inviteCode && SupaDB
+  var codeCheck = (inviteCode && SupaDB)
     ? SupaDB.from('access_codes').select('code,used_by').eq('code', inviteCode).single()
     : Promise.resolve({ data: null, error: null });
 
@@ -1700,16 +1824,17 @@ function authRegister() {
       .then(function(res) {
         if (res.error) throw res.error;
         var uid = res.data.user.id;
-        return SupaDB.from('profiles').insert({
-          id:       uid,
-          email:    email,
-          name:     name,
-          profile:  profile,
-          plan:     planInit,
-          is_admin: isAdminEmail
+        return SupaDB.rpc('create_profile', {
+          p_id:       uid,
+          p_email:    email,
+          p_name:     name,
+          p_profile:  profile,
+          p_plan:     planInit,
+          p_is_admin: isAdminEmail
         }).then(function() {
           if (inviteCode) {
-            return SupaDB.from('access_codes').update({ used_by: uid, used_at: new Date().toISOString() }).eq('code', inviteCode);
+            /* SECURITY DEFINER — fonctionne même sans session établie */
+            SupaDB.rpc('claim_access_code', { p_code: inviteCode, p_user_id: uid }).catch(function(){});
           }
         });
       })
@@ -1788,6 +1913,9 @@ function authContinueGuest() {
 
 function _doEnterApp() {
   if (AUTH.user) DataStore.session.setCurrent({ email: AUTH.user.email, isAdmin: AUTH.user.isAdmin || false });
+
+  /* ── Démarrer le timer d'inactivité ── */
+  _inactivityStart();
 
   /* ── Appliquer le statut d'essai ── */
   _applyTrialPlan();
@@ -1951,11 +2079,99 @@ function authLogout() {
   DataStore.session.clearCurrent();
   DataStore.session.clearRemember();
   AUTH.user = null;
+  _inactivityStop();
   document.querySelectorAll('.auth-screen').forEach(function(s){ s.classList.add('hidden'); });
   var _as=document.getElementById('auth-splash'); if(_as) _as.classList.remove('hidden');
   var profileBtn = document.getElementById('profile-btn');
   if (profileBtn){ profileBtn.style.display = 'none'; profileBtn.textContent = '👤'; }
   authToast('Déconnexion réussie');
+}
+
+/* ─── Déconnexion automatique après 20 min d'inactivité ─── */
+var _inactivityTimer = null;
+var _INACTIVITY_MS = 20 * 60 * 1000;
+
+function _inactivityReset() {
+  if (!AUTH.user) return;
+  clearTimeout(_inactivityTimer);
+  _inactivityTimer = setTimeout(function() {
+    if (!AUTH.user) return;
+    authToast('Session expirée — reconnexion requise');
+    setTimeout(function() { authLogout(); }, 1500);
+  }, _INACTIVITY_MS);
+}
+
+function _inactivityStop() {
+  clearTimeout(_inactivityTimer);
+  _inactivityTimer = null;
+}
+
+function _inactivityStart() {
+  ['mousemove','mousedown','keydown','touchstart','scroll','click'].forEach(function(ev) {
+    document.addEventListener(ev, _inactivityReset, { passive: true });
+  });
+  _inactivityReset();
+}
+
+function _applyMetaCodeOverride(supaUser) {
+  /* supaUser = objet user Supabase (contient user_metadata) — appelé de façon synchrone */
+  if (!AUTH.user || !supaUser) return;
+  var meta = supaUser.user_metadata || {};
+  if (meta.hc_code) {
+    AUTH.user.plan = 'etab';
+    AUTH.user.invite_code = meta.hc_code;
+  }
+}
+
+function _applyLocalCodeOverride(uid) {
+  /* Conservé pour compatibilité — ne fait plus rien (remplacé par _applyMetaCodeOverride) */
+}
+
+function applyAccessCode() {
+  var code = ((document.getElementById('profile-access-code') || {}).value || '').trim().toUpperCase();
+  if (!code) { authToast('Entrez un code d\'accès.'); return; }
+  if (!AUTH.user) { authToast('Connexion requise.'); return; }
+  if (!code.match(/^HC-[A-Z0-9]{4}-[A-Z0-9]{4}$/)) { authToast('Code invalide. Format attendu : HC-XXXX-XXXX'); return; }
+  if (!SupaDB) { authToast('Connexion internet requise.'); return; }
+
+  var btn = document.querySelector('#profile-access-code + button');
+  if (btn) { btn.disabled = true; btn.textContent = '…'; }
+
+  /* updateUser() modifie les métadonnées du compte auth — toujours autorisé */
+  SupaDB.auth.updateUser({ data: { hc_code: code, hc_plan: 'etab' } })
+    .then(function(res) {
+      if (res.error) throw res.error;
+      /* Marquer le code utilisé dans access_codes (best-effort, pour le Coffre admin) */
+      SupaDB.auth.getUser().then(function(ur) {
+        var uid = ur.data && ur.data.user && ur.data.user.id;
+        if (uid) SupaDB.from('access_codes').update({ used_by: uid, used_at: new Date().toISOString() }).eq('code', code).catch(function(){});
+      }).catch(function(){});
+      AUTH.user.plan = 'etab';
+      AUTH.user.invite_code = code;
+      if (btn) { btn.disabled = false; btn.textContent = 'Appliquer'; }
+      authToast('✅ Code appliqué — Accès Établissement activé en permanence !');
+      buildProfile();
+      if (typeof renderSidebarPlans === 'function') renderSidebarPlans();
+    })
+    .catch(function(err) {
+      if (btn) { btn.disabled = false; btn.textContent = 'Appliquer'; }
+      authToast('Erreur : ' + ((err && err.message) || 'impossible d\'appliquer le code.'));
+    });
+}
+
+function removeAccessCode() {
+  if (!AUTH.user || !SupaDB) return;
+  if (!confirm('Retirer le code d\'accès ? Votre compte repassera en plan Gratuit.')) return;
+  SupaDB.auth.updateUser({ data: { hc_code: null, hc_plan: null } })
+    .then(function(res) {
+      if (res.error) throw res.error;
+      AUTH.user.plan = 'free';
+      AUTH.user.invite_code = null;
+      authToast('Code retiré. Compte repassé en Gratuit.');
+      buildProfile();
+      if (typeof renderSidebarPlans === 'function') renderSidebarPlans();
+    })
+    .catch(function(err) { authToast('Erreur : ' + ((err && err.message) || 'impossible de retirer le code.')); });
 }
 
 function openProfile() {
@@ -2030,7 +2246,7 @@ function buildProfile() {
   /* Annuler / gérer l'abonnement via portail Stripe */
   if (u.plan === 'pro' || u.plan === 'etab') {
     html += '<div style="padding:var(--s-2) var(--s-4) 0">'
-      + '<button onclick="stripeOpenPortal()" style="width:100%;padding:11px;background:none;border:1.5px solid var(--c-border);border-radius:var(--r-lg);font-family:var(--f-body);font-size:12.5px;font-weight:600;color:var(--c-text-3);cursor:pointer">Gérer mon abonnement (Stripe)</button>'
+      + '<button onclick="stripeOpenPortal()" style="width:100%;padding:11px;background:none;border:1.5px solid var(--c-border);border-radius:var(--r-lg);font-family:var(--f-body);font-size:12.5px;font-weight:600;color:var(--c-text-3);cursor:pointer">Gérer mon abonnement</button>'
     + '</div>';
   }
 
@@ -2048,6 +2264,30 @@ function buildProfile() {
       + '<button onclick="openCoffre()" style="width:100%;padding:12px;background:linear-gradient(135deg,#7c3aed,#a855f7);border:none;border-radius:var(--r-lg);font-family:var(--f-body);font-size:13px;font-weight:700;color:#fff;cursor:pointer">🗄️ Coffre Admin · Codes d\'accès</button>'
     + '</div>';
   }
+
+  // Code d'accès
+  var _activeCode = u.invite_code || (AUTH._uid ? (function(){ try{ return localStorage.getItem('hc_active_code_' + AUTH._uid); }catch(e){ return null; } })() : null);
+  html += '<div style="padding:var(--s-3) var(--s-4) 0">'
+    + '<div style="font-size:var(--t-xs);font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--s-2)">Code d\'accès</div>'
+    + '<div style="background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-lg);padding:14px var(--s-4)">';
+  if (u.plan === 'etab' && !u.is_admin) {
+    html += '<div style="display:flex;align-items:center;gap:var(--s-3);margin-bottom:10px">'
+      + '<span style="font-size:20px">🎟️</span>'
+      + '<div style="flex:1">'
+        + '<div style="font-size:10px;color:var(--c-text-4);text-transform:uppercase;font-weight:700;letter-spacing:.04em">Code actif</div>'
+        + '<div style="font-size:15px;font-weight:900;color:var(--c-primary);letter-spacing:.12em;margin-top:2px">' + (_activeCode || '—') + '</div>'
+        + '<div style="font-size:10px;color:var(--c-ok,#166038);margin-top:2px;font-weight:600">✓ Accès Établissement activé en permanence</div>'
+      + '</div>'
+    + '</div>'
+    + '<button onclick="removeAccessCode()" style="width:100%;padding:9px;background:none;border:1.5px solid var(--c-border);border-radius:var(--r-lg);font-family:var(--f-body);font-size:12px;font-weight:700;color:var(--c-text-3);cursor:pointer">Retirer ce code</button>';
+  } else {
+    html += '<div style="font-size:12px;color:var(--c-text-3);margin-bottom:10px">Entrez un code d\'accès pour activer un accès Établissement permanent.</div>'
+      + '<div style="display:flex;gap:8px">'
+        + '<input id="profile-access-code" type="text" placeholder="HC-XXXX-XXXX" maxlength="14" oninput="this.value=this.value.toUpperCase()" style="flex:1;padding:9px 12px;border:1.5px solid var(--c-border);border-radius:var(--r-lg);font-family:var(--f-body);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--c-surface-2);color:var(--c-text)">'
+        + '<button onclick="applyAccessCode()" style="padding:9px 16px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-lg);font-family:var(--f-body);font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">Appliquer</button>'
+      + '</div>';
+  }
+  html += '</div></div>';
 
   // Déconnexion
   html += '<div style="padding:var(--s-3) var(--s-4) var(--s-2)">'
@@ -2122,7 +2362,7 @@ function selectHCPlan(planId) {
     showEtabPricingModal(); return;
   }
   if (planId === 'pro' && SupaDB) {
-    if (typeof stripeStartCheckout === 'function') { stripeStartCheckout(planId, 1); return; }
+    showProPricingModal(); return;
   }
 
   /* Fallback direct (compte démo local ou admin) */
@@ -2162,6 +2402,10 @@ function buildCoffre() {
   ]).then(function(results) {
     var profiles    = (results[0].data || []);
     var payments    = (results[1].data || []);
+    /* Construire une map code→{used_by} pour _renderEtabCodesInCoffre */
+    var supaCodesMap = {};
+    (results[3].data || []).forEach(function(c){ supaCodesMap[c.code] = c; });
+    window._coffreSupaCodes = supaCodesMap;
     var activeSubs  = (results[2].data || []);
     var accessCodes = (results[3].data || []);
 
@@ -2210,36 +2454,331 @@ function buildCoffre() {
       html += '</div>';
     }
 
-    /* Liste des comptes */
-    html += '<div style="font-weight:700;font-size:14px;margin:18px 0 10px">Tous les comptes</div>';
-    html += '<div style="display:flex;flex-direction:column;gap:6px">';
-    profiles.slice(0, 30).forEach(function(p) {
-      var planLabel = { free:'Free', pro:'Pro', etab:'Établissement', admin:'Admin' }[p.plan] || p.plan;
+    /* ── Annuaire des inscrits ── */
+    window._coffreProfiles = profiles;
+    var allEmails = profiles.map(function(p){ return p.email; }).join(', ');
+    html += '<div style="font-weight:700;font-size:14px;margin:22px 0 10px;display:flex;align-items:center;gap:8px">'
+      + '📋 Annuaire des inscrits'
+      + '<span style="font-size:12px;font-weight:600;padding:2px 9px;border-radius:20px;background:var(--c-primary);color:#fff">' + profiles.length + '</span>'
+      + '</div>';
+    html += '<div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">'
+      + '<input id="coffre-search" oninput="coffreSearch()" placeholder="🔍 Rechercher par nom ou email…" style="flex:1;min-width:180px;padding:8px 12px;border-radius:var(--r-md);border:1px solid var(--c-border);background:var(--c-surface);color:var(--c-text);font-size:12px;font-family:var(--f-body)">'
+      + '<button onclick="coffreCopyAllEmails()" style="padding:7px 14px;border-radius:var(--r-md);border:1px solid var(--c-border);background:var(--c-surface);color:var(--c-text);font-size:12px;font-weight:600;cursor:pointer;font-family:var(--f-body);white-space:nowrap">📧 Copier tous les emails</button>'
+      + '<button onclick="coffreExportCSV()" style="padding:7px 14px;border-radius:var(--r-md);border:1px solid var(--c-border);background:var(--c-surface);color:var(--c-text);font-size:12px;font-weight:600;cursor:pointer;font-family:var(--f-body);white-space:nowrap">⬇️ Exporter CSV</button>'
+      + '</div>';
+    html += '<div style="overflow-x:auto;border-radius:var(--r-lg);border:1px solid var(--c-border)">'
+      + '<table id="coffre-user-table" style="width:100%;border-collapse:collapse;font-size:12px">'
+      + '<thead><tr style="background:var(--c-surface-2,var(--c-surface));border-bottom:2px solid var(--c-border)">'
+      + '<th style="padding:9px 12px;text-align:left;font-weight:700;color:var(--c-text-2)">Nom</th>'
+      + '<th style="padding:9px 12px;text-align:left;font-weight:700;color:var(--c-text-2)">Email</th>'
+      + '<th style="padding:9px 12px;text-align:left;font-weight:700;color:var(--c-text-2)">Plan</th>'
+      + '<th style="padding:9px 12px;text-align:left;font-weight:700;color:var(--c-text-2)">Inscrit le</th>'
+      + '<th style="padding:9px 12px;text-align:left;font-weight:700;color:var(--c-text-2)">Actions</th>'
+      + '</tr></thead>'
+      + '<tbody>';
+    profiles.forEach(function(p, idx) {
       var planColor = { free:'#6b7280', pro:'#d97706', etab:'#2563eb', admin:'#7c3aed' }[p.plan] || '#6b7280';
-      html += '<div style="display:flex;justify-content:space-between;align-items:center;background:var(--c-surface);border-radius:var(--r-md);padding:9px 14px;border:1px solid var(--c-border)">'
-        + '<div><div style="font-size:13px;font-weight:600">' + (p.name || '—') + '</div>'
-        + '<div style="font-size:11px;color:var(--c-text-3)">' + p.email + '</div></div>'
-        + '<div style="font-size:11px;font-weight:700;color:' + planColor + '">' + planLabel + '</div>'
-        + '</div>';
+      var planLabel = { free:'Free', pro:'Pro ⭐', etab:'Établ. 🏫', admin:'Admin 🔑' }[p.plan] || p.plan;
+      var joinDate  = p.joined_at ? new Date(p.joined_at).toLocaleDateString('fr-FR') : '—';
+      var rowBg = idx % 2 === 0 ? 'background:var(--c-surface)' : 'background:var(--c-bg,var(--c-surface))';
+      html += '<tr class="coffre-user-row" data-name="' + (p.name || '').toLowerCase() + '" data-email="' + (p.email || '').toLowerCase() + '" style="' + rowBg + ';border-bottom:1px solid var(--c-border)">'
+        + '<td style="padding:9px 12px;font-weight:600;color:var(--c-text)">' + (p.name || '<em style="color:var(--c-text-3)">—</em>') + '</td>'
+        + '<td style="padding:9px 12px">'
+          + '<a href="mailto:' + p.email + '" style="color:var(--c-primary);text-decoration:none;font-family:monospace;font-size:11px">' + p.email + '</a>'
+        + '</td>'
+        + '<td style="padding:9px 12px"><span style="font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;background:' + planColor + '22;color:' + planColor + '">' + planLabel + '</span></td>'
+        + '<td style="padding:9px 12px;color:var(--c-text-3)">' + joinDate + '</td>'
+        + '<td style="padding:9px 12px">'
+          + '<button onclick="coffreCopyEmail(\'' + p.email + '\')" title="Copier l\'email" style="padding:3px 8px;border-radius:6px;border:1px solid var(--c-border);background:transparent;color:var(--c-text-3);font-size:11px;cursor:pointer;font-family:var(--f-body)">📋</button>'
+          + (p.plan !== 'admin' ? ' <button onclick="coffrePlanChange(\'' + p.id + '\',\'pro\')" title="Passer Pro" style="padding:3px 8px;border-radius:6px;border:1.5px solid #d97706;background:' + (p.plan==='pro'?'#d97706':'transparent') + ';color:' + (p.plan==='pro'?'#fff':'#d97706') + ';font-size:10px;font-weight:700;cursor:pointer;font-family:var(--f-body)" ' + (p.plan==='pro'?'disabled':'') + '>Pro</button>'
+            + ' <button onclick="coffrePlanChange(\'' + p.id + '\',\'etab\')" title="Passer Établ." style="padding:3px 8px;border-radius:6px;border:1.5px solid #2563eb;background:' + (p.plan==='etab'?'#2563eb':'transparent') + ';color:' + (p.plan==='etab'?'#fff':'#2563eb') + ';font-size:10px;font-weight:700;cursor:pointer;font-family:var(--f-body)" ' + (p.plan==='etab'?'disabled':'') + '>Établ.</button>'
+            + ' <button onclick="coffrePlanChange(\'' + p.id + '\',\'free\')" title="Repasser Free" style="padding:3px 8px;border-radius:6px;border:1.5px solid #6b7280;background:' + (p.plan==='free'?'#6b7280':'transparent') + ';color:' + (p.plan==='free'?'#fff':'#6b7280') + ';font-size:10px;font-weight:700;cursor:pointer;font-family:var(--f-body)" ' + (p.plan==='free'?'disabled':'') + '>Free</button>'
+            + ' <button onclick="coffreDeleteUser(\'' + p.id + '\',\'' + (p.name || p.email).replace(/'/g,'') + '\')" title="Supprimer ce compte" style="padding:3px 8px;border-radius:6px;border:1.5px solid var(--c-danger,#A82018);background:transparent;color:var(--c-danger,#A82018);font-size:10px;font-weight:700;cursor:pointer;font-family:var(--f-body)">🗑️</button>' : '')
+        + '</td>'
+        + '</tr>';
     });
+    html += '</tbody></table></div>';
+
     html += '</div>';
 
-    /* Codes d'accès invité */
-    html += '<div style="font-weight:700;font-size:14px;margin:18px 0 10px">Codes d\'accès invité</div>';
-    html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px">';
-    accessCodes.forEach(function(c) {
-      var used = !!c.used_by;
-      var usedProfile = used ? profiles.find(function(p){return p.id===c.used_by;}) : null;
-      html += '<div style="background:var(--c-surface);border:1.5px solid ' + (used?'var(--c-border)':'var(--c-ok)') + ';border-radius:var(--r-md);padding:8px 10px;opacity:' + (used?'0.45':'1') + '">'
-        + '<div style="font-family:monospace;font-size:11px;font-weight:700;color:' + (used?'var(--c-text-3)':'var(--c-ok)') + '">' + c.code + '</div>'
-        + (used ? '<div style="font-size:9px;color:var(--c-text-4);margin-top:2px">' + (usedProfile?usedProfile.email:'utilisé') + '</div>' : '<div style="font-size:9px;color:var(--c-ok);margin-top:2px">Disponible</div>')
-        + '</div>';
-    });
-    html += '</div></div>';
-
     el.innerHTML = html;
+    _renderEtabCodesInCoffre(supaCodesMap);
   }).catch(function(err) {
-    el.innerHTML = '<div style="padding:24px;color:var(--c-text-3)">Erreur : ' + err.message + '</div>';
+    el.innerHTML = '<div style="padding:24px;color:var(--c-text-3)">Supabase indisponible. Données locales chargées.</div>';
+    _renderEtabCodesInCoffre();
+  });
+}
+
+function _renderCoffreAnnuaire() {
+  var tbody = document.querySelector('#coffre-user-table tbody');
+  if (!tbody) return;
+  var profiles = window._coffreProfiles || [];
+  var html = '';
+  profiles.forEach(function(p, idx) {
+    var planColor = { free:'#6b7280', pro:'#d97706', etab:'#2563eb', admin:'#7c3aed' }[p.plan] || '#6b7280';
+    var planLabel = { free:'Free', pro:'Pro ⭐', etab:'Établ. 🏫', admin:'Admin 🔑' }[p.plan] || p.plan;
+    var joinDate  = p.joined_at ? new Date(p.joined_at).toLocaleDateString('fr-FR') : '—';
+    var rowBg = idx % 2 === 0 ? 'background:var(--c-surface)' : 'background:var(--c-bg,var(--c-surface))';
+    html += '<tr class="coffre-user-row" data-name="' + (p.name || '').toLowerCase() + '" data-email="' + (p.email || '').toLowerCase() + '" style="' + rowBg + ';border-bottom:1px solid var(--c-border)">'
+      + '<td style="padding:9px 12px;font-weight:600;color:var(--c-text)">' + (p.name || '<em style="color:var(--c-text-3)">—</em>') + '</td>'
+      + '<td style="padding:9px 12px"><a href="mailto:' + p.email + '" style="color:var(--c-primary);text-decoration:none;font-family:monospace;font-size:11px">' + p.email + '</a></td>'
+      + '<td style="padding:9px 12px"><span style="font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;background:' + planColor + '22;color:' + planColor + '">' + planLabel + '</span></td>'
+      + '<td style="padding:9px 12px;color:var(--c-text-3)">' + joinDate + '</td>'
+      + '<td style="padding:9px 12px">'
+        + '<button onclick="coffreCopyEmail(\'' + p.email + '\')" title="Copier l\'email" style="padding:3px 8px;border-radius:6px;border:1px solid var(--c-border);background:transparent;color:var(--c-text-3);font-size:11px;cursor:pointer;font-family:var(--f-body)">📋</button>'
+        + (p.plan !== 'admin' ? ' <button onclick="coffrePlanChange(\'' + p.id + '\',\'pro\')" style="padding:3px 8px;border-radius:6px;border:1.5px solid #d97706;background:' + (p.plan==='pro'?'#d97706':'transparent') + ';color:' + (p.plan==='pro'?'#fff':'#d97706') + ';font-size:10px;font-weight:700;cursor:pointer;font-family:var(--f-body)" ' + (p.plan==='pro'?'disabled':'') + '>Pro</button>'
+          + ' <button onclick="coffrePlanChange(\'' + p.id + '\',\'etab\')" style="padding:3px 8px;border-radius:6px;border:1.5px solid #2563eb;background:' + (p.plan==='etab'?'#2563eb':'transparent') + ';color:' + (p.plan==='etab'?'#fff':'#2563eb') + ';font-size:10px;font-weight:700;cursor:pointer;font-family:var(--f-body)" ' + (p.plan==='etab'?'disabled':'') + '>Établ.</button>'
+          + ' <button onclick="coffrePlanChange(\'' + p.id + '\',\'free\')" style="padding:3px 8px;border-radius:6px;border:1.5px solid #6b7280;background:' + (p.plan==='free'?'#6b7280':'transparent') + ';color:' + (p.plan==='free'?'#fff':'#6b7280') + ';font-size:10px;font-weight:700;cursor:pointer;font-family:var(--f-body)" ' + (p.plan==='free'?'disabled':'') + '>Free</button>'
+          + ' <button onclick="coffreDeleteUser(\'' + p.id + '\',\'' + (p.name || p.email).replace(/'/g,'') + '\')" style="padding:3px 8px;border-radius:6px;border:1.5px solid var(--c-danger,#A82018);background:transparent;color:var(--c-danger,#A82018);font-size:10px;font-weight:700;cursor:pointer;font-family:var(--f-body)">🗑️</button>' : '')
+      + '</td></tr>';
+  });
+  tbody.innerHTML = html;
+}
+
+function _renderEtabCodesInCoffre(supaCodesMap) {
+  var existing = document.getElementById('coffre-etab-codes');
+  if (existing) existing.remove();
+  var el = document.getElementById('coffre-content');
+  if (!el) return;
+
+  /* Construire la liste des codes depuis Supabase en priorité, localStorage en complément */
+  var supaMap = supaCodesMap || window._coffreSupaCodes || {};
+  var profiles = window._coffreProfiles || [];
+
+  /* Codes Supabase → source principale (multi-appareil) */
+  var etabCodes = Object.keys(supaMap).map(function(code) {
+    var supaEntry = supaMap[code];
+    var match = supaEntry.used_by ? profiles.find(function(p){ return p.id === supaEntry.used_by; }) : null;
+    return {
+      code: code,
+      used: !!supaEntry.used_by,
+      usedBy: match ? (match.name || match.email) : (supaEntry.used_by ? supaEntry.used_by.slice(0,8) + '…' : null),
+      usedEmail: match ? match.email : null,
+      usedAt: supaEntry.used_at || null,
+      label: null
+    };
+  });
+
+  /* Ajouter les codes locaux pas encore dans Supabase */
+  var localCodes = [];
+  try { localCodes = JSON.parse(localStorage.getItem('etab_codes') || '[]'); } catch(e) {}
+  localCodes.forEach(function(lc) {
+    if (!supaMap[lc.code]) etabCodes.push(lc);
+  });
+
+  var used  = etabCodes.filter(function(c){ return !!c.used; });
+  var avail = etabCodes.filter(function(c){ return !c.used; });
+
+  var div = document.createElement('div');
+  div.id = 'coffre-etab-codes';
+  div.style.cssText = 'padding:0 var(--s-4) var(--s-6)';
+
+  var html = '<div style="display:flex;align-items:center;justify-content:space-between;margin:18px 0 10px">'
+    + '<div style="font-weight:700;font-size:14px">Codes d\'accès Établissement</div>'
+    + '<span style="font-size:11px;color:var(--c-text-3)">'
+      + '<span style="color:var(--c-ok,#166038);font-weight:700">' + avail.length + ' dispo</span>'
+      + (used.length ? ' · <span style="color:var(--c-danger,#A82018);font-weight:700">⚠ ' + used.length + ' utilisé(s)</span>' : '')
+    + '</span>'
+    + '</div>'
+    + '<button onclick="etabGenerateCodeCoffre()" style="width:100%;padding:10px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-md);font-family:var(--f-body);font-size:13px;font-weight:700;cursor:pointer;margin-bottom:14px">+ Générer un code</button>';
+
+  div.innerHTML = html;
+  el.appendChild(div);
+}
+
+function coffreSearch() {
+  var q = (document.getElementById('coffre-search') || {}).value || '';
+  q = q.toLowerCase().trim();
+  var rows = document.querySelectorAll('.coffre-user-row');
+  rows.forEach(function(r) {
+    var match = !q || r.dataset.name.indexOf(q) !== -1 || r.dataset.email.indexOf(q) !== -1;
+    r.style.display = match ? '' : 'none';
+  });
+}
+
+function coffreCopyEmail(email) {
+  navigator.clipboard.writeText(email).then(function() {
+    authToast('Email copié : ' + email);
+  }).catch(function() {
+    authToast(email);
+  });
+}
+
+
+function coffreDeleteUser(userId, userName) {
+  var existing = document.getElementById('coffre-delete-modal');
+  if (existing) existing.remove();
+
+  var overlay = document.createElement('div');
+  overlay.id = 'coffre-delete-modal';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px';
+
+  overlay.innerHTML = '<div style="background:var(--c-surface);border-radius:var(--r-lg);padding:28px 24px;max-width:360px;width:100%;box-shadow:0 8px 32px rgba(0,0,0,.25)">'
+    + '<div style="font-size:22px;text-align:center;margin-bottom:12px">🗑️</div>'
+    + '<div style="font-size:15px;font-weight:800;color:var(--c-text);text-align:center;margin-bottom:8px">Supprimer ce compte ?</div>'
+    + '<div style="font-size:13px;color:var(--c-text-3);text-align:center;margin-bottom:20px">Le compte de <strong style="color:var(--c-text)">' + userName + '</strong> sera supprimé définitivement. Cette action est irréversible.</div>'
+    + '<div style="display:flex;gap:10px">'
+      + '<button onclick="document.getElementById(\'coffre-delete-modal\').remove()" style="flex:1;padding:10px;border-radius:var(--r-md);border:1.5px solid var(--c-border);background:transparent;color:var(--c-text);font-family:var(--f-body);font-size:13px;font-weight:600;cursor:pointer">Annuler</button>'
+      + '<button id="coffre-delete-confirm-btn" onclick="coffreDeleteUserConfirm(\'' + userId + '\',\'' + userName.replace(/'/g,'') + '\')" style="flex:1;padding:10px;border-radius:var(--r-md);border:none;background:var(--c-danger,#A82018);color:#fff;font-family:var(--f-body);font-size:13px;font-weight:700;cursor:pointer">Supprimer</button>'
+    + '</div>'
+  + '</div>';
+
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
+}
+
+function coffreDeleteUserConfirm(userId, userName) {
+  var btn = document.getElementById('coffre-delete-confirm-btn');
+  if (btn) { btn.textContent = '…'; btn.disabled = true; }
+
+  SupaDB.auth.getSession().then(function(res) {
+    var token = res.data && res.data.session ? res.data.session.access_token : null;
+    if (!token) { authToast('Session expirée, reconnectez-vous'); return; }
+
+    fetch(SUPABASE_FUNCTIONS_URL + '/delete-user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify({ userId: userId })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var modal = document.getElementById('coffre-delete-modal');
+      if (modal) modal.remove();
+      if (data.success) {
+        SupaDB.from('profiles').delete().eq('id', userId).catch(function(){});
+        if (window._coffreProfiles) {
+          window._coffreProfiles = window._coffreProfiles.filter(function(p){ return p.id !== userId; });
+        }
+        authToast('Compte de ' + userName + ' supprimé ✓');
+        _renderCoffreAnnuaire();
+      } else {
+        authToast('Erreur : ' + (data.error || 'Impossible de supprimer'));
+      }
+    })
+    .catch(function() {
+      var modal = document.getElementById('coffre-delete-modal');
+      if (modal) modal.remove();
+      authToast('Erreur réseau lors de la suppression');
+    });
+  });
+}
+
+function coffreCopyAllEmails() {
+  var profiles = window._coffreProfiles || [];
+  var emails = profiles.map(function(p){ return p.email; }).filter(Boolean).join(', ');
+  if (!emails) { authToast('Aucun email disponible.'); return; }
+  navigator.clipboard.writeText(emails).then(function() {
+    authToast(profiles.length + ' emails copiés dans le presse-papier ✓');
+  }).catch(function() {
+    var ta = document.createElement('textarea');
+    ta.value = emails;
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    authToast(profiles.length + ' emails copiés ✓');
+  });
+}
+
+function coffreExportCSV() {
+  var profiles = window._coffreProfiles || [];
+  if (!profiles.length) { authToast('Aucune donnée à exporter.'); return; }
+  var rows = [['Nom', 'Email', 'Plan', 'Inscrit le']];
+  profiles.forEach(function(p) {
+    var d = p.joined_at ? new Date(p.joined_at).toLocaleDateString('fr-FR') : '';
+    rows.push([
+      '"' + (p.name || '').replace(/"/g, '""') + '"',
+      '"' + (p.email || '').replace(/"/g, '""') + '"',
+      p.plan || '',
+      d
+    ]);
+  });
+  var csv = rows.map(function(r){ return r.join(';'); }).join('\r\n');
+  var blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'HydroCalc_inscrits_' + new Date().toISOString().slice(0,10) + '.csv';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  authToast('CSV exporté (' + profiles.length + ' inscrits) ✓');
+}
+
+function coffrePlanChange(userId, newPlan) {
+  if (!SupaDB) { authToast('Supabase non connecté'); return; }
+  SupaDB.rpc('admin_update_plan', { p_user_id: userId, p_plan: newPlan }).then(function(res) {
+    if (res.error) { authToast('Erreur : ' + res.error.message); return; }
+    if (window._coffreProfiles) {
+      var p = window._coffreProfiles.find(function(x){ return x.id === userId; });
+      if (p) p.plan = newPlan;
+    }
+    authToast('Plan mis à jour → ' + { free:'Free', pro:'Pro', etab:'Établissement' }[newPlan]);
+    _renderCoffreAnnuaire();
+  });
+}
+
+function _etabMakeCode() {
+  var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  var r = '';
+  for (var i = 0; i < 8; i++) r += chars[Math.floor(Math.random() * chars.length)];
+  return 'HC-' + r.slice(0,4) + '-' + r.slice(4);
+}
+
+function etabGenerateCodeCoffre() {
+  /* Modal inline pour saisir le titre */
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px';
+  overlay.innerHTML = '<div style="background:var(--c-surface);border-radius:var(--r-lg);padding:24px 20px;width:100%;max-width:340px;box-shadow:0 8px 40px rgba(0,0,0,.25)">'
+    + '<div style="font-size:15px;font-weight:800;color:var(--c-text);margin-bottom:6px">Nouveau code d\'accès</div>'
+    + '<div style="font-size:12px;color:var(--c-text-3);margin-bottom:14px">Donnez un titre pour identifier à qui ce code est destiné.</div>'
+    + '<input id="_gen-code-label" type="text" placeholder="Ex : Jean Dupont, Promo 2025…" maxlength="60" style="width:100%;padding:10px 12px;border:1.5px solid var(--c-border);border-radius:var(--r-md);font-family:var(--f-body);font-size:13px;box-sizing:border-box;margin-bottom:14px;background:var(--c-surface-2);color:var(--c-text)">'
+    + '<div style="display:flex;gap:8px">'
+      + '<button onclick="this.closest(\'[data-gen-overlay]\').remove()" style="flex:1;padding:10px;background:none;border:1.5px solid var(--c-border);border-radius:var(--r-md);font-family:var(--f-body);font-size:13px;font-weight:700;color:var(--c-text-3);cursor:pointer">Annuler</button>'
+      + '<button onclick="_etabDoGenerate(document.getElementById(\'_gen-code-label\').value);this.closest(\'[data-gen-overlay]\').remove()" style="flex:2;padding:10px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-md);font-family:var(--f-body);font-size:13px;font-weight:700;cursor:pointer">✓ Générer</button>'
+    + '</div>'
+  + '</div>';
+  overlay.setAttribute('data-gen-overlay', '1');
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) overlay.remove(); });
+  document.body.appendChild(overlay);
+  setTimeout(function(){ var inp = document.getElementById('_gen-code-label'); if(inp) inp.focus(); }, 80);
+}
+
+function _etabDoGenerate(labelRaw) {
+  var label = (labelRaw || '').trim();
+  var code = _etabMakeCode();
+  var codes = _etabGetCodes();
+  codes.push({ code: code, used: false, label: label, createdAt: new Date().toISOString() });
+  _etabSaveCodes(codes);
+  if (SupaDB) {
+    SupaDB.from('access_codes').insert({ code: code, used_by: null, used_at: null })
+      .then(function(r) {
+        if (r.error) authToast('⚠️ Code local uniquement : ' + r.error.message);
+        else authToast('✓ Code généré : ' + (label || code));
+      });
+  } else {
+    authToast('Code généré : ' + (label || code));
+  }
+  _renderEtabCodesInCoffre();
+}
+
+function etabSyncCodesToSupabase() {
+  if (!SupaDB) { authToast('Supabase non connecté'); return; }
+  var codes = _etabGetCodes().filter(function(c){ return !c.used; });
+  if (!codes.length) { authToast('Aucun code disponible à synchroniser'); return; }
+  var rows = codes.map(function(c){ return { code: c.code, used_by: null, used_at: null }; });
+  SupaDB.from('access_codes').upsert(rows, { onConflict: 'code' }).then(function(r) {
+    if (r.error) authToast('Erreur sync : ' + r.error.message);
+    else authToast('✓ ' + codes.length + ' code(s) synchronisé(s) vers Supabase');
+  });
+}
+
+function etabDeleteCodeCoffre(code) {
+  if (!SupaDB) return;
+  SupaDB.from('access_codes').delete().eq('code', code).then(function(r) {
+    if (r.error) { authToast('Erreur : ' + r.error.message); return; }
+    /* Supprimer aussi du localStorage si présent */
+    var local = _etabGetCodes().filter(function(c){ return c.code !== code; });
+    _etabSaveCodes(local);
+    authToast('Code supprimé : ' + code);
+    buildCoffre();
   });
 }
 
@@ -2291,6 +2830,7 @@ function buildCoffre() {
   /* Session Supabase (gère automatiquement le "Se souvenir de moi") */
   setTimeout(function() {
     if (_recoveryHandled) return; /* écran reset déjà affiché */
+    var _supaSessionUser = null;
     SupaDB.auth.getSession()
       .then(function(res) {
         if (_recoveryHandled) return;
@@ -2299,6 +2839,8 @@ function buildCoffre() {
           if (!_tryLocalDemo()) _showSplash();
           return;
         }
+        AUTH._uid = session.user.id;
+        _supaSessionUser = session.user;
         return _fetchProfileWithRetry(session.user.id);
       })
       .then(function(res) {
@@ -2312,8 +2854,10 @@ function buildCoffre() {
           isAdmin:    p.is_admin   || false,
           profile:    p.profile    || '',
           trialUsed:  p.trial_used || false,
-          trialStart: p.trial_start ? new Date(p.trial_start).getTime() : null
+          trialStart: p.trial_start ? new Date(p.trial_start).getTime() : null,
+          invite_code: p.invite_code || null
         });
+        _applyMetaCodeOverride(_supaSessionUser);
         _doEnterApp();
       })
       .catch(function() { if (!_recoveryHandled) _showSplash(); });
@@ -2368,7 +2912,7 @@ var PLANS = [
     id: 'etab',
     ico: '🏛️',
     name: 'Établissement',
-    price: '35 €',
+    price: '24 €',
     period: '/mois',
     priceBis: '190 € /an — soit 2 mois offerts',
     badge: '⭐ Meilleur rapport qualité',
@@ -2425,7 +2969,7 @@ function _trialBannerHtml() {
   }
 
   if (status === 'expired') {
-    return '<div style="background:#fff5f5;border:1.5px solid var(--c-danger);border-radius:var(--r-md);padding:12px 14px;margin-bottom:var(--s-3)">'
+    return '<div style="background:var(--c-danger-l,#fff5f5);border:1.5px solid var(--c-danger);border-radius:var(--r-md);padding:12px 14px;margin-bottom:var(--s-3)">'
       + '<div style="font-size:12px;font-weight:800;color:var(--c-danger)">⏰ Essai terminé</div>'
       + '<div style="font-size:11px;color:var(--c-text-3);margin-top:2px">Passez à Pro pour continuer</div>'
     + '</div>';
@@ -2503,7 +3047,7 @@ function renderSidebarPlans() {
     ['Tableau de bord classe',   '✗','✗','✓'],
     ['QCM Professeur',           '✗','✗','✓'],
     ['Support prioritaire',      '✗','✗','✓'],
-    ['Prix mensuel',             'Gratuit','5,90 €','35 €'],
+    ['Prix mensuel',             'Gratuit','5,90 €','24 €'],
     ['Prix annuel',              '—','—','190 €'],
   ];
 
@@ -2676,21 +3220,23 @@ function showFormulaPicker() {
     + 'style="border:none;background:transparent;font-family:var(--f-body);font-size:13px;outline:none;flex:1;color:var(--c-text)">'
     + '</div></div>';
 
-  /* Corps */
+  /* Corps — les items sont indexés dans _fpData pour éviter les bugs de guillemets dans onclick */
+  window._fpData = [];
   var body = '<div id="fp-body" style="overflow-y:auto;flex:1;padding:10px 16px 20px">';
   FORMULES_BIBLIO.forEach(function(cat) {
     body += '<div class="fp-cat" data-cat="' + cat.cat + '">'
       + '<div style="font-size:10px;font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.06em;margin:10px 0 6px;display:flex;align-items:center;gap:6px">'
       + '<span>' + cat.ico + '</span><span>' + cat.cat + '</span></div>';
     cat.items.forEach(function(f) {
+      var idx = window._fpData.length;
+      window._fpData.push(f);
       var varsHtml = '';
       if (f.vars && f.vars.length) {
         varsHtml = '<div style="margin-top:6px;padding:6px 8px;background:var(--c-surface-2);border-radius:6px;border-left:2px solid var(--c-primary)">'
           + f.vars.map(function(v) { return '<div style="font-size:10px;color:var(--c-text-2);line-height:1.6">' + v + '</div>'; }).join('')
           + '</div>';
       }
-      body += '<div class="fp-item" data-nom="' + f.nom.toLowerCase() + '" data-expr="' + f.expr.toLowerCase() + '" '
-        + 'onclick="selectFormula(' + JSON.stringify(f.nom) + ',' + JSON.stringify(f.expr) + ',' + JSON.stringify(f.ref) + ',' + JSON.stringify(f.vars||[]) + ')" '
+      body += '<div class="fp-item" data-nom="' + f.nom.toLowerCase() + '" data-expr="' + f.expr.toLowerCase() + '" data-fpidx="' + idx + '" '
         + 'style="background:var(--c-surface);border:1.5px solid var(--c-border);border-radius:10px;padding:10px 12px;margin-bottom:6px;cursor:pointer;transition:border-color .15s" '
         + 'onmouseover="this.style.borderColor=\'var(--c-primary)\'" onmouseout="this.style.borderColor=\'var(--c-border)\'">'
         + '<div style="font-size:12px;font-weight:700;color:var(--c-text);margin-bottom:4px">' + f.nom + '</div>'
@@ -2705,7 +3251,15 @@ function showFormulaPicker() {
 
   panel.innerHTML = hdr + search + body;
   modal.appendChild(panel);
-  modal.addEventListener('click', function(e) { if (e.target === modal) closeFormulaPicker(); });
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) { closeFormulaPicker(); return; }
+    var item = e.target.closest('.fp-item');
+    if (item) {
+      var idx = parseInt(item.getAttribute('data-fpidx'), 10);
+      var f = window._fpData[idx];
+      if (f) selectFormula(f.nom, f.expr, f.ref, f.vars || []);
+    }
+  });
   document.body.appendChild(modal);
   setTimeout(function() { var s = document.getElementById('fp-search'); if (s) s.focus(); }, 100);
 }
@@ -2722,14 +3276,22 @@ function _formulaNomSuggest(val) {
     });
   });
   if (!matches.length) { box.style.display = 'none'; return; }
-  box.innerHTML = matches.slice(0, 8).map(function(f) {
-    return '<div onclick="_formulaSuggestSelect(' + JSON.stringify(f.nom) + ',' + JSON.stringify(f.expr) + ',' + JSON.stringify(f.ref||'') + ',' + JSON.stringify(f.vars||[]) + ')" '
+  window._fnsData = matches.slice(0, 8);
+  box.innerHTML = window._fnsData.map(function(f, i) {
+    return '<div data-fnsidx="' + i + '" '
       + 'style="padding:8px 12px;cursor:pointer;border-bottom:1px solid var(--c-border);font-size:12px" '
       + 'onmouseover="this.style.background=\'var(--c-surface-2)\'" onmouseout="this.style.background=\'\'">'
       + '<div style="font-weight:700;color:var(--c-text)">' + f.nom + '</div>'
       + '<div style="font-family:monospace;font-size:10px;color:var(--c-primary)">' + f.expr + '</div>'
       + '</div>';
   }).join('');
+  box.addEventListener('click', function _fnsClick(e) {
+    var item = e.target.closest('[data-fnsidx]');
+    if (!item) return;
+    box.removeEventListener('click', _fnsClick);
+    var f = window._fnsData[parseInt(item.getAttribute('data-fnsidx'), 10)];
+    if (f) _formulaSuggestSelect(f.nom, f.expr, f.ref || '', f.vars || []);
+  });
   box.style.display = 'block';
 }
 
@@ -2803,17 +3365,18 @@ function showReglPicker() {
     + 'style="border:none;background:transparent;font-family:var(--f-body);font-size:13px;outline:none;flex:1;color:var(--c-text)">'
     + '</div></div>';
 
+  window._rpData = [];
   var body = '<div id="rp-body" style="overflow-y:auto;flex:1;padding:10px 16px 20px">';
   var CATS = { anc:'ANC', ac:'Assainissement collectif', ep:'Eau potable', milieux:'Milieux naturels', transversal:'Transversal' };
   Object.keys(CATS).forEach(function(key) {
-    var list = (window.REGL_TEXTES && window.REGL_TEXTES[key]) || [];
+    var list = (typeof REGL_TEXTES !== 'undefined' && REGL_TEXTES[key]) || [];
     if (!list.length) return;
     body += '<div class="rp-cat" data-cat="' + key + '">'
       + '<div style="font-size:10px;font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.06em;margin:10px 0 6px">' + CATS[key] + '</div>';
     list.forEach(function(t) {
-      var pts = (t.pts||[]).map(function(p){ return p.v; }).join('\n');
-      body += '<div class="rp-item" data-nom="' + (t.name||'').toLowerCase() + '" '
-        + 'onclick="selectRegl(' + JSON.stringify(t.name) + ',' + JSON.stringify(t.ref||'') + ',' + JSON.stringify(pts) + ')" '
+      var idx = window._rpData.length;
+      window._rpData.push(t);
+      body += '<div class="rp-item" data-nom="' + (t.name||'').toLowerCase() + '" data-rpidx="' + idx + '" '
         + 'style="background:var(--c-surface);border:1.5px solid var(--c-border);border-radius:10px;padding:10px 12px;margin-bottom:6px;cursor:pointer;transition:border-color .15s" '
         + 'onmouseover="this.style.borderColor=\'var(--c-primary)\'" onmouseout="this.style.borderColor=\'var(--c-border)\'">'
         + '<div style="font-size:12px;font-weight:700;color:var(--c-text);margin-bottom:3px">' + (t.ico||'📋') + ' ' + (t.name||'') + '</div>'
@@ -2826,7 +3389,18 @@ function showReglPicker() {
 
   panel.innerHTML = hdr + search + body;
   modal.appendChild(panel);
-  modal.addEventListener('click', function(e) { if (e.target === modal) closeReglPicker(); });
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) { closeReglPicker(); return; }
+    var item = e.target.closest('.rp-item');
+    if (item) {
+      var idx = parseInt(item.getAttribute('data-rpidx'), 10);
+      var t = window._rpData[idx];
+      if (t) {
+        var pts = (t.pts||[]).map(function(p){ return p.v; }).join('\n');
+        selectRegl(t.name, t.ref||'', pts);
+      }
+    }
+  });
   document.body.appendChild(modal);
   setTimeout(function() { var s = document.getElementById('rp-search'); if (s) s.focus(); }, 100);
 }
@@ -2880,7 +3454,7 @@ function previewReport(format) {
   _previewBlob = null;
   _previewHtml = null;
 
-  if (format === 'html') {
+  if (format === 'html' || format === 'pdf') {
     _buildHTMLContent(arr, formulas, regls, function(htmlContent) {
       _previewHtml = htmlContent;
       _showPreviewModal();
@@ -2903,17 +3477,18 @@ function _showPreviewModal() {
   var existing = document.getElementById('hc-report-preview');
   if (existing) existing.remove();
 
-  var isHTML = _previewFmt === 'html';
+  var isHTML = _previewFmt === 'html' || _previewFmt === 'pdf';
   var modal = document.createElement('div');
   modal.id = 'hc-report-preview';
   modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9998;display:flex;flex-direction:column';
 
   /* Barre d'outils */
-  var fmt = { html:'HTML', odt:'ODT', docx:'DOCX' }[_previewFmt] || '';
+  var fmt = { html:'HTML', odt:'ODT', docx:'DOCX', pdf:'PDF' }[_previewFmt] || '';
+  var dlLabel = _previewFmt === 'pdf' ? '📕 Générer & Télécharger PDF' : '⬇ Télécharger';
   var toolbar = '<div style="background:#1A2B28;padding:12px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0">'
     + '<div style="font-size:13px;font-weight:800;color:#fff;flex:1">👁 Aperçu — Rapport ' + fmt + '</div>'
-    + '<button onclick="downloadFromPreview()" style="display:flex;align-items:center;gap:6px;padding:8px 14px;background:#0A7460;color:#fff;border:none;border-radius:8px;font-family:var(--f-body);font-size:12px;font-weight:700;cursor:pointer">⬇ Télécharger</button>'
-    + '<button onclick="emailFromPreview()" style="display:flex;align-items:center;gap:6px;padding:8px 14px;background:#1550A0;color:#fff;border:none;border-radius:8px;font-family:var(--f-body);font-size:12px;font-weight:700;cursor:pointer">📧 Envoyer</button>'
+    + '<button onclick="downloadFromPreview()" style="display:flex;align-items:center;gap:6px;padding:8px 14px;background:#0A7460;color:#fff;border:none;border-radius:8px;font-family:var(--f-body);font-size:12px;font-weight:700;cursor:pointer">' + dlLabel + '</button>'
+    + (_previewFmt !== 'pdf' ? '<button onclick="emailFromPreview()" style="display:flex;align-items:center;gap:6px;padding:8px 14px;background:#1550A0;color:#fff;border:none;border-radius:8px;font-family:var(--f-body);font-size:12px;font-weight:700;cursor:pointer">📧 Envoyer</button>' : '')
     + '<button onclick="closePreviewModal()" style="padding:8px 14px;background:rgba(255,255,255,.1);color:#fff;border:none;border-radius:8px;font-family:var(--f-body);font-size:12px;font-weight:700;cursor:pointer">✕ Fermer</button>'
     + '</div>';
 
@@ -2928,28 +3503,28 @@ function _showPreviewModal() {
     var formulas = _getSelectedFormulas();
     var regls = _getSelectedRegls();
     var items = arr.map(function(c) {
-      return '<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border-radius:8px;margin-bottom:6px">'
+      return '<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--c-surface);border-radius:8px;margin-bottom:6px">'
         + '<span style="font-size:18px">' + (c.type === 'outil' ? '🔧' : '📊') + '</span>'
         + '<div><div style="font-size:12px;font-weight:700">' + (c.type === 'outil' ? c.outil.name : c.module) + '</div>'
-        + '<div style="font-size:11px;color:#617068">' + (c.type === 'outil' ? c.outil.cat : _htmlToText(c.valeur).slice(0,80)) + '</div></div>'
+        + '<div style="font-size:11px;color:var(--c-text-3)">' + (c.type === 'outil' ? c.outil.cat : _htmlToText(c.valeur).slice(0,80)) + '</div></div>'
         + '</div>';
     }).join('');
     var fItems = formulas.map(function(f) {
-      return '<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border-radius:8px;margin-bottom:6px">'
+      return '<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--c-surface);border-radius:8px;margin-bottom:6px">'
         + '<span style="font-size:18px">📐</span>'
         + '<div><div style="font-size:12px;font-weight:700">' + f.nom + '</div>'
-        + '<div style="font-size:11px;color:#1550A0;font-family:monospace">' + f.expr + '</div></div>'
+        + '<div style="font-size:11px;color:var(--c-primary);font-family:monospace">' + f.expr + '</div></div>'
         + '</div>';
     }).join('');
     var rItems = regls.map(function(r) {
-      return '<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border-radius:8px;margin-bottom:6px">'
+      return '<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--c-surface);border-radius:8px;margin-bottom:6px">'
         + '<span style="font-size:18px">📋</span>'
         + '<div><div style="font-size:12px;font-weight:700">' + r.nom + '</div>'
-        + (r.ref ? '<div style="font-size:11px;color:#617068">' + r.ref + '</div>' : '')
+        + (r.ref ? '<div style="font-size:11px;color:var(--c-text-3)">' + r.ref + '</div>' : '')
         + '</div>'
         + '</div>';
     }).join('');
-    body = '<div style="flex:1;overflow-y:auto;background:#F0F4F2;padding:24px">'
+    body = '<div style="flex:1;overflow-y:auto;background:var(--c-bg);padding:24px">'
       + '<div style="max-width:640px;margin:0 auto">'
       + '<div style="background:#1A2B28;border-radius:12px;padding:20px;text-align:center;margin-bottom:20px">'
         + '<div style="font-size:32px;margin-bottom:8px">' + (_previewFmt === 'odt' ? '📝' : '📄') + '</div>'
@@ -2977,7 +3552,11 @@ function _showPreviewModal() {
 
 /* ─── TÉLÉCHARGEMENT DEPUIS APERÇU ─── */
 function downloadFromPreview() {
-  if (_previewFmt === 'html' && _previewHtml) {
+  if (_previewFmt === 'pdf') {
+    closePreviewModal();
+    authToast('Génération PDF en cours…');
+    setTimeout(_doGeneratePDFReport, 200);
+  } else if (_previewFmt === 'html' && _previewHtml) {
     _download(new Blob([_previewHtml], {type:'text/html;charset=utf-8'}), _previewName);
     _incrementReportQuota();
     authToast('Rapport HTML téléchargé ✓');
@@ -3040,35 +3619,35 @@ function _buildHTMLContent(arr, formulas, regls, callback) {
       var o = c.outil;
       var tColors = {ok:'#166038',warn:'#886000',danger:'#A82018'};
       var tBg = {ok:'#EAF8F0',warn:'#FDF0D8',danger:'#FDECEA'};
-      return '<div style="margin-bottom:16px;border:1px solid #C8DEDD;border-radius:12px;overflow:hidden">'
+      return '<div style="margin-bottom:16px;border:1px solid var(--c-border);border-radius:12px;overflow:hidden">'
         + '<div style="background:linear-gradient(135deg,#0A3060,#0A5090);padding:10px 16px;display:flex;justify-content:space-between;align-items:center">'
           + '<span style="color:#fff;font-weight:800;font-size:13px">' + o.ico + ' ' + o.name + '</span>'
           + '<span style="font-size:10px;color:rgba(255,255,255,.6)">' + dateStr + '</span>'
         + '</div>'
-        + '<div style="padding:14px 16px;background:#fff">'
-          + '<div style="font-size:11px;color:#3A4840;margin-bottom:10px;padding:8px;background:#F0F6F8;border-left:3px solid #0A5090;border-radius:4px">' + o.usage + '</div>'
-          + '<p style="font-size:10px;font-weight:800;color:#617068;text-transform:uppercase;margin:0 0 4px">Protocole</p>'
-          + '<ol style="margin:0 0 10px 16px;font-size:11px;color:#3A4840">' + o.protocole.map(function(p) { return '<li>' + p + '</li>'; }).join('') + '</ol>'
-          + '<p style="font-size:10px;font-weight:800;color:#617068;text-transform:uppercase;margin:0 0 4px">Interprétation</p>'
+        + '<div style="padding:14px 16px;background:var(--c-surface)">'
+          + '<div style="font-size:11px;color:var(--c-text-2);margin-bottom:10px;padding:8px;background:var(--c-surface-2);border-left:3px solid #0A5090;border-radius:4px">' + o.usage + '</div>'
+          + '<p style="font-size:10px;font-weight:800;color:var(--c-text-3);text-transform:uppercase;margin:0 0 4px">Protocole</p>'
+          + '<ol style="margin:0 0 10px 16px;font-size:11px;color:var(--c-text-2)">' + o.protocole.map(function(p) { return '<li>' + p + '</li>'; }).join('') + '</ol>'
+          + '<p style="font-size:10px;font-weight:800;color:var(--c-text-3);text-transform:uppercase;margin:0 0 4px">Interprétation</p>'
           + '<table style="width:100%;border-collapse:collapse;font-size:10px;margin-bottom:10px">'
-            + '<tr style="background:#F0F6F8"><th style="padding:4px 8px;text-align:left">Valeur</th><th style="padding:4px 8px;text-align:left">Diagnostic</th><th style="padding:4px 8px;text-align:left">Action</th></tr>'
+            + '<tr style="background:var(--c-surface-2)"><th style="padding:4px 8px;text-align:left;color:var(--c-text-3)">Valeur</th><th style="padding:4px 8px;text-align:left;color:var(--c-text-3)">Diagnostic</th><th style="padding:4px 8px;text-align:left;color:var(--c-text-3)">Action</th></tr>'
             + o.interpretation.map(function(r) {
-                return '<tr><td style="padding:4px 8px;background:' + (tBg[r.t]||'#fff') + ';color:' + (tColors[r.t]||'#333') + '">' + r.val + '</td><td style="padding:4px 8px;font-weight:700;color:' + (tColors[r.t]||'#333') + '">' + r.label + '</td><td style="padding:4px 8px">' + r.action + '</td></tr>';
+                return '<tr><td style="padding:4px 8px;background:' + (tBg[r.t]||'var(--c-surface-2)') + ';color:' + (tColors[r.t]||'var(--c-text)') + '">' + r.val + '</td><td style="padding:4px 8px;font-weight:700;color:' + (tColors[r.t]||'var(--c-text)') + '">' + r.label + '</td><td style="padding:4px 8px;color:var(--c-text-2)">' + r.action + '</td></tr>';
               }).join('')
           + '</table>'
-          + '<div style="font-size:10px;color:#617068;font-style:italic">📖 ' + o.norme + '</div>'
+          + '<div style="font-size:10px;color:var(--c-text-3);font-style:italic">📖 ' + o.norme + '</div>'
         + '</div>'
       + '</div>';
     }
     var detail = (c.detail||'').replace(/<br\s*\/?>/gi,'<br>').replace(/<(?!br)[^>]+>/g,'');
-    return '<div style="margin-bottom:16px;border:1px solid #DEE8E4;border-radius:12px;overflow:hidden">'
+    return '<div style="margin-bottom:16px;border:1px solid var(--c-border);border-radius:12px;overflow:hidden">'
       + '<div style="background:linear-gradient(135deg,#0A7460,#0A5040);padding:10px 16px;display:flex;justify-content:space-between;align-items:center">'
         + '<span style="background:rgba(255,255,255,.2);color:#fff;font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px">' + c.module + '</span>'
         + '<span style="font-size:10px;color:rgba(255,255,255,.7)">' + dateStr + '</span>'
       + '</div>'
-      + '<div style="padding:14px 16px;background:#fff">'
-        + '<div style="font-size:20px;font-weight:800;color:#065A48;margin-bottom:8px;font-family:Georgia,serif">' + (c.valeur||'') + '</div>'
-        + (detail ? '<div style="font-size:12px;color:#3A4840;padding:10px;background:#F3F6F4;border-radius:8px;border-left:3px solid #0A7460">' + detail + '</div>' : '')
+      + '<div style="padding:14px 16px;background:var(--c-surface)">'
+        + '<div style="font-size:20px;font-weight:800;color:var(--c-primary);margin-bottom:8px;font-family:Georgia,serif">' + (c.valeur||'') + '</div>'
+        + (detail ? '<div style="font-size:12px;color:var(--c-text-2);padding:10px;background:var(--c-surface-2);border-radius:8px;border-left:3px solid var(--c-primary)">' + detail + '</div>' : '')
       + '</div>'
     + '</div>';
   }).join('');
@@ -3080,19 +3659,19 @@ function _buildHTMLContent(arr, formulas, regls, callback) {
     + '@media print{body{background:#fff;padding:0}.page{box-shadow:none;border-radius:0}}';
 
   var formulasHtml = formulas.map(function(f) {
-    return '<div style="margin-bottom:12px;border:1px solid #DEE8E4;border-radius:10px;overflow:hidden">'
-      + '<div style="background:#E6EEF8;padding:8px 14px"><span style="font-weight:800;font-size:11px;color:#1550A0">📐 ' + f.nom + '</span></div>'
-      + '<div style="padding:10px 14px"><div style="font-family:\'Courier New\',monospace;font-size:13px;color:#1550A0;background:#EEF3FC;padding:6px 10px;border-radius:6px;margin-bottom:6px">' + f.expr + '</div>'
-      + (f.result ? '<div style="font-size:13px;font-weight:700;color:#166038">= ' + f.result + '</div>' : '')
+    return '<div style="margin-bottom:12px;border:1px solid var(--c-border);border-radius:10px;overflow:hidden">'
+      + '<div style="background:var(--c-surface-2);padding:8px 14px"><span style="font-weight:800;font-size:11px;color:var(--c-primary)">📐 ' + f.nom + '</span></div>'
+      + '<div style="padding:10px 14px"><div style="font-family:\'Courier New\',monospace;font-size:13px;color:var(--c-primary);background:var(--c-surface-2);padding:6px 10px;border-radius:6px;margin-bottom:6px">' + f.expr + '</div>'
+      + (f.result ? '<div style="font-size:13px;font-weight:700;color:var(--c-ok)">= ' + f.result + '</div>' : '')
       + '</div></div>';
   }).join('');
 
   var reglsHtml = (regls||[]).map(function(r) {
-    return '<div style="margin-bottom:12px;border:1px solid #DEE8E4;border-radius:10px;overflow:hidden">'
-      + '<div style="background:#E8F0E8;padding:8px 14px"><span style="font-weight:800;font-size:11px;color:#165028">📋 ' + r.nom + '</span>'
-      + (r.ref ? '<span style="font-size:10px;color:#617068;margin-left:10px">' + r.ref + '</span>' : '')
+    return '<div style="margin-bottom:12px;border:1px solid var(--c-border);border-radius:10px;overflow:hidden">'
+      + '<div style="background:var(--c-surface-2);padding:8px 14px"><span style="font-weight:800;font-size:11px;color:var(--c-ok)">📋 ' + r.nom + '</span>'
+      + (r.ref ? '<span style="font-size:10px;color:var(--c-text-3);margin-left:10px">' + r.ref + '</span>' : '')
       + '</div>'
-      + (r.texte ? '<div style="padding:10px 14px;font-size:11px;color:#3A4840;line-height:1.6;white-space:pre-wrap">' + r.texte + '</div>' : '')
+      + (r.texte ? '<div style="padding:10px 14px;font-size:11px;color:var(--c-text-2);line-height:1.6;white-space:pre-wrap">' + r.texte + '</div>' : '')
       + '</div>';
   }).join('');
 
@@ -3100,7 +3679,9 @@ function _buildHTMLContent(arr, formulas, regls, callback) {
     + '<style>' + css + '</style></head><body><div class="page">'
     + '<div class="header"><div>' + logoHtml + '</div>'
     + '<div style="text-align:right"><div style="font-size:16px;font-weight:800">' + h.userName + '</div>'
-    + '<div style="font-size:11px;color:#617068">' + h.dateStr + '</div></div></div>'
+    + '<div style="font-size:11px;color:#617068">' + h.dateStr + '</div>'
+    + (h.projectTitle ? '<div style="font-size:12px;font-weight:700;color:#0A7460;margin-top:4px;padding-top:4px;border-top:1px solid #E0F4F0">' + h.projectTitle + '</div>' : '')
+    + '</div></div>'
     + (arr.length ? '<div style="font-size:13px;font-weight:800;color:#617068;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px">📊 Calculs & fiches (' + arr.length + ')</div>' + calcsHtml : '')
     + (formulas.length ? '<div style="font-size:13px;font-weight:800;color:#617068;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px;margin-top:20px">📐 Formules (' + formulas.length + ')</div>' + formulasHtml : '')
     + (reglsHtml ? '<div style="font-size:13px;font-weight:800;color:#617068;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px;margin-top:20px">📋 Textes réglementaires (' + (regls||[]).length + ')</div>' + reglsHtml : '')
@@ -3322,22 +3903,106 @@ function _buildDOCXBlob(arr, formulas, regls, callback) {
    MODAL TARIFICATION ÉTABLISSEMENT
 ═══════════════════════════════════════════════════ */
 var ETAB_TIERS = [
-  { min:1,  max:9,  unitPrice:35, label:'Tarif standard' },
-  { min:10, max:29, unitPrice:28, label:'-20% · 10 à 29 abonnements' },
-  { min:30, max:999,unitPrice:21, label:'-40% · 30 abonnements et plus' },
+  { min:1,  max:9,  unitPrice:24, label:'Tarif standard' },
+  { min:10, max:29, unitPrice:19, label:'-20% · 10 à 29 abonnements' },
+  { min:30, max:999,unitPrice:14, label:'-40% · 30 abonnements et plus' },
 ];
 
 function _etabTier(qty) {
   return ETAB_TIERS.find(function(t){ return qty >= t.min && qty <= t.max; }) || ETAB_TIERS[0];
 }
 
+function showProPricingModal() {
+  var existing = document.getElementById('pro-pricing-modal');
+  if (existing) existing.remove();
+  window._proSelectedPlan = 'pro';
+
+  var modal = document.createElement('div');
+  modal.id = 'pro-pricing-modal';
+  modal.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center;padding:0';
+  modal.innerHTML = `
+    <div style="background:var(--c-surface);border-radius:var(--r-xl) var(--r-xl) 0 0;width:100%;max-width:480px;padding:var(--s-4);padding-bottom:calc(var(--s-4) + env(safe-area-inset-bottom))">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--s-3)">
+        <div>
+          <div style="font-size:18px;font-weight:800;color:var(--c-text-1)">⚡ Abonnement Pro</div>
+          <div style="font-size:11px;color:var(--c-text-3);margin-top:2px">Choisissez votre période de facturation</div>
+        </div>
+        <button onclick="document.getElementById('pro-pricing-modal').remove()" style="background:none;border:none;font-size:24px;cursor:pointer;color:var(--c-text-3);line-height:1;padding:4px">×</button>
+      </div>
+
+      <div onclick="proBillingSelect('pro')" id="pro-card-monthly"
+        style="border:2px solid var(--c-primary);border-radius:var(--r-lg);padding:var(--s-3);margin-bottom:var(--s-2);cursor:pointer;background:var(--c-primary-l)">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-size:14px;font-weight:800;color:var(--c-text-1)">Mensuel</div>
+            <div style="font-size:11px;color:var(--c-text-3)">Résiliable à tout moment</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:22px;font-weight:800;color:var(--c-primary)">5,90 €</div>
+            <div style="font-size:10px;color:var(--c-text-3)">/mois</div>
+          </div>
+        </div>
+      </div>
+
+      <div onclick="proBillingSelect('pro_annual')" id="pro-card-annual"
+        style="border:2px solid var(--c-border);border-radius:var(--r-lg);padding:var(--s-3);margin-bottom:var(--s-3);cursor:pointer;position:relative">
+        <div style="position:absolute;top:-10px;right:12px;background:#0d6e3f;color:#fff;font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px">2 MOIS OFFERTS</div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-size:14px;font-weight:800;color:var(--c-text-1)">Annuel</div>
+            <div style="font-size:11px;color:var(--c-text-3)">59 € facturés en une fois</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:22px;font-weight:800;color:var(--c-text-1)">4,92 €</div>
+            <div style="font-size:10px;color:var(--c-text-3)">/mois</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:rgba(150,240,216,.1);border:1px solid rgba(150,240,216,.3);border-radius:var(--r-sm);padding:8px 12px;margin-bottom:var(--s-3);font-size:11px;color:var(--c-text-3);text-align:center">
+        🎁 7 jours d'essai gratuit · Sans engagement · Résiliable à tout moment
+      </div>
+
+      <button onclick="proLaunchCheckout()"
+        style="width:100%;padding:15px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-lg);font-size:15px;font-weight:800;cursor:pointer;font-family:var(--f-body)">
+        Commencer l'essai gratuit →
+      </button>
+      <div style="text-align:center;font-size:10px;color:var(--c-text-4);margin-top:8px">Paiement sécurisé via Stripe</div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  modal.addEventListener('click', function(e){ if(e.target===modal) modal.remove(); });
+}
+
+function proBillingSelect(planKey) {
+  window._proSelectedPlan = planKey;
+  var mCard = document.getElementById('pro-card-monthly');
+  var aCard = document.getElementById('pro-card-annual');
+  if (mCard) {
+    mCard.style.border = planKey === 'pro' ? '2px solid var(--c-primary)' : '2px solid var(--c-border)';
+    mCard.style.background = planKey === 'pro' ? 'var(--c-primary-l)' : 'transparent';
+  }
+  if (aCard) {
+    aCard.style.border = planKey === 'pro_annual' ? '2px solid var(--c-primary)' : '2px solid var(--c-border)';
+    aCard.style.background = planKey === 'pro_annual' ? 'var(--c-primary-l)' : 'transparent';
+  }
+}
+
+function proLaunchCheckout() {
+  var planKey = window._proSelectedPlan || 'pro';
+  var modal = document.getElementById('pro-pricing-modal');
+  if (modal) modal.remove();
+  if (typeof stripeStartCheckout === 'function') stripeStartCheckout(planKey, 1);
+}
+
 function showEtabPricingModal() {
   var existing = document.getElementById('etab-pricing-modal');
   if (existing) { existing.remove(); }
 
+  window._etabBilling = 'monthly';
   var modal = document.createElement('div');
   modal.id = 'etab-pricing-modal';
-  modal.style.cssText = 'position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center;padding:0';
+  modal.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center;padding:0';
   modal.innerHTML = `
     <div style="background:var(--c-surface);border-radius:var(--r-xl) var(--r-xl) 0 0;width:100%;max-width:480px;padding:var(--s-4);padding-bottom:calc(var(--s-4) + env(safe-area-inset-bottom))">
 
@@ -3347,6 +4012,17 @@ function showEtabPricingModal() {
           <div style="font-size:11px;color:var(--c-text-3);margin-top:2px">Choisissez le nombre de licences</div>
         </div>
         <button onclick="document.getElementById('etab-pricing-modal').remove()" style="background:none;border:none;font-size:24px;cursor:pointer;color:var(--c-text-3);line-height:1;padding:4px">×</button>
+      </div>
+
+      <div style="display:flex;background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-lg);padding:4px;margin-bottom:var(--s-3)">
+        <button id="etab-toggle-monthly" onclick="etabSetBilling('monthly')"
+          style="flex:1;padding:9px;border:none;border-radius:var(--r-md);font-size:12px;font-weight:700;cursor:pointer;font-family:var(--f-body);background:var(--c-primary);color:#fff;transition:all .2s">
+          Mensuel
+        </button>
+        <button id="etab-toggle-annual" onclick="etabSetBilling('annual')"
+          style="flex:1;padding:9px;border:none;border-radius:var(--r-md);font-size:12px;font-weight:700;cursor:pointer;font-family:var(--f-body);background:transparent;color:var(--c-text-2);transition:all .2s">
+          Annuel &nbsp;<span style="font-size:9px;font-weight:800;color:#0d6e3f;background:#e6faf3;padding:2px 5px;border-radius:10px">2 MOIS OFFERTS</span>
+        </button>
       </div>
 
       <div style="background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-lg);padding:var(--s-3);margin-bottom:var(--s-3)">
@@ -3381,6 +4057,21 @@ function showEtabPricingModal() {
   etabQtyRefresh();
 }
 
+function etabSetBilling(period) {
+  window._etabBilling = period;
+  var mBtn = document.getElementById('etab-toggle-monthly');
+  var aBtn = document.getElementById('etab-toggle-annual');
+  if (mBtn) {
+    mBtn.style.background = period === 'monthly' ? 'var(--c-primary)' : 'transparent';
+    mBtn.style.color = period === 'monthly' ? '#fff' : 'var(--c-text-2)';
+  }
+  if (aBtn) {
+    aBtn.style.background = period === 'annual' ? 'var(--c-primary)' : 'transparent';
+    aBtn.style.color = period === 'annual' ? '#fff' : 'var(--c-text-2)';
+  }
+  etabQtyRefresh();
+}
+
 function etabQtyChange(delta) {
   var inp = document.getElementById('etab-qty-input');
   if (!inp) return;
@@ -3395,12 +4086,13 @@ function etabQtyRefresh() {
   var qty = Math.max(1, Math.min(500, parseInt(inp.value)||1));
   inp.value = qty;
 
-  var tier = _etabTier(qty);
-  var totalMonth   = tier.unitPrice * qty;
-  var totalFull    = 35 * qty;
-  var savings      = totalFull - totalMonth;
-  var totalYear    = totalMonth * 10;
-  var discount     = tier.unitPrice < 35 ? Math.round((1 - tier.unitPrice / 35) * 100) : 0;
+  var isAnnual   = window._etabBilling === 'annual';
+  var tier       = _etabTier(qty);
+  var totalMonth = tier.unitPrice * qty;
+  var totalYear  = totalMonth * 10;
+  var totalFull  = 24 * qty;
+  var savings    = totalFull - totalMonth;
+  var discount   = tier.unitPrice < 24 ? Math.round((1 - tier.unitPrice / 24) * 100) : 0;
 
   var badgeEl = document.getElementById('etab-tier-badge');
   if (badgeEl) {
@@ -3411,32 +4103,40 @@ function etabQtyRefresh() {
 
   var summaryEl = document.getElementById('etab-price-summary');
   if (summaryEl) {
+    var displayTotal = isAnnual ? totalYear : totalMonth;
+    var displayUnit  = isAnnual ? '/an' : '/mois';
     var strikeHtml = discount > 0
-      ? '<span style="font-size:18px;color:rgba(255,255,255,.4);text-decoration:line-through;margin-right:4px">' + totalFull.toLocaleString('fr-FR') + ' €</span>'
+      ? '<span style="font-size:18px;color:rgba(255,255,255,.4);text-decoration:line-through;margin-right:4px">' + (isAnnual ? (totalFull*10) : totalFull).toLocaleString('fr-FR') + ' €</span>'
       : '';
-    var savingsHtml = savings > 0
+    var savingsHtml = savings > 0 && !isAnnual
       ? '<div style="background:rgba(150,240,216,.15);border:1px solid rgba(150,240,216,.35);border-radius:var(--r-sm);padding:7px 10px;display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">' +
           '<span style="font-size:11px;color:#96F0D8;font-weight:700">💰 Économie mensuelle</span>' +
           '<span style="font-size:13px;font-weight:800;color:#96F0D8">−' + savings.toLocaleString('fr-FR') + ' €/mois</span>' +
         '</div>'
       : '';
+    var bottomRowHtml = isAnnual
+      ? '<div style="background:rgba(255,255,255,.1);border-radius:var(--r-sm);padding:8px 10px;display:flex;justify-content:space-between;align-items:center">' +
+          '<span style="font-size:11px;color:rgba(255,255,255,.7)">💰 Économie vs mensuel</span>' +
+          '<span style="font-size:13px;font-weight:800;color:#96F0D8">+' + (totalMonth*2).toLocaleString('fr-FR') + ' € offerts</span>' +
+        '</div>'
+      : '<div style="background:rgba(255,255,255,.1);border-radius:var(--r-sm);padding:8px 10px;display:flex;justify-content:space-between;align-items:center">' +
+          '<span style="font-size:11px;color:rgba(255,255,255,.7)">🗓️ Annuel (2 mois offerts)</span>' +
+          '<span style="font-size:13px;font-weight:800;color:#96F0D8">' + totalYear.toLocaleString('fr-FR') + ' €/an</span>' +
+        '</div>';
     summaryEl.innerHTML =
       '<div style="background:linear-gradient(135deg,#072018,#0A3828);border-radius:var(--r-lg);padding:var(--s-3) var(--s-4)">' +
         '<div style="display:flex;align-items:baseline;gap:4px;margin-bottom:2px">' +
           strikeHtml +
-          '<span style="font-size:32px;font-weight:800;color:#fff">' + totalMonth.toLocaleString('fr-FR') + ' €</span>' +
-          '<span style="font-size:13px;color:rgba(255,255,255,.6)">/mois</span>' +
+          '<span style="font-size:32px;font-weight:800;color:#fff">' + displayTotal.toLocaleString('fr-FR') + ' €</span>' +
+          '<span style="font-size:13px;color:rgba(255,255,255,.6)">' + displayUnit + '</span>' +
         '</div>' +
         '<div style="font-size:12px;color:rgba(255,255,255,.6);margin-bottom:10px">' +
           qty + ' licence' + (qty > 1 ? 's' : '') + ' × ' + tier.unitPrice + ' €' +
-          (discount > 0 ? ' <span style="text-decoration:line-through;opacity:.5">35 €</span>' : '') +
+          (discount > 0 ? ' <span style="text-decoration:line-through;opacity:.5">24 €</span>' : '') +
           '/mois/licence' +
         '</div>' +
         savingsHtml +
-        '<div style="background:rgba(255,255,255,.1);border-radius:var(--r-sm);padding:8px 10px;display:flex;justify-content:space-between;align-items:center">' +
-          '<span style="font-size:11px;color:rgba(255,255,255,.7)">🗓️ Annuel (2 mois offerts)</span>' +
-          '<span style="font-size:13px;font-weight:800;color:#96F0D8">' + totalYear.toLocaleString('fr-FR') + ' €/an</span>' +
-        '</div>' +
+        bottomRowHtml +
       '</div>';
   }
 
@@ -3458,15 +4158,20 @@ function etabQtyRefresh() {
   }
 
   var btn = document.getElementById('etab-checkout-btn');
-  if (btn) btn.textContent = 'Payer ' + totalMonth.toLocaleString('fr-FR') + ' €/mois →';
+  if (btn) {
+    var btnTotal = isAnnual ? totalYear : totalMonth;
+    var btnUnit  = isAnnual ? '/an' : '/mois';
+    btn.textContent = 'Payer ' + btnTotal.toLocaleString('fr-FR') + ' €' + btnUnit + ' →';
+  }
 }
 
 function etabLaunchCheckout() {
   var inp = document.getElementById('etab-qty-input');
   var qty = inp ? Math.max(1, parseInt(inp.value)||1) : 1;
+  var isAnnual = window._etabBilling === 'annual';
   var modal = document.getElementById('etab-pricing-modal');
   if (modal) modal.remove();
-  if (typeof stripeStartCheckout === 'function') stripeStartCheckout('etab', qty);
+  if (typeof stripeStartCheckout === 'function') stripeStartCheckout(isAnnual ? 'etab_annual' : 'etab', qty);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -3573,12 +4278,7 @@ function _etabSaveCodes(arr) {
 
 function etabGenerateCode() {
   var codes = _etabGetCodes();
-  if (codes.length >= 30) { authToast('Limite de 30 codes atteinte.'); return; }
-  var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  var code = 'HC-';
-  for (var i = 0; i < 4; i++) code += chars[Math.floor(Math.random() * chars.length)];
-  code += '-';
-  for (var j = 0; j < 4; j++) code += chars[Math.floor(Math.random() * chars.length)];
+  var code = _etabMakeCode();
   codes.push({ code: code, used: false, createdAt: new Date().toISOString() });
   _etabSaveCodes(codes);
   authToast('Code généré : ' + code);

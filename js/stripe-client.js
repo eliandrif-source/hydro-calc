@@ -6,8 +6,10 @@ var STRIPE_PK = 'pk_test_51TnL41RoaEvjU7M7IBgppniueRsxF7t3sQBfJ1OSx5ylq8SPPYSWth
 
 /* Prix Stripe (créés dans le dashboard Stripe) */
 var STRIPE_PRICES = {
-  pro:  'price_1TvJoFRoaEvjU7M7PIrHbQND',  /* 5,90 €/mois */
-  etab: 'price_1TvJooRoaEvjU7M7Gc57pi1V'   /* 35 €/mois   */
+  pro:        'price_1TvJoFRoaEvjU7M7PIrHbQND',  /* 5,90 €/mois  */
+  pro_annual: 'price_1U3LG0RoaEvjU7M70g6oxsvv',  /* 59 €/an      */
+  etab:        'price_1TvJooRoaEvjU7M7Gc57pi1V',  /* 24 €/mois    */
+  etab_annual: 'price_1U3LL3RoaEvjU7M7uyHPM9zu'  /* 240 €/an     */
 };
 
 /* URL de base des Edge Functions Supabase */
@@ -35,6 +37,7 @@ function stripeStartCheckout(planId, quantity) {
         planId: planId,
         priceId: STRIPE_PRICES[planId],
         quantity: qty,
+        trialDays: 7,
         successUrl: window.location.href.split('?')[0] + '?stripe=success',
         cancelUrl:  window.location.href.split('?')[0] + '?stripe=cancel'
       })
