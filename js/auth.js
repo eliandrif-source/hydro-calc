@@ -1774,7 +1774,6 @@ function authLogin() {
         trialStart: p.trial_start ? new Date(p.trial_start).getTime() : null,
         invite_code: p.invite_code || null
       });
-      _applyMetaCodeOverride(_supaLoginUser);
       if (rememberMe) DataStore.session.setRemember({ email: email, supa: true });
       else DataStore.session.clearRemember();
       _doEnterApp();
@@ -2113,66 +2112,6 @@ function _inactivityStart() {
   _inactivityReset();
 }
 
-function _applyMetaCodeOverride(supaUser) {
-  /* supaUser = objet user Supabase (contient user_metadata) — appelé de façon synchrone */
-  if (!AUTH.user || !supaUser) return;
-  var meta = supaUser.user_metadata || {};
-  if (meta.hc_code) {
-    AUTH.user.plan = 'etab';
-    AUTH.user.invite_code = meta.hc_code;
-  }
-}
-
-function _applyLocalCodeOverride(uid) {
-  /* Conservé pour compatibilité — ne fait plus rien (remplacé par _applyMetaCodeOverride) */
-}
-
-function applyAccessCode() {
-  var code = ((document.getElementById('profile-access-code') || {}).value || '').trim().toUpperCase();
-  if (!code) { authToast('Entrez un code d\'accès.'); return; }
-  if (!AUTH.user) { authToast('Connexion requise.'); return; }
-  if (!code.match(/^HC-[A-Z0-9]{4}-[A-Z0-9]{4}$/)) { authToast('Code invalide. Format attendu : HC-XXXX-XXXX'); return; }
-  if (!SupaDB) { authToast('Connexion internet requise.'); return; }
-
-  var btn = document.querySelector('#profile-access-code + button');
-  if (btn) { btn.disabled = true; btn.textContent = '…'; }
-
-  /* updateUser() modifie les métadonnées du compte auth — toujours autorisé */
-  SupaDB.auth.updateUser({ data: { hc_code: code, hc_plan: 'etab' } })
-    .then(function(res) {
-      if (res.error) throw res.error;
-      /* Marquer le code utilisé dans access_codes (best-effort, pour le Coffre admin) */
-      SupaDB.auth.getUser().then(function(ur) {
-        var uid = ur.data && ur.data.user && ur.data.user.id;
-        if (uid) SupaDB.from('access_codes').update({ used_by: uid, used_at: new Date().toISOString() }).eq('code', code).catch(function(){});
-      }).catch(function(){});
-      AUTH.user.plan = 'etab';
-      AUTH.user.invite_code = code;
-      if (btn) { btn.disabled = false; btn.textContent = 'Appliquer'; }
-      authToast('✅ Code appliqué — Accès Établissement activé en permanence !');
-      buildProfile();
-      if (typeof renderSidebarPlans === 'function') renderSidebarPlans();
-    })
-    .catch(function(err) {
-      if (btn) { btn.disabled = false; btn.textContent = 'Appliquer'; }
-      authToast('Erreur : ' + ((err && err.message) || 'impossible d\'appliquer le code.'));
-    });
-}
-
-function removeAccessCode() {
-  if (!AUTH.user || !SupaDB) return;
-  if (!confirm('Retirer le code d\'accès ? Votre compte repassera en plan Gratuit.')) return;
-  SupaDB.auth.updateUser({ data: { hc_code: null, hc_plan: null } })
-    .then(function(res) {
-      if (res.error) throw res.error;
-      AUTH.user.plan = 'free';
-      AUTH.user.invite_code = null;
-      authToast('Code retiré. Compte repassé en Gratuit.');
-      buildProfile();
-      if (typeof renderSidebarPlans === 'function') renderSidebarPlans();
-    })
-    .catch(function(err) { authToast('Erreur : ' + ((err && err.message) || 'impossible de retirer le code.')); });
-}
 
 function openProfile() {
   if (!AUTH.user){ authShow('auth-login'); return; }
@@ -2269,30 +2208,6 @@ function buildProfile() {
       + '<button onclick="openCoffre()" style="width:100%;padding:12px;background:linear-gradient(135deg,#7c3aed,#a855f7);border:none;border-radius:var(--r-lg);font-family:var(--f-body);font-size:13px;font-weight:700;color:#fff;cursor:pointer">🗄️ Coffre Admin · Codes d\'accès</button>'
     + '</div>';
   }
-
-  // Code d'accès
-  var _activeCode = u.invite_code || (AUTH._uid ? (function(){ try{ return localStorage.getItem('hc_active_code_' + AUTH._uid); }catch(e){ return null; } })() : null);
-  html += '<div style="padding:var(--s-3) var(--s-4) 0">'
-    + '<div style="font-size:var(--t-xs);font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--s-2)">Code d\'accès</div>'
-    + '<div style="background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-lg);padding:14px var(--s-4)">';
-  if (u.plan === 'etab' && !u.is_admin) {
-    html += '<div style="display:flex;align-items:center;gap:var(--s-3);margin-bottom:10px">'
-      + '<span style="font-size:20px">🎟️</span>'
-      + '<div style="flex:1">'
-        + '<div style="font-size:10px;color:var(--c-text-4);text-transform:uppercase;font-weight:700;letter-spacing:.04em">Code actif</div>'
-        + '<div style="font-size:15px;font-weight:900;color:var(--c-primary);letter-spacing:.12em;margin-top:2px">' + (_activeCode || '—') + '</div>'
-        + '<div style="font-size:10px;color:var(--c-ok,#166038);margin-top:2px;font-weight:600">✓ Accès Établissement activé en permanence</div>'
-      + '</div>'
-    + '</div>'
-    + '<button onclick="removeAccessCode()" style="width:100%;padding:9px;background:none;border:1.5px solid var(--c-border);border-radius:var(--r-lg);font-family:var(--f-body);font-size:12px;font-weight:700;color:var(--c-text-3);cursor:pointer">Retirer ce code</button>';
-  } else {
-    html += '<div style="font-size:12px;color:var(--c-text-3);margin-bottom:10px">Entrez un code d\'accès pour activer un accès Établissement permanent.</div>'
-      + '<div style="display:flex;gap:8px">'
-        + '<input id="profile-access-code" type="text" placeholder="HC-XXXX-XXXX" maxlength="14" oninput="this.value=this.value.toUpperCase()" style="flex:1;padding:9px 12px;border:1.5px solid var(--c-border);border-radius:var(--r-lg);font-family:var(--f-body);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--c-surface-2);color:var(--c-text)">'
-        + '<button onclick="applyAccessCode()" style="padding:9px 16px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-lg);font-family:var(--f-body);font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">Appliquer</button>'
-      + '</div>';
-  }
-  html += '</div></div>';
 
   // Déconnexion
   html += '<div style="padding:var(--s-3) var(--s-4) var(--s-2)">'
@@ -2868,7 +2783,6 @@ function etabDeleteCodeCoffre(code) {
           trialStart: p.trial_start ? new Date(p.trial_start).getTime() : null,
           invite_code: p.invite_code || null
         });
-        _applyMetaCodeOverride(_supaSessionUser);
         _doEnterApp();
       })
       .catch(function() { if (!_recoveryHandled) _showSplash(); });
