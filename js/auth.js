@@ -2249,6 +2249,11 @@ function buildProfile() {
       + '<button onclick="stripeOpenPortal()" style="width:100%;padding:11px;background:none;border:1.5px solid var(--c-border);border-radius:var(--r-lg);font-family:var(--f-body);font-size:12.5px;font-weight:600;color:var(--c-text-3);cursor:pointer">Gérer mon abonnement</button>'
     + '</div>';
   }
+  if (u.plan === 'etab' || u.plan === 'admin') {
+    html += '<div style="padding:var(--s-2) var(--s-4) 0">'
+      + '<button onclick="closeProfile();showEtabEspace();" style="width:100%;padding:11px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-lg);font-family:var(--f-body);font-size:13px;font-weight:700;cursor:pointer">🏛️ Mon espace Établissement</button>'
+    + '</div>';
+  }
 
   /* Compteur abonnés + Coffre — admin seulement */
   if (u.plan === 'admin') {
