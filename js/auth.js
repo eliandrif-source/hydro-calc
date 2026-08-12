@@ -467,12 +467,11 @@ function _doGeneratePDFReport() {
         lines.forEach(function(l) {
           checkPage(5);
           doc.setFillColor(248, 251, 250);
-          doc.setDrawColor(200, 225, 218);
-          doc.rect(MARGIN, y - 3, cW, 5, 'F');
-          doc.text(l, MARGIN + 3, y + 0.5);
-          y += 4;
+          doc.rect(MARGIN, y - 2, cW, 4.5, 'F');
+          doc.text(l, MARGIN + 3, y + 1);
+          y += 4.5;
         });
-        y += 4;
+        y += 3;
       }
       y += 3;
     });
