@@ -2359,6 +2359,8 @@ function selectHCPlan(planId) {
 
   /* Espace établissement si déjà abonné */
   if (planId === 'etab' && (AUTH.user.plan === 'etab' || AUTH.user.plan === 'admin')) {
+    var pp = document.getElementById('profile-panel');
+    if (pp) pp.style.display = 'none';
     if (typeof showEtabEspace === 'function') showEtabEspace(); return;
   }
 
