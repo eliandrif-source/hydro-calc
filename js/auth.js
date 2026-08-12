@@ -2357,6 +2357,11 @@ function selectHCPlan(planId) {
     if (typeof stripeOpenPortal === 'function') { stripeOpenPortal(); return; }
   }
 
+  /* Espace établissement si déjà abonné */
+  if (planId === 'etab' && (AUTH.user.plan === 'etab' || AUTH.user.plan === 'admin')) {
+    if (typeof showEtabEspace === 'function') showEtabEspace(); return;
+  }
+
   /* Upgrade vers plan payant → Stripe Checkout */
   if (planId === 'etab' && SupaDB) {
     showEtabPricingModal(); return;
