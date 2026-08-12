@@ -443,32 +443,36 @@ function _doGeneratePDFReport() {
 
       /* Valeur */
       if (c.valeur) {
-        checkPage(10);
+        var valTxt = _pdfSanitize(_htmlToText ? _htmlToText(c.valeur) : c.valeur);
+        var valLines = doc.splitTextToSize(valTxt, cW - 6);
+        var valH = valLines.length * 6 + 4;
+        checkPage(valH);
         doc.setFillColor.apply(doc, LGRAY);
-        doc.roundedRect(MARGIN, y, cW, 8, 1.5, 1.5, 'F');
+        doc.roundedRect(MARGIN, y, cW, valH, 1.5, 1.5, 'F');
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(10);
         doc.setTextColor.apply(doc, DGREEN);
-        var valTxt = _pdfSanitize(_htmlToText ? _htmlToText(c.valeur) : c.valeur);
-        var valLines = doc.splitTextToSize(valTxt, cW - 6);
-        doc.text(valLines[0] || '', MARGIN + 3, y + 5.5);
-        y += 10;
+        valLines.forEach(function(l, li) { doc.text(l, MARGIN + 3, y + 5.5 + li * 6); });
+        y += valH + 2;
       }
 
-      /* Détail */
+      /* Détail — ligne par ligne pour gérer les sauts de page */
       if (c.detail) {
         var detTxt = _pdfSanitize(_htmlToText ? _htmlToText(c.detail) : c.detail);
         var lines = doc.splitTextToSize(detTxt, cW - 6);
-        var blockH = lines.length * 4 + 6;
-        checkPage(blockH);
-        doc.setFillColor(248, 251, 250);
-        doc.setDrawColor(200, 225, 218);
-        doc.roundedRect(MARGIN, y, cW, blockH, 1.5, 1.5, 'FD');
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(8);
         doc.setTextColor.apply(doc, DGRAY);
-        lines.forEach(function(l, li) { doc.text(l, MARGIN + 3, y + 5 + li * 4); });
-        y += blockH + 3;
+        y += 2;
+        lines.forEach(function(l) {
+          checkPage(5);
+          doc.setFillColor(248, 251, 250);
+          doc.setDrawColor(200, 225, 218);
+          doc.rect(MARGIN, y - 3, cW, 5, 'F');
+          doc.text(l, MARGIN + 3, y + 0.5);
+          y += 4;
+        });
+        y += 4;
       }
       y += 3;
     });
