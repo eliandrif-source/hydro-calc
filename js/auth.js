@@ -347,7 +347,7 @@ function _doGeneratePDFReport() {
   var arr      = _getSelectedCalcs();
   var formulas = _getSelectedFormulas();
   var regls    = _getSelectedRegls ? _getSelectedRegls() : [];
-  if (!arr.length && !formulas.length) { authToast('Aucun élément sélectionné à exporter.'); return; }
+  if (!arr.length && !formulas.length && !regls.length) { authToast('Aucun élément sélectionné à exporter.'); return; }
 
   if (!window.jspdf) { authToast('Bibliothèque PDF non chargée — vérifiez votre connexion.'); return; }
 
