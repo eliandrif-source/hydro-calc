@@ -8234,11 +8234,11 @@ function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap) {
 
   /* Intro */
   var LH = 5.2;
+  doc.setFont('helvetica', 'italic'); doc.setFontSize(9.5);
   var introLines = doc.splitTextToSize(_pdfSanitize(fi.intro), cW - 10);
   checkPage(introLines.length * LH + 12);
   doc.setFillColor(246, 248, 247);
   doc.roundedRect(MARGIN, y, cW, introLines.length * LH + 8, 2, 2, 'F');
-  doc.setFont('helvetica', 'italic'); doc.setFontSize(9.5);
   doc.setTextColor(80, 92, 86);
   introLines.forEach(function(l, i) { doc.text(l, MARGIN + 5, y + 6 + i * LH); });
   y += introLines.length * LH + 14;
@@ -8340,12 +8340,12 @@ function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap) {
       form.split(' | ').forEach(function(part) {
         part = _pdfSanitize(part.trim());
         if (!part) return;
+        doc.setFont('courier', 'bold'); doc.setFontSize(9.5);
         var partLines = doc.splitTextToSize(part, cW - 12);
         var boxH = partLines.length * 5.5 + 7;
         checkPage(boxH + 3);
         doc.setFillColor(222, 238, 250);
         doc.roundedRect(MARGIN, y, cW, boxH, 1.5, 1.5, 'F');
-        doc.setFont('courier', 'bold'); doc.setFontSize(9.5);
         doc.setTextColor(12, 70, 120);
         partLines.forEach(function(l, li) {
           doc.text(l, MARGIN + 5, y + 6 + li * 5.5);
@@ -8457,6 +8457,7 @@ function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap) {
 
       /* Énoncé — fond très léger + bordure colorée */
       if (ex.enonce) {
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
         var enonceLines = doc.splitTextToSize(_pdfSanitize(ex.enonce), cW - 10);
         checkPage(enonceLines.length * 5.2 + 12);
         doc.setFillColor(248, 250, 249);
@@ -8465,7 +8466,6 @@ function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap) {
         doc.roundedRect(MARGIN, y, cW, enonceLines.length * 5.2 + 8, 1.5, 1.5, 'FD');
         doc.setFillColor.apply(doc, col);
         doc.roundedRect(MARGIN, y, 2.5, enonceLines.length * 5.2 + 8, 1, 1, 'F');
-        doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
         doc.setTextColor(40, 50, 45);
         enonceLines.forEach(function(l, li) { doc.text(l, MARGIN + 6, y + 6 + li * 5.2); });
         y += enonceLines.length * 5.2 + 13;
