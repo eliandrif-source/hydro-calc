@@ -8147,20 +8147,36 @@ function _svgDimensions(svgStr) {
 function _preconvertSchemas(chaps, cb) {
   var map = {};
   var pending = 0;
-  chaps.forEach(function(c) { if (c.fiche && c.fiche.schema) pending++; });
+  chaps.forEach(function(c) {
+    if (c.fiche && c.fiche.schema) pending++;
+    if (c.exercices) c.exercices.forEach(function(ex) { if (ex.schema) pending++; });
+  });
   if (!pending) { cb(map); return; }
   chaps.forEach(function(c) {
-    if (!c.fiche || !c.fiche.schema) return;
-    var dim = _svgDimensions(c.fiche.schema);
-    _svgStringToPng(c.fiche.schema, dim.w, dim.h, function(png) {
-      if (png) map[c.id] = png;
-      pending--;
-      if (!pending) cb(map);
-    });
+    if (c.fiche && c.fiche.schema) {
+      var dim = _svgDimensions(c.fiche.schema);
+      _svgStringToPng(c.fiche.schema, dim.w, dim.h, function(png) {
+        if (png) map[c.id] = png;
+        pending--;
+        if (!pending) cb(map);
+      });
+    }
+    if (c.exercices) {
+      c.exercices.forEach(function(ex) {
+        if (!ex.schema) return;
+        var dim = _svgDimensions(ex.schema);
+        _svgStringToPng(ex.schema, dim.w, dim.h, function(png) {
+          if (png) map['ex_' + ex.id] = png;
+          pending--;
+          if (!pending) cb(map);
+        });
+      });
+    }
   });
 }
 
-function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaPng) {
+function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap) {
+  var schemaPng = schemaMap ? (schemaMap[c.id] || null) : null;
   var fi = c.fiche;
   var col = _hexToRgb(m.color);
   var colL = _hexToRgb(m.colorl);
@@ -8241,12 +8257,15 @@ function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaPng) {
 
           var paraClean = _pdfSanitize(cleanBloc);
           if (!paraClean) return;
-          var paraLines = doc.splitTextToSize(paraClean, cW - 10);
           doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
           doc.setTextColor(50, 60, 55);
+          var paraLines = doc.splitTextToSize(paraClean, cW - 10);
+          var paraH = paraLines.length * 5 + 6;
+          /* Garder le bloc entier sur la même page si possible */
+          checkPage(Math.min(paraH, 60));
           y += 2;
           paraLines.forEach(function(l) {
-            checkPage(6);
+            if (y + 5 > PAGE_H) { doc.addPage(); y = RESUME_Y; }
             doc.text(l, MARGIN + 4, y + 4);
             y += 5;
           });
@@ -8308,7 +8327,14 @@ function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaPng) {
   /* À retenir */
   if (fi.retenir) {
     var retenirItems = _pdfSanitize(fi.retenir).split(' | ').map(function(p){ return p.trim(); }).filter(Boolean);
-    checkPage(12);
+    /* Pré-calculer la hauteur totale pour garder header + 2 premiers items ensemble */
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5);
+    var retenirTotalH = 12;
+    retenirItems.forEach(function(item) {
+      var il = doc.splitTextToSize('• ' + item, cW - 12);
+      retenirTotalH += il.length * 5.2 + 4;
+    });
+    checkPage(Math.min(retenirTotalH, 50));
     doc.setFillColor(230, 248, 238);
     doc.setDrawColor(22, 96, 56);
     doc.setLineWidth(0.4);
@@ -8318,11 +8344,11 @@ function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaPng) {
     doc.text('À RETENIR ABSOLUMENT', MARGIN + 5, y + 6.8);
     y += 12;
     retenirItems.forEach(function(item) {
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5);
       var itemLines = doc.splitTextToSize('• ' + item, cW - 12);
-      checkPage(itemLines.length * 5.2 + 4);
+      if (y + itemLines.length * 5.2 + 4 > PAGE_H) { doc.addPage(); y = RESUME_Y; }
       doc.setFillColor(230, 248, 238);
       doc.rect(MARGIN, y - 1, cW, itemLines.length * 5.2 + 3, 'F');
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5);
       doc.setTextColor(20, 50, 32);
       itemLines.forEach(function(l, li) { doc.text(l, MARGIN + 5, y + 4.5 + li * 5.2); });
       y += itemLines.length * 5.2 + 4;
@@ -8334,7 +8360,7 @@ function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaPng) {
   if (fi.schema) {
     if (schemaPng && schemaPng.dataUrl) {
       var imgW = cW;
-      var imgH = Math.min(Math.round(schemaPng.h * (cW / schemaPng.w)), 130);
+      var imgH = Math.round(schemaPng.h * (cW / schemaPng.w));
       checkPage(imgH + 14);
       doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5);
       doc.setTextColor.apply(doc, col);
@@ -8415,49 +8441,57 @@ function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaPng) {
 
       /* Schéma lié à l'exercice */
       if (ex.schema) {
-        checkPage(20);
-        doc.setFont('helvetica', 'bold'); doc.setFontSize(8.5);
-        doc.setTextColor.apply(doc, col);
-        doc.text('Schéma :', MARGIN, y);
-        y += 5;
-        doc.setFillColor(245, 247, 250);
-        doc.setDrawColor(180, 195, 210);
-        doc.setLineWidth(0.3);
-        doc.roundedRect(MARGIN, y, cW, 35, 1.5, 1.5, 'FD');
-        doc.setFont('helvetica', 'italic'); doc.setFontSize(8);
-        doc.setTextColor(120, 135, 130);
-        doc.text('Voir schéma dans l\'application HydroCalc', MARGIN + cW / 2, y + 18, { align: 'center' });
-        y += 40;
+        var exPng = schemaMap ? (schemaMap['ex_' + ex.id] || null) : null;
+        if (exPng && exPng.dataUrl) {
+          var exImgW = cW;
+          var exImgH = Math.round(exPng.h * (cW / exPng.w));
+          checkPage(exImgH + 10);
+          doc.addImage(exPng.dataUrl, 'PNG', MARGIN, y, exImgW, exImgH);
+          y += exImgH + 6;
+        } else {
+          checkPage(20);
+          doc.setFillColor(245, 247, 250);
+          doc.setDrawColor(180, 195, 210);
+          doc.setLineWidth(0.3);
+          doc.roundedRect(MARGIN, y, cW, 14, 1.5, 1.5, 'FD');
+          doc.setFont('helvetica', 'italic'); doc.setFontSize(8);
+          doc.setTextColor(120, 135, 130);
+          doc.text('Voir schéma dans l\'application HydroCalc', MARGIN + cW / 2, y + 8, { align: 'center' });
+          y += 18;
+        }
       }
 
       /* Questions */
       if (ex.questions && ex.questions.length) {
         ex.questions.forEach(function(q) {
+          /* Définir la police AVANT splitTextToSize pour que la mesure soit correcte */
+          doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
           var qLabel = 'Q' + q.num + '.';
           var qBody = _pdfSanitize(q.texte);
           var qLines = doc.splitTextToSize(qBody, cW - 14);
-          var indiceLines = q.indice ? doc.splitTextToSize('Indice : ' + _pdfSanitize(q.indice), cW - 14) : [];
+          doc.setFont('helvetica', 'italic'); doc.setFontSize(8);
+          var indiceLines = q.indice ? doc.splitTextToSize('Indice : ' + _pdfSanitize(q.indice), cW - 12) : [];
           var ansLines = 4;
-          var blockH = (qLines.length + indiceLines.length) * 5.2 + ansLines * 7.5 + 16;
+          var blockH = qLines.length * 5.2 + 8 + (indiceLines.length ? indiceLines.length * 4.8 + 8 : 0) + ansLines * 7.5 + 6;
           checkPage(blockH);
 
-          /* Numéro question */
+          /* Bloc question — fond très clair */
           doc.setFillColor(col[0] + Math.round((255 - col[0]) * 0.92), col[1] + Math.round((255 - col[1]) * 0.92), col[2] + Math.round((255 - col[2]) * 0.92));
           doc.roundedRect(MARGIN, y, cW, qLines.length * 5.2 + 8, 1.2, 1.2, 'F');
           doc.setFont('helvetica', 'bold'); doc.setFontSize(9);
           doc.setTextColor.apply(doc, col);
           doc.text(qLabel, MARGIN + 4, y + 5.5);
-          doc.setFont('helvetica', 'normal');
-          doc.setTextColor(40, 50, 45);
+          doc.setFont('helvetica', 'normal'); doc.setTextColor(40, 50, 45);
           qLines.forEach(function(l, li) { doc.text(l, MARGIN + 12, y + 5.5 + li * 5.2); });
           y += qLines.length * 5.2 + 10;
 
-          /* Indice */
+          /* Indice — espacé et distingué */
           if (indiceLines.length) {
+            y += 2;
             doc.setFont('helvetica', 'italic'); doc.setFontSize(8);
-            doc.setTextColor(120, 130, 125);
-            indiceLines.forEach(function(l, li) { doc.text(l, MARGIN + 6, y + li * 5); });
-            y += indiceLines.length * 5 + 4;
+            doc.setTextColor(110, 125, 118);
+            indiceLines.forEach(function(l, li) { doc.text(l, MARGIN + 6, y + li * 4.8); });
+            y += indiceLines.length * 4.8 + 6;
           }
 
           /* Lignes de réponse pointillées */
@@ -8471,7 +8505,7 @@ function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaPng) {
               sx += segL + gapL;
             }
           }
-          y += ansLines * 7.5 + 6;
+          y += ansLines * 7.5 + 8;
         });
       }
 
@@ -8605,7 +8639,7 @@ function _downloadFichePDF(fId, aId, mId, cId) {
     var W = 210, MARGIN = 14, cW = W - MARGIN * 2, y = 32;
 
     _pdfFicheHeader(doc, W, MARGIN, m.color, m.name, f.sigle);
-    y = _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap[c.id] || null);
+    y = _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap);
 
     doc.setFont('helvetica', 'normal'); doc.setFontSize(7);
     doc.setTextColor(150, 160, 155);
@@ -8654,7 +8688,7 @@ function _downloadFormationPDF(fId) {
           if (!c.fiche) return;
           _pdfFicheHeader(doc, W, MARGIN, m.color, m.name, f.sigle + ' · ' + a.name);
           y = 32;
-          y = _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap[c.id] || null);
+          y = _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap);
           doc.addPage(); y = 14;
         });
       });
@@ -8686,7 +8720,7 @@ function _downloadMatierePDF(fId, aId, mId) {
     chaps.forEach(function(c, idx) {
       _pdfFicheHeader(doc, W, MARGIN, m.color, m.name, f.sigle + ' · ' + a.name);
       y = 32;
-      y = _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap[c.id] || null);
+      y = _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap);
       if (idx < chaps.length - 1) { doc.addPage(); y = 14; }
     });
 
