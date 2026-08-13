@@ -2208,7 +2208,7 @@ function buildProfile() {
       + '<div style="text-align:center"><div style="font-size:20px;font-weight:800;color:#60a5fa" id="stat-etab">…</div><div style="font-size:10px;color:rgba(255,255,255,.6)">Établ.</div></div>'
       + '</div></div></div>';
     html += '<div style="padding:4px var(--s-4) 0">'
-      + '<button onclick="openCoffre()" style="width:100%;padding:12px;background:linear-gradient(135deg,#7c3aed,#a855f7);border:none;border-radius:var(--r-lg);font-family:var(--f-body);font-size:13px;font-weight:700;color:#fff;cursor:pointer">🗄️ Coffre Admin · Codes d\'accès</button>'
+      + '<button onclick="openCoffre()" style="width:100%;padding:12px;background:linear-gradient(135deg,#7c3aed,#a855f7);border:none;border-radius:var(--r-lg);font-family:var(--f-body);font-size:13px;font-weight:700;color:#fff;cursor:pointer">🗄️ Coffre Admin</button>'
     + '</div>';
   }
 
@@ -2431,10 +2431,8 @@ function buildCoffre() {
     html += '</div>';
 
     el.innerHTML = html;
-    _renderEtabCodesInCoffre(supaCodesMap);
   }).catch(function(err) {
     el.innerHTML = '<div style="padding:24px;color:var(--c-text-3)">Supabase indisponible. Données locales chargées.</div>';
-    _renderEtabCodesInCoffre();
   });
 }
 
@@ -2464,56 +2462,6 @@ function _renderCoffreAnnuaire() {
   tbody.innerHTML = html;
 }
 
-function _renderEtabCodesInCoffre(supaCodesMap) {
-  var existing = document.getElementById('coffre-etab-codes');
-  if (existing) existing.remove();
-  var el = document.getElementById('coffre-content');
-  if (!el) return;
-
-  /* Construire la liste des codes depuis Supabase en priorité, localStorage en complément */
-  var supaMap = supaCodesMap || window._coffreSupaCodes || {};
-  var profiles = window._coffreProfiles || [];
-
-  /* Codes Supabase → source principale (multi-appareil) */
-  var etabCodes = Object.keys(supaMap).map(function(code) {
-    var supaEntry = supaMap[code];
-    var match = supaEntry.used_by ? profiles.find(function(p){ return p.id === supaEntry.used_by; }) : null;
-    return {
-      code: code,
-      used: !!supaEntry.used_by,
-      usedBy: match ? (match.name || match.email) : (supaEntry.used_by ? supaEntry.used_by.slice(0,8) + '…' : null),
-      usedEmail: match ? match.email : null,
-      usedAt: supaEntry.used_at || null,
-      label: null
-    };
-  });
-
-  /* Ajouter les codes locaux pas encore dans Supabase */
-  var localCodes = [];
-  try { localCodes = JSON.parse(localStorage.getItem('etab_codes') || '[]'); } catch(e) {}
-  localCodes.forEach(function(lc) {
-    if (!supaMap[lc.code]) etabCodes.push(lc);
-  });
-
-  var used  = etabCodes.filter(function(c){ return !!c.used; });
-  var avail = etabCodes.filter(function(c){ return !c.used; });
-
-  var div = document.createElement('div');
-  div.id = 'coffre-etab-codes';
-  div.style.cssText = 'padding:0 var(--s-4) var(--s-6)';
-
-  var html = '<div style="display:flex;align-items:center;justify-content:space-between;margin:18px 0 10px">'
-    + '<div style="font-weight:700;font-size:14px">Codes d\'accès Établissement</div>'
-    + '<span style="font-size:11px;color:var(--c-text-3)">'
-      + '<span style="color:var(--c-ok,#166038);font-weight:700">' + avail.length + ' dispo</span>'
-      + (used.length ? ' · <span style="color:var(--c-danger,#A82018);font-weight:700">⚠ ' + used.length + ' utilisé(s)</span>' : '')
-    + '</span>'
-    + '</div>'
-    + '<button onclick="etabGenerateCodeCoffre()" style="width:100%;padding:10px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-md);font-family:var(--f-body);font-size:13px;font-weight:700;cursor:pointer;margin-bottom:14px">+ Générer un code</button>';
-
-  div.innerHTML = html;
-  el.appendChild(div);
-}
 
 function coffreSearch() {
   var q = (document.getElementById('coffre-search') || {}).value || '';
@@ -2644,72 +2592,6 @@ function coffrePlanChange(userId, newPlan) {
   });
 }
 
-function _etabMakeCode() {
-  var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  var r = '';
-  for (var i = 0; i < 8; i++) r += chars[Math.floor(Math.random() * chars.length)];
-  return 'HC-' + r.slice(0,4) + '-' + r.slice(4);
-}
-
-function etabGenerateCodeCoffre() {
-  /* Modal inline pour saisir le titre */
-  var overlay = document.createElement('div');
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px';
-  overlay.innerHTML = '<div style="background:var(--c-surface);border-radius:var(--r-lg);padding:24px 20px;width:100%;max-width:340px;box-shadow:0 8px 40px rgba(0,0,0,.25)">'
-    + '<div style="font-size:15px;font-weight:800;color:var(--c-text);margin-bottom:6px">Nouveau code d\'accès</div>'
-    + '<div style="font-size:12px;color:var(--c-text-3);margin-bottom:14px">Donnez un titre pour identifier à qui ce code est destiné.</div>'
-    + '<input id="_gen-code-label" type="text" placeholder="Ex : Jean Dupont, Promo 2025…" maxlength="60" style="width:100%;padding:10px 12px;border:1.5px solid var(--c-border);border-radius:var(--r-md);font-family:var(--f-body);font-size:13px;box-sizing:border-box;margin-bottom:14px;background:var(--c-surface-2);color:var(--c-text)">'
-    + '<div style="display:flex;gap:8px">'
-      + '<button onclick="this.closest(\'[data-gen-overlay]\').remove()" style="flex:1;padding:10px;background:none;border:1.5px solid var(--c-border);border-radius:var(--r-md);font-family:var(--f-body);font-size:13px;font-weight:700;color:var(--c-text-3);cursor:pointer">Annuler</button>'
-      + '<button onclick="_etabDoGenerate(document.getElementById(\'_gen-code-label\').value);this.closest(\'[data-gen-overlay]\').remove()" style="flex:2;padding:10px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-md);font-family:var(--f-body);font-size:13px;font-weight:700;cursor:pointer">✓ Générer</button>'
-    + '</div>'
-  + '</div>';
-  overlay.setAttribute('data-gen-overlay', '1');
-  overlay.addEventListener('click', function(e){ if (e.target === overlay) overlay.remove(); });
-  document.body.appendChild(overlay);
-  setTimeout(function(){ var inp = document.getElementById('_gen-code-label'); if(inp) inp.focus(); }, 80);
-}
-
-function _etabDoGenerate(labelRaw) {
-  var label = (labelRaw || '').trim();
-  var code = _etabMakeCode();
-  var codes = _etabGetCodes();
-  codes.push({ code: code, used: false, label: label, createdAt: new Date().toISOString() });
-  _etabSaveCodes(codes);
-  if (SupaDB) {
-    SupaDB.from('access_codes').insert({ code: code, used_by: null, used_at: null })
-      .then(function(r) {
-        if (r.error) authToast('⚠️ Code local uniquement : ' + r.error.message);
-        else authToast('✓ Code généré : ' + (label || code));
-      });
-  } else {
-    authToast('Code généré : ' + (label || code));
-  }
-  _renderEtabCodesInCoffre();
-}
-
-function etabSyncCodesToSupabase() {
-  if (!SupaDB) { authToast('Supabase non connecté'); return; }
-  var codes = _etabGetCodes().filter(function(c){ return !c.used; });
-  if (!codes.length) { authToast('Aucun code disponible à synchroniser'); return; }
-  var rows = codes.map(function(c){ return { code: c.code, used_by: null, used_at: null }; });
-  SupaDB.from('access_codes').upsert(rows, { onConflict: 'code' }).then(function(r) {
-    if (r.error) authToast('Erreur sync : ' + r.error.message);
-    else authToast('✓ ' + codes.length + ' code(s) synchronisé(s) vers Supabase');
-  });
-}
-
-function etabDeleteCodeCoffre(code) {
-  if (!SupaDB) return;
-  SupaDB.from('access_codes').delete().eq('code', code).then(function(r) {
-    if (r.error) { authToast('Erreur : ' + r.error.message); return; }
-    /* Supprimer aussi du localStorage si présent */
-    var local = _etabGetCodes().filter(function(c){ return c.code !== code; });
-    _etabSaveCodes(local);
-    authToast('Code supprimé : ' + code);
-    buildCoffre();
-  });
-}
 
 /* INIT — vérification session Supabase au chargement */
 (function initAuth(){
