@@ -15,7 +15,24 @@ function saveCurrentCalc() {
   var boxes = document.querySelectorAll('.result-box.show');
   if (!boxes.length) { authToast('Aucun calcul à enregistrer'); return; }
   var box = boxes[boxes.length - 1];
+
+  /* Format 1 : .result-value (calculateurs classiques) */
   var val = box.querySelector('.result-value');
+  var valText = val ? val.textContent.trim() : '';
+
+  /* Format 2 : grille multi-unités rv-* (débit nuit, fuite AEP...) */
+  if (!valText) {
+    var rvDiv = box.querySelector('[id^="rv-"]');
+    if (rvDiv && rvDiv.textContent.trim()) {
+      valText = rvDiv.textContent.replace(/\s+/g, ' ').trim();
+    }
+  }
+
+  /* Format 3 : contenu libre (charges polluantes, etc.) */
+  if (!valText) {
+    valText = box.textContent.replace(/\s+/g, ' ').trim().slice(0, 300);
+  }
+
   var det = box.querySelector('.result-detail');
   var titleEl = document.getElementById('top-title');
   var inputs = {};
@@ -30,7 +47,7 @@ function saveCurrentCalc() {
   }
   var calc = {
     module: titleEl ? titleEl.textContent : 'Calcul',
-    valeur: val ? val.textContent : '',
+    valeur: valText,
     detail: det ? det.innerHTML : '',
     inputs: inputs,
     moduleId: typeof currentModule !== 'undefined' ? (currentModule || '') : '',
