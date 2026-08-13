@@ -8158,13 +8158,17 @@ function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaPng) {
     if (y + needed > PAGE_H) { doc.addPage(); y = RESUME_Y; }
   }
 
-  /* Bandeau titre chapitre */
+  /* Bandeau titre chapitre — fond clair + bordure colorée */
   checkPage(14);
+  doc.setFillColor(col[0] + Math.round((255 - col[0]) * 0.88), col[1] + Math.round((255 - col[1]) * 0.88), col[2] + Math.round((255 - col[2]) * 0.88));
+  doc.setDrawColor.apply(doc, col);
+  doc.setLineWidth(0.5);
+  doc.roundedRect(MARGIN, y, cW, 11, 1.5, 1.5, 'FD');
   doc.setFillColor.apply(doc, col);
-  doc.roundedRect(MARGIN, y, cW, 11, 1.5, 1.5, 'F');
+  doc.roundedRect(MARGIN, y, 3, 11, 1, 1, 'F');
   doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
-  doc.setTextColor(255,255,255);
-  doc.text(_pdfSanitize(c.titre), MARGIN + 4, y + 7.3);
+  doc.setTextColor.apply(doc, col);
+  doc.text(_pdfSanitize(c.titre), MARGIN + 6, y + 7.3);
   y += 16;
 
   /* Intro */
@@ -8191,7 +8195,7 @@ function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaPng) {
 
       /* Titre de section — garde au moins 20mm avec le contenu suivant */
       checkPage(26);
-      doc.setFillColor.apply(doc, colL);
+      doc.setFillColor(col[0] + Math.round((255 - col[0]) * 0.94), col[1] + Math.round((255 - col[1]) * 0.94), col[2] + Math.round((255 - col[2]) * 0.94));
       doc.roundedRect(MARGIN, y, cW, 6.5, 1, 1, 'F');
       doc.setFont('helvetica', 'bold'); doc.setFontSize(8.5);
       doc.setTextColor.apply(doc, col);
@@ -8379,17 +8383,25 @@ function _hexToRgb(hex) {
 
 function _pdfFicheHeader(doc, W, MARGIN, color, title, subtitle) {
   var col = _hexToRgb(color);
+  /* Fond blanc + fine bordure colorée en bas */
+  doc.setFillColor(255, 255, 255);
+  doc.rect(0, 0, W, 22, 'F');
+  doc.setDrawColor.apply(doc, col);
+  doc.setLineWidth(0.8);
+  doc.line(0, 22, W, 22);
+  /* Barre colorée fine à gauche */
   doc.setFillColor.apply(doc, col);
-  doc.rect(0, 0, W, 24, 'F');
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(15);
-  doc.setTextColor(255,255,255);
-  doc.text('HydroCalc — Fiche de révision', MARGIN, 11);
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
-  doc.setTextColor(255,255,255);
-  doc.text(_pdfSanitize(title), MARGIN, 18);
+  doc.rect(0, 0, 4, 22, 'F');
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(14);
+  doc.setTextColor.apply(doc, col);
+  doc.text('HydroCalc — Fiche de révision', MARGIN + 4, 10);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5);
+  doc.setTextColor(80, 90, 85);
+  doc.text(_pdfSanitize(title), MARGIN + 4, 17);
   if (subtitle) {
     doc.setFontSize(7.5);
-    doc.text(_pdfSanitize(subtitle), W - MARGIN, 18, { align: 'right' });
+    doc.setTextColor.apply(doc, col);
+    doc.text(_pdfSanitize(subtitle), W - MARGIN, 17, { align: 'right' });
   }
 }
 
