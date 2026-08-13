@@ -8181,6 +8181,7 @@ function _preconvertSchemas(chaps, cb) {
   var pending = 0;
   chaps.forEach(function(c) {
     if (c.fiche && c.fiche.schema) pending++;
+    if (c.fiche && c.fiche.sections) c.fiche.sections.forEach(function(sec) { if (sec && sec.schema) pending++; });
     if (c.exercices) c.exercices.forEach(function(ex) { if (ex.schema) pending++; });
   });
   if (!pending) { cb(map); return; }
@@ -8191,6 +8192,18 @@ function _preconvertSchemas(chaps, cb) {
         if (png) map[c.id] = png;
         pending--;
         if (!pending) cb(map);
+      });
+    }
+    if (c.fiche && c.fiche.sections) {
+      c.fiche.sections.forEach(function(sec, si) {
+        if (!sec || !sec.schema) return;
+        var key = c.id + '_sec_' + si;
+        var dim = _svgDimensions(sec.schema);
+        _svgStringToPng(sec.schema, dim.w, dim.h, function(png) {
+          if (png) map[key] = png;
+          pending--;
+          if (!pending) cb(map);
+        });
       });
     }
     if (c.exercices) {
@@ -8251,9 +8264,10 @@ function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap) {
     doc.text('CONTENU DU COURS', MARGIN, y);
     y += 7;
 
-    fi.sections.forEach(function(sec) {
+    fi.sections.forEach(function(sec, si) {
       var titreSection = typeof sec === 'string' ? sec : sec.titre;
       var texteSection = typeof sec === 'string' ? '' : (sec.texte || '');
+      var schemaSection = typeof sec === 'string' ? null : (sec.schema || null);
 
       /* Titre de section — garde au moins 25mm avec le contenu suivant */
       checkPage(28);
@@ -8304,6 +8318,17 @@ function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap) {
           y += 4;
         });
         y += 5;
+      }
+
+      /* Schéma de section */
+      if (schemaSection && schemaMap) {
+        var secPng = schemaMap[c.id + '_sec_' + si];
+        if (secPng && secPng.dataUrl) {
+          var secImgH = Math.round(secPng.h * (cW / secPng.w));
+          checkPage(secImgH + 6);
+          doc.addImage(secPng.dataUrl, 'PNG', MARGIN, y, cW, secImgH);
+          y += secImgH + 6;
+        }
       }
     });
     y += 6;
