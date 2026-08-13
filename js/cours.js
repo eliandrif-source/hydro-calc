@@ -7760,14 +7760,19 @@ function renderCoursChapitre(fId, aId, mId, cId) {
     + '</div>'
     + '<div style="background:var(--c-surface);border:1.5px solid #E6510033;border-radius:var(--r-md);padding:var(--s-3);display:flex;flex-direction:column;gap:6px">';
   fi.points.forEach(function(p) {
+    var parts = p.split(' | ');
     var isFormule = /=/.test(p) && /[·×\/\^²³ρνμγλξπΔΣ√⁰¹²³⁴⁵⁶⁷⁸⁹]/.test(p);
     if (isFormule) {
-      html += '<div style="background:var(--c-primary-l);border-left:3px solid var(--c-primary);border-radius:0 8px 8px 0;padding:8px 12px;font-family:\'Courier New\',monospace;font-size:12.5px;font-weight:700;color:var(--c-primary)">' + p + '</div>';
+      parts.forEach(function(part) {
+        html += '<div style="background:var(--c-primary-l);border-left:3px solid var(--c-primary);border-radius:0 8px 8px 0;padding:8px 12px;font-family:\'Courier New\',monospace;font-size:12.5px;font-weight:700;color:var(--c-primary)">' + part + '</div>';
+      });
     } else {
-      html += '<div style="display:flex;gap:10px;align-items:flex-start;padding:6px 10px;background:var(--c-surface-2);border-radius:8px">'
-        + '<span style="color:#E65100;font-weight:800;font-size:15px;flex-shrink:0;line-height:1.5">◆</span>'
-        + '<span style="font-size:12.5px;color:var(--c-text);line-height:1.75">' + p + '</span>'
-        + '</div>';
+      parts.forEach(function(part) {
+        html += '<div style="display:flex;gap:10px;align-items:flex-start;padding:6px 10px;background:var(--c-surface-2);border-radius:8px">'
+          + '<span style="color:#E65100;font-weight:800;font-size:15px;flex-shrink:0;line-height:1.5">◆</span>'
+          + '<span style="font-size:12.5px;color:var(--c-text);line-height:1.75">' + part + '</span>'
+          + '</div>';
+      });
     }
   });
   html += '</div></div>';
@@ -7781,7 +7786,9 @@ function renderCoursChapitre(fId, aId, mId, cId) {
       + '</div>'
       + '<div style="display:flex;flex-direction:column;gap:7px">';
     fi.formules.forEach(function(form) {
-      html += '<div style="background:var(--c-primary-l);border-left:4px solid var(--c-primary);border-radius:0 10px 10px 0;padding:10px 16px;font-family:\'Courier New\',monospace;font-size:13px;font-weight:700;color:var(--c-primary);overflow-x:auto;white-space:nowrap">' + form + '</div>';
+      form.split(' | ').forEach(function(part) {
+        html += '<div style="background:var(--c-primary-l);border-left:4px solid var(--c-primary);border-radius:0 10px 10px 0;padding:10px 16px;font-family:\'Courier New\',monospace;font-size:13px;font-weight:700;color:var(--c-primary);overflow-x:auto;white-space:nowrap">' + part + '</div>';
+      });
     });
     html += '</div></div>';
   }
@@ -8159,48 +8166,51 @@ function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaPng) {
   }
 
   /* Bandeau titre chapitre — fond clair + bordure colorée */
-  checkPage(14);
+  checkPage(16);
   doc.setFillColor(col[0] + Math.round((255 - col[0]) * 0.88), col[1] + Math.round((255 - col[1]) * 0.88), col[2] + Math.round((255 - col[2]) * 0.88));
   doc.setDrawColor.apply(doc, col);
   doc.setLineWidth(0.5);
-  doc.roundedRect(MARGIN, y, cW, 11, 1.5, 1.5, 'FD');
+  doc.roundedRect(MARGIN, y, cW, 13, 1.5, 1.5, 'FD');
   doc.setFillColor.apply(doc, col);
-  doc.roundedRect(MARGIN, y, 3, 11, 1, 1, 'F');
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
+  doc.roundedRect(MARGIN, y, 3.5, 13, 1, 1, 'F');
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(12);
   doc.setTextColor.apply(doc, col);
-  doc.text(_pdfSanitize(c.titre), MARGIN + 6, y + 7.3);
-  y += 16;
+  doc.text(_pdfSanitize(c.titre), MARGIN + 7, y + 8.8);
+  y += 19;
 
   /* Intro */
-  var introLines = doc.splitTextToSize(_pdfSanitize(fi.intro), cW - 8);
-  checkPage(introLines.length * 4.6 + 8);
+  var LH = 5.2;
+  var introLines = doc.splitTextToSize(_pdfSanitize(fi.intro), cW - 10);
+  checkPage(introLines.length * LH + 12);
   doc.setFillColor(246, 248, 247);
-  doc.roundedRect(MARGIN, y, cW, introLines.length * 4.6 + 6, 1.5, 1.5, 'F');
-  doc.setFont('helvetica', 'italic'); doc.setFontSize(9);
+  doc.roundedRect(MARGIN, y, cW, introLines.length * LH + 8, 2, 2, 'F');
+  doc.setFont('helvetica', 'italic'); doc.setFontSize(9.5);
   doc.setTextColor(80, 92, 86);
-  introLines.forEach(function(l, i) { doc.text(l, MARGIN + 4, y + 5 + i * 4.6); });
-  y += introLines.length * 4.6 + 10;
+  introLines.forEach(function(l, i) { doc.text(l, MARGIN + 5, y + 6 + i * LH); });
+  y += introLines.length * LH + 14;
 
   /* Sections (contenu détaillé) */
   if (fi.sections && fi.sections.length) {
-    checkPage(8);
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5);
+    checkPage(10);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(10);
     doc.setTextColor.apply(doc, col);
     doc.text('CONTENU DU COURS', MARGIN, y);
-    y += 5;
+    y += 7;
 
     fi.sections.forEach(function(sec) {
       var titreSection = typeof sec === 'string' ? sec : sec.titre;
       var texteSection = typeof sec === 'string' ? '' : (sec.texte || '');
 
-      /* Titre de section — garde au moins 20mm avec le contenu suivant */
-      checkPage(26);
+      /* Titre de section — garde au moins 25mm avec le contenu suivant */
+      checkPage(28);
       doc.setFillColor(col[0] + Math.round((255 - col[0]) * 0.94), col[1] + Math.round((255 - col[1]) * 0.94), col[2] + Math.round((255 - col[2]) * 0.94));
-      doc.roundedRect(MARGIN, y, cW, 6.5, 1, 1, 'F');
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(8.5);
+      doc.roundedRect(MARGIN, y, cW, 8, 1.5, 1.5, 'F');
+      doc.setFillColor.apply(doc, col);
+      doc.roundedRect(MARGIN, y, 3, 8, 1, 1, 'F');
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(9);
       doc.setTextColor.apply(doc, col);
-      doc.text(_pdfSanitize(titreSection), MARGIN + 3, y + 4.5);
-      y += 9;
+      doc.text(_pdfSanitize(titreSection), MARGIN + 6, y + 5.5);
+      y += 11;
 
       if (texteSection) {
         /* Découper en blocs (paragraphes séparés par ligne vide) */
@@ -8225,89 +8235,93 @@ function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaPng) {
 
           var paraClean = _pdfSanitize(cleanBloc);
           if (!paraClean) return;
-          var paraLines = doc.splitTextToSize(paraClean, cW - 8);
-          doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5);
+          var paraLines = doc.splitTextToSize(paraClean, cW - 10);
+          doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
           doc.setTextColor(50, 60, 55);
           y += 2;
           paraLines.forEach(function(l) {
-            checkPage(5);
-            doc.text(l, MARGIN + 3, y + 3);
-            y += 4.2;
+            checkPage(6);
+            doc.text(l, MARGIN + 4, y + 4);
+            y += 5;
           });
-          y += 2;
+          y += 4;
         });
-        y += 3;
+        y += 5;
       }
     });
-    y += 4;
+    y += 6;
   }
 
   /* Points clés */
-  checkPage(8);
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5);
+  checkPage(10);
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(10);
   doc.setTextColor.apply(doc, col);
   doc.text('POINTS CLÉS', MARGIN, y);
-  y += 5;
+  y += 7;
 
   fi.points.forEach(function(p) {
-    var nLines = _richTextLineCount(doc, p, cW - 9);
-    var blockH = nLines * 4.6 + 4;
-    checkPage(blockH + 2);
-    doc.setFillColor.apply(doc, colL);
-    doc.roundedRect(MARGIN, y, cW, blockH, 1.2, 1.2, 'F');
-    _drawRichText(doc, p, MARGIN + 4, y + 4.6, cW - 9, 4.6, _FICHE_COLORS);
-    y += blockH + 2.5;
+    p.split(' | ').forEach(function(part) {
+      var nLines = _richTextLineCount(doc, part, cW - 10);
+      var blockH = nLines * 5.2 + 6;
+      checkPage(blockH + 3);
+      doc.setFillColor.apply(doc, colL);
+      doc.roundedRect(MARGIN, y, cW, blockH, 1.5, 1.5, 'F');
+      _drawRichText(doc, part, MARGIN + 5, y + 5.5, cW - 11, 5.2, _FICHE_COLORS);
+      y += blockH + 3.5;
+    });
   });
-  y += 3;
+  y += 5;
 
   /* Formules */
   if (fi.formules && fi.formules.length) {
-    checkPage(8);
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5);
+    checkPage(10);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(10);
     doc.setTextColor(12, 90, 150);
     doc.text('FORMULES CLÉS', MARGIN, y);
-    y += 5;
+    y += 7;
     fi.formules.forEach(function(form) {
-      var parts = _pdfSanitize(form).split(' | ').map(function(p){ return p.trim(); }).filter(Boolean);
-      checkPage(parts.length * 5.5 + 4);
-      doc.setFillColor(222, 238, 250);
-      doc.roundedRect(MARGIN, y, cW, parts.length * 5.5 + 3, 1.2, 1.2, 'F');
-      doc.setFont('courier', 'bold'); doc.setFontSize(9);
-      doc.setTextColor(12, 70, 120);
-      parts.forEach(function(part, i) {
-        var partLines = doc.splitTextToSize(part, cW - 10);
+      form.split(' | ').forEach(function(part) {
+        part = _pdfSanitize(part.trim());
+        if (!part) return;
+        var partLines = doc.splitTextToSize(part, cW - 12);
+        var boxH = partLines.length * 5.5 + 7;
+        checkPage(boxH + 3);
+        doc.setFillColor(222, 238, 250);
+        doc.roundedRect(MARGIN, y, cW, boxH, 1.5, 1.5, 'F');
+        doc.setFont('courier', 'bold'); doc.setFontSize(9.5);
+        doc.setTextColor(12, 70, 120);
         partLines.forEach(function(l, li) {
-          doc.text(l, MARGIN + 4, y + 5 + i * 5.5 + li * 4.4);
+          doc.text(l, MARGIN + 5, y + 6 + li * 5.5);
         });
+        y += boxH + 3.5;
       });
-      y += parts.length * 5.5 + 4.5;
     });
-    y += 2;
+    y += 3;
   }
 
   /* À retenir */
   if (fi.retenir) {
     var retenirItems = _pdfSanitize(fi.retenir).split(' | ').map(function(p){ return p.trim(); }).filter(Boolean);
-    checkPage(10);
+    checkPage(12);
     doc.setFillColor(230, 248, 238);
     doc.setDrawColor(22, 96, 56);
     doc.setLineWidth(0.4);
-    doc.roundedRect(MARGIN, y, cW, 8, 1.5, 1.5, 'FD');
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(8.3);
+    doc.roundedRect(MARGIN, y, cW, 10, 1.5, 1.5, 'FD');
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(9);
     doc.setTextColor(22, 96, 56);
-    doc.text('À RETENIR ABSOLUMENT', MARGIN + 4, y + 5.5);
-    y += 10;
+    doc.text('À RETENIR ABSOLUMENT', MARGIN + 5, y + 6.8);
+    y += 12;
     retenirItems.forEach(function(item) {
-      var itemLines = doc.splitTextToSize('• ' + item, cW - 10);
-      checkPage(itemLines.length * 4.8 + 2);
+      var itemLines = doc.splitTextToSize('• ' + item, cW - 12);
+      checkPage(itemLines.length * 5.2 + 4);
       doc.setFillColor(230, 248, 238);
-      doc.rect(MARGIN, y - 1, cW, itemLines.length * 4.8 + 1, 'F');
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(9.2);
+      doc.rect(MARGIN, y - 1, cW, itemLines.length * 5.2 + 3, 'F');
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5);
       doc.setTextColor(20, 50, 32);
-      itemLines.forEach(function(l, li) { doc.text(l, MARGIN + 4, y + 3.8 + li * 4.8); });
-      y += itemLines.length * 4.8 + 2;
+      itemLines.forEach(function(l, li) { doc.text(l, MARGIN + 5, y + 4.5 + li * 5.2); });
+      y += itemLines.length * 5.2 + 4;
     });
-    y += 5;
+    y += 7;
   }
 
   /* Schéma — rendu PNG via canvas */
