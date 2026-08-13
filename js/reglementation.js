@@ -2333,20 +2333,20 @@ function _renderReglPdfBlock(doc, t, y, MARGIN, cW, checkPage) {
   var col = _hexToRgb(t.color);
 
   /* Bandeau titre */
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(10.5);
   var titleLines = doc.splitTextToSize(_pdfSanitize(t.name), cW - 8);
   var titleH = titleLines.length * 5 + 6;
   checkPage(titleH);
   doc.setFillColor.apply(doc, col);
   doc.roundedRect(MARGIN, y, cW, titleH, 1.5, 1.5, 'F');
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(10.5);
   doc.setTextColor(255,255,255);
   titleLines.forEach(function(l,i){ doc.text(l, MARGIN+4, y+5.5+i*5); });
   y += titleH + 2;
 
   /* Référence */
+  doc.setFont('helvetica', 'italic'); doc.setFontSize(8.3);
   var refLines = doc.splitTextToSize(_pdfSanitize(t.ref), cW - 8);
   checkPage(refLines.length * 4.2 + 4);
-  doc.setFont('helvetica', 'italic'); doc.setFontSize(8.3);
   doc.setTextColor(97, 112, 104);
   refLines.forEach(function(l,i){ doc.text(l, MARGIN+2, y+i*4.2); });
   y += refLines.length * 4.2 + 5;
@@ -2360,8 +2360,8 @@ function _renderReglPdfBlock(doc, t, y, MARGIN, cW, checkPage) {
   t.pts.forEach(function(p) {
     var c = ptColors[p.t] || ptColors.info;
     var txt = _pdfSanitize(p.v);
-    var lines = doc.splitTextToSize(txt, cW - 8);
     doc.setFont('helvetica', 'normal'); doc.setFontSize(8.6);
+    var lines = doc.splitTextToSize(txt, cW - 8);
     doc.setTextColor.apply(doc, c.fg);
     lines.forEach(function(l) {
       checkPage(5.5);
@@ -2459,8 +2459,8 @@ function _renderReglPdfBlock(doc, t, y, MARGIN, cW, checkPage) {
         sec.items.forEach(function(item) {
           var ac = alertColors[item.t] || alertColors.info;
           var txt = _pdfSanitize((item.v||'').replace(/<[^>]+>/g,' '));
-          var aLines = doc.splitTextToSize(txt, cW - 8);
           doc.setFont('helvetica', 'normal'); doc.setFontSize(8.2);
+          var aLines = doc.splitTextToSize(txt, cW - 8);
           doc.setTextColor.apply(doc, ac.fg);
           aLines.forEach(function(l) {
             checkPage(5.5);
@@ -2477,9 +2477,9 @@ function _renderReglPdfBlock(doc, t, y, MARGIN, cW, checkPage) {
       if (sec.type === 'list' && sec.items) {
         sec.items.forEach(function(item) {
           var itemTxt = '• ' + _pdfSanitize(item.replace(/<[^>]+>/g,' '));
+          doc.setFont('helvetica', 'normal'); doc.setFontSize(8.2);
           var iLines = doc.splitTextToSize(itemTxt, cW - 6);
           checkPage(iLines.length * 4.2 + 2);
-          doc.setFont('helvetica', 'normal'); doc.setFontSize(8.2);
           doc.setTextColor(40, 48, 44);
           iLines.forEach(function(l,i){ doc.text(l, MARGIN+3, y+i*4.2); });
           y += iLines.length * 4.2 + 1.5;
