@@ -8625,12 +8625,22 @@ function _pdfFicheHeader(doc, W, MARGIN, color, title, subtitle) {
   /* Barre colorée fine à gauche */
   doc.setFillColor.apply(doc, col);
   doc.rect(0, 0, 4, 22, 'F');
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(14);
-  doc.setTextColor.apply(doc, col);
-  doc.text('HydroCalc — Fiche de révision', MARGIN + 4, 10);
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5);
-  doc.setTextColor(80, 90, 85);
-  doc.text(_pdfSanitize(title), MARGIN + 4, 17);
+  if (_pdfIconDataUrl) {
+    doc.addImage(_pdfIconDataUrl, 'PNG', MARGIN + 4, 3, 16, 16);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(14);
+    doc.setTextColor.apply(doc, col);
+    doc.text('HydroCalc — Fiche de révision', MARGIN + 23, 10);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5);
+    doc.setTextColor(80, 90, 85);
+    doc.text(_pdfSanitize(title), MARGIN + 23, 17);
+  } else {
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(14);
+    doc.setTextColor.apply(doc, col);
+    doc.text('HydroCalc — Fiche de révision', MARGIN + 4, 10);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5);
+    doc.setTextColor(80, 90, 85);
+    doc.text(_pdfSanitize(title), MARGIN + 4, 17);
+  }
   if (subtitle) {
     doc.setFontSize(7.5);
     doc.setTextColor.apply(doc, col);

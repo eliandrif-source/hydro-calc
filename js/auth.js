@@ -246,7 +246,7 @@ function generateHTMLReport() {
   var plan = AUTH.user ? (AUTH.user.plan || 'free') : 'free';
   var logoHtml = (userLogo && plan !== 'free')
     ? '<img src="' + userLogo + '" style="height:56px;object-fit:contain">'
-    : '<div style="font-size:26px;font-weight:900;color:#0A7460;letter-spacing:-1px;font-family:Georgia,serif">HydroCalc</div><div style="font-size:10px;color:#7ECABB;letter-spacing:2px;text-transform:uppercase;margin-top:2px">Application hydraulique</div>';
+    : '<img src="./images/logo-light.png" style="height:56px;object-fit:contain" alt="HydroCalc">';
 
   var calcsHtml = arr.map(function(c, i) {
     var d = new Date(c.date);
@@ -376,11 +376,11 @@ function _doGeneratePDFReport() {
   var y      = MARGIN;
 
   /* ── Palette ── */
-  var GREEN  = [10, 116, 96];
-  var DGREEN = [6, 90, 72];
-  var LGRAY  = [243, 246, 244];
-  var DGRAY  = [20, 28, 24];
-  var MGRAY  = [97, 112, 104];
+  var GREEN  = [21, 80, 160];
+  var DGREEN = [14, 58, 120];
+  var LGRAY  = [242, 245, 252];
+  var DGRAY  = [17, 24, 39];
+  var MGRAY  = [74, 88, 120];
   var WHITE  = [255, 255, 255];
   var RED    = [192, 57, 43];
 
@@ -392,14 +392,26 @@ function _doGeneratePDFReport() {
   /* ── Header ── */
   doc.setFillColor.apply(doc, DGREEN);
   doc.rect(0, 0, W, 22, 'F');
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(16);
-  doc.setTextColor.apply(doc, WHITE);
-  doc.text('HydroCalc', MARGIN, 13);
-  doc.setFontSize(8);
-  doc.setFont('helvetica', 'normal');
-  doc.setTextColor(200, 235, 225);
-  doc.text('Application hydraulique professionnelle', MARGIN, 18);
+  if (_pdfIconDataUrl) {
+    doc.addImage(_pdfIconDataUrl, 'PNG', MARGIN, 3, 16, 16);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(14);
+    doc.setTextColor.apply(doc, WHITE);
+    doc.text('HydroCalc', MARGIN + 19, 12);
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(180, 210, 240);
+    doc.text('Application hydraulique professionnelle', MARGIN + 19, 18);
+  } else {
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.setTextColor.apply(doc, WHITE);
+    doc.text('HydroCalc', MARGIN, 13);
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(180, 210, 240);
+    doc.text('Application hydraulique professionnelle', MARGIN, 18);
+  }
 
   var h = _reportHeader();
   doc.setFont('helvetica', 'bold');
@@ -3438,7 +3450,7 @@ function _buildHTMLContent(arr, formulas, regls, callback) {
   var plan = AUTH.user ? (AUTH.user.plan || 'free') : 'free';
   var logoHtml = (userLogo && plan !== 'free')
     ? '<img src="' + userLogo + '" style="height:56px;object-fit:contain">'
-    : '<div style="font-size:26px;font-weight:900;color:#0A7460;letter-spacing:-1px;font-family:Georgia,serif">HydroCalc</div><div style="font-size:10px;color:#7ECABB;letter-spacing:2px;text-transform:uppercase;margin-top:2px">Application hydraulique</div>';
+    : '<img src="./images/logo-light.png" style="height:56px;object-fit:contain" alt="HydroCalc">';
 
   var calcsHtml = arr.map(function(c) {
     var d = new Date(c.date);

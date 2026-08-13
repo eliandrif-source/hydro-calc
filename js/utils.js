@@ -1,4 +1,17 @@
 ﻿
+/* ─── Logo préchargé pour PDF ─── */
+var _pdfIconDataUrl = null;
+(function() {
+  var img = new Image();
+  img.onload = function() {
+    var c = document.createElement('canvas');
+    c.width = img.naturalWidth; c.height = img.naturalHeight;
+    c.getContext('2d').drawImage(img, 0, 0);
+    _pdfIconDataUrl = c.toDataURL('image/png');
+  };
+  img.src = './images/icon.png';
+})();
+
 /* ─── HELPER COMPAT (remplace ?. pour les anciens Android) ─── */
 function getV(id){ var e=document.getElementById(id); return e?e.value:''; }
 function getEl(id){ return document.getElementById(id)||null; }
@@ -50,9 +63,7 @@ function showCalcLimitModal() {
    MODULES DATA
 ═══════════════════════════════════════════════════ */
 const MODULES_META = [
-  { id:'calc',  ico:'⚡', name:'Calculateurs principaux',   sub:'ANC · AC · EP · Rivières',           color:'var(--c-anc)',  tags:['ANC','AC','EP','Rivières'],    cat:'calculs',    featured:true  },
-  { id:'calca', ico:'🧮', name:'Calculateurs avancés',      sub:'Manning · Bélier · NPSH · Shields',  color:'var(--c-ac)',   tags:['Manning','Bélier','NPSH'],     cat:'calculs'  },
-  { id:'calcs', ico:'📐', name:'Calculateurs complémentaires', sub:'Chlore · Réservoir · STEU',       color:'var(--c-aides)',tags:['Chlore','Réservoir','STEU'],   cat:'calculs'  },
+  { id:'calc',  ico:'⚡', name:'Calculateurs',               sub:'AC · AEP · ANC · Milieux — tous thèmes', color:'var(--c-anc)', tags:['AC','AEP','ANC','Milieux'], cat:'calculs', featured:true },
   { id:'conv',  ico:'🔄', name:'Convertisseur d\'unités',   sub:'Débit · Pression · Concentration',   color:'var(--c-riv)', tags:['m³/h','bar','mg/L'],           cat:'calculs',    isNew:true  },
   { id:'anc',   ico:'🏡', name:'Ouvrages ANC complets',     sub:'31 ouvrages · Filières · Rejet',     color:'var(--c-anc)', tags:['31 ouvrages','Filières'],      cat:'anc',        featured:true  },
   { id:'nc',    ico:'⚠️', name:'Non conformes',             sub:'Puisard · Fosse septique · Réhab.', color:'var(--c-nc)',   tags:['Historique','NC','Réhab.'],    cat:'anc'  },
@@ -63,7 +74,7 @@ const MODULES_META = [
   { id:'form',  ico:'🏛️', name:'Formations supérieures',   sub:'BUT · Master · ENGEES · MS EPA',     color:'var(--c-form)',tags:['Bac+2 à Bac+6','QCM'],        cat:'formation'  },
   { id:'regl',  ico:'📋', name:'Réglementation complète',  sub:'Arrêté 2024 · REUT · NOTRe',         color:'var(--c-regl)',tags:['2024','REUT','DCE'],           cat:'reference'  },
   { id:'gloss', ico:'📖', name:'Glossaire & Références',   sub:'200+ termes · 90+ acronymes',        color:'var(--c-ref)', tags:['Glossaire','Acronymes'],       cat:'reference'  },
-  { id:'mat',   ico:'🔩', name:'Matériaux & Équipements',  sub:'PVC · Fonte · Pompes · SCADA',       color:'var(--c-mat)', tags:['PVC','Fonte','Pompes'],        cat:'reference',  isNew:true  },
+  { id:'mat',     ico:'🔩', name:'Matériaux',       sub:'AEP · AC · ANC · DN normalisés', color:'var(--c-mat)', tags:['PVC','Fonte','PEHD','DN'], cat:'reference' },
 ];
 
 const CATS_CONFIG = {
@@ -79,28 +90,24 @@ let qcmState = { idx:0, score:0 };
 /* ═══ RENDER HOME ═══ */
 
 var HOME_ALL_SHORTCUTS = [
-  { id:'calc',       ico:'⚡', name:'Calculateurs',      sub:'AC · EP · ANC · Riv.' },
-  { id:'calca',      ico:'🧮', name:'Calc. avancés',     sub:'Manning · Bélier · NPSH' },
-  { id:'calcs',      ico:'📐', name:'Calc. complémentaires', sub:'Chlore · Réservoir' },
+  { id:'calc',       ico:'⚡', name:'Calculateurs',      sub:'AC · AEP · ANC · Milieux' },
   { id:'conv',       ico:'🔄', name:'Convertisseur',     sub:'Débit · Pression' },
   { id:'cours',      ico:'🎓', name:'Cours',             sub:'52 chapitres' },
   { id:'form',       ico:'🏛️', name:'Formations',        sub:'BUT · Master · ENGEES' },
-  { id:'qcm',        ico:'✅', name:'QCM',               sub:'720 questions' },
+  { id:'qcm',        ico:'✅', name:'QCM',               sub:'800+ questions · 4 modules' },
   { id:'anc',        ico:'🏡', name:'Ouvrages ANC',      sub:'31 ouvrages' },
   { id:'ouv',        ico:'🔧', name:'Ouvrages AC & EP',  sub:'Regards · Bassins' },
   { id:'nc',         ico:'⚠️', name:'Non conformes',     sub:'Historique · Réhab.' },
   { id:'spanc',      ico:'🗺️', name:'SPANC',             sub:'101 départements' },
   { id:'aides',      ico:'💰', name:'Aides ANC',         sub:'Éco-PTZ · TVA 5,5%' },
   { id:'gloss',      ico:'📖', name:'Glossaire',         sub:'200+ termes' },
-  { id:'mat',        ico:'🔩', name:'Matériaux',         sub:'PVC · Fonte · Pompes' },
+  { id:'mat',        ico:'🔩', name:'Matériaux',           sub:'AEP · AC · ANC · DN normalisés' },
   { id:'regl',       ico:'📋', name:'Réglementation',    sub:'Arrêtés · DCE · REUT' },
-  { id:'outils-anc', ico:'🔬', name:'Terrain ANC',       sub:'Mesures · Rapports' },
-  { id:'outils-ac',  ico:'🏗️', name:'Terrain AC',        sub:'Mesures · Rapports' },
-  { id:'outils-ep',  ico:'💧', name:'Terrain EP',        sub:'Mesures · Rapports' },
-  { id:'outils-riv', ico:'🌊', name:'Terrain Rivières',  sub:'Mesures · Rapports' },
+  { id:'outils',    ico:'📐', name:'Terrain',         sub:'ANC · AC · EP · Rivières' },
+  { id:'dossiers',  ico:'📁', name:'Dossiers perso',  sub:'Rapports · CR · Documents' },
 ];
 
-var HOME_DEFAULT_SHORTCUTS = ['calc','cours','qcm','outils-anc'];
+var HOME_DEFAULT_SHORTCUTS = ['calc','cours','qcm','outils'];
 
 function _homeGetShortcuts() {
   try {
@@ -117,6 +124,38 @@ function _homeSaveShortcuts(arr) {
   try { localStorage.setItem('home_shortcuts', JSON.stringify(arr)); } catch(e) {}
 }
 
+/* ─── BREADCRUMB GLOBAL ─── */
+function setBreadcrumb(items) {
+  var mc = document.getElementById('main-content');
+  if (!mc) return;
+  var existing = mc.querySelector('.hc-breadcrumb');
+  if (existing) existing.remove();
+  var bar = document.createElement('div');
+  bar.className = 'hc-breadcrumb';
+  bar.style.cssText = 'padding:var(--s-2) var(--s-4);display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none;background:var(--c-surface-2);border-bottom:1px solid var(--c-border)';
+  items.forEach(function(item, i) {
+    if (i > 0) {
+      var sep = document.createElement('span');
+      sep.style.cssText = 'color:var(--c-text-4);font-size:12px';
+      sep.textContent = '›';
+      bar.appendChild(sep);
+    }
+    if (item.fn) {
+      var btn = document.createElement('button');
+      btn.setAttribute('onclick', item.fn);
+      btn.style.cssText = 'background:none;border:none;font-family:var(--f-body);font-size:12px;color:var(--c-primary);cursor:pointer;white-space:nowrap;padding:2px 0';
+      btn.textContent = item.label;
+      bar.appendChild(btn);
+    } else {
+      var span = document.createElement('span');
+      span.style.cssText = 'font-size:12px;color:var(--c-text-3);white-space:nowrap;font-weight:600';
+      span.textContent = item.label;
+      bar.appendChild(span);
+    }
+  });
+  mc.insertBefore(bar, mc.firstChild);
+}
+
 function renderHome() {
   setNav('');
   document.getElementById('tab-bar').style.display = 'none';
@@ -127,13 +166,13 @@ function renderHome() {
   var html = `
     <div class="home-hero">
       <div class="hh-brand">
-        <div class="hh-icon">💧</div>
-        <div><div class="hh-name">HydroCalc</div><div class="hh-sub">Application hydraulique professionnelle</div></div>
+        <div class="hh-icon"><img src="./images/logo-dark.png" alt="HydroCalc" style="height:42px;width:auto"></div>
+        <div><div class="hh-sub">Application hydraulique professionnelle</div></div>
       </div>
       <div class="hh-stats">
-        <div class="hs-item"><div class="hs-val">14</div><div class="hs-lbl">Modules</div></div>
-        <div class="hs-item"><div class="hs-val">60+</div><div class="hs-lbl">Calculateurs</div></div>
-        <div class="hs-item"><div class="hs-val">720</div><div class="hs-lbl">QCM</div></div>
+        <div class="hs-item"><div class="hs-val">18</div><div class="hs-lbl">Modules</div></div>
+        <div class="hs-item"><div class="hs-val">70+</div><div class="hs-lbl">Calculateurs</div></div>
+        <div class="hs-item"><div class="hs-val">800+</div><div class="hs-lbl">Questions</div></div>
       </div>
     </div>
 
@@ -156,6 +195,29 @@ function renderHome() {
 
   html += `</div>
 
+    <div class="section-header" style="margin-top:var(--s-4)">Mes projets</div>
+    <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
+  `;
+
+  var nbCalcs = (typeof getSavedCalcs === 'function') ? getSavedCalcs().length : 0;
+  var projets = [
+    { fn:'renderCalcHistory()', ico:'💾', name:'Mes calculs & rapports', sub: nbCalcs > 0 ? nbCalcs + ' calcul' + (nbCalcs>1?'s':'') + ' · Export PDF · DOCX · ODT' : 'Calculs sauvegardés · Export PDF · DOCX · ODT', colorl:'#EFF6FF' },
+    { fn:'showModule(\'outils\')', ico:'📐', name:'Mes outils terrain', sub:'Mesures · Relevés · Notes de chantier', colorl:'#F0FDF4' },
+  ];
+
+  projets.forEach(function(r) {
+    html += '<div class="mod-list-card" onclick="' + r.fn + '">'
+      + '<div class="mlc-icon" style="background:' + r.colorl + ';font-size:22px">' + r.ico + '</div>'
+      + '<div class="mlc-body">'
+        + '<div class="mlc-name" style="font-size:var(--t-md)">' + r.name + '</div>'
+        + '<div class="mlc-sub">' + r.sub + '</div>'
+      + '</div>'
+      + '<span class="mlc-arrow">›</span>'
+    + '</div>';
+  });
+
+  html += `</div>
+
     <div class="section-header" style="margin-top:var(--s-4)">Ressources</div>
     <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
   `;
@@ -163,7 +225,6 @@ function renderHome() {
   var resources = [
     { id:'gloss',  ico:'📖', name:'Formules & Glossaire', sub:'200+ termes · 90+ acronymes · Toutes les formules', colorl:'var(--c-ref-l)'  },
     { id:'regl',   ico:'📋', name:'Réglementation',       sub:'Arrêtés · DCE · Police de l\'eau · REUT · Normes',  colorl:'var(--c-regl-l)' },
-    { id:'mat',    ico:'🔩', name:'Matériaux & Équipements', sub:'PVC · Fonte · Pompes · SCADA · Filtres',         colorl:'var(--c-mat-l)'  },
   ];
 
   resources.forEach(function(r) {
@@ -285,6 +346,7 @@ function showModule(id) {
     nc:'Non conformes',
     mat:'Matériaux & Équipements',
     form:'Formations supérieures',
+    dossiers:'Dossiers perso',
   };
   var titre = TITRES[id];
   if (!titre) {
@@ -323,20 +385,33 @@ function showModule(id) {
   else if (id === 'outils-ac')  renderOutilsTerrain('ac');
   else if (id === 'outils-ep')  renderOutilsTerrain('ep');
   else if (id === 'outils-riv') renderOutilsTerrain('riv');
-  else if (id === 'mat')    renderMateriaux();
+  else if (id === 'outils')     renderOutilsHome();
+  else if (id === 'dossiers')    renderDossiersHub();
+  else if (id === 'dossiers-cr') renderCRReunion();
+  else if (id === 'mat')      renderMatHome();
+  else if (id === 'mat-aep')  renderMatAEP();
+  else if (id === 'mat-ac')   renderMatAC();
+  else if (id === 'mat-anc')  renderMatANC();
+  else if (id === 'calc-ac')  renderCalc('ac');
+  else if (id === 'calc-anc') renderCalc('anc');
+  else if (id === 'calc-ep')  renderCalc('ep');
+  else if (id === 'calc-riv') renderCalc('riv');
   else if (id === 'design') renderDesignSystem();
   else renderModuleSimple(id);
 
   // Nav highlight
   var navMap = {
-    refmat:'nav-gloss', gloss:'nav-gloss', mat:'nav-gloss',
+    refmat:'nav-gloss', gloss:'nav-gloss',
     qcm:'nav-anc',
     ac:'nav-ac', calc:'nav-ac', calca:'nav-ac', calcs:'nav-ac', conv:'nav-ac', ouv:'nav-ac',
-    'anc-home':'nav-anc', anc:'nav-anc', nc:'nav-anc', aides:'nav-anc', spanc:'nav-anc', 'outils-anc':'nav-anc',
-    'outils-ac':'nav-ac', 'outils-ep':'nav-ep', 'outils-riv':'nav-riv',
-    ep:'nav-ep',
-    riv:'nav-riv', pap:'nav-riv',
-    gloss:'nav-gloss', cours:'nav-gloss', form:'nav-gloss', regl:'nav-gloss', mat:'nav-gloss'
+    'calc-ac':'nav-ac',
+    'anc-home':'nav-anc', anc:'nav-anc', nc:'nav-anc', aides:'nav-anc', spanc:'nav-anc', 'outils-anc':'nav-anc', 'mat-anc':'nav-anc', 'calc-anc':'nav-anc',
+    'outils-ac':'nav-ac', 'outils-ep':'nav-ep', 'outils-riv':'nav-riv', outils:'nav-anc',
+    ep:'nav-ep', 'calc-ep':'nav-ep',
+    riv:'nav-riv', pap:'nav-riv', 'calc-riv':'nav-riv',
+    cours:'nav-gloss', form:'nav-gloss', regl:'nav-gloss',
+    mat:'nav-gloss', 'mat-ac':'nav-ac', 'mat-aep':'nav-ep', 'mat-anc':'nav-anc',
+    dossiers:'nav-gloss', 'dossiers-cr':'nav-gloss'
   };
   setNav(navMap[id] || '');
 }
@@ -568,11 +643,16 @@ function _buildSearchIndex() {
   if (typeof COURS_DATA !== 'undefined') {
     Object.keys(COURS_DATA).forEach(function(fId) {
       var f = COURS_DATA[fId];
-      if (!f || !f.chapitres) return;
-      f.chapitres.forEach(function(chap) {
-        if (chap.titre) idx.push({ title: chap.titre, body: chap.desc || '', section: 'cours', label: '🎓 Cours', color: 'var(--c-form)', action: function() { showModule('cours'); } });
-        if (chap.flashcards) chap.flashcards.slice(0, 30).forEach(function(fc) {
-          idx.push({ title: fc.q || '', body: fc.a || '', section: 'cours', label: '🎓 Flashcards', color: 'var(--c-form)', action: function() { showModule('cours'); } });
+      if (!f) return;
+      var annees = f.annees || (f.chapitres ? [{ matieres: [{ chapitres: f.chapitres }] }] : []);
+      annees.forEach(function(an) {
+        (an.matieres || []).forEach(function(mat) {
+          (mat.chapitres || []).forEach(function(chap) {
+            if (chap.titre) idx.push({ title: chap.titre, body: (chap.desc || '') + ' ' + (mat.nom || ''), section: 'cours', label: '🎓 ' + (f.nom || 'Cours'), color: 'var(--c-form)', action: function() { showModule('cours'); } });
+            if (chap.flashcards) chap.flashcards.slice(0, 20).forEach(function(fc) {
+              idx.push({ title: fc.q || '', body: fc.a || '', section: 'cours', label: '🎓 Flashcards', color: 'var(--c-form)', action: function() { showModule('cours'); } });
+            });
+          });
         });
       });
     });

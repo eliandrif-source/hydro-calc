@@ -2,7 +2,7 @@
    SERVICE WORKER — HydroCalc PWA
    Cache-first · Mode hors-ligne complet
 ═══════════════════════════════════════════════════ */
-var CACHE_NAME = 'hydrocalc-v177';
+var CACHE_NAME = 'hydrocalc-v178';
 
 var ASSETS = [
   './',
@@ -23,6 +23,10 @@ var ASSETS = [
   './js/qcm_prof.js',
   './js/dossiers.js',
   './js/auth.js',
+  './manifest.json',
+  './images/icon.png',
+  './images/logo-dark.png',
+  './images/logo-light.png',
   './libs/docx.js',
   './libs/jszip.js',
 ];
