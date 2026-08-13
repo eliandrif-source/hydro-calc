@@ -8561,9 +8561,11 @@ function _pdfRenderMarkdownTable(doc, tableBlock, x, y, maxW, col, colL, checkPa
   var numCols = rows.reduce(function(max, r){ return Math.max(max, r.length); }, 0);
   var colW = maxW / numCols;
   var cellH = 6.5;
+  var PAGE_H = 278, RESUME_Y = 14;
   rows.forEach(function(row, ri) {
     var isHeader = ri === 0;
-    checkPage(cellH + 1);
+    /* Saut de page géré localement avec le y de cette fonction */
+    if (y + cellH + 1 > PAGE_H) { doc.addPage(); y = RESUME_Y; }
     if (isHeader) { doc.setFillColor.apply(doc, col); } else { doc.setFillColor(248, 250, 252); }
     doc.rect(x, y, maxW, cellH, 'F');
     doc.setDrawColor(210, 215, 220); doc.setLineWidth(0.2);
@@ -8623,9 +8625,14 @@ function _pdfSaveOrPreview(doc, filename, toastMsg) {
   var blob = doc.output('blob');
   var blobUrl = URL.createObjectURL(blob);
   var old = document.getElementById('hc-pdf-preview');
-  if (old) old.remove();
+  if (old) {
+    var oldUrl = old.dataset.blobUrl;
+    if (oldUrl) URL.revokeObjectURL(oldUrl);
+    old.remove();
+  }
   var overlay = document.createElement('div');
   overlay.id = 'hc-pdf-preview';
+  overlay.dataset.blobUrl = blobUrl;
   overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;display:flex;flex-direction:column';
   overlay.innerHTML =
     '<div style="background:#0f172a;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:10px">'
@@ -8633,7 +8640,7 @@ function _pdfSaveOrPreview(doc, filename, toastMsg) {
     + '<div style="display:flex;gap:8px;flex-shrink:0">'
       + '<button onclick="_pdfPreviewNeverAgain()" style="padding:6px 12px;background:none;border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.65);border-radius:8px;font-size:11px;cursor:pointer;font-family:inherit">Ne plus afficher</button>'
       + '<button onclick="_pdfPreviewDownload()" style="padding:6px 14px;background:#059669;border:none;color:#fff;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">⬇️ Télécharger</button>'
-      + '<button onclick="var o=document.getElementById(\'hc-pdf-preview\');if(o)o.remove()" style="padding:6px 12px;background:rgba(255,255,255,0.1);border:none;color:#fff;border-radius:8px;font-size:14px;cursor:pointer">✕</button>'
+      + '<button onclick="_pdfPreviewClose()" style="padding:6px 12px;background:rgba(255,255,255,0.1);border:none;color:#fff;border-radius:8px;font-size:14px;cursor:pointer">✕</button>'
     + '</div></div>'
     + '<iframe src="' + blobUrl + '" style="flex:1;border:none;width:100%;background:#fff"></iframe>';
   document.body.appendChild(overlay);
@@ -8642,14 +8649,29 @@ function _pdfSaveOrPreview(doc, filename, toastMsg) {
   window._pdfPreviewToast = toastMsg;
 }
 
+function _pdfPreviewClose() {
+  var overlay = document.getElementById('hc-pdf-preview');
+  if (overlay) {
+    var blobUrl = overlay.dataset.blobUrl;
+    if (blobUrl) URL.revokeObjectURL(blobUrl);
+    overlay.remove();
+  }
+}
+
 function _pdfPreviewDownload() {
   var overlay = document.getElementById('hc-pdf-preview');
-  if (overlay) overlay.remove();
+  if (overlay) {
+    var blobUrl = overlay.dataset.blobUrl;
+    if (blobUrl) URL.revokeObjectURL(blobUrl);
+    overlay.remove();
+  }
   if (window._pdfPreviewBlob && window._pdfPreviewFilename) {
+    var dlUrl = URL.createObjectURL(window._pdfPreviewBlob);
     var a = document.createElement('a');
-    a.href = URL.createObjectURL(window._pdfPreviewBlob);
+    a.href = dlUrl;
     a.download = window._pdfPreviewFilename;
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(dlUrl); }, 100);
     if (typeof authToast === 'function') authToast(window._pdfPreviewToast || 'PDF téléchargé ✓');
   }
 }
