@@ -33,7 +33,7 @@
 
 <!-- ═══ VERROU D'ACCÈS TEMPORAIRE (phase de test privée) ═══
      À retirer avant la mise en ligne publique / publication Play Store. -->
-<div id="site-gate" style="position:fixed;inset:0;z-index:99999;background:linear-gradient(160deg,#061410,#0A2820,#0A5040);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;font-family:'Outfit',sans-serif">
+<div id="site-gate" style="position:fixed;inset:0;z-index:99999;background:linear-gradient(160deg,#040810,#0A1428,#0A2050);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;font-family:'Outfit',sans-serif">
   <div style="font-size:48px;margin-bottom:16px">💧</div>
   <div style="color:#fff;font-size:20px;font-weight:800;margin-bottom:6px">HydroCalc</div>
   <div style="color:rgba(255,255,255,.65);font-size:13px;margin-bottom:24px;text-align:center">Accès réservé — phase de test privée</div>
@@ -41,7 +41,7 @@
     style="width:100%;max-width:280px;padding:13px 16px;border-radius:10px;border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-size:15px;text-align:center;margin-bottom:12px;outline:none"
     onkeydown="if(event.key==='Enter')_siteGateCheck()">
   <div id="site-gate-err" style="display:none;color:#ff8a80;font-size:12px;margin-bottom:10px">Code incorrect.</div>
-  <button onclick="_siteGateCheck()" style="width:100%;max-width:280px;padding:13px;background:#0A7460;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer">Accéder à l'app</button>
+  <button onclick="_siteGateCheck()" style="width:100%;max-width:280px;padding:13px;background:#1550A0;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer">Accéder à l'app</button>
 </div>
 <script>
 (function(){
@@ -132,9 +132,6 @@
         <div class="auth-divider-line"></div>
       </div>
       <button class="auth-btn-ghost" onclick="authShow('auth-register')">Créer un compte gratuitement</button>
-      <div class="auth-hint">
-        Compte démo : <span class="auth-link" onclick="authDemoFill()">demo@hydrocalc.fr</span> / <strong>hydro2024</strong>
-      </div>
     </div>
   </div>
 </div>
@@ -178,13 +175,6 @@
         <button type="button" class="auth-pwd-toggle" onclick="toggleAuthPwd('reg-pwd2', this)" title="Afficher/masquer le mot de passe">👁</button>
       </div>
       <button class="auth-btn-submit" onclick="authRegister()">Créer mon compte</button>
-      <div id="invite-code-wrap" style="margin-top:10px">
-        <button type="button" onclick="_toggleInviteCode()" style="width:100%;padding:10px;background:none;border:1.5px dashed var(--c-border);border-radius:var(--r-lg);font-family:var(--f-body);font-size:12.5px;font-weight:600;color:var(--c-text-3);cursor:pointer">🎟️ J'ai un code d'accès</button>
-        <div id="invite-code-field" style="display:none;margin-top:8px">
-          <input class="auth-input" type="text" id="reg-invite-code" placeholder="HC-XXXX-XXXX" style="text-transform:uppercase;letter-spacing:.1em;text-align:center;font-family:monospace;font-size:14px;font-weight:700">
-          <div style="font-size:11px;color:var(--c-text-3);text-align:center;margin-top:4px">Le code sera activé après la création de votre compte</div>
-        </div>
-      </div>
       <div class="auth-divider">
         <div class="auth-divider-line"></div>
         <div class="auth-divider-txt">déjà inscrit ?</div>
@@ -296,7 +286,7 @@
     <button class="tb-icon-btn tb-back-btn" onclick="goHome()" title="Accueil">🏠</button>
     <span class="top-bar-logo" id="top-title">HydroCalc</span>
     <button class="tb-icon-btn" onclick="openSearch()" title="Recherche globale" id="btn-search">🔍</button>
-    <button class="tb-icon-btn" onclick="openRapports()" title="Mes rapports PDF" id="btn-rapports" style="display:none">📄</button>
+
     <button class="tb-icon-btn" id="profile-btn" onclick="openProfile()" title="Mon profil" style="display:none">👤</button>
   </div>
 
@@ -357,6 +347,7 @@
 <script src="js/settings.js"></script>
 <script src="js/qcm_bank.js"></script>
 <script src="js/qcm_prof.js"></script>
+<script src="js/dossiers.js"></script>
 <script src="js/auth.js"></script>
 <script>
 if ('serviceWorker' in navigator) {
