@@ -148,7 +148,7 @@ function filterSPANC() {
   const region = window.spanc_region || '';
   let list = SPANC_DEPTS.filter(d => {
     const matchRegion = !region || d.region === region;
-    const matchQ = !q || d.num.includes(q) || d.name.toLowerCase().includes(q) || d.region.toLowerCase().includes(q);
+    const matchQ = !q || d.num.includes(q) || d.name.toLowerCase().includes(q) || d.region.toLowerCase().includes(q) || (d.oblig||'').toLowerCase().includes(q) || (d.contact||'').toLowerCase().includes(q) || (d.agence||'').toLowerCase().includes(q);
     return matchRegion && matchQ;
   });
   document.getElementById('spanc-count').textContent = list.length;
@@ -598,7 +598,30 @@ const REGL_TEXTES = {
        {t:'info',v:'ℹ Couvre : terrassement, pose des ouvrages, raccordements, remblayage, contrôle d\'étanchéité'},
        {t:'ok',v:'✓ Référence contractuelle dans les devis et garanties des installateurs agréés'},
      ],
-     detail:'Le DTU 64.1 est la norme d\'exécution qui complète les arrêtés réglementaires : alors que l\'arrêté fixe les exigences de résultat (distances, volumes, performances), le DTU précise comment exécuter les travaux dans les règles de l\'art (profondeur de pose, pente des canalisations, protection des ouvrages contre les remontées de nappe, etc.). Pour un professionnel, s\'écarter du DTU sans justification technique documentée expose à un refus de couverture par l\'assurance décennale en cas de sinistre — c\'est donc une référence contractuelle incontournable, au même titre que l\'arrêté lui-même.'},
+     detail:'Le DTU 64.1 est la norme d\'exécution qui complète les arrêtés réglementaires : alors que l\'arrêté fixe les exigences de résultat (distances, volumes, performances), le DTU précise comment exécuter les travaux dans les règles de l\'art (profondeur de pose, pente des canalisations, protection des ouvrages contre les remontées de nappe, etc.). Pour un professionnel, s\'écarter du DTU sans justification technique documentée expose à un refus de couverture par l\'assurance décennale en cas de sinistre — c\'est donc une référence contractuelle incontournable, au même titre que l\'arrêté lui-même.',
+     sections:[
+       {title:'Prescriptions techniques clés du DTU 64.1', type:'table',
+        headers:['Élément','Prescriptions DTU','Conséquence si non-respect','Contrôlé par'],
+        rows:[
+          ['Pente des canalisations','Minimum 2% (recommandé 3%)','Stagnation, colmatage, remontées d\'odeurs','SPANC contrôle réalisation'],
+          ['Remblayage de la fosse','Matériaux non compactants · Sable ou grave propre','Déformation ou fissuration de la fosse','SPANC avant remblayage'],
+          ['Ventilation primaire','Continuité du couvercle à la sortie atmosphérique','Pression dans les canalisations · Clapets siphons inefficaces','Contrôle de réalisation'],
+          ['Ventilation secondaire','Extracteur au-dessus du toit (≥ 40 cm après faitage)','Mauvaise évacuation des biogaz · Odeurs intérieures','Contrôle de réalisation'],
+          ['Protection anti-nappe','Lestage ou ancrage si nappe < 1 m','Soulèvement de la fosse en période de crue','Étude de sol'],
+        ]},
+       {title:'DTU et assurance décennale — ce que les installateurs doivent savoir', type:'alerts', items:[
+         {t:'danger', v:'⛔ Tout écart par rapport au DTU 64.1 non documenté par une note justificative technique peut entraîner le refus de couverture par l\'assurance dommages-ouvrage en cas de sinistre (infiltrations, odeurs, affaissement)'},
+         {t:'warn', v:'⚠ Les filières agréées CE (microstations, filtres compacts) sont régies par leur propre notice d\'installation, qui prime sur le DTU — mais le DTU reste applicable pour les parties communes (fosse, canalisations, ventilation)'},
+         {t:'ok', v:'✅ Bonne pratique : remettre au maître d\'ouvrage un DOE (Dossier des Ouvrages Exécutés) avec les plans de récolement, le certificat d\'installation et la référence au DTU 64.1 — indispensable pour le rapport SPANC de réalisation'},
+         {t:'info', v:'ℹ La norme DTU 64.1 est éditée par l\'AFNOR et mise à jour périodiquement — la version applicable est celle en vigueur à la date du marché, pas à la date des travaux'},
+       ]},
+       {title:'Points de contrôle essentiels lors de la réalisation', type:'list', items:[
+         '<b>Avant remblayage (obligatoire) :</b> l\'installateur doit prévenir le SPANC pour le contrôle de réalisation — tout remblayage sans contrôle préalable est une irrégularité documentée',
+         '<b>Essai d\'étanchéité :</b> le DTU recommande un essai à l\'eau (maintien du niveau 30 minutes) sur la fosse avant mise en service — résultat à consigner dans le carnet de suivi',
+         '<b>Repérage des ouvrages :</b> obligations de pose de grilles de repérage et d\'un plan coté remis au propriétaire (localisation exacte de tous les ouvrages pour faciliter les contrôles futurs)',
+         '<b>Matériaux :</b> uniquement des fosses et regards certifiés NF ou équivalent CE — les éléments sans marquage CE sont refusés lors du contrôle de réalisation',
+       ]},
+     ]},
     {ico:'⚖️',year:2006,isNew:false,color:'var(--c-regl)',colorl:'var(--c-regl-l)',
      name:'Code de la santé publique — Art. L.1331-1 à L.1331-8',
      ref:'Base légale du raccordement et du contrôle des installations privées',
@@ -608,7 +631,34 @@ const REGL_TEXTES = {
        {t:'info',v:'ℹ Donne au SPANC son fondement légal pour pénétrer dans les propriétés privées (avec préavis)'},
        {t:'info',v:'ℹ Articulé avec le Code général des collectivités territoriales pour la police des eaux'},
      ],
-     detail:'Ces articles sont la base légale ultime qui permet au SPANC d\'agir : sans eux, aucun contrôle d\'une installation privée ne serait possible. L\'article L.1331-1 instaure la règle miroir de l\'assainissement collectif et non collectif — toute habitation doit être assainie, soit par raccordement à l\'égout si celui-ci existe à moins de 100 m, soit par une installation ANC conforme. L\'article L.1331-8 donne aux communes (via le SPANC) le pouvoir de mettre en demeure un propriétaire récalcitrant, première étape avant des sanctions financières (majoration de redevance) voire des travaux d\'office aux frais du propriétaire en dernier recours.'},
+     detail:'Ces articles sont la base légale ultime qui permet au SPANC d\'agir : sans eux, aucun contrôle d\'une installation privée ne serait possible. L\'article L.1331-1 instaure la règle miroir de l\'assainissement collectif et non collectif — toute habitation doit être assainie, soit par raccordement à l\'égout si celui-ci existe à moins de 100 m, soit par une installation ANC conforme. L\'article L.1331-8 donne aux communes (via le SPANC) le pouvoir de mettre en demeure un propriétaire récalcitrant, première étape avant des sanctions financières (majoration de redevance) voire des travaux d\'office aux frais du propriétaire en dernier recours.',
+     sections:[
+       {title:'Les 8 articles fondateurs du SPANC — résumé', type:'table',
+        headers:['Article','Objet','Ce qu\'il permet concrètement'],
+        rows:[
+          ['L.1331-1','Raccordement à l\'égout obligatoire','Toute habitation à < 100 m du réseau doit se raccorder dans les 2 ans'],
+          ['L.1331-1-1','Exception ANC admise','Habitations non raccordables → ANC conforme obligatoire'],
+          ['L.1331-4','Mise en conformité avant vente','Le vendeur doit fournir rapport SPANC ≤ 3 ans (Décret 2012-274)'],
+          ['L.1331-6','Travaux d\'office','Commune peut faire réaliser les travaux aux frais du propriétaire défaillant'],
+          ['L.1331-7','Participation financière au raccordement','La commune peut réclamer une participation pour raccordement à l\'égout'],
+          ['L.1331-8','Majoration de redevance','Refus d\'accès SPANC → redevance × 4 jusqu\'à levée obstruction'],
+          ['L.1331-9','Pouvoir de contrôle','Agents habilités peuvent pénétrer dans les propriétés privées (préavis 7 jours)'],
+          ['L.1331-11','Police sanitaire','Préfet peut ordonner les travaux en urgence pour risque sanitaire avéré'],
+        ]},
+       {title:'Comment s\'applique l\'obligation de raccordement', type:'alerts', items:[
+         {t:'danger', v:'⛔ L.1331-1 : dès qu\'un réseau d\'assainissement collectif est mis en service à moins de 100 m de la façade, l\'installation ANC existante devient INTERDITE et le propriétaire dispose de 2 ans pour se raccorder'},
+         {t:'warn', v:'⚠ La distance de 100 m est mesurée en suivi des voies publiques (pas à vol d\'oiseau) — vérifier le tracé exact du réseau sur le plan des réseaux de la commune'},
+         {t:'info', v:'ℹ Dérogation possible si raccordement techniquement impossible ou financièrement excessif — à demander à la commune, qui peut accorder un maintien de l\'ANC à titre permanent'},
+         {t:'ok', v:'✅ Participation pour raccordement (L.1331-7) : la commune peut demander une participation financière allant jusqu\'à 80% du coût de l\'installation ANC supprimée — à négocier avant signature du DDT lors d\'une vente'},
+       ]},
+       {title:'Mise en demeure et travaux d\'office — procédure', type:'list', items:[
+         '<b>Étape 1 — Notification du SPANC :</b> rapport de contrôle notifié au propriétaire avec délai de mise en conformité (1 à 4 ans selon gravité)',
+         '<b>Étape 2 — Constat de carence :</b> si le délai est dépassé sans travaux, le SPANC saisit le maire ou le préfet',
+         '<b>Étape 3 — Mise en demeure préfectorale :</b> arrêté préfectoral fixant un délai ultime sous astreinte journalière',
+         '<b>Étape 4 — Travaux d\'office (L.1331-6) :</b> en dernier recours, la commune fait réaliser les travaux et récupère les coûts par voie fiscale (taxe foncière supplémentaire)',
+         '<b>Sanctions pénales :</b> entrave délibérée au contrôle SPANC = contravention de 5e classe (1 500 € d\'amende)',
+       ]},
+     ]},
   ],
   ac:[
     {ico:'♻️',year:2020,isNew:false,color:'var(--c-ac)',colorl:'var(--c-ac-l)',
@@ -620,7 +670,24 @@ const REGL_TEXTES = {
        {t:'info',v:'ℹ France 2024 : < 1% des eaux traitées réutilisées vs 10–15% en Espagne/Italie'},
        {t:'ok',v:'🆕 Plan Eau 2023 : objectif ×10 de REUT d\'ici 2030'},
      ],
-     detail:'Ce règlement européen — d\'application directe, sans transposition nécessaire — harmonise les exigences sanitaires pour irriguer avec des eaux usées traitées plutôt que de l\'eau potable, un enjeu croissant face aux sécheresses. La classe requise dépend de la culture (A pour les cultures consommées crues, D pour les usages non alimentaires) et du mode d\'irrigation (aspersion plus risquée que goutte-à-goutte). En France, la frilosité reste forte en raison du principe de précaution sanitaire et de la complexité administrative ; le Plan Eau 2023 vise justement à simplifier les autorisations préfectorales pour accélérer les projets pilotes.'},
+     detail:'Ce règlement européen — d\'application directe, sans transposition nécessaire — harmonise les exigences sanitaires pour irriguer avec des eaux usées traitées plutôt que de l\'eau potable. La classe requise dépend de la culture et du mode d\'irrigation. En France, la frilosité reste forte ; le Plan Eau 2023 vise à simplifier les autorisations préfectorales.',
+     sections:[
+       {title:'Les 4 classes de REUT et leurs usages', type:'table',
+        headers:['Classe','E. coli (UFC/100mL)','Usage autorisé','Mode d\'irrigation'],
+        rows:[
+          ['Classe A (le plus strict)','≤ 10','Cultures consommées crues (salade, fraises...)','Tous modes (aspersion, goutte-à-goutte)'],
+          ['Classe B','≤ 100','Cultures transformées ou pelées avant consommation','Goutte-à-goutte préférentiel'],
+          ['Classe C','≤ 1 000','Cultures non consommées crues (blé, maïs...)','Goutte-à-goutte ou aspersion basse'],
+          ['Classe D (le moins strict)','≤ 10 000','Pâturages non alimentaires, forêts industrielles','Aspersion tolérée'],
+        ]},
+       {title:'Procédure d\'autorisation en France', type:'list', items:[
+         '<b>Dossier de demande :</b> déposé en préfecture — inclut l\'étude de risque sanitaire et environnementale, le plan d\'épandage, les analyses de l\'eau traitée',
+         '<b>Analyse requise :</b> E. coli, Légionella pneumophila, helminthes, turbidité — fréquence fixée par l\'arrêté préfectoral d\'autorisation',
+         '<b>Zone tampon :</b> 50 m minimum entre zone d\'irrigation Classe A et zone d\'habitation · 200 m pour aspersion en zone fréquentée',
+         '<b>Traçabilité :</b> registre de suivi obligatoire — volumes utilisés, analyses, incidents — consultable par la police de l\'eau',
+         '<b>Plan Eau 2023 :</b> objectif ×10 de REUT d\'ici 2030 — simplification administrative prévue par décret en cours',
+       ]},
+     ]},
     {ico:'🏭',year:2007,isNew:false,color:'var(--c-regl)',colorl:'var(--c-regl-l)',
      name:'Arrêté du 22/06/2007 — Collecte et traitement des eaux usées STEU',
      ref:'NOR : DEVO0752257A · Texte de référence pour toutes les STEU',
@@ -671,7 +738,23 @@ const REGL_TEXTES = {
        {t:'info',v:'ℹ Loi Ferrand-Fesneau 2018 : report à 2026 possible si 25% communes s\'y opposent avant 2019'},
        {t:'info',v:'ℹ Conséquence : fusion syndicats · Renégociation DSP · Mutualisation des moyens'},
      ],
-     detail:'Cette loi a profondément restructuré le paysage institutionnel de l\'eau en France en retirant aux communes isolées la compétence eau et assainissement au profit des intercommunalités (EPCI à fiscalité propre). L\'objectif affiché était d\'atteindre une taille critique permettant de mutualiser l\'ingénierie et d\'investir plus efficacement dans le renouvellement des réseaux vieillissants. Concrètement, cela s\'est traduit par des fusions de syndicats intercommunaux historiques et la renégociation de nombreux contrats de DSP arrivant à échéance, avec parfois des tensions sur le mode de gestion choisi (régie vs délégation) selon les sensibilités politiques locales.'},
+     detail:'Cette loi a profondément restructuré le paysage institutionnel de l\'eau en France en retirant aux communes isolées la compétence eau et assainissement au profit des intercommunalités (EPCI). L\'objectif : atteindre une taille critique pour mutualiser l\'ingénierie et investir dans le renouvellement des réseaux vieillissants.',
+     sections:[
+       {title:'Calendrier de transfert de compétences', type:'table',
+        headers:['Type d\'EPCI','Eau potable','Assainissement','Remarque'],
+        rows:[
+          ['Métropoles et communautés urbaines','Obligatoire depuis 2016','Obligatoire depuis 2016','Déjà effectif'],
+          ['Communautés d\'agglomération','Obligatoire depuis 01/01/2020','Obligatoire depuis 01/01/2020','Loi NOTRe initiale'],
+          ['Communautés de communes','Obligatoire depuis 01/01/2020','Obligatoire depuis 01/01/2020','Loi Ferrand-Fesneau : report 2026 possible'],
+          ['Syndicats intercommunaux','Dissolution ou fusion dans l\'EPCI','Idem','Délai négocié localement'],
+        ]},
+       {title:'Conséquences pratiques pour les techniciens', type:'alerts', items:[
+         {t:'info', v:'ℹ Fusion des syndicats : les règlements de service et les tarifs doivent être harmonisés sur le territoire de l\'EPCI — délai de transition 5 ans possible'},
+         {t:'warn', v:'⚠ DSP en cours : les contrats de délégation de service public signés avant le transfert restent en vigueur jusqu\'à leur terme — la compétence est transférée mais le contrat suit'},
+         {t:'ok', v:'✓ Mutualisation : les EPCI peuvent désormais disposer d\'une ingénierie interne complète (techniciens réseau, hydrogéologue, ingénieur STEU) — objectif de réduction des coûts sur le long terme'},
+         {t:'info', v:'ℹ SPANC : transfert inclut le SPANC — harmonisation des fréquences de contrôle et des tarifs sur tout le territoire intercommunal'},
+       ]},
+     ]},
     {ico:'⚠️',year:2015,isNew:false,color:'var(--c-regl)',colorl:'var(--c-regl-l)',
      name:'Arrêté du 21/07/2015 — Déversoirs d\'orage',
      ref:'Arrêté relatif aux systèmes d\'assainissement collectif et aux installations de prétraitement',
@@ -681,7 +764,22 @@ const REGL_TEXTES = {
        {t:'info',v:'ℹ Déclaration annuelle des volumes déversés obligatoire'},
        {t:'info',v:'ℹ Programme de mise en conformité des DO à présenter à l\'autorité compétente'},
      ],
-     detail:'Les déversoirs d\'orage (DO) sont les points du réseau unitaire où les eaux mélangées (usées + pluviales) peuvent être rejetées directement au milieu naturel en cas de forte pluie, sans passer par la station — un point de vigilance majeur pour la qualité des cours d\'eau. Cet arrêté encadre cette pratique en imposant un suivi quantitatif systématique des rejets, condition de transparence vis-à-vis de la police de l\'eau. Les DO les plus impactants (zones sensibles, gros volumes) doivent faire l\'objet d\'un programme de travaux de mise en conformité, souvent intégré aux schémas directeurs d\'assainissement des collectivités.'},
+     detail:'Les déversoirs d\'orage (DO) sont les points du réseau unitaire où les eaux mélangées (usées + pluviales) peuvent être rejetées directement au milieu naturel en cas de forte pluie, sans passer par la station. Cet arrêté impose un suivi quantitatif systématique des rejets et un programme de mise en conformité pour les DO les plus impactants.',
+     sections:[
+       {title:'Obligations selon le type de réseau', type:'table',
+        headers:['Débit DO','Autosurveillance requise','Rapport annuel','Délai conformité'],
+        rows:[
+          ['< 120 m³/h','Non obligatoire','Non','Schéma directeur si impact avéré'],
+          ['120–500 m³/h','Mesure débit + durée déversements','Oui, à la DREAL','Programme travaux si > 4 événements/an'],
+          ['> 500 m³/h ou zone sensible','Mesure continue en temps réel','Oui, trimestriel','Programme travaux prioritaire'],
+        ]},
+       {title:'Points de vigilance', type:'alerts', items:[
+         {t:'danger', v:'⛔ Zone de baignade ou captage AEP en aval : tout DO non instrumenté à moins de 2 km est une non-conformité à régulariser en priorité'},
+         {t:'warn', v:'⚠ Déversements fréquents (> 4×/an) : indice de dysfonctionnement du réseau — à signaler dans le RPQS et au schéma directeur d\'assainissement'},
+         {t:'info', v:'ℹ Résultats transmis via VERSEAU (plateforme nationale) — données publiques consultables en ligne'},
+         {t:'ok', v:'✓ Bonne pratique : installer des capteurs de niveau (limnimètres) + alarme SMS — coût 2 000–5 000 € vs amende et redevances pollution'},
+       ]},
+     ]},
     {ico:'🇪🇺',year:1991,isNew:false,color:'var(--c-ac)',colorl:'var(--c-ac-l)',
      name:'Directive 91/271/CEE — Traitement des eaux urbaines résiduaires',
      ref:'Directive fondatrice européenne · Révision en cours (2024) pour neutralité carbone 2045',
@@ -691,7 +789,23 @@ const REGL_TEXTES = {
        {t:'info',v:'ℹ Transposée en droit français par l\'arrêté du 22/06/2007 et ses prédécesseurs'},
        {t:'info',v:'ℹ Révision 2024 : extension du traitement quaternaire (micropolluants) pour les grandes STEU'},
      ],
-     detail:'C\'est la directive mère de tout l\'assainissement collectif européen, antérieure même à la DCE : elle a structuré l\'obligation pour les agglomérations de plus de 2 000 équivalents-habitants de collecter et traiter leurs eaux usées avant rejet, avec des exigences renforcées en zone sensible. La France a fait l\'objet de plusieurs condamnations par la Cour de Justice de l\'UE pour retard de mise en conformité de certaines stations. La révision en cours (2024) vise à intégrer un traitement quaternaire (élimination des micropolluants et résidus pharmaceutiques) pour les stations de plus de 100 000 EH, avec un principe de responsabilité élargie du producteur pour en financer le coût.'},
+     detail:'C\'est la directive mère de tout l\'assainissement collectif européen : elle a structuré l\'obligation de collecter et traiter les eaux usées pour les agglomérations > 2 000 EH. La France a été condamnée plusieurs fois par la CJUE pour retard. La révision 2024 vise un traitement quaternaire (micropolluants) pour les STEU > 100 000 EH.',
+     sections:[
+       {title:'Obligations selon la taille de l\'agglomération', type:'table',
+        headers:['Taille agglomération','Collecte','Traitement requis','Délai initial'],
+        rows:[
+          ['< 2 000 EH','Non obligatoire (ANC possible)','Non requis par directive','N/A'],
+          ['2 000–10 000 EH','Réseau collectif obligatoire','Traitement secondaire (DBO₅, DCO, MES)','31/12/2005'],
+          ['10 000–150 000 EH','Réseau collectif obligatoire','Secondaire + zones sensibles : tertiaire','31/12/1998'],
+          ['> 150 000 EH','Réseau collectif obligatoire','Secondaire + tertiaire + (quaternaire 2045)','31/12/1998'],
+        ]},
+       {title:'Révision 2024 — traitement quaternaire', type:'alerts', items:[
+         {t:'ok', v:'🆕 Traitement quaternaire obligatoire pour STEU > 100 000 EH d\'ici 2045 : élimination des micropolluants (résidus médicamenteux, perturbateurs endocriniens)'},
+         {t:'info', v:'ℹ Financement : principe de responsabilité élargie du producteur (REP) pharmaceutique — industrie pharma contribue au financement des équipements'},
+         {t:'warn', v:'⚠ Neutralité carbone STEU : objectif 2045 pour les stations > 10 000 EH — cogénération des boues, réduction du N₂O obligatoire'},
+         {t:'info', v:'ℹ Condamnations France CJUE : plusieurs arrêts pour défaut de traitement en zone sensible (Bretagne, Bassin parisien) — majorations financières notables'},
+       ]},
+     ]},
     {ico:'📜',year:2006,isNew:false,color:'var(--c-regl)',colorl:'var(--c-regl-l)',
      name:'Code de la santé publique — Art. L.1331-1 (raccordement à l\'égout)',
      ref:'Obligation de raccordement et sanctions associées',
@@ -701,7 +815,23 @@ const REGL_TEXTES = {
        {t:'info',v:'ℹ La commune peut exécuter les travaux de raccordement d\'office, aux frais du propriétaire'},
        {t:'info',v:'ℹ Exonération possible si raccordement techniquement impossible (justification requise)'},
      ],
-     detail:'Cet article impose une obligation claire et datée : dès qu\'un réseau collectif est mis en service à proximité d\'une habitation, son propriétaire dispose de 2 ans pour s\'y raccorder et abandonner son éventuelle installation ANC. Cette règle vise à éviter la coexistence inutile de deux systèmes d\'assainissement et à optimiser le taux de remplissage (donc la rentabilité) des nouveaux réseaux. En cas de refus persistant, la collectivité dispose de leviers progressifs : majoration financière, puis exécution des travaux d\'office si le propriétaire ne réagit pas, le tout recouvré comme une dette fiscale.'},
+     detail:'Cet article impose une obligation claire : dès qu\'un réseau collectif est mis en service à proximité d\'une habitation, son propriétaire dispose de 2 ans pour s\'y raccorder et abandonner son installation ANC. En cas de refus persistant, la collectivité peut exécuter les travaux d\'office aux frais du propriétaire.',
+     sections:[
+       {title:'Délais et exceptions', type:'table',
+        headers:['Situation','Délai de raccordement','Exception possible','Qui décide'],
+        rows:[
+          ['Réseau mis en service — habitation existante','2 ans après mise en service','Impossibilité technique démontrée','Arrêté municipal motivé'],
+          ['Construction neuve en zone desservie','Raccordement obligatoire dès construction','Aucune','Permis de construire conditionné'],
+          ['Réseau à moins de 100 m (ANC existant)','2 ans','Accord préfectoral si coût excessif','Préfet'],
+          ['Zone d\'assainissement non collectif','Pas d\'obligation de raccordement','N/A — ANC obligatoire','Commune (zonage)'],
+        ]},
+       {title:'Sanctions en cas de non-raccordement', type:'alerts', items:[
+         {t:'danger', v:'⛔ Majoration de la redevance d\'assainissement : montant équivalent à ce que le propriétaire aurait payé s\'il était raccordé — cumulatif jusqu\'à la mise en conformité'},
+         {t:'danger', v:'⛔ Travaux d\'office : après mise en demeure restée sans effet, la commune exécute les travaux et en récupère le coût + 10% de frais de gestion'},
+         {t:'warn', v:'⚠ Transaction immobilière : l\'état de raccordement doit figurer dans le diagnostic assainissement annexé à la promesse de vente — non-conformité = risque de résolution de vente'},
+         {t:'info', v:'ℹ Aide financière possible : certaines Agences de l\'eau subventionnent les branchements au réseau — se renseigner auprès de la collectivité compétente'},
+       ]},
+     ]},
   ],
   ep:[
     {ico:'💧',year:2020,isNew:false,color:'var(--c-ep)',colorl:'var(--c-ep-l)',
@@ -715,7 +845,32 @@ const REGL_TEXTES = {
        {t:'ok',v:'🆕 Droit d\'accès à l\'eau : information sur la qualité + accès gratuit espaces publics'},
        {t:'info',v:'ℹ Microplastiques : sur la watchlist · Surveillance obligatoire · Valeur limite à définir'},
      ],
-     detail:'Cette révision marque un changement de philosophie : on passe d\'une approche purement curative (contrôler la qualité au robinet) à une approche préventive "du captage au robinet" via le Plan de Sécurité de l\'Eau (PSE), qui impose aux exploitants d\'identifier et de maîtriser les risques à chaque étape de la chaîne. L\'intégration des PFAS ("polluants éternels", très persistants) répond à une préoccupation sanitaire croissante : de nombreux captages français dépasseront probablement les seuils 2026, ce qui impliquera des investissements en traitement (charbon actif, osmose inverse) pour de nombreuses collectivités d\'ici la transposition complète.'},
+     detail:'Cette révision marque un changement de philosophie : on passe d\'une approche purement curative (contrôler la qualité au robinet) à une approche préventive "du captage au robinet" via le Plan de Sécurité de l\'Eau (PSE), qui impose aux exploitants d\'identifier et de maîtriser les risques à chaque étape de la chaîne. L\'intégration des PFAS ("polluants éternels", très persistants) répond à une préoccupation sanitaire croissante : de nombreux captages français dépasseront probablement les seuils 2026, ce qui impliquera des investissements en traitement (charbon actif, osmose inverse) pour de nombreuses collectivités d\'ici la transposition complète.',
+     sections:[
+       {title:'Calendrier de transposition en France', type:'table',
+        headers:['Obligation','Échéance','Statut'],
+        rows:[
+          ['PFAS totaux < 0,1 µg/L','Janvier 2026','Transposition en cours'],
+          ['Remplacement branchements plomb','Décembre 2026','Arrêté en préparation'],
+          ['Plan de Sécurité de l\'Eau (UDI > 5 000 m³/j)','Janvier 2026','Circulaire ministérielle prévue'],
+          ['Information consommateurs en ligne','Juillet 2025','En cours'],
+          ['Microplastiques — valeur limite','2030 (watchlist)','Pas encore fixée'],
+        ]},
+       {title:'Nouveaux paramètres PFAS — limites 2026', type:'table',
+        headers:['Paramètre','Nouvelle limite','Procédé de traitement recommandé'],
+        rows:[
+          ['PFAS totaux (20 listés)','< 0,1 µg/L','Charbon actif en grain ou osmose inverse'],
+          ['PFOA / PFOS individuel','< 0,02 µg/L','Charbon actif haute dose + nanofiltration'],
+          ['Bisphénol A','< 2,5 µg/L','Nanofiltration ou osmose inverse'],
+          ['Chlorates','< 0,25 mg/L','Optimisation de la chloration'],
+        ]},
+       {title:'Impact pratique pour les exploitants AEP', type:'alerts', items:[
+         {t:'danger', v:'⛔ Captages en zones industrielles, proches aéroports ou bases militaires : analyser le PFAS total dès maintenant — seuil 0,1 µg/L sera opposable dès 2026'},
+         {t:'warn', v:'⚠ PSE obligatoire pour UDI > 5 000 m³/j en 2026 : démarrer la démarche en 2025 avec bureau d\'études agréé + validation ARS'},
+         {t:'ok', v:'✓ Branchements plomb : établir l\'inventaire est la première étape — données disponibles auprès de la mairie ou du syndicat'},
+         {t:'info', v:'ℹ Microplastiques : surveillance obligatoire dès 2026 pour UDI > 10 000 m³/j — pas de valeur limite avant 2030'},
+       ]},
+     ]},
     {ico:'📋',year:2007,isNew:false,color:'var(--c-ep)',colorl:'var(--c-ep-l)',
      name:'Arrêté du 11/01/2007 — Limites qualité eau potable',
      ref:'NOR : SANP0720200A · Transposition Directive 98/83/CE',
@@ -726,7 +881,32 @@ const REGL_TEXTES = {
        {t:'info',v:'ℹ Désinfection UV : dose minimale 40 mJ/cm² (conf. réglementaire)'},
        {t:'info',v:'ℹ Pesticides totaux : < 0,5 µg/L · Individuellement : < 0,1 µg/L (sauf exceptions)'},
      ],
-     detail:'C\'est le texte de référence quotidien pour tout exploitant d\'un réseau d\'eau potable en France : il fixe les limites de qualité opposables, contrôlées par l\'ARS via un programme d\'analyses réglementaires (le fameux "contrôle sanitaire"). Un dépassement, même ponctuel, déclenche une procédure spécifique : information immédiate des consommateurs, recherche de la cause, et restriction d\'usage (ex. "eau impropre à la consommation des nourrissons") si le seuil sanitaire est franchi. Les paramètres microbiologiques (E. coli, entérocoques) sont les plus surveillés car ils sont l\'indicateur le plus direct d\'un risque sanitaire immédiat, contrairement aux paramètres chimiques dont les effets sont souvent liés à une exposition chronique.'},
+     detail:'C\'est le texte de référence quotidien pour tout exploitant d\'un réseau d\'eau potable en France : il fixe les limites de qualité opposables, contrôlées par l\'ARS via un programme d\'analyses réglementaires (le fameux "contrôle sanitaire"). Un dépassement, même ponctuel, déclenche une procédure spécifique : information immédiate des consommateurs, recherche de la cause, et restriction d\'usage (ex. "eau impropre à la consommation des nourrissons") si le seuil sanitaire est franchi.',
+     sections:[
+       {title:'Paramètres microbiologiques — limites absolues', type:'table',
+        headers:['Paramètre','Limite','Fréquence','Conséquence dépassement'],
+        rows:[
+          ['E. coli','0 UFC/100 mL','Programme ARS (P1)','Alerte immédiate + restriction usage'],
+          ['Entérocoques','0 UFC/100 mL','Programme ARS (P1)','Alerte immédiate + restriction usage'],
+          ['Bactéries sulfito-réductrices','0 spores/100 mL','Programme P2','Indicateur contamination profonde'],
+        ]},
+       {title:'Paramètres physico-chimiques clés', type:'table',
+        headers:['Paramètre','Limite réglementaire','Valeur cible','Enjeu sanitaire'],
+        rows:[
+          ['Nitrates NO₃⁻','< 50 mg/L','< 25 mg/L','Méthémoglobinémie nourrissons'],
+          ['Plomb','< 10 µg/L','< 5 µg/L (futur 2026)','Neurotoxicité enfants'],
+          ['Turbidité (distribution)','< 1 NTU','< 0,2 NTU','Efficacité de la désinfection'],
+          ['pH','6,5–9,0','7,2–7,8','Corrosion réseau / entartrage'],
+          ['Chlore résiduel libre','< 0,5 mg/L','0,1–0,3 mg/L','Protection microbiologique réseau'],
+          ['Pesticides totaux','< 0,5 µg/L','< 0,1 µg/L','Contamination agricole'],
+        ]},
+       {title:'Procédure en cas de dépassement', type:'alerts', items:[
+         {t:'danger', v:'⛔ Dépassement microbiologique : information ARS dans les 24h + affichage mairie + information abonnés — restriction d\'usage possible (ne pas boire, ne pas cuisiner)'},
+         {t:'danger', v:'⛔ Restriction levée uniquement sur décision formelle de l\'ARS après 2 analyses conformes consécutives'},
+         {t:'warn', v:'⚠ Dépassement chimique hors urgence : signalement ARS dans les 72h + plan d\'action correctif à soumettre sous 15 jours'},
+         {t:'info', v:'ℹ Résultats transmis via SISE-Eaux (système d\'information santé environnement) — consultables en mairie par tout citoyen'},
+       ]},
+     ]},
     {ico:'🔵',year:1998,isNew:false,color:'var(--c-ac)',colorl:'var(--c-ac-l)',
      name:'Directive 98/83/CE — Eau destinée à la consommation humaine (ancienne)',
      ref:'Remplacée par Directive 2020/2184 · Toujours en vigueur jusqu\'à transposition complète',
@@ -734,7 +914,24 @@ const REGL_TEXTES = {
        {t:'info',v:'ℹ 48 paramètres de qualité fixés · Toujours applicable jusqu\'à transposition 2020/2184'},
        {t:'info',v:'ℹ Base du CSP art. R.1321-2 et de l\'Arrêté 11/01/2007'},
      ],
-     detail:'Bien que formellement remplacée par la directive 2020/2184, cette directive historique reste la référence implicite tant que la transposition française n\'est pas achevée sur tous ses volets (le calendrier s\'étend jusqu\'en 2026-2027 pour certains paramètres comme le plomb). Elle a posé les bases du "contrôle sanitaire" tel qu\'on le connaît aujourd\'hui en France et demeure citée dans de nombreux textes nationaux encore en vigueur, d\'où l\'intérêt de la connaître même si elle est progressivement supplantée.'},
+     detail:'Bien que formellement remplacée par la directive 2020/2184, cette directive historique reste la référence implicite tant que la transposition française n\'est pas achevée sur tous ses volets (le calendrier s\'étend jusqu\'en 2026-2027 pour certains paramètres comme le plomb).',
+     sections:[
+       {title:'Ce qu\'elle a introduit (encore applicable)', type:'list', items:[
+         '<b>48 paramètres de qualité</b> : base de l\'arrêté du 11/01/2007 — E. coli, nitrates, pesticides, métaux lourds',
+         '<b>Contrôle sanitaire obligatoire</b> : programme d\'analyses périodiques sur tous les réseaux publics (repris par arrêté 20/06/2007)',
+         '<b>Information des consommateurs</b> : rapport annuel de qualité obligatoire, transmis sur facture — toujours en vigueur',
+         '<b>Obligations des États membres</b> : assurer eau propre à la consommation pour tous — base juridique des poursuites contre la France pour retard',
+       ]},
+       {title:'Différences clés avec la directive 2020/2184', type:'table',
+        headers:['Sujet','Directive 98/83/CE','Directive 2020/2184'],
+        rows:[
+          ['PFAS','Non inclus','Limites strictes dès 2026'],
+          ['Plomb','< 10 µg/L','< 5 µg/L (délai 2036)'],
+          ['Plan de sécurité (PSE)','Non requis','Obligatoire > 5 000 m³/j'],
+          ['Droit d\'accès à l\'eau','Non prévu','Article explicite'],
+          ['Microplastiques','Absents','Watchlist + surveillance'],
+        ]},
+     ]},
     {ico:'⚖️',year:2007,isNew:false,color:'var(--c-ep)',colorl:'var(--c-ep-l)',
      name:'Code de la santé publique — Art. R.1321-1 à R.1321-63',
      ref:'Cadre réglementaire complet du contrôle sanitaire des eaux destinées à la consommation humaine',
@@ -744,7 +941,23 @@ const REGL_TEXTES = {
        {t:'info',v:'ℹ Encadre les périmètres de protection des captages (immédiat, rapproché, éloigné)'},
        {t:'danger',v:'✗ Non-déclaration d\'un dépassement de seuil sanitaire : responsabilité pénale du gestionnaire'},
      ],
-     detail:'Ces articles forment l\'architecture réglementaire complète qui chapeaute l\'arrêté du 11/01/2007 : ils définissent qui est responsable de quoi (producteur d\'eau, distributeur, ARS), comment un captage doit être autorisé et protégé (les fameux périmètres de protection, souvent source de contraintes agricoles ou urbanistiques autour des points de prélèvement), et quelles sont les obligations de transparence en cas de problème de qualité. C\'est ce cadre qui rend le gestionnaire pénalement responsable s\'il dissimule ou tarde à signaler un dépassement constaté.'},
+     detail:'Ces articles forment l\'architecture réglementaire complète qui chapeaute l\'arrêté du 11/01/2007 : ils définissent qui est responsable de quoi (producteur d\'eau, distributeur, ARS), comment un captage doit être autorisé et protégé, et quelles sont les obligations de transparence en cas de problème.',
+     sections:[
+       {title:'Responsabilités par acteur', type:'table',
+        headers:['Acteur','Obligation principale','Sanction en cas de manquement'],
+        rows:[
+          ['Producteur (syndicat, commune)','Surveiller la qualité en sortie traitement · Informer l\'ARS','Mise en demeure préfectorale + amende'],
+          ['Distributeur','Maintenir la qualité jusqu\'au robinet · Carnet sanitaire à jour','Responsabilité pénale si dissimulation'],
+          ['ARS','Contrôle sanitaire officiel · Autorisation d\'utilisation','Peut ordonner l\'arrêt de la distribution'],
+          ['Préfet','Autorisation d\'exploitation du captage','Peut retirer l\'autorisation'],
+        ]},
+       {title:'Autorisations préfectorales obligatoires', type:'list', items:[
+         '<b>Captage :</b> autorisation préfectorale requise avant tout prélèvement — dossier : étude hydrogéologique + enquête publique + avis du CODERST',
+         '<b>Installation de traitement :</b> tout nouveau procédé de désinfection ou traitement doit être notifié à l\'ARS avant mise en service',
+         '<b>Périmètres de protection :</b> déclaration d\'Utilité Publique (DUP) obligatoire — délai moyen 3 à 7 ans pour les captages non encore protégés',
+         '<b>Dérogation de qualité :</b> si dépassement ponctuel, dérogation ARS possible sous conditions — durée limitée + plan d\'action obligatoire',
+       ]},
+     ]},
     {ico:'🔬',year:2007,isNew:false,color:'var(--c-ep)',colorl:'var(--c-ep-l)',
      name:'Arrêté du 20 juin 2007 — Programme de surveillance de la qualité',
      ref:'Fixe les fréquences et types d\'analyses du contrôle sanitaire selon la population desservie',
@@ -753,7 +966,23 @@ const REGL_TEXTES = {
        {t:'info',v:'ℹ Distingue analyses de type P1 (routine), P2 (complète), et analyses occasionnelles'},
        {t:'danger',v:'✗ Non-respect du programme de surveillance : non-conformité administrative vis-à-vis de l\'ARS'},
      ],
-     detail:'Ce texte technique répond à une question très concrète pour les exploitants : combien d\'analyses, de quel type, et à quelle fréquence ? La réponse dépend directement de la taille de l\'unité de distribution (UDI) desservie — plus la population est nombreuse, plus la fréquence et la complétude des analyses augmentent, car le nombre de personnes exposées à un risque potentiel est plus élevé. Les analyses dites P1 vérifient les paramètres les plus sensibles (bactériologie, turbidité), tandis que les analyses P2, plus complètes et moins fréquentes, couvrent l\'ensemble des paramètres réglementaires.'},
+     detail:'Ce texte technique répond à une question très concrète pour les exploitants : combien d\'analyses, de quel type, et à quelle fréquence ? La réponse dépend directement de la taille de l\'unité de distribution (UDI) desservie — plus la population est nombreuse, plus la fréquence et la complétude des analyses augmentent.',
+     sections:[
+       {title:'Fréquences d\'analyse selon la taille de l\'UDI', type:'table',
+        headers:['Volume distribué','Type P1 (routine)','Type P2 (complète)','Paramètres P1'],
+        rows:[
+          ['< 100 m³/j (< 400 hab.)','1×/trimestre','1×/an','E. coli, turbidité, chlore, pH'],
+          ['100–1 000 m³/j','1×/mois','1×/an','E. coli, entérocoques, turbidité, chlore'],
+          ['1 000–5 000 m³/j','2×/mois','1×/an + si anomalie','Bactério + paramètres chimiques de base'],
+          ['> 5 000 m³/j','Fréquence calculée','Trimestrielle','Tous paramètres réglementaires'],
+        ]},
+       {title:'Différence P1 / P2', type:'alerts', items:[
+         {t:'info', v:'ℹ Analyse P1 (routine) : vérification des paramètres les plus sensibles (bactériologie, turbidité, chlore résiduel, pH) — résultat en 24–48h'},
+         {t:'info', v:'ℹ Analyse P2 (complète) : tous les paramètres de l\'arrêté 11/01/2007 — métaux, pesticides, nitrates, hydrocarbures — résultat en 5–10 jours'},
+         {t:'warn', v:'⚠ Non-respect du programme de surveillance : assimilé à un dépassement de seuil pour le calcul des redevances Agence de l\'eau — impact financier direct'},
+         {t:'ok', v:'✓ Laboratoires agréés obligatoires : liste consultable sur le site du Ministère — prélèvement par un agent assermenté de l\'ARS ou un prestataire agréé'},
+       ]},
+     ]},
     {ico:'🛡️',year:2001,isNew:false,color:'var(--c-ep)',colorl:'var(--c-ep-l)',
      name:'Décret du 20/12/2001 — Périmètres de protection des captages AEP',
      ref:'Code de l\'environnement art. R.1321-13 · Déclaration d\'Utilité Publique (DUP)',
@@ -775,7 +1004,23 @@ const REGL_TEXTES = {
        {t:'info',v:'ℹ Ozone : appliqué avant filtration charbon actif pour limiter les bromates (< 10 µg/L)'},
        {t:'warn',v:'⚠ Excès chlore (> 0,5 mg/L) : risque formation THM · Goût et odeur dégradés'},
      ],
-     detail:'La désinfection est le dernier rempart contre les risques microbiologiques avant la distribution. La chloration reste le procédé de référence français pour sa persistance dans le réseau, mais elle génère des sous-produits de désinfection (principalement les THM comme le chloroforme) quand le chlore réagit avec la matière organique naturelle présente dans l\'eau. Le maintien d\'un résiduel chloré suffisant — ni trop faible (risque de recroissance bactérienne, notamment des légionelles dans les installations intérieures) ni trop élevé (formation de THM, inconfort organoleptique) — est un exercice d\'équilibre délicat qui justifie un suivi en continu sur les réseaux de grande taille. La combinaison ozone + charbon actif biologique permet de réduire la teneur en matière organique en amont et donc de chlorer à des doses plus faibles.'},
+     detail:'La désinfection est le dernier rempart contre les risques microbiologiques avant la distribution. La chloration reste le procédé de référence français pour sa persistance dans le réseau, mais elle génère des sous-produits de désinfection (THM) quand le chlore réagit avec la matière organique. Le maintien d\'un résiduel chloré suffisant — ni trop faible (recroissance bactérienne) ni trop élevé (THM, goût) — est un exercice d\'équilibre quotidien.',
+     sections:[
+       {title:'Comparatif des procédés de désinfection', type:'table',
+        headers:['Procédé','Avantages','Limites','Usage typique'],
+        rows:[
+          ['Chloration (hypochlorite)','Résiduel persistant · Peu coûteux · Simple','Formation THM si MO élevée · Goût possible','Tous réseaux, distribution'],
+          ['UV (40 mJ/cm²)','Pas de sous-produits · Efficace contre Crypto','Pas de résiduel · Eau turbide = inefficace','Traitement amont, petites UDI'],
+          ['Ozonation','Très efficace · Détruit micropolluants','Pas de résiduel · Coûteux · Bromates possibles','Grandes STEP, eau de surface'],
+          ['Dioxyde de chlore (ClO₂)','Résiduel stable · Pas de THM','Chlorites résiduels réglementés','Eau fortement chargée en MO'],
+        ]},
+       {title:'Seuils et sous-produits à surveiller', type:'alerts', items:[
+         {t:'danger', v:'⛔ THM totaux (trihalométhanes) : < 100 µg/L — mesuré en bout de réseau, là où la concentration est maximale'},
+         {t:'danger', v:'⛔ Chlore résiduel > 0,5 mg/L au robinet : dépassement réglementaire + formation de THM accélérée'},
+         {t:'warn', v:'⚠ Chlore résiduel < 0,05 mg/L en distribution : risque de recroissance bactérienne — surtout en période chaude (T° réseau > 20°C)'},
+         {t:'info', v:'ℹ Bromates (ozonation) : < 10 µg/L — paramètre à surveiller systématiquement si ozonation sur eau de surface riche en bromures'},
+       ]},
+     ]},
     {ico:'🔧',year:2012,isNew:false,color:'var(--c-ep)',colorl:'var(--c-ep-l)',
      name:'Décret 2012-97 — Rapport annuel prix et qualité du service eau potable (RPQS)',
      ref:'Code général des collectivités territoriales L.2224-5 · Indicateurs de performance',
@@ -786,7 +1031,24 @@ const REGL_TEXTES = {
        {t:'info',v:'ℹ Publication obligatoire sur le portail eau.france.fr (SISPEA) dès 2026'},
        {t:'ok',v:'🆕 Plan Eau 2023 : seuils de rendement renforcés · Objectif national 85% d\'ici 2035'},
      ],
-     detail:'Le RPQS est le document de référence annuel pour évaluer la performance d\'un service d\'eau potable : le rendement du réseau (eau facturée / eau produite) est son indicateur roi, directement lié aux pertes par fuites. Un réseau à faible rendement constitue non seulement un gâchis de la ressource, mais aussi un surcoût de production que payent indirectement les abonnés. Le seuil de 80% (ou l\'ILP réglementaire) déclenche l\'obligation d\'établir un schéma directeur de réhabilitation du réseau, avec un programme de travaux pluriannuel financé partiellement par les Agences de l\'eau. Depuis le Plan Eau 2023, cet objectif est renforcé à 85% pour les services urbains, avec un financement conditionné des Agences de l\'eau aux collectivités dépassant ce seuil.'},
+     detail:'Le RPQS est le document de référence annuel pour évaluer la performance d\'un service d\'eau potable : le rendement du réseau (eau facturée / eau produite) est son indicateur roi, directement lié aux pertes par fuites. Un réseau à faible rendement constitue non seulement un gâchis de la ressource, mais aussi un surcoût de production que payent indirectement les abonnés.',
+     sections:[
+       {title:'Indicateurs clés du RPQS eau potable', type:'table',
+        headers:['Indicateur','Définition','Seuil d\'alerte','Action déclenchée'],
+        rows:[
+          ['Rendement réseau','Eau facturée / Eau mise en distribution × 100','< 80% (rural) / < 85% (urbain)','Schéma directeur de réhabilitation obligatoire'],
+          ['ILP — Indice Linéaire de Pertes','m³ perdus / km réseau / jour','> 1,5 m³/km/j (urbain)','Idem schéma directeur'],
+          ['ILC — Connaissance patrimoine','Inventaire des canalisations','< 40 points / 100','Financement Agence eau conditionné'],
+          ['Prix TTC au m³','Eau + assainissement + taxes','Aucun seuil légal','Indicateur de comparaison'],
+          ['Taux de réclamations','Réclamations / 1 000 abonnés','> 15 pour 1 000','Indicateur qualité service'],
+        ]},
+       {title:'Obligations et délais', type:'alerts', items:[
+         {t:'danger', v:'⛔ RPQS à présenter en assemblée délibérante avant le 30 juin de l\'année N+1 (ex: RPQS 2024 → avant 30/06/2025)'},
+         {t:'danger', v:'⛔ Publication sur SISPEA (eau.france.fr) obligatoire — non-publication = non-conformité administrative signalée par l\'ARS'},
+         {t:'warn', v:'⚠ Rendement < 80% sans schéma directeur en cours : financement Agence de l\'eau pour tout nouveau projet conditionné à son établissement'},
+         {t:'ok', v:'✓ Plan Eau 2023 : objectif national 85% d\'ici 2035 — Agences de l\'eau priorisent les collectivités ayant un plan de réduction des fuites'},
+       ]},
+     ]},
     {ico:'🏗️',year:2003,isNew:false,color:'var(--c-ep)',colorl:'var(--c-ep-l)',
      name:'Arrêté du 22/07/2003 — Adduction d\'eau potable — Conception des réseaux',
      ref:'DTU 60.11 complémentaire · Normes NF EN 805 et NF EN 1057',
@@ -955,7 +1217,27 @@ const REGL_TEXTES = {
        {t:'info',v:'ℹ Effacement d\'ouvrage : financé à 50–80% par les Agences de l\'eau · Procédure IOTA'},
        {t:'warn',v:'⚠ Propriétaire d\'un ouvrage en liste 2 inactif au-delà du délai : astreinte journalière + travaux d\'office'},
      ],
-     detail:'Le classement en liste 2 est souvent vécu comme une contrainte lourde par les propriétaires de moulins et petits ouvrages hydroélectriques : il impose de rendre la rivière franchissable aux poissons migrateurs (saumons, truites fario, anguilles…) soit en installant une passe à poissons, soit en effaçant totalement l\'ouvrage. L\'effacement est souvent préféré par les gestionnaires de bassin car plus efficace hydrauliquement et écologiquement, mais il se heurte à l\'attachement patrimonial des propriétaires. Le bras de fer juridique et administratif autour de ces classements a alimenté de nombreux contentieux, certains propriétaires contestant la liste elle-même, d\'autres contestant le diagnostic d\'efficacité des passes installées.'},
+     detail:'Le classement en liste 2 est souvent vécu comme une contrainte lourde par les propriétaires de moulins et petits ouvrages hydroélectriques : il impose de rendre la rivière franchissable aux poissons migrateurs (saumons, truites fario, anguilles…) soit en installant une passe à poissons, soit en effaçant totalement l\'ouvrage. L\'effacement est souvent préféré par les gestionnaires de bassin car plus efficace hydrauliquement et écologiquement, mais il se heurte à l\'attachement patrimonial des propriétaires. Le bras de fer juridique et administratif autour de ces classements a alimenté de nombreux contentieux, certains propriétaires contestant la liste elle-même, d\'autres contestant le diagnostic d\'efficacité des passes installées.',
+     sections:[
+       {title:'Liste 1 vs Liste 2 — ce que cela implique concrètement', type:'table',
+        headers:['Classement','Principe','Obligation','Délai','Sanction si inaction'],
+        rows:[
+          ['Liste 1 (très bon état écologique)','Préserver l\'état actuel · Aucune nouvelle entrave','Refus systématique de tout nouvel ouvrage faisant obstacle','Immédiat (permanent)','Refus d\'autorisation · Annulation permis'],
+          ['Liste 2 (à restaurer)','Rétablir la libre circulation des espèces migratrices','Équiper l\'ouvrage d\'une passe à poissons OU l\'effacer','5 ans après classement','Astreinte journalière + travaux d\'office aux frais du propriétaire'],
+        ]},
+       {title:'Passe à poissons ou effacement — comment choisir ?', type:'alerts', items:[
+         {t:'danger', v:'⛔ La passe à poissons n\'est pas automatiquement acceptée : l\'OFB contrôle son efficacité réelle. Si le taux de franchissement est insuffisant (mesuré par radiopistage), une mise en demeure de compléter les travaux ou d\'effacer l\'ouvrage peut suivre'},
+         {t:'warn', v:'⚠ L\'effacement est souvent recommandé par les agences de bassin : il rétablit le profil en long naturel, améliore le transport sédimentaire et la température de l\'eau — effets sur le bon état DCE bien au-delà du simple transit des poissons'},
+         {t:'info', v:'ℹ Financement Agences de l\'eau : 50–80% du coût HT pour les travaux de continuité écologique — selon les bassins et l\'état d\'urgence de la liste. Priorité aux ouvrages en liste 2 depuis longtemps inactifs'},
+         {t:'ok', v:'✅ Espèces cibles en France : saumon atlantique, truite fario, anguille européenne (classée en danger critique), lamproie marine, alose feinte — les espèces cibles sont définies par arrêté préfectoral pour chaque ouvrage'},
+       ]},
+       {title:'Procédure IOTA pour les travaux de continuité', type:'list', items:[
+         '<b>Effacement total :</b> dossier IOTA en autorisation (impact sur lit mineur, sédiments, zones humides) — inclure étude hydraulique avant/après + suivi morphologique 3 ans',
+         '<b>Installation d\'une passe :</b> dossier IOTA en déclaration ou autorisation selon la hauteur de l\'ouvrage (rubrique 3.1.1.0) + plan de surveillance de l\'efficacité sur 5 ans',
+         '<b>Clause importante :</b> les travaux sur un ouvrage soumis au droit de pêche nécessitent un avis de la Fédération de Pêche départementale — à anticiper dans l\'instruction',
+         '<b>Répartition des coûts :</b> si la DIG est utilisée, la collectivité GEMAPI peut prendre en charge les travaux sur les ouvrages privés récalcitrants et récupérer une partie des coûts auprès du propriétaire',
+       ]},
+     ]},
     {ico:'🏞️',year:2004,isNew:false,color:'var(--c-aides)',colorl:'var(--c-aides-l)',
      name:'Directive Habitats-Faune-Flore 92/43/CEE — Natura 2000 volet aquatique',
      ref:'Directive européenne · ZSC en France · Évaluation des incidences Natura 2000',
@@ -965,7 +1247,29 @@ const REGL_TEXTES = {
        {t:'info',v:'ℹ N2000 ≠ zone inconstructible · Gestion contractuelle via DOCOB · Mesures compensatoires si impact inévitable'},
        {t:'warn',v:'⚠ Absence d\'EIN pour un projet impactant un site N2000 : irrégularité entachant le permis ou l\'autorisation'},
      ],
-     detail:'L\'évaluation des incidences Natura 2000 est un point fréquemment sous-estimé dans l\'instruction des projets hydrauliques : tout aménagement susceptible d\'affecter un site N2000 — même s\'il est en dehors des limites du site — doit faire l\'objet d\'une évaluation, dont la conclusion peut être "pas d\'incidence significative" (ce qui est le cas de la grande majorité des dossiers). En hydraulique, les espèces aquatiques protégées comme l\'écrevisse à pattes blanches (très sensible à la pollution et à l\'échauffement) ou la lamproie marine constituent des indicateurs de la bonne santé des cours d\'eau et peuvent conditionner les débits réservés ou les conditions de rejets à proximité de leurs habitats.'},
+     detail:'L\'évaluation des incidences Natura 2000 est un point fréquemment sous-estimé dans l\'instruction des projets hydrauliques : tout aménagement susceptible d\'affecter un site N2000 — même s\'il est en dehors des limites du site — doit faire l\'objet d\'une évaluation, dont la conclusion peut être "pas d\'incidence significative" (ce qui est le cas de la grande majorité des dossiers). En hydraulique, les espèces aquatiques protégées comme l\'écrevisse à pattes blanches (très sensible à la pollution et à l\'échauffement) ou la lamproie marine constituent des indicateurs de la bonne santé des cours d\'eau et peuvent conditionner les débits réservés ou les conditions de rejets à proximité de leurs habitats.',
+     sections:[
+       {title:'Quand une Évaluation des Incidences Natura 2000 (EIN) est-elle obligatoire ?', type:'alerts', items:[
+         {t:'danger', v:'⛔ Tout projet, plan ou programme susceptible d\'affecter un site Natura 2000 — MÊME s\'il est situé EN DEHORS des limites du site — doit faire l\'objet d\'une EIN. La proximité suffit : un rejet dans un cours d\'eau qui traverse un site N2000 en aval déclenche l\'obligation'},
+         {t:'danger', v:'⛔ Absence d\'EIN = irrégularité de fond qui entache l\'autorisation et la rend annulable par le juge administratif — et ce même si l\'EIN aurait conclu à "pas d\'incidence significative"'},
+         {t:'warn', v:'⚠ La liste des projets soumis à EIN par défaut est fixée par arrêté préfectoral dans chaque département — vérifier la liste locale avant tout dépôt de dossier IOTA en zone potentiellement impactante'},
+         {t:'info', v:'ℹ Bonne nouvelle : dans plus de 90% des dossiers IOTA, la conclusion de l\'EIN est "absence d\'incidence significative" — c\'est un formulaire standardisé (cerfa 14734*02) mais il faut le joindre'},
+       ]},
+       {title:'Espèces aquatiques d\'intérêt communautaire — les plus fréquentes', type:'table',
+        headers:['Espèce','Sensibilité principale','Impact hydraulique redouté','Mesures de protection typiques'],
+        rows:[
+          ['Écrevisse à pattes blanches','Pollution et réchauffement de l\'eau','Rejets thermiques, eutrophisation','Maintien ombre ripisylve, aucun rejet en période estivale'],
+          ['Lamproie marine','Franchissabilité des cours d\'eau','Seuils et barrages bloquant la migration','Passe à poissons adaptée (pente douce) ou effacement'],
+          ['Chabot','Colmatage du substrat gravier','Matières en suspension lors des travaux','Batardeaux, barrières à limons, travaux en étiage'],
+          ['Triton crêté','Destruction des mares et fossés','Remblaiement zones humides annexes','Compensation habitats + suivi 10 ans'],
+        ]},
+       {title:'Comment rédiger une EIN en pratique', type:'list', items:[
+         '<b>Étape 1 — Localisation :</b> identifier les sites Natura 2000 dans un rayon de 5 km (cartographie INPN : inpn.mnhn.fr) et les fiches espèces/habitats pour lesquels le site est désigné',
+         '<b>Étape 2 — Analyse des incidences :</b> démontrer que le projet n\'affecte pas les espèces et habitats ayant justifié la désignation — distance, connectivité hydraulique, nature des rejets, emprise temporaire ou permanente',
+         '<b>Étape 3 — Conclusion :</b> soit "pas d\'incidence significative" (très fréquent) soit nécessité de mesures d\'atténuation (calendrier de chantier, limitation des rejets, surveillance) soit mesures compensatoires (rare)',
+         '<b>Délai :</b> inclure l\'EIN dans le dossier IOTA ou le dossier PC — ne pas attendre une demande de complément de l\'instruction',
+       ]},
+     ]},
     {ico:'💧',year:2006,isNew:false,color:'var(--c-riv)',colorl:'var(--c-riv-l)',
      name:'SDAGE — Schémas Directeurs d\'Aménagement et de Gestion des Eaux',
      ref:'Code de l\'environnement L.212-1 · Révisés tous les 6 ans · 6 SDAGE métropolitains',
@@ -1009,7 +1313,29 @@ const REGL_TEXTES = {
        {t:'ok',v:'🆕 Recharge artificielle des nappes : mesure facilitée par simplification administrative'},
        {t:'info',v:'ℹ Outil DRIAS (Météo-France) : projections climatiques localisées téléchargeables par bassin versant'},
      ],
-     detail:'Le PNACC-3 marque un tournant dans la façon dont la réglementation prend en compte l\'aléa climatique dans les projections hydrologiques : les études de dimensionnement (ouvrages de rétention, dimensionnement des débits réservés, études d\'impact sur la ressource) ne peuvent plus ignorer que les données historiques des cours d\'eau sont en train de devenir une référence obsolète sous l\'effet des modifications du régime de précipitations et d\'évapotranspiration. Concrètement, pour les maîtres d\'œuvre, les logiciels de simulation hydraulique (HEC-HMS, MIKE SHE, etc.) devront intégrer les scénarios climatiques DRIAS dans les études à horizon 2050 ou 2100, notamment pour le dimensionnement des bassins de rétention ou l\'évaluation des débits d\'étiage réservés.'},
+     detail:'Le PNACC-3 marque un tournant dans la façon dont la réglementation prend en compte l\'aléa climatique dans les projections hydrologiques : les études de dimensionnement (ouvrages de rétention, dimensionnement des débits réservés, études d\'impact sur la ressource) ne peuvent plus ignorer que les données historiques des cours d\'eau sont en train de devenir une référence obsolète sous l\'effet des modifications du régime de précipitations et d\'évapotranspiration. Concrètement, pour les maîtres d\'œuvre, les logiciels de simulation hydraulique (HEC-HMS, MIKE SHE, etc.) devront intégrer les scénarios climatiques DRIAS dans les études à horizon 2050 ou 2100, notamment pour le dimensionnement des bassins de rétention ou l\'évaluation des débits d\'étiage réservés.',
+     sections:[
+       {title:'Projections hydrologiques 2050 — ce qui va changer', type:'table',
+        headers:['Indicateur','Évolution projetée 2050','Conséquence pour l\'hydraulique','Source'],
+        rows:[
+          ['Débit moyen annuel des rivières','−10 à −30% selon les bassins','Dimensionnement des prises d\'eau à revoir','Météo-France / DRIAS 2023'],
+          ['VCN10 (étiage 10 jours)','−30 à −50% en été','Débits réservés actuels intenables en certains secteurs','EXPLORE2 (INRAE/AFB)'],
+          ['Crues intenses (T10, T100)','+10 à +30% en fréquence ou intensité selon région','Bassins de rétention sous-dimensionnés','IPCC AR6 / DRIAS'],
+          ['Durée des étiages','Allongement de 2 à 6 semaines','Périodes de restriction d\'arrosage plus longues','PNACC-3 2024'],
+        ]},
+       {title:'Obligations nouvelles pour les études hydrauliques', type:'alerts', items:[
+         {t:'danger', v:'⛔ Les études de dimensionnement à horizon 2050+ doivent désormais intégrer les scénarios climatiques DRIAS (disponibles gratuitement sur drias.meteo.fr) — les hydrologues ne peuvent plus se fonder uniquement sur les séries historiques pour dimensionner un ouvrage pérenne'},
+         {t:'warn', v:'⚠ Débits réservés (10% du module selon L.214-18) : si l\'hydrologie de référence est invalidée par le changement climatique (module calculé sur des données trop anciennes), un recalcul peut être imposé par la DDT à l\'occasion du renouvellement d\'autorisation'},
+         {t:'info', v:'ℹ Recharge artificielle des nappes : le PNACC-3 a simplifié les démarches administratives pour les projets de recharge (Aquifer Storage and Recovery) — outil de stockage hivernal anticipant les étiages estivaux'},
+         {t:'ok', v:'✅ Outil DRIAS (drias.meteo.fr) : projections climatiques localisées téléchargeables par commune ou bassin versant, pour 3 scénarios RCP (2,6 — 4,5 — 8,5) et 3 horizons (2030, 2050, 2100)'},
+       ]},
+       {title:'Ce que cela change pour les professionnels de l\'eau', type:'list', items:[
+         '<b>Bureau d\'études hydrauliques :</b> intégrer les projections DRIAS dans les rapports d\'études de dimensionnement des bassins de rétention, des ouvrages de protection et des prises d\'eau — c\'est désormais une attente des instructeurs DDT/DREAL',
+         '<b>Services AEP :</b> les schémas directeurs de renouvellement des réseaux doivent anticiper la raréfaction de la ressource — diversification des sources et réduction des pertes priment sur le seul renouvellement à l\'identique',
+         '<b>Gestionnaires de STEU :</b> les étiages plus sévères concentrent les polluants dans les cours d\'eau récepteurs — les prescriptions de rejet (norme NGL, phosphore) pourraient être durcies à l\'occasion des révisions d\'arrêtés',
+         '<b>Collectivités en zone de montagne :</b> le retrait glaciaire modifie profondément les régimes hydrologiques (glaciaires → nivaux → pluviaux) — certains captages en haute altitude devront être reconnus dans les 10 ans',
+       ]},
+     ]},
   ],
   transversal:[
     {ico:'💦',year:2023,isNew:true,color:'var(--c-anc)',colorl:'var(--c-anc-l)',
@@ -1700,7 +2026,7 @@ function renderReglByDept(q='') {
 
   // Liste de sélection des départements
   let list = SPANC_DEPTS.filter(d =>
-    !q || d.num.includes(q) || d.name.toLowerCase().includes(q) || d.region.toLowerCase().includes(q)
+    !q || d.num.includes(q) || d.name.toLowerCase().includes(q) || d.region.toLowerCase().includes(q) || (d.oblig||'').toLowerCase().includes(q) || (d.agence||'').toLowerCase().includes(q)
   );
 
   zone.innerHTML = `
@@ -1758,7 +2084,7 @@ function renderRegl(startKey) {
 
   // Vue générale : 2 onglets
   window.reglStartKey = '';
-  loadModuleTabs(['🗺️ Par département','📋 Textes nationaux'], 'switchReglTab');
+  loadModuleTabs(['🗺️ Par département','📋 Textes nationaux','⛔ Non conforme / Interdit'], 'switchReglTab');
   document.getElementById('main-content').innerHTML =
     '<div class="search-container" style="padding-top:var(--s-2)">'
     + '<div class="search-bar"><span class="search-ico">🔍</span>'
@@ -1779,6 +2105,7 @@ function switchReglTab(idx) {
   var sb = document.getElementById('regl-search');
   if (sb) sb.value = '';
   if (idx === 0) renderReglByDept('');
+  else if (idx === 2) renderReglNonConforme('');
   else renderReglNational('');
   scrollToTop();
 }
@@ -1789,7 +2116,8 @@ function filterReglDirect(q) {
 
 function filterRegl(q) {
   if (window.reglTabIdx === 1) renderReglNational(q.toLowerCase());
-  else { if (window.reglDeptSel) renderReglByDept(''); else renderReglByDept(q.toLowerCase()); }
+  else if (window.reglTabIdx === 2) renderReglNonConforme(q.toLowerCase());
+  else { window.reglDeptSel = ''; renderReglByDept(q.toLowerCase()); }
 }
 
 function renderReglNational(q) {
@@ -1819,6 +2147,54 @@ function renderReglNational(q) {
     + '<div class="alert info" style="margin-bottom:var(--s-2)"><span class="alert-icon">ℹ</span><span>Ces textes s\'appliquent <b>identiquement dans tous les départements de France</b>. Pour voir les spécificités locales, utilisez l\'onglet "Par département".</span></div>'
     + '</div>'
     + (parts || '<div style="text-align:center;padding:40px;color:var(--c-text-3)">Aucun texte trouvé</div>');
+}
+
+function renderReglNonConforme(q) {
+  var modules = [
+    {key:'ep',      lbl:'💧 Eau potable',          color:'var(--c-ep,#0A7460)',   colorl:'var(--c-ep-l,#E0F4F0)'},
+    {key:'ac',      lbl:'🏙️ Assainissement collectif', color:'var(--c-ac,#1550A0)', colorl:'var(--c-ac-l,#E6EEF8)'},
+    {key:'milieux', lbl:'🌊 Milieux naturels',      color:'var(--c-riv,#166038)',  colorl:'var(--c-riv-l,#EAF8F0)'},
+  ];
+
+  var totalItems = 0;
+  var parts = modules.map(function(mod) {
+    var items = [];
+    (REGL_TEXTES[mod.key]||[]).forEach(function(t) {
+      var dangerPts = (t.pts||[]).filter(function(p) {
+        return p.t === 'danger' || p.t === 'warn';
+      }).filter(function(p) {
+        return !q || p.v.toLowerCase().indexOf(q) >= 0 || t.name.toLowerCase().indexOf(q) >= 0;
+      });
+      if (dangerPts.length) {
+        items.push({text: t, pts: dangerPts});
+      }
+    });
+    if (!items.length) return '';
+    totalItems += items.reduce(function(acc, i) { return acc + i.pts.length; }, 0);
+    var rows = items.map(function(item) {
+      var srcBadge = '<span style="display:inline-block;font-size:9px;font-weight:800;color:var(--c-surface);background:' + mod.color + ';padding:1px 7px;border-radius:var(--r-pill);margin-bottom:4px">' + mod.lbl + '</span>';
+      var textName = '<div style="font-size:11px;font-weight:700;color:var(--c-text-2);margin-bottom:6px">' + item.text.ico + ' ' + item.text.name + '</div>';
+      var ptsHtml = item.pts.map(function(p) {
+        return '<div class="rc-pt" style="background:var(--c-'+p.t+'-l);color:var(--c-'+p.t+');border-color:var(--c-'+p.t+')">' + p.v + '</div>';
+      }).join('');
+      return '<div style="background:var(--c-surface);border:1.5px solid ' + mod.color + ';border-radius:var(--r-md);padding:var(--s-3) var(--s-4);display:flex;flex-direction:column;gap:4px">'
+        + srcBadge + textName
+        + '<div style="display:flex;flex-direction:column;gap:5px">' + ptsHtml + '</div>'
+        + '</div>';
+    }).join('');
+    return '<div style="margin-bottom:var(--s-3)">'
+      + '<div class="section-header" style="padding-top:var(--s-2)">' + mod.lbl
+      + ' <span class="sh-count">' + items.reduce(function(a,i){return a+i.pts.length;},0) + ' point' + (items.reduce(function(a,i){return a+i.pts.length;},0)>1?'s':'') + '</span></div>'
+      + '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">' + rows + '</div>'
+      + '</div>';
+  }).join('');
+
+  document.getElementById('regl-content').innerHTML =
+    '<div style="padding:var(--s-2) var(--s-4) 0">'
+    + '<div class="alert danger" style="margin-bottom:var(--s-2)"><span class="alert-icon">⛔</span><span>Synthèse des <b>non-conformités et interdictions réglementaires</b> pour l\'eau potable, l\'assainissement collectif et les milieux naturels.'
+    + (totalItems ? ' <b>' + totalItems + ' points</b> répertoriés.' : '') + '</span></div>'
+    + '</div>'
+    + (parts || '<div style="text-align:center;padding:40px;color:var(--c-text-3)">Aucun point trouvé</div>');
 }
 
 function renderReglTab(key, q='') {
@@ -1985,25 +2361,132 @@ function _renderReglPdfBlock(doc, t, y, MARGIN, cW, checkPage) {
     var c = ptColors[p.t] || ptColors.info;
     var txt = _pdfSanitize(p.v);
     var lines = doc.splitTextToSize(txt, cW - 8);
-    var h = lines.length * 4.4 + 4;
-    checkPage(h + 1.5);
-    doc.setFillColor.apply(doc, c.bg);
-    doc.roundedRect(MARGIN, y, cW, h, 1.2, 1.2, 'F');
     doc.setFont('helvetica', 'normal'); doc.setFontSize(8.6);
     doc.setTextColor.apply(doc, c.fg);
-    lines.forEach(function(l,i){ doc.text(l, MARGIN+4, y+4.4+i*4.4); });
-    y += h + 1.8;
+    lines.forEach(function(l) {
+      checkPage(5.5);
+      doc.setFillColor.apply(doc, c.bg);
+      doc.rect(MARGIN, y - 2, cW, 5, 'F');
+      doc.text(l, MARGIN+4, y + 2);
+      y += 4.4;
+    });
+    y += 1.8;
   });
 
   /* Détail libre éventuel */
   if (t.detail) {
     var dTxt = _pdfSanitize(t.detail.replace(/<[^>]+>/g, ' '));
     var dLines = doc.splitTextToSize(dTxt, cW - 8);
-    checkPage(dLines.length * 4.2 + 4);
     doc.setFont('helvetica', 'normal'); doc.setFontSize(8.3);
     doc.setTextColor(40, 48, 44);
-    dLines.forEach(function(l,i){ doc.text(l, MARGIN+2, y+4+i*4.2); });
-    y += dLines.length * 4.2 + 4;
+    y += 2;
+    dLines.forEach(function(l) {
+      checkPage(5);
+      doc.text(l, MARGIN+2, y+2);
+      y += 4.2;
+    });
+    y += 4;
+  }
+
+  /* Sections structurées */
+  if (t.sections && t.sections.length) {
+    t.sections.forEach(function(sec) {
+      /* Titre de section */
+      checkPage(10);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(9);
+      doc.setTextColor(40, 48, 44);
+      var secTitleLines = doc.splitTextToSize(_pdfSanitize(sec.title || ''), cW - 4);
+      secTitleLines.forEach(function(l,i){ doc.text(l, MARGIN+2, y+i*4.6); });
+      y += secTitleLines.length * 4.6 + 2;
+      doc.setDrawColor(190,210,200); doc.setLineWidth(0.3);
+      doc.line(MARGIN, y, MARGIN+cW, y); y += 3;
+
+      if (sec.type === 'text' && sec.content) {
+        var ctxLines = doc.splitTextToSize(_pdfSanitize(sec.content.replace(/<[^>]+>/g,' ')), cW - 4);
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(8);
+        doc.setTextColor(50, 60, 55);
+        ctxLines.forEach(function(l) {
+          checkPage(5);
+          doc.text(l, MARGIN+2, y);
+          y += 4.0;
+        });
+        y += 4;
+      }
+
+      if (sec.type === 'table' && sec.headers && sec.rows) {
+        var colCount = sec.headers.length;
+        var colW = cW / colCount;
+        /* Header row */
+        checkPage(7);
+        doc.setFillColor(50, 80, 65);
+        doc.rect(MARGIN, y, cW, 6.5, 'F');
+        doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5);
+        doc.setTextColor(255,255,255);
+        sec.headers.forEach(function(h,ci){
+          doc.text(_pdfSanitize(h).slice(0,30), MARGIN + ci*colW + 2, y+4.5);
+        });
+        y += 6.5;
+        /* Data rows */
+        sec.rows.forEach(function(row, ri) {
+          var rowH = 6;
+          row.forEach(function(cell) {
+            var lines = doc.splitTextToSize(_pdfSanitize(cell.replace(/<[^>]+>/g,' ')), colW - 4);
+            rowH = Math.max(rowH, lines.length * 4.2 + 2.5);
+          });
+          checkPage(rowH + 1);
+          doc.setFillColor(ri % 2 === 0 ? 245 : 235, ri % 2 === 0 ? 248 : 245, ri % 2 === 0 ? 246 : 242);
+          doc.rect(MARGIN, y, cW, rowH, 'F');
+          doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5);
+          doc.setTextColor(40, 48, 44);
+          row.forEach(function(cell, ci){
+            var cellLines = doc.splitTextToSize(_pdfSanitize(cell.replace(/<[^>]+>/g,' ')), colW - 4);
+            cellLines.forEach(function(l, li){ doc.text(l, MARGIN + ci*colW + 2, y + 4 + li*4.2); });
+          });
+          doc.setDrawColor(210,220,215); doc.setLineWidth(0.2);
+          doc.rect(MARGIN, y, cW, rowH, 'S');
+          y += rowH;
+        });
+        y += 4;
+      }
+
+      if (sec.type === 'alerts' && sec.items) {
+        var alertColors = {
+          ok:     { bg:[230,248,238], fg:[22,96,56] },
+          danger: { bg:[253,236,234], fg:[168,32,24] },
+          warn:   { bg:[255,248,225], fg:[136,96,0] },
+          info:   { bg:[224,238,250], fg:[15,80,140] }
+        };
+        sec.items.forEach(function(item) {
+          var ac = alertColors[item.t] || alertColors.info;
+          var txt = _pdfSanitize((item.v||'').replace(/<[^>]+>/g,' '));
+          var aLines = doc.splitTextToSize(txt, cW - 8);
+          doc.setFont('helvetica', 'normal'); doc.setFontSize(8.2);
+          doc.setTextColor.apply(doc, ac.fg);
+          aLines.forEach(function(l) {
+            checkPage(5.5);
+            doc.setFillColor.apply(doc, ac.bg);
+            doc.rect(MARGIN, y - 2, cW, 5, 'F');
+            doc.text(l, MARGIN+4, y + 2);
+            y += 4.2;
+          });
+          y += 1.8;
+        });
+        y += 2;
+      }
+
+      if (sec.type === 'list' && sec.items) {
+        sec.items.forEach(function(item) {
+          var itemTxt = '• ' + _pdfSanitize(item.replace(/<[^>]+>/g,' '));
+          var iLines = doc.splitTextToSize(itemTxt, cW - 6);
+          checkPage(iLines.length * 4.2 + 2);
+          doc.setFont('helvetica', 'normal'); doc.setFontSize(8.2);
+          doc.setTextColor(40, 48, 44);
+          iLines.forEach(function(l,i){ doc.text(l, MARGIN+3, y+i*4.2); });
+          y += iLines.length * 4.2 + 1.5;
+        });
+        y += 3;
+      }
+    });
   }
 
   /* Source */
