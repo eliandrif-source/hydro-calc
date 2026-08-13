@@ -8353,6 +8353,126 @@ function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaPng) {
     }
   }
 
+  /* Exercices d'application */
+  if (c.exercices && c.exercices.length) {
+    doc.addPage(); y = RESUME_Y;
+
+    /* Bandeau titre section exercices */
+    doc.setFillColor(col[0] + Math.round((255 - col[0]) * 0.85), col[1] + Math.round((255 - col[1]) * 0.85), col[2] + Math.round((255 - col[2]) * 0.85));
+    doc.setDrawColor.apply(doc, col);
+    doc.setLineWidth(0.6);
+    doc.roundedRect(MARGIN, y, cW, 13, 1.5, 1.5, 'FD');
+    doc.setFillColor.apply(doc, col);
+    doc.roundedRect(MARGIN, y, 3.5, 13, 1, 1, 'F');
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(12);
+    doc.setTextColor.apply(doc, col);
+    doc.text('EXERCICES D\'APPLICATION', MARGIN + 7, y + 8.8);
+    y += 19;
+
+    c.exercices.forEach(function(ex, ei) {
+      checkPage(50);
+
+      /* Titre exercice — fond plein coloré */
+      doc.setFillColor.apply(doc, col);
+      doc.roundedRect(MARGIN, y, cW, 10, 1.5, 1.5, 'F');
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(10);
+      doc.setTextColor(255, 255, 255);
+      var exTitre = 'Exercice ' + (ei + 1) + (ex.titre ? ' — ' + _pdfSanitize(ex.titre) : '');
+      var exTitreLines = doc.splitTextToSize(exTitre, cW - 10);
+      exTitreLines.forEach(function(l, li) { doc.text(l, MARGIN + 5, y + 6.8 + li * 5); });
+      y += Math.max(10, exTitreLines.length * 5 + 4) + 2;
+
+      /* Source / difficulté */
+      if (ex.source || ex.difficulte) {
+        var srcTxt = [ex.source, ex.difficulte ? ('Difficulté : ' + ex.difficulte) : ''].filter(Boolean).join('  ·  ');
+        doc.setFont('helvetica', 'italic'); doc.setFontSize(7.5);
+        doc.setTextColor(110, 120, 115);
+        doc.text(_pdfSanitize(srcTxt), MARGIN + 2, y + 4);
+        y += 8;
+      }
+
+      /* Énoncé — fond très léger + bordure colorée */
+      if (ex.enonce) {
+        var enonceLines = doc.splitTextToSize(_pdfSanitize(ex.enonce), cW - 10);
+        checkPage(enonceLines.length * 5.2 + 12);
+        doc.setFillColor(248, 250, 249);
+        doc.setDrawColor.apply(doc, col);
+        doc.setLineWidth(0.4);
+        doc.roundedRect(MARGIN, y, cW, enonceLines.length * 5.2 + 8, 1.5, 1.5, 'FD');
+        doc.setFillColor.apply(doc, col);
+        doc.roundedRect(MARGIN, y, 2.5, enonceLines.length * 5.2 + 8, 1, 1, 'F');
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
+        doc.setTextColor(40, 50, 45);
+        enonceLines.forEach(function(l, li) { doc.text(l, MARGIN + 6, y + 6 + li * 5.2); });
+        y += enonceLines.length * 5.2 + 13;
+      }
+
+      /* Schéma lié à l'exercice */
+      if (ex.schema) {
+        checkPage(20);
+        doc.setFont('helvetica', 'bold'); doc.setFontSize(8.5);
+        doc.setTextColor.apply(doc, col);
+        doc.text('Schéma :', MARGIN, y);
+        y += 5;
+        doc.setFillColor(245, 247, 250);
+        doc.setDrawColor(180, 195, 210);
+        doc.setLineWidth(0.3);
+        doc.roundedRect(MARGIN, y, cW, 35, 1.5, 1.5, 'FD');
+        doc.setFont('helvetica', 'italic'); doc.setFontSize(8);
+        doc.setTextColor(120, 135, 130);
+        doc.text('Voir schéma dans l\'application HydroCalc', MARGIN + cW / 2, y + 18, { align: 'center' });
+        y += 40;
+      }
+
+      /* Questions */
+      if (ex.questions && ex.questions.length) {
+        ex.questions.forEach(function(q) {
+          var qLabel = 'Q' + q.num + '.';
+          var qBody = _pdfSanitize(q.texte);
+          var qLines = doc.splitTextToSize(qBody, cW - 14);
+          var indiceLines = q.indice ? doc.splitTextToSize('Indice : ' + _pdfSanitize(q.indice), cW - 14) : [];
+          var ansLines = 4;
+          var blockH = (qLines.length + indiceLines.length) * 5.2 + ansLines * 7.5 + 16;
+          checkPage(blockH);
+
+          /* Numéro question */
+          doc.setFillColor(col[0] + Math.round((255 - col[0]) * 0.92), col[1] + Math.round((255 - col[1]) * 0.92), col[2] + Math.round((255 - col[2]) * 0.92));
+          doc.roundedRect(MARGIN, y, cW, qLines.length * 5.2 + 8, 1.2, 1.2, 'F');
+          doc.setFont('helvetica', 'bold'); doc.setFontSize(9);
+          doc.setTextColor.apply(doc, col);
+          doc.text(qLabel, MARGIN + 4, y + 5.5);
+          doc.setFont('helvetica', 'normal');
+          doc.setTextColor(40, 50, 45);
+          qLines.forEach(function(l, li) { doc.text(l, MARGIN + 12, y + 5.5 + li * 5.2); });
+          y += qLines.length * 5.2 + 10;
+
+          /* Indice */
+          if (indiceLines.length) {
+            doc.setFont('helvetica', 'italic'); doc.setFontSize(8);
+            doc.setTextColor(120, 130, 125);
+            indiceLines.forEach(function(l, li) { doc.text(l, MARGIN + 6, y + li * 5); });
+            y += indiceLines.length * 5 + 4;
+          }
+
+          /* Lignes de réponse pointillées */
+          doc.setDrawColor(190, 205, 200);
+          doc.setLineWidth(0.3);
+          for (var li = 0; li < ansLines; li++) {
+            var lx1 = MARGIN + 3, lx2 = MARGIN + cW - 3, ly = y + li * 7.5 + 3;
+            var segL = 1.5, gapL = 2, sx = lx1;
+            while (sx < lx2) {
+              doc.line(sx, ly, Math.min(sx + segL, lx2), ly);
+              sx += segL + gapL;
+            }
+          }
+          y += ansLines * 7.5 + 6;
+        });
+      }
+
+      y += 10;
+    });
+  }
+
   return y;
 }
 
