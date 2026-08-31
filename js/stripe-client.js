@@ -136,7 +136,9 @@ function stripeOpenPortal() {
 
   function loadBridges() {
     appendScript('hc-auth-security-bridge', 'js/auth-security.js', function() {
-      appendScript('hc-xss-security-bridge', 'js/xss-security.js');
+      appendScript('hc-xss-security-bridge', 'js/xss-security.js', function() {
+        appendScript('hc-coffre-security-bridge', 'js/coffre-security.js');
+      });
     });
   }
 
