@@ -3,10 +3,14 @@
 -- This migration intentionally does NOT grant or revoke the existing administrator.
 -- Existing is_admin/plan values are preserved.
 
--- Stripe subscription IDs are external stable identifiers and must be unique.
+-- Stripe external identifiers must be unique so webhook retries stay idempotent.
 create unique index if not exists subscriptions_stripe_subscription_id_uidx
   on public.subscriptions (stripe_subscription_id)
   where stripe_subscription_id is not null;
+
+create unique index if not exists payments_stripe_payment_id_uidx
+  on public.payments (stripe_payment_id)
+  where stripe_payment_id is not null;
 
 -- Basic integrity constraints for server-controlled entitlements.
 do $$
