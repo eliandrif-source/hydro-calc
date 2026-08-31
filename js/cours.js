@@ -11405,12 +11405,9 @@ function _pdfFicheHeader(doc, W, MARGIN, color, title, subtitle) {
   var C_ACC  = [8, 127, 234];
   var C_GRAY = [104, 117, 133];
 
-  /* Logo + "HydroCalc" à gauche */
+  /* Logo complet à gauche */
   if (_pdfIconDataUrl) {
-    doc.addImage(_pdfIconDataUrl, 'PNG', MARGIN, 4, 8, 8);
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
-    doc.setTextColor(C_DARK[0], C_DARK[1], C_DARK[2]);
-    doc.text('HydroCalc', MARGIN + 10.5, 10.5);
+    doc.addImage(_pdfIconDataUrl, 'PNG', MARGIN, 3, 34, 11);
   } else {
     doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
     doc.setTextColor(C_DARK[0], C_DARK[1], C_DARK[2]);
@@ -11549,13 +11546,8 @@ function _downloadFormationPDF(fId) {
     /* Page de couverture sobre */
     doc.setFillColor(C_DARK[0], C_DARK[1], C_DARK[2]);
     doc.rect(0, 0, W, 60, 'F');
-    if (_pdfIconDataUrl) doc.addImage(_pdfIconDataUrl, 'PNG', MARGIN, 18, 14, 14);
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(20);
-    doc.setTextColor(255, 255, 255);
-    doc.text('HydroCalc', MARGIN + 18, 28);
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
-    doc.setTextColor(C_ACC[0], C_ACC[1], C_ACC[2]);
-    doc.text('CALCULER. COMPRENDRE. MAITRISER L\'HYDRAULIQUE.', MARGIN + 18, 36);
+    if (_pdfIconLightDataUrl) doc.addImage(_pdfIconLightDataUrl, 'PNG', MARGIN, 16, 50, 17);
+    else if (_pdfIconDataUrl) doc.addImage(_pdfIconDataUrl, 'PNG', MARGIN, 16, 50, 17);
 
     doc.setFillColor(C_LGRAY[0], C_LGRAY[1], C_LGRAY[2]);
     doc.rect(0, 60, W, 297 - 60, 'F');

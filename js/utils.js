@@ -1,15 +1,20 @@
 ﻿
-/* ─── Logo préchargé pour PDF ─── */
+/* ─── Logos préchargés pour PDF ─── */
 var _pdfIconDataUrl = null;
+var _pdfIconLightDataUrl = null;
 (function() {
-  var img = new Image();
-  img.onload = function() {
-    var c = document.createElement('canvas');
-    c.width = img.naturalWidth; c.height = img.naturalHeight;
-    c.getContext('2d').drawImage(img, 0, 0);
-    _pdfIconDataUrl = c.toDataURL('image/png');
-  };
-  img.src = './images/icon.png';
+  function loadLogo(src, cb) {
+    var img = new Image();
+    img.onload = function() {
+      var c = document.createElement('canvas');
+      c.width = img.naturalWidth; c.height = img.naturalHeight;
+      c.getContext('2d').drawImage(img, 0, 0);
+      cb(c.toDataURL('image/png'));
+    };
+    img.src = src;
+  }
+  loadLogo('./images/logo-dark.png', function(url) { _pdfIconDataUrl = url; });
+  loadLogo('./images/logo-light.png', function(url) { _pdfIconLightDataUrl = url; });
 })();
 
 /* ─── HELPER COMPAT (remplace ?. pour les anciens Android) ─── */
@@ -91,6 +96,10 @@ let qcmState = { idx:0, score:0 };
 
 var HOME_ALL_SHORTCUTS = [
   { id:'calc',       ico:'⚡', name:'Calculateurs',      sub:'AC · AEP · ANC · Milieux' },
+  { id:'calc-ac',    ico:'🌊', name:'Calc. AC',          sub:'Manning · STEP · Débit nuit' },
+  { id:'calc-anc',   ico:'🏡', name:'Calc. ANC',         sub:'Épandage · Fosse · Porchet' },
+  { id:'calc-ep',    ico:'💧', name:'Calc. AEP',         sub:'Pression · Chloration · Pompe' },
+  { id:'calc-riv',   ico:'🏞️', name:'Calc. Milieux',    sub:'Shields · Langelier' },
   { id:'conv',       ico:'🔄', name:'Convertisseur',     sub:'Débit · Pression' },
   { id:'cours',      ico:'🎓', name:'Cours',             sub:'52 chapitres' },
   { id:'form',       ico:'🏛️', name:'Formations',        sub:'BUT · Master · ENGEES' },
@@ -104,14 +113,13 @@ var HOME_ALL_SHORTCUTS = [
   { id:'mat',        ico:'🔩', name:'Matériaux',           sub:'AEP · AC · ANC · DN normalisés' },
   { id:'regl',       ico:'📋', name:'Réglementation',    sub:'Arrêtés · DCE · REUT' },
   { id:'outils',    ico:'📐', name:'Terrain',         sub:'ANC · AC · EP · Rivières' },
-  { id:'dossiers',  ico:'📁', name:'Dossiers perso',  sub:'Rapports · CR · Documents' },
 ];
 
-var HOME_DEFAULT_SHORTCUTS = ['calc','cours','qcm','outils'];
+var HOME_DEFAULT_SHORTCUTS = ['calc-ac','calc-anc','calc-ep','calc-riv'];
 
 function _homeGetShortcuts() {
   try {
-    var saved = localStorage.getItem('home_shortcuts');
+    var saved = localStorage.getItem('home_shortcuts_v2');
     if (saved) {
       var arr = JSON.parse(saved);
       if (Array.isArray(arr) && arr.length === 4) return arr;
@@ -121,7 +129,7 @@ function _homeGetShortcuts() {
 }
 
 function _homeSaveShortcuts(arr) {
-  try { localStorage.setItem('home_shortcuts', JSON.stringify(arr)); } catch(e) {}
+  try { localStorage.setItem('home_shortcuts_v2', JSON.stringify(arr)); } catch(e) {}
 }
 
 /* ─── BREADCRUMB GLOBAL ─── */
@@ -203,6 +211,7 @@ function renderHome() {
   var projets = [
     { fn:'renderCalcHistory()', ico:'💾', name:'Mes calculs & rapports', sub: nbCalcs > 0 ? nbCalcs + ' calcul' + (nbCalcs>1?'s':'') + ' · Export PDF · DOCX · ODT' : 'Calculs sauvegardés · Export PDF · DOCX · ODT', colorl:'#EFF6FF' },
     { fn:'showModule(\'outils\')', ico:'📐', name:'Mes outils terrain', sub:'Mesures · Relevés · Notes de chantier', colorl:'#F0FDF4' },
+    { fn:'renderDossiersHub()', ico:'📁', name:'Dossiers perso', sub:'Rapports · CR · Documents', colorl:'#FFFBEB' },
   ];
 
   projets.forEach(function(r) {
@@ -239,6 +248,27 @@ function renderHome() {
   });
 
   html += `</div>
+
+    <div class="section-header" style="margin-top:var(--s-4)">Communauté</div>
+    <div style="padding:0 var(--s-4) 0;display:flex;flex-direction:column;gap:var(--s-2)">
+      <div class="mod-list-card" onclick="showModule('forum')">
+        <div class="mlc-icon" style="background:#E3F2FD;font-size:22px">💬</div>
+        <div class="mlc-body">
+          <div class="mlc-name" style="font-size:var(--t-md)">Forum communautaire</div>
+          <div class="mlc-sub">Questions · Réponses · Entraide</div>
+        </div>
+        <span class="mlc-arrow">›</span>
+      </div>
+      <div class="mod-list-card" onclick="showModule('messagerie')">
+        <div class="mlc-icon" style="background:#E1F5FE;font-size:22px">✉️</div>
+        <div class="mlc-body">
+          <div class="mlc-name" style="font-size:var(--t-md)">Messagerie</div>
+          <div class="mlc-sub">Messages privés entre professionnels</div>
+        </div>
+        <span class="mlc-arrow">›</span>
+      </div>
+    </div>
+
     <div style="text-align:center;padding:var(--s-4) var(--s-4) var(--s-2);font-size:9px;color:var(--c-text-4);letter-spacing:.03em;line-height:1.7;font-style:italic">
       Application hydraulique professionnelle · BTS GEMEAU · Techniciens eau
     </div>
@@ -347,6 +377,8 @@ function showModule(id) {
     mat:'Matériaux & Équipements',
     form:'Formations supérieures',
     dossiers:'Dossiers perso',
+    forum:'Forum communautaire',
+    messagerie:'Messagerie',
   };
   var titre = TITRES[id];
   if (!titre) {
@@ -388,6 +420,8 @@ function showModule(id) {
   else if (id === 'outils')     renderOutilsHome();
   else if (id === 'dossiers')    renderDossiersHub();
   else if (id === 'dossiers-cr') renderCRReunion();
+  else if (id === 'forum')       renderForum();
+  else if (id === 'messagerie')  renderMessagerie();
   else if (id === 'mat')      renderMatHome();
   else if (id === 'mat-aep')  renderMatAEP();
   else if (id === 'mat-ac')   renderMatAC();
