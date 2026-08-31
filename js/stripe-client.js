@@ -1,25 +1,28 @@
 /* ═══════════════════════════════════════════════════
    STRIPE CLIENT — HydroCalc
-   Clé publique de test → remplacer par pk_live_ en production
+   Le navigateur ne transmet plus de Price ID ni de niveau d'accès.
+   Le mapping prix/abonnement est validé par l'Edge Function Supabase.
 ═══════════════════════════════════════════════════ */
 var STRIPE_PK = 'pk_test_51TnL41RoaEvjU7M7IBgppniueRsxF7t3sQBfJ1OSx5ylq8SPPYSWthquQe7RDCo8IngR1KRRCwU0EHeb4oVGdkYl00e9n0y3dA';
 
-/* Prix Stripe (créés dans le dashboard Stripe) */
-var STRIPE_PRICES = {
-  pro:        'price_1TvJoFRoaEvjU7M7PIrHbQND',  /* 5,90 €/mois  */
-  pro_annual: 'price_1U3LG0RoaEvjU7M70g6oxsvv',  /* 59 €/an      */
-  etab:        'price_1TvJooRoaEvjU7M7Gc57pi1V',  /* 24 €/mois    */
-  etab_annual: 'price_1U3LL3RoaEvjU7M7uyHPM9zu'  /* 240 €/an     */
+/* Clés d'offres autorisées côté interface (le serveur reste l'autorité). */
+var STRIPE_PLANS = {
+  pro: true,
+  pro_annual: true,
+  etab: true,
+  etab_annual: true
 };
 
 /* URL de base des Edge Functions Supabase */
 var SUPABASE_FUNCTIONS_URL = 'https://vbdsqvmgtwsjxckpcosi.supabase.co/functions/v1';
 
 /* ─── Lancer le Stripe Checkout ─── */
-function stripeStartCheckout(planId, quantity) {
+function stripeStartCheckout(planId) {
   if (!AUTH.user) { authShow('auth-login'); return; }
-  if (!STRIPE_PRICES[planId]) return;
-  var qty = Math.max(1, parseInt(quantity) || 1);
+  if (!STRIPE_PLANS[planId]) {
+    authToast('Offre inconnue');
+    return;
+  }
 
   authToast('Redirection vers le paiement sécurisé…');
 
@@ -35,11 +38,8 @@ function stripeStartCheckout(planId, quantity) {
       },
       body: JSON.stringify({
         planId: planId,
-        priceId: STRIPE_PRICES[planId],
-        quantity: qty,
-        trialDays: 7,
-        successUrl: window.location.href.split('?')[0] + '?stripe=success',
-        cancelUrl:  window.location.href.split('?')[0] + '?stripe=cancel'
+        successUrl: window.location.origin + window.location.pathname + '?stripe=success',
+        cancelUrl:  window.location.origin + window.location.pathname + '?stripe=cancel'
       })
     })
     .then(function(r) { return r.json(); })
@@ -73,7 +73,7 @@ function stripeOpenPortal() {
         'Authorization': 'Bearer ' + token
       },
       body: JSON.stringify({
-        returnUrl: window.location.href.split('?')[0]
+        returnUrl: window.location.origin + window.location.pathname
       })
     })
     .then(function(r) { return r.json(); })
@@ -98,10 +98,11 @@ function stripeOpenPortal() {
     setTimeout(function() {
       authToast('Paiement confirmé ! Votre abonnement est actif.');
       if (AUTH.user && SupaDB) {
-        SupaDB.from('profiles').select('*').eq('email', AUTH.user.email).single()
+        SupaDB.from('profiles').select('*').eq('id', AUTH.user.id).single()
           .then(function(res) {
             if (res.data) {
               AUTH.user.plan = res.data.plan;
+              AUTH.user.isAdmin = res.data.is_admin === true;
               if (typeof buildProfile === 'function') buildProfile();
             }
           });
