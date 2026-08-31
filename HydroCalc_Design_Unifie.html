@@ -283,6 +283,7 @@
     <button class="tb-icon-btn tb-back-btn" onclick="goHome()" title="Accueil">🏠</button>
     <span class="top-bar-logo" id="top-title">HydroCalc</span>
     <button class="tb-icon-btn" onclick="openSearch()" title="Recherche globale" id="btn-search">🔍</button>
+    <button class="tb-icon-btn" id="btn-messagerie" onclick="showModule('messagerie')" title="Messagerie" style="position:relative">✉️<span id="msg-badge" style="display:none;position:absolute;top:2px;right:2px;background:#E53935;color:white;border-radius:50%;width:14px;height:14px;font-size:9px;font-weight:700;line-height:14px;text-align:center"></span></button>
 
     <button class="tb-icon-btn" id="profile-btn" onclick="openProfile()" title="Mon profil" style="display:none">👤</button>
   </div>
@@ -335,10 +336,14 @@
 <script src="js/utils.js"></script>
 <script src="js/calculateurs.js"></script>
 <script src="js/glossaire.js"></script>
+<script src="js/regl_depts.js"></script>
 <script src="js/reglementation.js"></script>
 <script src="js/contenus.js"></script>
 <script src="js/outils_terrain.js"></script>
 <script src="js/cours.js"></script>
+<script src="js/cours_perso.js"></script>
+<script src="js/forum.js"></script>
+<script src="js/messagerie.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://unpkg.com/peerjs@1.5.1/dist/peerjs.min.js"></script>
 <script src="js/settings.js"></script>
@@ -356,6 +361,29 @@ if ('serviceWorker' in navigator) {
 }
 window.addEventListener('load', function() {
   if (typeof _loadSharedCalcFromURL === 'function') _loadSharedCalcFromURL();
+});
+</script>
+<script>
+/* Badge messagerie non lus */
+async function _refreshMsgBadge() {
+  var badge = document.getElementById('msg-badge');
+  if (!badge) return;
+  var n = (typeof getUnreadMsgCount === 'function') ? await getUnreadMsgCount() : 0;
+  if (n > 0) { badge.textContent = n > 9 ? '9+' : n; badge.style.display = 'block'; }
+  else { badge.style.display = 'none'; }
+}
+function _startBadgeRealtime() {
+  if (!SupaDB || typeof SupaDB.channel !== 'function') return;
+  var uid = (_currentUser && _currentUser.id) ? _currentUser.id : null;
+  if (!uid) return;
+  SupaDB.channel('badge-threads-'+uid)
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'message_threads' }, function() {
+      _refreshMsgBadge();
+    })
+    .subscribe();
+}
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() { _refreshMsgBadge(); _startBadgeRealtime(); }, 3000);
 });
 </script>
 </body>

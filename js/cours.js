@@ -7457,6 +7457,2764 @@ const COURS_DATA = {
       },
     ],
   },
+    'gemapi': {
+    name: 'GEMAPI — Gestion des Milieux Aquatiques et Prévention des Inondations',
+    sigle: 'GEMAPI',
+    ico: '🌊',
+    color: '#1565C0',
+    colorl: '#E3F2FD',
+    niveau: 'Débutant → Expert',
+    organisme: 'Formation continue / FPT / CNFPT',
+    desc: 'Formation complète sur la compétence GEMAPI : cycle de l\'eau, cadre juridique, hydraulique fluviale, prévention des inondations, restauration écologique et montage de projet. De la découverte à l\'expertise opérationnelle.',
+    annees: [
+      {
+        id: 'gemapi-n1',
+        name: 'Niveau 1 — Débutant : Fondamentaux de l\'eau',
+        matieres: [
+          {
+            id: 'gemapi-n1-m1',
+            name: 'Le cycle de l\'eau et les milieux aquatiques',
+            ico: '💧',
+            color: '#1565C0',
+            colorl: '#E3F2FD',
+            chapitres: [
+              {
+                id: 'gemapi-n1-m1-c1',
+                titre: 'Le cycle hydrologique',
+                fiche: {
+                  intro: 'Le cycle hydrologique décrit le mouvement continu de l\'eau à la surface de la Terre, dans l\'atmosphère et dans le sous-sol. Comprendre ce cycle est indispensable pour tout acteur de la gestion de l\'eau. Source : UNESCO, Guide du cycle hydrologique, 2022.',
+                  sections: [
+                    {
+                      titre: 'Les grandes étapes du cycle',
+                      schema: `<svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#1565C0"/>
+    </marker>
+  </defs>
+  <!-- Ciel -->
+  <rect x="0" y="0" width="500" height="120" rx="0" fill="#E3F2FD" opacity="0.5"/>
+  <!-- Sol -->
+  <rect x="0" y="200" width="500" height="100" fill="#8D6E63" opacity="0.3"/>
+  <!-- Montagne -->
+  <polygon points="320,200 400,80 480,200" fill="#78909C" opacity="0.7"/>
+  <!-- Soleil -->
+  <circle cx="60" cy="50" r="30" fill="#FDD835" opacity="0.9"/>
+  <text x="60" y="55" text-anchor="middle" font-size="10" fill="#F57F17">☀ Rayonnement</text>
+  <!-- Nuage -->
+  <ellipse cx="200" cy="50" rx="60" ry="25" fill="white" stroke="#90CAF9" stroke-width="1.5"/>
+  <text x="200" y="54" text-anchor="middle" font-size="11" fill="#1565C0">☁ Nuages</text>
+  <!-- Mer/lac -->
+  <ellipse cx="80" cy="215" rx="70" ry="20" fill="#42A5F5" opacity="0.8"/>
+  <text x="80" y="218" text-anchor="middle" font-size="10" fill="white">Mer / lac</text>
+  <!-- Rivière -->
+  <path d="M 380 200 Q 300 220 200 230 Q 130 238 80 215" stroke="#42A5F5" stroke-width="5" fill="none"/>
+  <!-- Évaporation -->
+  <path d="M 80 195 Q 100 130 170 70" stroke="#1565C0" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#arr)"/>
+  <text x="90" y="140" font-size="10" fill="#1565C0">Évaporation</text>
+  <!-- Précipitations -->
+  <path d="M 230 75 L 230 170" stroke="#1565C0" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+  <text x="240" y="120" font-size="10" fill="#1565C0">Précipitations</text>
+  <!-- Ruissellement -->
+  <path d="M 350 195 Q 280 215 200 228" stroke="#0D47A1" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <text x="280" y="210" font-size="9" fill="#0D47A1">Ruissellement</text>
+  <!-- Infiltration -->
+  <path d="M 230 175 L 230 245" stroke="#4E342E" stroke-width="1.5" fill="none" stroke-dasharray="4,2" marker-end="url(#arr)"/>
+  <text x="238" y="220" font-size="9" fill="#4E342E">Infiltration</text>
+  <!-- Nappe -->
+  <text x="200" y="265" text-anchor="middle" font-size="10" fill="#1A237E">〰 Nappe phréatique 〰</text>
+  <!-- Transpiration -->
+  <path d="M 155 175 Q 170 120 180 70" stroke="#2E7D32" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#arr)"/>
+  <text x="115" y="135" font-size="9" fill="#2E7D32">Transpiration</text>
+  <!-- Arbres -->
+  <text x="145" y="195" font-size="22">🌳</text>
+</svg>`,
+                      texte: 'Les grandes étapes sont : (1) Évaporation — l\'eau des surfaces libres (mer, lac, sol) se vaporise sous l\'effet du rayonnement solaire. (2) Transpiration — les végétaux restituent l\'eau par leurs stomates (= évapotranspiration). (3) Condensation — la vapeur forme des nuages en altitude. (4) Précipitations — pluie, neige, grêle selon la température. (5) Ruissellement — l\'eau non infiltrée s\'écoule en surface vers les cours d\'eau. (6) Infiltration — une partie s\'infiltre et alimente les nappes. (7) Écoulement souterrain — les nappes restituent l\'eau aux cours d\'eau (débit de base). Source : Margat J. & Van der Gun J., Groundwater around the world, CRC Press, 2013.'
+                    },
+                    {
+                      titre: 'Bilan hydrologique',
+                      schema: `<svg viewBox="0 0 460 160" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="10" y="10" width="440" height="140" rx="8" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1"/>
+  <text x="230" y="35" text-anchor="middle" font-size="13" font-weight="bold" fill="#1565C0">Équation du bilan hydrologique</text>
+  <!-- Formule -->
+  <rect x="60" y="50" width="340" height="50" rx="6" fill="white" stroke="#1565C0" stroke-width="1.5"/>
+  <text x="230" y="80" text-anchor="middle" font-size="15" font-weight="bold" fill="#0D47A1">P = ETR + R + ΔS</text>
+  <text x="60" y="125" font-size="10" fill="#424242">P = Précipitations</text>
+  <text x="180" y="125" font-size="10" fill="#424242">ETR = Évapotranspiration réelle</text>
+  <text x="340" y="125" font-size="10" fill="#424242">R = Ruissellement</text>
+  <text x="60" y="142" font-size="10" fill="#424242">ΔS = Variation de stock (nappes, neige)</text>
+</svg>`,
+                      texte: 'Sur un bassin versant : Précipitations = Évapotranspiration réelle + Ruissellement total + Variation des stocks. En France métropolitaine, sur une année moyenne : P ≈ 900 mm, ETR ≈ 520 mm, R ≈ 380 mm. Source : SHYREG — Banque Hydro, DREAL, 2023.'
+                    }
+                  ],
+                  points: [
+                    'Le cycle de l\'eau est fermé : l\'eau circule en permanence entre atmosphère, surface et sous-sol',
+                    'Le bassin versant est l\'unité géographique de référence de la gestion de l\'eau',
+                    'L\'ETR représente en moyenne 55–60 % des précipitations en France',
+                    'Les nappes phréatiques jouent un rôle tampon essentiel en étiage'
+                  ],
+                  formules: [
+                    { nom: 'Bilan hydrologique', expr: 'P = ETR + R + ΔS', unite: 'mm/an', detail: 'P=précipitations, ETR=évapotranspiration réelle, R=ruissellement, ΔS=variation de stock' },
+                    { nom: 'Coefficient de ruissellement', expr: 'Cr = R / P', unite: 'sans dimension [0–1]', detail: 'Varie selon l\'imperméabilisation, la végétation, la pente et l\'état hydrique initial' }
+                  ],
+                  retenir: 'Le cycle hydrologique est le moteur de la GEMAPI : chaque action sur le milieu (imperméabilisation, drainage, déboisement) modifie les flux et les stocks d\'eau, avec des conséquences sur les crues et les étiages.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce qu\'un bassin versant ?', r: 'Surface topographique dont toutes les eaux de pluie convergent vers un même exutoire (cours d\'eau ou lac). Les limites sont les lignes de crête (interfluves).' },
+                  { q: 'Quelle est la différence entre ETP et ETR ?', r: 'ETP (potentielle) = quantité d\'eau évapotranspirée si l\'eau est disponible en permanence. ETR (réelle) = quantité réellement évapotranspirée, limitée par la disponibilité en eau. ETR ≤ ETP.' },
+                  { q: 'Citez 3 facteurs qui augmentent le ruissellement', r: '1) Imperméabilisation (voiries, toitures). 2) Déboisement / suppression de haies. 3) Sol saturé ou gelé.' },
+                  { q: 'Qu\'est-ce que le débit de base ?', r: 'Débit d\'un cours d\'eau en période sans pluie, alimenté uniquement par la vidange des nappes souterraines (écoulement hypodermique et souterrain).' }
+                ],
+                exercices: [
+                  {
+                    id: 'ex-gemapi-n1-m1-c1-1',
+                    titre: 'Calcul de bilan hydrologique',
+                    source: 'CNFPT — Module Eau et territoires, fiche pédagogique 1',
+                    difficulte: 'facile',
+                    enonce: 'Sur un bassin versant de 50 km², on mesure : précipitations annuelles P = 850 mm, évapotranspiration réelle ETR = 480 mm, variation de stock ΔS = −20 mm (déstockage des nappes). Calculer le ruissellement total R et estimer le volume annuel écoulé.',
+                    questions: [
+                      { q: 'Calculer R (mm/an)', r: 'R = P − ETR − ΔS = 850 − 480 − (−20) = 390 mm/an', formule: 'R = P − ETR − ΔS', calcul: 'ΔS = −20 mm signifie déstockage : le stock diminue, donc il contribue à l\'écoulement → R = 850 − 480 + 20 = 390 mm/an' },
+                      { q: 'Calculer le volume annuel écoulé Q_vol en millions de m³', r: 'Q_vol = 0,390 m × 50×10⁶ m² = 19,5 × 10⁶ m³ = 19,5 Mm³', formule: 'Q_vol = R (m) × Surface (m²)', calcul: '390 mm = 0,390 m ; Surface = 50 km² = 50 × 10⁶ m² ; Q_vol = 0,390 × 50 000 000 = 19 500 000 m³' }
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'gemapi-n1-m1-c2',
+                titre: 'Les cours d\'eau : morphologie et fonctionnement',
+                fiche: {
+                  intro: 'Un cours d\'eau est un système dynamique qui transporte de l\'eau, des sédiments et de la matière organique. Sa morphologie (forme du lit, méandres, profil en long) résulte de l\'équilibre entre débit liquide et débit solide. Source : SDAGE Loire-Bretagne 2022-2027 ; Malavoi J.-R. & Bravard J.-P., Éléments d\'hydromorphologie fluviale, ONEMA, 2010.',
+                  sections: [
+                    {
+                      titre: 'Morphologie d\'un cours d\'eau',
+                      schema: `<svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <!-- Fond -->
+  <rect x="0" y="0" width="500" height="220" fill="#F1F8E9" rx="6"/>
+  <!-- Lit mineur -->
+  <path d="M 20 110 Q 80 80 140 110 Q 200 140 260 110 Q 320 80 380 110 Q 430 130 480 110" stroke="#42A5F5" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <!-- Lit majeur -->
+  <path d="M 20 110 Q 80 80 140 110 Q 200 140 260 110 Q 320 80 380 110 Q 430 130 480 110" stroke="#90CAF9" stroke-width="50" fill="none" stroke-linecap="round" opacity="0.35"/>
+  <!-- Labels -->
+  <rect x="215" y="95" width="70" height="18" rx="4" fill="#1565C0" opacity="0.85"/>
+  <text x="250" y="108" text-anchor="middle" font-size="10" fill="white">Lit mineur</text>
+  <rect x="100" y="55" width="70" height="18" rx="4" fill="#90CAF9"/>
+  <text x="135" y="68" text-anchor="middle" font-size="10" fill="#0D47A1">Lit majeur</text>
+  <!-- Berge -->
+  <line x1="90" y1="75" x2="115" y2="90" stroke="#4E342E" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="50" y="75" font-size="10" fill="#4E342E">Berge</text>
+  <!-- Ripisylve -->
+  <text x="150" y="50" font-size="18">🌿</text>
+  <text x="170" y="42" font-size="9" fill="#2E7D32">Ripisylve</text>
+  <!-- Méandre -->
+  <text x="240" y="155" font-size="9" fill="#0D47A1">← Méandre →</text>
+  <!-- Sédimentation / érosion -->
+  <text x="60" y="105" font-size="9" fill="#E65100">Érosion</text>
+  <text x="175" y="138" font-size="9" fill="#558B2F">Dépôt</text>
+  <!-- Profil en travers -->
+  <rect x="350" y="10" width="140" height="80" rx="6" fill="white" stroke="#90CAF9" stroke-width="1"/>
+  <text x="420" y="25" text-anchor="middle" font-size="9" font-weight="bold" fill="#1565C0">Profil en travers</text>
+  <path d="M 360 70 L 390 45 L 420 55 L 450 45 L 480 70" stroke="#42A5F5" stroke-width="2" fill="#E3F2FD"/>
+  <line x1="360" y1="70" x2="480" y2="70" stroke="#8D6E63" stroke-width="2"/>
+  <text x="415" y="83" text-anchor="middle" font-size="8" fill="#4E342E">Fond du lit</text>
+</svg>`,
+                      texte: 'Le lit mineur contient les écoulements courants. Le lit majeur (ou lit d\'inondation) est recouvert lors des crues. La ripisylve (végétation des berges) joue un rôle fondamental : stabilité des berges, ombrage, habitat. Les méandres résultent d\'un processus auto-organisé entre érosion en rive concave et dépôt en rive convexe.'
+                    },
+                    {
+                      titre: 'Le continuum fluvial',
+                      schema: `<svg viewBox="0 0 500 130" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="130" rx="6" fill="#E3F2FD"/>
+  <!-- Fleuve amont → aval -->
+  <path d="M 30 65 L 470 65" stroke="#42A5F5" stroke-width="12" stroke-linecap="round"/>
+  <!-- Gradient pente -->
+  <text x="30" y="30" font-size="10" fill="#1565C0" font-weight="bold">AMONT (pente forte)</text>
+  <text x="340" y="30" font-size="10" fill="#1565C0" font-weight="bold">AVAL (pente faible)</text>
+  <!-- Zones -->
+  <rect x="30" y="80" width="130" height="40" rx="4" fill="#1565C0" opacity="0.8"/>
+  <text x="95" y="96" text-anchor="middle" font-size="9" fill="white">Zone de production</text>
+  <text x="95" y="112" text-anchor="middle" font-size="9" fill="white">Érosion dominante</text>
+  <rect x="175" y="80" width="130" height="40" rx="4" fill="#1976D2" opacity="0.8"/>
+  <text x="240" y="96" text-anchor="middle" font-size="9" fill="white">Zone de transfert</text>
+  <text x="240" y="112" text-anchor="middle" font-size="9" fill="white">Transit sédimentaire</text>
+  <rect x="320" y="80" width="150" height="40" rx="4" fill="#42A5F5" opacity="0.8"/>
+  <text x="395" y="96" text-anchor="middle" font-size="9" fill="white">Zone de dépôt</text>
+  <text x="395" y="112" text-anchor="middle" font-size="9" fill="white">Plaine alluviale</text>
+  <!-- Flèche direction -->
+  <text x="460" y="60" font-size="14" fill="#0D47A1">→</text>
+</svg>`,
+                      texte: 'Le concept de River Continuum (Vannote et al., 1980) décrit le cours d\'eau comme un continuum de l\'amont vers l\'aval. Les sédiments, la matière organique et les organismes s\'organisent selon ce gradient. Toute rupture (barrage, seuil) perturbe ce continuum : piégeage des sédiments, blocage de la faune piscicole. Source : Vannote R.L. et al., The River Continuum Concept, Canadian Journal of Fisheries, 1980.'
+                    }
+                  ],
+                  points: [
+                    'Le lit mineur est encaissé dans le lit majeur, qui est le champ d\'expansion des crues',
+                    'La ripisylve est un élément clé de la qualité écologique et de la stabilité des berges',
+                    'Les méandres sont des formes d\'équilibre naturel — leur recalibrage génère des problèmes en aval',
+                    'Tout ouvrage transversal (seuil, barrage) rompt le continuum fluvial',
+                    'La dynamique sédimentaire conditionne la morphologie : érosion amont = dépôt aval'
+                  ],
+                  formules: [
+                    { nom: 'Débit (formule générale)', expr: 'Q = V × A', unite: 'm³/s', detail: 'V = vitesse moyenne (m/s), A = section mouillée (m²)' },
+                    { nom: 'Largeur plein-bord (empirique Beven)', expr: 'W = a × Q_pb^b', unite: 'm', detail: 'Q_pb = débit plein-bord, a et b = coefficients régionaux' }
+                  ],
+                  retenir: 'Un cours d\'eau est un système vivant en équilibre dynamique. La GEMAPI doit restaurer et maintenir cet équilibre plutôt que de contraindre ou de recalibrer.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Définir le lit mineur, le lit moyen et le lit majeur', r: 'Lit mineur : écoulement permanent. Lit moyen : inondé 1 à 2 fois/an. Lit majeur : inondé lors des grandes crues (période de retour > 2 ans).' },
+                  { q: 'Qu\'est-ce que la ripisylve et quel est son rôle ?', r: 'Végétation ligneuse des berges (aulnes, saules, frênes). Rôles : stabilisation des berges par les racines, ombrage limitant le réchauffement de l\'eau, habitat faune/flore, corridor écologique, filtre à nitrates.' },
+                  { q: 'Qu\'est-ce que le débit plein-bord ?', r: 'Débit pour lequel l\'eau commence à déborder dans le lit majeur. C\'est le débit morphogène par excellence : il déplace les sédiments et façonne le lit. Période de retour ≈ 1,5 à 2 ans.' }
+                ],
+                exercices: []
+              },
+              {
+                id: 'gemapi-n1-m1-c3',
+                titre: 'Les zones humides : définition, rôles et enjeux',
+                fiche: {
+                  intro: 'Les zones humides (ZH) sont des écosystèmes à l\'interface entre milieux terrestres et aquatiques. En France, elles ont régressé de 67 % depuis 1960. Leur protection est un enjeu majeur de la GEMAPI. Source : CGDD, Évaluation des zones humides de France, 2019 ; Art. L.211-1 du Code de l\'environnement.',
+                  sections: [
+                    {
+                      titre: 'Définition légale et critères d\'identification',
+                      schema: `<svg viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="160" rx="6" fill="#E8F5E9"/>
+  <text x="250" y="25" text-anchor="middle" font-size="12" font-weight="bold" fill="#1B5E20">Critères de définition — Zone Humide (art. L.211-1 CE)</text>
+  <!-- Critère 1 -->
+  <rect x="20" y="40" width="210" height="110" rx="6" fill="white" stroke="#66BB6A" stroke-width="1.5"/>
+  <text x="125" y="60" text-anchor="middle" font-size="11" font-weight="bold" fill="#2E7D32">Critère PÉDOLOGIQUE</text>
+  <text x="125" y="78" text-anchor="middle" font-size="10" fill="#424242">Sols hydromorphes</text>
+  <text x="125" y="94" text-anchor="middle" font-size="9" fill="#616161">(Traces d\'oxydo-réduction,</text>
+  <text x="125" y="108" text-anchor="middle" font-size="9" fill="#616161">taches rouille/gris-bleu)</text>
+  <text x="125" y="125" text-anchor="middle" font-size="9" fill="#616161">Réf. : Arrêté du 24/06/2008</text>
+  <text x="125" y="141" text-anchor="middle" font-size="9" fill="#616161">modifié le 01/10/2009</text>
+  <!-- OU -->
+  <text x="250" y="100" text-anchor="middle" font-size="14" font-weight="bold" fill="#1B5E20">OU</text>
+  <!-- Critère 2 -->
+  <rect x="270" y="40" width="210" height="110" rx="6" fill="white" stroke="#66BB6A" stroke-width="1.5"/>
+  <text x="375" y="60" text-anchor="middle" font-size="11" font-weight="bold" fill="#2E7D32">Critère FLORISTIQUE</text>
+  <text x="375" y="78" text-anchor="middle" font-size="10" fill="#424242">Végétation hygrophile</text>
+  <text x="375" y="94" text-anchor="middle" font-size="9" fill="#616161">(Phragmites, Carex,</text>
+  <text x="375" y="108" text-anchor="middle" font-size="9" fill="#616161">Saules, Aulnes…)</text>
+  <text x="375" y="125" text-anchor="middle" font-size="9" fill="#616161">Réf. : Liste Roselaar</text>
+  <text x="375" y="141" text-anchor="middle" font-size="9" fill="#616161">Arrêté du 01/10/2009</text>
+</svg>`,
+                      texte: 'Selon l\'article L.211-1 du Code de l\'environnement, une zone humide est caractérisée par la présence de sols hydromorphes OU d\'une végétation hygrophile dominante. La délimitation sur le terrain mobilise les deux critères conjointement. Attention : la décision du Conseil d\'État du 22 février 2017 a réaffirmé que le critère pédologique suffit seul. Source : CE, 22/02/2017, n°386325.'
+                    },
+                    {
+                      titre: 'Fonctions et services écosystémiques',
+                      schema: `<svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="180" rx="6" fill="#E3F2FD"/>
+  <text x="250" y="22" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565C0">Fonctions des zones humides</text>
+  <!-- 4 cases -->
+  <rect x="10" y="32" width="115" height="135" rx="6" fill="white" stroke="#42A5F5" stroke-width="1.5"/>
+  <text x="67" y="50" text-anchor="middle" font-size="18">🌊</text>
+  <text x="67" y="66" text-anchor="middle" font-size="10" font-weight="bold" fill="#1565C0">Hydrologique</text>
+  <text x="67" y="82" text-anchor="middle" font-size="9" fill="#424242">Écrêtement</text>
+  <text x="67" y="96" text-anchor="middle" font-size="9" fill="#424242">des crues</text>
+  <text x="67" y="112" text-anchor="middle" font-size="9" fill="#424242">Soutien d\'étiage</text>
+  <text x="67" y="128" text-anchor="middle" font-size="9" fill="#424242">Recharge nappes</text>
+  <text x="67" y="144" text-anchor="middle" font-size="9" fill="#424242">Réduction de</text>
+  <text x="67" y="158" text-anchor="middle" font-size="9" fill="#424242">ruissellement</text>
+  <rect x="130" y="32" width="115" height="135" rx="6" fill="white" stroke="#66BB6A" stroke-width="1.5"/>
+  <text x="187" y="50" text-anchor="middle" font-size="18">🌿</text>
+  <text x="187" y="66" text-anchor="middle" font-size="10" font-weight="bold" fill="#2E7D32">Épuratoire</text>
+  <text x="187" y="82" text-anchor="middle" font-size="9" fill="#424242">Dénitrification</text>
+  <text x="187" y="96" text-anchor="middle" font-size="9" fill="#424242">Piégeage P</text>
+  <text x="187" y="112" text-anchor="middle" font-size="9" fill="#424242">Rétention MES</text>
+  <text x="187" y="128" text-anchor="middle" font-size="9" fill="#424242">Bioaccumulation</text>
+  <rect x="250" y="32" width="115" height="135" rx="6" fill="white" stroke="#FFA726" stroke-width="1.5"/>
+  <text x="307" y="50" text-anchor="middle" font-size="18">🦋</text>
+  <text x="307" y="66" text-anchor="middle" font-size="10" font-weight="bold" fill="#E65100">Écologique</text>
+  <text x="307" y="82" text-anchor="middle" font-size="9" fill="#424242">Biodiversité</text>
+  <text x="307" y="96" text-anchor="middle" font-size="9" fill="#424242">Corridor bleu</text>
+  <text x="307" y="112" text-anchor="middle" font-size="9" fill="#424242">Frayères</text>
+  <text x="307" y="128" text-anchor="middle" font-size="9" fill="#424242">Nichoirs / haltes</text>
+  <text x="307" y="144" text-anchor="middle" font-size="9" fill="#424242">migratoires</text>
+  <rect x="370" y="32" width="120" height="135" rx="6" fill="white" stroke="#AB47BC" stroke-width="1.5"/>
+  <text x="430" y="50" text-anchor="middle" font-size="18">💰</text>
+  <text x="430" y="66" text-anchor="middle" font-size="10" font-weight="bold" fill="#6A1B9A">Socio-économique</text>
+  <text x="430" y="82" text-anchor="middle" font-size="9" fill="#424242">Pêche / chasse</text>
+  <text x="430" y="96" text-anchor="middle" font-size="9" fill="#424242">Tourisme nature</text>
+  <text x="430" y="112" text-anchor="middle" font-size="9" fill="#424242">Fourrage / roseaux</text>
+  <text x="430" y="128" text-anchor="middle" font-size="9" fill="#424242">Stockage carbone</text>
+  <text x="430" y="144" text-anchor="middle" font-size="9" fill="#424242">Valeur paysagère</text>
+</svg>`,
+                      texte: 'Les zones humides rendent de nombreux services : 1 ha de ZH peut retenir jusqu\'à 1 000 à 2 000 m³ d\'eau lors d\'une crue, réduisant le pic de débit en aval. Leur capacité épuratoire (dénitrification bactérienne) est équivalente à une station d\'épuration tertiaire. Le stockage de carbone (tourbières) est un enjeu climatique majeur. Source : Fustec E. & Frochot B., Fonctions et valeurs des zones humides, Dunod, 2000.'
+                    }
+                  ],
+                  points: [
+                    'En France, 50 % des espèces d\'oiseaux et 30 % des espèces végétales menacées dépendent des zones humides',
+                    'La valeur économique d\'une zone humide est estimée à 6 000–10 000 €/ha/an (services écosystémiques)',
+                    'La destruction d\'une ZH oblige à une compensation ERC (Éviter, Réduire, Compenser) — ratio minimal 2:1',
+                    'Les tourbières représentent 3 % des surfaces terrestres mais stockent 30 % du carbone des sols',
+                    'La séquence ERC est obligatoire depuis la loi du 8 août 2016 (biodiversité)'
+                  ],
+                  formules: [],
+                  retenir: 'Les zones humides sont des infrastructures naturelles multifonctions. Leur protection et restauration sont au cœur de la mission 5 de la compétence GEMAPI (article L.211-7 CE).',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Quels sont les deux critères légaux de définition d\'une zone humide ?', r: 'Critère pédologique (sols hydromorphes, Arrêté 24/06/2008) OU critère floristique (végétation hygrophile, Arrêté 01/10/2009). Confirmé par CE 22/02/2017.' },
+                  { q: 'Qu\'est-ce que la séquence ERC ?', r: 'Éviter, Réduire, Compenser. Toute atteinte à une zone humide ou à la biodiversité doit d\'abord être évitée, puis réduite, et seulement compensée en dernier recours. Ratio minimal de compensation : 2 pour 1 en surface.' },
+                  { q: 'Pourquoi les zones humides écrêtent-elles les crues ?', r: 'Elles stockent temporairement l\'eau dans leurs sols et leur végétation lors des épisodes de crue, puis la restituent progressivement. Ce rôle de "tampon" réduit le débit de pointe en aval.' }
+                ],
+                exercices: []
+              },
+              {
+                id: 'gemapi-n1-m1-c4',
+                titre: 'La qualité des eaux : indicateurs et évaluation',
+                fiche: {
+                  intro: 'La Directive Cadre sur l\'Eau (DCE 2000/60/CE) impose d\'évaluer la qualité des masses d\'eau selon plusieurs paramètres. En France, cette évaluation est pilotée par les Agences de l\'eau avec l\'appui des DREAL. Source : DCE 2000/60/CE ; Arrêté du 25 janvier 2010 modifié relatif aux méthodes et critères d\'évaluation de l\'état écologique.',
+                  sections: [
+                    {
+                      titre: 'Les 5 classes de qualité DCE',
+                      schema: `<svg viewBox="0 0 500 120" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="120" rx="6" fill="#FAFAFA"/>
+  <text x="250" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Classes d'état écologique — DCE 2000/60/CE</text>
+  <!-- 5 cases -->
+  <rect x="5" y="30" width="88" height="80" rx="5" fill="#1565C0"/>
+  <text x="49" y="58" text-anchor="middle" font-size="22">⭐⭐</text>
+  <text x="49" y="78" text-anchor="middle" font-size="10" fill="white" font-weight="bold">TRÈS BON</text>
+  <text x="49" y="94" text-anchor="middle" font-size="9" fill="#BBDEFB">Référence</text>
+  <text x="49" y="108" text-anchor="middle" font-size="9" fill="#BBDEFB">naturelle</text>
+  <rect x="98" y="30" width="88" height="80" rx="5" fill="#43A047"/>
+  <text x="142" y="58" text-anchor="middle" font-size="22">✅</text>
+  <text x="142" y="78" text-anchor="middle" font-size="10" fill="white" font-weight="bold">BON</text>
+  <text x="142" y="94" text-anchor="middle" font-size="9" fill="#C8E6C9">Légères</text>
+  <text x="142" y="108" text-anchor="middle" font-size="9" fill="#C8E6C9">perturbations</text>
+  <rect x="191" y="30" width="88" height="80" rx="5" fill="#FDD835"/>
+  <text x="235" y="58" text-anchor="middle" font-size="22">⚠️</text>
+  <text x="235" y="78" text-anchor="middle" font-size="10" fill="#333" font-weight="bold">MOYEN</text>
+  <text x="235" y="94" text-anchor="middle" font-size="9" fill="#555">Perturbations</text>
+  <text x="235" y="108" text-anchor="middle" font-size="9" fill="#555">modérées</text>
+  <rect x="284" y="30" width="88" height="80" rx="5" fill="#FB8C00"/>
+  <text x="328" y="58" text-anchor="middle" font-size="22">❌</text>
+  <text x="328" y="78" text-anchor="middle" font-size="10" fill="white" font-weight="bold">MÉDIOCRE</text>
+  <text x="328" y="94" text-anchor="middle" font-size="9" fill="#FFE0B2">Fortes</text>
+  <text x="328" y="108" text-anchor="middle" font-size="9" fill="#FFE0B2">perturbations</text>
+  <rect x="377" y="30" width="118" height="80" rx="5" fill="#C62828"/>
+  <text x="436" y="58" text-anchor="middle" font-size="22">🚫</text>
+  <text x="436" y="78" text-anchor="middle" font-size="10" fill="white" font-weight="bold">MAUVAIS</text>
+  <text x="436" y="94" text-anchor="middle" font-size="9" fill="#FFCDD2">Altérations</text>
+  <text x="436" y="108" text-anchor="middle" font-size="9" fill="#FFCDD2">sévères</text>
+</svg>`,
+                      texte: 'L\'état écologique intègre des éléments biologiques (invertébrés, poissons, macrophytes, phytoplancton), physico-chimiques (température, oxygène, nutriments) et hydromorphologiques. L\'objectif DCE = atteindre le bon état écologique pour 2/3 des masses d\'eau en 2027. En 2022, seulement 44 % des masses d\'eau de surface atteignaient le bon état en France. Source : SOeS, Tableaux de bord DCE, 2022.'
+                    }
+                  ],
+                  points: [
+                    'L\'état chimique porte sur 45 substances prioritaires (Directive 2008/105/CE)',
+                    'L\'indice IBD (Indice Biologique Diatomées) est très sensible à la pollution diffuse agricole',
+                    'L\'IBG-DCE (invertébrés) évalue l\'hydromorphologie et la pollution organique',
+                    'La règle du "minimum" s\'applique : l\'état final = le plus mauvais des états biologiques',
+                    'Objectif DCE France 2027 : 2/3 des masses d\'eau en bon état — actuellement 44 %'
+                  ],
+                  formules: [
+                    { nom: 'DBO5 — Demande Biologique en Oxygène', expr: 'DBO5 (mg O₂/L)', unite: 'mg/L', detail: 'Quantité d\'O₂ consommée par les bactéries en 5 jours à 20°C. Seuil bon état : < 3 mg/L. Source : Arrêté ERU 22/12/1994' },
+                    { nom: 'DCO — Demande Chimique en Oxygène', expr: 'DCO (mg O₂/L)', unite: 'mg/L', detail: 'Quantité d\'O₂ nécessaire pour oxyder chimiquement toute la matière organique. DCO/DBO5 ≈ 2 à 3 pour les effluents domestiques.' }
+                  ],
+                  retenir: 'La qualité des eaux est multi-paramétrique. La GEMAPI contribue à l\'amélioration de la qualité par la restauration des milieux (ripisylve, zones humides, continuité), qui agissent comme des filtres naturels.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Quel est l\'objectif général de la DCE pour les masses d\'eau ?', r: 'Atteindre le bon état écologique et chimique pour toutes les masses d\'eau à l\'horizon 2027 (avec possibilité de dérogation justifiée). Objectif fixé par la Directive 2000/60/CE.' },
+                  { q: 'Qu\'est-ce qu\'une masse d\'eau (ME) ?', r: 'Portion homogène de cours d\'eau, plan d\'eau, eau côtière ou eau souterraine constituant l\'unité d\'évaluation DCE. En France : ~12 000 ME de surface et ~600 ME souterraines.' }
+                ],
+                exercices: []
+              }
+            ]
+          },
+          {
+            id: 'gemapi-n1-m2',
+            name: 'Cadre juridique de base',
+            ico: '⚖️',
+            color: '#2E7D32',
+            colorl: '#E8F5E9',
+            chapitres: [
+              {
+                id: 'gemapi-n1-m2-c1',
+                titre: 'Histoire de la politique de l\'eau en France',
+                fiche: {
+                  intro: 'La politique de l\'eau en France s\'est construite progressivement depuis 1964, en réponse à la dégradation des milieux aquatiques et aux conflits d\'usage. Comprendre cette histoire permet de situer la GEMAPI dans son contexte législatif. Source : Barraqué B., Les politiques de l\'eau en Europe, La Découverte, 1995 ; Cambon J., La loi sur l\'eau de 1964, Revue française d\'administration publique, 2001.',
+                  sections: [
+                    {
+                      titre: 'Chronologie des grandes lois sur l\'eau',
+                      schema: `<svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="200" rx="6" fill="#E8F5E9"/>
+  <!-- Ligne du temps -->
+  <line x1="30" y1="100" x2="470" y2="100" stroke="#2E7D32" stroke-width="3"/>
+  <!-- Points et labels -->
+  <circle cx="60" cy="100" r="8" fill="#2E7D32"/>
+  <text x="60" y="82" text-anchor="middle" font-size="9" font-weight="bold" fill="#1B5E20">1964</text>
+  <text x="60" y="125" text-anchor="middle" font-size="8" fill="#333">Loi sur l'eau :</text>
+  <text x="60" y="138" text-anchor="middle" font-size="8" fill="#333">Agences de</text>
+  <text x="60" y="150" text-anchor="middle" font-size="8" fill="#333">bassin</text>
+  <circle cx="160" cy="100" r="8" fill="#1565C0"/>
+  <text x="160" y="60" text-anchor="middle" font-size="9" font-weight="bold" fill="#1565C0">1992</text>
+  <text x="160" y="75" text-anchor="middle" font-size="8" fill="#333">Loi sur l'eau :</text>
+  <text x="160" y="88" text-anchor="middle" font-size="8" fill="#333">SDAGE, SAGE</text>
+  <text x="160" y="100" text-anchor="middle" font-size="8" fill="#333">DUP eau</text>
+  <circle cx="250" cy="100" r="8" fill="#6A1B9A"/>
+  <text x="250" y="120" text-anchor="middle" font-size="9" font-weight="bold" fill="#6A1B9A">2000</text>
+  <text x="250" y="135" text-anchor="middle" font-size="8" fill="#333">DCE</text>
+  <text x="250" y="148" text-anchor="middle" font-size="8" fill="#333">Directive</text>
+  <text x="250" y="161" text-anchor="middle" font-size="8" fill="#333">européenne</text>
+  <circle cx="340" cy="100" r="8" fill="#E65100"/>
+  <text x="340" y="60" text-anchor="middle" font-size="9" font-weight="bold" fill="#E65100">2006</text>
+  <text x="340" y="75" text-anchor="middle" font-size="8" fill="#333">LEMA :</text>
+  <text x="340" y="88" text-anchor="middle" font-size="8" fill="#333">transposition</text>
+  <text x="340" y="100" text-anchor="middle" font-size="8" fill="#333">DCE, ONEMA</text>
+  <circle cx="430" cy="100" r="10" fill="#B71C1C"/>
+  <text x="430" y="120" text-anchor="middle" font-size="9" font-weight="bold" fill="#B71C1C">2014</text>
+  <text x="430" y="135" text-anchor="middle" font-size="8" fill="#333">MAPTAM :</text>
+  <text x="430" y="148" text-anchor="middle" font-size="8" fill="#333">GEMAPI créée</text>
+  <text x="430" y="161" text-anchor="middle" font-size="8" fill="#333">EPCI-FP</text>
+</svg>`,
+                      texte: 'Loi du 16/12/1964 : crée les Agences de bassin et les comités de bassin ("Parlements de l\'eau"). Loi du 03/01/1992 : instaure les SDAGE et SAGE, reconnaît l\'eau comme "patrimoine commun de la nation". DCE 2000/60/CE : fixe l\'objectif de bon état écologique. LEMA 30/12/2006 : transpose la DCE, crée l\'ONEMA. Loi MAPTAM 27/01/2014 : crée la compétence GEMAPI attribuée aux EPCI-FP. Source : Légifrance ; Bouleau G., La DCE vue de France, Natures Sciences Sociétés, 2008.'
+                    }
+                  ],
+                  points: [
+                    'La loi de 1964 est la première grande loi sur l\'eau : elle crée 6 agences de bassin',
+                    'La loi de 1992 consacre l\'eau comme "patrimoine commun de la nation" (art. L.210-1 CE)',
+                    'La DCE fixe le cadre européen et l\'objectif de bon état pour 2027',
+                    'La LEMA de 2006 crée l\'ONEMA (devenu OFB en 2019 par fusion avec l\'AFB)',
+                    'La MAPTAM de 2014 attribue la GEMAPI aux intercommunalités'
+                  ],
+                  formules: [],
+                  retenir: 'La GEMAPI est l\'aboutissement de 60 ans de construction progressive d\'une politique publique de l\'eau en France. Elle transfère aux EPCI-FP une compétence auparavant dispersée entre communes, syndicats et départements.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Quelle loi a créé les Agences de l\'eau ?', r: 'La loi sur l\'eau du 16 décembre 1964 a créé les 6 Agences de bassin (devenues Agences de l\'eau), organisées autour des grands bassins hydrographiques.' },
+                  { q: 'Qu\'est-ce que le SDAGE ?', r: 'Schéma Directeur d\'Aménagement et de Gestion des Eaux. Document de planification à l\'échelle du bassin hydrographique (ex. : Loire-Bretagne), établi par le Comité de bassin pour 6 ans. Il fixe les orientations de la politique de l\'eau et est opposable aux documents d\'urbanisme.' }
+                ],
+                exercices: []
+              },
+              {
+                id: 'gemapi-n1-m2-c2',
+                titre: 'Les acteurs institutionnels de l\'eau en France',
+                fiche: {
+                  intro: 'La gestion de l\'eau en France repose sur un système multi-acteurs organisé à différentes échelles : européenne, nationale, de bassin, départementale et locale. La GEMAPI s\'insère dans cet ensemble complexe. Source : OFB, Guide des acteurs de l\'eau, 2021.',
+                  sections: [
+                    {
+                      titre: 'L\'organigramme des acteurs',
+                      schema: `<svg viewBox="0 0 500 250" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="250" rx="6" fill="#EDE7F6"/>
+  <!-- Niveau européen -->
+  <rect x="150" y="5" width="200" height="30" rx="5" fill="#4527A0"/>
+  <text x="250" y="25" text-anchor="middle" font-size="10" fill="white" font-weight="bold">🇪🇺 Commission européenne (DCE)</text>
+  <!-- Niveau national -->
+  <rect x="10" y="50" width="150" height="30" rx="5" fill="#1565C0"/>
+  <text x="85" y="70" text-anchor="middle" font-size="9" fill="white">🏛 Min. Transition</text>
+  <rect x="175" y="50" width="150" height="30" rx="5" fill="#1565C0"/>
+  <text x="250" y="65" text-anchor="middle" font-size="9" fill="white">🔬 OFB</text>
+  <text x="250" y="77" text-anchor="middle" font-size="8" fill="#BBDEFB">(ex-ONEMA)</text>
+  <rect x="340" y="50" width="150" height="30" rx="5" fill="#1565C0"/>
+  <text x="415" y="70" text-anchor="middle" font-size="9" fill="white">📐 CEREMA</text>
+  <!-- Niveau bassin -->
+  <rect x="10" y="100" width="220" height="30" rx="5" fill="#0288D1"/>
+  <text x="120" y="120" text-anchor="middle" font-size="9" fill="white">💧 Agence de l'eau (6 bassins)</text>
+  <rect x="245" y="100" width="245" height="30" rx="5" fill="#0288D1"/>
+  <text x="367" y="115" text-anchor="middle" font-size="9" fill="white">🗳 Comité de bassin</text>
+  <text x="367" y="127" text-anchor="middle" font-size="8" fill="#B3E5FC">(Parlement de l'eau)</text>
+  <!-- Niveau régional/dép. -->
+  <rect x="10" y="150" width="220" height="30" rx="5" fill="#00796B"/>
+  <text x="120" y="165" text-anchor="middle" font-size="9" fill="white">🏢 DREAL / DDT(M)</text>
+  <text x="120" y="177" text-anchor="middle" font-size="8" fill="#B2DFDB">(police de l'eau)</text>
+  <rect x="245" y="150" width="245" height="30" rx="5" fill="#00796B"/>
+  <text x="367" y="165" text-anchor="middle" font-size="9" fill="white">🏥 ARS</text>
+  <text x="367" y="177" text-anchor="middle" font-size="8" fill="#B2DFDB">(eau potable, baignade)</text>
+  <!-- Niveau local -->
+  <rect x="10" y="200" width="220" height="40" rx="5" fill="#E65100"/>
+  <text x="120" y="218" text-anchor="middle" font-size="9" fill="white">🏙 EPCI-FP</text>
+  <text x="120" y="232" text-anchor="middle" font-size="8" fill="#FFE0B2">Compétence GEMAPI obligatoire</text>
+  <rect x="245" y="200" width="245" height="40" rx="5" fill="#BF360C"/>
+  <text x="367" y="218" text-anchor="middle" font-size="9" fill="white">🌊 EPAGE / EPTB</text>
+  <text x="367" y="232" text-anchor="middle" font-size="8" fill="#FFCCBC">Délégation ou mandat GEMAPI</text>
+</svg>`,
+                      texte: 'L\'OFB (Office Français de la Biodiversité, créé par loi du 24/07/2019) est né de la fusion de l\'AFB et de l\'ONEMA. Il assure la police de l\'eau et la police de la nature. Les DREAL (Directions Régionales de l\'Environnement) exercent la police de l\'eau par délégation du préfet. Les Agences de l\'eau collectent les redevances et financent les projets eau. Source : Loi n°2019-773 du 24/07/2019 portant création de l\'OFB.'
+                    }
+                  ],
+                  points: [
+                    'L\'OFB est la police de l\'eau et de la nature au niveau national',
+                    'Il existe 6 bassins hydrographiques en France métropolitaine, chacun avec une Agence de l\'eau',
+                    'Les EPCI-FP exercent la GEMAPI depuis le 1er janvier 2018',
+                    'Les ARS contrôlent la qualité de l\'eau potable et des eaux de baignade',
+                    'Le préfet est l\'autorité compétente pour la police de l\'eau (IOTA)'
+                  ],
+                  formules: [],
+                  retenir: 'Connaître les acteurs est indispensable pour monter un dossier GEMAPI : Agence de l\'eau (financement), DDT(M)/DREAL (instruction IOTA), OFB (police), ARS (santé), EPTB/EPAGE (coordination).',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce que l\'OFB et quelle est sa mission ?', r: 'Office Français de la Biodiversité (loi 24/07/2019). Mission : police de l\'eau, police de la nature, surveillance et amélioration de l\'état des écosystèmes. Né de la fusion ONEMA + AFB.' },
+                  { q: 'Combien d\'Agences de l\'eau existent en France ?', r: 'Six Agences de l\'eau correspondant aux 6 grands bassins hydrographiques : Adour-Garonne, Artois-Picardie, Loire-Bretagne, Rhin-Meuse, Rhône-Méditerranée-Corse, Seine-Normandie.' }
+                ],
+                exercices: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'gemapi-n2',
+        name: 'Niveau 2 — Intermédiaire : La compétence GEMAPI',
+        matieres: [
+          {
+            id: 'gemapi-n2-m1',
+            name: 'La loi MAPTAM et les 4 missions GEMAPI',
+            ico: '📜',
+            color: '#E65100',
+            colorl: '#FBE9E7',
+            chapitres: [
+              {
+                id: 'gemapi-n2-m1-c1',
+                titre: 'Genèse et contexte de la loi MAPTAM',
+                fiche: {
+                  intro: 'La loi MAPTAM (Modernisation de l\'Action Publique Territoriale et d\'Affirmation des Métropoles) du 27 janvier 2014 a créé la compétence GEMAPI. Elle répond à un double constat : la gestion des milieux aquatiques était éclatée entre de nombreux acteurs, et la responsabilité en cas de dommage liés aux inondations était floue. Source : Loi n°2014-58 du 27/01/2014 ; CGCT art. L.5211-9-2.',
+                  sections: [
+                    {
+                      titre: 'Pourquoi la GEMAPI a-t-elle été créée ?',
+                      schema: `<svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="180" rx="6" fill="#FBE9E7"/>
+  <text x="250" y="22" text-anchor="middle" font-size="12" font-weight="bold" fill="#B71C1C">Constats ayant conduit à la création de la GEMAPI</text>
+  <rect x="10" y="32" width="148" height="138" rx="6" fill="white" stroke="#EF9A9A" stroke-width="1.5"/>
+  <text x="84" y="52" text-anchor="middle" font-size="20">⚡</text>
+  <text x="84" y="68" text-anchor="middle" font-size="10" font-weight="bold" fill="#C62828">Catastrophes</text>
+  <text x="84" y="82" text-anchor="middle" font-size="9" fill="#555">Xynthia (2010)</text>
+  <text x="84" y="96" text-anchor="middle" font-size="9" fill="#555">Vaison-la-R. (1992)</text>
+  <text x="84" y="110" text-anchor="middle" font-size="9" fill="#555">Nîmes (1988)</text>
+  <text x="84" y="128" text-anchor="middle" font-size="9" fill="#777">Révèlent l'absence</text>
+  <text x="84" y="142" text-anchor="middle" font-size="9" fill="#777">de responsable</text>
+  <text x="84" y="156" text-anchor="middle" font-size="9" fill="#777">clairement identifié</text>
+  <rect x="176" y="32" width="148" height="138" rx="6" fill="white" stroke="#EF9A9A" stroke-width="1.5"/>
+  <text x="250" y="52" text-anchor="middle" font-size="20">🏗️</text>
+  <text x="250" y="68" text-anchor="middle" font-size="10" font-weight="bold" fill="#C62828">Fragmentation</text>
+  <text x="250" y="82" text-anchor="middle" font-size="9" fill="#555">Communes</text>
+  <text x="250" y="96" text-anchor="middle" font-size="9" fill="#555">Départements</text>
+  <text x="250" y="110" text-anchor="middle" font-size="9" fill="#555">Régions</text>
+  <text x="250" y="124" text-anchor="middle" font-size="9" fill="#555">Syndicats</text>
+  <text x="250" y="142" text-anchor="middle" font-size="9" fill="#777">= absence de</text>
+  <text x="250" y="156" text-anchor="middle" font-size="9" fill="#777">pilotage cohérent</text>
+  <rect x="342" y="32" width="148" height="138" rx="6" fill="white" stroke="#EF9A9A" stroke-width="1.5"/>
+  <text x="416" y="52" text-anchor="middle" font-size="20">💰</text>
+  <text x="416" y="68" text-anchor="middle" font-size="10" font-weight="bold" fill="#C62828">Sous-financement</text>
+  <text x="416" y="82" text-anchor="middle" font-size="9" fill="#555">Entretien des digues</text>
+  <text x="416" y="96" text-anchor="middle" font-size="9" fill="#555">et cours d'eau</text>
+  <text x="416" y="110" text-anchor="middle" font-size="9" fill="#555">insuffisant</text>
+  <text x="416" y="128" text-anchor="middle" font-size="9" fill="#777">→ Taxe GEMAPI</text>
+  <text x="416" y="142" text-anchor="middle" font-size="9" fill="#777">plafonnée à</text>
+  <text x="416" y="156" text-anchor="middle" font-size="9" fill="#777">40 €/hab/an</text>
+</svg>`,
+                      texte: 'La tempête Xynthia (28 février 2010 : 59 morts en France, dont 29 en Vendée) a révélé de façon dramatique l\'absence d\'un responsable clairement identifié pour la gestion des digues littorales. La MAPTAM clarifie les responsabilités en confiant la GEMAPI aux EPCI-FP (intercommunalités). Source : Rapport Anziani, Sénat, 2010 ; étude d\'impact MAPTAM, 2013.'
+                    }
+                  ],
+                  points: [
+                    'La MAPTAM est promulguée le 27 janvier 2014 (JO 28 janvier 2014)',
+                    'La GEMAPI est effective depuis le 1er janvier 2018 pour tous les EPCI-FP',
+                    'La loi NOTRe de 2015 a précisé les modalités de transfert',
+                    'La loi Fesneau du 30/12/2017 a repoussé l\'échéance du 01/01/2018 et clarifié les délégations',
+                    'La GEMAPI est obligatoire : les EPCI-FP ne peuvent pas y renoncer'
+                  ],
+                  formules: [],
+                  retenir: 'La GEMAPI clarifie la chaîne de responsabilité pour la gestion des milieux aquatiques et la prévention des inondations. L\'EPCI-FP est le pivot de cette compétence, mais peut déléguer à un EPAGE ou EPTB.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Que signifie MAPTAM ?', r: 'Modernisation de l\'Action Publique Territoriale et d\'Affirmation des Métropoles. Loi n°2014-58 du 27 janvier 2014.' },
+                  { q: 'Depuis quand la GEMAPI est-elle obligatoire pour les EPCI-FP ?', r: 'Depuis le 1er janvier 2018. La date initiale de 2016 avait été repoussée par plusieurs textes successifs.' },
+                  { q: 'Quel événement a catalysé la création de la GEMAPI ?', r: 'La tempête Xynthia (28 février 2010 : 59 morts) qui a mis en lumière l\'absence de responsable identifié pour la gestion des ouvrages de protection contre les inondations.' }
+                ],
+                exercices: []
+              },
+              {
+                id: 'gemapi-n2-m1-c2',
+                titre: 'Les 4 missions de l\'article L.211-7 du Code de l\'environnement',
+                fiche: {
+                  intro: 'La GEMAPI est définie par 4 alinéas de l\'article L.211-7 I du Code de l\'environnement. Ces 4 missions constituent le cœur de la compétence, et leur maîtrise est indispensable pour tout acteur GEMAPI. Source : Art. L.211-7 I du Code de l\'environnement (CE) ; Art. L.5214-16 du CGCT.',
+                  sections: [
+                    {
+                      titre: 'Les 4 missions GEMAPI',
+                      schema: `<svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="220" rx="6" fill="#FFF3E0"/>
+  <text x="250" y="22" text-anchor="middle" font-size="12" font-weight="bold" fill="#E65100">Les 4 missions GEMAPI — Art. L.211-7 I CE</text>
+  <!-- Mission 1 -->
+  <rect x="10" y="32" width="235" height="85" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+  <text x="15" y="50" font-size="22">🌊</text>
+  <text x="45" y="50" font-size="11" font-weight="bold" fill="#1565C0">Alinéa 1 — Milieux aquatiques</text>
+  <text x="15" y="68" font-size="9" fill="#424242">Aménagement d'un bassin ou d'une fraction</text>
+  <text x="15" y="82" font-size="9" fill="#424242">de bassin hydrographique</text>
+  <text x="15" y="98" font-size="9" fill="#1565C0" font-style="italic">→ Entretien des cours d'eau, restauration</text>
+  <text x="15" y="112" font-size="9" fill="#1565C0" font-style="italic">des milieux, protection des ressources</text>
+  <!-- Mission 2 -->
+  <rect x="255" y="32" width="235" height="85" rx="6" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="260" y="50" font-size="22">🌿</text>
+  <text x="295" y="50" font-size="11" font-weight="bold" fill="#2E7D32">Alinéa 2 — Zones humides</text>
+  <text x="260" y="68" font-size="9" fill="#424242">Entretien et aménagement d'un cours d'eau,</text>
+  <text x="260" y="82" font-size="9" fill="#424242">canal, lac, plan d'eau, y compris leurs berges</text>
+  <text x="260" y="98" font-size="9" fill="#2E7D32" font-style="italic">→ Curage, faucardage, gestion des berges</text>
+  <!-- Mission 3 -->
+  <rect x="10" y="127" width="235" height="85" rx="6" fill="#FFF8E1" stroke="#F57F17" stroke-width="2"/>
+  <text x="15" y="145" font-size="22">💧</text>
+  <text x="48" y="145" font-size="11" font-weight="bold" fill="#E65100">Alinéa 5 — Eau pluviale</text>
+  <text x="15" y="163" font-size="9" fill="#424242">Défense contre les inondations</text>
+  <text x="15" y="177" font-size="9" fill="#424242">et contre la mer</text>
+  <text x="15" y="193" font-size="9" fill="#E65100" font-style="italic">→ Digues, levées, bassins écrêtement</text>
+  <text x="15" y="207" font-size="9" fill="#E65100" font-style="italic">PAPI, PPRi, PGRI</text>
+  <!-- Mission 4 -->
+  <rect x="255" y="127" width="235" height="85" rx="6" fill="#FCE4EC" stroke="#AD1457" stroke-width="2"/>
+  <text x="260" y="145" font-size="22">🛡️</text>
+  <text x="295" y="145" font-size="11" font-weight="bold" fill="#AD1457">Alinéa 8 — Protection source</text>
+  <text x="260" y="163" font-size="9" fill="#424242">Protection et restauration des sites,</text>
+  <text x="260" y="177" font-size="9" fill="#424242">des écosystèmes aquatiques et des zones</text>
+  <text x="260" y="191" font-size="9" fill="#424242">humides ainsi que des formations boisées</text>
+  <text x="260" y="207" font-size="9" fill="#AD1457" font-style="italic">riveraines</text>
+</svg>`,
+                      texte: 'Les 4 missions sont définies par les alinéas 1, 2, 5 et 8 de l\'article L.211-7 I du Code de l\'environnement. Elles forment un bloc indissociable : on ne peut pas exercer uniquement certaines missions. ATTENTION : seules ces 4 missions constituent la GEMAPI stricto sensu. Les autres alinéas de L.211-7 (eau potable, assainissement…) ne font pas partie de la GEMAPI. Source : Circulaire du 17 mars 2015 sur la GEMAPI.'
+                    },
+                    {
+                      titre: 'Ce qui n\'est PAS la GEMAPI',
+                      schema: `<svg viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="100" rx="6" fill="#FFEBEE"/>
+  <text x="250" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#B71C1C">⚠ Hors GEMAPI — Ne pas confondre</text>
+  <rect x="10" y="28" width="150" height="62" rx="4" fill="white" stroke="#EF9A9A" stroke-width="1"/>
+  <text x="85" y="45" text-anchor="middle" font-size="9" fill="#C62828" font-weight="bold">🚫 Eau potable</text>
+  <text x="85" y="60" text-anchor="middle" font-size="8" fill="#555">Compétence EPCI</text>
+  <text x="85" y="74" text-anchor="middle" font-size="8" fill="#555">séparée (art. L.2224-7)</text>
+  <rect x="175" y="28" width="150" height="62" rx="4" fill="white" stroke="#EF9A9A" stroke-width="1"/>
+  <text x="250" y="45" text-anchor="middle" font-size="9" fill="#C62828" font-weight="bold">🚫 Assainissement</text>
+  <text x="250" y="60" text-anchor="middle" font-size="8" fill="#555">Compétence EPCI</text>
+  <text x="250" y="74" text-anchor="middle" font-size="8" fill="#555">séparée (art. L.2224-8)</text>
+  <rect x="340" y="28" width="150" height="62" rx="4" fill="white" stroke="#EF9A9A" stroke-width="1"/>
+  <text x="415" y="45" text-anchor="middle" font-size="9" fill="#C62828" font-weight="bold">🚫 Eau pluviale urbaine</text>
+  <text x="415" y="60" text-anchor="middle" font-size="8" fill="#555">Réseau EU/EP</text>
+  <text x="415" y="74" text-anchor="middle" font-size="8" fill="#555">≠ milieux naturels</text>
+</svg>`,
+                      texte: 'La frontière entre GEMAPI et autres compétences eau est parfois floue. La gestion des eaux pluviales urbaines (réseaux EP) n\'est pas GEMAPI mais compétence assainissement. La gestion des cours d\'eau en zone urbaine peut poser des questions de limite. Source : Réponse ministérielle n°97224, JO AN 15/01/2019.'
+                    }
+                  ],
+                  points: [
+                    'Les 4 missions GEMAPI : alinéas 1, 2, 5, 8 de l\'art. L.211-7 I CE',
+                    'La compétence GEMAPI est exercée à titre exclusif par les EPCI-FP',
+                    'Les communes membres ne peuvent plus exercer ces compétences seules depuis 2018',
+                    'Les EPCI-FP peuvent déléguer à un EPAGE ou EPTB mais restent responsables',
+                    'La taxe GEMAPI peut financer uniquement les 4 missions'
+                  ],
+                  formules: [],
+                  retenir: 'Connaître les 4 alinéas GEMAPI par cœur est fondamental. La distinction entre GEMAPI (milieux naturels) et assainissement (réseaux artificiels) est clé pour délimiter les périmètres de compétence.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Citez les 4 missions GEMAPI (alinéas)', r: 'Al. 1 : Aménagement bassin hydrographique. Al. 2 : Entretien cours d\'eau et berges. Al. 5 : Défense contre inondations et mer. Al. 8 : Protection/restauration sites, écosystèmes aquatiques et zones humides.' },
+                  { q: 'La gestion des eaux pluviales urbaines fait-elle partie de la GEMAPI ?', r: 'Non. Les réseaux d\'eaux pluviales urbaines relèvent de la compétence assainissement. Seule la gestion des milieux aquatiques naturels (cours d\'eau, zones humides) est GEMAPI.' }
+                ],
+                exercices: [
+                  {
+                    id: 'ex-gemapi-n2-m1-c2-1',
+                    titre: 'Identification des missions GEMAPI',
+                    source: 'CNFPT — Module GEMAPI pour élus, 2022',
+                    difficulte: 'facile',
+                    enonce: 'Classez les actions suivantes dans la bonne catégorie : GEMAPI ou Hors GEMAPI. Actions : (A) Curage d\'un fossé agricole relié à un cours d\'eau classé. (B) Réhabilitation d\'une station d\'épuration. (C) Création d\'un bassin écrêteur de crue sur un cours d\'eau. (D) Entretien d\'un réseau d\'eaux pluviales urbaines. (E) Restauration d\'une zone humide de fond de vallée. (F) Gestion d\'un captage AEP.',
+                    questions: [
+                      { q: 'Classez les 6 actions', r: 'GEMAPI : A (al.2), C (al.5), E (al.8) | Hors GEMAPI : B (assainissement), D (assainissement/eau pluviale), F (eau potable)', formule: 'Art. L.211-7 I alinéas 1, 2, 5, 8 CE', calcul: 'A = entretien cours d\'eau → al.2 GEMAPI. B = STEP → assainissement. C = bassin écrêteur → al.5 GEMAPI. D = réseau EP urbain → assainissement. E = zone humide → al.8 GEMAPI. F = captage AEP → eau potable.' }
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'gemapi-n2-m1-c3',
+                titre: 'La taxe GEMAPI : modalités et plafonds',
+                fiche: {
+                  intro: 'La taxe GEMAPI est une taxe facultative instaurée par l\'article 1530 bis du CGI. Elle permet aux EPCI-FP de financer l\'exercice de la compétence GEMAPI. Son plafond est fixé à 40 € par habitant et par an. Source : Art. 1530 bis du Code général des impôts (CGI) ; BO Impôts 31/08/2016.',
+                  sections: [
+                    {
+                      titre: 'Mécanisme de la taxe GEMAPI',
+                      schema: `<svg viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="160" rx="6" fill="#FBE9E7"/>
+  <text x="250" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#B71C1C">Mécanisme de la taxe GEMAPI — Art. 1530 bis CGI</text>
+  <!-- Étapes -->
+  <rect x="10" y="32" width="140" height="115" rx="6" fill="white" stroke="#EF9A9A" stroke-width="1.5"/>
+  <text x="80" y="55" text-anchor="middle" font-size="22">🗳️</text>
+  <text x="80" y="72" text-anchor="middle" font-size="10" font-weight="bold" fill="#B71C1C">1. Vote</text>
+  <text x="80" y="88" text-anchor="middle" font-size="9" fill="#555">Conseil communautaire</text>
+  <text x="80" y="102" text-anchor="middle" font-size="9" fill="#555">vote le montant</text>
+  <text x="80" y="116" text-anchor="middle" font-size="9" fill="#555">avant le 1er oct N-1</text>
+  <text x="80" y="132" text-anchor="middle" font-size="9" fill="#777">Plafond : 40 €/hab/an</text>
+  <text x="157" y="95" font-size="16" fill="#E65100">→</text>
+  <rect x="175" y="32" width="140" height="115" rx="6" fill="white" stroke="#EF9A9A" stroke-width="1.5"/>
+  <text x="245" y="55" text-anchor="middle" font-size="22">📊</text>
+  <text x="245" y="72" text-anchor="middle" font-size="10" font-weight="bold" fill="#B71C1C">2. Répartition</text>
+  <text x="245" y="88" text-anchor="middle" font-size="9" fill="#555">Proratisée sur les</text>
+  <text x="245" y="102" text-anchor="middle" font-size="9" fill="#555">bases TH/TFPB/CFE</text>
+  <text x="245" y="116" text-anchor="middle" font-size="9" fill="#555">des contribuables</text>
+  <text x="245" y="132" text-anchor="middle" font-size="9" fill="#777">par l'administration fiscale</text>
+  <text x="322" y="95" font-size="16" fill="#E65100">→</text>
+  <rect x="340" y="32" width="150" height="115" rx="6" fill="white" stroke="#EF9A9A" stroke-width="1.5"/>
+  <text x="415" y="55" text-anchor="middle" font-size="22">💼</text>
+  <text x="415" y="72" text-anchor="middle" font-size="10" font-weight="bold" fill="#B71C1C">3. Usage</text>
+  <text x="415" y="88" text-anchor="middle" font-size="9" fill="#555">Uniquement pour</text>
+  <text x="415" y="102" text-anchor="middle" font-size="9" fill="#555">les 4 missions GEMAPI</text>
+  <text x="415" y="116" text-anchor="middle" font-size="9" fill="#555">Peut être reversé</text>
+  <text x="415" y="132" text-anchor="middle" font-size="9" fill="#777">à EPAGE/EPTB</text>
+</svg>`,
+                      texte: 'La taxe GEMAPI est additionnelle aux taxes foncières (TFB et TFNB) et à la cotisation foncière des entreprises (CFE). Le montant voté est réparti entre les contribuables par l\'administration fiscale au prorata de leurs bases d\'imposition. Elle est affectée exclusivement aux missions GEMAPI. Son produit peut être reversé à un EPAGE ou EPTB auquel l\'EPCI-FP a délégué la compétence. Source : Art. 1530 bis CGI.'
+                    }
+                  ],
+                  points: [
+                    'Taxe facultative, plafonnée à 40 €/habitant/an (Art. 1530 bis CGI)',
+                    'Vote du conseil communautaire avant le 1er octobre de l\'année N-1',
+                    'Additionnelle à TFB, TFNB et CFE — recouvrée par l\'État',
+                    'Affectation exclusive aux 4 missions GEMAPI',
+                    'Peut être reversée à un EPAGE ou EPTB délégataire'
+                  ],
+                  formules: [
+                    { nom: 'Produit potentiel taxe GEMAPI', expr: 'T_max = 40 € × Population', unite: '€/an', detail: 'Population = dernière population légale INSEE. Ex : EPCI de 50 000 hab → T_max = 2 000 000 €/an' }
+                  ],
+                  retenir: 'La taxe GEMAPI est le principal outil de financement dédié, mais elle est souvent insuffisante pour les gros travaux (digues, renaturation). Elle doit être complétée par les subventions des Agences de l\'eau et du Fonds Barnier.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Quel est le plafond de la taxe GEMAPI ?', r: '40 € par habitant et par an (Art. 1530 bis CGI). C\'est un maximum — l\'EPCI-FP vote librement le montant effectif en dessous de ce plafond.' },
+                  { q: 'La taxe GEMAPI est-elle obligatoire ?', r: 'Non, elle est facultative. Un EPCI-FP peut exercer la GEMAPI sans l\'instituer, en finançant la compétence sur son budget général.' }
+                ],
+                exercices: [
+                  {
+                    id: 'ex-gemapi-n2-m1-c3-1',
+                    titre: 'Calcul du produit de la taxe GEMAPI',
+                    source: 'CNFPT — Finances GEMAPI, TD 2023',
+                    difficulte: 'facile',
+                    enonce: 'Une communauté de communes de 35 000 habitants décide d\'instituer la taxe GEMAPI à 28 €/hab. Elle a délégué la compétence à un EPAGE. Calculer le produit annuel et la part pouvant être reversée à l\'EPAGE.',
+                    questions: [
+                      { q: 'Calculer le produit annuel de la taxe', r: 'Produit = 28 € × 35 000 hab = 980 000 €/an', formule: 'T = montant voté × population', calcul: '28 × 35 000 = 980 000 €' },
+                      { q: 'Quelle part peut être reversée à l\'EPAGE ?', r: '100 % du produit peut être reversé à l\'EPAGE délégataire, sous réserve d\'une convention de reversement', formule: 'Art. 1530 bis VI CGI', calcul: 'La totalité du produit de la taxe GEMAPI peut être reversée à l\'organisme délégataire' }
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'gemapi-n2-m1-c4',
+                titre: 'Transfert de la compétence aux EPCI-FP : modalités pratiques',
+                fiche: {
+                  intro: 'Le transfert de la GEMAPI des communes vers les EPCI-FP s\'est effectué au 1er janvier 2018. Ce transfert a posé des problèmes pratiques importants : reprise des biens (digues, ouvrages), des contrats, des personnels, et des responsabilités. Source : CGCT art. L.5211-17 et suivants ; Guide GEMAPI, CEREMA, 2020.',
+                  sections: [
+                    {
+                      titre: 'Les étapes du transfert de compétence',
+                      schema: `<svg viewBox="0 0 500 130" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="130" rx="6" fill="#FFF8E1"/>
+  <text x="250" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#F57F17">Transfert GEMAPI — Communes → EPCI-FP (1er janv. 2018)</text>
+  <!-- Étapes -->
+  <rect x="5" y="26" width="115" height="95" rx="5" fill="#FFF3E0" stroke="#FFB300" stroke-width="1.5"/>
+  <text x="62" y="45" text-anchor="middle" font-size="9" font-weight="bold" fill="#E65100">① INVENTAIRE</text>
+  <text x="62" y="60" text-anchor="middle" font-size="8" fill="#555">Ouvrages (digues,</text>
+  <text x="62" y="73" text-anchor="middle" font-size="8" fill="#555">barrages, seuils)</text>
+  <text x="62" y="86" text-anchor="middle" font-size="8" fill="#555">Contrats, marchés</text>
+  <text x="62" y="99" text-anchor="middle" font-size="8" fill="#555">Agents</text>
+  <rect x="128" y="26" width="115" height="95" rx="5" fill="#FFF3E0" stroke="#FFB300" stroke-width="1.5"/>
+  <text x="185" y="45" text-anchor="middle" font-size="9" font-weight="bold" fill="#E65100">② ÉVALUATION</text>
+  <text x="185" y="60" text-anchor="middle" font-size="8" fill="#555">Valeur des biens</text>
+  <text x="185" y="73" text-anchor="middle" font-size="8" fill="#555">Coût d\'entretien</text>
+  <text x="185" y="86" text-anchor="middle" font-size="8" fill="#555">Responsabilité</text>
+  <text x="185" y="99" text-anchor="middle" font-size="8" fill="#555">pénale et civile</text>
+  <rect x="251" y="26" width="115" height="95" rx="5" fill="#FFF3E0" stroke="#FFB300" stroke-width="1.5"/>
+  <text x="308" y="45" text-anchor="middle" font-size="9" font-weight="bold" fill="#E65100">③ TRANSFERT</text>
+  <text x="308" y="60" text-anchor="middle" font-size="8" fill="#555">Mise à disposition</text>
+  <text x="308" y="73" text-anchor="middle" font-size="8" fill="#555">ou cession des biens</text>
+  <text x="308" y="86" text-anchor="middle" font-size="8" fill="#555">Transfert des agents</text>
+  <text x="308" y="99" text-anchor="middle" font-size="8" fill="#555">(art. L.5211-4-1)</text>
+  <rect x="374" y="26" width="121" height="95" rx="5" fill="#FFF3E0" stroke="#FFB300" stroke-width="1.5"/>
+  <text x="434" y="45" text-anchor="middle" font-size="9" font-weight="bold" fill="#E65100">④ ORGANISATION</text>
+  <text x="434" y="60" text-anchor="middle" font-size="8" fill="#555">Création d\'un service</text>
+  <text x="434" y="73" text-anchor="middle" font-size="8" fill="#555">ou délégation</text>
+  <text x="434" y="86" text-anchor="middle" font-size="8" fill="#555">EPAGE / EPTB</text>
+  <text x="434" y="99" text-anchor="middle" font-size="8" fill="#555">Taxe GEMAPI</text>
+</svg>`,
+                      texte: 'La reprise des ouvrages hydrauliques (digues notamment) par les EPCI-FP est un enjeu majeur : elle transfère la responsabilité civile et pénale en cas de défaillance. Le propriétaire d\'un ouvrage de protection est responsable des dommages causés en cas de rupture ou d\'insuffisance (art. L.214-10-1 CE). Source : CGCT art. L.5211-17 ; CE L.214-10-1.'
+                    }
+                  ],
+                  points: [
+                    'Transfert effectif au 1er janvier 2018 de plein droit',
+                    'Les biens (digues, cours d\'eau domaniaux) sont mis à disposition ou cédés',
+                    'Les agents communaux affectés à la GEMAPI sont transférés (art. L.5211-4-1 CGCT)',
+                    'La responsabilité du propriétaire d\'une digue est strictement encadrée (art. L.214-10-1 CE)',
+                    'Les syndicats existants ont pu être maintenus avec convention de délégation'
+                  ],
+                  formules: [],
+                  retenir: 'Le transfert GEMAPI n\'est pas seulement administratif : il transfère la responsabilité pénale et civile liée aux ouvrages. Un diagnostic préalable des digues et ouvrages est indispensable.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qui est responsable d\'un ouvrage de protection (digue) en cas de rupture ?', r: 'Le propriétaire de l\'ouvrage (art. L.214-10-1 CE), désormais l\'EPCI-FP ou son délégataire. Responsabilité civile ET pénale (mise en danger d\'autrui, art. 223-1 Code pénal).' },
+                  { q: 'Comment les agents communaux GEMAPI sont-ils traités lors du transfert ?', r: 'Ils sont transférés de plein droit à l\'EPCI-FP, avec maintien de leur rémunération et de leur statut (art. L.5211-4-1 CGCT). Ils peuvent opter pour la fonction publique communale ou territoriale.' }
+                ],
+                exercices: []
+              }
+            ]
+          },
+          {
+            id: 'gemapi-n2-m2',
+            name: 'Gouvernance et structures de portage',
+            ico: '🏛️',
+            color: '#4527A0',
+            colorl: '#EDE7F6',
+            chapitres: [
+              {
+                id: 'gemapi-n2-m2-c1',
+                titre: 'EPAGE et EPTB : rôles et différences',
+                fiche: {
+                  intro: 'Les EPCI-FP peuvent déléguer ou transférer la GEMAPI à des structures de portage spécialisées : l\'EPAGE (Établissement Public d\'Aménagement et de Gestion de l\'Eau) à l\'échelle d\'un sous-bassin, et l\'EPTB (Établissement Public Territorial de Bassin) à l\'échelle d\'un bassin versant. Source : Art. L.213-12 CE ; Loi NOTRe 2015 ; CGCT L.5721-2.',
+                  sections: [
+                    {
+                      titre: 'EPAGE vs EPTB : comparaison',
+                      schema: `<svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="200" rx="6" fill="#EDE7F6"/>
+  <text x="250" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#4527A0">EPAGE vs EPTB — Structures de portage GEMAPI</text>
+  <!-- EPAGE -->
+  <rect x="10" y="30" width="230" height="160" rx="6" fill="white" stroke="#7B1FA2" stroke-width="2"/>
+  <text x="125" y="52" text-anchor="middle" font-size="11" font-weight="bold" fill="#7B1FA2">🏞️ EPAGE</text>
+  <text x="125" y="68" text-anchor="middle" font-size="9" fill="#333">Établissement Public</text>
+  <text x="125" y="80" text-anchor="middle" font-size="9" fill="#333">d'Aménagement et de Gestion</text>
+  <text x="125" y="92" text-anchor="middle" font-size="9" fill="#333">de l'Eau</text>
+  <text x="125" y="110" text-anchor="middle" font-size="9" fill="#1565C0">Échelle : sous-bassin versant</text>
+  <text x="125" y="124" text-anchor="middle" font-size="9" fill="#555">Membres : EPCI-FP</text>
+  <text x="125" y="138" text-anchor="middle" font-size="9" fill="#555">Missions : maîtrise d'ouvrage</text>
+  <text x="125" y="152" text-anchor="middle" font-size="9" fill="#555">GEMAPI opérationnelle</text>
+  <text x="125" y="167" text-anchor="middle" font-size="9" fill="#E65100">= Syndicat mixte fermé</text>
+  <text x="125" y="181" text-anchor="middle" font-size="9" fill="#E65100">Art. L.213-12 CE</text>
+  <!-- EPTB -->
+  <rect x="260" y="30" width="230" height="160" rx="6" fill="white" stroke="#1565C0" stroke-width="2"/>
+  <text x="375" y="52" text-anchor="middle" font-size="11" font-weight="bold" fill="#1565C0">🌊 EPTB</text>
+  <text x="375" y="68" text-anchor="middle" font-size="9" fill="#333">Établissement Public</text>
+  <text x="375" y="80" text-anchor="middle" font-size="9" fill="#333">Territorial de Bassin</text>
+  <text x="375" y="100" text-anchor="middle" font-size="9" fill="#1565C0">Échelle : bassin ou sous-bassin</text>
+  <text x="375" y="114" text-anchor="middle" font-size="9" fill="#555">Membres : collectivités variées</text>
+  <text x="375" y="128" text-anchor="middle" font-size="9" fill="#555">Missions : coordination</text>
+  <text x="375" y="142" text-anchor="middle" font-size="9" fill="#555">animation + peut recevoir</text>
+  <text x="375" y="156" text-anchor="middle" font-size="9" fill="#555">délégation GEMAPI</text>
+  <text x="375" y="171" text-anchor="middle" font-size="9" fill="#E65100">= Syndicat mixte ouvert</text>
+  <text x="375" y="185" text-anchor="middle" font-size="9" fill="#E65100">Art. L.213-12 CE</text>
+</svg>`,
+                      texte: 'L\'EPAGE est créé pour exercer à la place des EPCI-FP les missions GEMAPI à l\'échelle d\'un sous-bassin versant cohérent. Il reçoit un transfert de compétence (et non une simple délégation). L\'EPTB coordonne à l\'échelle d\'un bassin versant entier et peut recevoir une délégation de compétence. Exemples : EPAGE "Syndicat de rivière de l\'Arc" (BV Arc, Provence) ; EPTB "Institution Interdépartementale des Barrages-Réservoirs de la Seine" (IIBR). Source : Art. L.213-12 CE.'
+                    }
+                  ],
+                  points: [
+                    'EPAGE = syndicat mixte fermé (seulement EPCI-FP membres) — maîtrise d\'ouvrage GEMAPI',
+                    'EPTB = syndicat mixte ouvert (collectivités variées) — coordination à l\'échelle bassin',
+                    'L\'EPCI-FP reste responsable même après délégation — il doit contrôler le délégataire',
+                    'La taxe GEMAPI collectée peut être reversée à l\'EPAGE/EPTB',
+                    'En 2023, on dénombre environ 100 EPAGE et 40 EPTB en France'
+                  ],
+                  formules: [],
+                  retenir: 'Le choix entre gestion en régie, EPAGE ou EPTB dépend de la taille du bassin versant, de l\'histoire des syndicats existants et des enjeux. La mutualisation via EPAGE est recommandée pour les bassins de taille moyenne (100-2000 km²).',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Quelle est la différence entre transfert et délégation de compétence GEMAPI ?', r: 'Transfert (vers EPAGE) : l\'EPCI-FP n\'exerce plus la compétence, elle appartient à l\'EPAGE. Délégation (vers EPTB ou EPAGE) : l\'EPCI-FP conserve la compétence mais confie l\'exercice au délégataire par convention. Dans les deux cas, la responsabilité finale reste à l\'EPCI-FP.' },
+                  { q: 'Donnez un exemple concret d\'EPTB', r: 'Établissement Public Loire (EPL) à l\'échelle du bassin de la Loire (117 000 km²). Syndicat mixte ouvert regroupant régions, départements, EPCI. Coordonne la mise en oeuvre du Plan Loire Grandeur Nature.' }
+                ],
+                exercices: []
+              },
+              {
+                id: 'gemapi-n2-m2-c2',
+                titre: 'Les syndicats de rivière : histoire et transformation',
+                fiche: {
+                  intro: 'Les syndicats de rivière sont des structures historiques de gestion des cours d\'eau, souvent créées dans les années 1970-1990. Avec la GEMAPI, ils ont dû se transformer en EPAGE ou signer des conventions avec les EPCI-FP. Source : CGCT art. L.5711-1 et suivants ; Rapport Gantier, Sénat, 2018.',
+                  sections: [
+                    {
+                      titre: 'Évolution des syndicats de rivière post-GEMAPI',
+                      schema: `<svg viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="150" rx="6" fill="#E8EAF6"/>
+  <text x="250" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#283593">Évolution des syndicats de rivière avec la GEMAPI</text>
+  <!-- Avant -->
+  <rect x="10" y="28" width="140" height="112" rx="6" fill="white" stroke="#9FA8DA" stroke-width="1.5"/>
+  <text x="80" y="48" text-anchor="middle" font-size="10" font-weight="bold" fill="#283593">AVANT 2018</text>
+  <text x="80" y="64" text-anchor="middle" font-size="9" fill="#555">Syndicats mixtes</text>
+  <text x="80" y="78" text-anchor="middle" font-size="9" fill="#555">regroupant communes</text>
+  <text x="80" y="92" text-anchor="middle" font-size="9" fill="#555">et départements</text>
+  <text x="80" y="108" text-anchor="middle" font-size="9" fill="#555">Financement par</text>
+  <text x="80" y="122" text-anchor="middle" font-size="9" fill="#555">contributions membres</text>
+  <text x="80" y="136" text-anchor="middle" font-size="9" fill="#555">+ subventions</text>
+  <!-- Flèche -->
+  <text x="165" y="100" font-size="20" fill="#283593">→</text>
+  <!-- Options -->
+  <rect x="185" y="28" width="145" height="112" rx="6" fill="#E8F5E9" stroke="#43A047" stroke-width="1.5"/>
+  <text x="257" y="48" text-anchor="middle" font-size="10" font-weight="bold" fill="#2E7D32">Option A : EPAGE</text>
+  <text x="257" y="64" text-anchor="middle" font-size="9" fill="#555">Transformation en</text>
+  <text x="257" y="78" text-anchor="middle" font-size="9" fill="#555">syndicat mixte fermé</text>
+  <text x="257" y="92" text-anchor="middle" font-size="9" fill="#555">(EPCI-FP membres)</text>
+  <text x="257" y="108" text-anchor="middle" font-size="9" fill="#2E7D32">= Transfert GEMAPI</text>
+  <text x="257" y="128" text-anchor="middle" font-size="9" fill="#2E7D32">Maîtrise d'ouvrage</text>
+  <rect x="340" y="28" width="150" height="112" rx="6" fill="#FFF8E1" stroke="#FFB300" stroke-width="1.5"/>
+  <text x="415" y="48" text-anchor="middle" font-size="10" font-weight="bold" fill="#F57F17">Option B : Convention</text>
+  <text x="415" y="64" text-anchor="middle" font-size="9" fill="#555">Le syndicat reçoit une</text>
+  <text x="415" y="78" text-anchor="middle" font-size="9" fill="#555">délégation des EPCI-FP</text>
+  <text x="415" y="92" text-anchor="middle" font-size="9" fill="#555">via convention</text>
+  <text x="415" y="108" text-anchor="middle" font-size="9" fill="#F57F17">= L'EPCI reste</text>
+  <text x="415" y="122" text-anchor="middle" font-size="9" fill="#F57F17">responsable</text>
+</svg>`,
+                      texte: 'En 2018, les syndicats de rivière comprenant des communes membres ont perdu leur assise juridique (les communes n\'ont plus la compétence GEMAPI). Deux voies : (A) se transformer en EPAGE (syndicat mixte fermé d\'EPCI-FP) avec transfert de compétence, ou (B) obtenir une délégation des EPCI-FP via convention et rester syndicat mixte ouvert. La grande majorité des 1 500 syndicats de rivière existants ont opté pour la voie conventionnelle. Source : CEREMA, Retours d\'expérience GEMAPI, 2021.'
+                    }
+                  ],
+                  points: [
+                    'En France, environ 1 500 syndicats de rivière existaient avant 2018',
+                    'Les communes ne pouvant plus être membres d\'un syndicat GEMAPI après 2018',
+                    'La voie EPAGE impose un accord de tous les EPCI-FP du bassin versant',
+                    'La convention de délégation est plus souple mais maintient l\'EPCI-FP responsable',
+                    'De nombreux syndicats intercommunaux mixtes existent encore via convention'
+                  ],
+                  formules: [],
+                  retenir: 'La transformation des syndicats de rivière est un enjeu de gouvernance local. Le bon niveau d\'organisation doit correspondre au bassin versant hydrographique cohérent, pas aux limites administratives.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Pourquoi les communes ne peuvent-elles plus être membres d\'un syndicat de rivière GEMAPI ?', r: 'Parce que depuis le 1er janvier 2018, la compétence GEMAPI appartient exclusivement aux EPCI-FP. Une commune n\'ayant plus la compétence, elle ne peut pas la déléguer à un syndicat.' }
+                ],
+                exercices: []
+              }
+            ]
+          },
+          {
+            id: 'gemapi-n2-m3',
+            name: 'Zones humides et Solutions fondées sur la Nature',
+            ico: '🌿',
+            color: '#2E7D32',
+            colorl: '#E8F5E9',
+            chapitres: [
+              {
+                id: 'gemapi-n2-m3-c1',
+                titre: 'Les zones humides : définition, identification et enjeux',
+                fiche: {
+                  intro: 'Les zones humides sont des terrains exploités ou non, habituellement inondés ou gorgés d\'eau douce, salée ou saumâtre de façon permanente ou temporaire (art. L.211-1 CE). Elles représentent moins de 3 % du territoire français mais rendent des services écosystémiques considérables. Source : OFB, Inventaire des zones humides en France, 2020 ; Ramsar, Convention sur les zones humides, 1971.',
+                  sections: [
+                    {
+                      titre: 'Critères d\'identification d\'une zone humide',
+                      schema: `<svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="200" rx="6" fill="#E8F5E9"/>
+  <text x="250" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#1B5E20">Identification d'une zone humide (Art. L.211-1 CE)</text>
+  <rect x="15" y="30" width="220" height="155" rx="6" fill="white" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="125" y="50" text-anchor="middle" font-size="10" font-weight="bold" fill="#2E7D32">Critère végétation</text>
+  <text x="125" y="68" text-anchor="middle" font-size="9" fill="#444">Plantes hydrophiles :</text>
+  <text x="125" y="82" text-anchor="middle" font-size="9" fill="#444">roseaux, joncs, saules</text>
+  <text x="125" y="96" text-anchor="middle" font-size="9" fill="#444">aulnes, iris des marais</text>
+  <text x="125" y="115" text-anchor="middle" font-size="9" font-weight="bold" fill="#2E7D32">Liste officielle arrêté</text>
+  <text x="125" y="129" text-anchor="middle" font-size="9" fill="#444">24/06/2008 + 01/10/2009</text>
+  <text x="125" y="148" text-anchor="middle" font-size="8" fill="#666">Présence de plantes</text>
+  <text x="125" y="162" text-anchor="middle" font-size="8" fill="#666">hygrophiles suffit</text>
+  <text x="125" y="176" text-anchor="middle" font-size="8" fill="#666">à caractériser la ZH</text>
+  <rect x="265" y="30" width="220" height="155" rx="6" fill="white" stroke="#1565C0" stroke-width="1.5"/>
+  <text x="375" y="50" text-anchor="middle" font-size="10" font-weight="bold" fill="#1565C0">Critère sol</text>
+  <text x="375" y="68" text-anchor="middle" font-size="9" fill="#444">Sols hydromorphes :</text>
+  <text x="375" y="82" text-anchor="middle" font-size="9" fill="#444">taches rouille, gris-bleu</text>
+  <text x="375" y="96" text-anchor="middle" font-size="9" fill="#444">(réduction du fer)</text>
+  <text x="375" y="115" text-anchor="middle" font-size="9" font-weight="bold" fill="#1565C0">Classes d'hydromorphie</text>
+  <text x="375" y="129" text-anchor="middle" font-size="9" fill="#444">Ia, Ib, IIa, IIb, III, IV, V, VI</text>
+  <text x="375" y="148" text-anchor="middle" font-size="8" fill="#666">Sondage pédologique</text>
+  <text x="375" y="162" text-anchor="middle" font-size="8" fill="#666">à 50 cm de profondeur</text>
+  <text x="375" y="176" text-anchor="middle" font-size="8" fill="#666">par expert</text>
+</svg>`,
+                      texte: 'L\'identification repose sur deux critères alternatifs (art. R.211-108 CE) : (1) végétation hygrophile dominante — liste officielle des espèces indicatrices (arrêté 24/06/2008 modifié) ; (2) sol hydromorphe — sondage pédologique révélant des traces d\'engorgement (taches d\'oxydation rouille + réduction gris-bleu). Un seul critère suffit. Attention : la jurisprudence du Conseil d\'État (CE, 22/02/2017, "Commune de Fontenay-sous-Fouronnes") a réintégré l\'exigence des deux critères pour les zones humides en dehors des cours d\'eau. Source : Art. R.211-108 CE.'
+                    },
+                    {
+                      titre: 'Les grands types de zones humides en France',
+                      texte: 'On distingue : Zones humides côtières — estuaires, lagunes, marais maritimes, vasières. Zones humides continentales — marais intérieurs, tourbières, prairies humides inondables, forêts alluviales, ripisylves, bras morts, plans d\'eau. Zones humides artificielles — bassins de retenue, rizières, marais salants. En GEMAPI, les zones humides les plus importantes sont les zones d\'expansion des crues (ZEC) et les prairies humides riveraines, qui jouent un rôle tampon décisif lors des crues. Source : OFB, Guide méthodologique de délimitation des zones humides, 2022.'
+                    }
+                  ],
+                  points: [
+                    'Une zone humide peut être identifiée par la végétation hygrophile OU le sol hydromorphe',
+                    'Les zones humides françaises ont diminué de 50 % depuis 1960 — perte irréversible de services écosystémiques',
+                    'Les ZEC (Zones d\'Expansion des Crues) sont des zones humides protectrices contre les inondations',
+                    'La suppression d\'une zone humide est soumise à autorisation IOTA et à compensation (ratio 2 pour 1)'
+                  ],
+                  formules: [],
+                  retenir: 'Détruire une zone humide sans compensation est illégal. En GEMAPI, les zones humides sont des alliées naturelles pour laminer les crues, filtrer l\'eau et maintenir les débits d\'étiage. Leur préservation vaut mieux que n\'importe quel ouvrage de protection.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Quels sont les deux critères officiels d\'identification d\'une zone humide ?', r: '1) Végétation hygrophile (espèces indicatrices, arrêté 24/06/2008). 2) Sol hydromorphe (traces d\'engorgement : taches rouille + horizon réduit gris-bleu). Un seul critère suffit à caractériser la zone humide (art. R.211-108 CE).' },
+                  { q: 'Quel est le ratio de compensation lors de destruction d\'une zone humide ?', r: '2 pour 1 minimum selon la doctrine ERC (Éviter, Réduire, Compenser). Pour 1 ha détruit, il faut recréer ou restaurer 2 ha de zone humide de fonctionnalité équivalente.' }
+                ],
+                exercices: []
+              },
+              {
+                id: 'gemapi-n2-m3-c2',
+                titre: 'Fonctions hydrologiques des zones humides',
+                fiche: {
+                  intro: 'Les zones humides rendent des services écosystémiques essentiels à la gestion des eaux. Leur rôle hydrologique est particulièrement précieux pour la GEMAPI : écrêtement des crues, soutien des étiages, filtration des polluants. Source : Barnaud G. & Fustec E., Fonctions et valeurs des zones humides, Dunod, 2007 ; SDAGE Loire-Bretagne 2022-2027.',
+                  sections: [
+                    {
+                      titre: 'Rôle des zones humides dans le cycle de l\'eau',
+                      schema: `<svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="220" rx="6" fill="#E8F5E9"/>
+  <text x="250" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#1B5E20">Fonctions hydrologiques des zones humides</text>
+  <defs>
+    <marker id="arr2" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <polygon points="0 0,7 2.5,0 5" fill="#1565C0"/>
+    </marker>
+  </defs>
+  <!-- Zone humide -->
+  <ellipse cx="250" cy="130" rx="110" ry="55" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+  <text x="250" y="128" text-anchor="middle" font-size="11" font-weight="bold" fill="#1B5E20">ZONE HUMIDE</text>
+  <text x="250" y="145" text-anchor="middle" font-size="9" fill="#2E7D32">prairie / marais / ripisylve</text>
+  <!-- Crue -->
+  <path d="M 50 100 Q 130 80 155 115" stroke="#1565C0" stroke-width="2.5" fill="none" marker-end="url(#arr2)"/>
+  <text x="20" y="88" font-size="9" font-weight="bold" fill="#1565C0">CRUE</text>
+  <text x="15" y="102" font-size="8" fill="#1565C0">stockage</text>
+  <!-- Étiage -->
+  <path d="M 358 125 Q 415 130 460 160" stroke="#0D47A1" stroke-width="2" fill="none" marker-end="url(#arr2)"/>
+  <text x="450" y="175" font-size="9" font-weight="bold" fill="#0D47A1">ÉTIAGE</text>
+  <text x="445" y="188" font-size="8" fill="#0D47A1">soutien</text>
+  <!-- Filtration -->
+  <path d="M 250 185 L 250 215" stroke="#4CAF50" stroke-width="2" fill="none" marker-end="url(#arr2)"/>
+  <text x="258" y="208" font-size="8" fill="#4CAF50">filtration</text>
+  <!-- Biodiversité -->
+  <text x="30" y="175" font-size="9" fill="#2E7D32">Biodiversité :</text>
+  <text x="30" y="188" font-size="8" fill="#555">amphibiens, oiseaux</text>
+  <text x="30" y="201" font-size="8" fill="#555">poissons, insectes</text>
+  <!-- Volume -->
+  <text x="375" y="60" font-size="9" fill="#E65100">Écrêtement</text>
+  <text x="375" y="73" font-size="8" fill="#E65100">jusqu'à 30–50 %</text>
+  <text x="375" y="86" font-size="8" fill="#E65100">des débits de pointe</text>
+</svg>`,
+                      texte: 'Les zones humides jouent trois rôles hydrologiques majeurs : (1) Écrêtement des crues — lors d\'une crue, elles stockent l\'eau comme une éponge et la restituent progressivement, réduisant le débit de pointe de 30 à 50 % pour les petits bassins. (2) Soutien des étiages — l\'eau stockée est restituée lentement pendant l\'été, maintenant un débit de base dans les cours d\'eau. (3) Filtration — les végétaux et micro-organismes décomposent les nitrates, phosphates et polluants. Un hectare de zone humide peut traiter l\'équivalent d\'une station d\'épuration pour 100 habitants. Source : IFEN, Fonctions des zones humides, 2006.'
+                    }
+                  ],
+                  points: [
+                    'Une ZH peut stocker 1 000 à 30 000 m³ d\'eau par hectare selon sa profondeur',
+                    'L\'écrêtement des crues par les ZH dépend de leur position dans le bassin versant et de leur saturation initiale',
+                    'Les prairies humides inondables en lit majeur sont les ZEC les plus efficaces pour l\'écrêtement',
+                    'La valorisation économique des services rendus : 1 ha de ZH = 600 à 4 000 €/an de services'
+                  ],
+                  formules: [
+                    { nom: 'Volume de stockage d\'une zone humide', expr: 'Vstockage = Surface × H_moy × (1 − Porosité)', unite: 'm³', detail: 'Surface en m², H_moy = hauteur de stockage en m, porosité de la végétation et du sol (0,2 à 0,5)' }
+                  ],
+                  retenir: 'La préservation des zones humides en lit majeur est l\'une des mesures les plus efficaces et les moins coûteuses pour réduire le risque inondation. La déconnecter de la rivière (remblais, drainage) supprime cette fonction de manière irréversible.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'De combien une zone humide peut-elle réduire le débit de pointe d\'une crue ?', r: 'Selon les études, de 30 à 50 % pour les petits bassins versants, sous réserve que la zone humide ne soit pas saturée avant la crue. L\'efficacité diminue pour les crues exceptionnelles (ZH saturées plus tôt).' },
+                  { q: 'Qu\'est-ce qu\'une ZEC (Zone d\'Expansion des Crues) ?', r: 'Espace naturel ou aménagé où les eaux peuvent se répandre temporairement lors d\'une crue. Elle a une fonction d\'écrêtement (stockage temporaire) et de laminage. Sa préservation est un objectif du SDAGE et du PPRi.' }
+                ],
+                exercices: [
+                  {
+                    id: 'ex-gemapi-n2-m3-c2-1',
+                    titre: 'Estimation de la capacité de stockage d\'une zone humide',
+                    source: 'Exercice pédagogique GEMAPI — Formation OFB, 2023',
+                    difficulte: 'facile',
+                    enonce: 'Une prairie humide en lit majeur a une superficie de 8 ha et peut être inondée sur une hauteur moyenne de 60 cm lors des crues. Estimer : 1) le volume de stockage brut, 2) le débit de pointe écrêté si la montée des eaux dure 3 heures et si la ZH absorbe 40 % du ruissellement.',
+                    questions: [
+                      { q: 'Calculer le volume de stockage brut (m³)', r: 'Vstockage = 8 ha × 10 000 m²/ha × 0,60 m = 48 000 m³', formule: 'V = Surface (m²) × H (m)', calcul: '8 ha = 80 000 m² ; V = 80 000 × 0,60 = 48 000 m³' },
+                      { q: 'Calculer le débit écrêté moyen sur 3 heures', r: 'Q_écrêté = V / t = 48 000 m³ / (3 × 3 600 s) = 4,4 m³/s', formule: 'Q = V / t', calcul: 'Q = 48 000 / 10 800 = 4,44 m³/s de débit écrêté pendant la montée des eaux' }
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'gemapi-n2-m3-c3',
+                titre: 'Solutions fondées sur la Nature (SFN) en GEMAPI',
+                fiche: {
+                  intro: 'Les Solutions fondées sur la Nature (SFN ou NBS — Nature-Based Solutions) s\'appuient sur les processus naturels pour répondre aux défis sociétaux. En GEMAPI, elles offrent une alternative ou un complément aux ouvrages de génie civil pour gérer l\'eau et les risques. Source : UICN, Solutions fondées sur la Nature, 2020 ; Cerema, NBS et inondations, 2022.',
+                  sections: [
+                    {
+                      titre: 'Catalogue des SFN en gestion de l\'eau',
+                      schema: `<svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="220" rx="6" fill="#F1F8E9"/>
+  <text x="250" y="16" text-anchor="middle" font-size="11" font-weight="bold" fill="#1B5E20">Solutions fondées sur la Nature — GEMAPI</text>
+  <!-- Colonne 1 -->
+  <rect x="10" y="24" width="145" height="190" rx="5" fill="white" stroke="#81C784" stroke-width="1.5"/>
+  <text x="82" y="42" text-anchor="middle" font-size="9" font-weight="bold" fill="#2E7D32">Restauration</text>
+  <text x="82" y="55" text-anchor="middle" font-size="8" fill="#444">Reméandrage</text>
+  <text x="82" y="68" text-anchor="middle" font-size="8" fill="#444">Reconnexion lit majeur</text>
+  <text x="82" y="81" text-anchor="middle" font-size="8" fill="#444">Restauration ripisylve</text>
+  <text x="82" y="94" text-anchor="middle" font-size="8" fill="#444">Suppression seuils</text>
+  <text x="82" y="107" text-anchor="middle" font-size="8" fill="#444">Recharge sédimentaire</text>
+  <text x="82" y="125" text-anchor="middle" font-size="8" fill="#2E7D32">Bénéfices :</text>
+  <text x="82" y="138" text-anchor="middle" font-size="8" fill="#555">Biodiversité</text>
+  <text x="82" y="151" text-anchor="middle" font-size="8" fill="#555">Écrêtement crues</text>
+  <text x="82" y="164" text-anchor="middle" font-size="8" fill="#555">Transit sédimentaire</text>
+  <!-- Colonne 2 -->
+  <rect x="178" y="24" width="145" height="190" rx="5" fill="white" stroke="#42A5F5" stroke-width="1.5"/>
+  <text x="250" y="42" text-anchor="middle" font-size="9" font-weight="bold" fill="#1565C0">Rétention</text>
+  <text x="250" y="55" text-anchor="middle" font-size="8" fill="#444">ZEC (prairies humides)</text>
+  <text x="250" y="68" text-anchor="middle" font-size="8" fill="#444">Bassins tampons</text>
+  <text x="250" y="81" text-anchor="middle" font-size="8" fill="#444">Haies et bocage</text>
+  <text x="250" y="94" text-anchor="middle" font-size="8" fill="#444">Bandes enherbées</text>
+  <text x="250" y="107" text-anchor="middle" font-size="8" fill="#444">Noues / tranchées</text>
+  <text x="250" y="125" text-anchor="middle" font-size="8" fill="#1565C0">Bénéfices :</text>
+  <text x="250" y="138" text-anchor="middle" font-size="8" fill="#555">Ralentissement</text>
+  <text x="250" y="151" text-anchor="middle" font-size="8" fill="#555">Infiltration</text>
+  <text x="250" y="164" text-anchor="middle" font-size="8" fill="#555">Filtration azote</text>
+  <!-- Colonne 3 -->
+  <rect x="346" y="24" width="145" height="190" rx="5" fill="white" stroke="#FF8A65" stroke-width="1.5"/>
+  <text x="418" y="42" text-anchor="middle" font-size="9" font-weight="bold" fill="#E64A19">Adaptation</text>
+  <text x="418" y="55" text-anchor="middle" font-size="8" fill="#444">Relocalisation</text>
+  <text x="418" y="68" text-anchor="middle" font-size="8" fill="#444">Désimperméabilisation</text>
+  <text x="418" y="81" text-anchor="middle" font-size="8" fill="#444">Toitures végétalisées</text>
+  <text x="418" y="94" text-anchor="middle" font-size="8" fill="#444">Forêts de protection</text>
+  <text x="418" y="107" text-anchor="middle" font-size="8" fill="#444">Zones refuges biodiv.</text>
+  <text x="418" y="125" text-anchor="middle" font-size="8" fill="#E64A19">Bénéfices :</text>
+  <text x="418" y="138" text-anchor="middle" font-size="8" fill="#555">Résilience</text>
+  <text x="418" y="151" text-anchor="middle" font-size="8" fill="#555">Ilots de fraîcheur</text>
+  <text x="418" y="164" text-anchor="middle" font-size="8" fill="#555">Stockage carbone</text>
+</svg>`,
+                      texte: 'Les SFN en GEMAPI se regroupent en trois familles : (1) Restauration des milieux — reméandrage, suppression d\'ouvrages transversaux, reconnexion du lit majeur, restauration de ripisylve. (2) Rétention et ralentissement — création ou préservation de zones d\'expansion des crues, restauration du bocage (ralentissement du ruissellement), bandes enherbées. (3) Adaptation — désimperméabilisation des surfaces urbaines, toitures et parkings végétalisés, forêts de protection des versants. Source : Cerema, Les SFN pour la gestion des risques d\'inondation, 2022.'
+                    }
+                  ],
+                  points: [
+                    'Les SFN sont moins coûteuses que les ouvrages de génie civil à entretien équivalent, sur 30 ans',
+                    'Le bocage peut réduire le ruissellement de 20 à 40 % sur les petits bassins versants',
+                    'Désimperméabiliser 1 ha en ville peut représenter 10 000 m³ de rétention supplémentaire par an',
+                    'Les SFN fournissent des co-bénéfices : biodiversité, qualité de l\'eau, paysage, adaptation climatique'
+                  ],
+                  formules: [],
+                  retenir: 'Les SFN ne remplacent pas toujours les digues, mais elles les complètent et les renforcent à moindre coût. La démarche ERC (Éviter, Réduire, Compenser) impose d\'examiner les SFN avant tout recours à un ouvrage de génie civil.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce qu\'une Solution fondée sur la Nature (SFN) en GEMAPI ?', r: 'Action qui s\'appuie sur des processus naturels (restauration, préservation ou gestion d\'écosystèmes) pour répondre à des défis sociétaux comme la prévention des inondations. Exemple : restaurer une ripisylve pour stabiliser des berges.' },
+                  { q: 'Quel est l\'intérêt de la désimperméabilisation urbaine pour la GEMAPI ?', r: 'Elle réduit le ruissellement en ville, diminue les débits de pointe à l\'exutoire urbain et soulage les réseaux pluviaux. C\'est une SFN urbaine complémentaire aux ouvrages de protection.' }
+                ],
+                exercices: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'gemapi-n3',
+        name: 'Niveau 3 — Avancé : Hydraulique et prévention des inondations',
+        matieres: [
+          {
+            id: 'gemapi-n3-m1',
+            name: 'Hydraulique fluviale appliquée',
+            ico: '📐',
+            color: '#0D47A1',
+            colorl: '#E3F2FD',
+            chapitres: [
+              {
+                id: 'gemapi-n3-m1-c1',
+                titre: 'Hydrologie : calcul des débits de crue',
+                fiche: {
+                  intro: 'Le calcul des débits de crue est fondamental en GEMAPI pour dimensionner les ouvrages de protection et évaluer les risques. Plusieurs méthodes existent selon la taille du bassin versant et la disponibilité des données. Source : Guide méthodologique SHYREG, IRSTEA, 2012 ; Galéa G. & Prudhomme C., Notions de base et concepts utiles, Cemagref, 1997.',
+                  sections: [
+                    {
+                      titre: 'La méthode rationnelle (petits bassins)',
+                      schema: `<svg viewBox="0 0 500 170" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="170" rx="6" fill="#E3F2FD"/>
+  <text x="250" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#0D47A1">Méthode Rationnelle — Crue de projet (petits BV)</text>
+  <!-- Formule centrale -->
+  <rect x="80" y="30" width="340" height="50" rx="8" fill="white" stroke="#1565C0" stroke-width="2"/>
+  <text x="250" y="62" text-anchor="middle" font-size="18" font-weight="bold" fill="#0D47A1">Q = C × i × A / 3,6</text>
+  <!-- Légende -->
+  <rect x="10" y="92" width="115" height="68" rx="5" fill="white" stroke="#90CAF9" stroke-width="1"/>
+  <text x="67" y="108" text-anchor="middle" font-size="9" font-weight="bold" fill="#1565C0">Q (m³/s)</text>
+  <text x="67" y="122" text-anchor="middle" font-size="9" fill="#555">Débit de pointe</text>
+  <text x="67" y="136" text-anchor="middle" font-size="9" fill="#555">de la crue de projet</text>
+  <text x="67" y="150" text-anchor="middle" font-size="8" fill="#777">(période de retour T)</text>
+  <rect x="135" y="92" width="115" height="68" rx="5" fill="white" stroke="#90CAF9" stroke-width="1"/>
+  <text x="192" y="108" text-anchor="middle" font-size="9" font-weight="bold" fill="#1565C0">C (sans dim.)</text>
+  <text x="192" y="122" text-anchor="middle" font-size="9" fill="#555">Coeff. ruissellement</text>
+  <text x="192" y="136" text-anchor="middle" font-size="9" fill="#555">0,1 à 0,95</text>
+  <text x="192" y="150" text-anchor="middle" font-size="8" fill="#777">selon occupation sol</text>
+  <rect x="260" y="92" width="115" height="68" rx="5" fill="white" stroke="#90CAF9" stroke-width="1"/>
+  <text x="317" y="108" text-anchor="middle" font-size="9" font-weight="bold" fill="#1565C0">i (mm/h)</text>
+  <text x="317" y="122" text-anchor="middle" font-size="9" fill="#555">Intensité de pluie</text>
+  <text x="317" y="136" text-anchor="middle" font-size="9" fill="#555">Montana / Météo-F</text>
+  <text x="317" y="150" text-anchor="middle" font-size="8" fill="#777">pour durée = Tc</text>
+  <rect x="385" y="92" width="105" height="68" rx="5" fill="white" stroke="#90CAF9" stroke-width="1"/>
+  <text x="437" y="108" text-anchor="middle" font-size="9" font-weight="bold" fill="#1565C0">A (km²)</text>
+  <text x="437" y="122" text-anchor="middle" font-size="9" fill="#555">Superficie du</text>
+  <text x="437" y="136" text-anchor="middle" font-size="9" fill="#555">bassin versant</text>
+  <text x="437" y="150" text-anchor="middle" font-size="8" fill="#777">en km²</text>
+</svg>`,
+                      texte: 'La méthode rationnelle s\'applique aux bassins versants < 5 km². Elle suppose que le débit de pointe est atteint quand toute la surface du BV contribue simultanément à l\'écoulement — ce qui se produit quand la durée de la pluie ≥ Tc (temps de concentration). Pour les pluies, on utilise les courbes IDF (Intensité-Durée-Fréquence) de Météo-France, ajustées par la formule de Montana : i = a × t^(-b). Source : Guide BCEOM, Hydraulique urbaine, 1994 ; Nowakowski C., Hydrologie appliquée, Tec & Doc, 2014.'
+                    },
+                    {
+                      titre: 'Temps de concentration — Formule de Kirpich',
+                      schema: `<svg viewBox="0 0 500 120" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="120" rx="6" fill="#E8F5E9"/>
+  <text x="250" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#1B5E20">Temps de concentration Tc — Formule de Kirpich (1940)</text>
+  <rect x="100" y="28" width="300" height="45" rx="6" fill="white" stroke="#43A047" stroke-width="2"/>
+  <text x="250" y="56" text-anchor="middle" font-size="15" font-weight="bold" fill="#1B5E20">Tc = 0,0663 × (L / √I)^0,77</text>
+  <text x="30" y="90" font-size="10" fill="#555">Tc (h) = temps de concentration</text>
+  <text x="30" y="105" font-size="10" fill="#555">L (km) = longueur hydraulique du talweg principal</text>
+  <text x="280" y="90" font-size="10" fill="#555">I (m/m) = pente moyenne du talweg</text>
+  <text x="280" y="105" font-size="9" fill="#777">Valable pour BV ruraux, < 50 km²</text>
+</svg>`,
+                      texte: 'D\'autres formules de Tc existent : Ventura, Pasini, SOCOSE (France, BV > 20 km²). Pour les grands bassins (> 500 km²), on utilise des modèles pluie-débit (GR4J, HBV) ou des méthodes statistiques (Gumbel, SHYREG). Source : Hydrology for Engineers, Linsley et al., 3e éd., 1982.'
+                    },
+                    {
+                      titre: 'Analyse fréquentielle — Loi de Gumbel',
+                      schema: `<svg viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="160" rx="6" fill="#FFF3E0"/>
+  <text x="250" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#E65100">Loi de Gumbel — Analyse de fréquence des crues</text>
+  <!-- Graphique schématique -->
+  <rect x="50" y="25" width="300" height="120" rx="4" fill="white" stroke="#FFCC80" stroke-width="1"/>
+  <!-- Axes -->
+  <line x1="60" y1="135" x2="345" y2="135" stroke="#555" stroke-width="1.5"/>
+  <line x1="60" y1="135" x2="60" y2="30" stroke="#555" stroke-width="1.5"/>
+  <text x="200" y="152" text-anchor="middle" font-size="9" fill="#555">Période de retour T (années) — échelle Gumbel</text>
+  <text x="30" y="90" font-size="9" fill="#555" transform="rotate(-90,30,90)">Débit Q (m³/s)</text>
+  <!-- Droite de Gumbel -->
+  <line x1="80" y1="120" x2="340" y2="40" stroke="#E65100" stroke-width="2"/>
+  <!-- Points observés -->
+  <circle cx="100" cy="115" r="4" fill="#1565C0"/>
+  <circle cx="150" cy="100" r="4" fill="#1565C0"/>
+  <circle cx="200" cy="88" r="4" fill="#1565C0"/>
+  <circle cx="250" cy="75" r="4" fill="#1565C0"/>
+  <circle cx="300" cy="58" r="4" fill="#1565C0"/>
+  <!-- Labels T -->
+  <text x="100" y="148" text-anchor="middle" font-size="8" fill="#555">2</text>
+  <text x="165" y="148" text-anchor="middle" font-size="8" fill="#555">10</text>
+  <text x="230" y="148" text-anchor="middle" font-size="8" fill="#555">50</text>
+  <text x="295" y="148" text-anchor="middle" font-size="8" fill="#555">100</text>
+  <!-- Formule -->
+  <rect x="360" y="30" width="130" height="115" rx="5" fill="white" stroke="#FFCC80" stroke-width="1"/>
+  <text x="425" y="50" text-anchor="middle" font-size="9" font-weight="bold" fill="#E65100">Formule Gumbel</text>
+  <text x="425" y="68" text-anchor="middle" font-size="9" fill="#333">Q(T) = Q̄ + K(T) × σQ</text>
+  <text x="425" y="88" text-anchor="middle" font-size="8" fill="#555">K(T) = -√6/π ×</text>
+  <text x="425" y="100" text-anchor="middle" font-size="8" fill="#555">[0,5772 + ln(ln(T/T-1))]</text>
+  <text x="425" y="118" text-anchor="middle" font-size="8" fill="#555">Q̄ = débit moyen</text>
+  <text x="425" y="132" text-anchor="middle" font-size="8" fill="#555">σQ = écart-type</text>
+</svg>`,
+                      texte: 'L\'analyse fréquentielle ajuste une loi statistique (Gumbel, GEV, Log-Pearson III) aux débits annuels maximaux observés. Le débit décennal Q10 (période de retour 10 ans) est le débit de référence pour le dimensionnement courant. Q100 est utilisé pour les PPRi et le dimensionnement des digues. SHYREG (IRSTEA) permet d\'estimer les quantiles de débit sans données locales, par régionalisation. Source : Renard B. et al., Analyse fréquentielle des crues, Cemagref, 2006 ; Galéa G., SHYREG, IRSTEA, 2012.'
+                    }
+                  ],
+                  points: [
+                    'Méthode rationnelle : bassins < 5 km², formule Q = C×i×A/3,6',
+                    'SOCOSE et CRUPEDIX : méthodes régionales pour BV ruraux de 1 à 10 000 km²',
+                    'Gumbel et GEV : lois statistiques pour l\'analyse fréquentielle sur longues séries',
+                    'SHYREG (IRSTEA) : régionalisation nationale des quantiles de débit',
+                    'Q10 = crue décennale (dimensionnement courant) ; Q100 = crue centennale (PPRi)'
+                  ],
+                  formules: [
+                    { nom: 'Méthode Rationnelle', expr: 'Q = C × i(Tc,T) × A / 3,6', unite: 'm³/s', detail: 'C = coeff. ruissellement, i = intensité pluie (mm/h) pour durée Tc et période T, A = superficie BV (km²)' },
+                    { nom: 'Temps de concentration — Kirpich', expr: 'Tc = 0,0663 × (L/√I)^0,77', unite: 'heures', detail: 'L = longueur talweg (km), I = pente (m/m). Valable pour BV ruraux < 50 km²' },
+                    { nom: 'Formule de Montana', expr: 'i(t) = a × t^(-b)', unite: 'mm/h', detail: 'Intensité de pluie en fonction de la durée t (min). a et b = paramètres régionaux Météo-France.' }
+                  ],
+                  retenir: 'Le dimensionnement d\'un ouvrage GEMAPI nécessite de connaître les débits de référence (Q10 à Q100) pour le bassin versant. En l\'absence de données locales, SHYREG ou les méthodes régionales (CRUPEDIX) sont à utiliser.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Dans quelle limite la méthode rationnelle est-elle applicable ?', r: 'Bassins versants < 5 km² (certains guides l\'étendent à 10 km²). Pour les grands bassins, il faut des modèles pluie-débit (GR4J, TOPMODEL) ou des analyses fréquentielles sur séries historiques.' },
+                  { q: 'Qu\'est-ce que le débit décennal Q10 ?', r: 'Débit ayant une probabilité de 10 % d\'être atteint ou dépassé chaque année (période de retour 10 ans). C\'est le débit de référence pour le dimensionnement des ouvrages courants (dalots, buses) et le débit plein-bord d\'un cours d\'eau aménagé.' },
+                  { q: 'Qu\'est-ce que SHYREG ?', r: 'Méthode de régionalisation des quantiles de débits de crue développée par l\'IRSTEA (Galéa, 2012). Permet d\'estimer Q(T) pour tout BV sans données de débit locales, par interpolation sur des stations hydrologiques proches.' }
+                ],
+                exercices: [
+                  {
+                    id: 'ex-gemapi-n3-m1-c1-1',
+                    titre: 'Application de la méthode rationnelle',
+                    source: 'TD Hydraulique appliquée — ENGEES Strasbourg, 2022',
+                    difficulte: 'moyen',
+                    enonce: 'Un bassin versant agricole de surface A = 3,5 km², pente I = 2 %, longueur talweg L = 4,2 km. Occupation du sol : 70 % prairie (C₁=0,25), 30 % cultures (C₂=0,45). Intensité de pluie décennale pour Tc : i(Tc, 10 ans) = 22 mm/h. Calculer Tc, C pondéré et Q10.',
+                    questions: [
+                      { q: 'Calculer Tc avec la formule de Kirpich', r: 'Tc = 0,0663 × (4,2/√0,02)^0,77 = 0,0663 × (4,2/0,1414)^0,77 = 0,0663 × 29,7^0,77 ≈ 0,0663 × 15,18 ≈ 1,01 h', formule: 'Tc = 0,0663 × (L/√I)^0,77', calcul: 'L=4,2 km, I=0,02 m/m → √I=0,1414 → L/√I=29,7 → 29,7^0,77≈15,18 → Tc=1,01 h' },
+                      { q: 'Calculer le coefficient de ruissellement pondéré C', r: 'C = 0,70×0,25 + 0,30×0,45 = 0,175 + 0,135 = 0,31', formule: 'C = Σ(Ci × Ai/A)', calcul: '70% prairie (C=0,25) + 30% cultures (C=0,45)' },
+                      { q: 'Calculer Q10 avec la méthode rationnelle', r: 'Q10 = 0,31 × 22 × 3,5 / 3,6 = 0,31 × 22 × 0,972 = 6,63 m³/s', formule: 'Q = C × i × A / 3,6', calcul: 'C=0,31, i=22 mm/h, A=3,5 km² → Q=0,31×22×3,5/3,6=6,63 m³/s' }
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'gemapi-n3-m1-c2',
+                titre: 'Hydraulique à surface libre — Formule de Manning-Strickler',
+                fiche: {
+                  intro: 'La formule de Manning-Strickler est l\'outil de base du calcul hydraulique en charge libre (cours d\'eau, canaux, fossés). Elle relie le débit à la géométrie de la section, à la pente et à la rugosité. Source : Chaudhry M.H., Open Channel Hydraulics, Springer, 2008 ; Carlier M., Hydraulique générale et appliquée, Eyrolles, 1986.',
+                  sections: [
+                    {
+                      titre: 'Formule de Manning-Strickler',
+                      schema: `<svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="200" rx="6" fill="#E3F2FD"/>
+  <text x="250" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#0D47A1">Formule de Manning-Strickler</text>
+  <!-- Grande formule -->
+  <rect x="60" y="28" width="380" height="55" rx="8" fill="white" stroke="#1565C0" stroke-width="2.5"/>
+  <text x="250" y="63" text-anchor="middle" font-size="18" font-weight="bold" fill="#0D47A1">Q = K × A × Rh^(2/3) × I^(1/2)</text>
+  <!-- Termes -->
+  <rect x="10" y="93" width="90" height="98" rx="5" fill="white" stroke="#90CAF9" stroke-width="1"/>
+  <text x="55" y="110" text-anchor="middle" font-size="9" font-weight="bold" fill="#1565C0">K (m^1/3/s)</text>
+  <text x="55" y="125" text-anchor="middle" font-size="9" fill="#555">Coeff. Strickler</text>
+  <text x="55" y="140" text-anchor="middle" font-size="8" fill="#777">Béton lisse : 75–85</text>
+  <text x="55" y="154" text-anchor="middle" font-size="8" fill="#777">Cours d'eau nat. : 25–40</text>
+  <text x="55" y="168" text-anchor="middle" font-size="8" fill="#777">Canal en terre : 30–45</text>
+  <text x="55" y="182" text-anchor="middle" font-size="8" fill="#777">Enrochements : 20–30</text>
+  <rect x="110" y="93" width="90" height="98" rx="5" fill="white" stroke="#90CAF9" stroke-width="1"/>
+  <text x="155" y="110" text-anchor="middle" font-size="9" font-weight="bold" fill="#1565C0">A (m²)</text>
+  <text x="155" y="125" text-anchor="middle" font-size="9" fill="#555">Section mouillée</text>
+  <text x="155" y="142" text-anchor="middle" font-size="8" fill="#777">Rect. : b×h</text>
+  <text x="155" y="156" text-anchor="middle" font-size="8" fill="#777">Trap. : (b+m×h)×h</text>
+  <text x="155" y="172" text-anchor="middle" font-size="8" fill="#777">Circ. : πD²/4</text>
+  <rect x="210" y="93" width="90" height="98" rx="5" fill="white" stroke="#90CAF9" stroke-width="1"/>
+  <text x="255" y="110" text-anchor="middle" font-size="9" font-weight="bold" fill="#1565C0">Rh (m)</text>
+  <text x="255" y="125" text-anchor="middle" font-size="9" fill="#555">Rayon hydraulique</text>
+  <text x="255" y="142" text-anchor="middle" font-size="8" fill="#777">Rh = A / P</text>
+  <text x="255" y="158" text-anchor="middle" font-size="8" fill="#777">P = périmètre mouillé</text>
+  <text x="255" y="175" text-anchor="middle" font-size="8" fill="#777">Rect. large : Rh ≈ h</text>
+  <rect x="310" y="93" width="90" height="98" rx="5" fill="white" stroke="#90CAF9" stroke-width="1"/>
+  <text x="355" y="110" text-anchor="middle" font-size="9" font-weight="bold" fill="#1565C0">I (m/m)</text>
+  <text x="355" y="125" text-anchor="middle" font-size="9" fill="#555">Pente de la ligne</text>
+  <text x="355" y="140" text-anchor="middle" font-size="9" fill="#555">d'énergie ≈ pente</text>
+  <text x="355" y="155" text-anchor="middle" font-size="9" fill="#555">du fond en régime</text>
+  <text x="355" y="170" text-anchor="middle" font-size="9" fill="#555">uniforme</text>
+  <rect x="410" y="93" width="82" height="98" rx="5" fill="white" stroke="#90CAF9" stroke-width="1"/>
+  <text x="451" y="110" text-anchor="middle" font-size="9" font-weight="bold" fill="#1565C0">Q (m³/s)</text>
+  <text x="451" y="125" text-anchor="middle" font-size="9" fill="#555">Débit en régime</text>
+  <text x="451" y="140" text-anchor="middle" font-size="9" fill="#555">uniforme</text>
+  <text x="451" y="158" text-anchor="middle" font-size="8" fill="#777">V = Q/A</text>
+  <text x="451" y="172" text-anchor="middle" font-size="8" fill="#777">vitesse moyenne</text>
+</svg>`,
+                      texte: 'Manning-Strickler est valable en régime uniforme permanent (profil en long constant, section constante). Pour les cours d\'eau naturels, le régime n\'est jamais parfaitement uniforme, mais la formule donne de bonnes approximations. Le coefficient K de Strickler dépend de la rugosité : plus K est élevé, plus la surface est lisse. K = 1/n de Manning. Source : Chaudhry M.H., Open Channel Hydraulics, 2e éd., Springer, 2008.'
+                    },
+                    {
+                      titre: 'Nombres adimensionnels : Froude et Reynolds',
+                      schema: `<svg viewBox="0 0 500 110" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="110" rx="6" fill="#FFF8E1"/>
+  <text x="250" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#F57F17">Nombre de Froude — Régimes d'écoulement</text>
+  <rect x="10" y="28" width="148" height="72" rx="5" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.5"/>
+  <text x="84" y="46" text-anchor="middle" font-size="10" font-weight="bold" fill="#0D47A1">Fr &lt; 1 : FLUVIAL</text>
+  <text x="84" y="62" text-anchor="middle" font-size="9" fill="#333">Régime lent (torrentiel</text>
+  <text x="84" y="76" text-anchor="middle" font-size="9" fill="#333">impossible). Vague remonte</text>
+  <text x="84" y="90" text-anchor="middle" font-size="9" fill="#555">Cours d'eau plaine</text>
+  <rect x="176" y="28" width="148" height="72" rx="5" fill="#FFE082" stroke="#F57F17" stroke-width="1.5"/>
+  <text x="250" y="46" text-anchor="middle" font-size="10" font-weight="bold" fill="#E65100">Fr = 1 : CRITIQUE</text>
+  <text x="250" y="62" text-anchor="middle" font-size="9" fill="#333">Passage fluvial/torrentiel</text>
+  <text x="250" y="76" text-anchor="middle" font-size="9" fill="#333">Ressaut hydraulique</text>
+  <text x="250" y="90" text-anchor="middle" font-size="9" fill="#555">Seuil, déversoir</text>
+  <rect x="342" y="28" width="148" height="72" rx="5" fill="#FFCDD2" stroke="#C62828" stroke-width="1.5"/>
+  <text x="416" y="46" text-anchor="middle" font-size="10" font-weight="bold" fill="#B71C1C">Fr &gt; 1 : TORRENTIEL</text>
+  <text x="416" y="62" text-anchor="middle" font-size="9" fill="#333">Régime rapide, instable</text>
+  <text x="416" y="76" text-anchor="middle" font-size="9" fill="#333">Dangereux pour ouvrages</text>
+  <text x="416" y="90" text-anchor="middle" font-size="9" fill="#555">Cours d'eau montagne</text>
+</svg>`,
+                      texte: 'Le nombre de Froude Fr = V / √(g×h) distingue le régime fluvial (Fr<1, écoulement lent) du régime torrentiel (Fr>1, écoulement rapide). En GEMAPI, il est essentiel de connaître le régime pour dimensionner les protections de berges et les franchissements. Un changement brutal de régime produit un ressaut hydraulique, source d\'érosion. Source : Lencastre A. & François P., Notions d\'hydrologie, Eyrolles, 2009.'
+                    }
+                  ],
+                  points: [
+                    'K de Strickler = 1/n de Manning (Manning américain, Strickler européen)',
+                    'Cours d\'eau naturel propre : K = 30–40 m^1/3/s (Rhin aménagé : K ≈ 40)',
+                    'Fr < 1 = régime fluvial (plaine) ; Fr > 1 = torrentiel (montagne)',
+                    'En régime uniforme : pente de la surface libre = pente du fond',
+                    'Le débit à pleine section est le débit morphogène (Q plein-bord, T ≈ 1,5 à 2 ans)'
+                  ],
+                  formules: [
+                    { nom: 'Manning-Strickler', expr: 'Q = K × A × Rh^(2/3) × I^(1/2)', unite: 'm³/s', detail: 'K = coeff. Strickler (m^1/3/s), A = section mouillée (m²), Rh = rayon hydraulique (m), I = pente (m/m)' },
+                    { nom: 'Rayon hydraulique', expr: 'Rh = A / P', unite: 'm', detail: 'A = section mouillée (m²), P = périmètre mouillé (m). Pour section rectangulaire large : Rh ≈ h (hauteur d\'eau)' },
+                    { nom: 'Nombre de Froude', expr: 'Fr = V / √(g × h)', unite: 'sans dimension', detail: 'V = vitesse (m/s), g = 9,81 m/s², h = tirant d\'eau (m). Fr<1 : fluvial, Fr>1 : torrentiel' }
+                  ],
+                  retenir: 'Manning-Strickler est la formule de base de tout hydraulicien GEMAPI. Elle est utilisée pour dimensionner les digues (tirant d\'eau côté val), les déversoirs, les passes à poissons, les buses et les fossés.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Quelle est la valeur du coefficient K de Strickler pour un cours d\'eau naturel en bon état ?', r: 'K ≈ 30 à 40 m^1/3/s pour un cours d\'eau naturel avec végétation de berge bien entretenue. K diminue en présence de végétation aquatique dense (K = 20–25) et augmente pour un lit bétonné (K = 75–85).' },
+                  { q: 'Comment calculer le rayon hydraulique d\'une section rectangulaire ?', r: 'Rh = A/P = (b×h)/(b+2h). Pour une section large (b >> h) : Rh ≈ h. C\'est le cas de la plupart des cours d\'eau en plaine.' }
+                ],
+                exercices: [
+                  {
+                    id: 'ex-gemapi-n3-m1-c2-1',
+                    titre: 'Dimensionnement d\'un canal trapézoïdal',
+                    source: 'TD Hydraulique GEMAPI — CEREMA, 2021',
+                    difficulte: 'moyen',
+                    enonce: 'On souhaite restaurer un cours d\'eau avec une section trapézoïdale, base b = 4 m, fruit m = 1 (pente 1:1), pente I = 0,0008 m/m, K = 30 m^1/3/s. Calculer le débit à pleine section pour une hauteur d\'eau h = 1,5 m.',
+                    questions: [
+                      { q: 'Calculer la section mouillée A', r: 'A = (b + m×h) × h = (4 + 1×1,5) × 1,5 = 5,5 × 1,5 = 8,25 m²', formule: 'A = (b + m×h) × h', calcul: 'b=4m, m=1, h=1,5m → A=(4+1,5)×1,5=5,5×1,5=8,25 m²' },
+                      { q: 'Calculer le périmètre mouillé P et le rayon hydraulique Rh', r: 'P = b + 2×h×√(1+m²) = 4 + 2×1,5×√2 = 4 + 4,243 = 8,243 m → Rh = 8,25/8,243 = 1,001 m', formule: 'P = b + 2h√(1+m²) ; Rh = A/P', calcul: 'P = 4 + 2×1,5×1,414 = 8,243 m ; Rh = 8,25/8,243 ≈ 1,00 m' },
+                      { q: 'Calculer Q avec Manning-Strickler', r: 'Q = 30 × 8,25 × 1,001^(2/3) × 0,0008^(1/2) = 30 × 8,25 × 1,001 × 0,02828 = 7,01 m³/s', formule: 'Q = K × A × Rh^(2/3) × I^(1/2)', calcul: 'I^(1/2)=√0,0008=0,02828 ; Rh^(2/3)=1,001^0,667≈1,001 → Q=30×8,25×1,001×0,02828≈7,00 m³/s' }
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'gemapi-n3-m1-c3',
+                titre: 'Morphologie fluviale et dynamique sédimentaire',
+                fiche: {
+                  intro: 'La morphologie d\'un cours d\'eau résulte de l\'équilibre entre le débit liquide (énergie) et le débit solide (matériaux). La formule de Lane (1955) exprime cet équilibre. Les travaux d\'aménagement doivent respecter cet équilibre pour ne pas générer d\'instabilités (incision ou exhaussement). Source : Lane E.W., The importance of fluvial morphology in hydraulic engineering, 1955 ; Bravard J.-P., Amoros C., Pautou G., Impact of civil engineering works on the successions of communities in a fluvial system, Oikos, 1986.',
+                  sections: [
+                    {
+                      titre: 'L\'équilibre de Lane',
+                      schema: `<svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="180" rx="6" fill="#FFF3E0"/>
+  <text x="250" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#E65100">Balance de Lane — Équilibre morphologique</text>
+  <!-- Balance -->
+  <line x1="250" y1="40" x2="250" y2="80" stroke="#555" stroke-width="3"/>
+  <line x1="100" y1="80" x2="400" y2="80" stroke="#555" stroke-width="3"/>
+  <line x1="100" y1="80" x2="100" y2="110" stroke="#555" stroke-width="2"/>
+  <line x1="400" y1="80" x2="400" y2="110" stroke="#555" stroke-width="2"/>
+  <!-- Plateau gauche -->
+  <rect x="50" y="110" width="100" height="50" rx="4" fill="#1565C0" opacity="0.8"/>
+  <text x="100" y="132" text-anchor="middle" font-size="10" fill="white" font-weight="bold">Qs × D50</text>
+  <text x="100" y="148" text-anchor="middle" font-size="9" fill="white">Charge solide</text>
+  <text x="100" y="162" text-anchor="middle" font-size="9" fill="white">× calibre grains</text>
+  <!-- Plateau droit -->
+  <rect x="350" y="110" width="100" height="50" rx="4" fill="#2E7D32" opacity="0.8"/>
+  <text x="400" y="132" text-anchor="middle" font-size="10" fill="white" font-weight="bold">Ql × S</text>
+  <text x="400" y="148" text-anchor="middle" font-size="9" fill="white">Débit liquide</text>
+  <text x="400" y="162" text-anchor="middle" font-size="9" fill="white">× pente</text>
+  <!-- Équilibre -->
+  <text x="250" y="100" text-anchor="middle" font-size="14" fill="#555">⚖</text>
+  <!-- Perturbations -->
+  <text x="100" y="172" text-anchor="middle" font-size="8" fill="#B71C1C">↑ barrage → ↓Qs → incision</text>
+  <text x="400" y="172" text-anchor="middle" font-size="8" fill="#B71C1C">↑ urbanisation → ↑Ql → érosion</text>
+</svg>`,
+                      texte: 'La balance de Lane : Qs × D50 ∝ Ql × S (charge sédimentaire × calibre ∝ débit × pente). Toute perturbation d\'un terme entraîne un rééquilibrage. Exemple : un barrage réduit Qs → le cours d\'eau aval s\'incise pour récupérer les sédiments manquants (rivière "affamée"). Un recalibrage augmente Ql et S → érosion accélérée, jusqu\'au nouvel équilibre. Source : Lane E.W., 1955 ; Liébault F., Implication des dynamiques hydro-sédimentaires dans la gestion des cours d\'eau, IRSTEA, 2012.'
+                    }
+                  ],
+                  points: [
+                    'Tout aménagement modifie l\'équilibre morphologique en amont ET en aval',
+                    'Incision : manque de sédiments (barrage, extraction) → approfondissement du lit',
+                    'Exhaussement : excès de sédiments (reforestation, érosion agricole) → comblement',
+                    'Le transit sédimentaire doit être restauré pour retrouver l\'équilibre',
+                    'La granulométrie D50 (médiane) caractérise le calibre des sédiments du fond'
+                  ],
+                  formules: [
+                    { nom: 'Débit sédimentaire (Meyer-Peter-Müller)', expr: 'Qs = 8 × (θ − θc)^1,5 × √(g×(s-1)×D50³)', unite: 'm²/s (débit solide volumique)', detail: 'θ = contrainte de Shields adimensionnelle, θc ≈ 0,047 (seuil de mise en mouvement), s = ρs/ρ ≈ 2,65' }
+                  ],
+                  retenir: 'La morphologie fluviale n\'est pas statique. Tout travaux GEMAPI doit intégrer une analyse de la dynamique sédimentaire pour éviter de créer des problèmes en amont ou en aval du site d\'intervention.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce que l\'incision d\'un cours d\'eau et quelles en sont les causes ?', r: 'Approfondissement progressif du lit mineur par érosion. Causes : barrage (piégeage sédiments), extraction de granulats, recalibrage (augmentation de la pente effective), urbanisation (augmentation des débits de pointe).' },
+                  { q: 'Qu\'est-ce que D50 en granulométrie ?', r: 'Diamètre médian des sédiments : 50 % des grains en masse sont inférieurs à D50. Caractérise le calibre dominant du fond du lit. Galets de rivière alpine : D50 = 50–200 mm ; sables de plaine : D50 = 0,1–2 mm.' }
+                ],
+                exercices: []
+              },
+              {
+                id: 'gemapi-n3-m1-c4',
+                titre: 'Ouvrages hydrauliques : digues, seuils, passes à poissons',
+                fiche: {
+                  intro: 'Les ouvrages hydrauliques sont les éléments construits qui interagissent avec l\'écoulement. En GEMAPI, la connaissance des principaux types d\'ouvrages est indispensable pour leur gestion, leur surveillance et leur entretien. Source : CEREMA, Digues fluviales, guide de gestion, 2020 ; Guide passes à poissons, ONEMA/OFB, 2014.',
+                  sections: [
+                    {
+                      titre: 'Anatomie d\'une digue fluviale',
+                      schema: `<svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="200" rx="6" fill="#E3F2FD"/>
+  <text x="250" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#0D47A1">Anatomie d'une digue fluviale — Coupe transversale</text>
+  <!-- Sol naturel -->
+  <rect x="0" y="160" width="500" height="40" fill="#8D6E63" opacity="0.4"/>
+  <text x="250" y="188" text-anchor="middle" font-size="9" fill="#4E342E">Sol naturel (terrain naturel)</text>
+  <!-- Corps de la digue -->
+  <polygon points="60,160 140,80 360,80 440,160" fill="#78909C" opacity="0.85"/>
+  <!-- Étanchéité masque amont -->
+  <polygon points="60,160 70,160 145,80 140,80" fill="#1565C0" opacity="0.6"/>
+  <text x="40" y="128" font-size="8" fill="#0D47A1">Masque</text>
+  <text x="40" y="140" font-size="8" fill="#0D47A1">étanche</text>
+  <!-- Labels -->
+  <text x="250" y="100" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Corps de digue</text>
+  <text x="250" y="115" text-anchor="middle" font-size="9" fill="#ECEFF1">(remblai compacté)</text>
+  <!-- Crête -->
+  <line x1="140" y1="80" x2="360" y2="80" stroke="white" stroke-width="2" stroke-dasharray="5,2"/>
+  <text x="250" y="75" text-anchor="middle" font-size="9" fill="#0D47A1">← Crête (chemin de service) →</text>
+  <!-- Niveaux -->
+  <line x1="50" y1="100" x2="130" y2="100" stroke="#42A5F5" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="25" y="103" font-size="8" fill="#1565C0">NNE</text>
+  <!-- Talus côté eau -->
+  <text x="100" y="148" text-anchor="middle" font-size="8" fill="#0D47A1">Talus côté eau</text>
+  <!-- Talus côté val -->
+  <text x="390" y="148" text-anchor="middle" font-size="8" fill="#E65100">Talus côté val</text>
+  <!-- Pied côté val -->
+  <text x="430" y="172" font-size="8" fill="#E65100">Fossé drainage</text>
+  <!-- Fruit -->
+  <text x="130" y="175" font-size="8" fill="#555">Fruit amont 1:2</text>
+  <text x="340" y="175" font-size="8" fill="#555">Fruit aval 1:2,5</text>
+</svg>`,
+                      texte: 'Une digue est un ouvrage linéaire en remblai destiné à contenir les crues. Ses éléments constitutifs : crête (chemin de service + fruit), talus côté eau (exposition à l\'érosion), talus côté val (exposition aux sous-pressions), masque amont ou noyau étanche, fossé de pied de digue côté val (collecte des infiltrations). Les pathologies principales : érosion externe (batillage, surverse), renard hydraulique (piping), glissement de talus. Source : CEREMA, Digues fluviales — Guide de gestion, 2020.'
+                    },
+                    {
+                      titre: 'Passes à poissons : principaux types',
+                      schema: `<svg viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="160" rx="6" fill="#E8F5E9"/>
+  <text x="250" y="16" text-anchor="middle" font-size="11" font-weight="bold" fill="#1B5E20">Principaux types de passes à poissons</text>
+  <!-- Passe bassins -->
+  <rect x="5" y="24" width="115" height="128" rx="5" fill="white" stroke="#43A047" stroke-width="1.5"/>
+  <text x="62" y="42" text-anchor="middle" font-size="9" font-weight="bold" fill="#2E7D32">Bassins successifs</text>
+  <text x="62" y="95" text-anchor="middle" font-size="28">🪜</text>
+  <text x="62" y="120" text-anchor="middle" font-size="8" fill="#555">Échancrures ou</text>
+  <text x="62" y="132" text-anchor="middle" font-size="8" fill="#555">cloisons. Énergie</text>
+  <text x="62" y="144" text-anchor="middle" font-size="8" fill="#555">dissipée par bassins</text>
+  <!-- Passe fentes -->
+  <rect x="127" y="24" width="115" height="128" rx="5" fill="white" stroke="#43A047" stroke-width="1.5"/>
+  <text x="184" y="42" text-anchor="middle" font-size="9" font-weight="bold" fill="#2E7D32">Fentes verticales</text>
+  <text x="184" y="95" text-anchor="middle" font-size="28">🌊</text>
+  <text x="184" y="120" text-anchor="middle" font-size="8" fill="#555">Fente de 0,15–0,30m</text>
+  <text x="184" y="132" text-anchor="middle" font-size="8" fill="#555">Convient salmonidés</text>
+  <text x="184" y="144" text-anchor="middle" font-size="8" fill="#555">et cyprinidés</text>
+  <!-- Rivière contournement -->
+  <rect x="249" y="24" width="115" height="128" rx="5" fill="white" stroke="#43A047" stroke-width="1.5"/>
+  <text x="306" y="36" text-anchor="middle" font-size="9" font-weight="bold" fill="#2E7D32">Rivière de</text>
+  <text x="306" y="48" text-anchor="middle" font-size="9" font-weight="bold" fill="#2E7D32">contournement</text>
+  <text x="306" y="95" text-anchor="middle" font-size="28">🌿</text>
+  <text x="306" y="120" text-anchor="middle" font-size="8" fill="#555">Bras naturalisé</text>
+  <text x="306" y="132" text-anchor="middle" font-size="8" fill="#555">Haute valeur</text>
+  <text x="306" y="144" text-anchor="middle" font-size="8" fill="#555">écologique</text>
+  <!-- Ascenseur -->
+  <rect x="371" y="24" width="124" height="128" rx="5" fill="white" stroke="#43A047" stroke-width="1.5"/>
+  <text x="433" y="42" text-anchor="middle" font-size="9" font-weight="bold" fill="#2E7D32">Ascenseur à poissons</text>
+  <text x="433" y="95" text-anchor="middle" font-size="28">🛗</text>
+  <text x="433" y="120" text-anchor="middle" font-size="8" fill="#555">Grands barrages</text>
+  <text x="433" y="132" text-anchor="middle" font-size="8" fill="#555">H > 10 m</text>
+  <text x="433" y="144" text-anchor="middle" font-size="8" fill="#555">Entretien élevé</text>
+</svg>`,
+                      texte: 'Les passes à poissons sont obligatoires sur tout nouvel ouvrage (art. L.214-17 CE) et doivent être rétroactivement installées sur les ouvrages existants classés en liste 1 ou 2. Le débit de fonctionnement de la passe doit représenter 1 à 5 % du débit moyen interannuel (module). La vitesse dans la fente ne doit pas excéder 1,5 à 2,0 m/s pour permettre le passage des salmonidés. Source : Guide passes à poissons, ONEMA/OFB, 2014 ; Art. L.214-17 CE.'
+                    }
+                  ],
+                  points: [
+                    'Toute digue doit faire l\'objet d\'une surveillance régulière (visite annuelle + après crue)',
+                    'Décret digues du 12/05/2015 : classement en 3 catégories A, B, C selon le niveau de risque',
+                    'Catégorie A : hauteur > 1 m et population protégée > 50 000 hab — études de dangers obligatoires',
+                    'Passes à poissons : obligatoires sur ouvrages classés en liste 1 et 2 de l\'art. L.214-17 CE',
+                    'La rivière de contournement est la solution la plus efficace biologiquement mais la plus coûteuse'
+                  ],
+                  formules: [
+                    { nom: 'Débit de la passe à poissons', expr: 'Q_passe = (1 à 5%) × Q_mod', unite: 'm³/s', detail: 'Q_mod = débit moyen interannuel (module) en m³/s. Source : guide ONEMA 2014.' }
+                  ],
+                  retenir: 'La gestion des ouvrages hydrauliques est une responsabilité majeure de l\'EPCI-FP GEMAPI. Elle implique une surveillance régulière, des études de dangers pour les ouvrages classés, et la mise en conformité sur la continuité écologique.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce que le "piping" ou renard hydraulique ?', r: 'Érosion interne progressive dans le corps ou la fondation d\'une digue, créée par des infiltrations concentrées. Le flux d\'eau entraîne des particules fines et creuse un chenal (renard) pouvant conduire à la rupture soudaine de la digue. Principal mécanisme de rupture des digues en France.' },
+                  { q: 'Qu\'impose le classement d\'un ouvrage en liste 1 de l\'art. L.214-17 CE ?', r: 'L\'interdiction de tout nouvel obstacle à la continuité écologique (migration des espèces et transit sédimentaire). Les ouvrages existants en liste 1 doivent assurer le libre passage des poissons (passe à poissons ou arasement).' }
+                ],
+                exercices: []
+              }
+            ]
+          },
+          {
+            id: 'gemapi-n3-m2',
+            name: 'Prévention des inondations : outils réglementaires',
+            ico: '🛡️',
+            color: '#B71C1C',
+            colorl: '#FFEBEE',
+            chapitres: [
+              {
+                id: 'gemapi-n3-m2-c1',
+                titre: 'Le PPRi — Plan de Prévention des Risques inondation',
+                fiche: {
+                  intro: 'Le Plan de Prévention des Risques inondation (PPRi) est l\'outil réglementaire central de la gestion du risque inondation en France. Il délimite les zones exposées et fixe des règles d\'urbanisme. Source : Loi Barnier du 02/02/1995 ; Art. L.562-1 CE ; Decret du 05/10/1995 ; Circulaire du 24/04/1996 ; Guide méthodologique PPRi, DGPR, 2014.',
+                  sections: [
+                    {
+                      titre: 'Structure et portée juridique du PPRi',
+                      schema: `<svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="200" rx="6" fill="#FFEBEE"/>
+  <text x="250" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#B71C1C">Structure du PPRi — Loi Barnier 02/02/1995</text>
+  <!-- 3 documents -->
+  <rect x="5" y="28" width="155" height="162" rx="6" fill="white" stroke="#EF9A9A" stroke-width="1.5"/>
+  <text x="82" y="48" text-anchor="middle" font-size="10" font-weight="bold" fill="#B71C1C">📄 Note de présentation</text>
+  <text x="82" y="66" text-anchor="middle" font-size="9" fill="#555">Contexte, aléas,</text>
+  <text x="82" y="80" text-anchor="middle" font-size="9" fill="#555">enjeux, historique</text>
+  <text x="82" y="96" text-anchor="middle" font-size="9" fill="#555">des inondations</text>
+  <text x="82" y="116" text-anchor="middle" font-size="8" fill="#777">Documents cartographiques :</text>
+  <text x="82" y="130" text-anchor="middle" font-size="8" fill="#777">— Carte des aléas</text>
+  <text x="82" y="144" text-anchor="middle" font-size="8" fill="#777">— Carte des enjeux</text>
+  <text x="82" y="158" text-anchor="middle" font-size="8" fill="#777">Non opposables</text>
+  <rect x="172" y="28" width="155" height="162" rx="6" fill="white" stroke="#EF9A9A" stroke-width="1.5"/>
+  <text x="249" y="48" text-anchor="middle" font-size="10" font-weight="bold" fill="#B71C1C">🗺️ Plan de zonage</text>
+  <text x="249" y="66" text-anchor="middle" font-size="9" fill="#555">Zone ROUGE : aléa fort</text>
+  <text x="249" y="80" text-anchor="middle" font-size="9" fill="#E65100">→ Constructibilité interdite</text>
+  <text x="249" y="100" text-anchor="middle" font-size="9" fill="#555">Zone BLEUE : aléa modéré</text>
+  <text x="249" y="114" text-anchor="middle" font-size="9" fill="#1565C0">→ Construction sous conditions</text>
+  <text x="249" y="134" text-anchor="middle" font-size="9" fill="#555">Zone VERTE : champ expan.</text>
+  <text x="249" y="148" text-anchor="middle" font-size="9" fill="#2E7D32">→ Préservation lit majeur</text>
+  <text x="249" y="168" text-anchor="middle" font-size="8" fill="#C62828" font-weight="bold">Annexé au PLU (OPPOSABLE)</text>
+  <rect x="339" y="28" width="155" height="162" rx="6" fill="white" stroke="#EF9A9A" stroke-width="1.5"/>
+  <text x="416" y="48" text-anchor="middle" font-size="10" font-weight="bold" fill="#B71C1C">📋 Règlement</text>
+  <text x="416" y="68" text-anchor="middle" font-size="9" fill="#555">Interdictions et</text>
+  <text x="416" y="82" text-anchor="middle" font-size="9" fill="#555">prescriptions</text>
+  <text x="416" y="96" text-anchor="middle" font-size="9" fill="#555">par zone</text>
+  <text x="416" y="116" text-anchor="middle" font-size="9" fill="#555">Ex. : surélévation</text>
+  <text x="416" y="130" text-anchor="middle" font-size="9" fill="#555">du plancher, matériaux</text>
+  <text x="416" y="145" text-anchor="middle" font-size="9" fill="#555">résistants à l'eau</text>
+  <text x="416" y="165" text-anchor="middle" font-size="8" fill="#C62828" font-weight="bold">Valeur de servitude</text>
+</svg>`,
+                      texte: 'Le PPRi est prescrit par le préfet, élaboré par la DDT(M), soumis à enquête publique et approuvé par arrêté préfectoral. Il vaut servitude d\'utilité publique et est annexé au PLU. Non-respect du PPRi → refus de permis de construire. La crue de référence du PPRi est la plus forte crue connue et, si celle-ci est inférieure à la crue centennale (Q100), c\'est la Q100 qui s\'applique. Source : Art. L.562-1 à L.562-9 CE ; Guide PPRi, DGPR, 2014.'
+                    }
+                  ],
+                  points: [
+                    'Le PPRi est prescrit et approuvé par le préfet (État), pas par la commune',
+                    'Vaut servitude d\'utilité publique annexée au PLU (opposable aux tiers)',
+                    'Crue de référence : la plus forte connue, et au minimum Q100',
+                    'Zone rouge : inconstructible en général (sauf exception justifiée)',
+                    'Les biens assurables dans les zones PPRi bénéficient du régime Cat-Nat (CCH art. L.125-1)'
+                  ],
+                  formules: [],
+                  retenir: 'Le PPRi est l\'outil réglementaire clé pour la prévention des inondations. Il contraint l\'urbanisme en zone inondable et doit être compatible avec les SCOT et PLU. La GEMAPI contribue à la réduction de l\'aléa (travaux de protection) mais ne peut pas modifier le PPRi.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qui prescrit et approuve le PPRi ?', r: 'Le préfet de département prescrit et approuve le PPRi. Il est élaboré par les services de l\'État (DDT/DDTM), avec concertation des collectivités et enquête publique. Source : Art. L.562-1 CE.' },
+                  { q: 'Quelle est la crue de référence utilisée dans un PPRi ?', r: 'La plus forte crue connue, et au minimum la crue centennale (Q100). Si la plus forte crue connue a une période de retour < 100 ans, c\'est Q100 qui est utilisée.' }
+                ],
+                exercices: []
+              },
+              {
+                id: 'gemapi-n3-m2-c2',
+                titre: 'Les PAPI — Programmes d\'Actions de Prévention des Inondations',
+                fiche: {
+                  intro: 'Le Programme d\'Actions de Prévention des Inondations (PAPI) est un outil contractuel entre l\'État et une collectivité pour financer un programme intégré de réduction du risque inondation. Il est structuré en 7 axes. Source : Circulaire PAPI du 26/10/2011 révisée 2017 ; Cahier des charges PAPI 3, DGPR, 2021.',
+                  sections: [
+                    {
+                      titre: 'Les 7 axes du PAPI',
+                      schema: `<svg viewBox="0 0 500 210" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="210" rx="6" fill="#E3F2FD"/>
+  <text x="250" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="#0D47A1">7 Axes du PAPI — Cahier des charges 2021</text>
+  <!-- 7 axes en grille -->
+  <rect x="5" y="26" width="152" height="55" rx="5" fill="#1565C0" opacity="0.9"/>
+  <text x="81" y="44" text-anchor="middle" font-size="9" font-weight="bold" fill="white">① Connaissance des aléas</text>
+  <text x="81" y="58" text-anchor="middle" font-size="8" fill="#BBDEFB">Études hydro, modélisation,</text>
+  <text x="81" y="70" text-anchor="middle" font-size="8" fill="#BBDEFB">cartographie des crues</text>
+  <rect x="174" y="26" width="152" height="55" rx="5" fill="#1565C0" opacity="0.9"/>
+  <text x="250" y="44" text-anchor="middle" font-size="9" font-weight="bold" fill="white">② Surveillance, prévision</text>
+  <text x="250" y="58" text-anchor="middle" font-size="8" fill="#BBDEFB">Réseau hydro, SCHAPI,</text>
+  <text x="250" y="70" text-anchor="middle" font-size="8" fill="#BBDEFB">systèmes d'alerte locaux</text>
+  <rect x="343" y="26" width="152" height="55" rx="5" fill="#1565C0" opacity="0.9"/>
+  <text x="419" y="44" text-anchor="middle" font-size="9" font-weight="bold" fill="white">③ Sensibilisation, info</text>
+  <text x="419" y="58" text-anchor="middle" font-size="8" fill="#BBDEFB">Dossiers d'infos, DICRIM,</text>
+  <text x="419" y="70" text-anchor="middle" font-size="8" fill="#BBDEFB">exercices de crise</text>
+  <rect x="5" y="92" width="152" height="55" rx="5" fill="#1976D2" opacity="0.9"/>
+  <text x="81" y="110" text-anchor="middle" font-size="9" font-weight="bold" fill="white">④ Prépa. gestion de crise</text>
+  <text x="81" y="124" text-anchor="middle" font-size="8" fill="#BBDEFB">PCS, DICRIM, exercices,</text>
+  <text x="81" y="136" text-anchor="middle" font-size="8" fill="#BBDEFB">refuges, évacuation</text>
+  <rect x="174" y="92" width="152" height="55" rx="5" fill="#1976D2" opacity="0.9"/>
+  <text x="250" y="110" text-anchor="middle" font-size="9" font-weight="bold" fill="white">⑤ Milieu naturel</text>
+  <text x="250" y="124" text-anchor="middle" font-size="8" fill="#BBDEFB">Entretien cours d'eau,</text>
+  <text x="250" y="136" text-anchor="middle" font-size="8" fill="#BBDEFB">zones humides, ZEC</text>
+  <rect x="343" y="92" width="152" height="55" rx="5" fill="#1976D2" opacity="0.9"/>
+  <text x="419" y="110" text-anchor="middle" font-size="9" font-weight="bold" fill="white">⑥ Ralentissement dynamique</text>
+  <text x="419" y="124" text-anchor="middle" font-size="8" fill="#BBDEFB">Zones expansion crues,</text>
+  <text x="419" y="136" text-anchor="middle" font-size="8" fill="#BBDEFB">barrages écrêteurs</text>
+  <rect x="174" y="157" width="152" height="44" rx="5" fill="#0D47A1" opacity="0.95"/>
+  <text x="250" y="174" text-anchor="middle" font-size="9" font-weight="bold" fill="white">⑦ Protection des lieux habités</text>
+  <text x="250" y="188" text-anchor="middle" font-size="8" fill="#BBDEFB">Digues, batardeaux,</text>
+  <text x="250" y="200" text-anchor="middle" font-size="8" fill="#BBDEFB">réduction vulnérabilité bâtis</text>
+</svg>`,
+                      texte: 'Le PAPI est une labellisation par une commission nationale (ou régionale pour les "petits PAPI" < 3 M€). Il doit couvrir un bassin versant cohérent et intégrer une vision globale des 7 axes. La majorité des financements État (fonds Barnier) passent par le PAPI. Taux de subvention : jusqu\'à 50 % pour les études, 40 % pour les travaux (axes 1-6), 25-40 % pour les digues (axe 7). Source : Cahier des charges PAPI 3, DGPR, 2021 ; Fonds Barnier (FPRNM).'
+                    }
+                  ],
+                  points: [
+                    'PAPI I (2002-2012) → PAPI II (2011-2018) → PAPI 3 (depuis 2021)',
+                    'Labellisation par COPRNM (Commission des Partenaires du FPRNM) pour les PAPI > 3 M€',
+                    'Durée d\'un PAPI : 6 ans en général, renouvelable',
+                    'L\'axe 7 (digues) est le plus coûteux mais aussi le plus subventionné',
+                    'En 2023, environ 100 PAPI sont en cours sur le territoire national'
+                  ],
+                  formules: [],
+                  retenir: 'Le PAPI est l\'outil de planification et de financement de référence pour la prévention des inondations. Sa labellisation est conditionnée à une approche intégrée (les 7 axes) et à un portage par un EPCI-FP ou EPTB.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce qu\'une Zone d\'Expansion de Crue (ZEC) ?', r: 'Espace naturel ou agricole que la crue peut occuper temporairement, permettant l\'écrêtement du débit de pointe. Préservées dans les PPRi et PAPI (axe 6). Chaque ha de ZEC peut stocker 1 000 à 10 000 m³ selon la morphologie.' },
+                  { q: 'Quel fonds finance les PAPI ?', r: 'Le Fonds de Prévention des Risques Naturels Majeurs (FPRNM), dit "Fonds Barnier", créé par la loi Barnier de 1995. Il est alimenté par un prélèvement sur les primes d\'assurance contre les catastrophes naturelles.' }
+                ],
+                exercices: []
+              },
+              {
+                id: 'gemapi-n3-m2-c3',
+                titre: 'TRI, SLGRI et PGRI : la directive Inondation',
+                fiche: {
+                  intro: 'La Directive Inondation (2007/60/CE) a introduit de nouveaux outils de planification : les TRI (Territoires à Risque Important d\'inondation), les SLGRI (Stratégies Locales de Gestion du Risque Inondation) et les PGRI (Plans de Gestion des Risques d\'Inondation). Source : Directive 2007/60/CE ; Arrêté du 02/03/2016 sur les TRI ; Art. L.566-1 à L.566-13 CE.',
+                  sections: [
+                    {
+                      titre: 'Hiérarchie des documents DI',
+                      schema: `<svg viewBox="0 0 500 170" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="170" rx="6" fill="#FFF3E0"/>
+  <text x="250" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#E65100">Directive Inondation 2007/60/CE — Outils de planification</text>
+  <!-- Pyramide -->
+  <!-- PGRI -->
+  <polygon points="250,28 160,70 340,70" fill="#B71C1C" opacity="0.9"/>
+  <text x="250" y="54" text-anchor="middle" font-size="10" fill="white" font-weight="bold">PGRI</text>
+  <!-- SLGRI -->
+  <polygon points="160,75 100,120 400,120" fill="#E65100" opacity="0.85"/>
+  <text x="250" y="103" text-anchor="middle" font-size="10" fill="white" font-weight="bold">SLGRI (par TRI)</text>
+  <!-- TRI -->
+  <polygon points="100,125 50,165 450,165" fill="#FF8F00" opacity="0.8"/>
+  <text x="250" y="150" text-anchor="middle" font-size="10" fill="white" font-weight="bold">TRI — Cartes des surfaces inondables (CSI)</text>
+  <!-- Labels -->
+  <text x="430" y="55" font-size="9" fill="#B71C1C">Échelle bassin</text>
+  <text x="430" y="70" font-size="9" fill="#B71C1C">6 ans (2016-2021)</text>
+  <text x="430" y="105" font-size="9" fill="#E65100">Échelle TRI</text>
+  <text x="430" y="120" font-size="9" fill="#E65100">Objectifs cibles</text>
+  <text x="430" y="148" font-size="9" fill="#E65100">122 TRI en France</text>
+</svg>`,
+                      texte: 'La France compte 122 TRI identifiés par arrêté préfectoral. Pour chaque TRI, des Cartes des Surfaces Inondables (CSI) sont établies pour 3 scénarios : événement fréquent (T=10 à 30 ans), moyen (T=100 à 300 ans), extrême (T=1000 ans). La SLGRI fixe des objectifs de réduction du risque et des dispositions à mettre en œuvre. Le PGRI est établi à l\'échelle du bassin hydrographique et est compatible avec le SDAGE. Source : Art. L.566-7 CE ; Arrêté du 02/03/2016.'
+                    }
+                  ],
+                  points: [
+                    '122 TRI identifiés en France par arrêté du 26/11/2012 et mis à jour le 02/03/2016',
+                    '3 scénarios par TRI : fréquent (Q10-Q30), moyen (Q100-Q300), extrême (Q1000)',
+                    'PGRI : 6 plans pour les 6 bassins métropolitains, cycle 6 ans, compatible avec SDAGE',
+                    'La SLGRI est portée par l\'EPCI-FP ou l\'EPTB — elle décline les objectifs PGRI localement',
+                    'Les PAPI doivent être compatibles avec les SLGRI'
+                  ],
+                  formules: [],
+                  retenir: 'TRI → CSI → SLGRI → PAPI : c\'est la chaîne de planification Directive Inondation. La SLGRI est l\'équivalent local du PGRI, adaptée aux enjeux du territoire à risque identifié.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce qu\'un TRI ?', r: 'Territoire à Risque Important d\'inondation. Zone où les enjeux humains, économiques ou environnementaux exposés aux inondations sont significatifs à l\'échelle du bassin. 122 TRI identifiés en France (arrêté 2012 mis à jour 2016).' },
+                  { q: 'Quelle est la différence entre PAPI et SLGRI ?', r: 'La SLGRI est un document de planification stratégique fixant des objectifs (compatible avec le PGRI). Le PAPI est un programme d\'actions opérationnel contractualisé avec l\'État pour obtenir des financements. Le PAPI doit être compatible avec la SLGRI.' }
+                ],
+                exercices: []
+              },
+              {
+                id: 'gemapi-n3-m2-c4',
+                titre: 'Digues : réglementation et responsabilité (décret 2015)',
+                fiche: {
+                  intro: 'Le décret du 12 mai 2015 (art. R.214-112 à R.214-147 CE) a réformé la réglementation des digues et barrages. Il classe les ouvrages en 4 catégories (A, B, C, D) et impose des obligations de surveillance proportionnées au risque. Source : Décret n°2015-526 du 12/05/2015 ; CEREMA, Digues fluviales — Guide de surveillance, 2016.',
+                  sections: [
+                    {
+                      titre: 'Classement des ouvrages hydrauliques',
+                      schema: `<svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="180" rx="6" fill="#FFEBEE"/>
+  <text x="250" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#B71C1C">Classement des ouvrages — Décret 12/05/2015</text>
+  <!-- En-têtes -->
+  <rect x="5" y="26" width="70" height="145" rx="4" fill="#EF9A9A" opacity="0.5"/>
+  <text x="40" y="62" text-anchor="middle" font-size="9" font-weight="bold" fill="#B71C1C">Classe</text>
+  <rect x="80" y="26" width="100" height="145" rx="4" fill="#EF9A9A" opacity="0.3"/>
+  <text x="130" y="62" text-anchor="middle" font-size="9" font-weight="bold" fill="#B71C1C">Critères</text>
+  <rect x="185" y="26" width="120" height="145" rx="4" fill="#EF9A9A" opacity="0.3"/>
+  <text x="245" y="62" text-anchor="middle" font-size="9" font-weight="bold" fill="#B71C1C">Pop. protégée</text>
+  <rect x="310" y="26" width="180" height="145" rx="4" fill="#EF9A9A" opacity="0.3"/>
+  <text x="400" y="62" text-anchor="middle" font-size="9" font-weight="bold" fill="#B71C1C">Obligations</text>
+  <!-- Ligne A -->
+  <line x1="5" y1="72" x2="495" y2="72" stroke="#EF9A9A" stroke-width="1"/>
+  <text x="40" y="90" text-anchor="middle" font-size="12" font-weight="bold" fill="#B71C1C">A</text>
+  <text x="130" y="85" text-anchor="middle" font-size="8" fill="#555">H ≥ 1m et pop.</text>
+  <text x="130" y="98" text-anchor="middle" font-size="8" fill="#555">&gt; 50 000 hab</text>
+  <text x="245" y="90" text-anchor="middle" font-size="9" fill="#B71C1C">&gt; 50 000</text>
+  <text x="400" y="85" text-anchor="middle" font-size="8" fill="#555">Étude dangers, rev. 10 ans</text>
+  <text x="400" y="98" text-anchor="middle" font-size="8" fill="#555">Surveillance renforcée</text>
+  <!-- Ligne B -->
+  <line x1="5" y1="108" x2="495" y2="108" stroke="#EF9A9A" stroke-width="1"/>
+  <text x="40" y="125" text-anchor="middle" font-size="12" font-weight="bold" fill="#E65100">B</text>
+  <text x="130" y="120" text-anchor="middle" font-size="8" fill="#555">1 000 à 50 000 hab</text>
+  <text x="245" y="125" text-anchor="middle" font-size="9" fill="#E65100">1 000–50 000</text>
+  <text x="400" y="120" text-anchor="middle" font-size="8" fill="#555">Étude dangers, rev. 15 ans</text>
+  <text x="400" y="133" text-anchor="middle" font-size="8" fill="#555">Visite annuelle</text>
+  <!-- Ligne C -->
+  <line x1="5" y1="142" x2="495" y2="142" stroke="#EF9A9A" stroke-width="1"/>
+  <text x="40" y="158" text-anchor="middle" font-size="12" font-weight="bold" fill="#F57F17">C</text>
+  <text x="130" y="153" text-anchor="middle" font-size="8" fill="#555">10 à 1 000 hab</text>
+  <text x="245" y="158" text-anchor="middle" font-size="9" fill="#F57F17">10–1 000</text>
+  <text x="400" y="153" text-anchor="middle" font-size="8" fill="#555">Étude dangers, rev. 15 ans</text>
+  <text x="400" y="166" text-anchor="middle" font-size="8" fill="#555">Surveillance standard</text>
+  <!-- Ligne D -->
+  <line x1="5" y1="168" x2="495" y2="168" stroke="#EF9A9A" stroke-width="0.5"/>
+  <text x="40" y="178" text-anchor="middle" font-size="10" fill="#777">D</text>
+  <text x="130" y="178" text-anchor="middle" font-size="8" fill="#777">&lt; 10 hab</text>
+  <text x="245" y="178" text-anchor="middle" font-size="9" fill="#777">&lt; 10</text>
+  <text x="400" y="178" text-anchor="middle" font-size="8" fill="#777">Surveillance minimale</text>
+</svg>`,
+                      texte: 'Le classement détermine les obligations réglementaires. Les digues de classe A et B nécessitent une Étude de Danger (EDD) avec révision périodique, un dossier d\'organisation de la surveillance et de l\'exploitation (DOSE), et un document d\'information communal sur les risques majeurs (DICRIM). La responsabilité pénale du gestionnaire est engagée en cas de manquement grave (art. 223-1 du Code pénal : mise en danger d\'autrui). Source : Art. R.214-112 CE ; Décret 2015-526.'
+                    }
+                  ],
+                  points: [
+                    'Décret 2015-526 du 12/05/2015 → Art. R.214-112 à R.214-147 CE',
+                    'Classe A : H ≥ 1m et pop. protégée > 50 000 hab → étude de danger tous les 10 ans',
+                    'Classe B : 1 000 à 50 000 hab protégés → étude de danger tous les 15 ans',
+                    'Toute rupture de digue causant des dommages engage la responsabilité civile ET pénale du propriétaire',
+                    'L\'EPCI-FP GEMAPI est responsable des digues transférées depuis les communes'
+                  ],
+                  formules: [],
+                  retenir: 'Le classement d\'une digue entraîne des obligations lourdes (études de dangers, surveillance). Avant de reprendre la gestion d\'un ouvrage, l\'EPCI-FP doit impérativement connaître son classement et ses obligations associées. Un diagnostic préalable est indispensable.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce qu\'une Étude de Dangers (EDD) pour une digue ?', r: 'Document technique obligatoire pour les digues A, B et C. Analyse les scénarios d\'accident (rupture, surverse), la probabilité et les conséquences. Doit être révisée tous les 10 ans (A) ou 15 ans (B/C). Réalisée par un bureau d\'études agréé.' },
+                  { q: 'Quelle est la responsabilité pénale du gestionnaire d\'une digue ?', r: 'Art. 223-1 du Code pénal : "mise en danger délibérée d\'autrui" si le gestionnaire ne respecte pas ses obligations de surveillance/entretien et qu\'un accident survient. Peine : 1 an emprisonnement et 15 000 € amende. Possible mise en cause personnelle du directeur de service.' }
+                ],
+                exercices: []
+              }
+            ]
+          },
+          {
+            id: 'gemapi-n3-m3',
+            name: 'Gouvernance, financement et gestion de crise',
+            ico: '🏛️',
+            color: '#6A1B9A',
+            colorl: '#F3E5F5',
+            chapitres: [
+              {
+                id: 'gemapi-n3-m3-c1',
+                titre: 'Gouvernance de la GEMAPI : EPCI-FP, EPTB, EPAGE',
+                fiche: {
+                  intro: 'Depuis le 1er janvier 2018, la compétence GEMAPI appartient obligatoirement aux EPCI-FP (communautés de communes, d\'agglomération, urbaines, métropoles). Ils peuvent la déléguer à des structures intercommunales : EPTB (à l\'échelle du bassin) ou EPAGE (à l\'échelle du sous-bassin). Source : Art. L.5211-9-2, L.213-12 CE ; Circulaire 22/07/2021.',
+                  sections: [
+                    {
+                      titre: 'Architecture de la gouvernance GEMAPI',
+                      schema: `<svg viewBox="0 0 500 250" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="250" rx="6" fill="#F3E5F5"/>
+  <text x="250" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#4A148C">Architecture de la gouvernance GEMAPI</text>
+  <defs>
+    <marker id="arr3" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <polygon points="0 0,7 2.5,0 5" fill="#6A1B9A"/>
+    </marker>
+  </defs>
+  <!-- ÉTAT -->
+  <rect x="190" y="25" width="120" height="28" rx="4" fill="#4A148C"/>
+  <text x="250" y="44" text-anchor="middle" font-size="10" fill="white" font-weight="bold">ÉTAT / Préfet</text>
+  <!-- Comité de bassin -->
+  <rect x="150" y="75" width="200" height="28" rx="4" fill="#6A1B9A" opacity="0.85"/>
+  <text x="250" y="94" text-anchor="middle" font-size="9" fill="white">Comité de bassin — SDAGE</text>
+  <line x1="250" y1="53" x2="250" y2="75" stroke="#6A1B9A" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <!-- EPTB -->
+  <rect x="30" y="130" width="145" height="34" rx="4" fill="#7B1FA2" opacity="0.8"/>
+  <text x="102" y="148" text-anchor="middle" font-size="9" fill="white" font-weight="bold">EPTB</text>
+  <text x="102" y="162" text-anchor="middle" font-size="8" fill="#EDE7F6">Échelle bassin versant</text>
+  <!-- EPAGE -->
+  <rect x="325" y="130" width="145" height="34" rx="4" fill="#7B1FA2" opacity="0.8"/>
+  <text x="397" y="148" text-anchor="middle" font-size="9" fill="white" font-weight="bold">EPAGE</text>
+  <text x="397" y="162" text-anchor="middle" font-size="8" fill="#EDE7F6">Échelle sous-bassin</text>
+  <!-- Flèches vers EPTB/EPAGE -->
+  <line x1="250" y1="103" x2="102" y2="130" stroke="#6A1B9A" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <line x1="250" y1="103" x2="397" y2="130" stroke="#6A1B9A" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <!-- EPCI-FP -->
+  <rect x="120" y="200" width="260" height="34" rx="4" fill="#1565C0"/>
+  <text x="250" y="218" text-anchor="middle" font-size="10" fill="white" font-weight="bold">EPCI-FP (compétence GEMAPI)</text>
+  <text x="250" y="232" text-anchor="middle" font-size="8" fill="#BBDEFB">CC / CA / CU / Métropole</text>
+  <!-- Flèches depuis EPCI-FP -->
+  <line x1="180" y1="200" x2="130" y2="164" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr3)"/>
+  <line x1="320" y1="200" x2="370" y2="164" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr3)"/>
+  <text x="155" y="190" font-size="7" fill="#1565C0" transform="rotate(-35 155 190)">délégation</text>
+  <text x="340" y="188" font-size="7" fill="#1565C0" transform="rotate(35 340 188)">délégation</text>
+</svg>`,
+                      texte: 'Trois niveaux de gouvernance : (1) EPCI-FP — compétence GEMAPI obligatoire depuis le 01/01/2018. Peut déléguer tout ou partie à un EPTB ou EPAGE par convention. Responsable juridique même en cas de délégation. (2) EPAGE — Établissement Public d\'Aménagement et de Gestion des Eaux. Syndicat mixte fermé d\'EPCI-FP à l\'échelle d\'un sous-bassin cohérent. Exerce la compétence GEMAPI par transfert. (3) EPTB — Établissement Public Territorial de Bassin. Syndicat mixte ouvert. Coordonne à l\'échelle du bassin versant. Ne reçoit pas la compétence GEMAPI par défaut mais assure la cohérence. Source : Art. L.213-12 CE ; Circulaire DGCL 22/07/2021.'
+                    }
+                  ],
+                  points: [
+                    'L\'EPCI-FP est le seul détenteur de la compétence GEMAPI au 01/01/2018 — toute délégation laisse la responsabilité à l\'EPCI',
+                    'L\'EPAGE est un syndicat mixte FERMÉ (seuls des EPCI-FP peuvent en être membres)',
+                    'L\'EPTB est un syndicat mixte OUVERT (départements et régions peuvent y participer)',
+                    'La taxe GEMAPI est perçue par l\'EPCI-FP, qui la reverse en tout ou partie à l\'EPAGE ou l\'EPTB'
+                  ],
+                  formules: [],
+                  retenir: 'L\'architecture EPCI-FP → EPAGE → EPTB est une répartition de la maîtrise d\'ouvrage. L\'EPCI reste responsable. La bonne gouvernance GEMAPI repose sur la cohérence entre les périmètres administratifs et les bassins versants hydrographiques.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Quelle est la différence entre EPTB et EPAGE ?', r: 'EPTB : syndicat mixte ouvert, périmètre de bassin versant, coordination — ne reçoit pas la compétence GEMAPI par défaut. EPAGE : syndicat mixte FERMÉ (EPCI-FP uniquement), périmètre de sous-bassin, reçoit la compétence GEMAPI par délégation.' },
+                  { q: 'Qui peut percevoir la taxe GEMAPI ?', r: 'Uniquement l\'EPCI-FP, qui est détenteur de la compétence. Il peut ensuite reverser tout ou partie à son EPAGE ou EPTB selon convention. La taxe est plafonnée à 40 €/habitant/an et est facultative.' }
+                ],
+                exercices: []
+              },
+              {
+                id: 'gemapi-n3-m3-c2',
+                titre: 'Financement de la GEMAPI : taxe et subventions',
+                fiche: {
+                  intro: 'La GEMAPI représente un besoin de financement estimé à 3–4 milliards d\'euros par an à l\'échelle nationale. Les EPCI-FP disposent d\'un outil fiscal dédié : la taxe GEMAPI. Des subventions complètent le financement des investissements. Source : Rapport Davy/Dussolier, Sénat, 2019 ; FPRNM — Fonds Barnier, DGPR, 2023.',
+                  sections: [
+                    {
+                      titre: 'La taxe GEMAPI : fonctionnement et plafond',
+                      schema: `<svg viewBox="0 0 500 170" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="170" rx="6" fill="#EDE7F6"/>
+  <text x="250" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#4A148C">Taxe GEMAPI — Principales caractéristiques</text>
+  <rect x="15" y="28" width="220" height="130" rx="5" fill="white" stroke="#9C27B0" stroke-width="1.5"/>
+  <text x="125" y="48" text-anchor="middle" font-size="10" font-weight="bold" fill="#6A1B9A">Principe</text>
+  <text x="125" y="65" text-anchor="middle" font-size="9" fill="#333">Facultative (vote du conseil)</text>
+  <text x="125" y="80" text-anchor="middle" font-size="9" fill="#333">Affectée exclusivement GEMAPI</text>
+  <text x="125" y="95" text-anchor="middle" font-size="9" fill="#333">Collectée par les impôts locaux</text>
+  <text x="125" y="110" text-anchor="middle" font-size="9" fill="#333">(4 taxes foncières + TH + CFE)</text>
+  <text x="125" y="130" text-anchor="middle" font-size="10" font-weight="bold" fill="#B71C1C">Plafond</text>
+  <text x="125" y="148" text-anchor="middle" font-size="12" font-weight="bold" fill="#B71C1C">40 € / hab / an</text>
+  <rect x="265" y="28" width="220" height="130" rx="5" fill="white" stroke="#1565C0" stroke-width="1.5"/>
+  <text x="375" y="48" text-anchor="middle" font-size="10" font-weight="bold" fill="#1565C0">Subventions mobilisables</text>
+  <text x="375" y="65" text-anchor="middle" font-size="9" fill="#333">Agences de l'eau (30–50 %)</text>
+  <text x="375" y="80" text-anchor="middle" font-size="9" fill="#333">Fonds Barnier / FPRNM</text>
+  <text x="375" y="95" text-anchor="middle" font-size="9" fill="#333">État (contrats de plan)</text>
+  <text x="375" y="110" text-anchor="middle" font-size="9" fill="#333">Région (contrats territoriaux)</text>
+  <text x="375" y="125" text-anchor="middle" font-size="9" fill="#333">Département</text>
+  <text x="375" y="145" text-anchor="middle" font-size="8" fill="#666">PAPI labellisé : accès FPRNM</text>
+</svg>`,
+                      texte: 'La taxe GEMAPI (art. 1530 bis CGI) est facultative et votée par le conseil communautaire. Son produit est plafonné à l\'équivalent de 40 € par habitant et par an. Elle est répartie entre les contribuables locaux proportionnellement à leur cotisation foncière, taxe d\'habitation ou CFE. Elle doit être exclusivement affectée aux dépenses GEMAPI. Les EPCI utilisent en pratique 5 à 25 € par habitant en moyenne. Source : Art. 1530 bis CGI ; DGCL, Note sur la taxe GEMAPI, 2021.'
+                    }
+                  ],
+                  points: [
+                    'Taxe GEMAPI plafonnée à 40 €/hab/an (art. 1530 bis CGI) — facultative',
+                    'Fonds Barnier (FPRNM) : 50–80 % des travaux PAPI labellisés selon les axes',
+                    'Agence de l\'eau : 30–50 % des travaux de restauration des milieux',
+                    'Un plan de financement PAPI type : 40 % FPRNM + 20 % Agence eau + 20 % Région/Dpt + 20 % maîtrise d\'ouvrage'
+                  ],
+                  formules: [
+                    { nom: 'Recette taxe GEMAPI', expr: 'Recette = Taux × Population × Base fiscale', unite: '€/an', detail: 'Le taux est fixé par le conseil communautaire dans la limite du plafond de 40 €/habitant/an' }
+                  ],
+                  retenir: 'Sans taxe GEMAPI, les EPCI dépendent des subventions qui ne couvrent jamais 100 % des dépenses courantes. La taxe permet de financer l\'entretien annuel des ouvrages et des cours d\'eau, qui n\'est généralement pas subventionné.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce que le Fonds Barnier (FPRNM) ?', r: 'Fonds de Prévention des Risques Naturels Majeurs, créé par la loi Barnier (1995). Alimenté par un prélèvement de 12 % sur les primes d\'assurance CatNat. Finance les PAPI labellisés (jusqu\'à 50–80 % selon les axes), les études PPR, les expropriations en zone de risque.' }
+                ],
+                exercices: [
+                  {
+                    id: 'ex-gemapi-n3-m3-c2-1',
+                    titre: 'Construction d\'un plan de financement PAPI',
+                    source: 'Exercice formation GEMAPI — CNFPT, 2023',
+                    difficulte: 'moyen',
+                    enonce: 'Un EPAGE porte un programme PAPI avec un budget total de 2 400 000 €. Le programme comprend : axe 5 (réduction vulnérabilité bâtiments) pour 600 000 €, axe 6 (gestion des écoulements — ZEC) pour 1 200 000 €, axe 7 (ouvrages de protection — confortement digue) pour 600 000 €. Les taux FPRNM sont : axe 5 = 40 %, axe 6 = 50 %, axe 7 = 30 %. L\'agence de l\'eau finance 25 % des axes 5 et 6. Calculer la part restant à financer par les collectivités.',
+                    questions: [
+                      { q: 'Calculer la subvention FPRNM totale', r: 'Axe5: 600 000×0,40=240 000 € | Axe6: 1 200 000×0,50=600 000 € | Axe7: 600 000×0,30=180 000 € → FPRNM = 1 020 000 €', formule: 'Subvention = Budget axe × Taux FPRNM', calcul: '240 000 + 600 000 + 180 000 = 1 020 000 €' },
+                      { q: 'Calculer la subvention Agence de l\'eau', r: 'Axe5: 600 000×0,25=150 000 € | Axe6: 1 200 000×0,25=300 000 € → Agence = 450 000 €', formule: 'Subvention AE = Budget axe × 25 %', calcul: '150 000 + 300 000 = 450 000 €' },
+                      { q: 'Calculer le reste à charge des collectivités', r: 'Reste = 2 400 000 − 1 020 000 − 450 000 = 930 000 € (39 % du total)', formule: 'Reste = Budget total − FPRNM − Agence', calcul: '2 400 000 − 1 470 000 = 930 000 €' }
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'gemapi-n3-m3-c3',
+                titre: 'Gestion de crise inondation : organisation et outils',
+                fiche: {
+                  intro: 'La gestion de crise inondation implique une chaîne d\'acteurs — de l\'État aux communes — avec des outils et des procédures précis. Comprendre cette organisation permet aux gestionnaires GEMAPI d\'articuler leur surveillance et leurs interventions avec les dispositifs réglementaires. Source : DDRM (Dossier Départemental des Risques Majeurs) ; PCS (Plans Communaux de Sauvegarde) — Loi 2004-811 ; Vigicrues, Météo-France.',
+                  sections: [
+                    {
+                      titre: 'Séquence de gestion d\'une crise inondation',
+                      schema: `<svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="220" rx="6" fill="#FFF3E0"/>
+  <text x="250" y="16" text-anchor="middle" font-size="11" font-weight="bold" fill="#E65100">Séquence de gestion d'une crise inondation</text>
+  <defs>
+    <marker id="arr4" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <polygon points="0 0,7 2.5,0 5" fill="#E65100"/>
+    </marker>
+  </defs>
+  <!-- Flèche principale -->
+  <line x1="30" y1="110" x2="475" y2="110" stroke="#FFCC80" stroke-width="30" stroke-linecap="round"/>
+  <!-- Étapes -->
+  <circle cx="60" cy="110" r="22" fill="#1565C0"/>
+  <text x="60" y="107" text-anchor="middle" font-size="7" fill="white" font-weight="bold">Prévision</text>
+  <text x="60" y="118" text-anchor="middle" font-size="7" fill="white">Météo/Vigicrues</text>
+  <circle cx="140" cy="110" r="22" fill="#1976D2"/>
+  <text x="140" y="107" text-anchor="middle" font-size="7" fill="white" font-weight="bold">Surveillance</text>
+  <text x="140" y="118" text-anchor="middle" font-size="7" fill="white">niveaux</text>
+  <circle cx="220" cy="110" r="22" fill="#E65100"/>
+  <text x="220" y="107" text-anchor="middle" font-size="7" fill="white" font-weight="bold">Alerte</text>
+  <text x="220" y="118" text-anchor="middle" font-size="7" fill="white">COD/CODIS</text>
+  <circle cx="300" cy="110" r="22" fill="#C62828"/>
+  <text x="300" y="107" text-anchor="middle" font-size="7" fill="white" font-weight="bold">Activation</text>
+  <text x="300" y="118" text-anchor="middle" font-size="7" fill="white">PCS / ORSEC</text>
+  <circle cx="380" cy="110" r="22" fill="#880E4F"/>
+  <text x="380" y="107" text-anchor="middle" font-size="7" fill="white" font-weight="bold">Protection</text>
+  <text x="380" y="118" text-anchor="middle" font-size="7" fill="white">évacuation</text>
+  <circle cx="455" cy="110" r="22" fill="#4A148C"/>
+  <text x="455" y="107" text-anchor="middle" font-size="7" fill="white" font-weight="bold">REX</text>
+  <text x="455" y="118" text-anchor="middle" font-size="7" fill="white">retour exp.</text>
+  <!-- Labels haut -->
+  <text x="60" y="75" text-anchor="middle" font-size="8" fill="#1565C0">Avant la crue</text>
+  <text x="220" y="75" text-anchor="middle" font-size="8" fill="#E65100">Pendant</text>
+  <text x="380" y="75" text-anchor="middle" font-size="8" fill="#880E4F">Pic + décrue</text>
+  <text x="455" y="75" text-anchor="middle" font-size="8" fill="#4A148C">Après</text>
+  <!-- Labels bas -->
+  <text x="60" y="148" text-anchor="middle" font-size="7.5" fill="#555">Vigicrues</text>
+  <text x="140" y="148" text-anchor="middle" font-size="7.5" fill="#555">Hydrométristes</text>
+  <text x="220" y="148" text-anchor="middle" font-size="7.5" fill="#555">Préfet / maire</text>
+  <text x="300" y="148" text-anchor="middle" font-size="7.5" fill="#555">Services secours</text>
+  <text x="380" y="148" text-anchor="middle" font-size="7.5" fill="#555">Commune / EPCI</text>
+  <text x="455" y="148" text-anchor="middle" font-size="7.5" fill="#555">EPAGE/EPTB</text>
+</svg>`,
+                      texte: 'La séquence de gestion comprend : (1) Prévision — Météo-France (pluie) et SPC/SCHAPI (débit via Vigicrues, 4 niveaux : vert → jaune → orange → rouge). (2) Surveillance des niveaux — astreinte des services, suivi des échelles limnimétriques et capteurs en temps réel. (3) Alerte — déclenchée par le Préfet, remontée via le COD (Centre Opérationnel Départemental). (4) Activation des plans — PCS communal, plan ORSEC inondation. (5) Protection et évacuation — barrières mobiles, mise en sécurité des enjeux. (6) REX — retour d\'expérience obligatoire pour améliorer les procédures. Source : Loi 2004-811 ; SCHAPI, Guide Vigicrues, 2022.'
+                    }
+                  ],
+                  points: [
+                    'Vigicrues : 4 niveaux (vert / jaune / orange / rouge) sur les cours d\'eau surveillés par les SPC',
+                    'Le PCS (Plan Communal de Sauvegarde) est obligatoire pour les communes ayant un PPRi approuvé',
+                    'En cas de crue, la responsabilité de l\'alerte à la population appartient au Maire',
+                    'Le Retour d\'Expérience (REX) doit être organisé dans les 3 mois suivant l\'événement'
+                  ],
+                  formules: [],
+                  retenir: 'L\'EPAGE et l\'EPTB jouent un rôle clé dans la surveillance des cours d\'eau et la transmission d\'informations aux communes. Leur organisation de la surveillance en crue doit être documentée dans un PGSSE (Plan de Gestion de la Sécurité des Systèmes d\'Endiguement).',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce que le système Vigicrues et combien a-t-il de niveaux d\'alerte ?', r: 'Service national de prévision des crues piloté par le SCHAPI (Service Central d\'Hydrométéorologie). 4 niveaux : vert (pas de vigilance), jaune (risque de crue), orange (risque important), rouge (risque majeur). Disponible sur vigicrues.gouv.fr.' },
+                  { q: 'Qu\'est-ce qu\'un PCS et pour qui est-il obligatoire ?', r: 'Plan Communal de Sauvegarde (loi 2004-811). Obligatoire pour les communes dotées d\'un PPRi approuvé ou comprises dans un plan particulier d\'intervention (PPI). Définit l\'organisation communale de gestion de crise et les modalités d\'alerte de la population.' }
+                ],
+                exercices: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'gemapi-n4',
+        name: 'Niveau 4 — Expert : Restauration et gestion de projet',
+        matieres: [
+          {
+            id: 'gemapi-n4-m1',
+            name: 'Restauration écologique des cours d\'eau',
+            ico: '🌿',
+            color: '#1B5E20',
+            colorl: '#E8F5E9',
+            chapitres: [
+              {
+                id: 'gemapi-n4-m1-c1',
+                titre: 'Continuité écologique : réglementation et techniques',
+                fiche: {
+                  intro: 'La continuité écologique (CE) des cours d\'eau est définie par la libre circulation des espèces aquatiques et le bon transit sédimentaire (art. L.214-17 CE). Elle est au cœur de la restauration des milieux aquatiques depuis la LEMA de 2006. Source : Art. L.214-17 CE ; Arrêté du 09/06/2021 fixant les listes 1 et 2 ; Guide continuité, OFB, 2020.',
+                  sections: [
+                    {
+                      titre: 'Les listes 1 et 2 de l\'article L.214-17',
+                      schema: `<svg viewBox="0 0 500 170" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="170" rx="6" fill="#E8F5E9"/>
+  <text x="250" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="#1B5E20">Listes de classement des cours d'eau — Art. L.214-17 CE</text>
+  <!-- Liste 1 -->
+  <rect x="10" y="28" width="230" height="132" rx="6" fill="white" stroke="#43A047" stroke-width="2"/>
+  <text x="125" y="48" text-anchor="middle" font-size="11" font-weight="bold" fill="#1B5E20">🟢 Liste 1</text>
+  <text x="125" y="65" text-anchor="middle" font-size="9" fill="#333">Cours d'eau à préserver</text>
+  <text x="125" y="80" text-anchor="middle" font-size="9" fill="#333">(état naturel ou réservoirs bio)</text>
+  <text x="125" y="100" text-anchor="middle" font-size="9" font-weight="bold" fill="#C62828">→ Aucun nouvel obstacle</text>
+  <text x="125" y="116" text-anchor="middle" font-size="9" fill="#555">Les ouvrages existants doivent</text>
+  <text x="125" y="130" text-anchor="middle" font-size="9" fill="#555">assurer le passage des poissons</text>
+  <text x="125" y="146" text-anchor="middle" font-size="9" fill="#777">Ex. : axes à migrateurs amphihalins</text>
+  <text x="125" y="158" text-anchor="middle" font-size="9" fill="#777">(saumon, anguille, alose)</text>
+  <!-- Liste 2 -->
+  <rect x="260" y="28" width="230" height="132" rx="6" fill="white" stroke="#FF8F00" stroke-width="2"/>
+  <text x="375" y="48" text-anchor="middle" font-size="11" font-weight="bold" fill="#E65100">🟡 Liste 2</text>
+  <text x="375" y="65" text-anchor="middle" font-size="9" fill="#333">Cours d'eau à restaurer</text>
+  <text x="375" y="80" text-anchor="middle" font-size="9" fill="#333">(objectifs de bon état)</text>
+  <text x="375" y="100" text-anchor="middle" font-size="9" font-weight="bold" fill="#C62828">→ Équipement ou arasement</text>
+  <text x="375" y="116" text-anchor="middle" font-size="9" fill="#555">dans les 5 ans du classement</text>
+  <text x="375" y="132" text-anchor="middle" font-size="9" fill="#555">Ouvrages ≤ 10 D (débit/10)</text>
+  <text x="375" y="148" text-anchor="middle" font-size="9" fill="#777">Priorité à l'effacement si</text>
+  <text x="375" y="160" text-anchor="middle" font-size="9" fill="#777">usage obsolète</text>
+</svg>`,
+                      texte: 'Le classement en liste 1 ou 2 est révisé tous les 6 ans (cycles DCE). Depuis l\'arrêté du 09/06/2021, environ 55 000 km de cours d\'eau sont classés en liste 1 et 55 000 km en liste 2. Sur les cours d\'eau en liste 2, l\'effacement d\'ouvrages est l\'option la plus efficace écologiquement et souvent la moins chère à long terme. Source : Arrêté du 09/06/2021 ; OFB, Atlas de la continuité écologique, 2022.'
+                    },
+                    {
+                      titre: 'Techniques de restauration de la continuité',
+                      schema: `<svg viewBox="0 0 500 140" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="140" rx="6" fill="#F1F8E9"/>
+  <text x="250" y="16" text-anchor="middle" font-size="11" font-weight="bold" fill="#1B5E20">Solutions de restauration de continuité (ordre de préférence)</text>
+  <!-- Effacement -->
+  <rect x="5" y="24" width="115" height="108" rx="5" fill="#1B5E20" opacity="0.9"/>
+  <text x="62" y="44" text-anchor="middle" font-size="20">💥</text>
+  <text x="62" y="62" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Effacement</text>
+  <text x="62" y="78" text-anchor="middle" font-size="9" fill="#C8E6C9">Solution optimale</text>
+  <text x="62" y="92" text-anchor="middle" font-size="9" fill="#C8E6C9">Transit sédim.</text>
+  <text x="62" y="106" text-anchor="middle" font-size="9" fill="#C8E6C9">+ migration</text>
+  <text x="62" y="122" text-anchor="middle" font-size="8" fill="#A5D6A7">Coût 0 à terme</text>
+  <!-- Arasement partiel -->
+  <rect x="127" y="24" width="115" height="108" rx="5" fill="#2E7D32" opacity="0.9"/>
+  <text x="184" y="44" text-anchor="middle" font-size="20">🔨</text>
+  <text x="184" y="62" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Arasement partiel</text>
+  <text x="184" y="78" text-anchor="middle" font-size="9" fill="#C8E6C9">Réduction de</text>
+  <text x="184" y="92" text-anchor="middle" font-size="9" fill="#C8E6C9">hauteur de chute</text>
+  <text x="184" y="106" text-anchor="middle" font-size="9" fill="#C8E6C9">Compromis usage</text>
+  <text x="184" y="122" text-anchor="middle" font-size="8" fill="#A5D6A7">Coût modéré</text>
+  <!-- Rivière de contournement -->
+  <rect x="249" y="24" width="115" height="108" rx="5" fill="#43A047" opacity="0.9"/>
+  <text x="306" y="44" text-anchor="middle" font-size="20">🌊</text>
+  <text x="306" y="62" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Contournement</text>
+  <text x="306" y="78" text-anchor="middle" font-size="9" fill="#C8E6C9">Bras naturalisé</text>
+  <text x="306" y="92" text-anchor="middle" font-size="9" fill="#C8E6C9">haute valeur écol.</text>
+  <text x="306" y="106" text-anchor="middle" font-size="9" fill="#C8E6C9">Ouvrage maintenu</text>
+  <text x="306" y="122" text-anchor="middle" font-size="8" fill="#A5D6A7">Coût élevé</text>
+  <!-- Passe à poissons -->
+  <rect x="371" y="24" width="124" height="108" rx="5" fill="#66BB6A" opacity="0.9"/>
+  <text x="433" y="44" text-anchor="middle" font-size="20">🪜</text>
+  <text x="433" y="62" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Passe à poissons</text>
+  <text x="433" y="78" text-anchor="middle" font-size="9" fill="#1B5E20">Solution minimale</text>
+  <text x="433" y="92" text-anchor="middle" font-size="9" fill="#1B5E20">Ne résout pas</text>
+  <text x="433" y="106" text-anchor="middle" font-size="9" fill="#1B5E20">le transit sédim.</text>
+  <text x="433" y="122" text-anchor="middle" font-size="8" fill="#1B5E20">Entretien élevé</text>
+</svg>`,
+                      texte: 'L\'effacement d\'ouvrages est désormais la solution prioritaire en France : moins de 10 % des seuils arasés font l\'objet de recours, et le retour à un état naturel est observé en 2 à 5 ans après effacement. Depuis 2010, plus de 2 500 ouvrages ont été effacés en France. Source : OFB, Base de données effacement d\'ouvrages, 2023 ; Belletti B. et al., A review of the effectiveness of different types of fish passage in rivers, Ecological Engineering, 2020.'
+                    }
+                  ],
+                  points: [
+                    '~110 000 obstacles sur les cours d\'eau en France (Référentiel ROE, OFB)',
+                    'Délai réglementaire liste 2 : 5 ans après parution de l\'arrêté de classement',
+                    'L\'anguille est une espèce prioritaire : son déclin de 95 % depuis 1980 est alarmant',
+                    'Les migrateurs amphihalins (saumon, anguille, alose, lamproie) nécessitent la libre circulation mer-source',
+                    'Coût moyen d\'un effacement de seuil : 50 000 à 300 000 € selon la taille'
+                  ],
+                  formules: [],
+                  retenir: 'La restauration de la continuité écologique est une obligation réglementaire (liste 2, délai 5 ans) et un levier majeur d\'amélioration de l\'état écologique des masses d\'eau. L\'effacement est la solution à privilégier quand l\'usage est obsolète.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce que la continuité écologique d\'un cours d\'eau ?', r: 'Libre circulation des espèces aquatiques (montaison et dévalaison) et bon transit des sédiments et des bois morts. Définie par l\'art. L.214-17 CE. Conditionne la réalisation du bon état écologique (DCE).' },
+                  { q: 'Quel est le délai réglementaire pour mettre en conformité un ouvrage en liste 2 ?', r: '5 ans à compter de la publication de l\'arrêté de classement (art. L.214-17 II CE). Après ce délai, le préfet peut mettre l\'exploitant en demeure et procéder à l\'exécution d\'office aux frais du propriétaire.' }
+                ],
+                exercices: []
+              },
+              {
+                id: 'gemapi-n4-m1-c2',
+                titre: 'Renaturation des cours d\'eau : techniques et retours d\'expérience',
+                fiche: {
+                  intro: 'La renaturation consiste à restaurer le fonctionnement naturel d\'un cours d\'eau artificialisé (recalibré, busé, rectifié). Elle s\'appuie sur les concepts de géomorphologie fluviale et d\'ingénierie écologique. Source : Malavoi J.-R., Guide de restauration des rivières, ONEMA, 2007 ; Malavoi J.-R. et Souchon Y., Principes de restauration hydromorphologique des cours d\'eau, ONEMA, 2014.',
+                  sections: [
+                    {
+                      titre: 'Techniques de renaturation',
+                      schema: `<svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="180" rx="6" fill="#E8F5E9"/>
+  <text x="250" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#1B5E20">Principales techniques de renaturation</text>
+  <rect x="5" y="28" width="150" height="142" rx="5" fill="white" stroke="#43A047" stroke-width="1.5"/>
+  <text x="80" y="48" text-anchor="middle" font-size="10" font-weight="bold" fill="#1B5E20">🌀 Remise en méandres</text>
+  <text x="80" y="64" text-anchor="middle" font-size="9" fill="#555">Raccourcissement artificiel</text>
+  <text x="80" y="78" text-anchor="middle" font-size="9" fill="#555">annulé par création d'un</text>
+  <text x="80" y="92" text-anchor="middle" font-size="9" fill="#555">nouveau tracé sinueux</text>
+  <text x="80" y="110" text-anchor="middle" font-size="8" fill="#777">Ex. : Loue (Doubs), Sélune (Norm.)</text>
+  <text x="80" y="126" text-anchor="middle" font-size="8" fill="#2E7D32">Bénéfices : ralentissement,</text>
+  <text x="80" y="140" text-anchor="middle" font-size="8" fill="#2E7D32">diversification habitats,</text>
+  <text x="80" y="154" text-anchor="middle" font-size="8" fill="#2E7D32">recharge nappe</text>
+  <rect x="165" y="28" width="165" height="142" rx="5" fill="white" stroke="#43A047" stroke-width="1.5"/>
+  <text x="247" y="48" text-anchor="middle" font-size="10" font-weight="bold" fill="#1B5E20">🪨 Recharge sédimentaire</text>
+  <text x="247" y="64" text-anchor="middle" font-size="9" fill="#555">Apport de galets et graviers</text>
+  <text x="247" y="78" text-anchor="middle" font-size="9" fill="#555">pour compenser le déficit</text>
+  <text x="247" y="92" text-anchor="middle" font-size="9" fill="#555">sédimentaire (aval barrage)</text>
+  <text x="247" y="110" text-anchor="middle" font-size="8" fill="#777">Ex. : Rhône (aval barrages CNR)</text>
+  <text x="247" y="126" text-anchor="middle" font-size="8" fill="#2E7D32">Bénéfices : frayères truite,</text>
+  <text x="247" y="140" text-anchor="middle" font-size="8" fill="#2E7D32">arrêt incision, diversification</text>
+  <text x="247" y="154" text-anchor="middle" font-size="8" fill="#2E7D32">du lit</text>
+  <rect x="340" y="28" width="155" height="142" rx="5" fill="white" stroke="#43A047" stroke-width="1.5"/>
+  <text x="417" y="48" text-anchor="middle" font-size="10" font-weight="bold" fill="#1B5E20">🌱 Végétalisation berges</text>
+  <text x="417" y="64" text-anchor="middle" font-size="9" fill="#555">Plantation ripisylve</text>
+  <text x="417" y="78" text-anchor="middle" font-size="9" fill="#555">Techniques végétales</text>
+  <text x="417" y="92" text-anchor="middle" font-size="9" fill="#555">(fascines, tressage,</text>
+  <text x="417" y="106" text-anchor="middle" font-size="9" fill="#555">peigne willow)</text>
+  <text x="417" y="124" text-anchor="middle" font-size="8" fill="#2E7D32">Bénéfices : stabilisation,</text>
+  <text x="417" y="138" text-anchor="middle" font-size="8" fill="#2E7D32">ombrage, alimentation</text>
+  <text x="417" y="152" text-anchor="middle" font-size="8" fill="#2E7D32">de la chaîne trophique</text>
+</svg>`,
+                      texte: 'La renaturation peut aussi passer par la dérivation (dé-busage), le retalutage des berges en pente douce, l\'implantation d\'épis pour créer de la diversité hydromorphologique, ou la restitution de bois mort (LIDAR). Le suivi post-travaux (IHR — Indice d\'Hydromorphologie des Rivières) est obligatoire pour évaluer l\'efficacité. Source : Malavoi J.-R. & Souchon Y., ONEMA, 2014 ; Nota Bene Environments, REX renaturation cours d\'eau, 2022.'
+                    }
+                  ],
+                  points: [
+                    'La renaturation peut diviser par 3 le coût d\'entretien par rapport à la gestion de berges artificialisées',
+                    'Le bois mort en rivière est un habitat fondamental : 30 à 50 % des invertébrés y vivent',
+                    'La remise en méandres réduit la vitesse d\'écoulement et favorise l\'écrêtement des crues',
+                    'La recharge sédimentaire nécessite une autorisation IOTA (rubrique 3.1.5.0)',
+                    'La présence de castors favorise naturellement la renaturation — espèce protégée depuis 1968'
+                  ],
+                  formules: [],
+                  retenir: 'La renaturation est à la fois une mission GEMAPI (restauration milieux) et un outil de prévention des inondations (ralentissement des écoulements). Son efficacité est documentée sur des centaines de sites en France et en Europe.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce qu\'une fascine de saule ?', r: 'Technique végétale de génie civil écologique : fagot de branches de saule vivantes fixé au niveau de l\'eau sur la berge. Le saule bouture naturellement et ses racines stabilisent la berge en 2 à 3 ans. Moins coûteux (50-100 €/ml) que les enrochements (200-500 €/ml).' },
+                  { q: 'Qu\'est-ce que l\'IHR (Indice Hydromorphologique des Rivières) ?', r: 'Indice standardisé d\'évaluation de l\'hydromorphologie d\'un cours d\'eau, développé par l\'ONEMA/OFB. Évalue 6 composantes : naturalité du lit mineur, berges, ripisylve, connectivité latérale, lit majeur, continuité longitudinale. Note de 0 à 20.' }
+                ],
+                exercices: []
+              },
+              {
+                id: 'gemapi-n4-m1-c3',
+                titre: 'Zones humides : compensation et restauration dans la séquence ERC',
+                fiche: {
+                  intro: 'La loi du 8 août 2016 pour la reconquête de la biodiversité a renforcé l\'obligation de compensation des atteintes aux zones humides et aux espèces protégées. La séquence ERC (Éviter, Réduire, Compenser) est maintenant opposable en justice. Source : Loi n°2016-1087 du 08/08/2016 ; Art. L.163-1 à L.163-10 CE ; Arrêté du 22/11/1993 sur les critères ZH.',
+                  sections: [
+                    {
+                      titre: 'La séquence ERC appliquée aux zones humides',
+                      schema: `<svg viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="160" rx="6" fill="#E8F5E9"/>
+  <text x="250" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="#1B5E20">Séquence ERC — Zones humides (Loi 08/08/2016)</text>
+  <!-- E -->
+  <rect x="5" y="28" width="155" height="122" rx="6" fill="#1B5E20" opacity="0.9"/>
+  <text x="82" y="52" text-anchor="middle" font-size="28" fill="white">🚫</text>
+  <text x="82" y="72" text-anchor="middle" font-size="14" fill="white" font-weight="bold">ÉVITER</text>
+  <text x="82" y="90" text-anchor="middle" font-size="9" fill="#C8E6C9">Conception du projet</text>
+  <text x="82" y="105" text-anchor="middle" font-size="9" fill="#C8E6C9">pour ne pas impacter</text>
+  <text x="82" y="120" text-anchor="middle" font-size="9" fill="#C8E6C9">la zone humide</text>
+  <text x="82" y="140" text-anchor="middle" font-size="8" fill="#A5D6A7">Priorité absolue</text>
+  <!-- R -->
+  <rect x="173" y="28" width="155" height="122" rx="6" fill="#2E7D32" opacity="0.9"/>
+  <text x="250" y="52" text-anchor="middle" font-size="28" fill="white">📉</text>
+  <text x="250" y="72" text-anchor="middle" font-size="14" fill="white" font-weight="bold">RÉDUIRE</text>
+  <text x="250" y="90" text-anchor="middle" font-size="9" fill="#C8E6C9">Optimisation des</text>
+  <text x="250" y="105" text-anchor="middle" font-size="9" fill="#C8E6C9">emprises, calendrier</text>
+  <text x="250" y="120" text-anchor="middle" font-size="9" fill="#C8E6C9">de travaux (hors</text>
+  <text x="250" y="135" text-anchor="middle" font-size="9" fill="#C8E6C9">périodes sensibles)</text>
+  <!-- C -->
+  <rect x="341" y="28" width="154" height="122" rx="6" fill="#43A047" opacity="0.9"/>
+  <text x="418" y="52" text-anchor="middle" font-size="28" fill="white">⚖️</text>
+  <text x="418" y="72" text-anchor="middle" font-size="14" fill="white" font-weight="bold">COMPENSER</text>
+  <text x="418" y="88" text-anchor="middle" font-size="9" fill="#1B5E20">Création ou restauration</text>
+  <text x="418" y="102" text-anchor="middle" font-size="9" fill="#1B5E20">de zones humides</text>
+  <text x="418" y="116" text-anchor="middle" font-size="9" fill="#1B5E20">Ratio min. : 2 pour 1</text>
+  <text x="418" y="130" text-anchor="middle" font-size="9" fill="#1B5E20">En surface ET en</text>
+  <text x="418" y="143" text-anchor="middle" font-size="9" fill="#1B5E20">fonctionnalité</text>
+</svg>`,
+                      texte: 'La compensation doit être "équivalente" en termes de fonctionnalités écologiques, pas seulement en surface. Le ratio minimal est de 2 pour 1 en surface (souvent 3 à 4 pour 1 en pratique pour compenser la perte de fonctionnalité). Les sites de compensation peuvent être portés par des opérateurs de compensation (sites naturels de compensation — SNC). Source : Art. L.163-1 CE ; Instruction du gouvernement du 01/04/2022 sur la séquence ERC.'
+                    }
+                  ],
+                  points: [
+                    'Ratio de compensation ZH : minimum 2:1 en surface, souvent 3:1 à 4:1 pour les fonctionnalités',
+                    'La compensation doit être réalisée AVANT ou PENDANT les travaux d\'impact',
+                    'Sites Naturels de Compensation (SNC) : opérateurs agréés par le ministère depuis 2016',
+                    'Non-respect de la séquence ERC → suspension du chantier, voire annulation de l\'autorisation',
+                    'En GEMAPI, la séquence ERC s\'applique aux travaux de restauration eux-mêmes si impact ZH'
+                  ],
+                  formules: [],
+                  retenir: 'Tout projet GEMAPI impactant une zone humide doit intégrer la séquence ERC dès la conception. La compensation ex post (après travaux) est généralement refusée par les services instructeurs.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce qu\'un opérateur de compensation (Site Naturel de Compensation) ?', r: 'Structure agréée (association, entreprise) qui restaure des écosystèmes et vend les "unités de compensation" résultantes à des maîtres d\'ouvrage soumis à l\'obligation de compensation. Créé par la loi biodiversité 2016, premier site agréé en 2017 (CDC Biodiversité).' },
+                  { q: 'Pourquoi la compensation doit-elle être faite en fonctionnalités et pas seulement en surface ?', r: 'Une zone humide de 2 ha fraîchement créée n\'a pas les mêmes fonctionnalités qu\'une zone humide de 1 ha mature (sol hydromorphe développé, espèces installées, capacité épuratoire complète). La compensation en fonctionnalités impose donc souvent des ratios plus élevés et des délais de mise en oeuvre plus longs.' }
+                ],
+                exercices: []
+              }
+            ]
+          },
+          {
+            id: 'gemapi-n4-m2',
+            name: 'Montage et gestion de projet GEMAPI',
+            ico: '📊',
+            color: '#4A148C',
+            colorl: '#F3E5F5',
+            chapitres: [
+              {
+                id: 'gemapi-n4-m2-c1',
+                titre: 'Le dossier IOTA — Loi sur l\'eau',
+                fiche: {
+                  intro: 'Les Installations, Ouvrages, Travaux et Activités (IOTA) ayant un impact sur les milieux aquatiques sont soumis à autorisation ou déclaration selon la nomenclature de l\'article R.214-1 du CE (annexe). C\'est le principal outil de police de l\'eau. Source : Art. L.214-1 à L.214-6 CE ; Arrêté du 13/02/2002 fixant la nomenclature loi sur l\'eau ; Guide IOTA, DGPR, 2019.',
+                  sections: [
+                    {
+                      titre: 'Nomenclature IOTA et seuils',
+                      schema: `<svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="180" rx="6" fill="#F3E5F5"/>
+  <text x="250" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#4A148C">Nomenclature IOTA (Art. R.214-1 CE) — Rubrique 3.1.1.0</text>
+  <text x="250" y="32" text-anchor="middle" font-size="10" fill="#555">Exemple : Installations, ouvrages, travaux ou activités dans le lit mineur d'un cours d'eau</text>
+  <!-- Tableau 3 régimes -->
+  <rect x="5" y="42" width="155" height="128" rx="5" fill="white" stroke="#7B1FA2" stroke-width="2"/>
+  <text x="82" y="62" text-anchor="middle" font-size="10" font-weight="bold" fill="#7B1FA2">🟣 AUTORISATION</text>
+  <text x="82" y="80" text-anchor="middle" font-size="9" fill="#555">Impacts significatifs</text>
+  <text x="82" y="96" text-anchor="middle" font-size="9" fill="#555">Dossier complet</text>
+  <text x="82" y="112" text-anchor="middle" font-size="9" fill="#555">Enquête publique</text>
+  <text x="82" y="128" text-anchor="middle" font-size="9" fill="#555">Arrêté préfectoral</text>
+  <text x="82" y="148" text-anchor="middle" font-size="9" fill="#7B1FA2">Délai : 12–18 mois</text>
+  <text x="82" y="162" text-anchor="middle" font-size="8" fill="#777">Ex. : surface&gt;0,10 ha</text>
+  <rect x="173" y="42" width="155" height="128" rx="5" fill="white" stroke="#1565C0" stroke-width="2"/>
+  <text x="250" y="62" text-anchor="middle" font-size="10" font-weight="bold" fill="#1565C0">🔵 DÉCLARATION</text>
+  <text x="250" y="80" text-anchor="middle" font-size="9" fill="#555">Impacts limités</text>
+  <text x="250" y="96" text-anchor="middle" font-size="9" fill="#555">Dossier simplifié</text>
+  <text x="250" y="112" text-anchor="middle" font-size="9" fill="#555">Récépissé préfectoral</text>
+  <text x="250" y="128" text-anchor="middle" font-size="9" fill="#555">(pas d'enquête pub.)</text>
+  <text x="250" y="148" text-anchor="middle" font-size="9" fill="#1565C0">Délai : 2–3 mois</text>
+  <text x="250" y="162" text-anchor="middle" font-size="8" fill="#777">Ex. : 0,01 à 0,10 ha</text>
+  <rect x="341" y="42" width="154" height="128" rx="5" fill="white" stroke="#2E7D32" stroke-width="2"/>
+  <text x="418" y="62" text-anchor="middle" font-size="10" font-weight="bold" fill="#2E7D32">🟢 AUCUNE FORMALITÉ</text>
+  <text x="418" y="80" text-anchor="middle" font-size="9" fill="#555">Impact négligeable</text>
+  <text x="418" y="96" text-anchor="middle" font-size="9" fill="#555">Seuils bas</text>
+  <text x="418" y="112" text-anchor="middle" font-size="9" fill="#555">Ex. : surface</text>
+  <text x="418" y="126" text-anchor="middle" font-size="9" fill="#555">&lt; 0,01 ha</text>
+  <text x="418" y="148" text-anchor="middle" font-size="9" fill="#2E7D32">Délai : immédiat</text>
+</svg>`,
+                      texte: 'La nomenclature IOTA comprend des rubriques pour chaque type d\'activité : 3.1.1.0 (sondages, forages), 3.1.2.0 (fondations en lit mineur), 3.1.3.0 (impacts sur régimes hydrauliques), 3.1.4.0 (barrages de plus de 2 m de hauteur), 3.1.5.0 (recharge sédimentaire), 3.2.1.0 (assèchement marais), 3.2.3.0 (aménagement zones humides)… Le dossier IOTA est instruit par la DDT(M) et soumis à l\'avis de l\'OFB. Source : Art. R.214-1 CE ; Arrêté nomenclature IOTA.'
+                    },
+                    {
+                      titre: 'Contenu d\'un dossier d\'autorisation IOTA',
+                      schema: `<svg viewBox="0 0 500 140" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="140" rx="6" fill="#EDE7F6"/>
+  <text x="250" y="16" text-anchor="middle" font-size="11" font-weight="bold" fill="#4A148C">Pièces obligatoires — Dossier autorisation IOTA (Art. R.181-13 CE)</text>
+  <!-- Pièces -->
+  <rect x="5" y="24" width="148" height="108" rx="5" fill="white" stroke="#9C27B0" stroke-width="1"/>
+  <text x="79" y="42" text-anchor="middle" font-size="9" font-weight="bold" fill="#4A148C">1. Demande</text>
+  <text x="79" y="57" text-anchor="middle" font-size="8" fill="#555">Identité pétitionnaire</text>
+  <text x="79" y="70" text-anchor="middle" font-size="8" fill="#555">Localisation (coord. Lambert)</text>
+  <text x="79" y="83" text-anchor="middle" font-size="8" fill="#555">Nature et volume du projet</text>
+  <text x="79" y="96" text-anchor="middle" font-size="8" fill="#555">Rubriques IOTA concernées</text>
+  <text x="79" y="114" text-anchor="middle" font-size="8" fill="#777">Art. R.181-13 CE</text>
+  <rect x="161" y="24" width="178" height="108" rx="5" fill="white" stroke="#9C27B0" stroke-width="1"/>
+  <text x="250" y="42" text-anchor="middle" font-size="9" font-weight="bold" fill="#4A148C">2. Document d'incidence</text>
+  <text x="250" y="57" text-anchor="middle" font-size="8" fill="#555">État initial des milieux</text>
+  <text x="250" y="70" text-anchor="middle" font-size="8" fill="#555">Analyse des impacts (phase travaux</text>
+  <text x="250" y="82" text-anchor="middle" font-size="8" fill="#555">et exploitation)</text>
+  <text x="250" y="95" text-anchor="middle" font-size="8" fill="#555">Mesures ERC + suivi</text>
+  <text x="250" y="108" text-anchor="middle" font-size="8" fill="#555">Compatibilité SDAGE/SAGE</text>
+  <text x="250" y="124" text-anchor="middle" font-size="8" fill="#777">Pièce maîtresse du dossier</text>
+  <rect x="347" y="24" width="148" height="108" rx="5" fill="white" stroke="#9C27B0" stroke-width="1"/>
+  <text x="421" y="42" text-anchor="middle" font-size="9" font-weight="bold" fill="#4A148C">3. Pièces annexes</text>
+  <text x="421" y="57" text-anchor="middle" font-size="8" fill="#555">Plans (1/25 000 + 1/2 500)</text>
+  <text x="421" y="70" text-anchor="middle" font-size="8" fill="#555">Note hydraulique</text>
+  <text x="421" y="83" text-anchor="middle" font-size="8" fill="#555">Évaluation incidences Natura 2000</text>
+  <text x="421" y="96" text-anchor="middle" font-size="8" fill="#555">Plan de gestion</text>
+  <text x="421" y="114" text-anchor="middle" font-size="8" fill="#777">Si espèces prot. : dossier CNPN</text>
+</svg>`,
+                      texte: 'Le document d\'incidences est la pièce centrale du dossier IOTA. Pour les projets impactant des espèces protégées, une demande de dérogation (art. L.411-2 CE) et l\'avis du Conseil National de Protection de la Nature (CNPN) sont nécessaires. Pour les projets en zone Natura 2000, une Évaluation des Incidences Natura 2000 (EIN 2000) est obligatoire. Source : Art. R.181-13 CE ; Guide pour l\'instruction des dossiers IOTA, DGPR, 2019.'
+                    }
+                  ],
+                  points: [
+                    'IOTA = régime de police administrative, instruction par la DDT(M) sous autorité préfectorale',
+                    'Délai d\'instruction autorisation : 12 mois en moyenne, pouvant aller jusqu\'à 24 mois',
+                    'L\'OFB est consulté obligatoirement pour avis sur toutes les autorisations IOTA',
+                    'La non-déclaration d\'une IOTA soumise à déclaration constitue un délit (art. L.216-10 CE)',
+                    'Exemption pour les travaux d\'entretien régulier et de restauration (art. L.215-14 CE)'
+                  ],
+                  formules: [],
+                  retenir: 'Tout projet GEMAPI (travaux en cours d\'eau, création de zones humides, effacement d\'ouvrages, renaturation) doit être vérifié au regard de la nomenclature IOTA. Anticiper les délais d\'instruction est essentiel pour la programmation des travaux.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce que la rubrique 3.1.5.0 de la nomenclature IOTA ?', r: 'Travaux de recharge sédimentaire. Autorisation si le volume est > 2 000 m³, déclaration de 500 à 2 000 m³. Concerne les apports de sédiments pour compenser l\'incision ou restaurer les frayères.' },
+                  { q: 'Quelle est la différence entre une autorisation et une déclaration IOTA ?', r: 'Autorisation : dossier complet, enquête publique, arrêté préfectoral avec prescriptions (délai ~12-18 mois). Déclaration : dossier simplifié, récépissé préfectoral (délai ~2-3 mois), pas d\'enquête publique.' }
+                ],
+                exercices: []
+              },
+              {
+                id: 'gemapi-n4-m2-c2',
+                titre: 'Financement GEMAPI : Agences de l\'eau et Fonds Barnier',
+                fiche: {
+                  intro: 'Le financement des projets GEMAPI fait appel à plusieurs sources : taxe GEMAPI, Agences de l\'eau (redevances), Fonds Barnier (FPRNM), DETR/DSIL, fonds européens (FEDER, FEADER, LIFE). Monter un plan de financement est une compétence clé. Source : 11e programme des Agences de l\'eau 2019-2024 ; Cahier des charges PAPI 3, DGPR, 2021 ; LEMA 2006 art. 14.',
+                  sections: [
+                    {
+                      titre: 'Panorama des financeurs GEMAPI',
+                      schema: `<svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="200" rx="6" fill="#F3E5F5"/>
+  <text x="250" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="#4A148C">Principaux financeurs GEMAPI</text>
+  <!-- Agences eau -->
+  <rect x="5" y="28" width="148" height="162" rx="5" fill="#1565C0" opacity="0.9"/>
+  <text x="79" y="50" text-anchor="middle" font-size="20" fill="white">💧</text>
+  <text x="79" y="70" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Agences de l'eau</text>
+  <text x="79" y="88" text-anchor="middle" font-size="9" fill="#BBDEFB">Taux : 30–80 %</text>
+  <text x="79" y="104" text-anchor="middle" font-size="9" fill="#BBDEFB">Études : jusqu'à 80 %</text>
+  <text x="79" y="120" text-anchor="middle" font-size="9" fill="#BBDEFB">Travaux : 50–70 %</text>
+  <text x="79" y="138" text-anchor="middle" font-size="9" fill="white">Domaines : continuité,</text>
+  <text x="79" y="152" text-anchor="middle" font-size="9" fill="white">ZH, renaturation,</text>
+  <text x="79" y="166" text-anchor="middle" font-size="9" fill="white">digues, épuration</text>
+  <text x="79" y="182" text-anchor="middle" font-size="8" fill="#BBDEFB">11e programme 2019-2024</text>
+  <!-- Fonds Barnier -->
+  <rect x="176" y="28" width="148" height="162" rx="5" fill="#B71C1C" opacity="0.9"/>
+  <text x="250" y="50" text-anchor="middle" font-size="20" fill="white">🛡️</text>
+  <text x="250" y="70" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Fonds Barnier</text>
+  <text x="250" y="86" text-anchor="middle" font-size="9" fill="#FFCDD2">FPRNM</text>
+  <text x="250" y="104" text-anchor="middle" font-size="9" fill="#FFCDD2">Études : 50 %</text>
+  <text x="250" y="120" text-anchor="middle" font-size="9" fill="#FFCDD2">Travaux : 25–40 %</text>
+  <text x="250" y="138" text-anchor="middle" font-size="9" fill="white">Domaines : digues,</text>
+  <text x="250" y="152" text-anchor="middle" font-size="9" fill="white">ZEC, sensibilisation,</text>
+  <text x="250" y="166" text-anchor="middle" font-size="9" fill="white">prévision crues</text>
+  <text x="250" y="182" text-anchor="middle" font-size="8" fill="#FFCDD2">Via PAPI labellisé</text>
+  <!-- Fonds UE -->
+  <rect x="347" y="28" width="148" height="162" rx="5" fill="#4A148C" opacity="0.9"/>
+  <text x="421" y="50" text-anchor="middle" font-size="20" fill="white">🇪🇺</text>
+  <text x="421" y="70" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Fonds européens</text>
+  <text x="421" y="88" text-anchor="middle" font-size="9" fill="#E1BEE7">FEDER : infrastructures</text>
+  <text x="421" y="104" text-anchor="middle" font-size="9" fill="#E1BEE7">FEADER : zones rurales</text>
+  <text x="421" y="120" text-anchor="middle" font-size="9" fill="#E1BEE7">LIFE+ : biodiversité</text>
+  <text x="421" y="138" text-anchor="middle" font-size="9" fill="white">Taux : 50–75 %</text>
+  <text x="421" y="154" text-anchor="middle" font-size="9" fill="white">Complexe à monter</text>
+  <text x="421" y="170" text-anchor="middle" font-size="9" fill="white">Via Conseil régional</text>
+  <text x="421" y="182" text-anchor="middle" font-size="8" fill="#E1BEE7">Prog. 2021-2027</text>
+</svg>`,
+                      texte: 'Le cumul des aides publiques pour un projet GEMAPI peut théoriquement atteindre 80 à 90 % du montant HT. En pratique, le taux de financement effectif des travaux de digue est souvent de 60 à 70 % (40 % Fonds Barnier via PAPI + 20-30 % Agence de l\'eau). La DETR (Dotation d\'Équipement des Territoires Ruraux) et la DSIL peuvent compléter pour les petits projets. Source : Cahier des charges PAPI 3, DGPR, 2021 ; Programmes d\'intervention des Agences de l\'eau 2019-2024.'
+                    }
+                  ],
+                  points: [
+                    'Le cumul des aides publiques est plafonné à 80 % du coût HT pour les travaux GEMAPI',
+                    'Le Fonds Barnier est alimenté par un prélèvement de 12 % sur les primes Cat-Nat',
+                    'Les Agences de l\'eau accordent des subventions ET des prêts à taux zéro (OFB)',
+                    'La DETR et DSIL sont accessibles pour les petits projets sans PAPI',
+                    'Le programme LIFE (UE) finance des projets pilotes de restauration écologique ambitieux'
+                  ],
+                  formules: [
+                    { nom: 'Part restant à charge GEMAPI', expr: 'Charge = Coût HT × (1 − Σ taux subventions)', unite: '€', detail: 'Exemple : 1 000 000 € HT × (1 − 0,40 Barnier − 0,30 AgEau − 0,10 DETR) = 200 000 € reste à charge (20%)' }
+                  ],
+                  retenir: 'Monter un plan de financement GEMAPI exige de connaître les guichets, les taux, les critères d\'éligibilité et les délais de chaque financeur. Le PAPI est la clé d\'accès au Fonds Barnier pour les projets importants.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce que le Fonds Barnier (FPRNM) ?', r: 'Fonds de Prévention des Risques Naturels Majeurs. Créé par la loi Barnier de 1995. Alimenté par un prélèvement de 12 % sur les primes d\'assurance Cat-Nat. Finance les études et travaux de prévention des risques naturels, notamment via les PAPI. Géré par la Caisse Centrale de Réassurance (CCR).' },
+                  { q: 'Quel est le taux de subvention du Fonds Barnier pour les travaux de digue (axe 7 PAPI) ?', r: '25 à 40 % selon la catégorie de digue et le type de travaux. Ce taux est majoré pour les collectivités à faibles ressources. La demande s\'effectue via le dossier PAPI labellisé.' }
+                ],
+                exercices: [
+                  {
+                    id: 'ex-gemapi-n4-m2-c2-1',
+                    titre: 'Montage d\'un plan de financement PAPI',
+                    source: 'Exercice CEREMA — Formation GEMAPI, 2023',
+                    difficulte: 'difficile',
+                    enonce: 'Une CCGT (50 000 hab) porte un PAPI labellisé. Programme de travaux : 3 M€ HT (axe 7 digues) + 800 000 € HT (axe 5 milieux) + 400 000 € HT (études ax.1). Financements disponibles : Fonds Barnier axe 7 = 40 %, Agence de l\'eau ax.5 = 60 %, ax.1 études = 80 %, DETR ax.7 = 15 %. Calculer le reste à charge de la CCGT.',
+                    questions: [
+                      { q: 'Calculer le montant subventionné et le reste à charge pour les travaux de digue (axe 7)', r: 'Subv. = 3 000 000 × (0,40 + 0,15) = 1 650 000 €. Reste = 3 000 000 − 1 650 000 = 1 350 000 €', formule: 'Subv. = Coût HT × (Barnier + DETR)', calcul: '3M × 0,55 = 1,65 M€ subventionné ; 3 − 1,65 = 1,35 M€ reste à charge' },
+                      { q: 'Calculer le reste à charge pour les milieux (axe 5) et les études (axe 1)', r: 'Ax.5 : 800 000 × 0,40 = 320 000 € reste. Ax.1 : 400 000 × 0,20 = 80 000 € reste.', formule: 'Reste = Coût × (1 − taux)', calcul: 'Ax.5 : 800k × (1−0,60) = 320k€ ; Ax.1 : 400k × (1−0,80) = 80k€' },
+                      { q: 'Calculer le reste à charge total de la CCGT et son financement par la taxe GEMAPI', r: 'Reste total = 1 350 000 + 320 000 + 80 000 = 1 750 000 €. Taxe GEMAPI max = 40 × 50 000 = 2 000 000 €/an → la taxe au plafond couvre le reste à charge en 1 an', formule: 'Taxe max = 40 €/hab × population', calcul: '1 750 000 € < 2 000 000 € = 40 €/hab × 50 000 hab → finançable sur 1 cycle de taxe' }
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'gemapi-n4-m2-c3',
+                titre: 'Responsabilité juridique de l\'autorité GEMAPI',
+                fiche: {
+                  intro: 'L\'exercice de la GEMAPI génère des responsabilités juridiques importantes pour l\'EPCI-FP : responsabilité civile (indemnisation des victimes), responsabilité pénale (mise en danger, homicide involontaire), responsabilité administrative. Source : CE L.214-10-1 ; Code pénal art. 221-6, 223-1 ; CAA Nantes 13/10/2016 ; TA Rennes 2018.',
+                  sections: [
+                    {
+                      titre: 'Les trois régimes de responsabilité',
+                      schema: `<svg viewBox="0 0 500 190" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="190" rx="6" fill="#FFEBEE"/>
+  <text x="250" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="#B71C1C">Responsabilités juridiques de l'autorité GEMAPI</text>
+  <!-- Civile -->
+  <rect x="5" y="28" width="155" height="152" rx="6" fill="white" stroke="#EF9A9A" stroke-width="2"/>
+  <text x="82" y="50" text-anchor="middle" font-size="20">⚖️</text>
+  <text x="82" y="68" text-anchor="middle" font-size="11" font-weight="bold" fill="#B71C1C">CIVILE</text>
+  <text x="82" y="86" text-anchor="middle" font-size="9" fill="#333">Indemnisation des</text>
+  <text x="82" y="100" text-anchor="middle" font-size="9" fill="#333">victimes d'inondation</text>
+  <text x="82" y="116" text-anchor="middle" font-size="9" fill="#555">si défaut d'entretien</text>
+  <text x="82" y="132" text-anchor="middle" font-size="9" fill="#555">ou de surveillance</text>
+  <text x="82" y="150" text-anchor="middle" font-size="9" fill="#555">Art. L.214-10-1 CE</text>
+  <text x="82" y="168" text-anchor="middle" font-size="8" fill="#777">Assurance obligatoire</text>
+  <!-- Pénale -->
+  <rect x="173" y="28" width="155" height="152" rx="6" fill="white" stroke="#EF9A9A" stroke-width="2"/>
+  <text x="250" y="50" text-anchor="middle" font-size="20">⚠️</text>
+  <text x="250" y="68" text-anchor="middle" font-size="11" font-weight="bold" fill="#B71C1C">PÉNALE</text>
+  <text x="250" y="86" text-anchor="middle" font-size="9" fill="#333">Mise en danger</text>
+  <text x="250" y="100" text-anchor="middle" font-size="9" fill="#333">d'autrui (art. 223-1)</text>
+  <text x="250" y="116" text-anchor="middle" font-size="9" fill="#333">Homicide involontaire</text>
+  <text x="250" y="132" text-anchor="middle" font-size="9" fill="#333">(art. 221-6)</text>
+  <text x="250" y="150" text-anchor="middle" font-size="9" fill="#555">Responsabilité</text>
+  <text x="250" y="164" text-anchor="middle" font-size="9" fill="#555">personnelle du DGS</text>
+  <!-- Administrative -->
+  <rect x="341" y="28" width="154" height="152" rx="6" fill="white" stroke="#EF9A9A" stroke-width="2"/>
+  <text x="418" y="50" text-anchor="middle" font-size="20">🏛️</text>
+  <text x="418" y="68" text-anchor="middle" font-size="11" font-weight="bold" fill="#B71C1C">ADMINISTRATIVE</text>
+  <text x="418" y="86" text-anchor="middle" font-size="9" fill="#333">Annulation des actes</text>
+  <text x="418" y="100" text-anchor="middle" font-size="9" fill="#333">(ex : autorisation IOTA</text>
+  <text x="418" y="114" text-anchor="middle" font-size="9" fill="#333">incomplète)</text>
+  <text x="418" y="132" text-anchor="middle" font-size="9" fill="#555">Recours des tiers</text>
+  <text x="418" y="148" text-anchor="middle" font-size="9" fill="#555">Astreintes (pollueur)</text>
+  <text x="418" y="164" text-anchor="middle" font-size="9" fill="#777">TA / CAA / CE</text>
+</svg>`,
+                      texte: 'La responsabilité civile de l\'EPCI-FP peut être engagée même sans faute prouvée, au titre du risque créé (responsabilité sans faute pour risque exceptionnel). La responsabilité pénale du directeur général des services (DGS) peut être engagée personnellement si la négligence est établie. Il est donc indispensable de disposer d\'une assurance responsabilité civile spécifique GEMAPI et de documenter toutes les décisions de surveillance et d\'entretien. Source : CE, arrêt Société Nationale des Chemins de Fer, 1951 ; CAA Nantes, 13/10/2016, n°14NT01249.'
+                    }
+                  ],
+                  points: [
+                    'Art. L.214-10-1 CE : le propriétaire d\'un ouvrage hydraulique est responsable des dommages',
+                    'La faute peut être prouvée par l\'absence de surveillance régulière documentée',
+                    'Le DGS et l\'élu délégué peuvent être mis en cause personnellement (délit non intentionnel)',
+                    'L\'assurance GEMAPI est obligatoire — à souscrire spécifiquement car les polices générales excluent souvent les inondations',
+                    'La documentation des décisions (PV de visite, rapports annuels) est une protection juridique essentielle'
+                  ],
+                  formules: [],
+                  retenir: 'Exercer la GEMAPI sans avoir documenté sa surveillance et son entretien expose l\'EPCI-FP et ses dirigeants à des risques juridiques majeurs. La prévention juridique passe par la traçabilité des actions et une assurance adaptée.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'L\'EPCI-FP peut-il être tenu responsable d\'une inondation sans faute prouvée ?', r: 'Oui, au titre de la responsabilité sans faute pour risque exceptionnel (risque créé par l\'ouvrage). Même si l\'entretien était correct, la rupture d\'une digue peut engager la responsabilité civile de l\'EPCI-FP propriétaire. C\'est pour cela que l\'assurance GEMAPI est indispensable.' },
+                  { q: 'Quelle est la responsabilité du DGS en matière de GEMAPI ?', r: 'Le Directeur Général des Services peut être poursuivi pour mise en danger d\'autrui (art. 223-1 Code pénal) si une négligence grave dans la surveillance des ouvrages est établie. L\'élu délégué peut également être mis en cause. La protection fonctionnelle de la collectivité couvre les agents de bonne foi.' }
+                ],
+                exercices: []
+              },
+              {
+                id: 'gemapi-n4-m2-c4',
+                titre: 'Études d\'impact et évaluation environnementale des projets GEMAPI',
+                fiche: {
+                  intro: 'Les projets GEMAPI importants sont soumis à évaluation environnementale (EE), dont le régime est fixé par la directive 2011/92/UE (transposée en France par le décret du 11/08/2016). L\'EE comprend une étude d\'impact et une enquête publique. Source : Directive 2011/92/UE ; Art. L.122-1 CE ; Décret n°2016-1110 du 11/08/2016 ; Guide EE, CGDD, 2017.',
+                  sections: [
+                    {
+                      titre: 'Screening : soumis ou non à EE ?',
+                      schema: `<svg viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="160" rx="6" fill="#EDE7F6"/>
+  <text x="250" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#4A148C">Soumission à évaluation environnementale (Annexe R.122-2 CE)</text>
+  <!-- Systématique -->
+  <rect x="5" y="28" width="230" height="122" rx="5" fill="#7B1FA2" opacity="0.9"/>
+  <text x="117" y="50" text-anchor="middle" font-size="10" font-weight="bold" fill="white">EE SYSTÉMATIQUE</text>
+  <text x="117" y="68" text-anchor="middle" font-size="9" fill="#E1BEE7">Travaux de génie civil</text>
+  <text x="117" y="82" text-anchor="middle" font-size="9" fill="#E1BEE7">supérieurs à des seuils</text>
+  <text x="117" y="98" text-anchor="middle" font-size="9" fill="white">Ex. : digue H &gt; 2 m et L &gt; 500 m</text>
+  <text x="117" y="114" text-anchor="middle" font-size="9" fill="white">Ex. : retenue V &gt; 50 000 m³</text>
+  <text x="117" y="130" text-anchor="middle" font-size="9" fill="white">Ex. : ZH aménagée &gt; 1 ha</text>
+  <text x="117" y="145" text-anchor="middle" font-size="8" fill="#E1BEE7">Tableau Annexe R.122-2 CE</text>
+  <!-- Cas par cas -->
+  <rect x="265" y="28" width="230" height="122" rx="5" fill="#4A148C" opacity="0.9"/>
+  <text x="380" y="50" text-anchor="middle" font-size="10" font-weight="bold" fill="white">EE CAS PAR CAS</text>
+  <text x="380" y="68" text-anchor="middle" font-size="9" fill="#E1BEE7">Projets sous les seuils</text>
+  <text x="380" y="82" text-anchor="middle" font-size="9" fill="#E1BEE7">mais potentiellement</text>
+  <text x="380" y="96" text-anchor="middle" font-size="9" fill="#E1BEE7">sensibles</text>
+  <text x="380" y="114" text-anchor="middle" font-size="9" fill="white">→ Dossier soumis à l'AE</text>
+  <text x="380" y="130" text-anchor="middle" font-size="9" fill="white">(Autorité Environnementale)</text>
+  <text x="380" y="145" text-anchor="middle" font-size="8" fill="#E1BEE7">Délai : 35 jours</text>
+</svg>`,
+                      texte: 'L\'Autorité Environnementale (AE) — le préfet de région ou la DREAL — émet un avis sur l\'étude d\'impact (obligatoirement rendu public). L\'étude d\'impact doit décrire l\'état initial, les impacts directs et indirects du projet, les mesures ERC, et les modalités de suivi. Pour les projets en zone Natura 2000, l\'évaluation des incidences est intégrée ou constitue un dossier séparé. Source : Art. L.122-1 à L.122-3 CE ; Guide EE, CGDD, 2017.'
+                    },
+                    {
+                      titre: 'Plan type d\'une étude d\'impact GEMAPI',
+                      schema: `<svg viewBox="0 0 500 140" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="140" rx="6" fill="#F3E5F5"/>
+  <text x="250" y="16" text-anchor="middle" font-size="10" font-weight="bold" fill="#4A148C">Structure type d'une étude d'impact (Art. R.122-5 CE)</text>
+  <!-- 6 chapitres -->
+  <rect x="5" y="24" width="78" height="108" rx="4" fill="#7B1FA2" opacity="0.85"/>
+  <text x="44" y="50" text-anchor="middle" font-size="8" fill="white" font-weight="bold">1. Résumé</text>
+  <text x="44" y="64" text-anchor="middle" font-size="8" fill="white">non tech.</text>
+  <rect x="90" y="24" width="78" height="108" rx="4" fill="#7B1FA2" opacity="0.75"/>
+  <text x="129" y="50" text-anchor="middle" font-size="8" fill="white" font-weight="bold">2. Présentation</text>
+  <text x="129" y="64" text-anchor="middle" font-size="8" fill="white">du projet</text>
+  <text x="129" y="80" text-anchor="middle" font-size="7" fill="#E1BEE7">Solutions</text>
+  <text x="129" y="92" text-anchor="middle" font-size="7" fill="#E1BEE7">alternatives</text>
+  <rect x="175" y="24" width="78" height="108" rx="4" fill="#7B1FA2" opacity="0.75"/>
+  <text x="214" y="50" text-anchor="middle" font-size="8" fill="white" font-weight="bold">3. État initial</text>
+  <text x="214" y="64" text-anchor="middle" font-size="8" fill="white">du site</text>
+  <text x="214" y="80" text-anchor="middle" font-size="7" fill="#E1BEE7">Faune/flore,</text>
+  <text x="214" y="92" text-anchor="middle" font-size="7" fill="#E1BEE7">eau, paysage</text>
+  <rect x="260" y="24" width="78" height="108" rx="4" fill="#4A148C" opacity="0.85"/>
+  <text x="299" y="50" text-anchor="middle" font-size="8" fill="white" font-weight="bold">4. Impacts</text>
+  <text x="299" y="64" text-anchor="middle" font-size="8" fill="white">directs et</text>
+  <text x="299" y="78" text-anchor="middle" font-size="8" fill="white">indirects</text>
+  <text x="299" y="92" text-anchor="middle" font-size="7" fill="#E1BEE7">Impacts cumulés</text>
+  <rect x="345" y="24" width="78" height="108" rx="4" fill="#4A148C" opacity="0.85"/>
+  <text x="384" y="50" text-anchor="middle" font-size="8" fill="white" font-weight="bold">5. Mesures</text>
+  <text x="384" y="64" text-anchor="middle" font-size="8" fill="white">ERC +</text>
+  <text x="384" y="78" text-anchor="middle" font-size="8" fill="white">suivi</text>
+  <text x="384" y="92" text-anchor="middle" font-size="7" fill="#E1BEE7">Surveillance post</text>
+  <rect x="430" y="24" width="65" height="108" rx="4" fill="#4A148C" opacity="0.85"/>
+  <text x="462" y="50" text-anchor="middle" font-size="8" fill="white" font-weight="bold">6. Glossaire</text>
+  <text x="462" y="64" text-anchor="middle" font-size="8" fill="white">Méthodes</text>
+  <text x="462" y="78" text-anchor="middle" font-size="8" fill="white">Auteurs</text>
+</svg>`,
+                      texte: 'Le résumé non technique (RNT) est la pièce la plus lue par le public et les élus : il doit être compréhensible sans formation scientifique. L\'étude des alternatives ("options de moindre impact") est une exigence nouvelle renforcée par la directive 2011/92/UE. Le suivi des mesures ERC est désormais obligatoire et contrôlé par l\'inspection IOTA. Source : Art. R.122-5 CE ; CGDD, Guide EE projets, 2021.'
+                    }
+                  ],
+                  points: [
+                    'L\'étude d\'impact est obligatoire pour les projets IOTA au-dessus des seuils (Annexe R.122-2)',
+                    'L\'Autorité Environnementale émet un avis public (non contraignant mais opposable en contentieux)',
+                    'Le RNT (résumé non technique) doit être compréhensible par le grand public',
+                    'Le suivi post-travaux des mesures ERC est désormais contrôlé par l\'OFB',
+                    'Les contentieux sur l\'évaluation environnementale peuvent bloquer un projet 3 à 5 ans'
+                  ],
+                  formules: [],
+                  retenir: 'L\'évaluation environnementale est devenue incontournable pour les grands projets GEMAPI. Sa qualité conditionne la solidité juridique de l\'autorisation et la crédibilité du porteur de projet. Anticipez : l\'étude d\'impact peut prendre 1 à 2 ans.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce que l\'Autorité Environnementale (AE) en France ?', r: 'Instance indépendante qui émet un avis sur les études d\'impact des projets (art. L.122-1 CE). En général : préfet de région ou DREAL (délégué). L\'avis est rendu public et joint au dossier d\'enquête publique. Non contraignant mais peut être utilisé en contentieux pour démontrer l\'insuffisance de l\'étude d\'impact.' },
+                  { q: 'Quelles sont les "alternatives" à analyser dans une étude d\'impact ?', r: 'Les options de substitution techniquement réalisables permettant d\'atteindre les objectifs avec des impacts moindres. Ex. pour une digue : alternative 1 = renforcement digue existante, alternative 2 = réduction de la vulnérabilité des biens, alternative 3 = nouvelle digue. La solution retenue doit être justifiée au regard des alternatives.' }
+                ],
+                exercices: [
+                  {
+                    id: 'ex-gemapi-n4-m2-c4-1',
+                    titre: 'Identification du régime EE pour un projet GEMAPI',
+                    source: 'Exercice de formation CEREMA — Chefs de projet GEMAPI, 2022',
+                    difficulte: 'moyen',
+                    enonce: 'Classez les projets suivants dans leur régime d\'évaluation environnementale : (A) Construction d\'une digue de protection, H = 3 m, L = 800 m, protégeant 2 000 logements. (B) Renaturation d\'un cours d\'eau sur 1,5 km avec remise en méandres et recharge sédimentaire (volume 1 500 m³). (C) Effacement d\'un seuil de moulin (H = 1,2 m) sur une rivière classée liste 2. (D) Création d\'une zone d\'expansion de crues de 15 ha.',
+                    questions: [
+                      { q: 'Classez les 4 projets (EE systématique / cas par cas / aucune EE)', r: 'A : EE systématique (digue H>2m et L>500m, rubrique 13 Annexe R.122-2). B : cas par cas (recharge 1500 m³ < 2000 m³ rubrique 3.1.5.0, mais remise méandres à vérifier). C : aucune EE (effacement seuil = restauration, exempté si < seuils). D : cas par cas (ZH aménagée < seuil systématique mais >1 ha = cas par cas)', formule: 'Annexe R.122-2 CE + Rubrique nomenclature IOTA', calcul: 'A : digue H=3m>2m, L=800m>500m → systématique. B : recharge 1500m³ entre 500 et 2000m³ → déclaration + cas par cas EE. C : effacement seuil, travaux de restauration exemptés. D : ZH 15ha > 1ha seuil déclaration mais < 25ha seuil systématique → cas par cas.' }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: 'gemapi-n4-m3',
+            name: 'Stratégie GEMAPI, PAPI et changement climatique',
+            ico: '🗺️',
+            color: '#1565C0',
+            colorl: '#E3F2FD',
+            chapitres: [
+              {
+                id: 'gemapi-n4-m3-c1',
+                titre: 'Diagnostic territorial GEMAPI : méthode et outils',
+                fiche: {
+                  intro: 'Le diagnostic territorial est le fondement de toute stratégie GEMAPI. Il permet de connaître le territoire (bassin versant, cours d\'eau, ouvrages, enjeux), d\'identifier les problèmes et de hiérarchiser les interventions. Source : Guide méthodologique pour l\'exercice de la compétence GEMAPI, CEREMA, 2018 ; Livre bleu de la GEMAPI, AFEPTB, 2021.',
+                  sections: [
+                    {
+                      titre: 'Les 4 étapes du diagnostic GEMAPI',
+                      schema: `<svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="200" rx="6" fill="#E3F2FD"/>
+  <text x="250" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#0D47A1">Les 4 étapes du diagnostic territorial GEMAPI</text>
+  <defs>
+    <marker id="arr5" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <polygon points="0 0,7 2.5,0 5" fill="#1565C0"/>
+    </marker>
+  </defs>
+  <!-- Étape 1 -->
+  <rect x="10" y="28" width="105" height="155" rx="5" fill="#1565C0"/>
+  <text x="62" y="50" text-anchor="middle" font-size="14" fill="white">1</text>
+  <text x="62" y="68" text-anchor="middle" font-size="9" font-weight="bold" fill="white">COLLECTE</text>
+  <text x="62" y="82" text-anchor="middle" font-size="8" fill="#BBDEFB">Topographie</text>
+  <text x="62" y="96" text-anchor="middle" font-size="8" fill="#BBDEFB">Hydrologie</text>
+  <text x="62" y="110" text-anchor="middle" font-size="8" fill="#BBDEFB">Ouvrages</text>
+  <text x="62" y="124" text-anchor="middle" font-size="8" fill="#BBDEFB">Population</text>
+  <text x="62" y="138" text-anchor="middle" font-size="8" fill="#BBDEFB">Environnement</text>
+  <text x="62" y="152" text-anchor="middle" font-size="8" fill="#BBDEFB">Réglementation</text>
+  <line x1="115" y1="105" x2="128" y2="105" stroke="#1565C0" stroke-width="2" marker-end="url(#arr5)"/>
+  <!-- Étape 2 -->
+  <rect x="128" y="28" width="105" height="155" rx="5" fill="#1976D2"/>
+  <text x="180" y="50" text-anchor="middle" font-size="14" fill="white">2</text>
+  <text x="180" y="68" text-anchor="middle" font-size="9" font-weight="bold" fill="white">CARTO</text>
+  <text x="180" y="82" text-anchor="middle" font-size="8" fill="#BBDEFB">Bassin versant</text>
+  <text x="180" y="96" text-anchor="middle" font-size="8" fill="#BBDEFB">Cours d'eau</text>
+  <text x="180" y="110" text-anchor="middle" font-size="8" fill="#BBDEFB">Zones inond.</text>
+  <text x="180" y="124" text-anchor="middle" font-size="8" fill="#BBDEFB">Enjeux</text>
+  <text x="180" y="138" text-anchor="middle" font-size="8" fill="#BBDEFB">Ouvrages</text>
+  <line x1="233" y1="105" x2="246" y2="105" stroke="#1565C0" stroke-width="2" marker-end="url(#arr5)"/>
+  <!-- Étape 3 -->
+  <rect x="246" y="28" width="105" height="155" rx="5" fill="#0D47A1"/>
+  <text x="298" y="50" text-anchor="middle" font-size="14" fill="white">3</text>
+  <text x="298" y="68" text-anchor="middle" font-size="9" font-weight="bold" fill="white">ANALYSE</text>
+  <text x="298" y="82" text-anchor="middle" font-size="8" fill="#BBDEFB">Aléa (Q10/Q100)</text>
+  <text x="298" y="96" text-anchor="middle" font-size="8" fill="#BBDEFB">Vulnérabilité</text>
+  <text x="298" y="110" text-anchor="middle" font-size="8" fill="#BBDEFB">État écologique</text>
+  <text x="298" y="124" text-anchor="middle" font-size="8" fill="#BBDEFB">Dysf. hydrauliques</text>
+  <text x="298" y="138" text-anchor="middle" font-size="8" fill="#BBDEFB">Problèmes locaux</text>
+  <line x1="351" y1="105" x2="364" y2="105" stroke="#1565C0" stroke-width="2" marker-end="url(#arr5)"/>
+  <!-- Étape 4 -->
+  <rect x="364" y="28" width="126" height="155" rx="5" fill="#1B5E20"/>
+  <text x="427" y="50" text-anchor="middle" font-size="14" fill="white">4</text>
+  <text x="427" y="68" text-anchor="middle" font-size="9" font-weight="bold" fill="white">HIÉRAR.</text>
+  <text x="427" y="82" text-anchor="middle" font-size="8" fill="#C8E6C9">Criticité</text>
+  <text x="427" y="96" text-anchor="middle" font-size="8" fill="#C8E6C9">Urgence</text>
+  <text x="427" y="110" text-anchor="middle" font-size="8" fill="#C8E6C9">Coût estimatif</text>
+  <text x="427" y="124" text-anchor="middle" font-size="8" fill="#C8E6C9">Faisabilité</text>
+  <text x="427" y="138" text-anchor="middle" font-size="8" fill="#C8E6C9">Bénéfice-risque</text>
+  <text x="427" y="152" text-anchor="middle" font-size="8" fill="#C8E6C9">→ Programme</text>
+</svg>`,
+                      texte: 'Le diagnostic GEMAPI s\'organise en 4 étapes : (1) Collecte des données — topographie (MNT Lidar), hydrologie (Banque Hydro), inventaire des ouvrages (registre digue), données enjeux (PLU, base Sirène), état écologique (DCE). (2) Cartographie — fond bassin versant, tracé des cours d\'eau, zones inondables (TRI, PHEC), localisation des ouvrages. (3) Analyse — croisement aléas/enjeux, identification des dysfonctionnements hydrauliques et écologiques. (4) Hiérarchisation — critères de criticité, urgence, coût, faisabilité, bénéfice écologique. Source : CEREMA, Guide diagnostic GEMAPI, 2018.'
+                    }
+                  ],
+                  points: [
+                    'Le Lidar aérien (MNT à 1 m de résolution) est l\'outil clé pour la cartographie des zones inondables',
+                    'La Banque Hydro (banque.hydro.eaufrance.fr) fournit les chroniques de débit pour le calcul des fréquences de crue',
+                    'Le diagnostic doit couvrir l\'ensemble du bassin versant — pas seulement le territoire de l\'EPCI-FP',
+                    'La hiérarchisation multi-critères évite de concentrer les investissements sur les ouvrages les plus visibles'
+                  ],
+                  formules: [
+                    { nom: 'Indice de criticité simplifié', expr: 'IC = Aléa × Enjeux × Vulnérabilité', unite: 'score [1–9]', detail: 'Chaque critère noté de 1 à 3. IC permet de prioriser les sites d\'intervention. IC ≥ 6 = priorité haute.' }
+                  ],
+                  retenir: 'Un bon diagnostic GEMAPI est la base de tout. Il faut au minimum 12 à 24 mois pour le conduire sérieusement. Sans lui, la stratégie repose sur des perceptions plutôt que des faits.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce que les PHEC (Plus Hautes Eaux Connues) ?', r: 'Niveau maximal historiquement atteint par une crue sur un cours d\'eau donné. Utilisées comme enveloppe maximale de la zone inondable dans les cartographies d\'aléa. Source : mémoires d\'inondation, relevés hydrologiques, témoignages.' },
+                  { q: 'Pourquoi le diagnostic GEMAPI doit-il couvrir tout le bassin versant ?', r: 'Parce que les actions en amont ont des effets en aval (et inversement). Un diagnostic limité au périmètre administratif rate les causes des problèmes qui sont souvent en dehors de la zone de compétence.' }
+                ],
+                exercices: []
+              },
+              {
+                id: 'gemapi-n4-m3-c2',
+                titre: 'Le PAPI : outil de programmation de la prévention des inondations',
+                fiche: {
+                  intro: 'Le Programme d\'Actions de Prévention des Inondations (PAPI) est le principal outil de contractualisation entre l\'État et les territoires pour la prévention des inondations. Labellisé par la Commission Mixte Inondation (CMI), il donne accès aux financements du Fonds Barnier (FPRNM). Source : Cahier des charges PAPI 3, DGPR/MTES, 2021 ; Art. L.566-1 CE.',
+                  sections: [
+                    {
+                      titre: 'Les 7 axes du PAPI',
+                      schema: `<svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="220" rx="6" fill="#E3F2FD"/>
+  <text x="250" y="16" text-anchor="middle" font-size="11" font-weight="bold" fill="#0D47A1">Les 7 axes du PAPI (Cahier des charges PAPI 3 — 2021)</text>
+  <!-- Axe 1 -->
+  <rect x="10" y="24" width="228" height="28" rx="4" fill="#1565C0"/>
+  <text x="14" y="43" font-size="9" fill="white" font-weight="bold">Axe 1 — Conscience et connaissance du risque</text>
+  <!-- Axe 2 -->
+  <rect x="10" y="56" width="228" height="28" rx="4" fill="#1976D2"/>
+  <text x="14" y="75" font-size="9" fill="white" font-weight="bold">Axe 2 — Surveillance, prévision et alerte</text>
+  <!-- Axe 3 -->
+  <rect x="10" y="88" width="228" height="28" rx="4" fill="#0288D1"/>
+  <text x="14" y="107" font-size="9" fill="white" font-weight="bold">Axe 3 — Alerte et gestion de crise</text>
+  <!-- Axe 4 -->
+  <rect x="10" y="120" width="228" height="28" rx="4" fill="#0277BD"/>
+  <text x="14" y="139" font-size="9" fill="white" font-weight="bold">Axe 4 — Prise en compte du risque dans l'urba.</text>
+  <!-- Axe 5 -->
+  <rect x="262" y="24" width="228" height="28" rx="4" fill="#01579B"/>
+  <text x="266" y="43" font-size="9" fill="white" font-weight="bold">Axe 5 — Réduction de la vulnérabilité</text>
+  <!-- Axe 6 -->
+  <rect x="262" y="56" width="228" height="28" rx="4" fill="#004D40"/>
+  <text x="266" y="75" font-size="9" fill="white" font-weight="bold">Axe 6 — Gestion des écoulements (ZEC)</text>
+  <!-- Axe 7 -->
+  <rect x="262" y="88" width="228" height="50" rx="4" fill="#B71C1C"/>
+  <text x="266" y="107" font-size="9" fill="white" font-weight="bold">Axe 7 — Gestion des ouvrages de protection</text>
+  <text x="266" y="125" font-size="8" fill="#FFCDD2">(digues, systèmes d'endiguement)</text>
+  <!-- Note financement -->
+  <rect x="10" y="162" width="480" height="50" rx="4" fill="white" stroke="#0D47A1" stroke-width="1"/>
+  <text x="250" y="178" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#0D47A1">Taux de financement FPRNM (Fonds Barnier) — PAPI labellisé</text>
+  <text x="250" y="194" text-anchor="middle" font-size="8" fill="#444">Axes 1–4 : 50 %  |  Axe 5 : 40 %  |  Axe 6 : 50 %  |  Axe 7 : 30–40 %</text>
+  <text x="250" y="208" text-anchor="middle" font-size="8" fill="#666">Ces taux peuvent être majorés (TRI prioritaires, projet PAPI complet)</text>
+</svg>`,
+                      texte: 'Le PAPI est structuré autour de 7 axes couvrant l\'ensemble de la politique de prévention. La CMI (Commission Mixte Inondation) évalue la qualité du dossier et labellise le programme. La labellisation ouvre l\'accès au FPRNM (Fonds Barnier). Un PAPI a une durée de 6 ans. Il nécessite une gouvernance dédiée (comité de pilotage avec l\'État, les collectivités et la société civile). Source : Cahier des charges PAPI 3, DGPR, 2021.'
+                    }
+                  ],
+                  points: [
+                    'Un PAPI doit couvrir les 7 axes — un PAPI mono-axe (ex : uniquement des digues) sera rejeté',
+                    'L\'axe 1 (connaissance et conscience) est obligatoire dans tout PAPI',
+                    'L\'axe 6 (ZEC) est le seul qui agit sur l\'aléa lui-même — les autres agissent sur la vulnérabilité ou la réponse',
+                    'Un PAPI d\'intention (PAI) précède le PAPI complet — délai d\'instruction : 6–12 mois'
+                  ],
+                  formules: [],
+                  retenir: 'Un PAPI n\'est pas un catalogue de travaux de digues. Il doit démontrer une approche intégrée sur les 7 axes. Sans diagnostic, sans gouvernance, sans axe 1 (connaissance), le dossier sera refusé par la CMI.',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce que la Commission Mixte Inondation (CMI) ?', r: 'Instance nationale qui labellise les PAPI. Elle réunit des représentants de l\'État, des collectivités, des assureurs et d\'associations de sinistrés. La labellisation est le préalable au financement par le Fonds Barnier. Elle émet un avis sur la qualité du dossier et la cohérence avec la SLGRI.' },
+                  { q: 'Quelle est la différence entre un PAPI d\'intention (PAI) et un PAPI complet ?', r: 'PAI : première phase (2 ans max), finance des études et de la concertation. Permet de structurer la gouvernance et préparer le PAPI complet. PAPI complet : 6 ans, comprend les travaux. Le PAI est une porte d\'entrée pour les territoires qui n\'ont pas encore de diagnostic complet.' }
+                ],
+                exercices: [
+                  {
+                    id: 'ex-gemapi-n4-m3-c2-1',
+                    titre: 'Analyse coût-bénéfice d\'un scénario PAPI',
+                    source: 'Exercice inspiré du Guide ACB PAPI — DGPR, 2022',
+                    difficulte: 'difficile',
+                    enonce: 'Sur un bassin de risque, les dommages annuels moyens (DAM) sans protection sont estimés à 850 000 €/an. Un PAPI propose 3 scénarios : (A) ne rien faire ; (B) réduction de la vulnérabilité (axe 5) → DAM réduits à 500 000 €/an, investissement 1 200 000 € ; (C) digue de protection (axe 7) → DAM réduits à 150 000 €/an, investissement 4 500 000 €. Taux d\'actualisation 4 %, durée 30 ans. Calculer le VAN des bénéfices et le ratio B/C pour les scénarios B et C.',
+                    questions: [
+                      { q: 'Calculer les bénéfices annuels pour les scénarios B et C', r: 'B : 850 000 − 500 000 = 350 000 €/an | C : 850 000 − 150 000 = 700 000 €/an', formule: 'Bénéfice annuel = DAM_référence − DAM_projet', calcul: 'B : 350 000 €/an / C : 700 000 €/an' },
+                      { q: 'Calculer la VAN des bénéfices sur 30 ans (4 %)', r: 'Facteur actualisation 30 ans à 4 % = 17,29. B : 350 000 × 17,29 = 6 052 000 € | C : 700 000 × 17,29 = 12 103 000 €', formule: 'VAN = B_annuel × Σ(1/(1+i)^t)', calcul: 'Facteur = (1-(1,04)^-30)/0,04 = 17,29 ; B : 6 052 000 € ; C : 12 103 000 €' },
+                      { q: 'Calculer le ratio Bénéfice/Coût pour B et C', r: 'B : 6 052 000 / 1 200 000 = 5,04 (excellent) | C : 12 103 000 / 4 500 000 = 2,69 (bon). Le scénario B est plus rentable mais protège moins.', formule: 'B/C = VAN_bénéfices / Investissement', calcul: 'B : 5,04 > 1 → projet rentable. C : 2,69 > 1 → projet rentable. B/C > 1 est requis pour justifier le financement public.' }
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'gemapi-n4-m3-c3',
+                titre: 'Changement climatique et adaptation de la stratégie GEMAPI',
+                fiche: {
+                  intro: 'Le changement climatique modifie la distribution des précipitations, l\'intensité des événements extrêmes et le régime des cours d\'eau. Une stratégie GEMAPI qui ne prend pas en compte les évolutions climatiques sera obsolète dans 20 ans. Source : GIEC AR6, 2021-2022 ; ONERC, Changement climatique en France, 2023 ; Cerema, Intégration du changement climatique dans les PAPI, 2022.',
+                  sections: [
+                    {
+                      titre: 'Effets du changement climatique sur le cycle de l\'eau en France',
+                      schema: `<svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="500" height="200" rx="6" fill="#E8EAF6"/>
+  <text x="250" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#283593">Changement climatique — Effets attendus en France (GIEC AR6)</text>
+  <!-- Colonne 1 -->
+  <rect x="10" y="28" width="148" height="162" rx="5" fill="white" stroke="#EF9A9A" stroke-width="1.5"/>
+  <text x="84" y="46" text-anchor="middle" font-size="9" font-weight="bold" fill="#B71C1C">Précipitations</text>
+  <text x="84" y="60" text-anchor="middle" font-size="8" fill="#555">Été : réduction</text>
+  <text x="84" y="73" text-anchor="middle" font-size="8" fill="#555">Hiver : augmentation</text>
+  <text x="84" y="90" text-anchor="middle" font-size="8" fill="#B71C1C">Événements extrêmes</text>
+  <text x="84" y="104" text-anchor="middle" font-size="8" fill="#555">+intensité</text>
+  <text x="84" y="117" text-anchor="middle" font-size="8" fill="#555">+fréquence</text>
+  <text x="84" y="135" text-anchor="middle" font-size="8" fill="#777">Méditerranée :</text>
+  <text x="84" y="148" text-anchor="middle" font-size="8" fill="#777">pluies cévenoles</text>
+  <text x="84" y="161" text-anchor="middle" font-size="8" fill="#777">plus intenses</text>
+  <text x="84" y="178" text-anchor="middle" font-size="7" fill="#999">+20 à +40 % en 2100</text>
+  <!-- Colonne 2 -->
+  <rect x="176" y="28" width="148" height="162" rx="5" fill="white" stroke="#90CAF9" stroke-width="1.5"/>
+  <text x="250" y="46" text-anchor="middle" font-size="9" font-weight="bold" fill="#1565C0">Cours d'eau</text>
+  <text x="250" y="60" text-anchor="middle" font-size="8" fill="#555">Crues : possiblement</text>
+  <text x="250" y="73" text-anchor="middle" font-size="8" fill="#555">plus fréquentes (nord)</text>
+  <text x="250" y="86" text-anchor="middle" font-size="8" fill="#555">ou plus intenses</text>
+  <text x="250" y="103" text-anchor="middle" font-size="8" fill="#B71C1C">Étiages plus sévères</text>
+  <text x="250" y="117" text-anchor="middle" font-size="8" fill="#555">Températures eau en</text>
+  <text x="250" y="130" text-anchor="middle" font-size="8" fill="#555">hausse (stress thermique</text>
+  <text x="250" y="143" text-anchor="middle" font-size="8" fill="#555">des espèces)</text>
+  <text x="250" y="162" text-anchor="middle" font-size="8" fill="#777">Pic nival avancé</text>
+  <text x="250" y="178" text-anchor="middle" font-size="7" fill="#999">(montagne)</text>
+  <!-- Colonne 3 -->
+  <rect x="342" y="28" width="148" height="162" rx="5" fill="white" stroke="#A5D6A7" stroke-width="1.5"/>
+  <text x="416" y="46" text-anchor="middle" font-size="9" font-weight="bold" fill="#2E7D32">Adaptation GEMAPI</text>
+  <text x="416" y="62" text-anchor="middle" font-size="8" fill="#555">Réviser les Q100</text>
+  <text x="416" y="75" text-anchor="middle" font-size="8" fill="#555">Marges de sécurité sur</text>
+  <text x="416" y="88" text-anchor="middle" font-size="8" fill="#555">les ouvrages</text>
+  <text x="416" y="103" text-anchor="middle" font-size="8" fill="#2E7D32">Solutions flexibles</text>
+  <text x="416" y="117" text-anchor="middle" font-size="8" fill="#555">SFN adaptables</text>
+  <text x="416" y="130" text-anchor="middle" font-size="8" fill="#555">Urbanisme résilient</text>
+  <text x="416" y="148" text-anchor="middle" font-size="8" fill="#2E7D32">Horizon 2050–2100</text>
+  <text x="416" y="162" text-anchor="middle" font-size="8" fill="#555">intégrer dans le PAPI</text>
+  <text x="416" y="178" text-anchor="middle" font-size="7" fill="#999">et les études de danger</text>
+</svg>`,
+                      texte: 'D\'après le GIEC AR6 (2021), pour un scénario +2°C en France : (1) augmentation de l\'intensité des pluies extrêmes (+20 à +40 % de l\'intensité horaire), (2) sécheresses estivales plus fréquentes et sévères, (3) crues plus importantes en hiver sur la façade atlantique et dans les Cévennes. Conséquence pour la GEMAPI : les périodes de retour actuelles (Q10, Q100) seront sous-estimées. Les digues dimensionnées pour un Q100 actuel pourraient être surversées par un événement de période de retour plus courte en 2050. Source : GIEC AR6, 2022 ; ONERC, 2023.'
+                    },
+                    {
+                      titre: 'Principes d\'adaptation de la stratégie GEMAPI',
+                      texte: 'Trois principes d\'adaptation : (1) Robustesse — concevoir les ouvrages avec des marges de sécurité supplémentaires (hauteur libre sur les digues, capacité des ZEC surdimensionnée). (2) Flexibilité — privilégier les solutions adaptables dans le temps (SFN modulables, évitement de l\'urbanisation en zone inondable). (3) Résilience — développer la capacité du territoire à absorber des chocs et à se relever rapidement (exercices de crise, réduction de la vulnérabilité bâtie, PCS actualisés). Le PAPI de 3e génération (PAPI 3) intègre désormais explicitement la dimension climatique dans les cahiers des charges. Source : Cerema, Prise en compte du changement climatique dans les PAPI, 2022.'
+                    }
+                  ],
+                  points: [
+                    'Les études de dangers des digues doivent intégrer les projections climatiques à l\'horizon 2050 et 2100',
+                    'En France, les pluies extrêmes pourraient augmenter de 20 à 40 % en intensité d\'ici 2100 (+2°C)',
+                    'La règle : concevoir pour le futur, pas pour le passé — utiliser des marges de sécurité sur les Q100',
+                    'Les SFN sont naturellement plus résilientes que les ouvrages rigides face aux changements climatiques'
+                  ],
+                  formules: [
+                    { nom: 'Majoration climatique d\'un débit de pointe', expr: 'Q_futur = Q_actuel × (1 + α)', unite: 'm³/s', detail: 'α = facteur de majoration climatique, typiquement 0,15 à 0,30 pour les études à l\'horizon 2070-2100 selon les recommandations régionales' }
+                  ],
+                  retenir: 'Ne pas intégrer le changement climatique dans une stratégie GEMAPI, c\'est concevoir des ouvrages déjà obsolètes. La question n\'est plus "est-ce que le climat va changer ?" mais "de combien, et dans quelle direction pour mon territoire ?"',
+                  schema: null
+                },
+                flashcards: [
+                  { q: 'Pourquoi les Q100 actuels sont-ils potentiellement sous-estimés pour 2050 ?', r: 'Parce que les Q100 sont calculés sur les chroniques historiques observées. Or, le changement climatique va modifier les régimes de précipitations et donc les débits de crue. Un Q100 calculé en 2020 sur 50 ans de données ne reflète pas la pluviométrie prévue en 2050.' },
+                  { q: 'Qu\'est-ce qu\'un coefficient de majoration climatique dans une étude hydraulique ?', r: 'Facteur multiplicatif appliqué aux débits de projet pour tenir compte de l\'augmentation prévue des crues due au changement climatique. Exemple : multiplier le Q100 par 1,20 (facteur +20 %) pour dimensionner un ouvrage à l\'horizon 2070.' }
+                ],
+                exercices: []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
 };
 
 /* ─── ÉTAT NAVIGATION ─────────────────────────────────────────────── */
@@ -7509,6 +10267,7 @@ function _getChapProgress(fId, aId, mId, cId) {
 }
 
 function renderCours() {
+  var mc = document.getElementById('main-content'); if (mc) { mc.style.overflow = ''; mc.style.padding = ''; }
   var _tb = document.getElementById('tab-bar'); if (_tb) _tb.style.display = 'none';
   var html = '<div class="module-hero" style="--cat-color:var(--c-form)">'
     + '<span class="mh-icon">🎓</span>'
@@ -7632,6 +10391,7 @@ function renderCoursFormation(fId) {
 /* ─── VUE MATIÈRE ────────────────────────────────────────────────── */
 function renderCoursMatiere(fId, aId, mId) {
   _coursState.fId = fId; _coursState.aId = aId; _coursState.mId = mId;
+  var mc = document.getElementById('main-content'); if (mc) { mc.style.overflow = ''; mc.style.padding = ''; }
   var f = _coursGetFormation(fId);
   var a = _coursGetAnnee(fId, aId);
   var m = _coursGetMatiere(fId, aId, mId);
@@ -7709,10 +10469,11 @@ function renderCoursMatiere(fId, aId, mId) {
 /* ─── VUE CHAPITRE (FICHE RÉSUMÉE) ──────────────────────────────── */
 function renderCoursChapitre(fId, aId, mId, cId) {
   _coursState.fId = fId; _coursState.aId = aId; _coursState.mId = mId; _coursState.cId = cId;
+  var mc = document.getElementById('main-content'); if (mc) { mc.style.overflow = ''; mc.style.padding = ''; }
   var f = _coursGetFormation(fId);
   var m = _coursGetMatiere(fId, aId, mId);
   var c = _coursGetChapitre(fId, aId, mId, cId);
-  if (!c || !c.fiche) return;
+  if (!c || !c.fiche) { return; }
 
   var fi = c.fiche;
   var html = _coursBreadcrumb([
@@ -7824,9 +10585,17 @@ function renderCoursChapitre(fId, aId, mId, cId) {
       + '</div>'
       + '<div style="display:flex;flex-direction:column;gap:7px">';
     fi.formules.forEach(function(form) {
-      form.split(' | ').forEach(function(part) {
-        html += '<div style="background:var(--c-primary-l);border-left:4px solid var(--c-primary);border-radius:0 10px 10px 0;padding:10px 16px;font-family:\'Courier New\',monospace;font-size:13px;font-weight:700;color:var(--c-primary);overflow-x:auto;white-space:nowrap">' + part + '</div>';
-      });
+      if (typeof form === 'object' && form !== null) {
+        html += '<div style="background:var(--c-primary-l);border-left:4px solid var(--c-primary);border-radius:0 10px 10px 0;padding:10px 16px">'
+          + '<div style="font-family:\'Courier New\',monospace;font-size:13px;font-weight:700;color:var(--c-primary);overflow-x:auto;white-space:nowrap">' + (form.expr || form.nom || '') + '</div>'
+          + (form.unite ? '<div style="font-size:10px;color:var(--c-text-3);margin-top:3px">Unité : ' + form.unite + '</div>' : '')
+          + (form.detail ? '<div style="font-size:11px;color:var(--c-text-2);margin-top:4px;font-family:inherit;white-space:normal">' + form.detail + '</div>' : '')
+        + '</div>';
+      } else {
+        form.split(' | ').forEach(function(part) {
+          html += '<div style="background:var(--c-primary-l);border-left:4px solid var(--c-primary);border-radius:0 10px 10px 0;padding:10px 16px;font-family:\'Courier New\',monospace;font-size:13px;font-weight:700;color:var(--c-primary);overflow-x:auto;white-space:nowrap">' + part + '</div>';
+        });
+      }
     });
     html += '</div></div>';
   }
@@ -8220,353 +10989,369 @@ function _preconvertSchemas(chaps, cb) {
   });
 }
 
-function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap) {
+function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap, headerInfo) {
   var schemaPng = schemaMap ? (schemaMap[c.id] || null) : null;
   var fi = c.fiche;
-  var col = _hexToRgb(m.color);
-  var colL = _hexToRgb(m.colorl);
-  var PAGE_H = 278, RESUME_Y = 14;
+  var W = MARGIN * 2 + cW;
 
-  /* checkPage défini ici pour capturer le y LOCAL — seule façon de synchroniser */
-  function checkPage(needed) {
-    if (y + needed > PAGE_H) { doc.addPage(); y = RESUME_Y; }
+  /* Palette fixe Hydrocalc */
+  var C_DARK  = [18, 59, 114];    /* #123B72 */
+  var C_ACC   = [8, 127, 234];    /* #087FEA */
+  var C_LBLUE = [220, 238, 255];  /* #DCEEFF */
+  var C_TEXT  = [39, 49, 61];     /* #27313D */
+  var C_GRAY  = [104, 117, 133];  /* #687585 */
+  var C_LGRAY = [244, 247, 250];  /* #F4F7FA */
+  var PAGE_H = 275, RESUME_Y = 22;
+
+  function newPage() {
+    doc.addPage();
+    if (headerInfo) _pdfFicheHeader(doc, W, MARGIN, headerInfo.color, headerInfo.title, headerInfo.subtitle);
+    y = RESUME_Y;
   }
 
-  /* Bandeau titre chapitre — fond clair + bordure colorée */
-  checkPage(16);
-  doc.setFillColor(col[0] + Math.round((255 - col[0]) * 0.88), col[1] + Math.round((255 - col[1]) * 0.88), col[2] + Math.round((255 - col[2]) * 0.88));
-  doc.setDrawColor.apply(doc, col);
-  doc.setLineWidth(0.5);
-  doc.roundedRect(MARGIN, y, cW, 13, 1.5, 1.5, 'FD');
-  doc.setFillColor.apply(doc, col);
-  doc.roundedRect(MARGIN, y, 3.5, 13, 1, 1, 'F');
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(12);
-  doc.setTextColor.apply(doc, col);
-  doc.text(_pdfSanitize(c.titre), MARGIN + 7, y + 8.8);
-  y += 19;
+  function checkPage(needed) {
+    if (y + needed > PAGE_H) newPage();
+  }
 
-  /* Intro */
-  var LH = 5.2;
-  doc.setFont('helvetica', 'italic'); doc.setFontSize(9.5);
-  var introLines = doc.splitTextToSize(_pdfSanitize(fi.intro), cW - 10);
-  checkPage(introLines.length * LH + 12);
-  doc.setFillColor(246, 248, 247);
-  doc.roundedRect(MARGIN, y, cW, introLines.length * LH + 8, 2, 2, 'F');
-  doc.setTextColor(80, 92, 86);
-  introLines.forEach(function(l, i) { doc.text(l, MARGIN + 5, y + 6 + i * LH); });
-  y += introLines.length * LH + 14;
+  function sectionLabel(label) {
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5);
+    doc.setTextColor(C_DARK[0], C_DARK[1], C_DARK[2]);
+    doc.text(label.toUpperCase(), MARGIN, y);
+    doc.setDrawColor(C_ACC[0], C_ACC[1], C_ACC[2]);
+    doc.setLineWidth(0.5);
+    doc.line(MARGIN, y + 2, MARGIN + cW, y + 2);
+    y += 8;
+  }
 
-  /* Sections (contenu détaillé) */
+  /* ── 1. Badge matière + grand titre ── */
+  checkPage(32);
+  var badgeText = _pdfSanitize(m.name);
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5);
+  var badgeW = doc.getTextWidth(badgeText) + 10;
+  doc.setFillColor(C_LBLUE[0], C_LBLUE[1], C_LBLUE[2]);
+  doc.roundedRect(MARGIN, y, badgeW, 6.5, 3, 3, 'F');
+  doc.setTextColor(C_DARK[0], C_DARK[1], C_DARK[2]);
+  doc.text(badgeText, MARGIN + 5, y + 4.8);
+  y += 10;
+
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(18);
+  doc.setTextColor(C_DARK[0], C_DARK[1], C_DARK[2]);
+  var titreLines = doc.splitTextToSize(_pdfSanitize(c.titre), cW);
+  titreLines.forEach(function(l) { doc.text(l, MARGIN, y); y += 9; });
+
+  doc.setDrawColor(C_ACC[0], C_ACC[1], C_ACC[2]);
+  doc.setLineWidth(1.5);
+  doc.line(MARGIN, y, MARGIN + 32, y);
+  doc.setLineWidth(0.25);
+  doc.setDrawColor(C_LBLUE[0], C_LBLUE[1], C_LBLUE[2]);
+  doc.line(MARGIN + 34, y, MARGIN + cW, y);
+  y += 9;
+
+  /* ── 2. Résumé / intro ── */
+  if (fi.intro) {
+    var LH = 5.3;
+    doc.setFont('helvetica', 'italic'); doc.setFontSize(9.5);
+    var introLines = doc.splitTextToSize(_pdfSanitize(fi.intro), cW - 16);
+    checkPage(introLines.length * LH + 14);
+    doc.setFillColor(C_LGRAY[0], C_LGRAY[1], C_LGRAY[2]);
+    doc.roundedRect(MARGIN, y, cW, introLines.length * LH + 10, 3, 3, 'F');
+    doc.setFillColor(C_ACC[0], C_ACC[1], C_ACC[2]);
+    doc.roundedRect(MARGIN, y, 2.5, introLines.length * LH + 10, 1.5, 1.5, 'F');
+    doc.setTextColor(C_GRAY[0], C_GRAY[1], C_GRAY[2]);
+    introLines.forEach(function(l, i) { doc.text(l, MARGIN + 8, y + 7 + i * LH); });
+    y += introLines.length * LH + 16;
+  }
+
+  /* ── 3. Sections ── */
   if (fi.sections && fi.sections.length) {
-    checkPage(10);
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(10);
-    doc.setTextColor.apply(doc, col);
-    doc.text('CONTENU DU COURS', MARGIN, y);
-    y += 7;
+    checkPage(16);
+    sectionLabel('Contenu du cours');
 
     fi.sections.forEach(function(sec, si) {
       var titreSection = typeof sec === 'string' ? sec : sec.titre;
       var texteSection = typeof sec === 'string' ? '' : (sec.texte || '');
       var schemaSection = typeof sec === 'string' ? null : (sec.schema || null);
 
-      /* Titre de section — garde au moins 25mm avec le contenu suivant */
-      checkPage(28);
-      doc.setFillColor(col[0] + Math.round((255 - col[0]) * 0.94), col[1] + Math.round((255 - col[1]) * 0.94), col[2] + Math.round((255 - col[2]) * 0.94));
-      doc.roundedRect(MARGIN, y, cW, 8, 1.5, 1.5, 'F');
-      doc.setFillColor.apply(doc, col);
-      doc.roundedRect(MARGIN, y, 3, 8, 1, 1, 'F');
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(9);
-      doc.setTextColor.apply(doc, col);
-      doc.text(_pdfSanitize(titreSection), MARGIN + 6, y + 5.5);
-      y += 11;
+      checkPage(22);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
+      doc.setTextColor(C_DARK[0], C_DARK[1], C_DARK[2]);
+      var titSecLines = doc.splitTextToSize((si + 1) + '. ' + _pdfSanitize(titreSection), cW);
+      titSecLines.forEach(function(l) { doc.text(l, MARGIN, y); y += 6.5; });
+      doc.setDrawColor(C_LBLUE[0], C_LBLUE[1], C_LBLUE[2]);
+      doc.setLineWidth(0.25);
+      doc.line(MARGIN, y, MARGIN + cW, y);
+      y += 6;
 
       if (texteSection) {
-        /* Découper en blocs (paragraphes séparés par ligne vide) */
-        var blocs = texteSection.split(/\n{2,}/);
-        blocs.forEach(function(bloc) {
+        texteSection.split(/\n{2,}/).forEach(function(bloc) {
           var blocTrim = bloc.trim();
           if (!blocTrim) return;
-
-          /* Tableau Markdown : au moins une ligne | ... | */
           if (/^\|.+\|/m.test(blocTrim)) {
-            y = _pdfRenderMarkdownTable(doc, blocTrim, MARGIN, y, cW, col, colL, checkPage);
+            y = _pdfRenderMarkdownTable(doc, blocTrim, MARGIN, y, cW, C_DARK, C_LBLUE, checkPage);
             return;
           }
-
-          /* Texte normal */
           var cleanBloc = blocTrim
-            .replace(/\*\*(.+?)\*\*/g, '$1')
-            .replace(/\*(.+?)\*/g, '$1')
-            .replace(/`(.+?)`/g, '$1')
-            .replace(/^#{1,4}\s/gm, '')
+            .replace(/\*\*(.+?)\*\*/g, '$1').replace(/\*(.+?)\*/g, '$1')
+            .replace(/`(.+?)`/g, '$1').replace(/^#{1,4}\s/gm, '')
             .replace(/^[•\-\*]\s/gm, '  • ');
-
           var paraClean = _pdfSanitize(cleanBloc);
           if (!paraClean) return;
-          doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
-          doc.setTextColor(50, 60, 55);
-          var paraLines = doc.splitTextToSize(paraClean, cW - 10);
-          var paraH = paraLines.length * 5 + 6;
-          /* Garder le bloc entier sur la même page si possible */
-          checkPage(Math.min(paraH, 60));
-          y += 2;
+          doc.setFont('helvetica', 'normal'); doc.setFontSize(9.5);
+          doc.setTextColor(C_TEXT[0], C_TEXT[1], C_TEXT[2]);
+          var paraLines = doc.splitTextToSize(paraClean, cW);
+          checkPage(Math.min(paraLines.length * 5.5 + 4, 60));
           paraLines.forEach(function(l) {
-            if (y + 5 > PAGE_H) { doc.addPage(); y = RESUME_Y; }
-            doc.text(l, MARGIN + 4, y + 4);
-            y += 5;
+            if (y + 5.5 > PAGE_H) newPage();
+            doc.text(l, MARGIN, y); y += 5.5;
           });
-          y += 4;
+          y += 5;
         });
-        y += 5;
       }
 
-      /* Schéma de section */
       if (schemaSection && schemaMap) {
         var secPng = schemaMap[c.id + '_sec_' + si];
         if (secPng && secPng.dataUrl) {
           var secImgH = Math.round(secPng.h * (cW / secPng.w));
-          checkPage(secImgH + 6);
-          doc.addImage(secPng.dataUrl, 'PNG', MARGIN, y, cW, secImgH);
-          y += secImgH + 6;
+          checkPage(secImgH + 16);
+          doc.setDrawColor(C_LBLUE[0], C_LBLUE[1], C_LBLUE[2]);
+          doc.setLineWidth(0.3);
+          doc.roundedRect(MARGIN, y, cW, secImgH + 4, 2, 2, 'D');
+          doc.addImage(secPng.dataUrl, 'PNG', MARGIN + 2, y + 2, cW - 4, secImgH);
+          y += secImgH + 8;
+          doc.setFont('helvetica', 'italic'); doc.setFontSize(8);
+          doc.setTextColor(C_GRAY[0], C_GRAY[1], C_GRAY[2]);
+          doc.text('Figure ' + (si + 1) + '  —  ' + _pdfSanitize(titreSection), MARGIN + cW / 2, y, { align: 'center' });
+          y += 8;
         }
       }
+      y += 5;
+    });
+    y += 2;
+  }
+
+  /* ── 4. Points clés ── */
+  if (fi.points && fi.points.length) {
+    checkPage(16);
+    sectionLabel('Points cles');
+    fi.points.forEach(function(p) {
+      var items = (typeof p === 'string') ? p.split(' | ') : [p];
+      items.forEach(function(part) {
+        part = _pdfSanitize(part.trim());
+        if (!part) return;
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(9.5);
+        doc.setTextColor(C_TEXT[0], C_TEXT[1], C_TEXT[2]);
+        var pLines = doc.splitTextToSize(part, cW - 10);
+        checkPage(pLines.length * 5.5 + 4);
+        doc.setFillColor(C_ACC[0], C_ACC[1], C_ACC[2]);
+        doc.circle(MARGIN + 1.5, y - 1, 1, 'F');
+        pLines.forEach(function(l) { doc.text(l, MARGIN + 6, y); y += 5.5; });
+        y += 2;
+      });
     });
     y += 6;
   }
 
-  /* Points clés */
-  checkPage(10);
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(10);
-  doc.setTextColor.apply(doc, col);
-  doc.text('POINTS CLÉS', MARGIN, y);
-  y += 7;
-
-  fi.points.forEach(function(p) {
-    p.split(' | ').forEach(function(part) {
-      var nLines = _richTextLineCount(doc, part, cW - 10);
-      var blockH = nLines * 5.2 + 6;
-      checkPage(blockH + 3);
-      doc.setFillColor.apply(doc, colL);
-      doc.roundedRect(MARGIN, y, cW, blockH, 1.5, 1.5, 'F');
-      _drawRichText(doc, part, MARGIN + 5, y + 5.5, cW - 11, 5.2, _FICHE_COLORS);
-      y += blockH + 3.5;
-    });
-  });
-  y += 5;
-
-  /* Formules */
+  /* ── 5. Formules ── */
   if (fi.formules && fi.formules.length) {
-    checkPage(10);
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(10);
-    doc.setTextColor(12, 90, 150);
-    doc.text('FORMULES CLÉS', MARGIN, y);
-    y += 7;
+    checkPage(16);
+    sectionLabel('Formules cles');
     fi.formules.forEach(function(form) {
-      form.split(' | ').forEach(function(part) {
-        part = _pdfSanitize(part.trim());
-        if (!part) return;
-        doc.setFont('courier', 'bold'); doc.setFontSize(9.5);
-        var partLines = doc.splitTextToSize(part, cW - 12);
-        var boxH = partLines.length * 5.5 + 7;
-        checkPage(boxH + 3);
-        doc.setFillColor(222, 238, 250);
-        doc.roundedRect(MARGIN, y, cW, boxH, 1.5, 1.5, 'F');
-        doc.setTextColor(12, 70, 120);
-        partLines.forEach(function(l, li) {
-          doc.text(l, MARGIN + 5, y + 6 + li * 5.5);
+      if (typeof form === 'object' && form !== null) {
+        var expr = _pdfSanitize((form.expr || form.nom || '').trim());
+        if (!expr) return;
+        doc.setFont('courier', 'bold'); doc.setFontSize(10);
+        var exprLines = doc.splitTextToSize(expr, cW - 12);
+        var boxH = exprLines.length * 5.8 + 8
+          + (form.unite ? 6 : 0)
+          + (form.detail ? Math.ceil(_pdfSanitize(form.detail).length / 60) * 5 + 4 : 0);
+        checkPage(boxH + 5);
+        doc.setFillColor(C_LBLUE[0], C_LBLUE[1], C_LBLUE[2]);
+        doc.roundedRect(MARGIN, y, cW, boxH, 2, 2, 'F');
+        doc.setTextColor(C_DARK[0], C_DARK[1], C_DARK[2]);
+        exprLines.forEach(function(l, li) { doc.text(l, MARGIN + cW / 2, y + 7 + li * 5.8, { align: 'center' }); });
+        var dy = y + 7 + exprLines.length * 5.8;
+        if (form.unite) {
+          doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5);
+          doc.setTextColor(C_GRAY[0], C_GRAY[1], C_GRAY[2]);
+          doc.text('Unite : ' + _pdfSanitize(form.unite), MARGIN + 6, dy + 3);
+          dy += 6;
+        }
+        if (form.detail) {
+          doc.setFont('helvetica', 'italic'); doc.setFontSize(8);
+          doc.setTextColor(C_TEXT[0], C_TEXT[1], C_TEXT[2]);
+          doc.splitTextToSize(_pdfSanitize(form.detail), cW - 12).forEach(function(l, li) {
+            doc.text(l, MARGIN + 6, dy + 3 + li * 5);
+          });
+        }
+        y += boxH + 5;
+      } else {
+        form.split(' | ').forEach(function(part) {
+          part = _pdfSanitize(part.trim());
+          if (!part) return;
+          doc.setFont('courier', 'bold'); doc.setFontSize(10);
+          var partLines = doc.splitTextToSize(part, cW - 12);
+          var boxH = partLines.length * 5.8 + 8;
+          checkPage(boxH + 5);
+          doc.setFillColor(C_LBLUE[0], C_LBLUE[1], C_LBLUE[2]);
+          doc.roundedRect(MARGIN, y, cW, boxH, 2, 2, 'F');
+          doc.setTextColor(C_DARK[0], C_DARK[1], C_DARK[2]);
+          partLines.forEach(function(l, li) { doc.text(l, MARGIN + cW / 2, y + 7 + li * 5.8, { align: 'center' }); });
+          y += boxH + 5;
         });
-        y += boxH + 3.5;
-      });
+      }
     });
     y += 3;
   }
 
-  /* À retenir */
+  /* ── 6. À retenir ── */
   if (fi.retenir) {
     var retenirItems = _pdfSanitize(fi.retenir).split(' | ').map(function(p){ return p.trim(); }).filter(Boolean);
-    /* Pré-calculer la hauteur totale pour garder header + 2 premiers items ensemble */
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5);
-    var retenirTotalH = 12;
-    retenirItems.forEach(function(item) {
-      var il = doc.splitTextToSize('• ' + item, cW - 12);
-      retenirTotalH += il.length * 5.2 + 4;
-    });
-    checkPage(Math.min(retenirTotalH, 50));
-    doc.setFillColor(230, 248, 238);
-    doc.setDrawColor(22, 96, 56);
-    doc.setLineWidth(0.4);
-    doc.roundedRect(MARGIN, y, cW, 10, 1.5, 1.5, 'FD');
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(9);
-    doc.setTextColor(22, 96, 56);
-    doc.text('À RETENIR ABSOLUMENT', MARGIN + 5, y + 6.8);
-    y += 12;
+    checkPage(16);
+    sectionLabel('A retenir');
     retenirItems.forEach(function(item) {
       doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5);
-      var itemLines = doc.splitTextToSize('• ' + item, cW - 12);
-      if (y + itemLines.length * 5.2 + 4 > PAGE_H) { doc.addPage(); y = RESUME_Y; }
-      doc.setFillColor(230, 248, 238);
-      doc.rect(MARGIN, y - 1, cW, itemLines.length * 5.2 + 3, 'F');
-      doc.setTextColor(20, 50, 32);
-      itemLines.forEach(function(l, li) { doc.text(l, MARGIN + 5, y + 4.5 + li * 5.2); });
-      y += itemLines.length * 5.2 + 4;
+      var itemLines = doc.splitTextToSize(item, cW - 10);
+      checkPage(itemLines.length * 5.5 + 5);
+      doc.setFillColor(C_ACC[0], C_ACC[1], C_ACC[2]);
+      doc.circle(MARGIN + 1.5, y - 1, 1, 'F');
+      doc.setTextColor(C_DARK[0], C_DARK[1], C_DARK[2]);
+      itemLines.forEach(function(l) { doc.text(l, MARGIN + 6, y); y += 5.5; });
+      y += 3;
     });
-    y += 7;
+    y += 4;
   }
 
-  /* Schéma — rendu PNG via canvas */
+  /* ── 7. Schéma hydraulique ── */
   if (fi.schema) {
     if (schemaPng && schemaPng.dataUrl) {
-      var imgW = cW;
       var imgH = Math.round(schemaPng.h * (cW / schemaPng.w));
-      checkPage(imgH + 14);
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5);
-      doc.setTextColor.apply(doc, col);
-      doc.text('SCHÉMA', MARGIN, y);
-      y += 5;
-      doc.addImage(schemaPng.dataUrl, 'PNG', MARGIN, y, imgW, imgH);
-      y += imgH + 4;
-    } else {
-      checkPage(14);
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5);
-      doc.setTextColor.apply(doc, col);
-      doc.text('SCHÉMA', MARGIN, y);
-      y += 5;
-      doc.setFillColor(245, 247, 250);
-      doc.setDrawColor(180, 195, 210);
+      checkPage(imgH + 22);
+      sectionLabel('Schema hydraulique');
+      doc.setDrawColor(C_LBLUE[0], C_LBLUE[1], C_LBLUE[2]);
       doc.setLineWidth(0.3);
-      doc.roundedRect(MARGIN, y, cW, 14, 1.5, 1.5, 'FD');
+      doc.roundedRect(MARGIN, y, cW, imgH + 4, 2, 2, 'D');
+      doc.addImage(schemaPng.dataUrl, 'PNG', MARGIN + 2, y + 2, cW - 4, imgH);
+      y += imgH + 8;
+      doc.setFont('helvetica', 'italic'); doc.setFontSize(8);
+      doc.setTextColor(C_GRAY[0], C_GRAY[1], C_GRAY[2]);
+      doc.text('Figure 1  —  ' + _pdfSanitize(c.titre), MARGIN + cW / 2, y, { align: 'center' });
+      y += 10;
+    } else {
+      checkPage(20);
+      doc.setFillColor(C_LGRAY[0], C_LGRAY[1], C_LGRAY[2]);
+      doc.setDrawColor(C_LBLUE[0], C_LBLUE[1], C_LBLUE[2]);
+      doc.setLineWidth(0.3);
+      doc.roundedRect(MARGIN, y, cW, 14, 2, 2, 'FD');
       doc.setFont('helvetica', 'italic'); doc.setFontSize(8.5);
-      doc.setTextColor(100, 120, 140);
-      doc.text('Schéma disponible dans l\'application HydroCalc', MARGIN + cW/2, y + 8, { align:'center' });
+      doc.setTextColor(C_GRAY[0], C_GRAY[1], C_GRAY[2]);
+      doc.text('Schema disponible dans l\'application HydroCalc', MARGIN + cW / 2, y + 8, { align: 'center' });
       y += 18;
     }
   }
 
-  /* Exercices d'application */
+  /* ── 8. Exercices d'application ── */
   if (c.exercices && c.exercices.length) {
-    doc.addPage(); y = RESUME_Y;
-
-    /* Bandeau titre section exercices */
-    doc.setFillColor(col[0] + Math.round((255 - col[0]) * 0.85), col[1] + Math.round((255 - col[1]) * 0.85), col[2] + Math.round((255 - col[2]) * 0.85));
-    doc.setDrawColor.apply(doc, col);
-    doc.setLineWidth(0.6);
-    doc.roundedRect(MARGIN, y, cW, 13, 1.5, 1.5, 'FD');
-    doc.setFillColor.apply(doc, col);
-    doc.roundedRect(MARGIN, y, 3.5, 13, 1, 1, 'F');
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(12);
-    doc.setTextColor.apply(doc, col);
-    doc.text('EXERCICES D\'APPLICATION', MARGIN + 7, y + 8.8);
-    y += 19;
+    newPage();
+    sectionLabel('Exercices d\'application');
 
     c.exercices.forEach(function(ex, ei) {
-      checkPage(50);
+      checkPage(40);
+      var exNum = (ei + 1) < 10 ? '0' + (ei + 1) : '' + (ei + 1);
 
-      /* Titre exercice — fond plein coloré */
-      doc.setFillColor.apply(doc, col);
-      doc.roundedRect(MARGIN, y, cW, 10, 1.5, 1.5, 'F');
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(10);
+      /* En-tête exercice */
+      doc.setFillColor(C_LGRAY[0], C_LGRAY[1], C_LGRAY[2]);
+      doc.roundedRect(MARGIN, y, cW, 9, 2, 2, 'F');
+      doc.setFillColor(C_DARK[0], C_DARK[1], C_DARK[2]);
+      doc.roundedRect(MARGIN, y, 14, 9, 2, 2, 'F');
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(8);
       doc.setTextColor(255, 255, 255);
-      var exTitre = 'Exercice ' + (ei + 1) + (ex.titre ? ' — ' + _pdfSanitize(ex.titre) : '');
-      var exTitreLines = doc.splitTextToSize(exTitre, cW - 10);
-      exTitreLines.forEach(function(l, li) { doc.text(l, MARGIN + 5, y + 6.8 + li * 5); });
-      y += Math.max(10, exTitreLines.length * 5 + 4) + 2;
+      doc.text(exNum, MARGIN + 7, y + 6.2, { align: 'center' });
+      doc.setFontSize(9.5); doc.setTextColor(C_DARK[0], C_DARK[1], C_DARK[2]);
+      var exTitre = ex.titre ? _pdfSanitize(ex.titre) : 'Exercice ' + exNum;
+      doc.text(exTitre, MARGIN + 17, y + 6.2);
+      y += 11;
 
-      /* Source / difficulté */
       if (ex.source || ex.difficulte) {
-        var srcTxt = [ex.source, ex.difficulte ? ('Difficulté : ' + ex.difficulte) : ''].filter(Boolean).join('  ·  ');
         doc.setFont('helvetica', 'italic'); doc.setFontSize(7.5);
-        doc.setTextColor(110, 120, 115);
-        doc.text(_pdfSanitize(srcTxt), MARGIN + 2, y + 4);
+        doc.setTextColor(C_GRAY[0], C_GRAY[1], C_GRAY[2]);
+        var srcTxt = [ex.source, ex.difficulte ? 'Niveau : ' + ex.difficulte : ''].filter(Boolean).join('  ·  ');
+        doc.text(_pdfSanitize(srcTxt), MARGIN + 17, y + 4);
         y += 8;
       }
 
-      /* Énoncé — fond très léger + bordure colorée */
       if (ex.enonce) {
-        doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(9.5);
         var enonceLines = doc.splitTextToSize(_pdfSanitize(ex.enonce), cW - 10);
-        checkPage(enonceLines.length * 5.2 + 12);
-        doc.setFillColor(248, 250, 249);
-        doc.setDrawColor.apply(doc, col);
-        doc.setLineWidth(0.4);
-        doc.roundedRect(MARGIN, y, cW, enonceLines.length * 5.2 + 8, 1.5, 1.5, 'FD');
-        doc.setFillColor.apply(doc, col);
-        doc.roundedRect(MARGIN, y, 2.5, enonceLines.length * 5.2 + 8, 1, 1, 'F');
-        doc.setTextColor(40, 50, 45);
-        enonceLines.forEach(function(l, li) { doc.text(l, MARGIN + 6, y + 6 + li * 5.2); });
-        y += enonceLines.length * 5.2 + 13;
+        checkPage(enonceLines.length * 5.5 + 12);
+        doc.setFillColor(C_LGRAY[0], C_LGRAY[1], C_LGRAY[2]);
+        doc.roundedRect(MARGIN, y, cW, enonceLines.length * 5.5 + 8, 2, 2, 'F');
+        doc.setFillColor(C_ACC[0], C_ACC[1], C_ACC[2]);
+        doc.roundedRect(MARGIN, y, 2.5, enonceLines.length * 5.5 + 8, 1, 1, 'F');
+        doc.setTextColor(C_TEXT[0], C_TEXT[1], C_TEXT[2]);
+        enonceLines.forEach(function(l, li) { doc.text(l, MARGIN + 7, y + 6.5 + li * 5.5); });
+        y += enonceLines.length * 5.5 + 12;
       }
 
-      /* Schéma lié à l'exercice */
       if (ex.schema) {
         var exPng = schemaMap ? (schemaMap['ex_' + ex.id] || null) : null;
         if (exPng && exPng.dataUrl) {
-          var exImgW = cW;
           var exImgH = Math.round(exPng.h * (cW / exPng.w));
-          checkPage(exImgH + 10);
-          doc.addImage(exPng.dataUrl, 'PNG', MARGIN, y, exImgW, exImgH);
-          y += exImgH + 6;
-        } else {
-          checkPage(20);
-          doc.setFillColor(245, 247, 250);
-          doc.setDrawColor(180, 195, 210);
-          doc.setLineWidth(0.3);
-          doc.roundedRect(MARGIN, y, cW, 14, 1.5, 1.5, 'FD');
+          checkPage(exImgH + 12);
+          doc.addImage(exPng.dataUrl, 'PNG', MARGIN, y, cW, exImgH);
+          y += exImgH + 4;
           doc.setFont('helvetica', 'italic'); doc.setFontSize(8);
-          doc.setTextColor(120, 135, 130);
-          doc.text('Voir schéma dans l\'application HydroCalc', MARGIN + cW / 2, y + 8, { align: 'center' });
-          y += 18;
+          doc.setTextColor(C_GRAY[0], C_GRAY[1], C_GRAY[2]);
+          doc.text('Figure  —  ' + exTitre, MARGIN + cW / 2, y, { align: 'center' });
+          y += 8;
+        } else {
+          checkPage(18);
+          doc.setFillColor(C_LGRAY[0], C_LGRAY[1], C_LGRAY[2]);
+          doc.setDrawColor(C_LBLUE[0], C_LBLUE[1], C_LBLUE[2]);
+          doc.setLineWidth(0.3);
+          doc.roundedRect(MARGIN, y, cW, 12, 2, 2, 'FD');
+          doc.setFont('helvetica', 'italic'); doc.setFontSize(8);
+          doc.setTextColor(C_GRAY[0], C_GRAY[1], C_GRAY[2]);
+          doc.text('Voir schema dans l\'application HydroCalc', MARGIN + cW / 2, y + 7, { align: 'center' });
+          y += 16;
         }
       }
 
-      /* Questions */
       if (ex.questions && ex.questions.length) {
         ex.questions.forEach(function(q) {
-          /* Définir la police AVANT splitTextToSize pour que la mesure soit correcte */
-          doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
-          var qLabel = 'Q' + q.num + '.';
-          var qBody = _pdfSanitize(q.texte);
-          var qLines = doc.splitTextToSize(qBody, cW - 14);
+          doc.setFont('helvetica', 'normal'); doc.setFontSize(9.5);
+          var qLines = doc.splitTextToSize(_pdfSanitize(q.texte), cW - 14);
           doc.setFont('helvetica', 'italic'); doc.setFontSize(8);
           var indiceLines = q.indice ? doc.splitTextToSize('Indice : ' + _pdfSanitize(q.indice), cW - 12) : [];
           var ansLines = 4;
-          var blockH = qLines.length * 5.2 + 8 + (indiceLines.length ? indiceLines.length * 4.8 + 8 : 0) + ansLines * 7.5 + 6;
+          var blockH = qLines.length * 5.5 + 8 + (indiceLines.length ? indiceLines.length * 4.8 + 6 : 0) + ansLines * 7 + 6;
           checkPage(blockH);
 
-          /* Bloc question — fond très clair */
-          doc.setFillColor(col[0] + Math.round((255 - col[0]) * 0.92), col[1] + Math.round((255 - col[1]) * 0.92), col[2] + Math.round((255 - col[2]) * 0.92));
-          doc.roundedRect(MARGIN, y, cW, qLines.length * 5.2 + 8, 1.2, 1.2, 'F');
-          doc.setFont('helvetica', 'bold'); doc.setFontSize(9);
-          doc.setTextColor.apply(doc, col);
-          doc.text(qLabel, MARGIN + 4, y + 5.5);
-          doc.setFont('helvetica', 'normal'); doc.setTextColor(40, 50, 45);
-          qLines.forEach(function(l, li) { doc.text(l, MARGIN + 12, y + 5.5 + li * 5.2); });
-          y += qLines.length * 5.2 + 10;
+          doc.setFillColor(C_LBLUE[0], C_LBLUE[1], C_LBLUE[2]);
+          doc.roundedRect(MARGIN, y, cW, qLines.length * 5.5 + 8, 1.5, 1.5, 'F');
+          doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5);
+          doc.setTextColor(C_DARK[0], C_DARK[1], C_DARK[2]);
+          doc.text('Q' + q.num + '.', MARGIN + 4, y + 6.5);
+          doc.setFont('helvetica', 'normal'); doc.setTextColor(C_TEXT[0], C_TEXT[1], C_TEXT[2]);
+          qLines.forEach(function(l, li) { doc.text(l, MARGIN + 13, y + 6.5 + li * 5.5); });
+          y += qLines.length * 5.5 + 10;
 
-          /* Indice — espacé et distingué */
           if (indiceLines.length) {
-            y += 2;
             doc.setFont('helvetica', 'italic'); doc.setFontSize(8);
-            doc.setTextColor(110, 125, 118);
+            doc.setTextColor(C_GRAY[0], C_GRAY[1], C_GRAY[2]);
             indiceLines.forEach(function(l, li) { doc.text(l, MARGIN + 6, y + li * 4.8); });
-            y += indiceLines.length * 4.8 + 6;
+            y += indiceLines.length * 4.8 + 5;
           }
 
-          /* Lignes de réponse pointillées */
-          doc.setDrawColor(190, 205, 200);
-          doc.setLineWidth(0.3);
+          doc.setDrawColor(200, 212, 225); doc.setLineWidth(0.25);
           for (var li = 0; li < ansLines; li++) {
-            var lx1 = MARGIN + 3, lx2 = MARGIN + cW - 3, ly = y + li * 7.5 + 3;
-            var segL = 1.5, gapL = 2, sx = lx1;
-            while (sx < lx2) {
-              doc.line(sx, ly, Math.min(sx + segL, lx2), ly);
-              sx += segL + gapL;
-            }
+            var lx1 = MARGIN + 3, lx2 = MARGIN + cW - 3, ly = y + li * 7 + 4;
+            var sx = lx1;
+            while (sx < lx2) { doc.line(sx, ly, Math.min(sx + 1.5, lx2), ly); sx += 3.5; }
           }
-          y += ansLines * 7.5 + 8;
+          y += ansLines * 7 + 8;
         });
       }
-
-      y += 10;
+      y += 8;
     });
   }
 
@@ -8615,37 +11400,36 @@ function _hexToRgb(hex) {
 }
 
 function _pdfFicheHeader(doc, W, MARGIN, color, title, subtitle) {
-  var col = _hexToRgb(color);
-  /* Fond blanc + fine bordure colorée en bas */
-  doc.setFillColor(255, 255, 255);
-  doc.rect(0, 0, W, 22, 'F');
-  doc.setDrawColor.apply(doc, col);
-  doc.setLineWidth(0.8);
-  doc.line(0, 22, W, 22);
-  /* Barre colorée fine à gauche */
-  doc.setFillColor.apply(doc, col);
-  doc.rect(0, 0, 4, 22, 'F');
+  var today = new Date().toLocaleDateString('fr-FR');
+  var C_DARK = [18, 59, 114];
+  var C_ACC  = [8, 127, 234];
+  var C_GRAY = [104, 117, 133];
+
+  /* Logo + "HydroCalc" à gauche */
   if (_pdfIconDataUrl) {
-    doc.addImage(_pdfIconDataUrl, 'PNG', MARGIN + 4, 3, 16, 16);
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(14);
-    doc.setTextColor.apply(doc, col);
-    doc.text('HydroCalc — Fiche de révision', MARGIN + 23, 10);
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5);
-    doc.setTextColor(80, 90, 85);
-    doc.text(_pdfSanitize(title), MARGIN + 23, 17);
+    doc.addImage(_pdfIconDataUrl, 'PNG', MARGIN, 4, 8, 8);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
+    doc.setTextColor(C_DARK[0], C_DARK[1], C_DARK[2]);
+    doc.text('HydroCalc', MARGIN + 10.5, 10.5);
   } else {
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(14);
-    doc.setTextColor.apply(doc, col);
-    doc.text('HydroCalc — Fiche de révision', MARGIN + 4, 10);
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5);
-    doc.setTextColor(80, 90, 85);
-    doc.text(_pdfSanitize(title), MARGIN + 4, 17);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
+    doc.setTextColor(C_DARK[0], C_DARK[1], C_DARK[2]);
+    doc.text('HydroCalc', MARGIN, 10.5);
   }
-  if (subtitle) {
-    doc.setFontSize(7.5);
-    doc.setTextColor.apply(doc, col);
-    doc.text(_pdfSanitize(subtitle), W - MARGIN, 17, { align: 'right' });
-  }
+
+  /* Métadonnées à droite */
+  var metaParts = [];
+  if (subtitle) metaParts.push(_pdfSanitize(subtitle));
+  if (title) metaParts.push(_pdfSanitize(title));
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5);
+  doc.setTextColor(C_GRAY[0], C_GRAY[1], C_GRAY[2]);
+  if (metaParts.length) doc.text(metaParts.join('  ·  '), W - MARGIN, 8, { align: 'right' });
+  doc.text(today, W - MARGIN, 13.5, { align: 'right' });
+
+  /* Ligne bleue fine */
+  doc.setDrawColor(C_ACC[0], C_ACC[1], C_ACC[2]);
+  doc.setLineWidth(0.6);
+  doc.line(MARGIN, 17, W - MARGIN, 17);
 }
 
 /* ─── Aperçu PDF avant téléchargement ─── */
@@ -8725,14 +11509,22 @@ function _downloadFichePDF(fId, aId, mId, cId) {
   _preconvertSchemas([c], function(schemaMap) {
     var jsPDF = window.jspdf.jsPDF;
     var doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-    var W = 210, MARGIN = 14, cW = W - MARGIN * 2, y = 32;
+    var W = 210, MARGIN = 14, cW = W - MARGIN * 2, y = 22;
+    var hi = { color: m.color, title: m.name, subtitle: f.sigle };
 
     _pdfFicheHeader(doc, W, MARGIN, m.color, m.name, f.sigle);
-    y = _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap);
+    y = _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap, hi);
 
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(7);
-    doc.setTextColor(150, 160, 155);
-    doc.text('Généré avec HydroCalc · hydrocalc.fr', MARGIN, 292);
+    var totalPages = doc.internal.getNumberOfPages();
+    for (var p = 1; p <= totalPages; p++) {
+      doc.setPage(p);
+      doc.setDrawColor(220, 238, 255); doc.setLineWidth(0.25);
+      doc.line(MARGIN, 285, W - MARGIN, 285);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(7);
+      doc.setTextColor(104, 117, 133);
+      doc.text('HYDROCALC  |  CALCULER. COMPRENDRE. MAITRISER L\'HYDRAULIQUE.', MARGIN, 290);
+      doc.text('Page ' + p + ' / ' + totalPages, W - MARGIN, 290, { align: 'right' });
+    }
 
     _pdfSaveOrPreview(doc, 'Fiche_' + c.titre.replace(/[^a-zA-Z0-9]/g, '_').slice(0, 50) + '.pdf', 'Fiche PDF téléchargée ✓');
   });
@@ -8751,43 +11543,68 @@ function _downloadFormationPDF(fId) {
   _preconvertSchemas(allChaps, function(schemaMap) {
     var jsPDF = window.jspdf.jsPDF;
     var doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-    var W = 210, MARGIN = 14, cW = W - MARGIN * 2, y = 32;
-    var fCol = _hexToRgb(f.color);
+    var W = 210, MARGIN = 14, cW = W - MARGIN * 2;
+    var C_DARK = [18, 59, 114], C_ACC = [8, 127, 234], C_GRAY = [104, 117, 133], C_LGRAY = [244, 247, 250];
 
-    /* Couverture */
-    doc.setFillColor.apply(doc, fCol);
-    doc.rect(0, 0, W, 297, 'F');
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(26);
-    doc.setTextColor(255,255,255);
-    doc.text('HydroCalc', W/2, 110, { align: 'center' });
-    doc.setFontSize(13);
-    doc.text('Pack de fiches de révision', W/2, 122, { align: 'center' });
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(16);
-    doc.text(_pdfSanitize(f.name), W/2, 145, { align: 'center', maxWidth: cW });
-    doc.setFontSize(10);
-    doc.text(_pdfSanitize(f.organisme + ' - ' + f.niveau), W/2, 155, { align: 'center' });
+    /* Page de couverture sobre */
+    doc.setFillColor(C_DARK[0], C_DARK[1], C_DARK[2]);
+    doc.rect(0, 0, W, 60, 'F');
+    if (_pdfIconDataUrl) doc.addImage(_pdfIconDataUrl, 'PNG', MARGIN, 18, 14, 14);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(20);
+    doc.setTextColor(255, 255, 255);
+    doc.text('HydroCalc', MARGIN + 18, 28);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
+    doc.setTextColor(C_ACC[0], C_ACC[1], C_ACC[2]);
+    doc.text('CALCULER. COMPRENDRE. MAITRISER L\'HYDRAULIQUE.', MARGIN + 18, 36);
+
+    doc.setFillColor(C_LGRAY[0], C_LGRAY[1], C_LGRAY[2]);
+    doc.rect(0, 60, W, 297 - 60, 'F');
+
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(22);
+    doc.setTextColor(C_DARK[0], C_DARK[1], C_DARK[2]);
+    doc.text(_pdfSanitize(f.name), MARGIN, 100, { maxWidth: cW });
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(11);
+    doc.setTextColor(C_GRAY[0], C_GRAY[1], C_GRAY[2]);
+    doc.text(_pdfSanitize((f.organisme || '') + (f.niveau ? '  ·  ' + f.niveau : '')), MARGIN, 115);
     doc.setFontSize(9);
-    doc.text(totalChap + ' fiches de révision', W/2, 270, { align: 'center' });
+    doc.text(totalChap + ' fiches de cours', MARGIN, 125);
 
-    doc.addPage(); y = 14;
+    doc.setDrawColor(C_ACC[0], C_ACC[1], C_ACC[2]); doc.setLineWidth(1);
+    doc.line(MARGIN, 130, MARGIN + 30, 130);
+
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(8);
+    doc.setTextColor(C_GRAY[0], C_GRAY[1], C_GRAY[2]);
+    doc.text(new Date().toLocaleDateString('fr-FR'), MARGIN, 280);
+
+    doc.addPage();
 
     f.annees.forEach(function(a) {
       a.matieres.forEach(function(m) {
         m.chapitres.forEach(function(c) {
           if (!c.fiche) return;
+          var hi = { color: m.color, title: m.name, subtitle: f.sigle + ' · ' + a.name };
           _pdfFicheHeader(doc, W, MARGIN, m.color, m.name, f.sigle + ' · ' + a.name);
-          y = 32;
-          y = _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap);
-          doc.addPage(); y = 14;
+          var y = 22;
+          y = _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap, hi);
+          doc.addPage();
         });
       });
     });
 
-    if (doc.internal.getNumberOfPages() > 1) {
-      doc.deletePage(doc.internal.getNumberOfPages());
+    if (doc.internal.getNumberOfPages() > 1) doc.deletePage(doc.internal.getNumberOfPages());
+
+    var totalPages = doc.internal.getNumberOfPages();
+    for (var p = 2; p <= totalPages; p++) {
+      doc.setPage(p);
+      doc.setDrawColor(220, 238, 255); doc.setLineWidth(0.25);
+      doc.line(MARGIN, 285, W - MARGIN, 285);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(7);
+      doc.setTextColor(104, 117, 133);
+      doc.text('HYDROCALC  |  CALCULER. COMPRENDRE. MAITRISER L\'HYDRAULIQUE.', MARGIN, 290);
+      doc.text('Page ' + p + ' / ' + totalPages, W - MARGIN, 290, { align: 'right' });
     }
 
-    _pdfSaveOrPreview(doc, 'HydroCalc_' + f.sigle.replace(/[^a-zA-Z0-9]/g, '_') + '_fiches_revision.pdf', 'Pack PDF téléchargé (' + totalChap + ' fiches) ✓');
+    _pdfSaveOrPreview(doc, 'HydroCalc_' + f.sigle.replace(/[^a-zA-Z0-9]/g, '_') + '_fiches.pdf', 'Pack PDF téléchargé (' + totalChap + ' fiches) ✓');
   });
 }
 
@@ -8804,16 +11621,28 @@ function _downloadMatierePDF(fId, aId, mId) {
   _preconvertSchemas(chaps, function(schemaMap) {
     var jsPDF = window.jspdf.jsPDF;
     var doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-    var W = 210, MARGIN = 14, cW = W - MARGIN * 2, y = 32;
+    var W = 210, MARGIN = 14, cW = W - MARGIN * 2;
+    var hi = { color: m.color, title: m.name, subtitle: f.sigle + ' · ' + a.name };
 
     chaps.forEach(function(c, idx) {
+      if (idx > 0) doc.addPage();
       _pdfFicheHeader(doc, W, MARGIN, m.color, m.name, f.sigle + ' · ' + a.name);
-      y = 32;
-      y = _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap);
-      if (idx < chaps.length - 1) { doc.addPage(); y = 14; }
+      var y = 22;
+      y = _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, schemaMap, hi);
     });
 
-    _pdfSaveOrPreview(doc, 'HydroCalc_' + m.name.replace(/[^a-zA-Z0-9]/g, '_').slice(0, 50) + '_fiches.pdf', 'Fiches du thème téléchargées (' + chaps.length + ') ✓');
+    var totalPages = doc.internal.getNumberOfPages();
+    for (var p = 1; p <= totalPages; p++) {
+      doc.setPage(p);
+      doc.setDrawColor(220, 238, 255); doc.setLineWidth(0.25);
+      doc.line(MARGIN, 285, W - MARGIN, 285);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(7);
+      doc.setTextColor(104, 117, 133);
+      doc.text('HYDROCALC  |  CALCULER. COMPRENDRE. MAITRISER L\'HYDRAULIQUE.', MARGIN, 290);
+      doc.text('Page ' + p + ' / ' + totalPages, W - MARGIN, 290, { align: 'right' });
+    }
+
+    _pdfSaveOrPreview(doc, 'HydroCalc_' + m.name.replace(/[^a-zA-Z0-9]/g, '_').slice(0, 50) + '_fiches.pdf', 'Fiches du theme telechargees (' + chaps.length + ') ✓');
   });
 }
 
