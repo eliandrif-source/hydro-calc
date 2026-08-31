@@ -116,19 +116,30 @@ function stripeOpenPortal() {
   }
 })();
 
-/* ─── Charger le pont de sécurité après les scripts historiques ───
-   auth.js est encore monolithique. Le bridge est volontairement chargé une
-   fois la page terminée afin que ses overrides soient les dernières définitions
-   actives, sans devoir réécrire le fichier historique en une seule opération. */
-(function _loadAuthSecurityBridge() {
-  function loadBridge() {
-    if (document.getElementById('hc-auth-security-bridge')) return;
+/* ─── Charger les ponts de sécurité après les scripts historiques ───
+   auth.js est encore monolithique. Les bridges sont volontairement chargés
+   une fois la page terminée afin que leurs overrides soient les dernières
+   définitions actives, sans réécrire le fichier historique d'un seul bloc. */
+(function _loadSecurityBridges() {
+  function appendScript(id, src, onload) {
+    if (document.getElementById(id)) {
+      if (onload) onload();
+      return;
+    }
     var script = document.createElement('script');
-    script.id = 'hc-auth-security-bridge';
-    script.src = 'js/auth-security.js';
+    script.id = id;
+    script.src = src;
     script.async = false;
+    if (onload) script.onload = onload;
     document.body.appendChild(script);
   }
-  if (document.readyState === 'complete') loadBridge();
-  else window.addEventListener('load', loadBridge, { once: true });
+
+  function loadBridges() {
+    appendScript('hc-auth-security-bridge', 'js/auth-security.js', function() {
+      appendScript('hc-xss-security-bridge', 'js/xss-security.js');
+    });
+  }
+
+  if (document.readyState === 'complete') loadBridges();
+  else window.addEventListener('load', loadBridges, { once: true });
 })();
