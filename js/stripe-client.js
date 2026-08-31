@@ -98,10 +98,12 @@ function stripeOpenPortal() {
     setTimeout(function() {
       authToast('Paiement confirmé ! Votre abonnement est actif.');
       if (AUTH.user && SupaDB) {
-        SupaDB.from('profiles').select('*').eq('id', AUTH.user.id).single()
+        var uid = AUTH._uid || AUTH.user.id;
+        if (!uid) return;
+        SupaDB.from('profiles').select('*').eq('id', uid).single()
           .then(function(res) {
             if (res.data) {
-              AUTH.user.plan = res.data.plan;
+              AUTH.user.plan = res.data.is_admin === true ? 'admin' : (res.data.plan || 'free');
               AUTH.user.isAdmin = res.data.is_admin === true;
               if (typeof buildProfile === 'function') buildProfile();
             }
@@ -112,4 +114,21 @@ function stripeOpenPortal() {
     history.replaceState({}, '', window.location.pathname);
     setTimeout(function() { authToast('Paiement annulé.'); }, 800);
   }
+})();
+
+/* ─── Charger le pont de sécurité après les scripts historiques ───
+   auth.js est encore monolithique. Le bridge est volontairement chargé une
+   fois la page terminée afin que ses overrides soient les dernières définitions
+   actives, sans devoir réécrire le fichier historique en une seule opération. */
+(function _loadAuthSecurityBridge() {
+  function loadBridge() {
+    if (document.getElementById('hc-auth-security-bridge')) return;
+    var script = document.createElement('script');
+    script.id = 'hc-auth-security-bridge';
+    script.src = 'js/auth-security.js';
+    script.async = false;
+    document.body.appendChild(script);
+  }
+  if (document.readyState === 'complete') loadBridge();
+  else window.addEventListener('load', loadBridge, { once: true });
 })();
