@@ -44,12 +44,54 @@ Vecteurs de régression : 5 PP → 3 m³ ; 6 PP → 4 m³ ; 8 PP → 6 m³. Le n
 
 Implémentation auditée : `js/science-core.js` → `HydroCalcScience.fteSizing()`.
 
+## 3. Méthode rationnelle — débit de pointe pluvial
+
+**Statut : CORRIGÉ / moteur audité actif**
+
+Références principales : Cerema, Hydrouti ; guide technique d'assainissement routier.
+
+Hypothèse : pluie uniforme et constante sur le bassin ; le débit maximal est obtenu lorsque la durée de l'averse est égale au temps de concentration. L'intensité `i` doit donc provenir de la courbe IDF pour cette durée et la période de retour retenue.
+
+Avec `i` en mm/h et `A` en hectares :
+
+- `Q [m³/s] = C × i × A / 360`
+- `Q [L/s] = C × i × A / 0,36`
+
+**Erreur corrigée :** l'ancien HydroCalc calculait `C × i × A / 360` puis affichait cette valeur en L/s. Cette expression étant en m³/s, l'affichage sous-estimait le débit d'un facteur 1000.
+
+Vecteur de régression : `C = 0,60`, `i = 25 mm/h`, `A = 5 ha` → `Q = 0,208333 m³/s = 208,333 L/s = 750 m³/h`.
+
+Le seuil `S ≤ 2 km²` n'est plus présenté comme une limite universelle. Le domaine dépend du contexte et du référentiel : par exemple, le guide Cerema pour bassins versants naturels donne des limites spécifiques selon la région.
+
+Implémentation auditée : `js/science-core.js` → `HydroCalcScience.rationalPeakFlow()`.
+
+## 4. ANC — perméabilité Porchet / interprétation réglementaire
+
+**Statut : CORRIGÉ pour les unités et seuils réglementaires / formule Porchet encore À VÉRIFIER**
+
+Référence principale : arrêté du 7 septembre 2009 modifié.
+
+- Article 6 : traitement par le sol en place lorsque la perméabilité est comprise entre **15 et 500 mm/h**, avec les autres conditions du site.
+- Article 11 : infiltration des eaux usées traitées lorsque la perméabilité est comprise entre **10 et 500 mm/h**.
+
+**Erreur corrigée :** plusieurs écrans utilisaient `mm/min` alors que le calculateur Porchet et les seuils réglementaires étaient exprimés en `mm/h`. Des règles de type `K < 1`, `1–15`, `>15 mm/min` étaient ensuite présentées comme déterminant directement la filière. Cette présentation n'est plus considérée comme une règle réglementaire nationale.
+
+HydroCalc affiche désormais les plages légales en mm/h et sépare :
+
+- l'aptitude réglementaire du sol au traitement en place ;
+- l'aptitude à l'infiltration d'eaux déjà traitées ;
+- le choix de filière, qui doit rester dépendant de l'étude de sol, du DTU, du dispositif et des prescriptions du SPANC.
+
+Implémentation auditée : `js/science-core.js` → `HydroCalcScience.ancPermeabilityStatus()`.
+
+La formule de décroissance de charge utilisée dans le calcul Porchet historique est conservée provisoirement mais n'est pas encore marquée VALIDÉE : attribution normative, protocole et géométrie doivent encore être consolidés.
+
 ## File d'audit prioritaire
 
-- Méthode rationnelle : formule, unités pluie/surface, domaine de bassin et coefficient de ruissellement.
 - Manning section partielle : géométrie de section mouillée, rayon hydraulique, angles et cas limites.
 - Coup de bélier : Joukowsky, célérité et hypothèses de fermeture.
-- Porchet / épandage ANC : cohérence des unités et seuils de perméabilité entre écrans.
+- Porchet : validation complète de la formule et du protocole de mesure.
+- Épandage ANC : dimensionnement surfacique et distinction DTU / pratique SPANC / réglementation.
 - STEP : distinguer obligations réglementaires, paramètres de conception et valeurs de pratique.
 - AEP : Hazen-Williams, HMT, NPSH, chloration et temps de séjour.
 - Milieux aquatiques : Shields, Langelier, passes à poissons et valeurs biologiques de référence.
