@@ -1,6 +1,7 @@
 -- HydroCalc — authoritative server-side usage quotas
--- Free: 10 calculations/day, 10 QCM/week, no report export.
+-- Free: 10 calculations/day, QCM unavailable by product UI, no report export.
 -- Pro: calculations unlimited, 10 QCM/week, 1 report/week.
+-- Active 7-day trial: same quota entitlement as Pro.
 -- Etablissement/admin: unlimited for these counters.
 
 alter table public.usage_quotas
@@ -33,10 +34,20 @@ begin
     raise exception 'invalid quota kind';
   end if;
 
-  select coalesce(plan, 'free'), coalesce(is_admin, false)
+  select
+    case
+      when coalesce(p.is_admin, false) then 'admin'
+      when p.plan = 'free'
+       and coalesce(p.trial_used, false) = true
+       and p.trial_start is not null
+       and p.trial_start > now() - interval '7 days'
+        then 'pro'
+      else coalesce(p.plan, 'free')
+    end,
+    coalesce(p.is_admin, false)
     into v_plan, v_admin
-    from public.profiles
-   where id = v_uid;
+    from public.profiles p
+   where p.id = v_uid;
 
   if not found then raise exception 'profile not found'; end if;
 
@@ -62,8 +73,6 @@ begin
     return;
   end if;
 
-  -- Serialize consumption for this user/kind/period. The row is created once,
-  -- then incremented only when still below the entitlement limit.
   insert into public.usage_quotas(profile_id, kind, period_key, count)
   values (v_uid, p_kind, v_period, 0)
   on conflict (profile_id, kind, period_key) do nothing;
@@ -106,8 +115,21 @@ begin
   if v_uid is null then raise exception 'authentication required'; end if;
   if p_kind not in ('calc_daily', 'report_weekly', 'qcm_weekly') then raise exception 'invalid quota kind'; end if;
 
-  select coalesce(plan, 'free'), coalesce(is_admin, false)
-    into v_plan, v_admin from public.profiles where id = v_uid;
+  select
+    case
+      when coalesce(p.is_admin, false) then 'admin'
+      when p.plan = 'free'
+       and coalesce(p.trial_used, false) = true
+       and p.trial_start is not null
+       and p.trial_start > now() - interval '7 days'
+        then 'pro'
+      else coalesce(p.plan, 'free')
+    end,
+    coalesce(p.is_admin, false)
+    into v_plan, v_admin
+    from public.profiles p
+   where p.id = v_uid;
+
   if not found then raise exception 'profile not found'; end if;
 
   if v_admin or v_plan in ('admin', 'etab') then
