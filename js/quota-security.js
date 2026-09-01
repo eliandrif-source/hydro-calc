@@ -100,8 +100,6 @@
       var usage = await consume('report_weekly');
       if (!usage.allowed) return;
 
-      /* Legacy code still has a localStorage quota check/increment. Temporarily
-         neutralize it so Supabase is the single authoritative counter. */
       var oldCan = window._canGenerateReport;
       var oldInc = window._incrementReportQuota;
       window._canGenerateReport = function () { return { ok: true }; };
@@ -116,6 +114,30 @@
   }
 
   ['generateHTMLReport', '_doGeneratePDFReport', '_doGenerateDOCXReport', '_doGenerateODTReport'].forEach(gateReportFunction);
+
+  /* ── Banque QCM ──────────────────────────────────────────────
+     Pro is limited to 10 starts/week. Establishment/Admin remain unlimited.
+     The legacy implementation increments localStorage; this override makes
+     Supabase the authoritative counter and never calls that increment helper. */
+  if (typeof window._startBankQCM === 'function') {
+    window._startBankQCM = async function (idx) {
+      if (typeof window.QCM_BANK === 'undefined' || !window.QCM_BANK[idx]) return;
+      var access = typeof window._qcmBankAccess === 'function' ? window._qcmBankAccess() : 'none';
+      if (access === 'none') {
+        toast('QCM réservés au plan Pro, Établissement ou Admin');
+        return;
+      }
+      if (access === 'limited') {
+        if (!isAuthenticatedUser()) {
+          toast('Reconnectez-vous pour utiliser les QCM Pro.');
+          return;
+        }
+        var usage = await consume('qcm_weekly');
+        if (!usage.allowed) return;
+      }
+      if (typeof window._startStudentQCM === 'function') window._startStudentQCM(window.QCM_BANK[idx], true);
+    };
+  }
 
   window.hcQuotaConsume = consume;
 })();
