@@ -76,20 +76,56 @@ Référence principale : arrêté du 7 septembre 2009 modifié.
 
 **Erreur corrigée :** plusieurs écrans utilisaient `mm/min` alors que le calculateur Porchet et les seuils réglementaires étaient exprimés en `mm/h`. Des règles de type `K < 1`, `1–15`, `>15 mm/min` étaient ensuite présentées comme déterminant directement la filière. Cette présentation n'est plus considérée comme une règle réglementaire nationale.
 
-HydroCalc affiche désormais les plages légales en mm/h et sépare :
-
-- l'aptitude réglementaire du sol au traitement en place ;
-- l'aptitude à l'infiltration d'eaux déjà traitées ;
-- le choix de filière, qui doit rester dépendant de l'étude de sol, du DTU, du dispositif et des prescriptions du SPANC.
+HydroCalc affiche désormais les plages légales en mm/h et sépare l'aptitude réglementaire du sol au traitement en place, l'aptitude à l'infiltration d'eaux déjà traitées et le choix de filière, qui doit rester dépendant de l'étude de sol, du DTU, du dispositif et des prescriptions du SPANC.
 
 Implémentation auditée : `js/science-core.js` → `HydroCalcScience.ancPermeabilityStatus()`.
 
 La formule de décroissance de charge utilisée dans le calcul Porchet historique est conservée provisoirement mais n'est pas encore marquée VALIDÉE : attribution normative, protocole et géométrie doivent encore être consolidés.
 
+## 5. Manning-Strickler — conduite circulaire partiellement remplie
+
+**Statut : CORRIGÉ / moteur audité actif**
+
+La géométrie historique de la section mouillée était correcte pour `0 < y < D` :
+
+- `θ = 2 arccos(1 − 2y/D)`
+- `A = D²(θ − sin θ)/8`
+- `P = Dθ/2`
+- `Rh = A/P`
+
+La largeur au miroir vaut `T = D sin(θ/2)`. La profondeur hydraulique utilisée pour le nombre de Froude est `Dh = A/T`.
+
+**Erreur corrigée :** l'ancien calcul utilisait `Fr = V/√(g y)`. Cette expression n'est valable telle quelle que pour une section rectangulaire où la profondeur hydraulique est égale à la hauteur d'eau. Pour la section circulaire partiellement remplie, HydroCalc utilise maintenant `Fr = V/√(g A/T)`. HEC-RAS définit également la profondeur hydraulique comme `A / largeur au miroir`.
+
+Vecteur de régression : `D = 0,300 m`, `y = 0,240 m`, `K = 90`, `I = 3 ‰` → `θ = 4,428595 rad`, `A = 0,0606217 m²`, `Rh = 0,091258 m`, `T = 0,240 m`, `Dh = 0,252590 m`, `Q = 60,5729 L/s`, `V = 0,999195 m/s`, `Fr = 0,634757`.
+
+Implémentation auditée : `js/science-advanced.js` → `HydroCalcScience.manningPartialCircular()`.
+
+## 6. Coup de bélier — borne de Joukowsky en fermeture rapide
+
+**Statut : CORRIGÉ / moteur simplifié audité actif**
+
+Référence principale : USACE, EM 1110-3-173, §5-5.
+
+Le temps critique d'aller-retour de l'onde est `Tc = 2L/a`. Si l'arrêt complet s'effectue en un temps `tf ≤ Tc`, la fermeture est considérée rapide dans cette analyse simplifiée et la hausse théorique maximale est :
+
+- `ΔH = a ΔV / g`
+- `ΔP = ρ a ΔV`
+
+**Corrections HydroCalc :**
+
+- le temps de fermeture `tf` est désormais demandé et comparé à `Tc` ;
+- la célérité `a` est une hypothèse de calcul éditable et non une constante intrinsèque du seul matériau ; elle dépend notamment des propriétés du fluide et de la conduite, de son diamètre/épaisseur et de son élasticité ;
+- lorsque `tf > Tc`, la valeur de Joukowsky est affichée comme borne théorique et non comme surpression calculée du transitoire réel ;
+- la pression minimale théorique n'est plus artificiellement tronquée à `0 bar` : une valeur manométrique négative déclenche au contraire un avertissement de dépression/cavitation ou séparation de colonne à étudier ;
+- HydroCalc ne déduit plus automatiquement une classe PN à partir de ce seul calcul transitoire simplifié.
+
+Vecteur de régression : `L = 500 m`, `ΔV = 1,2 m/s`, `a = 400 m/s`, `Pstat = 4 bar(g)`, `tf = 1 s` → `Tc = 2,5 s`, fermeture rapide, `ΔH = 48,9297 m`, `ΔP = 4,8 bar`, `Pmax théorique = 8,8 bar(g)`, `Pmin symétrique théorique = −0,8 bar(g)`.
+
+Implémentation auditée : `js/science-advanced.js` → `HydroCalcScience.waterHammerJoukowsky()`.
+
 ## File d'audit prioritaire
 
-- Manning section partielle : géométrie de section mouillée, rayon hydraulique, angles et cas limites.
-- Coup de bélier : Joukowsky, célérité et hypothèses de fermeture.
 - Porchet : validation complète de la formule et du protocole de mesure.
 - Épandage ANC : dimensionnement surfacique et distinction DTU / pratique SPANC / réglementation.
 - STEP : distinguer obligations réglementaires, paramètres de conception et valeurs de pratique.
