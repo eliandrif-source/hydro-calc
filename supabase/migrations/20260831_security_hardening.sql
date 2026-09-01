@@ -1,7 +1,40 @@
 -- HydroCalc — security hardening
 -- Apply through the Supabase migration workflow before production.
 -- This migration intentionally does NOT grant or revoke the existing administrator.
--- Existing is_admin/plan values are preserved.
+-- Existing administrator rows are preserved.
+
+-- Normalize legacy nullable flags before server-side billing code relies on
+-- `is_admin = false`. The target schema already defines NOT NULL/default false,
+-- but this keeps older deployed databases compatible.
+update public.profiles set is_admin = false where is_admin is null;
+alter table public.profiles alter column is_admin set default false;
+alter table public.profiles alter column is_admin set not null;
+
+-- Preflight: never silently delete financial/subscription history to make a
+-- uniqueness constraint pass. Fail with an actionable message if legacy data
+-- contains duplicates, so it can be reviewed before deployment.
+do $$
+begin
+  if exists (
+    select stripe_subscription_id
+      from public.subscriptions
+     where stripe_subscription_id is not null
+     group by stripe_subscription_id
+    having count(*) > 1
+  ) then
+    raise exception 'HydroCalc preflight: duplicate subscriptions.stripe_subscription_id values exist; review duplicates before applying security hardening';
+  end if;
+
+  if exists (
+    select stripe_payment_id
+      from public.payments
+     where stripe_payment_id is not null
+     group by stripe_payment_id
+    having count(*) > 1
+  ) then
+    raise exception 'HydroCalc preflight: duplicate payments.stripe_payment_id values exist; review duplicates before applying security hardening';
+  end if;
+end $$;
 
 -- Stripe external identifiers must be unique so webhook retries stay idempotent.
 create unique index if not exists subscriptions_stripe_subscription_id_uidx
@@ -33,7 +66,8 @@ begin
 end $$;
 
 -- Users may edit only non-privileged profile fields through this RPC.
--- Billing/admin fields remain writable only by trusted server-side code/service_role.
+-- NULL arguments mean "leave this field unchanged", which makes partial profile
+-- edits safe and avoids accidentally erasing another editable field.
 create or replace function public.update_my_profile(
   p_name text default null,
   p_profile text default null
@@ -51,8 +85,8 @@ begin
   end if;
 
   update public.profiles
-     set name = p_name,
-         profile = p_profile
+     set name = coalesce(p_name, name),
+         profile = coalesce(p_profile, profile)
    where id = auth.uid()
    returning * into result;
 
