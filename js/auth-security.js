@@ -76,6 +76,26 @@
     finally{if(btnEl){btnEl.disabled=false;btnEl.textContent='Créer mon compte';}}
   };
 
+  window.authUpdatePassword=async function(){
+    var pwd=(typeof window.getV==='function'?window.getV('reset-pwd'):'')||'';
+    var pwd2=(typeof window.getV==='function'?window.getV('reset-pwd2'):'')||'';
+    var errEl=document.getElementById('reset-pwd-err');
+    var btnEl=document.querySelector('#auth-reset-password .auth-btn-submit');
+    function showErr(msg){if(errEl){errEl.textContent=msg;errEl.style.display='block';}}
+    if(pwd.length<8)return showErr('Mot de passe trop court (8 caractères minimum).');
+    if(pwd!==pwd2)return showErr('Les mots de passe ne correspondent pas.');
+    if(!window.SupaDB)return showErr('Impossible (hors-ligne).');
+    if(errEl)errEl.style.display='none';if(btnEl){btnEl.disabled=true;btnEl.textContent='Mise à jour…';}
+    try{
+      var res=await window.SupaDB.auth.updateUser({password:pwd});if(res.error)throw res.error;
+      _toast('Mot de passe mis à jour ✓ Vous pouvez vous reconnecter.');
+      await window.SupaDB.auth.signOut();window.AUTH.user=null;
+      document.querySelectorAll('.auth-screen').forEach(function(s){s.classList.add('hidden');});
+      if(typeof window.authShow==='function')window.authShow('auth-login');
+    }catch(err){showErr((err&&err.message)||'Erreur lors de la mise à jour.');}
+    finally{if(btnEl){btnEl.disabled=false;btnEl.textContent='Valider le nouveau mot de passe';}}
+  };
+
   window.showEtabEspace=function(){
     if(!window.SupaDB||!window.AUTH||!window.AUTH.user)return _toast('Supabase non connecté');
     window.SupaDB.from('access_codes').select('code,used_by,used_at,created_at,revoked_at').is('revoked_at',null).order('created_at',{ascending:false}).then(function(res){
@@ -93,6 +113,20 @@
 
   window.startTrial=function(){if(!window.SupaDB||!window.AUTH||!window.AUTH.user)return;window.SupaDB.rpc('start_my_trial').then(async function(res){if(res.error||!res.data){_toast('Essai déjà utilisé ou non disponible pour ce compte.');if(typeof window._closeTrialModal==='function')window._closeTrialModal();return;}window.AUTH.user=_profileToUser(res.data,window.AUTH.user);if(typeof window._applyTrialPlan==='function')window._applyTrialPlan();if(typeof window._closeTrialModal==='function')window._closeTrialModal();_toast('🎉 Essai Pro activé — 7 jours d’accès illimité !');if(typeof window.renderSidebarPlans==='function')window.renderSidebarPlans();});};
 
+  window.selectHCPlan=function(planId){
+    if(!window.AUTH||!window.AUTH.user)return;
+    var current=window.AUTH.user.plan||'free';
+    if(window.AUTH.user.isAdmin||current==='admin'){_toast('Le compte administrateur est géré côté serveur.');return;}
+    if(planId==='free'){
+      if(current==='pro'||current==='etab'){if(typeof window.stripeOpenPortal==='function')window.stripeOpenPortal();return;}
+      _toast('Le plan Gratuit est déjà actif.');return;
+    }
+    if(planId==='etab'&&(current==='etab')){if(typeof window.closeProfile==='function')window.closeProfile();if(typeof window.showEtabEspace==='function')window.showEtabEspace();return;}
+    if(planId==='etab'){if(typeof window.showEtabPricingModal==='function')window.showEtabPricingModal();return;}
+    if(planId==='pro'){if(typeof window.showProPricingModal==='function')window.showProPricingModal();return;}
+    _toast('Offre inconnue.');
+  };
+
   /* Server-authoritative quota API. New/async callers should await this. */
   window.hcConsumeUsage=async function(kind){
     if(!window.SupaDB||!window.AUTH||!window.AUTH.user)return{allowed:false,used:0,limit_value:0,error:'authentication required'};
@@ -105,9 +139,6 @@
     if(!window.SupaDB)return null;var res=await window.SupaDB.rpc('get_my_usage',{p_kind:kind});if(res.error)return null;return Array.isArray(res.data)?res.data[0]:res.data;
   };
 
-  /* Legacy checkCalcLimit() is synchronous and cannot safely perform an RPC.
-     Stop treating localStorage as a security boundary. Existing calculator flows
-     remain usable while each entry point is migrated to await hcConsumeUsage(). */
   window.checkCalcLimit=function(){
     var plan=window.AUTH&&window.AUTH.user?(window.AUTH.user.plan||'free'):'free';
     if(plan!=='free'||(window.AUTH.user&&window.AUTH.user.isAdmin))return true;
