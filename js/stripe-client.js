@@ -116,10 +116,9 @@ function stripeOpenPortal() {
   }
 })();
 
-/* ─── Charger les ponts de sécurité après les scripts historiques ───
-   auth.js est encore monolithique. Les bridges sont volontairement chargés
-   une fois la page terminée afin que leurs overrides soient les dernières
-   définitions actives, sans réécrire le fichier historique d'un seul bloc. */
+/* ─── Charger les ponts de sécurité et le noyau scientifique ───
+   Les fichiers historiques restent monolithiques. Les bridges sont chargés
+   après eux afin que les implémentations auditées soient les définitions actives. */
 (function _loadSecurityBridges() {
   function appendScript(id, src, onload) {
     if (document.getElementById(id)) {
@@ -138,7 +137,9 @@ function stripeOpenPortal() {
     appendScript('hc-auth-security-bridge', 'js/auth-security.js', function() {
       appendScript('hc-xss-security-bridge', 'js/xss-security.js', function() {
         appendScript('hc-coffre-security-bridge', 'js/coffre-security.js', function() {
-          appendScript('hc-quota-security-bridge', 'js/quota-security.js');
+          appendScript('hc-quota-security-bridge', 'js/quota-security.js', function() {
+            appendScript('hc-science-core', 'js/science-core.js');
+          });
         });
       });
     });
