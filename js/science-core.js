@@ -22,7 +22,7 @@
     if (!finitePositive(stricklerK)) throw new RangeError('Strickler K must be > 0');
     if (!finitePositive(slopeMmPerM)) throw new RangeError('slope must be > 0');
 
-    var slope = slopeMmPerM / 1000; // ‰ -> m/m
+    var slope = slopeMmPerM / 1000;
     var area = Math.PI * diameterM * diameterM / 4;
     var hydraulicRadius = diameterM / 4;
     var velocity = stricklerK * Math.pow(hydraulicRadius, 2 / 3) * Math.sqrt(slope);
@@ -35,6 +35,32 @@
       areaM2: area,
       hydraulicRadiusM: hydraulicRadius,
       velocityMs: velocity,
+      flowM3s: flowM3s,
+      flowLs: flowM3s * 1000,
+      flowM3h: flowM3s * 3600
+    };
+  }
+
+  /* ── Rational method — peak stormwater flow ──────────────────
+     Cerema Hydrouti: rainfall is assumed uniform and constant; peak flow is
+     reached when the storm duration equals the catchment concentration time.
+     With i in mm/h and A in ha:
+       Q [m³/s] = C · i · A / 360
+       Q [L/s]  = C · i · A / 0.36
+     The method's area/domain limits depend on context; do not present 2 km² as
+     a universal regulatory boundary. */
+  function rationalPeakFlow(runoffCoefficient, intensityMmH, areaHa) {
+    var c = Number(runoffCoefficient);
+    var i = Number(intensityMmH);
+    var a = Number(areaHa);
+    if (!Number.isFinite(c) || c < 0 || c > 1) throw new RangeError('runoff coefficient must be between 0 and 1');
+    if (!finitePositive(i)) throw new RangeError('rainfall intensity must be > 0');
+    if (!finitePositive(a)) throw new RangeError('catchment area must be > 0');
+    var flowM3s = c * i * a / 360;
+    return {
+      runoffCoefficient: c,
+      intensityMmH: i,
+      areaHa: a,
       flowM3s: flowM3s,
       flowLs: flowM3s * 1000,
       flowM3h: flowM3s * 3600
@@ -60,9 +86,28 @@
     };
   }
 
+  /* ── ANC permeability — regulatory interpretation only ───────
+     Arrêté 07/09/2009 modifié:
+       art. 6: soil-in-place treatment permeability 15..500 mm/h
+       art. 11: treated-water infiltration permeability 10..500 mm/h
+     These ranges do NOT by themselves select a treatment technology. */
+  function ancPermeabilityStatus(kMmH) {
+    var k = Number(kMmH);
+    if (!finitePositive(k)) throw new RangeError('permeability must be > 0');
+    return {
+      kMmH: k,
+      soilTreatmentRange: k >= 15 && k <= 500,
+      treatedWaterInfiltrationRange: k >= 10 && k <= 500,
+      belowSoilTreatmentRange: k < 15,
+      aboveRegulatoryRange: k > 500
+    };
+  }
+
   window.HydroCalcScience = window.HydroCalcScience || {};
   window.HydroCalcScience.manningFullPipe = manningFullPipe;
+  window.HydroCalcScience.rationalPeakFlow = rationalPeakFlow;
   window.HydroCalcScience.fteSizing = fteSizing;
+  window.HydroCalcScience.ancPermeabilityStatus = ancPermeabilityStatus;
 
   /* Verified replacement for the legacy Manning UI handler. */
   window.calcManning = function () {
@@ -91,6 +136,49 @@
       box.style.borderLeftColor = 'var(--c-warn)';
       valueEl.textContent = 'Valeurs invalides';
       detailEl.textContent = 'Le diamètre, le coefficient de Strickler et la pente doivent être strictement positifs.';
+    }
+  };
+
+  /* Patch the rational-method renderer so displayed units match the verified
+     engine. The old /360 expression is m³/s, not L/s. */
+  if (typeof window.renderCalcMethodeRat === 'function') {
+    var legacyRenderRational = window.renderCalcMethodeRat;
+    window.renderCalcMethodeRat = function () {
+      var result = legacyRenderRational.apply(this, arguments);
+      var root = document.getElementById('calc-content');
+      if (!root) return result;
+      var alert = root.querySelector('.alert.info span:last-child');
+      if (alert) alert.textContent = 'Méthode simplifiée : utiliser une intensité IDF correspondant au temps de concentration du bassin et à la période de retour retenue. Le domaine de validité dépend du contexte et du référentiel de projet.';
+      var formula = root.querySelector('#res-mr .result-formula');
+      if (formula) formula.textContent = 'Q = C × i × A / 0,36  (L/s) · A en ha · i en mm/h';
+      var src = root.querySelector('#res-mr .result-src');
+      if (src) src.textContent = '📖 Cerema — Hydrouti · Méthode rationnelle · intensité pour une durée égale au temps de concentration';
+      return result;
+    };
+  }
+
+  window.calcMethodeRatMain = function () {
+    var c = parseFloat((document.getElementById('mr-c') || {}).value);
+    var a = parseFloat((document.getElementById('mr-a') || {}).value);
+    var i = parseFloat((document.getElementById('mr-i') || {}).value);
+    var box = document.getElementById('res-mr');
+    var valueEl = document.getElementById('rv-mr');
+    var detailEl = document.getElementById('rd-mr');
+    if (!box || !valueEl || !detailEl) return;
+    try {
+      var result = rationalPeakFlow(c, i, a);
+      box.classList.add('show');
+      box.style.borderLeftColor = 'var(--c-ok)';
+      valueEl.textContent = 'Q_pointe = ' + result.flowLs.toFixed(2) + ' L/s = ' + result.flowM3s.toFixed(3) + ' m³/s';
+      detailEl.textContent =
+        'C = ' + result.runoffCoefficient + ' · i = ' + result.intensityMmH + ' mm/h · A = ' + result.areaHa + ' ha · ' +
+        'Q = C × i × A / 360 = ' + result.flowM3s.toFixed(5) + ' m³/s. ' +
+        'L’intensité doit être choisie pour une durée égale au temps de concentration.';
+    } catch (err) {
+      box.classList.add('show');
+      box.style.borderLeftColor = 'var(--c-warn)';
+      valueEl.textContent = 'Valeurs invalides';
+      detailEl.textContent = 'C doit être compris entre 0 et 1 ; la surface et l’intensité doivent être strictement positives.';
     }
   };
 
@@ -133,7 +221,6 @@
     };
   }
 
-  /* Verified replacement for the legacy FTE result handler. */
   window.calcFTEMain = function () {
     var pp = parseInt((document.getElementById('f-pp') || {}).value, 10);
     var box = document.getElementById('res-fte2');
@@ -159,8 +246,76 @@
     }
   };
 
-  /* Regression vector (independent hand-check):
-     Manning: D=300 mm, K=90, I=3‰ -> Q=0.0619693 m³/s,
-     V=0.876686 m/s, Q=61.9693 L/s = 223.089 m³/h.
+  /* ANC screen: remove the mm/min regulatory confusion. This patch does not
+     certify the legacy surface-sizing coefficients; those remain under audit. */
+  if (typeof window.renderCalcEpandage === 'function') {
+    var legacyRenderEpandage = window.renderCalcEpandage;
+    window.renderCalcEpandage = function () {
+      var result = legacyRenderEpandage.apply(this, arguments);
+      var root = document.getElementById('calc-content');
+      if (!root) return result;
+      var eh = document.getElementById('c-eh');
+      if (eh) {
+        var field = eh.closest('.field');
+        var hint = field && field.querySelector('.field-hint');
+        var tip = field && field.querySelector('.field-tip');
+        if (hint) hint.textContent = 'Pour une maison individuelle, le dimensionnement de référence est le nombre de pièces principales, sauf cas particuliers prévus par la réglementation.';
+        if (tip) tip.textContent = '💡 Exemple : 5 pièces principales → 5 EH en règle générale.';
+      }
+      var kInput = document.getElementById('c-k');
+      if (kInput) {
+        kInput.value = '30';
+        kInput.step = '1';
+        var kField = kInput.closest('.field');
+        var kHint = kField && kField.querySelector('.field-hint');
+        var kTip = kField && kField.querySelector('.field-tip');
+        var unit = kInput.parentElement && kInput.parentElement.querySelector('.field-unit');
+        if (unit) unit.textContent = 'mm/h';
+        if (kHint) kHint.textContent = 'Perméabilité mesurée du sol. Les seuils réglementaires nationaux sont exprimés en mm/h.';
+        if (kTip) kTip.textContent = '💡 Traitement par le sol en place : 15–500 mm/h (art. 6). Infiltration des eaux traitées : 10–500 mm/h (art. 11).';
+      }
+      var formula = root.querySelector('#res-epandage .result-formula');
+      if (formula) formula.textContent = 'Dimensionnement surfacique : vérifier DTU 64.1, étude de sol et prescriptions du SPANC. Les seuils K seuls ne suffisent pas à choisir une filière.';
+      var src = root.querySelector('#res-epandage .result-src');
+      if (src) src.textContent = '📖 Arrêté du 7 septembre 2009 modifié — art. 6 et 11 · DTU 64.1 à vérifier selon filière';
+      return result;
+    };
+  }
+
+  /* Keep the Porchet numerical formula for now, but replace the legacy
+     technology-prescriptive classification with the verified legal ranges. */
+  if (typeof window.calcPorchet === 'function') {
+    var legacyCalcPorchet = window.calcPorchet;
+    window.calcPorchet = function () {
+      var result = legacyCalcPorchet.apply(this, arguments);
+      var r = parseFloat((document.getElementById('po-r') || {}).value);
+      var h1 = parseFloat((document.getElementById('po-h1') || {}).value);
+      var h2 = parseFloat((document.getElementById('po-h2') || {}).value);
+      var dt = parseFloat((document.getElementById('po-dt') || {}).value);
+      var cl = document.getElementById('po-classement');
+      if (!cl || !finitePositive(r) || !finitePositive(dt) || !(h1 > h2) || h2 < 0) return result;
+      var kMmH = (r / (2 * dt)) * Math.log((2 * h1 + r) / (2 * h2 + r)) * 60;
+      try {
+        var status = ancPermeabilityStatus(kMmH);
+        var message;
+        if (status.aboveRegulatoryRange) {
+          message = 'K = ' + kMmH.toFixed(1) + ' mm/h : au-dessus de 500 mm/h. Le sol est hors des plages réglementaires nationales citées aux articles 6 et 11 ; une étude adaptée est nécessaire.';
+        } else if (status.soilTreatmentRange) {
+          message = 'K = ' + kMmH.toFixed(1) + ' mm/h : dans la plage 15–500 mm/h de l’article 6 pour le traitement par le sol en place, sous réserve des autres conditions du site.';
+        } else if (status.treatedWaterInfiltrationRange) {
+          message = 'K = ' + kMmH.toFixed(1) + ' mm/h : dans la plage 10–500 mm/h de l’article 11 pour l’infiltration d’eaux traitées, mais sous 15 mm/h pour le traitement par le sol en place de l’article 6.';
+        } else {
+          message = 'K = ' + kMmH.toFixed(1) + ' mm/h : sous 10 mm/h, donc hors de la plage d’infiltration de l’article 11. Étude et solution adaptées nécessaires.';
+        }
+        cl.textContent = message;
+        cl.style.cssText = 'margin-top:var(--s-2);border-radius:10px;padding:12px 14px;background:var(--c-surface-2);border:1.5px solid var(--c-border);font-size:12px;line-height:1.55;color:var(--c-text-2)';
+      } catch (err) {}
+      return result;
+    };
+  }
+
+  /* Regression vectors:
+     Manning: D=300 mm, K=90, I=3‰ -> 61.9693 L/s.
+     Rational: C=0.6, i=25 mm/h, A=5 ha -> 0.208333 m³/s = 208.333 L/s.
      FTE: 5 PP -> 3 m³; 6 PP -> 4 m³; 8 PP -> 6 m³. */
 })();
