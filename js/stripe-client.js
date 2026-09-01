@@ -116,7 +116,7 @@ function stripeOpenPortal() {
   }
 })();
 
-/* ─── Charger les ponts de sécurité et le noyau scientifique ───
+/* ─── Charger les ponts de sécurité et les noyaux scientifiques ───
    Les fichiers historiques restent monolithiques. Les bridges sont chargés
    après eux afin que les implémentations auditées soient les définitions actives. */
 (function _loadSecurityBridges() {
@@ -138,7 +138,9 @@ function stripeOpenPortal() {
       appendScript('hc-xss-security-bridge', 'js/xss-security.js', function() {
         appendScript('hc-coffre-security-bridge', 'js/coffre-security.js', function() {
           appendScript('hc-quota-security-bridge', 'js/quota-security.js', function() {
-            appendScript('hc-science-core', 'js/science-core.js');
+            appendScript('hc-science-core', 'js/science-core.js', function() {
+              appendScript('hc-science-advanced', 'js/science-advanced.js');
+            });
           });
         });
       });
