@@ -71,6 +71,17 @@
   }, true);
 
   /* ── Rapports ──────────────────────────────────────────────── */
+  function hasReportContent() {
+    try {
+      var calcs = typeof window._getSelectedCalcs === 'function' ? window._getSelectedCalcs() : [];
+      var formulas = typeof window._getSelectedFormulas === 'function' ? window._getSelectedFormulas() : [];
+      var regls = typeof window._getSelectedRegls === 'function' ? window._getSelectedRegls() : [];
+      return !!((calcs && calcs.length) || (formulas && formulas.length) || (regls && regls.length));
+    } catch (e) {
+      return false;
+    }
+  }
+
   function gateReportFunction(name) {
     if (typeof window[name] !== 'function') return;
     var legacy = window[name];
@@ -78,6 +89,10 @@
       var plan = window.AUTH && window.AUTH.user ? (window.AUTH.user.plan || 'free') : 'free';
       if (plan === 'free') {
         toast('Les rapports ne sont pas disponibles avec le plan Gratuit.');
+        return;
+      }
+      if (!hasReportContent()) {
+        toast('Aucun élément sélectionné à exporter.');
         return;
       }
       if (!isAuthenticatedUser()) return legacy.apply(this, arguments);
