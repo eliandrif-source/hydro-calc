@@ -13,7 +13,8 @@ const safetyMigration = fs.readFileSync(path.join(__dirname, '..', 'supabase', '
 const context = {
   window: { confirm: () => true, prompt: () => 'spam' },
   document: {
-    createElement: () => ({ style:{}, addEventListener(){}, appendChild(){}, set textContent(v){ this._text=v; }, get textContent(){ return this._text; } }),
+    createElement: () => ({ style:{}, dataset:{}, addEventListener(){}, appendChild(){}, set textContent(v){ this._text=v; }, get textContent(){ return this._text; } }),
+    createDocumentFragment: () => ({ appendChild(){} }),
     getElementById: () => null,
     querySelector: () => null
   },
@@ -47,10 +48,14 @@ assert.equal(S.displayName('  Alice\u0000\nDupont  '), 'AliceDupont');
 assert.equal(S.safeExtension('rapport.final.PDF'), 'pdf');
 assert.equal(S.safeExtension('sans-extension'), 'bin');
 assert.equal(C.cleanReason('  spam\n\u0000 agressif  '), 'spam agressif');
+assert.equal(C.pageSize, 50);
 assert.ok(context.window.HydroCalcMessagingUI && context.window.HydroCalcMessagingUI.safeListRenderer);
 assert.ok(!uiSource.includes('onclick='), 'secure list renderer must not create inline event handlers');
 assert.ok(!uiSource.includes('.innerHTML'), 'secure list renderer must not use innerHTML');
 assert.ok(!controlsSource.includes('.innerHTML'), 'message safety controls must remain DOM-only');
+assert.match(controlsSource, /order\('created_at',\{ascending:false\}\)\.limit\(PAGE_SIZE\+1\)/);
+assert.match(controlsSource, /Charger les messages précédents/);
+assert.match(controlsSource, /q=q\.lt\('created_at',before\)/);
 
 assert.match(migration, /'message-attachments','message-attachments',false,10485760/);
 assert.match(migration, /create or replace function public\.search_message_members/);
@@ -71,4 +76,4 @@ assert.match(safetyMigration, /public\.message_is_blocked_pair\(v_uid,v_other\)/
 assert.match(safetyMigration, /public\.message_is_blocked_pair\(v_uid,p_receiver\)/);
 assert.match(safetyMigration, /unique \(reporter_id, message_id\)/);
 
-console.log('messaging-security: private attachments, RPC authority, privacy, DOM rendering, anti-spam, blocking and reporting regressions OK');
+console.log('messaging-security: private attachments, RPC authority, privacy, pagination, anti-spam, blocking and reporting regressions OK');
