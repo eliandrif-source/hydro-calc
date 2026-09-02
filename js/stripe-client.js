@@ -142,7 +142,9 @@ function stripeOpenPortal() {
               appendScript('hc-science-advanced', 'js/science-advanced.js', function() {
                 appendScript('hc-science-anc', 'js/science-anc.js', function() {
                   appendScript('hc-science-step', 'js/science-step.js', function() {
-                    appendScript('hc-science-lagoon', 'js/science-lagoon.js');
+                    appendScript('hc-science-lagoon', 'js/science-lagoon.js', function() {
+                      appendScript('hc-science-biofilm', 'js/science-biofilm.js');
+                    });
                   });
                 });
               });
