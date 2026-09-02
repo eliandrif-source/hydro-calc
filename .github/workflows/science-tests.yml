@@ -1,4 +1,4 @@
-name: Scientific regression tests
+name: Scientific and report regression tests
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  science:
+  regression:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -28,3 +28,5 @@ jobs:
             echo "Running ${test_file}"
             node "${test_file}"
           done
+      - name: Run report renderer regressions
+        run: node tests/report-security.test.cjs
