@@ -70,15 +70,19 @@ function stripeOpenPortal() {
                   appendScript('hc-messaging-security','js/messaging-security.js',function(){
                     appendScript('hc-messaging-ui-security','js/messaging-ui-security.js',function(){
                       appendScript('hc-messaging-controls','js/messaging-controls.js',function(){
-                        appendScript('hc-science-core','js/science-core.js',function(){
-                          appendScript('hc-science-advanced','js/science-advanced.js',function(){
-                            appendScript('hc-science-anc','js/science-anc.js',function(){
-                              appendScript('hc-science-step','js/science-step.js',function(){
-                                appendScript('hc-science-lagoon','js/science-lagoon.js',function(){
-                                  appendScript('hc-science-biofilm','js/science-biofilm.js',function(){
-                                    appendScript('hc-science-aep','js/science-aep.js',function(){
-                                      appendScript('hc-science-rivers','js/science-rivers.js',function(){
-                                        appendScript('hc-science-fishpass','js/science-fishpass.js');
+                        appendScript('hc-community-admin','js/community-admin.js',function(){
+                          appendScript('hc-forum-enhancements','js/forum-enhancements.js',function(){
+                            appendScript('hc-science-core','js/science-core.js',function(){
+                              appendScript('hc-science-advanced','js/science-advanced.js',function(){
+                                appendScript('hc-science-anc','js/science-anc.js',function(){
+                                  appendScript('hc-science-step','js/science-step.js',function(){
+                                    appendScript('hc-science-lagoon','js/science-lagoon.js',function(){
+                                      appendScript('hc-science-biofilm','js/science-biofilm.js',function(){
+                                        appendScript('hc-science-aep','js/science-aep.js',function(){
+                                          appendScript('hc-science-rivers','js/science-rivers.js',function(){
+                                            appendScript('hc-science-fishpass','js/science-fishpass.js');
+                                          });
+                                        });
                                       });
                                     });
                                   });
