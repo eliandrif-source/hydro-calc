@@ -11,7 +11,7 @@ assert.match(quota, /Créez un compte gratuit pour lancer un calcul/);
 assert.ok(!quota.includes('guest/local demo remains legacy behaviour'), 'guest calculations must not bypass server-authoritative quotas');
 assert.match(quota, /return \{ allowed: false, unauthenticated: true \}/);
 assert.match(quota, /event\.preventDefault\(\);[\s\S]*event\.stopImmediatePropagation\(\);/);
-assert.match(sw, /hydrocalc-v302-security-20260902/);
+assert.match(sw, /hydrocalc-v303-security-20260902/);
 assert.match(sw, /\.\/js\/quota-security\.js/);
 
 console.log('quota-guest-security: guest calculators require an account and PWA cache was bumped');
