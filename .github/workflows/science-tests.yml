@@ -52,5 +52,7 @@ jobs:
         run: node tests/external-dependencies.test.cjs
       - name: Run legacy QCM retirement regressions
         run: node tests/legacy-qcm-retirement.test.cjs
+      - name: Run Supabase schema source-of-truth regressions
+        run: node tests/schema-source-of-truth.test.cjs
       - name: Run production readiness checks
         run: node tests/production-readiness.test.cjs
