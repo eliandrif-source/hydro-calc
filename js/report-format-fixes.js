@@ -18,8 +18,9 @@
   }
 
   function safeFilename(ext) {
-    var model = window.HydroCalcReportSecurity && HydroCalcReportSecurity.collectModel ? HydroCalcReportSecurity.collectModel() : { title:'Rapport HydroCalc' };
-    var base = window.HydroCalcReportSecurity && HydroCalcReportSecurity.pdfText ? HydroCalcReportSecurity.pdfText(model.title || 'Rapport HydroCalc') : String(model.title || 'Rapport HydroCalc');
+    var report = window.HydroCalcReportSecurity;
+    var model = report && typeof report.collectModel === 'function' ? report.collectModel() : { title:'Rapport HydroCalc' };
+    var base = report && typeof report.pdfText === 'function' ? report.pdfText(model.title || 'Rapport HydroCalc') : String(model.title || 'Rapport HydroCalc');
     base = base.replace(/[^A-Za-z0-9À-ÿ._-]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 80) || 'Rapport_HydroCalc';
     return base + '_' + new Date().toISOString().slice(0, 10) + '.' + ext;
   }
@@ -60,9 +61,10 @@
       return;
     }
 
-    var quota = window.HydroCalcReportPdfFixes && HydroCalcReportPdfFixes.consumeReportQuota;
+    var pdfFixes = window.HydroCalcReportPdfFixes;
+    var quota = pdfFixes && typeof pdfFixes.consumeReportQuota === 'function' ? pdfFixes.consumeReportQuota : null;
     if (typeof quota === 'function' && !(await quota())) return;
-    if (typeof quota !== 'function' && window.AUTH && AUTH.user && (AUTH.user.plan || 'free') === 'free') {
+    if (typeof quota !== 'function' && window.AUTH && window.AUTH.user && (window.AUTH.user.plan || 'free') === 'free') {
       toast('Les rapports ne sont pas disponibles avec le plan Gratuit.'); return;
     }
 
