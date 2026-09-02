@@ -12,6 +12,8 @@ Date de préparation : 2026-09-02
 - [ ] Un code révoqué/utilisé ne peut pas être réutilisé.
 - [ ] Réinitialisation du mot de passe refuse moins de 8 caractères côté application.
 - [ ] Déconnexion puis reconnexion restaure le plan depuis le serveur.
+- [ ] « Continuer sans compte » permet de parcourir l'application mais un bouton Calculer ouvre l'inscription au lieu d'exécuter le moteur.
+- [ ] Un simple paramètre d'URL QCM ne confère aucun plan, rôle ou privilège supplémentaire.
 
 ## Quotas
 
@@ -20,6 +22,7 @@ Date de préparation : 2026-09-02
 - [ ] Compte Pro/Admin/Établissement suit les limites prévues.
 - [ ] Essai actif est reconnu côté serveur ; essai expiré ne l'est plus.
 - [ ] Une action refusée n'est pas contournable par appel direct du frontend historique.
+- [ ] Le mode invité ne permet pas de contourner le quota de calcul du compte Gratuit.
 
 ## Stripe
 
@@ -27,6 +30,7 @@ Date de préparation : 2026-09-02
 - [ ] Checkout Pro annuel.
 - [ ] Checkout Établissement selon le modèle commercial finalement validé.
 - [ ] Le Price ID effectif est choisi côté serveur.
+- [ ] Le navigateur n'embarque ni clé Stripe secrète ni clé publishable de test devenue inutile.
 - [ ] Le webhook active le bon entitlement.
 - [ ] Rejouer le même webhook ne duplique pas le paiement.
 - [ ] Un événement de facturation ne rétrograde jamais un administrateur.
@@ -80,6 +84,14 @@ Date de préparation : 2026-09-02
 - [ ] Suppression d'un autre admin refusée.
 - [ ] File de modération forum + messagerie fonctionne.
 
+## Hébergement et en-têtes HTTP
+
+- [ ] `X-Content-Type-Options: nosniff` est présent sur la page principale.
+- [ ] `Referrer-Policy: strict-origin-when-cross-origin` est présent.
+- [ ] HydroCalc ne peut pas être intégré dans une iframe externe (`X-Frame-Options: DENY` / `frame-ancestors 'none'`).
+- [ ] `sw.js` est servi avec `Cache-Control: no-cache, no-store, must-revalidate`.
+- [ ] Les fichiers `/js/*` sont servis avec revalidation et ne restent pas figés par le CDN d'hébergement.
+
 ## Mobile / PWA
 
 - [ ] Navigation principale utilisable sur largeur téléphone.
@@ -87,6 +99,9 @@ Date de préparation : 2026-09-02
 - [ ] Forum et messagerie restent utilisables au clavier mobile.
 - [ ] Installation PWA et lancement standalone.
 - [ ] Mise à jour du service worker ne conserve pas une ancienne version incompatible des bridges.
+- [ ] Lors d'un nouveau `controllerchange`, la page se recharge une seule fois et n'entre pas dans une boucle de reload.
+- [ ] Après mise à jour, l'ancien cache HydroCalc a disparu de Cache Storage.
+- [ ] Hors ligne, aucune réponse Supabase/Stripe/API d'un utilisateur précédent n'est accessible depuis Cache Storage.
 
 ## Critère final
 
