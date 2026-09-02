@@ -47,6 +47,20 @@
       var sub = register.querySelector('.auth-sub');
       if (sub) sub.textContent = 'Créez votre compte gratuit pour utiliser HydroCalc et retrouver vos données. Certaines fonctions avancées sont réservées aux plans Pro et Établissement.';
     }
+
+    var splash = document.getElementById('auth-splash');
+    if (splash) {
+      var guestButtons = splash.querySelectorAll('button');
+      guestButtons.forEach(function (btn) {
+        var txt = (btn.textContent || '').replace(/\s+/g, ' ').trim();
+        if (/continuer sans compte/i.test(txt)) {
+          btn.textContent = 'Découvrir sans compte →';
+          btn.title = 'Mode découverte : consultation des contenus ouverts. Un compte gratuit est requis pour lancer un calcul.';
+          btn.setAttribute('aria-label', 'Découvrir HydroCalc sans compte, en mode consultation');
+        }
+      });
+    }
+
     var version = document.querySelector('#auth-splash .auth-version');
     if (version) version.textContent = 'v2.0 · 18 modules · 70+ calculateurs';
   }
