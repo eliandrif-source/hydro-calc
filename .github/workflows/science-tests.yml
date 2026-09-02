@@ -42,3 +42,5 @@ jobs:
         run: node tests/product-ux-hardening.test.cjs
       - name: Run home UX regressions
         run: node tests/home-ux-enhancements.test.cjs
+      - name: Run PWA cache security regressions
+        run: node tests/pwa-security.test.cjs
