@@ -13,8 +13,19 @@
     if (typeof window.authToast === 'function') window.authToast(msg);
   }
 
+  function hasAccount() {
+    return !!(window.AUTH && window.AUTH.user);
+  }
+
   function isAuthenticatedUser() {
-    return !!(window.AUTH && window.AUTH.user && window.SupaDB && typeof window.hcConsumeUsage === 'function');
+    return !!(hasAccount() && window.SupaDB && typeof window.hcConsumeUsage === 'function');
+  }
+
+  function inviteToRegister() {
+    toast('Créez un compte gratuit pour lancer un calcul et bénéficier des quotas serveur.');
+    if (typeof window.authShow === 'function') {
+      window.setTimeout(function () { window.authShow('auth-register'); }, 250);
+    }
   }
 
   function quotaMessage(kind, usage) {
@@ -25,7 +36,7 @@
   }
 
   async function consume(kind) {
-    if (!isAuthenticatedUser()) return { allowed: true, unmetered: true };
+    if (!isAuthenticatedUser()) return { allowed: false, unauthenticated: true };
     try {
       var usage = await window.hcConsumeUsage(kind);
       if (!usage || usage.error) {
@@ -43,9 +54,12 @@
   }
 
   /* ── Calculateurs ─────────────────────────────────────────────
-     Most legacy calculators expose an inline button labelled Calculer inside
-     #calc-content / #calca-content. Capture the click before the inline handler,
-     consume server quota, then replay it exactly once if allowed. */
+     Le mode invité reste un mode de découverte : il peut parcourir les contenus,
+     mais un moteur de calcul doit être rattaché à un compte afin que le quota
+     serveur soit l'autorité. Les calculateurs legacy exposent majoritairement un
+     bouton Calculer dans #calc-content / #calca-content ; on intercepte le clic
+     avant le handler inline, puis on le rejoue une seule fois si le serveur
+     autorise l'usage. */
   document.addEventListener('click', function (event) {
     var button = event.target && event.target.closest ? event.target.closest('button') : null;
     if (!button) return;
@@ -55,10 +69,19 @@
     if (!scope) return;
     var label = (button.textContent || '').replace(/\s+/g, ' ').trim();
     if (!/(^|\s)calculer(\s|$|→|✓)/i.test(label)) return;
-    if (!isAuthenticatedUser()) return; // guest/local demo remains legacy behaviour
 
     event.preventDefault();
     event.stopImmediatePropagation();
+
+    if (!hasAccount()) {
+      inviteToRegister();
+      return;
+    }
+    if (!isAuthenticatedUser()) {
+      toast('Reconnectez-vous pour lancer ce calcul.');
+      return;
+    }
+
     var oldDisabled = button.disabled;
     button.disabled = true;
 
@@ -95,7 +118,10 @@
         toast('Aucun élément sélectionné à exporter.');
         return;
       }
-      if (!isAuthenticatedUser()) return legacy.apply(this, arguments);
+      if (!isAuthenticatedUser()) {
+        toast('Reconnectez-vous pour générer un rapport.');
+        return;
+      }
 
       var usage = await consume('report_weekly');
       if (!usage.allowed) return;
@@ -116,9 +142,8 @@
   ['generateHTMLReport', '_doGeneratePDFReport', '_doGenerateDOCXReport', '_doGenerateODTReport'].forEach(gateReportFunction);
 
   /* ── Banque QCM ──────────────────────────────────────────────
-     Pro is limited to 10 starts/week. Establishment/Admin remain unlimited.
-     The legacy implementation increments localStorage; this override makes
-     Supabase the authoritative counter and never calls that increment helper. */
+     Pro est limité côté serveur. Établissement/Admin restent illimités.
+     L'ancien compteur localStorage n'est jamais l'autorité. */
   if (typeof window._startBankQCM === 'function') {
     window._startBankQCM = async function (idx) {
       if (typeof window.QCM_BANK === 'undefined' || !window.QCM_BANK[idx]) return;
