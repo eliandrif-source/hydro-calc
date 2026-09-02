@@ -21,6 +21,21 @@ var DataStore = (function() {
   function remove(key) { _safeStorage.removeItem(key); }
 
   function userKey(prefix, email) { return prefix + (email || 'guest'); }
+  function activeUserEmail() {
+    try {
+      return (typeof AUTH !== 'undefined' && AUTH && AUTH.user && AUTH.user.email)
+        ? String(AUTH.user.email).trim().toLowerCase()
+        : 'guest';
+    } catch (e) { return 'guest'; }
+  }
+  function activeUserKey(prefix) { return userKey(prefix, activeUserEmail()); }
+
+  /* Le logo était historiquement stocké dans `hc_user_logo`, clé globale au
+     navigateur. Cette clé n'est plus lue afin qu'un compte connecté après un
+     autre ne puisse pas hériter du logo précédent. Elle est supprimée sans
+     migration automatique : l'attribuer au premier compte qui se connecte serait
+     ambigu sur un poste partagé. */
+  try { _safeStorage.removeItem('hc_user_logo'); } catch (e) {}
 
   return {
 
@@ -40,11 +55,11 @@ var DataStore = (function() {
       clearCurrent: function() { remove('hc_current_session'); }
     },
 
-    /* ─── Logo personnalisé (data URL, stocké en clair) ─── */
+    /* ─── Logo personnalisé, isolé par compte ─── */
     userLogo: {
-      get: function() { return _safeStorage.getItem('hc_user_logo'); },
-      set: function(dataUrl) { _safeStorage.setItem('hc_user_logo', dataUrl); },
-      remove: function() { remove('hc_user_logo'); }
+      get: function() { return _safeStorage.getItem(activeUserKey('hc_user_logo_')); },
+      set: function(dataUrl) { _safeStorage.setItem(activeUserKey('hc_user_logo_'), dataUrl); },
+      remove: function() { remove(activeUserKey('hc_user_logo_')); }
     },
 
     /* ─── Calculs sauvegardés ─── */
@@ -124,6 +139,7 @@ var DataStore = (function() {
       remove(userKey('hc_projects_', email));
       remove(userKey('hc_formulas_', email));
       remove(userKey('hc_regls_', email));
+      remove(userKey('hc_user_logo_', String(email || 'guest').trim().toLowerCase()));
     }
 
   };
