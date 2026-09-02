@@ -4,6 +4,7 @@
    - Aligns free-plan copy with actual quotas/features.
    - Replaces misleading per-seat establishment pricing with the
      server-authoritative monthly/annual establishment subscription.
+   - Clarifies primary navigation and removes the fake mobile status bar.
 ═══════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
@@ -34,17 +35,47 @@
 
   function fixRegistrationCopy() {
     var register = document.getElementById('auth-register');
-    if (!register) return;
-    var hint = register.querySelector('.auth-hint');
-    if (hint) {
-      hint.replaceChildren(
-        document.createTextNode('En créant un compte, vous acceptez les conditions d’utilisation. '),
-        document.createElement('br'),
-        document.createTextNode('Le compte Gratuit donne accès aux fonctions gratuites ; certaines fonctions avancées, rapports et services collaboratifs nécessitent un plan éligible.')
-      );
+    if (register) {
+      var hint = register.querySelector('.auth-hint');
+      if (hint) {
+        hint.replaceChildren(
+          document.createTextNode('En créant un compte, vous acceptez les conditions d’utilisation. '),
+          document.createElement('br'),
+          document.createTextNode('Le compte Gratuit donne accès aux fonctions gratuites ; certaines fonctions avancées, rapports et services collaboratifs nécessitent un plan éligible.')
+        );
+      }
+      var sub = register.querySelector('.auth-sub');
+      if (sub) sub.textContent = 'Créez votre compte gratuit pour utiliser HydroCalc et retrouver vos données. Certaines fonctions avancées sont réservées aux plans Pro et Établissement.';
     }
-    var sub = register.querySelector('.auth-sub');
-    if (sub) sub.textContent = 'Créez votre compte gratuit pour utiliser HydroCalc et retrouver vos données. Certaines fonctions avancées sont réservées aux plans Pro et Établissement.';
+    var version = document.querySelector('#auth-splash .auth-version');
+    if (version) version.textContent = 'v2.0 · 18 modules · 70+ calculateurs';
+  }
+
+  function fixPrimaryNavigation() {
+    var statusBar = document.querySelector('.status-bar');
+    if (statusBar) {
+      statusBar.style.display = 'none';
+      statusBar.setAttribute('aria-hidden', 'true');
+    }
+
+    var labels = {
+      'nav-ac': ['Assain. coll.', 'Assainissement collectif'],
+      'nav-anc': ['ANC', 'Assainissement non collectif'],
+      'nav-ep': ['Eau potable', 'Eau potable / AEP'],
+      'nav-riv': ['Rivières', 'Rivières et milieux aquatiques'],
+      'nav-gloss': ['Formules', 'Formules, glossaire et références']
+    };
+    Object.keys(labels).forEach(function (id) {
+      var btn = document.getElementById(id);
+      if (!btn) return;
+      var lbl = btn.querySelector('.nav-lbl');
+      if (lbl) lbl.textContent = labels[id][0];
+      btn.title = labels[id][1];
+      btn.setAttribute('aria-label', labels[id][1]);
+    });
+
+    var nav = document.querySelector('.bottom-nav');
+    if (nav) nav.setAttribute('aria-label', 'Navigation principale HydroCalc');
   }
 
   function billingButton(label, period) {
@@ -140,4 +171,5 @@
 
   removeLegacyGate();
   fixRegistrationCopy();
+  fixPrimaryNavigation();
 })();
