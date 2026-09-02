@@ -8,6 +8,22 @@ var STRIPE_PK = 'pk_test_51TnL41RoaEvjU7M7IBgppniueRsxF7t3sQBfJ1OSx5ylq8SPPYSWth
 var STRIPE_PLANS = { pro:true, pro_annual:true, etab:true, etab_annual:true };
 var SUPABASE_FUNCTIONS_URL = 'https://vbdsqvmgtwsjxckpcosi.supabase.co/functions/v1';
 
+/* Le verrou historique était uniquement du JavaScript client et ne constitue pas
+   un contrôle d'accès. On le retire dès le chargement de ce script pour éviter
+   qu'il bloque/flash l'interface avant le chargement des bridges. */
+(function _disableLegacyClientGateEarly(){
+  function removeGate(){
+    var gate=document.getElementById('site-gate');
+    if(gate)gate.remove();
+    try{localStorage.removeItem('hc_site_gate_ok');}catch(e){}
+    window._siteGateCheck=function(){var g=document.getElementById('site-gate');if(g)g.remove();};
+  }
+  if(document.readyState==='loading'){
+    removeGate();
+    document.addEventListener('DOMContentLoaded',removeGate,{once:true});
+  }else removeGate();
+})();
+
 function stripeStartCheckout(planId) {
   if (!AUTH.user) { authShow('auth-login'); return; }
   if (!STRIPE_PLANS[planId]) { authToast('Offre inconnue'); return; }
@@ -61,27 +77,29 @@ function stripeOpenPortal() {
   }
   function loadBridges(){
     appendScript('hc-auth-security-bridge','js/auth-security.js',function(){
-      appendScript('hc-xss-security-bridge','js/xss-security.js',function(){
-        appendScript('hc-coffre-security-bridge','js/coffre-security.js',function(){
-          appendScript('hc-quota-security-bridge','js/quota-security.js',function(){
-            appendScript('hc-report-security-bridge','js/report-security.js',function(){
-              appendScript('hc-report-pdf-fixes','js/report-pdf-fixes.js',function(){
-                appendScript('hc-report-format-fixes','js/report-format-fixes.js',function(){
-                  appendScript('hc-messaging-security','js/messaging-security.js',function(){
-                    appendScript('hc-messaging-ui-security','js/messaging-ui-security.js',function(){
-                      appendScript('hc-messaging-controls','js/messaging-controls.js',function(){
-                        appendScript('hc-community-admin','js/community-admin.js',function(){
-                          appendScript('hc-forum-enhancements','js/forum-enhancements.js',function(){
-                            appendScript('hc-share-community','js/share-community.js',function(){
-                              appendScript('hc-science-core','js/science-core.js',function(){
-                                appendScript('hc-science-advanced','js/science-advanced.js',function(){
-                                  appendScript('hc-science-anc','js/science-anc.js',function(){
-                                    appendScript('hc-science-step','js/science-step.js',function(){
-                                      appendScript('hc-science-lagoon','js/science-lagoon.js',function(){
-                                        appendScript('hc-science-biofilm','js/science-biofilm.js',function(){
-                                          appendScript('hc-science-aep','js/science-aep.js',function(){
-                                            appendScript('hc-science-rivers','js/science-rivers.js',function(){
-                                              appendScript('hc-science-fishpass','js/science-fishpass.js');
+      appendScript('hc-product-ux-hardening','js/product-ux-hardening.js',function(){
+        appendScript('hc-xss-security-bridge','js/xss-security.js',function(){
+          appendScript('hc-coffre-security-bridge','js/coffre-security.js',function(){
+            appendScript('hc-quota-security-bridge','js/quota-security.js',function(){
+              appendScript('hc-report-security-bridge','js/report-security.js',function(){
+                appendScript('hc-report-pdf-fixes','js/report-pdf-fixes.js',function(){
+                  appendScript('hc-report-format-fixes','js/report-format-fixes.js',function(){
+                    appendScript('hc-messaging-security','js/messaging-security.js',function(){
+                      appendScript('hc-messaging-ui-security','js/messaging-ui-security.js',function(){
+                        appendScript('hc-messaging-controls','js/messaging-controls.js',function(){
+                          appendScript('hc-community-admin','js/community-admin.js',function(){
+                            appendScript('hc-forum-enhancements','js/forum-enhancements.js',function(){
+                              appendScript('hc-share-community','js/share-community.js',function(){
+                                appendScript('hc-science-core','js/science-core.js',function(){
+                                  appendScript('hc-science-advanced','js/science-advanced.js',function(){
+                                    appendScript('hc-science-anc','js/science-anc.js',function(){
+                                      appendScript('hc-science-step','js/science-step.js',function(){
+                                        appendScript('hc-science-lagoon','js/science-lagoon.js',function(){
+                                          appendScript('hc-science-biofilm','js/science-biofilm.js',function(){
+                                            appendScript('hc-science-aep','js/science-aep.js',function(){
+                                              appendScript('hc-science-rivers','js/science-rivers.js',function(){
+                                                appendScript('hc-science-fishpass','js/science-fishpass.js');
+                                              });
                                             });
                                           });
                                         });
