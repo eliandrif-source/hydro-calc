@@ -49,6 +49,7 @@ assert.match(headers, /\/js\/\*[\s\S]*Cache-Control:\s*no-cache, must-revalidate
 const stripeClient = read('js/stripe-client.js');
 assert.ok(!/priceId\s*:/.test(stripeClient), 'browser must not send a Stripe Price ID');
 assert.ok(!/price_id\s*:/.test(stripeClient), 'browser must not send a Stripe price_id');
+assert.ok(!/pk_test_[A-Za-z0-9]+/.test(stripeClient), 'unused Stripe test publishable keys must not ship in the browser bundle');
 assert.match(stripeClient, /body:JSON\.stringify\(\{planId:planId/);
 
 const checkout = read('supabase/functions/create-checkout-session/index.ts');
@@ -84,4 +85,4 @@ requiredMigrations.forEach((file) => {
   assert.ok(deploy.includes(name), `deployment runbook must mention ${name}`);
 });
 
-console.log('production-readiness: migrations, edge functions, headers, secret hygiene and deployment package checks OK');
+console.log('production-readiness: migrations, edge functions, headers, Stripe client hygiene, secret hygiene and deployment package checks OK');
