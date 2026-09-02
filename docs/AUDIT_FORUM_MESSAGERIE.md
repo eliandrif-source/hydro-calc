@@ -93,6 +93,15 @@ Le nouveau système :
 
 Les publications forum sont limitées côté serveur. Les nouvelles demandes de contact sont également limitées sur 24 h.
 
+### Blocage et signalement privé
+
+Le blocage d'un membre est maintenant stocké côté serveur. Un blocage dans un sens ou dans l'autre empêche une nouvelle demande de contact, la création d'un fil et l'envoi de nouveaux messages. Le membre qui bloque peut ensuite le débloquer depuis la conversation.
+
+Chaque message reçu dispose aussi d'une action **Signaler**. Le signalement enregistre le message exact et le motif, avec une contrainte d'un signalement actif par utilisateur/message. Les signalements sont lisibles par leur auteur ou un administrateur et disposent d'un RPC de traitement admin.
+
+Migration : `supabase/migrations/202609022030_messaging_blocking_reports.sql`.
+Frontend : `js/messaging-controls.js`.
+
 ## Architecture recommandée
 
 ### Forum
@@ -127,9 +136,9 @@ Priorité haute :
 
 1. appliquer et tester les migrations forum/messagerie sur Supabase ;
 2. vérifier la compatibilité du schéma réel existant avec les contraintes/indices de la migration ;
-3. test navigateur à deux comptes distincts : demande, acceptation, message, non-lu, realtime, pièce jointe, URL signée ;
+3. test navigateur à deux comptes distincts : demande, acceptation, message, non-lu, realtime, pièce jointe, URL signée, blocage et signalement ;
 4. test admin du forum : verrouillage, masquage et solution ;
-5. ajouter **blocage d'un membre** et **signalement d'un message privé** avant ouverture publique à grande échelle ;
+5. tester l'écran/flux admin de traitement des signalements privés ;
 6. définir une politique de conservation/suppression des messages et pièces jointes.
 
 Priorité UX suivante :
@@ -146,4 +155,4 @@ Priorité UX suivante :
 
 **Forum : à conserver et à mettre davantage en avant.** La version retrouvée dans le dépôt était techniquement cassée ; la nouvelle fondation correspond beaucoup mieux à la vocation métier d'HydroCalc.
 
-**Messagerie : à conserver, mais à maintenir volontairement simple.** Son interface de base est pertinente ; son problème principal était la sécurité et l'autorité client, pas le concept visuel. Après les corrections actuelles, les prochains investissements doivent aller vers blocage/signalement, contexte projet/calcul et notifications, plutôt que vers des fonctions sociales supplémentaires.
+**Messagerie : à conserver, mais à maintenir volontairement simple.** Son interface de base est pertinente ; son problème principal était la sécurité et l'autorité client, pas le concept visuel. Les prochains investissements doivent maintenant aller vers contexte projet/calcul, pagination, notifications et outils de modération plutôt que vers des fonctions sociales supplémentaires.
