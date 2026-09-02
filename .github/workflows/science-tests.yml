@@ -40,3 +40,5 @@ jobs:
         run: node tests/share-community.test.cjs
       - name: Run product UX regressions
         run: node tests/product-ux-hardening.test.cjs
+      - name: Run home UX regressions
+        run: node tests/home-ux-enhancements.test.cjs
