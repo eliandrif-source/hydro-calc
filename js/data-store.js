@@ -35,6 +35,10 @@ var DataStore = (function() {
      ambiguë sur un appareil partagé, donc ces clés sont simplement purgées. */
   try { _safeStorage.removeItem('hc_main_accounts'); } catch (e) {}
   try { _safeStorage.removeItem('hc_user_logo'); } catch (e) {}
+  try {
+    var legacyRemember = read('hc_remember', null);
+    if (legacyRemember && legacyRemember.supa !== true) remove('hc_remember');
+  } catch (e) {}
 
   return {
 
