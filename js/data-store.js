@@ -3,10 +3,10 @@
    Aujourd'hui : localStorage (via _safeStorage)
    Demain : Supabase (voir supabase/schema.sql pour le schéma cible)
 
-   Toutes les données utilisateur (comptes, calculs, projets, formules,
-   réglementations, QCM, paramètres...) passent par DataStore. Le jour
-   où on branche Supabase, seules les fonctions de ce fichier doivent
-   changer — les modules appelants n'ont pas à être modifiés.
+   Les données de travail utilisateur restent isolées localement par compte.
+   L'identité, les rôles, les plans, les essais et les quotas sont en revanche
+   autoritatifs côté Supabase et ne doivent jamais être reconstruits depuis le
+   navigateur.
    ══════════════════════════════════════════════════════════════════ */
 
 var DataStore = (function() {
@@ -30,19 +30,20 @@ var DataStore = (function() {
   }
   function activeUserKey(prefix) { return userKey(prefix, activeUserEmail()); }
 
-  /* Le logo était historiquement stocké dans `hc_user_logo`, clé globale au
-     navigateur. Cette clé n'est plus lue afin qu'un compte connecté après un
-     autre ne puisse pas hériter du logo précédent. Elle est supprimée sans
-     migration automatique : l'attribuer au premier compte qui se connecte serait
-     ambigu sur un poste partagé. */
+  /* Les anciens comptes locaux et le logo global étaient des reliquats de la
+     version pré-Supabase. Ils ne sont plus lus. Une migration automatique serait
+     ambiguë sur un appareil partagé, donc ces clés sont simplement purgées. */
+  try { _safeStorage.removeItem('hc_main_accounts'); } catch (e) {}
   try { _safeStorage.removeItem('hc_user_logo'); } catch (e) {}
 
   return {
 
-    /* ─── Comptes ─── */
+    /* ─── Identité locale legacy : désactivée ───
+       Conservé comme façade de compatibilité pour auth.js, mais aucune donnée
+       n'est lue ni enregistrée. Cela rend impossible _tryLocalDemo(). */
     accounts: {
-      getAll: function() { return read('hc_main_accounts', {}); },
-      saveAll: function(accounts) { write('hc_main_accounts', accounts); }
+      getAll: function() { return {}; },
+      saveAll: function() { remove('hc_main_accounts'); }
     },
 
     /* ─── Session courante / "se souvenir de moi" ─── */
