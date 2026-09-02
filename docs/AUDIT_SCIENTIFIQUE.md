@@ -180,8 +180,45 @@ Vecteur de régression : `500 EH`, profondeur `1 m` → `5500 m²` au total, soi
 
 Implémentation : `js/science-lagoon.js` → `HydroCalcScience.naturalLagoonClassic()`.
 
+## 10. STEP — lits bactériens et biodisques
+
+**Statut : CORRIGÉ / moteurs de pré-dimensionnement actifs**
+
+Références principales : NF EN 12255-7, édition 2026, réacteurs biologiques à cultures fixées ; documentation Cemagref/INRAE sur les lits bactériens.
+
+**Erreur documentaire corrigée :** l'ancien calculateur biodisques citait `NF EN 12255-8`, qui concerne le stockage et le traitement des boues. Les lits bactériens et les disques/tambours biologiques relèvent de `NF EN 12255-7`.
+
+Pour le lit bactérien, HydroCalc distingue désormais :
+
+- la charge organique volumique, saisie comme hypothèse de projet en `kg DBO₅/m³ de garnissage/j` ;
+- le débit journalier de projet, désormais visible et éditable ;
+- la recirculation ;
+- la charge hydraulique appliquée au lit, calculée sur le débit total `Q × (1 + R)` rapporté à l'emprise horizontale.
+
+La documentation Cemagref rappelle que la conduite hydraulique et la recirculation sont déterminantes pour le mouillage, le contrôle du biofilm, le colmatage et les odeurs. Les valeurs historiques associées automatiquement au matériau ne sont donc plus présentées comme universelles.
+
+Pour les biodisques, la surface biologique reste calculée par `S = charge DBO₅ / charge surfacique choisie`, mais la charge surfacique est désormais explicitement une **donnée de conception** dépendant du procédé, de la température, de l'étagement et des objectifs carbone/azote ; elle n'est plus attribuée comme valeur imposée par une norme.
+
+Vecteurs de régression : lit bactérien `120 kg DBO₅/j`, `Cv = 0,5 kg/m³/j`, hauteur `3 m`, `Q = 500 m³/j`, `R = 1` → volume `240 m³`, emprise `80 m²`, débit appliqué `1000 m³/j`, charge hydraulique `0,520833 m/h`. Biodisques `30 kg DBO₅/j`, `6 g/m²/j`, module `2000 m²` → surface requise `5000 m²`, 3 modules, `6000 m²` installés.
+
+Implémentation : `js/science-biofilm.js`.
+
+## 11. AEP — Hazen-Williams
+
+**Statut : VALIDÉ pour l'implémentation mathématique / interprétation corrigée**
+
+HydroCalc utilise la forme SI `V = 0,8492 × C × Rh^0,63 × S^0,54`, avec `Rh = D/4` pour une conduite circulaire pleine et `S = hf/L`.
+
+La relation est empirique. Le coefficient `C` doit être choisi et justifié selon le matériau, l'état intérieur, l'âge de la conduite et le référentiel de projet ; il n'est pas traité comme une constante physique universelle.
+
+**Interprétation corrigée :** le calculateur ne conclut plus automatiquement qu'une vitesse supérieure à `2 m/s` constitue à elle seule un risque de coup de bélier. L'analyse transitoire dépend notamment de la variation de vitesse, de la célérité et du temps de fermeture et relève du calculateur dédié.
+
+Vecteur de régression : `Q = 10 L/s`, `D = 150 mm`, `C = 130`, `L = 200 m` → `V = 0,565884 m/s`, gradient `0,00264528`, perte de charge `0,529056 m`.
+
+Implémentation : `js/science-aep.js` → `HydroCalcScience.hazenWilliamsHeadloss()`.
+
 ## File d'audit prioritaire
 
-- STEP : lit bactérien, biodisques puis lagunage aéré.
-- AEP : Hazen-Williams, HMT, NPSH, chloration et temps de séjour.
+- STEP : lagunage aéré et consolidation des valeurs de conception restantes.
+- AEP : HMT, NPSH, chloration et temps de séjour/réservoir.
 - Milieux aquatiques : Shields, Langelier, passes à poissons et valeurs biologiques de référence.
