@@ -9,7 +9,7 @@
    - les images/libs locales immuables peuvent être cache-first ;
    - tout changement de politique ou bundle critique incrémente CACHE_NAME.
 ═══════════════════════════════════════════════════ */
-var CACHE_NAME = 'hydrocalc-v302-security-20260902';
+var CACHE_NAME = 'hydrocalc-v303-security-20260902';
 
 var APP_SHELL = [
   './',
@@ -38,6 +38,7 @@ var APP_SHELL = [
   './js/auth.js',
 
   /* Bridges sécurité / production */
+  './js/pwa-update.js',
   './js/auth-security.js',
   './js/product-ux-hardening.js',
   './js/xss-security.js',
