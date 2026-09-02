@@ -50,5 +50,7 @@ jobs:
         run: node tests/local-data-isolation.test.cjs
       - name: Run external dependency inventory regressions
         run: node tests/external-dependencies.test.cjs
+      - name: Run legacy QCM retirement regressions
+        run: node tests/legacy-qcm-retirement.test.cjs
       - name: Run production readiness checks
         run: node tests/production-readiness.test.cjs
