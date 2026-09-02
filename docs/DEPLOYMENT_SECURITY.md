@@ -6,7 +6,7 @@ Ce document décrit l'ordre de mise en production de la branche `security-harden
 
 ## Principe de déploiement
 
-Ordre recommandé : **sauvegarde → préflight données → migrations SQL → Edge Functions → smoke tests backend → frontend → smoke tests navigateur → surveillance**.
+Ordre recommandé : **sauvegarde → préflight données → migrations SQL → Edge Functions → smoke tests backend → frontend → validation PWA/cache → smoke tests navigateur → surveillance**.
 
 Ne pas publier le frontend sécurisé avant les migrations qui retirent l'autorité du navigateur sur les rôles, quotas, messagerie et modération. Les bridges frontend sont une défense supplémentaire ; l'autorité de sécurité reste le backend/RLS/RPC.
 
@@ -134,7 +134,7 @@ Avant de basculer en production commerciale :
 - vérifier l'idempotence d'un webhook rejoué ;
 - décider explicitement de la politique en cas d'échec de paiement avant de considérer ce comportement comme définitif.
 
-Point produit encore à résoudre : l'interface Établissement calcule une quantité/licences alors que le checkout sécurisé actuel traite une quantité serveur fixe. Ne pas annoncer une facturation multi-sièges tant que ce contrat commercial n'est pas aligné de bout en bout.
+L'interface Établissement ne calcule plus de quantité ou de prix par siège dans le navigateur. Elle présente un abonnement mensuel/annuel unique et une capacité fonctionnelle allant jusqu'à 30 codes d'accès. Avant publication commerciale, vérifier que les montants Stripe configurés pour `etab` et `etab_annual` correspondent bien à cette promesse produit.
 
 ## 7. Publication frontend
 
@@ -154,13 +154,34 @@ Vérifier après publication :
 
 Faire ces tests sur desktop et mobile.
 
-## 8. Validation scientifique
+## 8. PWA et service worker
+
+Le service worker `sw.js` utilise le cache `hydrocalc-v300-security-20260902` et applique les règles suivantes :
+
+- aucune requête cross-origin n'est mise en cache ; cela exclut Supabase, Stripe, les CDN et Google Fonts ;
+- les navigations, fichiers HTML, JS et CSS locaux sont **network-first**, avec cache uniquement en fallback hors-ligne ;
+- seules les ressources statiques locales (images, polices éventuelles, `libs/`) utilisent un cache-first ;
+- les requêtes portant un en-tête `Authorization` sont ignorées par le service worker ;
+- les anciens caches HydroCalc sont supprimés à l'activation du nouveau worker.
+
+Après mise en ligne :
+
+1. ouvrir HydroCalc sur un appareil déjà utilisé avant le déploiement ;
+2. attendre l'activation du nouveau service worker puis recharger l'application ;
+3. vérifier dans DevTools/Application que l'ancien cache `hydrocalc-v227` n'existe plus ;
+4. confirmer que `auth-security.js`, `report-security.js`, `messaging-security.js` et les autres bridges sont servis dans leur version actuelle ;
+5. effectuer une déconnexion/reconnexion avec deux comptes différents et confirmer qu'aucune donnée utilisateur/API n'est disponible hors ligne via le Cache Storage ;
+6. tester ensuite le mode avion : l'interface statique peut se charger depuis le cache, mais les fonctionnalités nécessitant Supabase doivent échouer proprement sans données d'un autre utilisateur.
+
+Si un correctif de sécurité frontend est publié après cette version, incrémenter `CACHE_NAME` afin d'éviter toute ambiguïté de cache installée.
+
+## 9. Validation scientifique
 
 Le CI vérifie les vecteurs de régression des moteurs audités. Cela ne remplace pas la validation métier. Pour chaque calculateur publié comme professionnel, conserver : formule, unités, hypothèses, domaine de validité, source, date/version de vérification et avertissements nécessaires.
 
 Ne pas réactiver un modèle volontairement neutralisé ou marqué « à vérifier » simplement pour obtenir un résultat numérique.
 
-## 9. Rollback
+## 10. Rollback
 
 Le rollback frontend peut revenir au SHA précédent, mais **ne pas supposer qu'une migration de base est réversible automatiquement**. En cas de problème SQL :
 
@@ -169,8 +190,10 @@ Le rollback frontend peut revenir au SHA précédent, mais **ne pas supposer qu'
 3. restaurer depuis le backup si nécessaire ou appliquer une migration corrective revue ;
 4. ne jamais improviser un `drop`/`delete` sur les tables financières, comptes, messages ou projets.
 
-## 10. Critères GO / NO-GO
+Un rollback frontend vers une version utilisant un ancien service worker doit également changer son nom de cache ; sinon un appareil peut conserver un mélange de ressources anciennes et nouvelles.
 
-GO uniquement si : CI vert, preflight sans incohérence non résolue, migrations appliquées, fonctions déployées, RLS/RPC testées avec plusieurs rôles, Stripe testé, parcours navigateur testés et backup disponible.
+## 11. Critères GO / NO-GO
 
-NO-GO si : doublon financier non compris, possibilité de modifier son rôle/plan côté client, fuite inter-utilisateurs, pièce jointe publique, admin non vérifié côté serveur, webhook Stripe non signé/testé, ou migration partiellement appliquée.
+GO uniquement si : CI vert, preflight sans incohérence non résolue, migrations appliquées, fonctions déployées, RLS/RPC testées avec plusieurs rôles, Stripe testé, service worker/cache vérifié, parcours navigateur testés et backup disponible.
+
+NO-GO si : doublon financier non compris, possibilité de modifier son rôle/plan côté client, fuite inter-utilisateurs, pièce jointe publique, réponse API présente dans le cache PWA, admin non vérifié côté serveur, webhook Stripe non signé/testé, ou migration partiellement appliquée.
