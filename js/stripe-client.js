@@ -1,10 +1,9 @@
 /* ═══════════════════════════════════════════════════
    STRIPE CLIENT — HydroCalc
    Le navigateur ne transmet plus de Price ID ni de niveau d'accès.
-   Le mapping prix/abonnement est validé par l'Edge Function Supabase.
+   Le checkout est créé côté serveur par l'Edge Function Supabase et
+   renvoie une URL Stripe hébergée : aucune clé Stripe client n'est requise ici.
 ═══════════════════════════════════════════════════ */
-var STRIPE_PK = 'pk_test_51TnL41RoaEvjU7M7IBgppniueRsxF7t3sQBfJ1OSx5ylq8SPPYSWthquQe7RDCo8IngR1KRRCwU0EHeb4oVGdkYl00e9n0y3dA';
-
 var STRIPE_PLANS = { pro:true, pro_annual:true, etab:true, etab_annual:true };
 var SUPABASE_FUNCTIONS_URL = 'https://vbdsqvmgtwsjxckpcosi.supabase.co/functions/v1';
 
