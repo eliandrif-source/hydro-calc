@@ -66,15 +66,17 @@ function stripeOpenPortal() {
           appendScript('hc-quota-security-bridge','js/quota-security.js',function(){
             appendScript('hc-report-security-bridge','js/report-security.js',function(){
               appendScript('hc-report-pdf-fixes','js/report-pdf-fixes.js',function(){
-                appendScript('hc-science-core','js/science-core.js',function(){
-                  appendScript('hc-science-advanced','js/science-advanced.js',function(){
-                    appendScript('hc-science-anc','js/science-anc.js',function(){
-                      appendScript('hc-science-step','js/science-step.js',function(){
-                        appendScript('hc-science-lagoon','js/science-lagoon.js',function(){
-                          appendScript('hc-science-biofilm','js/science-biofilm.js',function(){
-                            appendScript('hc-science-aep','js/science-aep.js',function(){
-                              appendScript('hc-science-rivers','js/science-rivers.js',function(){
-                                appendScript('hc-science-fishpass','js/science-fishpass.js');
+                appendScript('hc-report-format-fixes','js/report-format-fixes.js',function(){
+                  appendScript('hc-science-core','js/science-core.js',function(){
+                    appendScript('hc-science-advanced','js/science-advanced.js',function(){
+                      appendScript('hc-science-anc','js/science-anc.js',function(){
+                        appendScript('hc-science-step','js/science-step.js',function(){
+                          appendScript('hc-science-lagoon','js/science-lagoon.js',function(){
+                            appendScript('hc-science-biofilm','js/science-biofilm.js',function(){
+                              appendScript('hc-science-aep','js/science-aep.js',function(){
+                                appendScript('hc-science-rivers','js/science-rivers.js',function(){
+                                  appendScript('hc-science-fishpass','js/science-fishpass.js');
+                                });
                               });
                             });
                           });
