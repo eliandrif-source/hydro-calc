@@ -29,9 +29,17 @@ requiredMigrations.forEach((file) => assert.ok(exists(file), `missing production
 [
   'docs/DEPLOYMENT_SECURITY.md',
   'docs/PRODUCTION_SMOKE_TESTS.md',
+  'docs/DEPENDENCY_SECURITY.md',
   'supabase/preflight/production_preflight.sql',
+  'SECURITY.md',
+  '.github/PULL_REQUEST_TEMPLATE.md',
   '_headers'
-].forEach((file) => assert.ok(exists(file), `missing production runbook asset: ${file}`));
+].forEach((file) => assert.ok(exists(file), `missing production/governance asset: ${file}`));
+
+assert.equal(exists('HydroCalc_QCM_Platform.html'), false,
+  'insecure legacy standalone QCM platform must remain retired');
+const redirects = read('_redirects');
+assert.match(redirects, /HydroCalc_QCM_Platform\.html\s+\/HydroCalc_Design_Unifie\.html\s+302!/);
 
 const ignore = read('.gitignore');
 assert.match(ignore, /^\.env$/m);
@@ -43,6 +51,9 @@ assert.match(headers, /X-Content-Type-Options:\s*nosniff/i);
 assert.match(headers, /Referrer-Policy:\s*strict-origin-when-cross-origin/i);
 assert.match(headers, /X-Frame-Options:\s*DENY/i);
 assert.match(headers, /frame-ancestors\s+'none'/i);
+assert.match(headers, /script-src\s+'self'\s+'unsafe-inline'/i);
+assert.match(headers, /style-src\s+'self'\s+'unsafe-inline'\s+https:\/\/fonts\.googleapis\.com/i);
+assert.match(headers, /font-src\s+'self'\s+https:\/\/fonts\.gstatic\.com\s+data:/i);
 assert.match(headers, /\/sw\.js[\s\S]*Cache-Control:\s*no-cache, no-store, must-revalidate/i);
 assert.match(headers, /\/js\/\*[\s\S]*Cache-Control:\s*no-cache, must-revalidate/i);
 
@@ -74,6 +85,12 @@ const clientText = clientFiles.map((file) => `${file}\n${read(file)}`).join('\n'
 assert.ok(!/sk_live_[A-Za-z0-9]+/.test(clientText), 'Stripe secret key must never appear in browser code');
 assert.ok(!/service_role[^\n]{0,20}["'][A-Za-z0-9._-]{20,}/i.test(clientText), 'Supabase service-role secret must never appear in browser code');
 
+const dataStore = read('js/data-store.js');
+assert.match(dataStore, /accounts:\s*\{[\s\S]*getAll:\s*function\(\)\s*\{\s*return \{\};\s*\}/,
+  'legacy local account identity must remain disabled');
+assert.match(dataStore, /activeUserKey\('hc_user_logo_'\)/,
+  'report logo must remain isolated by account');
+
 const authBridge = read('js/auth-security.js');
 assert.match(authBridge, /_forceAdminIfNeeded/);
 assert.match(authBridge, /authRegister/);
@@ -85,4 +102,4 @@ requiredMigrations.forEach((file) => {
   assert.ok(deploy.includes(name), `deployment runbook must mention ${name}`);
 });
 
-console.log('production-readiness: migrations, edge functions, headers, Stripe client hygiene, secret hygiene and deployment package checks OK');
+console.log('production-readiness: migrations, governance, legacy retirement, CSP, local identity, Stripe and secret hygiene checks OK');
