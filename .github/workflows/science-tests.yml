@@ -1,4 +1,4 @@
-name: Scientific, report and messaging regression tests
+name: Scientific, report, messaging and forum regression tests
 
 on:
   push:
@@ -32,3 +32,5 @@ jobs:
         run: node tests/report-security.test.cjs
       - name: Run messaging security regressions
         run: node tests/messaging-security.test.cjs
+      - name: Run forum security regressions
+        run: node tests/forum-security.test.cjs
