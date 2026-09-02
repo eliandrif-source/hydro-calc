@@ -134,16 +134,19 @@ Avant de basculer en production commerciale :
 - vérifier l'idempotence d'un webhook rejoué ;
 - décider explicitement de la politique en cas d'échec de paiement avant de considérer ce comportement comme définitif.
 
-L'interface Établissement ne calcule plus de quantité ou de prix par siège dans le navigateur. Elle présente un abonnement mensuel/annuel unique et une capacité fonctionnelle allant jusqu'à 30 codes d'accès. Avant publication commerciale, vérifier que les montants Stripe configurés pour `etab` et `etab_annual` correspondent bien à cette promesse produit.
+Le frontend n'embarque plus de clé publishable Stripe de test inutilisée : le checkout est créé par l'Edge Function et le navigateur suit uniquement l'URL Stripe retournée. L'interface Établissement ne calcule plus de quantité ou de prix par siège dans le navigateur. Elle présente un abonnement mensuel/annuel unique et une capacité fonctionnelle allant jusqu'à 30 codes d'accès. Avant publication commerciale, vérifier que les montants Stripe configurés pour `etab` et `etab_annual` correspondent bien à cette promesse produit.
 
 ## 7. Publication frontend
 
 Publier seulement après validation backend. Le frontend charge les bridges de sécurité, rapports, communauté et moteurs scientifiques depuis `js/stripe-client.js`.
 
+Le mode **Découvrir sans compte** est un mode de consultation. Les boutons de calcul sont interceptés avant leur handler legacy et demandent la création/connexion à un compte afin que `consume_usage` reste l'autorité sur les quotas. Tester explicitement qu'un invité ne peut pas obtenir davantage de calculs qu'un compte Gratuit en évitant l'authentification.
+
 Vérifier après publication :
 
 - inscription et confirmation e-mail ;
 - connexion/déconnexion ;
+- mode Découvrir sans compte ;
 - essai ;
 - calcul et quota ;
 - génération de rapport ;
@@ -154,20 +157,35 @@ Vérifier après publication :
 
 Faire ces tests sur desktop et mobile.
 
+### En-têtes HTTP
+
+Le fichier `_headers` configure la base de durcissement attendue sur un hébergement compatible Netlify : `nosniff`, politique de referrer, anti-framing et CSP limitée à `object-src`, `base-uri` et `frame-ancestors`, ainsi que la revalidation du HTML/JS et l'absence de cache du service worker.
+
+Après déploiement, contrôler les **réponses HTTP réellement servies**, pas seulement la présence du fichier dans Git :
+
+- `X-Content-Type-Options: nosniff` ;
+- `Referrer-Policy: strict-origin-when-cross-origin` ;
+- `X-Frame-Options: DENY` et `frame-ancestors 'none'` ;
+- `sw.js` avec `Cache-Control: no-cache, no-store, must-revalidate` ;
+- `/js/*` avec revalidation.
+
+Si l'hébergeur final n'interprète pas `_headers`, reporter ces mêmes règles dans sa configuration native avant GO.
+
 ## 8. PWA et service worker
 
-Le service worker `sw.js` utilise le cache `hydrocalc-v300-security-20260902` et applique les règles suivantes :
+Le service worker `sw.js` utilise actuellement le cache de série `hydrocalc-v30x-security-20260902` et applique les règles suivantes :
 
 - aucune requête cross-origin n'est mise en cache ; cela exclut Supabase, Stripe, les CDN et Google Fonts ;
 - les navigations, fichiers HTML, JS et CSS locaux sont **network-first**, avec cache uniquement en fallback hors-ligne ;
 - seules les ressources statiques locales (images, polices éventuelles, `libs/`) utilisent un cache-first ;
 - les requêtes portant un en-tête `Authorization` sont ignorées par le service worker ;
-- les anciens caches HydroCalc sont supprimés à l'activation du nouveau worker.
+- les anciens caches HydroCalc sont supprimés à l'activation du nouveau worker ;
+- `js/pwa-update.js` recharge la page une seule fois lors d'un `controllerchange`, avec garde en `sessionStorage`, afin d'éviter qu'une page ouverte continue à exécuter le bundle précédent.
 
 Après mise en ligne :
 
 1. ouvrir HydroCalc sur un appareil déjà utilisé avant le déploiement ;
-2. attendre l'activation du nouveau service worker puis recharger l'application ;
+2. attendre l'activation du nouveau service worker puis vérifier le rechargement unique ;
 3. vérifier dans DevTools/Application que l'ancien cache `hydrocalc-v227` n'existe plus ;
 4. confirmer que `auth-security.js`, `report-security.js`, `messaging-security.js` et les autres bridges sont servis dans leur version actuelle ;
 5. effectuer une déconnexion/reconnexion avec deux comptes différents et confirmer qu'aucune donnée utilisateur/API n'est disponible hors ligne via le Cache Storage ;
@@ -194,6 +212,6 @@ Un rollback frontend vers une version utilisant un ancien service worker doit é
 
 ## 11. Critères GO / NO-GO
 
-GO uniquement si : CI vert, preflight sans incohérence non résolue, migrations appliquées, fonctions déployées, RLS/RPC testées avec plusieurs rôles, Stripe testé, service worker/cache vérifié, parcours navigateur testés et backup disponible.
+GO uniquement si : CI vert, preflight sans incohérence non résolue, migrations appliquées, fonctions déployées, RLS/RPC testées avec plusieurs rôles, Stripe testé, service worker/cache vérifié, en-têtes HTTP vérifiés sur le domaine final, parcours navigateur testés et backup disponible.
 
-NO-GO si : doublon financier non compris, possibilité de modifier son rôle/plan côté client, fuite inter-utilisateurs, pièce jointe publique, réponse API présente dans le cache PWA, admin non vérifié côté serveur, webhook Stripe non signé/testé, ou migration partiellement appliquée.
+NO-GO si : doublon financier non compris, possibilité de modifier son rôle/plan côté client, contournement des quotas par le mode invité, fuite inter-utilisateurs, pièce jointe publique, réponse API présente dans le cache PWA, admin non vérifié côté serveur, webhook Stripe non signé/testé, en-têtes attendus absents sur l'hébergement final, ou migration partiellement appliquée.
