@@ -14,6 +14,8 @@ assert.ok(!product.includes('.innerHTML'), 'product UX hardening should use DOM/
 assert.match(product, /jusqu’à 30 codes d’accès/i);
 assert.match(product, /certaines fonctions avancées/i);
 assert.ok(!product.includes("donne accès à l'ensemble de l'application"));
+assert.match(product, /Découvrir sans compte/);
+assert.match(product, /Mode découverte : consultation des contenus ouverts/);
 assert.match(product, /18 modules · 70\+ calculateurs/);
 assert.match(product, /statusBar\.style\.display\s*=\s*'none'/);
 assert.match(product, /'nav-ac': \['Assain\. coll\.'/);
@@ -28,4 +30,4 @@ assert.match(stripe, /js\/product-ux-hardening\.js/);
 assert.match(stripe, /DOMContentLoaded',loadBridges/);
 assert.ok(!/window\.addEventListener\('load',loadBridges/.test(stripe), 'security bridges should not wait for all window resources');
 
-console.log('product-ux-hardening: billing, plan copy, legacy gate, navigation and early bridge loading regressions OK');
+console.log('product-ux-hardening: billing, guest discovery, plan copy, navigation and early bridge loading regressions OK');
