@@ -140,7 +140,9 @@ function stripeOpenPortal() {
           appendScript('hc-quota-security-bridge', 'js/quota-security.js', function() {
             appendScript('hc-science-core', 'js/science-core.js', function() {
               appendScript('hc-science-advanced', 'js/science-advanced.js', function() {
-                appendScript('hc-science-anc', 'js/science-anc.js');
+                appendScript('hc-science-anc', 'js/science-anc.js', function() {
+                  appendScript('hc-science-step', 'js/science-step.js');
+                });
               });
             });
           });
