@@ -7,7 +7,7 @@ const stripe = fs.readFileSync(path.join(__dirname, '..', 'js', 'stripe-client.j
 const update = fs.readFileSync(path.join(__dirname, '..', 'js', 'pwa-update.js'), 'utf8');
 const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'manifest.json'), 'utf8'));
 
-assert.match(sw, /CACHE_NAME\s*=\s*'hydrocalc-v303-security-20260902'/);
+assert.match(sw, /CACHE_NAME\s*=\s*'hydrocalc-v305-security-20260902'/);
 assert.match(sw, /function isSameOrigin\(request\)/);
 assert.match(sw, /if \(!isSameOrigin\(request\)\) return;/);
 assert.match(sw, /request\.headers\.get\('Authorization'\)/);
@@ -48,4 +48,4 @@ assert.ok(!/caches\.match\(e\.request\)[\s\S]*if \(cached\) return cached[\s\S]*
 assert.ok(!/cache\.put\(e\.request/.test(sw),
   'service worker must not cache every successful GET request');
 
-console.log('pwa-security: cache isolation, one-shot updates and install manifest regressions OK');
+console.log('pwa-security: v305 cache isolation, one-shot updates and install manifest regressions OK');
