@@ -25,8 +25,11 @@ context.window.window = context.window;
 vm.createContext(context);
 vm.runInContext(source, context, { filename: 'science-step.js' });
 
-const fn = context.window.HydroCalcScience.stepMinimumPerformance;
+const science = context.window.HydroCalcScience;
+const fn = science.stepMinimumPerformance;
+const fpr = science.fprPrefeasibility;
 assert.equal(typeof fn, 'function');
+assert.equal(typeof fpr, 'function');
 
 const below = fn(1.19);
 assert.equal(below.annex3Applies, false);
@@ -63,7 +66,17 @@ assert.equal(high.mes.maxMgL, 35);
 assert.equal(high.mes.minRemovalPct, 90);
 assert.equal(high.mes.redhibitoryMgL, 85);
 
+const fprCase = fpr(200, 60, 70, 50, 0.15, 20);
+assert.ok(Math.abs(fprCase.verticalAreaOrganicM2 - 171.4285714) < 1e-6);
+assert.ok(Math.abs(fprCase.verticalAreaHydraulicM2 - 333.3333333) < 1e-6);
+assert.ok(Math.abs(fprCase.verticalAreaM2 - 333.3333333) < 1e-6);
+assert.equal(fprCase.firstStageCasings, 3);
+assert.ok(Math.abs(fprCase.verticalAreaPerCasingM2 - 111.1111111) < 1e-6);
+assert.ok(Math.abs(fprCase.horizontalAreaM2 - 600) < 1e-9);
+
 assert.throws(() => fn(-1), /CBPO/);
 assert.throws(() => fn(Number.NaN), /CBPO/);
+assert.throws(() => fpr(0, 60, 70, 50, 0.15, 20), /FPR/);
+assert.throws(() => fpr(200, 60, 70, 0, 0.15, 20), /FPR/);
 
-console.log('science-step: annex 3 regulatory regressions OK');
+console.log('science-step: annex 3 + FPR regressions OK');
