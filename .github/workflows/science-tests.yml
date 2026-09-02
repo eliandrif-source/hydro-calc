@@ -44,5 +44,7 @@ jobs:
         run: node tests/home-ux-enhancements.test.cjs
       - name: Run PWA cache security regressions
         run: node tests/pwa-security.test.cjs
+      - name: Run guest quota security regressions
+        run: node tests/quota-guest-security.test.cjs
       - name: Run production readiness checks
         run: node tests/production-readiness.test.cjs
