@@ -1,0 +1,58 @@
+name: Scientific, report, messaging and forum regression tests
+
+on:
+  push:
+    branches: [main, security-hardening]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run scientific regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          for test_file in tests/science-*.test.cjs; do
+            echo "Running ${test_file}"
+            node "${test_file}"
+          done
+      - name: Run report renderer regressions
+        run: node tests/report-security.test.cjs
+      - name: Run messaging security regressions
+        run: node tests/messaging-security.test.cjs
+      - name: Run forum security regressions
+        run: node tests/forum-security.test.cjs
+      - name: Run community moderation regressions
+        run: node tests/community-moderation.test.cjs
+      - name: Run sharing regressions
+        run: node tests/share-community.test.cjs
+      - name: Run product UX regressions
+        run: node tests/product-ux-hardening.test.cjs
+      - name: Run home UX regressions
+        run: node tests/home-ux-enhancements.test.cjs
+      - name: Run PWA cache security regressions
+        run: node tests/pwa-security.test.cjs
+      - name: Run guest quota security regressions
+        run: node tests/quota-guest-security.test.cjs
+      - name: Run local data isolation regressions
+        run: node tests/local-data-isolation.test.cjs
+      - name: Run external dependency inventory regressions
+        run: node tests/external-dependencies.test.cjs
+      - name: Run legacy QCM retirement regressions
+        run: node tests/legacy-qcm-retirement.test.cjs
+      - name: Run Supabase schema source-of-truth regressions
+        run: node tests/schema-source-of-truth.test.cjs
+      - name: Run production readiness checks
+        run: node tests/production-readiness.test.cjs
