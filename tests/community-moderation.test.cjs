@@ -35,7 +35,10 @@ assert.match(migration,/where public\.forum_is_admin\(auth\.uid\(\)\)/);
 assert.match(migration,/'message'::text as kind/);
 assert.match(migration,/join public\.messages m on m\.id=mr\.message_id/);
 assert.ok(!/community_admin_reports[\s\S]*join public\.message_threads/.test(migration), 'admin report feed must not expose the private thread');
-assert.ok(!/community_admin_reports[\s\S]*attachment_url/.test(migration), 'admin report feed must not expose private attachment paths');
+const returnsBlock = migration.match(/returns table\(([\s\S]*?)\)\nlanguage sql/);
+assert.ok(returnsBlock, 'moderation RPC must declare an explicit return shape');
+assert.ok(!/attachment_url/i.test(returnsBlock[1]), 'moderation RPC output must not expose private attachment paths');
+assert.match(migration,/case when m\.attachment_url is not null then '\[Pièce jointe\]'/);
 assert.match(migration,/update public\.messages set is_deleted=true where id=v_target/);
 assert.match(migration,/p_status not in \('reviewed','dismissed'\)/);
 
