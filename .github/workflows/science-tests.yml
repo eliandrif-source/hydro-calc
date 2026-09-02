@@ -48,5 +48,7 @@ jobs:
         run: node tests/quota-guest-security.test.cjs
       - name: Run local data isolation regressions
         run: node tests/local-data-isolation.test.cjs
+      - name: Run external dependency inventory regressions
+        run: node tests/external-dependencies.test.cjs
       - name: Run production readiness checks
         run: node tests/production-readiness.test.cjs
