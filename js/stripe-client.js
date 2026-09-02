@@ -75,30 +75,32 @@ function stripeOpenPortal() {
     var script=document.createElement('script');script.id=id;script.src=src;script.async=false;if(onload)script.onload=onload;document.body.appendChild(script);
   }
   function loadBridges(){
-    appendScript('hc-auth-security-bridge','js/auth-security.js',function(){
-      appendScript('hc-product-ux-hardening','js/product-ux-hardening.js',function(){
-        appendScript('hc-home-ux-enhancements','js/home-ux-enhancements.js',function(){
-          appendScript('hc-xss-security-bridge','js/xss-security.js',function(){
-            appendScript('hc-coffre-security-bridge','js/coffre-security.js',function(){
-              appendScript('hc-quota-security-bridge','js/quota-security.js',function(){
-                appendScript('hc-report-security-bridge','js/report-security.js',function(){
-                  appendScript('hc-report-pdf-fixes','js/report-pdf-fixes.js',function(){
-                    appendScript('hc-report-format-fixes','js/report-format-fixes.js',function(){
-                      appendScript('hc-messaging-security','js/messaging-security.js',function(){
-                        appendScript('hc-messaging-ui-security','js/messaging-ui-security.js',function(){
-                          appendScript('hc-messaging-controls','js/messaging-controls.js',function(){
-                            appendScript('hc-community-admin','js/community-admin.js',function(){
-                              appendScript('hc-forum-enhancements','js/forum-enhancements.js',function(){
-                                appendScript('hc-share-community','js/share-community.js',function(){
-                                  appendScript('hc-science-core','js/science-core.js',function(){
-                                    appendScript('hc-science-advanced','js/science-advanced.js',function(){
-                                      appendScript('hc-science-anc','js/science-anc.js',function(){
-                                        appendScript('hc-science-step','js/science-step.js',function(){
-                                          appendScript('hc-science-lagoon','js/science-lagoon.js',function(){
-                                            appendScript('hc-science-biofilm','js/science-biofilm.js',function(){
-                                              appendScript('hc-science-aep','js/science-aep.js',function(){
-                                                appendScript('hc-science-rivers','js/science-rivers.js',function(){
-                                                  appendScript('hc-science-fishpass','js/science-fishpass.js');
+    appendScript('hc-pwa-update','js/pwa-update.js',function(){
+      appendScript('hc-auth-security-bridge','js/auth-security.js',function(){
+        appendScript('hc-product-ux-hardening','js/product-ux-hardening.js',function(){
+          appendScript('hc-home-ux-enhancements','js/home-ux-enhancements.js',function(){
+            appendScript('hc-xss-security-bridge','js/xss-security.js',function(){
+              appendScript('hc-coffre-security-bridge','js/coffre-security.js',function(){
+                appendScript('hc-quota-security-bridge','js/quota-security.js',function(){
+                  appendScript('hc-report-security-bridge','js/report-security.js',function(){
+                    appendScript('hc-report-pdf-fixes','js/report-pdf-fixes.js',function(){
+                      appendScript('hc-report-format-fixes','js/report-format-fixes.js',function(){
+                        appendScript('hc-messaging-security','js/messaging-security.js',function(){
+                          appendScript('hc-messaging-ui-security','js/messaging-ui-security.js',function(){
+                            appendScript('hc-messaging-controls','js/messaging-controls.js',function(){
+                              appendScript('hc-community-admin','js/community-admin.js',function(){
+                                appendScript('hc-forum-enhancements','js/forum-enhancements.js',function(){
+                                  appendScript('hc-share-community','js/share-community.js',function(){
+                                    appendScript('hc-science-core','js/science-core.js',function(){
+                                      appendScript('hc-science-advanced','js/science-advanced.js',function(){
+                                        appendScript('hc-science-anc','js/science-anc.js',function(){
+                                          appendScript('hc-science-step','js/science-step.js',function(){
+                                            appendScript('hc-science-lagoon','js/science-lagoon.js',function(){
+                                              appendScript('hc-science-biofilm','js/science-biofilm.js',function(){
+                                                appendScript('hc-science-aep','js/science-aep.js',function(){
+                                                  appendScript('hc-science-rivers','js/science-rivers.js',function(){
+                                                    appendScript('hc-science-fishpass','js/science-fishpass.js');
+                                                  });
                                                 });
                                               });
                                             });
