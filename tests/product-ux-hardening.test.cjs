@@ -25,5 +25,7 @@ assert.match(stripe, /_disableLegacyClientGateEarly/);
 assert.match(stripe, /site-gate/);
 assert.match(stripe, /hc-product-ux-hardening/);
 assert.match(stripe, /js\/product-ux-hardening\.js/);
+assert.match(stripe, /DOMContentLoaded',loadBridges/);
+assert.ok(!/window\.addEventListener\('load',loadBridges/.test(stripe), 'security bridges should not wait for all window resources');
 
-console.log('product-ux-hardening: billing, plan copy, legacy gate and primary navigation regressions OK');
+console.log('product-ux-hardening: billing, plan copy, legacy gate, navigation and early bridge loading regressions OK');
