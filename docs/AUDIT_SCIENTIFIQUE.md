@@ -135,19 +135,53 @@ HydroCalc distingue désormais les **seuils nationaux de rejet** des **hypothès
 
 Le respect du niveau MES est facultatif dans le jugement de conformité en performance selon la note du tableau 6. Des prescriptions plus strictes peuvent résulter du milieu récepteur, d'une zone sensible ou d'un arrêté préfectoral.
 
-**Corrections d'interface :**
-
-- les charges surfaciques FPR, profondeurs, TSH et vitesses ascensionnelles sont marquées comme hypothèses de pré-dimensionnement lorsqu'elles ne sont pas imposées par le texte réglementaire ;
-- la mention « 3 bassins en série recommandés (DTU 64.1) » est supprimée du lagunage collectif : le DTU 64.1 n'est pas le référentiel réglementaire de dimensionnement d'une STEP collective ;
-- la charge FPR `60–80 g DBO₅/m²/j` n'est plus présentée comme une exigence de l'arrêté 2015 ;
-- la référence `NF EN 12566-5` est retirée comme justification générale du calculateur FPR collectif ; les guides techniques Irstea/OFB sont distingués de l'arrêté de rejet.
-
 Moteur réglementaire : `js/science-step.js` → `HydroCalcScience.stepMinimumPerformance()`.
 
-Vecteurs de régression : `CBPO = 60 kg DBO₅/j` → DBO₅ 35 mg/L ou 60 %, DCO 200 mg/L ou 60 % ; `CBPO = 120 kg DBO₅/j` → DBO₅ 25 mg/L ou 80 %, DCO 125 mg/L ou 75 %.
+## 8. STEP — boues activées et clarificateur
+
+**Statut : CORRIGÉ / moteurs de pré-dimensionnement actifs**
+
+Référence technique principale : documentation INRAE/Cemagref sur les paramètres de dimensionnement des clarificateurs de boues activées.
+
+La charge hydraulique superficielle ou vitesse ascensionnelle est définie par `Va = Qe / S`. La documentation technique souligne que la valeur limite ne dépend pas seulement d'un régime « faible/moyenne/forte charge », mais aussi de la qualité de décantation et de la concentration des boues, notamment via l'indice de boue et les MES.
+
+**Erreurs corrigées :**
+
+- l'ancien moteur appelait `Qj/24` « débit de pointe » ; il s'agit seulement du débit horaire moyen ;
+- le nouveau moteur demande donc explicitement le débit horaire de pointe de projet `Qp` et dimensionne la surface hydraulique sur `S = Qp / Va` ;
+- les valeurs de `Va`, concentration MVS, coefficient de production de boues et concentration des boues extraites sont affichées comme hypothèses de projet, pas comme prescriptions réglementaires ;
+- le coefficient historique `0,8 kg MS/kg DBO₅` reste disponible comme valeur préremplie mais devient éditable et n'est plus présenté comme universel ;
+- le sélecteur `60/70 g DBO₅/EH/j` distingue maintenant la définition de l'EH à 60 g/j d'une marge de conception éventuelle à justifier.
+
+Vecteur de régression boues activées : `5000 EH`, `60 g DBO₅/EH/j`, `Cm = 0,15`, `MVS = 3,5 kg/m³`, `Qj = 1250 m³/j`, `Qp = 100 m³/h`, `Va = 1,0 m/h` → charge DBO₅ `300 kg/j`, masse MVS `2000 kg`, bassin `571,43 m³`, surface clarificateur `100 m²`.
+
+Vecteur clarificateur : `Qm = 60 m³/h`, `Qp = 120 m³/h`, `Va = 1,2 m/h`, profondeur `3,5 m` → surface `100 m²`, volume `350 m³`.
+
+Implémentations : `js/science-step.js` → `HydroCalcScience.activatedSludgePrefeasibility()` et `HydroCalcScience.clarifierHydraulicSizing()`.
+
+## 9. STEP — lagunage naturel
+
+**Statut : CORRIGÉ / filière naturelle classique auditée / lagunage aéré encore À VÉRIFIER**
+
+Références principales : Cemagref/SATESE et EPNAC/INRAE, retour d'expérience français sur le lagunage naturel.
+
+La configuration française classique de lagunage naturel est dimensionnée à environ **11 m²/EH** sur trois bassins en série :
+
+- bassin 1 : `6 m²/EH` ;
+- bassin 2 : `2,5 m²/EH` ;
+- bassin 3 : `2,5 m²/EH` ;
+- profondeur de l'ordre de `1 m`.
+
+**Erreur corrigée :** avec son ancienne valeur par défaut de `100 kg DBO₅/ha/j`, HydroCalc aboutissait à environ `6 m²/EH`, puis répartissait cette surface `35/45/20 %`, ce qui ne correspondait pas à la filière classique de référence. Le nouveau moteur utilise directement la répartition `6 + 2,5 + 2,5 m²/EH` pour le lagunage naturel.
+
+Le lagunage aéré est désormais séparé : HydroCalc ne réutilise plus automatiquement le modèle du lagunage naturel et n'affiche pas de dimensionnement chiffré tant que ce modèle n'est pas audité.
+
+Vecteur de régression : `500 EH`, profondeur `1 m` → `5500 m²` au total, soit `3000 + 1250 + 1250 m²`, volume géométrique `5500 m³`.
+
+Implémentation : `js/science-lagoon.js` → `HydroCalcScience.naturalLagoonClassic()`.
 
 ## File d'audit prioritaire
 
-- STEP : vérifier maintenant, procédé par procédé, les coefficients de conception boues activées, lagunage, FPR, lit bactérien, biodisques et décantation.
+- STEP : lit bactérien, biodisques puis lagunage aéré.
 - AEP : Hazen-Williams, HMT, NPSH, chloration et temps de séjour.
 - Milieux aquatiques : Shields, Langelier, passes à poissons et valeurs biologiques de référence.
