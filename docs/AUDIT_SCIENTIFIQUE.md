@@ -217,8 +217,77 @@ Vecteur de régression : `Q = 10 L/s`, `D = 150 mm`, `C = 130`, `L = 200 m` → 
 
 Implémentation : `js/science-aep.js` → `HydroCalcScience.hazenWilliamsHeadloss()`.
 
+## 12. AEP — HMT et puissance de pompage
+
+**Statut : VALIDÉ pour le bilan de charge / interprétation moteur corrigée**
+
+Le moteur calcule `HMT = Hg + hf + Hp`, puis `P_hyd = ρgQHMT` et `P_abs = P_hyd/η`. Les grandeurs sont explicites et le rendement est une hypothèse de projet.
+
+**Correction :** l'ancien écran déduisait automatiquement une puissance moteur normalisée et un courant à 400 V à partir du seul rendement global. Cette sélection n'est plus présentée comme une décision de dimensionnement : le moteur doit être retenu sur les courbes constructeur, le point de fonctionnement et les caractéristiques électriques réelles.
+
+Implémentation : `js/science-aep.js`.
+
+## 13. AEP — NPSH
+
+**Statut : CORRIGÉ / moteur audité actif**
+
+HydroCalc calcule désormais le NPSH disponible à partir de la pression atmosphérique absolue, de la hauteur géométrique d'aspiration, des pertes de charge et de la pression de vapeur de l'eau. La pression atmosphérique est éditable afin de ne plus supposer implicitement le niveau de la mer.
+
+**Erreur corrigée :** l'ancienne approximation de pression de vapeur surestimait fortement `Pv` à température ambiante. La nouvelle implémentation utilise une corrélation Antoine documentée. La marge `NPSHa − NPSHr` n'est plus transformée en seuil universel de `0,5 m` : la marge requise dépend de la pompe, du service et des recommandations constructeur.
+
+Implémentation : `js/science-aep.js`.
+
+## 14. AEP — chloration et réservoir
+
+**Statut : CORRIGÉ / bilans de pré-dimensionnement actifs**
+
+Le bilan de chloration conserve `dose appliquée = demande + résiduel cible`, puis calcule la masse de chlore et le débit d'une solution dont la concentration est saisie. Ce bilan ne vaut pas validation de la désinfection : le temps de contact, le CT, la température, le pH et les sous-produits restent à vérifier.
+
+**Correction réglementaire :** HydroCalc ne présente plus `0,5 mg/L` comme un maximum légal universel de chlore libre en France.
+
+Pour le réservoir, HydroCalc sépare la tranche de régulation, l'autonomie/sécurité et la réserve incendie. La réserve incendie est une donnée de projet issue de la DECI locale ; `120 m³` n'est plus affiché comme un minimum national universel. Le temps de renouvellement du volume opérationnel est distingué du cas où une réserve incendie participe effectivement au volume mélangé.
+
+Implémentation : `js/science-aep.js`.
+
+## 15. Milieux aquatiques — Shields
+
+**Statut : CORRIGÉ / moteur audité actif**
+
+Pour des sédiments non cohésifs, HydroCalc utilise désormais le critère `θ = τb / [(ρs − ρ) g d]` et compare `θ` au paramètre critique choisi `θc`.
+
+**Erreur corrigée :** l'ancien calculateur utilisait directement la vitesse moyenne dans une expression de type pression dynamique pour en déduire un diamètre stable. Une vitesse moyenne seule ne fournit pas la contrainte de cisaillement au fond sans modèle hydraulique complémentaire. `θc = 0,047` est conservé comme valeur historique Meyer-Peter & Müller modifiable, pas comme constante universelle.
+
+Vecteur de régression : `τb = 15 Pa`, `d = 20 mm`, `ρs = 2650 kg/m³`, `ρ = 1000 kg/m³`, `θc = 0,047` → `θ = 0,0463349`, `τcrit = 15,21531 Pa`, seuil non dépassé.
+
+Implémentation : `js/science-rivers.js` → `HydroCalcScience.shieldsIncipientMotion()`.
+
+## 16. Qualité d'eau — Langelier
+
+**Statut : CORRIGÉ / moteur audité actif**
+
+Le LSI est calculé comme `LSI = pH − pHs` avec la formulation simplifiée documentée par l'US EPA, utilisant la température, les TDS, la dureté **calcique** et l'alcalinité exprimées en CaCO₃.
+
+**Erreur corrigée :** l'ancien écran utilisait le TH total et une conversion interne non traçable. Le nouvel écran demande explicitement la dureté calcique et les TDS. Le LSI est présenté comme un indice de saturation vis-à-vis de CaCO₃, pas comme un diagnostic complet de corrosion ou de conformité sanitaire.
+
+Vecteur de régression : `pH = 7,4`, `T = 15 °C`, `TDS = 300 mg/L`, dureté calcique `150 mg/L CaCO₃`, alcalinité `100 mg/L CaCO₃` → `pHs = 7,95439`, `LSI = −0,55439`.
+
+Implémentation : `js/science-rivers.js` → `HydroCalcScience.langelierSaturationIndex()`.
+
+## 17. Passes à poissons — pré-dimensionnement hydraulique
+
+**Statut : CORRIGÉ / critères biologiques universels supprimés**
+
+La méthode ICE de l'OFB est une méthode nationale standardisée de diagnostic de franchissabilité qui confronte géométrie, hydraulique et capacités des espèces. Elle n'est pas utilisée comme une table réglementaire imposant une vitesse, une profondeur ou une distance unique par groupe d'espèces.
+
+HydroCalc calcule désormais uniquement les grandeurs hydrauliques de pré-dimensionnement d'une passe à bassins : nombre de chutes, dénivelé réel, vitesse théorique d'ouverture, puissance dissipée et puissance volumique. Les critères biologiques doivent être définis pour les espèces cibles et le site.
+
+Vecteur de régression : `H = 2 m`, `Δh cible = 0,15 m`, `Q = 0,5 m³/s`, bassin `2,5 × 1,5 × 1 m`, `Cd = 0,62` → 14 chutes, `Δh réel = 0,142857 m`, vitesse théorique `1,03799 m/s`, puissance volumique `186,857 W/m³`.
+
+Implémentation : `js/science-fishpass.js` → `HydroCalcScience.poolFishPassHydraulics()`.
+
 ## File d'audit prioritaire
 
 - STEP : lagunage aéré et consolidation des valeurs de conception restantes.
-- AEP : HMT, NPSH, chloration et temps de séjour/réservoir.
-- Milieux aquatiques : Shields, Langelier, passes à poissons et valeurs biologiques de référence.
+- AEP : approfondir les critères de qualité d'eau, réseau et stockage qui restent dans les fiches historiques.
+- Milieux aquatiques : compléter transport solide, continuité écologique et hydraulique des ouvrages sans convertir les guides techniques en pseudo-réglementation.
+- Sécurité/production : exécuter la suite de tests en CI, finir le durcissement des rapports/export et préparer la séquence de déploiement Supabase.
