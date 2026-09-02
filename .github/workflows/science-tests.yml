@@ -46,5 +46,7 @@ jobs:
         run: node tests/pwa-security.test.cjs
       - name: Run guest quota security regressions
         run: node tests/quota-guest-security.test.cjs
+      - name: Run local data isolation regressions
+        run: node tests/local-data-isolation.test.cjs
       - name: Run production readiness checks
         run: node tests/production-readiness.test.cjs
