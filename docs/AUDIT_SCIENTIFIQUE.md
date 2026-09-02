@@ -1,6 +1,6 @@
 # HydroCalc — Audit scientifique
 
-Dernière vérification : 2026-09-01
+Dernière vérification : 2026-09-02
 
 Objectif : chaque calculateur doit avoir une formule identifiée, des unités explicites, un domaine de validité, des cas limites et au moins un vecteur de régression indépendant. Une valeur pédagogique ou une règle de pratique ne doit pas être présentée comme une obligation réglementaire sans source.
 
@@ -61,26 +61,28 @@ Avec `i` en mm/h et `A` en hectares :
 
 Vecteur de régression : `C = 0,60`, `i = 25 mm/h`, `A = 5 ha` → `Q = 0,208333 m³/s = 208,333 L/s = 750 m³/h`.
 
-Le seuil `S ≤ 2 km²` n'est plus présenté comme une limite universelle. Le domaine dépend du contexte et du référentiel : par exemple, le guide Cerema pour bassins versants naturels donne des limites spécifiques selon la région.
+Le seuil `S ≤ 2 km²` n'est plus présenté comme une limite universelle. Le domaine dépend du contexte et du référentiel de projet.
 
 Implémentation auditée : `js/science-core.js` → `HydroCalcScience.rationalPeakFlow()`.
 
-## 4. ANC — perméabilité Porchet / interprétation réglementaire
+## 4. ANC — Porchet, perméabilité et épandage
 
-**Statut : CORRIGÉ pour les unités et seuils réglementaires / formule Porchet encore À VÉRIFIER**
+**Statut : CORRIGÉ / protocole Porchet audité actif / dimensionnement surfacique historique neutralisé**
 
-Référence principale : arrêté du 7 septembre 2009 modifié.
+Références principales : arrêté du 7 septembre 2009 modifié et documentation technique Cerema sur le test de Porchet.
 
-- Article 6 : traitement par le sol en place lorsque la perméabilité est comprise entre **15 et 500 mm/h**, avec les autres conditions du site.
-- Article 11 : infiltration des eaux usées traitées lorsque la perméabilité est comprise entre **10 et 500 mm/h**.
+HydroCalc utilise désormais un protocole explicite et traçable : forage de diamètre 150 mm, phase d'imbibition de 4 h puis mesure du volume d'eau infiltré pendant 10 min à charge maintenue. Pour ce protocole, le moteur convertit le volume mesuré `V10` en coefficient de perméabilité `K` en mm/h selon la relation documentée par le Cerema.
 
-**Erreur corrigée :** plusieurs écrans utilisaient `mm/min` alors que le calculateur Porchet et les seuils réglementaires étaient exprimés en `mm/h`. Des règles de type `K < 1`, `1–15`, `>15 mm/min` étaient ensuite présentées comme déterminant directement la filière. Cette présentation n'est plus considérée comme une règle réglementaire nationale.
+Les seuils réglementaires sont séparés du choix de filière :
 
-HydroCalc affiche désormais les plages légales en mm/h et sépare l'aptitude réglementaire du sol au traitement en place, l'aptitude à l'infiltration d'eaux déjà traitées et le choix de filière, qui doit rester dépendant de l'étude de sol, du DTU, du dispositif et des prescriptions du SPANC.
+- article 6 : traitement par le sol en place lorsque la perméabilité est comprise entre **15 et 500 mm/h**, sous réserve des autres conditions du site ;
+- article 11 : infiltration des eaux usées traitées lorsque la perméabilité est comprise entre **10 et 500 mm/h**.
 
-Implémentation auditée : `js/science-core.js` → `HydroCalcScience.ancPermeabilityStatus()`.
+**Erreurs corrigées :** les anciens écrans mélangeaient mm/min et mm/h, citaient à tort NF EN ISO 22282-4 pour l'essai d'infiltration et déduisaient automatiquement une filière et une surface à partir de `K` seul.
 
-La formule de décroissance de charge utilisée dans le calcul Porchet historique est conservée provisoirement mais n'est pas encore marquée VALIDÉE : attribution normative, protocole et géométrie doivent encore être consolidés.
+Le calcul historique de surface d'épandage fondé sur un coefficient interne non sourcé a été neutralisé. HydroCalc fournit maintenant un pré-diagnostic de perméabilité ; le dimensionnement final doit tenir compte de l'étude de sol, des volumes à infiltrer, des règles de l'art, du dispositif retenu et des prescriptions locales.
+
+Implémentations auditées : `js/science-core.js` → `HydroCalcScience.ancPermeabilityStatus()` et `js/science-anc.js` pour le protocole et les protections d'interface.
 
 ## 5. Manning-Strickler — conduite circulaire partiellement remplie
 
@@ -95,7 +97,7 @@ La géométrie historique de la section mouillée était correcte pour `0 < y < 
 
 La largeur au miroir vaut `T = D sin(θ/2)`. La profondeur hydraulique utilisée pour le nombre de Froude est `Dh = A/T`.
 
-**Erreur corrigée :** l'ancien calcul utilisait `Fr = V/√(g y)`. Cette expression n'est valable telle quelle que pour une section rectangulaire où la profondeur hydraulique est égale à la hauteur d'eau. Pour la section circulaire partiellement remplie, HydroCalc utilise maintenant `Fr = V/√(g A/T)`. HEC-RAS définit également la profondeur hydraulique comme `A / largeur au miroir`.
+**Erreur corrigée :** l'ancien calcul utilisait `Fr = V/√(g y)`. Pour une section circulaire partiellement remplie, HydroCalc utilise maintenant `Fr = V/√(g A/T)`.
 
 Vecteur de régression : `D = 0,300 m`, `y = 0,240 m`, `K = 90`, `I = 3 ‰` → `θ = 4,428595 rad`, `A = 0,0606217 m²`, `Rh = 0,091258 m`, `T = 0,240 m`, `Dh = 0,252590 m`, `Q = 60,5729 L/s`, `V = 0,999195 m/s`, `Fr = 0,634757`.
 
@@ -112,22 +114,40 @@ Le temps critique d'aller-retour de l'onde est `Tc = 2L/a`. Si l'arrêt complet 
 - `ΔH = a ΔV / g`
 - `ΔP = ρ a ΔV`
 
-**Corrections HydroCalc :**
-
-- le temps de fermeture `tf` est désormais demandé et comparé à `Tc` ;
-- la célérité `a` est une hypothèse de calcul éditable et non une constante intrinsèque du seul matériau ; elle dépend notamment des propriétés du fluide et de la conduite, de son diamètre/épaisseur et de son élasticité ;
-- lorsque `tf > Tc`, la valeur de Joukowsky est affichée comme borne théorique et non comme surpression calculée du transitoire réel ;
-- la pression minimale théorique n'est plus artificiellement tronquée à `0 bar` : une valeur manométrique négative déclenche au contraire un avertissement de dépression/cavitation ou séparation de colonne à étudier ;
-- HydroCalc ne déduit plus automatiquement une classe PN à partir de ce seul calcul transitoire simplifié.
+**Corrections HydroCalc :** le temps de fermeture est désormais demandé ; la célérité est une hypothèse éditable ; Joukowsky n'est plus présenté comme le transitoire réel lorsque la fermeture est lente ; une pression manométrique théorique négative n'est plus tronquée artificiellement à zéro ; aucune classe PN n'est déduite de ce seul calcul simplifié.
 
 Vecteur de régression : `L = 500 m`, `ΔV = 1,2 m/s`, `a = 400 m/s`, `Pstat = 4 bar(g)`, `tf = 1 s` → `Tc = 2,5 s`, fermeture rapide, `ΔH = 48,9297 m`, `ΔP = 4,8 bar`, `Pmax théorique = 8,8 bar(g)`, `Pmin symétrique théorique = −0,8 bar(g)`.
 
 Implémentation auditée : `js/science-advanced.js` → `HydroCalcScience.waterHammerJoukowsky()`.
 
+## 7. STEP — cadre réglementaire et hypothèses de pré-dimensionnement
+
+**Statut : CORRIGÉ pour la qualification réglementaire / paramètres de procédé encore en audit**
+
+Référence réglementaire principale : arrêté du 21 juillet 2015 modifié, article 7 et annexe 3.
+
+L'article 7 impose que les stations soient conçues et dimensionnées conformément aux règles de l'art pour traiter la charge reçue, le débit de référence, les boues produites et respecter les performances de rejet. Il ne transforme pas les ratios internes HydroCalc (charge surfacique, TSH, vitesse ascensionnelle, profondeur, nombre de bassins) en valeurs réglementaires.
+
+HydroCalc distingue désormais les **seuils nationaux de rejet** des **hypothèses de conception**. Pour les stations recevant une CBPO ≥ 1,2 kg DBO₅/j, l'annexe 3 fixe notamment :
+
+- CBPO < 120 kg DBO₅/j : DBO₅ 35 mg/L ou 60 % ; DCO 200 mg/L ou 60 % ; MES 50 % ;
+- CBPO ≥ 120 kg DBO₅/j : DBO₅ 25 mg/L ou 80 % ; DCO 125 mg/L ou 75 % ; MES 35 mg/L ou 90 %.
+
+Le respect du niveau MES est facultatif dans le jugement de conformité en performance selon la note du tableau 6. Des prescriptions plus strictes peuvent résulter du milieu récepteur, d'une zone sensible ou d'un arrêté préfectoral.
+
+**Corrections d'interface :**
+
+- les charges surfaciques FPR, profondeurs, TSH et vitesses ascensionnelles sont marquées comme hypothèses de pré-dimensionnement lorsqu'elles ne sont pas imposées par le texte réglementaire ;
+- la mention « 3 bassins en série recommandés (DTU 64.1) » est supprimée du lagunage collectif : le DTU 64.1 n'est pas le référentiel réglementaire de dimensionnement d'une STEP collective ;
+- la charge FPR `60–80 g DBO₅/m²/j` n'est plus présentée comme une exigence de l'arrêté 2015 ;
+- la référence `NF EN 12566-5` est retirée comme justification générale du calculateur FPR collectif ; les guides techniques Irstea/OFB sont distingués de l'arrêté de rejet.
+
+Moteur réglementaire : `js/science-step.js` → `HydroCalcScience.stepMinimumPerformance()`.
+
+Vecteurs de régression : `CBPO = 60 kg DBO₅/j` → DBO₅ 35 mg/L ou 60 %, DCO 200 mg/L ou 60 % ; `CBPO = 120 kg DBO₅/j` → DBO₅ 25 mg/L ou 80 %, DCO 125 mg/L ou 75 %.
+
 ## File d'audit prioritaire
 
-- Porchet : validation complète de la formule et du protocole de mesure.
-- Épandage ANC : dimensionnement surfacique et distinction DTU / pratique SPANC / réglementation.
-- STEP : distinguer obligations réglementaires, paramètres de conception et valeurs de pratique.
+- STEP : vérifier maintenant, procédé par procédé, les coefficients de conception boues activées, lagunage, FPR, lit bactérien, biodisques et décantation.
 - AEP : Hazen-Williams, HMT, NPSH, chloration et temps de séjour.
 - Milieux aquatiques : Shields, Langelier, passes à poissons et valeurs biologiques de référence.
