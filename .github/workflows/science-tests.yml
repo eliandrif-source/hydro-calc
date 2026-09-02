@@ -1,0 +1,30 @@
+name: Scientific regression tests
+
+on:
+  push:
+    branches: [main, security-hardening]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  science:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run scientific regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          for test_file in tests/science-*.test.cjs; do
+            echo "Running ${test_file}"
+            node "${test_file}"
+          done
