@@ -122,5 +122,6 @@ function stripeOpenPortal() {
       });
     });
   }
-  if(document.readyState==='complete')loadBridges();else window.addEventListener('load',loadBridges,{once:true});
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',loadBridges,{once:true});
+  else loadBridges();
 })();
