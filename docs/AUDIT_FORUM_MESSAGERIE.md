@@ -6,52 +6,37 @@ Dernière passe : 2026-09-02
 
 Les deux fonctions méritent d'être conservées, mais elles ne doivent pas jouer le même rôle.
 
-- **Forum : fonctionnalité communautaire principale.** Il doit capitaliser les questions techniques, méthodes, sources et solutions afin qu'une réponse utile reste retrouvable par tous les membres.
-- **Messagerie : fonctionnalité privée secondaire.** Elle doit servir à poursuivre un échange, travailler entre collègues, accompagner un apprenant ou discuter d'un projet précis. Elle ne doit pas devenir un réseau social généraliste.
+- **Forum : fonctionnalité communautaire principale.** Il capitalise les questions techniques, méthodes, sources et solutions afin qu'une réponse utile reste retrouvable.
+- **Messagerie : fonctionnalité privée secondaire.** Elle sert à poursuivre un échange, travailler entre collègues, accompagner un apprenant ou discuter d'un projet précis.
 
-Le meilleur différenciateur pour HydroCalc n'est pas un chat de plus, mais une chaîne métier : **question → contexte/données → calcul HydroCalc → hypothèses → réponse → source → solution validée**.
+Le différenciateur HydroCalc est la chaîne métier : **question → contexte/données → calcul HydroCalc → hypothèses → réponse → source → solution validée**.
 
-## Situation trouvée
+## Forum — état actuel
 
-### Forum
+Le fichier `js/forum.js`, absent du dépôt lors de l'audit initial, a été reconstruit et versionné.
 
-Le HTML chargeait `js/forum.js` et `showModule('forum')` appelait `renderForum()`, mais le fichier `js/forum.js` n'était pas présent dans le dépôt. Un déploiement propre pouvait donc aboutir à un module forum cassé ou dépendre d'un ancien cache navigateur.
-
-Le forum a été reconstruit et versionné avec :
+Le forum dispose maintenant de :
 
 - huit salons métier : Hydraulique, AEP, Assainissement collectif, ANC/SPANC, Rivières & GEMAPI, Réglementation, Formation, Terrain & matériel ;
 - création de questions et réponses ;
 - statut ouvert / résolu / verrouillé / masqué ;
 - réponse marquée comme solution par l'auteur de la question ou un administrateur ;
-- signalement ;
-- modération admin ;
+- signalement et modération ;
 - limitations anti-spam côté serveur ;
-- rendu DOM via `textContent` pour les contenus utilisateur ;
-- aucune pièce jointe dans cette première fondation, volontairement.
+- rendu DOM sûr via `textContent` ;
+- recherche **serveur** du titre et du corps ;
+- filtres `Tous`, `Ouverts`, `Sans réponse`, `Résolus` ;
+- partage direct d'un calcul/projet HydroCalc vers une nouvelle discussion.
 
-Migration : `supabase/migrations/20260902_forum_foundation.sql`.
-Frontend : `js/forum.js`.
-Tests : `tests/forum-security.test.cjs`.
+Le forum reste volontairement sans pièces jointes dans cette première fondation.
 
-## Messagerie — points positifs de l'ancienne UX
+Fichiers principaux : `js/forum.js`, `js/forum-enhancements.js`, `supabase/migrations/20260902_forum_foundation.sql`, `supabase/migrations/202609022200_community_moderation_search.sql`.
 
-L'interface historique avait plusieurs bonnes idées :
+## Messagerie — état actuel
 
-- panneau conversations + panneau discussion proche des usages WhatsApp/Teams ;
-- adaptation mobile par bascule liste/conversation ;
-- non-lus par conversation ;
-- demandes de contact avant messagerie ;
-- temps réel Supabase ;
-- possibilité de joindre un fichier ;
-- accès rapide au forum depuis la messagerie.
+### Autorité serveur
 
-Ces éléments donnent une base UX pertinente et ne justifient pas une réécriture visuelle totale.
-
-## Messagerie — problèmes corrigés
-
-### Autorité client excessive
-
-Les demandes de contact, créations de fils, envois et compteurs de non-lus reposaient largement sur des écritures directes du navigateur. Des RPC serveur sont maintenant l'autorité pour :
+Les demandes de contact, créations de fils, envois et compteurs de non-lus passent par RPC serveur :
 
 - `send_friend_request` ;
 - `respond_friend_request` ;
@@ -59,100 +44,79 @@ Les demandes de contact, créations de fils, envois et compteurs de non-lus repo
 - `message_send` ;
 - `message_mark_read`.
 
-Les tables restent lisibles seulement dans le périmètre autorisé par RLS et les mutations directes sont retirées au rôle `authenticated`.
+Les mutations directes des tables sont retirées au rôle `authenticated`.
 
-### Confidentialité de l'annuaire
+### Confidentialité et rendu
 
-La recherche historique sélectionnait `id,name,email` et permettait la recherche par e-mail. Le RPC `search_message_members` ne retourne désormais que `id` et `name`, et uniquement parmi les membres pouvant utiliser la messagerie.
+La recherche historique exposait `id,name,email`. Le RPC `search_message_members` ne retourne plus que `id` et `name` parmi les membres autorisés à utiliser la messagerie.
 
-### XSS / handlers inline
-
-Les noms de membres étaient incorporés dans des attributs `onclick`. Le nouveau renderer de listes `js/messaging-ui-security.js` construit les éléments avec `createElement`, `textContent` et `addEventListener`.
-
-Les bulles de messages et pièces jointes sont également rendues via DOM dans `js/messaging-security.js`.
+Les listes et bulles utilisent maintenant des nœuds DOM, `textContent` et `addEventListener` plutôt que des noms injectés dans des handlers `onclick`.
 
 ### Pièces jointes
-
-L'ancien système :
-
-- acceptait jusqu'à 50 Mo ;
-- acceptait notamment de la vidéo ;
-- utilisait `getPublicUrl()` sur le bucket de messagerie.
-
-Le nouveau système :
 
 - bucket `message-attachments` privé ;
 - 10 Mo maximum ;
 - JPEG, PNG, WebP, PDF, TXT, CSV, DOCX, XLSX ;
-- chemin d'objet rattaché au préfixe de l'émetteur ;
-- lecture autorisée seulement à un participant du fil ;
-- URLs signées temporaires côté client ;
-- migration des anciennes URLs publiques stockées en base vers des chemins d'objet.
+- chemins d'objet privés et URLs signées temporaires ;
+- lecture réservée aux participants du fil ;
+- migration des anciennes URLs publiques stockées en base ;
+- pas de vidéo.
 
-### Anti-spam
+### Blocage, signalement et historique
 
-Les publications forum sont limitées côté serveur. Les nouvelles demandes de contact sont également limitées sur 24 h.
+Un membre peut être bloqué/débloqué. Un blocage empêche nouvelle demande de contact, création de fil et nouvel envoi.
 
-### Blocage et signalement privé
+Chaque message reçu peut être signalé. L'administrateur ne reçoit via la file de modération **que le message explicitement signalé**, jamais le fil privé complet ni le chemin d'une pièce jointe privée.
 
-Le blocage d'un membre est maintenant stocké côté serveur. Un blocage dans un sens ou dans l'autre empêche une nouvelle demande de contact, la création d'un fil et l'envoi de nouveaux messages. Le membre qui bloque peut ensuite le débloquer depuis la conversation.
+L'historique charge les 50 messages les plus récents puis permet de charger les messages précédents en conservant la position de lecture.
 
-Chaque message reçu dispose aussi d'une action **Signaler**. Le signalement enregistre le message exact et le motif, avec une contrainte d'un signalement actif par utilisateur/message. Les signalements sont lisibles par leur auteur ou un administrateur et disposent d'un RPC de traitement admin.
+Fichiers principaux : `js/messaging-security.js`, `js/messaging-ui-security.js`, `js/messaging-controls.js`, `supabase/migrations/20260902_messaging_security.sql`, `202609021900_messaging_followup.sql`, `202609022030_messaging_blocking_reports.sql`.
 
-Migration : `supabase/migrations/202609022030_messaging_blocking_reports.sql`.
-Frontend : `js/messaging-controls.js`.
+## Modération admin
 
-## Architecture recommandée
+Le Coffre Admin comporte maintenant une file de modération commune forum + messagerie :
 
-### Forum
+- vues À traiter / Traités / Classés / Tous ;
+- contenu signalé, motif, auteur et rapporteur ;
+- traitement sans masquer ;
+- classement sans suite ;
+- masquage du contenu signalé + traitement ;
+- aucune lecture du reste d'une conversation privée.
 
-Le forum doit évoluer vers des discussions techniquement structurées plutôt que vers des conversations sociales génériques. À terme, une question devrait pouvoir référencer :
+Frontend : `js/community-admin.js`.
+RPC : `community_admin_reports`, `community_admin_review_report`, `community_admin_hide_reported_target`.
 
-- domaine ;
-- calculateur HydroCalc ;
-- projet/dossier ;
-- données d'entrée principales ;
-- résultat ;
-- hypothèses ;
-- source technique/réglementaire ;
-- statut résolu ;
-- solution acceptée.
+## Partage calcul / projet
 
-### Messagerie
+`js/share-community.js` ajoute :
 
-La messagerie devrait permettre principalement :
+- `↗ Partager` sur les calculs enregistrés ;
+- `↗ Partager le projet` dans un projet ouvert ;
+- résumé texte : module, résultat, entrées, détail/hypothèses et avertissement d'interprétation ;
+- publication au forum avec salon, titre et texte modifiables ;
+- préparation du même résumé dans la messagerie, modifiable avant envoi.
 
-- « partager ce calcul avec… » ;
-- « discuter de ce projet avec… » ;
-- échange formateur/apprenant ;
-- échange professionnel après une discussion forum ;
-- transmission privée d'un document de travail raisonnable.
-
-Elle ne doit pas chercher à reproduire WhatsApp, Discord ou Slack au complet.
+Le HTML enregistré dans les anciens détails de calcul n'est pas injecté dans le partage : il est converti en texte.
 
 ## Reste à faire avant statut production
 
 Priorité haute :
 
-1. appliquer et tester les migrations forum/messagerie sur Supabase ;
-2. vérifier la compatibilité du schéma réel existant avec les contraintes/indices de la migration ;
-3. test navigateur à deux comptes distincts : demande, acceptation, message, non-lu, realtime, pièce jointe, URL signée, blocage et signalement ;
-4. test admin du forum : verrouillage, masquage et solution ;
-5. tester l'écran/flux admin de traitement des signalements privés ;
-6. définir une politique de conservation/suppression des messages et pièces jointes.
+1. appliquer **dans l'ordre** les migrations forum/messagerie/modération sur le projet Supabase réel ;
+2. vérifier la compatibilité du schéma réel et résoudre les éventuels doublons détectés par les preflights ;
+3. test navigateur à deux comptes : demande, acceptation, message, non-lu, realtime, pièce jointe, URL signée, blocage, signalement et pagination ;
+4. test administrateur : signalements forum et privés, masquer, traiter, classer, verrouiller/réouvrir ;
+5. test du partage calcul/projet vers forum et messagerie sur mobile + desktop ;
+6. définir et publier une politique de conservation/suppression des messages et pièces jointes.
 
-Priorité UX suivante :
+Priorité UX suivante : préférences de notifications, code de conduite communautaire, règles de publication, tags techniques supplémentaires et éventuellement statistiques communautaires sobres.
 
-- pagination ou chargement progressif au-delà de 100 messages ;
-- recherche serveur du forum ;
-- tags et filtres « résolu / sans réponse » ;
-- écran admin des signalements ;
-- préférence de notifications ;
-- lien direct « partager un calcul/projet » vers forum ou messagerie ;
-- code de conduite communautaire et règles de publication.
+## Tests
+
+Le workflow GitHub Actions exécute désormais les régressions scientifiques, rapports, messagerie, forum, modération et partage communautaire. La passe incluant le partage et la modération est verte sur `security-hardening`.
 
 ## Verdict
 
-**Forum : à conserver et à mettre davantage en avant.** La version retrouvée dans le dépôt était techniquement cassée ; la nouvelle fondation correspond beaucoup mieux à la vocation métier d'HydroCalc.
+**Forum : à conserver et à mettre davantage en avant.** Il devient le lieu où HydroCalc transforme un calcul isolé en connaissance métier vérifiable.
 
-**Messagerie : à conserver, mais à maintenir volontairement simple.** Son interface de base est pertinente ; son problème principal était la sécurité et l'autorité client, pas le concept visuel. Les prochains investissements doivent maintenant aller vers contexte projet/calcul, pagination, notifications et outils de modération plutôt que vers des fonctions sociales supplémentaires.
+**Messagerie : à conserver volontairement simple.** Elle est désormais mieux protégée et doit rester orientée projet/formation/échange professionnel plutôt que réseau social généraliste.
