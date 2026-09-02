@@ -38,3 +38,5 @@ jobs:
         run: node tests/community-moderation.test.cjs
       - name: Run sharing regressions
         run: node tests/share-community.test.cjs
+      - name: Run product UX regressions
+        run: node tests/product-ux-hardening.test.cjs
