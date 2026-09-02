@@ -36,3 +36,5 @@ jobs:
         run: node tests/forum-security.test.cjs
       - name: Run community moderation regressions
         run: node tests/community-moderation.test.cjs
+      - name: Run sharing regressions
+        run: node tests/share-community.test.cjs
