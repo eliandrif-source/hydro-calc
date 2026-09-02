@@ -5,6 +5,7 @@ const path = require('node:path');
 const sw = fs.readFileSync(path.join(__dirname, '..', 'sw.js'), 'utf8');
 const stripe = fs.readFileSync(path.join(__dirname, '..', 'js', 'stripe-client.js'), 'utf8');
 const update = fs.readFileSync(path.join(__dirname, '..', 'js', 'pwa-update.js'), 'utf8');
+const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'manifest.json'), 'utf8'));
 
 assert.match(sw, /CACHE_NAME\s*=\s*'hydrocalc-v303-security-20260902'/);
 assert.match(sw, /function isSameOrigin\(request\)/);
@@ -34,9 +35,17 @@ assert.match(update, /window\.location\.reload\(\)/);
 assert.match(update, /sessionStorage/);
 assert.match(update, /reloading/);
 
+assert.equal(manifest.id, './');
+assert.equal(manifest.scope, './');
+assert.equal(manifest.start_url, './');
+assert.equal(manifest.display, 'standalone');
+assert.equal(manifest.orientation, 'any');
+assert.equal(manifest.lang, 'fr-FR');
+assert.ok(Array.isArray(manifest.icons) && manifest.icons.some((icon) => icon.sizes === '512x512'));
+
 assert.ok(!/caches\.match\(e\.request\)[\s\S]*if \(cached\) return cached[\s\S]*fetch\(e\.request\)/.test(sw),
   'service worker must not use the old generic cache-first strategy');
 assert.ok(!/cache\.put\(e\.request/.test(sw),
   'service worker must not cache every successful GET request');
 
-console.log('pwa-security: same-origin isolation, network-first critical assets and one-shot update reload regressions OK');
+console.log('pwa-security: cache isolation, one-shot updates and install manifest regressions OK');
