@@ -10,6 +10,8 @@ assert.match(store, /accounts:\s*\{[\s\S]*getAll:\s*function\(\)\s*\{\s*return \
   'legacy local accounts must never be an identity source');
 assert.match(store, /saveAll:\s*function\(\)\s*\{\s*remove\('hc_main_accounts'\);\s*\}/,
   'legacy local account writes must stay disabled');
+assert.match(store, /legacyRemember[\s\S]*legacyRemember\.supa !== true[\s\S]*remove\('hc_remember'\)/,
+  'legacy non-Supabase remember tokens must be purged');
 
 assert.match(store, /function activeUserEmail\(\)/);
 assert.match(store, /activeUserKey\('hc_user_logo_'\)/,
@@ -21,4 +23,4 @@ assert.match(store, /removeItem\('hc_user_logo'\)/,
 assert.match(store, /clearUserData:[\s\S]*hc_user_logo_/,
   'user-data purge must remove the account-scoped report logo');
 
-console.log('local-data-isolation: browser identity disabled and report logo isolated by account');
+console.log('local-data-isolation: browser identity disabled, legacy remember token purged and report logo isolated by account');
