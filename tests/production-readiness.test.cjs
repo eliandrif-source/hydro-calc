@@ -29,13 +29,22 @@ requiredMigrations.forEach((file) => assert.ok(exists(file), `missing production
 [
   'docs/DEPLOYMENT_SECURITY.md',
   'docs/PRODUCTION_SMOKE_TESTS.md',
-  'supabase/preflight/production_preflight.sql'
+  'supabase/preflight/production_preflight.sql',
+  '_headers'
 ].forEach((file) => assert.ok(exists(file), `missing production runbook asset: ${file}`));
 
 const ignore = read('.gitignore');
 assert.match(ignore, /^\.env$/m);
 assert.match(ignore, /^\.env\.\*$/m);
 assert.match(ignore, /^supabase\/\.temp\/$/m);
+
+const headers = read('_headers');
+assert.match(headers, /X-Content-Type-Options:\s*nosniff/i);
+assert.match(headers, /Referrer-Policy:\s*strict-origin-when-cross-origin/i);
+assert.match(headers, /X-Frame-Options:\s*DENY/i);
+assert.match(headers, /frame-ancestors\s+'none'/i);
+assert.match(headers, /\/sw\.js[\s\S]*Cache-Control:\s*no-cache, no-store, must-revalidate/i);
+assert.match(headers, /\/js\/\*[\s\S]*Cache-Control:\s*no-cache, must-revalidate/i);
 
 const stripeClient = read('js/stripe-client.js');
 assert.ok(!/priceId\s*:/.test(stripeClient), 'browser must not send a Stripe Price ID');
@@ -75,4 +84,4 @@ requiredMigrations.forEach((file) => {
   assert.ok(deploy.includes(name), `deployment runbook must mention ${name}`);
 });
 
-console.log('production-readiness: migrations, edge functions, secret hygiene and deployment package checks OK');
+console.log('production-readiness: migrations, edge functions, headers, secret hygiene and deployment package checks OK');
