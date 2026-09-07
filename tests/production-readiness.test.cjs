@@ -15,7 +15,9 @@ const requiredMigrations = [
   'supabase/migrations/202609021900_messaging_followup.sql',
   'supabase/migrations/202609022030_messaging_blocking_reports.sql',
   'supabase/migrations/20260902_forum_foundation.sql',
-  'supabase/migrations/202609022200_community_moderation_search.sql'
+  'supabase/migrations/202609022200_community_moderation_search.sql',
+  'supabase/migrations/202609072100_realtime_private_messaging.sql',
+  'supabase/migrations/202609072130_community_integrity.sql'
 ];
 requiredMigrations.forEach((file) => assert.ok(exists(file), `missing production migration: ${file}`));
 
@@ -27,110 +29,52 @@ requiredMigrations.forEach((file) => assert.ok(exists(file), `missing production
 ].forEach((file) => assert.ok(exists(file), `missing edge function: ${file}`));
 
 [
-  'docs/DEPLOYMENT_SECURITY.md',
-  'docs/PRODUCTION_SMOKE_TESTS.md',
-  'docs/DEPENDENCY_SECURITY.md',
-  'docs/SUPABASE_ENVIRONMENTS.md',
-  'supabase/preflight/production_preflight.sql',
-  'SECURITY.md',
-  '.github/PULL_REQUEST_TEMPLATE.md',
-  '_headers'
+  'docs/DEPLOYMENT_SECURITY.md','docs/PRODUCTION_SMOKE_TESTS.md','docs/DEPENDENCY_SECURITY.md',
+  'docs/SUPABASE_ENVIRONMENTS.md','supabase/preflight/production_preflight.sql','SECURITY.md',
+  '.github/PULL_REQUEST_TEMPLATE.md','_headers'
 ].forEach((file) => assert.ok(exists(file), `missing production/governance asset: ${file}`));
 
-assert.equal(exists('HydroCalc_QCM_Platform.html'), false,
-  'insecure legacy standalone QCM platform must remain retired');
+assert.equal(exists('HydroCalc_QCM_Platform.html'), false,'insecure legacy standalone QCM platform must remain retired');
 const redirects = read('_redirects');
 assert.match(redirects, /HydroCalc_QCM_Platform\.html\s+\/HydroCalc_Design_Unifie\.html\s+302!/);
 
 const ignore = read('.gitignore');
-assert.match(ignore, /^\.env$/m);
-assert.match(ignore, /^\.env\.\*$/m);
-assert.match(ignore, /^supabase\/\.temp\/$/m);
+assert.match(ignore, /^\.env$/m); assert.match(ignore, /^\.env\.\*$/m); assert.match(ignore, /^supabase\/\.temp\/$/m);
 
 const headers = read('_headers');
-assert.match(headers, /X-Content-Type-Options:\s*nosniff/i);
-assert.match(headers, /Referrer-Policy:\s*strict-origin-when-cross-origin/i);
-assert.match(headers, /X-Frame-Options:\s*DENY/i);
-assert.match(headers, /frame-ancestors\s+'none'/i);
-assert.match(headers, /script-src\s+'self'\s+'unsafe-inline'/i);
-assert.match(headers, /style-src\s+'self'\s+'unsafe-inline'\s+https:\/\/fonts\.googleapis\.com/i);
+assert.match(headers, /X-Content-Type-Options:\s*nosniff/i); assert.match(headers, /Referrer-Policy:\s*strict-origin-when-cross-origin/i);
+assert.match(headers, /X-Frame-Options:\s*DENY/i); assert.match(headers, /frame-ancestors\s+'none'/i);
+assert.match(headers, /script-src\s+'self'\s+'unsafe-inline'/i); assert.match(headers, /style-src\s+'self'\s+'unsafe-inline'\s+https:\/\/fonts\.googleapis\.com/i);
 assert.match(headers, /font-src\s+'self'\s+https:\/\/fonts\.gstatic\.com\s+data:/i);
 assert.match(headers, /\/sw\.js[\s\S]*Cache-Control:\s*no-cache, no-store, must-revalidate/i);
 assert.match(headers, /\/js\/\*[\s\S]*Cache-Control:\s*no-cache, must-revalidate/i);
-assert.ok(!headers.includes('/HydroCalc_QCM_Platform.html'), 'retired QCM page must not keep stale hosting rules');
+assert.ok(!headers.includes('/HydroCalc_QCM_Platform.html'));
 
 const stripeClient = read('js/stripe-client.js');
-assert.ok(!/priceId\s*:/.test(stripeClient), 'browser must not send a Stripe Price ID');
-assert.ok(!/price_id\s*:/.test(stripeClient), 'browser must not send a Stripe price_id');
-assert.ok(!/pk_test_[A-Za-z0-9]+/.test(stripeClient), 'unused Stripe test publishable keys must not ship in the browser bundle');
+assert.ok(!/priceId\s*:/.test(stripeClient)); assert.ok(!/price_id\s*:/.test(stripeClient)); assert.ok(!/pk_test_[A-Za-z0-9]+/.test(stripeClient));
 assert.match(stripeClient, /body:JSON\.stringify\(\{planId:planId/);
-
 const checkout = read('supabase/functions/create-checkout-session/index.ts');
-assert.match(checkout, /PRICE_BY_PLAN|PRODUCTS|PRICE/,
-  'checkout function must contain server-side price mapping');
-assert.match(checkout, /Authorization/);
-assert.match(checkout, /https:\/\/hydrocalc\.fr/);
-assert.match(checkout, /https:\/\/www\.hydrocalc\.fr/);
+assert.match(checkout, /PRICE_BY_PLAN|PRODUCTS|PRICE/); assert.match(checkout, /Authorization/); assert.match(checkout, /https:\/\/hydrocalc\.fr/); assert.match(checkout, /https:\/\/www\.hydrocalc\.fr/);
+const portal = read('supabase/functions/create-portal-session/index.ts'); assert.match(portal, /https:\/\/hydrocalc\.fr/); assert.match(portal, /Origine de retour non autorisée/);
+const webhook = read('supabase/functions/stripe-webhook/index.ts'); assert.match(webhook, /constructEvent|signature/i); assert.match(webhook, /is_admin/);
 
-const portal = read('supabase/functions/create-portal-session/index.ts');
-assert.match(portal, /https:\/\/hydrocalc\.fr/);
-assert.match(portal, /Origine de retour non autorisée/);
+const clientFiles=['HydroCalc_Design_Unifie.html','js/stripe-client.js','js/auth-security.js','js/product-ux-hardening.js','js/report-security.js','js/messaging-security.js','js/forum.js'];
+const clientText=clientFiles.map((file)=>`${file}\n${read(file)}`).join('\n');
+assert.ok(!/sk_live_[A-Za-z0-9]+/.test(clientText)); assert.ok(!/service_role[^\n]{0,20}["'][A-Za-z0-9._-]{20,}/i.test(clientText));
 
-const webhook = read('supabase/functions/stripe-webhook/index.ts');
-assert.match(webhook, /constructEvent|signature/i, 'webhook must verify Stripe signature');
-assert.match(webhook, /is_admin/);
+const dataStore=read('js/data-store.js');
+assert.match(dataStore,/accounts:\s*\{[\s\S]*getAll:\s*function\(\)\s*\{\s*return \{\};\s*\}/); assert.match(dataStore,/activeUserKey\('hc_user_logo_'\)/);
+const authBridge=read('js/auth-security.js');
+assert.match(authBridge,/_forceAdminIfNeeded/); assert.match(authBridge,/authRegister/); assert.match(authBridge,/update_my_profile|claim_access_code|start_my_trial/);
+assert.match(authBridge,/localStorage\.removeItem\('etab_codes'\)/); assert.match(authBridge,/rpc\('create_access_code'\)/); assert.match(authBridge,/rpc\('revoke_access_code'/);
 
-const clientFiles = [
-  'HydroCalc_Design_Unifie.html',
-  'js/stripe-client.js',
-  'js/auth-security.js',
-  'js/product-ux-hardening.js',
-  'js/report-security.js',
-  'js/messaging-security.js',
-  'js/forum.js'
-];
-const clientText = clientFiles.map((file) => `${file}\n${read(file)}`).join('\n');
-assert.ok(!/sk_live_[A-Za-z0-9]+/.test(clientText), 'Stripe secret key must never appear in browser code');
-assert.ok(!/service_role[^\n]{0,20}["'][A-Za-z0-9._-]{20,}/i.test(clientText), 'Supabase service-role secret must never appear in browser code');
+const sw=read('sw.js'); assert.match(sw,/hydrocalc-v306-security-20260907/);
+const deploy=read('docs/DEPLOYMENT_SECURITY.md');
+requiredMigrations.forEach((file)=>{const name=path.basename(file);assert.ok(deploy.includes(name),`deployment runbook must mention ${name}`);});
+assert.match(deploy,/hydrocalc-v306-security-20260907/); assert.match(deploy,/etab_codes/); assert.match(deploy,/Allow public access/); assert.match(deploy,/messages:<thread_uuid>/);
+const smoke=read('docs/PRODUCTION_SMOKE_TESTS.md'); assert.match(smoke,/hydrocalc-v306-security-20260907/); assert.match(smoke,/etab_codes/);
+const environments=read('docs/SUPABASE_ENVIRONMENTS.md');
+assert.match(environments,/staging\s*→\s*production/i); assert.match(environments,/supabase db push --dry-run/); assert.match(environments,/Ne jamais utiliser `--include-seed` sur production/i);
+assert.match(environments,/db reset --linked[\s\S]*interdit sur production/i); assert.match(environments,/STAGING_PROJECT_ID/); assert.match(environments,/PRODUCTION_PROJECT_ID/); assert.match(environments,/sb_publishable_/); assert.match(environments,/sb_secret_/);
 
-const dataStore = read('js/data-store.js');
-assert.match(dataStore, /accounts:\s*\{[\s\S]*getAll:\s*function\(\)\s*\{\s*return \{\};\s*\}/,
-  'legacy local account identity must remain disabled');
-assert.match(dataStore, /activeUserKey\('hc_user_logo_'\)/,
-  'report logo must remain isolated by account');
-
-const authBridge = read('js/auth-security.js');
-assert.match(authBridge, /_forceAdminIfNeeded/);
-assert.match(authBridge, /authRegister/);
-assert.match(authBridge, /update_my_profile|claim_access_code|start_my_trial/);
-assert.match(authBridge, /localStorage\.removeItem\('etab_codes'\)/,
-  'legacy establishment code storage must be purged');
-assert.match(authBridge, /rpc\('create_access_code'\)/);
-assert.match(authBridge, /rpc\('revoke_access_code'/);
-
-const sw = read('sw.js');
-assert.match(sw, /hydrocalc-v306-security-20260907/);
-
-const deploy = read('docs/DEPLOYMENT_SECURITY.md');
-requiredMigrations.forEach((file) => {
-  const name = path.basename(file);
-  assert.ok(deploy.includes(name), `deployment runbook must mention ${name}`);
-});
-assert.match(deploy, /hydrocalc-v306-security-20260907/);
-assert.match(deploy, /etab_codes/);
-
-const smoke = read('docs/PRODUCTION_SMOKE_TESTS.md');
-assert.match(smoke, /hydrocalc-v306-security-20260907/);
-assert.match(smoke, /etab_codes/);
-
-const environments = read('docs/SUPABASE_ENVIRONMENTS.md');
-assert.match(environments, /staging\s*→\s*production/i);
-assert.match(environments, /supabase db push --dry-run/);
-assert.match(environments, /Ne jamais utiliser `--include-seed` sur production/i);
-assert.match(environments, /db reset --linked[\s\S]*interdit sur production/i);
-assert.match(environments, /STAGING_PROJECT_ID/);
-assert.match(environments, /PRODUCTION_PROJECT_ID/);
-assert.match(environments, /sb_publishable_/);
-assert.match(environments, /sb_secret_/);
-
-console.log('production-readiness: migrations, governance, legacy retirement, CSP, v306 PWA, establishment storage, staging workflow, Stripe and secret hygiene checks OK');
+console.log('production-readiness: migrations, governance, realtime isolation, community integrity, CSP, v306 PWA, staging, Stripe and secret hygiene checks OK');
