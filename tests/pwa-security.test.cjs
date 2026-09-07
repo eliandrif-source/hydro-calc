@@ -7,45 +7,25 @@ const stripe = fs.readFileSync(path.join(__dirname, '..', 'js', 'stripe-client.j
 const update = fs.readFileSync(path.join(__dirname, '..', 'js', 'pwa-update.js'), 'utf8');
 const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'manifest.json'), 'utf8'));
 
-assert.match(sw, /CACHE_NAME\s*=\s*'hydrocalc-v306-security-20260907'/);
+assert.match(sw, /CACHE_NAME\s*=\s*'hydrocalc-v307-security-20260907'/);
 assert.match(sw, /function isSameOrigin\(request\)/);
-assert.match(sw, /if \(!isSameOrigin\(request\)\) return;/);
-assert.match(sw, /request\.headers\.get\('Authorization'\)/);
-assert.match(sw, /if \(isCriticalAppAsset\(request\)\)[\s\S]*networkFirst\(request\)/);
-assert.match(sw, /if \(isLocalStaticAsset\(request\)\)[\s\S]*cacheFirstStatic\(request\)/);
+assert.match(sw, /if\(!isSameOrigin\(request\)\)return;/);
+assert.match(sw, /request\.headers&&request\.headers\.get\('Authorization'\)/);
+assert.match(sw, /if\(isCriticalAppAsset\(request\)\).*networkFirst\(request\)/s);
+assert.match(sw, /if\(isLocalStaticAsset\(request\)\).*cacheFirstStatic\(request\)/s);
 
 [
-  './js/pwa-update.js',
-  './js/auth-security.js',
-  './js/product-ux-hardening.js',
-  './js/xss-security.js',
-  './js/quota-security.js',
-  './js/report-security.js',
-  './js/messaging-security.js',
-  './js/forum-enhancements.js',
-  './js/home-ux-enhancements.js'
-].forEach((asset) => {
-  assert.ok(sw.includes(asset), `PWA shell must include critical asset ${asset}`);
-});
+  './js/pwa-update.js','./js/auth-security.js','./js/product-ux-hardening.js','./js/xss-security.js','./js/quota-security.js','./js/report-security.js','./js/messaging-security.js','./js/messaging-blocks.js','./js/moderation-admin.js','./js/forum-enhancements.js','./js/home-ux-enhancements.js'
+].forEach((asset) => assert.ok(sw.includes(asset), `PWA shell must include critical asset ${asset}`));
 
-assert.match(stripe, /hc-pwa-update/);
+['hc-pwa-update','hc-messaging-blocks','hc-moderation-admin'].forEach((id)=>assert.ok(stripe.includes(id),`bridge loader must include ${id}`));
 assert.match(stripe, /js\/pwa-update\.js/);
 assert.match(update, /serviceWorker\.addEventListener\('controllerchange'/);
 assert.match(update, /window\.location\.reload\(\)/);
 assert.match(update, /sessionStorage/);
 assert.match(update, /reloading/);
 
-assert.equal(manifest.id, './');
-assert.equal(manifest.scope, './');
-assert.equal(manifest.start_url, './');
-assert.equal(manifest.display, 'standalone');
-assert.equal(manifest.orientation, 'any');
-assert.equal(manifest.lang, 'fr-FR');
-assert.ok(Array.isArray(manifest.icons) && manifest.icons.some((icon) => icon.sizes === '512x512'));
-
-assert.ok(!/caches\.match\(e\.request\)[\s\S]*if \(cached\) return cached[\s\S]*fetch\(e\.request\)/.test(sw),
-  'service worker must not use the old generic cache-first strategy');
-assert.ok(!/cache\.put\(e\.request/.test(sw),
-  'service worker must not cache every successful GET request');
-
-console.log('pwa-security: v306 cache isolation, one-shot updates and install manifest regressions OK');
+assert.equal(manifest.id, './');assert.equal(manifest.scope, './');assert.equal(manifest.start_url, './');assert.equal(manifest.display, 'standalone');assert.equal(manifest.orientation, 'any');assert.equal(manifest.lang, 'fr-FR');assert.ok(Array.isArray(manifest.icons) && manifest.icons.some((icon) => icon.sizes === '512x512'));
+assert.ok(!/caches\.match\(e\.request\)[\s\S]*if \(cached\) return cached[\s\S]*fetch\(e\.request\)/.test(sw),'service worker must not use the old generic cache-first strategy');
+assert.ok(!/cache\.put\(e\.request/.test(sw),'service worker must not cache every successful GET request');
+console.log('pwa-security: v307 cache isolation, moderation bridges, one-shot updates and install manifest regressions OK');
