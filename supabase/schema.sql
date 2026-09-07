@@ -26,6 +26,10 @@
 --  10. 202609022200_community_moderation_search.sql
 --  11. 202609072130_community_integrity.sql
 --  12. 202609072131_messaging_realtime_authorization.sql
+--  13. 202609072200_admin_moderation_workflow.sql
+--  14. 202609072201_sanction_enforcement.sql
+--  15. 202609072202_profiles_admin_rls_recursion_fix.sql
+--  16. 202609072203_moderation_privacy_notifications.sql
 --
 -- Les Edge Functions de `supabase/functions/` doivent ensuite être déployées
 -- conformément au même runbook.
