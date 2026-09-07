@@ -85,7 +85,7 @@ Vérifier sur les réponses réellement servies : `nosniff`, `strict-origin-when
 
 ## 8. PWA et service worker
 
-Le service worker utilise `hydrocalc-v306-security-20260907`. Il ne met pas en cache les requêtes cross-origin ou portant `Authorization`; HTML/JS/CSS/navigation sont network-first. Vérifier mise à jour d'un appareil existant, disparition des anciens caches, absence de données inter-utilisateurs hors ligne et échec propre des fonctionnalités Supabase en mode avion.
+Le service worker utilise `hydrocalc-v307-security-20260907`. Il ne met pas en cache les requêtes cross-origin ou portant `Authorization`; HTML/JS/CSS/navigation sont network-first. Vérifier mise à jour d'un appareil existant, disparition des anciens caches, absence de données inter-utilisateurs hors ligne et échec propre des fonctionnalités Supabase en mode avion.
 
 ## 9. Validation scientifique
 
