@@ -1,6 +1,6 @@
 # HydroCalc — Smoke tests production
 
-Date de préparation : 2026-09-02
+Date de préparation : 2026-09-07
 
 À exécuter après migrations + Edge Functions et avant ouverture publique. Utiliser au minimum trois identités de test : membre A, membre B, administrateur. Aucun test ne doit utiliser un compte réel d'un client.
 
@@ -12,8 +12,9 @@ Date de préparation : 2026-09-02
 - [ ] Un code révoqué/utilisé ne peut pas être réutilisé.
 - [ ] Réinitialisation du mot de passe refuse moins de 8 caractères côté application.
 - [ ] Déconnexion puis reconnexion restaure le plan depuis le serveur.
-- [ ] « Continuer sans compte » permet de parcourir l'application mais un bouton Calculer ouvre l'inscription au lieu d'exécuter le moteur.
+- [ ] « Découvrir sans compte » permet de parcourir l'application mais un bouton Calculer ouvre l'inscription au lieu d'exécuter le moteur.
 - [ ] Un simple paramètre d'URL QCM ne confère aucun plan, rôle ou privilège supplémentaire.
+- [ ] `hc_main_accounts` et un ancien remember token non-Supabase ne peuvent pas recréer une identité HydroCalc.
 
 ## Quotas
 
@@ -24,6 +25,16 @@ Date de préparation : 2026-09-02
 - [ ] Une action refusée n'est pas contournable par appel direct du frontend historique.
 - [ ] Le mode invité ne permet pas de contourner le quota de calcul du compte Gratuit.
 
+## Établissement
+
+- [ ] L'espace Établissement charge les codes depuis Supabase.
+- [ ] Créer un code appelle le RPC serveur et le nouveau code apparaît après rechargement.
+- [ ] Révoquer un code appelle le RPC serveur et son état est conservé après reconnexion.
+- [ ] La clé `etab_codes` est absente de `localStorage` avant et après création/révocation.
+- [ ] Modifier manuellement `etab_codes` dans DevTools ne change ni le plan ni les codes réellement valides.
+- [ ] Un utilisateur non autorisé ne peut pas créer/révoquer de code par appel RPC direct.
+- [ ] Le nombre maximum de codes et la promesse commerciale correspondent au plan Stripe réellement vendu.
+
 ## Stripe
 
 - [ ] Checkout Pro mensuel.
@@ -31,6 +42,7 @@ Date de préparation : 2026-09-02
 - [ ] Checkout Établissement selon le modèle commercial finalement validé.
 - [ ] Le Price ID effectif est choisi côté serveur.
 - [ ] Le navigateur n'embarque ni clé Stripe secrète ni clé publishable de test devenue inutile.
+- [ ] Les Edge Functions refusent une origine navigateur hors allowlist.
 - [ ] Le webhook active le bon entitlement.
 - [ ] Rejouer le même webhook ne duplique pas le paiement.
 - [ ] Un événement de facturation ne rétrograde jamais un administrateur.
@@ -42,8 +54,9 @@ Date de préparation : 2026-09-02
 - [ ] Un calcul invalide affiche une erreur sans résultat trompeur.
 - [ ] Rapport PDF : nom/projet contenant `<script>` est rendu comme texte.
 - [ ] Rapport : formule/réglementation sauvegardée contenant HTML hostile est rendue comme texte.
+- [ ] Le logo personnalisé d'un compte A n'apparaît jamais dans le rapport du compte B sur le même navigateur.
 - [ ] Quota rapport est contrôlé serveur.
-- [ ] Mise en page A4 vérifiée visuellement sur plusieurs pages.
+- [ ] Mise en page A4 vérifiée visuellement sur plusieurs pages, notamment avec contenu long et logo large.
 
 ## Forum
 
@@ -89,8 +102,10 @@ Date de préparation : 2026-09-02
 - [ ] `X-Content-Type-Options: nosniff` est présent sur la page principale.
 - [ ] `Referrer-Policy: strict-origin-when-cross-origin` est présent.
 - [ ] HydroCalc ne peut pas être intégré dans une iframe externe (`X-Frame-Options: DENY` / `frame-ancestors 'none'`).
+- [ ] La CSP réellement servie limite `script-src`, `style-src` et `font-src` aux hôtes inventoriés.
 - [ ] `sw.js` est servi avec `Cache-Control: no-cache, no-store, must-revalidate`.
 - [ ] Les fichiers `/js/*` sont servis avec revalidation et ne restent pas figés par le CDN d'hébergement.
+- [ ] L'ancienne URL `HydroCalc_QCM_Platform.html` redirige vers l'application principale et aucun fichier legacy n'est servi.
 
 ## Mobile / PWA
 
@@ -98,11 +113,12 @@ Date de préparation : 2026-09-02
 - [ ] Formulaires calculateurs sans débordement horizontal.
 - [ ] Forum et messagerie restent utilisables au clavier mobile.
 - [ ] Installation PWA et lancement standalone.
+- [ ] Le service worker actif est `hydrocalc-v306-security-20260907`.
 - [ ] Mise à jour du service worker ne conserve pas une ancienne version incompatible des bridges.
 - [ ] Lors d'un nouveau `controllerchange`, la page se recharge une seule fois et n'entre pas dans une boucle de reload.
-- [ ] Après mise à jour, l'ancien cache HydroCalc a disparu de Cache Storage.
+- [ ] Après mise à jour, les caches antérieurs à v306 ont disparu de Cache Storage.
 - [ ] Hors ligne, aucune réponse Supabase/Stripe/API d'un utilisateur précédent n'est accessible depuis Cache Storage.
 
 ## Critère final
 
-Un seul échec de confidentialité inter-utilisateurs, d'élévation de privilège, de webhook non vérifié ou de calcul scientifique critique implique **NO-GO** jusqu'à correction et nouveau passage complet des tests concernés.
+Un seul échec de confidentialité inter-utilisateurs, d'élévation de privilège, de webhook non vérifié, d'autorité commerciale restaurable depuis `localStorage` ou de calcul scientifique critique implique **NO-GO** jusqu'à correction et nouveau passage complet des tests concernés.
