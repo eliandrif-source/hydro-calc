@@ -8,15 +8,15 @@ const exists = (p) => fs.existsSync(path.join(ROOT, p));
 
 const requiredMigrations = [
   'supabase/migrations/20260831_security_hardening.sql',
-  'supabase/migrations/20260831_auth_entitlements.sql',
-  'supabase/migrations/20260831_trial_security.sql',
+  'supabase/migrations/202608310100_auth_entitlements.sql',
+  'supabase/migrations/202608310200_trial_security.sql',
   'supabase/migrations/20260901_server_quotas.sql',
-  'supabase/migrations/20260902_messaging_security.sql',
+  'supabase/migrations/202609020100_messaging_security.sql',
   'supabase/migrations/202609021900_messaging_followup.sql',
   'supabase/migrations/202609022030_messaging_blocking_reports.sql',
   'supabase/migrations/20260902_forum_foundation.sql',
   'supabase/migrations/202609022200_community_moderation_search.sql',
-  'supabase/migrations/202609072130_messaging_realtime_authorization.sql',
+  'supabase/migrations/202609072131_messaging_realtime_authorization.sql',
   'supabase/migrations/202609072130_community_integrity.sql'
 ];
 requiredMigrations.forEach((file) => assert.ok(exists(file), `missing production migration: ${file}`));
