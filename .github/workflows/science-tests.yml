@@ -54,5 +54,7 @@ jobs:
         run: node tests/legacy-qcm-retirement.test.cjs
       - name: Run Supabase schema source-of-truth regressions
         run: node tests/schema-source-of-truth.test.cjs
+      - name: Run production preflight safety regression
+        run: node tests/preflight-safety.test.cjs
       - name: Run production readiness checks
         run: node tests/production-readiness.test.cjs
