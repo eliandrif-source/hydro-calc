@@ -1,6 +1,6 @@
 # HydroCalc — Déploiement sécurisé
 
-Dernière vérification : 2026-09-02
+Dernière vérification : 2026-09-07
 
 Ce document décrit l'ordre de mise en production de la branche `security-hardening`. Un commit GitHub ne déploie ni les migrations Supabase ni les Edge Functions : ces étapes doivent être exécutées sur le projet Supabase cible avant d'exposer le nouveau frontend.
 
@@ -94,6 +94,8 @@ Appliquer les fichiers SQL dans cet ordre logique :
 
 Après chaque migration, arrêter le déploiement en cas d'erreur. Ne pas continuer en espérant que la migration suivante répare la précédente.
 
+`supabase/schema.sql` n'est **pas** un script d'installation. Il est volontairement non exécutable ; seules les migrations versionnées ci-dessus constituent la source de vérité.
+
 ## 4. Edge Functions
 
 Déployer ensuite les fonctions versionnées dans `supabase/functions/` :
@@ -107,6 +109,8 @@ Vérifier dans l'environnement Supabase que les secrets nécessaires sont config
 
 Pour Stripe, vérifier que le webhook de production pointe vers la fonction réellement déployée et que son secret de signature correspond à cet endpoint.
 
+Les fonctions HTTP sensibles utilisent une liste d'origines autorisées contenant `https://hydrocalc.fr`, `https://www.hydrocalc.fr` et les origines locales de développement. Toute origine supplémentaire doit être ajoutée explicitement via `ALLOWED_ORIGINS` ; ne pas introduire de wildcard CORS.
+
 ## 5. Smoke tests backend avant frontend
 
 Avec deux comptes de test non-admin et un compte admin autorisé, vérifier au minimum :
@@ -114,6 +118,8 @@ Avec deux comptes de test non-admin et un compte admin autorisé, vérifier au m
 - un utilisateur ne peut pas modifier `profiles.plan` ou `profiles.is_admin` directement ;
 - `create_profile` ne permet pas de choisir un rôle privilégié ;
 - `claim_access_code` agit uniquement pour l'utilisateur authentifié ;
+- création et révocation des codes Établissement passent par les RPC serveur ;
+- aucune donnée `etab_codes` locale ne constitue une source d'autorité ;
 - les quotas sont consommés par RPC ;
 - un non-admin ne peut pas appeler les RPC de modération ;
 - un membre ne lit que ses propres fils/messages ;
@@ -153,19 +159,21 @@ Vérifier après publication :
 - projets et partage vers forum/messagerie ;
 - forum : création, réponse, recherche, filtres, solution, signalement ;
 - messagerie : demande, acceptation, envoi, non-lu, realtime, pièce jointe, blocage, signalement ;
+- espace Établissement : chargement des codes depuis Supabase, création, révocation et absence de réapparition de `etab_codes` dans `localStorage` ;
 - Coffre Admin : annuaire, plans autorisés, suppression utilisateur et file de modération.
 
 Faire ces tests sur desktop et mobile.
 
 ### En-têtes HTTP
 
-Le fichier `_headers` configure la base de durcissement attendue sur un hébergement compatible Netlify : `nosniff`, politique de referrer, anti-framing et CSP limitée à `object-src`, `base-uri` et `frame-ancestors`, ainsi que la revalidation du HTML/JS et l'absence de cache du service worker.
+Le fichier `_headers` configure la base de durcissement attendue sur un hébergement compatible Netlify : `nosniff`, politique de referrer, anti-framing, Permissions-Policy et CSP. La CSP limite les scripts externes aux hôtes déjà inventoriés (`cdn.jsdelivr.net`, `js.stripe.com`, `cdnjs.cloudflare.com`, `unpkg.com`), les styles externes à Google Fonts et les polices à Google Fonts/data. Les handlers/styles inline historiques restent temporairement autorisés pour compatibilité avec le shell actuel.
 
 Après déploiement, contrôler les **réponses HTTP réellement servies**, pas seulement la présence du fichier dans Git :
 
 - `X-Content-Type-Options: nosniff` ;
 - `Referrer-Policy: strict-origin-when-cross-origin` ;
 - `X-Frame-Options: DENY` et `frame-ancestors 'none'` ;
+- présence de `script-src`, `style-src` et `font-src` conformes à l'inventaire revu ;
 - `sw.js` avec `Cache-Control: no-cache, no-store, must-revalidate` ;
 - `/js/*` avec revalidation.
 
@@ -173,7 +181,7 @@ Si l'hébergeur final n'interprète pas `_headers`, reporter ces mêmes règles 
 
 ## 8. PWA et service worker
 
-Le service worker `sw.js` utilise actuellement le cache de série `hydrocalc-v30x-security-20260902` et applique les règles suivantes :
+Le service worker `sw.js` utilise actuellement le cache `hydrocalc-v306-security-20260907` et applique les règles suivantes :
 
 - aucune requête cross-origin n'est mise en cache ; cela exclut Supabase, Stripe, les CDN et Google Fonts ;
 - les navigations, fichiers HTML, JS et CSS locaux sont **network-first**, avec cache uniquement en fallback hors-ligne ;
@@ -186,10 +194,11 @@ Après mise en ligne :
 
 1. ouvrir HydroCalc sur un appareil déjà utilisé avant le déploiement ;
 2. attendre l'activation du nouveau service worker puis vérifier le rechargement unique ;
-3. vérifier dans DevTools/Application que l'ancien cache `hydrocalc-v227` n'existe plus ;
+3. vérifier dans DevTools/Application que les caches antérieurs à v306 ont disparu ;
 4. confirmer que `auth-security.js`, `report-security.js`, `messaging-security.js` et les autres bridges sont servis dans leur version actuelle ;
 5. effectuer une déconnexion/reconnexion avec deux comptes différents et confirmer qu'aucune donnée utilisateur/API n'est disponible hors ligne via le Cache Storage ;
-6. tester ensuite le mode avion : l'interface statique peut se charger depuis le cache, mais les fonctionnalités nécessitant Supabase doivent échouer proprement sans données d'un autre utilisateur.
+6. confirmer que `hc_main_accounts`, l'ancien logo global, les anciens remember tokens non-Supabase et `etab_codes` ne réapparaissent pas comme sources d'autorité ;
+7. tester ensuite le mode avion : l'interface statique peut se charger depuis le cache, mais les fonctionnalités nécessitant Supabase doivent échouer proprement sans données d'un autre utilisateur.
 
 Si un correctif de sécurité frontend est publié après cette version, incrémenter `CACHE_NAME` afin d'éviter toute ambiguïté de cache installée.
 
@@ -214,4 +223,4 @@ Un rollback frontend vers une version utilisant un ancien service worker doit é
 
 GO uniquement si : CI vert, preflight sans incohérence non résolue, migrations appliquées, fonctions déployées, RLS/RPC testées avec plusieurs rôles, Stripe testé, service worker/cache vérifié, en-têtes HTTP vérifiés sur le domaine final, parcours navigateur testés et backup disponible.
 
-NO-GO si : doublon financier non compris, possibilité de modifier son rôle/plan côté client, contournement des quotas par le mode invité, fuite inter-utilisateurs, pièce jointe publique, réponse API présente dans le cache PWA, admin non vérifié côté serveur, webhook Stripe non signé/testé, en-têtes attendus absents sur l'hébergement final, ou migration partiellement appliquée.
+NO-GO si : doublon financier non compris, possibilité de modifier son rôle/plan côté client, restauration d'une identité/autorité Établissement depuis `localStorage`, contournement des quotas par le mode invité, fuite inter-utilisateurs, pièce jointe publique, réponse API présente dans le cache PWA, admin non vérifié côté serveur, webhook Stripe non signé/testé, en-têtes attendus absents sur l'hébergement final, ou migration partiellement appliquée.
