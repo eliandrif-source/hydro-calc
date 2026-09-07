@@ -14,8 +14,5 @@
 /HydroCalc_Design_Unifie.html
   Cache-Control: no-cache, must-revalidate
 
-/HydroCalc_QCM_Platform.html
-  Cache-Control: no-cache, must-revalidate
-
 /js/*
   Cache-Control: no-cache, must-revalidate
