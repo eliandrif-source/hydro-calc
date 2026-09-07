@@ -30,6 +30,7 @@ requiredMigrations.forEach((file) => assert.ok(exists(file), `missing production
   'docs/DEPLOYMENT_SECURITY.md',
   'docs/PRODUCTION_SMOKE_TESTS.md',
   'docs/DEPENDENCY_SECURITY.md',
+  'docs/SUPABASE_ENVIRONMENTS.md',
   'supabase/preflight/production_preflight.sql',
   'SECURITY.md',
   '.github/PULL_REQUEST_TEMPLATE.md',
@@ -122,4 +123,14 @@ const smoke = read('docs/PRODUCTION_SMOKE_TESTS.md');
 assert.match(smoke, /hydrocalc-v306-security-20260907/);
 assert.match(smoke, /etab_codes/);
 
-console.log('production-readiness: migrations, governance, legacy retirement, CSP, v306 PWA, establishment storage, Stripe and secret hygiene checks OK');
+const environments = read('docs/SUPABASE_ENVIRONMENTS.md');
+assert.match(environments, /staging\s*→\s*production/i);
+assert.match(environments, /supabase db push --dry-run/);
+assert.match(environments, /Ne jamais utiliser `--include-seed` sur production/i);
+assert.match(environments, /db reset --linked[\s\S]*interdit sur production/i);
+assert.match(environments, /STAGING_PROJECT_ID/);
+assert.match(environments, /PRODUCTION_PROJECT_ID/);
+assert.match(environments, /sb_publishable_/);
+assert.match(environments, /sb_secret_/);
+
+console.log('production-readiness: migrations, governance, legacy retirement, CSP, v306 PWA, establishment storage, staging workflow, Stripe and secret hygiene checks OK');
