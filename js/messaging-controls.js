@@ -1,4 +1,4 @@
-/* HydroCalc — blocage, signalement et pagination sûre de la messagerie. */
+/* HydroCalc — blocage, signalement, pagination et Realtime privé de la messagerie. */
 (function(){
   'use strict';
   if(window.__HC_MESSAGING_CONTROLS_LOADED__)return;
@@ -118,6 +118,22 @@
     if(r.hasOlder){var wrap=n('div',null,'text-align:center;padding:4px 0 10px');wrap.id='msg-load-older-wrap';var load=b('Charger les messages précédents',function(){prependOlder(threadId);},'border:1px solid var(--c-border);background:var(--c-bg);color:var(--c-text-2);border-radius:999px;padding:6px 11px;font-size:10px;font-weight:700;cursor:pointer');load.id='msg-load-older';wrap.appendChild(load);c.appendChild(wrap);}
     for(var i=0;i<msgs.length;i++)c.appendChild(await messageNode(msgs[i],me));
     c.scrollTop=c.scrollHeight;
+  };
+
+  /* Remplace le channel Realtime public du legacy par un channel privé.
+     Les lignes restent filtrées par les RLS de public.messages ; l'entrée dans le
+     channel est en plus contrôlée par realtime.messages (migration dédiée). */
+  window._mSubscribeRealtime=function(threadId){
+    if(!window.SupaDB||typeof SupaDB.channel!=='function'||!threadId)return;
+    try{
+      if(window._msgState&&_msgState.realtimeSub&&typeof SupaDB.removeChannel==='function')SupaDB.removeChannel(_msgState.realtimeSub);
+      var channel=SupaDB.channel('messages:'+threadId,{config:{private:true}})
+        .on('postgres_changes',{event:'INSERT',schema:'public',table:'messages',filter:'thread_id=eq.'+threadId},function(){window._mLoadMessages(threadId);if(typeof window._mMarkRead==='function')window._mMarkRead(threadId);})
+        .subscribe(function(status){
+          if(status==='CHANNEL_ERROR'||status==='TIMED_OUT')toast('Temps réel indisponible. Les messages restent accessibles après actualisation.','#C47A00');
+        });
+      if(window._msgState)_msgState.realtimeSub=channel;
+    }catch(e){toast('Temps réel indisponible. Les messages restent accessibles après actualisation.','#C47A00');}
   };
 
   window.HydroCalcMessagingControls={cleanReason:cleanReason,reportMessage:reportMessage,isBlocked:isBlocked,pageSize:PAGE_SIZE,fetchPage:fetchPage};
