@@ -12,6 +12,21 @@
   var _legacyShowEtabEspace = window.showEtabEspace;
   var _accessCodesCache = [];
 
+  /* Les codes établissement historiques étaient stockés dans localStorage.
+     Ils ne sont plus une source d'autorité : seules les RPC Supabase peuvent
+     créer/révoquer/lister des codes. La clé locale est purgée et les anciennes
+     fonctions deviennent une façade en lecture sur le cache serveur courant. */
+  try { localStorage.removeItem('etab_codes'); } catch (e) {}
+  window._etabGetCodes = function () {
+    return _accessCodesCache.map(function (c) {
+      return { code:c.code, used:!!c.used_by, usedBy:c.used_by, usedAt:c.used_at };
+    });
+  };
+  window._etabSaveCodes = function () {
+    try { localStorage.removeItem('etab_codes'); } catch (e) {}
+    return false;
+  };
+
   function _toast(msg) {
     if (typeof window.authToast === 'function') window.authToast(msg);
   }
@@ -102,8 +117,7 @@
       if(res.error){_toast('Impossible de charger les codes établissement.');return;}
       _accessCodesCache=res.data||[];window._etabSecureCodes=_accessCodesCache;
       if(typeof _legacyShowEtabEspace==='function'){
-        var oldGet=window._etabGetCodes;window._etabGetCodes=function(){return _accessCodesCache.map(function(c){return{code:c.code,used:!!c.used_by,usedBy:c.used_by,usedAt:c.used_at};});};
-        try{_legacyShowEtabEspace();}finally{window._etabGetCodes=oldGet;}
+        try{_legacyShowEtabEspace();}finally{try{localStorage.removeItem('etab_codes');}catch(e){}}
       }
     });
   };
