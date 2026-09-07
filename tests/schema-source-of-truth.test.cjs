@@ -20,15 +20,18 @@ assert.ok(!/create\s+(?:table|policy|function)|alter\s+table|security\s+definer/
   'legacy executable schema must never return');
 
 [
+  '20260830_baseline_schema.sql',
   '20260831_security_hardening.sql',
-  '20260831_auth_entitlements.sql',
-  '20260831_trial_security.sql',
+  '202608310100_auth_entitlements.sql',
+  '202608310200_trial_security.sql',
   '20260901_server_quotas.sql',
-  '20260902_messaging_security.sql',
+  '20260902_forum_foundation.sql',
+  '202609020100_messaging_security.sql',
   '202609021900_messaging_followup.sql',
   '202609022030_messaging_blocking_reports.sql',
-  '20260902_forum_foundation.sql',
-  '202609022200_community_moderation_search.sql'
+  '202609022200_community_moderation_search.sql',
+  '202609072130_community_integrity.sql',
+  '202609072131_messaging_realtime_authorization.sql'
 ].forEach((migration) => {
   assert.ok(schema.includes(migration), `schema retirement notice must point to ${migration}`);
   assert.ok(deploy.includes(migration), `deployment runbook must point to ${migration}`);
