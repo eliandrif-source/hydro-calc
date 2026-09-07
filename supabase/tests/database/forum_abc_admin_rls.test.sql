@@ -1,7 +1,7 @@
 begin;
 
 create extension if not exists pgtap with schema extensions;
-select plan(18);
+select plan(19);
 
 -- A = post author, B = normal member/replier, C = unrelated member, D = administrator.
 insert into auth.users (id, instance_id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
@@ -80,8 +80,13 @@ select ok(not (select is_solution from public.forum_replies where author_name='F
 -- Normal members no longer see the hidden reply; admin still does via RLS.
 select set_config('request.jwt.claims','{"role":"authenticated","sub":"11000000-0000-0000-0000-000000000003"}',true);
 select is((select count(*)::bigint from public.forum_replies where author_name='Forum B'),0::bigint,'C cannot read a hidden reply');
+-- Use the known reply id captured through an admin-visible lookup. Passing a subquery under C's RLS
+-- would yield NULL before forum_report runs and would only test the "one target required" guard.
+select set_config('request.jwt.claims','{"role":"authenticated","sub":"11000000-0000-0000-0000-000000000004"}',true);
+select set_config('hydrocalc.test.hidden_reply_id',(select id::text from public.forum_replies where author_name='Forum B'),true);
+select set_config('request.jwt.claims','{"role":"authenticated","sub":"11000000-0000-0000-0000-000000000003"}',true);
 select throws_ok(
-  $$select public.forum_report(null,(select id from public.forum_replies where author_name='Forum B'),'Hidden reply')$$,
+  format($q$select public.forum_report(null,%L::uuid,'Hidden reply')$q$,current_setting('hydrocalc.test.hidden_reply_id')),
   'P0001','reply not available','hidden replies cannot be reported as available content'
 );
 
