@@ -7,6 +7,7 @@ const forum = fs.readFileSync(path.join(__dirname, '..', 'js', 'forum.js'), 'utf
 const enhancements = fs.readFileSync(path.join(__dirname, '..', 'js', 'forum-enhancements.js'), 'utf8');
 const migration = fs.readFileSync(path.join(__dirname, '..', 'supabase', 'migrations', '20260902_forum_foundation.sql'), 'utf8');
 const moderationMigration = fs.readFileSync(path.join(__dirname, '..', 'supabase', 'migrations', '202609022200_community_moderation_search.sql'), 'utf8');
+const integrityMigration = fs.readFileSync(path.join(__dirname, '..', 'supabase', 'migrations', '202609072130_community_integrity.sql'), 'utf8');
 
 const context = {
   window: {},
@@ -49,6 +50,14 @@ assert.match(migration,/created_at>now\(\)-interval '1 hour'\) >= 30/);
 assert.match(moderationMigration,/create or replace function public\.forum_search_posts/);
 assert.match(moderationMigration,/p_filter='unanswered' and p\.status='open' and p\.reply_count=0/);
 assert.match(moderationMigration,/p_filter='solved' and p\.status='solved'/);
+assert.match(integrityMigration,/unique index if not exists forum_reports_reporter_post_uidx/);
+assert.match(integrityMigration,/unique index if not exists forum_reports_reporter_reply_uidx/);
+assert.match(integrityMigration,/on conflict \(reporter_id,post_id\) where post_id is not null/);
+assert.match(integrityMigration,/on conflict \(reporter_id,reply_id\) where reply_id is not null/);
+assert.match(integrityMigration,/status<>'hidden'/);
+assert.match(integrityMigration,/r\.is_hidden=false and p\.status<>'hidden'/);
+assert.match(integrityMigration,/set reply_count=\(select count\(\*\) from public\.forum_replies r where r\.post_id=p\.id and r\.is_hidden=false\)/);
+assert.match(integrityMigration,/set is_hidden=true,is_solution=false/);
 assert.match(enhancements,/SupaDB\.rpc\('forum_search_posts'/);
 assert.match(enhancements,/\['unanswered','Sans réponse'\]/);
 assert.match(enhancements,/\['solved','Résolus'\]/);
@@ -56,4 +65,4 @@ assert.ok(!enhancements.includes('.innerHTML'), 'forum enhancement renderer must
 assert.ok(!forum.includes('attachment_url'), 'forum intentionally starts without attachments');
 assert.ok(!/\.innerHTML\s*=.*(?:title|body|author_name)/.test(forum), 'untrusted forum fields must not be assigned through innerHTML');
 
-console.log('forum-security: versioned module, server search, filters, moderation and safe rendering regressions OK');
+console.log('forum-security: versioned module, server search, filters, moderation integrity and safe rendering regressions OK');
