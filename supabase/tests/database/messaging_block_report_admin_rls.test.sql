@@ -27,16 +27,17 @@ values
 
 set local role authenticated;
 
--- B can report a message from its own conversation.
+-- B can report a message from its own conversation. Direct table access is intentionally hidden;
+-- the safe RPC exposes only B's non-sensitive report fields.
 select set_config('request.jwt.claims','{"role":"authenticated","sub":"12000000-0000-0000-0000-000000000002"}',true);
 select lives_ok($$select public.message_report_private('42000000-0000-0000-0000-000000000001','Contenu inapproprié')$$,'B can report a message in its conversation');
-select is((select count(*)::bigint from public.message_reports),1::bigint,'B sees its own report');
+select is((select count(*)::bigint from public.message_my_reports()),1::bigint,'B sees its own report through the privacy-safe RPC');
 
 -- C cannot report or read the AB private conversation.
 select set_config('request.jwt.claims','{"role":"authenticated","sub":"12000000-0000-0000-0000-000000000003"}',true);
 select is((select count(*)::bigint from public.messages where thread_id='32000000-0000-0000-0000-000000000001'),0::bigint,'C cannot read AB private messages');
 select throws_ok($$select public.message_report_private('42000000-0000-0000-0000-000000000001','Intrusion')$$,'P0001','message access denied','C cannot report a message it cannot access');
-select is((select count(*)::bigint from public.message_reports),0::bigint,'C cannot read B report');
+select is((select count(*)::bigint from public.message_my_reports()),0::bigint,'C cannot read B report through the safe RPC');
 
 -- A blocks B. New messages in either direction are rejected.
 select set_config('request.jwt.claims','{"role":"authenticated","sub":"12000000-0000-0000-0000-000000000001"}',true);
