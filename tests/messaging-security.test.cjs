@@ -9,6 +9,7 @@ const controlsSource = fs.readFileSync(path.join(__dirname, '..', 'js', 'messagi
 const migration = fs.readFileSync(path.join(__dirname, '..', 'supabase', 'migrations', '20260902_messaging_security.sql'), 'utf8');
 const followup = fs.readFileSync(path.join(__dirname, '..', 'supabase', 'migrations', '202609021900_messaging_followup.sql'), 'utf8');
 const safetyMigration = fs.readFileSync(path.join(__dirname, '..', 'supabase', 'migrations', '202609022030_messaging_blocking_reports.sql'), 'utf8');
+const realtimeMigration = fs.readFileSync(path.join(__dirname, '..', 'supabase', 'migrations', '202609072130_messaging_realtime_authorization.sql'), 'utf8');
 
 const context = {
   window: { confirm: () => true, prompt: () => 'spam' },
@@ -18,17 +19,7 @@ const context = {
     getElementById: () => null,
     querySelector: () => null
   },
-  console,
-  Set,
-  String,
-  Array,
-  Math,
-  Date,
-  Number,
-  RegExp,
-  URL,
-  setTimeout,
-  clearTimeout
+  console, Set, String, Array, Math, Date, Number, RegExp, URL, setTimeout, clearTimeout
 };
 context.window.window = context.window;
 vm.createContext(context);
@@ -56,6 +47,9 @@ assert.ok(!controlsSource.includes('.innerHTML'), 'message safety controls must 
 assert.match(controlsSource, /order\('created_at',\{ascending:false\}\)\.limit\(PAGE_SIZE\+1\)/);
 assert.match(controlsSource, /Charger les messages précédents/);
 assert.match(controlsSource, /q=q\.lt\('created_at',before\)/);
+assert.match(controlsSource, /channel\('messages:'\+threadId,\{config:\{private:true\}\}\)/,
+  'messaging realtime channel must be private');
+assert.match(controlsSource, /CHANNEL_ERROR/);
 
 assert.match(migration, /'message-attachments','message-attachments',false,10485760/);
 assert.match(migration, /create or replace function public\.search_message_members/);
@@ -76,4 +70,10 @@ assert.match(safetyMigration, /public\.message_is_blocked_pair\(v_uid,v_other\)/
 assert.match(safetyMigration, /public\.message_is_blocked_pair\(v_uid,p_receiver\)/);
 assert.match(safetyMigration, /unique \(reporter_id, message_id\)/);
 
-console.log('messaging-security: private attachments, RPC authority, privacy, pagination, anti-spam, blocking and reporting regressions OK');
+assert.match(realtimeMigration, /on realtime\.messages/);
+assert.match(realtimeMigration, /realtime\.topic\(\)/);
+assert.match(realtimeMigration, /public\.message_threads/);
+assert.match(realtimeMigration, /t\.user_a_id = auth\.uid\(\) or t\.user_b_id = auth\.uid\(\)/);
+assert.match(realtimeMigration, /\^messages:/);
+
+console.log('messaging-security: private attachments, RPC authority, privacy, pagination, private realtime, anti-spam, blocking and reporting regressions OK');
