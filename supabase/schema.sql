@@ -14,15 +14,18 @@
 --
 -- Ordre de la baseline de sécurité actuelle :
 --
---   1. 20260831_security_hardening.sql
---   2. 20260831_auth_entitlements.sql
---   3. 20260831_trial_security.sql
---   4. 20260901_server_quotas.sql
---   5. 20260902_messaging_security.sql
---   6. 202609021900_messaging_followup.sql
---   7. 202609022030_messaging_blocking_reports.sql
---   8. 20260902_forum_foundation.sql
---   9. 202609022200_community_moderation_search.sql
+--   1. 20260830_baseline_schema.sql
+--   2. 20260831_security_hardening.sql
+--   3. 202608310100_auth_entitlements.sql
+--   4. 202608310200_trial_security.sql
+--   5. 20260901_server_quotas.sql
+--   6. 20260902_forum_foundation.sql
+--   7. 202609020100_messaging_security.sql
+--   8. 202609021900_messaging_followup.sql
+--   9. 202609022030_messaging_blocking_reports.sql
+--  10. 202609022200_community_moderation_search.sql
+--  11. 202609072130_community_integrity.sql
+--  12. 202609072131_messaging_realtime_authorization.sql
 --
 -- Les Edge Functions de `supabase/functions/` doivent ensuite être déployées
 -- conformément au même runbook.
