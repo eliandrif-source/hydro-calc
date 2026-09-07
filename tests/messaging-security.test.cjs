@@ -6,10 +6,10 @@ const path = require('node:path');
 const source = fs.readFileSync(path.join(__dirname, '..', 'js', 'messaging-security.js'), 'utf8');
 const uiSource = fs.readFileSync(path.join(__dirname, '..', 'js', 'messaging-ui-security.js'), 'utf8');
 const controlsSource = fs.readFileSync(path.join(__dirname, '..', 'js', 'messaging-controls.js'), 'utf8');
-const migration = fs.readFileSync(path.join(__dirname, '..', 'supabase', 'migrations', '20260902_messaging_security.sql'), 'utf8');
+const migration = fs.readFileSync(path.join(__dirname, '..', 'supabase', 'migrations', '202609020100_messaging_security.sql'), 'utf8');
 const followup = fs.readFileSync(path.join(__dirname, '..', 'supabase', 'migrations', '202609021900_messaging_followup.sql'), 'utf8');
 const safetyMigration = fs.readFileSync(path.join(__dirname, '..', 'supabase', 'migrations', '202609022030_messaging_blocking_reports.sql'), 'utf8');
-const realtimeMigration = fs.readFileSync(path.join(__dirname, '..', 'supabase', 'migrations', '202609072130_messaging_realtime_authorization.sql'), 'utf8');
+const realtimeMigration = fs.readFileSync(path.join(__dirname, '..', 'supabase', 'migrations', '202609072131_messaging_realtime_authorization.sql'), 'utf8');
 
 const context = {
   window: { confirm: () => true, prompt: () => 'spam' },
