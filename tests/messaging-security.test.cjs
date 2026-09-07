@@ -73,7 +73,9 @@ assert.match(safetyMigration, /unique \(reporter_id, message_id\)/);
 assert.match(realtimeMigration, /on realtime\.messages/);
 assert.match(realtimeMigration, /realtime\.topic\(\)/);
 assert.match(realtimeMigration, /public\.message_threads/);
-assert.match(realtimeMigration, /t\.user_a_id = auth\.uid\(\) or t\.user_b_id = auth\.uid\(\)/);
+assert.match(realtimeMigration, /t\.user_a_id = \(select auth\.uid\(\)\) or t\.user_b_id = \(select auth\.uid\(\)\)/);
 assert.match(realtimeMigration, /\^messages:/);
+assert.ok(!/realtime\.messages\.extension\s*=\s*'postgres_changes'/.test(realtimeMigration),
+  'Realtime Authorization must not rely on a fictitious postgres_changes extension policy');
 
 console.log('messaging-security: private attachments, RPC authority, privacy, pagination, private realtime, anti-spam, blocking and reporting regressions OK');
