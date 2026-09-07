@@ -20,21 +20,24 @@ Exécuter `supabase/preflight/production_preflight.sql`. Les doublons Stripe, pr
 
 ## 3. Ordre des migrations
 
-Appliquer les fichiers SQL dans cet ordre logique :
+Sur une base vierge, `20260830_baseline_schema.sql` fournit le schéma HydroCalc minimal reproductible. Sur une base existante, vérifier d'abord l'historique distant avec `supabase migration list` et ne jamais marquer ou rejouer une migration sans avoir confirmé l'état réel du schéma.
 
-1. `20260831_security_hardening.sql`
-2. `20260831_auth_entitlements.sql`
-3. `20260831_trial_security.sql`
-4. `20260901_server_quotas.sql`
-5. `20260902_messaging_security.sql`
-6. `202609021900_messaging_followup.sql`
-7. `202609022030_messaging_blocking_reports.sql`
-8. `20260902_forum_foundation.sql`
-9. `202609022200_community_moderation_search.sql`
-10. `202609072100_realtime_private_messaging.sql`
+Appliquer ensuite les fichiers SQL dans leur ordre versionné :
+
+1. `20260830_baseline_schema.sql` — baseline pour reconstruction vierge uniquement selon l'état de l'historique cible
+2. `20260831_security_hardening.sql`
+3. `202608310100_auth_entitlements.sql`
+4. `202608310200_trial_security.sql`
+5. `20260901_server_quotas.sql`
+6. `20260902_forum_foundation.sql`
+7. `202609020100_messaging_security.sql`
+8. `202609021900_messaging_followup.sql`
+9. `202609022030_messaging_blocking_reports.sql`
+10. `202609022200_community_moderation_search.sql`
 11. `202609072130_community_integrity.sql`
+12. `202609072131_messaging_realtime_authorization.sql`
 
-Après chaque migration, arrêter le déploiement en cas d'erreur. `supabase/schema.sql` n'est pas un script d'installation : seules les migrations versionnées constituent la source de vérité.
+Après chaque migration, arrêter le déploiement en cas d'erreur. `supabase/schema.sql` n'est pas un script d'installation : seules les migrations versionnées constituent la source de vérité. Avant toute production, exécuter `supabase db push --dry-run` sur la cible liée et comparer l'historique local/distant ; une divergence d'historique est un NO-GO jusqu'à résolution explicite.
 
 La migration Realtime autorise uniquement un participant authentifié à rejoindre le topic privé `messages:<thread_uuid>`. Après validation en staging de tous les usages Realtime du projet, désactiver **Allow public access** dans les réglages Realtime Supabase afin que les channels non privés soient rejetés.
 
