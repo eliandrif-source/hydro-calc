@@ -77,8 +77,13 @@ Date de préparation : 2026-09-07
 - [ ] L'objet Storage n'a pas d'URL publique exploitable.
 - [ ] Un compte C ne peut lire ni le fil ni la pièce jointe A/B.
 - [ ] B bloque A ; A ne peut plus envoyer de nouveau message.
+- [ ] B voit A dans sa propre zone « Utilisateurs bloqués » ; A et C ne peuvent pas consulter cette liste.
+- [ ] B débloque A ; la liste est mise à jour et le contact redevient possible si aucune autre restriction ne l'empêche.
 - [ ] B signale un message exact ; Admin voit ce message signalé mais pas l'historique complet du fil.
-- [ ] Admin traite le signalement ; le statut est mis à jour.
+- [ ] Le signalement crée une notification admin persistante et le badge en attente est mis à jour.
+- [ ] Admin traite le signalement ; le statut est mis à jour et une seconde décision sur le même dossier est refusée.
+- [ ] Une suspension/bannissement bloque les nouvelles écritures communautaires sans supprimer le compte ou ses projets.
+- [ ] Admin peut lever une sanction et cette levée est auditée.
 
 ## Partage HydroCalc
 
@@ -113,10 +118,10 @@ Date de préparation : 2026-09-07
 - [ ] Formulaires calculateurs sans débordement horizontal.
 - [ ] Forum et messagerie restent utilisables au clavier mobile.
 - [ ] Installation PWA et lancement standalone.
-- [ ] Le service worker actif est `hydrocalc-v306-security-20260907`.
+- [ ] Le service worker actif est `hydrocalc-v307-security-20260907`.
 - [ ] Mise à jour du service worker ne conserve pas une ancienne version incompatible des bridges.
 - [ ] Lors d'un nouveau `controllerchange`, la page se recharge une seule fois et n'entre pas dans une boucle de reload.
-- [ ] Après mise à jour, les caches antérieurs à v306 ont disparu de Cache Storage.
+- [ ] Après mise à jour, les caches antérieurs à v307 ont disparu de Cache Storage.
 - [ ] Hors ligne, aucune réponse Supabase/Stripe/API d'un utilisateur précédent n'est accessible depuis Cache Storage.
 
 ## Critère final
