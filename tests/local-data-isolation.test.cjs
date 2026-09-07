@@ -3,6 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const store = fs.readFileSync(path.join(__dirname, '..', 'js', 'data-store.js'), 'utf8');
+const auth = fs.readFileSync(path.join(__dirname, '..', 'js', 'auth-security.js'), 'utf8');
 
 assert.match(store, /removeItem\('hc_main_accounts'\)/,
   'legacy local account database must be purged');
@@ -23,4 +24,15 @@ assert.match(store, /removeItem\('hc_user_logo'\)/,
 assert.match(store, /clearUserData:[\s\S]*hc_user_logo_/,
   'user-data purge must remove the account-scoped report logo');
 
-console.log('local-data-isolation: browser identity disabled, legacy remember token purged and report logo isolated by account');
+assert.match(auth, /localStorage\.removeItem\('etab_codes'\)/,
+  'legacy establishment access-code storage must be purged');
+assert.match(auth, /window\._etabGetCodes\s*=\s*function\s*\(\)/,
+  'legacy establishment getter must be replaced by the server-backed cache facade');
+assert.match(auth, /window\._etabSaveCodes\s*=\s*function\s*\(\)[\s\S]*removeItem\('etab_codes'\)/,
+  'legacy establishment writes must stay disabled');
+assert.match(auth, /rpc\('create_access_code'\)/,
+  'new establishment codes must be created by Supabase RPC');
+assert.match(auth, /rpc\('revoke_access_code'/,
+  'establishment-code revocation must be handled by Supabase RPC');
+
+console.log('local-data-isolation: browser identity disabled, legacy remember/access-code storage purged and report logo isolated by account');
