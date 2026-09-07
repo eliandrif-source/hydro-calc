@@ -16,7 +16,7 @@ const requiredMigrations = [
   'supabase/migrations/202609022030_messaging_blocking_reports.sql',
   'supabase/migrations/20260902_forum_foundation.sql',
   'supabase/migrations/202609022200_community_moderation_search.sql',
-  'supabase/migrations/202609072100_realtime_private_messaging.sql',
+  'supabase/migrations/202609072130_messaging_realtime_authorization.sql',
   'supabase/migrations/202609072130_community_integrity.sql'
 ];
 requiredMigrations.forEach((file) => assert.ok(exists(file), `missing production migration: ${file}`));
