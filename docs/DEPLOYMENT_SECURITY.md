@@ -36,6 +36,10 @@ Appliquer ensuite les fichiers SQL dans leur ordre versionné :
 10. `202609022200_community_moderation_search.sql`
 11. `202609072130_community_integrity.sql`
 12. `202609072131_messaging_realtime_authorization.sql`
+13. `202609072200_admin_moderation_workflow.sql`
+14. `202609072201_sanction_enforcement.sql`
+15. `202609072202_profiles_admin_rls_recursion_fix.sql`
+16. `202609072203_moderation_privacy_notifications.sql`
 
 Après chaque migration, arrêter le déploiement en cas d'erreur. `supabase/schema.sql` n'est pas un script d'installation : seules les migrations versionnées constituent la source de vérité. Avant toute production, exécuter `supabase db push --dry-run` sur la cible liée et comparer l'historique local/distant ; une divergence d'historique est un NO-GO jusqu'à résolution explicite.
 
@@ -53,9 +57,12 @@ Avec deux comptes non-admin A/B, un troisième compte C non participant et un ad
 - création/révocation des codes Établissement uniquement par RPC et absence d'autorité `etab_codes` locale ;
 - quotas consommés par RPC ;
 - A et B peuvent accéder à leur conversation, C ne peut ni lire le thread/messages/pièces jointes ni rejoindre `messages:<threadId>` ;
-- le blocage empêche demandes, création de thread et nouveaux messages ;
+- le blocage empêche demandes, création de thread et nouveaux messages ; chaque membre ne voit que sa propre liste de blocage ;
 - les pièces jointes sont privées et accessibles par URL signée courte uniquement aux participants ;
-- un signalement privé n'expose à l'admin que le message explicitement signalé ;
+- un signalement privé n'expose à l'admin que le message explicitement signalé ; le déclarant ne voit jamais la note interne, la décision détaillée ni l'identité du modérateur ;
+- un signalement crée une notification durable pour l'admin ;
+- une décision de modération ne peut pas être appliquée deux fois au même dossier ; avertissement, suspension, bannissement et levée de sanction sont audités ;
+- une suspension/bannissement communautaire bloque les nouvelles écritures communautaires sans supprimer le compte, les projets ou la facturation ;
 - le forum refuse les écritures directes et passe par RPC ;
 - un membre normal ne voit pas les contenus forum masqués ;
 - un même membre ne crée pas une infinité de doublons de signalement sur la même cible ;
@@ -70,7 +77,7 @@ Tester checkout Pro/Établissement, activation webhook, renouvellement, annulati
 
 Publier seulement après validation backend. Tester inscription/confirmation, connexion/déconnexion, découverte invité, calcul/quota, rapports, projets, forum, messagerie, partage, Établissement et Coffre Admin sur desktop et mobile.
 
-Pour la messagerie, tester demande/acceptation, historique paginé, non-lus, channel privé Realtime, pièce jointe, blocage, signalement et déconnexion/reconnexion. Une panne Realtime ne doit pas empêcher l'envoi ou la lecture manuelle des messages.
+Pour la messagerie, tester demande/acceptation, historique paginé, non-lus, channel privé Realtime, pièce jointe, blocage/déblocage et liste personnelle des membres bloqués, signalement et déconnexion/reconnexion. Une panne Realtime ne doit pas empêcher l'envoi ou la lecture manuelle des messages.
 
 ### En-têtes HTTP
 
@@ -92,4 +99,4 @@ Un rollback frontend peut revenir au SHA précédent, mais une migration de base
 
 GO uniquement si : CI vert, preflight propre, migrations appliquées, fonctions déployées, RLS/RPC testées avec plusieurs rôles, isolation Realtime A/B/C vérifiée, Stripe testé, PWA/cache et en-têtes HTTP vérifiés, parcours navigateur testés et backup disponible.
 
-NO-GO si : privilège modifiable côté client, contournement quota, fuite inter-utilisateurs, channel privé accessible à C, pièce jointe publique, signalement/modération incohérents, autorité Établissement locale, réponse API en cache PWA, webhook Stripe non signé/testé ou migration partiellement appliquée.
+NO-GO si : privilège modifiable côté client, contournement quota, fuite inter-utilisateurs, channel privé accessible à C, pièce jointe publique, signalement/modération incohérents, liste de blocage visible par un tiers, autorité Établissement locale, réponse API en cache PWA, webhook Stripe non signé/testé ou migration partiellement appliquée.
