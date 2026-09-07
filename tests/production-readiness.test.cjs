@@ -56,6 +56,7 @@ assert.match(headers, /style-src\s+'self'\s+'unsafe-inline'\s+https:\/\/fonts\.g
 assert.match(headers, /font-src\s+'self'\s+https:\/\/fonts\.gstatic\.com\s+data:/i);
 assert.match(headers, /\/sw\.js[\s\S]*Cache-Control:\s*no-cache, no-store, must-revalidate/i);
 assert.match(headers, /\/js\/\*[\s\S]*Cache-Control:\s*no-cache, must-revalidate/i);
+assert.ok(!headers.includes('/HydroCalc_QCM_Platform.html'), 'retired QCM page must not keep stale hosting rules');
 
 const stripeClient = read('js/stripe-client.js');
 assert.ok(!/priceId\s*:/.test(stripeClient), 'browser must not send a Stripe Price ID');
@@ -67,6 +68,12 @@ const checkout = read('supabase/functions/create-checkout-session/index.ts');
 assert.match(checkout, /PRICE_BY_PLAN|PRODUCTS|PRICE/,
   'checkout function must contain server-side price mapping');
 assert.match(checkout, /Authorization/);
+assert.match(checkout, /https:\/\/hydrocalc\.fr/);
+assert.match(checkout, /https:\/\/www\.hydrocalc\.fr/);
+
+const portal = read('supabase/functions/create-portal-session/index.ts');
+assert.match(portal, /https:\/\/hydrocalc\.fr/);
+assert.match(portal, /Origine de retour non autorisée/);
 
 const webhook = read('supabase/functions/stripe-webhook/index.ts');
 assert.match(webhook, /constructEvent|signature/i, 'webhook must verify Stripe signature');
@@ -95,11 +102,24 @@ const authBridge = read('js/auth-security.js');
 assert.match(authBridge, /_forceAdminIfNeeded/);
 assert.match(authBridge, /authRegister/);
 assert.match(authBridge, /update_my_profile|claim_access_code|start_my_trial/);
+assert.match(authBridge, /localStorage\.removeItem\('etab_codes'\)/,
+  'legacy establishment code storage must be purged');
+assert.match(authBridge, /rpc\('create_access_code'\)/);
+assert.match(authBridge, /rpc\('revoke_access_code'/);
+
+const sw = read('sw.js');
+assert.match(sw, /hydrocalc-v306-security-20260907/);
 
 const deploy = read('docs/DEPLOYMENT_SECURITY.md');
 requiredMigrations.forEach((file) => {
   const name = path.basename(file);
   assert.ok(deploy.includes(name), `deployment runbook must mention ${name}`);
 });
+assert.match(deploy, /hydrocalc-v306-security-20260907/);
+assert.match(deploy, /etab_codes/);
 
-console.log('production-readiness: migrations, governance, legacy retirement, CSP, local identity, Stripe and secret hygiene checks OK');
+const smoke = read('docs/PRODUCTION_SMOKE_TESTS.md');
+assert.match(smoke, /hydrocalc-v306-security-20260907/);
+assert.match(smoke, /etab_codes/);
+
+console.log('production-readiness: migrations, governance, legacy retirement, CSP, v306 PWA, establishment storage, Stripe and secret hygiene checks OK');
