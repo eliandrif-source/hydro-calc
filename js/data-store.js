@@ -3,10 +3,10 @@
    Aujourd'hui : localStorage (via _safeStorage)
    Demain : Supabase (voir supabase/schema.sql pour le schéma cible)
 
-   Toutes les données utilisateur (comptes, calculs, projets, formules,
-   réglementations, QCM, paramètres...) passent par DataStore. Le jour
-   où on branche Supabase, seules les fonctions de ce fichier doivent
-   changer — les modules appelants n'ont pas à être modifiés.
+   Les données de travail utilisateur restent isolées localement par compte.
+   L'identité, les rôles, les plans, les essais et les quotas sont en revanche
+   autoritatifs côté Supabase et ne doivent jamais être reconstruits depuis le
+   navigateur.
    ══════════════════════════════════════════════════════════════════ */
 
 var DataStore = (function() {
@@ -21,13 +21,33 @@ var DataStore = (function() {
   function remove(key) { _safeStorage.removeItem(key); }
 
   function userKey(prefix, email) { return prefix + (email || 'guest'); }
+  function activeUserEmail() {
+    try {
+      return (typeof AUTH !== 'undefined' && AUTH && AUTH.user && AUTH.user.email)
+        ? String(AUTH.user.email).trim().toLowerCase()
+        : 'guest';
+    } catch (e) { return 'guest'; }
+  }
+  function activeUserKey(prefix) { return userKey(prefix, activeUserEmail()); }
+
+  /* Les anciens comptes locaux et le logo global étaient des reliquats de la
+     version pré-Supabase. Ils ne sont plus lus. Une migration automatique serait
+     ambiguë sur un appareil partagé, donc ces clés sont simplement purgées. */
+  try { _safeStorage.removeItem('hc_main_accounts'); } catch (e) {}
+  try { _safeStorage.removeItem('hc_user_logo'); } catch (e) {}
+  try {
+    var legacyRemember = read('hc_remember', null);
+    if (legacyRemember && legacyRemember.supa !== true) remove('hc_remember');
+  } catch (e) {}
 
   return {
 
-    /* ─── Comptes ─── */
+    /* ─── Identité locale legacy : désactivée ───
+       Conservé comme façade de compatibilité pour auth.js, mais aucune donnée
+       n'est lue ni enregistrée. Cela rend impossible _tryLocalDemo(). */
     accounts: {
-      getAll: function() { return read('hc_main_accounts', {}); },
-      saveAll: function(accounts) { write('hc_main_accounts', accounts); }
+      getAll: function() { return {}; },
+      saveAll: function() { remove('hc_main_accounts'); }
     },
 
     /* ─── Session courante / "se souvenir de moi" ─── */
@@ -40,11 +60,11 @@ var DataStore = (function() {
       clearCurrent: function() { remove('hc_current_session'); }
     },
 
-    /* ─── Logo personnalisé (data URL, stocké en clair) ─── */
+    /* ─── Logo personnalisé, isolé par compte ─── */
     userLogo: {
-      get: function() { return _safeStorage.getItem('hc_user_logo'); },
-      set: function(dataUrl) { _safeStorage.setItem('hc_user_logo', dataUrl); },
-      remove: function() { remove('hc_user_logo'); }
+      get: function() { return _safeStorage.getItem(activeUserKey('hc_user_logo_')); },
+      set: function(dataUrl) { _safeStorage.setItem(activeUserKey('hc_user_logo_'), dataUrl); },
+      remove: function() { remove(activeUserKey('hc_user_logo_')); }
     },
 
     /* ─── Calculs sauvegardés ─── */
@@ -124,6 +144,7 @@ var DataStore = (function() {
       remove(userKey('hc_projects_', email));
       remove(userKey('hc_formulas_', email));
       remove(userKey('hc_regls_', email));
+      remove(userKey('hc_user_logo_', String(email || 'guest').trim().toLowerCase()));
     }
 
   };

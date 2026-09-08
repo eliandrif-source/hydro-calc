@@ -1,13 +1,23 @@
 {
+  "id": "./",
   "name": "HydroCalc",
   "short_name": "HydroCalc",
-  "description": "Application hydraulique professionnelle — ANC, AC, EP, rivières, réglementation",
+  "description": "Application hydraulique professionnelle — calculs, formation, terrain, réglementation et projets.",
+  "lang": "fr-FR",
+  "dir": "ltr",
+  "scope": "./",
+  "start_url": "./",
   "display": "standalone",
+  "orientation": "any",
   "background_color": "#F2F5FC",
   "theme_color": "#1550A0",
-  "orientation": "portrait",
-  "start_url": "./",
+  "categories": ["utilities", "education", "productivity"],
   "icons": [
-    { "src": "./images/icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    {
+      "src": "./images/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ]
 }

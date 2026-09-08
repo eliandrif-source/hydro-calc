@@ -1,3 +1,27 @@
+# Secrets / configuration locale
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Dependencies / builds
+node_modules/
+dist/
+build/
+.next/
+coverage/
+
+# Supabase local state
+supabase/.temp/
+.supabase/
+
+# IDE
+.vscode/
+.idea/
+
 # Fichiers système Windows
 Thumbs.db
 desktop.ini
@@ -8,7 +32,9 @@ desktop.ini
 # Fichiers temporaires
 *.tmp
 *.log
+*.cache
 
 # Archives
 *.zip
 *.rar
+*.7z

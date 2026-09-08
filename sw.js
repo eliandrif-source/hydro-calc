@@ -1,89 +1,21 @@
 /* ═══════════════════════════════════════════════════
    SERVICE WORKER — HydroCalc PWA
-   Cache-first · Mode hors-ligne complet
+   Production-safe cache policy
 ═══════════════════════════════════════════════════ */
-var CACHE_NAME = 'hydrocalc-v227';
-
-var ASSETS = [
-  './',
-  './HydroCalc_Design_Unifie.html',
-  './styles.css',
-  './js/supabase-client.js',
-  './js/stripe-client.js',
-  './js/data-store.js',
-  './js/utils.js',
-  './js/calculateurs.js',
-  './js/glossaire.js',
-  './js/regl_depts.js',
-  './js/reglementation.js',
-  './js/contenus.js',
-  './js/outils_terrain.js',
-  './js/cours.js',
-  './js/cours_perso.js',
-  './js/forum.js',
-  './js/messagerie.js',
-  './js/settings.js',
-  './js/qcm_bank.js',
-  './js/qcm_prof.js',
-  './js/dossiers.js',
-  './js/auth.js',
-  './manifest.json',
-  './images/icon.png',
-  './images/logo-dark.png',
-  './images/logo-light.png',
-  './libs/docx.js',
-  './libs/jszip.js',
+var CACHE_NAME = 'hydrocalc-v307-security-20260907';
+var APP_SHELL = [
+  './','./HydroCalc_Design_Unifie.html','./styles.css','./manifest.json',
+  './js/supabase-client.js','./js/stripe-client.js','./js/data-store.js','./js/utils.js','./js/calculateurs.js','./js/glossaire.js','./js/regl_depts.js','./js/reglementation.js','./js/contenus.js','./js/outils_terrain.js','./js/cours.js','./js/cours_perso.js','./js/forum.js','./js/messagerie.js','./js/settings.js','./js/qcm_bank.js','./js/qcm_prof.js','./js/dossiers.js','./js/auth.js',
+  './js/pwa-update.js','./js/auth-security.js','./js/product-ux-hardening.js','./js/xss-security.js','./js/coffre-security.js','./js/quota-security.js','./js/report-security.js','./js/report-pdf-fixes.js','./js/report-format-fixes.js','./js/messaging-security.js','./js/messaging-ui-security.js','./js/messaging-controls.js','./js/community-admin.js','./js/messaging-blocks.js','./js/moderation-admin.js','./js/forum-enhancements.js','./js/share-community.js','./js/home-ux-enhancements.js',
+  './js/science-core.js','./js/science-advanced.js','./js/science-anc.js','./js/science-step.js','./js/science-lagoon.js','./js/science-biofilm.js','./js/science-aep.js','./js/science-rivers.js','./js/science-fishpass.js',
+  './images/icon.png','./images/logo-dark.png','./images/logo-light.png','./libs/docx.js','./libs/jszip.js'
 ];
-
-self.addEventListener('install', function(e) {
-  e.waitUntil(
-    caches.open(CACHE_NAME).then(function(cache) {
-      return Promise.allSettled(
-        ASSETS.map(function(url) {
-          return cache.add(url).catch(function() {});
-        })
-      );
-    })
-  );
-  self.skipWaiting();
-});
-
-self.addEventListener('activate', function(e) {
-  e.waitUntil(
-    caches.keys().then(function(keys) {
-      return Promise.all(
-        keys.filter(function(k) { return k !== CACHE_NAME; })
-            .map(function(k) { return caches.delete(k); })
-      );
-    })
-  );
-  self.clients.claim();
-});
-
-self.addEventListener('fetch', function(e) {
-  if (e.request.method !== 'GET') return;
-  var url = e.request.url;
-  if (url.startsWith('chrome-extension://') || url.startsWith('data:')) return;
-
-  e.respondWith(
-    caches.match(e.request).then(function(cached) {
-      if (cached) return cached;
-      return fetch(e.request).then(function(response) {
-        if (response && response.status === 200) {
-          var clone = response.clone();
-          caches.open(CACHE_NAME).then(function(cache) {
-            cache.put(e.request, clone);
-          });
-        }
-        return response;
-      }).catch(function() {
-        /* Hors-ligne : ne servir le fallback app que pour une navigation
-           vers la page principale, jamais pour une autre page (QCM Platform...) */
-        var isMainNav = e.request.mode === 'navigate'
-          && (url.endsWith('/') || url.endsWith('HydroCalc_Design_Unifie.html'));
-        if (isMainNav) return caches.match('./HydroCalc_Design_Unifie.html');
-        return Response.error();
-      });
-    })
-  );
-});
+function isSameOrigin(request){try{return new URL(request.url).origin===self.location.origin;}catch(e){return false;}}
+function isLocalStaticAsset(request){if(!isSameOrigin(request))return false;var u=new URL(request.url);return /\.(?:png|jpg|jpeg|webp|svg|ico|woff2?|ttf)$/i.test(u.pathname)||u.pathname.indexOf('/libs/')!==-1;}
+function isCriticalAppAsset(request){if(!isSameOrigin(request))return false;if(request.mode==='navigate')return true;var u=new URL(request.url);return /\.(?:html|js|css)$/i.test(u.pathname)||u.pathname==='/'||u.pathname.endsWith('/');}
+function cacheableResponse(response){return response&&response.ok&&response.type!=='opaque';}
+function networkFirst(request){return fetch(request).then(function(response){if(cacheableResponse(response)){var clone=response.clone();caches.open(CACHE_NAME).then(function(cache){cache.put(request,clone).catch(function(){});});}return response;}).catch(function(){return caches.match(request).then(function(cached){if(cached)return cached;if(request.mode==='navigate')return caches.match('./HydroCalc_Design_Unifie.html').then(function(fallback){return fallback||Response.error();});return Response.error();});});}
+function cacheFirstStatic(request){return caches.match(request).then(function(cached){if(cached)return cached;return fetch(request).then(function(response){if(cacheableResponse(response)){var clone=response.clone();caches.open(CACHE_NAME).then(function(cache){cache.put(request,clone).catch(function(){});});}return response;});});}
+self.addEventListener('install',function(event){event.waitUntil(caches.open(CACHE_NAME).then(function(cache){return Promise.allSettled(APP_SHELL.map(function(url){return cache.add(url);}));}));self.skipWaiting();});
+self.addEventListener('activate',function(event){event.waitUntil(caches.keys().then(function(keys){return Promise.all(keys.filter(function(key){return key!==CACHE_NAME;}).map(function(key){return caches.delete(key);}));}));self.clients.claim();});
+self.addEventListener('fetch',function(event){var request=event.request;if(!request||request.method!=='GET')return;if(!isSameOrigin(request))return;if(request.headers&&request.headers.get('Authorization'))return;if(isCriticalAppAsset(request)){event.respondWith(networkFirst(request));return;}if(isLocalStaticAsset(request))event.respondWith(cacheFirstStatic(request));});
