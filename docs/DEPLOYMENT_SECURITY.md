@@ -1,6 +1,6 @@
 # HydroCalc — Déploiement sécurisé
 
-Dernière vérification : 2026-09-07
+Dernière vérification : 2026-09-08
 
 Ce document décrit l'ordre de mise en production de la branche `security-hardening`. Un commit GitHub ne déploie ni les migrations Supabase ni les Edge Functions : ces étapes doivent être exécutées sur le projet Supabase cible avant d'exposer le nouveau frontend.
 
@@ -40,6 +40,9 @@ Appliquer ensuite les fichiers SQL dans leur ordre versionné :
 14. `202609072201_sanction_enforcement.sql`
 15. `202609072202_profiles_admin_rls_recursion_fix.sql`
 16. `202609072203_moderation_privacy_notifications.sql`
+17. `202609072204_security_definer_search_path_hardening.sql`
+
+La migration 17 ne change pas la logique métier : elle verrouille `search_path=''` sur les fonctions `SECURITY DEFINER` communautaires héritées et réaffirme leurs droits `EXECUTE` minimaux.
 
 Après chaque migration, arrêter le déploiement en cas d'erreur. `supabase/schema.sql` n'est pas un script d'installation : seules les migrations versionnées constituent la source de vérité. Avant toute production, exécuter `supabase db push --dry-run` sur la cible liée et comparer l'historique local/distant ; une divergence d'historique est un NO-GO jusqu'à résolution explicite.
 
