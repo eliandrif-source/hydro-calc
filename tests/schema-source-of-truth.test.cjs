@@ -34,7 +34,8 @@ assert.ok(!/create\s+(?:table|policy|function)|alter\s+table|security\s+definer/
   '202609072200_admin_moderation_workflow.sql',
   '202609072201_sanction_enforcement.sql',
   '202609072202_profiles_admin_rls_recursion_fix.sql',
-  '202609072203_moderation_privacy_notifications.sql'
+  '202609072203_moderation_privacy_notifications.sql',
+  '202609072204_security_definer_search_path_hardening.sql'
 ].forEach((migration) => {
   assert.ok(schema.includes(migration), `schema retirement notice must point to ${migration}`);
   assert.ok(deploy.includes(migration), `deployment runbook must point to ${migration}`);
