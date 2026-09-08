@@ -30,6 +30,7 @@
 --  14. 202609072201_sanction_enforcement.sql
 --  15. 202609072202_profiles_admin_rls_recursion_fix.sql
 --  16. 202609072203_moderation_privacy_notifications.sql
+--  17. 202609072204_security_definer_search_path_hardening.sql
 --
 -- Les Edge Functions de `supabase/functions/` doivent ensuite être déployées
 -- conformément au même runbook.
