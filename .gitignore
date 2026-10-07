@@ -1,0 +1,26 @@
+# Fichiers système Windows
+Thumbs.db
+desktop.ini
+
+# Fichiers macOS
+.DS_Store
+
+# Fichiers temporaires
+*.tmp
+*.log
+
+# Archives
+*.zip
+*.rar
+
+# Claude Code (sessions, mémoire interne)
+.claude/
+
+# Netlify cache local
+.netlify/
+
+# Supabase cache local
+supabase/.temp/
+
+# Node (au cas où)
+node_modules/

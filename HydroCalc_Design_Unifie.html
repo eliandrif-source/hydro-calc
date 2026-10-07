@@ -1,0 +1,373 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<title>HydroCalc — Application hydraulique</title>
+<!-- PWA : installation sur écran d'accueil -->
+<meta name="theme-color" content="#1550A0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="HydroCalc">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="Application hydraulique professionnelle — ANC, AC, EP, rivières, réglementation, glossaire">
+<link rel="apple-touch-icon" href="./images/icon.png">
+<link rel="manifest" href="./manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="dns-prefetch" href="https://js.stripe.com">
+<link rel="dns-prefetch" href="https://unpkg.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script>
+/* Applique thème + police avant le premier rendu (évite le flash) */
+(function(){
+  try {
+    var s = JSON.parse(localStorage.getItem('hc_settings_v1')||'{}');
+    var theme = s.theme||'light';
+    if(theme==='auto') theme = window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+    if(theme!=='light') document.documentElement.setAttribute('data-theme',theme);
+    if(s.font && s.font!=='normal') document.documentElement.setAttribute('data-font',s.font);
+    document.documentElement.setAttribute('data-accent', s.accent || 'blue');
+  }catch(e){}
+})();
+</script>
+</head>
+<body>
+
+
+<div id="auth-toast"></div>
+<button class="fab-save" id="fab-save" onclick="saveCurrentCalc()" title="Enregistrer ce calcul">💾</button>
+
+<!-- ═══ ÉCRANS D'AUTHENTIFICATION ═══ -->
+
+<!-- SPLASH AUTH -->
+<div class="auth-screen" id="auth-splash">
+  <div class="auth-splash">
+    <img class="auth-logo" src="./images/icon.png" alt="HydroCalc" style="width:72px;height:72px;object-fit:contain;">
+    <div class="auth-app-name">HydroCalc</div>
+    <div class="auth-tagline">Application hydraulique professionnelle<br>Techniciens eau · BTS GEMEAU · Ingénieurs</div>
+    <div class="auth-btns">
+      <button class="auth-btn auth-btn-primary" onclick="authShow('auth-login')">
+        <span class="auth-btn-ico">🔑</span>
+        <div class="auth-btn-text">
+          <div class="auth-btn-title">Se connecter</div>
+          <div class="auth-btn-sub">Accéder à mon espace</div>
+        </div>
+      </button>
+      <button class="auth-btn auth-btn-outline" onclick="authShow('auth-register')">
+        <span class="auth-btn-ico">✨</span>
+        <div class="auth-btn-text">
+          <div class="auth-btn-title">Créer un compte</div>
+          <div class="auth-btn-sub">Gratuit · Sans engagement</div>
+        </div>
+      </button>
+      <button class="auth-btn" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.12);justify-content:center;font-size:12px" onclick="authContinueGuest()">
+        Continuer sans compte →
+      </button>
+    </div>
+    <div class="auth-version">v2.0 · 14 modules · 60+ calculateurs</div>
+  </div>
+</div>
+
+<!-- CONNEXION -->
+<div class="auth-screen hidden" id="auth-login">
+  <div class="auth-form-wrap">
+    <div class="auth-form-hdr">
+      <div class="auth-back" onclick="authShow('auth-splash')">←</div>
+      <div class="auth-hdr-title">Connexion</div>
+    </div>
+    <div class="auth-body">
+      <div class="auth-icon">👋</div>
+      <div class="auth-title">Bon retour !</div>
+      <div class="auth-sub">Connectez-vous pour accéder à votre espace HydroCalc et retrouver votre progression.</div>
+      <div class="auth-error" id="login-err">Email ou mot de passe incorrect.</div>
+      <label class="auth-label">Adresse e-mail</label>
+      <input class="auth-input" type="email" id="login-email" placeholder="votre@email.fr" autocomplete="email">
+      <label class="auth-label">Mot de passe</label>
+      <div class="auth-pwd-wrap">
+        <input class="auth-input" type="password" id="login-pwd" placeholder="Votre mot de passe" autocomplete="current-password">
+        <button type="button" class="auth-pwd-toggle" onclick="toggleAuthPwd('login-pwd', this)" title="Afficher/masquer le mot de passe">👁</button>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:-8px;margin-bottom:16px">
+        <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--c-text-3);cursor:pointer">
+          <input type="checkbox" id="login-remember" style="width:15px;height:15px;accent-color:var(--c-primary)">
+          Se souvenir de moi
+        </label>
+        <span class="auth-link" style="font-size:12px" onclick="authShow('auth-forgot')">Mot de passe oublié ?</span>
+      </div>
+      <button class="auth-btn-submit" onclick="authLogin()">Se connecter</button>
+      <div class="auth-divider">
+        <div class="auth-divider-line"></div>
+        <div class="auth-divider-txt">ou</div>
+        <div class="auth-divider-line"></div>
+      </div>
+      <button class="auth-btn-ghost" onclick="authShow('auth-register')">Créer un compte gratuitement</button>
+      <div class="auth-hint">
+        Compte démo : <span class="auth-link" onclick="authDemoFill()">demo@hydrocalc.fr</span> / <strong>hydro2024</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INSCRIPTION -->
+<div class="auth-screen hidden" id="auth-register">
+  <div class="auth-form-wrap">
+    <div class="auth-form-hdr">
+      <div class="auth-back" onclick="authShow('auth-splash')">←</div>
+      <div class="auth-hdr-title">Créer un compte</div>
+    </div>
+    <div class="auth-body">
+      <div class="auth-icon">🚀</div>
+      <div class="auth-title">Rejoindre HydroCalc</div>
+      <div class="auth-sub">Créez votre compte gratuit et accédez aux calculateurs, glossaire, réglementation et bien plus.</div>
+      <div class="auth-error" id="register-err">Vérifiez les informations saisies.</div>
+      <label class="auth-label">Prénom et nom</label>
+      <input class="auth-input" type="text" id="reg-name" placeholder="Sophie Dupont" autocomplete="name">
+      <label class="auth-label">Adresse e-mail</label>
+      <input class="auth-input" type="email" id="reg-email" placeholder="votre@email.fr" autocomplete="email">
+      <label class="auth-label">Métier / Profil</label>
+      <select class="auth-input" id="reg-profile" style="appearance:none;cursor:pointer">
+        <option value="">Choisissez votre profil...</option>
+        <option value="etudiant-bts">Étudiant BTS GEMEAU / MDE</option>
+        <option value="etudiant-sup">Étudiant BUT / Master / ENGEES</option>
+        <option value="technicien">Technicien eau / assainissement</option>
+        <option value="ingenieur">Ingénieur hydraulicien</option>
+        <option value="spanc">Agent SPANC</option>
+        <option value="collectivite">Agent collectivité</option>
+        <option value="bureau-etude">Bureau d'études</option>
+        <option value="autre">Autre professionnel</option>
+      </select>
+      <label class="auth-label">Mot de passe</label>
+      <div class="auth-pwd-wrap">
+        <input class="auth-input" type="password" id="reg-pwd" placeholder="8 caractères minimum" autocomplete="new-password">
+        <button type="button" class="auth-pwd-toggle" onclick="toggleAuthPwd('reg-pwd', this)" title="Afficher/masquer le mot de passe">👁</button>
+      </div>
+      <label class="auth-label">Confirmer le mot de passe</label>
+      <div class="auth-pwd-wrap">
+        <input class="auth-input" type="password" id="reg-pwd2" placeholder="Répétez le mot de passe" autocomplete="new-password">
+        <button type="button" class="auth-pwd-toggle" onclick="toggleAuthPwd('reg-pwd2', this)" title="Afficher/masquer le mot de passe">👁</button>
+      </div>
+      <button class="auth-btn-submit" onclick="authRegister()">Créer mon compte</button>
+      <div id="invite-code-wrap" style="margin-top:10px">
+        <button type="button" onclick="_toggleInviteCode()" style="width:100%;padding:10px;background:none;border:1.5px dashed var(--c-border);border-radius:var(--r-lg);font-family:var(--f-body);font-size:12.5px;font-weight:600;color:var(--c-text-3);cursor:pointer">🎟️ J'ai un code d'accès</button>
+        <div id="invite-code-field" style="display:none;margin-top:8px">
+          <input class="auth-input" type="text" id="reg-invite-code" placeholder="HC-XXXX-XXXX" style="text-transform:uppercase;letter-spacing:.1em;text-align:center;font-family:monospace;font-size:14px;font-weight:700">
+          <div style="font-size:11px;color:var(--c-text-3);text-align:center;margin-top:4px">Le code sera activé après la création de votre compte</div>
+        </div>
+      </div>
+      <div class="auth-divider">
+        <div class="auth-divider-line"></div>
+        <div class="auth-divider-txt">déjà inscrit ?</div>
+        <div class="auth-divider-line"></div>
+      </div>
+      <button class="auth-btn-ghost" onclick="authShow('auth-login')">Se connecter</button>
+      <div class="auth-hint">
+        En créant un compte, vous acceptez nos <span class="auth-link">conditions d'utilisation</span>.<br>
+        Le compte gratuit donne accès à l'ensemble de l'application.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MOT DE PASSE OUBLIÉ -->
+<div class="auth-screen hidden" id="auth-forgot">
+  <div class="auth-form-wrap">
+    <div class="auth-form-hdr">
+      <div class="auth-back" onclick="authShow('auth-login')">←</div>
+      <div class="auth-hdr-title">Mot de passe oublié</div>
+    </div>
+    <div class="auth-body">
+      <div class="auth-icon">🔒</div>
+      <div class="auth-title">Réinitialisation</div>
+      <div class="auth-sub">Saisissez votre adresse e-mail. Un lien de réinitialisation vous sera envoyé.</div>
+      <label class="auth-label">Adresse e-mail</label>
+      <input class="auth-input" type="email" id="forgot-email" placeholder="votre@email.fr">
+      <button class="auth-btn-submit" onclick="authForgot()">Envoyer le lien de réinitialisation</button>
+      <button class="auth-btn-ghost" onclick="authShow('auth-login')">Retour à la connexion</button>
+    </div>
+  </div>
+</div>
+
+<!-- NOUVEAU MOT DE PASSE (après clic sur le lien reçu par email) -->
+<div class="auth-screen hidden" id="auth-reset-password">
+  <div class="auth-form-wrap">
+    <div class="auth-form-hdr">
+      <div class="auth-hdr-title">Nouveau mot de passe</div>
+    </div>
+    <div class="auth-body">
+      <div class="auth-icon">🔑</div>
+      <div class="auth-title">Choisissez un nouveau mot de passe</div>
+      <div class="auth-sub">Vous êtes connecté via votre lien de réinitialisation. Saisissez votre nouveau mot de passe.</div>
+      <div class="auth-error" id="reset-pwd-err">Erreur.</div>
+      <label class="auth-label">Nouveau mot de passe</label>
+      <div class="auth-pwd-wrap">
+        <input class="auth-input" type="password" id="reset-pwd" placeholder="8 caractères minimum" autocomplete="new-password">
+        <button type="button" class="auth-pwd-toggle" onclick="toggleAuthPwd('reset-pwd', this)" title="Afficher/masquer le mot de passe">👁</button>
+      </div>
+      <label class="auth-label">Confirmer le mot de passe</label>
+      <div class="auth-pwd-wrap">
+        <input class="auth-input" type="password" id="reset-pwd2" placeholder="Répétez le mot de passe" autocomplete="new-password">
+        <button type="button" class="auth-pwd-toggle" onclick="toggleAuthPwd('reset-pwd2', this)" title="Afficher/masquer le mot de passe">👁</button>
+      </div>
+      <button class="auth-btn-submit" onclick="authUpdatePassword()">Valider le nouveau mot de passe</button>
+    </div>
+  </div>
+</div>
+
+<!-- PROFIL UTILISATEUR -->
+<div class="auth-screen hidden" id="auth-profile">
+  <div class="auth-form-wrap">
+    <div class="auth-form-hdr">
+      <div class="auth-back" onclick="closeProfile()">←</div>
+      <div class="auth-hdr-title">Mon profil</div>
+      <button onclick="authLogout()" style="padding:4px 12px;border:1.5px solid var(--c-border);border-radius:var(--r-pill);background:none;font-size:11px;font-weight:700;cursor:pointer;color:var(--c-danger);font-family:var(--f-body)">Déconnexion</button>
+    </div>
+    <div style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch" id="profile-content"></div>
+  </div>
+</div>
+
+<!-- COFFRE ADMIN -->
+<div class="auth-screen hidden" id="auth-coffre">
+  <div class="auth-form-wrap">
+    <div class="auth-form-hdr">
+      <div class="auth-back" onclick="authShow('auth-profile')">←</div>
+      <div class="auth-hdr-title">🗄️ Coffre Admin</div>
+      <button onclick="buildCoffre()" style="padding:4px 12px;border:1.5px solid var(--c-border);border-radius:var(--r-pill);background:none;font-size:11px;font-weight:700;cursor:pointer;color:var(--c-primary);font-family:var(--f-body)">Actualiser</button>
+    </div>
+    <div style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch" id="coffre-content"></div>
+  </div>
+</div>
+
+<!-- ═══ SIDEBAR ═══ -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-hdr">
+    <button class="sidebar-close" onclick="closeSidebar()">✕</button>
+    <img class="sidebar-logo" src="./images/logo-light.png" alt="HydroCalc" style="width:40px;height:40px;object-fit:contain;">
+    <div class="sidebar-app-name">HydroCalc</div>
+    <div class="sidebar-tagline">Application hydraulique professionnelle</div>
+  </div>
+  <div class="sidebar-body" id="sidebar-body"></div>
+</div>
+
+<!-- ═══ APP PRINCIPALE ═══ -->
+<div id="shell">
+  <!-- SIDEBAR DESKTOP (masquee sur mobile) -->
+  <div class="hc-desk-sidebar" id="hc-desk-sidebar"></div>
+
+  <!-- COLONNE PRINCIPALE -->
+  <div class="hc-desk-main-col">
+
+    <!-- TOPBAR DESKTOP (masquee sur mobile) -->
+    <div class="hc-desk-topbar" id="hc-desk-topbar">
+      <div class="hc-desk-search-wrap">
+        <span style="font-size:14px;color:var(--c-text-4)">&#128269;</span>
+        <input type="text" id="desk-search-input" placeholder="Rechercher un cours, un calculateur, une notion..." oninput="_doSearch(this.value);document.getElementById('search-input').value=this.value;openSearch()" autocomplete="off" autocorrect="off">
+      </div>
+      <button id="hc-desk-user-btn" onclick="openProfile()" title="Profil" style="width:36px;height:36px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;font-size:13px;font-weight:800;cursor:pointer;font-family:var(--f-body);display:flex;align-items:center;justify-content:center;flex-shrink:0">?</button>
+    </div>
+
+
+  <!-- STATUS BAR (mobile uniquement) -->
+  <div class="status-bar">
+    <span>9:41</span>
+    <div class="sb-right"><span>📶</span><span>🔋</span></div>
+  </div>
+
+  <!-- TOP BAR (mobile uniquement) -->
+  <div class="top-bar" id="top-bar">
+    <button class="tb-icon-btn" onclick="openNavDrawer()" title="Menu">☰</button>
+    <button class="tb-icon-btn" id="btn-page-back" onclick="goBackPage()" title="Retour" style="display:none">←</button>
+    <button class="tb-icon-btn tb-back-btn" onclick="goHome()" title="Accueil">🏠</button>
+    <span class="top-bar-logo" id="top-title">HydroCalc</span>
+    <button class="tb-icon-btn" onclick="openSearch()" title="Recherche globale" id="btn-search">🔍</button>
+    <button class="tb-icon-btn" onclick="openRapports()" title="Mes rapports PDF" id="btn-rapports" style="display:none">📄</button>
+    <button class="tb-icon-btn" id="profile-btn" onclick="openProfile()" title="Mon profil" style="display:none">👤</button>
+  </div>
+
+  <!-- RECHERCHE GLOBALE -->
+  <div id="search-overlay" class="search-overlay" onclick="if(event.target===this)closeSearch()">
+    <div class="search-box">
+      <span class="search-box-ico">🔍</span>
+      <input type="text" id="search-input" placeholder="Rechercher formule, terme, réglementation…" oninput="_doSearch(this.value)" autocomplete="off" autocorrect="off">
+      <button class="search-close-btn" onclick="closeSearch()">✕</button>
+    </div>
+    <div class="search-results" id="search-results"></div>
+  </div>
+
+  <!-- TAB BAR (si module actif) -->
+  <div class="tab-bar" id="tab-bar" style="display:none"></div>
+
+  <!-- MAIN SCROLL -->
+  <div class="main-scroll" id="main-content"></div>
+
+  <!-- BOTTOM NAV (mobile uniquement) -->
+  <nav class="bottom-nav">
+    <button class="nav-btn" id="nav-ac" onclick="showModule('ac')">
+      <span class="nav-ico">🔧</span><span class="nav-lbl">A. Collectif</span>
+    </button>
+    <button class="nav-btn" id="nav-anc" onclick="showModule('anc-home')">
+      <span class="nav-ico">🏡</span><span class="nav-lbl">A. Non Coll.</span>
+    </button>
+    <button class="nav-btn" id="nav-ep" onclick="showModule('ep')">
+      <span class="nav-ico">💧</span><span class="nav-lbl">Eau potable</span>
+    </button>
+    <button class="nav-btn" id="nav-riv" onclick="showModule('riv')">
+      <span class="nav-ico">🌊</span><span class="nav-lbl">Mil. naturel</span>
+    </button>
+    <button class="nav-btn" id="nav-gloss" onclick="showModule('gloss')">
+      <span class="nav-ico">📖</span><span class="nav-lbl">Formulaire</span>
+    </button>
+  </nav>
+
+  </div>
+
+</div><!-- /#shell -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script>
+<script src="js/supabase-client.js" defer></script>
+<script src="https://js.stripe.com/v3/" defer></script>
+<script src="js/stripe-client.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+<script src="libs/docx.js" defer></script>
+<script src="libs/jszip.js" defer></script>
+<script src="js/data-store.js" defer></script>
+<script src="js/utils.js" defer></script>
+<script src="js/cms.js" defer></script>
+<script src="js/fiches_anc.js" defer></script>
+<script src="js/anc.js" defer></script>
+<script src="js/calculateurs.js" defer></script>
+<script src="js/glossaire.js" defer></script>
+<script src="js/reglementation.js" defer></script>
+<script src="js/contenus.js" defer></script>
+<script src="js/outils_terrain.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous" defer></script>
+<script src="js/cours.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script src="https://unpkg.com/peerjs@1.5.1/dist/peerjs.min.js" defer></script>
+<script src="js/messagerie.js" defer></script>
+<script src="js/forum.js" defer></script>
+<script src="js/dossiers.js" defer></script>
+<script src="js/cours_perso.js" defer></script>
+<script src="js/settings.js" defer></script>
+<script src="js/qcm_bank.js" defer></script>
+<script src="js/qcm_prof.js" defer></script>
+<script src="js/auth.js" defer></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').then(function(reg) {
+      console.log('SW enregistré :', reg.scope);
+    }).catch(function() {});
+  });
+}
+window.addEventListener('load', function() {
+  if (typeof _loadSharedCalcFromURL === 'function') _loadSharedCalcFromURL();
+});
+</script>
+</body>
+</html>

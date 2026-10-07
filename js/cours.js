@@ -1,0 +1,7084 @@
+﻿/* ══════════════════════════════════════════════════════════════════
+   COURS — HydroCalc
+   BTS GEMEAU · Licence Pro · Master · BUT
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ─── DONNÉES ─────────────────────────────────────────────────────── */
+const COURS_DATA = {
+
+  /* ══ BTS GEMEAU / BTS MDE ══════════════════════════════════════════ */
+  'bts-gemeau': {
+    name: 'BTS Métiers de l\'Eau / BTSA GEMEAU',
+    sigle: 'BTS GEMEAU',
+    ico: '💧',
+    color: '#0A7460',
+    colorl: '#E0F4F0',
+    niveau: 'Bac+2',
+    organisme: 'MEN / Ministère de l\'Agriculture',
+    desc: 'Formation aux métiers de l\'eau : alimentation en eau potable, assainissement collectif et non collectif, milieux aquatiques, STEU.',
+    annees: [
+      /* ── Première année ── */
+      {
+        id: 'an1',
+        name: 'Première année',
+        matieres: [
+
+          /* ── Hydraulique générale ── */
+          {
+            id: 'hydraulique',
+            name: 'Hydraulique générale',
+            ico: '🌊',
+            color: '#0A5090',
+            colorl: '#E6EEF8',
+            chapitres: [
+              {
+                id: 'hyd-1',
+                titre: 'Propriétés physiques des fluides',
+                fiche: {
+                  intro: 'L\'eau est un fluide incompressible dont les propriétés varient avec la température. La connaissance de ces propriétés est essentielle pour tout calcul hydraulique.',
+                  points: [
+                    '💧 Masse volumique ρ : 1 000 kg/m³ à 4 °C (maximum), 998 kg/m³ à 20 °C',
+                    '🌡️ Viscosité dynamique μ : 1,002 × 10⁻³ Pa·s à 20 °C — diminue quand T augmente',
+                    '📐 Viscosité cinématique ν = μ/ρ : ≈ 10⁻⁶ m²/s à 20 °C (1 mm²/s)',
+                    '🗜️ Module de compressibilité K ≈ 2,2 GPa → l\'eau est quasi-incompressible',
+                    '🫧 Tension superficielle σ ≈ 0,073 N/m à 20 °C — responsable de la capillarité',
+                    '⚠️ Contrairement aux gaz, la viscosité d\'un liquide DIMINUE quand T augmente',
+                    '📏 Poids volumique γ = ρ × g ≈ 9 810 N/m³ (≈ 10 kN/m³ en première approche)',
+                  ],
+                  formules: [
+                    'ν = μ / ρ — viscosité cinématique (m²/s)',
+                    'γ = ρ × g — poids volumique (N/m³)',
+                  ],
+                  retenir: 'À 20 °C : ρ ≈ 1 000 kg/m³, ν ≈ 10⁻⁶ m²/s. La viscosité diminue avec la chaleur.',
+                },
+                flashcards: [
+                  { q: 'Masse volumique de l\'eau à 4 °C ?', r: '1 000 kg/m³ — c\'est le maximum (l\'eau est la plus dense à 4 °C)', expl: 'Au-delà ou en-deçà de 4 °C, la masse volumique diminue légèrement.' },
+                  { q: 'Unité de la viscosité cinématique ?', r: 'm²/s (ou mm²/s = cSt). 1 cSt = 10⁻⁶ m²/s', expl: 'L\'eau à 20 °C a ν ≈ 1 mm²/s = 1 cSt, ce qui simplifie les calculs.' },
+                  { q: 'Comment la viscosité de l\'eau évolue-t-elle avec la température ?', r: 'Elle DIMINUE quand la température AUGMENTE (l\'eau chaude est plus fluide)', expl: 'Contrairement aux gaz, les liquides voient leur viscosité baisser avec la chaleur (agitation thermique réduit les liaisons H).' },
+                  { q: 'Lien entre viscosité dynamique μ et cinématique ν ?', r: 'ν = μ / ρ  (m²/s = Pa·s / kg·m⁻³)', expl: 'La viscosité cinématique intègre la densité du fluide, ce qui facilite l\'utilisation dans le nombre de Reynolds.' },
+                  { q: 'Pourquoi dit-on que l\'eau est quasi-incompressible ?', r: 'Son module de compressibilité K ≈ 2,2 GPa : une pression de 22 bars réduit le volume de seulement 0,1 %', expl: 'En hydraulique courante, on néglige la compressibilité. Elle n\'intervient que pour les coups de bélier.' },
+                  { q: 'Qu\'est-ce que la tension superficielle ?', r: 'Force par unité de longueur (N/m) à l\'interface eau-air. σ ≈ 0,073 N/m à 20 °C', expl: 'Elle explique la capillarité (montée d\'eau dans un tube fin), la sphéricité des gouttes et les insectes marchant sur l\'eau.' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#E6EEF8"/>
+  <text x="140" y="15" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#1550A0">Propriétés de l'eau selon T°</text>
+  <rect x="8" y="20" width="60" height="16" fill="#1550A0" rx="2"/><rect x="72" y="20" width="65" height="16" fill="#1550A0" rx="2"/><rect x="141" y="20" width="65" height="16" fill="#1550A0" rx="2"/><rect x="210" y="20" width="62" height="16" fill="#1550A0" rx="2"/>
+  <text x="38" y="31" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold">T (°C)</text><text x="104" y="31" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold">ρ (kg/m³)</text><text x="173" y="31" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold">ν (mm²/s)</text><text x="241" y="31" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold">γ (kN/m³)</text>
+  <rect x="8" y="38" width="264" height="14" fill="#fff" opacity=".5" rx="2"/>
+  <text x="38" y="48" text-anchor="middle" font-family="Arial" font-size="9" fill="#166038" font-weight="bold">4 ★</text><text x="104" y="48" text-anchor="middle" font-family="Arial" font-size="9" fill="#166038" font-weight="bold">1 000,0</text><text x="173" y="48" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">1,567</text><text x="241" y="48" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">9,81</text>
+  <rect x="8" y="54" width="264" height="14" rx="2"/>
+  <text x="38" y="64" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">10</text><text x="104" y="64" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">999,7</text><text x="173" y="64" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">1,307</text><text x="241" y="64" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">9,81</text>
+  <rect x="8" y="70" width="264" height="14" fill="#D0E4FF" rx="2"/>
+  <text x="38" y="80" text-anchor="middle" font-family="Arial" font-size="9" fill="#1550A0" font-weight="bold">20 ✓</text><text x="104" y="80" text-anchor="middle" font-family="Arial" font-size="9" fill="#1550A0" font-weight="bold">998,2</text><text x="173" y="80" text-anchor="middle" font-family="Arial" font-size="9" fill="#1550A0" font-weight="bold">1,004</text><text x="241" y="80" text-anchor="middle" font-family="Arial" font-size="9" fill="#1550A0" font-weight="bold">9,79</text>
+  <rect x="8" y="86" width="264" height="14" fill="#fff" opacity=".5" rx="2"/>
+  <text x="38" y="96" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">30</text><text x="104" y="96" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">995,7</text><text x="173" y="96" text-anchor="middle" font-family="Arial" font-size="9" fill="#C05A10" font-weight="bold">0,802 ↓</text><text x="241" y="96" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">9,77</text>
+  <rect x="8" y="102" width="264" height="14" rx="2"/>
+  <text x="38" y="112" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">40</text><text x="104" y="112" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">992,2</text><text x="173" y="112" text-anchor="middle" font-family="Arial" font-size="9" fill="#C05A10" font-weight="bold">0,658 ↓↓</text><text x="241" y="112" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">9,73</text>
+  <text x="140" y="133" text-anchor="middle" font-family="Arial" font-size="9" fill="#555" font-style="italic">★ ρ maximale à 4 °C — ν diminue quand T augmente</text>
+  <text x="140" y="144" text-anchor="middle" font-family="Arial" font-size="9" fill="#C05A10">⚠ Contrairement aux gaz : liquide plus chaud = moins visqueux</text>
+</svg>`,
+                exercice: {
+                  enonce: 'L\'eau circule à 20 °C dans une conduite DN100 à une vitesse de 1,5 m/s. Calculer le nombre de Reynolds et déterminer le régime d\'écoulement. (ν = 10⁻⁶ m²/s à 20 °C)',
+                  solution: '<strong>Re = V × D / ν</strong> = 1,5 × 0,10 / 10⁻⁶ = <strong>150 000</strong><br>Re >> 4 000 → <strong>régime turbulent</strong>.<br>C\'est le régime habituel en réseau AEP (sous pression). Même à V = 0,5 m/s et D = 50 mm : Re = 25 000, toujours turbulent.',
+                },
+              },
+              {
+                id: 'hyd-2',
+                titre: 'Hydrostatique — pression et poussées',
+                fiche: {
+                  intro: 'L\'hydrostatique étudie les fluides au repos. La pression augmente linéairement avec la profondeur et se transmet intégralement (Pascal).',
+                  points: [
+                    '📐 Loi fondamentale : P = P₀ + ρ·g·h  (h = profondeur comptée positivement vers le bas)',
+                    '🔄 Théorème de Pascal : toute variation de pression se transmet intégralement en tout point du fluide',
+                    '⬆️ Poussée d\'Archimède : Π = ρ_fluide × g × V_immergé, dirigée verticalement vers le haut',
+                    '📏 Hauteur piézométrique : H_piézo = z + P/(ρg) — représente l\'énergie de pression en mètres',
+                    '⚖️ Pression relative : mesurée par rapport à l\'atmosphère (P_atm = 101 325 Pa ≈ 10,3 m CE)',
+                    '🔗 Vases communicants : même fluide au repos → même niveau libre quelle que soit la forme',
+                    '💡 1 bar = 10,197 m CE = 100 kPa — à retenir pour convertir pression/hauteur d\'eau',
+                  ],
+                  formules: [
+                    'P = P₀ + ρgh — pression hydrostatique',
+                    'Π = ρ·g·V — poussée d\'Archimède (N)',
+                    'H_piézo = z + P/(ρg) — charge piézométrique (m)',
+                  ],
+                  retenir: '1 bar ≈ 10 m CE. La pression absolue = pression relative + 1,013 bar atmosphérique.',
+                },
+                flashcards: [
+                  { q: 'Formule de la pression hydrostatique ?', r: 'P = P₀ + ρ·g·h  (Pa, avec h en mètres)', expl: 'Chaque mètre de profondeur ajoute ρg ≈ 9 810 Pa ≈ 0,098 bar ≈ 1 mCE = 100 cm CE.' },
+                  { q: 'Énoncé du théorème de Pascal', r: 'Toute variation de pression appliquée en un point d\'un fluide incompressible au repos se transmet intégralement en tout point', expl: 'Principe des vérins hydrauliques : une petite force sur une petite surface crée une grande force sur une grande surface.' },
+                  { q: 'Formule de la poussée d\'Archimède ?', r: 'Π = ρ_fluide × g × V_immergé  (N), dirigée vers le haut', expl: 'Un objet flotte si Π ≥ P_objet, c\'est-à-dire si sa masse volumique moyenne ≤ celle du fluide.' },
+                  { q: 'Quelle est la différence entre pression absolue et relative ?', r: 'P_abs = P_rel + P_atm. Un manomètre mesure P_rel ; un capteur absolu mesure P_abs', expl: 'En réseau AEP, on exprime toujours la pression en relatif (0 bar rel. = 1,013 bar abs.).' },
+                  { q: 'Convertir 3 bar en mètres de colonne d\'eau', r: '3 bar × 10,197 ≈ 30,6 m CE', expl: 'Règle pratique : 1 bar ≈ 10 m CE. Pour 3 bar : 3 × 10 = 30 m CE (légèrement > en réalité).' },
+                  { q: 'Qu\'est-ce que la hauteur piézométrique ?', r: 'H = z + P/(ρg) : somme de l\'altitude z et de la pression en mètres', expl: 'En régime statique, H_piézo est la même partout dans un fluide connecté. En dynamique, elle décroît dans le sens de l\'écoulement.' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#E6EEF8"/>
+  <text x="140" y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#1550A0">Hydrostatique — Pression et Archimède</text>
+  <rect x="18" y="22" width="100" height="105" fill="none" stroke="#1550A0" stroke-width="2"/>
+  <rect x="19" y="38" width="98" height="88" fill="#B3D9FF" opacity=".65"/>
+  <line x1="18" y1="38" x2="118" y2="38" stroke="#1550A0" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="122" y="41" font-family="Arial" font-size="9" fill="#1550A0">P₀</text>
+  <line x1="10" y1="38" x2="10" y2="108" stroke="#C05A10" stroke-width="1.5"/>
+  <polygon points="7,36 10,31 13,36" fill="#C05A10"/><polygon points="7,110 10,115 13,110" fill="#C05A10"/>
+  <text x="2" y="77" font-family="Arial" font-size="9" fill="#C05A10" font-weight="bold">h</text>
+  <line x1="18" y1="108" x2="118" y2="108" stroke="#C05A10" stroke-width="1"/>
+  <text x="122" y="111" font-family="Arial" font-size="8" fill="#C05A10">P=P₀+ρgh</text>
+  <rect x="43" y="74" width="32" height="20" fill="#888" rx="3" opacity=".9"/>
+  <line x1="59" y1="72" x2="59" y2="56" stroke="#166038" stroke-width="2"/>
+  <polygon points="56,58 59,52 62,58" fill="#166038"/>
+  <text x="63" y="64" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">Π</text>
+  <polygon points="158,38 192,118 158,118" fill="#1550A0" opacity=".2"/>
+  <line x1="158" y1="38" x2="158" y2="118" stroke="#1550A0" stroke-width="1"/>
+  <text x="175" y="82" font-family="Arial" font-size="8" fill="#1550A0" text-anchor="middle">P=ρgh</text>
+  <text x="198" y="41" font-family="Arial" font-size="8" fill="#555">0</text>
+  <text x="196" y="121" font-family="Arial" font-size="8" fill="#555">max</text>
+  <rect x="10" y="126" width="260" height="16" fill="#D0E4FF" rx="4"/>
+  <text x="140" y="137" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#1550A0" font-weight="bold">P = P₀ + ρgh     Π = ρ·g·V_immergé ↑</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Un manomètre en fond d\'un réservoir indique 0,28 bar relatif. 1) Quelle est la hauteur d\'eau ? 2) Un flotteur de volume 0,5 m³ et de masse ρ = 800 kg/m³ flotte-t-il ?',
+                  solution: '<strong>1) h = P / (ρg)</strong> = 28 000 / (1 000 × 9,81) = <strong>2,85 m</strong><br><strong>2) Poussée d\'Archimède</strong> Π = 1000 × 9,81 × 0,5 = 4 905 N<br>Poids objet = 800 × 9,81 × 0,5 = 3 924 N<br>Π > Poids → <strong>l\'objet flotte</strong> (ρ_obj < ρ_eau).',
+                },
+              },
+              {
+                id: 'hyd-3',
+                titre: 'Hydrodynamique — équation de Bernoulli',
+                fiche: {
+                  intro: 'En régime permanent, l\'équation de Bernoulli exprime la conservation de l\'énergie entre deux sections d\'un écoulement. Elle est la base de tous les calculs hydrauliques.',
+                  points: [
+                    '🔄 Équation de continuité : Q = A₁·V₁ = A₂·V₂ (conservation du débit)',
+                    '⚡ Bernoulli sans pertes : z + P/(ρg) + V²/(2g) = constante (charge totale H en mètres)',
+                    '3️⃣ Les 3 termes : géodésique z + piézométrique P/(ρg) + cinétique V²/(2g)',
+                    '🔢 Nombre de Reynolds : Re = V·D/ν',
+                    '   Re < 2 000 → laminaire | 2 000–4 000 → transitoire | > 4 000 → turbulent',
+                    '🌀 En réseau sous pression : Re >> 4 000 → toujours turbulent',
+                    '🎯 Effet Venturi : rétrécissement → V augmente → P diminue (conservation énergie)',
+                    '📊 Débit : Q = V × A (m³/s), V = vitesse moyenne dans la section A',
+                  ],
+                  formules: [
+                    'Q = A·V — débit (m³/s)',
+                    'z₁ + P₁/(ρg) + V₁²/(2g) = z₂ + P₂/(ρg) + V₂²/(2g) + h_f — Bernoulli généralisé',
+                    'Re = V·D/ν — nombre de Reynolds (sans dimension)',
+                  ],
+                  retenir: 'Bernoulli = conservation de la charge totale H = z + P/(ρg) + V²/(2g). Les pertes de charge h_f réduisent H.',
+                },
+                flashcards: [
+                  { q: 'Formule de l\'équation de continuité ?', r: 'Q = A₁·V₁ = A₂·V₂  (débit volumique constant en écoulement incompressible)', expl: 'Un rétrécissement de section double la vitesse. Cela est utilisé pour mesurer les débits (venturi, diaphragme).' },
+                  { q: 'Quels sont les 3 termes de l\'équation de Bernoulli ?', r: '1) z : hauteur géodésique (m) 2) P/ρg : hauteur de pression (m) 3) V²/2g : hauteur cinétique (m)', expl: 'Leur somme = charge totale H (m). En l\'absence de pertes, H est constant le long d\'un filet.' },
+                  { q: 'Valeurs du nombre de Reynolds délimitant les régimes ?', r: 'Re < 2 000 : laminaire | 2 000 – 4 000 : transitoire | Re > 4 000 : turbulent', expl: 'En réseau AEP (V ≈ 1 m/s, D = 100 mm, ν = 10⁻⁶) : Re = 10⁵ → toujours turbulent.' },
+                  { q: 'Formule du nombre de Reynolds ?', r: 'Re = V·D/ν  (V en m/s, D en m, ν en m²/s)', expl: 'Re compare les forces d\'inertie aux forces visqueuses. Grand Re = turbulence dominante.' },
+                  { q: 'Qu\'est-ce que l\'effet Venturi ?', r: 'Dans un rétrécissement, V augmente et P diminue (énergie conservée)', expl: 'Utilisé dans les débitmètres Venturi et les injecteurs. La dépression permet d\'aspirer un autre fluide.' },
+                  { q: 'Convertir 12 L/s en m³/h', r: '12 L/s × 3,6 = 43,2 m³/h', expl: '1 L/s = 3,6 m³/h. Règle pratique : multiplier par 3,6 pour passer de L/s à m³/h.' },
+                ],
+                schema: `<svg viewBox="0 0 280 140" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="140" rx="8" fill="#E6EEF8"/>
+  <text x="140" y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#1550A0">Bernoulli — Conservation de la charge H</text>
+  <polygon points="8,30 68,52 68,92 8,114" fill="#B3D9FF" stroke="#1550A0" stroke-width="1.5"/>
+  <rect x="68" y="58" width="100" height="26" fill="#B3D9FF" stroke="#1550A0" stroke-width="1.5"/>
+  <polygon points="168,52 228,30 228,114 168,92" fill="#B3D9FF" stroke="#1550A0" stroke-width="1.5"/>
+  <text x="15" y="46" font-family="Arial" font-size="8" fill="#C05A10">V₁↓</text>
+  <text x="15" y="57" font-family="Arial" font-size="8" fill="#166038">P₁↑</text>
+  <text x="118" y="55" text-anchor="middle" font-family="Arial" font-size="8" fill="#C05A10" font-weight="bold">V₂↑↑</text>
+  <text x="118" y="98" text-anchor="middle" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">P₂↓↓</text>
+  <text x="232" y="46" font-family="Arial" font-size="8" fill="#C05A10">V₃↓</text>
+  <text x="232" y="57" font-family="Arial" font-size="8" fill="#166038">P₃↑</text>
+  <line x1="8" y1="22" x2="260" y2="22" stroke="#1550A0" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="263" y="25" font-family="Arial" font-size="8" fill="#1550A0" font-weight="bold">H</text>
+  <text x="8" y="18" font-family="Arial" font-size="8" fill="#1550A0">①</text>
+  <text x="116" y="18" font-family="Arial" font-size="8" fill="#1550A0">②</text>
+  <text x="226" y="18" font-family="Arial" font-size="8" fill="#1550A0">③</text>
+  <rect x="8" y="118" width="264" height="16" fill="#D0E4FF" rx="4"/>
+  <text x="140" y="129" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#1550A0" font-weight="bold">z + P/(ρg) + V²/(2g) = H = constante (sans pertes)</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Dans une conduite DN200 (section ①), Q = 25 L/s sous P₁ = 2,0 bar. Elle se réduit à DN100 (section ②) à la même altitude. Sans pertes de charge, calculer V₁, V₂ et P₂.',
+                  solution: '<strong>A₁ = π/4 × 0,2² = 0,03142 m²</strong> → V₁ = 0,025/0,03142 = <strong>0,80 m/s</strong><br><strong>Continuité :</strong> V₂ = V₁ × (D₁/D₂)² = 0,80 × 4 = <strong>3,2 m/s</strong><br><strong>Bernoulli (Δz = 0)</strong> : P₂ = P₁ + ρ/2 × (V₁² − V₂²) = 200 000 + 500 × (0,64 − 10,24) = 200 000 − 4 800 = <strong>195 200 Pa ≈ 1,95 bar</strong>',
+                },
+              },
+              {
+                id: 'hyd-4',
+                titre: 'Pertes de charge',
+                fiche: {
+                  intro: 'Les pertes de charge sont les dissipations d\'énergie dues aux frottements dans les conduites. Elles déterminent les pressions disponibles et le dimensionnement des pompes.',
+                  points: [
+                    '📉 Pertes régulières (linéaires) : dues aux frottements sur toute la longueur',
+                    '   Darcy-Weisbach : Δhf = λ·(L/D)·V²/(2g)  (λ = facteur de Darcy)',
+                    '   Manning-Strickler : V = K·Rh^(2/3)·I^(1/2)  (canaux et conduites à surface libre)',
+                    '📐 Coefficient K de Strickler : PVC neuf 90–100 · Fonte 100–130 · Béton 60–80',
+                    '🌀 Rayon hydraulique : Rh = A / P_mouillé (conduite pleine : Rh = D/4)',
+                    '🔩 Pertes singulières : Δhs = ξ·V²/(2g)  (ξ selon l\'accessoire)',
+                    '   Coude 90° : ξ ≈ 1,0–1,5 | Vanne pleine ouverture : ξ ≈ 0,1 | Clapet : ξ ≈ 2,5',
+                    '📊 Gradient hydraulique J = Δh / L (m/m ou ‰)',
+                    '⚡ Vitesses recommandées AEP : 0,5–2 m/s (éviter dépôts < 0,5, coups de bélier > 2)',
+                  ],
+                  formules: [
+                    'Δhf = λ·(L/D)·V²/(2g) — Darcy-Weisbach (m)',
+                    'V = K·Rh^(2/3)·I^(1/2) — Manning-Strickler (m/s)',
+                    'Δhs = ξ·V²/(2g) — pertes singulières (m)',
+                    'J = Δh/L — gradient hydraulique (m/m)',
+                  ],
+                  retenir: 'Les pertes de charge totales = Σ pertes régulières + Σ pertes singulières. Elles s\'additionnent dans le Bernoulli généralisé.',
+                },
+                flashcards: [
+                  { q: 'Formule de Manning-Strickler ?', r: 'V = K · Rh^(2/3) · I^(1/2)  (V en m/s, Rh en m, I en m/m)', expl: 'K est le coefficient de rugosité : plus il est élevé, moins la paroi est rugueuse (PVC > béton > maçonnerie).' },
+                  { q: 'Valeur de K Strickler pour du PVC neuf ?', r: 'K = 90 à 100 m^(1/3)/s', expl: 'Fonte ductile neuve : 100–130. Béton courant : 70–80. Conduite vieille + entartrée : 40–60.' },
+                  { q: 'Formule des pertes de charge singulières ?', r: 'Δhs = ξ · V²/(2g)  (ξ = coefficient sans dimension selon l\'accessoire)', expl: 'Les pertes singulières sont importantes aux vitesses élevées (V² !). Pour les réseaux longs, elles représentent 10–20 % des pertes totales.' },
+                  { q: 'Qu\'est-ce que le rayon hydraulique Rh ?', r: 'Rh = A / P_mouillé. Pour une conduite circulaire pleine : Rh = D/4', expl: 'Pour une conduite de D = 200 mm pleine : Rh = 0,2/4 = 0,05 m. Rh est maximal quand la conduite travaille pleine.' },
+                  { q: 'Quelle est la plage de vitesse recommandée en réseau AEP ?', r: '0,5 à 2 m/s (idéalement 0,8–1,5 m/s)', expl: '< 0,5 m/s : risque de dépôts et stagnation. > 2 m/s : risque de coups de bélier, bruit, usure.' },
+                  { q: 'Qu\'est-ce que le gradient hydraulique J ?', r: 'J = Δh / L (m/m ou ‰). Représente la pente de la ligne piézométrique', expl: 'Un gradient de 1 ‰ = 1 mm de perte de charge par mètre de conduite. En AEP, J est souvent 2–5 ‰.' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#E6EEF8"/>
+  <text x="140" y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#1550A0">Pertes de charge — Darcy-Weisbach</text>
+  <rect x="22" y="72" width="236" height="24" fill="#B3D9FF" stroke="#1550A0" stroke-width="1.5" rx="4"/>
+  <text x="140" y="88" text-anchor="middle" font-family="Arial" font-size="9" fill="#1550A0">→ V, D, λ (rugosité), L</text>
+  <line x1="22" y1="35" x2="258" y2="62" stroke="#C05A10" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="30" y="31" font-family="Arial" font-size="9" fill="#C05A10">Ligne piézométrique (pente = J)</text>
+  <line x1="22" y1="35" x2="22" y2="72" stroke="#166038" stroke-width="1.5"/>
+  <polygon points="19,37 22,32 25,37" fill="#166038"/><polygon points="19,70 22,75 25,70" fill="#166038"/>
+  <text x="5" y="56" font-family="Arial" font-size="8.5" fill="#166038" font-weight="bold">H₁</text>
+  <line x1="258" y1="62" x2="258" y2="72" stroke="#166038" stroke-width="1.5"/>
+  <polygon points="255,64 258,59 261,64" fill="#166038"/><polygon points="255,70 258,75 261,70" fill="#166038"/>
+  <text x="261" y="69" font-family="Arial" font-size="8.5" fill="#166038" font-weight="bold">H₂</text>
+  <line x1="100" y1="46" x2="100" y2="38" stroke="#A82018" stroke-width="1.5"/>
+  <polygon points="97,40 100,34 103,40" fill="#A82018"/><polygon points="97,48 100,54 103,48" fill="#A82018"/>
+  <line x1="22" y1="106" x2="258" y2="106" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/>
+  <polygon points="256,103 262,106 256,109" fill="#888"/>
+  <text x="140" y="117" text-anchor="middle" font-family="Arial" font-size="9" fill="#555">L</text>
+  <text x="115" y="44" font-family="Arial" font-size="8" fill="#A82018" font-weight="bold">ΔH = J × L</text>
+  <rect x="8" y="125" width="264" height="18" fill="#D0E4FF" rx="4"/>
+  <text x="140" y="133" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#1550A0" font-weight="bold">ΔH = λ(L/D)V²/(2g)   J = ΔH/L</text>
+  <text x="140" y="141" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">Pertes singulières : Δhs = ξ·V²/(2g)</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Conduite DN100 en PVC (K = 95 m^(1/3)/s) transportant Q = 10 L/s sur L = 200 m en charge (section pleine). Calculer la perte de charge ΔH avec Manning-Strickler. (Rh = D/4 pour conduite pleine)',
+                  solution: '<strong>A = π/4 × 0,1² = 7,854 × 10⁻³ m²</strong><br><strong>V = Q/A</strong> = 0,010 / 7,854×10⁻³ = <strong>1,27 m/s</strong><br><strong>Rh = D/4</strong> = 0,1/4 = 0,025 m → Rh^(2/3) = 0,025^0,667 = 0,0855<br><strong>J = (V / (K × Rh^(2/3)))²</strong> = (1,27 / (95 × 0,0855))² = (1,27/8,12)² = <strong>0,0245 m/m</strong><br><strong>ΔH = J × L</strong> = 0,0245 × 200 = <strong>4,9 m</strong>',
+                },
+              },
+              {
+                id: 'hyd-5',
+                titre: 'Pompes et stations de pompage',
+                fiche: {
+                  intro: 'Les pompes centrifuges sont les plus utilisées en AEP et assainissement. Leur dimensionnement repose sur la courbe caractéristique et le point de fonctionnement.',
+                  points: [
+                    '🔄 Pompe centrifuge : transfert d\'énergie par rotation (turbine) → la plus courante en eau',
+                    '📈 Courbe caractéristique pompe : H = f(Q), fournie par le fabricant (HMT décroît quand Q croît)',
+                    '📉 Courbe réseau : H_res = Δz + K·Q² (hauteur géodésique + pertes de charge)',
+                    '🎯 Point de fonctionnement : intersection des deux courbes → (Q_fonct, H_fonct)',
+                    '⚠️ Cavitation : vaporisation en aspiration si P < P_vapeur → bruit, érosion, chute de performances',
+                    '📐 NPSH (Net Positive Suction Head) : doit respecter NPSH_dispo > NPSH_requis + 0,5 m',
+                    '⚡ Rendement global η = P_hydraulique / P_absorbée = ρ·g·Q·H / P_moteur',
+                    '🔀 Couplage série : H s\'additionnent (même Q) → utile si pression insuffisante',
+                    '🔀 Couplage parallèle : Q s\'additionnent (même H) → utile pour augmenter le débit',
+                  ],
+                  formules: [
+                    'H_réseau = Δz + K·Q² — courbe réseau (m)',
+                    'NPSH_dispo = (P_asp - P_vap)/(ρg) - h_asp — charge nette disponible',
+                    'η = ρgQH / P_moteur — rendement global (sans dimension)',
+                    'P = ρ·g·Q·H / η — puissance absorbée (W)',
+                  ],
+                  retenir: 'Le point de fonctionnement = intersection pompe-réseau. Toujours vérifier NPSH_dispo > NPSH_requis pour éviter la cavitation.',
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce que le point de fonctionnement d\'une pompe ?', r: 'L\'intersection de la courbe H=f(Q) de la pompe et de la courbe H=f(Q) du réseau', expl: 'Si la courbe réseau monte (pression statique élevée), le débit de fonctionnement sera plus faible que le débit nominal.' },
+                  { q: 'Qu\'est-ce que la cavitation et quand apparaît-elle ?', r: 'Formation de bulles de vapeur lorsque la pression locale tombe sous la pression de vapeur de l\'eau', expl: 'Elle cause bruit, vibrations et érosion. On l\'évite en limitant la hauteur d\'aspiration et les pertes à l\'aspiration.' },
+                  { q: 'Formule du rendement global d\'une pompe ?', r: 'η = (ρ · g · Q · H) / P_moteur  (résultat entre 0 et 1)', expl: 'Un rendement de 0,75 signifie que 25 % de la puissance absorbée est perdue (frottements, fuites, pertes mécaniques).' },
+                  { q: 'Couplage série : quel effet ?', r: 'Les HMT s\'additionnent pour le même débit Q. Ex : 2 pompes de 20 m → 40 m HMT', expl: 'Utilisé quand la pression est insuffisante : long refoulement, point haut. Les pompes doivent avoir la même courbe.' },
+                  { q: 'Couplage parallèle : quel effet ?', r: 'Les débits s\'additionnent pour la même HMT. Ex : 2 pompes de 50 m³/h → 100 m³/h', expl: 'Utilisé en pointe ou pour la redondance. Le point de fonctionnement se déplace sur la courbe réseau.' },
+                  { q: 'Comment calcule-t-on la puissance d\'une pompe ?', r: 'P_absorbée = ρ·g·Q·H / η  (W). Avec ρ=1000, g=9,81 : P = 9810·Q·H/η', expl: 'Pour Q=0,01 m³/s, H=20 m, η=0,7 : P = 9810 × 0,01 × 20 / 0,7 ≈ 2 800 W = 2,8 kW.' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#E6EEF8"/>
+  <text x="140" y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#1550A0">Pompe — Point de fonctionnement</text>
+  <line x1="28" y1="118" x2="268" y2="118" stroke="#333" stroke-width="1.5"/>
+  <polygon points="266,115 272,118 266,121" fill="#333"/>
+  <line x1="28" y1="118" x2="28" y2="18" stroke="#333" stroke-width="1.5"/>
+  <polygon points="25,20 28,14 31,20" fill="#333"/>
+  <text x="272" y="121" font-family="Arial" font-size="9" fill="#333">Q</text>
+  <text x="22" y="14" font-family="Arial" font-size="9" fill="#333">H</text>
+  <path d="M 33,32 C 80,35 130,60 165,78 S 220,108 255,118" stroke="#1550A0" stroke-width="2.5" fill="none"/>
+  <text x="248" y="112" font-family="Arial" font-size="8" fill="#1550A0" font-weight="bold">Pompe</text>
+  <path d="M 33,92 C 80,88 130,82 165,78 S 220,70 255,60" stroke="#C05A10" stroke-width="2.5" fill="none"/>
+  <text x="248" y="57" font-family="Arial" font-size="8" fill="#C05A10" font-weight="bold">Réseau</text>
+  <circle cx="165" cy="78" r="5" fill="#166038" stroke="#fff" stroke-width="2"/>
+  <line x1="165" y1="78" x2="165" y2="118" stroke="#166038" stroke-width="1.2" stroke-dasharray="3,2"/>
+  <line x1="28" y1="78" x2="165" y2="78" stroke="#166038" stroke-width="1.2" stroke-dasharray="3,2"/>
+  <text x="161" y="127" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">Qf</text>
+  <text x="14" y="81" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">Hf</text>
+  <text x="168" y="74" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">PF</text>
+  <line x1="28" y1="92" x2="60" y2="92" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="63" y="95" font-family="Arial" font-size="8" fill="#888">Δz</text>
+  <rect x="8" y="128" width="264" height="14" fill="#D0E4FF" rx="4"/>
+  <text x="140" y="138" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#1550A0" font-weight="bold">PF = intersection pompe ∩ réseau • P = ρgQH/η</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Une pompe a pour courbe H = 30 − 500·Q² (H en m, Q en m³/s). Elle alimente un réservoir situé 15 m plus haut, pertes de charge K = 3 000 m/(m³/s)². 1) Écrire la courbe réseau. 2) Trouver Qf et Hf. 3) Calculer la puissance absorbée si η = 0,72.',
+                  solution: '<strong>1) H_réseau = Δz + K·Q² = 15 + 3 000·Q²</strong><br><strong>2) PF :</strong> 30 − 500Q² = 15 + 3 000Q² → 15 = 3 500Q² → Q = √(15/3500) = <strong>0,0655 m³/s ≈ 65,5 L/s</strong><br>Hf = 15 + 3000 × (0,0655)² = 15 + 12,9 = <strong>27,9 m</strong><br><strong>3) P = ρgQH/η</strong> = 1000 × 9,81 × 0,0655 × 27,9 / 0,72 = <strong>≈ 24 800 W = 24,8 kW</strong>',
+                },
+              },
+            ],
+          },
+
+          /* ── Chimie et qualité de l'eau ── */
+          {
+            id: 'chimie',
+            name: 'Chimie et qualité de l\'eau',
+            ico: '🔬',
+            color: '#7B2D8B',
+            colorl: '#F0E6F8',
+            chapitres: [
+              {
+                id: 'chi-1',
+                titre: 'Paramètres physico-chimiques — T°, pH, conductivité, turbidité',
+                fiche: {
+                  intro: 'Les paramètres physico-chimiques caractérisent la qualité de l\'eau avant tout traitement. Ils sont mesurés en continu sur le terrain ou en laboratoire et déclenchent des alertes si les seuils réglementaires sont dépassés.',
+                  points: [
+                    '🌡️ Température (°C) : influence la solubilité de l\'O₂, la vitesse des réactions et la croissance bactérienne. Norme AEP : ≤ 25 °C',
+                    '⚗️ pH : échelle de 0 (acide) à 14 (basique). Eau neutre = 7. Norme AEP : 6,5 – 9,0. Mesure par électrode de verre',
+                    '⚡ Conductivité électrique (µS/cm) : reflète la minéralisation totale. Eau distillée ≈ 0 µS/cm, eau douce 100–500, eau de mer ≈ 50 000',
+                    '☁️ Turbidité (NTU — Nephelometric Turbidity Unit) : matières en suspension. Norme AEP < 1 NTU au robinet, < 0,5 NTU après filtration',
+                    '💨 Oxygène dissous (mg/L) : saturation à 20 °C = 9,1 mg/L. < 2 mg/L → anoxie (mort des poissons)',
+                    '⚡ Potentiel d\'oxydo-réduction Eh (mV) : positif = milieu oxydant, négatif = milieu réducteur (anaérobie)',
+                    '🔍 MES (Matières En Suspension, mg/L) : filtrées sur 0,45 µm. Distinctes de la turbidité (qui est optique)',
+                  ],
+                  formules: [
+                    'pH = -log[H⁺] — définition du pH',
+                    'O₂ sat. (mg/L) ≈ 14,6 – 0,39·T (approximation pratique entre 0 et 30 °C)',
+                  ],
+                  retenir: 'pH 6,5–9, turbidité < 1 NTU, conductivité reflet de la minéralisation, O₂ dissous indicateur de vie aquatique.',
+                },
+                flashcards: [
+                  { q: 'Quelle est la norme de pH pour l\'eau potable ?', r: 'pH entre 6,5 et 9,0 (Directive 2020/2184)', expl: 'Un pH trop bas (< 6,5) rend l\'eau agressive (corrosion des canalisations). Trop élevé (> 9) : goût désagréable et risque d\'entartrage.' },
+                  { q: 'Unité de la turbidité et norme AEP ?', r: 'NTU (Nephelometric Turbidity Unit). Norme : < 1 NTU au robinet', expl: 'La turbidité mesure la diffusion de la lumière par les particules. Une eau trouble peut masquer des microorganismes et réduire l\'efficacité de la désinfection.' },
+                  { q: 'Que mesure la conductivité électrique d\'une eau ?', r: 'Sa minéralisation totale (ions dissous). Plus l\'eau est minéralisée, plus elle conduit le courant', expl: 'Eau de source peu minéralisée : ~100 µS/cm. Eau très minéralisée (Évian) : ~300 µS/cm. Eau de mer : ~50 000 µS/cm.' },
+                  { q: 'Valeur de la saturation en O₂ dissous à 20 °C ?', r: '9,1 mg/L (100 % de saturation)', expl: 'L\'O₂ dissous diminue quand la température augmente. À 30 °C, la saturation tombe à ~7,5 mg/L. En dessous de 2 mg/L, on parle d\'anoxie.' },
+                  { q: 'Quelle est la norme de température de l\'eau potable ?', r: '≤ 25 °C (valeur guide, pas paramètre de conformité strict)', expl: 'Au-delà de 25 °C, les bactéries se développent plus vite (notamment Legionella dans les réseaux d\'eau chaude).' },
+                  { q: 'Différence entre turbidité (NTU) et MES (mg/L) ?', r: 'Turbidité = mesure optique (diffusion lumière). MES = mesure gravimétrique (filtration + pesée)', expl: 'Les deux sont corrélées mais pas identiques. La turbidité est plus rapide sur le terrain ; les MES sont plus précises en laboratoire.' },
+                ],
+                schema: `<svg viewBox="0 0 280 158" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="158" rx="8" fill="#F0E6F8"/>
+  <text x="140" y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#7B2D8B">Paramètres physico-chimiques — Normes AEP</text>
+  <rect x="8" y="20" width="78" height="15" fill="#7B2D8B" rx="2"/><rect x="90" y="20" width="50" height="15" fill="#7B2D8B" rx="2"/><rect x="144" y="20" width="80" height="15" fill="#7B2D8B" rx="2"/><rect x="228" y="20" width="44" height="15" fill="#7B2D8B" rx="2"/>
+  <text x="47" y="31" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">Paramètre</text><text x="115" y="31" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">Unité</text><text x="184" y="31" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">Norme AEP</text><text x="250" y="31" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">Terrain</text>
+  <rect x="8" y="37" width="264" height="14" fill="#fff" opacity=".5" rx="2"/>
+  <text x="47" y="47" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#333">Température</text><text x="115" y="47" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#333">°C</text><text x="184" y="47" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#333">≤ 25 °C</text><text x="250" y="47" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">thermo.</text>
+  <rect x="8" y="53" width="264" height="14" rx="2"/>
+  <text x="47" y="63" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#7B2D8B" font-weight="bold">pH</text><text x="115" y="63" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#333">—</text><text x="184" y="63" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#7B2D8B" font-weight="bold">6,5 – 9,0</text><text x="250" y="63" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">pH-mètre</text>
+  <rect x="8" y="69" width="264" height="14" fill="#fff" opacity=".5" rx="2"/>
+  <text x="47" y="79" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#333">Conductivité</text><text x="115" y="79" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#333">µS/cm</text><text x="184" y="79" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#333">2 500 µS/cm max</text><text x="250" y="79" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">cond-mètre</text>
+  <rect x="8" y="85" width="264" height="14" rx="2"/>
+  <text x="47" y="95" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#7B2D8B" font-weight="bold">Turbidité</text><text x="115" y="95" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#333">NTU</text><text x="184" y="95" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#7B2D8B" font-weight="bold">&lt; 1 NTU</text><text x="250" y="95" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">turbidim.</text>
+  <rect x="8" y="101" width="264" height="14" fill="#fff" opacity=".5" rx="2"/>
+  <text x="47" y="111" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#333">O₂ dissous</text><text x="115" y="111" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#333">mg/L</text><text x="184" y="111" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#333">9,1 à 20 °C (sat.)</text><text x="250" y="111" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">oxymètre</text>
+  <rect x="8" y="117" width="264" height="14" rx="2"/>
+  <text x="47" y="127" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#333">Potentiel Eh</text><text x="115" y="127" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#333">mV</text><text x="184" y="127" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#333">+ = oxydant | − = réduct.</text><text x="250" y="127" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">redox-mètre</text>
+  <text x="140" y="148" text-anchor="middle" font-family="Arial" font-size="9" fill="#7B2D8B" font-style="italic">Sonde multiparamètre : mesure simultanée terrain</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Mesures terrain : T° = 18 °C, pH = 8,2, turbidité = 1,8 NTU, O₂ = 6,5 mg/L, conductivité = 380 µS/cm. 1) Quels paramètres sont hors norme AEP ? 2) Quelle action immédiate proposer ?',
+                  solution: '<strong>T° 18 °C</strong> ≤ 25 °C ✓ | <strong>pH 8,2</strong> ∈ [6,5–9,0] ✓ | <strong>conductivité 380 µS/cm</strong> &lt; 2 500 ✓ | <strong>O₂ 6,5 mg/L</strong> : indicatif, pas de norme AEP stricte ✓<br><strong>🔴 Turbidité 1,8 NTU &gt; 1 NTU → NON CONFORME</strong><br><strong>Action :</strong> vérifier l\'intégrité des filtres, contrôle microbiologique immédiat, restriction d\'usage possible, information des abonnés si confirmation à J+1.',
+                },
+              },
+              {
+                id: 'chi-2',
+                titre: 'Dureté, TAC, TAP et équilibre calco-carbonique',
+                fiche: {
+                  intro: 'La dureté et l\'alcalinité définissent l\'agressivité ou l\'incrustabilité d\'une eau vis-à-vis des canalisations. L\'indice de Langelier permet d\'évaluer cet équilibre.',
+                  points: [
+                    '💎 Dureté totale TH (Titre Hydrotimétrique) : [Ca²⁺] + [Mg²⁺] exprimés en °f (degrés français)',
+                    '   1 °f = 10 mg/L de CaCO₃ = 0,1 mmol/L',
+                    '   Eau douce < 15 °f | Eau modérément dure 15–30 °f | Eau dure > 30 °f | Eau très dure > 40 °f',
+                    '🔬 TAC (Titre Alcalimétrique Complet) : mesure les bicarbonates HCO₃⁻, carbonates CO₃²⁻ et hydroxydes OH⁻ — exprimé en °f',
+                    '   TAC = principal tampon de l\'eau → résiste aux variations de pH',
+                    '🧪 TAP (Titre Alcalimétrique simple) : mesure uniquement CO₃²⁻ et OH⁻. Si TAP = 0 → pas de carbonates ni d\'hydroxyles libres',
+                    '⚖️ Indice de Langelier IL = pH_mesuré – pH_s (pH de saturation en CaCO₃)',
+                    '   IL > 0 → eau incrustante (dépôt calcaire) | IL < 0 → eau agressive (corrosion) | IL ≈ 0 → eau équilibrée',
+                    '🔧 Traitements : décarbonatation (eau trop dure), reminéralisation au CO₂/calcaire (eau trop douce/agressive)',
+                  ],
+                  formules: [
+                    'TH (°f) = (Ca²⁺ en mg/L / 4,01) + (Mg²⁺ en mg/L / 2,43)',
+                    'IL = pH_réel – pH_s  (pH_s calculé en fonction de TH, TAC, T°, conductivité)',
+                    '1 °f = 10 mg/L CaCO₃ = 0,1 mmol/L',
+                  ],
+                  retenir: 'TH > 30 °f = eau dure (entartrage). IL < 0 = eau agressive (corrosion canalisations). TAC = pouvoir tampon de l\'eau.',
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce que la dureté totale TH d\'une eau ?', r: 'Somme des ions Ca²⁺ et Mg²⁺ exprimée en degrés français (°f). 1 °f = 10 mg/L CaCO₃', expl: 'L\'eau dure provoque le calcaire dans les canalisations et les appareils électroménagers. L\'eau trop douce est agressive pour les métaux.' },
+                  { q: 'Seuils de classification de la dureté de l\'eau', r: '< 15 °f : douce | 15–30 °f : moyennement dure | > 30 °f : dure | > 40 °f : très dure', expl: 'À titre indicatif : Paris ≈ 28 °f (dure), eau de pluie < 5 °f (très douce), certaines eaux du Massif Central < 10 °f.' },
+                  { q: 'Que mesure le TAC ?', r: 'Le Titre Alcalimétrique Complet : bicarbonates HCO₃⁻ + carbonates CO₃²⁻ + hydroxydes OH⁻ (en °f)', expl: 'Le TAC représente le pouvoir tampon de l\'eau. Un TAC élevé stabilise le pH face aux apports acides ou alcalins.' },
+                  { q: 'Qu\'indique l\'indice de Langelier ?', r: 'IL = pH_réel – pH_s. IL > 0 : eau incrustante | IL < 0 : eau agressive | IL = 0 : eau équilibrée', expl: 'En réseau AEP, on vise IL légèrement positif (0 à +0,5) pour former un dépôt protecteur fin sans entartrage excessif.' },
+                  { q: 'Différence entre TAC et TAP ?', r: 'TAP mesure CO₃²⁻ + OH⁻ uniquement. TAC = TAP + HCO₃⁻. En général TAP ≈ 0 dans les eaux naturelles', expl: 'Si TAP > 0, l\'eau contient des carbonates libres ou des hydroxydes : milieu très alcalin ou eau traitée à la chaux.' },
+                  { q: 'Comment traiter une eau trop douce et agressive ?', r: 'Reminéralisation : injection de CO₂ + passage sur lit de calcaire (carbonate de calcium), ou ajout de chaux', expl: 'Une eau trop douce (IL < -1) corrode les canalisations métalliques et dissout le plomb des anciennes conduites.' },
+                ],
+                schema: `<svg viewBox="0 0 280 155" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="155" rx="8" fill="#F0E6F8"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#7B2D8B">Dureté TH et Indice de Langelier</text>
+  <text x="70" y="26" text-anchor="middle" font-family="Arial" font-size="9" fill="#7B2D8B" font-weight="bold">TH (dureté °f)</text>
+  <rect x="12" y="30" width="116" height="14" rx="7" fill="#E0F0FF" stroke="#7B2D8B" stroke-width="1"/>
+  <rect x="12" y="30" width="30" height="14" rx="7" fill="#3A9FFF" opacity=".5"/>
+  <rect x="42" y="30" width="46" height="14" fill="#3A9FFF" opacity=".3"/>
+  <rect x="88" y="30" width="40" height="14" rx="0" fill="#3A9FFF" opacity=".6"/>
+  <text x="27" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">douce</text>
+  <text x="65" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">mod. dure</text>
+  <text x="108" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">dure</text>
+  <text x="12" y="52" font-family="Arial" font-size="7.5" fill="#555">0</text><text x="39" y="52" font-family="Arial" font-size="7.5" fill="#555">15</text><text x="84" y="52" font-family="Arial" font-size="7.5" fill="#555">30</text><text x="120" y="52" font-family="Arial" font-size="7.5" fill="#555">°f</text>
+  <text x="70" y="66" text-anchor="middle" font-family="Arial" font-size="8" fill="#555" font-style="italic">TH = Ca²⁺/4,01 + Mg²⁺/2,43</text>
+  <text x="200" y="26" text-anchor="middle" font-family="Arial" font-size="9" fill="#7B2D8B" font-weight="bold">Indice Langelier IL</text>
+  <rect x="148" y="30" width="124" height="14" rx="7" fill="#E0F0FF" stroke="#7B2D8B" stroke-width="1"/>
+  <rect x="148" y="30" width="40" height="14" rx="7" fill="#C05A10" opacity=".4"/>
+  <rect x="196" y="30" width="12" height="14" fill="#166038" opacity=".5"/>
+  <rect x="208" y="30" width="64" height="14" rx="0" fill="#7B2D8B" opacity=".35"/>
+  <text x="168" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">agressif</text>
+  <text x="202" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#166038">≈0</text>
+  <text x="240" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">incrustant</text>
+  <text x="148" y="52" font-family="Arial" font-size="7.5" fill="#555">−2</text><text x="186" y="52" font-family="Arial" font-size="7.5" fill="#555">−0,5</text><text x="208" y="52" font-family="Arial" font-size="7.5" fill="#555">0</text><text x="268" y="52" font-family="Arial" font-size="7.5" fill="#555">+2</text>
+  <text x="200" y="66" text-anchor="middle" font-family="Arial" font-size="8" fill="#555" font-style="italic">IL = pH_réel − pH_s</text>
+  <line x1="8" y1="72" x2="272" y2="72" stroke="#7B2D8B" stroke-width="0.5" stroke-dasharray="4,2"/>
+  <text x="140" y="84" text-anchor="middle" font-family="Arial" font-size="9" fill="#7B2D8B" font-weight="bold">Tableau de rappel</text>
+  <rect x="8" y="88" width="70" height="14" fill="#C05A10" opacity=".2" rx="2"/><text x="43" y="98" text-anchor="middle" font-family="Arial" font-size="8" fill="#C05A10">TH &lt; 15 °f : douce</text>
+  <rect x="82" y="88" width="78" height="14" fill="#3A9FFF" opacity=".2" rx="2"/><text x="121" y="98" text-anchor="middle" font-family="Arial" font-size="8" fill="#1550A0">15–30 °f : mod. dure</text>
+  <rect x="164" y="88" width="108" height="14" fill="#7B2D8B" opacity=".2" rx="2"/><text x="218" y="98" text-anchor="middle" font-family="Arial" font-size="8" fill="#7B2D8B">TH &gt; 30 °f : dure</text>
+  <rect x="8" y="104" width="264" height="14" fill="#D0F0E0" rx="2"/><text x="140" y="114" text-anchor="middle" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">IL ≈ 0 : eau équilibrée ✓ (objectif AEP)</text>
+  <text x="140" y="132" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#555">TAC = HCO₃⁻ + CO₃²⁻ + OH⁻ (°f) = pouvoir tampon</text>
+  <text x="140" y="145" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">TAP = CO₃²⁻ + OH⁻ uniquement (souvent ≈ 0 en eau naturelle)</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Analyse : Ca²⁺ = 80 mg/L, Mg²⁺ = 12 mg/L, pH_réel = 7,5, pH_s = 7,8. 1) Calculer le TH en °f. 2) Classer la dureté. 3) Calculer IL et interpréter. (Ca²⁺ ÷ 4,01 | Mg²⁺ ÷ 2,43)',
+                  solution: '<strong>1) TH = 80/4,01 + 12/2,43</strong> = 19,95 + 4,94 = <strong>24,9 °f ≈ 25 °f</strong><br><strong>2) 15–30 °f → eau modérément dure</strong><br><strong>3) IL = pH_réel − pH_s</strong> = 7,5 − 7,8 = <strong>−0,3</strong><br>IL négatif → eau légèrement <strong>agressive</strong> → risque de corrosion des canalisations métalliques. Action : légère reminéralisation ou ajout de CO₂/calcaire.',
+                },
+              },
+              {
+                id: 'chi-3',
+                titre: 'Micropolluants — nitrates, pesticides, PFAS, métaux lourds',
+                fiche: {
+                  intro: 'Les micropolluants sont des substances présentes à l\'état de traces (µg/L, ng/L) mais potentiellement toxiques. Leur surveillance est encadrée par des normes strictes en constante évolution.',
+                  points: [
+                    '🌱 Nitrates NO₃⁻ : norme AEP 50 mg/L. Origine : agriculture (engrais, lisier). Risque : méthémoglobinémie chez les nourrissons',
+                    '⚠️ Nitrites NO₂⁻ : norme AEP 0,5 mg/L. Très toxiques, intermédiaire nitrification. Indicateur de contamination bactériologique',
+                    '🌿 Pesticides : norme 0,1 µg/L par substance individuelle, 0,5 µg/L pour le total. Origine : agriculture, jardins, voies ferrées',
+                    '🧪 PFAS (substances per- et polyfluoroalkylées) : norme 2026 (Directive 2020/2184) — 0,1 µg/L par substance PFAS spécifique, 0,5 µg/L somme des 20 PFAS. Très persistants ("polluants éternels")',
+                    '⚗️ Métaux lourds — normes AEP : Pb < 10 µg/L | As < 10 µg/L | Hg < 1 µg/L | Cd < 5 µg/L | Cr < 50 µg/L',
+                    '🛢️ HAP (hydrocarbures aromatiques polycycliques) : norme 0,1 µg/L (somme 6 HAP OMS). Origine : goudrons, ruissellement routier',
+                    '💊 Résidus médicamenteux : pas encore de norme AEP en France mais surveillance accrue (antibiotiques, hormones)',
+                    '📊 Origine des pollutions diffuses : 70 % agricoles (N, P, pesticides), 30 % urbaines et industrielles',
+                  ],
+                  formules: [
+                    'Conversion : NO₃⁻ (mg N/L) × 4,43 = NO₃⁻ (mg/L) — attention aux deux expressions',
+                  ],
+                  retenir: 'Nitrates < 50 mg/L, pesticides < 0,1 µg/L/substance, PFAS < 0,1 µg/L (norme 2026), Pb < 10 µg/L.',
+                },
+                flashcards: [
+                  { q: 'Norme AEP pour les nitrates ?', r: '50 mg/L (valeur réglementaire). Valeur guide OMS : 50 mg/L également', expl: 'Au-delà de 50 mg/L, l\'eau ne peut plus être distribuée. Entre 25 et 50 mg/L : mesures de gestion. Risque principal : méthémoglobinémie chez les nourrissons < 3 mois.' },
+                  { q: 'Norme AEP pour les pesticides ?', r: '0,1 µg/L par substance individuelle — 0,5 µg/L pour la somme de tous les pesticides', expl: 'Cette norme est "de précaution" : elle ne correspond pas à une dose toxique connue mais à une limite analytique. Elle est l\'une des plus strictes au monde.' },
+                  { q: 'Que sont les PFAS et pourquoi sont-ils problématiques ?', r: 'Substances per- et polyfluoroalkylées : très stables, ne se dégradent pas dans l\'environnement ("polluants éternels"). Suspicion de cancérogénicité', expl: 'Présents dans les mousses anti-incendie AFFF, revêtements antiadhésifs, textiles imperméables. Nouvelle norme 2026 : 0,1 µg/L par PFAS, 0,5 µg/L en somme.' },
+                  { q: 'Norme AEP pour le plomb (Pb) ?', r: '10 µg/L au robinet du consommateur (Directive 2020/2184, applicable en 2036)', expl: 'Ancienne norme : 25 µg/L. Le plomb provient des anciennes canalisations intérieures (branchements en plomb). Neurotoxique pour les enfants.' },
+                  { q: 'Quelle est la principale source de nitrates dans les eaux souterraines ?', r: 'L\'agriculture : épandage d\'engrais azotés et de lisier. Les nitrates lessivés atteignent les nappes', expl: 'Les zones de captage en contexte agricole intensif (Bretagne, plaines céréalières) sont les plus touchées. Les Zones de Protection de Captage (ZPC) visent à réduire ces apports.' },
+                  { q: 'Pourquoi surveiller les nitrites NO₂⁻ en plus des nitrates ?', r: 'Les nitrites sont des intermédiaires de la nitrification, très toxiques (norme 0,5 mg/L). Leur présence peut indiquer une contamination bactériologique', expl: 'En réseau de distribution, des nitrites peuvent se former par dénitrification dans les zones de stagnation. C\'est un signal d\'alerte qualité.' },
+                ],
+                schema: `<svg viewBox="0 0 280 152" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="152" rx="8" fill="#F0E6F8"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#7B2D8B">Micropolluants — Normes AEP (Directive 2020/2184)</text>
+  <rect x="8" y="18" width="90" height="14" fill="#7B2D8B" rx="2"/><rect x="102" y="18" width="70" height="14" fill="#7B2D8B" rx="2"/><rect x="176" y="18" width="96" height="14" fill="#7B2D8B" rx="2"/>
+  <text x="53" y="28" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">Substance</text><text x="137" y="28" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">Norme AEP</text><text x="224" y="28" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">Source principale</text>
+  <rect x="8" y="34" width="264" height="14" fill="#fff" opacity=".5" rx="2"/>
+  <text x="53" y="44" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#333">Nitrates NO₃⁻</text><text x="137" y="44" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#A82018" font-weight="bold">50 mg/L</text><text x="224" y="44" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">Engrais agricoles</text>
+  <rect x="8" y="50" width="264" height="14" rx="2"/>
+  <text x="53" y="60" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#333">Nitrites NO₂⁻</text><text x="137" y="60" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#A82018" font-weight="bold">0,5 mg/L</text><text x="224" y="60" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">Contamination bact.</text>
+  <rect x="8" y="66" width="264" height="14" fill="#fff" opacity=".5" rx="2"/>
+  <text x="53" y="76" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#333">Pesticides (indiv.)</text><text x="137" y="76" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#A82018" font-weight="bold">0,1 µg/L</text><text x="224" y="76" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">Agriculture, jardins</text>
+  <rect x="8" y="82" width="264" height="14" rx="2"/>
+  <text x="53" y="92" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#333">Pesticides (total)</text><text x="137" y="92" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#A82018" font-weight="bold">0,5 µg/L</text><text x="224" y="92" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">Agriculture, jardins</text>
+  <rect x="8" y="98" width="264" height="14" fill="#fff" opacity=".5" rx="2"/>
+  <text x="53" y="108" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#7B2D8B" font-weight="bold">PFAS (indiv.) 2026</text><text x="137" y="108" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#A82018" font-weight="bold">0,1 µg/L</text><text x="224" y="108" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">Mousses AFFF, textiles</text>
+  <rect x="8" y="114" width="264" height="14" rx="2"/>
+  <text x="53" y="124" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#333">Plomb Pb</text><text x="137" y="124" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#A82018" font-weight="bold">10 µg/L</text><text x="224" y="124" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">Vieilles canalisations</text>
+  <text x="140" y="143" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#7B2D8B" font-style="italic">⚠ PFAS = polluants éternels — Arsenic As &lt; 10 µg/L</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Eau de captage : NO₃⁻ = 55 mg/L, lindane (pesticide) = 0,15 µg/L, Pb = 12 µg/L, turbidité = 0,4 NTU. 1) Quels paramètres sont non conformes ? 2) Proposer un traitement pour chacun.',
+                  solution: '<strong>NO₃⁻ = 55 &gt; 50 mg/L ✗</strong> → mélange avec ressource peu chargée ou nanofiltration<br><strong>Lindane = 0,15 &gt; 0,1 µg/L ✗</strong> → adsorption sur charbon actif en grain (CAG) ou nanofiltration<br><strong>Pb = 12 &gt; 10 µg/L ✗</strong> → remplacement des branchements en plomb + inhibiteurs de corrosion (orthophosphates)<br><strong>Turbidité 0,4 NTU &lt; 1 ✓</strong><br>→ 3 non-conformités nécessitant des mesures correctives et information des abonnés.',
+                },
+              },
+              {
+                id: 'chi-4',
+                titre: 'Méthodes d\'analyse et interprétation des résultats',
+                fiche: {
+                  intro: 'L\'analyse de l\'eau combine des mesures terrain (in situ) et des analyses de laboratoire. La rigueur du prélèvement conditionne la qualité des résultats.',
+                  points: [
+                    '🏕️ Mesures in situ (terrain) : T°, pH, conductivité, O₂ dissous, turbidité, redox → sonde multiparamètre',
+                    '🧪 Analyses de laboratoire accréditées COFRAC (norme NF EN ISO 17025)',
+                    '🔬 Principales méthodes analytiques :',
+                    '   • Ions majeurs (NO₃⁻, SO₄²⁻, Cl⁻, Ca²⁺…) : chromatographie ionique',
+                    '   • Métaux : spectrométrie d\'absorption atomique (SAA) ou ICP-MS (ultra-traces)',
+                    '   • Pesticides et PFAS : chromatographie liquide couplée à la spectrométrie de masse (LC-MS/MS)',
+                    '   • Microbiologie : filtration sur membrane + milieu de culture (E. coli, entérocoques)',
+                    '📏 Unités : mg/L (ppm) → µg/L (ppb) → ng/L (ppt) → les PFAS se mesurent au ng/L',
+                    '📋 Surveillance réglementaire : fréquence fixée par le préfet selon le débit distribué (décret du 11/01/2007)',
+                    '   Distribution > 1 000 m³/j : analyses plus fréquentes (P1 à P3 selon le paramètre)',
+                    '🚨 Interprétation : conformité / non-conformité → restriction d\'usage, traitement, information consommateurs',
+                  ],
+                  formules: [
+                    '1 mg/L = 1 ppm (partie par million) = 1 g/m³',
+                    '1 µg/L = 1 ppb (partie par milliard) = 0,001 mg/L',
+                    '1 ng/L = 1 ppt (partie par trillion) = 0,000001 mg/L',
+                  ],
+                  retenir: 'Mesures terrain = multiparamètre. Labo accrédité COFRAC pour la conformité AEP. µg/L = ppb, ng/L = ppt.',
+                },
+                flashcards: [
+                  { q: 'Quelle accréditation doit avoir un laboratoire pour des analyses réglementaires AEP ?', r: 'Accréditation COFRAC (Comité Français d\'Accréditation) selon la norme ISO 17025', expl: 'Sans accréditation COFRAC, les résultats ne peuvent pas être utilisés pour statuer sur la conformité réglementaire d\'une eau distribuée.' },
+                  { q: 'Quelle méthode utilise-t-on pour analyser les métaux à l\'état de traces ?', r: 'Spectrométrie d\'absorption atomique (SAA) ou ICP-MS (spectrométrie de masse à plasma induit)', expl: 'L\'ICP-MS permet de mesurer des concentrations en ng/L (ppt), nécessaire pour les PFAS et certains métaux à l\'état d\'ultra-traces.' },
+                  { q: 'Convertir 50 µg/L en mg/L', r: '50 µg/L = 0,05 mg/L', expl: '1 mg/L = 1 000 µg/L. Pour convertir µg/L → mg/L : diviser par 1 000. La norme nitrates (50 mg/L) = 50 000 µg/L.' },
+                  { q: 'Qu\'est-ce qu\'une sonde multiparamètre ?', r: 'Instrument de terrain mesurant simultanément T°, pH, conductivité, O₂ dissous, turbidité et parfois redox', expl: 'Elle permet une mesure in situ rapide sans prélèvement. Indispensable pour le suivi de chantier, le contrôle de rejets ou l\'exploration d\'aquifères.' },
+                  { q: 'Comment est déterminée la fréquence de surveillance d\'une eau distribuée ?', r: 'Par le préfet, selon le volume distribué (m³/j) et la qualité de la ressource. Plus le débit est grand, plus la surveillance est fréquente', expl: 'Référence : décret 2007-49. Un réseau distribuant > 1 000 m³/j a des analyses P1 (routine), P2 (complètes) et P3 (renforcées).' },
+                  { q: 'Quelle méthode pour analyser les pesticides dans l\'eau ?', r: 'Chromatographie liquide couplée à la spectrométrie de masse en tandem (LC-MS/MS)', expl: 'Cette méthode permet de détecter des centaines de pesticides en un seul passage à des concentrations < 0,01 µg/L, bien en dessous de la norme.' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#F0E6F8"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#7B2D8B">Workflow — Analyse de l'eau</text>
+  <rect x="8" y="22" width="48" height="38" rx="6" fill="#7B2D8B" opacity=".15" stroke="#7B2D8B" stroke-width="1.5"/>
+  <text x="32" y="36" text-anchor="middle" font-family="Arial" font-size="18">🪣</text>
+  <text x="32" y="52" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#7B2D8B" font-weight="bold">Prélèv.</text>
+  <polygon points="58,41 66,41 62,46" fill="#7B2D8B"/>
+  <rect x="68" y="22" width="48" height="38" rx="6" fill="#7B2D8B" opacity=".15" stroke="#7B2D8B" stroke-width="1.5"/>
+  <text x="92" y="36" text-anchor="middle" font-family="Arial" font-size="18">📡</text>
+  <text x="92" y="52" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#7B2D8B" font-weight="bold">In situ</text>
+  <polygon points="118,41 126,41 122,46" fill="#7B2D8B"/>
+  <rect x="128" y="22" width="48" height="38" rx="6" fill="#7B2D8B" opacity=".15" stroke="#7B2D8B" stroke-width="1.5"/>
+  <text x="152" y="36" text-anchor="middle" font-family="Arial" font-size="18">🔬</text>
+  <text x="152" y="52" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#7B2D8B" font-weight="bold">Labo COFRAC</text>
+  <polygon points="178,41 186,41 182,46" fill="#7B2D8B"/>
+  <rect x="188" y="22" width="48" height="38" rx="6" fill="#7B2D8B" opacity=".15" stroke="#7B2D8B" stroke-width="1.5"/>
+  <text x="212" y="36" text-anchor="middle" font-family="Arial" font-size="18">📊</text>
+  <text x="212" y="52" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#7B2D8B" font-weight="bold">Interprét.</text>
+  <polygon points="238,41 246,41 242,46" fill="#7B2D8B"/>
+  <rect x="248" y="22" width="24" height="38" rx="6" fill="#166038" opacity=".2" stroke="#166038" stroke-width="1.5"/>
+  <text x="260" y="36" text-anchor="middle" font-family="Arial" font-size="14">✅</text>
+  <text x="260" y="52" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#166038" font-weight="bold">ARS</text>
+  <text x="32" y="70" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Norm. ISO</text>
+  <text x="92" y="70" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">T°, pH, O₂…</text>
+  <text x="152" y="70" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">ISO 17025</text>
+  <text x="212" y="70" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Conformité</text>
+  <line x1="8" y1="78" x2="272" y2="78" stroke="#7B2D8B" stroke-width="0.5" stroke-dasharray="4,2"/>
+  <text x="140" y="90" text-anchor="middle" font-family="Arial" font-size="9" fill="#7B2D8B" font-weight="bold">Méthodes analytiques clés</text>
+  <rect x="8" y="94" width="124" height="12" fill="#fff" opacity=".6" rx="2"/>
+  <text x="70" y="103" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Ions : chromatographie ionique</text>
+  <rect x="136" y="94" width="136" height="12" fill="#fff" opacity=".6" rx="2"/>
+  <text x="204" y="103" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Métaux : ICP-MS (ng/L = ppt)</text>
+  <rect x="8" y="108" width="124" height="12" fill="#fff" opacity=".4" rx="2"/>
+  <text x="70" y="117" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Pesticides/PFAS : LC-MS/MS</text>
+  <rect x="136" y="108" width="136" height="12" fill="#fff" opacity=".4" rx="2"/>
+  <text x="204" y="117" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Micro : filtre membrane + culture</text>
+  <rect x="8" y="127" width="264" height="14" fill="#D0F0E0" rx="4"/>
+  <text x="140" y="137" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#166038" font-weight="bold">1 mg/L = 1 ppm | 1 µg/L = 1 ppb | 1 ng/L = 1 ppt</text>
+</svg>`,
+                exercice: {
+                  enonce: '1) Convertir 0,08 mg/L en µg/L et en ng/L. 2) Lors d\'une analyse, la conductivité mesurée est 48 000 µS/cm et l\'O₂ dissous = 0 mg/L. Que suggèrent ces résultats ? Quelle erreur de prélèvement suspecter ?',
+                  solution: '<strong>1) 0,08 mg/L × 1 000 = 80 µg/L × 1 000 = 80 000 ng/L</strong><br><strong>2) Conductivité 48 000 µS/cm</strong> → valeur typique d\'eau de mer (eau douce normale = 100–500 µS/cm) → contamination saline ou erreur de calibration<br><strong>O₂ = 0 mg/L</strong> → milieu <strong>anoxique</strong> (fond de nappe, zone anaérobie, sédiment)<br>Erreurs à suspecter : prélèvement mal purgé (eau stagnante dans le tube), contamination du flacon, mauvaise conservation.',
+                },
+              },
+            ],
+          },
+
+          /* ── Biologie et microbiologie ── */
+          {
+            id: 'biologie',
+            name: 'Biologie et microbiologie de l\'eau',
+            ico: '🦠',
+            color: '#166038',
+            colorl: '#E0F4EC',
+            chapitres: [
+              {
+                id: 'bio-1',
+                titre: 'Écosystèmes aquatiques et chaînes trophiques',
+                fiche: {
+                  intro: 'Un écosystème aquatique est un ensemble d\'organismes vivants (biocénose) en interaction avec leur milieu physico-chimique (biotope). Sa santé est révélatrice de la qualité de l\'eau.',
+                  points: [
+                    '🌿 Producteurs primaires : algues microscopiques (phytoplancton), macroalgues, macrophytes — fixent le CO₂ par photosynthèse',
+                    '🦐 Consommateurs primaires : zooplancton, invertébrés benthiques (gammares, éphémères…)',
+                    '🐟 Consommateurs secondaires et tertiaires : poissons, oiseaux, mammifères',
+                    '🍂 Décomposeurs : bactéries et champignons — recyclent la matière organique en nutriments minéraux',
+                    '☀️ Facteurs limitants : lumière, T°, O₂ dissous, azote (N), phosphore (P)',
+                    '🔴 Eutrophisation : enrichissement excessif en N et P → prolifération algale → mort des algues → décomposition → hypoxie → mort de la faune',
+                    '🌊 Notion de continuum fluvial : source (eaux froides, rapides, O₂ élevé) → aval (eaux chaudes, lentes, chargées)',
+                    '📊 IBE (Indice Biotique Étendu) : évalue la qualité biologique d\'un cours d\'eau sur 20',
+                  ],
+                  formules: [
+                    'DBO₅ (mg O₂/L) : demande biochimique en O₂ sur 5 jours à 20 °C — mesure la biodégradabilité',
+                    'DCO (mg O₂/L) : demande chimique en O₂ — mesure la totalité de la pollution organique oxydable',
+                  ],
+                  retenir: 'Eutrophisation = trop de N et P → algues → hypoxie. DBO₅ mesure la pollution biodégradable, DCO la pollution totale.',
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce que l\'eutrophisation ?', r: 'Enrichissement excessif d\'un milieu aquatique en nutriments (N, P) → prolifération d\'algues → déficit en O₂ → mort de la faune', expl: 'L\'eutrophisation touche lacs, étangs et estuaires. Elle est principalement due aux rejets agricoles (nitrates, phosphates) et aux STEP.' },
+                  { q: 'Rôle des décomposeurs dans un écosystème aquatique ?', r: 'Ils décomposent la matière organique morte en nutriments minéraux (N, P, C), bouclant le cycle de la matière', expl: 'Sans décomposeurs, les nutriments seraient bloqués dans la matière morte. Ils sont essentiels à la fertilité du milieu et à l\'auto-épuration.' },
+                  { q: 'Quelle est la différence entre DBO₅ et DCO ?', r: 'DBO₅ = pollution biodégradable (oxydée par les bactéries en 5 j). DCO = pollution totale oxydable (chimique)', expl: 'Le rapport DCO/DBO₅ indique la biodégradabilité : si < 2, l\'eau est facilement traitable biologiquement. Si > 3, présence de substances réfractaires.' },
+                  { q: 'Qu\'est-ce que le phytoplancton ?', r: 'Algues microscopiques en suspension dans l\'eau, productrices primaires grâce à la photosynthèse', expl: 'En excès (bloom algal), elles consomment tout l\'O₂ lors de leur décomposition et peuvent produire des toxines (cyanobactéries).' },
+                  { q: 'Quels sont les deux facteurs nutritifs responsables de l\'eutrophisation ?', r: 'L\'azote (N) et le phosphore (P), apportés par les engrais agricoles et les rejets d\'eaux usées', expl: 'Le phosphore est souvent le facteur limitant en eau douce. Le contrôle du P dans les STEP (déphosphatation) est une priorité réglementaire.' },
+                  { q: 'Qu\'est-ce que le continuum fluvial ?', r: 'Gradient longitudinal d\'une rivière : de la source (froide, rapide, O₂ élevé) vers l\'aval (chaude, lente, plus chargée)', expl: 'La structure des communautés biologiques change selon ce continuum. Un déséquilibre (barrage, rejet) interrompt ce gradient naturel.' },
+                ],
+                schema: `<svg viewBox="0 0 280 145" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="145" rx="8" fill="#E0F4EC"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#166038">Chaîne trophique aquatique &amp; Eutrophisation</text>
+  <text x="30" y="30" text-anchor="middle" font-family="Arial" font-size="18">☀️</text>
+  <text x="30" y="42" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#166038" font-weight="bold">Lumière</text>
+  <polygon points="44,30 52,30 48,35" fill="#166038"/>
+  <text x="65" y="30" text-anchor="middle" font-family="Arial" font-size="18">🌿</text>
+  <text x="65" y="42" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#166038" font-weight="bold">Phytopl.</text>
+  <polygon points="80,30 88,30 84,35" fill="#166038"/>
+  <text x="105" y="30" text-anchor="middle" font-family="Arial" font-size="18">🦐</text>
+  <text x="105" y="42" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#166038" font-weight="bold">Zoopl.</text>
+  <polygon points="120,30 128,30 124,35" fill="#166038"/>
+  <text x="145" y="30" text-anchor="middle" font-family="Arial" font-size="18">🐟</text>
+  <text x="145" y="42" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#166038" font-weight="bold">Poissons</text>
+  <polygon points="160,30 168,30 164,35" fill="#166038"/>
+  <text x="185" y="30" text-anchor="middle" font-family="Arial" font-size="18">🍂</text>
+  <text x="185" y="42" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#166038" font-weight="bold">Décomp.</text>
+  <line x1="198" y1="30" x2="210" y2="45" stroke="#166038" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="220" y="30" text-anchor="middle" font-family="Arial" font-size="11">🔄</text>
+  <text x="220" y="42" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#166038" font-weight="bold">N, P, C</text>
+  <line x1="8" y1="52" x2="272" y2="52" stroke="#166038" stroke-width="0.5" stroke-dasharray="4,2"/>
+  <text x="140" y="63" text-anchor="middle" font-family="Arial" font-size="10" fill="#A82018" font-weight="bold">⚠ Eutrophisation = excès N + P</text>
+  <rect x="8" y="67" width="264" height="52" rx="6" fill="#A82018" opacity=".08" stroke="#A82018" stroke-width="1"/>
+  <text x="22" y="79" font-family="Arial" font-size="8" fill="#A82018">① Engrais agricoles → ↑ N, ↑ P dans le milieu</text>
+  <text x="22" y="91" font-family="Arial" font-size="8" fill="#A82018">② Prolifération algale (bloom) → turbidité élevée</text>
+  <text x="22" y="103" font-family="Arial" font-size="8" fill="#A82018">③ Mort des algues → décomposition → ↓ O₂</text>
+  <text x="22" y="115" font-family="Arial" font-size="8" fill="#A82018">④ Hypoxie → mort des poissons et invertébrés</text>
+  <rect x="8" y="124" width="264" height="14" fill="#D0F0E0" rx="4"/>
+  <text x="140" y="134" text-anchor="middle" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">DBO₅ = pollution biodégradable | DCO = pollution totale</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Un lac reçoit des rejets agricoles. Analyse : DBO₅ = 15 mg O₂/L, DCO = 60 mg O₂/L, O₂ dissous = 3 mg/L. 1) Calculer le rapport DCO/DBO₅ et interpréter la biodégradabilité. 2) L\'O₂ à 3 mg/L est-il préoccupant pour la faune ?',
+                  solution: '<strong>1) DCO/DBO₅ = 60/15 = 4</strong> → rapport > 3 : présence de matières réfractaires (non biodégradables) → traitement biologique seul insuffisant, traitement complémentaire nécessaire (CAG, ozone)<br><strong>2) O₂ = 3 mg/L</strong> : valeur en dessous du seuil de 5 mg/L requis pour la plupart des poissons → <strong>stress hypoxique</strong>. En dessous de 2 mg/L → mort des espèces sensibles (truites, salmonidés).',
+                },
+              },
+              {
+                id: 'bio-2',
+                titre: 'Microbiologie de l\'eau — bactéries, virus, protozoaires',
+                fiche: {
+                  intro: 'Les agents pathogènes microbiologiques sont la principale cause de maladies d\'origine hydrique. Leur détection et leur élimination sont au cœur du traitement de l\'eau potable.',
+                  points: [
+                    '🦠 Bactéries pathogènes : Escherichia coli (gastro-entérites), Salmonella (salmonellose), Legionella (légionellose, voie aérosol), Campylobacter (le + fréquent en France)',
+                    '🔬 Virus entériques : norovirus, hépatite A, rotavirus — plus petits que les bactéries, plus résistants au chlore et aux UV',
+                    '🟤 Protozoaires : Cryptosporidium parvum et Giardia lamblia — résistants au chlore ! Seuls filtration et UV efficaces',
+                    '💩 Voie de contamination principale : féco-orale (ingestion d\'eau ou aliments contaminés par des matières fécales)',
+                    '🌬️ Legionella : exception — transmission par inhalation d\'aérosols (douches, tours aéroréfrigérantes, jacuzzis)',
+                    '📊 Persistance dans l\'eau : Cryptosporidium > 1 an dans l\'eau froide | virus > 100 jours | bactéries végétatives : quelques semaines',
+                    '🔢 Dose infectieuse : très faible pour Cryptosporidium (< 10 oocystes) et norovirus (< 18 particules)',
+                  ],
+                  formules: [
+                    'Log reduction = log₁₀(C_entrée / C_sortie) — mesure l\'efficacité d\'une barrière de traitement',
+                    'Objectif OMS : 6 log de réduction pour les virus, 4 log pour Cryptosporidium',
+                  ],
+                  retenir: 'Cryptosporidium et Giardia résistent au chlore → barrière physique (filtration, UV) obligatoire. Legionella = aérosol, pas ingestion.',
+                },
+                flashcards: [
+                  { q: 'Pourquoi Cryptosporidium est-il particulièrement dangereux pour l\'eau potable ?', r: 'Il résiste au chlore à doses usuelles, sa dose infectieuse est très faible (< 10 oocystes), et il persiste plus d\'un an dans l\'eau froide', expl: 'La seule protection efficace est la filtration (1 µm absolu) ou les UV. La contamination de Milwaukee en 1993 (400 000 cas) est la référence mondiale.' },
+                  { q: 'Quelle est la voie de contamination de Legionella pneumophila ?', r: 'Inhalation d\'aérosols contaminés (douches, TAR, spa). PAS par ingestion d\'eau potable', expl: 'Legionella prolifère entre 25 et 45 °C dans les réseaux d\'eau chaude. Prévention : maintien T° > 60 °C en production et > 50 °C partout.' },
+                  { q: 'Qu\'est-ce que la "réduction log" en traitement de l\'eau ?', r: 'Réduction log = log₁₀(Cin/Csortie). 1 log = réduction de 90 %, 3 log = 99,9 %, 6 log = 99,9999 %', expl: 'L\'OMS recommande 6 log de réduction pour les virus entériques. Une filière complète (coagulation + filtration + chloration) atteint 8–10 log.' },
+                  { q: 'Les virus sont-ils plus ou moins résistants au chlore que les bactéries ?', r: 'Plus résistants. Les bactéries végétatives sont détruites rapidement par le chlore, les virus nécessitent des doses plus élevées ou des temps de contact plus longs', expl: 'Norovirus : CT (concentration × temps) nécessaire ≈ 10 fois celui de E. coli. L\'ozone est plus efficace que le chlore contre les virus.' },
+                  { q: 'Quelle bactérie est la plus fréquemment impliquée dans les toxi-infections alimentaires et gastro-entérites d\'origine hydrique en France ?', r: 'Campylobacter jejuni (le plus fréquent), suivi de Salmonella et E. coli entérotoxinogène', expl: 'Campylobacter est très présent dans les élevages avicoles et porcins. Il peut contaminer les nappes phréatiques proches d\'élevages.' },
+                  { q: 'Pourquoi les protozoaires (Cryptosporidium, Giardia) sont-ils résistants au chlore ?', r: 'Ils forment des spores (oocystes/kystes) à paroi épaisse qui protègent le parasite contre les oxydants chimiques', expl: 'La CT nécessaire pour inactiver Cryptosporidium par le chlore serait toxique pour les consommateurs. Les UV (40 mJ/cm²) sont l\'alternative recommandée.' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#E0F4EC"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#166038">Micro-organismes pathogènes — Résistance au Cl₂</text>
+  <rect x="8" y="18" width="70" height="14" fill="#166038" rx="2"/><rect x="82" y="18" width="55" height="14" fill="#166038" rx="2"/><rect x="141" y="18" width="60" height="14" fill="#166038" rx="2"/><rect x="205" y="18" width="67" height="14" fill="#166038" rx="2"/>
+  <text x="43" y="28" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Organisme</text><text x="109" y="28" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Taille</text><text x="171" y="28" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Cl₂ résist.</text><text x="238" y="28" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Traitement</text>
+  <rect x="8" y="34" width="264" height="14" fill="#fff" opacity=".5" rx="2"/>
+  <text x="43" y="44" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Bactéries (E.coli)</text><text x="109" y="44" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">1–5 µm</text><text x="171" y="44" text-anchor="middle" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">Faible ✓</text><text x="238" y="44" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">Cl₂ usuel</text>
+  <rect x="8" y="50" width="264" height="14" rx="2"/>
+  <text x="43" y="60" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Virus entériques</text><text x="109" y="60" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">25–100 nm</text><text x="171" y="60" text-anchor="middle" font-family="Arial" font-size="8" fill="#886000" font-weight="bold">Modérée ⚠</text><text x="238" y="60" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">Cl₂ + ozone</text>
+  <rect x="8" y="66" width="264" height="14" fill="#fff" opacity=".5" rx="2"/>
+  <text x="43" y="76" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Giardia (kyste)</text><text x="109" y="76" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">8–14 µm</text><text x="171" y="76" text-anchor="middle" font-family="Arial" font-size="8" fill="#A82018" font-weight="bold">Haute ✗</text><text x="238" y="76" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">Filtr. + UV</text>
+  <rect x="8" y="82" width="264" height="14" rx="2"/>
+  <text x="43" y="92" text-anchor="middle" font-family="Arial" font-size="8" fill="#A82018" font-weight="bold">Cryptosporidium</text><text x="109" y="92" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">4–6 µm</text><text x="171" y="92" text-anchor="middle" font-family="Arial" font-size="8" fill="#A82018" font-weight="bold">Très haute ✗✗</text><text x="238" y="92" text-anchor="middle" font-family="Arial" font-size="8" fill="#A82018" font-weight="bold">UV 40 mJ/cm²</text>
+  <rect x="8" y="98" width="264" height="14" fill="#fff" opacity=".5" rx="2"/>
+  <text x="43" y="108" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Legionella</text><text x="109" y="108" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">2–20 µm</text><text x="171" y="108" text-anchor="middle" font-family="Arial" font-size="8" fill="#886000" font-weight="bold">Modérée ⚠</text><text x="238" y="108" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">T° &gt; 60 °C</text>
+  <text x="140" y="124" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#166038" font-weight="bold">Réduction log : 1 log = 90 % | 3 log = 99,9 % | 6 log = 99,9999 %</text>
+  <text x="140" y="136" text-anchor="middle" font-family="Arial" font-size="8" fill="#555" font-style="italic">Filière complète (coag.+filtr.+Cl₂) ≈ 8–10 log de réduction</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Une filière de traitement atteint 3 log de réduction pour Cryptosporidium (oocystes en entrée : 100/L). 1) Combien d\'oocystes restent en sortie ? 2) L\'OMS recommande 6 log pour les protozoaires. Quelle barrière complémentaire proposer ?',
+                  solution: '<strong>1) 3 log de réduction = 99,9 %</strong> d\'abattement<br>Sortie = 100 × (1 − 0,999) = 100 × 0,001 = <strong>0,1 oocyste/L</strong><br><strong>2) Il manque 3 log supplémentaires.</strong> Barrière recommandée : <strong>traitement UV à 40 mJ/cm²</strong> (donne 4 log sur Cryptosporidium) ou ultrafiltration membranaire (1 µm absolu). Les UV sont préconisés car le chlore est inefficace contre les oocystes.',
+                },
+              },
+              {
+                id: 'bio-3',
+                titre: 'Indicateurs de contamination fécale',
+                fiche: {
+                  intro: 'Plutôt que de rechercher tous les pathogènes (trop nombreux et coûteux), on utilise des indicateurs bactériologiques qui signalent une contamination fécale. Leur absence garantit (statistiquement) la sécurité microbiologique.',
+                  points: [
+                    '💩 Contamination fécale : présence de matières fécales humaines ou animales dans l\'eau → risque pathogènes',
+                    '🦠 Coliformes totaux : bactéries Gram⁻, 37 °C, indicateurs généraux de contamination (pas spécifiques fécaux)',
+                    '✅ E. coli (Escherichia coli) : indicateur spécifique de contamination fécale humaine/animale. Norme AEP : 0 UFC/100 mL',
+                    '🔵 Entérocoques intestinaux : plus résistants que E. coli → indicateurs de contamination ancienne ou traitée. Norme : 0 UFC/100 mL',
+                    '⚫ Spores de Clostridium sulfito-réducteurs (CSR) : très résistants → indicateurs d\'événements de contamination passés',
+                    '📊 Bactéries coliformes 22 °C et 37 °C : indicateurs de la qualité générale (biomasse, recontamination réseau)',
+                    '🔬 Méthodes de dénombrement : filtration sur membrane (ISO 9308-1) et NPP (Nombre le Plus Probable)',
+                    '🚨 Si E. coli détecté en distribution : enquête obligatoire + mesures correctives immédiates',
+                  ],
+                  formules: [
+                    'UFC = Unités Formant Colonies (méthode de dénombrement bactériologique)',
+                    'NPP = Nombre le Plus Probable (méthode statistique pour dénombrer des microorganismes)',
+                  ],
+                  retenir: '0 E. coli / 100 mL = exigence absolue eau potable. 0 entérocoques / 100 mL. E. coli = indicateur fécal de référence.',
+                },
+                flashcards: [
+                  { q: 'Quelle est la norme microbiologique fondamentale de l\'eau potable ?', r: '0 E. coli / 100 mL et 0 entérocoques / 100 mL (Directive 2020/2184)', expl: 'C\'est une valeur absolue : la présence d\'un seul E. coli déclenche une non-conformité et des mesures correctives obligatoires.' },
+                  { q: 'Pourquoi utilise-t-on des indicateurs plutôt que de chercher directement les pathogènes ?', r: 'Les pathogènes (virus, parasites) sont trop nombreux, difficiles à cultiver et coûteux à analyser. Les indicateurs sont rapides et peu coûteux', expl: 'Un bon indicateur doit être : présent avec les pathogènes, absent en eau saine, plus résistant que les pathogènes (garantie de sécurité).' },
+                  { q: 'Quelle est la différence entre E. coli et les coliformes totaux ?', r: 'E. coli = indicateur spécifique fécal. Coliformes totaux = groupe plus large, incluant des bactéries non fécales (environnement, sol)', expl: 'Des coliformes totaux sans E. coli peuvent indiquer une contamination du réseau (biofilm, entrée de sol) sans contamination fécale.' },
+                  { q: 'Pourquoi les entérocoques sont-ils utilisés en plus d\'E. coli ?', r: 'Ils sont plus résistants au chlore et à la dessiccation → ils persistent plus longtemps et signalent des contaminations que E. coli ne détecterait plus', expl: 'En eau de baignade, les entérocoques sont le paramètre de référence car ils survivent mieux en eau salée et sous UV solaires.' },
+                  { q: 'Qu\'est-ce que la méthode de filtration sur membrane ?', r: 'On filtre 100 mL d\'eau sur une membrane à 0,45 µm, puis on incube la membrane sur milieu sélectif. On compte les colonies', expl: 'C\'est la méthode de référence ISO 9308-1 pour E. coli et coliformes. Résultat en 24 h. Avantage : simple, précise, peu coûteuse.' },
+                  { q: 'Que signifie "0 UFC/100 mL" pour E. coli ?', r: 'Aucune colonie d\'E. coli détectée dans 100 mL d\'eau. UFC = Unité Formant Colonie', expl: 'Cette valeur seuil est absolue : 1 UFC/100 mL suffit à déclencher une non-conformité. C\'est le niveau le plus exigeant de la réglementation eau.' },
+                ],
+                schema: `<svg viewBox="0 0 280 145" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="145" rx="8" fill="#E0F4EC"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#166038">Indicateurs de contamination fécale</text>
+  <rect x="8" y="18" width="264" height="14" fill="#166038" opacity=".15" rx="3"/>
+  <text x="140" y="28" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#166038" font-weight="bold">🔴 E. coli = 0 UFC/100 mL (eau potable) — norme absolue</text>
+  <rect x="8" y="34" width="264" height="14" fill="#166038" opacity=".1" rx="3"/>
+  <text x="140" y="44" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#166038" font-weight="bold">🔴 Entérocoques = 0 UFC/100 mL (eau potable)</text>
+  <line x1="8" y1="52" x2="272" y2="52" stroke="#166038" stroke-width="0.5" stroke-dasharray="4,2"/>
+  <text x="70" y="63" text-anchor="middle" font-family="Arial" font-size="9" fill="#166038" font-weight="bold">E. coli</text>
+  <text x="70" y="74" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Spécifique fécal</text>
+  <text x="70" y="84" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Demi-vie courte</text>
+  <text x="70" y="94" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Sensible au Cl₂</text>
+  <line x1="140" y1="56" x2="140" y2="130" stroke="#166038" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="210" y="63" text-anchor="middle" font-family="Arial" font-size="9" fill="#166038" font-weight="bold">Entérocoques</text>
+  <text x="210" y="74" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Fécal + persistant</text>
+  <text x="210" y="84" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Résiste mieux Cl₂</text>
+  <text x="210" y="94" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Référence baignade</text>
+  <line x1="8" y1="100" x2="272" y2="100" stroke="#166038" stroke-width="0.5" stroke-dasharray="4,2"/>
+  <text x="140" y="112" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#7B2D8B" font-weight="bold">Méthode : filtration sur membrane 0,45 µm</text>
+  <text x="140" y="123" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">Filtration 100 mL → incubation 24 h (44°C) → comptage colonies</text>
+  <text x="140" y="134" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">Coliformes totaux ≠ coliformes fécaux (peuvent être non fécaux)</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Un réseau AEP présente : E. coli = 0 UFC/100 mL, coliformes totaux = 3 UFC/100 mL, entérocoques = 0 UFC/100 mL, turbidité = 0,3 NTU. 1) L\'eau est-elle conforme ? 2) Que signifie la présence de 3 coliformes totaux sans E. coli ?',
+                  solution: '<strong>E. coli = 0 ✓ | entérocoques = 0 ✓ | turbidité 0,3 &lt; 1 NTU ✓ → eau conforme aux normes AEP</strong><br><strong>Coliformes totaux = 3 UFC/100 mL :</strong> non conformité de gestion (valeur guide OMS = 0). Mais sans E. coli, pas de contamination fécale directe.<br>Signification possible : biofilm dans le réseau, entrée de sol, vieillissement des canalisations → action : purge du réseau, recherche de la source, renforcement du chlore résiduel.',
+                },
+              },
+              {
+                id: 'bio-4',
+                titre: 'Indices biologiques — IBD, IBGN, IPR',
+                fiche: {
+                  intro: 'Les indices biologiques évaluent la qualité écologique d\'un cours d\'eau via les organismes vivants. Ils intègrent les perturbations passées et constituent les paramètres de l\'état écologique imposé par la DCE.',
+                  points: [
+                    '🔬 IBD (Indice Biologique Diatomées) : basé sur les algues diatomées fixées aux substrats. Sensibles à la pollution organique et aux nutriments. Note /20. Très bon état ≥ 17',
+                    '🦋 IBGN (Indice Biologique Global Normalisé) : macroinvertébrés benthiques (insectes, vers, crustacés). Note /20. Indicateur de perturbations physiques et chimiques. Très bon état ≥ 17',
+                    '🐟 IPR (Indice Poisson Rivière) : compare le peuplement observé à un peuplement de référence. Valeur proche de 0 = très bon état. Score > 16 = mauvais état',
+                    '🌱 IBMR (Indice Biologique Macrophytes en Rivière) : végétation aquatique. Sensible à l\'eutrophisation. Note sur 20',
+                    '📋 DCE impose : atteindre le bon état écologique (IBD ≥ 13, IBGN ≥ 13) pour 2027',
+                    '🗓️ Fréquence de suivi : IBD et IBGN tous les 3 ans en réseau de contrôle opérationnel, 6 ans en surveillance',
+                    '⚠️ Limites : les indices sont "intégrateurs" (passé récent), donc délai entre la pollution et le signal biologique',
+                  ],
+                  formules: [
+                    'Note IBD : de 1 (très mauvais) à 20 (très bon état) selon la composition des assemblages de diatomées',
+                    'Note IBGN : de 0 à 20, calculée à partir de la diversité taxonomique et de la présence de groupes sentinelles',
+                  ],
+                  retenir: 'IBD = diatomées (chimique). IBGN = invertébrés (physico-chimique). IPR = poissons (intégrateur global). Tous requis par la DCE.',
+                },
+                flashcards: [
+                  { q: 'Sur quels organismes est basé l\'IBGN ?', r: 'Les macroinvertébrés benthiques (vivant sur le fond) : larves d\'insectes, vers, crustacés, mollusques', expl: 'Certains groupes (éphémères, plécoptères) sont très sensibles à la pollution → leur présence indique un très bon état. D\'autres (vers tubifex) tolèrent une forte pollution.' },
+                  { q: 'Quelle est la valeur seuil du bon état écologique pour l\'IBD ?', r: 'IBD ≥ 13/20 pour le bon état. IBD ≥ 17 pour le très bon état', expl: 'L\'objectif de la DCE est d\'atteindre au moins le bon état (≥ 13) pour toutes les masses d\'eau d\'ici 2027.' },
+                  { q: 'Pourquoi utilise-t-on les diatomées pour l\'IBD ?', r: 'Ce sont des algues microscopiques très sensibles aux nutriments (N, P) et aux pollutions organiques, et leur composition varie selon la qualité de l\'eau', expl: 'Il existe des milliers d\'espèces de diatomées, chacune ayant des préférences écologiques précises. L\'IBD exploite cette diversité spécifique.' },
+                  { q: 'Qu\'est-ce que l\'IPR mesure exactement ?', r: 'L\'écart entre le peuplement piscicole observé et le peuplement attendu dans un cours d\'eau non perturbé de même type', expl: 'Si la truite (espèce de référence en eaux froides) a disparu d\'une rivière qui lui était favorable, l\'IPR le révèle. Plus le score est bas, meilleur est l\'état.' },
+                  { q: 'À quelle fréquence les indices biologiques sont-ils mesurés en réseau de contrôle opérationnel ?', r: 'Tous les 3 ans (IBD, IBGN). En réseau de surveillance (RCS) : tous les 6 ans', expl: 'Le réseau opérationnel surveille les masses d\'eau en risque de ne pas atteindre les objectifs DCE. Le réseau de surveillance couvre l\'ensemble des masses d\'eau.' },
+                  { q: 'Quelle est la principale limite des indices biologiques ?', r: 'Ils intègrent des perturbations passées (délai entre pollution et réponse des organismes). Ils ne détectent pas les pollutions aiguës récentes', expl: 'Après une amélioration de la qualité de l\'eau, les organismes benthiques mettent plusieurs années à recoloniser : l\'indice améliore lentement.' },
+                ],
+                schema: `<svg viewBox="0 0 280 145" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="145" rx="8" fill="#E0F4EC"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#166038">Indices biologiques — DCE (objectif bon état 2027)</text>
+  <rect x="8" y="18" width="82" height="52" rx="6" fill="#0A5090" opacity=".12" stroke="#0A5090" stroke-width="1.5"/>
+  <text x="49" y="33" text-anchor="middle" font-family="Arial" font-size="14">🦟</text>
+  <text x="49" y="45" text-anchor="middle" font-family="Arial" font-size="9" fill="#0A5090" font-weight="bold">IBGN</text>
+  <text x="49" y="56" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Invertébrés</text>
+  <text x="49" y="66" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">benthiques</text>
+  <rect x="99" y="18" width="82" height="52" rx="6" fill="#7B2D8B" opacity=".12" stroke="#7B2D8B" stroke-width="1.5"/>
+  <text x="140" y="33" text-anchor="middle" font-family="Arial" font-size="14">🔬</text>
+  <text x="140" y="45" text-anchor="middle" font-family="Arial" font-size="9" fill="#7B2D8B" font-weight="bold">IBD</text>
+  <text x="140" y="56" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Diatomées</text>
+  <text x="140" y="66" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">algues N+P</text>
+  <rect x="190" y="18" width="82" height="52" rx="6" fill="#166038" opacity=".12" stroke="#166038" stroke-width="1.5"/>
+  <text x="231" y="33" text-anchor="middle" font-family="Arial" font-size="14">🐟</text>
+  <text x="231" y="45" text-anchor="middle" font-family="Arial" font-size="9" fill="#166038" font-weight="bold">IPR</text>
+  <text x="231" y="56" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Poissons</text>
+  <text x="231" y="66" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">obs. / attendu</text>
+  <line x1="8" y1="76" x2="272" y2="76" stroke="#166038" stroke-width="0.5" stroke-dasharray="4,2"/>
+  <text x="140" y="88" text-anchor="middle" font-family="Arial" font-size="9" fill="#166038" font-weight="bold">IBD — Seuils de qualité écologique</text>
+  <rect x="8" y="93" width="50" height="12" fill="#A82018" opacity=".3" rx="2"/><text x="33" y="102" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#A82018">0–8 : mauvais</text>
+  <rect x="62" y="93" width="50" height="12" fill="#C05A10" opacity=".3" rx="2"/><text x="87" y="102" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C05A10">8–13 : moyen</text>
+  <rect x="116" y="93" width="50" height="12" fill="#886000" opacity=".3" rx="2"/><text x="141" y="102" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#886000">13–17 : bon ✓</text>
+  <rect x="170" y="93" width="102" height="12" fill="#166038" opacity=".3" rx="2"/><text x="221" y="102" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#166038">17–20 : très bon ✓✓</text>
+  <text x="140" y="120" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#555">Objectif DCE : IBD ≥ 13 pour toutes les masses d\'eau en 2027</text>
+  <text x="140" y="132" text-anchor="middle" font-family="Arial" font-size="8" fill="#555" font-style="italic">Fréquence : tous les 3 ans (contrôle opérationnel)</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Sur un cours d\'eau, les relevés donnent : IBD = 11/20, présence de gammares et d\'éphémères (groupes faunistiques sensibles). 1) Quel est l\'état IBD selon les seuils DCE ? 2) La présence de gammares contredit-elle l\'IBD ? Comment expliquer ?',
+                  solution: '<strong>1) IBD = 11 → état moyen</strong> (entre 8 et 13 → en dessous du seuil de bon état ≥ 13). La masse d\'eau est en risque par rapport à l\'objectif DCE 2027.<br><strong>2) Non-contradiction :</strong> les invertébrés (IBGN) et les diatomées (IBD) répondent à des types de pollutions différents. Les gammares indiquent un bon état vis-à-vis de l\'O₂ et des matières organiques, mais l\'IBD (diatomées) peut révéler une eutrophisation (excès N, P) que les invertébrés ne perçoivent pas. Un IBD faible avec IBGN correct → polluer par les nutriments sans pollution organique.',
+                },
+              },
+            ],
+          },
+
+          /* ── Réglementation ── */
+          {
+            id: 'reglementation',
+            name: 'Réglementation de l\'eau',
+            ico: '📋',
+            color: '#8B4513',
+            colorl: '#FBF0E6',
+            chapitres: [
+              {
+                id: 'reg-1',
+                titre: 'Code de l\'environnement et Loi sur l\'eau — LEMA 2006',
+                fiche: {
+                  intro: 'Le droit de l\'eau français repose sur un principe fondateur : l\'eau est "patrimoine commun de la nation". La LEMA de 2006 organise la gestion de l\'eau à l\'échelle des bassins versants.',
+                  points: [
+                    '📜 Loi du 3 janvier 1992 : "L\'eau fait partie du patrimoine commun de la nation" (art. L210-1 Code envt). Première vraie loi-cadre sur l\'eau en France',
+                    '📋 LEMA — Loi sur l\'Eau et les Milieux Aquatiques du 30 décembre 2006 : modernise la gestion de l\'eau, transpose la DCE, crée l\'ONEMA (devenu OFB)',
+                    '🗺️ SDAGE (Schéma Directeur d\'Aménagement et de Gestion des Eaux) : document de planification à l\'échelle des 7 grands bassins hydrographiques, révisé tous les 6 ans',
+                    '📍 SAGE (Schéma d\'Aménagement et de Gestion des Eaux) : déclinaison locale du SDAGE sur un sous-bassin ou une nappe',
+                    '🏛️ 6 Agences de l\'eau : AESN (Seine-Normandie), AELB (Loire-Bretagne), AEAG (Adour-Garonne), RMC (Rhône-Méditerranée-Corse), AERM (Rhin-Meuse), AP (Artois-Picardie)',
+                    '👮 Police de l\'eau : DDT(M), OFB (Office Français de la Biodiversité) — contrôle les IOTA',
+                    '⚙️ IOTA (Installations, Ouvrages, Travaux, Activités) : nomenclature eau — 3 régimes : autorisation, déclaration, ou rien (selon impact)',
+                    '💰 Redevances des Agences : "pollueur-payeur" et "préleveur-payeur" → financement des travaux d\'épuration et de restauration',
+                  ],
+                  formules: [],
+                  retenir: 'L\'eau = patrimoine commun (L210-1). SDAGE = outil de planification bassin. Agences de l\'eau = financement. IOTA = régime d\'autorisation des travaux.',
+                },
+                flashcards: [
+                  { q: 'Quel article du Code de l\'environnement proclame l\'eau "patrimoine commun de la nation" ?', r: 'Article L210-1 du Code de l\'environnement (issu de la loi du 3 janvier 1992)', expl: 'Cet article pose le principe fondateur : l\'eau n\'est pas une marchandise ordinaire, elle appartient à tous. Il fonde toute la politique de l\'eau française.' },
+                  { q: 'Qu\'est-ce que la LEMA et quand a-t-elle été adoptée ?', r: 'Loi sur l\'Eau et les Milieux Aquatiques du 30 décembre 2006. Elle modernise la gestion de l\'eau et transpose la DCE en droit français', expl: 'La LEMA a créé l\'ONEMA (Office National de l\'Eau et des Milieux Aquatiques), devenu OFB en 2019 par fusion avec l\'AFB.' },
+                  { q: 'Qu\'est-ce qu\'un SDAGE ?', r: 'Schéma Directeur d\'Aménagement et de Gestion des Eaux : document de planification de la politique de l\'eau à l\'échelle d\'un grand bassin hydrographique', expl: 'Il fixe les orientations pour atteindre le bon état des eaux (DCE). Révisé tous les 6 ans. En France : 7 SDAGE métropolitains + 5 outre-mer.' },
+                  { q: 'Quelles sont les 6 agences de l\'eau françaises ?', r: 'AESN (Seine-Normandie), AELB (Loire-Bretagne), AEAG (Adour-Garonne), RMC (Rhône-Méditerranée-Corse), AERM (Rhin-Meuse), AP (Artois-Picardie)', expl: 'Chaque agence perçoit des redevances auprès des usagers (collectivités, industriels) et reverse des aides pour les travaux d\'eau et d\'assainissement.' },
+                  { q: 'Qu\'est-ce qu\'une IOTA ?', r: 'Installation, Ouvrage, Travaux ou Activité ayant un impact sur l\'eau. Selon l\'importance : autorisation, déclaration, ou exemption (nomenclature annexe à l\'art. R214-1)', expl: 'Ex : un forage > 200 m³/j nécessite une autorisation. Une prise d\'eau < 400 m³/h avec retour intégral nécessite seulement une déclaration.' },
+                  { q: 'Quel organisme assure la police de l\'eau en France ?', r: 'L\'OFB (Office Français de la Biodiversité) et les DDT(M) (Directions Départementales des Territoires)', expl: 'Les agents de l\'OFB ont des pouvoirs de police judiciaire : ils peuvent dresser des procès-verbaux et réaliser des prélèvements d\'office en cas de pollution.' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#FBF0E6"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#8B4513">Organisation de la gestion de l'eau en France</text>
+  <rect x="95" y="18" width="90" height="16" rx="4" fill="#8B4513"/>
+  <text x="140" y="29" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">LEMA 2006 — Code Envt</text>
+  <line x1="140" y1="34" x2="70" y2="46" stroke="#8B4513" stroke-width="1.2"/>
+  <line x1="140" y1="34" x2="140" y2="46" stroke="#8B4513" stroke-width="1.2"/>
+  <line x1="140" y1="34" x2="210" y2="46" stroke="#8B4513" stroke-width="1.2"/>
+  <rect x="10" y="46" width="90" height="14" rx="3" fill="#C05A10" opacity=".8"/>
+  <text x="55" y="56" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">SDAGE (bassin)</text>
+  <rect x="95" y="46" width="90" height="14" rx="3" fill="#C05A10" opacity=".8"/>
+  <text x="140" y="56" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">Agences de l'eau (6)</text>
+  <rect x="180" y="46" width="90" height="14" rx="3" fill="#C05A10" opacity=".8"/>
+  <text x="225" y="56" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">Police eau (OFB+DDT)</text>
+  <line x1="55" y1="60" x2="55" y2="72" stroke="#8B4513" stroke-width="1.2"/>
+  <line x1="140" y1="60" x2="140" y2="72" stroke="#8B4513" stroke-width="1.2"/>
+  <rect x="10" y="72" width="90" height="14" rx="3" fill="#886000" opacity=".8"/>
+  <text x="55" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">SAGE (sous-bassin)</text>
+  <rect x="95" y="72" width="90" height="14" rx="3" fill="#886000" opacity=".8"/>
+  <text x="140" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">Redevances préleveur/</text>
+  <text x="140" y="90" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">pollueur → aides travaux</text>
+  <line x1="55" y1="86" x2="55" y2="98" stroke="#8B4513" stroke-width="1.2"/>
+  <rect x="10" y="98" width="90" height="14" rx="3" fill="#8B4513" opacity=".6"/>
+  <text x="55" y="108" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">IOTA (autorisation)</text>
+  <rect x="8" y="118" width="264" height="24" fill="#FDE8D8" rx="4" stroke="#8B4513" stroke-width="1"/>
+  <text x="140" y="128" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#8B4513" font-weight="bold">L210-1 : L'eau = patrimoine commun de la nation</text>
+  <text x="140" y="138" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">7 bassins métropolitains — dérogations possibles si force majeure</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Un agriculteur souhaite installer un forage d\'irrigation prélevant 500 m³/j dans une nappe. 1) Quel régime IOTA s\'applique ? 2) Quel outil de planification doit-il consulter pour connaître les orientations sur son bassin versant ?',
+                  solution: '<strong>1) Régime IOTA :</strong> un prélèvement > 200 m³/j en eau souterraine (ou > 400 m³/h avec restitution totale) relève du régime d\'<strong>autorisation</strong> (Rubrique 1.1.1.0 de la nomenclature eau). Il doit déposer un dossier loi sur l\'eau auprès de la DDT.<br><strong>2) Outil de planification :</strong> le <strong>SDAGE</strong> de son bassin hydrographique (ex. AEAG pour l\'Adour-Garonne). Pour son sous-bassin ou sa nappe spécifique, un <strong>SAGE</strong> peut exister avec des dispositions plus précises.',
+                },
+              },
+              {
+                id: 'reg-2',
+                titre: 'Directive Cadre sur l\'Eau — DCE 2000 et objectifs',
+                fiche: {
+                  intro: 'La DCE est le texte fondateur de la politique de l\'eau européenne. Elle impose d\'atteindre le "bon état" de toutes les masses d\'eau selon des critères biologiques et chimiques stricts.',
+                  points: [
+                    '🇪🇺 Directive 2000/60/CE du 23 octobre 2000 : texte de référence pour l\'ensemble des pays de l\'UE',
+                    '🎯 Objectif principal : atteindre le "bon état" de toutes les masses d\'eau (superficielles et souterraines) — délais : 2015, puis 2021, puis 2027',
+                    '💧 5 types de masses d\'eau : cours d\'eau, lacs, eaux de transition (estuaires), eaux côtières, eaux souterraines',
+                    '🟢 État écologique : 5 classes (très bon / bon / moyen / médiocre / mauvais) — évalué par IBD, IBGN, IPR + paramètres physico-chimiques',
+                    '🔵 État chimique : "bon" ou "mauvais" selon les 45 substances prioritaires (liste prioritaire UE)',
+                    '☠️ 8 substances dangereuses prioritaires (SDp) : objectif zéro rejet (mercure, cadmium, HAP, PCB…)',
+                    '🗺️ Masse d\'eau = unité de gestion cohérente. France : ~12 000 masses d\'eau de surface + ~600 masses d\'eau souterraine',
+                    '📊 Programme de surveillance obligatoire : réseau de contrôle de surveillance (RCS) + contrôle opérationnel (RCO)',
+                  ],
+                  formules: [],
+                  retenir: 'DCE 2000 : bon état écologique + chimique d\'ici 2027. 5 classes d\'état. 45 substances prioritaires dont 8 "zéro rejet". Évaluation par indices biologiques.',
+                },
+                flashcards: [
+                  { q: 'Quelle est la référence réglementaire de la DCE ?', r: 'Directive 2000/60/CE du Parlement européen et du Conseil du 23 octobre 2000', expl: 'La DCE est transposée en droit français principalement par la LEMA (2006) et diverses ordonnances. Le SDAGE est l\'outil de sa mise en œuvre.' },
+                  { q: 'Quel est l\'objectif central de la DCE ?', r: 'Atteindre le "bon état" de toutes les masses d\'eau européennes (écologique et chimique)', expl: 'L\'objectif initial de 2015 a été reporté à 2021 puis 2027 pour la majorité des masses d\'eau en raison des difficultés de mise en œuvre.' },
+                  { q: 'Quelles sont les 5 classes d\'état écologique de la DCE ?', r: 'Très bon — Bon — Moyen — Médiocre — Mauvais', expl: 'L\'objectif est d\'atteindre au moins le "bon état". Le "très bon état" est protégé (non-dégradation). L\'état est évalué par des indices biologiques (IBD, IBGN, IPR).' },
+                  { q: 'Quelle est la différence entre état écologique et état chimique ?', r: 'État écologique : biologie + physico-chimie (5 niveaux). État chimique : conformité aux 45 substances prioritaires (binaire : bon ou mauvais)', expl: 'Une masse d\'eau peut avoir un bon état écologique mais un mauvais état chimique (ex. mercure héritage industriel). Les deux doivent être atteints.' },
+                  { q: 'Qu\'est-ce qu\'une substance dangereuse prioritaire (SDp) selon la DCE ?', r: 'Substance présentant un risque inacceptable pour l\'environnement aquatique, pour laquelle l\'objectif est zéro rejet dans l\'eau', expl: 'Exemples : mercure, cadmium, PCB, dioxines. 8 SDp au départ, liste élargie. Objectif "zéro rejet" = élimination progressive des émissions.' },
+                  { q: 'Qu\'est-ce que le réseau de contrôle opérationnel (RCO) ?', r: 'Réseau de surveillance ciblé sur les masses d\'eau à risque de ne pas atteindre le bon état DCE. Fréquence de suivi renforcée', expl: 'Distinct du RCS (réseau de contrôle de surveillance), qui couvre toutes les masses d\'eau à fréquence standard pour établir l\'état de référence.' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#EBF5FF"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#1550A0">DCE — Grille d'état des masses d'eau</text>
+  <rect x="8" y="18" width="264" height="14" rx="2" fill="#1550A0"/>
+  <text x="140" y="28.5" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">État écologique (5 classes) + État chimique (2 classes)</text>
+  <rect x="8" y="34" width="80" height="18" fill="#0066CC" rx="2"/>
+  <text x="48" y="46" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold">Très bon</text>
+  <rect x="8" y="54" width="80" height="18" fill="#00A876" rx="2"/>
+  <text x="48" y="66" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold">Bon ✓ objectif</text>
+  <rect x="8" y="74" width="80" height="18" fill="#F5C400" rx="2"/>
+  <text x="48" y="86" text-anchor="middle" font-family="Arial" font-size="9" fill="#333" font-weight="bold">Moyen</text>
+  <rect x="8" y="94" width="80" height="18" fill="#E07B00" rx="2"/>
+  <text x="48" y="106" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold">Médiocre</text>
+  <rect x="8" y="114" width="80" height="18" fill="#CC0000" rx="2"/>
+  <text x="48" y="126" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold">Mauvais</text>
+  <text x="100" y="46" font-family="Arial" font-size="7.8" fill="#1550A0">IBD ≥ 17 · IBGN ≥ 17 · IPR ≈ 0</text>
+  <text x="100" y="66" font-family="Arial" font-size="7.8" fill="#1550A0">IBD ≥ 13 · IBGN ≥ 13 · IPR &lt; 7</text>
+  <text x="100" y="86" font-family="Arial" font-size="7.8" fill="#555">IBD 8-13 · IBGN 9-13 · IPR 7-16</text>
+  <text x="100" y="106" font-family="Arial" font-size="7.8" fill="#555">IBD 5-8 · IBGN 5-9 · IPR 16-25</text>
+  <text x="100" y="126" font-family="Arial" font-size="7.8" fill="#555">IBD &lt; 5 · IBGN &lt; 5 · IPR &gt; 25</text>
+  <rect x="8" y="134" width="264" height="10" rx="2" fill="#D0E8FF"/>
+  <text x="140" y="141" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#1550A0">État chimique : Bon (45 substances ok) ou Mauvais (≥1 dépassement)</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Une masse d\'eau est évaluée : IBD = 11, IBGN = 10, IPR = 9. Par ailleurs, le chrome hexavalent dépasse son NQE (norme de qualité environnementale). 1) Quel est l\'état écologique ? 2) Quel est l\'état chimique ? 3) Quel est l\'état global de la masse d\'eau ?',
+                  solution: '<strong>1) État écologique :</strong> IBD=11 (classe "Moyen" : 8-13), IBGN=10 (classe "Moyen" : 9-13), IPR=9 (classe "Moyen" : 7-16) → <strong>État écologique = Moyen</strong> (note la plus défavorable des indicateurs biologiques).<br><strong>2) État chimique :</strong> le chrome hexavalent est une substance prioritaire ; son dépassement de NQE → <strong>État chimique = Mauvais</strong>.<br><strong>3) État global :</strong> on retient le moins bon des deux → <strong>État global = Mauvais</strong>. Deux plans d\'action sont nécessaires : plan de restauration écologique (morphologie, continuité) + plan de réduction du chrome à la source (activités industrielles amont).',
+                },
+              },
+              {
+                id: 'reg-3',
+                titre: 'Normes qualité eau potable — Directive 2020/2184',
+                fiche: {
+                  intro: 'La Directive 2020/2184 (eau potable) remplace la Directive 98/83/CE. Elle renforce les exigences sur les PFAS, le plomb, fixe une approche par les risques et inclut des paramètres émergents.',
+                  points: [
+                    '📜 Directive (UE) 2020/2184 du 16 décembre 2020 — transposée en droit français le 12 janvier 2023',
+                    '🦠 Paramètres microbiologiques : E. coli = 0 UFC/100 mL | Entérocoques = 0 UFC/100 mL (inchangé)',
+                    '🌿 Nitrates : 50 mg/L | Nitrites (distribution) : 0,5 mg/L | Nitrites (traitement) : 0,1 mg/L',
+                    '🌿 Pesticides : 0,1 µg/L / substance | Total pesticides : 0,5 µg/L',
+                    '🧪 PFAS (nouveauté 2020) : 0,1 µg/L / substance PFAS spécifique | Somme 20 PFAS : 0,5 µg/L',
+                    '⚗️ Plomb (Pb) : 10 µg/L (transitoire jusqu\'en 2036, puis 5 µg/L) — ancienne norme : 25 µg/L',
+                    '🔩 Bisphénol A : 2,5 µg/L (nouveau paramètre — perturbateur endocrinien)',
+                    '🔴 Chlorure de vinyle (PVC dégradé) : 0,5 µg/L',
+                    '⚠️ Approche basée sur les risques (ABR) : évaluation du système d\'alimentation de la captation au robinet, obligatoire dès 2026',
+                    '📊 Légionelles dans les eaux chaudes sanitaires : < 1 000 UFC/L (recommandation Directive)',
+                  ],
+                  formules: [],
+                  retenir: 'PFAS : 0,1 µg/L par substance (nouveau). Pb : 10 µg/L (→ 5 µg/L en 2036). E. coli : 0/100 mL. Approche par les risques obligatoire dès 2026.',
+                },
+                flashcards: [
+                  { q: 'Quelle directive remplace la Directive 98/83/CE sur l\'eau potable ?', r: 'Directive (UE) 2020/2184 du 16 décembre 2020, transposée en France le 12 janvier 2023', expl: 'Cette révision majeure intègre les polluants émergents (PFAS), renforce les normes sur le plomb et introduit une approche basée sur les risques.' },
+                  { q: 'Quelle est la nouvelle norme pour les PFAS dans l\'eau potable ?', r: '0,1 µg/L par substance PFAS individuelle — 0,5 µg/L pour la somme des 20 PFAS réglementés', expl: 'Ces valeurs s\'appliquent progressivement. En 2026, un plan de surveillance PFAS est obligatoire pour tous les captages. Les PFAS ne sont pas éliminés par le traitement classique (chlore, sable).' },
+                  { q: 'Quelle est l\'évolution de la norme plomb dans la Directive 2020 ?', r: '10 µg/L actuellement (jusqu\'en 2036), puis 5 µg/L. Ancienne norme : 25 µg/L', expl: 'L\'enjeu principal est le remplacement des branchements en plomb encore présents dans les réseaux, notamment dans les vieux immeubles. Coût estimé : plusieurs milliards d\'euros en France.' },
+                  { q: 'Qu\'est-ce que l\'approche basée sur les risques (ABR) imposée par la Directive 2020 ?', r: 'Évaluation des risques sur tout le système : bassin versant → captage → traitement → réseau → robinet du consommateur', expl: 'L\'ABR remplace une surveillance uniquement au robinet par une gestion proactive des risques. Elle est obligatoire pour les distributeurs > 1 000 m³/j dès 2026.' },
+                  { q: 'Quelle est la norme pour les pesticides individuels dans l\'eau potable ?', r: '0,1 µg/L par substance active individuelle — 0,5 µg/L pour la somme de tous les pesticides', expl: 'Cette norme "de précaution" (fixée en 1980, maintenue) est indépendante de la toxicité réelle. Elle est parmi les plus strictes au monde et pousse à chercher des alternatives aux pesticides.' },
+                  { q: 'Quel est le nouveau paramètre "perturbateur endocrinien" introduit par la Directive 2020 ?', r: 'Le bisphénol A (BPA) avec une norme de 2,5 µg/L', expl: 'Le BPA peut migrer des plastiques et revêtements des canalisations dans l\'eau. Il est suspecté d\'effets sur le système hormonal à faibles doses.' },
+                ],
+                schema: `<svg viewBox="0 0 280 152" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="152" rx="8" fill="#EEF6FF"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#1550A0">Directive 2020/2184 — Paramètres clés AEP</text>
+  <rect x="8" y="18" width="110" height="11" rx="2" fill="#1550A0"/>
+  <rect x="124" y="18" width="75" height="11" rx="2" fill="#1550A0"/>
+  <rect x="205" y="18" width="67" height="11" rx="2" fill="#1550A0"/>
+  <text x="63" y="26.5" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Paramètre</text>
+  <text x="161" y="26.5" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Norme</text>
+  <text x="238" y="26.5" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Évolution 2036</text>
+  <text x="63" y="40" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Nitrates (NO₃⁻)</text>
+  <text x="161" y="40" text-anchor="middle" font-family="Arial" font-size="8" fill="#1550A0">50 mg/L</text>
+  <text x="238" y="40" text-anchor="middle" font-family="Arial" font-size="8" fill="#666">inchangé</text>
+  <text x="63" y="54" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Pesticides (indiv.)</text>
+  <text x="161" y="54" text-anchor="middle" font-family="Arial" font-size="8" fill="#1550A0">0,1 µg/L</text>
+  <text x="238" y="54" text-anchor="middle" font-family="Arial" font-size="8" fill="#666">inchangé</text>
+  <text x="63" y="68" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">PFAS (somme 20)</text>
+  <text x="161" y="68" text-anchor="middle" font-family="Arial" font-size="8" fill="#CC0000">0,5 µg/L</text>
+  <text x="238" y="68" text-anchor="middle" font-family="Arial" font-size="8" fill="#CC0000">NOUVEAU</text>
+  <text x="63" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Plomb (Pb)</text>
+  <text x="161" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#E07B00">10 µg/L → 5 µg/L</text>
+  <text x="238" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#E07B00">réduction</text>
+  <text x="63" y="96" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Bisphénol A (BPA)</text>
+  <text x="161" y="96" text-anchor="middle" font-family="Arial" font-size="8" fill="#CC0000">2,5 µg/L</text>
+  <text x="238" y="96" text-anchor="middle" font-family="Arial" font-size="8" fill="#CC0000">NOUVEAU</text>
+  <text x="63" y="110" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Turbidité</text>
+  <text x="161" y="110" text-anchor="middle" font-family="Arial" font-size="8" fill="#1550A0">1 NTU (réseau)</text>
+  <text x="238" y="110" text-anchor="middle" font-family="Arial" font-size="8" fill="#666">inchangé</text>
+  <rect x="8" y="118" width="264" height="28" fill="#D0E8FF" rx="4"/>
+  <text x="140" y="129" text-anchor="middle" font-family="Arial" font-size="8" fill="#1550A0" font-weight="bold">Approche basée sur les risques (ABR) obligatoire dès 2026</text>
+  <text x="140" y="141" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Bassin versant → captage → traitement → réseau → robinet</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Une analyse de l\'eau au robinet d\'un consommateur donne : NO₃⁻ = 48 mg/L ; PFAS totaux (20 substances) = 0,42 µg/L avec un PFOA à 0,12 µg/L individuellement ; Pb = 8 µg/L (réseau neuf). Les résultats sont-ils conformes à la Directive 2020/2184 ?',
+                  solution: '<strong>Nitrates :</strong> 48 mg/L < 50 mg/L → <strong>conforme</strong>.<br><strong>PFAS :</strong> somme 0,42 µg/L < 0,5 µg/L → <strong>conforme pour la somme</strong>. Mais PFOA = 0,12 µg/L > 0,1 µg/L (norme par substance individuelle) → <strong>NON CONFORME</strong> sur ce paramètre.<br><strong>Plomb :</strong> réseau neuf = pas de risque branchement. 8 µg/L < 10 µg/L (norme jusqu\'en 2036) → <strong>conforme</strong> pour l\'instant. En 2036 la norme sera 5 µg/L → non conforme.<br><strong>Conclusion :</strong> eau non conforme en raison du PFOA. Mesures correctives : vérifier la source de contamination PFAS, renforcer le traitement (charbons actifs, osmose inverse).',
+                },
+              },
+            ],
+          },
+        ],
+      },
+
+      /* ── Deuxième année ── */
+      {
+        id: 'an2',
+        name: 'Deuxième année',
+        matieres: [
+
+          /* ── Traitement des eaux potables ── */
+          {
+            id: 'traitement-ep',
+            name: 'Traitement des eaux potables',
+            ico: '🚰',
+            color: '#0A5090',
+            colorl: '#E6EEF8',
+            chapitres: [
+              {
+                id: 'tep-1',
+                titre: 'Filières de traitement selon la qualité de la ressource',
+                fiche: {
+                  intro: 'Le traitement de l\'eau potable est adapté à la qualité de la ressource (souterraine ou superficielle) et aux polluants présents. Le principe fondamental est le traitement par "barrières multiples".',
+                  points: [
+                    '💡 Principe des barrières multiples : chaque étape élimine partiellement les polluants. L\'association de barrières garantit la sécurité sanitaire',
+                    '🏔️ Eau souterraine de bonne qualité : désinfection seule (chlore ou UV) — ex. source de montagne peu minéralisée',
+                    '⛏️ Eau souterraine avec fer/manganèse : aération (oxydation Fe²⁺→Fe³⁺) + filtration + désinfection',
+                    '🌊 Eau de surface (rivière, lac) : filière complète — coagulation + floculation + décantation + filtration + désinfection',
+                    '🧪 Eau polluée (pesticides, matières organiques, PFAS) : filière avancée — CAG (charbon actif en grains) + procédés membranaires (NF/OI)',
+                    '🌊 Eau saumâtre ou de mer : osmose inverse (OI) + reminéralisation',
+                    '📊 Choix de la filière : basé sur l\'analyse de la ressource brute (physico-chimique + microbiologique + émergents)',
+                    '⚖️ Arrêté du 11/01/2007 : fixe les procédés de traitement autorisés pour l\'eau potable en France',
+                  ],
+                  formules: [],
+                  retenir: 'Eau souterraine propre → désinfection seule. Eau de surface → filière complète. Polluants émergents → CAG ou membranes. Toujours plusieurs barrières.',
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce que le principe des barrières multiples en traitement de l\'eau ?', r: 'Chaque étape de traitement constitue une barrière partielle. L\'accumulation de barrières garantit la qualité finale même si l\'une est défaillante', expl: 'Exemple : coagulation (3 log) + filtration (2 log) + chloration (3 log) = 8 log de réduction des pathogènes. Si une barrière faillit, les autres compensent.' },
+                  { q: 'Quelle filière pour une eau souterraine contenant du fer et du manganèse ?', r: 'Aération (oxydation du Fe²⁺ en Fe³⁺ insoluble) + filtration sur sable (rétention des flocs de fer/manganèse) + désinfection', expl: 'Le fer et le manganèse donnent une eau colorée (brunâtre), au goût métallique et favorisent le développement bactérien dans le réseau.' },
+                  { q: 'Quelle est la filière complète pour une eau de surface ?', r: 'Coagulation → floculation → décantation → filtration sur sable → désinfection (± charbon actif si micropollants)', expl: 'Chaque étape traite un type de pollution spécifique : la coagulation/décantation élimine les MES et colloïdes ; la filtration affine ; la désinfection tue les germes.' },
+                  { q: 'Quel traitement pour une eau contenant des pesticides ou PFAS ?', r: 'Adsorption sur charbon actif en grains (CAG) ou nanofiltration/osmose inverse (procédés membranaires)', expl: 'Le chlore et le sable n\'éliminent pas les micropolluants organiques. Le CAG adsorbe les molécules organiques ; les membranes les rejettent physiquement.' },
+                  { q: 'Quel texte réglementaire fixe les procédés de traitement autorisés pour l\'eau potable ?', r: 'Arrêté du 11 janvier 2007 relatif aux limites et références de qualité de l\'eau destinée à la consommation humaine', expl: 'Cet arrêté liste les réactifs autorisés (coagulants, désinfectants, correcteurs de pH) et leurs doses maximales pour la production d\'eau potable.' },
+                  { q: 'Pourquoi une eau de mer traitée par osmose inverse nécessite-t-elle une reminéralisation ?', r: 'L\'OI élimine quasiment tous les ions → eau déminéralisée, agressive pour les canalisations et déséquilibrée pour la santé. Reminéralisation = CO₂ + calcaire', expl: 'L\'eau déminéralisée (conductivité < 10 µS/cm) est très agressive (indice de Langelier très négatif). Elle dissout les canalisations et a un goût "plat".' },
+                ],
+                schema: `<svg viewBox="0 0 280 155" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="155" rx="8" fill="#E8F5EE"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#1A7040">Filières de traitement — arbre de décision</text>
+  <rect x="88" y="18" width="104" height="13" rx="3" fill="#1A7040"/>
+  <text x="140" y="27.5" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Ressource brute</text>
+  <line x1="140" y1="31" x2="30" y2="42" stroke="#1A7040" stroke-width="1"/>
+  <line x1="140" y1="31" x2="90" y2="42" stroke="#1A7040" stroke-width="1"/>
+  <line x1="140" y1="31" x2="150" y2="42" stroke="#1A7040" stroke-width="1"/>
+  <line x1="140" y1="31" x2="220" y2="42" stroke="#1A7040" stroke-width="1"/>
+  <text x="14" y="40" font-family="Arial" font-size="7.5" fill="#1A7040" font-weight="bold">Souterraine</text>
+  <text x="14" y="49" font-family="Arial" font-size="7" fill="#1A7040">simple</text>
+  <text x="76" y="40" font-family="Arial" font-size="7.5" fill="#1A7040" font-weight="bold">Souterraine</text>
+  <text x="76" y="49" font-family="Arial" font-size="7" fill="#1A7040">Fe/Mn</text>
+  <text x="136" y="40" font-family="Arial" font-size="7.5" fill="#1A7040" font-weight="bold">Surface</text>
+  <text x="136" y="49" font-family="Arial" font-size="7" fill="#1A7040">(rivière)</text>
+  <text x="200" y="40" font-family="Arial" font-size="7.5" fill="#1A7040" font-weight="bold">Mer /</text>
+  <text x="200" y="49" font-family="Arial" font-size="7" fill="#1A7040">saumâtre</text>
+  <rect x="4" y="53" width="62" height="34" rx="3" fill="#2E8B57" opacity=".8"/>
+  <text x="35" y="63" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Désinfection</text>
+  <text x="35" y="72" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">seule (Cl₂ ou UV)</text>
+  <rect x="72" y="53" width="58" height="34" rx="3" fill="#2E8B57" opacity=".8"/>
+  <text x="101" y="62" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">Aération</text>
+  <text x="101" y="71" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">+ Filtration</text>
+  <text x="101" y="80" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">+ Désinfection</text>
+  <rect x="130" y="53" width="72" height="34" rx="3" fill="#1A7040" opacity=".8"/>
+  <text x="166" y="62" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">Coag.→Déc.→</text>
+  <text x="166" y="71" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">Filtr.→CAG</text>
+  <text x="166" y="80" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">→ Désinfection</text>
+  <rect x="208" y="53" width="68" height="34" rx="3" fill="#005A30" opacity=".8"/>
+  <text x="242" y="63" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">OI / NF</text>
+  <text x="242" y="72" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">+ Reminéral.</text>
+  <text x="242" y="81" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">+ Désinfection</text>
+  <rect x="4" y="95" width="264" height="26" fill="#C8E6C9" rx="4"/>
+  <text x="136" y="105" text-anchor="middle" font-family="Arial" font-size="8" fill="#1A7040" font-weight="bold">Ressource polluée (pesticides, PFAS, micropolluants)</text>
+  <text x="136" y="115" text-anchor="middle" font-family="Arial" font-size="8" fill="#1A7040">→ filière avancée : ajouter CAG + NF/OI sur toute ressource</text>
+  <rect x="4" y="128" width="264" height="20" fill="#1A7040" rx="4"/>
+  <text x="136" y="141" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">Arrêté 11/01/2007 — liste des procédés autorisés en AEP</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Une commune s\'alimente depuis un puits captant une nappe présentant : Fe = 0,9 mg/L, Mn = 0,12 mg/L, NO₃⁻ = 52 mg/L, turbidité = 0,3 NTU, pas de contamination microbiologique détectée. Quelle filière proposez-vous ? Quelles sont les étapes clés et pourquoi ?',
+                  solution: '<strong>Problèmes identifiés :</strong> Fe > 0,2 mg/L (norme AEP), Mn > 0,05 mg/L, NO₃⁻ > 50 mg/L → 3 non-conformités.<br><strong>Filière proposée :</strong><br>1. <strong>Aération</strong> → oxyde Fe²⁺ en Fe³⁺ (insoluble) et Mn²⁺ en MnO₂<br>2. <strong>Filtration sur sable manganèse</strong> → retient les précipités Fe/Mn<br>3. <strong>Nanofiltration (NF) ou échangeurs d\'ions</strong> → réduction NO₃⁻ (NF retient les anions divalents mais laisse passer les monovalents — une NF adaptée ou résine échangeuse NO₃⁻/SO₄²⁻ sélective)<br>4. <strong>Désinfection UV + chloration résiduelle</strong><br>La turbidité faible et l\'absence de pathogènes ne nécessitent pas de coagulation-décantation.',
+                },
+              },
+              {
+                id: 'tep-2',
+                titre: 'Coagulation, floculation et décantation',
+                fiche: {
+                  intro: 'La coagulation-floculation-décantation est la première grande étape de la filière complète. Elle élimine les particules en suspension, les colloïdes et une partie de la matière organique dissoute.',
+                  points: [
+                    '⚡ Coagulation : les particules naturelles portent une charge négative (répulsion mutuelle). On ajoute un coagulant chargé positivement pour neutraliser cette charge',
+                    '🧪 Coagulants courants : sulfate d\'aluminium Al₂(SO₄)₃ · 18H₂O ("alun"), chlorure ferrique FeCl₃, poly-chlorure d\'aluminium (PAC)',
+                    '🌀 Floculation : agitation douce (palettes) → les particules déstabilisées s\'agglomèrent en flocs visibles (flocons)',
+                    '⬇️ Décantation : les flocs sédimentent par gravité. Types : statique (bassin rectangulaire), lamellaire (accélérée par lamelles inclinées)',
+                    '📐 pH optimal de coagulation : aluminium : pH 6,0–7,5 | Fer : pH 5,0–8,5 (plus large, plus robuste)',
+                    '🧫 Jar-test : test de laboratoire pour déterminer la dose optimale de coagulant et le pH optimal',
+                    '🔬 Adjuvants : polyélectrolytes anioniques ou cationiques pour renforcer les flocs et accélérer la décantation',
+                    '🟤 Boues produites : 0,5–5 % du volume traité. Gestion : déshydratation (filtre-presse, centrifugeuse) + valorisation/décharge',
+                  ],
+                  formules: [
+                    'Al₂(SO₄)₃ + 6H₂O → 2Al(OH)₃↓ + 3SO₄²⁻ + 6H⁺ — réaction de coagulation à l\'aluminium',
+                    'Dose coagulant ≈ 10–100 mg/L selon turbidité et COT de l\'eau brute',
+                  ],
+                  retenir: 'Coagulation = neutralisation des charges. Floculation = agglomération. Décantation = séparation par gravité. pH optimal Al : 6–7,5. Dosage par jar-test.',
+                },
+                flashcards: [
+                  { q: 'Pourquoi les particules en suspension dans l\'eau naturelle ne décantent-elles pas spontanément ?', r: 'Elles portent une charge négative en surface → répulsion électrostatique mutuelle → maintien en suspension stable (colloïdes)', expl: 'Cette stabilité colloïdale est rompue par le coagulant (chargé positivement). Une fois déstabilisées, les particules s\'agglomèrent (floculation).' },
+                  { q: 'Quels sont les deux coagulants minéraux les plus utilisés ?', r: 'Sulfate d\'aluminium Al₂(SO₄)₃ ("alun") et chlorure ferrique FeCl₃', expl: 'Le chlorure ferrique est plus efficace sur une plage de pH plus large et à l\'eau froide. L\'aluminium est moins coûteux mais plus sensible au pH.' },
+                  { q: 'Quel est le pH optimal de coagulation pour les sels d\'aluminium ?', r: 'pH 6,0 à 7,5. En dehors de cette plage, la coagulation est inefficace (Al reste en solution)', expl: 'À pH > 8, l\'aluminium forme Al(OH)₄⁻ (soluble). À pH < 5, il reste Al³⁺ (soluble). Seule la forme Al(OH)₃ précipite et coagule.' },
+                  { q: 'À quoi sert le jar-test ?', r: 'Test de laboratoire simulant la coagulation-floculation pour déterminer la dose optimale de coagulant et le pH optimal pour une eau donnée', expl: 'On teste plusieurs doses dans 6 béchers en parallèle. On mesure turbidité résiduelle et pH après floculation et décantation. Essentiel pour régler la station.' },
+                  { q: 'Quelle est la différence entre un décanteur statique et lamellaire ?', r: 'Décanteur statique : grand bassin horizontal lent. Décanteur lamellaire : lamelles inclinées qui raccourcissent la distance de sédimentation → même surface, débit 5–10× plus élevé', expl: 'Les décanteurs lamellaires sont privilégiés dans les nouvelles installations ou pour augmenter la capacité sans agrandir le génie civil.' },
+                  { q: 'Que sont les boues de décantation et comment sont-elles traitées ?', r: 'Flocs sédimentés (Al(OH)₃ + matières organiques + MES). Épaississement + déshydratation (filtre-presse) + mise en décharge ou valorisation agricole (si conforme)', expl: 'Les boues de potabilisation sont souvent valorisées comme amendement agricole si leur composition le permet. Sinon : installation de stockage de déchets non dangereux (ISDND).' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#EBF3FB"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#1550A0">Coagulation – Floculation – Décantation</text>
+  <defs><marker id="ar2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#1550A0"/></marker></defs>
+  <rect x="4" y="18" width="54" height="24" rx="4" fill="#1550A0"/>
+  <text x="31" y="28.5" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Eau brute</text>
+  <text x="31" y="38" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">turbide/colorée</text>
+  <line x1="58" y1="30" x2="74" y2="30" stroke="#1550A0" stroke-width="1.5" marker-end="url(#ar2)"/>
+  <rect x="74" y="18" width="54" height="24" rx="4" fill="#2172C5"/>
+  <text x="101" y="28.5" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Coagulation</text>
+  <text x="101" y="38" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">Al₂(SO₄)₃ pH 6-7,5</text>
+  <line x1="128" y1="30" x2="144" y2="30" stroke="#1550A0" stroke-width="1.5" marker-end="url(#ar2)"/>
+  <rect x="144" y="18" width="54" height="24" rx="4" fill="#2E8FC7"/>
+  <text x="171" y="28.5" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Floculation</text>
+  <text x="171" y="38" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">agitateur lent 20 min</text>
+  <line x1="198" y1="30" x2="214" y2="30" stroke="#1550A0" stroke-width="1.5" marker-end="url(#ar2)"/>
+  <rect x="214" y="18" width="58" height="24" rx="4" fill="#3EA8D8"/>
+  <text x="243" y="28.5" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Décantation</text>
+  <text x="243" y="38" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">lamellaire ou static</text>
+  <text x="74" y="54" font-family="Arial" font-size="8" fill="#333">Al³⁺ + 3 OH⁻ → Al(OH)₃↓</text>
+  <text x="74" y="64" font-family="Arial" font-size="7.5" fill="#555">Charge neutralisée → déstabilisation</text>
+  <text x="144" y="54" font-family="Arial" font-size="8" fill="#333">Microfloculats → macroflocs</text>
+  <text x="144" y="64" font-family="Arial" font-size="7.5" fill="#555">Polymère floculant optionnel</text>
+  <text x="214" y="54" font-family="Arial" font-size="8" fill="#333">Flocs → fond</text>
+  <text x="214" y="64" font-family="Arial" font-size="7.5" fill="#555">Eau clarifiée en surface</text>
+  <rect x="4" y="72" width="264" height="30" rx="4" fill="#D0E8FF" stroke="#1550A0" stroke-width="1"/>
+  <text x="136" y="84" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#1550A0" font-weight="bold">Jar-test : optimisation en laboratoire</text>
+  <text x="136" y="95" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">6 béchers, doses croissantes de coagulant → turbidité résiduelle min.</text>
+  <text x="136" y="104" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Décanteur lamellaire : même surface, débit 5–10× vs décanteur statique</text>
+  <rect x="4" y="108" width="264" height="34" rx="4" fill="#FFF3E0"/>
+  <text x="136" y="118" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#E07B00" font-weight="bold">Boues de potabilisation</text>
+  <text x="136" y="129" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">Al(OH)₃ + MES + matières organiques → épaississement</text>
+  <text x="136" y="139" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">→ filtre-presse → valorisation agricole ou ISDND</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Un jar-test est réalisé sur une eau de surface (turbidité initiale = 25 NTU, pH = 7,2). Les résultats pour différentes doses de sulfate d\'aluminium sont : 10 mg/L → 4,8 NTU ; 20 mg/L → 1,2 NTU ; 30 mg/L → 0,9 NTU ; 40 mg/L → 0,8 NTU. La norme en sortie de filière est 1 NTU au réseau. Quelle dose choisissez-vous et pourquoi ?',
+                  solution: '<strong>Analyse des résultats :</strong><br>- 10 mg/L : 4,8 NTU → insuffisant (> 1 NTU)<br>- 20 mg/L : 1,2 NTU → encore légèrement au-dessus ; après filtration sur sable (qui affine le traitement) → on peut atteindre < 1 NTU au réseau<br>- 30 mg/L : 0,9 NTU → turbidité satisfaisante<br>- 40 mg/L : 0,8 NTU → amélioration marginale (+0,1 NTU) pour +33 % de coagulant<br><strong>Dose optimale : 20 ou 30 mg/L</strong> selon la présence d\'une filtration sur sable en aval. On choisit <strong>20 mg/L</strong> si la filière comporte un filtre à sable (ce qui ramènera la turbidité < 1 NTU), limitant la production de boues et le coût en réactif. On monte à 30 mg/L si la qualité de la ressource se dégrade.',
+                },
+              },
+              {
+                id: 'tep-3',
+                titre: 'Filtration sur sable et charbon actif en grains (CAG)',
+                fiche: {
+                  intro: 'La filtration affine le traitement après décantation et adsorbe les micropolluants organiques. Le charbon actif est la barrière indispensable contre les pesticides et les substances émergentes.',
+                  points: [
+                    '🏖️ Filtration rapide sur sable : vitesse 5–10 m/h. Retient flocs résiduels, MES, microorganismes. Doit être précédée de coagulation',
+                    '🐢 Filtration lente sur sable : vitesse 0,1–0,3 m/h. Se forme un bio-film (schmutzdecke) = couche biologique active très épurante. Pas besoin de coagulation préalable',
+                    '⬛ Charbon Actif en Grains (CAG) : adsorption des micropolluants organiques (pesticides, HAP, goûts, odeurs, PFAS partiellement)',
+                    '   Surface spécifique 800–1 200 m²/g → très grande capacité d\'adsorption',
+                    '   Durée de vie : 2–5 ans. Régénération : thermique (900 °C) ou biologique (biofilm)',
+                    '⬛ Charbon Actif en Poudre (CAP) : ajouté directement en suspension. Usage ponctuel (pics de pesticides, algues). Éliminé à la décantation',
+                    '🔄 Contre-lavage des filtres : eau + air injectés à contre-courant toutes les 24–72 h → décolmatage. Eau de lavage = effluent à traiter',
+                    '📊 Contrôle : mesure de la turbidité filtrée (< 0,5 NTU en sortie de filtre), pertes de charge, durée de cycle',
+                  ],
+                  formules: [
+                    'EBCT (Empty Bed Contact Time) = volume CAG / débit — temps de contact minimum pour adsorption efficace ≥ 10–15 min',
+                    'Taux de chargement filtration rapide : 5–10 m/h',
+                  ],
+                  retenir: 'Filtration rapide = clarification mécanique. CAG = adsorption micropollants (pesticides, goûts/odeurs). EBCT ≥ 10 min pour efficacité du CAG.',
+                },
+                flashcards: [
+                  { q: 'Quelle est la différence entre filtration rapide et filtration lente sur sable ?', r: 'Rapide (5–10 m/h) : traitement physique, retient les flocs. Lente (0,1–0,3 m/h) : biofilm (schmutzdecke) très épurant, élimine aussi les germes', expl: 'La filtration lente est très efficace mais nécessite de grandes surfaces. La filtration rapide est plus compacte mais nécessite une coagulation préalable.' },
+                  { q: 'Pourquoi utilise-t-on du charbon actif en grains (CAG) ?', r: 'Pour adsorber les micropolluants organiques (pesticides, HAP, goûts, odeurs) que les autres traitements n\'éliminent pas', expl: 'La très grande surface spécifique du CAG (jusqu\'à 1 200 m²/g) permet d\'adsorber des molécules organiques à très faibles concentrations (ng/L à µg/L).' },
+                  { q: 'Qu\'est-ce que l\'EBCT (Empty Bed Contact Time) ?', r: 'Temps de contact entre l\'eau et le CAG = volume du filtre CAG / débit. Minimum requis : 10–15 minutes pour une adsorption efficace', expl: 'Un EBCT trop court : l\'eau passe trop vite, les molécules n\'ont pas le temps d\'être adsorbées. On dimensionne la hauteur du lit en conséquence.' },
+                  { q: 'Quelle est la différence entre CAG et CAP ?', r: 'CAG = filtre permanent (2–5 ans, régénérable). CAP = poudre injectée en suspension, usage ponctuel, retirée à la décantation', expl: 'Le CAP est utilisé pour des pics saisonniers (prolifération algale → goûts/odeurs) ou des pollutions accidentelles. Il est moins coûteux ponctuellement mais non régénérable.' },
+                  { q: 'Comment se décolmate un filtre à sable rapide ?', r: 'Contre-lavage : injection d\'eau + air à contre-courant (expansionfluide du lit) toutes les 24–72 h selon le colmatage', expl: 'L\'eau de lavage (très chargée) est collectée et recyclée en tête de filière. Elle ne peut pas être rejetée directement dans le milieu naturel.' },
+                  { q: 'Qu\'est-ce que le "schmutzdecke" dans la filtration lente ?', r: 'Biofilm biologique qui se forme à la surface du sable lent après quelques semaines : communauté de bactéries, algues, protozoaires très efficace pour épurer l\'eau', expl: 'La formation du schmutzdecke (terme allemand = "peau sale") prend 2–6 semaines. C\'est une technologie très ancienne mais encore utilisée pour des petites communautés.' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#F0F8F0"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#2E7D32">Filtration sur CAG — coupe transversale</text>
+  <rect x="60" y="18" width="160" height="10" rx="2" fill="#546E7A"/>
+  <text x="140" y="25.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Eau à traiter (entrée)</text>
+  <rect x="60" y="30" width="160" height="50" rx="2" fill="#263238"/>
+  <text x="140" y="50" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold">Charbon Actif en Grains</text>
+  <text x="140" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#9E9E9E">Surface spécifique : 800–1 200 m²/g</text>
+  <text x="140" y="72" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#9E9E9E">Hauteur lit : 1,0–2,5 m</text>
+  <rect x="60" y="82" width="160" height="18" rx="2" fill="#78909C"/>
+  <text x="140" y="94" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Sable support + drain de fond</text>
+  <rect x="60" y="102" width="160" height="10" rx="2" fill="#1B5E20"/>
+  <text x="140" y="109.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Perméat (eau traitée)</text>
+  <text x="226" y="40" font-family="Arial" font-size="7.5" fill="#2E7D32">EBCT ≥ 10 min</text>
+  <text x="226" y="50" font-family="Arial" font-size="7.5" fill="#2E7D32">Vitesse filtr.</text>
+  <text x="226" y="58" font-family="Arial" font-size="7.5" fill="#2E7D32">5–10 m/h</text>
+  <rect x="4" y="118" width="126" height="24" rx="4" fill="#C8E6C9"/>
+  <text x="67" y="128.5" text-anchor="middle" font-family="Arial" font-size="8" fill="#1B5E20" font-weight="bold">CAG vs CAP</text>
+  <text x="67" y="139" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#2E7D32">CAG = permanent (2-5 ans)</text>
+  <rect x="136" y="118" width="136" height="24" rx="4" fill="#FFF9C4"/>
+  <text x="204" y="128.5" text-anchor="middle" font-family="Arial" font-size="8" fill="#F57F17" font-weight="bold">Régénération CAG</text>
+  <text x="204" y="139" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Thermique 900 °C ou biologique</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Une filière de potabilisation dispose d\'un filtre CAG de 2 m de haut, avec une section de 25 m². Le débit traité est 5 000 m³/h. 1) Calculer la vitesse de filtration. 2) Calculer l\'EBCT. 3) Ce filtre est-il dimensionné correctement ?',
+                  solution: '<strong>1) Vitesse de filtration :</strong> V = Q/S = 5 000 / 25 = <strong>200 m/h</strong><br>→ trop élevé ! Une vitesse de 200 m/h est incohérente. Revenons : le débit est probablement 50 m³/h → V = 50/25 = <strong>2 m/h</strong> → trop lent (filtration lente). Pour un CAG : optimal 5–10 m/h.<br><strong>2) EBCT :</strong> Volume du lit = 25 × 2 = 50 m³. EBCT = V_lit / Q = 50 / 50 = <strong>1 heure = 60 minutes</strong> → bien > 10 min ✓<br><strong>3) Conclusion :</strong> si Q = 50 m³/h, la vitesse de 2 m/h est trop faible (risque de court-circuit, développement biologique excessif). À 5 m/h optimal, le débit serait 125 m³/h et EBCT = 50/125 = 0,4 h = 24 min ≥ 10 min ✓. Pour Q = 50 m³/h, il faudrait réduire la section à 10 m² (V = 5 m/h, EBCT = 10/50 × 60 = 12 min ✓).',
+                },
+              },
+              {
+                id: 'tep-4',
+                titre: 'Désinfection — chlore, UV, ozone',
+                fiche: {
+                  intro: 'La désinfection est la dernière barrière contre les pathogènes. Chaque agent désinfectant a ses avantages et limites. La chloration maintient un résiduel protecteur dans le réseau.',
+                  points: [
+                    '🟡 Chloration : agent le plus utilisé en France. Formes : Cl₂ gazeux (usines), hypochlorite de sodium NaClO, dioxyde de chlore ClO₂',
+                    '   Chlore résiduel libre maintenu en distribution : 0,05–0,3 mg/L (arrêté 11/01/2007)',
+                    '   CT minimum requis : Cl₂ × temps (mg·min/L). Ex : CT = 20 pour E. coli à pH 7',
+                    '⚠️ Sous-produits de chloration (SPD) : trihalométhanes (THM) < 100 µg/L | acides haloacétiques (AHA) < 60 µg/L. Formés par réaction chlore × matières organiques',
+                    '🔵 UV (ultraviolets) : longueur d\'onde 254 nm. Efficace contre Cryptosporidium, Giardia et virus. Dose minimale : 40 mJ/cm². Pas de résiduel dans le réseau → post-chloration obligatoire',
+                    '🟣 Ozone O₃ : puissant oxydant, détruit virus, pesticides, micropollants. Dose 1–3 mg/L. Demi-vie très courte → résiduel nul → post-chloration obligatoire',
+                    '🧬 Ozone → peut former des bromates BrO₃⁻ (cancérogène possible) si eau contient du bromure Br⁻ — norme bromates : 10 µg/L',
+                    '📊 Combinaisons courantes : O₃ + CAG + Cl₂ | UV + Cl₂ (eau souterraine sans MO)',
+                  ],
+                  formules: [
+                    'CT (mg·min/L) = C_désinfectant (mg/L) × t_contact (min) — efficacité de la désinfection',
+                    'Log-inactivation = f(CT, T°, pH) — se lit sur les tables CT de l\'OMS',
+                  ],
+                  retenir: 'Chlore = désinfectant + résiduel réseau. UV = efficace Cryptosporidium, pas de résiduel. Ozone = puissant mais pas de résiduel. THM < 100 µg/L.',
+                },
+                flashcards: [
+                  { q: 'Pourquoi maintient-on un chlore résiduel dans le réseau de distribution ?', r: 'Pour éviter la recontamination bactériologique entre la station et le robinet. Minimum 0,05 mg/L aux points les plus éloignés', expl: 'Le réseau peut être contaminé par des entrées d\'eau non traitée (joints, fuites, travaux). Le chlore résiduel tue les bactéries qui pourraient entrer.' },
+                  { q: 'Qu\'est-ce que le concept CT en désinfection ?', r: 'CT = Concentration du désinfectant (mg/L) × Temps de contact (min). La valeur CT nécessaire dépend du pathogène, de la T° et du pH', expl: 'Pour inactiver 3 log de Giardia à 10 °C, pH 7 : CT chlore ≈ 165 mg·min/L. Pour Cryptosporidium : CT chlore >> 1 000 (donc UV ou O₃ obligatoire).' },
+                  { q: 'Quels sont les sous-produits de chloration (SPD) et leur norme ?', r: 'Trihalométhanes (THM) : < 100 µg/L. Acides haloacétiques (AHA) : < 60 µg/L. Formés par réaction chlore + matière organique naturelle', expl: 'Pour limiter les SPD : réduire la dose de chlore et les matières organiques (filtration sur CAG) avant chloration, et éviter le surchlorage.' },
+                  { q: 'Pourquoi l\'UV est-il particulièrement adapté pour Cryptosporidium ?', r: 'Les UV endommagent l\'ADN des oocystes de Cryptosporidium de façon irréversible. Ils sont résistants au chlore mais très sensibles aux UV à 254 nm', expl: 'Dose minimale : 10 mJ/cm² pour 2 log de réduction. 40 mJ/cm² pour 3 log. L\'OFB recommande 40 mJ/cm² comme minimum pour l\'eau potable.' },
+                  { q: 'Quel sous-produit dangereux peut être formé lors d\'une ozonation ?', r: 'Les bromates BrO₃⁻ (cancérogène présumé), formés si l\'eau brute contient du bromure Br⁻. Norme AEP : 10 µg/L', expl: 'Les eaux littorales et certaines nappes contiennent naturellement des bromures. L\'ozonation les oxyde en bromates. Parade : réduire la dose d\'ozone ou prétraiter.' },
+                  { q: 'Quelle combinaison de traitements est la plus efficace contre les micropolluants et les pathogènes ?', r: 'Ozonation + filtration sur CAG + post-chloration : élimine micropollants (O₃ + CAG), pathogènes (O₃ + Cl₂) et maintient un résiduel (Cl₂)', expl: 'Cette filière est très efficace mais coûteuse (investissement O₃ élevé). Réservée aux grandes usines ou aux ressources de mauvaise qualité.' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#FFF8F0"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#C05A10">Désinfection — CT et résistance des pathogènes</text>
+  <rect x="4" y="18" width="272" height="11" rx="2" fill="#C05A10"/>
+  <text x="140" y="26.5" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">CT (mg·min/L) pour 3 log de réduction — T=10°C, pH=7</text>
+  <rect x="4" y="31" width="110" height="11" rx="2" fill="#884000"/>
+  <rect x="120" y="31" width="70" height="11" rx="2" fill="#884000"/>
+  <rect x="196" y="31" width="80" height="11" rx="2" fill="#884000"/>
+  <text x="59" y="39.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Pathogène</text>
+  <text x="155" y="39.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Chlore</text>
+  <text x="236" y="39.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">UV (mJ/cm²)</text>
+  <text x="59" y="54" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Bactéries (E.coli)</text>
+  <text x="155" y="54" text-anchor="middle" font-family="Arial" font-size="8" fill="#00A050">0,4</text>
+  <text x="236" y="54" text-anchor="middle" font-family="Arial" font-size="8" fill="#00A050">6</text>
+  <text x="59" y="68" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Virus entériques</text>
+  <text x="155" y="68" text-anchor="middle" font-family="Arial" font-size="8" fill="#E07B00">6</text>
+  <text x="236" y="68" text-anchor="middle" font-family="Arial" font-size="8" fill="#00A050">40</text>
+  <text x="59" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Giardia (kystes)</text>
+  <text x="155" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#E07B00">165</text>
+  <text x="236" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#00A050">20</text>
+  <text x="59" y="96" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Cryptosporidium</text>
+  <text x="155" y="96" text-anchor="middle" font-family="Arial" font-size="8" fill="#CC0000">> 1 000</text>
+  <text x="236" y="96" text-anchor="middle" font-family="Arial" font-size="8" fill="#00A050">10</text>
+  <text x="59" y="110" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Legionella</text>
+  <text x="155" y="110" text-anchor="middle" font-family="Arial" font-size="8" fill="#00A050">5</text>
+  <text x="236" y="110" text-anchor="middle" font-family="Arial" font-size="8" fill="#00A050">5</text>
+  <rect x="4" y="118" width="272" height="24" rx="4" fill="#FDE8D8"/>
+  <text x="140" y="129" text-anchor="middle" font-family="Arial" font-size="8" fill="#C05A10" font-weight="bold">Crypto résistant au chlore → UV ou ozone obligatoire</text>
+  <text x="140" y="139" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">SPD chloration : THM < 100 µg/L · AHA < 60 µg/L — Bromates O₃ < 10 µg/L</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Une station traite 2 000 m³/h. Le débit dans la chambre de contact chlorée est continu (plug-flow). La concentration résiduelle en chlore libre est 0,3 mg/L et le temps de contact est 25 minutes. 1) Calculer le CT. 2) Cette désinfection assure-t-elle 3 log de réduction de Giardia (CT requis = 165 mg·min/L à 10°C) ? 3) Que faire si la température descend à 5°C (CT Giardia = 265 mg·min/L) ?',
+                  solution: '<strong>1) CT = C × T</strong> = 0,3 × 25 = <strong>7,5 mg·min/L</strong><br><strong>2) Non :</strong> CT obtenu (7,5) << CT requis (165) → moins de 3 log de réduction pour Giardia. Cette chloration seule est largement insuffisante contre les protozoaires.<br><strong>3) En hiver (5°C) :</strong> le CT requis passe à 265 mg·min/L → encore plus défavorable. Solutions possibles :<br>• Augmenter C à 1 mg/L et T à 265 min (irréaliste pour les SPD)<br>• <strong>Installer un traitement UV</strong> (40 mJ/cm² = 3 log Giardia, insensible à la T°)<br>• <strong>Ozonation</strong> (CT O₃ Giardia ≈ 0,9 mg·min/L → très efficace)<br>Recommandation : UV en barrière anti-Giardia/Crypto + chloration résiduelle pour le réseau.',
+                },
+              },
+              {
+                id: 'tep-5',
+                titre: 'Traitements avancés — nanofiltration et osmose inverse',
+                fiche: {
+                  intro: 'Les procédés membranaires permettent d\'éliminer les polluants que les traitements classiques ne peuvent pas traiter : PFAS, nitrates, salinité. Ils sont de plus en plus utilisés face aux pollutions émergentes.',
+                  points: [
+                    '🔬 Hiérarchie des membranes (du moins au plus serré) : MF (0,1–10 µm) > UF (0,01–0,1 µm) > NF (0,001–0,01 µm) > OI (< 0,001 µm)',
+                    '🔵 Microfiltration (MF) et Ultrafiltration (UF) : éliminent bactéries, parasites, virus (UF). Pression 0,5–4 bar. Remplacent avantageusement la filtration sur sable',
+                    '🟡 Nanofiltration (NF) : élimine pesticides, PFAS, dureté (ions divalents Ca²⁺, Mg²⁺), couleur. Pression 5–20 bar. Rétention sélective',
+                    '🔴 Osmose inverse (OI) : élimine quasi tout (sels, PFAS, nitrates, métaux, virus). Pression 15–80 bar. Taux de conversion 60–80 %',
+                    '🌊 OI dessalement : pression > 60 bar pour l\'eau de mer (TDS ≈ 35 000 mg/L). Très énergivore (3–10 kWh/m³)',
+                    '⚠️ Concentrat : 20–40 % du volume traité, très chargé en polluants retenus → évacuation obligatoire (milieu naturel si autorisation, égout, réinjection)',
+                    '🔧 CIP (Cleaning In Place) : nettoyage chimique des membranes (acide, base, biocide) tous les quelques mois contre l\'entartrage et le biofouling',
+                    '💧 Perméat déminéralisé : reminéralisation obligatoire avant distribution (CO₂ + calcaire) pour corriger l\'équilibre calco-carbonique',
+                  ],
+                  formules: [
+                    'Taux de conversion r = Q_perméat / Q_alimentation × 100 (%) — ex : r = 75 % → 25 % de concentrat',
+                    'Flux membranaire J = Q_perméat / Surface (L/h/m² ou LMH)',
+                  ],
+                  retenir: 'OI = élimination totale mais énergivore + concentrat. NF = sélectif (dureté, pesticides). Toujours reminéraliser le perméat. Taux conversion OI : 60–80 %.',
+                },
+                flashcards: [
+                  { q: 'Dans quel ordre croissant de "finesse" classe-t-on les membranes ?', r: 'MF < UF < NF < OI (du moins au plus serré). MF laisse passer les bactéries, OI retient les ions', expl: 'La sélectivité augmente avec la pression nécessaire. MF : 0,5 bar. OI eau douce : 15–25 bar. OI eau de mer : 60–80 bar.' },
+                  { q: 'Quelle membrane est utilisée pour éliminer les PFAS de l\'eau potable ?', r: 'La nanofiltration (NF) ou l\'osmose inverse (OI). La NF retient les PFAS > C8. L\'OI retient pratiquement tous les PFAS', expl: 'Les PFAS à chaîne courte (C4, C6) peuvent traverser certaines membranes NF. L\'OI est plus sûre mais plus énergivore et produit plus de concentrat.' },
+                  { q: 'Qu\'est-ce que le concentrat et comment est-il géré ?', r: 'Volume d\'eau rejeté (20–40 %) très concentré en polluants retenus par la membrane. Géré par rejet au milieu naturel (autorisation), réseau d\'assainissement ou réinjection', expl: 'Le concentrat pose un problème environnemental : rejeter des PFAS ou des nitrates concentrés dans le milieu peut aggraver la pollution à la source.' },
+                  { q: 'Pourquoi doit-on reminéraliser l\'eau après osmose inverse ?', r: 'L\'OI produit une eau très déminéralisée (conductivité < 50 µS/cm), agressive et instable. La reminéralisation (CO₂ + calcaire) rétablit l\'équilibre calco-carbonique', expl: 'Une eau trop douce corrode les canalisations (cuivre, acier) et a un goût "plat" désagréable. L\'OMS recommande une minéralisation minimale après traitement par membranes.' },
+                  { q: 'Quelle est la consommation énergétique typique de l\'osmose inverse pour l\'eau douce ?', r: '0,3–1 kWh/m³ pour l\'eau douce (nitrates, pesticides). 3–10 kWh/m³ pour le dessalement de l\'eau de mer', expl: 'L\'OI est l\'étape la plus énergivore d\'une filière de potabilisation. La récupération d\'énergie sur le concentrat (échangeurs de pression) réduit la consommation du dessalement.' },
+                  { q: 'Qu\'est-ce que le CIP (Cleaning In Place) des membranes ?', r: 'Nettoyage chimique in situ des membranes : acide (détartrage), base (matières organiques), biocide (biofilm). Périodicité : mensuelle à semestrielle', expl: 'Sans CIP régulier, les membranes se colmatent (fouling) par dépôts calcaires, biofilm ou colloïdes. Le flux chute et la consommation d\'énergie augmente.' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#EEF6FF"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#1550A0">Membranes — hiérarchie et rétention</text>
+  <defs><marker id="ar3" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#666"/></marker></defs>
+  <text x="8" y="30" font-family="Arial" font-size="8" fill="#333">Taille</text>
+  <text x="8" y="40" font-family="Arial" font-size="8" fill="#333">pores</text>
+  <text x="8" y="50" font-family="Arial" font-size="7.5" fill="#888">Pression</text>
+  <rect x="50" y="18" width="50" height="50" rx="4" fill="#4DB6AC"/>
+  <text x="75" y="32" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold">MF</text>
+  <text x="75" y="43" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">0,1–10 µm</text>
+  <text x="75" y="53" text-anchor="middle" font-family="Arial" font-size="7" fill="#ddd">< 1 bar</text>
+  <rect x="106" y="18" width="50" height="50" rx="4" fill="#26A69A"/>
+  <text x="131" y="32" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold">UF</text>
+  <text x="131" y="43" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">10–100 nm</text>
+  <text x="131" y="53" text-anchor="middle" font-family="Arial" font-size="7" fill="#ddd">1–3 bar</text>
+  <rect x="162" y="18" width="50" height="50" rx="4" fill="#00796B"/>
+  <text x="187" y="32" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold">NF</text>
+  <text x="187" y="43" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">1–10 nm</text>
+  <text x="187" y="53" text-anchor="middle" font-family="Arial" font-size="7" fill="#ddd">5–20 bar</text>
+  <rect x="218" y="18" width="54" height="50" rx="4" fill="#004D40"/>
+  <text x="245" y="32" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold">OI</text>
+  <text x="245" y="43" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">< 1 nm</text>
+  <text x="245" y="53" text-anchor="middle" font-family="Arial" font-size="7" fill="#ddd">15–80 bar</text>
+  <rect x="50" y="74" width="50" height="32" rx="4" fill="#B2DFDB"/>
+  <text x="75" y="85" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">MES, bact.,</text>
+  <text x="75" y="93" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">parasites</text>
+  <text x="75" y="101" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">protozoaires</text>
+  <rect x="106" y="74" width="50" height="32" rx="4" fill="#B2DFDB"/>
+  <text x="131" y="85" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">Virus, prot.</text>
+  <text x="131" y="93" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">colloïdes</text>
+  <text x="131" y="101" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">macromol.</text>
+  <rect x="162" y="74" width="50" height="32" rx="4" fill="#B2DFDB"/>
+  <text x="187" y="85" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">PFAS, pest.</text>
+  <text x="187" y="93" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">dureté Ca²⁺</text>
+  <text x="187" y="101" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">molécules</text>
+  <rect x="218" y="74" width="54" height="32" rx="4" fill="#B2DFDB"/>
+  <text x="245" y="85" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">Tous ions</text>
+  <text x="245" y="93" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">sels, NO₃⁻</text>
+  <text x="245" y="101" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">eau de mer</text>
+  <rect x="4" y="112" width="272" height="30" rx="4" fill="#D0E8FF"/>
+  <text x="140" y="122" text-anchor="middle" font-family="Arial" font-size="8" fill="#1550A0" font-weight="bold">Concentrat (20–40 %) à gérer · CIP mensuel à semestriel</text>
+  <text x="140" y="132" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">OI eau douce : 0,3–1 kWh/m³ · OI eau de mer : 3–10 kWh/m³</text>
+  <text x="140" y="140" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Taux conversion r = Q_perméat / Q_alimentation × 100 (%)</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Une installation d\'osmose inverse traite 500 m³/h avec un taux de conversion de 75 %. 1) Quel est le débit de perméat ? 2) Quel est le débit de concentrat ? 3) La conductivité du perméat est 25 µS/cm. Peut-il être distribué directement ? Que faut-il faire ?',
+                  solution: '<strong>1) Débit perméat :</strong> Q_perméat = 500 × 0,75 = <strong>375 m³/h</strong><br><strong>2) Débit concentrat :</strong> Q_concentrat = 500 − 375 = <strong>125 m³/h</strong><br><strong>3) Distribution directe :</strong> Non. Conductivité 25 µS/cm = eau très déminéralisée (eau naturelle équilibrée : 200–700 µS/cm). L\'indice de Langelier est très négatif → eau agressive pour les canalisations + goût "plat" pour le consommateur + carences minérales.<br><strong>Traitement obligatoire :</strong> reminéralisation par injection de CO₂ puis passage sur lit de calcaire (marbre ou craie) pour atteindre TH ≈ 10–20 °f et IL ≈ 0. Objectif : conductivité > 200 µS/cm et pH ≈ 7,5.',
+                },
+              },
+            ],
+          },
+
+          /* ── Assainissement collectif ── */
+          {
+            id: 'assainissement',
+            name: 'Assainissement collectif',
+            ico: '🏭',
+            color: '#5C4A1E',
+            colorl: '#F5EFE0',
+            chapitres: [
+              {
+                id: 'ac-1',
+                titre: 'Réseaux d\'assainissement — séparatifs et unitaires',
+                fiche: {
+                  intro: 'Le réseau d\'assainissement collecte les eaux usées domestiques et/ou les eaux pluviales pour les acheminer vers la STEP. Le choix du système conditionne les performances épuratoires et les coûts d\'exploitation.',
+                  points: [
+                    '🔵 Réseau séparatif : deux canalisations distinctes — EU (eaux usées) vers STEP, EP (eaux pluviales) vers milieu naturel ou bassin de rétention',
+                    '🟤 Réseau unitaire : une seule canalisation collectant EU + EP. Avantage : investissement initial réduit. Inconvénient : surcharge hydraulique en pluie → déversements',
+                    '🟡 Réseau pseudo-séparatif : séparatif de conception mais avec mauvais branchements (EP dans EU). Très fréquent dans le parc existant',
+                    '🚨 Déversoir d\'orage (DO) : ouvrage sur réseau unitaire qui déleste le trop-plein vers le milieu naturel en cas de pluie. Réglementé (arrêté 21/07/2015 si Q > 120 m³/h)',
+                    '📐 Règles de conception : pente minimale 2 ‰ (EU gravitaire) — vitesse d\'auto-curage ≥ 0,6 m/s — DN minimal 200 mm pour EU',
+                    '🔍 Diagnostic réseau : ITV (inspection télévisée), test colorimétrique, mesures de débit. Permet de détecter les eaux parasites',
+                    '💧 Eaux parasites permanentes (EP) : eau souterraine infiltrée dans les réseaux EU → surdimensionnement STEP et dilution des boues',
+                    '🏗️ Zonage d\'assainissement : document d\'urbanisme définissant les zones raccordées au réseau collectif vs. ANC',
+                  ],
+                  formules: [
+                    'Pente minimale auto-curage EU : I ≥ 2 ‰ pour DN200, à vérifier avec Manning-Strickler',
+                    'Vitesse d\'auto-curage : V ≥ 0,6 m/s à pleine section (EU), V ≥ 0,3 m/s à débit de pointe (EP)',
+                  ],
+                  retenir: 'Séparatif = 2 réseaux (EU + EP). Unitaire = 1 réseau + déversoirs d\'orage. Auto-curage : V ≥ 0,6 m/s, pente ≥ 2 ‰. Diagnostiquer les eaux parasites.',
+                },
+                flashcards: [
+                  { q: 'Quelle est la différence entre réseau séparatif et unitaire ?', r: 'Séparatif : 2 réseaux distincts (EU vers STEP, EP vers milieu). Unitaire : 1 seul réseau (EU+EP) avec déversoirs d\'orage en cas de pluie', expl: 'Le réseau séparatif protège mieux le milieu naturel (pas de déversement d\'EU) mais est plus coûteux à construire. La majorité des villes françaises ont un réseau unitaire historique.' },
+                  { q: 'Qu\'est-ce qu\'un déversoir d\'orage (DO) ?', r: 'Ouvrage sur réseau unitaire qui déverse le trop-plein (EU diluées) vers le milieu naturel lorsque le débit dépasse la capacité de transport', expl: 'Les DO sont réglementés depuis l\'arrêté du 21/07/2015. Obligatoirement équipés d\'autosurveillance si Q > 120 m³/h ou STEP > 2 000 EH.' },
+                  { q: 'Pourquoi la pente minimale d\'un collecteur EU est-elle de 2 ‰ ?', r: 'Pour atteindre une vitesse d\'auto-curage ≥ 0,6 m/s à pleine section, évitant les dépôts de matières dans la conduite', expl: 'En dessous de 0,6 m/s, les matières en suspension sédimentent et forment des dépôts qui réduisent la section et créent des nuisances olfactives.' },
+                  { q: 'Qu\'est-ce que le réseau pseudo-séparatif ?', r: 'Réseau conçu en séparatif mais avec des mauvais raccordements : EP dans le réseau EU, ou EU dans le réseau EP', expl: 'Très fréquent dans le parc existant. Les EP dans EU surchargent la STEP en pluie. Les EU dans EP polluent directement le milieu naturel sans traitement.' },
+                  { q: 'Qu\'est-ce que le zonage d\'assainissement ?', r: 'Document délimitant les zones relevant de l\'assainissement collectif (réseau public) et les zones où l\'ANC est obligatoire', expl: 'C\'est une pièce obligatoire du PLU (Plan Local d\'Urbanisme). Une habitation en zone ANC ne peut pas être raccordée au réseau collectif.' },
+                  { q: 'Qu\'est-ce que l\'ITV en diagnostic de réseau ?', r: 'Inspection Télévisée des canalisations : caméra robotisée qui parcourt le réseau et détecte les défauts (fissures, déformations, mauvais branchements)', expl: 'L\'ITV est la technique de référence pour le diagnostic d\'un réseau. Elle est obligatoire pour les STEP > 10 000 EH (autosurveillance réglementaire).' },
+                ],
+                schema: `<svg viewBox="0 0 280 145" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="145" rx="8" fill="#E8F0FB"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#1550A0">Systèmes d'assainissement — comparaison</text>
+  <rect x="8" y="18" width="124" height="14" rx="3" fill="#1550A0"/>
+  <rect x="140" y="18" width="132" height="14" rx="3" fill="#884000"/>
+  <text x="70" y="28.5" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold">Séparatif</text>
+  <text x="206" y="28.5" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold">Unitaire</text>
+  <rect x="8" y="34" width="52" height="42" rx="3" fill="#1550A0" opacity=".15" stroke="#1550A0" stroke-width="1"/>
+  <text x="34" y="47" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#1550A0" font-weight="bold">EU</text>
+  <text x="34" y="56" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">→ STEP</text>
+  <text x="34" y="65" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">traitement</text>
+  <rect x="68" y="34" width="52" height="42" rx="3" fill="#3EA8D8" opacity=".2" stroke="#3EA8D8" stroke-width="1"/>
+  <text x="94" y="47" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#1550A0" font-weight="bold">EP</text>
+  <text x="94" y="56" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">→ milieu nat.</text>
+  <text x="94" y="65" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">ou bassins</text>
+  <rect x="140" y="34" width="120" height="42" rx="3" fill="#884000" opacity=".15" stroke="#884000" stroke-width="1"/>
+  <text x="200" y="47" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#884000" font-weight="bold">EU + EP → 1 canalisation</text>
+  <text x="200" y="57" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">Déversoir d'orage (DO)</text>
+  <text x="200" y="66" text-anchor="middle" font-family="Arial" font-size="7" fill="#CC0000">→ déversement EU diluées</text>
+  <rect x="8" y="82" width="124" height="34" rx="3" fill="#D0E8FF" stroke="#1550A0" stroke-width="1"/>
+  <text x="70" y="93" text-anchor="middle" font-family="Arial" font-size="8" fill="#1550A0" font-weight="bold">✓ Pas de déversement EU</text>
+  <text x="70" y="102" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Investissement : 2 canalisations</text>
+  <text x="70" y="110" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Risque : pseudo-séparatif</text>
+  <rect x="140" y="82" width="132" height="34" rx="3" fill="#FDE8D8" stroke="#884000" stroke-width="1"/>
+  <text x="206" y="93" text-anchor="middle" font-family="Arial" font-size="8" fill="#884000" font-weight="bold">1 canalisation (coût réduit)</text>
+  <text x="206" y="102" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">DO réglementé > 120 m³/h</text>
+  <text x="206" y="110" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">STEP surchargée en pluie</text>
+  <rect x="8" y="122" width="264" height="16" rx="3" fill="#1550A0" opacity=".1"/>
+  <text x="140" y="133" text-anchor="middle" font-family="Arial" font-size="8" fill="#1550A0">Auto-curage : V ≥ 0,6 m/s · pente ≥ 2 ‰ · DN min 200 mm EU</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Lors d\'un diagnostic réseau EU, un test au colorant révèle que 35 % du débit par temps sec est constitué d\'eaux parasites permanentes (eaux de nappe infiltrées). La STEP en aval est dimensionnée pour 3 000 EH. Le débit réel entrant en temps sec est 950 m³/j. 1) Quel est le débit d\'eaux parasites estimé ? 2) Quel est l\'impact sur la STEP ? 3) Quelle action prioritaire ?',
+                  solution: '<strong>1) Débit eaux parasites :</strong> 35 % × 950 = <strong>332 m³/j</strong><br><strong>2) Impact STEP :</strong> les eaux parasites diluent les eaux usées → charge organique diluée mais volume hydraulique gonflé. Le temps de séjour dans les bassins biologiques est réduit → risque de lavage des boues (IB élevé, nitrification perturbée si T° froide). La STEP reçoit un volume hydraulique supérieur à celui prévu.<br><strong>3) Action prioritaire :</strong> localisation précise des entrées parasites par ITV (inspection télévisée) + tests colorimétriques secteur par secteur. Réparation des drainages parasites (drains de fond de jardin, drains agricoles), mise en sac-vide des joints défaillants. Objectif : réduire le taux d\'eaux parasites à < 15 % du débit.',
+                },
+              },
+              {
+                id: 'ac-2',
+                titre: 'Dimensionnement des collecteurs gravitaires',
+                fiche: {
+                  intro: 'Le dimensionnement d\'un collecteur doit garantir l\'évacuation des débits de pointe (EU et EP) avec une vitesse d\'auto-curage suffisante et un fonctionnement à surface libre.',
+                  points: [
+                    '📊 Débit moyen EU : Q_moy = dotation (L/j/habitant) × nb habitants / 86 400',
+                    '   Dotation courante en France : 150–250 L/j/habitant',
+                    '📈 Débit de pointe EU : Q_p = k × Q_moy avec k = 1,5 + 2,5/√Q_moy (Q en L/s)',
+                    '   Si Q_moy < 1 L/s : k = 3 (coefficient forfaitaire)',
+                    '🌧️ Débit de pointe EP (méthode rationnelle) : Q = C × i × A / 360 (en L/s)',
+                    '   C = coefficient de ruissellement (imperméable ≈ 0,9 ; espaces verts ≈ 0,2)',
+                    '   i = intensité pluie (mm/h) pour la période de retour choisie (T = 10 ans courant)',
+                    '   A = surface du bassin versant (ha)',
+                    '📐 Dimensionnement hydraulique : Manning-Strickler Q = K·A·Rh^(2/3)·I^(1/2)',
+                    '   Conduite circulaire pleine : A = π·D²/4, Rh = D/4',
+                    '   Fonctionnement préconisé : 70–80 % de la section pleine (pas 100 %)',
+                    '⚡ Vitesses limites : V_min 0,6 m/s (auto-curage EU) — V_max 3–4 m/s (éviter abrasion)',
+                  ],
+                  formules: [
+                    'Q_moy EU (L/s) = N × dotation / 86400',
+                    'k = 1,5 + 2,5/√Q_moy — coefficient de pointe horaire EU',
+                    'Q_EP = C × i × A / 360 — méthode rationnelle (L/s)',
+                    'Q = K · A · Rh^(2/3) · I^(1/2) — Manning-Strickler',
+                  ],
+                  retenir: 'Débit de pointe EU = k × Q_moy. Méthode rationnelle pour EP. Manning-Strickler pour dimensionner. Fonctionner à 70–80 % de la section pleine.',
+                },
+                flashcards: [
+                  { q: 'Formule du coefficient de pointe horaire k pour les EU ?', r: 'k = 1,5 + 2,5 / √Q_moy  (Q_moy en L/s). Si Q_moy < 1 L/s : k = 3 forfaitaire', expl: 'Le coefficient de pointe reflète les variations journalières : plus le débit moyen est faible (petite commune), plus les pointes sont proportionnellement importantes.' },
+                  { q: 'Formule de la méthode rationnelle pour le débit EP de pointe ?', r: 'Q = C × i × A / 360  (L/s, avec A en ha, i en mm/h)', expl: 'Valide pour les bassins versants < 2 km². Pour les grands bassins : méthodes complexes (Gradex, SHYREG). Le coefficient 360 vient de la conversion d\'unités (1 mm/h sur 1 ha = 2,78 L/s).' },
+                  { q: 'Pourquoi dimensionne-t-on un collecteur à 70–80 % de la section pleine et non 100 % ?', r: 'Pour conserver une marge de sécurité face aux incertitudes de débit et éviter la mise en charge (écoulement sous pression)', expl: 'Un collecteur en charge peut provoquer des refoulements dans les caves. La marge à 70–80 % absorbe les pointes non prévues et les apports parasites.' },
+                  { q: 'Que vaut le coefficient de ruissellement C pour une surface imperméable ?', r: 'C ≈ 0,9 pour les surfaces imperméables (toits, voiries). C ≈ 0,2 pour les espaces verts. C ≈ 0,6 pour un quartier mixte', expl: 'Le coefficient de ruissellement exprime la fraction des précipitations qui ruisselle (le reste s\'infiltre ou s\'évapore). Il est crucial pour le dimensionnement des réseaux EP.' },
+                  { q: 'Pourquoi limiter la vitesse maximale dans un collecteur ?', r: 'Au-delà de 3–4 m/s, l\'eau chargée de sable érode les parois (abrasion). Risque d\'usure prématurée et de fuites', expl: 'En pratique, les grandes pentes (terrain montagneux) peuvent imposer des vitesses élevées. On utilise alors des cascades ou des chutes pour dissiper l\'énergie.' },
+                  { q: 'Quelle est la dotation moyenne en eau usée par habitant utilisée en France ?', r: '150 à 250 L/j/habitant selon le contexte (rural, urbain, activités). Valeur courante : 200 L/j/hab', expl: 'La dotation varie selon les habitudes, le niveau de vie et la présence d\'activités industrielles ou commerciales. Elle diminue dans les villes où l\'eau est chère.' },
+                ],
+                schema: `<svg viewBox="0 0 280 145" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="145" rx="8" fill="#EBF5FF"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#1550A0">Dimensionnement collecteur EU — méthodes clés</text>
+  <rect x="8" y="18" width="264" height="22" rx="3" fill="#1550A0" opacity=".1" stroke="#1550A0" stroke-width="1"/>
+  <text x="140" y="26.5" text-anchor="middle" font-family="Arial" font-size="8" fill="#1550A0" font-weight="bold">Débit moyen EU : Q_moy = N × dotation / 86 400</text>
+  <text x="140" y="36" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">ex : 1 000 hab × 200 L/j / 86 400 = 2,31 L/s</text>
+  <rect x="8" y="44" width="264" height="28" rx="3" fill="#2172C5" opacity=".1" stroke="#2172C5" stroke-width="1"/>
+  <text x="140" y="53" text-anchor="middle" font-family="Arial" font-size="8" fill="#1550A0" font-weight="bold">Coefficient de pointe k = 1,5 + 2,5 / √Q_moy</text>
+  <text x="140" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Si Q_moy = 2,31 L/s → k = 1,5 + 2,5/√2,31 = 1,5 + 1,64 = 3,14</text>
+  <text x="140" y="70" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Q_p = 3,14 × 2,31 = <tspan font-weight="bold" fill="#1550A0">7,25 L/s</tspan></text>
+  <rect x="8" y="76" width="264" height="28" rx="3" fill="#3EA8D8" opacity=".1" stroke="#3EA8D8" stroke-width="1"/>
+  <text x="140" y="85" text-anchor="middle" font-family="Arial" font-size="8" fill="#1550A0" font-weight="bold">Méthode rationnelle EP : Q = C × i × A / 360</text>
+  <text x="140" y="94" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">ex : C=0,7, i=30 mm/h, A=5 ha → Q = 0,7×30×5/360 = <tspan font-weight="bold" fill="#1550A0">0,29 m³/s = 292 L/s</tspan></text>
+  <text x="140" y="102" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Valable bassins &lt; 2 km² — pluie T=10 ans courante</text>
+  <rect x="8" y="108" width="264" height="24" rx="3" fill="#1B5E20" opacity=".1" stroke="#1B5E20" stroke-width="1"/>
+  <text x="140" y="117" text-anchor="middle" font-family="Arial" font-size="8" fill="#1B5E20" font-weight="bold">Manning-Strickler : Q = K · A · Rh^(2/3) · I^(1/2)</text>
+  <text x="140" y="127" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">DN plein : A = πD²/4, Rh = D/4 — fonctionner à 70–80 % section</text>
+  <rect x="8" y="134" width="264" height="8" rx="2" fill="#1550A0"/>
+  <text x="140" y="140" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">V_min 0,6 m/s (auto-curage) · V_max 3–4 m/s (abrasion)</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Un quartier de 800 habitants (dotation 200 L/j/hab) doit être raccordé à un collecteur EU en PVC de pente I = 5 ‰ et K = 80 m¹/³/s. 1) Calculer Q_moy puis Q_pointe. 2) Vérifier si un DN 200 mm (K·A·Rh^2/3·I^1/2, pleine section) est suffisant en respectant 80 % de la section.',
+                  solution: '<strong>1) Q_moy :</strong> 800 × 200 / 86 400 = <strong>1,85 L/s</strong><br>k = 1,5 + 2,5/√1,85 = 1,5 + 1,84 = <strong>3,34</strong><br>Q_pointe = 3,34 × 1,85 = <strong>6,18 L/s = 0,00618 m³/s</strong><br><strong>2) Manning-Strickler DN 200 mm :</strong><br>A = π × 0,2² / 4 = 0,0314 m²<br>Rh = 0,2/4 = 0,05 m<br>Q_plein = 80 × 0,0314 × 0,05^(2/3) × 0,005^(1/2) = 80 × 0,0314 × 0,1357 × 0,0707 = <strong>0,0241 m³/s = 24,1 L/s</strong><br>80 % section → Q_admissible = 0,80 × 24,1 = <strong>19,3 L/s</strong><br>Q_pointe (6,18) << Q_admissible (19,3) → DN 200 mm est largement suffisant.',
+                },
+              },
+              {
+                id: 'ac-3',
+                titre: 'Stations d\'épuration à boues activées',
+                fiche: {
+                  intro: 'Les boues activées constituent le procédé d\'épuration biologique le plus répandu pour les STEP urbaines. Les bactéries en suspension dégradent la matière organique en conditions aérobies.',
+                  points: [
+                    '⚙️ Prétraitements (obligatoires) : dégrillage (≥ 6 mm) + dessablage + déshuilage → protègent les équipements aval',
+                    '🟤 Décantation primaire (facultative) : sépare les MES décantables → réduit la charge des bassins biologiques de 30–40 %',
+                    '🌀 Bassin d\'aération (réacteur biologique) : mélange boues activées + eaux usées + air (insufflation ou turbines)',
+                    '   Bactéries aérobies dégradent la MO : C + O₂ → CO₂ + H₂O + nouvelle biomasse',
+                    '📊 Charges : faible charge ≤ 0,15 kg DBO₅/kg MVS/j (meilleure qualité, plus de boues stabilisées) | forte charge ≥ 0,4 kg DBO₅/kg MVS/j',
+                    '⬇️ Clarificateur (décanteur secondaire) : séparation eau traitée / boues. Recirculation des boues (50–100 % du Q entrée)',
+                    '🔬 Nitrification : NH₄⁺ → NO₂⁻ → NO₃⁻ par bactéries nitrifiantes (Nitrosomonas, Nitrobacter). Besoin O₂ ≥ 2 mg/L',
+                    '🔄 Dénitrification : NO₃⁻ → N₂ (gaz) par bactéries dénitrifiantes en conditions anoxies (sans O₂ dissous)',
+                    '📏 Paramètres clés : IB (Indice de Boues, mL/g) ≤ 150 bon, AB (âge des boues, jours) = SRT',
+                  ],
+                  formules: [
+                    'Charge massique Cm = Q×DBO₅ / (V×X) [kg DBO₅/kg MVS/j] — critère de dimensionnement',
+                    'IB (Indice de Boue) = volume boues sédimentées 30 min (mL) / concentration boues (g/L)',
+                    'EH (Equivalent Habitant) = 60 g DBO₅/j — unité de référence de charge polluante',
+                  ],
+                  retenir: 'Boues activées = bactéries aérobies + aération + clarificateur. Faible charge = meilleure qualité + boues stabilisées. IB ≤ 150 = boues bien décantables.',
+                },
+                flashcards: [
+                  { q: 'Quel est le principe des boues activées ?', r: 'Des bactéries en suspension dans le bassin d\'aération dégradent la matière organique en présence d\'oxygène. Les boues sont séparées en clarificateur et recirculées', expl: 'La recirculation des boues maintient une forte concentration de biomasse (3–6 g MVS/L). L\'excédent de boues (boues en excès) est extrait quotidiennement.' },
+                  { q: 'Quelle est la différence entre faible charge et forte charge ?', r: 'Faible charge : Cm ≤ 0,15 kgDBO₅/kgMVS/j → meilleure qualité du rejet, boues minéralisées. Forte charge : Cm ≥ 0,4 → rejet de moins bonne qualité, boues fermentescibles', expl: 'Les STEP urbaines modernes fonctionnent en faible charge (parfois très faible charge < 0,05 = aération prolongée). La faible charge permet la nitrification.' },
+                  { q: 'Qu\'est-ce que l\'Équivalent Habitant (EH) ?', r: '1 EH = 60 g DBO₅/j = 120 g DCO/j = 15 g N/j = 4 g P/j — unité de capacité des STEP', expl: 'La taille d\'une STEP est exprimée en EH. Une STEP de 100 000 EH traite la charge d\'une ville de 100 000 habitants en équivalent organique.' },
+                  { q: 'Qu\'est-ce que l\'Indice de Boue (IB) et quelle valeur traduit des boues de bonne qualité ?', r: 'IB = volume sédimenté des boues en 30 min (mL/L) / concentration en boues (g/L). IB ≤ 150 mL/g = bonnes boues décantables', expl: 'Un IB élevé (> 200) indique des boues filamenteuses qui décantent mal, risque de fuite de boues dans le rejet. Cause : bulking filamenteux, carence en O₂, changement de substrat.' },
+                  { q: 'Quelles conditions sont nécessaires pour la nitrification ?', r: 'O₂ dissous ≥ 2 mg/L, T° > 10 °C, pH 7–8, faible charge, temps de séjour suffisant des boues (SRT > 10 jours à 15 °C)', expl: 'Les bactéries nitrifiantes (Nitrosomonas, Nitrobacter) sont plus lentes que les hétérotrophes. Si le SRT est trop court, elles sont lessivées de la STEP.' },
+                  { q: 'Quelle est la différence entre nitrification et dénitrification ?', r: 'Nitrification : NH₄⁺ → NO₃⁻ (oxydation, aérobie, consomme O₂). Dénitrification : NO₃⁻ → N₂ (réduction, anoxie, produit de l\'azote gazeux)', expl: 'Pour éliminer l\'azote total, il faut les deux étapes en série (zones aérobies et anoxies alternées). La dénitrification nécessite une source de carbone (MO).' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#EAF5EA"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#1B5E20">Filière boues activées — synoptique</text>
+  <defs><marker id="ar4" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#1B5E20"/></marker></defs>
+  <rect x="4" y="18" width="44" height="20" rx="3" fill="#546E7A"/>
+  <text x="26" y="27.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Prétraits</text>
+  <text x="26" y="35.5" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#ddd">grill.+dessabl.</text>
+  <line x1="48" y1="28" x2="60" y2="28" stroke="#1B5E20" stroke-width="1.2" marker-end="url(#ar4)"/>
+  <rect x="60" y="18" width="44" height="20" rx="3" fill="#795548"/>
+  <text x="82" y="28.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Déc. prim.</text>
+  <text x="82" y="36" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#ddd">facultatif</text>
+  <line x1="104" y1="28" x2="116" y2="28" stroke="#1B5E20" stroke-width="1.2" marker-end="url(#ar4)"/>
+  <rect x="116" y="18" width="56" height="20" rx="3" fill="#2E7D32"/>
+  <text x="144" y="28.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Bassin aération</text>
+  <text x="144" y="36" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#ddd">O₂ + bact. hétéro.</text>
+  <line x1="172" y1="28" x2="184" y2="28" stroke="#1B5E20" stroke-width="1.2" marker-end="url(#ar4)"/>
+  <rect x="184" y="18" width="44" height="20" rx="3" fill="#1B5E20"/>
+  <text x="206" y="27.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Clarificateur</text>
+  <text x="206" y="35.5" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#ddd">sépar. boues</text>
+  <line x1="228" y1="28" x2="240" y2="28" stroke="#1B5E20" stroke-width="1.2" marker-end="url(#ar4)"/>
+  <rect x="240" y="18" width="36" height="20" rx="3" fill="#1B5E20" opacity=".7"/>
+  <text x="258" y="28.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Rejet</text>
+  <text x="258" y="36" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#ddd">milieu nat.</text>
+  <line x1="206" y1="38" x2="206" y2="50" stroke="#1B5E20" stroke-width="1.2"/>
+  <line x1="206" y1="50" x2="144" y2="50" stroke="#1B5E20" stroke-width="1.2" marker-end="url(#ar4)"/>
+  <text x="175" y="47" text-anchor="middle" font-family="Arial" font-size="7" fill="#1B5E20">recirculation boues (50–100 %)</text>
+  <rect x="116" y="56" width="56" height="16" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1"/>
+  <text x="144" y="63" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#1B5E20">Nitrif. (aérobie)</text>
+  <text x="144" y="70" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">NH₄⁺ → NO₃⁻</text>
+  <rect x="4" y="78" width="264" height="20" rx="3" fill="#F1F8E9" stroke="#558B2F" stroke-width="1"/>
+  <text x="140" y="88" text-anchor="middle" font-family="Arial" font-size="8" fill="#33691E" font-weight="bold">Charge massique Cm = Q×DBO₅ / (V×X) — IB ≤ 150 mL/g = bon décantabilité</text>
+  <text x="140" y="97" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Faible charge ≤ 0,15 | Forte charge ≥ 0,4 kgDBO₅/kgMVS/j</text>
+  <rect x="4" y="102" width="264" height="40" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1"/>
+  <text x="140" y="112" text-anchor="middle" font-family="Arial" font-size="8" fill="#1B5E20" font-weight="bold">Normes de rejet (arrêté 22/06/2007)</text>
+  <text x="78" y="123" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">DBO₅ &lt; 25 mg/L</text>
+  <text x="140" y="123" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">DCO &lt; 125 mg/L</text>
+  <text x="208" y="123" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">MES &lt; 35 mg/L</text>
+  <text x="100" y="136" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">NGL &lt; 10–15 mg/L</text>
+  <text x="200" y="136" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">PT &lt; 1–2 mg/L</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Une STEP reçoit les eaux d\'une ville de 15 000 EH. Le bassin d\'aération a un volume de 4 200 m³ et la concentration en MVS est 3,5 g/L. Le débit est Q = 5 000 m³/j avec DBO₅ = 180 mg/L à l\'entrée. 1) Calculer la charge massique Cm. 2) La STEP travaille-t-elle en faible ou forte charge ? 3) La nitrification est-elle possible ?',
+                  solution: '<strong>1) Charge massique Cm :</strong><br>Cm = Q × DBO₅ / (V × X) = (5 000 × 0,180) / (4 200 × 3,5) = 900 / 14 700 = <strong>0,061 kg DBO₅/kg MVS/j</strong><br><strong>2) Régime :</strong> Cm = 0,061 < 0,05 = très faible charge (aération prolongée) ← très faible charge. En tout cas < 0,15 → faible charge. Les boues sont bien minéralisées, le rejet est de bonne qualité.<br><strong>3) Nitrification :</strong> la faible charge garantit un âge des boues (SRT) élevé (typiquement > 15 jours), favorable aux bactéries nitrifiantes lentes (Nitrosomonas). Si T° > 10 °C et O₂ > 2 mg/L → la nitrification est assurée. En hiver (T° < 10 °C), vérifier que le SRT est augmenté pour maintenir les nitrifiants.',
+                },
+              },
+              {
+                id: 'ac-4',
+                titre: 'Traitements tertiaires et gestion des boues',
+                fiche: {
+                  intro: 'Le traitement tertiaire affine le rejet pour atteindre les normes environnementales. Les boues produites doivent être stabilisées et valorisées selon une filière réglementée.',
+                  points: [
+                    '🎯 Normes de rejet (arrêté 22/06/2007) : DBO₅ < 25 mg/L | DCO < 125 mg/L | MES < 35 mg/L | NGL < 10–15 mg/L | PT < 1–2 mg/L (selon taille STEP)',
+                    '🔵 Traitements tertiaires courants : filtration sur sable (MES résiduelles) | désinfection UV (coliformes) | lagunage de finition | filtres plantés de roseaux (FPR)',
+                    '🌿 Zones de rejet végétalisées (ZRV) : traitement des eaux de lavage, finition par végétation aquatique',
+                    '🟤 Filière boues : épaississement (gravité ou flottation) → stabilisation → déshydratation → valorisation/élimination',
+                    '🔥 Digestion anaérobie (méthanisation) : dégradation de la MO en absence d\'O₂ → biogaz (60 % CH₄) + boues digérées stabilisées. T° 35–38 °C (mésophile)',
+                    '🚜 Épandage agricole : valorisation principale (boues = amendement organique riche en N et P). Nécessite plan d\'épandage + analyses + agrément préfectoral',
+                    '⚠️ Contraintes épandage : distances (50 m cours d\'eau, 100 m captage), périodes, charges en métaux lourds (arrêté 08/01/1998)',
+                    '♻️ Alternatives : compostage + épandage | incinération avec récupération énergie | ISDND (décharge) en dernier recours',
+                  ],
+                  formules: [
+                    'Production de biogaz ≈ 0,35 m³ CH₄/kg DCO éliminée — estimation rendement méthanisation',
+                    'Production boues ≈ 60–120 g MS/EH/j (varie selon le procédé)',
+                  ],
+                  retenir: 'Normes rejet : DBO₅ < 25, DCO < 125, NGL < 15 mg/L. Boues : digestion → biogaz + stabilisation → épandage agricole (voie principale en France).',
+                },
+                flashcards: [
+                  { q: 'Quelles sont les normes de rejet DBO₅ et DCO pour les STEP > 10 000 EH ?', r: 'DBO₅ < 25 mg/L et DCO < 125 mg/L (arrêté 22/06/2007 relatif aux STEU)', expl: 'Ces valeurs correspondent à une réduction de ≥ 80 % de la DBO₅ et ≥ 75 % de la DCO par rapport aux eaux brutes urbaines typiques.' },
+                  { q: 'Quel est le principe de la digestion anaérobie des boues ?', r: 'Dégradation de la matière organique des boues par des bactéries anaérobies (sans O₂) → biogaz (≈ 60 % CH₄) + boues digérées stabilisées', expl: 'La méthanisation réduit le volume de boues de 30–40 % et produit de l\'énergie (le biogaz peut couvrir 30–50 % des besoins énergétiques de la STEP).' },
+                  { q: 'Quelles sont les conditions réglementaires pour l\'épandage agricole des boues de STEP ?', r: 'Plan d\'épandage approuvé, analyses régulières (métaux lourds, composés traces organiques), distances réglementaires, périodes d\'interdiction', expl: 'L\'arrêté du 08/01/1998 fixe les teneurs maximales en métaux lourds des boues épandues. Les boues ne peuvent pas être épandues à moins de 50 m d\'un cours d\'eau.' },
+                  { q: 'Qu\'est-ce qu\'un filtre planté de roseaux (FPR) ?', r: 'Traitement extensif : les eaux usées (ou boues liquides) sont filtrées à travers un substrat planté de Phragmites australis (roseaux communs)', expl: 'Les FPR combinées (2 étages) peuvent traiter les eaux brutes directement (sans prétraitement). Ils sont très utilisés pour les petites communes (< 5 000 EH) : faible coût d\'exploitation.' },
+                  { q: 'Quelle est la norme de rejet en azote total NGL pour une grande STEP ?', r: 'NGL (Azote Global) < 10 à 15 mg/L selon la taille et la zone sensible (arrêté 22/06/2007)', expl: 'En zone sensible (estuaires, lagunes, baies eutrophisées), les normes N et P sont plus strictes. La dénitrification et la déphosphatation sont alors obligatoires.' },
+                  { q: 'Quelles sont les alternatives à l\'épandage agricole pour les boues de STEP ?', r: 'Compostage (boues + déchets verts) → épandage | incinération avec récupération énergie | mise en décharge (ISDND) en dernier recours', expl: 'La tendance est à la réduction de la mise en décharge et au développement de la valorisation matière (épandage, compostage) et énergétique (incinération, méthanisation).' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#F3EDF7"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#4A148C">Filière boues de STEP — de la production à la valorisation</text>
+  <defs><marker id="ar5" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#4A148C"/></marker></defs>
+  <rect x="8" y="18" width="50" height="18" rx="3" fill="#7B1FA2"/>
+  <text x="33" y="29" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Boues exc.</text>
+  <line x1="58" y1="27" x2="70" y2="27" stroke="#4A148C" stroke-width="1.2" marker-end="url(#ar5)"/>
+  <rect x="70" y="18" width="58" height="18" rx="3" fill="#8E24AA"/>
+  <text x="99" y="27.5" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Épaississement</text>
+  <text x="99" y="35" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#ddd">gravité / flottat.</text>
+  <line x1="128" y1="27" x2="140" y2="27" stroke="#4A148C" stroke-width="1.2" marker-end="url(#ar5)"/>
+  <rect x="140" y="18" width="58" height="18" rx="3" fill="#6A1B9A"/>
+  <text x="169" y="27.5" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Stabilisation</text>
+  <text x="169" y="35" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#ddd">digestion anaérobie</text>
+  <line x1="198" y1="27" x2="210" y2="27" stroke="#4A148C" stroke-width="1.2" marker-end="url(#ar5)"/>
+  <rect x="210" y="18" width="62" height="18" rx="3" fill="#4A148C"/>
+  <text x="241" y="27.5" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Déshydratation</text>
+  <text x="241" y="35" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#ddd">filtre-presse</text>
+  <line x1="169" y1="36" x2="169" y2="48" stroke="#4A148C" stroke-width="1.2"/>
+  <line x1="169" y1="48" x2="190" y2="48" stroke="#4A148C" stroke-width="1.2"/>
+  <rect x="150" y="42" width="58" height="14" rx="3" fill="#F3E5F5" stroke="#4A148C" stroke-width="1"/>
+  <text x="179" y="52" text-anchor="middle" font-family="Arial" font-size="8" fill="#4A148C">Biogaz ≈ 60% CH₄</text>
+  <rect x="4" y="62" width="264" height="26" rx="3" fill="#EDE7F6" stroke="#7B1FA2" stroke-width="1"/>
+  <text x="140" y="72" text-anchor="middle" font-family="Arial" font-size="8" fill="#4A148C" font-weight="bold">Valorisation des boues (voies principales)</text>
+  <text x="60" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#2E7D32">🌾 Épandage agricole</text>
+  <text x="160" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#2E7D32">🌿 Compostage</text>
+  <text x="240" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#E64A19">🔥 Incinération</text>
+  <rect x="4" y="94" width="264" height="30" rx="3" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1"/>
+  <text x="140" y="103" text-anchor="middle" font-family="Arial" font-size="8" fill="#4A148C" font-weight="bold">Normes épandage (arrêté 08/01/1998)</text>
+  <text x="140" y="113" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Distances : 50 m cours d'eau · 100 m captage AEP</text>
+  <text x="140" y="121" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Analyses métaux lourds (Cd, Hg, Pb, Ni, Cr, Zn, Cu) obligatoires</text>
+  <rect x="4" y="130" width="264" height="12" rx="3" fill="#4A148C" opacity=".15"/>
+  <text x="140" y="139" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#4A148C">Production boues ≈ 60–120 g MS/EH/j · 0,35 m³ CH₄/kg DCO éliminée</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Une STEP de 20 000 EH produit 90 g MS/EH/j de boues. La digestion anaérobie élimine 50 % de la DCO des boues. La DCO initiale des boues est 1,5 kg DCO/kg MS. 1) Quelle est la production de boues en kg MS/j ? 2) Quelle quantité de biogaz (m³/j) peut être produite ? 3) La STEP veut épandre les boues sur des terres agricoles à 40 m d\'un ruisseau. Est-ce réglementaire ?',
+                  solution: '<strong>1) Production de boues :</strong> 20 000 EH × 90 g/j = 1 800 000 g/j = <strong>1 800 kg MS/j</strong><br><strong>2) Biogaz :</strong> DCO éliminée = 50 % × (1 800 × 1,5) = 50 % × 2 700 = 1 350 kg DCO/j<br>Biogaz = 0,35 m³ CH₄/kg DCO × 1 350 = <strong>472 m³ CH₄/j</strong> (soit environ 675 m³ biogaz brut à 70% CH₄)<br><strong>3) Distance réglementaire :</strong> NON. L\'arrêté du 08/01/1998 impose une distance minimale de <strong>50 m</strong> des cours d\'eau pour l\'épandage de boues de STEP. 40 m < 50 m → épandage interdit sur cette parcelle. Il faut soit exclure la zone dans les 50 m, soit trouver d\'autres terres.',
+                },
+              },
+            ],
+          },
+
+          /* ── ANC ── */
+          {
+            id: 'anc',
+            name: 'Assainissement non collectif (ANC)',
+            ico: '🏡',
+            color: '#2D6A4F',
+            colorl: '#D8F3DC',
+            chapitres: [
+              {
+                id: 'anc-1',
+                titre: 'Contexte réglementaire ANC — Arrêtés 2009, 2021 et 2024',
+                fiche: {
+                  intro: 'L\'ANC concerne environ 5 millions de logements en France non raccordés au réseau collectif. Il est encadré par un corpus réglementaire précis et contrôlé obligatoirement par le SPANC.',
+                  points: [
+                    '📜 Arrêté du 07/09/2009 : prescriptions techniques fondatrices — volumes minimaux, filières, distances réglementaires',
+                    '✏️ Arrêté du 26/02/2021 : modification de l\'arrêté 2009 — renforcement maintenance préventive, précision critères NC',
+                    '🆕 Arrêté du 10/07/2024 (en vigueur 01/01/2025) : autosurveillance annuelle par le propriétaire, carnet de suivi numérique obligatoire, contrat entretien microstation ≥ 2 ans',
+                    '🚫 Fosse septique (eaux vannes seules) : interdite à neuf depuis l\'arrêté 2009',
+                    '📐 Distances réglementaires : ≥ 5 m de l\'habitation | ≥ 35 m de tout captage | ≥ 3 m d\'une limite de propriété',
+                    '👮 SPANC (Service Public d\'Assainissement Non Collectif) : contrôle obligatoire (conception/réalisation + bon fonctionnement tous les 10 ans)',
+                    '⚠️ Non-conformité avec danger sanitaire : délai 1 an pour travaux | NC sans danger : délai 4 ans',
+                    '🏠 Vente immobilière : rapport SPANC < 3 ans obligatoire dans le Dossier de Diagnostic Technique (DDT)',
+                  ],
+                  formules: [],
+                  retenir: 'Fosse septique interdite à neuf (2009). Distance captage : 35 m. NC avec danger : 1 an de délai. SPANC contrôle tous les 10 ans. Arrêté 2024 = carnet numérique.',
+                },
+                flashcards: [
+                  { q: 'Depuis quelle année la fosse septique (eaux vannes seules) est-elle interdite à neuf ?', r: 'Depuis l\'arrêté du 07/09/2009 (applicatoin 01/10/2009). Seule la fosse toutes eaux est autorisée', expl: 'La fosse septique ne traitait que les eaux vannes. La fosse toutes eaux (FTE) reçoit les eaux vannes + eaux ménagères, ce qui améliore la performance du système.' },
+                  { q: 'Quelle est la distance minimale entre un épandage ANC et un captage d\'eau potable ?', r: '35 mètres minimum (arrêté 07/09/2009)', expl: 'Cette distance protège les captages de la pollution par les effluents traités par le sol. Elle peut être augmentée par le préfet en zone sensible (karst, captages stratégiques).' },
+                  { q: 'Quel est le délai de mise en conformité pour une non-conformité ANC "avec danger" ?', r: '1 an maximum pour réaliser les travaux de mise en conformité (arrêté 2024)', expl: 'Une NC "avec danger" = rejet direct sans traitement, contact avec personnes, pollution de captage, etc. La NC "sans danger" donne 4 ans. En vente immobilière, l\'acheteur dispose de 1 an.' },
+                  { q: 'Qu\'est-ce que le SPANC ?', r: 'Service Public d\'Assainissement Non Collectif : service obligatoire géré par la collectivité, chargé du contrôle des installations ANC de son territoire', expl: 'Le SPANC contrôle la conception, la réalisation des nouvelles installations, et le bon fonctionnement de toutes les installations tous les 10 ans. Il perçoit une redevance.' },
+                  { q: 'Quelles sont les nouveautés de l\'arrêté du 10 juillet 2024 ?', r: 'Autosurveillance annuelle obligatoire par le propriétaire avec carnet de suivi numérique. Contrat d\'entretien microstation : durée minimale 2 ans (contre annuel avant)', expl: 'Entré en vigueur le 1er janvier 2025. L\'objectif est d\'améliorer la maintenance préventive et de responsabiliser les propriétaires sur le suivi de leur installation.' },
+                  { q: 'Quand un rapport SPANC est-il obligatoire lors d\'une vente immobilière ?', r: 'Toujours : un rapport de contrôle de moins de 3 ans doit figurer dans le Dossier de Diagnostic Technique (DDT) annexé à la promesse de vente', expl: 'Si le rapport est absent ou non conforme, le notaire doit en informer les parties. L\'acheteur dispose de 1 an après la vente pour mettre en conformité (sauf danger).' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#E8F5E9"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#2D6A4F">Réglementation ANC — chronologie</text>
+  <rect x="8" y="18" width="264" height="4" rx="2" fill="#2D6A4F" opacity=".3"/>
+  <circle cx="50" cy="20" r="5" fill="#2D6A4F"/>
+  <text x="50" y="32" text-anchor="middle" font-family="Arial" font-size="8" fill="#2D6A4F" font-weight="bold">2009</text>
+  <text x="50" y="41" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">Fondateur</text>
+  <text x="50" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">FTE obligatoire</text>
+  <text x="50" y="57" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Fosse sept. = ✕</text>
+  <circle cx="140" cy="20" r="5" fill="#2D6A4F"/>
+  <text x="140" y="32" text-anchor="middle" font-family="Arial" font-size="8" fill="#2D6A4F" font-weight="bold">2021</text>
+  <text x="140" y="41" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">Renforcement</text>
+  <text x="140" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Maintenance prév.</text>
+  <text x="140" y="57" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Critères NC précisés</text>
+  <circle cx="232" cy="20" r="5" fill="#1B5E20"/>
+  <text x="232" y="32" text-anchor="middle" font-family="Arial" font-size="8" fill="#1B5E20" font-weight="bold">2024/2025</text>
+  <text x="232" y="41" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">Numérique</text>
+  <text x="232" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Carnet suivi num.</text>
+  <text x="232" y="57" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Contrat 2 ans micro.</text>
+  <rect x="8" y="66" width="264" height="56" rx="4" fill="#C8E6C9" stroke="#2D6A4F" stroke-width="1"/>
+  <text x="140" y="76" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#2D6A4F" font-weight="bold">Distances réglementaires (arrêté 2009)</text>
+  <text x="70" y="89" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">≥ 5 m de l'habitation</text>
+  <text x="200" y="89" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">≥ 35 m d'un captage</text>
+  <text x="70" y="100" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">≥ 3 m d'une limite propriété</text>
+  <text x="200" y="100" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">SPANC contrôle ≤ 10 ans</text>
+  <text x="140" y="114" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">Vente : rapport SPANC &lt; 3 ans dans le DDT</text>
+  <rect x="8" y="128" width="264" height="14" rx="3" fill="#2D6A4F" opacity=".15"/>
+  <text x="50" y="137" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#1B5E20" font-weight="bold">NC avec danger</text>
+  <text x="50" y="138.5" font-family="Arial" font-size="7" fill="#333"></text>
+  <text x="140" y="137" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">1 an pour travaux</text>
+  <text x="232" y="137" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">NC sans danger → 4 ans</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Lors de la vente d\'une maison, le rapport SPANC date de 4 ans et mentionne une NC "sans danger" (absence de ventilation secondaire). 1) Ce rapport peut-il être intégré dans le DDT ? 2) L\'acheteur doit-il réaliser des travaux ? Dans quel délai ? 3) La fosse septique d\'origine (1985, eaux vannes seules) est-elle conforme ?',
+                  solution: '<strong>1) Rapport SPANC :</strong> NON. Le rapport doit dater de moins de 3 ans. Un rapport de 4 ans est périmé. Il faut demander un nouveau contrôle au SPANC avant la signature de l\'acte définitif.<br><strong>2) Travaux :</strong> NC "sans danger" → l\'acheteur dispose de <strong>1 an après la signature de l\'acte de vente</strong> pour réaliser les travaux (délai de 4 ans réduit à 1 an en cas de vente, arrêté 2009 art. 10).<br><strong>3) Fosse septique :</strong> la fosse septique (eaux vannes seules) est <strong>interdite à neuf depuis l\'arrêté du 07/09/2009</strong>. Mais une installation de 1985 n\'a pas l\'obligation d\'être remplacée tant qu\'elle fonctionne sans danger et est entretenue. Elle peut constituer une NC mineure à mentionner dans le rapport SPANC.',
+                },
+              },
+              {
+                id: 'anc-2',
+                titre: 'Filières agréées et dimensionnement ANC',
+                fiche: {
+                  intro: 'Le choix de la filière ANC dépend de la perméabilité du sol, de la surface disponible et du niveau de traitement requis. Toutes les filières reposent sur la fosse toutes eaux comme premier traitement.',
+                  points: [
+                    '🪣 Fosse toutes eaux (FTE) : 1er traitement — décantation + préfermentation. Volume minimum : 3 000 L pour ≤ 5 pièces principales (PP), +1 000 L/PP au-delà',
+                    '🌱 Tranchées d\'épandage : épandage en sol en place. Surface : 5 m × nbre PP (ex : 5 PP → 25 m de tranchées). Ksat sol ≥ 10 mm/h requis',
+                    '🏔️ Tertre d\'infiltration : sol de substitution surélevé quand la nappe est peu profonde ou le sol imperméable',
+                    '🔵 Lit filtrant drainé : sable lavé + drain de collecte → rejet vers milieu superficiel. Ksat sol < 10 mm/h',
+                    '🟢 Filtres compacts agréés CE : géotextile + tourbe, zéolithe, coco… Surface réduite (< 5 m²). Utile en terrain contraint',
+                    '⚙️ Microstations à boues activées ou cultures fixées : épuration biologique poussée. Rejet vers sol ou fossé (selon arrêté). Contrat entretien ≥ 2 ans obligatoire',
+                    '📋 Agrément filières CE : liste publiée sur le site du Ministère. Chaque filière a une notice dimensionnement + conditions installation',
+                    '🔍 Test de perméabilité (Porchet) : mesure du Ksat in situ — indispensable pour le choix de la filière',
+                  ],
+                  formules: [
+                    'Volume FTE (L) = 3 000 + (nbre PP – 5) × 1 000  pour nbre PP > 5',
+                    'Surface tranchées (m) = 5 × nbre PP (longueur totale avec espacement ≥ 1,5 m entre tranchées)',
+                  ],
+                  retenir: 'FTE : 3 000 L pour 5 PP. Tranchées : 5 m/PP, sol Ksat ≥ 10 mm/h. Si sol imperméable : lit filtrant drainé. Microstation : contrat entretien obligatoire.',
+                },
+                flashcards: [
+                  { q: 'Quel est le volume minimal d\'une fosse toutes eaux pour une maison de 5 pièces principales ?', r: '3 000 litres minimum (arrêté 07/09/2009). +1 000 L par pièce principale au-delà de 5', expl: 'Pour une maison de 7 PP : 3 000 + 2 × 1 000 = 5 000 L. Le volume assure un temps de séjour suffisant pour la décantation et la préfermentation des effluents.' },
+                  { q: 'Quelle perméabilité du sol est requise pour des tranchées d\'épandage ?', r: 'Ksat ≥ 10 mm/h (perméabilité mesurée par test de Porchet ou test d\'infiltration)', expl: 'Si Ksat < 10 mm/h : sol trop imperméable → les effluents ne s\'infiltrent pas → filière alternative (lit filtrant drainé, tertre). Si Ksat > 500 mm/h : sol trop perméable → risque de pollution de nappe.' },
+                  { q: 'Dans quel cas utilise-t-on un tertre d\'infiltration ?', r: 'Quand la nappe est proche de la surface (< 1 m), quand le sol est imperméable ou quand le relief ne permet pas les tranchées en déblai', expl: 'Le tertre surélevé de 0,6 à 1 m crée une distance supplémentaire entre les effluents épurés et la nappe. Il utilise du sable de granulométrie contrôlée comme sol de substitution.' },
+                  { q: 'Qu\'est-ce qu\'un filtre compact agréé CE ?', r: 'Filière préfabriquée contenant un matériau filtrant spécifique (tourbe, coco, zéolithe…) agréée par le Ministère. Surface très réduite, adaptée aux terrains contraints', expl: 'L\'agrément CE est délivré après évaluation des performances épuratoires. Chaque constructeur publie une notice de dimensionnement. La liste est mise à jour sur le site du Ministère.' },
+                  { q: 'Quelle est la différence entre lit filtrant drainé et lit filtrant non drainé ?', r: 'Drainé : drain de collecte → rejet vers fossé/milieu. Non drainé : effluents s\'infiltrent dans le sol sous le filtre. Le drainé est utilisé quand le sol est imperméable', expl: 'Le lit filtrant drainé est une filière à épuration biologique et physique. Le rejet final doit respecter des valeurs limites fixées par arrêté préfectoral.' },
+                  { q: 'Pourquoi un contrat d\'entretien est-il obligatoire pour les microstations ?', r: 'Les microstations sont des installations mécaniques et biologiques complexes nécessitant un suivi régulier pour maintenir leurs performances épuratoires', expl: 'L\'arrêté 2024 impose un contrat d\'entretien d\'au moins 2 ans. Sans entretien, la microstation peut se dérégler et rejeter des effluents non traités — non-conformité SPANC.' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#F1F8E9"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#2D6A4F">Filières ANC agréées — choix selon le sol</text>
+  <rect x="8" y="18" width="264" height="16" rx="3" fill="#2D6A4F"/>
+  <text x="140" y="29" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Fosse Toutes Eaux (FTE) — premier traitement commun à toutes filières</text>
+  <text x="140" y="37.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">3 000 L pour ≤ 5 PP · +1 000 L/PP au-delà</text>
+  <defs><marker id="ar6" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#2D6A4F"/></marker></defs>
+  <line x1="140" y1="36" x2="50" y2="48" stroke="#2D6A4F" stroke-width="1.2" marker-end="url(#ar6)"/>
+  <line x1="140" y1="36" x2="140" y2="48" stroke="#2D6A4F" stroke-width="1.2" marker-end="url(#ar6)"/>
+  <line x1="140" y1="36" x2="232" y2="48" stroke="#2D6A4F" stroke-width="1.2" marker-end="url(#ar6)"/>
+  <rect x="4" y="48" width="90" height="34" rx="4" fill="#4CAF50" opacity=".8"/>
+  <text x="49" y="60" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Tranchées d'épandage</text>
+  <text x="49" y="70" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Ksat ≥ 10 mm/h</text>
+  <text x="49" y="78" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">5 m/PP en longueur</text>
+  <rect x="100" y="48" width="80" height="34" rx="4" fill="#2E7D32" opacity=".8"/>
+  <text x="140" y="60" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Lit filtrant drainé</text>
+  <text x="140" y="70" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Ksat &lt; 10 mm/h</text>
+  <text x="140" y="78" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">rejet → fossé</text>
+  <rect x="186" y="48" width="90" height="34" rx="4" fill="#1B5E20" opacity=".8"/>
+  <text x="231" y="60" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Tertre d'infiltration</text>
+  <text x="231" y="70" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Nappe peu profonde</text>
+  <text x="231" y="78" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">ou sol imperméable</text>
+  <rect x="4" y="88" width="264" height="24" rx="4" fill="#DCEDC8" stroke="#2D6A4F" stroke-width="1"/>
+  <text x="140" y="98" text-anchor="middle" font-family="Arial" font-size="8" fill="#2D6A4F" font-weight="bold">Filtre compact agréé CE (sol contraint &lt; 5 m²)</text>
+  <text x="140" y="107" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Tourbe / zéolithe / coco · Notice fabricant · Liste Ministère</text>
+  <rect x="4" y="118" width="264" height="24" rx="4" fill="#F1F8E9" stroke="#2D6A4F" stroke-width="1"/>
+  <text x="140" y="128" text-anchor="middle" font-family="Arial" font-size="8" fill="#2D6A4F" font-weight="bold">Microstation boues activées / cultures fixées</text>
+  <text x="140" y="137" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Rejet sol ou fossé · Contrat entretien ≥ 2 ans obligatoire (arrêté 2024)</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Une maison de 7 pièces principales est construite sur un terrain dont le test de Porchet donne Ksat = 6 mm/h, avec une nappe phréatique à 0,8 m de profondeur. 1) Quel volume de fosse toutes eaux est requis ? 2) Les tranchées d\'épandage sont-elles possibles ? 3) Quelle filière proposez-vous ?',
+                  solution: '<strong>1) Volume FTE :</strong> 3 000 + (7 − 5) × 1 000 = 3 000 + 2 000 = <strong>5 000 litres</strong><br><strong>2) Tranchées d\'épandage :</strong> NON. Ksat = 6 mm/h < 10 mm/h → sol insuffisamment perméable. Les tranchées nécessitent Ksat ≥ 10 mm/h.<br><strong>3) Filière recommandée :</strong> le <strong>lit filtrant drainé</strong> convient (sable lavé, sol imperméable → on draine vers un fossé). Vérifier que la nappe à 0,8 m est compatible (distance nappe/fond de fouille ≥ 0,5 m → ok si le lit est en surface). Alternative : <strong>filtre compact agréé CE</strong> si la surface disponible est contrainte. La microstation est aussi envisageable si le rejet vers un fossé est autorisé.',
+                },
+              },
+              {
+                id: 'anc-3',
+                titre: 'Contrôle SPANC et diagnostics de terrain',
+                fiche: {
+                  intro: 'Le SPANC intervient à toutes les étapes de vie d\'une installation ANC : conception, réalisation et fonctionnement. Ses agents réalisent des visites terrain et établissent des rapports réglementaires.',
+                  points: [
+                    '📋 4 types de contrôles SPANC : conception (avant travaux) | réalisation (pendant) | bon fonctionnement (tous les 10 ans) | entretien',
+                    '🟢 Conformité : installation respecte les arrêtés en vigueur, pas de danger sanitaire ni environnemental',
+                    '🟡 NC sans danger : non-conformité mais pas de risque immédiat (défaut de distance, absence de ventilation). Délai : 4 ans',
+                    '🔴 NC avec danger : rejet direct, risque sanitaire avéré. Délai : 1 an pour travaux',
+                    '🔬 Outils de diagnostic terrain : perméamètre de Porchet (Ksat), piézomètre (niveau nappe), caméra inspection, kit analyse eau (test E. coli)',
+                    '📏 Test de Porchet : mesure du rabattement dans un trou de 20 cm de diamètre. Calcul du Ksat en mm/h',
+                    '📊 Rapport SPANC : document officiel remis au propriétaire, annexé lors de la vente immobilière. Conservation obligatoire',
+                    '💰 Redevance SPANC : perçue par la collectivité auprès de tous les propriétaires en zone ANC — financement du service public',
+                  ],
+                  formules: [
+                    'Ksat (mm/h) = π × r² × ΔH / (8 × r × Δt) — formule de Porchet simplifiée',
+                    '   r = rayon du trou (m), ΔH = variation du niveau d\'eau (m), Δt = temps (h)',
+                  ],
+                  retenir: 'SPANC = 4 types de contrôles. NC avec danger = 1 an. Porchet mesure le Ksat. Rapport SPANC < 3 ans obligatoire en vente. Redevance = financement service.',
+                },
+                flashcards: [
+                  { q: 'Quels sont les 4 types de contrôles du SPANC ?', r: '1) Contrôle de conception (projet) 2) Contrôle de réalisation (chantier) 3) Bon fonctionnement (périodique, ≤ 10 ans) 4) Contrôle de l\'entretien', expl: 'Le contrôle de réalisation est fait avant remblaiement des tranchées — l\'agent SPANC doit vérifier les dimensions, les pentes et la conformité de l\'installation visible.' },
+                  { q: 'Qu\'est-ce que le test de Porchet ?', r: 'Test de perméabilité in situ : on remplit un trou cylindrique (Ø 20 cm) et on mesure la vitesse de baisse du niveau d\'eau → calcul du Ksat (mm/h)', expl: 'Le test de Porchet est réalisé par le bureau d\'études avant le dépôt de permis de construire. Il conditionne le choix de la filière ANC. Obligatoire pour toute nouvelle installation.' },
+                  { q: 'Qu\'est-ce qu\'une non-conformité "avec danger sanitaire" ?', r: 'Situation présentant un risque direct pour la santé humaine ou l\'environnement : rejet direct sans traitement, présence d\'un puits à moins de 35 m, submersion permanente', expl: 'Le SPANC notifie le propriétaire par courrier. Délai de 1 an pour travaux. Si inaction : la collectivité peut intervenir d\'office et facturer les travaux au propriétaire.' },
+                  { q: 'Comment est financé le SPANC ?', r: 'Par une redevance obligatoire payée par tous les propriétaires en zone ANC, proportionnelle à la consommation d\'eau ou forfaitaire selon la collectivité', expl: 'La redevance SPANC est distincte de la redevance assainissement collectif. Elle finance les salaires des agents, les visites terrain, les analyses et la gestion administrative.' },
+                  { q: 'À quoi sert le piézomètre dans un diagnostic ANC ?', r: 'À mesurer le niveau de la nappe phréatique. Indispensable pour choisir la filière (distance nappe / fond des tranchées ≥ 0,5 m minimum)', expl: 'Si la nappe est à moins de 0,5 m de profondeur, les tranchées d\'épandage sont interdites. Il faut un tertre ou un lit filtrant drainé. Le piézomètre mesure aussi les variations saisonnières.' },
+                  { q: 'Quelle est la fréquence maximale du contrôle de bon fonctionnement du SPANC ?', r: 'Tous les 10 ans maximum. Certaines collectivités contrôlent tous les 6 ou 8 ans. Le propriétaire peut demander un contrôle volontaire', expl: 'L\'arrêté 2024 renforce cette périodicité et impose une autosurveillance annuelle par le propriétaire (relevé du carnet de suivi numérique).' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#F0FBF0"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#2D6A4F">Contrôles SPANC — types et procédure</text>
+  <rect x="4" y="18" width="60" height="46" rx="4" fill="#4CAF50" opacity=".85"/>
+  <text x="34" y="30" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">1. Conception</text>
+  <text x="34" y="40" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">Avant</text>
+  <text x="34" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">dépôt PC</text>
+  <text x="34" y="58" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">Filière ok ?</text>
+  <rect x="70" y="18" width="60" height="46" rx="4" fill="#2E7D32" opacity=".85"/>
+  <text x="100" y="30" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">2. Réalisation</text>
+  <text x="100" y="40" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">Pendant</text>
+  <text x="100" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">travaux</text>
+  <text x="100" y="58" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">Avant remblai</text>
+  <rect x="136" y="18" width="70" height="46" rx="4" fill="#1B5E20" opacity=".85"/>
+  <text x="171" y="30" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">3. Fonctiont</text>
+  <text x="171" y="40" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">Périodique</text>
+  <text x="171" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">≤ 10 ans</text>
+  <text x="171" y="58" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">+autosurv.annuel</text>
+  <rect x="212" y="18" width="64" height="46" rx="4" fill="#558B2F" opacity=".85"/>
+  <text x="244" y="30" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">4. Entretien</text>
+  <text x="244" y="40" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">Vidange</text>
+  <text x="244" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">fosse (4–8 ans)</text>
+  <text x="244" y="58" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">Contrat micro.</text>
+  <rect x="4" y="70" width="264" height="40" rx="4" fill="#DCEDC8" stroke="#2D6A4F" stroke-width="1"/>
+  <text x="140" y="80" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#2D6A4F" font-weight="bold">Classement non-conformités</text>
+  <text x="70" y="91" text-anchor="middle" font-family="Arial" font-size="8" fill="#CC0000" font-weight="bold">NC avec danger</text>
+  <text x="70" y="100" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">→ 1 an pour travaux</text>
+  <text x="200" y="91" text-anchor="middle" font-family="Arial" font-size="8" fill="#E07B00" font-weight="bold">NC sans danger</text>
+  <text x="200" y="100" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">→ 4 ans (1 an si vente)</text>
+  <rect x="4" y="116" width="264" height="26" rx="4" fill="#2D6A4F" opacity=".1" stroke="#2D6A4F" stroke-width="1"/>
+  <text x="140" y="126" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#2D6A4F" font-weight="bold">Outils de diagnostic terrain</text>
+  <text x="70" y="136" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Porchet = Ksat</text>
+  <text x="140" y="136" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Piézomètre = nappe</text>
+  <text x="210" y="136" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Kit E.coli = qualité</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Un agent SPANC réalise un contrôle de bon fonctionnement. Il constate : 1) La fosse toutes eaux est pleine à ras-bord et les effluents s\'écoulent directement vers le jardin en surface. 2) La ventilation secondaire est absente. 3) La vidange n\'a pas été faite depuis 12 ans. Quelle classification attribue-t-il à chaque point ? Quel est le délai de mise en conformité ?',
+                  solution: '<strong>Point 1 — rejet direct en surface :</strong> risque sanitaire avéré (contact avec les personnes, effluents bruts sur le sol) → <strong>NC avec danger sanitaire</strong>. Délai : <strong>1 an</strong> pour travaux (ou immédiat si risque de contamination de captage).<br><strong>Point 2 — absence de ventilation secondaire :</strong> non-conformité réglementaire mais pas de danger immédiat → <strong>NC sans danger</strong>. Délai : <strong>4 ans</strong>.<br><strong>Point 3 — vidange non faite depuis 12 ans :</strong> une fosse doit être vidangée tous les 4–8 ans selon le volume et la charge. La plénitude de la fosse explique le rejet en surface → aggrave la NC avec danger. La preuve de vidange est requise pour la conformité (arrêtés 2021/2024). Le rapport SPANC mentionnera les 3 points, avec deux délais distincts.',
+                },
+              },
+            ],
+          },
+
+          /* ── Milieux aquatiques ── */
+          {
+            id: 'milieux',
+            name: 'Milieux aquatiques',
+            ico: '🌿',
+            color: '#1B4332',
+            colorl: '#D8F3DC',
+            chapitres: [
+              {
+                id: 'mil-1',
+                titre: 'Morphologie des cours d\'eau et processus naturels',
+                fiche: {
+                  intro: 'La morphologie d\'un cours d\'eau résulte de l\'équilibre dynamique entre les apports solides, le débit liquide et la géologie. Comprendre ces processus est essentiel pour toute intervention de restauration.',
+                  points: [
+                    '🌊 Trois types de cours d\'eau en plan : rectiligne (rare, artificiel) | méandriforme (sinueux, plaine) | en tresses (charge sédimentaire élevée, pente forte)',
+                    '📏 Profil en travers : lit d\'étiage (filet d\'eau) — lit mineur (entre berges) — lit majeur (inondable) — plaine alluviale',
+                    '🌄 Profil en long : pente décroissante de la source vers l\'aval. Ruptures = seuils naturels ou barrages',
+                    '🪨 Transport solide : charriage (roulement au fond) + saltation + suspension. Débit solide Qs ∝ Q^n (n ≈ 2–3)',
+                    '⚖️ Critère de Shields : seuil de mise en mouvement des sédiments. Au-delà : érosion. En dessous : dépôt',
+                    '🌿 Ripisylve : végétation riveraine des berges — stabilise les berges, ombrage, filtre les nutriments. Protégée par le code de l\'environnement',
+                    '🔧 Restauration hydromorphologique : reméandrage, reconnexion lit majeur, suppression seuils, recharge granulométrique',
+                    '🐟 Continuité écologique : libre circulation des poissons et transit sédimentaire. Obligation DCE — effacement ou aménagement des seuils',
+                  ],
+                  formules: [
+                    'Rapport de sinuosité = longueur du chenal / longueur de la vallée (méandriforme > 1,5)',
+                    'Q plein bord ≈ Q de référence morphogène = débit formateur du lit mineur (T ≈ 1,5–2 ans)',
+                  ],
+                  retenir: 'Lit mineur = entre berges. Lit majeur = inondable. Ripisylve protège les berges. Continuité écologique (DCE) = libre passage poissons + sédiments.',
+                },
+                flashcards: [
+                  { q: 'Quels sont les 3 types de cours d\'eau selon leur tracé en plan ?', r: 'Rectiligne (rare, artificiel) — Méandriforme (sinueux, plaine alluviale) — En tresses (forte charge sédimentaire, pente forte)', expl: 'Le méandre est la forme d\'équilibre naturelle en plaine. Le recalibrage rectiligne des rivières perturbe l\'équilibre et accélère la vitesse, aggravant les crues aval.' },
+                  { q: 'Qu\'est-ce que le lit majeur d\'un cours d\'eau ?', r: 'Espace inondé lors des crues courantes (T ≈ 2 à 10 ans). Au-delà des berges du lit mineur, il joue un rôle de stockage temporaire des crues', expl: 'L\'urbanisation du lit majeur aggrave les crues (ruissellement + accélération). Le PPRI (Plan de Prévention des Risques d\'Inondation) le protège de l\'urbanisation.' },
+                  { q: 'Qu\'est-ce que le transport solide en charriage ?', r: 'Déplacement des sédiments les plus grossiers (graviers, galets) par roulement et glissement au fond du lit', expl: 'Le charriage est déclenché quand la contrainte de cisaillement dépasse le critère de Shields (dépend de la taille des grains). Les barrages bloquent ce transit et affament l\'aval.' },
+                  { q: 'Quel est le rôle de la ripisylve ?', r: 'Végétation des berges : stabilisation mécanique (racines), ombrage (régule T°), filtration des nitrates, habitat faune', expl: 'La ripisylve réduit l\'érosion des berges et maintient une eau fraîche (vital pour les salmonidés). Sa suppression aggrave les crues et réchauffe les eaux.' },
+                  { q: 'Qu\'est-ce que la continuité écologique et pourquoi est-elle obligatoire ?', r: 'Libre circulation des poissons (migration) et transit libre des sédiments. Obligatoire par la DCE et le classement des cours d\'eau (art. L214-17 Code envt)', expl: 'Les ouvrages (barrages, seuils) sur les cours d\'eau classés doivent être équipés de passes à poissons ou être effacés. Échéance : 2027 pour la plupart des ouvrages.' },
+                  { q: 'Qu\'est-ce que la restauration hydromorphologique d\'un cours d\'eau ?', r: 'Ensemble de travaux visant à rétablir les processus naturels : reméandrage, reconnexion du lit majeur, suppression de seuils, recharge granulométrique', expl: 'Financée par les Agences de l\'eau et les collectivités. La restauration améliore l\'état écologique (IBD, IBGN) et réduit les risques d\'inondation par stockage naturel en lit majeur.' },
+                ],
+                schema: `<svg viewBox="0 0 280 145" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="145" rx="8" fill="#E8F5E9"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#1B4332">Morphologie transversale d'un cours d'eau</text>
+  <rect x="4" y="90" width="272" height="48" rx="4" fill="#C8D8CC" opacity=".5"/>
+  <text x="140" y="103" text-anchor="middle" font-family="Arial" font-size="8" fill="#1B4332" font-weight="bold">Lit majeur (inondable — T ≈ 2–10 ans)</text>
+  <rect x="44" y="78" width="192" height="24" rx="4" fill="#A5C8B8" opacity=".6"/>
+  <text x="140" y="93" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#1B4332" font-weight="bold">Berges — Ripisylve</text>
+  <rect x="84" y="66" width="112" height="24" rx="4" fill="#4DB6AC" opacity=".6"/>
+  <text x="140" y="81.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Lit mineur (entre berges)</text>
+  <rect x="110" y="55" width="60" height="20" rx="4" fill="#0097A7"/>
+  <text x="140" y="68" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Lit d'étiage</text>
+  <text x="140" y="77" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">filet d'eau</text>
+  <text x="14" y="72" font-family="Arial" font-size="7.5" fill="#1B4332" font-weight="bold">🌿 Ripisylve</text>
+  <text x="14" y="81" font-family="Arial" font-size="7" fill="#555">stabilise berges</text>
+  <text x="14" y="89" font-family="Arial" font-size="7" fill="#555">régule T°, NO₃⁻</text>
+  <text x="224" y="72" font-family="Arial" font-size="7.5" fill="#1B4332" font-weight="bold">🌿 Ripisylve</text>
+  <text x="14" y="102" font-family="Arial" font-size="7.5" fill="#1B4332">Stockage crues</text>
+  <text x="14" y="110" font-family="Arial" font-size="7" fill="#555">Biodiversité ZH</text>
+  <text x="14" y="118" font-family="Arial" font-size="7" fill="#555">Nappe alluviale</text>
+  <rect x="4" y="18" width="264" height="42" rx="4" fill="#D0EDD8" stroke="#1B4332" stroke-width="1"/>
+  <text x="140" y="28" text-anchor="middle" font-family="Arial" font-size="8" fill="#1B4332" font-weight="bold">Types de tracés en plan</text>
+  <text x="50" y="40" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Rectiligne</text>
+  <text x="50" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">artificiel/rare</text>
+  <text x="140" y="40" text-anchor="middle" font-family="Arial" font-size="8" fill="#1B4332" font-weight="bold">Méandriforme ⌇</text>
+  <text x="140" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">sinuosité &gt; 1,5 (plaine)</text>
+  <text x="228" y="40" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">En tresses</text>
+  <text x="228" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">forte charge sédim.</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Un cours d\'eau a été recalibré (rectifié et endiguement) dans les années 1970. Aujourd\'hui, l\'IBGN est de 7 et les crues débordent plus fréquemment en aval. 1) Quel est l\'état écologique estimé (IBGN seul) ? 2) Quel lien entre la rectification et les crues ? 3) Quelles mesures de restauration proposez-vous ?',
+                  solution: '<strong>1) État écologique :</strong> IBGN = 7 → classe <strong>Médiocre</strong> (IBGN 5–9). Très en-dessous du bon état (IBGN ≥ 13).<br><strong>2) Rectification et crues :</strong> la rectification supprime les méandres → chenal plus court et plus pentu → vitesse d\'écoulement augmentée → les crues arrivent plus vite et plus intenses à l\'aval. De plus, le lit majeur déconnecté ne stocke plus les crues.<br><strong>3) Restauration :</strong><br>• <strong>Reméandrage</strong> du chenal (ou re-création d\'une sinuosité) pour allonger le lit et réduire la pente<br>• <strong>Reconnexion du lit majeur</strong> (abaissement ou effacement des digues) pour réactiver le stockage des crues<br>• <strong>Recharge granulométrique</strong> (galets) pour diversifier les habitats benthiques et améliorer l\'IBGN<br>• <strong>Plantation de ripisylve</strong> pour stabiliser les berges et ombrer',
+                },
+              },
+              {
+                id: 'mil-2',
+                titre: 'DCE — état écologique et chimique des masses d\'eau',
+                fiche: {
+                  intro: 'La DCE évalue la qualité des eaux selon deux dimensions indépendantes : l\'état écologique (biologie + physico-chimie) et l\'état chimique (substances dangereuses). L\'objectif est le "bon état" d\'ici 2027.',
+                  points: [
+                    '🗂️ 4 catégories de masses d\'eau de surface : cours d\'eau | plans d\'eau | eaux de transition (estuaires) | eaux côtières',
+                    '🟢 État écologique : 5 classes — Très bon / Bon / Moyen / Médiocre / Mauvais',
+                    '   Évalué par : indices biologiques (IBD, IBGN, IPR) + paramètres physico-chimiques généraux (O₂, nutriments, T°, pH)',
+                    '🔵 État chimique : Bon ou Mauvais — basé sur 45 substances prioritaires (SP) dont 8 substances dangereuses prioritaires (SDp)',
+                    '🏆 Objectif : bon état = état écologique "bon" ET état chimique "bon"',
+                    '🏗️ MEFM (Masse d\'Eau Fortement Modifiée) : cours d\'eau canalisés, barrages, ports. Objectif réduit = "bon potentiel écologique" (BPE)',
+                    '📋 Exemptions possibles (art. 4.4 DCE) : report d\'échéance pour raisons techniques, économiques ou naturelles. Justification obligatoire dans le SDAGE',
+                    '📊 Résultats France 2022 : ~ 43 % des masses d\'eau en bon ou très bon état écologique | ~ 37 % en bon état chimique hors ubiquitaires',
+                  ],
+                  formules: [],
+                  retenir: 'Bon état = bon état écologique (IBD/IBGN/IPR ≥ bon) ET bon état chimique (45 SP). MEFM = bon potentiel. France 2022 : ~43 % bon état écologique.',
+                },
+                flashcards: [
+                  { q: 'Combien y a-t-il de classes d\'état écologique selon la DCE ?', r: '5 classes : Très bon — Bon — Moyen — Médiocre — Mauvais', expl: 'L\'objectif est d\'atteindre au moins la classe "Bon". Le "Très bon" correspond à l\'état de référence non perturbé. On ne peut pas dégrader une masse d\'eau de bonne qualité.' },
+                  { q: 'Quelle est la différence entre état écologique et état chimique ?', r: 'État écologique : biologie + physico-chimie générale (5 classes). État chimique : 45 substances prioritaires (binaire : bon ou mauvais)', expl: 'Une rivière peut avoir un très bon état écologique mais un mauvais état chimique (traces de mercure industriel). Les deux critères doivent être atteints pour le "bon état".' },
+                  { q: 'Qu\'est-ce qu\'une Masse d\'Eau Fortement Modifiée (MEFM) ?', r: 'Masse d\'eau dont la morphologie a été profondément modifiée par l\'homme (canal, barrage, port) et qui ne peut pas atteindre le "bon état" sans contrainte économique ou sociale inacceptable', expl: 'Pour les MEFM, l\'objectif n\'est pas le "bon état" mais le "bon potentiel écologique" (BPE). Ex : le canal de la Marne au Rhin est une MEFM.' },
+                  { q: 'Quels sont les paramètres physico-chimiques généraux évalués pour l\'état écologique ?', r: 'Température, O₂ dissous, pH, conductivité, nutriments (N total, NO₃⁻, PO₄³⁻, phosphore total), turbidité', expl: 'Ces paramètres sont des "éléments de qualité physico-chimiques" soutenant la biologie. Un excès de phosphore (> 0,1 mg P/L) peut dégrader l\'état écologique même si la biologie est bonne.' },
+                  { q: 'Quel est le taux approximatif de masses d\'eau en bon état écologique en France (2022) ?', r: 'Environ 43 % des masses d\'eau de surface en bon ou très bon état écologique', expl: 'La France est en retard sur les objectifs DCE. Les pressions agricoles (nitrates, pesticides) et morphologiques (ouvrages) sont les principales causes de non-atteinte du bon état.' },
+                  { q: 'Que permet l\'article 4.4 de la DCE ?', r: 'Des dérogations (reports d\'échéance) pour atteindre le bon état, justifiées par des raisons techniques (travaux complexes), économiques ou naturelles (délai de récupération biologique)', expl: 'Les reports doivent être justifiés dans le SDAGE et notifiés à la Commission européenne. Ils ne sont pas automatiques : l\'État doit démontrer que les objectifs restent atteignables.' },
+                ],
+                schema: `<svg viewBox="0 0 280 145" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="145" rx="8" fill="#EBF5FF"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#1550A0">DCE — double évaluation des masses d'eau</text>
+  <rect x="8" y="18" width="122" height="90" rx="6" fill="#1550A0" opacity=".08" stroke="#1550A0" stroke-width="1.5"/>
+  <text x="69" y="30" text-anchor="middle" font-family="Arial" font-size="9" fill="#1550A0" font-weight="bold">État écologique</text>
+  <text x="69" y="40" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">5 classes</text>
+  <rect x="16" y="44" width="106" height="12" rx="3" fill="#0066CC"/>
+  <text x="69" y="52.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Très bon (IBD≥17, IBGN≥17)</text>
+  <rect x="16" y="57" width="106" height="12" rx="3" fill="#00A876"/>
+  <text x="69" y="65.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Bon ≥ objectif DCE</text>
+  <rect x="16" y="70" width="106" height="12" rx="3" fill="#F5C400"/>
+  <text x="69" y="78.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Moyen</text>
+  <rect x="16" y="83" width="106" height="12" rx="3" fill="#E07B00"/>
+  <text x="69" y="91.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Médiocre / Mauvais</text>
+  <text x="69" y="103" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Biologie + physico-chimie</text>
+  <rect x="150" y="18" width="122" height="90" rx="6" fill="#1550A0" opacity=".08" stroke="#1550A0" stroke-width="1.5"/>
+  <text x="211" y="30" text-anchor="middle" font-family="Arial" font-size="9" fill="#1550A0" font-weight="bold">État chimique</text>
+  <text x="211" y="40" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Binaire seulement</text>
+  <rect x="158" y="44" width="106" height="22" rx="3" fill="#00A876"/>
+  <text x="211" y="55" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">BON</text>
+  <text x="211" y="63" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">45 substances ok</text>
+  <rect x="158" y="70" width="106" height="22" rx="3" fill="#CC0000"/>
+  <text x="211" y="81" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">MAUVAIS</text>
+  <text x="211" y="89" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">≥ 1 substance dépasse NQE</text>
+  <text x="211" y="103" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Mercure, Cd, PCB, pesticides...</text>
+  <rect x="8" y="114" width="264" height="24" rx="4" fill="#1550A0" opacity=".15"/>
+  <text x="140" y="124" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#1550A0" font-weight="bold">État global = le moins bon des deux</text>
+  <text x="140" y="133" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">France 2022 : ~43 % bon état éco. · ~37 % bon état chimique (hors ubiquitaires)</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Une rivière est classée en "état moyen" lors du dernier bilan DCE. Les raisons identifiées sont : pression agricole (nitrates élevés, pesticides), présence d\'un barrage hydro-électrique (obstacle continuité), et un tronçon classé MEFM. 1) Pour le tronçon MEFM, quel objectif s\'applique ? 2) Pour les deux autres pressions, quels outils réglementaires ou financiers peuvent être mobilisés ? 3) Une dérogation DCE peut-elle être demandée pour le barrage ?',
+                  solution: '<strong>1) MEFM :</strong> l\'objectif est le <strong>bon potentiel écologique (BPE)</strong>, pas le bon état. Cela permet de maintenir l\'usage (production hydroélectrique) tout en améliorant la biologie dans les limites du possible.<br><strong>2) Outils :</strong><br>• <strong>Nitrates/pesticides :</strong> SDAGE (orientations) + SAGE (dispositions locales) + contrats territoriaux des Agences de l\'eau + MAEC (mesures agro-environnementales et climatiques) + zones vulnérables (directive nitrates)<br>• <strong>Barrage (continuité) :</strong> cours d\'eau classé liste 2 (art. L214-17) → obligation d\'équipement en passe à poissons ou effacement avant 2027. Financement Agence de l\'eau.<br><strong>3) Dérogation :</strong> OUI, l\'article 4.4 DCE permet un report d\'échéance pour raisons techniques ou économiques. La dérogation doit être inscrite dans le SDAGE révisé et notifiée à la Commission européenne. Elle n\'est pas automatique et doit démontrer que les objectifs restent atteignables à terme.',
+                },
+              },
+              {
+                id: 'mil-3',
+                titre: 'Zones humides — rôles, identification et gestion',
+                fiche: {
+                  intro: 'Les zones humides sont des milieux de transition entre terre et eau, parmi les plus riches en biodiversité. Elles jouent des fonctions hydrologiques majeures et sont protégées par de nombreux textes réglementaires.',
+                  points: [
+                    '📖 Définition (art. L211-1 Code envt) : "terrains habituellement inondés ou gorgés d\'eau douce, salée ou saumâtre de façon permanente ou temporaire"',
+                    '🌿 Types : tourbières | prairies humides | mares | roselières | ripisylves | marais côtiers | mangroves',
+                    '💧 Fonctions hydrologiques : laminage des crues (stockage temporaire) | soutien des étiages | recharge des nappes | rétention des sédiments',
+                    '🌱 Fonctions épuratoires : dénitrification (abattement NO₃⁻), rétention phosphore, filtration des MES',
+                    '🦋 Fonctions écologiques : habitats de reproduction pour amphibiens, oiseaux, insectes | corridors biologiques | biodiversité végétale',
+                    '🌡️ Fonctions climatiques : stockage carbone (tourbières = puits de CO₂) | régulation microclimatique',
+                    '🔍 Critères d\'identification (arrêté 24/06/2008) : végétation hygrophile (espèces indicatrices) OU sol hydromorphe (gleysol) OU inondation ≥ 1 mois/an',
+                    '⚖️ Séquence ERC : Éviter → Réduire → Compenser. Compensation zones humides : ratio ≥ 2:1 en surface',
+                    '🌍 Conventions et protections : Convention RAMSAR | Natura 2000 (Habitats, Oiseaux) | arrêtés de biotope | inscription SDAGE',
+                  ],
+                  formules: [],
+                  retenir: 'Zones humides = régulation crues + épuration N/P + biodiversité. Identification : végétation hygrophile ou sol hydromorphe. Compensation ERC : ratio ≥ 2:1.',
+                },
+                flashcards: [
+                  { q: 'Quels sont les 3 critères réglementaires d\'identification d\'une zone humide ?', r: '1) Végétation hygrophile (liste espèces indicatrices) 2) Sol hydromorphe (trace de gleyfication) 3) Inondation ≥ 1 mois par an (au moins une fois tous les 5 ans)', expl: 'Un seul critère suffit pour qualifier la zone humide (arrêté du 24/06/2008 modifié). La présence de saules, roseaux ou joncs est souvent le premier indice.' },
+                  { q: 'Quel est le rôle des zones humides dans la régulation des crues ?', r: 'Elles stockent temporairement les eaux de crue en lit majeur et les restituent lentement, écrêtant les pics de débit et retardant la propagation des crues', expl: '1 ha de zone humide peut stocker 1 000 à 5 000 m³ d\'eau. La suppression des zones humides (drainage, remblaiement) aggrave directement les crues aval.' },
+                  { q: 'Qu\'est-ce que la séquence ERC dans le cadre des zones humides ?', r: 'Éviter (ne pas impacter la zone humide) → Réduire (minimiser l\'impact) → Compenser (créer ou restaurer une zone humide ailleurs, ratio ≥ 2:1)', expl: 'La compensation est un minimum légal, pas un droit à détruire. Le porteur de projet doit prouver qu\'il a d\'abord tout mis en œuvre pour éviter et réduire avant de compenser.' },
+                  { q: 'Pourquoi les tourbières sont-elles importantes pour le climat ?', r: 'Elles stockent d\'énormes quantités de carbone (jusqu\'à 1 500 t C/ha), accumulé pendant des millénaires. Leur drainage libère CO₂ et méthane (puissants GES)', expl: 'Les tourbières couvrent 3 % des terres émergées mais stockent ≈ 30 % du carbone terrestre. Leur protection est un enjeu climatique mondial (Convention RAMSAR).' },
+                  { q: 'Qu\'est-ce que la Convention RAMSAR ?', r: 'Convention internationale (1971, Ramsar, Iran) sur les zones humides d\'importance internationale. 172 pays signataires, plus de 2 400 sites désignés mondialement', expl: 'En France : 55 sites RAMSAR (Camargue, Marais Poitevin, Baie de Somme…). Un site RAMSAR bénéficie d\'une protection renforcée et d\'un suivi de l\'état de conservation.' },
+                  { q: 'Quelle fonction épuratoire les zones humides assurent-elles vis-à-vis de l\'azote ?', r: 'Dénitrification : les bactéries anaérobies transforment NO₃⁻ en N₂ (gaz) — élimination définitive de l\'azote sans résidu', expl: 'Les zones humides en aval de terres agricoles peuvent abattre 60–90 % des nitrates. Elles servent de "filtre naturel" et sont valorisées dans les programmes agro-environnementaux (MAEC).' },
+                ],
+                schema: `<svg viewBox="0 0 280 145" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="145" rx="8" fill="#E8F5E9"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#1B4332">Zones humides — fonctions écosystémiques</text>
+  <rect x="4" y="18" width="130" height="52" rx="4" fill="#4CAF50" opacity=".15" stroke="#2E7D32" stroke-width="1"/>
+  <text x="69" y="29" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#1B4332" font-weight="bold">Fonctions hydrologiques</text>
+  <text x="69" y="40" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">💧 Laminage des crues</text>
+  <text x="69" y="50" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">💧 Soutien des étiages</text>
+  <text x="69" y="60" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">💧 Recharge nappes</text>
+  <text x="69" y="67" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">1 ha = 1 000–5 000 m³</text>
+  <rect x="146" y="18" width="130" height="52" rx="4" fill="#66BB6A" opacity=".15" stroke="#2E7D32" stroke-width="1"/>
+  <text x="211" y="29" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#1B4332" font-weight="bold">Fonctions épuratoires</text>
+  <text x="211" y="40" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">🌿 Dénitrification NO₃⁻→N₂</text>
+  <text x="211" y="50" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">🌿 Rétention phosphore</text>
+  <text x="211" y="60" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">🌿 Filtration MES</text>
+  <text x="211" y="67" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">abattement NO₃⁻ 60–90 %</text>
+  <rect x="4" y="76" width="130" height="40" rx="4" fill="#A5D6A7" opacity=".3" stroke="#2E7D32" stroke-width="1"/>
+  <text x="69" y="87" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#1B4332" font-weight="bold">Biodiversité</text>
+  <text x="69" y="97" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Reproduction amphibiens</text>
+  <text x="69" y="107" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Corridors biologiques</text>
+  <rect x="146" y="76" width="130" height="40" rx="4" fill="#A5D6A7" opacity=".3" stroke="#2E7D32" stroke-width="1"/>
+  <text x="211" y="87" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#1B4332" font-weight="bold">Climat</text>
+  <text x="211" y="97" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Tourbières = puits CO₂</text>
+  <text x="211" y="107" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">1 500 t C/ha (millénaires)</text>
+  <rect x="4" y="122" width="264" height="18" rx="4" fill="#1B4332" opacity=".15"/>
+  <text x="140" y="132" text-anchor="middle" font-family="Arial" font-size="8" fill="#1B4332" font-weight="bold">ERC : Éviter → Réduire → Compenser (ratio ≥ 2:1)</text>
+  <text x="140" y="140.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Critères identif. : végétation hygrophile OU sol hydromorphe OU inondation ≥ 1 mois</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Un promoteur souhaite remblayer 1,5 ha de prairie humide en zone inondable pour construire un parc d\'activités. 1) Comment identifier si la prairie est légalement une zone humide ? 2) La séquence ERC s\'applique-t-elle ? 3) Quelle compensation minimale est requise en surface ?',
+                  solution: '<strong>1) Identification légale :</strong> la prairie est une zone humide si au moins un des 3 critères de l\'arrêté du 24/06/2008 est satisfait :<br>• Présence d\'espèces végétales hygrophiles (joncs, laîches, roseaux, menthe aquatique… liste officielle)<br>• Sol hydromorphe (gleysol avec taches rouille et fond gris, horizons réductiques)<br>• Inondation ≥ 1 mois/an (au moins 1 fois tous les 5 ans)<br>→ Une expertise pédologique et botanique est obligatoire avant tout projet.<br><strong>2) Séquence ERC :</strong> OUI, obligatoirement. Le porteur de projet doit : d\'abord <strong>Éviter</strong> l\'impact (autre localisation, réduction d\'emprise), puis <strong>Réduire</strong> (concevoir pour minimiser), puis, seulement si impact résiduel inévitable, <strong>Compenser</strong>.<br><strong>3) Compensation minimale :</strong> ratio ≥ 2:1 en surface → 1,5 ha × 2 = <strong>3 ha minimum</strong> de zones humides à créer ou restaurer. Cette compensation doit être de fonctionnalité équivalente (même type de zone humide, même bassin versant si possible).',
+                },
+              },
+            ],
+          },
+
+          /* ── Instrumentation ── */
+          {
+            id: 'instrumentation',
+            name: 'Instrumentation et automatisme',
+            ico: '⚙️',
+            color: '#6B4226',
+            colorl: '#F5EFE0',
+            chapitres: [
+              {
+                id: 'ins-1',
+                titre: 'Capteurs de mesure — débit, pression, niveau, qualité',
+                fiche: {
+                  intro: 'La mesure en continu est le fondement de l\'exploitation des réseaux d\'eau et des STEP. Chaque grandeur physique dispose de technologies adaptées à la nature du fluide et aux contraintes de terrain.',
+                  points: [
+                    '🔵 Débitmètre électromagnétique (EM) : principe de Faraday (fluide conducteur = eau + électrolytes). Très précis (±0,5 %), pas de perte de charge. Standard AEP et EU',
+                    '🔊 Débitmètre ultrasonique transit-time : mesure le temps de propagation des ultrasons. Clamp-on = sans découpe de conduite. Adapté eau propre',
+                    '🌊 Débitmètre ultrasonique Doppler : décalage fréquence sur particules/bulles. Adapté eaux chargées (EU, boues)',
+                    '🔺 Débitmètre Venturi / diaphragme : mesure la différence de pression. Robuste, sans pièces mobiles. Adapté aux grandes conduites',
+                    '⬇️ Capteurs de pression : piézorésistifs (déformation membrane), portée 0–1 à 0–600 bar. Signal 4–20 mA ou numérique',
+                    '📏 Capteurs de niveau : ultrasons (sans contact) | radar (haute précision) | piézométrique (pression d\'eau = niveau) | à flotteur (simple)',
+                    '🔬 Sonde multiparamètre : mesure simultanée T°, pH, conductivité, O₂, turbidité, redox. Déploiement en réseau ou sur cours d\'eau',
+                    '💡 Capteurs en ligne : NO₃⁻ (mesure UV), turbidité (néphélémétrie), chlore résiduel (ampérométrie)',
+                  ],
+                  formules: [
+                    'Loi de Faraday (débitmètre EM) : U = B × D × V (U = tension induite, B = champ magnétique, D = diamètre, V = vitesse)',
+                    'Signal standard industriel : 4 mA = 0 % de la mesure — 20 mA = 100 % de la plage',
+                  ],
+                  retenir: 'Débitmètre EM = précis, eau conductrice (AEP/EU). Doppler = eaux chargées. Signal 4–20 mA = standard industriel. Sonde multiparamètre = diagnostic rapide terrain.',
+                },
+                flashcards: [
+                  { q: 'Quel est le principe du débitmètre électromagnétique ?', r: 'Loi de Faraday : un fluide conducteur en mouvement dans un champ magnétique génère une tension proportionnelle à la vitesse. U = B × D × V', expl: 'Applicable uniquement aux fluides conducteurs (σ > 5 µS/cm). Eau potable, eaux usées, boues. Pas pour l\'eau ultra-pure ou les hydrocarbures.' },
+                  { q: 'Quelle technologie de débitmètre utiliser pour des eaux usées chargées en MES ?', r: 'Débitmètre ultrasonique Doppler : les ultrasons se réfléchissent sur les particules en suspension → mesure de la vitesse par effet Doppler', expl: 'Le transit-time (temps de propagation) fonctionne sur eau claire. Le Doppler fonctionne sur eau chargée. On choisit selon la nature du fluide à mesurer.' },
+                  { q: 'Qu\'est-ce que le signal 4–20 mA en instrumentation industrielle ?', r: 'Signal analogique standard : 4 mA correspond à 0 % de la mesure, 20 mA correspond à 100 % de la plage. Robuste aux perturbations électromagnétiques', expl: 'Le 4 mA (et non 0 mA) permet de détecter les coupures de fil (qui donneraient 0 mA). Toujours alimenter la boucle 4–20 mA avec une alimentation 24 VDC.' },
+                  { q: 'Quelle est la différence entre un capteur de niveau ultrasonique et piézométrique ?', r: 'Ultrasonique : mesure la distance par écho sonore, sans contact avec le liquide. Piézométrique : mesure la pression de la colonne d\'eau, immergé', expl: 'L\'ultrasonique est idéal pour les cuves propres (réservoirs d\'eau potable). Le piézométrique est robuste pour les fosses, puits ou canaux chargés.' },
+                  { q: 'Comment mesure-t-on les nitrates en ligne dans un cours d\'eau ?', r: 'Par spectrométrie UV : les ions NO₃⁻ absorbent la lumière UV à 220 nm. La concentration est proportionnelle à l\'absorbance mesurée', expl: 'Les sondes nitrates UV sont très répandues pour la surveillance des cours d\'eau et l\'autosurveillance des STEP. Elles mesurent en continu sans réactif.' },
+                  { q: 'Dans quel cas utilise-t-on un débitmètre clamp-on ?', r: 'Quand on ne peut pas ou ne veut pas interrompre le service (pas de découpe de conduite). Capteurs collés sur l\'extérieur du tuyau', expl: 'Le clamp-on est utilisé pour des mesures temporaires (diagnostic réseau, campagne de mesure) ou des installations sans by-pass. Précision moindre que l\'EM (±1–2 %).' },
+                ],
+                schema: `<svg viewBox="0 0 280 145" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="145" rx="8" fill="#FBF0E6"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#6B4226">Capteurs — technologies et applications</text>
+  <rect x="4" y="18" width="272" height="11" rx="2" fill="#6B4226"/>
+  <text x="140" y="26.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Débitmétrie</text>
+  <text x="40" y="38" text-anchor="middle" font-family="Arial" font-size="8" fill="#6B4226" font-weight="bold">Électromagnétique</text>
+  <text x="40" y="47" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Faraday U=BDV</text>
+  <text x="40" y="55" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Eau conductrice AEP/EU</text>
+  <text x="40" y="62" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">±0,5 %</text>
+  <text x="120" y="38" text-anchor="middle" font-family="Arial" font-size="8" fill="#6B4226" font-weight="bold">Transit-time US</text>
+  <text x="120" y="47" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Temps propagation</text>
+  <text x="120" y="55" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Eau claire · Clamp-on</text>
+  <text x="200" y="38" text-anchor="middle" font-family="Arial" font-size="8" fill="#6B4226" font-weight="bold">Doppler US</text>
+  <text x="200" y="47" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Réflexion sur particules</text>
+  <text x="200" y="55" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">EU chargées · boues</text>
+  <line x1="4" y1="68" x2="276" y2="68" stroke="#6B4226" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <rect x="4" y="70" width="272" height="11" rx="2" fill="#6B4226" opacity=".7"/>
+  <text x="140" y="78.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Pression / Niveau / Qualité</text>
+  <text x="50" y="91" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#6B4226" font-weight="bold">Pression</text>
+  <text x="50" y="100" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Piézorésistif</text>
+  <text x="50" y="108" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">4–20 mA · 0–600 bar</text>
+  <text x="140" y="91" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#6B4226" font-weight="bold">Niveau</text>
+  <text x="140" y="100" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">US (sans contact)</text>
+  <text x="140" y="108" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">ou Piézo (immergé)</text>
+  <text x="230" y="91" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#6B4226" font-weight="bold">Qualité</text>
+  <text x="230" y="100" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Sonde multiparam.</text>
+  <text x="230" y="108" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">T°, pH, O₂, NO₃⁻ UV</text>
+  <rect x="4" y="116" width="272" height="24" rx="4" fill="#FFCC80" opacity=".5" stroke="#6B4226" stroke-width="1"/>
+  <text x="140" y="126" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#6B4226" font-weight="bold">Signal standard industriel : 4–20 mA</text>
+  <text x="140" y="135" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">4 mA = 0 % de plage · 20 mA = 100 % · fil coupé = 0 mA (alarme)</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Un technicien reçoit un signal de 12 mA d\'un capteur de pression 4–20 mA calibré pour une plage 0–10 bar. 1) Quelle pression lit-il ? 2) Le signal passe soudainement à 0 mA. Que se passe-t-il ? 3) Pourquoi choisir un débitmètre électromagnétique plutôt qu\'un Doppler pour mesurer le débit en sortie d\'une usine d\'eau potable ?',
+                  solution: '<strong>1) Calcul de pression :</strong> la plage 4–20 mA correspond à 0–10 bar.<br>P = (12 − 4) / (20 − 4) × 10 = 8/16 × 10 = <strong>5 bar</strong><br><strong>2) Signal à 0 mA :</strong> 0 mA n\'est pas dans la plage normale (4–20 mA). Ce n\'est pas une mesure de 0 bar. Cela indique une <strong>rupture de la boucle de courant</strong> (fil coupé, alimentation coupée, défaut capteur). L\'automate doit déclencher une alarme "défaut capteur", jamais interpréter cela comme une pression nulle.<br><strong>3) EM vs Doppler :</strong> l\'eau potable est propre (faible teneur en MES, pas de bulles). Le débitmètre électromagnétique convient parfaitement (eau conductrice, précision ±0,5 %). Le Doppler nécessite des particules ou bulles en suspension pour fonctionner → il n\'est pas adapté à une eau claire. L\'EM est le standard en AEP.',
+                },
+              },
+              {
+                id: 'ins-2',
+                titre: 'Automates programmables (API) et SCADA',
+                fiche: {
+                  intro: 'L\'automatisation des ouvrages d\'eau (STEP, stations de pompage, usines de potabilisation) repose sur des API qui exécutent la logique de commande, supervisés par un SCADA centralisant les données.',
+                  points: [
+                    '🖥️ API (Automate Programmable Industriel) : calculateur industriel robuste qui lit les capteurs, exécute un programme logique et commande les actionneurs (pompes, vannes)',
+                    '📋 Langages de programmation API (norme IEC 61131-3) : Ladder (schéma contact, électriciens) | FBD (blocs fonctionnels) | ST (texte structuré, informaticiens)',
+                    '🔄 Cycle API : lecture entrées → exécution programme → écriture sorties. Temps de cycle : 1–100 ms',
+                    '🖥️ SCADA (Supervisory Control And Data Acquisition) : logiciel de supervision — affiche l\'état des ouvrages, mémorise les historiques, gère les alarmes',
+                    '👁️ IHM (Interface Homme Machine) : écran tactile ou PC sur lequel l\'opérateur visualise et interagit avec le processus',
+                    '🔗 Protocoles de communication terrain : Modbus RTU/TCP (le plus courant en eau) | PROFIBUS | 4–20 mA analogique | HART (numérique sur la boucle 4–20 mA)',
+                    '🌐 Protocoles réseau industriel : OPC-UA (standard interopérabilité) | DNP3 (télécontrôle eau/énergie) | MQTT (IoT industriel)',
+                    '🔒 Cybersécurité ICS : les systèmes industriels eau sont des infrastructures critiques — segmentation réseau, mises à jour, authentification',
+                  ],
+                  formules: [],
+                  retenir: 'API = cerveau de l\'automatisme. SCADA = supervision globale. Modbus = protocole terrain standard en eau. Cycle : lecture capteurs → programme → commande actionneurs.',
+                },
+                flashcards: [
+                  { q: 'Quelle est la différence entre un API et un SCADA ?', r: 'API = automate terrain qui exécute la logique de commande en temps réel. SCADA = logiciel de supervision centralisé qui surveille et collecte les données de plusieurs API', expl: 'L\'API commande directement la pompe. Le SCADA affiche l\'état, l\'historique et envoie des alarmes. En cas de panne du SCADA, l\'API continue de fonctionner.' },
+                  { q: 'Quels sont les langages de programmation d\'un API selon la norme IEC 61131-3 ?', r: 'Ladder (LD) — blocs fonctionnels (FBD) — texte structuré (ST) — liste d\'instructions (IL) — grafcet/SFC', expl: 'Le Ladder est le plus utilisé en industrie de l\'eau (héritage des logiques à relais électromécaniques). Le texte structuré se rapproche de la programmation informatique.' },
+                  { q: 'Qu\'est-ce que le protocole Modbus ?', r: 'Protocole de communication maître-esclave très répandu dans l\'industrie de l\'eau. Modbus RTU (série RS485) ou Modbus TCP/IP (réseau Ethernet)', expl: 'Un débitmètre, une pompe ou une sonde pH communiquent souvent en Modbus avec l\'API. C\'est un protocole simple, robuste et universel.' },
+                  { q: 'Qu\'est-ce qu\'un cycle API et quelle est sa durée typique ?', r: 'Séquence répétée : lecture des entrées (capteurs) → exécution du programme → écriture des sorties (actionneurs). Durée : 1 à 100 ms selon la complexité', expl: 'Un cycle de 10 ms signifie que l\'API réagit en moins de 10 ms à un changement d\'état d\'un capteur. Pour la gestion de pompes, 100 ms est amplement suffisant.' },
+                  { q: 'Pourquoi la cybersécurité est-elle un enjeu pour les systèmes SCADA d\'eau ?', r: 'Les réseaux d\'eau et STEP sont des infrastructures critiques. Une attaque peut modifier des dosages de réactifs, arrêter des pompes ou déclencher des alarmes intempestives', expl: 'En 2021, une usine de potabilisation en Floride a subi une attaque : un pirate a tenté d\'augmenter la dose de soude caustique × 100. Isolement des réseaux SCADA d\'Internet = mesure prioritaire.' },
+                  { q: 'Qu\'est-ce que l\'IHM (Interface Homme Machine) ?', r: 'Écran (tactile ou PC) permettant à l\'opérateur de visualiser l\'état du processus, acquitter les alarmes et envoyer des commandes manuelles', expl: 'L\'IHM peut être locale (pupitre sur la STEP) ou déportée (SCADA sur serveur). Elle affiche les synoptiques, les courbes de tendance et la liste des alarmes actives.' },
+                ],
+                schema: `<svg viewBox="0 0 280 145" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="145" rx="8" fill="#F5EFE0"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#6B4226">Architecture API – SCADA – IHM</text>
+  <defs><marker id="ar7" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#6B4226"/></marker></defs>
+  <rect x="4" y="18" width="58" height="36" rx="4" fill="#6B4226" opacity=".8"/>
+  <text x="33" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Capteurs</text>
+  <text x="33" y="40" text-anchor="middle" font-family="Arial" font-size="7" fill="#ddd">débit, niveau</text>
+  <text x="33" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#ddd">pression, qualité</text>
+  <line x1="62" y1="36" x2="74" y2="36" stroke="#6B4226" stroke-width="1.2" marker-end="url(#ar7)"/>
+  <rect x="74" y="18" width="58" height="36" rx="4" fill="#8B5E3C"/>
+  <text x="103" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">API</text>
+  <text x="103" y="40" text-anchor="middle" font-family="Arial" font-size="7" fill="#ddd">Ladder/FBD</text>
+  <text x="103" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#ddd">cycle 1–100 ms</text>
+  <line x1="132" y1="36" x2="144" y2="36" stroke="#6B4226" stroke-width="1.2" marker-end="url(#ar7)"/>
+  <text x="140" y="22" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Modbus/TCP</text>
+  <rect x="144" y="18" width="64" height="36" rx="4" fill="#A07040"/>
+  <text x="176" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">SCADA</text>
+  <text x="176" y="40" text-anchor="middle" font-family="Arial" font-size="7" fill="#ddd">Supervision</text>
+  <text x="176" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#ddd">Historiques · alarmes</text>
+  <line x1="208" y1="36" x2="220" y2="36" stroke="#6B4226" stroke-width="1.2" marker-end="url(#ar7)"/>
+  <rect x="220" y="18" width="56" height="36" rx="4" fill="#6B4226" opacity=".6"/>
+  <text x="248" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">IHM</text>
+  <text x="248" y="40" text-anchor="middle" font-family="Arial" font-size="7" fill="#ddd">Synoptiques</text>
+  <text x="248" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#ddd">Opérateur</text>
+  <line x1="103" y1="54" x2="103" y2="64" stroke="#6B4226" stroke-width="1.2"/>
+  <rect x="62" y="64" width="80" height="26" rx="4" fill="#F5EFE0" stroke="#6B4226" stroke-width="1"/>
+  <text x="102" y="74" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#6B4226" font-weight="bold">Actionneurs</text>
+  <text x="102" y="83" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Pompes, vannes, doseurs</text>
+  <rect x="4" y="96" width="272" height="44" rx="4" fill="#FFCC80" opacity=".3" stroke="#6B4226" stroke-width="1"/>
+  <text x="140" y="107" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#6B4226" font-weight="bold">Protocoles de communication</text>
+  <text x="70" y="118" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Modbus RTU/TCP</text>
+  <text x="70" y="127" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Standard terrain eau</text>
+  <text x="150" y="118" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">OPC-UA</text>
+  <text x="150" y="127" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Interopérabilité</text>
+  <text x="224" y="118" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">DNP3 / MQTT</text>
+  <text x="224" y="127" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Télécontrôle / IoT</text>
+  <text x="140" y="136" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#CC0000">⚠️ Cybersécurité : segmentation réseau obligatoire (infra. critique)</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Un API surveille le niveau d\'un réservoir d\'eau. Le capteur de niveau envoie 4–20 mA (0–5 m). À 14 mA, la pompe de remplissage doit s\'arrêter (niveau haut). À 6 mA, elle doit redémarrer (niveau bas). 1) Quel niveau correspond à 14 mA ? 2) Quel niveau correspond à 6 mA ? 3) Si le signal passe à 2 mA, que doit faire l\'API ? 4) Quel protocole utilise-t-on typiquement pour lire ce capteur depuis un API en France ?',
+                  solution: '<strong>1) Niveau à 14 mA :</strong> L = (14 − 4) / (20 − 4) × 5 = 10/16 × 5 = <strong>3,125 m</strong> → l\'API arrête la pompe (niveau haut).<br><strong>2) Niveau à 6 mA :</strong> L = (6 − 4) / 16 × 5 = 2/16 × 5 = <strong>0,625 m</strong> → l\'API redémarre la pompe (niveau bas).<br><strong>3) Signal à 2 mA :</strong> hors de la plage 4–20 mA → <strong>défaut capteur</strong> (fil coupé ou panne). L\'API doit déclencher une alarme "défaut niveau", ne pas interpréter comme une donnée valide, et bloquer la pompe par sécurité (état sûr = pompe arrêtée pour éviter la marche à sec).<br><strong>4) Protocole typique :</strong> <strong>Modbus RTU</strong> (liaison série RS485) ou <strong>Modbus TCP/IP</strong> (réseau Ethernet). C\'est le protocole de facto dans le secteur de l\'eau en France.',
+                },
+              },
+              {
+                id: 'ins-3',
+                titre: 'Télégestion des réseaux d\'eau',
+                fiche: {
+                  intro: 'La télégestion permet de surveiller et piloter à distance des ouvrages dispersés (stations de pompage, réservoirs, surpresseurs). Elle réduit les déplacements et améliore la réactivité face aux incidents.',
+                  points: [
+                    '📡 Définition : système de surveillance et de commande à distance d\'ouvrages répartis géographiquement',
+                    '🏗️ Architecture : capteur/actionneur → RTU (Remote Terminal Unit) → réseau de communication → serveur télégestion → opérateur',
+                    '📶 Réseaux de communication utilisés : GPRS/4G (réseau cellulaire) | LoRaWAN / Sigfox (LPWAN IoT, faible débit, longue portée) | radio UHF propriétaire | fibre optique',
+                    '📊 Fonctions principales : mesure en temps réel | alarmes (SMS, email, application) | commandes à distance (marche/arrêt pompes, ouverture vannes) | historiques et courbes',
+                    '⚡ Avantages : réduction des rondes terrain | réactivité incidents | optimisation énergétique (pilotage pompes aux heures creuses) | bilan eau (rendement réseau)',
+                    '📋 Obligations réglementaires : autosurveillance STEP (arrêté 22/06/2007) — télétransmission des données au ROSEAU (Réseau d\'Observation et de Surveillance des Eaux)',
+                    '💧 Autosurveillance AEP : suivi débit distribué, chlore résiduel, pression, turbidité — en continu ou horaire selon le réseau',
+                    '🔋 Alimentation des RTU isolés : panneaux solaires + batterie. Consommation LoRa : quelques mA → autonomie plusieurs années',
+                  ],
+                  formules: [
+                    'Rendement réseau = Volume facturé / Volume mis en distribution × 100 (%)',
+                    'ILP (Indice Linéaire de Perte) = Pertes réelles (m³/j) / longueur réseau (km) — seuil de performance',
+                  ],
+                  retenir: 'Télégestion = RTU + réseau comm. (4G, LoRa) + serveur. Fonctions : mesure, alarmes, commandes, historiques. Autosurveillance STEP obligatoire (arrêté 2007).',
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce qu\'un RTU (Remote Terminal Unit) ?', r: 'Unité de télécontrôle déportée : acquiert les mesures des capteurs locaux, les transmet au serveur de télégestion et exécute les commandes distantes', expl: 'Le RTU est l\'équivalent d\'un petit API avec une interface de communication radio ou cellulaire. Il est souvent alimenté par panneau solaire + batterie pour les sites isolés.' },
+                  { q: 'Quels réseaux de communication sont utilisés pour la télégestion ?', r: 'GPRS/4G (réseau mobile, ubiquitaire) | LoRaWAN/Sigfox (IoT bas débit, longue portée, économe) | radio UHF propriétaire | fibre optique (sites importants)', expl: 'LoRa est de plus en plus utilisé pour les capteurs de niveau et pression (faible débit suffisant, très économe en énergie). La 4G reste la référence pour les sites nécessitant du débit.' },
+                  { q: 'Qu\'est-ce que le rendement de réseau AEP et comment est-il calculé ?', r: 'Rendement = Volume facturé / Volume mis en distribution × 100 %. Un réseau performant a un rendement ≥ 85 %', expl: 'Les pertes (fuites) représentent en France environ 20 % du volume produit. La télégestion permet de détecter les fuites nocturnes (débit minimum nocturne anormal).' },
+                  { q: 'Qu\'est-ce que l\'ILP (Indice Linéaire de Perte) ?', r: 'ILP = pertes réelles (m³/j) / longueur de réseau (km). Bon réseau : ILP < 3 m³/j/km. Mauvais : ILP > 10', expl: 'L\'ILP est un indicateur de performance du réseau plus équitable que le rendement (un réseau dense urbain a structurellement plus de fuites qu\'un réseau rural).' },
+                  { q: 'Quelles sont les obligations réglementaires d\'autosurveillance pour les STEP ?', r: 'Arrêté du 22/06/2007 : mesure en continu débit entrant/sortant, turbidité sortie, et transmission mensuelle des données au ROSEAU (base nationale)', expl: 'Les STEP > 100 000 EH ont des obligations renforcées (analyseurs en ligne DCO, NH₄, NO₃). Les données sont publiques et visibles sur le portail national de l\'assainissement.' },
+                  { q: 'Comment la télégestion contribue-t-elle à l\'optimisation énergétique ?', r: 'En pilotant les pompes aux heures creuses (tarif électrique réduit), en optimisant les points de fonctionnement et en détectant les anomalies de consommation', expl: 'L\'énergie représente 50–70 % des coûts d\'exploitation d\'une STEP ou d\'un réseau AEP. Un système de télégestion intelligent peut réduire la facture électrique de 15–25 %.' },
+                ],
+                schema: `<svg viewBox="0 0 280 145" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="145" rx="8" fill="#F0EAD6"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#6B4226">Télégestion — architecture et fonctions</text>
+  <defs><marker id="ar8" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#6B4226"/></marker></defs>
+  <rect x="4" y="18" width="56" height="30" rx="4" fill="#6B4226" opacity=".7"/>
+  <text x="32" y="28.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Capteur /</text>
+  <text x="32" y="38" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Actionneur</text>
+  <text x="32" y="46.5" text-anchor="middle" font-family="Arial" font-size="7" fill="#ddd">terrain</text>
+  <line x1="60" y1="33" x2="72" y2="33" stroke="#6B4226" stroke-width="1.2" marker-end="url(#ar8)"/>
+  <rect x="72" y="18" width="52" height="30" rx="4" fill="#8B5E3C"/>
+  <text x="98" y="28.5" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">RTU</text>
+  <text x="98" y="37.5" text-anchor="middle" font-family="Arial" font-size="7" fill="#ddd">Remote Terminal</text>
+  <text x="98" y="46.5" text-anchor="middle" font-family="Arial" font-size="7" fill="#ddd">Solaire + batterie</text>
+  <line x1="124" y1="33" x2="136" y2="33" stroke="#6B4226" stroke-width="1.2" marker-end="url(#ar8)"/>
+  <rect x="136" y="14" width="72" height="18" rx="4" fill="#C8A070" opacity=".5" stroke="#6B4226" stroke-width="1"/>
+  <text x="172" y="26" text-anchor="middle" font-family="Arial" font-size="8" fill="#6B4226" font-weight="bold">Réseau de comm.</text>
+  <text x="68" y="55" font-family="Arial" font-size="7.5" fill="#333">4G/GPRS</text>
+  <text x="108" y="55" font-family="Arial" font-size="7.5" fill="#333">LoRaWAN</text>
+  <text x="148" y="55" font-family="Arial" font-size="7.5" fill="#333">Radio UHF</text>
+  <text x="200" y="55" font-family="Arial" font-size="7.5" fill="#333">Fibre optique</text>
+  <line x1="208" y1="33" x2="220" y2="33" stroke="#6B4226" stroke-width="1.2" marker-end="url(#ar8)"/>
+  <rect x="220" y="18" width="56" height="30" rx="4" fill="#6B4226" opacity=".6"/>
+  <text x="248" y="28" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Serveur</text>
+  <text x="248" y="37" text-anchor="middle" font-family="Arial" font-size="7" fill="#ddd">Télégestion</text>
+  <text x="248" y="46" text-anchor="middle" font-family="Arial" font-size="7" fill="#ddd">SCADA cloud</text>
+  <rect x="4" y="62" width="272" height="40" rx="4" fill="#F5EFE0" stroke="#6B4226" stroke-width="1"/>
+  <text x="140" y="73" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#6B4226" font-weight="bold">Fonctions principales</text>
+  <text x="55" y="85" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">📊 Mesure temps réel</text>
+  <text x="140" y="85" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">🚨 Alarmes SMS/email</text>
+  <text x="225" y="85" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">⚡ Commandes dist.</text>
+  <text x="55" y="95" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">📈 Historiques</text>
+  <text x="140" y="95" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">🔋 Optim. énergie</text>
+  <text x="225" y="95" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">📋 Autosurveillance</text>
+  <rect x="4" y="108" width="272" height="30" rx="4" fill="#FFCC80" opacity=".3" stroke="#6B4226" stroke-width="1"/>
+  <text x="140" y="118" text-anchor="middle" font-family="Arial" font-size="8" fill="#6B4226" font-weight="bold">Indicateurs de performance réseau</text>
+  <text x="80" y="129" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Rendement = V_facturé / V_distribué ≥ 85 %</text>
+  <text x="220" y="129" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">ILP &lt; 3 m³/j/km (bon)</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Un réseau AEP distribue 1 200 m³/j. La facturation aux abonnés enregistre 960 m³/j. Le réseau a 28 km de canalisations. 1) Calculer le rendement du réseau. 2) Est-il satisfaisant ? 3) Calculer l\'ILP. 4) Comment la télégestion peut-elle aider à améliorer ces indicateurs ?',
+                  solution: '<strong>1) Rendement :</strong> R = V_facturé / V_distribué = 960 / 1 200 = <strong>80 %</strong><br><strong>2) Satisfaisant ?</strong> 80 % est en-dessous du seuil de 85 % généralement considéré comme performant. Des travaux de renouvellement des canalisations sont probablement nécessaires.<br><strong>3) ILP :</strong> Pertes = 1 200 − 960 = 240 m³/j<br>ILP = 240 / 28 = <strong>8,6 m³/j/km</strong> → entre 3 et 10 → réseau "moyen" (ILP > 10 = mauvais). Des fuites significatives existent.<br><strong>4) Apport de la télégestion :</strong><br>• Mesure du débit minimum nocturne (2h–4h du matin) → si Q_nuit > 0,5–1 L/s → présence de fuites actives localisables<br>• Alarmes de débit anormal en temps réel → intervention rapide<br>• Sectorisation avec compteurs de secteur → localisation de la fuite par secteur<br>• Bilan hebdomadaire distribué/facturé automatique pour suivre l\'évolution du rendement',
+                },
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  /* ══ LICENCE PRO MÉTIERS DE L'EAU ══════════════════════════════════ */
+  'licence-pro': {
+    name: 'Licence Professionnelle Métiers de l\'Eau',
+    sigle: 'Licence Pro EAU',
+    ico: '🎓',
+    color: '#1550A0',
+    colorl: '#E6EEF8',
+    niveau: 'Bac+3',
+    organisme: 'Universités — IUT',
+    desc: 'Spécialisation après BTS/BUT : exploitation réseau, traitement avancé, milieux aquatiques, droit de l\'eau. Souvent en alternance.',
+    annees: [
+      {
+        id: 'an1',
+        name: 'Année de spécialisation (Bac+3)',
+        matieres: [
+
+          /* ── Hydrologie appliquée ── */
+          { id: 'hydrologie', name: 'Hydrologie appliquée', ico: '⛰️', color: '#0A5090', colorl: '#E6EEF8', chapitres: [
+            {
+              id: 'hyd-lp-1',
+              titre: 'Cycle de l\'eau et bilans hydrologiques',
+              fiche: {
+                intro: 'Le cycle hydrologique décrit la circulation de l\'eau entre l\'atmosphère, la surface et le sous-sol. Le bilan hydrologique quantifie ces transferts à l\'échelle d\'un bassin versant.',
+                points: [
+                  '🌧️ Cycle : précipitations → interception (végétation) → ruissellement de surface → infiltration → percolation → nappe → exfiltration → cours d\'eau → évapotranspiration → atmosphère',
+                  '📐 Bassin versant (BV) : surface drainée par un cours d\'eau, délimitée par la ligne de partage des eaux (ligne de crête). Unité de gestion hydrologique',
+                  '⚖️ Bilan hydrologique : P = ETR + Q + ΔS',
+                  '   P = précipitations | ETR = évapotranspiration réelle | Q = ruissellement (débit) | ΔS = variation du stock (nappes, neige)',
+                  '💧 Coefficient d\'écoulement Ce = Q/P (sans unité). Varie de 0,05 (milieu aride) à 0,8 (montagne imperméable)',
+                  '🌿 ETP (Évapotranspiration Potentielle) : formule de Penman-Monteith (FAO) — dépend T°, humidité, vent, rayonnement',
+                  '📊 Données hydrométrie : stations de mesure (HYDRO, Vigicrues), courbes de tarage, module (débit moyen interannuel)',
+                  '🗺️ Module spécifique : débit par unité de surface du BV (L/s/km²) — compare les bassins entre eux',
+                ],
+                formules: [
+                  'P = ETR + Q + ΔS — bilan hydrologique (mm ou m³)',
+                  'Ce = Q / P — coefficient d\'écoulement (–)',
+                  'Module = débit moyen interannuel (m³/s ou L/s/km²)',
+                ],
+                retenir: 'Bilan : P = ETR + Q + ΔS. Ce = Q/P. Le bassin versant = unité de gestion. Module = débit moyen interannuel. Données : banque HYDRO, Vigicrues.',
+              },
+              flashcards: [
+                { q: 'Formule du bilan hydrologique ?', r: 'P = ETR + Q + ΔS  (précipitations = évapotranspiration réelle + débit + variation de stock)', expl: 'Sur une longue période (> 10 ans) et à l\'échelle annuelle, ΔS ≈ 0. On peut alors écrire : Q = P – ETR, ce qui permet d\'estimer la ressource renouvelable.' },
+                { q: 'Comment est délimité un bassin versant ?', r: 'Par la ligne de partage des eaux : ligne reliant les points hauts (crêtes) séparant les eaux vers deux bassins différents. Délimitation sur carte topographique ou MNT', expl: 'Un bassin versant topographique peut différer d\'un bassin versant hydrogéologique (les eaux souterraines peuvent traverser une ligne de crête).' },
+                { q: 'Que représente le coefficient d\'écoulement Ce ?', r: 'Ce = Q/P : fraction des précipitations qui ruisselle vers les cours d\'eau. Ce varie de 0,05 (milieu aride) à 0,8 (montagne granitique imperméable)', expl: 'Le reste (1 – Ce) retourne à l\'atmosphère par évapotranspiration. En France métropolitaine, Ce moyen ≈ 0,3–0,5 selon les régions.' },
+                { q: 'Qu\'est-ce que le module d\'un cours d\'eau ?', r: 'Le débit moyen interannuel (m³/s). Calculé sur une longue série (> 20 ans). C\'est la valeur de référence pour caractériser une rivière', expl: 'Le module sert de base aux calculs réglementaires (débit réservé = module/10) et aux études d\'impact (prélèvements, rejets).' },
+                { q: 'Qu\'est-ce que la banque de données HYDRO ?', r: 'Base nationale des données hydrométriques (débits, niveaux) des cours d\'eau français. Gérée par le SCHAPI et les DREAL. Accès public via hubeau.eaufrance.fr', expl: 'HYDRO contient les chroniques de débits depuis parfois 1880. Indispensable pour les études hydrologiques (fréquence des crues, étiages de référence).' },
+                { q: 'Qu\'est-ce que l\'évapotranspiration potentielle (ETP) ?', r: 'Quantité d\'eau évaporée et transpirée par la végétation si l\'eau est disponible en quantité illimitée. ETP > ETR réelle si déficit hydrique', expl: 'En France : ETP annuelle ≈ 600–800 mm. La formule de Penman-Monteith (FAO) est la référence internationale. Elle intègre température, humidité relative, vent et rayonnement solaire.' },
+              ],
+              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#E6EEF8"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#0A5090">Bilan hydrologique P = ETR + Q + ΔS</text>
+  <rect x="90" y="18" width="100" height="22" rx="4" fill="#0A5090"/>
+  <text x="140" y="33" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold">Précipitations P</text>
+  <defs><marker id="ar9" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#0A5090"/></marker></defs>
+  <line x1="140" y1="40" x2="140" y2="52" stroke="#0A5090" stroke-width="1.5" marker-end="url(#ar9)"/>
+  <text x="140" y="64" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#0A5090" font-weight="bold">Ce = Q / P — Coefficient d'écoulement</text>
+  <rect x="4" y="70" width="78" height="30" rx="4" fill="#1976D2" opacity=".85"/>
+  <text x="43" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">ETR</text>
+  <text x="43" y="93" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Évapo-transpiration</text>
+  <rect x="101" y="70" width="78" height="30" rx="4" fill="#0A5090" opacity=".85"/>
+  <text x="140" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Q — Débit</text>
+  <text x="140" y="93" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">vers cours d'eau</text>
+  <rect x="198" y="70" width="78" height="30" rx="4" fill="#1550A0" opacity=".85"/>
+  <text x="237" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">ΔS</text>
+  <text x="237" y="93" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Stock nappes/neige</text>
+  <rect x="8" y="106" width="264" height="36" rx="4" fill="#fff" stroke="#0A5090" stroke-width="1"/>
+  <text x="140" y="119" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A5090" font-weight="bold">Valeurs de référence</text>
+  <text x="140" y="130" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Ce France ≈ 0,3–0,5 · Module = débit moyen interannuel (m³/s)</text>
+  <text x="140" y="140" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">ETP Penman-Monteith · Données : HYDRO / Vigicrues (hubeau)</text>
+</svg>`,
+              exercice: {
+                enonce: 'Sur un bassin versant de 250 km², les mesures annuelles donnent : P = 950 mm, ETR = 580 mm, ΔS = 0. 1) Calculer Q moyen (mm/an). 2) Calculer le coefficient d\'écoulement Ce. 3) Convertir Q en m³/s (module). 4) En déduire le débit réservé légal aval.',
+                solution: '<strong>1) Q :</strong> Q = P − ETR − ΔS = 950 − 580 − 0 = <strong>370 mm/an</strong><br><strong>2) Ce :</strong> Ce = Q/P = 370/950 = <strong>0,39</strong> (39 % des pluies ruissellent)<br><strong>3) Module :</strong> Q = 0,370 m/an × 250×10⁶ m² = 92,5×10⁶ m³/an<br>Module = 92 500 000 / 31 536 000 = <strong>2,93 m³/s</strong><br><strong>4) Débit réservé</strong> (art. L214-18) = Module/10 = <strong>0,29 m³/s</strong>',
+              },
+            },
+            {
+              id: 'hyd-lp-2',
+              titre: 'Précipitations, ruissellement et crues',
+              fiche: {
+                intro: 'Les crues sont les événements hydrologiques extrêmes qui menacent les personnes et les biens. Leur caractérisation statistique et leur prévision reposent sur l\'analyse des précipitations et des modèles pluie-débit.',
+                points: [
+                  '🌧️ Mesure des précipitations : pluviomètre (bague collectrice), pluviographe (enregistreur), radar météo (Doppler — résolution 1 km)',
+                  '📊 Courbes IDF (Intensité-Durée-Fréquence) : outil réglementaire donnant l\'intensité pluviale (mm/h) en fonction de la durée et la période de retour',
+                  '📈 Hydrogramme de crue : débit en fonction du temps. Caractéristiques : temps de montée, débit de pointe Qp, volume, temps de décrue',
+                  '🔢 Période de retour T (ans) : probabilité annuelle de dépassement p = 1/T. Crue T = 100 ans = probabilité 1/100 = 1 % chaque année',
+                  '📐 Méthode rationnelle (BV < 2 km²) : Q = C × i × A / 360 (L/s)',
+                  '🏔️ Méthode GRADEX (grands BV) : extrapolation statistique des débits de crue pour les faibles probabilités (crues rares)',
+                  '💻 Modèles pluie-débit : GR4J (4 paramètres, modèle conceptuel) — MIKE FLOOD — HEC-HMS. Simuler le débit à partir des précipitations',
+                  '⚠️ PPRI (Plan de Prévention des Risques d\'Inondation) : cartographie zones inondables (aléa + enjeux). Opposable aux tiers (annexe PLU)',
+                ],
+                formules: [
+                  'Q = C × i × A / 360 — méthode rationnelle (L/s, A en ha, i en mm/h)',
+                  'p = 1/T — probabilité annuelle de dépassement d\'une crue de période de retour T',
+                ],
+                retenir: 'IDF = outil clé pour le dimensionnement EP. Crue T100 = p=1%. Méthode rationnelle pour BV < 2 km². PPRI = zonage réglementaire inondation.',
+              },
+              flashcards: [
+                { q: 'Qu\'est-ce qu\'une courbe IDF ?', r: 'Courbe Intensité-Durée-Fréquence : donne l\'intensité pluviale (mm/h) pour une durée d\'événement et une période de retour donnée', expl: 'Exemple : pour T = 10 ans et durée 1h, une IDF de Paris donne i ≈ 25 mm/h. Utilisée pour dimensionner les réseaux EP, les bassins de rétention, les déversoirs.' },
+                { q: 'Qu\'est-ce que la période de retour d\'une crue ?', r: 'T (ans) = 1/p où p est la probabilité annuelle de dépassement. Une crue T100 a p = 1% chaque année, pas qu\'une fois tous les 100 ans exactement', expl: 'Un événement T100 peut se produire deux fois en 5 ans. La probabilité d\'avoir au moins un T100 en 100 ans est : 1-(1-1/100)^100 ≈ 63 %.' },
+                { q: 'Qu\'est-ce que l\'hydrogramme de crue ?', r: 'Graphique débit = f(temps) pour un événement pluvieux. Comprend : temps de montée → pic Qp → décrue. La forme dépend du BV, du sol et de la pluie', expl: 'Un BV imperméable et dense → montée rapide et pic élevé. Un BV forestier avec sol perméable → montée lente et pic écrêté. La restauration des zones humides réduit les pics.' },
+                { q: 'Pour quels bassins versants la méthode rationnelle est-elle valable ?', r: 'BV < 2 km² (petits bassins urbains ou ruraux). Au-delà, les hypothèses de la méthode ne sont plus valides', expl: 'La méthode rationnelle suppose que la pluie est uniforme et que la durée de la pluie = le temps de concentration du BV. Pour les grands BV, on utilise GRADEX ou des modèles pluie-débit.' },
+                { q: 'Qu\'est-ce que le PPRI et quelle est sa portée juridique ?', r: 'Plan de Prévention des Risques d\'Inondation : cartographie l\'aléa inondation et définit des zones réglementaires. Annexé au PLU → opposable aux tiers', expl: 'En zone rouge (aléa fort), toute construction est en général interdite. En zone bleue (aléa modéré), des prescriptions s\'imposent (plancher surélevé, matériaux adaptés).' },
+                { q: 'Qu\'est-ce que le modèle GR4J ?', r: 'Modèle pluie-débit conceptuel à 4 paramètres (Génie Rural, journalier) — transforme les séries de pluie et ETP en débit journalier calculé', expl: 'GR4J est un modèle simple mais performant, développé par INRAE. Très utilisé en France pour la simulation hydrologique et la prévision des crues.' },
+              ],
+              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#E6EEF8"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#0A5090">Crues — Méthode rationnelle &amp; Hydrogramme</text>
+  <rect x="4" y="18" width="128" height="68" rx="4" fill="#0A5090" opacity=".1" stroke="#0A5090" stroke-width="1"/>
+  <text x="68" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#0A5090" font-weight="bold">Méthode rationnelle</text>
+  <text x="68" y="43" text-anchor="middle" font-family="Arial" font-size="9" fill="#0A5090" font-weight="bold">Q = C × i × A / 360</text>
+  <text x="68" y="54" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">C : coeff. ruissellement</text>
+  <text x="68" y="64" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">i : intensité IDF (mm/h)</text>
+  <text x="68" y="74" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">A : surface (ha) · BV &lt; 2 km²</text>
+  <rect x="136" y="18" width="140" height="68" rx="4" fill="#E6EEF8" stroke="#0A5090" stroke-width="1"/>
+  <text x="206" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#0A5090" font-weight="bold">Hydrogramme de crue</text>
+  <defs><marker id="ar10" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#0A5090"/></marker></defs>
+  <polyline points="145,78 158,78 170,52 190,36 210,52 235,68 270,76" fill="none" stroke="#0A5090" stroke-width="2"/>
+  <line x1="145" y1="78" x2="270" y2="78" stroke="#888" stroke-width="0.8"/>
+  <line x1="145" y1="32" x2="145" y2="78" stroke="#888" stroke-width="0.8"/>
+  <text x="190" y="32" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828" font-weight="bold">Qp (pointe)</text>
+  <text x="162" y="75" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#555">montée</text>
+  <text x="230" y="75" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#555">décrue</text>
+  <text x="270" y="86" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">t →</text>
+  <rect x="8" y="92" width="264" height="50" rx="4" fill="#fff" stroke="#0A5090" stroke-width="1"/>
+  <text x="140" y="104" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A5090" font-weight="bold">Courbes IDF — Période de retour T</text>
+  <text x="140" y="115" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">T (ans) = 1/p · Crue T100 : p = 1 % par an</text>
+  <text x="140" y="126" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Paris T10, 1h : i ≈ 25 mm/h · PPRI = zonage réglementaire (PLU)</text>
+  <text x="140" y="137" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">GR4J = modèle pluie-débit 4 param. (INRAE) · GRADEX pour grands BV</text>
+</svg>`,
+              exercice: {
+                enonce: 'Un parking imperméable de 1,2 ha (C = 0,85) reçoit une pluie d\'intensité T10, durée 30 min : i = 35 mm/h (IDF locale). 1) Calculer le débit de pointe Q (méthode rationnelle). 2) Quelle est la probabilité d\'avoir au moins un événement supérieur en 20 ans ?',
+                solution: '<strong>1) Débit de pointe :</strong> Q = C × i × A / 360 = 0,85 × 35 × 1,2 / 360 = 35,7 / 360 = <strong>0,099 m³/s ≈ 99 L/s</strong><br><strong>2) Probabilité sur 20 ans :</strong> p annuelle = 1/T = 1/10 = 10 %<br>P(au moins 1 en 20 ans) = 1 − (1 − 0,1)²⁰ = 1 − 0,9²⁰ = 1 − 0,122 = <strong>87,8 %</strong><br>→ Quasi certain d\'observer au moins un dépassement T10 sur 20 ans.',
+              },
+            },
+            {
+              id: 'hyd-lp-3',
+              titre: 'Étiages et débits réservés',
+              fiche: {
+                intro: 'Les étiages représentent les périodes de faibles débits, critiques pour les usages de l\'eau (prélèvements, dilution des rejets, vie aquatique). Leur gestion est encadrée par des débits réglementaires minimaux.',
+                points: [
+                  '📉 Étiage : période de basses eaux. En France : principalement été-automne (fonte des neiges passée + déficit estival). Aggravé par le changement climatique',
+                  '📊 VCN10 (m³/s) : débit moyen minimum sur 10 jours consécutifs pour une année donnée. Indicateur couramment utilisé pour caractériser la sévérité d\'un étiage',
+                  '📊 QMNA5 : débit mensuel sec de période de retour 5 ans = débit de référence réglementaire pour les autorisations de prélèvements et de rejets',
+                  '⚖️ Débit réservé (ou débit minimum biologique) : débit à maintenir obligatoirement en aval de tout ouvrage prélevant de l\'eau',
+                  '   Règle générale : 1/10 du module (débit moyen annuel) — ou 1/40 du module si l\'ouvrage existait avant 1984',
+                  '🚨 Seuils d\'alerte sécheresse : DDT fixe par arrêté préfectoral 4 niveaux (vigilance → alerte → alerte renforcée → crise). Restrictions d\'usage progressives',
+                  '🌡️ Changement climatique : augmentation de la fréquence et de la sévérité des étiages. QMNA5 en baisse de 20–40 % d\'ici 2050 selon les scénarios RCP8.5',
+                  '💡 DSA (Débit de Salubrité Aquatique) : débit minimal pour maintenir la vie aquatique — souvent supérieur au débit réservé réglementaire',
+                ],
+                formules: [
+                  'Débit réservé = Module / 10 (règle générale — art. L214-18 Code envt)',
+                  'QMNA5 = débit mensuel minimum dépassé 4 années sur 5 (fréquence de non-dépassement 20 %)',
+                ],
+                retenir: 'QMNA5 = débit de référence réglementaire. Débit réservé = module/10. Étiages aggravés par le CC (-20 à -40% d\'ici 2050). VCN10 = indicateur de sévérité.',
+              },
+              flashcards: [
+                { q: 'Qu\'est-ce que le QMNA5 ?', r: 'Débit Mensuel Minimum de fréquence 5 ans de retour : le débit du mois le plus sec qui n\'est dépassé (vers le bas) qu\'une fois tous les 5 ans', expl: 'C\'est la référence pour fixer les débits réservés et encadrer les prélèvements d\'eau. Les autorisations IOTA vérifient que le prélèvement ne descend pas sous le QMNA5.' },
+                { q: 'Quelle est la règle générale pour le débit réservé ?', r: '1/10 du module (débit moyen interannuel). Valeur minimale à maintenir en aval de tout ouvrage de prélèvement ou de retenue', expl: 'Art. L214-18 du Code de l\'environnement. Si l\'ouvrage existait avant 1984 et n\'a pas fait l\'objet d\'une nouvelle autorisation : débit réservé = module/40.' },
+                { q: 'Qu\'est-ce que le VCN10 ?', r: 'Volume (débit) Caractéristique de crue Négative sur 10 jours : débit minimal moyen sur 10 jours consécutifs, calculé sur une année donnée', expl: 'Le VCN10 quinquennal sec (VQCN10-5) est le VCN10 de période de retour 5 ans = l\'un des indicateurs officiels pour caractériser les étiages sévères.' },
+                { q: 'Quels sont les 4 niveaux d\'alerte sécheresse ?', r: 'Vigilance → Alerte → Alerte renforcée → Crise. Chaque niveau déclenche des restrictions d\'usage (agriculture, industrie, collectivités, particuliers)', expl: 'Les restrictions progressent : en crise, l\'irrigation agricole peut être totalement interdite. Le portail "propluvia" (gouvernement) cartographie les arrêtés en temps réel.' },
+                { q: 'Comment le changement climatique affecte-t-il les étiages en France ?', r: 'Augmentation de la fréquence et de la sévérité. QMNA5 en baisse de 20–40 % d\'ici 2050 sur les bassins méditerranéens et atlantiques selon les scénarios RCP8.5', expl: 'La recharge hivernale des nappes diminue (moins de pluies hivernales, plus d\'évaporation). Les étiages commencent plus tôt et durent plus longtemps, mettant en tension les usages.' },
+                { q: 'Pourquoi le débit réservé peut-il être insuffisant pour la vie aquatique ?', r: 'Le débit réservé (module/10) est un minimum légal, souvent inférieur au Débit de Salubrité Aquatique (DSA) nécessaire pour maintenir les habitats et la faune piscicole', expl: 'Des études montrent qu\'un DSA correspond souvent à 30–40 % du module. Le module/10 ne permet pas toujours le maintien des espèces les plus exigeantes (salmonidés).' },
+              ],
+              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#E6EEF8"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#0A5090">Étiages — QMNA5 · Débit réservé · Sécheresse</text>
+  <rect x="4" y="18" width="130" height="72" rx="4" fill="#0A5090" opacity=".1" stroke="#0A5090" stroke-width="1"/>
+  <text x="69" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#0A5090" font-weight="bold">Débits réglementaires</text>
+  <text x="69" y="42" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">QMNA5 = débit mensuel</text>
+  <text x="69" y="52" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">min · fréquence 1/5 ans</text>
+  <text x="69" y="64" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A5090" font-weight="bold">Débit réservé = Module/10</text>
+  <text x="69" y="74" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">DSA ≈ 30–40 % du module</text>
+  <text x="69" y="83" text-anchor="middle" font-family="Arial" font-size="7" fill="#C62828">(légal &lt; biologique)</text>
+  <rect x="140" y="18" width="136" height="72" rx="4" fill="#fff" stroke="#0A5090" stroke-width="1"/>
+  <text x="208" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#0A5090" font-weight="bold">Niveaux sécheresse</text>
+  <rect x="144" y="34" width="128" height="11" rx="2" fill="#4CAF50"/>
+  <text x="208" y="43" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">1 · Vigilance</text>
+  <rect x="144" y="47" width="128" height="11" rx="2" fill="#FFC107"/>
+  <text x="208" y="56" text-anchor="middle" font-family="Arial" font-size="8" fill="#333" font-weight="bold">2 · Alerte</text>
+  <rect x="144" y="60" width="128" height="11" rx="2" fill="#FF9800"/>
+  <text x="208" y="69" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">3 · Alerte renforcée</text>
+  <rect x="144" y="73" width="128" height="11" rx="2" fill="#C62828"/>
+  <text x="208" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">4 · Crise (AEP prioritaire)</text>
+  <rect x="8" y="96" width="264" height="46" rx="4" fill="#fff" stroke="#0A5090" stroke-width="1"/>
+  <text x="140" y="108" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A5090" font-weight="bold">VCN10 — indicateur de sévérité</text>
+  <text x="140" y="119" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">VCN10 = débit moyen min sur 10 jours consécutifs</text>
+  <text x="140" y="130" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">QMNA5 en baisse −20 à −40 % d'ici 2050 (RCP8.5)</text>
+  <text x="140" y="140" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Portail propluvia → arrêtés préfectoraux sécheresse</text>
+</svg>`,
+              exercice: {
+                enonce: 'Une rivière a un module de 3,8 m³/s et un QMNA5 de 0,45 m³/s. Un prélèvement agricole de 0,15 m³/s est en cours. 1) Quel est le débit réservé légal ? 2) Le débit résiduel après prélèvement respecte-t-il le débit réservé ? 3) Le QMNA5 sera-t-il respecté en étiage ?',
+                solution: '<strong>1) Débit réservé :</strong> Module/10 = 3,8/10 = <strong>0,38 m³/s</strong><br><strong>2) Débit résiduel hors étiage :</strong> théoriquement le débit moyen >> 0,38 m³/s → ok. Mais le prélèvement doit cesser dès que le débit approche du seuil.<br><strong>3) En étiage (QMNA5 = 0,45 m³/s) :</strong> Débit résiduel = 0,45 − 0,15 = <strong>0,30 m³/s < 0,38 m³/s</strong> → débit réservé <strong>NON respecté</strong>. Le prélèvement doit être interdit ou réduit à 0,45 − 0,38 = <strong>0,07 m³/s max</strong> en période d\'étiage.',
+              },
+            },
+          ]},
+
+          /* ── Droit et gestion de l'eau ── */
+          { id: 'droit-eau', name: 'Droit et gestion de l\'eau', ico: '⚖️', color: '#8B4513', colorl: '#FBF0E6', chapitres: [
+            {
+              id: 'dr-lp-1',
+              titre: 'Domanialité et propriété de l\'eau',
+              fiche: {
+                intro: 'Le statut juridique de l\'eau et des cours d\'eau détermine qui en est propriétaire, qui peut l\'utiliser et selon quelles règles. L\'eau n\'est pas une marchandise ordinaire : c\'est un bien commun à usage réglementé.',
+                points: [
+                  '📜 Art. L210-1 Code envt : "L\'eau fait partie du patrimoine commun de la nation." Son usage appartient à tous dans le respect des lois.',
+                  '🌊 Domaine Public Fluvial (DPF) : cours d\'eau navigables/flottables + lacs domaniaux → propriété de l\'État ou des collectivités. Géré par VNF ou les Départements',
+                  '🏡 Cours d\'eau non domaniaux : lit appartient aux propriétaires riverains (moitié chacun jusqu\'à la ligne médiane). Mais usage de l\'eau = droit d\'usage encadré',
+                  '⛏️ Eaux souterraines : art. 552 Code Civil → propriétaire du terrain est propriétaire de l\'eau, MAIS prélèvements soumis à autorisation IOTA au-delà des seuils',
+                  '💰 Prix de l\'eau : France ≈ 2,10 €/m³ TTC (eau + assainissement). Varie de 1,50 à 5 €/m³ selon les territoires',
+                  '🌍 ODD 6 de l\'ONU (Agenda 2030) : accès universel à l\'eau potable et à l\'assainissement d\'ici 2030',
+                  '🔒 Loi BROTTES (2013) : interdiction de coupure d\'eau aux résidences principales (droit à l\'eau). Avance de trésorerie possible par les CCAS',
+                  '🏛️ Services eau : SPIC (Service Public Industriel et Commercial) — délégués à des entreprises privées (DSP) ou gérés en régie',
+                ],
+                formules: [],
+                retenir: 'Eau = patrimoine commun (L210-1). Cours d\'eau domaniaux = État/collectivités. Cours d\'eau non domaniaux = riverains. Eaux souterraines = propriétaire terrain (sous conditions).',
+              },
+              flashcards: [
+                { q: 'Qu\'est-ce que le Domaine Public Fluvial (DPF) ?', r: 'Ensemble des cours d\'eau navigables et flottables + lacs domaniaux appartenant à l\'État ou aux Régions/Départements. Géré par VNF pour les canaux et rivières navigables', expl: 'Les berges et le lit des cours d\'eau du DPF sont inaliénables. Les riverains ont des droits d\'usage mais pas de propriété. Les ports intérieurs font aussi partie du DPF.' },
+                { q: 'Qui est propriétaire du lit d\'un cours d\'eau non domanial ?', r: 'Les propriétaires riverains, chacun jusqu\'à la ligne médiane du cours d\'eau (mi-lit). En l\'absence de riverain identifié : l\'État', expl: 'Cette règle est fixée par l\'art. L215-2 du Code de l\'environnement. Le propriétaire riverain a des obligations : entretien des berges, laissez-passer des engins d\'entretien.' },
+                { q: 'À qui appartiennent les eaux souterraines en France ?', r: 'Au propriétaire du terrain (art. 552 Code Civil), mais les prélèvements sont soumis à autorisation ou déclaration IOTA au-delà de seuils fixés par la nomenclature eau', expl: 'En pratique, un forage domestique (≤ 1 000 m³/an, usage domestique) est libre. Au-delà, déclaration ou autorisation. Un forage industriel ou agricole est très encadré.' },
+                { q: 'Qu\'est-ce que la Loi BROTTES (2013) prévoit pour le droit à l\'eau ?', r: 'Interdiction de coupure d\'eau dans les résidences principales toute l\'année. Maintien d\'un débit minimum si impayé. Aide via les CCAS (avance de trésorerie)', expl: 'Avant 2013, les coupures d\'eau pour impayés étaient possibles. Cette loi reconnaît l\'eau comme droit fondamental. Les factures impayées restent dues : c\'est une avance, pas une remise.' },
+                { q: 'Quelle est la différence entre une régie et une DSP pour les services d\'eau ?', r: 'Régie = la collectivité gère directement le service (agents publics, budget municipal). DSP (Délégation de Service Public) = contrat avec un opérateur privé (Veolia, Suez, Saur…)', expl: 'En France, environ 50 % de la population est en DSP, 50 % en régie. La tendance récente est le retour en régie (Paris, Grenoble, Bordeaux…) pour des raisons de transparence et de coût.' },
+                { q: 'Quel est l\'ODD 6 de l\'ONU et son objectif ?', r: 'Objectif de Développement Durable 6 : garantir l\'accès de tous à l\'eau et à l\'assainissement, et assurer une gestion durable des ressources en eau d\'ici 2030', expl: 'En 2023, 2,2 milliards de personnes n\'avaient pas accès à l\'eau potable gérée de façon sûre. L\'ODD 6 est très loin d\'être atteint à l\'échelle mondiale.' },
+              ],
+              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#FBF0E6"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#8B4513">Droit de l'eau — Propriété &amp; Gestion</text>
+  <rect x="4" y="18" width="83" height="56" rx="4" fill="#8B4513" opacity=".15" stroke="#8B4513" stroke-width="1"/>
+  <text x="45" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#8B4513" font-weight="bold">DPF</text>
+  <text x="45" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Cours d'eau</text>
+  <text x="45" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">navigables</text>
+  <text x="45" y="61" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">État/Régions</text>
+  <text x="45" y="71" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">géré par VNF</text>
+  <rect x="98" y="18" width="83" height="56" rx="4" fill="#8B4513" opacity=".15" stroke="#8B4513" stroke-width="1"/>
+  <text x="140" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#8B4513" font-weight="bold">Non domanial</text>
+  <text x="140" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Lit = riverains</text>
+  <text x="140" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">(½ chacun)</text>
+  <text x="140" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Eau souterraine</text>
+  <text x="140" y="71" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">propriétaire terrain</text>
+  <rect x="192" y="18" width="84" height="56" rx="4" fill="#8B4513" opacity=".15" stroke="#8B4513" stroke-width="1"/>
+  <text x="234" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#8B4513" font-weight="bold">Gestion service</text>
+  <text x="234" y="42" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Régie directe</text>
+  <text x="234" y="52" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">(collectivité)</text>
+  <text x="234" y="63" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">DSP : Veolia</text>
+  <text x="234" y="72" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Suez, Saur…</text>
+  <rect x="8" y="80" width="264" height="62" rx="4" fill="#fff" stroke="#8B4513" stroke-width="1"/>
+  <text x="140" y="92" text-anchor="middle" font-family="Arial" font-size="8" fill="#8B4513" font-weight="bold">Textes fondamentaux</text>
+  <text x="140" y="103" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Art. L210-1 Code env. : eau = patrimoine commun de la nation</text>
+  <text x="140" y="114" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Art. 552 C. Civil : eaux souterraines → propriétaire terrain (sous IOTA)</text>
+  <text x="140" y="124" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Loi BROTTES 2013 : interdiction coupures AEP résidences principales</text>
+  <text x="140" y="135" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">ODD 6 ONU 2030 · Prix France ≈ 2,10 €/m³ TTC</text>
+</svg>`,
+              exercice: {
+                enonce: 'Une commune veut exploiter une source sur une propriété privée riveraine d\'un cours d\'eau non domanial (Q = 15 L/s). 1) La source appartient-elle à la commune ou au propriétaire du terrain ? 2) Quel régime IOTA s\'applique probablement ? 3) La commune préfère gérer le service en régie : quelle différence avec une DSP ?',
+                solution: '<strong>1) Propriété :</strong> selon l\'art. 552 C. Civil, les eaux souterraines appartiennent au propriétaire du terrain. La commune doit acquérir le terrain ou obtenir une servitude de captage.<br><strong>2) Régime IOTA :</strong> 15 L/s = 54 m³/h. Selon la nomenclature eau, un prélèvement sur cours d\'eau < 400 m³/h est en régime de <strong>déclaration</strong>. Une source souterraine ≥ 8 m³/h peut requérir autorisation selon le contexte (hydrogéologie, nappe).<br><strong>3) Régie vs DSP :</strong> en régie, la commune gère directement (agents publics, budget propre, contrôle direct des prix). En DSP, elle délègue à un opérateur privé par contrat (Veolia/Suez/Saur) — service maintenu mais moins de transparence sur les coûts.',
+              },
+            },
+            {
+              id: 'dr-lp-2',
+              titre: 'Police de l\'eau et procédures IOTA',
+              fiche: {
+                intro: 'La police de l\'eau encadre tous les projets susceptibles d\'affecter les milieux aquatiques. La procédure IOTA soumet les travaux à autorisation ou déclaration selon leur impact potentiel.',
+                points: [
+                  '👮 Police de l\'eau : exercée par l\'OFB (Office Français de la Biodiversité) et les DDT(M) (Direction Départementale des Territoires). Pouvoirs de police judiciaire',
+                  '⚙️ IOTA : Installations, Ouvrages, Travaux, Activités soumis à la nomenclature eau (art. R214-1 Code envt)',
+                  '3️⃣ 3 régimes selon l\'impact : Autorisation (dossier complet + enquête publique + arrêté préfectoral) | Déclaration (dossier simplifié, récépissé) | Aucune formalité',
+                  '📋 Dossier loi sur l\'eau (autorisation) : description du projet + état initial + impact sur les eaux + mesures ERC + étude d\'incidence',
+                  '🔍 Enquête publique (autorisation) : obligatoire pour les projets les plus impactants. Commissaire enquêteur indépendant. Durée ≥ 30 jours',
+                  '🚨 Sanctions : arrêt des travaux + remise en état + amende (jusqu\'à 75 000 € et 2 ans de prison pour les infractions graves)',
+                  '📜 DIG (Déclaration d\'Intérêt Général) : procédure permettant à une collectivité d\'intervenir sur des terrains privés pour des travaux d\'entretien ou de restauration de cours d\'eau',
+                  '🌡️ Arrêtés-cadre sécheresse : mesures de restriction des usages de l\'eau par niveau d\'alerte (vigilance → crise). Préfet de département',
+                ],
+                formules: [],
+                retenir: 'IOTA = 3 régimes (autorisation, déclaration, sans formalité). OFB + DDT = police de l\'eau. DIG = intervention collective sur terrain privé. Infraction → remise en état + amende.',
+              },
+              flashcards: [
+                { q: 'Qu\'est-ce qu\'une IOTA ?', r: 'Installation, Ouvrage, Travaux ou Activité susceptible d\'affecter les eaux ou les milieux aquatiques, soumis à la nomenclature eau (R214-1)', expl: 'Exemples : forage, prise d\'eau, rejet en cours d\'eau, remblaiement en zone humide, modification du lit d\'une rivière, construction d\'un barrage.' },
+                { q: 'Quels sont les 3 régimes de la nomenclature eau ?', r: 'Autorisation (impacts forts → enquête publique + arrêté préfectoral) | Déclaration (impacts modérés → récépissé) | Aucune formalité (impact négligeable)', expl: 'Le seuil entre déclaration et autorisation dépend du type d\'ouvrage et de sa taille. Ex : prise d\'eau en rivière < 200 m³/h = déclaration ; > 1 000 m³/h = autorisation.' },
+                { q: 'Qu\'est-ce que la DIG ?', r: 'Déclaration d\'Intérêt Général : arrêté préfectoral qui autorise une collectivité à intervenir sur des propriétés privées (berges, lit) pour des travaux d\'entretien de cours d\'eau', expl: 'Sans DIG, une collectivité ne peut pas travailler sur terrain privé. La DIG est souvent couplée à un plan de gestion pluriannuel (5 ans) financé par les Agences de l\'eau.' },
+                { q: 'Quelles sont les sanctions d\'une infraction à la police de l\'eau ?', r: 'Arrêt immédiat des travaux + obligation de remise en état + amende jusqu\'à 75 000 € + peine d\'emprisonnement jusqu\'à 2 ans (infractions graves)', expl: 'Les agents de l\'OFB ont un statut de police judiciaire : ils peuvent constater des infractions, dresser des PV et déclencher des poursuites pénales.' },
+                { q: 'Quel organisme exerce principalement la police de l\'eau en France ?', r: 'L\'OFB (Office Français de la Biodiversité) et les DDT(M) (Directions Départementales des Territoires et de la Mer)', expl: 'L\'OFB (créé en 2020 par fusion de l\'ONEMA et de l\'AFB) compte environ 2 800 agents. Ses inspecteurs environnementaux contrôlent les installations, les rejets et les prélèvements.' },
+                { q: 'Qu\'est-ce qu\'une enquête publique dans le cadre d\'une autorisation IOTA ?', r: 'Procédure obligatoire pour les projets soumis à autorisation : un commissaire enquêteur indépendant recueille les observations du public pendant ≥ 30 jours, puis rend un avis', expl: 'L\'avis du commissaire enquêteur n\'est pas contraignant pour le préfet, mais un avis défavorable motivé est un signal fort. Il doit être suivi sauf motif impérieux.' },
+              ],
+              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#FBF0E6"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#8B4513">Procédures IOTA — 3 régimes</text>
+  <defs><marker id="ar11" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#8B4513"/></marker></defs>
+  <rect x="4" y="18" width="84" height="54" rx="4" fill="#C62828" opacity=".8"/>
+  <text x="46" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">Autorisation</text>
+  <text x="46" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Impact fort</text>
+  <text x="46" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Enquête pub. ≥30j</text>
+  <text x="46" y="61" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Arrêté préfectoral</text>
+  <text x="46" y="70" text-anchor="middle" font-family="Arial" font-size="7" fill="#FFE0E0">dossier complet</text>
+  <rect x="98" y="18" width="84" height="54" rx="4" fill="#FF9800" opacity=".8"/>
+  <text x="140" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">Déclaration</text>
+  <text x="140" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Impact modéré</text>
+  <text x="140" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Récépissé DDT</text>
+  <text x="140" y="61" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Pas d'enquête</text>
+  <text x="140" y="70" text-anchor="middle" font-family="Arial" font-size="7" fill="#FFF8E0">dossier simplifié</text>
+  <rect x="192" y="18" width="84" height="54" rx="4" fill="#4CAF50" opacity=".8"/>
+  <text x="234" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">Aucune</text>
+  <text x="234" y="41" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">formalité</text>
+  <text x="234" y="52" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Impact</text>
+  <text x="234" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">négligeable</text>
+  <rect x="8" y="78" width="264" height="64" rx="4" fill="#fff" stroke="#8B4513" stroke-width="1"/>
+  <text x="140" y="90" text-anchor="middle" font-family="Arial" font-size="8" fill="#8B4513" font-weight="bold">Acteurs · Outils · Sanctions</text>
+  <text x="140" y="101" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Police de l'eau : OFB + DDT(M) · Pouvoirs judiciaires</text>
+  <text x="140" y="112" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">DIG : intervention collectivité sur terrain privé (entretien rivière)</text>
+  <text x="140" y="122" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Infraction : arrêt travaux + remise en état + 75 000 € + 2 ans prison</text>
+  <text x="140" y="135" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Arrêtés sécheresse : 4 niveaux · Portail propluvia</text>
+</svg>`,
+              exercice: {
+                enonce: 'Un agriculteur veut créer un lac collinaire (retenue de 45 000 m³) par un barrage sur un ruisseau non domanial pour irriguer ses parcelles. 1) Quel régime IOTA s\'applique probablement ? 2) Quelles pièces doit contenir le dossier ? 3) Si les travaux débutent sans autorisation, quelles sanctions risque-t-il ?',
+                solution: '<strong>1) Régime IOTA :</strong> un barrage créant une retenue > 10 000 m³ est en régime d\'<strong>autorisation</strong> (nomenclature eau rubrique 3.2.3.0 — ouvrages constituant obstacle à la continuité écologique). Enquête publique obligatoire.<br><strong>2) Dossier loi sur l\'eau :</strong> description du projet · état initial des eaux et milieux · étude d\'incidence sur les débits/niveaux/espèces aquatiques · mesures ERC · étude hydraulique (crues, sécurité du barrage).<br><strong>3) Sanctions :</strong> arrêt immédiat des travaux + obligation de <strong>remise en état</strong> du cours d\'eau à ses frais + amende jusqu\'à <strong>75 000 €</strong> + risque de peine d\'emprisonnement jusqu\'à 2 ans (art. L216-10 Code env.).',
+              },
+            },
+          ]},
+
+          /* ── Exploitation des réseaux ── */
+          { id: 'exploitation', name: 'Exploitation des réseaux AEP', ico: '🔧', color: '#0A7460', colorl: '#E0F4F0', chapitres: [
+            {
+              id: 'exp-lp-1',
+              titre: 'Maintenance préventive et corrective des réseaux AEP',
+              fiche: {
+                intro: 'L\'exploitation d\'un réseau d\'eau potable exige un programme de maintenance rigoureux pour garantir la continuité du service, la qualité de l\'eau et la durabilité des ouvrages.',
+                points: [
+                  '🛠️ Maintenance préventive : interventions planifiées pour éviter les pannes. Ex : vidange/nettoyage réservoirs (1/an), renouvellement joints vannes (5–10 ans), purges réseau',
+                  '🚨 Maintenance corrective : intervention suite à une fuite, une rupture, une panne de pompe ou une contamination. Délai d\'intervention ≤ 4h (astreinte 24h/24)',
+                  '🔄 Taux de renouvellement recommandé : 1–1,5 % du linéaire par an. France : ~0,6 %/an → déficit chronique → vieillissement du parc',
+                  '🔧 Techniques de réhabilitation sans tranchée : gainage (résine projetée à l\'intérieur), chemisage (tubage PEHD ou fibre de verre), éclatement (pipe bursting)',
+                  '📋 RPQS (Rapport sur le Prix et la Qualité du Service) : rapport annuel obligatoire pour toute collectivité. Indicateurs de performance publiés (SISPEA)',
+                  '💧 Indicateurs de performance clés : rendement réseau | ILP (Indice Linéaire de Pertes) | taux de renouvellement | taux de conformité bactériologique et physico-chimique',
+                  '⚠️ Plan de gestion des crises : procédure d\'urgence (contamination, rupture d\'alimentation). ARS notifiée immédiatement en cas d\'alerte qualité',
+                  '🗓️ Plan Pluriannuel de Renouvellement (PPR) : programmation des travaux à 5–10 ans selon l\'état du réseau (données ITV, âge, matériaux, incidents)',
+                ],
+                formules: [
+                  'Taux de renouvellement = km renouvelés / km total × 100 (% par an)',
+                  'Taux de casse = nombre de réparations de fuites / 100 km de réseau / an — indicateur de dégradation',
+                ],
+                retenir: 'Renouvellement cible : 1–1,5 %/an. France : 0,6 % = insuffisant. Maintenance préventive planifiée > corrective. Techniques sans tranchée pour réhabilitation. RPQS obligatoire.',
+              },
+              flashcards: [
+                { q: 'Quel est le taux de renouvellement recommandé pour un réseau AEP ?', r: '1 à 1,5 % du linéaire par an. La France renouvelle en moyenne ~0,6 %/an, insuffisant pour maintenir l\'état du parc', expl: 'À 0,6 %/an, une conduite dure en moyenne 167 ans avant d\'être renouvelée. De nombreuses canalisations ont déjà 80–100 ans et fuient de plus en plus.' },
+                { q: 'Qu\'est-ce que le gainage et le chemisage d\'une conduite ?', r: 'Techniques de réhabilitation sans tranchée : gainage = résine polymérisée in situ à l\'intérieur (réduction du diamètre de 5–10 %) | chemisage = insertion d\'un tube PEHD ou fibre de verre', expl: 'Ces techniques évitent de creuser des tranchées en voirie (coûteuses, longues, perturbation du trafic). Elles conviennent aux conduites dégradées mais encore structurellement stables.' },
+                { q: 'Qu\'est-ce que le RPQS ?', r: 'Rapport sur le Prix et la Qualité du Service : document annuel obligatoire pour toutes les collectivités. Indicateurs de performance publiés sur le portail SISPEA', expl: 'Le RPQS contient : prix de l\'eau, rendement, taux de renouvellement, taux de conformité, nombre d\'analyses, volumes distribués. Permet la comparaison entre collectivités.' },
+                { q: 'Qu\'est-ce que le taux de casse d\'un réseau ?', r: 'Nombre de réparations de fuites pour 100 km de réseau et par an. Réseau en bon état : < 25 casses/100 km/an. Réseau dégradé : > 100 casses', expl: 'Le taux de casse permet d\'identifier les tronçons à prioriser dans le Plan Pluriannuel de Renouvellement (PPR). Un taux > 100 justifie généralement un renouvellement immédiat.' },
+                { q: 'Qu\'est-ce que le plan de gestion des crises pour un réseau AEP ?', r: 'Procédure documentée déclenchée en cas d\'alerte qualité ou de rupture d\'alimentation : alerte ARS, information abonnés, distribution d\'eau alternative, mesures conservatoires', expl: 'Toute non-conformité microbiologique doit être signalée à l\'ARS sous 24h. L\'ARS peut imposer des restrictions d\'usage (eau non potable) ou l\'arrêt de la distribution.' },
+                { q: 'Qu\'est-ce que le "pipe bursting" (éclatement) ?', r: 'Technique sans tranchée : on tire un outil conique qui éclate l\'ancienne conduite vers l\'extérieur tout en tirant simultanément la nouvelle conduite PEHD', expl: 'L\'éclatement permet d\'augmenter le diamètre de la conduite (car l\'ancienne est fragmentée et poussée dans le sol). Idéal pour les conduites en fonte ou en amiante-ciment.' },
+              ],
+              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#E0F4F0"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#0A7460">Réhabilitation réseau — Techniques sans tranchée</text>
+  <rect x="4" y="18" width="84" height="58" rx="4" fill="#0A7460" opacity=".85"/>
+  <text x="46" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Gainage</text>
+  <text x="46" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Résine projetée</text>
+  <text x="46" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">in situ (CIPP)</text>
+  <text x="46" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#FFF">Ø −5 à −10 %</text>
+  <text x="46" y="73" text-anchor="middle" font-family="Arial" font-size="7" fill="#cce8e0">sol stable requis</text>
+  <rect x="98" y="18" width="84" height="58" rx="4" fill="#147A60" opacity=".85"/>
+  <text x="140" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Chemisage</text>
+  <text x="140" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Tubage PEHD</text>
+  <text x="140" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">ou fibre de verre</text>
+  <text x="140" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Ø légèrement réduit</text>
+  <text x="140" y="73" text-anchor="middle" font-family="Arial" font-size="7" fill="#cce8e0">conduite stable</text>
+  <rect x="192" y="18" width="84" height="58" rx="4" fill="#1B6E55" opacity=".85"/>
+  <text x="234" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Pipe Bursting</text>
+  <text x="234" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Éclate l'ancienne</text>
+  <text x="234" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">+ tire nouveau PEHD</text>
+  <text x="234" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Ø possible ↑</text>
+  <text x="234" y="73" text-anchor="middle" font-family="Arial" font-size="7" fill="#cce8e0">fonte/amiante-ciment</text>
+  <rect x="8" y="82" width="264" height="60" rx="4" fill="#fff" stroke="#0A7460" stroke-width="1"/>
+  <text x="140" y="94" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A7460" font-weight="bold">Indicateurs performance réseau</text>
+  <text x="140" y="105" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Renouvellement cible : 1–1,5 %/an · France : ~0,6 %/an (insuffisant)</text>
+  <text x="140" y="116" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Taux de casse : &lt; 25 / 100 km/an = bon · > 100 = renouvellement urgent</text>
+  <text x="140" y="127" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">RPQS obligatoire · Indicateurs sur SISPEA</text>
+  <text x="140" y="137" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">PPR = Plan Pluriannuel de Renouvellement 5–10 ans</text>
+</svg>`,
+              exercice: {
+                enonce: 'Un réseau de 120 km a renouvelé 0,8 km en N et 1,1 km en N+1. Il compte 35 réparations de fuites sur l\'année. 1) Calculer le taux de renouvellement moyen sur 2 ans. 2) Comparer au seuil recommandé. 3) Calculer le taux de casse. 4) Quel programme de réhabilitation préconisez-vous pour une conduite en amiante-ciment Ø 200 mm de 2,5 km ?',
+                solution: '<strong>1) Taux de renouvellement :</strong> km moyen = (0,8 + 1,1)/2 = 0,95 km/an · Taux = 0,95/120 × 100 = <strong>0,79 %/an</strong><br><strong>2) Comparaison :</strong> 0,79 % < 1 % (seuil min) — insuffisant, le parc vieillit.<br><strong>3) Taux de casse :</strong> 35 réparations / 120 km × 100 = <strong>29,2 casses/100 km/an</strong> — légèrement au-dessus du seuil bon (25). Acceptable mais à surveiller.<br><strong>4) Amiante-ciment Ø 200 mm :</strong> le <strong>pipe bursting</strong> est idéal — il éclate l\'ancienne conduite fragile et permet de tirer un PEHD Ø 250 mm (augmentation de capacité). Avantage : pas de tranchée sur 2,5 km de voirie.',
+              },
+            },
+            {
+              id: 'exp-lp-2',
+              titre: 'Rendement de réseau et bilan entrées-sorties',
+              fiche: {
+                intro: 'Le rendement d\'un réseau AEP mesure l\'efficacité du service : plus il est élevé, moins l\'eau produite est perdue en fuites avant d\'arriver aux abonnés. Sa mesure et son amélioration sont des priorités réglementaires.',
+                points: [
+                  '📊 Rendement réseau = Volume consommé autorisé / Volume mis en distribution × 100 (%)',
+                  '   Volume consommé autorisé = facturé aux abonnés + usages municipaux (fontaines, nettoyage voirie) + usages de lutte contre incendies',
+                  '⚠️ Seuil réglementaire (décret 2012-97) : rendement < 50 % (ou ILP > 10) → programme d\'actions obligatoire dans les 2 ans',
+                  '📏 ILP (Indice Linéaire de Pertes) = Volume pertes (m³/j) / longueur réseau (km)',
+                  '   ILP < 3 m³/j/km = très bon | 3–8 = acceptable | > 10 = mauvais',
+                  '🔍 Méthodes de détection des fuites : bruit-corrélation (micro + corrélateur) | prélocalisateur acoustique | gaz traceur (hélium) | thermographie IR',
+                  '🌙 Débit minimum nocturne (0h–4h) : mesure du débit le plus bas de la nuit. Permet d\'estimer les fuites (consommation nocturne légitime ≈ 1,5 L/h/abonné)',
+                  '🗺️ Sectorisation : découpage du réseau en zones étanches mesurées individuellement → localisation des secteurs avec les plus fortes pertes',
+                ],
+                formules: [
+                  'Rendement (%) = V_consommé_autorisé / V_mis_en_distribution × 100',
+                  'ILP (m³/j/km) = Pertes (m³/j) / linéaire réseau (km)',
+                  'Pertes = V_mis_en_distribution – V_consommé_autorisé',
+                ],
+                retenir: 'Rendement = V_consommé/V_produit. ILP = pertes/km. Seuil alerte : rendement < 50 % ou ILP > 10 → plan d\'action obligatoire. Détection : corrélateur acoustique.',
+              },
+              flashcards: [
+                { q: 'Formule du rendement de réseau AEP ?', r: 'Rendement (%) = Volume consommé autorisé / Volume mis en distribution × 100', expl: 'Le "consommé autorisé" inclut les abonnés facturés + usages municipaux (fontaines, arrosage, nettoyage). La différence avec le volume produit = pertes réelles + pertes apparentes.' },
+                { q: 'Quel est le seuil réglementaire déclenchant un programme d\'actions obligatoire ?', r: 'Rendement < 50 % OU ILP > 10 m³/j/km (décret 2012-97). Programme d\'amélioration à déposer dans les 2 ans', expl: 'En dessous de ce seuil, la collectivité ne peut plus augmenter ses prélèvements sans présenter un plan d\'action. Les Agences de l\'eau peuvent aussi conditionner leurs subventions au rendement.' },
+                { q: 'Comment fonctionne la corrélation acoustique pour détecter les fuites ?', r: 'Deux microphones sont posés sur la conduite à distance. La fuite émet un bruit. Le corrélateur calcule l\'écart de temps d\'arrivée du bruit → localise la fuite', expl: 'La précision est de ±1 m sur une conduite en métal, ±5 m sur du PVC. La méthode est rapide et ne nécessite pas de creuser. Elle est indispensable pour les pertes nocturnes.' },
+                { q: 'Qu\'est-ce que le débit minimum nocturne et à quoi sert-il ?', r: 'Débit le plus faible mesuré la nuit (0h–4h). La consommation légitime nocturne ≈ 1,5 L/h/abonné. L\'excédent = estimation des fuites actives', expl: 'Ex : secteur de 500 abonnés, DMN = 5 m³/h. Conso légitime = 500 × 1,5 = 750 L/h = 0,75 m³/h. Fuites estimées = 5 – 0,75 = 4,25 m³/h = 102 m³/j.' },
+                { q: 'Qu\'est-ce que la sectorisation d\'un réseau ?', r: 'Découpage du réseau en secteurs hydrauliquement isolables et mesurables individuellement (compteur sectoriel). Permet d\'identifier les zones à fortes pertes', expl: 'Chaque secteur (500–2 000 abonnés) est équipé d\'un compteur de sectorisation. On compare le volume entrant au volume facturé sur le secteur : l\'écart = pertes du secteur.' },
+                { q: 'Quelle est la différence entre pertes réelles et pertes apparentes ?', r: 'Pertes réelles = fuites physiques (eau quitte le réseau). Pertes apparentes = erreurs de comptage, fraudes, volumes non mesurés (dépassent les compteurs)', expl: 'Les pertes apparentes représentent souvent 1–3 % du volume distribué. Elles sont réduites par le renouvellement des compteurs vieillissants (sous-comptage systématique après 15–20 ans).' },
+              ],
+              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#E0F4F0"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#0A7460">Rendement réseau &amp; Bilan entrées-sorties</text>
+  <rect x="8" y="18" width="264" height="28" rx="4" fill="#0A7460"/>
+  <text x="140" y="29" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">Rendement = V_consommé_autorisé / V_mis_en_distribution × 100</text>
+  <text x="140" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#cce8e0">V_consommé = facturé abonnés + usages municipaux + incendies</text>
+  <rect x="4" y="52" width="130" height="38" rx="4" fill="#0A7460" opacity=".12" stroke="#0A7460" stroke-width="1"/>
+  <text x="69" y="63" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A7460" font-weight="bold">ILP (m³/j/km)</text>
+  <text x="69" y="74" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">&lt; 3 = très bon</text>
+  <text x="69" y="84" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">3–10 = acceptable · &gt; 10 = mauvais</text>
+  <rect x="146" y="52" width="130" height="38" rx="4" fill="#0A7460" opacity=".12" stroke="#0A7460" stroke-width="1"/>
+  <text x="211" y="63" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A7460" font-weight="bold">Seuil décret 2012-97</text>
+  <text x="211" y="74" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828" font-weight="bold">Rdt &lt; 50 % ou ILP &gt; 10</text>
+  <text x="211" y="84" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">→ programme d'actions 2 ans</text>
+  <defs><marker id="ar12" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#0A7460"/></marker></defs>
+  <rect x="8" y="96" width="264" height="46" rx="4" fill="#fff" stroke="#0A7460" stroke-width="1"/>
+  <text x="140" y="108" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A7460" font-weight="bold">Détection des fuites</text>
+  <text x="140" y="119" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Corrélation acoustique (±1 m fonte) · Prélocalisateur · Gaz traceur</text>
+  <text x="140" y="130" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">DMN : débit nocturne (0h–4h) − 1,5 L/h/abonné = fuites estimées</text>
+  <text x="140" y="140" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Sectorisation : 500–2 000 abonnés/secteur + compteur sectoriel</text>
+</svg>`,
+              exercice: {
+                enonce: 'Un réseau distribue 3 200 m³/j sur 85 km. Les volumes comptabilisés : abonnés facturés = 2 450 m³/j, usages municipaux = 120 m³/j. La nuit (0h–4h), le débit minimum nocturne est 18 m³/h pour 2 400 abonnés. 1) Calculer le rendement. 2) Calculer l\'ILP. 3) Un plan d\'actions est-il obligatoire ? 4) Estimer les fuites actives depuis le DMN.',
+                solution: '<strong>1) Rendement :</strong> V consommé autorisé = 2 450 + 120 = 2 570 m³/j · Rdt = 2 570 / 3 200 × 100 = <strong>80,3 %</strong><br><strong>2) Pertes :</strong> 3 200 − 2 570 = 630 m³/j · ILP = 630 / 85 = <strong>7,4 m³/j/km</strong> (acceptable, < 10)<br><strong>3) Plan d\'actions :</strong> Rdt = 80 % > 50 % et ILP = 7,4 < 10 → <strong>pas obligatoire</strong>. Mais à surveiller.<br><strong>4) DMN :</strong> Conso légitime nocturne = 2 400 × 1,5 L/h = 3 600 L/h = 3,6 m³/h · Fuites actives ≈ 18 − 3,6 = <strong>14,4 m³/h = 346 m³/j</strong>',
+              },
+            },
+            {
+              id: 'exp-lp-3',
+              titre: 'Sécurité sanitaire et Plan de Gestion des Risques (Water Safety Plan)',
+              fiche: {
+                intro: 'Le Water Safety Plan (WSP) ou Plan de Gestion de la Sécurité Sanitaire de l\'Eau (PGSSE) est l\'approche préventive imposée par la Directive 2020/2184. Il identifie tous les risques de la captation au robinet.',
+                points: [
+                  '📋 PGSSE (Plan de Gestion de la Sécurité Sanitaire de l\'Eau) : version française du Water Safety Plan de l\'OMS. Obligatoire depuis janvier 2023 (Directive 2020/2184)',
+                  '🎯 Principe : approche basée sur les risques (ABR) — identifier et maîtriser les dangers avant qu\'ils n\'atteignent le consommateur (préventif vs réactif)',
+                  '🗺️ Périmètre du PGSSE : de la ressource (bassin versant) → captage → traitement → stockage → distribution → branchement → robinet',
+                  '⚠️ Dangers identifiés : microbiologiques (Cryptosporidium, Legionella) | chimiques (pesticides, PFAS, nitrates) | physiques (turbidité) | radiologiques',
+                  '📊 Évaluation des risques : probabilité × gravité → hiérarchisation des risques → mesures de maîtrise prioritaires',
+                  '🔄 HACCP adapté à l\'eau : Hazard Analysis and Critical Control Points. Identifier les CCP (points critiques de maîtrise) dans la filière',
+                  '👁️ Surveillance opérationnelle : mesures en continu (turbidité, chlore) permettant de réagir en temps réel sans attendre l\'analyse de labo',
+                  '📋 Obligations : producteurs > 1 000 m³/j doivent soumettre leur PGSSE à l\'ARS avant 2026. Mise à jour tous les 6 ans minimum',
+                ],
+                formules: [],
+                retenir: 'PGSSE = Water Safety Plan obligatoire depuis 2023. ABR = identifier les risques de la source au robinet. Surveillance opérationnelle = temps réel. Soumis à l\'ARS avant 2026.',
+              },
+              flashcards: [
+                { q: 'Qu\'est-ce que le PGSSE et depuis quand est-il obligatoire ?', r: 'Plan de Gestion de la Sécurité Sanitaire de l\'Eau (Water Safety Plan) : obligatoire depuis la transposition de la Directive 2020/2184 en droit français (janvier 2023)', expl: 'Il doit être soumis à l\'ARS avant 2026 pour les producteurs > 1 000 m³/j. C\'est une approche préventive systémique qui remplace la simple conformité au robinet.' },
+                { q: 'Quel est le principe de l\'approche basée sur les risques (ABR) ?', r: 'Identifier, évaluer et maîtriser tous les dangers (micro, chimiques, physiques) tout au long du système eau — de la ressource au robinet — avant qu\'ils n\'impactent la qualité', expl: 'L\'ABR est proactive : on ne attend pas le résultat d\'analyse non conforme. On identifie les situations à risque et on met en place des barrières préventives.' },
+                { q: 'Quel est le périmètre du PGSSE ?', r: 'De la ressource (bassin versant) jusqu\'au robinet du consommateur : captage → traitement → réservoirs → réseau de distribution → branchements', expl: 'Le PGSSE est plus large que l\'ancienne surveillance : il inclut le bassin versant (pressions agricoles, industrielles) et les réseaux intérieurs des bâtiments (risque Legionella).' },
+                { q: 'Qu\'est-ce que la surveillance opérationnelle dans le cadre du PGSSE ?', r: 'Mesures en temps réel de paramètres clés (turbidité, chlore résiduel, pH) permettant de détecter immédiatement une anomalie sans attendre une analyse de laboratoire', expl: 'Ex : une montée de turbidité en sortie de filtre > 0,3 NTU déclenche une alarme et peut arrêter la distribution en quelques minutes, avant que l\'eau non conforme n\'atteigne le réseau.' },
+                { q: 'Qu\'est-ce qu\'un CCP (Critical Control Point) dans la logique HACCP appliquée à l\'eau ?', r: 'Point dans la filière de traitement où la maîtrise est essentielle : une défaillance à ce point crée un risque sanitaire inacceptable pour le consommateur', expl: 'Ex : la chloration finale est un CCP (si la dose de chlore est insuffisante, des pathogènes atteignent le réseau). La mesure de maîtrise = chlore résiduel maintenu entre 0,1 et 0,5 mg/L.' },
+                { q: 'Pour quels producteurs le PGSSE est-il obligatoire et quelle est l\'échéance de soumission à l\'ARS ?', r: 'Obligatoire pour tous les producteurs d\'eau > 1 000 m³/j. Soumission à l\'ARS avant le 12 janvier 2026', expl: 'Les petits systèmes (< 1 000 m³/j) ont une approche simplifiée. L\'ARS valide le PGSSE et peut demander des mesures complémentaires. Mise à jour tous les 6 ans minimum.' },
+              ],
+              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#E0F4F0"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#0A7460">PGSSE — Approche basée sur les risques</text>
+  <rect x="8" y="18" width="264" height="16" rx="3" fill="#0A7460"/>
+  <text x="140" y="29" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">De la ressource → captage → traitement → stockage → réseau → robinet</text>
+  <defs><marker id="ar13" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#0A7460"/></marker></defs>
+  <rect x="4" y="38" width="58" height="28" rx="3" fill="#4CAF50" opacity=".85"/>
+  <text x="33" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Identifier</text>
+  <text x="33" y="61" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">les dangers</text>
+  <line x1="62" y1="52" x2="74" y2="52" stroke="#0A7460" stroke-width="1.2" marker-end="url(#ar13)"/>
+  <rect x="74" y="38" width="58" height="28" rx="3" fill="#26A69A" opacity=".85"/>
+  <text x="103" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Évaluer</text>
+  <text x="103" y="61" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">prob × gravité</text>
+  <line x1="132" y1="52" x2="144" y2="52" stroke="#0A7460" stroke-width="1.2" marker-end="url(#ar13)"/>
+  <rect x="144" y="38" width="58" height="28" rx="3" fill="#0A7460" opacity=".85"/>
+  <text x="173" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Maîtriser</text>
+  <text x="173" y="61" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">CCP / barrières</text>
+  <line x1="202" y1="52" x2="214" y2="52" stroke="#0A7460" stroke-width="1.2" marker-end="url(#ar13)"/>
+  <rect x="214" y="38" width="62" height="28" rx="3" fill="#00695C" opacity=".85"/>
+  <text x="245" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Surveiller</text>
+  <text x="245" y="61" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">en continu</text>
+  <rect x="8" y="72" width="264" height="70" rx="4" fill="#fff" stroke="#0A7460" stroke-width="1"/>
+  <text x="140" y="84" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A7460" font-weight="bold">CCP — Points Critiques de Maîtrise (HACCP eau)</text>
+  <text x="140" y="95" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Ex : chloration finale = CCP (chlore résiduel 0,1–0,5 mg/L)</text>
+  <text x="140" y="106" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Surveillance opérationnelle : turbidité, pH, chlore en temps réel</text>
+  <text x="140" y="117" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Dangers : micro (Crypto, Legionella) · chimiques (PFAS, NO₃⁻) · physiques</text>
+  <text x="140" y="128" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Obligatoire > 1 000 m³/j · Soumis à l'ARS avant janv. 2026</text>
+  <text x="140" y="138" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Mise à jour tous les 6 ans · Petits systèmes = approche simplifiée</text>
+</svg>`,
+              exercice: {
+                enonce: 'Un service AEP produit 1 800 m³/j depuis un captage souterrain. Il identifie 3 risques principaux : 1) forte turbidité après pluie (fréquence élevée, gravité faible) 2) dépassement nitrates NO₃⁻ en période printanière (fréquence moyenne, gravité modérée) 3) défaillance du chlorateur (fréquence faible, gravité très élevée). Classer ces risques par priorité et proposer une mesure de maîtrise pour le risque prioritaire.',
+                solution: '<strong>Classification (probabilité × gravité) :</strong><br>· Turbidité : élevée × faible → <strong>risque moyen</strong><br>· Nitrates : moyenne × modérée → <strong>risque moyen</strong><br>· Défaillance chlorateur : faible × très élevée → <strong>risque ÉLEVÉ (CCP)</strong><br><strong>Mesure de maîtrise prioritaire — chlorateur :</strong> doublement du système de chloration (deux chlorateurs en redondance) + alarme 24h/24 sur la mesure de chlore résiduel en réseau (sonde continue) + procédure d\'astreinte pour intervention < 2h. Test de la mesure de sauvegarde mensuel obligatoire.',
+              },
+            },
+          ]},
+        ],
+      },
+    ],
+  },
+
+  /* ══ MASTER SCIENCES DE L'EAU ══════════════════════════════════════ */
+  'master-eau': {
+    name: 'Master Sciences de l\'Eau',
+    sigle: 'Master Eau',
+    ico: '🔬',
+    color: '#5A189A',
+    colorl: '#F3E8FF',
+    niveau: 'Bac+5',
+    organisme: 'Universités — AgroParisTech — SupAgro',
+    desc: 'Hydrologie, hydrogéologie, modélisation (MODFLOW), qualité des eaux, changement climatique. Débouchés : BRGM, bureaux d\'études, Agences de l\'eau.',
+    annees: [
+      {
+        id: 'an1',
+        name: 'Master 1',
+        matieres: [
+          { id: 'hydrogeologie', name: 'Hydrogéologie', ico: '🗺️', color: '#5A189A', colorl: '#F3E8FF', chapitres: [
+            {
+              id: 'hg-m1-1',
+              titre: 'Aquifères — types, propriétés et paramètres hydrauliques',
+              fiche: {
+                intro: 'Un aquifère est une formation géologique poreuse ou fissurée qui contient et transmet de l\'eau souterraine en quantité exploitable. La connaissance de ses paramètres est indispensable pour dimensionner les captages.',
+                points: [
+                  '🌊 Nappe libre : surface piézométrique à pression atmosphérique. Niveau fluctue avec les recharges. Plus vulnérable aux pollutions de surface',
+                  '🔵 Nappe captive : aquifère coincé entre deux couches imperméables (aquitards). Pression > Patm. Forage artésien si P > Patm au niveau du sol',
+                  '🏖️ Milieu poreux : sables et graviers — porosité d\'interstices (p = 20–35 %). Aquifères alluviaux (Rhin, Rhône, Seine…)',
+                  '🪨 Milieu karstique : calcaires fissurés et dissous — réseau de galeries, circulations rapides (km/j), très vulnérables aux pollutions',
+                  '📐 Perméabilité K (m/s) : facilité d\'écoulement. Gravier = 10⁻³–10⁻¹ | Sable = 10⁻⁵–10⁻³ | Argile = 10⁻¹⁰–10⁻⁸ (imperméable)',
+                  '📊 Transmissivité T = K × e (m²/s) : K × épaisseur mouillée. Paramètre clé pour le débit d\'un forage',
+                  '💾 Coefficient d\'emmagasinement S (–) : volume d\'eau libéré par unité de surface pour une baisse de charge unitaire. Nappe libre S ≈ porosité efficace (0,05–0,25) | Nappe captive S = 10⁻⁵–10⁻³',
+                  '📏 Loi de Darcy : Q = K × i × A (i = Δh/L = gradient hydraulique, A = section)',
+                ],
+                formules: [
+                  'Q = K × i × A — loi de Darcy (m³/s)',
+                  'T = K × e — transmissivité (m²/s)',
+                  'v_réelle = K × i / ω_eff — vitesse réelle de l\'eau (ω_eff = porosité efficace)',
+                ],
+                retenir: 'Nappe libre : surface libre à Patm. Captive : sous pression. K (m/s) = perméabilité. T = K×e = transmissivité. S très petit pour nappe captive.',
+              },
+              flashcards: [
+                { q: 'Quelle est la différence entre nappe libre et nappe captive ?', r: 'Libre : surface piézométrique à pression atmosphérique, fluctue selon les recharges. Captive : sous pression entre deux couches imperméables, niveau piézométrique au-dessus du toit de l\'aquifère', expl: 'Un forage artésien (eau jaillissante) exploite une nappe captive dont la pression est supérieure à la pression atmosphérique au niveau du sol. Ex : bassin de Paris.' },
+                { q: 'Qu\'est-ce que la transmissivité T ?', r: 'T = K × e (m²/s) : produit de la perméabilité par l\'épaisseur saturée. Représente la facilité de transmission horizontale de l\'eau dans l\'aquifère', expl: 'T est le paramètre le plus important pour estimer le débit d\'un forage. T > 10⁻³ m²/s = aquifère productif. T < 10⁻⁵ = aquifère faible rendement.' },
+                { q: 'Quelle est la valeur typique du coefficient d\'emmagasinement S pour une nappe captive ?', r: 'S = 10⁻⁵ à 10⁻³ (très faible). Pour une nappe libre : S ≈ porosité efficace = 0,05 à 0,25 (100× à 1000× plus élevé)', expl: 'La nappe captive libère très peu d\'eau par baisse de charge (compressibilité de l\'eau et de l\'aquifère). C\'est pourquoi les nappes captives se rabattent rapidement sous pompage.' },
+                { q: 'Quelle est la loi de Darcy et ses conditions d\'application ?', r: 'Q = K × i × A. Valable en régime laminaire (Re < 1–10), ce qui correspond à la quasi-totalité des écoulements en milieux poreux', expl: 'En milieu karstique (galeries larges), l\'écoulement peut être turbulent → Darcy non valide. On utilise des traceurs pour caractériser ces aquifères complexes.' },
+                { q: 'Pourquoi les aquifères karstiques sont-ils très vulnérables aux pollutions ?', r: 'Circulation très rapide de l\'eau (galeries, conduits) → pas de filtration naturelle → une pollution de surface peut atteindre un captage en quelques heures à jours', expl: 'Les périmètres de protection des captages karstiques doivent être très larges. Une bactérie introduite en surface peut parcourir plusieurs km avant d\'être détectée en captage.' },
+                { q: 'Quelle est la gamme de perméabilité K pour des sables ?', r: 'K = 10⁻⁵ à 10⁻³ m/s. Graviers : 10⁻³–10⁻¹. Argiles : 10⁻¹⁰–10⁻⁸ (imperméable). Calcaires karstiques : 10⁻²–10⁻¹', expl: 'La perméabilité varie sur 10 ordres de grandeur dans la nature. C\'est l\'un des paramètres les plus difficiles à mesurer et les plus variables spatialement.' },
+              ],
+              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#F3E8FF"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#5A189A">Aquifères — Types &amp; Paramètres hydrauliques</text>
+  <rect x="4" y="18" width="130" height="60" rx="4" fill="#5A189A" opacity=".1" stroke="#5A189A" stroke-width="1"/>
+  <text x="69" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#5A189A" font-weight="bold">Nappe libre</text>
+  <text x="69" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Surface piézométrique à Patm</text>
+  <text x="69" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Fluctue avec les recharges</text>
+  <text x="69" y="61" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">S ≈ porosité efficace (0,05–0,25)</text>
+  <text x="69" y="71" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828">Vulnérable aux pollutions</text>
+  <rect x="146" y="18" width="130" height="60" rx="4" fill="#5A189A" opacity=".1" stroke="#5A189A" stroke-width="1"/>
+  <text x="211" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#5A189A" font-weight="bold">Nappe captive</text>
+  <text x="211" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Sous pression (P > Patm)</text>
+  <text x="211" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Entre 2 aquitards</text>
+  <text x="211" y="61" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">S = 10⁻⁵–10⁻³ (très faible)</text>
+  <text x="211" y="71" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#4CAF50">Forage artésien possible</text>
+  <rect x="8" y="84" width="264" height="58" rx="4" fill="#fff" stroke="#5A189A" stroke-width="1"/>
+  <text x="140" y="96" text-anchor="middle" font-family="Arial" font-size="8" fill="#5A189A" font-weight="bold">Paramètres hydrauliques clés</text>
+  <text x="140" y="107" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">K (m/s) : Graviers 10⁻³–10⁻¹ · Sables 10⁻⁵–10⁻³ · Argiles 10⁻¹⁰–10⁻⁸</text>
+  <text x="140" y="118" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">T = K × e (m²/s) : transmissivité · T > 10⁻³ = aquifère productif</text>
+  <text x="140" y="129" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Loi de Darcy : Q = K × i × A (Re &lt; 10 — régime laminaire)</text>
+  <text x="140" y="140" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Vitesse réelle : v = K×i / ω_eff — Karstique = turbulent (Darcy non valide)</text>
+</svg>`,
+              exercice: {
+                enonce: 'Un aquifère alluvial sableux a K = 4×10⁻⁴ m/s, une épaisseur saturée e = 12 m, un gradient hydraulique i = 0,003. La section d\'écoulement A = 500 m². 1) Calculer T. 2) Calculer Q (loi de Darcy). 3) Calculer la vitesse de Darcy puis la vitesse réelle (porosité efficace ω = 0,20). 4) En quel temps (jours) une pollution à 300 m en amont atteindrait-elle le captage ?',
+                solution: '<strong>1) Transmissivité :</strong> T = K × e = 4×10⁻⁴ × 12 = <strong>4,8×10⁻³ m²/s</strong> (aquifère productif)<br><strong>2) Débit Darcy :</strong> Q = K × i × A = 4×10⁻⁴ × 0,003 × 500 = <strong>6×10⁻⁴ m³/s = 0,6 L/s</strong><br><strong>3) Vitesses :</strong> v_Darcy = K × i = 4×10⁻⁴ × 0,003 = 1,2×10⁻⁶ m/s · v_réelle = v_Darcy/ω = 1,2×10⁻⁶/0,20 = <strong>6×10⁻⁶ m/s</strong><br><strong>4) Temps :</strong> t = 300 / (6×10⁻⁶) = 50 000 000 s = <strong>578 jours ≈ 1,6 an</strong>',
+              },
+            },
+            {
+              id: 'hg-m1-2',
+              titre: 'Pompages d\'essai — méthodes de Theis et Cooper-Jacob',
+              fiche: {
+                intro: 'Le pompage d\'essai est la méthode de référence pour déterminer les paramètres hydrauliques d\'un aquifère (T et S) in situ. L\'interprétation graphique des courbes de rabattement permet d\'identifier le comportement de l\'aquifère.',
+                points: [
+                  '🏗️ Dispositif : forage de pompage à débit constant Q + 1 à 3 piézomètres d\'observation à distance r (m)',
+                  '📉 Rabattement s(r,t) = H₀ – H(r,t) : baisse du niveau piézométrique depuis le début du pompage',
+                  '📐 Méthode de Theis (1935) : s = Q/(4πT) × W(u) avec u = r²S/(4Tt)',
+                  '   W(u) = fonction puits (table ou calcul numérique). Calage graphique courbe observée / courbe type',
+                  '📏 Méthode de Cooper-Jacob (t grand, u < 0,05) : s = Q/(4πT) × [ln(2,25Tt) – ln(r²S)]',
+                  '   Graphe s vs. log(t) → droite. Pente Δs = Q/(4πT) × ln(10). Ordonnée à l\'origine → S',
+                  '🔄 Test de récupération : après arrêt du pompage, la remontée s\' vs. log(t/t\') → droite de pente identique → T',
+                  '⚠️ Limites : homogénéité, isotropie, aquifère infini, régime transitoire → souvent non respectées',
+                  '📊 Effets frontières : barrière imperméable (doublement du rabattement) | limite d\'alimentation (rabattement se stabilise)',
+                ],
+                formules: [
+                  's = Q/(4πT) × W(u) — Theis (u = r²S/4Tt)',
+                  's ≈ Q/(4πT) × [ln(2,25Tt) – ln(r²S)] — Cooper-Jacob (u < 0,05)',
+                  'Pente Cooper-Jacob : Δs = Q × ln(10) / (4πT) = 0,183 × Q / T',
+                ],
+                retenir: 'Theis = référence (toutes conditions). Cooper-Jacob = approximation graphique simple (t grand). Pente droite → T. Ordonnée origine → S. Récupération → vérification T.',
+              },
+              flashcards: [
+                { q: 'Qu\'est-ce que le rabattement dans un pompage d\'essai ?', r: 's = H₀ – H(t) : différence entre le niveau initial et le niveau mesuré pendant le pompage. Il augmente avec le temps et diminue avec la distance', expl: 'Le rabattement est mesuré dans le forage pompé et dans les piézomètres d\'observation. Plus on est près du forage, plus le rabattement est grand (cône de dépression).' },
+                { q: 'Quelle condition doit être respectée pour appliquer Cooper-Jacob ?', r: 'u = r²S/(4Tt) < 0,05 : cette condition est respectée pour t grand (pompage prolongé) ou r petit (piézomètre proche)', expl: 'En pratique, on attend généralement t > 10 minutes pour les aquifères poreux. Pour un aquifère captif (S petit), la condition est atteinte plus rapidement.' },
+                { q: 'Comment détermine-t-on T avec la méthode de Cooper-Jacob ?', r: 'On trace s vs. log(t). La droite a une pente Δs = Q × 0,183 / T. Donc T = 0,183 × Q / Δs', expl: 'Δs = montée du rabattement par cycle logarithmique de temps (ex : entre t=1 min et t=10 min). Plus Δs est grand, plus T est petit (aquifère peu transmissif).' },
+                { q: 'Comment détermine-t-on S avec Cooper-Jacob ?', r: 'S = 2,25 × T × t₀ / r² où t₀ est le temps pour lequel la droite coupe l\'axe s = 0 (extrapolation)', expl: 'S est déterminé uniquement avec les piézomètres d\'observation (pas dans le forage pompé à cause des pertes de charge). r = distance piézomètre-forage.' },
+                { q: 'Qu\'est-ce qu\'un test de récupération ?', r: 'Après arrêt du pompage, on mesure la remontée du niveau s\' = s(Δt). Graphe s\' vs. log(t/Δt) → droite de pente = Q×0,183/T → calcul T indépendant', expl: 'La récupération est souvent plus fiable que le pompage car moins affectée par les fluctuations du débit pompé. Elle confirme la valeur de T obtenue pendant le pompage.' },
+                { q: 'Qu\'est-ce que l\'effet de barrière imperméable sur une courbe de pompage ?', r: 'Une barrière imperméable proche crée un double rabattement : la courbe s vs. log(t) se redresse (pente double) à partir du moment où le cône d\'influence atteint la barrière', expl: 'En appliquant la méthode des images, on simule un forage virtuel symétrique par rapport à la barrière. La somme des deux rabattements reproduit l\'effet réel observé.' },
+              ],
+              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#F3E8FF"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#5A189A">Cooper-Jacob — Pompage d'essai</text>
+  <rect x="4" y="18" width="176" height="88" rx="4" fill="#F3E8FF" stroke="#5A189A" stroke-width="1"/>
+  <text x="92" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#5A189A" font-weight="bold">s vs. log(t) → droite</text>
+  <defs><marker id="ar14" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#5A189A"/></marker></defs>
+  <line x1="12" y1="96" x2="172" y2="96" stroke="#888" stroke-width="0.8"/>
+  <line x1="12" y1="96" x2="12" y2="34" stroke="#888" stroke-width="0.8"/>
+  <text x="92" y="104" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">log(t) →</text>
+  <text x="8" y="35" font-family="Arial" font-size="7" fill="#555">s ↑</text>
+  <polyline points="18,88 40,82 70,72 110,60 150,48 168,42" fill="none" stroke="#5A189A" stroke-width="2"/>
+  <line x1="40" y1="82" x2="40" y2="48" stroke="#5A189A" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <line x1="110" y1="60" x2="110" y2="26" stroke="#5A189A" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <text x="90" y="37" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828" font-weight="bold">Δs</text>
+  <line x1="40" y1="48" x2="110" y2="48" stroke="#C62828" stroke-width="1.2"/>
+  <text x="75" y="45" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#C62828">1 cycle log</text>
+  <rect x="184" y="18" width="92" height="88" rx="4" fill="#fff" stroke="#5A189A" stroke-width="1"/>
+  <text x="230" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#5A189A" font-weight="bold">Formules</text>
+  <text x="230" y="42" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">T = 0,183 × Q / Δs</text>
+  <text x="230" y="53" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">S = 2,25 × T × t₀ / r²</text>
+  <text x="230" y="64" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">t₀ = t où s → 0</text>
+  <text x="230" y="76" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">Valide si u&lt;0,05</text>
+  <text x="230" y="87" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">r²S / (4Tt) &lt; 0,05</text>
+  <text x="230" y="101" text-anchor="middle" font-family="Arial" font-size="7" fill="#5A189A">Récup : s' vs log(t/t')</text>
+  <rect x="8" y="112" width="264" height="30" rx="4" fill="#fff" stroke="#5A189A" stroke-width="1"/>
+  <text x="140" y="124" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#5A189A" font-weight="bold">Effets de frontière — Barrière imperméable : pente double</text>
+  <text x="140" y="136" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Limite d'alimentation : rabattement se stabilise (pente → 0)</text>
+</svg>`,
+              exercice: {
+                enonce: 'Pompage d\'essai à Q = 40 L/s (144 m³/h) sur un piézomètre à r = 50 m. Données Cooper-Jacob (u < 0,05 vérifié) : à t₁ = 10 min, s = 1,20 m ; à t₂ = 100 min, s = 2,55 m. Le graphe s = f(log t) coupe s = 0 à t₀ = 0,8 min. Calculer T et S.',
+                solution: '<strong>Δs :</strong> montée sur 1 cycle log = s(100 min) − s(10 min) = 2,55 − 1,20 = <strong>1,35 m</strong><br><strong>T :</strong> T = 0,183 × Q / Δs = 0,183 × 0,040 / 1,35 = 0,00732 / 1,35 = <strong>5,4×10⁻³ m²/s</strong><br><strong>t₀ en secondes :</strong> t₀ = 0,8 min = 48 s<br><strong>S :</strong> S = 2,25 × T × t₀ / r² = 2,25 × 5,4×10⁻³ × 48 / (50²) = 0,583 / 2 500 = <strong>2,3×10⁻⁴</strong> → nappe captive (S très faible)',
+              },
+            },
+            {
+              id: 'hg-m1-3',
+              titre: 'Modélisation numérique des eaux souterraines — MODFLOW',
+              fiche: {
+                intro: 'La modélisation numérique simule le comportement d\'un aquifère sur des domaines complexes et des longues échéances. MODFLOW (USGS) est le standard mondial des modèles d\'eaux souterraines.',
+                points: [
+                  '💻 MODFLOW (Modular 3D Groundwater Flow Model) : code USGS en domaine public depuis 1984. Standard mondial. Interfaces graphiques : GMS, ModelMuse, FEFLOW',
+                  '📐 Équation résolue : Ss × ∂h/∂t = ∇(K·∇h) + W (Ss = emmagasinement spécifique, W = sources/puits)',
+                  '🗺️ Discrétisation : grille 3D régulière (colonnes × rangées × couches). Chaque maille = K, Ss, recharge',
+                  '🔵 Conditions aux limites : charge imposée (rivière, lac, frontière) | débit imposé (pluie, pompage) | flux nul (limite imperméable)',
+                  '🔧 Packages spéciaux : RIV (rivière) | DRN (drain) | EVT (évapotranspiration) | WEL (forage) | RCH (recharge)',
+                  '📊 Calibration : ajuster K et Ss pour minimiser l\'écart entre h calculés et h observés (piézomètres). Méthode PEST (paramètre estimation)',
+                  '🎯 Utilisations pratiques : gestion des captages | impact d\'un projet (carrière, urbanisation) | délimitation des périmètres de protection | prévision étiages',
+                  '⚠️ Incertitude du modèle : toujours analyser la sensibilité aux paramètres. Un modèle non calibré peut être trompeur',
+                ],
+                formules: [
+                  'Ss × ∂h/∂t = ∂/∂x(Kx·∂h/∂x) + ∂/∂y(Ky·∂h/∂y) + ∂/∂z(Kz·∂h/∂z) + W — équation de diffusivité',
+                  'Résidu = h_calculé – h_observé → minimiser par calibration',
+                ],
+                retenir: 'MODFLOW = standard mondial (USGS, gratuit). Grille 3D + conditions limites. Calibration = ajuster K/Ss sur piézomètres réels. Toujours vérifier l\'incertitude.',
+              },
+              flashcards: [
+                { q: 'Qu\'est-ce que MODFLOW et qui le développe ?', r: 'Code de simulation des écoulements souterrains en 3D, développé par l\'USGS (United States Geological Survey). Domaine public, gratuit, standard mondial depuis 1984', expl: 'MODFLOW est utilisé par tous les grands bureaux d\'études en hydrogéologie, le BRGM, les Agences de l\'eau. Des dizaines de versions et extensions existent (MT3DMS pour le transport).' },
+                { q: 'Qu\'est-ce que la calibration d\'un modèle hydrogéologique ?', r: 'Processus d\'ajustement des paramètres (K, Ss) du modèle pour minimiser l\'écart entre les charges calculées et les charges observées aux piézomètres réels', expl: 'La calibration peut être manuelle (essai-erreur) ou automatique (PEST, UCODE). Un modèle bien calibré ne garantit pas qu\'il est juste pour d\'autres conditions (extrapolation risquée).' },
+                { q: 'Quelles sont les principales conditions aux limites utilisées dans MODFLOW ?', r: 'Charge imposée (rivière, lac, frontière connue) | débit imposé (pompage, recharge) | flux nul (limite imperméable, crête de partage)', expl: 'Le choix des conditions aux limites est crucial. Une mauvaise condition peut fausser tout le modèle. La frontière doit être éloignée de la zone d\'intérêt (≥ 5× le rayon d\'influence).' },
+                { q: 'À quoi sert un modèle MODFLOW pour la gestion des captages ?', r: 'Simuler l\'impact de différents scénarios de pompage, délimiter les périmètres de protection (isochrones), prévoir l\'impact d\'un projet sur les niveaux de nappe', expl: 'L\'isochrone 50 jours délimite le périmètre rapproché de protection d\'un captage AEP. Elle est calculée par suivi de particules (MODPATH) dans MODFLOW.' },
+                { q: 'Qu\'est-ce que le package RIV dans MODFLOW ?', r: 'Package Rivière : modélise les échanges hydrauliques entre la rivière et l\'aquifère (exfiltration si nappe haute, infiltration si rivière en charge)', expl: 'La rivière peut alimenter ou drainer la nappe selon les conditions. MODFLOW calcule le débit d\'échange proportionnellement à la différence de charge et à la conductance du lit.' },
+                { q: 'Pourquoi analyse-t-on la sensibilité d\'un modèle ?', r: 'Pour identifier quels paramètres ont le plus d\'influence sur les résultats et évaluer l\'incertitude des prédictions selon l\'incertitude sur les paramètres', expl: 'Si le modèle est très sensible à K (une variation de 20 % change les résultats de 50 %), les prédictions sont incertaines. Il faut alors plus de données terrain pour contraindre K.' },
+              ],
+              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#F3E8FF"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#5A189A">MODFLOW — Modélisation 3D aquifères</text>
+  <rect x="8" y="18" width="264" height="18" rx="3" fill="#5A189A"/>
+  <text x="140" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">USGS · Domaine public depuis 1984 · Standard mondial</text>
+  <rect x="4" y="40" width="84" height="46" rx="4" fill="#5A189A" opacity=".12" stroke="#5A189A" stroke-width="1"/>
+  <text x="46" y="52" text-anchor="middle" font-family="Arial" font-size="8" fill="#5A189A" font-weight="bold">Grille 3D</text>
+  <text x="46" y="63" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Col × Rang × Couche</text>
+  <text x="46" y="73" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Chaque maille = K, Ss</text>
+  <text x="46" y="82" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">GMS / ModelMuse</text>
+  <rect x="98" y="40" width="84" height="46" rx="4" fill="#5A189A" opacity=".12" stroke="#5A189A" stroke-width="1"/>
+  <text x="140" y="52" text-anchor="middle" font-family="Arial" font-size="8" fill="#5A189A" font-weight="bold">Conditions limites</text>
+  <text x="140" y="63" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Charge imposée (RIV)</text>
+  <text x="140" y="73" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Débit imposé (WEL)</text>
+  <text x="140" y="82" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Flux nul (limite imp.)</text>
+  <rect x="192" y="40" width="84" height="46" rx="4" fill="#5A189A" opacity=".12" stroke="#5A189A" stroke-width="1"/>
+  <text x="234" y="52" text-anchor="middle" font-family="Arial" font-size="8" fill="#5A189A" font-weight="bold">Calibration</text>
+  <text x="234" y="63" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Ajuster K, Ss</text>
+  <text x="234" y="73" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Minimiser résidus</text>
+  <text x="234" y="82" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">PEST automatique</text>
+  <rect x="8" y="92" width="264" height="50" rx="4" fill="#fff" stroke="#5A189A" stroke-width="1"/>
+  <text x="140" y="104" text-anchor="middle" font-family="Arial" font-size="8" fill="#5A189A" font-weight="bold">Utilisations pratiques</text>
+  <text x="140" y="115" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Périmètres de protection (isochrone 50j via MODPATH) · Impact carrière</text>
+  <text x="140" y="126" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Prévision étiages · Optimisation débit captages · Scénarios CC</text>
+  <text x="140" y="138" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Équation : Ss×∂h/∂t = ∇(K·∇h) + W · Analyse sensibilité obligatoire</text>
+</svg>`,
+              exercice: {
+                enonce: 'Un modèle MODFLOW d\'un aquifère alluvial est calibré sur 8 piézomètres. Les résidus moyens sont : h_calculé − h_observé = 0,15 m (bon), mais l\'analyse de sensibilité montre que ±20 % sur K change les niveaux de ±40 cm. 1) Le modèle est-il bien calibré ? 2) Peut-on l\'utiliser pour délimiter l\'isochrone 50 jours (périmètre de protection) ? 3) Quelle action s\'impose ?',
+                solution: '<strong>1) Calibration :</strong> résidu moyen 0,15 m est acceptable (< 5–10 % de la plage piézométrique). Le modèle est <strong>bien calibré</strong> sur les charges mesurées.<br><strong>2) Isochrone 50 jours :</strong> <strong>Avec réserves</strong>. La sensibilité à K (±20 % → ±40 cm de charge) introduit une incertitude significative sur les trajectoires de particules (MODPATH). L\'isochrone 50j peut varier de ±20–30 %.<br><strong>3) Action :</strong> réaliser des essais de traçage (traceur fluorescent) pour contraindre K localement + augmenter la densité de piézomètres dans la zone sensible. Appliquer une marge de sécurité (isochrone 60–70j) pour la protection réglementaire.',
+              },
+            },
+          ]},
+
+          { id: 'qualite-avancee', name: 'Qualité avancée des eaux', ico: '🧪', color: '#166038', colorl: '#E0F4EC', chapitres: [
+            {
+              id: 'qa-m1-1',
+              titre: 'PFAS — analyse, écotoxicologie et normes 2026',
+              fiche: {
+                intro: 'Les PFAS sont les polluants émergents les plus préoccupants pour les eaux souterraines et potables. Leur extrême persistance et leur toxicité à faible dose justifient les nouvelles normes très strictes de la Directive 2020.',
+                points: [
+                  '🧪 PFAS (Per- et PolyFluoroAlkylated Substances) : famille de 12 000+ composés. Liaison C-F = la plus forte en chimie → quasi-indestructibles dans l\'environnement',
+                  '🏭 Sources principales : mousses AFFF (lutte anti-incendie aéroports, bases militaires) | revêtements antiadhésifs (Téflon) | textiles imperméables (Gore-Tex) | boues d\'épuration épandues',
+                  '⚠️ Toxicité : cancérogènes (PFOA, PFOS classés CMR2) | perturbateurs thyroïdiens et immunitaires | reprotoxiques | transfert mère-enfant (placenta, lait maternel)',
+                  '🌍 "Polluants éternels" (forever chemicals) : aucune biodégradation naturelle. Ubiquitaires : retrouvés dans l\'Arctique, la faune sauvage, le sang humain',
+                  '📋 Directive 2020/2184 : 0,1 µg/L par PFAS individuel (liste 20 PFAS) | 0,5 µg/L pour la somme. Applicable progressivement',
+                  '🔬 Analyse : LC-MS/MS (chromatographie liquide couplée spectrométrie de masse). Limite détection : ng/L. Accréditation COFRAC obligatoire',
+                  '🔵 Traitement : CAG efficace PFAS ≥ C8. Nanofiltration partielle. Osmose inverse = quasi-totale. PFAS à courte chaîne (C4, C6) = difficiles à éliminer',
+                  '🔴 Concentrat OI contenant PFAS : problème majeur → incinération haute température (> 1 100°C) nécessaire pour destruction',
+                ],
+                formules: [],
+                retenir: 'PFAS = 12 000 composés, liaison C-F indestructible. Sources : AFFF, Téflon, boues. Norme : 0,1 µg/L/substance. Traitement : CAG (C8+) ou OI. Concentrat = incinération.',
+              },
+              flashcards: [
+                { q: 'Pourquoi les PFAS sont-ils appelés "polluants éternels" ?', r: 'La liaison carbone-fluor (C-F) est la plus forte en chimie organique → aucune enzyme naturelle ne peut la rompre. Les PFAS s\'accumulent dans les organismes et l\'environnement sans se dégrader', expl: 'La demi-vie des PFOS dans le corps humain est de 5–8 ans. Dans les sols, certains PFAS ont des demi-vies de plusieurs décennies. Même à des températures de 500°C, certains survivent.' },
+                { q: 'Quelle est la principale source de contamination des sols et nappes par les PFAS en France ?', r: 'Les mousses AFFF (aqueous film forming foam) utilisées pour l\'entraînement anti-incendie dans les aéroports et bases militaires. Les boues d\'épuration épandues sont la 2e source', expl: 'Les sites aéroportuaires (Roissy, Nice, Bordeaux, bases militaires) sont les zones les plus contaminées. La contamination peut s\'étendre sur plusieurs km en aval hydrogéologique.' },
+                { q: 'Quelle méthode d\'analyse est utilisée pour les PFAS à l\'état de traces ?', r: 'LC-MS/MS (chromatographie liquide à haute performance couplée à la spectrométrie de masse en tandem). Limite de détection : 1–5 ng/L', expl: 'Sans LC-MS/MS, les PFAS sont indétectables. Cette technique permet d\'identifier et quantifier des centaines de PFAS en un seul passage. Elle nécessite une accréditation COFRAC.' },
+                { q: 'Quel traitement élimine le mieux les PFAS de l\'eau potable ?', r: 'L\'osmose inverse (OI) retient quasi 100 % des PFAS. Le CAG est efficace pour les PFAS longue chaîne (≥ C8). La nanofiltration est intermédiaire', expl: 'Les PFAS à courte chaîne (C4, C6) résistent au CAG et à certaines NF. Seule l\'OI les retient. Problème : le concentrat OI contient tous les PFAS → destruction obligatoire par incinération à > 1 100°C.' },
+                { q: 'Quels organes ou systèmes sont principalement affectés par les PFAS ?', r: 'Foie (hépatotoxicité), thyroïde (perturbation hormonale), système immunitaire (immunosuppression), reins et testicules (PFOA/PFOS : cancérogènes CMR2)', expl: 'Les PFAS se fixent aux protéines plasmatiques et s\'accumulent dans le foie. Effets chez l\'enfant : réduction de la réponse vaccinale, perturbation du développement.' },
+                { q: 'Quelle est la norme PFAS dans l\'eau potable fixée par la Directive 2020/2184 ?', r: '0,1 µg/L par substance PFAS individuelle — 0,5 µg/L pour la somme des 20 PFAS réglementés. Applicabilité progressive selon les États membres', expl: 'L\'OMS a proposé en 2022 des valeurs guide encore plus strictes pour PFOS (100 ng/L) et PFOA (100 ng/L). Les États-Unis ont fixé des normes à 4 ng/L pour certains PFAS en 2024.' },
+              ],
+              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#E0F4EC"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#166038">PFAS — Sources · Traitement · Normes</text>
+  <rect x="4" y="18" width="130" height="56" rx="4" fill="#166038" opacity=".12" stroke="#166038" stroke-width="1"/>
+  <text x="69" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">Sources de contamination</text>
+  <text x="69" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Mousses AFFF (aéroports)</text>
+  <text x="69" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Téflon · Gore-Tex · textiles</text>
+  <text x="69" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Boues STEP épandues</text>
+  <text x="69" y="71" text-anchor="middle" font-family="Arial" font-size="7" fill="#C62828" font-weight="bold">Liaison C-F indestructible</text>
+  <rect x="146" y="18" width="130" height="56" rx="4" fill="#166038" opacity=".12" stroke="#166038" stroke-width="1"/>
+  <text x="211" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">Traitement</text>
+  <text x="211" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">CAG : C8+ efficace</text>
+  <text x="211" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Nanofiltration partielle</text>
+  <text x="211" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#1B5E20" font-weight="bold">OI : quasi 100 % rétention</text>
+  <text x="211" y="71" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828">Concentrat → incin. 1 100°C</text>
+  <rect x="8" y="80" width="264" height="62" rx="4" fill="#fff" stroke="#166038" stroke-width="1"/>
+  <text x="140" y="92" text-anchor="middle" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">Normes — Directive 2020/2184</text>
+  <text x="140" y="103" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">0,1 µg/L par substance PFAS individuelle (liste 20 PFAS)</text>
+  <text x="140" y="114" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">0,5 µg/L pour la somme · Analyse : LC-MS/MS (COFRAC obligatoire)</text>
+  <text x="140" y="124" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">PFOA · PFOS = CMR2 (cancérogènes) · Effets : thyroïde, foie, immunité</text>
+  <text x="140" y="135" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">C4/C6 (courte chaîne) = difficiles à traiter · Ubiquitaires (Arctique, sang)</text>
+</svg>`,
+              exercice: {
+                enonce: 'Une analyse LC-MS/MS de l\'eau d\'un captage situé en aval d\'une base militaire donne : PFOS = 0,08 µg/L, PFOA = 0,09 µg/L, PFHxA = 0,06 µg/L, PFBS = 0,05 µg/L. 1) Chaque substance respecte-t-elle la norme individuelle ? 2) La norme "somme" est-elle respectée ? 3) Quelle filière de traitement proposez-vous ? 4) Quel problème pose le concentrat ?',
+                solution: '<strong>1) Normes individuelles :</strong> PFOS 0,08 < 0,1 ✓ · PFOA 0,09 < 0,1 ✓ · PFHxA 0,06 < 0,1 ✓ · PFBS 0,05 < 0,1 ✓ → toutes conformes individuellement.<br><strong>2) Norme somme :</strong> 0,08 + 0,09 + 0,06 + 0,05 = <strong>0,28 µg/L < 0,5 µg/L</strong> → conforme (mais à surveiller).<br><strong>3) Filière :</strong> PFHxA et PFBS sont des PFAS courte chaîne (C4/C6) difficiles à éliminer par CAG. Seule l\'<strong>Osmose Inverse</strong> garantit une rétention quasi totale de tous les PFAS.<br><strong>4) Concentrat OI :</strong> contient tous les PFAS concentrés × 4–5. Élimination obligatoire par <strong>incinération à plus de 1 100°C</strong> (température minimum pour casser la liaison C-F). Coût élevé.',
+              },
+            },
+            {
+              id: 'qa-m1-2',
+              titre: 'Perturbateurs endocriniens et microplastiques',
+              fiche: {
+                intro: 'Perturbateurs endocriniens et microplastiques sont deux catégories de polluants émergents qui font l\'objet d\'une surveillance croissante, même en l\'absence de normes complètes.',
+                points: [
+                  '🧬 Perturbateurs endocriniens (PE) : substances qui imitent, bloquent ou modifient les hormones. Effets à très faibles doses (ng/L voire pg/L)',
+                  '💊 PE prioritaires en eau : 17α-éthinylestradiol (EE2 — contraceptif oral) | bisphénol A (BPA) | phtalates | nonylphénols | pesticides organochlorés (DDT, lindane)',
+                  '🐟 Impact aquatique : féminisation des poissons mâles (imposex), réduction de la fertilité, hermaphrodisme. Observé à EE2 ≥ 1 ng/L dans les rivières en aval de STEP',
+                  '⚠️ Élimination STEP : insuffisante pour EE2 (STEP classiques éliminent 50–90 % → résidu actif). Traitement complémentaire : ozonation + CAG',
+                  '🔵 Microplastiques : particules plastiques < 5 mm. Sources : dégradation déchets plastiques | fibres textiles synthétiques (lavage) | granulés de pneus (routes)',
+                  '🔴 Nanoplastiques (< 1 µm) : passent les barrières biologiques (sang-cerveau, placenta). Très préoccupants mais difficiles à analyser',
+                  '💧 Dans l\'eau potable : microplastiques retrouvés dans l\'eau du robinet et en bouteille. Pas encore de normes AEP. Élimination : filtration < 1 µm (UF) efficace',
+                  '🌡️ Effets PE à faible dose : courbe dose-réponse non linéaire (effet cocktail — mélange de PE à faibles doses = synergie toxique)',
+                ],
+                formules: [],
+                retenir: 'PE = hormones mimétiques à ng/L. EE2 féminise les poissons. Traitement : ozonation + CAG. Microplastiques = < 5 mm. Nanoplastiques franchissent les barrières bio.',
+              },
+              flashcards: [
+                { q: 'Qu\'est-ce qu\'un perturbateur endocrinien ?', r: 'Substance exogène qui interfère avec le système hormonal : imite les hormones (agoniste), les bloque (antagoniste) ou modifie leur synthèse/métabolisme', expl: 'Le caractère PE se manifeste souvent à des doses très inférieures aux doses toxiques classiques. La relation dose-réponse peut être non monotone (U inversé).' },
+                { q: 'Quel PE est le plus préoccupant pour les milieux aquatiques ?', r: '17α-éthinylestradiol (EE2) : hormone synthétique des contraceptifs oraux. Féminise les poissons mâles (réduction spermatogenèse, intersex) à des concentrations de 1 ng/L', expl: 'L\'EE2 est éliminé à 50–90 % par les STEP classiques. Le résidu actif dans les rivières françaises en aval de STEP est suffisant pour affecter la reproduction des poissons.' },
+                { q: 'Comment éliminer efficacement l\'EE2 dans une STEP ou une usine de potabilisation ?', r: 'Ozonation (oxydation de l\'EE2) suivie de filtration sur charbon actif en grains (CAG). L\'ozonation seule peut former des produits de transformation encore actifs', expl: 'L\'association O₃ + CAG est la référence pour éliminer les PE. Des études montrent une réduction de > 90 % de l\'activité oestrogénique sur des rivières équipées de cette technologie.' },
+                { q: 'Quelle est la définition des microplastiques ?', r: 'Particules plastiques de taille < 5 mm. Primaires (fabriqués petits : cosmétiques, granulés industriels) ou secondaires (fragmentation de macro-déchets plastiques)', expl: 'On les retrouve dans tous les compartiments : eau douce, eau de mer, sédiments, air, nourriture, corps humain. La contamination est planétaire et irréversible à l\'échelle humaine.' },
+                { q: 'Comment les microplastiques sont-ils éliminés dans l\'eau potable ?', r: 'La filtration membranaire < 1 µm (ultrafiltration) est efficace. Les traitements conventionnels (coagulation-filtration sable) éliminent 70–80 % des microplastiques > 20 µm', expl: 'Les nanoplastiques (< 1 µm) nécessitent des membranes très fines (OI/NF). Ils sont potentiellement plus dangereux car ils traversent les barrières biologiques.' },
+                { q: 'Qu\'est-ce que l\'effet cocktail des perturbateurs endocriniens ?', r: 'Synergie toxique de plusieurs PE présents simultanément à faibles doses individuellement non actives. Le mélange peut produire un effet hormonal significatif', expl: 'C\'est un défi réglementaire majeur : chaque substance respecte la norme, mais la combinaison de 10–20 PE à faibles doses produit un effet global. Les mélanges sont rarement évalués.' },
+              ],
+              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#E0F4EC"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#166038">Perturbateurs endocriniens &amp; Microplastiques</text>
+  <rect x="4" y="18" width="130" height="66" rx="4" fill="#166038" opacity=".12" stroke="#166038" stroke-width="1"/>
+  <text x="69" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">Perturbateurs endocriniens</text>
+  <text x="69" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">EE2 (pilule) → féminise poissons</text>
+  <text x="69" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">BPA, phtalates, pesticides</text>
+  <text x="69" y="61" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Effets à 1–10 ng/L</text>
+  <text x="69" y="71" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#1B5E20" font-weight="bold">Traitement : O₃ + CAG</text>
+  <text x="69" y="82" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">STEP classique : 50–90 % EE2</text>
+  <rect x="146" y="18" width="130" height="66" rx="4" fill="#166038" opacity=".12" stroke="#166038" stroke-width="1"/>
+  <text x="211" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">Microplastiques</text>
+  <text x="211" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Particules &lt; 5 mm</text>
+  <text x="211" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Fibres textiles, pneus</text>
+  <text x="211" y="61" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828" font-weight="bold">Nanoplastiques &lt; 1 µm</text>
+  <text x="211" y="71" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828">Franchissent barrières bio</text>
+  <text x="211" y="82" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Élimination : UF (ultrafilt.)</text>
+  <rect x="8" y="90" width="264" height="52" rx="4" fill="#fff" stroke="#166038" stroke-width="1"/>
+  <text x="140" y="102" text-anchor="middle" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">Effet cocktail</text>
+  <text x="140" y="113" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">10–20 PE à faibles doses → synergie toxique significative</text>
+  <text x="140" y="124" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Courbe dose-réponse non monotone · Mélanges rarement évalués</text>
+  <text x="140" y="136" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Pas de norme AEP microplastiques · Retrouvés eau robinet + bouteille</text>
+</svg>`,
+              exercice: {
+                enonce: 'Une STEP traite 5 000 m³/j d\'eaux usées contenant 15 ng/L d\'EE2. Le traitement conventionnel élimine 75 % de l\'EE2. La rivière réceptrice a un débit d\'étiage de 1 500 m³/j. 1) Quelle concentration d\'EE2 est rejetée par la STEP ? 2) Quelle est la concentration dans la rivière en aval ? 3) Est-ce problématique pour la faune aquatique ?',
+                solution: '<strong>1) EE2 rejeté :</strong> 15 × (1 − 0,75) = <strong>3,75 ng/L</strong><br><strong>2) Concentration rivière :</strong> débit total = 1 500 + 5 000 = 6 500 m³/j<br>EE2 rivière = (3,75 × 5 000) / 6 500 = <strong>2,88 ng/L</strong><br><strong>3) Impact aquatique :</strong> EE2 féminise les poissons dès <strong>1 ng/L</strong>. 2,88 ng/L >> seuil → <strong>risque avéré</strong> de perturbation de la reproduction piscicole. Traitement complémentaire obligatoire : <strong>ozonation + CAG</strong> pour descendre sous 0,5–1 ng/L.',
+              },
+            },
+          ]},
+        ],
+      },
+
+      {
+        id: 'an2',
+        name: 'Master 2',
+        matieres: [
+          { id: 'climatologie', name: 'Changement climatique et ressources en eau', ico: '🌍', color: '#E85D04', colorl: '#FFF0E0', chapitres: [
+            {
+              id: 'cc-m2-1',
+              titre: 'Impacts du changement climatique sur les débits et la ressource en eau',
+              fiche: {
+                intro: 'Le changement climatique modifie profondément le cycle de l\'eau en France et dans le monde. Les ressources en eau sont menacées par des étiages plus sévères, des crues plus intenses et une modification de la recharge des nappes.',
+                points: [
+                  '🌡️ Scénarios GIEC : RCP2.6 (+2°C) | RCP4.5 (+2,5°C) | RCP8.5 (business as usual : +4 à +5°C d\'ici 2100)',
+                  '🇫🇷 France : T° en hausse de +1,4°C depuis 1900. Projections : +1,5 à +4°C d\'ici 2100 selon scénarios',
+                  '🌧️ Précipitations : moins d\'été (–20 % à –30 % dans le Sud) | plus intenses (pluies extrêmes) | enneigement en forte baisse montagne',
+                  '📉 Modules (débits moyens) : –10 % à –40 % d\'ici 2050 selon bassins. Méditerranée et Sud-Ouest : les plus touchés',
+                  '🏔️ Glaciers alpins : réduction de 70 % du volume depuis 1850. Disparition prévue avant 2100 → perte du "château d\'eau" alpin',
+                  '🌊 Eaux souterraines : recharge hivernale réduite → niveaux piézométriques estivaux plus bas. Sécheresses 2003, 2018, 2022 : records historiques',
+                  '⚖️ Conflits d\'usage exacerbés : agriculture (70 % des prélèvements en été) vs AEP vs hydroélectricité vs milieux aquatiques',
+                  '🔴 Changements qualitatifs : eau de surface plus chaude → prolifération cyanobactéries | concentration des polluants en étiage | efficacité réduite des STEP en chaleur',
+                ],
+                formules: [
+                  'Forçage radiatif (W/m²) = mesure de l\'effet de serre additionnel. +4 W/m² pour RCP8.5',
+                  'Résilience hydrologique = capacité d\'un système eau à absorber les chocs climatiques sans changement de régime',
+                ],
+                retenir: 'RCP8.5 = +4°C d\'ici 2100. Modules en baisse de –10 à –40 %. Étiages plus sévères. Glaciers en voie de disparition. Conflits d\'usage agriculture/AEP/milieux.',
+              },
+              flashcards: [
+                { q: 'Qu\'est-ce que le scénario RCP8.5 du GIEC ?', r: 'Scénario "business as usual" : pas de réduction des émissions de GES. Concentration CO₂ > 1 000 ppm en 2100. Hausse T° de +4 à +5°C. Forçage radiatif +8,5 W/m²', expl: 'Le RCP8.5 est le scénario pessimiste de référence pour les études d\'impact. Il est malheureusement proche de la trajectoire réelle d\'émissions des 10 dernières années.' },
+                { q: 'Quel impact le CC a-t-il sur les modules (débits moyens) des rivières françaises ?', r: 'Baisse de 10 à 40 % des modules d\'ici 2050 selon les bassins. Les bassins méditerranéens et sud-atlantiques sont les plus touchés (–25 à –40 %)', expl: 'Certains bassins (Rhône alpin) maintiennent leurs débits à court terme grâce à la fonte glaciaire, mais subiront une chute brutale quand les glaciers auront disparu.' },
+                { q: 'Pourquoi la disparition des glaciers alpins est-elle un enjeu critique ?', r: 'Les glaciers stockent l\'eau en hiver et la restituent en été (étiage naturellement soutenu). Sans eux, les débits d\'été des rivières alpines chuteront drastiquement', expl: 'Le glacier de la Mer de Glace (Chamonix) a perdu 150 m de profondeur depuis 1850. Les glaciers pyrénéens seront probablement disparus avant 2050. L\'Arve, l\'Isère, le Gave en seront affectés.' },
+                { q: 'Pourquoi les étiages sont-ils plus concentrés en polluants lors des sécheresses ?', r: 'Le débit est plus faible → le facteur de dilution diminue → les mêmes rejets de STEP, agricoles et industriels produisent des concentrations plus élevées dans le cours d\'eau', expl: 'En étiage sévère, certains cours d\'eau sont constitués à plus de 50 % d\'effluents de STEP. La DCO, les nitrates, les perturbateurs endocriniens s\'y concentrent au-delà des normes.' },
+                { q: 'Quels usages de l\'eau sont en conflit lors des étiages exacerbés par le CC ?', r: 'Agriculture (irrigation, 70 % des prélèvements estivaux) vs AEP vs hydroélectricité vs maintien des débits réservés pour les milieux aquatiques', expl: 'Les arrêtés sécheresse imposent des restrictions par niveau d\'alerte. En crise, l\'AEP est prioritaire. Les conflits sont particulièrement aigus dans les bassins Adour-Garonne et Rhône-Méditerranée.' },
+                { q: 'Comment le changement climatique affecte-t-il la qualité de l\'eau des STEP ?', r: 'T° élevée réduit la solubilité de l\'O₂ et accélère les processus biologiques → risque de déficit en O₂ dans les bassins d\'aération + prolifération de cyanobactéries dans les réservoirs', expl: 'Les STEP dimensionnées pour T° < 25°C peuvent voir leurs performances se dégrader si la T° des eaux usées dépasse 30°C en été. La nitrification est particulièrement affectée.' },
+              ],
+              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#FFF0E0"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#E85D04">Changement climatique — Impacts sur les débits</text>
+  <rect x="4" y="18" width="83" height="68" rx="4" fill="#E85D04" opacity=".12" stroke="#E85D04" stroke-width="1"/>
+  <text x="45" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#E85D04" font-weight="bold">RCP2.6</text>
+  <text x="45" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">+2°C en 2100</text>
+  <text x="45" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#4CAF50">Objectif Paris</text>
+  <text x="45" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Modules :</text>
+  <text x="45" y="72" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">−10 à −20 %</text>
+  <text x="45" y="83" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">+2,5°C : RCP4.5</text>
+  <rect x="98" y="18" width="84" height="68" rx="4" fill="#E85D04" opacity=".12" stroke="#E85D04" stroke-width="1"/>
+  <text x="140" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#E85D04" font-weight="bold">RCP8.5</text>
+  <text x="140" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828" font-weight="bold">+4 à 5°C</text>
+  <text x="140" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Business as usual</text>
+  <text x="140" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Modules :</text>
+  <text x="140" y="72" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828" font-weight="bold">−20 à −40 %</text>
+  <text x="140" y="82" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">CO₂ > 1 000 ppm</text>
+  <rect x="192" y="18" width="84" height="68" rx="4" fill="#E85D04" opacity=".12" stroke="#E85D04" stroke-width="1"/>
+  <text x="234" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#E85D04" font-weight="bold">Impacts clés</text>
+  <text x="234" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Glaciers alpins</text>
+  <text x="234" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828">−70 % vol. depuis</text>
+  <text x="234" y="60" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828">1850 → avant 2100</text>
+  <text x="234" y="71" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Étiages + sévères</text>
+  <text x="234" y="82" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Conflits usage ↑</text>
+  <rect x="8" y="92" width="264" height="50" rx="4" fill="#fff" stroke="#E85D04" stroke-width="1"/>
+  <text x="140" y="104" text-anchor="middle" font-family="Arial" font-size="8" fill="#E85D04" font-weight="bold">Impacts qualitatifs</text>
+  <text x="140" y="115" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Eau + chaude → cyanobactéries · Étiage = concentration polluants</text>
+  <text x="140" y="126" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">T° STEP > 30°C → nitrification dégradée · Agriculture 70 % prélèvements été</text>
+  <text x="140" y="137" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">France : +1,4°C depuis 1900 · Sécheresses 2003/2018/2022 = records</text>
+</svg>`,
+              exercice: {
+                enonce: 'En été 2022, un cours d\'eau du Sud-Ouest a un débit de 0,8 m³/s (étiage sévère). Deux STEP rejettent : STEP A : 0,25 m³/s, DBO₅ = 15 mg/L ; STEP B : 0,10 m³/s, DBO₅ = 20 mg/L. Le débit naturel de la rivière (sans rejets) serait 0,45 m³/s. 1) Quelle fraction du débit total est constituée de rejets STEP ? 2) Calculer la DBO₅ mélangée en rivière. 3) Quel phénomène est amplifié par le CC dans ce scénario ?',
+                solution: '<strong>1) Fraction rejets STEP :</strong> débit total rivière = 0,45 + 0,25 + 0,10 = 0,80 m³/s<br>Fraction STEP = (0,25 + 0,10) / 0,80 = 0,35/0,80 = <strong>44 %</strong> du débit total<br><strong>2) DBO₅ mélangée :</strong> (0,25×15 + 0,10×20) / (0,45+0,25+0,10) = (3,75 + 2,00) / 0,80 = 5,75 / 0,80 = <strong>7,2 mg/L</strong><br><strong>3) Phénomène CC :</strong> <strong>concentration des polluants en étiage</strong>. Le débit naturel réduit par le CC (-30 %) fait que les rejets représentent une fraction bien plus grande → DBO₅, nutriments, perturbateurs endocriniens concentrés → anoxie, cyanobactéries.',
+              },
+            },
+            {
+              id: 'cc-m2-2',
+              titre: 'Adaptation des systèmes d\'eau potable et d\'assainissement',
+              fiche: {
+                intro: 'L\'adaptation au changement climatique impose de repenser la gestion des ressources en eau : sécurisation des approvisionnements, économies d\'eau, réutilisation et nouvelles technologies.',
+                points: [
+                  '🔀 Sécurisation AEP : diversification des ressources (interconnexions réseaux, nouvelles captations) + augmentation des capacités de stockage (réservoirs, barrages)',
+                  '💧 Économies d\'eau : réduction des fuites (rendement ≥ 85 %) | tarification progressive par blocs (premiers m³ bon marché, suivants plus chers) | compteurs intelligents (AMI)',
+                  '♻️ REUT (Réutilisation des Eaux Usées Traitées) : arrosage espaces verts, toilettes, irrigation agricole, industrie. Règlement UE 2020/741 + décret France 2022',
+                  '   REUT irrigation : qualité requise selon le type de culture (NGL < 10 mg/L, E. coli < 10 UFC/100 mL pour cultures alimentaires)',
+                  '🌧️ Récupération eaux pluviales : usages non potables (WC, arrosage, nettoyage). Réglementation française : citerne + robinet différencié + étiquetage',
+                  '🌊 Dessalement : solution de dernier recours (énergie intensive : 3–10 kWh/m³). Utilisé aux Canaries, en Martinique, dans les DROM. Envisagé pour Paris d\'ici 2050',
+                  '🏗️ Adaptation des STEP : prétraitements renforcés pour les crues (surverses) | biofiltration pour les étiages concentrés | réfrigération artificielle des bassins biologiques',
+                  '📋 Plans de gestion sécheresse (PGS) : obligation pour les collectivités > 5 000 abonnés. Scénarios d\'alimentation alternative, réduction des fuites prioritaire',
+                ],
+                formules: [],
+                retenir: 'REUT = réutilisation EUT (règlement UE 2020/741). Économies : fuites + compteurs intelligents. Sécurisation = interconnexions + stockage. Dessalement = dernier recours.',
+              },
+              flashcards: [
+                { q: 'Qu\'est-ce que la REUT et quelle est sa réglementation en France ?', r: 'Réutilisation des Eaux Usées Traitées pour des usages non potables. Règlement UE 2020/741 + décret français n°2022-336. Usages autorisés : irrigation agricole, arrosage espaces verts, nettoyage voirie', expl: 'La REUT est très développée en Espagne (20 % des eaux épurées réutilisées) et en Israël (90 %). France : seulement 1 % pour l\'instant, mais en forte progression post-sécheresses 2022.' },
+                { q: 'Qu\'est-ce qu\'un compteur intelligent (AMI) et quel avantage pour l\'adaptation au CC ?', r: 'Advanced Metering Infrastructure : compteur d\'eau avec transmission à distance des données (horaire ou quotidienne). Détecte les fuites domestiques, alerte les consommateurs et optimise la facturation', expl: 'Un compteur intelligent détecte une consommation nocturne anormale (fuite robinet, WC) et alerte le propriétaire. Les gains sur les pertes domestiques peuvent atteindre 10–15 % de la consommation.' },
+                { q: 'Pourquoi le dessalement est-il considéré comme "solution de dernier recours" ?', r: 'Très énergivore (3–10 kWh/m³ vs 0,3 kWh pour une eau souterraine) → coût élevé et fort impact carbone. Génère un concentrat salin à éliminer', expl: 'Pour produire 1 m³ d\'eau potable par dessalement, on consomme autant d\'énergie que pour produire 10 m³ d\'eau souterraine. Le bilan carbone est très défavorable sans énergie renouvelable.' },
+                { q: 'Quelles mesures concrètes d\'adaptation les STEP doivent-elles adopter face au CC ?', r: 'Gestion des surverses par temps de pluie intense (biofiltres, by-pass contrôlés) + adaptation aux températures élevées estivales (ventilation, ombrage bassins) + traitement tertiaire renforcé en étiage', expl: 'En 2022, plusieurs STEP en France ont eu des difficultés de nitrification en été (T° bassins > 30°C). Des modèles de simulation permettent de prévoir ces situations et d\'adapter le traitement.' },
+                { q: 'Qu\'est-ce que la tarification progressive par blocs ?', r: 'Les premiers m³ consommés (tranche sociale) sont facturés à un tarif bas. Les m³ suivants sont progressivement plus chers. Encourage les économies d\'eau tout en garantissant l\'accès au droit à l\'eau', expl: 'Ce système punit la surconsommation (arrosage intensif, piscines) tout en préservant l\'accès à l\'eau pour les ménages modestes. Dunkerque, Montpellier et d\'autres villes l\'ont adopté.' },
+                { q: 'Qu\'est-ce qu\'un Plan de Gestion de la Sécheresse (PGS) ?', r: 'Document préventif identifiant les ressources alternatives, les mesures d\'économies, les interconnexions de secours et les procédures d\'alerte pour maintenir l\'AEP en situation de sécheresse sévère', expl: 'La sécheresse 2022 a montré que de nombreuses communes n\'avaient pas de PGS. Le gouvernement a rendu ces plans obligatoires pour les collectivités > 5 000 abonnés à partir de 2024.' },
+              ],
+              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#FFF0E0"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#E85D04">Adaptation CC — REUT · AMI · PGS · Dessalement</text>
+  <rect x="4" y="18" width="60" height="52" rx="4" fill="#E85D04" opacity=".85"/>
+  <text x="34" y="29" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">REUT</text>
+  <text x="34" y="39" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">EUT réutilisées</text>
+  <text x="34" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">arrosage, WC</text>
+  <text x="34" y="58" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#FFE0B2">UE 2020/741</text>
+  <rect x="72" y="18" width="60" height="52" rx="4" fill="#D84315" opacity=".85"/>
+  <text x="102" y="29" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Compteurs</text>
+  <text x="102" y="39" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">AMI (smart)</text>
+  <text x="102" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">Détecte fuites</text>
+  <text x="102" y="58" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#FFE0B2">−10–15 % perte</text>
+  <rect x="140" y="18" width="60" height="52" rx="4" fill="#BF360C" opacity=".85"/>
+  <text x="170" y="29" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">PGS</text>
+  <text x="170" y="39" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">Plan Gestion</text>
+  <text x="170" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">Sécheresse</text>
+  <text x="170" y="58" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#FFE0B2">&gt; 5 000 abonn.</text>
+  <rect x="208" y="18" width="68" height="52" rx="4" fill="#8D1A00" opacity=".85"/>
+  <text x="242" y="29" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Dessalement</text>
+  <text x="242" y="39" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">3–10 kWh/m³</text>
+  <text x="242" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">Dernier recours</text>
+  <text x="242" y="58" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#FFE0B2">DROM/Canaries</text>
+  <rect x="8" y="76" width="264" height="66" rx="4" fill="#fff" stroke="#E85D04" stroke-width="1"/>
+  <text x="140" y="88" text-anchor="middle" font-family="Arial" font-size="8" fill="#E85D04" font-weight="bold">Stratégies d'adaptation</text>
+  <text x="140" y="99" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Sécurisation AEP : interconnexions + nouveaux stockages (réservoirs)</text>
+  <text x="140" y="110" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Tarification progressive par blocs : économies + droit à l'eau garanti</text>
+  <text x="140" y="121" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">STEP : traitement tertiaire renforcé en étiage + gestion surverses</text>
+  <text x="140" y="134" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">France REUT : 1 % (vs Israël 90 %) · AMI : Dunkerque, Montpellier…</text>
+</svg>`,
+              exercice: {
+                enonce: 'Une commune de 12 000 abonnés consomme 2 200 m³/j. Elle envisage la REUT de 20 % de ses EUT (1 200 m³/j traités) pour arroser les espaces verts et alimenter les WC publics. Elle évalue aussi des compteurs AMI promettant 12 % de réduction des pertes (rendement actuel = 78 %). 1) Volume économisé/j par REUT. 2) Volume supplémentaire économisé par les AMI (sur 2 200 m³/j). 3) Ces deux actions suffisent-elles pour passer le rendement de 78 à 85 % (volume distribué actuel = 2 820 m³/j) ?',
+                solution: '<strong>1) REUT :</strong> 20 % × 1 200 = <strong>240 m³/j</strong> d\'eau potable économisée (substitution)<br><strong>2) AMI :</strong> pertes actuelles = 2 820 − 2 200 = 620 m³/j<br>Gain AMI = 12 % × 620 = <strong>74 m³/j</strong> de pertes réduites<br><strong>3) Rendement :</strong> Pour Rdt = 85 % avec V distribué = 2 820 m³/j :<br>V consommé requis = 0,85 × 2 820 = 2 397 m³/j<br>Gain total REUT + AMI = 240 + 74 = 314 m³/j → V consommé apparent = 2 200 + 314 = 2 514 m³/j<br>Rdt nouveau = 2 514 / 2 820 = <strong>89 %</strong> > 85 % → <strong>oui, largement suffisant</strong>.',
+              },
+            },
+          ]},
+        ],
+      },
+    ],
+  },
+
+  /* ══ BUT GTE (option eau) ══════════════════════════════════════════ */
+  'but-gte': {
+    name: 'BUT Génie Thermique et Énergie — option Eau',
+    sigle: 'BUT GTE',
+    ico: '🏗️',
+    color: '#0A5090',
+    colorl: '#E6EEF8',
+    niveau: 'Bac+3',
+    organisme: 'IUT — Ministère de l\'Enseignement Supérieur',
+    desc: 'BUT en 3 ans avec option eau : hydraulique appliquée, systèmes de pompage, instrumentation, exploitation.',
+    annees: [
+      {
+        id: 'an1',
+        name: 'Semestres 1 à 6',
+        matieres: [
+          { id: 'hydraulique-but', name: 'Hydraulique appliquée', ico: '🌊', color: '#0A5090', colorl: '#E6EEF8', chapitres: [
+            {
+              id: 'hyd-but-1',
+              titre: 'Réseaux sous pression — simulation et optimisation',
+              fiche: {
+                intro: 'La simulation des réseaux hydrauliques permet de calculer pressions et débits en tous points, d\'optimiser les diamètres et d\'anticiper les coups de bélier avant la mise en service.',
+                points: [
+                  '💻 Logiciels de simulation : EPANET (USEPA, gratuit, standard mondial) | WaterGEMS | SynerGEE | PORTEAU (INRAE, gratuit)',
+                  '📐 Régime permanent : simulation des pressions et débits en état stationnaire. Vérification des pressions (2–6 bar) et des vitesses (0,5–2 m/s)',
+                  '📈 Régime transitoire (coups de bélier) : onde de pression lors d\'une fermeture rapide de vanne ou d\'un arrêt de pompe',
+                  '   ΔP = ρ × c × ΔV (c = célérité de l\'onde ≈ 1 000–1 300 m/s dans l\'eau en conduite)',
+                  '⚠️ Protection anti-bélier : chaudière (réservoir air comprimé) | vanne à fermeture lente | soupape de décharge | ventouse',
+                  '🔺 Nœud réseau : conservation des débits (Σ Q entrant = Σ Q sortant). Maille : conservation de l\'énergie (Σ ΔH = 0)',
+                  '📊 Optimisation diamètres : minimiser le coût (investissement + exploitation). NomoCom ou formule empirique : V ≈ 0,5–1,5 m/s recommandée',
+                  '🗺️ Sectorisation : zones de pression différentes séparées par des régulateurs (RDP). Évite les pressions excessives (> 8 bar = risque de fuites)',
+                ],
+                formules: [
+                  'ΔP_bélier = ρ × c × ΔV — surpression due au coup de bélier (Pa)',
+                  'c = √(E/ρ) — célérité de l\'onde (E = module de compressibilité, ρ = masse volumique)',
+                  'ΣQ_nœud = 0 et ΣΔH_maille = 0 — équations de Hardy-Cross',
+                ],
+                retenir: 'EPANET = simulation réseau (gratuit). Coup de bélier : ΔP = ρcΔV. Protection : chaudière ou vanne lente. Pressions cibles : 2–6 bar. V : 0,5–2 m/s.',
+              },
+              flashcards: [
+                { q: 'Qu\'est-ce qu\'EPANET et qui le développe ?', r: 'Logiciel de simulation hydraulique des réseaux sous pression, développé par l\'USEPA (Agence américaine de protection de l\'environnement). Gratuit, standard mondial', expl: 'EPANET simule le débit, la pression, la qualité de l\'eau (âge de l\'eau, chlore résiduel) en régime permanent et quasi-statique. Interface graphique simple et importation de données GIS.' },
+                { q: 'Formule du coup de bélier de Joukowski ?', r: 'ΔP = ρ × c × ΔV (Pa). c ≈ 1 200 m/s dans une conduite en fonte, ρ = 1 000 kg/m³', expl: 'Pour ΔV = 1 m/s (fermeture rapide d\'une vanne) : ΔP = 1 000 × 1 200 × 1 = 1 200 000 Pa = 12 bar ! D\'où l\'importance de fermer lentement les vannes (t_fermeture > 2L/c).' },
+                { q: 'Quelles sont les méthodes de protection contre les coups de bélier ?', r: 'Chaudière anti-bélier (réservoir air comprimé) | vanne à fermeture lente | soupape de décharge (by-pass calibré) | ventouse (admission d\'air) | volant d\'inertie sur pompe', expl: 'La chaudière anti-bélier est la solution la plus courante. Elle absorbe la surpression en comprimant l\'air emprisonné. Elle doit être dimensionnée pour la surpression maximale attendue.' },
+                { q: 'Qu\'est-ce que la méthode de Hardy-Cross pour les réseaux maillés ?', r: 'Méthode itérative de calcul des débits dans les mailles : on part d\'une distribution initiale et on corrige successivement jusqu\'à satisfaire les deux lois (Kirchhoff) : ΣQ=0 aux nœuds et ΣΔH=0 dans les mailles', expl: 'EPANET utilise une méthode similaire (gradient hydraulique). La méthode de Hardy-Cross est aujourd\'hui calculée par ordinateur, mais comprendre son principe aide à diagnostiquer les modèles.' },
+                { q: 'Pourquoi sépare-t-on un réseau en zones de pression ?', r: 'Pour maintenir une pression de service acceptable (2–6 bar) partout. Sans régulation, les points bas ont une pression > 10 bar → fuites, casses. Les RDP (régulateurs de pression) créent des zones', expl: 'Un réseau de collines requiert des zones de pression différentes selon l\'altitude. Sans RDP, les zones basses auraient une pression excessive → sur-fuites → mauvais rendement.' },
+                { q: 'Quelle vitesse d\'écoulement recommande-t-on dans un réseau AEP ?', r: '0,5 à 2 m/s en régime nominal. < 0,5 m/s : risque de dépôts et vieillissement de l\'eau (goûts, qualité). > 2 m/s : risque de coups de bélier et bruit', expl: 'La vitesse optimale se situe entre 0,8 et 1,5 m/s. Cette plage équilibre les pertes de charge (pas trop élevées), l\'auto-curage et la protection contre les coups de bélier.' },
+              ],
+              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#E6EEF8"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#0A5090">Réseaux AEP — Coup de bélier &amp; Protections</text>
+  <rect x="8" y="18" width="264" height="26" rx="4" fill="#0A5090"/>
+  <text x="140" y="29" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">Joukowski : ΔP = ρ × c × ΔV</text>
+  <text x="140" y="40" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#cce0f8">c ≈ 1 000–1 300 m/s · Ex : ΔV=1 m/s → ΔP = 12 bar !</text>
+  <defs><marker id="ar15" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#0A5090"/></marker></defs>
+  <rect x="4" y="50" width="60" height="40" rx="3" fill="#0A5090" opacity=".8"/>
+  <text x="34" y="63" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Chaudière</text>
+  <text x="34" y="73" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">anti-bélier</text>
+  <text x="34" y="83" text-anchor="middle" font-family="Arial" font-size="7" fill="#cce0f8">air comprimé</text>
+  <rect x="70" y="50" width="64" height="40" rx="3" fill="#1550A0" opacity=".8"/>
+  <text x="102" y="63" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Vanne</text>
+  <text x="102" y="73" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">fermeture lente</text>
+  <text x="102" y="83" text-anchor="middle" font-family="Arial" font-size="7" fill="#cce0f8">t &gt; 2L/c</text>
+  <rect x="140" y="50" width="64" height="40" rx="3" fill="#1976D2" opacity=".8"/>
+  <text x="172" y="63" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Soupape</text>
+  <text x="172" y="73" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">décharge</text>
+  <text x="172" y="83" text-anchor="middle" font-family="Arial" font-size="7" fill="#cce0f8">by-pass calibré</text>
+  <rect x="210" y="50" width="66" height="40" rx="3" fill="#0A5090" opacity=".6"/>
+  <text x="243" y="63" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Ventouse</text>
+  <text x="243" y="73" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">admission air</text>
+  <text x="243" y="83" text-anchor="middle" font-family="Arial" font-size="7" fill="#cce0f8">dépression</text>
+  <rect x="8" y="96" width="264" height="46" rx="4" fill="#fff" stroke="#0A5090" stroke-width="1"/>
+  <text x="140" y="108" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A5090" font-weight="bold">Simulation réseau — EPANET (USEPA, gratuit)</text>
+  <text x="140" y="119" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Hardy-Cross : ΣQ_nœud = 0 · ΣΔH_maille = 0</text>
+  <text x="140" y="130" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Vitesse cible : 0,5–2 m/s · Pression service : 2–6 bar</text>
+  <text x="140" y="139" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">RDP = régulateur de pression (zones séparées) · Sectorisation</text>
+</svg>`,
+              exercice: {
+                enonce: 'Une conduite fonte Ø 300 mm de L = 1 200 m alimente un château d\'eau. V = 1,2 m/s. La célérité de l\'onde est c = 1 100 m/s. 1) Calculer la surpression due au coup de bélier lors d\'une fermeture instantanée. 2) Quel est le temps de fermeture minimal "lente" ? 3) Avec une chaudière anti-bélier de volume V_air = 3 m³ à pression 6 bar, la protection est-elle suffisante (ΔP max admissible = 10 bar) ?',
+                solution: '<strong>1) Surpression Joukowski :</strong> ΔP = ρ × c × ΔV = 1 000 × 1 100 × 1,2 = 1 320 000 Pa = <strong>13,2 bar</strong><br><strong>2) Fermeture lente :</strong> t_min = 2L/c = 2 × 1 200 / 1 100 = <strong>2,18 s</strong> minimum pour une fermeture "lente"<br><strong>3) Protection :</strong> La chaudière absorbe le choc en comprimant l\'air. Avec 6 bar initial et V_air = 3 m³, la surpression admissible est de 10 bar → ΔP max 13,2 bar > 10 bar → <strong>la chaudière seule est insuffisante</strong>. Il faut coupler chaudière + vanne à fermeture lente (2,2 s minimum).',
+              },
+            },
+            {
+              id: 'hyd-but-2',
+              titre: 'Systèmes de pompage — choix, régulation et variation de vitesse',
+              fiche: {
+                intro: 'Le choix et la régulation des pompes sont des compétences clés du technicien eau. La variation de vitesse (VSP) est la solution la plus efficace énergétiquement pour adapter le débit à la demande.',
+                points: [
+                  '📈 Courbe pompe H=f(Q) : HMT décroît quand Q augmente. Fournie par le fabricant pour la vitesse nominale N (tr/min)',
+                  '🎯 Point de fonctionnement : intersection courbe pompe / courbe réseau (H_rés = Δz + K·Q²)',
+                  '⚡ Variation de vitesse (VSP = Variable Speed Pump) : lois de similitude (affinité) :',
+                  '   Q₂/Q₁ = N₂/N₁ | H₂/H₁ = (N₂/N₁)² | P₂/P₁ = (N₂/N₁)³',
+                  '💰 Économies énergie : réduire N de 20 % → P réduite de (0,8)³ = 51 % → économie 49 %',
+                  '🔧 Variateur de fréquence (VFD/VSD) : convertisseur électronique qui modifie la fréquence d\'alimentation du moteur (50 Hz → 30 Hz = N réduite à 60 %)',
+                  '🔗 Multi-pompes : 2–3 pompes en parallèle avec mise en route en cascade. 1 pompe à débit faible, 2 pompes à débit fort',
+                  '🛡️ Protections pompe : pressostat anti-désamorçage | clapet anti-retour | soupape de sécurité | détection de vibrations (cavitation)',
+                ],
+                formules: [
+                  'Q₂ = Q₁ × (N₂/N₁) | H₂ = H₁ × (N₂/N₁)² | P₂ = P₁ × (N₂/N₁)³ — lois de similitude',
+                  'NPSH_dispo = (P_atm + ρgh_asp – P_vap) / (ρg) — NPSH disponible',
+                ],
+                retenir: 'VSP : P ∝ N³ → réduire N = économies cubed. VFD = variateur de fréquence. Multi-pompes en parallèle = flexibilité. Vérifier NPSH_dispo > NPSH_requis.',
+              },
+              flashcards: [
+                { q: 'Si on réduit la vitesse d\'une pompe de 20 %, quel est le gain de puissance ?', r: 'P₂/P₁ = (0,8)³ = 0,51 → la puissance est réduite de 49 % ! (Loi de similitude : P ∝ N³)', expl: 'C\'est la règle "cubique" : une réduction modeste de vitesse donne un gain énergétique très significatif. D\'où l\'intérêt des variateurs de vitesse pour les pompes tournant souvent à charge partielle.' },
+                { q: 'Qu\'est-ce qu\'un variateur de fréquence (VFD) ?', r: 'Convertisseur électronique (AC/DC/AC) qui modifie la fréquence d\'alimentation du moteur asynchrone. Fréquence < 50 Hz → vitesse réduite proportionnellement', expl: 'Le VFD permet une régulation continue de 0 à 100 % de la vitesse. Il améliore la durée de vie de la pompe (démarrages progressifs), réduit les coups de bélier et économise 20–50 % d\'énergie.' },
+                { q: 'Comment fonctionne un système multi-pompes en parallèle ?', r: 'Plusieurs pompes branchées en parallèle sur le même collecteur. La mise en route est en cascade : 1 pompe si débit faible, 2 ou 3 si débit élevé. La HMT reste sensiblement la même', expl: 'Avantage : flexibilité + redondance (panne d\'une pompe = service maintenu par les autres). Les pompes doivent avoir des courbes similaires pour une répartition équitable du débit.' },
+                { q: 'Qu\'est-ce que le NPSH et pourquoi est-il crucial ?', r: 'Net Positive Suction Head : charge disponible à l\'aspiration. Si NPSH_dispo < NPSH_requis → cavitation → bulles de vapeur → érosion, bruit, perte de débit', expl: 'La cavitation est provoquée par une pression trop basse à l\'aspiration (hauteur d\'aspiration trop grande, température élevée, pertes de charge trop importantes côté aspiration).' },
+                { q: 'Comment détermine-t-on le point de fonctionnement d\'une pompe ?', r: 'C\'est l\'intersection de la courbe H=f(Q) de la pompe et de la courbe H=f(Q) du réseau : H_rés = Δz_géodésique + K×Q²', expl: 'Si le réseau change (vanne fermée, pression statique plus haute), la courbe réseau monte → le point de fonctionnement se déplace vers un débit plus faible. La pompe peut même ne pas démarrer si Δz > HMT_max.' },
+                { q: 'Quelle protection est indispensable contre le désamorçage d\'une pompe ?', r: 'Pressostat basse pression côté aspiration (ou détecteur de débit) qui coupe l\'alimentation si la pression d\'aspiration est insuffisante (pas d\'eau = fonctionnement à sec = destruction rapide)', expl: 'Une pompe centrifuge fonctionnant à sec peut être détruite en quelques secondes (échauffement joint mécanique, grippage). Le pressostat est la protection de base obligatoire.' },
+              ],
+              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#E6EEF8"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#0A5090">Pompes — Lois de similitude &amp; Variation de vitesse</text>
+  <rect x="8" y="18" width="264" height="22" rx="4" fill="#0A5090"/>
+  <text x="140" y="28" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">Q₂/Q₁ = N₂/N₁ · H₂/H₁ = (N₂/N₁)² · P₂/P₁ = (N₂/N₁)³</text>
+  <text x="140" y="36" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#cce0f8">N réduite de 20 % → P réduite de (0,8)³ = 51 % → économie 49 % !</text>
+  <defs><marker id="ar16" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#0A5090"/></marker></defs>
+  <rect x="4" y="46" width="84" height="44" rx="4" fill="#0A5090" opacity=".85"/>
+  <text x="46" y="58" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">VFD / VSP</text>
+  <text x="46" y="68" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Variateur fréquence</text>
+  <text x="46" y="78" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">50 Hz → 30 Hz</text>
+  <text x="46" y="88" text-anchor="middle" font-family="Arial" font-size="7" fill="#cce0f8">−20–50 % énergie</text>
+  <rect x="98" y="46" width="84" height="44" rx="4" fill="#1550A0" opacity=".85"/>
+  <text x="140" y="58" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Multi-pompes</text>
+  <text x="140" y="68" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Parallèle + cascade</text>
+  <text x="140" y="78" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Q faible : 1 pompe</text>
+  <text x="140" y="88" text-anchor="middle" font-family="Arial" font-size="7" fill="#cce0f8">Q fort : 2–3 pompes</text>
+  <rect x="192" y="46" width="84" height="44" rx="4" fill="#1976D2" opacity=".85"/>
+  <text x="234" y="58" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">NPSH</text>
+  <text x="234" y="68" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Dispo &gt; Requis</text>
+  <text x="234" y="78" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">sinon cavitation</text>
+  <text x="234" y="88" text-anchor="middle" font-family="Arial" font-size="7" fill="#cce0f8">érosion + bruit</text>
+  <rect x="8" y="96" width="264" height="46" rx="4" fill="#fff" stroke="#0A5090" stroke-width="1"/>
+  <text x="140" y="108" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A5090" font-weight="bold">Point de fonctionnement</text>
+  <text x="140" y="119" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Intersection courbe pompe H=f(Q) × courbe réseau H_rés = Δz + K×Q²</text>
+  <text x="140" y="130" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Protection désamorçage : pressostat côté aspiration (base obligatoire)</text>
+  <text x="140" y="140" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Clapet anti-retour · Soupape sécu · Détection vibration (cavitation)</text>
+</svg>`,
+              exercice: {
+                enonce: 'Une pompe tourne à N₁ = 1 450 tr/min et fonctionne à Q₁ = 120 m³/h, H₁ = 40 m, P₁ = 22 kW. On réduit la vitesse à N₂ = 1 160 tr/min (facteur 0,8). 1) Calculer Q₂, H₂ et P₂. 2) Quelle économie d\'énergie annuelle (8 000 h/an, tarif 0,12 €/kWh) ? 3) Si le débit minimal du réseau est 80 m³/h, cette réduction de vitesse est-elle acceptable ?',
+                solution: '<strong>1) Lois de similitude :</strong><br>Q₂ = Q₁ × (0,8) = 120 × 0,8 = <strong>96 m³/h</strong><br>H₂ = H₁ × (0,8)² = 40 × 0,64 = <strong>25,6 m</strong><br>P₂ = P₁ × (0,8)³ = 22 × 0,512 = <strong>11,3 kW</strong><br><strong>2) Économie annuelle :</strong> ΔP = 22 − 11,3 = 10,7 kW · Énergie = 10,7 × 8 000 = 85 600 kWh/an · <strong>Économie = 85 600 × 0,12 = 10 272 €/an</strong><br><strong>3) Débit acceptable :</strong> Q₂ = 96 m³/h > 80 m³/h minimum → <strong>oui, acceptable</strong>. La réduction de vitesse satisfait le débit minimum requis.',
+              },
+            },
+          ]},
+
+          { id: 'instrumentation-but', name: 'Métrologie et instrumentation', ico: '⚙️', color: '#6B4226', colorl: '#F5EFE0', chapitres: [
+            {
+              id: 'ins-but-1',
+              titre: 'Métrologie des capteurs — précision, étalonnage et chaîne de mesure',
+              fiche: {
+                intro: 'La métrologie est la science de la mesure. En instrumentation industrielle, comprendre les notions de justesse, fidélité, incertitude et étalonnage est indispensable pour garantir la fiabilité des données exploitées.',
+                points: [
+                  '🎯 Justesse (biais) : écart systématique entre la mesure et la valeur vraie. Éliminé par étalonnage',
+                  '🔁 Fidélité (reproductibilité) : dispersion des mesures répétées dans les mêmes conditions. Liée aux erreurs aléatoires',
+                  '🎯 Exactitude : combinaison de justesse + fidélité. Un instrument juste et fidèle est exact',
+                  '📏 Incertitude de mesure (norme GUM) : incertitude type u + incertitude élargie U = k×u (k=2 pour 95 % de confiance)',
+                  '📋 Étalonnage : comparaison à un étalon de référence traçable au SI. Certificat COFRAC pour mesures réglementaires AEP',
+                  '🔗 Chaîne de mesure : capteur → conditionneur → convertisseur A/N → API → supervision. Chaque maillon ajoute une incertitude',
+                  '💧 Compteurs abonnés : classe B (standard), C, D (haute précision). Renouvellement tous les 10–15 ans (sous-comptage au vieillissement)',
+                  '🌡️ Vérification in situ : débitmètre EM installé → vérification par débitmètre ultrasons clamp-on temporaire (±2 %)',
+                ],
+                formules: [
+                  'U = k × u_c — incertitude élargie (k=2 → confiance 95 %)',
+                  'Classe de précision = erreur maximale admissible / plage de mesure × 100 (%)',
+                  'Signal 4–20 mA : valeur mesurée = (I – 4) × (Vmax – Vmin) / 16 + Vmin',
+                ],
+                retenir: 'Justesse = biais (étalonnage). Fidélité = dispersion (répétabilité). U = 2u = incertitude à 95 %. COFRAC obligatoire pour mesures AEP. Compteurs vieillissent → sous-comptent.',
+              },
+              flashcards: [
+                { q: 'Quelle est la différence entre justesse et fidélité en métrologie ?', r: 'Justesse = absence de biais (centrage sur la vraie valeur). Fidélité = faible dispersion des mesures répétées. Un instrument peut être fidèle mais pas juste (biais constant)', expl: 'Analogie cible de tir : juste = flèches centrées sur le milieu. Fidèle = flèches groupées. Exact = juste + fidèle (groupées au centre).' },
+                { q: 'Qu\'est-ce que l\'incertitude élargie U ?', r: 'U = k × u_c (k = 2 pour 95 % de confiance). C\'est l\'intervalle dans lequel se trouve la valeur vraie avec 95 % de probabilité', expl: 'Ex : mesure = 10,0 mg/L, u_c = 0,2 mg/L → U = 0,4 mg/L → résultat : 10,0 ± 0,4 mg/L à 95 %. En dessous de cette incertitude, la mesure n\'est pas significativement différente.' },
+                { q: 'Pourquoi les compteurs abonnés vieillissants sous-comptent-ils ?', r: 'Les mécanismes s\'usent et la turbine tourne moins vite pour le même débit → sous-enregistrement des petits débits (fuites nocturnes, petite consommation)', expl: 'Un compteur de classe B en fin de vie peut sous-mesurer de 10–20 % la consommation réelle. Ce sous-comptage contribue aux "pertes apparentes" et réduit le rendement apparent du réseau.' },
+                { q: 'Qu\'est-ce que l\'étalonnage et quand est-il obligatoire avec accréditation COFRAC ?', r: 'Étalonnage = comparaison à un étalon de référence traçable. COFRAC obligatoire pour les mesures réglementaires AEP (chlore résiduel, turbidité, pH, paramètres microbiologiques)', expl: 'Sans étalonnage COFRAC, les résultats d\'analyse ne peuvent pas servir à statuer sur la conformité réglementaire de l\'eau. Un simple étalonnage interne (non COFRAC) ne suffit pas.' },
+                { q: 'Comment interpréter un signal 4–20 mA reçu de 12 mA pour un capteur de pression 0–10 bar ?', r: 'Valeur = (12 – 4) × (10 – 0) / 16 + 0 = 8/16 × 10 = 5 bar', expl: '4 mA → 0 bar, 20 mA → 10 bar. Le signal est proportionnel dans la plage. Le 4 mA "plancher" (non nul) permet de détecter une coupure de câble (qui donnerait 0 mA ≠ 4 mA normal).' },
+                { q: 'Qu\'est-ce qu\'une vérification in situ d\'un débitmètre installé ?', r: 'On pose temporairement un débitmètre de référence (ultrasonique clamp-on) sur la conduite pour comparer sa mesure avec celle du débitmètre installé et déterminer la dérive', expl: 'Si l\'écart entre les deux est > 2–5 %, le débitmètre installé doit être recalibré ou remplacé. La vérification in situ évite le démontage coûteux du capteur et l\'interruption du service.' },
+              ],
+              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#F5EFE0"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#6B4226">Métrologie — Justesse · Fidélité · Exactitude</text>
+  <rect x="4" y="18" width="84" height="56" rx="4" fill="#6B4226" opacity=".12" stroke="#6B4226" stroke-width="1"/>
+  <text x="46" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#6B4226" font-weight="bold">Justesse</text>
+  <text x="46" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Biais = écart</text>
+  <text x="46" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">systématique</text>
+  <text x="46" y="61" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">→ Étalonnage</text>
+  <text x="46" y="71" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">flèches groupées</text>
+  <text x="46" y="80" text-anchor="middle" font-family="Arial" font-size="7" fill="#6B4226">mais décentrées</text>
+  <rect x="98" y="18" width="84" height="56" rx="4" fill="#6B4226" opacity=".12" stroke="#6B4226" stroke-width="1"/>
+  <text x="140" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#6B4226" font-weight="bold">Fidélité</text>
+  <text x="140" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Dispersion faible</text>
+  <text x="140" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">erreurs aléatoires</text>
+  <text x="140" y="61" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">→ Répétabilité</text>
+  <text x="140" y="71" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">flèches centrées</text>
+  <text x="140" y="80" text-anchor="middle" font-family="Arial" font-size="7" fill="#6B4226">mais dispersées</text>
+  <rect x="192" y="18" width="84" height="56" rx="4" fill="#6B4226" opacity=".25" stroke="#6B4226" stroke-width="1.5"/>
+  <text x="234" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#6B4226" font-weight="bold">Exactitude</text>
+  <text x="234" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Juste + fidèle</text>
+  <text x="234" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">U = k × u_c</text>
+  <text x="234" y="61" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">(k=2 → 95 %)</text>
+  <text x="234" y="71" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">flèches groupées</text>
+  <text x="234" y="80" text-anchor="middle" font-family="Arial" font-size="7" fill="#1B5E20" font-weight="bold">au centre ✓</text>
+  <rect x="8" y="80" width="264" height="62" rx="4" fill="#fff" stroke="#6B4226" stroke-width="1"/>
+  <text x="140" y="92" text-anchor="middle" font-family="Arial" font-size="8" fill="#6B4226" font-weight="bold">Signal 4–20 mA &amp; Chaîne de mesure</text>
+  <text x="140" y="103" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Valeur = (I − 4) × (Vmax − Vmin) / 16 + Vmin</text>
+  <text x="140" y="114" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">4 mA = min · 20 mA = max · 0 mA = coupure câble (alarme)</text>
+  <text x="140" y="125" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Chaîne : capteur → conditionneur → A/N → API → supervision</text>
+  <text x="140" y="136" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Étalonnage COFRAC obligatoire pour mesures réglementaires AEP</text>
+</svg>`,
+              exercice: {
+                enonce: 'Un capteur de turbidité 0–10 NTU transmet un signal 4–20 mA. Le technicien relève 11,5 mA. Par ailleurs, l\'étalonnage COFRAC indique u_c = 0,08 NTU (incertitude type). 1) Calculer la turbidité mesurée. 2) Calculer l\'incertitude élargie U (k = 2). 3) La valeur de 1 NTU (seuil alerte turbidité en AEP) est-elle dépassée ou non ?',
+                solution: '<strong>1) Turbidité :</strong> Valeur = (11,5 − 4) × (10 − 0) / 16 + 0 = 7,5 × 10 / 16 = 75 / 16 = <strong>4,69 NTU</strong><br><strong>2) Incertitude élargie :</strong> U = k × u_c = 2 × 0,08 = <strong>0,16 NTU</strong><br>Résultat : 4,69 ± 0,16 NTU à 95 % de confiance.<br><strong>3) Dépassement :</strong> 4,69 NTU >> 1 NTU → <strong>oui, largement dépassé</strong>. Même en prenant la borne basse (4,69 − 0,16 = 4,53 NTU), la valeur est très au-dessus du seuil. Action requise : investigation de la source de turbidité + possible restriction de distribution.',
+              },
+            },
+          ]},
+        ],
+      },
+    ],
+  },
+
+
+  'gemapi': {
+    name: 'GEMAPI — Milieux aquatiques & Prévention des inondations',
+    sigle: 'GEMAPI',
+    ico: '🏞️',
+    color: '#0E6BA8',
+    colorl: '#E3F2FD',
+    niveau: 'Professionnel',
+    organisme: 'Formation continue — Collectivités',
+    desc: 'Compétence obligatoire des EPCI à fiscalité propre depuis 2018 : gestion des milieux aquatiques et prévention des inondations. 20 chapitres du diagnostic territorial à la conduite de projet.',
+    annees: [
+      {
+        id: 'an1',
+        name: 'Programme complet',
+        matieres: [
+
+          /* ══ MODULE 1 — FONDAMENTAUX ══ */
+          {
+            id: 'gem-m1',
+            name: 'Fondamentaux',
+            ico: '📖',
+            color: '#0E6BA8',
+            colorl: '#E3F2FD',
+            chapitres: [
+
+              {
+                id: 'gem-1',
+                titre: 'Origine, principes et objectifs de la GEMAPI',
+                fiche: {
+                  intro: 'La GEMAPI (Gestion des Milieux Aquatiques et Prévention des Inondations) associe deux domaines interdépendants : le fonctionnement des milieux aquatiques et la prévention des inondations. Compétence obligatoire des EPCI à fiscalité propre depuis le 1er janvier 2018, elle impose de comprendre le territoire avant d\'intervenir : bassin versant, système fluvial, solidarité amont-aval, causes des désordres.',
+                  points: [
+                    '📐 GEMAPI = Gestion des Milieux Aquatiques + Prévention des Inondations — missions 1°, 2°, 5° et 8° de l\'art. L.211-7 du Code de l\'environnement',
+                    '🏛️ Compétence obligatoire des EPCI à fiscalité propre depuis le 1er janvier 2018 (loi MAPTAM 2014 · loi NOTRe 2015 · ajustements loi 30 déc. 2017)',
+                    '🌊 Crue ≠ inondation : crue = hausse du débit (peut rester dans le lit mineur) ; inondation = submersion temporaire d\'un espace habituellement hors d\'eau',
+                    '⚠️ Mécanismes distincts : débordement, ruissellement, remontée de nappe, submersion marine — chaque mécanisme demande une solution adaptée',
+                    '🗺️ Bassin versant : territoire dont les eaux convergent vers un exutoire commun — les limites topographiques ne décrivent pas tous les transferts (nappes, réseaux)',
+                    '🏡 La rivière est un système : lit mineur, lit majeur, berges, ripisylve, annexes fluviales, sédiments — une intervention en un point peut modifier les écoulements ailleurs',
+                    '📊 Risque = f(aléa, exposition, vulnérabilité) — on peut agir sur l\'aléa, sur l\'exposition ou sur la vulnérabilité des enjeux',
+                    '🤝 Solidarité amont-aval : accélérer l\'évacuation locale peut aggraver la situation en aval — le moment d\'arrivée des crues est aussi important que le volume',
+                    '🌱 Zones humides : fonctions multiples (rétention, biodiversité) mais capacité dépendant de l\'état, des connexions et de la topographie — l\'image de "l\'éponge" est insuffisante',
+                    '🏗️ Activités humaines modificatrices : imperméabilisation, drainage, remblais, rectification des lits — chaque transformation doit être analysée localement et à l\'aval',
+                    '🔬 Démarche en 7 étapes : Décrire → Recueillir → Formuler hypothèses → Vérifier mécanismes → Définir objectifs → Comparer variantes → Suivre résultats',
+                    '🎯 Objectif premier : comprendre avant d\'intervenir — préserver ce qui fonctionne est une forme de gestion à part entière',
+                  ],
+                  formules: [
+                    'Volume précipité : Vp = P × A (P en m, A en m²)',
+                    'Ex. 30 mm sur 12 km² → Vp = 0,030 × 12 000 000 = 360 000 m³',
+                    'Volume écoulé estimé (hypothèse) : Ve = Ce × Vp → ex. 0,25 × 360 000 = 90 000 m³',
+                    'Ratio stockage : 15 000 / 90 000 × 100 ≈ 16,7 % — ne préjuge pas de la réduction du débit de pointe',
+                    'Risque = f(aléa, exposition, vulnérabilité) — relation conceptuelle, pas numérique universelle',
+                  ],
+                  retenir: 'GEMAPI = 4 missions L.211-7 + compétence EPCI depuis 2018 · Crue ≠ inondation · Risque = aléa + exposition + vulnérabilité · Bassin versant = échelle essentielle · Comprendre avant d\'intervenir.',
+                },
+                flashcards: [
+                  { q: 'Que signifie GEMAPI ?', r: 'Gestion des Milieux Aquatiques et Prévention des Inondations', expl: 'Ces deux dimensions sont interdépendantes : une intervention sur les milieux peut modifier les écoulements, et réciproquement. Elles s\'étudient ensemble.' },
+                  { q: 'Depuis quand et par qui la GEMAPI est-elle exercée ?', r: 'Depuis le 1er janvier 2018 par les EPCI à fiscalité propre (loi MAPTAM 2014)', expl: 'Communautés de communes, d\'agglomération, urbaines et métropoles. La loi NOTRe 2015 a précisé l\'attribution. La loi de 2017 a ajouté des possibilités de délégation à un EPAGE ou EPTB.' },
+                  { q: 'Quelles sont les 4 missions GEMAPI de l\'art. L.211-7 ?', r: '1° Aménagement de bassin · 2° Entretien de cours d\'eau · 5° Défense contre inondations · 8° Protection des écosystèmes', expl: 'La numérotation (1, 2, 5, 8) correspond aux alinéas de l\'article. Tout ce qui concerne l\'eau ne relève pas automatiquement de la GEMAPI.' },
+                  { q: 'Quelle est la différence entre une crue et une inondation ?', r: 'Crue = hausse du débit (peut rester dans le lit mineur) ; inondation = submersion temporaire d\'un espace habituellement hors d\'eau', expl: 'Identifier le mécanisme est indispensable. Une solution adaptée à un débordement peut être inefficace contre une remontée de nappe.' },
+                  { q: 'Comment définit-on le risque d\'inondation ?', r: 'Risque = f(aléa, exposition, vulnérabilité) — relation conceptuelle, pas numérique universelle', expl: 'On peut réduire le risque en agissant sur les écoulements (aléa), sur la localisation des enjeux (exposition) ou sur leur résistance à l\'eau (vulnérabilité).' },
+                  { q: 'Qu\'est-ce qu\'un bassin versant et pourquoi est-ce l\'échelle essentielle ?', r: 'Territoire dont toutes les eaux convergent vers un même exutoire — les causes peuvent être situées en dehors de la zone sinistrée', expl: 'Un grand bassin contient des sous-bassins emboîtés. Les limites topographiques ne couvrent pas toujours les nappes et les réseaux. Travailler à la seule échelle communale peut déplacer le problème.' },
+                  { q: 'Que désigne la ripisylve et quel est son rôle ?', r: 'Végétation bordant les cours d\'eau — ombrage, habitats, maintien de certaines berges', expl: 'Sa gestion doit être adaptée au site. Supprimer toute la végétation comme tout conserver sans examen sont deux erreurs symétriques.' },
+                  { q: 'Pourquoi le volume précipité ne permet-il pas de déduire directement le débit de pointe ?', r: 'Il manque la distribution temporelle de la pluie, les pertes, les stockages et les temps de transfert', expl: 'Ex. : 25 mm sur 8 km² = 200 000 m³ précipités. Un ratio volume stocké / volume écoulé ne préjuge pas de la réduction du débit de pointe.' },
+                  { q: 'Quelles sont les 7 étapes du diagnostic territorial GEMAPI ?', r: 'Décrire → Recueillir → Formuler hypothèses → Vérifier → Définir objectifs → Comparer variantes → Suivre résultats', expl: 'Distinguer faits, hypothèses et conclusions à chaque étape. Plusieurs variantes doivent être comparées, y compris une intervention limitée ou une adaptation progressive.' },
+                  { q: 'Quelle est la compétence clé à maîtriser après le chapitre 1 ?', r: 'Expliquer pourquoi une intervention locale doit être replacée dans le fonctionnement du bassin versant et l\'organisation du territoire', expl: 'Une note prudente et bien argumentée est plus utile qu\'une solution affirmée sans démonstration. La gestion n\'implique pas nécessairement des travaux.' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#E3F2FD"/>
+  <text x="140" y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#0E6BA8">4 missions GEMAPI — art. L.211-7 CE</text>
+  <rect x="8" y="20" width="30" height="118" fill="#0E6BA8" rx="4"/>
+  <text x="23" y="88" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold" transform="rotate(-90,23,88)">L.211-7</text>
+  <rect x="44" y="22" width="228" height="26" fill="#fff" rx="4" opacity=".85"/>
+  <text x="56" y="33" font-family="Arial" font-size="10" font-weight="bold" fill="#0E6BA8">1°</text>
+  <text x="70" y="33" font-family="Arial" font-size="9" fill="#1A3A5C">Aménagement de bassin hydrographique</text>
+  <text x="56" y="43" font-family="Arial" font-size="8" fill="#5A7A9C">Planification, études, aménagements structurants</text>
+  <rect x="44" y="52" width="228" height="26" fill="#B3D9F5" rx="4"/>
+  <text x="56" y="63" font-family="Arial" font-size="10" font-weight="bold" fill="#0E6BA8">2°</text>
+  <text x="70" y="63" font-family="Arial" font-size="9" fill="#1A3A5C">Entretien des cours d'eau, canaux, plans d'eau</text>
+  <text x="56" y="73" font-family="Arial" font-size="8" fill="#5A7A9C">Végétation, embâcles, accès riverains</text>
+  <rect x="44" y="82" width="228" height="26" fill="#fff" rx="4" opacity=".85"/>
+  <text x="56" y="93" font-family="Arial" font-size="10" font-weight="bold" fill="#C05A10">5°</text>
+  <text x="70" y="93" font-family="Arial" font-size="9" fill="#1A3A5C">Défense contre les inondations et contre la mer</text>
+  <text x="56" y="103" font-family="Arial" font-size="8" fill="#5A7A9C">Digues, systèmes d'endiguement, zones d'expansion</text>
+  <rect x="44" y="112" width="228" height="26" fill="#B3D9F5" rx="4"/>
+  <text x="56" y="123" font-family="Arial" font-size="10" font-weight="bold" fill="#1A7A4A">8°</text>
+  <text x="70" y="123" font-family="Arial" font-size="9" fill="#1A3A5C">Protection des écosystèmes et zones humides</text>
+  <text x="56" y="133" font-family="Arial" font-size="8" fill="#5A7A9C">Ripisylve, continuité écologique, restauration</text>
+</svg>`,
+                exercice: {
+                  enonce: '(1) Une rivière voit son débit augmenter fortement mais l\'eau reste dans le lit mineur. Y a-t-il une inondation par débordement ?\n(2) Un secteur prairal connaissait des débordements ; il accueille désormais 20 logements. Les crues n\'ont pas changé. Pourquoi le risque a-t-il augmenté ?\n(3) Calcule le volume précipité pour 25 mm sur 8 km². Peut-on déduire directement le débit maximal ?\n(4) Un rapport affirme : « La restauration de 5 ha de zone humide supprimera les inondations du village. » Pourquoi cette conclusion est-elle insuffisante ?',
+                  solution: '<strong>(1)</strong> Il y a une crue, mais pas d\'inondation par débordement : l\'eau ne quitte pas le lit mineur.<br><strong>(2)</strong> Les enjeux exposés ont augmenté (personnes et biens). Le risque évolue sans modification de l\'aléa : c\'est l\'exposition qui a changé.<br><strong>(3)</strong> Vp = 0,025 × 8 000 000 = <strong>200 000 m³</strong>. Non : il manque la distribution temporelle, les pertes, les stockages et les temps de transfert.<br><strong>(4)</strong> La surface seule ne caractérise pas l\'effet hydraulique. Il faut le volume mobilisable, les connexions, l\'état initial. Le terme « supprimera » garantit un résultat non démontré.',
+                },
+              },
+
+              {
+                id: 'gem-2',
+                titre: 'Les quatre missions de la GEMAPI',
+                fiche: {
+                  intro: 'Le périmètre de la GEMAPI est défini par quatre missions de l\'art. L.211-7 du Code de l\'environnement : 1° aménagement de bassin, 2° entretien des cours d\'eau, 5° défense contre les inondations, 8° protection et restauration des milieux. Qualifier une opération demande d\'analyser ses objectifs, son fonctionnement et ses effets — pas seulement son apparence ou son titre.',
+                  points: [
+                    '📐 Mission 1° : aménagement d\'un bassin ou d\'une fraction de bassin — raisonner sur l\'organisation des écoulements et les interactions entre secteurs',
+                    '💧 Mission 2° : entretien et aménagement des cours d\'eau, canaux, lacs — entretenir ≠ nettoyer ; l\'obligation des riverains (art. L.215-14) n\'est pas supprimée par la GEMAPI',
+                    '🛡️ Mission 5° : défense contre les inondations et contre la mer — le système d\'endiguement est un ensemble fonctionnel (art. R.562-13), pas une digue isolée',
+                    '🌱 Mission 8° : protection et restauration des milieux aquatiques, zones humides et ripisylve — justification propre, sans nécessairement un bénéfice anti-inondation démontré',
+                    '🔢 Les numéros 1, 2, 5, 8 ne se suivent pas car la GEMAPI ne reprend qu\'une partie des missions du I de l\'art. L.211-7',
+                    '🔄 Un même projet peut relever de plusieurs missions — identifier les objectifs avant les numéros, pas l\'inverse',
+                    '⚖️ Volume utile ≠ volume géométrique : une partie peut être déjà occupée, inaccessible ou mobilisée à un moment défavorable',
+                    '🏗️ Compétence ≠ propriété ≠ droits d\'intervention ≠ procédures — 4 questions distinctes pour tout projet',
+                    '🚫 Frontières GEMAPI : eaux pluviales, érosion agricole, espèces envahissantes, AEP/assainissement ne sont pas automatiquement GEMAPI',
+                    '🛑 Protection (mission 5°) : niveau de protection ≠ hauteur visible de la digue — l\'eau peut entrer par un passage routier, une buse ou un autre chemin',
+                    '📊 Calcul de stockage : ΔV = (Q_ent − Q_sort) × Δt — un dépassement de capacité peut survenir si les conditions durent',
+                    '🎯 Qualifier une mission est une étape du montage, pas une autorisation générale d\'intervenir — procédures et autorisations restent nécessaires',
+                  ],
+                  formules: [
+                    'Variation de stockage : ΔV = (Q_ent − Q_sort) × Δt (Q en m³/s, Δt en s)',
+                    'Ex. (8 − 5) m³/s × 3 600 s = 10 800 m³ stockés en 1 h',
+                    'Ex. (4 − 3) m³/s × 7 200 s = 7 200 m³ sur 2 h → reste 12 000 − 7 200 = 4 800 m³ disponibles',
+                    'Risque résiduel = risque qui subsiste malgré la protection (événement > niveau prévu, défaillance, autre mécanisme)',
+                  ],
+                  retenir: 'GEMAPI = missions 1° + 2° + 5° + 8° de l\'art. L.211-7 · Plusieurs missions possibles pour un projet · Compétence ≠ propriété ≠ autorisation · ΔV = (Q_ent − Q_sort) × Δt · Qualifier ≠ autoriser.',
+                },
+                flashcards: [
+                  { q: 'Quelles sont les 4 missions GEMAPI et leurs numéros ?', r: '1° Aménagement de bassin · 2° Entretien des cours d\'eau · 5° Défense contre les inondations · 8° Protection/restauration des milieux', expl: 'Ces numéros correspondent aux alinéas de l\'art. L.211-7 du Code de l\'environnement. Ils ne se suivent pas car la GEMAPI ne reprend qu\'une partie de la liste.' },
+                  { q: 'Pourquoi les numéros de missions GEMAPI ne se suivent-ils pas (1, 2, 5, 8) ?', r: 'L\'art. L.211-7 liste plusieurs domaines ; la GEMAPI n\'en reprend qu\'une partie', expl: 'Les autres missions de l\'article ne deviennent pas GEMAPI parce qu\'elles concernent aussi l\'eau. Le périmètre est limité et défini par le I bis du même article.' },
+                  { q: 'Que couvre la mission 2° et quelle obligation subsiste pour les riverains ?', r: 'Entretien et aménagement des cours d\'eau — l\'obligation d\'entretien régulier du riverain (art. L.215-14) n\'est pas supprimée', expl: 'Entretenir ≠ nettoyer intégralement. Un arbre tombé peut offrir des abris ; un amas peut obstruer un ouvrage. L\'analyse doit précéder la décision d\'intervenir.' },
+                  { q: 'Qu\'est-ce qu\'un système d\'endiguement (mission 5°) ?', r: 'Un ensemble fonctionnel associant plusieurs ouvrages et équipements — pas une digue considérée isolément (art. R.562-13)', expl: 'L\'eau peut entrer par un passage routier, une buse ou un autre chemin même si la digue est en bon état. Il faut analyser l\'ensemble du système.' },
+                  { q: 'Un projet de restauration (mission 8°) doit-il prouver un bénéfice anti-inondation ?', r: 'Non — la restauration écologique a sa propre justification au titre de la mission 8°', expl: 'Les quatre missions ont leur propre objet. Un projet peut relever de la GEMAPI sans produire de réduction mesurable du risque d\'inondation.' },
+                  { q: 'Quelle est la différence entre protéger et restaurer (mission 8°) ?', r: 'Protéger = préserver contre une dégradation ; restaurer = agir sur une altération existante', expl: 'Ex. : éviter la déconnexion d\'un bras = protection ; rétablir une connexion supprimée = restauration. Une action préventive peut éviter des interventions futures plus coûteuses.' },
+                  { q: 'Comment calculer la variation de stockage d\'un espace lors d\'une crue ?', r: 'ΔV = (Q_ent − Q_sort) × Δt (Q en m³/s, Δt en secondes)', expl: 'Ex. : (8-5) × 3 600 = 10 800 m³ en 1h. Si les mêmes conditions durent 2h : 3 × 7 200 = 21 600 m³ — la capacité de 20 000 m³ serait dépassée.' },
+                  { q: 'Quelles sont les 4 questions distinctes avant tout projet GEMAPI ?', r: 'Compétence · Propriété · Droits d\'intervention · Procédures environnementales', expl: 'Qualifier une mission ne dispense pas de vérifier : qui possède les terrains, sur quelle base on peut intervenir, et quelles démarches réglementaires s\'appliquent.' },
+                  { q: 'Qu\'est-ce que le risque résiduel dans une protection (mission 5°) ?', r: 'Le risque qui subsiste malgré les mesures : événement dépassant le niveau prévu, défaillance, autre mécanisme d\'entrée d\'eau', expl: 'On ne peut pas affirmer qu\'un ouvrage « protège contre toutes les crues ». La protection est définie pour des conditions hydrauliques précises.' },
+                  { q: 'Quelle est la compétence à maîtriser après le chapitre 2 ?', r: 'Justifier le rattachement d\'une opération aux missions GEMAPI tout en identifiant ce que cette qualification ne résout pas encore', expl: 'Une note professionnelle doit montrer qu\'on sait relier une mission à un objectif concret, distinguer les responsabilités et signaler les points à vérifier.' },
+                ],
+                schema: `<svg viewBox="0 0 300 172" xmlns="http://www.w3.org/2000/svg" style="max-width:300px;width:100%">
+  <rect width="300" height="172" rx="8" fill="#E3F2FD"/>
+  <text x="150" y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#0E6BA8">4 missions GEMAPI — art. L.211-7 CE</text>
+  <rect x="8" y="20" width="284" height="30" fill="#0E6BA8" rx="4"/>
+  <text x="22" y="31" font-family="Arial" font-size="9" font-weight="bold" fill="#fff">1°</text>
+  <text x="36" y="31" font-family="Arial" font-size="9" fill="#E8F4FF">Aménagement d'un bassin hydrographique</text>
+  <text x="22" y="44" font-family="Arial" font-size="8" fill="#B3D4F0">Organisation des écoulements · Stockage · Interactions territoriales</text>
+  <rect x="8" y="54" width="284" height="30" fill="#1565A8" rx="4"/>
+  <text x="22" y="65" font-family="Arial" font-size="9" font-weight="bold" fill="#fff">2°</text>
+  <text x="36" y="65" font-family="Arial" font-size="9" fill="#E8F4FF">Entretien et aménagement des cours d'eau</text>
+  <text x="22" y="78" font-family="Arial" font-size="8" fill="#B3D4F0">Canaux · Lacs · Accès · Végétation · Embâcles</text>
+  <rect x="8" y="88" width="284" height="30" fill="#C05A10" rx="4"/>
+  <text x="22" y="99" font-family="Arial" font-size="9" font-weight="bold" fill="#fff">5°</text>
+  <text x="36" y="99" font-family="Arial" font-size="9" fill="#FFF0E8">Défense contre les inondations et contre la mer</text>
+  <text x="22" y="112" font-family="Arial" font-size="8" fill="#FFD4B0">Système d'endiguement · Niveau de protection · Risque résiduel</text>
+  <rect x="8" y="122" width="284" height="30" fill="#1A7A4A" rx="4"/>
+  <text x="22" y="133" font-family="Arial" font-size="9" font-weight="bold" fill="#fff">8°</text>
+  <text x="36" y="133" font-family="Arial" font-size="9" fill="#E8FFF2">Protection et restauration des milieux aquatiques</text>
+  <text x="22" y="146" font-family="Arial" font-size="8" fill="#B0F0C8">Zones humides · Ripisylve · Continuité écologique</text>
+  <rect x="8" y="156" width="284" height="12" fill="#E8F0F8" rx="3"/>
+  <text x="150" y="165" text-anchor="middle" font-family="Arial" font-size="8" fill="#536987">Compétence ≠ propriété ≠ autorisation · Procédures toujours requises</text>
+</svg>`,
+                exercice: {
+                  enonce: '(1) Associe chaque opération à sa mission principale : (a) restaurer une zone humide dégradée, (b) définir un programme d\'entretien d\'une rivière, (c) gérer un système d\'endiguement, (d) organiser un stockage à l\'échelle d\'un sous-bassin.\n(2) Un propriétaire dit : « La GEMAPI m\'a libéré de toute obligation d\'entretien. » Est-ce exact ?\n(3) Capacité dispo = 12 000 m³. Pendant 2 h : Q_ent = 4 m³/s, Q_sort = 3 m³/s. Calcule ΔV. La capacité est-elle dépassée ?\n(4) Une digue est rehaussée mais un passage routier voisin reste plus bas. Le quartier est-il protégé au niveau de la digue ?',
+                  solution: '<strong>(1)</strong> (a) 8° — restauration de milieu humide · (b) 2° — entretien du cours d\'eau · (c) 5° — défense contre les inondations · (d) 1°, avec examen éventuel du 5° selon l\'objectif.<br><strong>(2)</strong> Non. La compétence GEMAPI ne supprime pas l\'obligation d\'entretien régulier du riverain (art. L.215-14). Il faut distinguer obligation privée et programme public.<br><strong>(3)</strong> ΔV = (4 − 3) × 2 × 3 600 = <strong>7 200 m³</strong>. Non dépassé : 12 000 − 7 200 = 4 800 m³ restent disponibles dans les hypothèses de l\'exercice.<br><strong>(4)</strong> Non. L\'eau peut entrer par le passage ou tout autre chemin. Il faut analyser le système complet et ses conditions de fonctionnement.',
+                },
+              },
+
+              {
+                id: 'gem-3',
+                titre: 'Les compétences connexes à la GEMAPI',
+                fiche: {
+                  intro: 'Les écoulements forment un système physique continu, mais les responsabilités sont réparties entre plusieurs acteurs. Une même inondation peut concerner une rivière, un réseau pluvial, une route, une station d\'épuration et des logements. Ce chapitre explique comment la GEMAPI s\'articule avec l\'eau potable, l\'assainissement, les eaux pluviales, l\'urbanisme, la voirie, la sécurité civile et les documents de planification.',
+                  points: [
+                    '🔗 Compétence connexe = domaine distinct de la GEMAPI, mais lié par le fonctionnement physique de l\'eau ou l\'aménagement du territoire',
+                    '⚠️ Méthode : qualifier le fonctionnement avant de répartir les interventions — le lieu du dommage ne suffit pas à identifier la cause ni le responsable',
+                    '💧 Eau potable : captages, traitement, réservoirs, canalisations — équipements pouvant être exposés aux crues ; coordination utile mais pas fusion des compétences',
+                    '🏭 Assainissement collectif : réseau séparatif ≠ absence de mélange (branchements défectueux) ; réseau unitaire = volumes majorés par temps de pluie ; milieu récepteur = conditions de rejet à examiner',
+                    '🏠 SPANC : contrôle des installations ANC — distinct de la GEMAPI même si une rivière est voisine ; contrôle de service ≠ police administrative',
+                    '🌧️ GEPU (eaux pluviales urbaines) : collecte, stockage, exutoires — un clapet anti-retour bloque le retour de rivière mais peut aussi empêcher l\'évacuation du quartier',
+                    '🌊 Ruissellement : 4° du I de l\'art. L.211-7 — n\'est pas l\'un des quatre items GEMAPI ; examiner l\'objet de l\'action, pas seulement l\'origine de l\'eau',
+                    '🏗️ Urbanisme : PLU/PLUi agissent sur les surfaces, obstacles, expositions ; PPRI = servitude d\'État encadrant constructions en zone inondable ; carte hydraulique ≠ document réglementaire',
+                    '🛣️ Voirie et franchissements : ponts, buses — effets hydrauliques sans mission GEMAPI ; propriétaire de l\'ouvrage ≠ gestionnaire de la rivière ; étude commune ≠ transfert de compétence',
+                    '🚨 Crise : prévention ≠ prévision ≠ alerte ≠ sauvegarde ≠ secours — fonctions distinctes ; GEMAPI apporte des infos sur ouvrages et niveaux, pas l\'ensemble des décisions de sécurité civile',
+                    '📋 Documents : GEMAPI = compétence · SDAGE/SAGE = planification · PPRI = réglementaire · PCS/PICS = crise · PAPI = programme d\'actions (pas une compétence)',
+                    '🤝 Gouvernance : matrice de responsabilités — qui définit, commande, décide, possède, exploite, entretient, finance, reçoit les données ; réunion commune ≠ fusion de compétences',
+                  ],
+                  formules: [
+                    'Volume accumulé : ΔV = Q × Δt (Q en m³/s, Δt en s)',
+                    'Ex. exutoire fermé 40 min : 0,15 × 2 400 = 360 m³ — si dispo = 250 m³ → déficit = 110 m³',
+                    'Ex. stockage pluvial 30 min : 0,20 × 1 800 = 360 m³ — dépasse un dispo de 300 m³ de 60 m³',
+                    'Déficit = ΔV_accumulé − V_disponible → indique si la capacité est suffisante dans les hypothèses',
+                  ],
+                  retenir: 'Compétence connexe ≠ GEMAPI · Qualifier le fonctionnement avant de répartir · Clapet = solution partielle · PAPI = programme, pas compétence · Réunion commune ≠ fusion · ΔV = Q × Δt.',
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce qu\'une compétence connexe à la GEMAPI ?', r: 'Un domaine distinct mais lié à la GEMAPI par le fonctionnement physique de l\'eau ou l\'aménagement du territoire', expl: 'Ex. : l\'assainissement collectif traite les eaux usées — sa gestion ne devient pas GEMAPI parce qu\'un réseau se rejette dans une rivière. Il faut analyser les interactions sans fusionner les responsabilités.' },
+                  { q: 'Quel item de l\'art. L.211-7 concerne la maîtrise des eaux pluviales et du ruissellement ?', r: 'Le 4° — qui n\'est pas l\'un des quatre items constitutifs de la GEMAPI (1°, 2°, 5°, 8°)', expl: 'Certaines actions contre les inondations par ruissellement peuvent relever de la GEMAPI selon leur objet. Il faut examiner l\'action, pas seulement l\'origine de l\'eau.' },
+                  { q: 'Quelle loi a modifié le transfert eau potable/assainissement aux communautés de communes ?', r: 'La loi du 11 avril 2025 a supprimé le transfert obligatoire pour les communautés de communes (sans remettre en cause les transferts déjà réalisés)', expl: 'La situation varie selon la catégorie d\'intercommunalité et l\'organisation existante. Vérifier la situation locale avant de conclure.' },
+                  { q: 'Un réseau séparatif garantit-il l\'absence de mélange eaux usées/eaux pluviales ?', r: 'Non — des branchements mal réalisés, des infiltrations et des défauts peuvent perturber le fonctionnement', expl: 'Même avec des réseaux distincts, des débordements ou des mesures de dilution au milieu récepteur peuvent indiquer des mélanges à l\'intérieur du réseau.' },
+                  { q: 'Pourquoi un clapet anti-retour ne suffit-il pas à éviter l\'inondation côté quartier ?', r: 'En se fermant, il empêche aussi l\'eau du quartier de sortir — il faut examiner le stockage disponible et les alternatives', expl: 'Ex. : ΔV = 0,15 × 2400 = 360 m³ en 40 min. Si la capacité de stockage est de 250 m³, il manque 110 m³ même avec un clapet. Le diagnostic doit examiner l\'ensemble du système.' },
+                  { q: 'Quelle est la différence entre un PAPI et une compétence ?', r: 'Un PAPI est un programme d\'actions de prévention — il structure une démarche, mais ne constitue pas une compétence', expl: 'Le PAPI peut associer connaissance du risque, surveillance, urbanisme, réduction de vulnérabilité et aménagements portés par différents maîtres d\'ouvrage. Le confondre avec une compétence entraîne des erreurs sur qui peut décider.' },
+                  { q: 'Comment calcule-t-on le volume accumulé si un exutoire est bloqué ?', r: 'ΔV = Q × Δt (Q moyen en m³/s, Δt en secondes)', expl: 'Ex. : 0,20 m³/s × 30 × 60 = 360 m³. Si la capacité disponible est 300 m³, le déficit est 60 m³. Ce calcul suppose un débit constant et l\'absence d\'autres échanges — c\'est un ordre de grandeur.' },
+                  { q: 'Quelles sont les 5 fonctions à distinguer en situation de crise ?', r: 'Prévention · Prévision · Alerte · Sauvegarde · Secours', expl: 'La GEMAPI apporte des informations sur les ouvrages et niveaux. Elle ne prend pas automatiquement en charge l\'ensemble des décisions de sécurité civile, qui relèvent du maire ou du préfet selon l\'échelle.' },
+                  { q: 'Un document d\'étude hydraulique modifie-t-il automatiquement le PLU ?', r: 'Non — une carte technique constitue une information ; sa portée réglementaire dépend de démarches spécifiques et d\'un statut approuvé', expl: 'Il faut toujours identifier la finalité, la date, les hypothèses, le statut et l\'échelle du document. Un plan de hauteurs d\'eau et un PPRI approuvé ont des portées très différentes.' },
+                  { q: 'Qu\'est-ce que la CLE dans un SAGE ?', r: 'La commission locale de l\'eau — réunit les acteurs pour élaborer et suivre le SAGE', expl: 'La CLE n\'est pas la structure porteuse (qui assure des moyens administratifs/techniques), ni les maîtres d\'ouvrage réalisant les actions. Ces trois niveaux ne doivent pas être confondus.' },
+                ],
+                schema: `<svg viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg" style="max-width:320px;width:100%">
+  <rect width="320" height="190" rx="8" fill="#EEF4FB"/>
+  <text x="160" y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#0E3A6E">Domaines connexes à la GEMAPI</text>
+  <rect x="8" y="20" width="145" height="24" fill="#1565C0" rx="4"/>
+  <text x="80" y="35" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff">💧 Eau potable</text>
+  <rect x="165" y="20" width="148" height="24" fill="#00838F" rx="4"/>
+  <text x="239" y="35" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff">🏭 Assainissement collectif</text>
+  <rect x="8" y="48" width="145" height="24" fill="#00695C" rx="4"/>
+  <text x="80" y="63" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff">🏠 ANC / SPANC</text>
+  <rect x="165" y="48" width="148" height="24" fill="#2E7D32" rx="4"/>
+  <text x="239" y="63" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff">🌧️ Eaux pluviales (GEPU)</text>
+  <rect x="8" y="76" width="145" height="24" fill="#6A1B9A" rx="4"/>
+  <text x="80" y="91" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff">🏗️ Urbanisme / PLU / PPRI</text>
+  <rect x="165" y="76" width="148" height="24" fill="#AD1457" rx="4"/>
+  <text x="239" y="91" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff">🛣️ Voirie / Franchissements</text>
+  <rect x="8" y="104" width="145" height="24" fill="#C62828" rx="4"/>
+  <text x="80" y="119" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff">🚨 Sécurité civile / Crise</text>
+  <rect x="165" y="104" width="148" height="24" fill="#E65100" rx="4"/>
+  <text x="239" y="119" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff">📋 SDAGE / SAGE / PAPI</text>
+  <rect x="8" y="133" width="305" height="20" fill="#0E3A6E" rx="4"/>
+  <text x="160" y="146" text-anchor="middle" font-family="Arial" font-size="8" fill="#D0E8FF">GEMAPI = compétence · Interactions à analyser, pas à fusionner</text>
+  <rect x="8" y="157" width="148" height="28" fill="#E8F0FC" rx="4"/>
+  <text x="82" y="168" text-anchor="middle" font-family="Arial" font-size="8" fill="#1A3A6E">Clé : qualifier le</text>
+  <text x="82" y="179" text-anchor="middle" font-family="Arial" font-size="8" fill="#1A3A6E">fonctionnement d'abord</text>
+  <rect x="165" y="157" width="148" height="28" fill="#E8F0FC" rx="4"/>
+  <text x="239" y="168" text-anchor="middle" font-family="Arial" font-size="8" fill="#1A3A6E">ΔV = Q × Δt</text>
+  <text x="239" y="179" text-anchor="middle" font-family="Arial" font-size="8" fill="#1A3A6E">Ex. 0,15 × 2400 = 360 m³</text>
+</svg>`,
+                exercice: {
+                  enonce: '(1) Une rue est inondée alors que la rivière reste dans son lit. Peut-on conclure que la GEMAPI n\'est pas concernée ?\n(2) Une STEP est endommagée par une crue. Son adaptation relève-t-elle automatiquement de la GEMAPI ?\n(3) Associe chaque besoin à son document : (a) préparer l\'organisation communale face à une crise, (b) prescriptions réglementaires liées à l\'inondation, (c) objectifs locaux de gestion de l\'eau, (d) programme global de prévention.\n(4) Un dispositif reçoit 0,20 m³/s pendant 30 min sans possibilité de sortie. Volume accumulé ? Un disponible de 300 m³ est-il suffisant ?\n(5) Un document annonce le transfert obligatoire eau/assainissement à une CC en 2026. Peut-on l\'utiliser sans vérification ?',
+                  solution: '<strong>(1)</strong> Non. Le niveau de la rivière peut empêcher l\'évacuation d\'un réseau sans qu\'elle déborde. Il faut examiner tous les mécanismes avant de répartir les responsabilités.<br><strong>(2)</strong> Non. Il faut distinguer la gestion de l\'installation (service assainissement), sa réduction de vulnérabilité et une éventuelle action territoriale GEMAPI. Plusieurs domaines peuvent être concernés.<br><strong>(3)</strong> (a) PCS — (b) PPRI (si approuvé) — (c) SAGE (si existant) — (d) PAPI.<br><strong>(4)</strong> ΔV = 0,20 × 30 × 60 = <strong>360 m³</strong>. Non, 300 m³ est insuffisant — dépassement de 60 m³. Il faut analyser où cette eau irait.<br><strong>(5)</strong> Non. La loi du 11 avril 2025 a supprimé ce transfert obligatoire pour les CC. Il faut vérifier la situation locale et les transferts déjà réalisés.',
+                },
+              },
+
+              {
+                id: 'gem-4',
+                titre: 'Les acteurs de la GEMAPI et leurs responsabilités',
+                fiche: {
+                  intro: 'Qui peut décider, qui réalise les études et les travaux, qui finance, qui contrôle et qui assure la gestion ensuite ? La présence de nombreux acteurs n\'est pas un problème en soi. La difficulté apparaît lorsque leurs rôles sont mal définis, lorsque des décisions restent sans responsable ou lorsque chacun suppose qu\'un autre interviendra. Pour un technicien, connaître les acteurs signifie comprendre leurs pouvoirs, leurs missions, leurs limites et les documents qui organisent leur intervention.',
+                  points: [
+                    '🔑 Responsabilité = 4 dimensions distinctes : institutionnelle (compétence), opérationnelle (tâche), contractuelle (contrat), juridique en cas de dommage (à ne pas déduire du titre seul)',
+                    '🏗️ Fonctions d\'un projet : autorité compétente · MOA · AMO · MOE · entreprise · propriétaire · gestionnaire · financeur · service instructeur · service de contrôle',
+                    '🏛️ EPCI à fiscalité propre : GEMAPI obligatoire depuis 2018 — 3 dimensions à distinguer : décision politique / organisation administrative / expertise technique',
+                    '🌊 EPAGE : échelle hydrographique opérationnelle (art. L.213-12) · EPTB : cohérence et solidarité à l\'échelle d\'un bassin — pas de hiérarchie automatique entre eux',
+                    '🗺️ Syndicat mixte : vérifier acte de création, statuts en vigueur, membres, territoire et missions — l\'expression « syndicat de rivière » est insuffisante',
+                    '👷 Maître d\'ouvrage : définit le programme et l\'enveloppe, organise les décisions en 9 étapes successives — définir le besoin précisément avant de commander',
+                    '📐 AMO ≠ MOE : l\'assistance ne confère pas le pouvoir de décider ni de signer pour le MOA ; interfaces techniques entre spécialistes à coordonner explicitement',
+                    '🚧 Entreprise : exécute les prestations contractuelles — toute modification doit suivre la chaîne de décision définie et être tracée (comptes rendus, photos, plans de récolement)',
+                    '🏢 Services de l\'État : DDT/DREAL selon les sujets — instruction ≠ conception ; autorisation ≠ garantie d\'absence de défaut — bon interlocuteur à identifier par question',
+                    '🌿 OFB : connaissance, expertise, police administrative et judiciaire — conseil technique ≠ autorisation ; avis favorable ≠ procédures achevées',
+                    '💶 Financement : agences de l\'eau, État, région, département — accord financier ≠ autorisation de travaux ; reste à charge = coût − Σ aides (sous conditions : éligibilité, plafond, cumul, calendrier)',
+                    '🤝 Propriétaire ≠ exploitant — l\'art. L.215-14 maintient l\'obligation d\'entretien du riverain ; concertation ≠ accord foncier ni autorisation',
+                  ],
+                  formules: [
+                    'Reste à charge = Coût total prévisionnel − Σ aides attribuées',
+                    'Ex. 500 000 − 200 000 − 100 000 = 200 000 € de reste à charge',
+                    'Attention : vérifier dépenses éligibles, assiette HT ou TTC, plafonds, règles de cumul et calendrier de versement',
+                    'Résultat technique exploitable = données + méthode + hypothèses + incertitudes + domaine d\'utilisation',
+                  ],
+                  retenir: 'Responsabilité ≠ compétence ≠ autorisation · Fonctions à distribuer : MOA, AMO, MOE, entreprise, gestionnaire · EPAGE/EPTB : vérifier les statuts · Financement ≠ autorisation · Riverain conserve L.215-14.',
+                },
+                flashcards: [
+                  { q: 'Quelles sont les 4 dimensions de la responsabilité à distinguer ?', r: 'Institutionnelle (compétence) · Opérationnelle (tâche) · Contractuelle (contrat) · Juridique en cas de dommage', expl: 'Attribuer une tâche dans un tableau de projet ne suffit pas à régler toutes les questions de responsabilité juridique. Il faut analyser les faits, les obligations et les liens de causalité.' },
+                  { q: 'Quelle est la différence entre un EPAGE et un EPTB ?', r: 'EPAGE = scale hydrographique opérationnelle (missions de prévention et de gestion) · EPTB = cohérence et solidarité à l\'échelle d\'un bassin', expl: 'Il ne faut pas imaginer de hiérarchie automatique entre eux. Les relations et les missions réelles doivent être examinées dans leurs statuts et actes. Un syndicat peut dans certains cas réunir les deux qualités sur des parties distinctes.' },
+                  { q: 'Un bureau d\'études peut-il engager directement l\'entreprise au nom du syndicat ?', r: 'Non — pas sur la seule base de sa mission d\'étude. Il faut vérifier les pouvoirs et contrats applicables', expl: 'La recommandation technique ne donne pas la capacité d\'engager une dépense. L\'AMO aide le MOA mais ne se substitue pas à lui pour les décisions et les actes contractuels.' },
+                  { q: 'Un accord de financement permet-il de démarrer les travaux ?', r: 'Non — financement et procédures réglementaires sont distincts et doivent être suivis séparément', expl: 'Inversement, une autorisation ne garantit pas l\'obtention d\'une aide. Il faut aussi vérifier les droits fonciers, les conditions de démarrage du marché et les conditions de l\'aide.' },
+                  { q: 'Comment calculer le reste à charge d\'une opération ?', r: 'Reste à charge = Coût prévisionnel − Σ aides (ex. 500 000 − 200 000 − 100 000 = 200 000 €)', expl: 'Ce calcul arithmétique ne suffit pas. Il faut vérifier les dépenses éligibles, l\'assiette HT/TTC, les plafonds de chaque aide, les règles de cumul, le calendrier de versement et la capacité d\'avance.' },
+                  { q: 'La GEMAPI supprime-t-elle l\'obligation d\'entretien du propriétaire riverain ?', r: 'Non — l\'art. L.215-14 maintient l\'obligation d\'entretien régulier du riverain', expl: 'L\'exercice de la compétence GEMAPI par un EPCI ou une structure de bassin ne se substitue pas automatiquement aux droits et obligations des propriétaires riverains sur les cours d\'eau non domaniaux.' },
+                  { q: 'Quelle est la différence entre un avis de l\'OFB et une autorisation ?', r: 'L\'OFB peut donner un conseil technique ou un avis dans une procédure, mais ses attributions sont distinctes d\'une décision administrative d\'autorisation', expl: 'Il faut distinguer conseil technique, avis dans une procédure, contrôle et décision administrative. Une remarque favorable lors d\'une visite ne remplace pas les décisions nécessaires.' },
+                  { q: 'Qu\'est-ce qu\'un AMO et en quoi diffère-t-il du maître d\'œuvre ?', r: 'AMO = assistant du MOA pour préparer et suivre ses décisions · MOE = conception et suivi technique des travaux selon le contrat', expl: 'Une mission d\'assistance ne donne pas automatiquement le pouvoir de décider ou de signer. AMO et MOE peuvent parfois être assurés par le même organisme, mais leurs missions restent distinctes.' },
+                  { q: 'Pourquoi la réception des travaux ne signifie-t-elle pas la fin du projet ?', r: 'L\'entretien, l\'exploitation et le suivi commencent ou se poursuivent — il faut prévoir accès, personnel, inspections, moyens financiers et conservation des documents', expl: 'Une opération peut être techniquement réussie et difficile à gérer si personne n\'a préparé la gestion ultérieure. La gestion future doit être planifiée dès la phase de conception.' },
+                  { q: 'Qu\'est-ce que la CLE et en quoi diffère-t-elle de la structure porteuse du SAGE ?', r: 'CLE = instance de concertation et d\'élaboration du SAGE (réunit les acteurs) · Structure porteuse = personne morale apportant les moyens (peut passer des marchés)', expl: 'La CLE ne dispose pas d\'une personnalité juridique propre. Elle ne peut pas commander des travaux directement. Il faut identifier l\'organisme porteur pour chaque acte juridique.' },
+                ],
+                schema: `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" style="max-width:320px;width:100%">
+  <rect width="320" height="200" rx="8" fill="#EEF4FB"/>
+  <text x="160" y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#0E3A6E">Acteurs d'un projet GEMAPI</text>
+  <rect x="110" y="20" width="100" height="24" fill="#0E3A6E" rx="5"/>
+  <text x="160" y="35" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold">Maître d'ouvrage</text>
+  <line x1="160" y1="44" x2="60" y2="68" stroke="#0E3A6E" stroke-width="1.5"/>
+  <line x1="160" y1="44" x2="160" y2="68" stroke="#0E3A6E" stroke-width="1.5"/>
+  <line x1="160" y1="44" x2="260" y2="68" stroke="#0E3A6E" stroke-width="1.5"/>
+  <rect x="8" y="68" width="104" height="22" fill="#1565C0" rx="4"/>
+  <text x="60" y="82" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff">AMO</text>
+  <rect x="108" y="68" width="104" height="22" fill="#1565C0" rx="4"/>
+  <text x="160" y="82" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff">Maître d'œuvre</text>
+  <rect x="208" y="68" width="104" height="22" fill="#1565C0" rx="4"/>
+  <text x="260" y="82" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff">Entreprise(s)</text>
+  <rect x="8" y="102" width="145" height="22" fill="#2E7D32" rx="4"/>
+  <text x="80" y="116" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff">Propriétaire · Exploitant</text>
+  <rect x="165" y="102" width="147" height="22" fill="#2E7D32" rx="4"/>
+  <text x="238" y="116" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff">Gestionnaire · Usagers</text>
+  <rect x="8" y="136" width="100" height="22" fill="#C62828" rx="4"/>
+  <text x="58" y="150" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff">État / DDT / DREAL</text>
+  <rect x="112" y="136" width="96" height="22" fill="#C62828" rx="4"/>
+  <text x="160" y="150" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff">OFB</text>
+  <rect x="212" y="136" width="100" height="22" fill="#C62828" rx="4"/>
+  <text x="262" y="150" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff">Agences · Financeurs</text>
+  <rect x="8" y="170" width="305" height="24" fill="#0E3A6E" rx="4"/>
+  <text x="160" y="179" text-anchor="middle" font-family="Arial" font-size="8" fill="#D0E8FF">Financement ≠ autorisation · Autorité compétente ≠ propriétaire</text>
+  <text x="160" y="189" text-anchor="middle" font-family="Arial" font-size="8" fill="#D0E8FF">Reste à charge = Coût − Σ aides (vérifier conditions)</text>
+</svg>`,
+                exercice: {
+                  enonce: '(1) Un bureau d\'études conclut qu\'une variante est techniquement préférable. Peut-il engager directement l\'entreprise pour le compte du syndicat ?\n(2) Une agence attribue une aide. Le dossier réglementaire n\'est pas achevé. L\'aide permet-elle de commencer les travaux ?\n(3) Un propriétaire accepte un chantier sur sa parcelle agricole louée. Pourquoi faut-il aussi examiner la situation de l\'exploitant ?\n(4) Un ouvrage a été inspecté par un service de l\'État. Le gestionnaire peut-il arrêter ses propres inspections ?\n(5) Un CR indique : « Tout le monde est d\'accord pour la variante B. » Pourquoi cette phrase est-elle insuffisante ?\n(6) Un agent envoie : « Problème important sur le bassin. » Quelles informations manquent ?',
+                  solution: '<strong>(1)</strong> Non — pas sur la seule base de sa mission d\'étude. Il faut vérifier les pouvoirs et contrats. La recommandation technique ne donne pas la capacité d\'engager une dépense.<br><strong>(2)</strong> Non. Financement et procédures réglementaires sont distincts. Il faut aussi vérifier les droits fonciers et conditions de démarrage du marché.<br><strong>(3)</strong> L\'usage de la parcelle et les droits d\'exploitation peuvent être affectés : accès, cultures, calendrier, conditions d\'exploitation. Un accord avec le propriétaire ne règle pas toutes les conséquences pour l\'exploitant.<br><strong>(4)</strong> Non. Le contrôle administratif ne remplace pas les obligations de surveillance du gestionnaire. Les fonctions se complètent.<br><strong>(5)</strong> Elle ne précise pas les participants, leur pouvoir de décision, les réserves, les conditions ni les actes attendus. Il faut distinguer consensus en réunion et décision formelle.<br><strong>(6)</strong> Manquent : localisation précise, heure, description du phénomène, son évolution, mesures/photos disponibles, actions déjà réalisées, incertitudes et besoin de décision.',
+                },
+              },
+
+              {
+                id: 'gem-5',
+                titre: 'Transfert, délégation et coopération en GEMAPI',
+                fiche: {
+                  intro: 'Lorsqu\'une intercommunalité confie une action à une autre structure, que lui confie-t-elle exactement : une compétence, son exercice, une opération ou une prestation ? Ces situations peuvent se ressembler sur le terrain, mais elles n\'ont pas les mêmes conséquences sur les décisions, les financements, les contrats et les obligations de chacun. Ce chapitre clôt le module 1 de la formation GEMAPI.',
+                  points: [
+                    '🔄 3 montages à distinguer : Transfert (la structure devient compétente) · Délégation (exercice confié, compétence conservée) · Prestation (tâche contractuelle, pas de compétence)',
+                    '🏗️ Exercice direct : l\'autorité compétente agit avec ses propres moyens et marchés — commander une étude à un BE ne lui transfère pas la compétence GEMAPI',
+                    '📋 Transfert (art. L.5211-61 CGCT) : peut porter sur certaines missions, partie du territoire, plusieurs structures sur parties distinctes — dessaisissement du cédant dans ce périmètre',
+                    '🤝 Délégation : exercice confié au nom et pour le compte du délégant, par convention — seules structures habilitées (EPAGE, EPTB, syndicats du VII bis de L.213-12)',
+                    '📊 Convention de délégation (art. R.1111-1) : objet, territoire, durée, objectifs mesurables, moyens, décisions de chaque partie, financement, suivi, modifications, fin',
+                    '⚙️ Conséquences matérielles du transfert : ouvrages, équipements, contrats, études, données, accès, personnels, procédures en cours — mise à disposition ≠ transfert de propriété (art. L.1321-1 CGCT)',
+                    '🤝 Coopération sans transfert : partage de données, groupement de commandes, organisation commune de MOA (art. L.2422-12 CCP) — ne fusionnent pas les compétences',
+                    '💶 Clé de répartition pondérée : Ci = B × (α × Pi/PT + β × Ai/AT + γ × Li/LT) — les coefficients doivent totaliser 1 et être justifiés, pas calqués sur un territoire voisin',
+                    '📅 Durée cohérente avec le cycle complet de l\'action — une convention courte sur une opération pluriannuelle peut créer une rupture au mauvais moment',
+                    '⚠️ « Délégation » = terme polysémique : délégation de compétence ≠ délégation de signature ≠ délégation d\'attributions ≠ délégation de service public — toujours préciser « de quoi, entre qui, sur quel fondement »',
+                    '🎯 Suivi utile : actions prévues/réalisées, écarts justifiés, dépenses, résultats, difficultés, décisions à prendre — nombre de réunions ≠ indicateur d\'efficacité',
+                    '📝 Fin de convention : prévoir suites des dossiers en cours, contrats, archives, données, obligations de suivi, dépenses restantes — échéance ≠ clôture automatique',
+                  ],
+                  formules: [
+                    'Clé pondérée : Ci = B × (α × Pi/PT + β × Ai/AT + γ × Li/LT) avec α + β + γ = 1',
+                    'Ex. B = 240 000 € · coefficients 50 %, 30 %, 20 % · membre à 40 %/30 %/25 %',
+                    'Ci = 240 000 × (0,50×0,40 + 0,30×0,30 + 0,20×0,25) = 240 000 × 0,34 = 81 600 €',
+                    'Ex. clé simple : C = 180 000 × 0,35 = 63 000 € (si la clé s\'applique à l\'ensemble de l\'assiette)',
+                  ],
+                  retenir: 'Transfert ≠ délégation ≠ prestation · Délégation = exercice confié, compétence conservée · Mise à disposition ≠ propriété · Groupement de commandes ≠ fusion des compétences · Ci = B × clé pondérée.',
+                },
+                flashcards: [
+                  { q: 'Quelle est la différence entre transfert et délégation de compétence ?', r: 'Transfert : la structure bénéficiaire devient compétente dans le périmètre · Délégation : l\'exercice est confié par convention, la compétence reste chez le délégant', expl: 'Dans le transfert, l\'organisme cédant est dessaisi dans ce périmètre. Dans la délégation, il conserve la compétence et en contrôle l\'exercice via la convention.' },
+                  { q: 'Un bureau d\'études qui réalise une étude GEMAPI devient-il titulaire de la compétence ?', r: 'Non — il exécute une prestation définie par un contrat. La compétence reste à l\'autorité compétente', expl: 'Commander une étude hydraulique, un inventaire ou un diagnostic ne transfère jamais la compétence. Le contrat doit définir précisément le livrable attendu.' },
+                  { q: 'Que signifie « dessaisissement » dans le cadre d\'un transfert ?', r: 'L\'organisme qui a transféré ne peut plus considérer qu\'il conserve librement le même pouvoir d\'intervention dans le périmètre transféré', expl: 'Il peut rester membre de la structure bénéficiaire, y participer financièrement et exercer ses autres compétences — mais pas exercer parallèlement la mission transférée.' },
+                  { q: 'Quels éléments une convention de délégation doit-elle préciser (art. R.1111-1) ?', r: 'Missions déléguées, territoire, durée, objectifs, moyens, décisions de chaque partie, financement, suivi/indicateurs, modifications, fin de convention', expl: 'Une expression comme « l\'EPAGE s\'occupe de la rivière » ne permet pas de répondre à ces questions. Chaque sujet doit être résolu pour que la convention soit opérationnelle.' },
+                  { q: 'Comment calculer la contribution d\'un membre selon une clé pondérée ?', r: 'Ci = B × (α × Pi/PT + β × Ai/AT + γ × Li/LT), avec α + β + γ = 1', expl: 'Ex. B = 240 000 €, coefficients 50/30/20 %, membre à 40/30/25 % : Ci = 240 000 × (0,20 + 0,09 + 0,05) = 240 000 × 0,34 = 81 600 €. La formule est un exemple pédagogique, pas une règle nationale.' },
+                  { q: 'Un groupement de commandes fusionne-t-il les compétences des acheteurs ?', r: 'Non — il organise un achat commun. Les compétences et les décisions qui suivent l\'étude restent distinctes', expl: 'Ex. : un syndicat GEMAPI et un service d\'eaux pluviales commandent une étude commune. L\'étude peut partager des hypothèses, mais chaque partenaire décide ensuite dans son domaine.' },
+                  { q: 'Comment distinguer « délégation de compétence » et « délégation de signature » ?', r: 'Délégation de compétence = exercice d\'une mission confié entre deux personnes publiques · Délégation de signature = possibilité de signer certains actes au sein d\'une institution', expl: 'Le mot « délégation » couvre aussi délégation d\'attributions et délégation de service public — des mécanismes totalement différents. Toujours préciser « de quoi, entre qui, sur quel fondement ».' },
+                  { q: 'Qu\'est-ce que la mise à disposition de biens lors d\'un transfert (art. L.1321-1 CGCT) ?', r: 'Les biens utilisés pour la compétence sont affectés à la structure bénéficiaire selon un procès-verbal contradictoire — sans changement automatique de propriétaire', expl: 'Un ouvrage mis à disposition reste la propriété de son propriétaire d\'origine. L\'inventaire, les actes et les conventions précisent ce qu\'il en est pour chaque bien.' },
+                  { q: 'Pourquoi la durée d\'une délégation doit-elle être cohérente avec le cycle de l\'action ?', r: 'Une convention courte sur une opération pluriannuelle peut créer une rupture au mauvais moment (études en cours, chantier, suivi)', expl: 'La durée n\'est pas seulement une formalité administrative — elle doit couvrir le cycle complet : études, travaux, réception et suivi post-travaux.' },
+                  { q: 'Qu\'est-ce qu\'un bilan de suivi utile pour une convention ?', r: 'Actions prévues/réalisées, écarts justifiés, dépenses, résultats obtenus, difficultés, décisions à prendre — pas seulement une liste de réunions', expl: 'Produire une étude (réalisation) ≠ disposer d\'un diagnostic permettant de décider (résultat). Un livrable inexploitable ne remplit pas l\'objectif de la convention.' },
+                ],
+                schema: `<svg viewBox="0 0 320 195" xmlns="http://www.w3.org/2000/svg" style="max-width:320px;width:100%">
+  <rect width="320" height="195" rx="8" fill="#EEF4FB"/>
+  <text x="160" y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#0E3A6E">Modes d'organisation GEMAPI</text>
+  <rect x="8" y="20" width="93" height="105" fill="#0E3A6E" rx="5"/>
+  <text x="54" y="34" text-anchor="middle" font-family="Arial" font-size="9" fill="#7DD" font-weight="bold">TRANSFERT</text>
+  <text x="54" y="47" text-anchor="middle" font-family="Arial" font-size="8" fill="#D0E8FF">Structure B</text>
+  <text x="54" y="58" text-anchor="middle" font-family="Arial" font-size="8" fill="#D0E8FF">devient</text>
+  <text x="54" y="69" text-anchor="middle" font-family="Arial" font-size="8" fill="#D0E8FF">compétente</text>
+  <text x="54" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#B0D4FF">A dessaisie</text>
+  <text x="54" y="93" text-anchor="middle" font-family="Arial" font-size="8" fill="#B0D4FF">dans périmètre</text>
+  <text x="54" y="106" text-anchor="middle" font-family="Arial" font-size="7" fill="#8ABBFF">L.5211-61 CGCT</text>
+  <rect x="113" y="20" width="93" height="105" fill="#1A6B3A" rx="5"/>
+  <text x="159" y="34" text-anchor="middle" font-family="Arial" font-size="9" fill="#7FE" font-weight="bold">DÉLÉGATION</text>
+  <text x="159" y="47" text-anchor="middle" font-family="Arial" font-size="8" fill="#C8F0D8">B exerce au nom</text>
+  <text x="159" y="58" text-anchor="middle" font-family="Arial" font-size="8" fill="#C8F0D8">et p/compte de A</text>
+  <text x="159" y="71" text-anchor="middle" font-family="Arial" font-size="8" fill="#A8E0C0">A conserve la</text>
+  <text x="159" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#A8E0C0">compétence</text>
+  <text x="159" y="95" text-anchor="middle" font-family="Arial" font-size="8" fill="#A8E0C0">+ contrôle</text>
+  <text x="159" y="106" text-anchor="middle" font-family="Arial" font-size="7" fill="#80D0A0">R.1111-1 CGCT</text>
+  <rect x="218" y="20" width="94" height="105" fill="#7A3A10" rx="5"/>
+  <text x="265" y="34" text-anchor="middle" font-family="Arial" font-size="9" fill="#FFD" font-weight="bold">PRESTATION</text>
+  <text x="265" y="47" text-anchor="middle" font-family="Arial" font-size="8" fill="#FFE8C0">C exécute une</text>
+  <text x="265" y="58" text-anchor="middle" font-family="Arial" font-size="8" fill="#FFE8C0">tâche définie</text>
+  <text x="265" y="69" text-anchor="middle" font-family="Arial" font-size="8" fill="#FFE8C0">par contrat</text>
+  <text x="265" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#FFD4A0">A reste seul</text>
+  <text x="265" y="93" text-anchor="middle" font-family="Arial" font-size="8" fill="#FFD4A0">compétent</text>
+  <text x="265" y="106" text-anchor="middle" font-family="Arial" font-size="7" fill="#FFBF80">Code commande</text>
+  <rect x="8" y="130" width="305" height="22" fill="#2D5A8E" rx="4"/>
+  <text x="160" y="144" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#D0E8FF">Groupement de commandes : achat commun ≠ fusion des compétences</text>
+  <rect x="8" y="157" width="148" height="32" fill="#E8F0FC" rx="4"/>
+  <text x="82" y="169" text-anchor="middle" font-family="Arial" font-size="8" fill="#1A3A6E" font-weight="bold">Clé de répartition</text>
+  <text x="82" y="181" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#1A3A6E">Ci = B × (α·Pi/PT + β·Ai/AT + γ·Li/LT)</text>
+  <rect x="162" y="157" width="150" height="32" fill="#E8F0FC" rx="4"/>
+  <text x="237" y="169" text-anchor="middle" font-family="Arial" font-size="8" fill="#1A3A6E" font-weight="bold">Mise à disposition</text>
+  <text x="237" y="181" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#1A3A6E">≠ transfert de propriété (L.1321-1)</text>
+</svg>`,
+                exercice: {
+                  enonce: '(1) Une EPCI commande un inventaire à un BE. Le BE devient-il compétent en GEMAPI ?\n(2) Une structure habilitée exerce des missions au nom et p/compte d\'une interco, pour durée définie, avec contrôle conventionnel. Quel mécanisme ?\n(3) Une interco appartient à deux bassins versants. Peut-on envisager une organisation différente sur chacun ?\n(4) Deux acteurs commandent ensemble une étude hydraulique et pluviale. L\'un devient-il compétent pour les missions de l\'autre ?\n(5) Budget commun 180 000 €. Un membre représente 35 % de la clé approuvée. Quelle est sa contribution ?\n(6) Une convention se termine le 31 déc. Un suivi écologique doit encore durer 2 ans. Que prévoir ?',
+                  solution: '<strong>(1)</strong> Non — il réalise une prestation contractuelle. La compétence reste à l\'EPCI.<br><strong>(2)</strong> Une délégation de compétence, sous réserve que les conditions juridiques (structures habilitées, convention conforme à R.1111-1) soient effectivement remplies.<br><strong>(3)</strong> Oui — L.5211-61 CGCT permet des répartitions territoriales. Il faut définir précisément les périmètres, les missions et les interfaces entre structures.<br><strong>(4)</strong> Non. L\'achat commun (groupement de commandes) doit être distingué de la compétence et des décisions qui suivront l\'étude.<br><strong>(5)</strong> C = 180 000 × 0,35 = <strong>63 000 €</strong>. Sous réserve que les 180 000 € constituent bien l\'assiette et que la clé s\'y applique entièrement.<br><strong>(6)</strong> Identifier l\'acteur chargé de poursuivre le suivi, vérifier les contrats, les données, les obligations associées. Formaliser la suite avant l\'échéance — elle ne clôt pas automatiquement tous les dossiers.',
+                },
+              },
+
+              {
+                id: 'gem-6',
+                titre: 'Unités, conversions et analyse dimensionnelle',
+                fiche: {
+                  intro: 'Module 2 — outils scientifiques. Une erreur de facteur 1 000 peut transformer un débit modeste en crue majeure sur une feuille de calcul. Une confusion mm/m produit un volume faux. Ce chapitre pose les bases : manipuler des grandeurs avec leurs unités, convertir sans erreur, distinguer débit, vitesse et volume, vérifier l\'homogénéité d\'une formule et présenter un résultat avec une précision adaptée.',
+                  points: [
+                    '🔢 Grandeur = valeur numérique × unité — « 150 » sans unité ne dit pas s\'il s\'agit de 150 L/s, 150 m³/h ou 150 m³/s',
+                    '📏 Longueurs : 1 km = 1 000 m · 1 m = 1 000 mm — unité plus petite → valeur numérique plus grande',
+                    '📐 Surfaces : facteur carré — 1 m² = 10 000 cm² · 1 ha = 10 000 m² (carré 100 m×100 m) · 1 km² = 100 ha',
+                    '💧 Volumes : facteur cube — 1 m³ = 1 000 L · 1 L = 1 dm³ · 1 mL = 1 cm³',
+                    '⏱️ Durées : 1 h = 3 600 s · 1 j = 86 400 s — 1,5 h = 1 h 30 min (pas 1 h 05)',
+                    '🌊 Débits : Q = V/t · 1 m³/s = 1 000 L/s = 3 600 m³/h · 1 L/s = 3,6 m³/h — convertir le volume ET le temps',
+                    '🌧️ Pluie : 1 mm sur 1 m² = 1 L · Vp[m³] = 10 × P[mm] × A[ha] — le facteur 10 est une conversion d\'unités, pas un coefficient hydrologique',
+                    '📊 Intensité : imoy = P ÷ Δt — deux événements peuvent avoir la même intensité moy. avec une répartition temporelle très différente',
+                    '⚡ Débit et vitesse : Q = A × v̄ (A section en m², v̄ vitesse moy. normale) — vitesse ≠ débit ≠ volume : grandeurs de natures différentes',
+                    '🔬 Préfixes : M = 10⁶ · k = 10³ · m (milli) = 10⁻³ · µ = 10⁻⁶ — confondre milli et méga = facteur 10⁹ d\'écart',
+                    '📉 Analyse dimensionnelle : [Q] = L³T⁻¹ · Q = Av homogène ✓ · Q = A+v non homogène ✗ — homogène ≠ physiquement correct : le modèle doit aussi être vérifié',
+                    '🎯 Présenter un résultat : valeur + unité + définition + contexte + hypothèses — précision adaptée aux données, pas au nombre de décimales de la calculatrice',
+                  ],
+                  formules: [
+                    'Q = \\dfrac{V}{t} \\quad (V \\text{ en m}^3\\text{, } t \\text{ en s} \\Rightarrow Q \\text{ en m}^3\\text{/s})',
+                    'V_p = P \\times A \\;\\Rightarrow\\; V_p[\\text{m}^3] = \\dfrac{P[\\text{mm}] \\times A[\\text{m}^2]}{1\\,000} = 10 \\times P[\\text{mm}] \\times A[\\text{ha}]',
+                    'i_{\\mathrm{moy}} = \\dfrac{P[\\text{mm}]}{\\Delta t[\\text{h}]} \\quad \\text{(résultat en mm/h — hauteur tombée reste P)}',
+                    'Q = A \\cdot \\bar{v} \\quad (A \\text{ section en m}^2,\\ \\bar{v} \\text{ vitesse moy. normale à la section en m/s})',
+                    's = \\dfrac{\\Delta z}{L_h} \\quad \\Rightarrow\\; \\times 100 = \\% \\;,\\; \\times 1000 = \\text{‰}',
+                    'p = \\rho g h \\quad (\\rho \\approx 1\\,000\\,\\text{kg/m}^3,\\ g \\approx 9{,}81\\,\\text{m/s}^2 \\Rightarrow 1\\,\\text{m} \\approx 9\\,810\\,\\text{Pa})',
+                    '1\\,\\text{m/s} = 3{,}6\\,\\text{km/h} \\qquad 1\\,\\text{L/s} = 3{,}6\\,\\text{m}^3/\\text{h} \\qquad 1\\,\\text{m}^3 = 1\\,000\\,\\text{L}',
+                    '\\text{Homogénéité : } [Q = Av] = \\mathsf{L}^2 \\cdot \\mathsf{LT}^{-1} = \\mathsf{L}^3\\mathsf{T}^{-1} = [Q] \\;\\checkmark',
+                  ],
+                  retenir: 'Grandeur = valeur × unité · 1 ha = 10 000 m² · 1 m³ = 1 000 L · 1 h = 3 600 s · Q = Av · V = Qt · Vp[m³] = 10 × P[mm] × A[ha] · imoy = P/Δt · homogène ≠ correct.',
+                },
+                flashcards: [
+                  { q: 'Pourquoi un résultat sans unité est-il insuffisant ?', r: 'Une valeur numérique sans unité est ambiguë : 150 L/s, 150 m³/h et 150 m³/s représentent des écoulements très différents', expl: 'Un résultat exploitable associe une valeur, une unité, une définition et un contexte. Même avec une unité, il peut manquer des informations : est-ce une profondeur, une altitude, une différence de niveau ?' },
+                  { q: 'Pourquoi 1 m² ≠ 100 cm² ?', r: 'La surface combine deux longueurs : (100 cm)² = 10 000 cm². Il faut élever le facteur au carré', expl: 'Erreur classique : appliquer le facteur de longueur directement aux surfaces. 1 m² = 100² = 10 000 cm². De même 1 m³ = 100³ = 1 000 000 cm³.' },
+                  { q: 'Comment convertir une hauteur de pluie en volume précipité ?', r: 'Vp[m³] = P[m] × A[m²] · raccourci : Vp[m³] = 10 × P[mm] × A[ha]', expl: 'Le facteur 10 vient de 0,001 × 10 000 = 10 (conversion mm→m et ha→m²). Ce n\'est pas un coefficient hydrologique. Ex. 22 mm sur 8 ha : Vp = 10 × 22 × 8 = 1 760 m³.' },
+                  { q: 'Quelle différence entre hauteur de pluie et intensité ?', r: 'Intensité = hauteur par unité de temps — imoy = P/Δt (ex. 18 mm en 30 min → imoy = 36 mm/h)', expl: 'L\'intensité est 36 mm/h mais la hauteur tombée reste 18 mm. Deux événements de 30 min et 36 mm/h d\'intensité moy. peuvent avoir des répartitions temporelles très différentes.' },
+                  { q: 'Comment passe-t-on de 72 m³/h en L/s ?', r: '72 ÷ 3 600 = 0,020 m³/s · puis × 1 000 = 20 L/s', expl: 'Convertir le volume (m³ → L : ×1 000) ET le temps (h → s : ÷3 600). On peut aussi utiliser 1 L/s = 3,6 m³/h donc 72 ÷ 3,6 = 20 L/s.' },
+                  { q: 'Comment calculer le débit à partir d\'une section et d\'une vitesse ?', r: 'Q = A × v̄ (A section en m², v̄ vitesse moyenne normale en m/s)', expl: 'Ex. A = 4,5 m², v̄ = 0,8 m/s → Q = 3,6 m³/s. Il s\'agit de la vitesse moyenne sur la section, pas de la vitesse en un point.' },
+                  { q: 'Qu\'est-ce que l\'analyse dimensionnelle permet de détecter ?', r: 'Elle détecte les formules non homogènes (ex. Q = A + v additionne L² et LT⁻¹) mais ne valide ni le modèle ni ses hypothèses', expl: 'Une formule homogène peut être physiquement fausse (ex. Q = 2Av a la bonne dimension mais le facteur 2 n\'est pas justifié). L\'analyse dimensionnelle est un filtre, pas une validation.' },
+                  { q: 'Comment exprimer une pente en % et en ‰ ?', r: 's = Δz/Lh (valeur décimale) · ×100 = % · ×1 000 = ‰', expl: 'Ex. Δz = 1,2 m sur Lh = 400 m → s = 0,003 = 0,3 % = 3 ‰. Attention : pente 1 % ≠ angle 1° — une pente est une tangente, pas un angle.' },
+                  { q: 'Que signifient les préfixes k, M, m et µ ?', r: 'k = 10³ · M = 10⁶ · m (milli) = 10⁻³ · µ = 10⁻⁶', expl: 'Confondre m (milli) et M (méga) produit un écart d\'un facteur 10⁹. La casse compte : mm = millimètre, mM n\'a pas de sens standard.' },
+                  { q: 'Pourquoi le volume précipité ne donne-t-il pas directement le débit maximal ?', r: 'Il manque la distribution temporelle de la pluie, les pertes, les stockages et les temps de transfert', expl: 'Ex. 1 760 m³ précipités sur 40 min : si l\'écoulement s\'étale sur 2h, le débit moyen est très différent. La forme de l\'hydrogramme dépend du fonctionnement du bassin.' },
+                ],
+                schema: `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" style="max-width:320px;width:100%">
+  <rect width="320" height="200" rx="8" fill="#EEF4FB"/>
+  <text x="160" y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#0E3A6E">Conversions clés — GEMAPI Module 2</text>
+  <rect x="8" y="20" width="148" height="20" fill="#1565C0" rx="3"/>
+  <text x="82" y="33" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">SURFACES</text>
+  <rect x="8" y="43" width="148" height="14" fill="#E8F0FC" rx="2"/>
+  <text x="82" y="53" text-anchor="middle" font-family="Arial" font-size="8" fill="#1A3A6E">1 ha = 10 000 m²</text>
+  <rect x="8" y="59" width="148" height="14" fill="#D8E8FC" rx="2"/>
+  <text x="82" y="69" text-anchor="middle" font-family="Arial" font-size="8" fill="#1A3A6E">1 km² = 100 ha = 1 000 000 m²</text>
+  <rect x="8" y="75" width="148" height="14" fill="#E8F0FC" rx="2"/>
+  <text x="82" y="85" text-anchor="middle" font-family="Arial" font-size="8" fill="#1A3A6E">1 m² = 10 000 cm²</text>
+  <rect x="163" y="20" width="149" height="20" fill="#00695C" rx="3"/>
+  <text x="237" y="33" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">VOLUMES &amp; DÉBITS</text>
+  <rect x="163" y="43" width="149" height="14" fill="#E0F5F0" rx="2"/>
+  <text x="237" y="53" text-anchor="middle" font-family="Arial" font-size="8" fill="#00695C">1 m³ = 1 000 L = 1 000 dm³</text>
+  <rect x="163" y="59" width="149" height="14" fill="#C8EEE8" rx="2"/>
+  <text x="237" y="69" text-anchor="middle" font-family="Arial" font-size="8" fill="#00695C">1 m³/s = 1 000 L/s = 3 600 m³/h</text>
+  <rect x="163" y="75" width="149" height="14" fill="#E0F5F0" rx="2"/>
+  <text x="237" y="85" text-anchor="middle" font-family="Arial" font-size="8" fill="#00695C">1 L/s = 3,6 m³/h</text>
+  <rect x="8" y="95" width="148" height="20" fill="#C05A10" rx="3"/>
+  <text x="82" y="108" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">PLUIE</text>
+  <rect x="8" y="118" width="148" height="14" fill="#FFF0E0" rx="2"/>
+  <text x="82" y="128" text-anchor="middle" font-family="Arial" font-size="8" fill="#7A3A00">1 mm sur 1 m² = 1 L</text>
+  <rect x="8" y="134" width="148" height="14" fill="#FFE4C8" rx="2"/>
+  <text x="82" y="144" text-anchor="middle" font-family="Arial" font-size="8" fill="#7A3A00">Vp[m³] = 10 × P[mm] × A[ha]</text>
+  <rect x="163" y="95" width="149" height="20" fill="#6A1B9A" rx="3"/>
+  <text x="237" y="108" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">TEMPS &amp; VITESSE</text>
+  <rect x="163" y="118" width="149" height="14" fill="#F0E4FC" rx="2"/>
+  <text x="237" y="128" text-anchor="middle" font-family="Arial" font-size="8" fill="#4A0A7A">1 h = 3 600 s · 1 j = 86 400 s</text>
+  <rect x="163" y="134" width="149" height="14" fill="#E4D4FC" rx="2"/>
+  <text x="237" y="144" text-anchor="middle" font-family="Arial" font-size="8" fill="#4A0A7A">1 m/s = 3,6 km/h</text>
+  <rect x="8" y="155" width="305" height="20" fill="#0E3A6E" rx="4"/>
+  <text x="160" y="168" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#D0E8FF">Q = A·v̄ · V = Q·t · imoy = P/Δt · s = Δz/Lh</text>
+  <rect x="8" y="178" width="305" height="18" fill="#E8F0F8" rx="3"/>
+  <text x="160" y="190" text-anchor="middle" font-family="Arial" font-size="8" fill="#536987">Homogénéité : [Q = Av] = L²·LT⁻¹ = L³T⁻¹ = [Q] ✓</text>
+</svg>`,
+                exercice: {
+                  enonce: '(1) Convertis 4,2 ha en m².\n(2) Convertis 72 m³/h en L/s.\n(3) Une pompe donne 18 L/s pendant 1 h 20 min (débit constant). Quel volume ?\n(4) Pluie de 15 mm uniforme sur 6 ha. Quel volume précipité ?\n(5) Il tombe 12 mm en 20 min. Quelle est l\'intensité moy. en mm/h ?\n(6) Δz = 1,2 m sur 400 m horizontaux. Exprimer la pente en valeur décimale, % et ‰.\n(7) Formule proposée : Q = A + v. Est-elle homogène ?\n(8) Q = 3,6 m³/s, section A = 4,5 m². Vitesse moyenne ?',
+                  solution: '<strong>(1)</strong> 4,2 × 10 000 = <strong>42 000 m²</strong><br><strong>(2)</strong> 72 ÷ 3 600 = 0,020 m³/s · × 1 000 = <strong>20 L/s</strong><br><strong>(3)</strong> Q = 0,018 m³/s · t = 3 600 + 20×60 = 4 800 s · V = 0,018 × 4 800 = <strong>86,4 m³</strong><br><strong>(4)</strong> V = 10 × 15 × 6 = <strong>900 m³</strong><br><strong>(5)</strong> imoy = 12 ÷ (20/60) = <strong>36 mm/h</strong> (hauteur tombée = 12 mm)<br><strong>(6)</strong> s = 1,2/400 = <strong>0,003 = 0,3 % = 3 ‰</strong><br><strong>(7)</strong> Non — [A] = L², [v] = LT⁻¹, dimensions différentes. Formule correcte : Q = A × v̄<br><strong>(8)</strong> v̄ = Q/A = 3,6/4,5 = <strong>0,8 m/s</strong>',
+                },
+              },
+
+            ],
+          }, // fin gem-m2
+
+          /* ══ MODULE 3 — GOUVERNANCE & PLANIFICATION ══ */
+          {
+            id: 'gem-m3',
+            name: 'Gouvernance & Planification',
+            ico: '🏛️',
+            color: '#6B4F9E',
+            colorl: '#F0EBFF',
+            chapitres: [
+
+              {
+                id: 'gem-7',
+                titre: 'Géométrie des sections et des ouvrages',
+                fiche: {
+                  intro: 'Pour comprendre comment l\'eau circule dans une rivière, traverse une buse ou se stocke dans un bassin, il faut décrire correctement l\'espace qu\'elle occupe. La géométrie permet de déterminer la surface disponible pour le passage de l\'eau, la longueur de fond et de berges en contact avec l\'eau, les dimensions d\'un ouvrage, le volume d\'eau présent dans un tronçon et le stockage disponible. La question centrale : comment transformer les dimensions d\'un cours d\'eau ou d\'un ouvrage en données utilisables pour une étude hydraulique ?',
+                  points: [
+                    '📐 Trois représentations : vue en plan (organisation du site et tracé), profil en long (altitudes et pentes le long du cours d\'eau), profil en travers (forme de la section — orienter perpendiculairement à l\'écoulement)',
+                    '💧 Section mouillée A [m²] = aire occupée par l\'eau dans la coupe — intervient dans Q = A·v̄ — la section seule ne suffit pas à déduire le débit',
+                    '🔵 Périmètre mouillé Pm [m] = contour solide immergé (fond + berges) — la surface libre (air) n\'en fait PAS partie — erreur classique à éviter',
+                    '📏 Rayon hydraulique Rh = A/Pm — ≠ rayon géométrique — caractérise le rapport entre section disponible et frottement des parois',
+                    '📊 Profondeur hydraulique Dh = A/T — ≠ hauteur d\'eau, sauf pour la section rectangulaire (Dh = y)',
+                    '📍 Hauteur d\'eau y = Z_eau − Z_fond (différence de deux cotes du même référentiel — ne pas confondre cote altimétrique et hauteur d\'eau)',
+                    '⬜ Section rectangulaire : A = by, Pm = b+2y, T = b, Rh = by/(b+2y), Dh = y — modèle de canal maçonné ou d\'ouvrage à parois verticales',
+                    '📐 Talus : z = distance horizontale / distance verticale — z=2 s\'écrit 2H/1V — longueur immergée ℓ = y√(1+z²) par le théorème de Pythagore',
+                    '🔺 Trapèze symétrique (fossé en terre) : T = b+2zy, A = y(b+zy), Pm = b+2y√(1+z²) — talus dissymétrique : utiliser zg et zd distincts',
+                    '⭕ Cercle plein : A = πD²/4, Pm = πD, Rh = D/4 — utiliser le diamètre INTÉRIEUR — la conduite à mi-remplissage a le même Rh que pleine mais une section différente',
+                    '📈 Profil irrégulier : méthode des trapèzes — Ai = (hi+hi+1)/2 × Δxi — ne jamais utiliser la profondeur maximale sur toute la largeur',
+                    '📉 Pente S0 = ΔZ/L · Volume V = A×L (section constante) ou (A1+A2)/2×L (variable) · Stockage disponible = V_max − V_initial',
+                  ],
+                  formules: [
+                    'Q = A \\cdot \\bar{v} \\quad (A \\text{ section mouillée en m}^2,\\ \\bar{v} \\text{ vitesse moyenne en m/s})',
+                    'R_h = \\dfrac{A}{P_m} \\quad \\text{(rayon hydraulique)}',
+                    'D_h = \\dfrac{A}{T} \\quad \\text{(profondeur hydraulique)}',
+                    'y = Z_{\\text{eau}} - Z_{\\text{fond}} \\quad \\text{(hauteur d eau, meme referentiel)}',
+                    '\\text{Rectangle :}\\; A = by,\\quad P_m = b+2y,\\quad R_h = \\dfrac{by}{b+2y},\\quad D_h = y',
+                    '\\text{Talus :}\\; \\ell = y\\sqrt{1+z^2} \\quad (z = \\text{horiz}/\\text{vert},\\; z=2 \\Rightarrow 2H/1V)',
+                    '\\text{Trapeze sym. :}\\; T = b+2zy,\\; A = y(b+zy),\\; P_m = b+2y\\sqrt{1+z^2}',
+                    '\\text{Cercle plein :}\\; A = \\dfrac{\\pi D^2}{4},\\quad P_m = \\pi D,\\quad R_h = \\dfrac{D}{4}',
+                    'A \\approx \\sum_i \\dfrac{h_i+h_{i+1}}{2}\\,(x_{i+1}-x_i) \\quad \\text{(profil irregulier, methode trapèzes)}',
+                    'S_0 = \\dfrac{\\Delta Z}{L} \\quad;\\quad V = A\\,L \\quad;\\quad V_{\\text{dispo}} = V_{\\text{max}} - V_{\\text{initial}}',
+                  ],
+                  retenir: 'Pm = contour solide immergé (jamais la surface libre) · Rh = A/Pm · Dh = A/T · Dh = y uniquement pour le rectangle · z = horiz/vert · longueur talus = y√(1+z²) · Rh cercle plein = D/4 · Profil irrégulier : méthode des trapèzes, jamais profondeur max × largeur.',
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce que la section mouillée et comment l\'utiliser ?', r: 'Aire occupée par l\'eau dans la coupe [m²] — intervient dans Q = A·v̄', expl: 'La section seule ne suffit pas à connaître le débit : il faut aussi la vitesse ou une relation hydraulique comme Manning-Strickler. Ne pas confondre section mouillée et section totale d\'un ouvrage.' },
+                  { q: 'Qu\'est-ce que le périmètre mouillé et quelle erreur éviter ?', r: 'Longueur du contour solide immergé — fond + berges immergées — la surface libre (air) n\'en fait PAS partie', expl: 'Erreur classique : ajouter la largeur de la surface libre. Pour un canal rectangulaire ouvert 3 m × 1 m : Pm = 3+1+1 = 5 m, non 3+1+3+1 = 8 m. Seuls les contours solides génèrent du frottement hydraulique.' },
+                  { q: 'Formule du rayon hydraulique et ce qu\'il représente ?', r: 'Rh = A/Pm — rapport entre section disponible et périmètre frottant', expl: 'Le nom est trompeur : Rh n\'est généralement pas le rayon géométrique d\'un cercle. Pour une buse pleine D=1,20 m : rayon géométrique = 0,60 m, mais Rh = D/4 = 0,30 m.' },
+                  { q: 'Formule de la profondeur hydraulique et différence avec y ?', r: 'Dh = A/T — égale à y seulement pour une section rectangulaire', expl: 'Pour un trapèze b=2, y=1, z=2 : A=4 m², T=6 m, Dh=0,667 m ≠ y=1 m. Les deux grandeurs ne sont pas interchangeables dans les formules hydrauliques, notamment pour le nombre de Froude.' },
+                  { q: 'Comment calculer la hauteur d\'eau à partir des cotes ?', r: 'y = Z_eau − Z_fond (même référentiel altimétrique)', expl: 'Ex. Z_fond=102,35 m, Z_eau=103,10 m → y=0,75 m. Dans une rivière naturelle, la profondeur varie le long du profil en travers : ne pas utiliser la profondeur maximale sur toute la largeur.' },
+                  { q: 'Section rectangulaire : formules A, Pm, Rh, Dh ?', r: 'A = by · Pm = b+2y · Rh = by/(b+2y) · Dh = y', expl: 'Ex. b=3 m, y=0,80 m : A=2,40 m², Pm=4,60 m, Rh=0,522 m. Pour une conduite rectangulaire fermée et entièrement remplie : Pm=2b+2h (ajouter le plafond). C\'est le seul cas où Dh = y.' },
+                  { q: 'Que signifie un talus z=2 et comment calculer la longueur immergée ?', r: 'z=2 = 2H/1V (2 m horiz pour 1 m vert) · ℓ = y√(1+z²)', expl: 'Ex. z=2, y=1 m : élargissement horizontal=2 m, ℓ=√(1+4)=√5≈2,236 m. L\'écriture « 2/1 » peut être ambiguë : toujours préciser les directions horizontale et verticale.' },
+                  { q: 'Trapèze symétrique : formules T, A, Pm ?', r: 'T = b+2zy · A = y(b+zy) · Pm = b+2y√(1+z²)', expl: 'Ex. b=2, y=1, z=2 : T=6 m, A=4 m², Pm≈6,472 m, Rh≈0,618 m, Dh≈0,667 m ≠ y=1 m. La profondeur hydraulique est différente de la hauteur d\'eau pour les sections non rectangulaires.' },
+                  { q: 'Rayon hydraulique d\'une conduite circulaire pleine de diamètre D ?', r: 'Rh = D/4 — la conduite à mi-remplissage a le même Rh que pleine', expl: 'Pour D=0,80 m : A≈0,503 m², Pm≈2,513 m, Rh=0,80/4=0,20 m. Rayon géométrique=0,40 m ≠ Rh. Toujours utiliser le diamètre intérieur, pas extérieur. Connaître section et diamètre ne suffit pas à déduire le débit admissible.' },
+                  { q: 'Comment calculer une section mouillée sur un profil irrégulier ?', r: 'Méthode des trapèzes : Ai = (hi+hi+1)/2 × Δxi, puis A = Σ Ai', expl: 'Ex. profondeurs 0;0,40;0,80;1,00;0,60;0 espacées de 1 m → A=2,80 m². Utiliser la profondeur max (1 m) × largeur (5 m) donnerait 5 m² → surestimation de +79%. La méthode des trapèzes est la seule approche correcte pour un profil quelconque.' },
+                ],
+                schema: `<svg viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg" style="max-width:320px;width:100%">
+  <rect width="320" height="210" rx="8" fill="#EEF4FB"/>
+  <text x="160" y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#0E3A6E">Géométrie des sections — Synthèse</text>
+  <rect x="4" y="18" width="88" height="16" fill="#0E3A6E" rx="3"/>
+  <text x="48" y="29" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Section</text>
+  <rect x="96" y="18" width="68" height="16" fill="#0E3A6E" rx="3"/>
+  <text x="130" y="29" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">A mouillée</text>
+  <rect x="168" y="18" width="68" height="16" fill="#0E3A6E" rx="3"/>
+  <text x="202" y="29" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Pm mouillé</text>
+  <rect x="240" y="18" width="76" height="16" fill="#0E3A6E" rx="3"/>
+  <text x="278" y="29" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Rh</text>
+  <rect x="4" y="36" width="88" height="30" fill="#DDEEFF" rx="2"/>
+  <text x="48" y="47" text-anchor="middle" font-family="Arial" font-size="8" font-weight="bold" fill="#0E3A6E">Rectangle</text>
+  <text x="48" y="59" text-anchor="middle" font-family="Arial" font-size="8" fill="#1565C0">largeur b, haut. y</text>
+  <rect x="96" y="36" width="68" height="30" fill="#F0F8FF" rx="2"/>
+  <text x="130" y="53" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">b · y</text>
+  <rect x="168" y="36" width="68" height="30" fill="#F0F8FF" rx="2"/>
+  <text x="202" y="53" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">b + 2y</text>
+  <rect x="240" y="36" width="76" height="30" fill="#F0F8FF" rx="2"/>
+  <text x="278" y="53" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">by/(b+2y)</text>
+  <rect x="4" y="68" width="88" height="30" fill="#E8F5E9" rx="2"/>
+  <text x="48" y="79" text-anchor="middle" font-family="Arial" font-size="8" font-weight="bold" fill="#2E7D32">Trapèze sym.</text>
+  <text x="48" y="91" text-anchor="middle" font-family="Arial" font-size="8" fill="#2E7D32">fond b, talus z</text>
+  <rect x="96" y="68" width="68" height="30" fill="#F1F8E9" rx="2"/>
+  <text x="130" y="83" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">y(b + zy)</text>
+  <rect x="168" y="68" width="68" height="30" fill="#F1F8E9" rx="2"/>
+  <text x="202" y="78" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">b + 2y ·</text>
+  <text x="202" y="90" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">√(1+z²)</text>
+  <rect x="240" y="68" width="76" height="30" fill="#F1F8E9" rx="2"/>
+  <text x="278" y="83" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">A/Pm</text>
+  <rect x="4" y="100" width="88" height="30" fill="#FFF3E0" rx="2"/>
+  <text x="48" y="111" text-anchor="middle" font-family="Arial" font-size="8" font-weight="bold" fill="#E65100">Triangle sym.</text>
+  <text x="48" y="123" text-anchor="middle" font-family="Arial" font-size="8" fill="#E65100">b=0, talus z</text>
+  <rect x="96" y="100" width="68" height="30" fill="#FFF8F0" rx="2"/>
+  <text x="130" y="117" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">z · y²</text>
+  <rect x="168" y="100" width="68" height="30" fill="#FFF8F0" rx="2"/>
+  <text x="202" y="112" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">2y ·</text>
+  <text x="202" y="124" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">√(1+z²)</text>
+  <rect x="240" y="100" width="76" height="30" fill="#FFF8F0" rx="2"/>
+  <text x="278" y="117" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">A/Pm</text>
+  <rect x="4" y="132" width="88" height="30" fill="#FCE4EC" rx="2"/>
+  <text x="48" y="143" text-anchor="middle" font-family="Arial" font-size="8" font-weight="bold" fill="#C62828">Cercle plein</text>
+  <text x="48" y="155" text-anchor="middle" font-family="Arial" font-size="8" fill="#C62828">diam. intérieur D</text>
+  <rect x="96" y="132" width="68" height="30" fill="#FFF0F3" rx="2"/>
+  <text x="130" y="149" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">πD²/4</text>
+  <rect x="168" y="132" width="68" height="30" fill="#FFF0F3" rx="2"/>
+  <text x="202" y="149" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">π · D</text>
+  <rect x="240" y="132" width="76" height="30" fill="#FFF0F3" rx="2"/>
+  <text x="278" y="149" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">D/4</text>
+  <rect x="4" y="165" width="312" height="40" fill="#0E3A6E" rx="4"/>
+  <text x="160" y="177" text-anchor="middle" font-family="Arial" font-size="8" fill="#D0E8FF" font-weight="bold">Relations essentielles</text>
+  <text x="160" y="189" text-anchor="middle" font-family="Arial" font-size="8" fill="#D0E8FF">Rh = A/Pm · Dh = A/T · y = Z_eau − Z_fond · S₀ = ΔZ/L</text>
+  <text x="160" y="201" text-anchor="middle" font-family="Arial" font-size="8" fill="#FFCC80">Pm = contour solide immergé seulement (jamais la surface libre)</text>
+</svg>`,
+                exercice: {
+                  enonce: '(1) Canal rectangulaire b=4 m, y=0,50 m : calculer A, Pm, Rh, Dh.\n(2) Fossé trapézoïdal b=1 m, y=0,60 m, z=1,5 : calculer T et A.\n(3) Buse diamètre intérieur D=800 mm : calculer A et Rh.\n(4) Profil irrégulier — profondeurs 0 ; 0,60 ; 1,00 ; 0,40 ; 0 mesurées tous les 2 m. Calculer A et Dh.\n(5) Fond de fossé descend de 0,72 m sur 240 m. Calculer S0 en m/m, % et ‰.\n(6) Bassin : V_initial = 180 m³, V_max = 950 m³. Quel est le stockage disponible ?\n(7) Un étudiant écrit pour un canal rectangulaire ouvert 3 m × 1 m : Pm = 3+1+3+1 = 8 m. Quelle est l\'erreur et quel est le résultat correct ?',
+                  solution: '<strong>(1)</strong> A=4×0,50=2 m² · Pm=4+2×0,50=5 m · Rh=2/5=0,40 m · Dh=2/4=0,50 m (=y, car rectangle)<br><strong>(2)</strong> T=1+2×1,5×0,60=2,80 m · A=0,60×(1+1,5×0,60)=1,14 m²<br><strong>(3)</strong> D=0,80 m · A=π×0,80²/4≈0,503 m² · Rh=0,80/4=0,20 m (rayon géom.=0,40 m ≠ Rh)<br><strong>(4)</strong> A₁=(0+0,60)/2×2=0,60 · A₂=(0,60+1,00)/2×2=1,60 · A₃=(1,00+0,40)/2×2=1,40 · A₄=(0,40+0)/2×2=0,40 → A=4 m² · Dh=4/8=0,50 m. Note : profondeur max (1 m) × largeur (8 m) = 8 m² → surestimation ×2.<br><strong>(5)</strong> S0=0,72/240=0,003 m/m = 0,30% = 3‰<br><strong>(6)</strong> V_dispo=950−180=770 m³<br><strong>(7)</strong> Il a ajouté la largeur de la surface libre (3 m en haut). Le périmètre mouillé ne comprend que le fond et les deux parois immergées : Pm=3+1+1=5 m. Rh=3/5=0,60 m.',
+                },
+              },
+
+              {
+                id: 'gem-8',
+                titre: 'Fonctions, graphiques et interpolation',
+                fiche: {
+                  intro: 'Dans les métiers liés à l\'eau, les informations prennent souvent la forme d\'un tableau, d\'une courbe ou d\'une relation mathématique : hauteur d\'eau relevée toutes les quinze minutes, débit mesuré, volume stocké en fonction du niveau, pluie cumulée, courbe hauteur-débit. Savoir utiliser ces informations ne consiste pas seulement à lire une valeur. Il faut comprendre ce que représente chaque axe, identifier les hypothèses et déterminer si une estimation est justifiée.',
+                  points: [
+                    '📐 Fonction y = f(x) : associe une sortie à chaque valeur d\'entrée de son domaine — toujours préciser le domaine de validité, ex. V(h) valable seulement pour 0 ≤ h ≤ 2 m',
+                    '🔣 Variables vs paramètres : le rôle d\'une grandeur dépend de la question posée — h est variable pour décrire le remplissage d\'un bassin, mais peut devenir un paramètre dans une autre étude',
+                    '📈 Proportionnalité y = ax : droite passant par l\'origine — le coefficient a possède une unité (ex. Q en m³/s) — changer d\'unité de temps change le coefficient numérique',
+                    '📉 Relation affine y = ax + b : droite avec valeur initiale b ≠ 0 — pente a = (y₂−y₁)/(x₂−x₁) — ex. bassin avec volume initial V₀ déjà présent',
+                    '🔺 Relations non linéaires : A = zy² (fossé triangulaire) — doubler y quadruple A — ne pas appliquer une interpolation linéaire sur un intervalle trop large si la relation est connue',
+                    '📊 Lire un graphique : vérifier titre, unités des axes, échelle (linéaire ou log), légende — axe tronqué = variations amplifiées visuellement — courbe lissée ≠ mesure continue',
+                    '📏 Taux de variation moyen Δy/Δx : unité = unité de y / unité de x — ex. vitesse de montée du niveau en m/h ou cm/h — ≠ vitesse de déplacement de l\'eau',
+                    '🎯 Interpolation linéaire : λ = (x−x₁)/(x₂−x₁) avec 0 ≤ λ ≤ 1 — puis y = y₁ + λ(y₂−y₁) — λ indique la position relative dans l\'intervalle',
+                    '🔄 Interpolation inverse : retrouver x à partir de y avec x = x₁ + (y−y₁)/(y₂−y₁)·(x₂−x₁) — valable si la relation est monotone',
+                    '📋 Interpolation par morceaux : toujours utiliser les deux points qui encadrent la valeur recherchée, pas les extrêmes du domaine entier',
+                    '⚠️ Interpolation ≠ extrapolation : hors domaine = extrapolation — le comportement peut changer (débordement, nouvelle zone, changement de section) — toujours signaler explicitement',
+                    '⏱️ Volume sous hydrogramme : méthode des trapèzes V ≈ Σ (Qi+Qi+1)/2 × Δti — Δt OBLIGATOIREMENT en secondes si Q est en m³/s — maximum mesuré ≠ maximum réel',
+                  ],
+                  formules: [
+                    'y = f(x) \\quad;\\quad V = f(h) \\quad;\\quad Q = f(t) \\quad \\text{(notations de fonction)}',
+                    'y = ax \\quad \\text{(proportionnalite, droite par l\'origine, } a \\text{ a une unite)}',
+                    'y = ax + b \\quad;\\quad a = \\dfrac{y_2-y_1}{x_2-x_1} \\quad;\\quad b = y_1 - ax_1',
+                    '\\dfrac{\\Delta y}{\\Delta x} = \\dfrac{y_2-y_1}{x_2-x_1} \\quad \\text{(taux de variation moyen)}',
+                    'i = \\dfrac{\\Delta P}{\\Delta t} \\quad \\text{(intensite moyenne de pluie)}',
+                    '\\lambda = \\dfrac{x-x_1}{x_2-x_1} \\quad (0 \\leq \\lambda \\leq 1) \\quad \\text{(position relative dans l\'intervalle)}',
+                    'y(x) = y_1 + \\lambda(y_2-y_1) = (1-\\lambda)y_1 + \\lambda y_2 \\quad \\text{(interpolation lineaire)}',
+                    'x(y) = x_1 + \\dfrac{y-y_1}{y_2-y_1}(x_2-x_1) \\quad \\text{(interpolation inverse)}',
+                    'V \\approx \\displaystyle\\sum_i \\dfrac{Q_i+Q_{i+1}}{2}\\,\\Delta t_i \\quad (\\Delta t \\text{ en secondes si } Q \\text{ en m}^3\\text{/s})',
+                    'V_{\\text{dispo}} = V_{\\text{max}} - V_{\\text{initial}} \\quad;\\quad V_{\\text{final}} = V_{\\text{initial}} + \\Delta V_{\\text{apport}}',
+                  ],
+                  retenir: 'Domaine de validité obligatoire · a = (y₂−y₁)/(x₂−x₁) possède une unité · λ = (x−x₁)/(x₂−x₁) ∈ [0,1] · y = y₁ + λ(y₂−y₁) · interpolation inverse : x = x₁ + (y−y₁)/(y₂−y₁)·(x₂−x₁) · hors domaine = extrapolation à signaler · Δt en secondes pour V en m³.',
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce que le domaine de validité d\'une fonction ?', r: 'L\'ensemble des valeurs d\'entrée pour lesquelles la relation est applicable — ex. 0 ≤ h ≤ 2 m pour un bassin de 2 m de hauteur', expl: 'Calculer V(5) pour un bassin de 2 m est mathématiquement possible mais physiquement sans sens. Une relation doit toujours être accompagnée de son domaine de validité pour éviter les erreurs d\'application.' },
+                  { q: 'Quelle est la différence entre proportionnalité et relation affine ?', r: 'Proportionnalité y=ax : droite passant par l\'origine · Relation affine y=ax+b : droite avec valeur initiale b (peut ≠ 0)', expl: 'Ex. bassin vide qui se remplit : V=Qt est proportionnel (part de 0). Bassin contenant déjà 50 m³ : V=50+Qt est affine. Dans les deux cas la pente est Q, mais la valeur initiale diffère.' },
+                  { q: 'Comment calculer la pente d\'une droite entre deux points ?', r: 'a = (y₂−y₁) / (x₂−x₁) — la pente possède une unité', expl: 'Ex. volume passe de 80 à 140 m³ en 600 s : a=(140−80)/600=0,10 m³/s. Ce résultat est bien une unité de débit. Toujours vérifier la cohérence dimensionnelle du coefficient.' },
+                  { q: 'Qu\'est-ce que λ dans la formule d\'interpolation et que vaut-il à mi-chemin ?', r: 'λ = (x−x₁)/(x₂−x₁) — position relative dans l\'intervalle — λ=0 : premier point, λ=0,5 : milieu, λ=1 : second point', expl: 'λ est toujours entre 0 et 1 pour une interpolation. Si λ>1 ou λ<0, la valeur recherchée est hors de l\'intervalle — c\'est une extrapolation. Ex. h=1,20 entre 1,00 et 1,50 → λ=(1,20−1,00)/0,50=0,40.' },
+                  { q: 'Formule de l\'interpolation linéaire y(x) ?', r: 'y(x) = y₁ + λ(y₂−y₁) avec λ = (x−x₁)/(x₂−x₁)', expl: 'Ex. V(1,00)=300 m³, V(1,50)=460 m³, chercher V(1,20) : λ=0,40, V=300+0,40×160=364 m³. Toujours vérifier que le résultat est bien entre y₁ et y₂. Préciser « estimé par interpolation linéaire ».' },
+                  { q: 'Comment réaliser une interpolation inverse ?', r: 'x = x₁ + (y−y₁)/(y₂−y₁) × (x₂−x₁) — même idée, on cherche x au lieu de y', expl: 'Ex. V=400 m³ entre V₁=300 (h=1,00) et V₂=460 (h=1,50) : h=1,00+(400−300)/160×0,50=1,3125 m. Fonctionne seulement si la relation est monotone (chaque valeur de y correspond à une seule valeur de x).' },
+                  { q: 'Quelle est la différence entre interpolation et extrapolation ?', r: 'Interpolation : valeur dans l\'intervalle des données (0≤λ≤1) · Extrapolation : valeur hors de cet intervalle — plus incertaine', expl: 'Au-delà des données disponibles, le comportement peut changer : débordement, nouvelle zone inondée, changement de section. Une extrapolation doit être signalée explicitement et ne doit pas être présentée comme une mesure.' },
+                  { q: 'Comment calculer un volume écoulé à partir d\'un hydrogramme discret ?', r: 'Méthode des trapèzes : V ≈ Σ (Qi+Qi+1)/2 × Δti — Δt OBLIGATOIREMENT en secondes si Q en m³/s', expl: 'Ex. Q₁=0,20, Q₂=0,50 m³/s, Δt=1 h=3600 s → V₁=(0,20+0,50)/2×3600=1260 m³. Erreur fréquente : utiliser Δt en heures avec Q en m³/s → résultat 3600 fois trop petit.' },
+                  { q: 'Que signifie un taux de variation Δh/Δt = 0,60 m/h ?', r: 'Le niveau monte en moyenne de 0,60 m par heure — c\'est une vitesse verticale de montée, pas la vitesse de l\'eau', expl: 'Ex. niveau passe de 0,80 à 1,10 m en 30 min : Δh/Δt=(1,10−0,80)/0,50=0,60 m/h. La vitesse de déplacement de l\'eau dans le cours d\'eau est une grandeur différente, mesurée horizontalement.' },
+                  { q: 'Pourquoi le maximum mesuré peut-il différer du maximum réel ?', r: 'Avec un pas de mesure d\'une heure, le vrai maximum peut être survenu entre deux mesures', expl: 'Le maximum du jeu de données est le maximum connu — le pic réel peut être plus élevé et avoir eu lieu entre deux mesures. Pour estimer le maximum réel, il faut un pas de temps plus fin ou une méthode de modélisation complémentaire.' },
+                ],
+                schema: `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" style="max-width:320px;width:100%">
+  <rect width="320" height="200" rx="8" fill="#EEF4FB"/>
+  <text x="160" y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#0E3A6E">Interpolation linéaire — principe</text>
+  <line x1="30" y1="170" x2="295" y2="170" stroke="#888" stroke-width="1.5"/>
+  <line x1="30" y1="170" x2="30" y2="22" stroke="#888" stroke-width="1.5"/>
+  <text x="295" y="183" text-anchor="middle" font-family="Arial" font-size="9" fill="#555">x</text>
+  <text x="22" y="22" text-anchor="middle" font-family="Arial" font-size="9" fill="#555">y</text>
+  <circle cx="90" cy="130" r="5" fill="#1565C0"/>
+  <text x="90" y="148" text-anchor="middle" font-family="Arial" font-size="8" fill="#1565C0" font-weight="bold">x₁, y₁</text>
+  <circle cx="240" cy="60" r="5" fill="#1565C0"/>
+  <text x="240" y="50" text-anchor="middle" font-family="Arial" font-size="8" fill="#1565C0" font-weight="bold">x₂, y₂</text>
+  <line x1="90" y1="130" x2="240" y2="60" stroke="#1565C0" stroke-width="2" stroke-dasharray="6,3"/>
+  <circle cx="150" cy="97" r="6" fill="#E53935"/>
+  <text x="150" y="88" text-anchor="middle" font-family="Arial" font-size="8" fill="#E53935" font-weight="bold">y(x) interpolé</text>
+  <line x1="150" y1="97" x2="150" y2="170" stroke="#E53935" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="150" y="183" text-anchor="middle" font-family="Arial" font-size="8" fill="#E53935">x</text>
+  <line x1="90" y1="170" x2="90" y2="130" stroke="#1565C0" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="240" y1="170" x2="240" y2="60" stroke="#1565C0" stroke-width="1" stroke-dasharray="3,2"/>
+  <rect x="32" y="22" width="260" height="32" fill="#fff" rx="3" opacity="0.9"/>
+  <text x="162" y="34" text-anchor="middle" font-family="Arial" font-size="8" fill="#0E3A6E" font-weight="bold">λ = (x−x₁)/(x₂−x₁) ∈ [0,1]</text>
+  <text x="162" y="46" text-anchor="middle" font-family="Arial" font-size="8" fill="#E53935">y(x) = y₁ + λ(y₂−y₁)</text>
+  <rect x="32" y="105" width="128" height="30" fill="#F3F8FE" rx="3"/>
+  <text x="96" y="116" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Interpolation ✓</text>
+  <text x="96" y="128" text-anchor="middle" font-family="Arial" font-size="8" fill="#2E7D32">x₁ ≤ x ≤ x₂ → 0≤λ≤1</text>
+  <rect x="170" y="105" width="128" height="30" fill="#FFF3F3" rx="3"/>
+  <text x="234" y="116" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Extrapolation ⚠️</text>
+  <text x="234" y="128" text-anchor="middle" font-family="Arial" font-size="8" fill="#C62828">x hors [x₁,x₂] → λ∉[0,1]</text>
+</svg>`,
+                exercice: {
+                  enonce: '(1) Débit constant 15 L/s pendant 20 min. Quel volume en m³ ?\n(2) Bassin : V₀=40 m³, apport 0,05 m³/s pendant 10 min. Volume final ?\n(3) Table : 200 m³ à 0,80 m ; 320 m³ à 1,20 m. Estimer le volume à 0,90 m.\n(4) Même table. Estimer la hauteur pour V=290 m³.\n(5) Il tombe 6 mm en 20 min. Calculer l\'intensité en mm/h.\n(6) Q=0,40 m³/s à t=0 et Q=0,80 m³/s à t=10 min. Volume écoulé par méthode des trapèzes ?\n(7) Table couvrant 0 à 1,50 m. Un logiciel donne une valeur à 1,80 m. Interpolation ou extrapolation ?\n(8) Fossé triangulaire A=3y². Que devient la section quand y est multiplié par 3 ?',
+                  solution: '<strong>(1)</strong> 15 L/s=0,015 m³/s · 20 min=1200 s · V=0,015×1200=18 m³<br><strong>(2)</strong> V(t)=40+0,05t · V(600)=40+0,05×600=70 m³<br><strong>(3)</strong> λ=(0,90−0,80)/(1,20−0,80)=0,25 · V=200+0,25×120=230 m³<br><strong>(4)</strong> h=0,80+(290−200)/(320−200)×(1,20−0,80)=0,80+0,75×0,40=1,10 m<br><strong>(5)</strong> 20 min=1/3 h · i=6/(1/3)=18 mm/h. Attention : la quantité reçue reste 6 mm.<br><strong>(6)</strong> Δt=10 min=600 s · V=(0,40+0,80)/2×600=360 m³<br><strong>(7)</strong> Extrapolation — 1,80 m dépasse le domaine [0 ; 1,50 m]. La valeur doit être signalée comme telle et son utilisation examinée.<br><strong>(8)</strong> A(3y)=3(3y)²=27y² · A(y)=3y² · rapport=9 → la section est multipliée par 9 (pas par 3).',
+                },
+              },
+
+            ],
+          }, // fin gem-m3
+
+          /* ══ MODULE 4 — DIAGNOSTIC & RESTAURATION ══ */
+          {
+            id: 'gem-m4',
+            name: 'Diagnostic & Restauration',
+            ico: '🔍',
+            color: '#2E7D9A',
+            colorl: '#E3F6FF',
+            chapitres: [
+
+              {
+                id: 'gem-9',
+                titre: 'Statistiques descriptives et incertitudes',
+                fiche: {
+                  intro: 'En GEMAPI, les décisions reposent sur des données : hauteurs d\'eau, débits, précipitations, dimensions d\'ouvrages, coûts. Ces données ne sont jamais parfaitement représentatives de toute la réalité. Les statistiques permettent de les organiser et de les résumer. L\'étude des incertitudes permet de comprendre jusqu\'où on peut leur faire confiance. Une moyenne peut être correctement calculée tout en étant mal interprétée. Un résultat comportant cinq décimales peut être moins fiable qu\'une estimation arrondie.',
+                  points: [
+                    '📊 Données quantitatives (discrètes ou continues) vs qualitatives (ordinales ou nominales) — attribuer un code numérique à une catégorie ne la transforme pas en grandeur mesurable',
+                    '👥 Population vs échantillon : le nombre ne garantit pas la représentativité — 25 ouvrages accessibles parmi 120 ≠ représentatifs si tous facilement accessibles depuis une route',
+                    '🔍 Préparer les données : vérifier unités, dates, doublons, manquantes, changements de méthode — 0 = débit nul ≠ absence de donnée — ne jamais remplacer une valeur manquante par zéro',
+                    '📐 Moyenne arithmétique x̄ = Σxi/n : équilibre arithmétique, même unité que les données, sensible aux valeurs extrêmes',
+                    '⚖️ Moyenne pondérée x̄p = Σwi·xi / Σwi : indispensable si les durées ou poids sont différents — ex. 2 m³/s pendant 1 h + 8 m³/s pendant 3 h → x̄ = 6,5 m³/s ≠ (2+8)/2 = 5 m³/s',
+                    '📍 Médiane : valeur centrale de la série ordonnée — moins sensible aux extrêmes — si 12 devient 120, la médiane reste 4 mais la moyenne augmente fortement',
+                    '📏 Étendue E = xmax − xmin : dispersion globale — ne décrit que 2 valeurs — le max enregistré dépend de la fréquence des mesures',
+                    '📦 Quartiles Q1, Q2 (médiane), Q3 et IQR = Q3−Q1 : dispersion centrale — attention aux conventions selon les logiciels — valeur atypique si < Q1−1,5×IQR ou > Q3+1,5×IQR',
+                    '📉 Écart-type descriptif σ = √(Σ(xi−x̄)²/n) — estimateur s = √(Σ(xi−x̄)²/(n-1)) — même unité que les données — CV% = σ/x̄ × 100 si pertinent',
+                    '⚠️ Valeur atypique = point à examiner, pas à supprimer automatiquement — peut être une erreur OU un événement réel (ex. crue) — toujours vérifier contexte terrain',
+                    '🔄 Variabilité ≠ erreur ≠ biais ≠ incertitude — répétabilité ≠ absence de biais — faible dispersion de mesures ≠ exactitude',
+                    '🎯 Bornes sur un calcul : b=4,00±0,05 m, y=0,80±0,02 m → Amin=3,95×0,78, Amax=4,05×0,82 — arrondi cohérent avec la qualité des données, pas d\'affichage abusif de décimales',
+                  ],
+                  formules: [
+                    '\\bar{x} = \\dfrac{1}{n}\\sum_{i=1}^{n} x_i \\quad \\text{(moyenne arithmetique)}',
+                    '\\bar{x}_p = \\dfrac{\\sum_i w_i x_i}{\\sum_i w_i} \\quad \\text{(moyenne ponderee)}',
+                    'E = x_{\\max} - x_{\\min} \\quad;\\quad IQR = Q_3 - Q_1',
+                    '\\sigma = \\sqrt{\\dfrac{1}{n}\\sum_i (x_i - \\bar{x})^2} \\quad \\text{(ecart-type descriptif, diviser par } n\\text{)}',
+                    's = \\sqrt{\\dfrac{1}{n-1}\\sum_i (x_i - \\bar{x})^2} \\quad \\text{(estimateur, diviser par } n-1\\text{)}',
+                    'CV_{\\%} = \\dfrac{\\sigma}{\\bar{x}} \\times 100 \\quad \\text{(coefficient de variation, si } \\bar{x} \\neq 0\\text{)}',
+                    'e = x_{\\text{mesure}} - x_{\\text{ref}} \\quad;\\quad e_r = \\dfrac{|e|}{|x_{\\text{ref}}|} \\times 100\\,\\%',
+                    '\\text{Valeur atypique si } x < Q_1 - 1{,}5 \\times IQR \\quad \\text{ou} \\quad x > Q_3 + 1{,}5 \\times IQR',
+                    '\\bar{Q} = \\dfrac{V_{\\text{ecoule}}}{\\Delta t} \\quad \\text{(moyenne temporelle a partir du volume)}',
+                    'A_{\\min} = b_{\\min}\\times y_{\\min} \\quad;\\quad A_{\\max} = b_{\\max}\\times y_{\\max} \\quad \\text{(bornes sur A = by)}',
+                  ],
+                  retenir: 'x̄ = Σxi/n · x̄p = Σwi·xi / Σwi · E = xmax−xmin · IQR = Q3−Q1 · σ = √(Σ(xi−x̄)²/n) ou s avec n−1 · CV% = σ/x̄ × 100 · valeur atypique ≠ valeur fausse · répétabilité ≠ absence de biais · 0 ≠ donnée manquante.',
+                },
+                flashcards: [
+                  { q: 'Pourquoi un grand échantillon peut-il ne pas être représentatif ?', r: 'La représentativité dépend de la méthode de sélection, pas seulement du nombre — des ouvrages tous accessibles par route ne représentent pas les ouvrages isolés', expl: 'Des mesures effectuées uniquement pendant les journées sèches ne décrivent pas les conditions de crue, même si elles sont nombreuses. La question à poser avant tout calcul : « De quelle réalité ces observations sont-elles représentatives ? »' },
+                  { q: 'Quelle est la différence entre 0 et une donnée manquante ?', r: 'Q=0 signifie un débit nul mesuré · absence = débit inconnu — remplacer par 0 diminue artificiellement la moyenne', expl: 'Ex. série 2;3;manquante;4 : moyenne des 3 disponibles = 3. Remplacement par 0 → (2+3+0+4)/4 = 2,25 — résultat basé sur une valeur inventée. Toujours documenter les valeurs manquantes, ne jamais les remplacer silencieusement.' },
+                  { q: 'Moyenne arithmétique vs moyenne pondérée : quand utiliser laquelle ?', r: 'Arithmétique si toutes les observations ont le même poids · Pondérée si les durées ou poids sont différents', expl: 'Ex. Q=2 m³/s pendant 1 h + Q=8 m³/s pendant 3 h : moyenne pondérée = (2×1+8×3)/4 = 6,5 m³/s ≠ (2+8)/2 = 5 m³/s. La moyenne simple donnerait un résultat incorrect car les deux situations n\'ont pas duré le même temps.' },
+                  { q: 'Quelle est la différence entre moyenne et médiane ?', r: 'Moyenne = équilibre arithmétique (sensible aux extrêmes) · Médiane = valeur centrale du classement (moins sensible)', expl: 'Ex. série 2;3;3;4;4;5;7;12 : x̄=5, Med=4. Si 12 devient 120 : x̄ passe à 17,75 mais Med reste 4. La médiane est utile quand quelques valeurs extrêmes ne doivent pas dominer la description.' },
+                  { q: 'Formule et interprétation de l\'IQR ?', r: 'IQR = Q3 − Q1 — dispersion de la moitié centrale de la série, moins sensible aux extrêmes que l\'étendue', expl: 'Ex. série 2;3;3;4;4;5;7;12 : Q1=3, Q3=5, IQR=2 m³/s. Étendue=10 m³/s. Valeurs atypiques si < Q1−1,5×IQR=0 ou > Q3+1,5×IQR=8 → la valeur 12 est signalée. Attention : les logiciels n\'utilisent pas tous la même convention pour les quartiles.' },
+                  { q: 'Différence entre σ (diviser par n) et s (diviser par n−1) ?', r: 'σ = écart-type descriptif des n valeurs disponibles · s = estimateur de l\'écart-type de la population dont elles sont issues', expl: 'Ex. série 2;3;3;4;4;5;7;12 : x̄=5, Σ(xi−x̄)²=72, σ=√(72/8)=3 m³/s, s=√(72/7)≈3,21 m³/s. Il faut savoir quelle formule est appliquée par votre logiciel. Un écart-type seul n\'est pas un intervalle de confiance.' },
+                  { q: 'Comment identifier une valeur atypique et que faire ensuite ?', r: 'Critère : x < Q1−1,5×IQR ou x > Q3+1,5×IQR — signale une alerte, pas une erreur prouvée', expl: 'Une valeur de crue ne doit pas être supprimée parce qu\'elle est rare. Il faut examiner : la donnée brute, l\'unité, l\'heure, les observations voisines, les informations de terrain. La bonne question : « Cette valeur est-elle crédible et appartient-elle au phénomène étudié ? »' },
+                  { q: 'Quelle est la différence entre variabilité, biais et incertitude ?', r: 'Variabilité = le phénomène change réellement · Biais = décalage systématique du dispositif · Incertitude = dispersion possible de la valeur mesurée', expl: 'Une rivière peut avoir des débits très variables mesurés par un dispositif stable. Inversement, un niveau presque constant peut donner des mesures dispersées si la méthode manque de répétabilité. Faible dispersion des mesures ≠ absence de biais.' },
+                  { q: 'Comment propager des bornes dans un calcul A = b × y ?', r: 'Amin = bmin × ymin · Amax = bmax × ymax — puis comparer les variations relatives pour identifier la source dominante', expl: 'Ex. b=4,00±0,05 m (1,25% de variation), y=0,80±0,02 m (2,50% de variation) : A=3,20 m² avec bornes [3,081 ; 3,321] m². La hauteur contribue davantage → améliorer sa mesure est plus utile que gagner quelques mm sur la largeur.' },
+                  { q: 'Pourquoi afficher moins de décimales dans un résultat ?', r: 'L\'arrondi doit être cohérent avec la qualité des données — afficher 1,603847291 m³/s ne signifie pas que le débit est connu à 9 décimales', expl: 'Conserver les chiffres en cours de calcul, arrondir uniquement au moment de présenter. Si les données permettent une estimation au dixième, écrire 1,6 m³/s est plus honnête. Mais l\'arrondi ne remplace pas l\'analyse de l\'incertitude.' },
+                ],
+                schema: `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" style="max-width:320px;width:100%">
+  <rect width="320" height="200" rx="8" fill="#EEF4FB"/>
+  <text x="160" y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#0E3A6E">Même moyenne, dispersions différentes</text>
+  <text x="80" y="30" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="#1565C0">Série A — peu dispersée</text>
+  <text x="240" y="30" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="#C62828">Série B — très dispersée</text>
+  <line x1="10" y1="95" x2="150" y2="95" stroke="#ccc" stroke-width="1"/>
+  <line x1="10" y1="95" x2="10" y2="40" stroke="#ccc" stroke-width="1"/>
+  <line x1="170" y1="95" x2="310" y2="95" stroke="#ccc" stroke-width="1"/>
+  <line x1="170" y1="95" x2="170" y2="40" stroke="#ccc" stroke-width="1"/>
+  <rect x="22" y="75" width="18" height="20" fill="#90CAF9"/>
+  <rect x="48" y="55" width="18" height="40" fill="#1565C0"/>
+  <rect x="74" y="55" width="18" height="40" fill="#1565C0"/>
+  <rect x="100" y="75" width="18" height="20" fill="#90CAF9"/>
+  <text x="80" y="107" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">x̄=5 · σ≈0,63</text>
+  <rect x="182" y="87" width="18" height="8" fill="#FFCDD2"/>
+  <rect x="208" y="71" width="18" height="24" fill="#E53935"/>
+  <rect x="234" y="55" width="18" height="40" fill="#C62828"/>
+  <rect x="260" y="71" width="18" height="24" fill="#E53935"/>
+  <text x="240" y="107" text-anchor="middle" font-family="Arial" font-size="8" fill="#555">x̄=5 · σ≈2,83</text>
+  <rect x="10" y="116" width="300" height="76" fill="#F8FAFE" rx="4"/>
+  <text x="160" y="128" text-anchor="middle" font-family="Arial" font-size="8" font-weight="bold" fill="#0E3A6E">Indicateurs clés de la série 2;3;3;4;4;5;7;12</text>
+  <text x="80" y="141" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">x̄ = 5 m³/s</text>
+  <text x="240" y="141" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Médiane = 4 m³/s</text>
+  <text x="80" y="153" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Q1=3 · Q3=5 · IQR=2</text>
+  <text x="240" y="153" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">Étendue = 10 m³/s</text>
+  <text x="80" y="165" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">σ = 3 m³/s (÷n)</text>
+  <text x="240" y="165" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">s ≈ 3,21 m³/s (÷n−1)</text>
+  <text x="160" y="183" text-anchor="middle" font-family="Arial" font-size="8" fill="#C62828">12 est atypique : > Q3+1,5×IQR = 8</text>
+</svg>`,
+                exercice: {
+                  enonce: '(1) Série 2;4;4;5;10 : calculer la moyenne et la médiane.\n(2) Débit 1 m³/s pendant 2 h puis 4 m³/s pendant 1 h. Calculer la moyenne temporelle et le volume écoulé.\n(3) Série 1;2;2;3;4;6;8;10 : déterminer Q1, Q3 et IQR (convention rang ⌈n/4⌉).\n(4) Calculer l\'écart-type descriptif σ de 3;5;7.\n(5) Référence = 2,00 m, mesure = 2,04 m. Calculer erreur et erreur relative en %.\n(6) Bassin : S ∈ [98;102] m², h ∈ [0,95;1,05] m. Calculer les bornes du volume.\n(7) Un débit de 15 m³/s apparaît au milieu de valeurs entre 2 et 4 m³/s. Faut-il le supprimer ?\n(8) Dix mesures très proches les unes des autres. Peut-on affirmer qu\'elles sont exactes ?',
+                  solution: '<strong>(1)</strong> x̄=(2+4+4+5+10)/5=25/5=5 · Médiane=4 (valeur centrale sur 5). La valeur 10 tire la moyenne au-dessus de la médiane.<br><strong>(2)</strong> x̄=(1×2+4×1)/3=6/3=2 m³/s · V=1×7200+4×3600=7200+14400=21600 m³ · Vérif : 21600/10800=2 m³/s ✓<br><strong>(3)</strong> n=8 · rang Q1=⌈8/4⌉=2 → Q1=2 · rang Q3=⌈6⌉=6 → Q3=6 · IQR=6−2=4<br><strong>(4)</strong> x̄=5 · σ=√((3-5)²+(5-5)²+(7-5)²)/3)=√(8/3)≈1,63<br><strong>(5)</strong> e=2,04−2,00=+0,04 m · er=0,04/2,00×100=2%<br><strong>(6)</strong> Vmin=98×0,95=93,1 m³ · Vmax=102×1,05=107,1 m³<br><strong>(7)</strong> Non, pas sans vérification. Il peut s\'agir d\'un événement réel (crue), d\'une erreur de saisie ou d\'un changement d\'unité. Une valeur atypique est d\'abord un point à examiner.<br><strong>(8)</strong> Non. Faible dispersion = bonne répétabilité dans ces conditions, mais toutes les mesures peuvent présenter un même décalage systématique (biais). Répétabilité ≠ exactitude.',
+                },
+              },
+
+              {
+                id: 'gem-10',
+                titre: 'Pression, énergie et lois de conservation',
+                fiche: {
+                  intro: 'Pourquoi l\'eau exerce-t-elle une force sur une vanne ? Pourquoi accélère-t-elle dans un rétrécissement ? Pourquoi un bassin monte-t-il même si son dispositif de vidange fonctionne ? Ce chapitre relie les notions précédentes — sections, volumes, graphiques — au fonctionnement physique des écoulements. Trois principes : l\'eau exerce une pression, l\'écoulement transporte de l\'énergie, la masse se conserve. Pour les forces liées à un changement de direction, on considère aussi la quantité de mouvement.',
+                  points: [
+                    '⚖️ Masse m = ρV [kg] et poids Fg = mg [N] — 2 m³ d\'eau ≈ 2 000 kg → poids 19 620 N ≈ 19,62 kN — ne jamais écrire « pression de 2 tonnes » : distinguer masse, force et pression',
+                    '📐 Pression uniforme p = F/A [Pa = N/m²] — 1 kPa = 1000 Pa, 1 bar = 100 000 Pa — F = p×A seulement si la pression est uniforme sur toute la surface',
+                    '🔵 Pression absolue vs relative : pabs = patm + prel — à la surface libre ouverte : prel = 0 mais pabs = patm ≠ 0 — ne jamais mélanger les deux dans une même équation',
+                    '💧 Pression hydrostatique prel = ρgh — ne dépend pas de la largeur du bassin — deux points à même profondeur dans une même masse d\'eau au repos ont la même pression',
+                    '📏 Hauteur de pression hp = p/(ρg) — repère pratique : 10 m de colonne d\'eau ≈ 1 bar (exactement 10,19 m) — permet d\'exprimer toutes les énergies en mètres',
+                    '🔺 Poussée sur paroi verticale rectangulaire de largeur b, depuis la surface jusqu\'à h : F = ½ρgbh² — répartition triangulaire — résultante à 2h/3 sous la surface, pas au milieu',
+                    '🔄 Bilan de volume dV/dt = ΣQe − ΣQs — un bassin MONTE même si la pompe fonctionne si Qe > Qs — entrées = sorties → niveau constant',
+                    '📈 Vitesse de montée dh/dt = (Qe−Qs)/S(h) — surface plus grande → montée plus lente pour le même débit net — si le bassin s\'élargit, chaque cm supplémentaire prend plus de temps',
+                    '➡️ Continuité (permanent, sans échange latéral) : A₁v̄₁ = A₂v̄₂ = Q — section plus petite → vitesse plus grande — dans une rivière, une diminution de largeur ≠ même proportion pour la section',
+                    '⚡ Charge hydraulique H = z + p/(ρg) + αv̄²/(2g) [m] — z : altitude, p/(ρg) : pression, αv²/2g : cinétique — α=1 en hypothèse simple — H diminue dans le sens de l\'écoulement (pertes)',
+                    '🔋 Bilan d\'énergie : H₁+Hp = H₂+Ht+hL — pertes de charge hL [m] ≠ perte d\'eau — la pression peut AUGMENTER si la conduite descend suffisamment malgré des pertes',
+                    '💡 Puissance hydraulique Ph = ρgQHp [W] — puissance électrique Pélec = Ph/η — distinguer kW (puissance) et kWh (énergie consommée sur une durée)',
+                  ],
+                  formules: [
+                    'm = \\rho V \\quad;\\quad F_g = mg \\quad (\\rho \\approx 1\\,000\\ \\text{kg/m}^3,\\ g = 9{,}81\\ \\text{m/s}^2)',
+                    'p = \\dfrac{F}{A} \\quad;\\quad F = p \\cdot A \\quad \\text{(pression uniforme, Pa = N/m}^2\\text{)}',
+                    'p_{\\text{rel}} = \\rho g h \\quad \\text{(hydrostatique relative, h = profondeur sous la surface)}',
+                    'h_p = \\dfrac{p}{\\rho g} \\quad \\text{(hauteur de pression — repere : 10 m} \\approx 1\\ \\text{bar)}',
+                    'F = \\dfrac{1}{2}\\rho g b h^2 \\quad \\text{(poussee paroi vert. rect. depuis surface, resultante a } \\tfrac{2h}{3}\\text{)}',
+                    '\\dfrac{\\mathrm{d}V}{\\mathrm{d}t} = \\sum Q_e - \\sum Q_s \\quad;\\quad \\dfrac{\\mathrm{d}h}{\\mathrm{d}t} = \\dfrac{Q_e - Q_s}{S(h)}',
+                    'A_1\\bar{v}_1 = A_2\\bar{v}_2 = Q \\quad \\text{(continuite, permanent, sans echange lateral)}',
+                    'H = z + \\dfrac{p}{\\rho g} + \\alpha\\dfrac{\\bar{v}^2}{2g} \\quad (\\alpha=1 \\text{ en hypothese simple})',
+                    'H_1 + H_p = H_2 + H_t + h_L \\quad;\\quad h_L = H_1 - H_2 \\text{ (sans machine)}',
+                    '\\mathcal{P}_h = \\rho g Q H_p \\quad;\\quad \\mathcal{P}_{\\text{elec}} = \\dfrac{\\mathcal{P}_h}{\\eta}',
+                  ],
+                  retenir: 'm=ρV [kg] · Fg=mg [N] · p=ρgh (hydrostatique) · hp=p/(ρg) · F=½ρgbh² (paroi vert.) · dV/dt=ΣQe−ΣQs · dh/dt=(Qe−Qs)/S · A₁v₁=A₂v₂ · H=z+p/(ρg)+v²/(2g) · hL=H₁−H₂ · Ph=ρgQHp · Pélec=Ph/η.',
+                },
+                flashcards: [
+                  { q: 'Quelle est la différence entre masse et poids ?', r: 'Masse m = ρV [kg] — poids Fg = mg [N] — le poids est une force', expl: 'Ex. V=2 m³ : m=1000×2=2000 kg, Fg=2000×9,81=19 620 N ≈ 19,62 kN. Écrire qu\'une vanne subit « une pression de 2 tonnes » mélange masse, force et pression. Il faut préciser s\'il s\'agit de kg, N ou Pa.' },
+                  { q: 'De quoi dépend la pression hydrostatique ?', r: 'prel = ρgh — dépend de la profondeur h, de ρ et de g — ne dépend PAS de la largeur ou de la forme du bassin', expl: 'Ex. à 1 m : p=9 810 Pa ≈ 9,81 kPa. À 3 m : p=29 430 Pa. Deux points à la même profondeur dans une même masse d\'eau au repos ont la même pression, quel que soit le contenant.' },
+                  { q: 'Qu\'est-ce que la hauteur de pression et le repère pratique avec le bar ?', r: 'hp = p/(ρg) [m] — 10 m de colonne d\'eau ≈ 1 bar (exactement 10,19 m)', expl: 'Ex. 49 050 Pa → hp=49050/(1000×9,81)=5 m. Pour 1 bar : hp=100000/9810≈10,19 m (pas exactement 10 m). La hauteur de pression permet d\'exprimer toutes les composantes de l\'énergie dans la même unité : le mètre.' },
+                  { q: 'Formule de la poussée sur une paroi verticale rectangulaire depuis la surface ?', r: 'F = ½ρgbh² — répartition triangulaire — résultante à 2h/3 sous la surface (pas au milieu)', expl: 'Ex. b=2 m, h=1,50 m : F=½×1000×9,81×2×2,25=22 073 N≈22,1 kN. La résultante agit à 2×1,50/3=1 m sous la surface. Si l\'eau est présente des deux côtés, calculer la force nette en tenant compte des deux niveaux.' },
+                  { q: 'Pourquoi un bassin peut-il monter même si la pompe fonctionne ?', r: 'Bilan : dV/dt = ΣQe − ΣQs — si Qe > Qs le volume augmente, quelle que soit la pompe', expl: 'Ex. Qe=0,80 m³/s, Qs=0,30 m³/s → débit net=0,50 m³/s → ΔV=0,50×600=300 m³ en 10 min. Un bassin ne peut descendre que si Qs > Qe. La pompe peut fonctionner et pourtant le niveau monte si l\'apport est supérieur au débit pompé.' },
+                  { q: 'Comment calculer la vitesse de montée d\'un niveau dans un bassin ?', r: 'dh/dt = (Qe−Qs) / S(h) — surface plus grande → montée plus lente pour le même débit net', expl: 'Ex. S=1000 m², débit net=0,50 m³/s : dh/dt=0,50/1000=0,0005 m/s=1,8 m/h. Sur 10 min : Δh=0,0005×600=0,30 m. Si le bassin s\'élargit avec le niveau, la montée ralentit progressivement même à débit constant.' },
+                  { q: 'Équation de continuité : que se passe-t-il quand la section diminue de moitié ?', r: 'A₁v̄₁ = A₂v̄₂ → si A₂ = A₁/2 alors v̄₂ = 2v̄₁ — la vitesse double', expl: 'Ex. Q=3 m³/s, A₁=6 m² → v̄₁=0,50 m/s. A₂=2 m² → v̄₂=1,50 m/s. Dans une rivière naturelle, une diminution de largeur ne se traduit pas nécessairement par la même réduction de section car la hauteur d\'eau peut changer.' },
+                  { q: 'Quelles sont les trois composantes de la charge hydraulique ?', r: 'H = z + p/(ρg) + αv̄²/(2g) — charge d\'altitude + hauteur de pression + hauteur de vitesse — tout en mètres', expl: 'Ex. z=50 m, p/(ρg)=3 m, v̄=2 m/s : H=50+3+4/(2×9,81)≈53,20 m. La hauteur de vitesse pour 2 m/s est ≈0,20 m, pour 4 m/s ≈0,81 m (×4 si vitesse ×2). Une charge exprimée en mètres représente une énergie par unité de poids.' },
+                  { q: 'Les pertes de charge correspondent-elles à une perte d\'eau ?', r: 'Non — hL [m] = dissipation d\'énergie mécanique — l\'eau ne disparaît pas', expl: 'Ex. H₁=105,40 m, H₂=104,85 m → hL=0,55 m. Ce n\'est pas 0,55 m³ d\'eau perdu ni nécessairement une baisse de niveau de 0,55 m. La pression peut même augmenter si la conduite descend suffisamment malgré les pertes et l\'augmentation de vitesse.' },
+                  { q: 'Formule de la puissance hydraulique et du rendement d\'une pompe ?', r: 'Ph = ρgQHp [W] — Pélec = Ph/η — ne pas confondre kW (puissance) et kWh (énergie)', expl: 'Ex. Q=0,020 m³/s, Hp=5 m : Ph=1000×9,81×0,020×5=981 W. Avec η=0,65 : Pélec=981/0,65≈1,51 kW. Sur 1 h : E=1,51 kWh. La charge Hp intègre la différence d\'altitude, les différences de pression/vitesse ET les pertes de charge.' },
+                ],
+                schema: `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" style="max-width:320px;width:100%">
+  <rect width="320" height="200" rx="8" fill="#EEF4FB"/>
+  <text x="160" y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#0E3A6E">Charge hydraulique H — composantes</text>
+  <line x1="20" y1="170" x2="300" y2="170" stroke="#888" stroke-width="1.5"/>
+  <text x="308" y="173" font-family="Arial" font-size="8" fill="#555">x</text>
+  <line x1="30" y1="175" x2="30" y2="22" stroke="#888" stroke-width="1.5"/>
+  <text x="32" y="20" font-family="Arial" font-size="8" fill="#555">z</text>
+  <line x1="30" y1="120" x2="270" y2="100" stroke="#0E3A6E" stroke-width="2"/>
+  <text x="275" y="100" font-family="Arial" font-size="8" fill="#0E3A6E" font-weight="bold">Ligne d\'énergie H</text>
+  <line x1="30" y1="135" x2="270" y2="115" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="275" y="116" font-family="Arial" font-size="8" fill="#1565C0">Ligne piézom.</text>
+  <line x1="30" y1="150" x2="270" y2="145" stroke="#2E7D32" stroke-width="1.5"/>
+  <text x="275" y="146" font-family="Arial" font-size="8" fill="#2E7D32">Fond z</text>
+  <line x1="130" y1="108" x2="130" y2="170" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2"/>
+  <line x1="130" y1="108" x2="130" y2="123" stroke="#0E3A6E" stroke-width="4"/>
+  <line x1="130" y1="123" x2="130" y2="132" stroke="#1565C0" stroke-width="4"/>
+  <line x1="130" y1="132" x2="130" y2="148" stroke="#2E7D32" stroke-width="4"/>
+  <text x="120" y="115" text-anchor="end" font-family="Arial" font-size="8" fill="#0E3A6E">αv²/2g</text>
+  <text x="120" y="128" text-anchor="end" font-family="Arial" font-size="8" fill="#1565C0">p/ρg</text>
+  <text x="120" y="142" text-anchor="end" font-family="Arial" font-size="8" fill="#2E7D32">z</text>
+  <rect x="10" y="25" width="298" height="55" fill="#F8FAFE" rx="4"/>
+  <text x="159" y="36" text-anchor="middle" font-family="Arial" font-size="8" font-weight="bold" fill="#0E3A6E">H = z + p/(ρg) + αv̄²/(2g)</text>
+  <text x="159" y="47" text-anchor="middle" font-family="Arial" font-size="8" fill="#333">H diminue dans le sens de l\'écoulement (pertes)</text>
+  <text x="159" y="59" text-anchor="middle" font-family="Arial" font-size="8" fill="#C62828">hL = H₁ − H₂ ≥ 0 (énergie dissipée, ≠ perte d\'eau)</text>
+  <text x="159" y="71" text-anchor="middle" font-family="Arial" font-size="8" fill="#2E7D32">Ph = ρgQHp  ·  Pélec = Ph/η</text>
+</svg>`,
+                exercice: {
+                  enonce: '(1) Pression hydrostatique à 2,50 m sous la surface.\n(2) À quelle hauteur d\'eau correspond p = 19 620 Pa ?\n(3) Paroi verticale 1 m de large, 2 m d\'eau depuis la surface. Calculer F et le point d\'application.\n(4) Q = 1,20 m³/s dans une section de 0,80 m². Calculer v̄.\n(5) Bassin : Qe=0,40 m³/s, Qs=0,25 m³/s pendant 30 min. Calculer ΔV.\n(6) Section : z=50 m, p/(ρg)=3 m, v̄=2 m/s. Calculer H avec α=1.\n(7) H₁=102,80 m → H₂=102,15 m sans machine. Calculer hL.\n(8) Pompe Q=30 L/s, Hp=6 m, η=0,60. Calculer Ph et Pélec.',
+                  solution: '<strong>(1)</strong> p=1000×9,81×2,50=24 525 Pa≈24,5 kPa<br><strong>(2)</strong> hp=19620/(1000×9,81)=2 m<br><strong>(3)</strong> F=½×1000×9,81×1×4=19 620 N=19,62 kN · Résultante à 2×2/3=1,33 m sous la surface (ou h/3=0,67 m au-dessus du bas)<br><strong>(4)</strong> v̄=1,20/0,80=1,50 m/s<br><strong>(5)</strong> Qnet=0,15 m³/s · Δt=1800 s · ΔV=0,15×1800=270 m³<br><strong>(6)</strong> H=50+3+4/(2×9,81)=50+3+0,204≈53,20 m<br><strong>(7)</strong> hL=102,80−102,15=0,65 m (dissipation d\'énergie, pas perte d\'eau)<br><strong>(8)</strong> Q=0,030 m³/s · Ph=1000×9,81×0,030×6=1765,8 W · Pélec=1765,8/0,60=2943 W≈2,94 kW',
+                },
+              },
+
+              {
+                id: 'gem-11',
+                titre: 'Le bassin versant et sa délimitation',
+                fiche: {
+                  intro: 'Le bassin versant est le territoire de collecte des eaux défini par rapport à un point de sortie appelé exutoire. Sa délimitation est le point de départ de toute étude hydrologique : elle permet de relier les actions réalisées sur un territoire à leurs effets possibles en aval.',
+                  points: [
+                    'Le bassin versant est toujours défini par rapport à un exutoire précis — le même cours d\'eau peut avoir plusieurs bassins selon le point choisi.',
+                    'La ligne de partage des eaux suit les crêtes et sépare les drainages vers des exutoires différents ; sur un plateau, quelques dizaines de cm d\'altitude ou un fossé peuvent suffire.',
+                    'Bassin topographique ≠ bassin souterrain : les eaux infiltrées circulent selon la structure du sous-sol et peuvent rejoindre un autre système (ex. karst).',
+                    'Bassin versant ≠ zone inondable : le bassin répond à « d\'où vient l\'eau ? » ; la zone inondable répond à « quels terrains sont recouverts ? ».',
+                    'Délimitation manuelle : positionner l\'exutoire → identifier le réseau amont → repérer les reliefs séparateurs → tracer la limite → contrôler les directions de drainage → documenter les incertitudes.',
+                    'Un MNT représente l\'altitude sous forme de grille ; sa résolution spatiale (taille de maille) ≠ précision altimétrique — les buses, remblais et ponts peuvent être invisibles.',
+                    'La méthode D8 attribue à chaque cellule une direction vers l\'un de ses 8 voisins selon la pente descendante ; l\'accumulation indique la surface amont contributive (pas un débit).',
+                    'Routes, fossés et buses peuvent modifier les connexions et transférer l\'eau vers un exutoire différent de celui attendu par le seul relief.',
+                    'Surface totale du bassin ≠ surface contributive à un événement : une partie de l\'eau s\'infiltre, se stocke ou reste dans des dépressions.',
+                    'Organiser un bassin en sous-bassins sans recouvrement évite le double comptage ; les débits de pointe des affluents ne s\'additionnent pas automatiquement.',
+                    'Documenter les incertitudes : position de l\'exutoire, qualité du MNT, zones plates, ouvrages mal connus, drainage souterrain — présenter deux hypothèses de surface si nécessaire.',
+                    'La surface s\'exprime en m², ha ou km² : 1 km² = 100 ha = 1 000 000 m² ; toujours conserver le système de coordonnées et les unités dans la fiche de résultat.',
+                  ],
+                  formules: [
+                    '\\text{Pente moyenne du chemin : } S = \\dfrac{Z_{\\text{amont}} - Z_{\\text{aval}}}{L}',
+                    '\\text{Part d\'occupation : } f_i = \\dfrac{A_i}{A_{\\text{total}}}',
+                    '\\text{Volume de pluie : } V_P = P \\times A \\quad (P \\text{ en m}, A \\text{ en m}^2)',
+                    '\\text{Conversions : } 1\\,\\text{km}^2 = 100\\,\\text{ha} = 1\\,000\\,000\\,\\text{m}^2',
+                    '\\text{Écart relatif : } e = \\dfrac{A_2 - A_1}{A_1} \\times 100\\,\\%',
+                  ],
+                  retenir: 'Le bassin versant est défini par un exutoire, pas par le nom d\'un cours d\'eau. Sa délimitation topographique est une hypothèse à confronter aux ouvrages, au fonctionnement souterrain et au terrain. Surface totale ≠ surface contributive à un épisode.',
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce qu\'un bassin versant ?', r: 'Un territoire de collecte des eaux défini par rapport à un exutoire.', expl: 'Les bassins s\'emboîtent : le bassin d\'un grand cours d\'eau comprend ceux de ses affluents.' },
+                  { q: 'Qu\'est-ce que l\'exutoire ?', r: 'Le point de sortie retenu pour l\'étude — section de rivière, station de mesure, buse, entrée d\'ouvrage ou confluence.', expl: 'Placer l\'exutoire juste avant ou après une confluence change fortement la surface calculée.' },
+                  { q: 'Qu\'est-ce que la ligne de partage des eaux ?', r: 'La limite qui sépare les écoulements de surface dirigés vers des exutoires différents.', expl: 'Elle suit les crêtes mais sur un plateau quelques dizaines de cm ou un fossé peuvent suffire.' },
+                  { q: 'Quelle différence entre bassin topographique et bassin souterrain ?', r: 'Le bassin topo est délimité par le relief ; le bassin souterrain suit la structure géologique — leurs limites peuvent ne pas coïncider.', expl: 'Dans un karst, des conduits transfèrent rapidement l\'eau indépendamment des crêtes visibles.' },
+                  { q: 'Quelle différence entre bassin versant et zone inondable ?', r: 'Bassin versant = d\'où vient l\'eau. Zone inondable = quels terrains sont submergés lors d\'un événement.', expl: 'Un versant peut appartenir au bassin sans être inondé ; une zone inondable peut recevoir des eaux de plusieurs origines.' },
+                  { q: 'Que représente l\'accumulation dans un MNT ?', r: 'Le nombre de cellules (ou la surface) qui contribuent à une cellule donnée — pas un débit.', expl: 'Pour obtenir un débit il faut aussi décrire la pluie, les pertes, les stockages et les transferts dans le temps.' },
+                  { q: 'Pourquoi une buse est-elle un piège dans un MNT ?', r: 'Le relief peut montrer une route comme barrière alors qu\'une buse laisse passer l\'eau dessous — connexion invisible dans le modèle.', expl: 'Il faut croiser le MNT avec la connaissance des ouvrages sur le terrain.' },
+                  { q: 'Comment éviter le double comptage des sous-bassins ?', r: 'Utiliser des unités sans recouvrement (surfaces intermédiaires) et ne pas additionner un bassin aval avec un sous-bassin déjà inclus.', expl: '12 km² (aval) + 4 km² (sous-bassin inclus) ≠ 16 km² ; la surface restante est 12 − 4 = 8 km².' },
+                  { q: 'Quelle est la formule de la pente moyenne d\'un chemin ?', r: 'S = (Z_amont − Z_aval) / L', expl: 'Ex. : 245 m − 125 m sur 6 000 m → S = 120/6000 = 0,02 = 2 %.' },
+                  { q: 'Quelle est la formule du volume de pluie sur un bassin ?', r: 'VP = P × A avec P en mètres et A en m².', expl: 'Ex. : 20 mm = 0,020 m sur 7 500 000 m² → VP = 150 000 m³. Ce volume ≠ ruissellement à l\'exutoire.' },
+                ],
+                schema: `<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="300" fill="#f0f7ff" rx="10"/>
+  <text x="260" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a3a5c">Bassin versant — éléments clés</text>
+  <!-- Relief : crêtes et versants -->
+  <polyline points="10,200 80,80 160,150 240,60 320,130 400,70 500,180" fill="none" stroke="#8B6914" stroke-width="2.5"/>
+  <text x="240" y="52" text-anchor="middle" fill="#8B6914" font-size="10">Crête (ligne de partage)</text>
+  <!-- Talweg / cours d'eau -->
+  <path d="M 60,220 Q 130,190 200,210 Q 280,230 360,210 Q 420,195 470,230" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="265" y="248" text-anchor="middle" fill="#2563eb">Talweg / cours d\'eau</text>
+  <!-- Exutoire -->
+  <circle cx="470" cy="230" r="7" fill="#dc2626" stroke="white" stroke-width="1.5"/>
+  <text x="475" y="220" fill="#dc2626" font-weight="bold">Exutoire</text>
+  <!-- Flèches écoulement versant gauche -->
+  <line x1="100" y1="130" x2="130" y2="200" stroke="#2563eb" stroke-width="1.2" marker-end="url(#arr)"/>
+  <line x1="60" y1="150" x2="90" y2="210" stroke="#2563eb" stroke-width="1.2" marker-end="url(#arr)"/>
+  <!-- Flèches versant droit -->
+  <line x1="380" y1="110" x2="410" y2="195" stroke="#2563eb" stroke-width="1.2" marker-end="url(#arr)"/>
+  <line x1="340" y1="140" x2="365" y2="205" stroke="#2563eb" stroke-width="1.2" marker-end="url(#arr)"/>
+  <!-- Délimitation bassin -->
+  <ellipse cx="250" cy="175" rx="220" ry="100" fill="none" stroke="#16a34a" stroke-width="2" stroke-dasharray="7,4"/>
+  <text x="250" y="290" text-anchor="middle" fill="#16a34a" font-weight="bold">Limite du bassin versant</text>
+  <!-- Sous-bassins -->
+  <line x1="200" y1="75" x2="200" y2="265" stroke="#f97316" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="110" y="270" text-anchor="middle" fill="#f97316" font-size="10">Sous-bassin A</text>
+  <text x="350" y="270" text-anchor="middle" fill="#f97316" font-size="10">Sous-bassin B</text>
+  <!-- Arrow marker -->
+  <defs><marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2563eb"/></marker></defs>
+</svg>`,
+                exercice: {
+                  enonce: 'Un bassin topographique couvre 7,5 km². Une pluie de 20 mm tombe uniformément. (1) Calculez VP en m³. (2) On délimite trois sous-bassins sans recouvrement : A = 3,2 km², B = 2,5 km², C = 1,8 km². Vérifiez la cohérence. (3) Le chemin principal descend de 245 m à 125 m sur 6 km. Calculez la pente moyenne en %.',
+                  solution: '<strong>(1) Volume de pluie :</strong> P = 0,020 m ; A = 7 500 000 m² → VP = 0,020 × 7 500 000 = <strong>150 000 m³</strong>. Ce volume ≠ ruissellement (infiltration, stockage non comptés).<br><strong>(2) Cohérence sous-bassins :</strong> 3,2 + 2,5 + 1,8 = <strong>7,5 km²</strong> ✓ (pas de double comptage car unités sans recouvrement).<br><strong>(3) Pente :</strong> S = (245 − 125) / 6 000 = 120 / 6 000 = 0,02 = <strong>2 %</strong>. Cette pente est une moyenne — elle peut masquer des secteurs plats et des secteurs très pentus.',
+                },
+              },
+
+              {
+                id: 'gem-12',
+                titre: 'Les précipitations : mesure, répartition et analyse',
+                fiche: {
+                  intro: 'Les précipitations sont la donnée d\'entrée essentielle des études hydrologiques. Un épisode ne se caractérise pas uniquement par son cumul : il faut aussi connaître sa durée, son intensité, sa répartition temporelle et sa variabilité spatiale. Pluie reçue ≠ ruissellement à l\'exutoire.',
+                  points: [
+                    '1 mm de pluie = 1 L/m² : hauteur d\'eau qui serait conservée sur une surface horizontale sans écoulement ni perte.',
+                    'Le cumul doit toujours être accompagné de sa période : « 18 mm » seul est inexploitable pour une analyse hydrologique.',
+                    'L\'intensité i = ΔP/Δt (mm/h) décrit le rythme d\'apport — trois épisodes de 30 mm en 30 min, 3 h, 24 h ont des intensités de 60, 10 et 1,25 mm/h : effets très différents.',
+                    'Pluviomètre collecteur : P = V/Sc. Pluviomètre à augets basculeurs : chaque basculement correspond à une quantité calibrée — qualité dépend de l\'implantation, du vent, de l\'entretien.',
+                    'Une mesure ponctuelle ne représente pas directement la pluie de tout un bassin : deux stations proches peuvent donner des cumuls différents lors d\'épisodes hétérogènes.',
+                    'Le radar fournit une information spatialisée mais c\'est une estimation (mesure à distance) — combiner radar et pluviomètres pour fiabiliser l\'analyse spatiale.',
+                    'L\'agrégation masque les pics : 10 mm en 10 min donne i = 60 mm/h sur 10 min mais seulement 10 mm/h sur 1 h — choisir le pas de temps adapté au phénomène étudié.',
+                    'Un hyétogramme représente la hauteur (ou l\'intensité) par intervalle ; la courbe cumulée augmente lors des pluies et reste constante entre deux épisodes.',
+                    'Pluie moyenne spatiale pondérée par les surfaces : Pmoy = ΣPiAi / Atotal — la moyenne arithmétique simple est incorrecte si les surfaces ne sont pas égales.',
+                    'Volume reçu : VP = Pmoy × A ; formules pratiques VP = 10PA (P en mm, A en ha) et VP = 1000PA (P en mm, A en km²) — ce volume ≠ ruissellement.',
+                    'Courbes IDF : niveaux statistiques d\'intensité pour différentes durées et fréquences — vérifier domaine de validité, unités, période de données avant utilisation.',
+                    'Période de retour T ans → probabilité 1/T par an — pas un calendrier ; sur 30 ans : P(≥1 dépassement) = 1−0,99³⁰ ≈ 26 % ; pluie T-annuelle ≠ crue T-annuelle.',
+                  ],
+                  formules: [
+                    '1\\,\\text{mm} = 1\\,\\text{L/m}^2',
+                    'i = \\dfrac{\\Delta P}{\\Delta t} \\quad (\\text{mm/h})',
+                    'P = \\dfrac{V}{S_c} \\quad (\\text{pluviomètre collecteur})',
+                    'P_{\\text{moy}} = \\dfrac{\\sum_i P_i A_i}{A_{\\text{total}}}',
+                    'V_P = P \\times A \\;\\; ; \\quad V_P = 10PA \\;\\text{(mm, ha)} \\;\\; ; \\quad V_P = 1000PA \\;\\text{(mm, km}^2\\text{)}',
+                    'p = \\dfrac{1}{T} \\;\\;; \\quad P(\\geq 1 \\text{ en }N) = 1-(1-p)^N',
+                  ],
+                  retenir: 'Cumul ≠ intensité. Mesure ponctuelle ≠ pluie de bassin. Pluie reçue ≠ ruissellement. Période de retour = probabilité, pas calendrier. Toujours préciser durée, unités, méthode et incertitudes.',
+                },
+                flashcards: [
+                  { q: 'Que signifie 1 mm de pluie ?', r: '1 litre d\'eau par m² — épaisseur d\'eau conservée sur surface horizontale sans perte.', expl: '0,001 m × 1 m² = 0,001 m³ = 1 L.' },
+                  { q: 'Quelle différence entre cumul et intensité ?', r: 'Cumul = quantité totale reçue (mm) sur une période. Intensité = rythme d\'apport (mm/h) = ΔP/Δt.', expl: '30 mm en 30 min → i = 60 mm/h ; 30 mm en 24 h → i = 1,25 mm/h. Même cumul, effets très différents.' },
+                  { q: 'Comment fonctionne un pluviomètre à augets basculeurs ?', r: 'Chaque basculement correspond à une quantité calibrée (ex. 0,2 mm) ; on comptabilise les basculements pour reconstituer P(t).', expl: '35 basculements × 0,2 mm = 7 mm (valeur d\'exercice, pas universelle).' },
+                  { q: 'Pourquoi utiliser une pluie moyenne pondérée et non une simple moyenne ?', r: 'Si les surfaces ne sont pas égales, la moyenne arithmétique sur-représente les secteurs bien couverts.', expl: 'Ex. : 10 mm sur 2 km² + 30 mm sur 6 km² → Pmoy = (20+180)/8 = 25 mm ≠ (10+30)/2 = 20 mm.' },
+                  { q: 'Quelle formule pour VP avec P en mm et A en km² ?', r: 'VP = 1000 × P × A (résultat en m³).', expl: 'Ex. : 23 mm sur 10 km² → VP = 1000 × 23 × 10 = 230 000 m³.' },
+                  { q: 'Qu\'est-ce qu\'un hyétogramme ?', r: 'Représentation graphique de la répartition temporelle des précipitations — barres de hauteur ou d\'intensité par intervalle.', expl: 'L\'axe vertical doit préciser mm ou mm/h. La courbe cumulée est la somme progressive des barres.' },
+                  { q: 'Pourquoi l\'agrégation au pas horaire peut-elle poser problème ?', r: 'Un pic intense de 10 min est noyé dans l\'heure : 60 mm/h sur 10 min → 10 mm/h sur 1 h. Le pic est masqué.', expl: 'Répartir un cumul journalier uniformément crée une hypothèse ; ça ne restitue pas les observations manquantes.' },
+                  { q: 'Qu\'est-ce qu\'une période de retour de 100 ans ?', r: 'Probabilité de dépassement de 1 % par an — pas un intervalle de 100 ans entre deux événements.', expl: 'Sur 30 ans : P(≥1 dép.) = 1 − 0,99³⁰ ≈ 26 % même pour un événement centennal.' },
+                  { q: 'Une pluie centennale entraîne-t-elle une crue centennale ?', r: 'Pas nécessairement — la réponse dépend de la répartition spatiale/temporelle et de l\'état initial du bassin.', expl: 'Un bassin sec peut absorber une pluie que le même bassin saturé transformerait en crue majeure.' },
+                  { q: 'Quelles informations une mesure de cumul journalier ne permet-elle pas de restituer ?', r: 'La chronologie, les pics d\'intensité, les interruptions et la répartition spatiale infra-journalière.', expl: 'Ces informations sont nécessaires pour simuler la réponse d\'un bassin lors d\'un événement court et intense.' },
+                ],
+                schema: `<svg viewBox="0 0 520 290" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="290" fill="#f0f7ff" rx="10"/>
+  <text x="260" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a3a5c">Hyétogramme et courbe cumulée</text>
+  <!-- Axes -->
+  <line x1="55" y1="200" x2="490" y2="200" stroke="#555" stroke-width="1.5"/>
+  <line x1="55" y1="30" x2="55" y2="200" stroke="#555" stroke-width="1.5"/>
+  <!-- Axe droite cumulé -->
+  <line x1="490" y1="30" x2="490" y2="200" stroke="#16a34a" stroke-width="1" stroke-dasharray="3,3"/>
+  <!-- Barres hyétogramme (6 intervalles de 10 min, hauteurs fictives) -->
+  <!-- 1mm, 3mm, 8mm, 6mm, 2mm, 0mm -->
+  <rect x="58" y="194" width="70" height="6" fill="#3b82f6" opacity="0.8"/>
+  <rect x="131" y="182" width="70" height="18" fill="#3b82f6" opacity="0.8"/>
+  <rect x="204" y="152" width="70" height="48" fill="#3b82f6" opacity="0.9"/>
+  <rect x="277" y="164" width="70" height="36" fill="#3b82f6" opacity="0.8"/>
+  <rect x="350" y="188" width="70" height="12" fill="#3b82f6" opacity="0.8"/>
+  <rect x="423" y="200" width="60" height="0" fill="#3b82f6" opacity="0.8"/>
+  <!-- Étiquettes barres -->
+  <text x="93" y="191" text-anchor="middle" fill="#1d4ed8" font-size="10">1</text>
+  <text x="166" y="179" text-anchor="middle" fill="#1d4ed8" font-size="10">3</text>
+  <text x="239" y="149" text-anchor="middle" fill="#1d4ed8" font-size="10">8</text>
+  <text x="312" y="161" text-anchor="middle" fill="#1d4ed8" font-size="10">6</text>
+  <text x="385" y="185" text-anchor="middle" fill="#1d4ed8" font-size="10">2</text>
+  <text x="453" y="197" text-anchor="middle" fill="#1d4ed8" font-size="10">0</text>
+  <!-- Courbe cumulée (points : 0,0 → 1 → 4 → 12 → 18 → 20 → 20) -->
+  <!-- Échelle cumulée : 20mm = 160px, so 1mm = 8px -->
+  <polyline points="55,200 93,192 166,168 239,104 312,56 385,40 483,40" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Points courbe -->
+  <circle cx="93" cy="192" r="3" fill="#16a34a"/>
+  <circle cx="166" cy="168" r="3" fill="#16a34a"/>
+  <circle cx="239" cy="104" r="3" fill="#16a34a"/>
+  <circle cx="312" cy="56" r="3" fill="#16a34a"/>
+  <circle cx="385" cy="40" r="3" fill="#16a34a"/>
+  <circle cx="483" cy="40" r="3" fill="#16a34a"/>
+  <!-- Étiquettes temps -->
+  <text x="55" y="215" text-anchor="middle" fill="#555">0</text>
+  <text x="128" y="215" text-anchor="middle" fill="#555">10</text>
+  <text x="201" y="215" text-anchor="middle" fill="#555">20</text>
+  <text x="274" y="215" text-anchor="middle" fill="#555">30</text>
+  <text x="347" y="215" text-anchor="middle" fill="#555">40</text>
+  <text x="420" y="215" text-anchor="middle" fill="#555">50</text>
+  <text x="483" y="215" text-anchor="middle" fill="#555">60</text>
+  <text x="268" y="232" text-anchor="middle" fill="#555">Temps (min)</text>
+  <!-- Légendes axes -->
+  <text x="30" y="120" text-anchor="middle" fill="#1d4ed8" transform="rotate(-90,30,120)" font-size="10">mm / intervalle</text>
+  <text x="505" y="120" text-anchor="middle" fill="#16a34a" transform="rotate(90,505,120)" font-size="10">Cumul (mm)</text>
+  <!-- Graduation cumul -->
+  <text x="488" y="204" fill="#16a34a" font-size="9">0</text>
+  <text x="488" y="124" fill="#16a34a" font-size="9">10</text>
+  <text x="488" y="44" fill="#16a34a" font-size="9">20</text>
+  <!-- Légende -->
+  <rect x="70" y="250" width="12" height="12" fill="#3b82f6" opacity="0.8"/>
+  <text x="86" y="261" fill="#1d4ed8">Hyétogramme (mm)</text>
+  <line x1="230" y1="256" x2="255" y2="256" stroke="#16a34a" stroke-width="2.5"/>
+  <circle cx="242" cy="256" r="3" fill="#16a34a"/>
+  <text x="260" y="261" fill="#16a34a">Cumul (mm)</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Bassin de 7,5 km² divisé en 3 secteurs : Amont 3,0 km² / 32 mm, Centre 2,5 km² / 24 mm, Aval 2,0 km² / 18 mm. (1) Calculez la pluie moyenne Pmoy. (2) Calculez le volume total VP. (3) Quelle erreur si l\'on n\'utilisait que la station aval (18 mm) pour tout le bassin ?',
+                  solution: '<strong>(1) Pluie moyenne :</strong> Pmoy = (3×32 + 2,5×24 + 2×18) / 7,5 = (96 + 60 + 36) / 7,5 = 192 / 7,5 = <strong>25,6 mm</strong>.<br><strong>(2) Volume total :</strong> VP = 1000 × 25,6 × 7,5 = <strong>192 000 m³</strong>. Vérification par secteur : 96 000 + 60 000 + 36 000 = 192 000 m³ ✓.<br><strong>(3) Erreur station unique :</strong> V(18 mm) = 1000 × 18 × 7,5 = 135 000 m³. Écart = 192 000 − 135 000 = 57 000 m³ → sous-estimation de <strong>≈ 29,7 %</strong>. Illustration de l\'importance de la représentativité spatiale.',
+                },
+              },
+
+            ],
+          }, // fin gem-m4
+
+          /* ══ MODULE 5 — PRÉVENTION DES INONDATIONS ══ */
+          {
+            id: 'gem-m5',
+            name: 'Prévention des inondations',
+            ico: '🛡️',
+            color: '#B84A0E',
+            colorl: '#FFF0E8',
+            chapitres: [
+
+              {
+                id: 'gem-13',
+                titre: 'Ruissellement, infiltration et bilan hydrologique',
+                fiche: {
+                  intro: 'Connaître la pluie reçue ne suffit pas à déterminer le débit. Une partie de l\'eau est interceptée, stockée, infiltrée ou évapotranspirée. Le bilan hydrologique décrit comment la pluie se répartit entre ces compartiments. La production d\'écoulement (quelle quantité ?) et le transfert (quand ?) sont deux calculs distincts.',
+                  points: [
+                    'L\'eau précipitée suit 7 chemins : interception, stockage superficiel, infiltration, évaporation, transpiration, écoulement de surface, écoulement souterrain — ces chemins ne sont pas indépendants (eau stockée → infiltration possible).',
+                    'Interception = stockage temporaire par la végétation, limité et dépendant de l\'état initial — ne pas comptabiliser à la fois comme perte et comme évaporation (double comptage).',
+                    'Stockage superficiel dans dépressions/mares/bassins : capacité max ≠ stockage disponible ; un stockage déjà rempli ne peut pas retenir une seconde fois le même volume.',
+                    'Infiltration réelle fa = min(i, fc) : quand i < fc, l\'eau disponible limite ; quand i > fc, la capacité limite et l\'excédent s\'écoule — la capacité d\'infiltration n\'est pas une constante universelle.',
+                    'Ruissellement hortonien r(t) = max(0, i−fc) : excédent de surface quand l\'intensité dépasse la capacité d\'entrée dans le sol (même si le sol n\'est pas saturé).',
+                    'Ruissellement par excès de saturation : quand le stockage disponible est épuisé, même une pluie modérée déborde — surface contributive variable qui s\'étend pendant l\'épisode.',
+                    'Conditions initiales cruciales : même pluie sur bassin sec vs. bassin saturé → volumes d\'écoulement très différents — examiner humidité, nappe, dépressions, pluies précédentes.',
+                    'Infiltration ≠ stockage sol ≠ recharge nappe : l\'eau infiltrée peut rester dans le sol, être reprise par les plantes, circuler latéralement ou rejoindre la nappe — ne pas poser automatiquement volume infiltré = recharge.',
+                    'Définir le système avant d\'écrire le bilan : l\'infiltration est une sortie si le système = surface seule, mais un transfert interne si le système = bassin complet avec sol.',
+                    'Bilan en lames d\'eau : P = ET + R + ΔS ; lame d\'eau h_mm = 1 000 × V/A — tous les termes doivent porter sur la même surface et la même période.',
+                    'CV = Ve/VP : coefficient volumique d\'écoulement — dépend de l\'événement, des conditions initiales et de la méthode ; ne pas transférer à une formule de débit de pointe.',
+                    'Production ≠ transfert : même Ve = 1 000 m³ peut passer en 30 min ou en 6 h → débits de pointe très différents ; l\'hydrogramme nécessite une représentation du transfert (chapitre 14).',
+                  ],
+                  formules: [
+                    'f_a(t) = \\min\\bigl(i(t),\\, f_c(t)\\bigr)',
+                    'r(t) = \\max\\bigl(0,\\, i(t) - f_c(t)\\bigr)',
+                    '\\Delta S = V_P + V_{\\text{entrées}} - V_{ET} - V_{\\text{sorties}}',
+                    'P = ET + R + \\Delta S \\quad (\\text{lames d\'eau, même surface et période})',
+                    'h_{\\text{mm}} = 1000\\,\\dfrac{V}{A}',
+                    'C_V = \\dfrac{V_e}{V_P} \\;\\;; \\quad V_e = C_V \\times P \\times A',
+                    'V_e = \\sum_i C_{V,i}\\, P_i\\, A_i \\quad (\\text{bassin hétérogène})',
+                  ],
+                  retenir: 'Pluie reçue ≠ ruissellement. Définir le système avant d\'écrire le bilan. CV n\'est pas une constante et ne donne pas le débit de pointe. L\'état initial du bassin est aussi important que la pluie.',
+                },
+                flashcards: [
+                  { q: 'Que vaut l\'infiltration réelle fa quand l\'intensité i < fc ?', r: 'fa = i — l\'eau disponible est le facteur limitant, le sol pourrait absorber plus mais la pluie n\'est pas assez forte.', expl: 'Ex. : i = 5 mm/h, fc = 12 mm/h → fa = 5 mm/h, excédent = 0.' },
+                  { q: 'Qu\'est-ce que le ruissellement hortonien ?', r: 'r(t) = max(0, i−fc) : excédent de surface quand l\'intensité dépasse la capacité d\'infiltration.', expl: 'Peut apparaître avant saturation totale du profil. Sensible à l\'intensité et à l\'état de surface.' },
+                  { q: 'Quelle différence entre ruissellement hortonien et ruissellement par saturation ?', r: 'Hortonien : arrivée > capacité d\'entrée (même sol non saturé). Saturation : stock épuisé, tout nouvel apport déborde.', expl: 'La surface contributive par saturation peut s\'étendre pendant l\'événement selon les apports latéraux.' },
+                  { q: 'Pourquoi les conditions initiales sont-elles aussi importantes que la pluie ?', r: 'Même pluie sur bassin sec vs. saturé → réponses très différentes. Humidité, nappe, dépressions et pluies précédentes modifient tous les seuils.', expl: 'Bassin A : stockages disponibles → faible Ve. Bassin B : sols saturés + dépressions pleines → fort Ve.' },
+                  { q: 'Volume infiltré = recharge de nappe ?', r: 'Non. L\'eau infiltrée peut rester dans le sol, être reprise par les plantes ou circuler latéralement sans atteindre la nappe.', expl: 'Cette égalité exige des hypothèses supplémentaires et une période de bilan adaptée.' },
+                  { q: 'Qu\'est-ce que la lame d\'eau équivalente d\'un volume ?', r: 'h_mm = 1 000 × V/A — épaisseur d\'eau uniformément répartie sur le bassin.', expl: 'Ex. : V = 40 000 m³ sur A = 2 km² → h = 1 000 × 40 000 / 2 000 000 = 20 mm.' },
+                  { q: 'Comment écrire le bilan hydrologique simplifié en lames d\'eau ?', r: 'P = ET + R + ΔS — tous les termes sur la même surface et la même période.', expl: 'ΔS > 0 : stockage augmente. ΔS < 0 : le bassin restitue de l\'eau stockée antérieurement.' },
+                  { q: 'Que signifie CV = 0,30 ?', r: '30 % du volume précipité sur le bassin est attribué à l\'écoulement direct de l\'événement.', expl: 'Ce coefficient dépend de l\'événement et des conditions initiales — pas une constante du bassin.' },
+                  { q: 'Ve = 1 000 m³. Peut-on en déduire le débit de pointe ?', r: 'Non — le débit de pointe dépend du transfert (chronologie, temps de parcours, stockages), pas seulement du volume produit.', expl: '1 000 m³ en 30 min → Q_moy ≈ 0,56 m³/s (si tout passe) mais Q_max peut être bien supérieur ou inférieur.' },
+                  { q: 'Pourquoi définir les frontières du système avant d\'écrire le bilan ?', r: 'L\'infiltration est une sortie si le système = surface seule, mais un transfert interne si le système = bassin complet (sol inclus). Même processus, signe opposé selon la frontière choisie.', expl: 'Oublier cette distinction conduit à compter deux fois un même volume.' },
+                ],
+                schema: `<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="300" fill="#f0f7ff" rx="10"/>
+  <text x="260" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a3a5c">Bilan hydrologique — destinations de la pluie</text>
+  <!-- Nuage / Pluie -->
+  <ellipse cx="260" cy="55" rx="55" ry="25" fill="#93c5fd" opacity="0.7"/>
+  <text x="260" y="59" text-anchor="middle" fill="#1d4ed8" font-weight="bold">Pluie P</text>
+  <!-- Flèches depuis pluie -->
+  <!-- Interception (gauche) -->
+  <line x1="220" y1="70" x2="95" y2="110" stroke="#22c55e" stroke-width="1.8" marker-end="url(#arr)"/>
+  <rect x="35" y="110" width="110" height="28" rx="5" fill="#bbf7d0" stroke="#16a34a" stroke-width="1"/>
+  <text x="90" y="128" text-anchor="middle" fill="#15803d">Interception</text>
+  <!-- Stockage superficiel (centre gauche) -->
+  <line x1="245" y1="78" x2="165" y2="115" stroke="#f59e0b" stroke-width="1.8" marker-end="url(#arr)"/>
+  <rect x="110" y="115" width="115" height="28" rx="5" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+  <text x="167" y="133" text-anchor="middle" fill="#92400e">Stockage surf.</text>
+  <!-- Infiltration (centre) -->
+  <line x1="260" y1="80" x2="260" y2="118" stroke="#78716c" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="218" y="118" width="84" height="28" rx="5" fill="#e7e5e4" stroke="#57534e" stroke-width="1"/>
+  <text x="260" y="136" text-anchor="middle" fill="#1c1917">Infiltration</text>
+  <!-- ET (droite) -->
+  <line x1="280" y1="68" x2="375" y2="95" stroke="#f97316" stroke-width="1.8" marker-end="url(#arrET)"/>
+  <rect x="340" y="95" width="120" height="28" rx="5" fill="#ffedd5" stroke="#ea580c" stroke-width="1"/>
+  <text x="400" y="113" text-anchor="middle" fill="#9a3412">Évapotransp.</text>
+  <!-- Ruissellement (bas) -->
+  <line x1="260" y1="78" x2="430" y2="155" stroke="#2563eb" stroke-width="2" marker-end="url(#arrR)"/>
+  <rect x="375" y="155" width="130" height="28" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="440" y="173" text-anchor="middle" fill="#1d4ed8" font-weight="bold">Ruissellement</text>
+  <!-- Sol / nappe -->
+  <rect x="35" y="200" width="310" height="35" rx="5" fill="#d6d3d1" stroke="#78716c" stroke-width="1"/>
+  <text x="190" y="222" text-anchor="middle" fill="#1c1917">Zone non saturée (sol)</text>
+  <rect x="35" y="245" width="310" height="30" rx="5" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="190" y="265" text-anchor="middle" fill="#1e3a8a">Nappe (zone saturée)</text>
+  <!-- Flèche infiltration → sol -->
+  <line x1="260" y1="147" x2="260" y2="198" stroke="#78716c" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+  <!-- Flèche sol → nappe (recharge) -->
+  <line x1="190" y1="235" x2="190" y2="244" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="210" y="242" fill="#2563eb" font-size="9">recharge</text>
+  <!-- ΔS annotation -->
+  <text x="360" y="220" fill="#78716c" font-size="10">ΔS_sol</text>
+  <text x="360" y="265" fill="#1e3a8a" font-size="10">ΔS_nappe</text>
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#555"/></marker>
+    <marker id="arrET" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ea580c"/></marker>
+    <marker id="arrR" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2563eb"/></marker>
+  </defs>
+</svg>`,
+                exercice: {
+                  enonce: 'Bassin de 7,5 km² (amont 3,0 km², centre 2,5 km², aval 2,0 km²) avec pluies 32/24/18 mm et coefficients CV = 0,20 / 0,35 / 0,60. VP total = 192 000 m³. (1) Calculez Ve par secteur et la somme. (2) Calculez CV_global. (3) Calculez la lame d\'écoulement Re en mm. (4) Que représente VP − Ve = 130 200 m³ ?',
+                  solution: '<strong>(1) Volumes :</strong> Ve_A = 1000×32×3×0,20 = 19 200 m³ ; Ve_C = 1000×24×2,5×0,35 = 21 000 m³ ; Ve_V = 1000×18×2×0,60 = 21 600 m³ → Ve = <strong>61 800 m³</strong>.<br><strong>(2) CV global :</strong> 61 800 / 192 000 = <strong>≈ 0,322</strong> (32,2 %).<br><strong>(3) Lame :</strong> Re = 1000 × 61 800 / 7 500 000 = <strong>8,24 mm</strong>.<br><strong>(4) Complément :</strong> 130 200 m³ regroupe stockages, ET et écoulements différés selon les conventions — pas automatiquement de l\'infiltration.',
+                },
+              },
+
+              {
+                id: 'gem-14',
+                titre: 'Les hydrogrammes et le transfert des écoulements',
+                fiche: {
+                  intro: 'L\'hydrogramme Q = f(t) est l\'outil central pour comprendre quand et comment l\'eau produite sur le bassin arrive à l\'exutoire. Un même volume peut produire une pointe courte et élevée ou un écoulement long et modéré : production et transfert sont deux calculs distincts.',
+                  points: [
+                    'L\'hydrogramme représente Q = f(t) — trois phases : montée (Q croissant), pointe Qp = max Q(t), décrue (restitution progressive). Un événement réel peut comporter plusieurs pointes.',
+                    'Décomposition : Q_total = Q_b + Q_d — débit de base (alimentation retardée/souterraine) + écoulement direct (composante rapide). La séparation repose sur des hypothèses, pas une mesure directe.',
+                    'Volume sous un hydrogramme : V ≈ Σ (Qi + Qi+1)/2 × Δt (valeurs ponctuelles, méthode des trapèzes) ou V = Σ Q̄i × Δti (moyennes d\'intervalles) — durées obligatoirement en secondes si Q en m³/s.',
+                    'Temps caractéristiques à définir explicitement : temps de montée, instant de pointe tp, durée de base Tb, temps de concentration (éloignement hydraulique ≠ distance géométrique), décalage pluie–débit.',
+                    'Translation (retard pur) : Q_aval(t) = Q_amont(t−τ) — la pointe et le volume sont conservés, seule la chronologie est décalée.',
+                    'Atténuation par stockage : la pointe est réduite et l\'écoulement étalé dans le temps — le volume reste conservé si l\'eau est seulement retardée, pas perdue.',
+                    'Hydrogramme triangulaire : Vd = ½ × Qp × Tb → Qp = 2Vd/Tb. Même volume → pointes différentes selon Tb. Le volume seul ne détermine pas les durées : elles doivent être justifiées.',
+                    'Addition des contributions : Qtotal(t) = QA(t) + QB(t) — additionner les débits simultanés, pas les pointes individuelles. Les maxima peuvent ne pas coïncider.',
+                    'Synchronisation des pointes : un aménagement peut décaler une contribution et réduire — ou aggraver — la coïncidence avec d\'autres apports. Évaluer l\'effet à l\'exutoire d\'intérêt, pas seulement sur l\'ouvrage isolé.',
+                    'Réservoir linéaire S = K×Qs : après arrêt des apports Qs(t) = Qs(0)×e^(−t/K) — K règle la rapidité de restitution, n\'est pas le temps de concentration.',
+                    'Hydrogramme unitaire : réponse à 1 mm de pluie efficace uniforme pendant une durée fixée — proportionnalité (2 mm → 2×U(t)) + superposition dans le temps permettent de construire l\'hydrogramme d\'un événement quelconque.',
+                    'Conservation du volume : Ve − Vs = ΔS — contrôler à chaque calcul. Arrêter la simulation pendant la décrue, confondre valeurs ponctuelles et moyennes, ou oublier le débit de base sont les erreurs les plus fréquentes.',
+                  ],
+                  formules: [
+                    'Q_p = \\max Q(t) \\;\\; ; \\quad Q_{\\text{total}} = Q_b + Q_d',
+                    'V \\approx \\sum_i \\dfrac{Q_i + Q_{i+1}}{2}\\,\\Delta t_i \\quad (\\text{trapèzes, }\\Delta t \\text{ en s})',
+                    'V_d = \\dfrac{1}{2} Q_p T_b \\;\\; ; \\quad Q_p = \\dfrac{2 V_d}{T_b}',
+                    'Q_{\\text{aval}}(t) = Q_{\\text{amont}}(t - \\tau) \\quad (\\text{translation pure})',
+                    '\\dfrac{dS}{dt} = Q_e - Q_s \\;\\; ; \\quad S = K Q_s',
+                    'Q_s(t) = Q_s(0)\\,e^{-t/K} \\quad (\\text{après arrêt des apports})',
+                    'V_e - V_s = \\Delta S \\quad (\\text{conservation du volume})',
+                  ],
+                  retenir: 'Production ≠ transfert. Volume ≠ débit de pointe. Ne jamais additionner les pointes des affluents sans vérifier la simultanéité. Contrôler le volume à chaque étape.',
+                },
+                flashcards: [
+                  { q: 'Quelles sont les 3 phases d\'un hydrogramme de crue ?', r: 'Montée (Q croissant) → Pointe Qp = max Q(t) → Décrue (Q décroissant, restitution progressive).', expl: 'Un événement réel peut avoir plusieurs pointes ou une longue phase proche du maximum.' },
+                  { q: 'Comment calculer le volume sous un hydrogramme à valeurs ponctuelles ?', r: 'V ≈ Σ (Qi + Qi+1)/2 × Δt (méthode des trapèzes, Δt en secondes).', expl: 'Ex. : Qmoy sur 1h = (0 + 0,4)/2 = 0,2 m³/s → V = 0,2 × 3600 = 720 m³.' },
+                  { q: 'Pour un triangle : Vd = 3 600 m³, Tb = 2h. Quelle est la pointe ?', r: 'Qp = 2 × 3 600 / (2 × 3 600) = 1 m³/s.', expl: 'Formule : Qp = 2Vd / Tb avec Tb en secondes.' },
+                  { q: 'Peut-on additionner les pointes des affluents pour obtenir la pointe aval ?', r: 'Non — il faut additionner les débits aux mêmes instants. Les maxima individuels peuvent ne pas être simultanés.', expl: 'Ex. : QpA = 4 m³/s à t=2h, QpB = 3 m³/s à t=3h → pointe somme = 5 m³/s à t=2h ou t=3h, pas 7 m³/s.' },
+                  { q: 'Quelle différence entre translation et atténuation ?', r: 'Translation = décalage dans le temps, pointe et volume conservés. Atténuation = réduction de la pointe par stockage, volume toujours conservé si eau seulement retardée.', expl: 'Q_aval(t) = Q_amont(t−τ) pour un retard pur. Un ouvrage de stockage lamina la pointe mais restitue l\'eau.' },
+                  { q: 'Que représente K dans le réservoir linéaire S = K×Qs ?', r: 'Un temps de restitution : après arrêt des apports Qs(t) = Qs(0)×e^(−t/K). Plus K est grand, plus la restitution est lente.', expl: 'Ex. : K = 1h, Q(0) = 2 m³/s → après 1h : Q = 2e⁻¹ ≈ 0,74 m³/s. K ≠ temps de concentration.' },
+                  { q: 'Qu\'est-ce qu\'un hydrogramme unitaire ?', r: 'Réponse du bassin à 1 mm de pluie efficace uniforme pendant une durée fixée. La proportionnalité et la superposition permettent de l\'utiliser pour n\'importe quelle pluie efficace.', expl: 'Sur 2 km², 1 mm → Vu = 2 000 m³. Volume sous l\'HU = Vu. La pluie brute ≠ pluie efficace.' },
+                  { q: 'Comment vérifier un calcul de transfert ?', r: 'Conservation du volume : Ve − Vs = ΔS. Si l\'événement est terminé (ΔS = 0), alors Ve = Vs.', expl: 'Causes d\'écart : simulation arrêtée trop tôt, confusion valeurs ponctuelles/moyennes, oubli débit de base, mauvaise conversion h→s.' },
+                  { q: 'Pourquoi la durée de base Tb ne se déduit-elle pas du volume seul ?', r: 'Le volume Vd = ½ × Qp × Tb contient deux inconnues. Il faut une hypothèse supplémentaire sur Tb ou Qp.', expl: 'Ex. : Vd = 3 600 m³ → Tb = 2h donne Qp = 1 m³/s, Tb = 4h donne Qp = 0,5 m³/s. Même volume, pointes différentes.' },
+                  { q: 'Qu\'est-ce que le temps de concentration ?', r: 'Durée de transfert depuis le point hydrauliquement le plus éloigné jusqu\'à l\'exutoire — éloignement hydraulique, pas distance géométrique.', expl: 'Un point proche à vol d\'oiseau peut être lentement connecté (écoulement diffus) ; un point plus loin peut être relié par un fossé rapide.' },
+                ],
+                schema: `<svg viewBox="0 0 520 285" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="285" fill="#f0f7ff" rx="10"/>
+  <text x="260" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a3a5c">Hydrogramme de crue — Q_total = Q_b + Q_d</text>
+  <!-- Q_b fill (base) -->
+  <rect x="65" y="212" width="400" height="28" fill="#bfdbfe" opacity="0.7"/>
+  <!-- Q_d fill (direct) -->
+  <polygon points="65,212 145,156 225,44 305,100 385,184 465,212" fill="#3b82f6" opacity="0.30"/>
+  <!-- Q_total curve -->
+  <polyline points="65,212 145,156 225,44 305,100 385,184 465,212" fill="none" stroke="#1d4ed8" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Q_b line -->
+  <line x1="65" y1="212" x2="465" y2="212" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <!-- Axes -->
+  <line x1="65" y1="240" x2="480" y2="240" stroke="#555" stroke-width="1.5"/>
+  <line x1="65" y1="240" x2="65" y2="28" stroke="#555" stroke-width="1.5"/>
+  <!-- Time ticks and labels -->
+  <text x="65" y="255" text-anchor="middle" fill="#555">0</text>
+  <text x="145" y="255" text-anchor="middle" fill="#555">1</text>
+  <text x="225" y="255" text-anchor="middle" fill="#555">2</text>
+  <text x="305" y="255" text-anchor="middle" fill="#555">3</text>
+  <text x="385" y="255" text-anchor="middle" fill="#555">4</text>
+  <text x="465" y="255" text-anchor="middle" fill="#555">5</text>
+  <text x="265" y="270" text-anchor="middle" fill="#555">Temps (h)</text>
+  <!-- Y axis labels -->
+  <text x="58" y="244" text-anchor="end" fill="#555">0</text>
+  <text x="58" y="170" text-anchor="end" fill="#555">0,5</text>
+  <text x="58" y="100" text-anchor="end" fill="#555">1,0</text>
+  <text x="58" y="38" text-anchor="end" fill="#555">1,5</text>
+  <text x="28" y="140" text-anchor="middle" fill="#555" transform="rotate(-90,28,140)">Q (m³/s)</text>
+  <!-- Phase labels -->
+  <text x="105" y="178" text-anchor="middle" fill="#1d4ed8" font-size="10" font-style="italic">Montée</text>
+  <circle cx="225" cy="44" r="5" fill="#dc2626" stroke="white" stroke-width="1.5"/>
+  <text x="240" y="40" fill="#dc2626" font-weight="bold" font-size="11">Qp</text>
+  <text x="370" y="145" text-anchor="middle" fill="#1d4ed8" font-size="10" font-style="italic">Décrue</text>
+  <!-- Component labels -->
+  <text x="265" y="230" fill="#1e3a8a" font-size="10">Qb — débit de base</text>
+  <text x="195" y="118" fill="#1d4ed8" font-weight="bold" font-size="10">Qd — écoulement direct</text>
+  <!-- Tb arrow (bottom) -->
+  <line x1="65" y1="278" x2="465" y2="278" stroke="#555" stroke-width="1" marker-end="url(#arr)"/>
+  <line x1="465" y1="278" x2="65" y2="278" stroke="#555" stroke-width="1" marker-end="url(#arr2)"/>
+  <text x="265" y="275" text-anchor="middle" fill="#555" font-size="9">Tb</text>
+  <defs>
+    <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#555"/></marker>
+    <marker id="arr2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M6,0 L0,3 L6,6 Z" fill="#555"/></marker>
+  </defs>
+</svg>`,
+                exercice: {
+                  enonce: 'Bassin rivière Claire : Vd = 61 800 m³, forme triangulaire avec Tb = 10h, Tp = 3h, Qb = 0,40 m³/s constant. (1) Calculez Qp,d. (2) Calculez Qp,total. (3) Calculez Vtotal sur 10h. (4) Si Tb passe à 14h (même Vd), quel serait Qp,d ?',
+                  solution: '<strong>(1) Qp,d :</strong> Tb = 10h = 36 000 s → Qp,d = 2 × 61 800 / 36 000 = <strong>≈ 3,43 m³/s</strong>.<br><strong>(2) Qp,total :</strong> 3,43 + 0,40 = <strong>≈ 3,83 m³/s</strong>.<br><strong>(3) Vtotal :</strong> Vb = 0,40 × 36 000 = 14 400 m³ → Vtotal = 61 800 + 14 400 = <strong>76 200 m³</strong>.<br><strong>(4) Sensibilité :</strong> Tb = 14h = 50 400 s → Qp,d = 2 × 61 800 / 50 400 ≈ <strong>2,45 m³/s</strong>. La forme temporelle choisie influence fortement la pointe calculée.',
+                },
+              },
+
+              {
+                id: 'gem-15',
+                titre: 'Crues, étiages et probabilités hydrologiques',
+                fiche: {
+                  intro: 'Caractériser la fréquence des hautes et basses eaux nécessite des statistiques hydrologiques, mais aussi une lecture rigoureuse des indicateurs. Une période de retour décrit une probabilité, pas un calendrier. Un débit seul ne résume pas une crue, et une pluie centennale ne produit pas automatiquement une crue centennale.',
+                  points: [
+                    'Crue ≠ inondation : une crue est une augmentation du débit, qui peut rester dans le lit ; une inondation est la submersion de terrains. Un débit de référence n\'est pas une carte d\'inondation.',
+                    'Caractériser une crue avec plusieurs indicateurs : débit de pointe Qp, volume écoulé, temps de montée, durée au-dessus d\'un seuil, nombre de pointes. Deux crues au même Qp peuvent avoir des effets très différents.',
+                    'Débit instantané ≠ débit moyen journalier : une pointe de 24 m³/s pendant 1h sur 24h donne une moyenne journalière ≈ 2,92 m³/s. Ne pas mélanger ces variables dans une analyse de fréquence.',
+                    'Probabilité annuelle de dépassement p = 1/T : Q100 → p = 1 % par an. Pas un calendrier : après une crue centennale, la probabilité l\'année suivante reste 1 % dans un modèle stationnaire.',
+                    'Probabilité sur N années : PN = 1−(1−p)^N sous hypothèse d\'indépendance et de probabilité constante. Q100 sur 30 ans → P30 ≈ 26 % : le risque s\'accumule dans le temps.',
+                    'Probabilité ≠ aléa ≠ risque : la fréquence d\'un événement ne suffit pas à évaluer ses conséquences. Les enjeux et la vulnérabilité entrent en compte.',
+                    'Série de maxima annuels et position empirique Tm = (n+1)/m (rang m décroissant, n années) — position graphique seulement. L\'estimation des événements rares nécessite un ajustement statistique complet.',
+                    'Analyse fréquentielle F(QT) = 1−1/T : préparer l\'échantillon → choisir le modèle statistique → estimer les paramètres → contrôler l\'ajustement → évaluer les incertitudes.',
+                    'Stationnarité : si le bassin ou le climat évolue (urbanisation, nouveaux ouvrages), les statistiques historiques peuvent ne plus s\'appliquer directement — toujours préciser la période de données.',
+                    'Pluie rare ≠ crue rare : la réponse dépend de la durée, répartition spatiale, humidité initiale, stockages et conditions de transfert — la qualification statistique doit rester attachée à la variable analysée.',
+                    'QMNA = minimum des débits moyens mensuels d\'une année. QMNA5 = quantile quinquennal sec (20 % de probabilité d\'être égalé ou dépassé vers le bas) — pas la moyenne des 5 dernières années.',
+                    'VCN3 = minimum des moyennes sur 3 jours consécutifs glissants. Volume de déficit VD = ∫max(0, Qs−Q) dt — dépend du seuil choisi, qui doit être justifié.',
+                  ],
+                  formules: [
+                    'p = \\dfrac{1}{T} \\;\\; ; \\quad T = \\dfrac{1}{p}',
+                    'P_N = 1-(1-p)^N \\quad (\\text{au moins 1 dépassement en }N\\text{ ans})',
+                    'F(Q_T) = 1 - \\dfrac{1}{T} \\quad (\\text{quantile des maxima annuels})',
+                    'p_m = \\dfrac{m}{n+1} \\;\\; ; \\quad T_m = \\dfrac{n+1}{m} \\quad (\\text{position empirique})',
+                    'VCN3 = \\min_k\\!\\left(\\dfrac{Q_{j,k}+Q_{j,k+1}+Q_{j,k+2}}{3}\\right)',
+                    'V_D = \\int \\max\\bigl(0,\\,Q_s - Q(t)\\bigr)\\,dt',
+                  ],
+                  retenir: 'Période de retour = probabilité annuelle (1/T), pas un calendrier. Crue ≠ inondation. Pluie rare ≠ crue rare. Toujours accompagner une valeur statistique de sa variable, sa période de données et ses incertitudes.',
+                },
+                flashcards: [
+                  { q: 'Quelle différence entre crue et inondation ?', r: 'Crue = augmentation du débit (peut rester dans le lit). Inondation = submersion de terrains habituellement hors d\'eau.', expl: 'Un débit de référence ne constitue pas une carte d\'inondation — il faut aussi la géométrie, les ouvrages et les conditions aval.' },
+                  { q: 'Que signifie « crue centennale Q100 » ?', r: 'Probabilité annuelle de dépassement de 1 % — pas un événement espacé de 100 ans. Après une crue centennale, la probabilité reste 1 % l\'année suivante.', expl: 'Dans un modèle stationnaire et indépendant : P30 = 1−0,99³⁰ ≈ 26 % de dépasser Q100 sur 30 ans.' },
+                  { q: 'Formule de la probabilité de dépassement sur N années ?', r: 'PN = 1−(1−p)^N sous hypothèses d\'indépendance et probabilité annuelle constante p = 1/T.', expl: 'Ex. : T=50 ans (p=2%) sur 30 ans → P30 = 1−0,98³⁰ ≈ 45 %.' },
+                  { q: 'Comment se construit la position empirique Tm ?', r: 'Trier les n maxima annuels par ordre décroissant (rang m) → Tm = (n+1)/m.', expl: 'Ex. : 10 valeurs, rang m=1 → T1 = 11 ans. C\'est une position graphique, pas une période de retour certifiée.' },
+                  { q: 'Qu\'est-ce que le QMNA ?', r: 'Minimum des débits moyens mensuels d\'une seule année. Pas le minimum journalier.', expl: 'Sur plusieurs années, on obtient une série de QMNA. Le QMNA5 est le quantile quinquennal sec de cette série (probabilité 20% vers le bas).' },
+                  { q: 'Qu\'est-ce que le VCN3 ?', r: 'Minimum des moyennes sur 3 jours consécutifs glissants pendant la période étudiée.', expl: 'Les 3 jours doivent être consécutifs, pas les 3 jours les plus faibles pris séparément.' },
+                  { q: 'Comment calculer le volume de déficit sous un seuil Qs ?', r: 'VD = ∫max(0, Qs−Q(t)) dt — somme des manques journaliers × durée.', expl: 'Ex. : déficit moyen = 0,70 m³/s pendant 4 jours → VD = 0,70 × 4 × 86400 = 241 920 m³.' },
+                  { q: 'Une pluie centennale produit-elle une crue centennale ?', r: 'Pas nécessairement. La réponse dépend de la durée, répartition spatiale, humidité initiale et stockages.', expl: 'La qualification statistique doit rester attachée à la variable analysée (pluie ou débit), pas transférée automatiquement.' },
+                  { q: 'Pourquoi ne pas interpoler linéairement entre Q10 et Q50 pour trouver Q30 ?', r: 'La relation entre débit et période de retour n\'est pas linéaire — il faut utiliser le modèle statistique ajusté.', expl: 'Ex. : Q10=8, Q50=14 → Q30 ≠ 8+(14-8)×20/40 = 11 m³/s. L\'interpolation linéaire est arbitraire.' },
+                  { q: 'Pourquoi accompagner Q100 de sa période de données ?', r: 'La période de retour est estimée à partir d\'une série historique. Une autre période peut donner une valeur différente. La stationnarité est une hypothèse, pas une garantie.', expl: 'Si le bassin a été urbanisé ou si le climat évolue, les statistiques passées peuvent ne plus s\'appliquer.' },
+                ],
+                schema: `<svg viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="280" fill="#f0f7ff" rx="10"/>
+  <text x="260" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a3a5c">Probabilité de dépassement sur N années</text>
+  <text x="260" y="38" text-anchor="middle" font-size="11" fill="#555">PN = 1 − (1 − p)^N</text>
+  <!-- Axes -->
+  <line x1="65" y1="225" x2="460" y2="225" stroke="#555" stroke-width="1.5"/>
+  <line x1="65" y1="225" x2="65" y2="45" stroke="#555" stroke-width="1.5"/>
+  <!-- Grid lignes 25% 50% 75% 100% -->
+  <line x1="65" y1="180" x2="460" y2="180" stroke="#ddd" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="65" y1="135" x2="460" y2="135" stroke="#ddd" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="65" y1="90" x2="460" y2="90" stroke="#ddd" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="65" y1="45" x2="460" y2="45" stroke="#ddd" stroke-width="1" stroke-dasharray="4,3"/>
+  <!-- Y labels -->
+  <text x="58" y="229" text-anchor="end" fill="#555">0</text>
+  <text x="58" y="184" text-anchor="end" fill="#555">25</text>
+  <text x="58" y="139" text-anchor="end" fill="#555">50</text>
+  <text x="58" y="94" text-anchor="end" fill="#555">75</text>
+  <text x="58" y="49" text-anchor="end" fill="#555">100</text>
+  <text x="28" y="140" text-anchor="middle" fill="#555" transform="rotate(-90,28,140)">P (%)</text>
+  <!-- X labels -->
+  <text x="65" y="240" text-anchor="middle" fill="#555">0</text>
+  <text x="143" y="240" text-anchor="middle" fill="#555">10</text>
+  <text x="222" y="240" text-anchor="middle" fill="#555">20</text>
+  <text x="300" y="240" text-anchor="middle" fill="#555">30</text>
+  <text x="378" y="240" text-anchor="middle" fill="#555">40</text>
+  <text x="457" y="240" text-anchor="middle" fill="#555">50</text>
+  <text x="265" y="258" text-anchor="middle" fill="#555">N (années)</text>
+  <!-- Courbe T=10 ans (rouge) : p=0.1 -->
+  <!-- N=0:65,225 N=5:104,151 N=10:143,108 N=20:222,67 N=30:300,52 N=50:457,47 -->
+  <polyline points="65,225 104,151 143,108 222,67 300,52 378,48 457,47" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+  <!-- Courbe T=50 ans (orange) : p=0.02 -->
+  <!-- N=0:65,225 N=10:143,207 N=20:222,165 N=30:300,144 N=40:378,126 N=50:457,110 -->
+  <polyline points="65,225 104,207 143,195 222,165 300,144 378,126 457,110" fill="none" stroke="#f97316" stroke-width="2.5"/>
+  <!-- Courbe T=100 ans (bleu) : p=0.01 -->
+  <!-- N=0:65,225 N=10:143,207 N=20:222,192 N=30:300,178 N=40:378,166 N=50:457,154 -->
+  <polyline points="65,225 104,216 143,207 222,192 300,178 378,166 457,154" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+  <!-- Point marquant N=30, T100 ≈ 26% → y=225-26*1.8=178 -->
+  <circle cx="300" cy="178" r="5" fill="#2563eb" stroke="white" stroke-width="1.5"/>
+  <line x1="300" y1="178" x2="300" y2="225" stroke="#2563eb" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="308" y="175" fill="#2563eb" font-size="10">26 %</text>
+  <text x="296" y="237" fill="#2563eb" font-size="9" text-anchor="middle">30 ans</text>
+  <!-- Légende -->
+  <line x1="75" y1="270" x2="100" y2="270" stroke="#dc2626" stroke-width="2.5"/>
+  <text x="105" y="274" fill="#dc2626">T = 10 ans (p=10%)</text>
+  <line x1="225" y1="270" x2="250" y2="270" stroke="#f97316" stroke-width="2.5"/>
+  <text x="255" y="274" fill="#f97316">T = 50 ans (p=2%)</text>
+  <line x1="370" y1="270" x2="395" y2="270" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="400" y="274" fill="#2563eb">T = 100 ans</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Rivière Claire : Q10 = 8 m³/s, Q50 = 14 m³/s, Q100 = 17 m³/s, QMNA5 = 0,18 m³/s. (1) Calculez P30 pour le seuil centennal. (2) Une crue de 12 m³/s est observée — pouvez-vous annoncer T = 30 ans ? (3) Le QMNA d\'une année vaut 0,15 m³/s. Quel constat peut-on faire ?',
+                  solution: '<strong>(1) P30 pour Q100 :</strong> P30 = 1 − 0,99³⁰ = 1 − 0,7397 ≈ <strong>26 %</strong>. Sur 30 ans, il y a 26% de chances de dépasser Q100 au moins une fois.<br><strong>(2) T pour 12 m³/s :</strong> Non — on constate que 8 < 12 < 14, soit entre les estimations décennale et cinquantennale. L\'interpolation linéaire serait arbitraire ; il faut le modèle statistique ajusté.<br><strong>(3) QMNA = 0,15 < QMNA5 = 0,18 :</strong> le seuil quinquennal sec est dépassé vers le bas. On ne peut pas en déduire précisément la période de retour avec cette seule comparaison.',
+                },
+              },
+
+              {
+                id: 'gem-16',
+                titre: 'Les écosystèmes aquatiques et leurs habitats',
+                fiche: {
+                  intro: 'L\'écosystème aquatique est l\'unité fonctionnelle de base : un biotope (conditions physiques et chimiques) héberge une biocénose (communauté d\'organismes vivants). Ces deux composantes interagissent en permanence. La qualité et la diversité des habitats conditionnent la richesse biologique ; toute altération du milieu physique se traduit par une dégradation de la biocénose.',
+                  points: [
+                    'Écosystème = biotope + biocénose + interactions — le biotope (eau, substrat, morphologie, lumière, température) héberge la biocénose ; la biocénose modifie en retour son biotope (macrophytes ralentissent l\'écoulement, accumulent les sédiments). La causalité est circulaire, pas unidirectionnelle.',
+                    'Grandes familles de milieux : cours d\'eau lotiques (écoulement permanent ou temporaire), plans d\'eau lentiques (lacs, étangs, retenues), zones humides (marais, tourbières, ripisylves), milieux souterrains (aquifères, karsts). Chacun a ses cortèges d\'espèces et ses fonctions écosystémiques propres.',
+                    'Habitat = ensemble des conditions physico-chimiques d\'un lieu (substrat, vitesse, profondeur, température, oxygène, lumière) + fonctions remplies (reproduction, nurserie, alimentation, refuge, repos). Une même espèce utilise des habitats différents selon son stade de vie — ne pas confondre habitat et domaine vital.',
+                    'Hydromorphologie = interaction entre forme du lit (géométrie, pente, sinuosité) et dynamique des écoulements (vitesse, profondeur, cisaillement). Elle structure la mosaïque d\'habitats à toutes les échelles : du méandre (km) à l\'interstice de substrat (cm). C\'est le paramètre physique central pour évaluer le potentiel d\'accueil biologique.',
+                    'Unités d\'écoulement (faciès) : radier (V > 30 cm/s, faible profondeur < 30 cm, substrat grossier — galets, graviers), mouille (V < 10 cm/s, profonde > 50 cm, substrat fin), plat courant (intermédiaire), plat lent. La succession radier-mouille est la signature d\'un cours d\'eau morphologiquement fonctionnel — sa disparition traduit une chenalisation ou une incision.',
+                    'Substrat et colmatage : la granulométrie conditionne la faune benthique et les sites de fraie des salmonidés. Le colmatage (dépôt de fines dans les interstices) asphyxie les œufs, réduit les échanges hyporhéiques et érode la diversité faunistique. Indicateurs : MES, taux de colmatage visuel, mesures de perméabilité du sédiment.',
+                    'Zone hyporhéique : espace de transition entre eau de surface et eau souterraine, sous et latéralement au lit. Elle abrite une faune spécialisée (hyporheobios), oxygène les sédiments alluviaux, assure un tampon thermique et filtre les polluants. Son fonctionnement dépend de la perméabilité du substrat et du gradient hydraulique vertical.',
+                    'Réseaux trophiques aquatiques : producteurs primaires (algues, macrophytes) → consommateurs primaires (invertébrés brouteurs, filtreurs, détritivores) → prédateurs (invertébrés, poissons) → prédateurs supérieurs. La matière organique allochtone (feuilles, bois mort) est souvent la source énergétique dominante dans les petits cours d\'eau ombragés.',
+                    'Berges et ripisylve : zone de transition terrestre-aquatique stratégique. Fonctions : ombrage (limite le réchauffement estival), stabilisation des berges par les racines, apport de matière organique et d\'abri, filtration des intrants agricoles, corridor écologique pour la faune terrestre.',
+                    'Quatre continuités écologiques : longitudinale (migrations amont-aval, dérive d\'invertébrés, transport sédimentaire), latérale (échanges cours d\'eau ↔ plaine d\'inondation en crue — nurserie, alimentation), verticale (échanges surface ↔ hyporhéique ↔ nappe), temporelle (variabilité saisonnière — étiage et crue sont des phases fonctionnelles). Ces quatre continuités sont interdépendantes.',
+                    'Cycles de vie et complémentarité des habitats : les espèces migratrices utilisent des habitats très différents selon leur stade. Exemple saumon atlantique : fraie sur graviers oxygénés (radiers) → alevins en zones peu profondes → tacons en radiers-plats → smoltification → mer → retour adulte. Toute interruption de continuité ou perte d\'un habitat critique brise le cycle.',
+                    'Bioindication : les organismes aquatiques intègrent les perturbations sur leur durée de vie et révèlent l\'état écologique mieux qu\'une mesure ponctuelle. Indices normalisés DCE : IBD (diatomées — eutrophisation), IBG-DCE (macroinvertébrés — dégradations générales), IPR (poissons — altérations morphologiques), IBMR (macrophytes — nutriments). Les indices se complètent et aucun n\'est exhaustif seul.',
+                  ],
+                  formules: [
+                    '\\text{Écosystème} = \\text{biotope} + \\text{biocénose} + \\text{interactions}',
+                    '\\text{Radier : } V > 0{,}30\\,\\text{m/s},\\; h < 0{,}30\\,\\text{m},\\; \\text{substrat grossier}',
+                    '\\text{Mouille : } V < 0{,}10\\,\\text{m/s},\\; h > 0{,}50\\,\\text{m},\\; \\text{substrat fin}',
+                    '\\text{Continuités : longitudinale} \\leftrightarrow \\text{latérale} \\leftrightarrow \\text{verticale} \\leftrightarrow \\text{temporelle}',
+                    '\\text{Bioindication DCE : IBD — IBG-DCE — IPR — IBMR}',
+                  ],
+                  retenir: 'Habitat ≠ espèce : l\'habitat est un lieu avec des conditions, l\'espèce en est l\'occupant. Un milieu riche = mosaïque d\'habitats diversifiés + quatre continuités fonctionnelles. Toute rupture de continuité dégrade l\'ensemble du système.',
+                },
+                flashcards: [
+                  { q: 'Quelle est la différence entre biotope et biocénose ?', r: 'Biotope = milieu physique et chimique (eau, substrat, température, lumière). Biocénose = ensemble des organismes vivant dans ce milieu. Les deux forment l\'écosystème.', expl: 'La relation est bidirectionnelle : la biocénose modifie aussi le biotope — macrophytes ralentissent l\'écoulement et favorisent la sédimentation.' },
+                  { q: 'Quelles sont les caractéristiques d\'un radier ?', r: 'Vitesse > 30 cm/s, faible profondeur (< 30 cm), substrat grossier (galets, graviers). C\'est la zone de fraie privilégiée des salmonidés.', expl: 'Son absence traduit une chenalisation, une incision ou un fort colmatage.' },
+                  { q: 'Qu\'est-ce que la zone hyporhéique et quel est son rôle ?', r: 'Transition entre eau de surface et eau souterraine sous/à côté du lit. Rôles : oxygénation des sédiments, tampon thermique, filtre des polluants, habitat spécialisé (hyporheobios).', expl: 'Une imperméabilisation du substrat (béton, colmatage intense) supprime la zone hyporhéique et ses services.' },
+                  { q: 'Quels sont les rôles de la ripisylve ?', r: 'Ombrage (régulation thermique), stabilisation des berges par les racines, apport de matière organique, corridor écologique, filtration des intrants agricoles, abris pour la faune.', expl: 'Sa suppression entraîne hausse des températures, érosion des berges et baisse de la diversité biologique.' },
+                  { q: 'Quelles sont les 4 continuités écologiques ?', r: 'Longitudinale (amont-aval), latérale (cours d\'eau ↔ plaine), verticale (surface ↔ nappe), temporelle (régimes saisonniers). Toutes sont interdépendantes.', expl: 'Un barrage coupe la continuité longitudinale et peut aussi modifier la latérale (piégeage sédiments, modification des crues).' },
+                  { q: 'Qu\'est-ce que le colmatage et quelles sont ses conséquences ?', r: 'Dépôt de particules fines dans les interstices du substrat. Conséquences : asphyxie des œufs de salmonidés, réduction des échanges hyporhéiques, appauvrissement de la faune benthique.', expl: 'Sources fréquentes : érosion des berges agricoles, MES en excès, défaut de végétalisation.' },
+                  { q: 'Quel indice biologique utilise-t-on pour les macroinvertébrés benthiques ?', r: 'IBG-DCE (anciennement IBGN). Évalue la qualité générale du cours d\'eau.', expl: 'IBD = diatomées (eutrophisation) ; IPR = poissons (morphologie) ; IBMR = macrophytes (nutriments).' },
+                  { q: 'Pourquoi les organismes aquatiques sont-ils de bons bioindicateurs ?', r: 'Ils intègrent les perturbations sur leur durée de vie (semaines à années) et révèlent l\'état écologique mieux qu\'une mesure ponctuelle de l\'eau.', expl: 'Une mesure d\'eau un jour J peut manquer une pollution épisodique ; un indice biologique capte l\'effet cumulé.' },
+                  { q: 'Pourquoi la succession radier-mouille indique-t-elle un bon état morphologique ?', r: 'Elle traduit la diversité des faciès : radier (vitesse, oxygène, fraie) et mouille (refuge, alimentation, profondeur) répondent à des besoins biologiques complémentaires.', expl: 'Sa disparition au profit d\'un profil uniforme (rectification) réduit fortement la capacité d\'accueil biologique.' },
+                  { q: 'Comment le cycle de vie du saumon illustre-t-il la complémentarité des habitats ?', r: 'Fraie sur graviers (radier) → alevins en zones peu profondes → tacons en radiers-plats → mer → retour adulte. Chaque phase exige un habitat précis ; perdre l\'un suffit à briser le cycle.', expl: 'Une seule suppression de radier de frai dans un bassin peut effondrer toute la cohorte de l\'année.' },
+                ],
+                schema: `<svg viewBox="0 0 520 310" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="310" fill="#f0f7ff" rx="10"/>
+  <text x="260" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a3a5c">4 continuités et faciès d'écoulement</text>
+  <!-- Plaine gauche -->
+  <rect x="15" y="45" width="60" height="180" rx="5" fill="#d1fae5" stroke="#16a34a" stroke-width="1"/>
+  <text x="45" y="102" text-anchor="middle" fill="#15803d" font-size="9" font-weight="bold">Plaine</text>
+  <text x="45" y="116" text-anchor="middle" fill="#15803d" font-size="9">d'inond.</text>
+  <!-- Cours d'eau -->
+  <rect x="85" y="85" width="350" height="105" rx="8" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <!-- Faciès -->
+  <ellipse cx="135" cy="137" rx="32" ry="20" fill="#60a5fa" opacity="0.8"/>
+  <text x="135" y="133" text-anchor="middle" fill="#1e3a8a" font-size="9" font-weight="bold">Radier</text>
+  <text x="135" y="145" text-anchor="middle" fill="#1e3a8a" font-size="8">V↑ h↓ O₂↑</text>
+  <ellipse cx="215" cy="137" rx="35" ry="22" fill="#1d4ed8" opacity="0.35"/>
+  <text x="215" y="133" text-anchor="middle" fill="#1e3a8a" font-size="9" font-weight="bold">Mouille</text>
+  <text x="215" y="145" text-anchor="middle" fill="#1e3a8a" font-size="8">V↓ h↑ refuge</text>
+  <ellipse cx="295" cy="137" rx="30" ry="18" fill="#60a5fa" opacity="0.45"/>
+  <text x="295" y="133" text-anchor="middle" fill="#1e3a8a" font-size="9" font-weight="bold">Plat</text>
+  <text x="295" y="145" text-anchor="middle" fill="#1e3a8a" font-size="8">interméd.</text>
+  <ellipse cx="375" cy="137" rx="32" ry="20" fill="#60a5fa" opacity="0.8"/>
+  <text x="375" y="133" text-anchor="middle" fill="#1e3a8a" font-size="9" font-weight="bold">Radier</text>
+  <text x="375" y="145" text-anchor="middle" fill="#1e3a8a" font-size="8">V↑ h↓ frai</text>
+  <!-- Plaine droite -->
+  <rect x="445" y="45" width="60" height="180" rx="5" fill="#d1fae5" stroke="#16a34a" stroke-width="1"/>
+  <text x="475" y="102" text-anchor="middle" fill="#15803d" font-size="9" font-weight="bold">Plaine</text>
+  <text x="475" y="116" text-anchor="middle" fill="#15803d" font-size="9">d'inond.</text>
+  <!-- Zone hyporhéique -->
+  <rect x="85" y="194" width="350" height="32" rx="5" fill="#c7d2fe" opacity="0.8" stroke="#6366f1" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="260" y="214" text-anchor="middle" fill="#4338ca" font-size="10">Zone hyporhéique</text>
+  <!-- Nappe -->
+  <rect x="15" y="234" width="490" height="24" rx="5" fill="#bfdbfe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="260" y="250" text-anchor="middle" fill="#1e3a8a" font-size="10">Nappe phréatique</text>
+  <!-- ① Longitudinale -->
+  <line x1="95" y1="63" x2="425" y2="63" stroke="#dc2626" stroke-width="2.5" marker-end="url(#aL)"/>
+  <text x="260" y="58" text-anchor="middle" fill="#dc2626" font-weight="bold" font-size="10">① Longitudinale (amont → aval)</text>
+  <!-- ② Latérale -->
+  <line x1="85" y1="137" x2="75" y2="137" stroke="#16a34a" stroke-width="2" stroke-dasharray="4,2" marker-end="url(#aLat)"/>
+  <line x1="435" y1="137" x2="445" y2="137" stroke="#16a34a" stroke-width="2" stroke-dasharray="4,2" marker-end="url(#aLat2)"/>
+  <text x="45" y="158" text-anchor="middle" fill="#15803d" font-size="9">② Lat.</text>
+  <text x="475" y="158" text-anchor="middle" fill="#15803d" font-size="9">② Lat.</text>
+  <!-- ③ Verticale (double flèche) -->
+  <line x1="460" y1="190" x2="460" y2="233" stroke="#b45309" stroke-width="2" marker-end="url(#aVd)"/>
+  <line x1="468" y1="233" x2="468" y2="190" stroke="#b45309" stroke-width="2" marker-end="url(#aVu)"/>
+  <text x="464" y="274" text-anchor="middle" fill="#b45309" font-size="9">③ Vert.</text>
+  <!-- ④ Temporelle -->
+  <text x="260" y="290" text-anchor="middle" fill="#7c3aed" font-weight="bold" font-size="10">④ Temporelle : alternance fonctionnelle crue ↔ étiage</text>
+  <text x="260" y="305" text-anchor="middle" fill="#64748b" font-size="9">Mosaïque Radier→Mouille→Plat = signature morphologique fonctionnelle</text>
+  <defs>
+    <marker id="aL" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#dc2626"/></marker>
+    <marker id="aLat" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#16a34a"/></marker>
+    <marker id="aLat2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#16a34a"/></marker>
+    <marker id="aVd" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b45309"/></marker>
+    <marker id="aVu" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b45309"/></marker>
+  </defs>
+</svg>`,
+                exercice: {
+                  enonce: 'Un cours d\'eau a été rectifié sur 2 km (profil uniforme en trapèze, absence de radiers et mouilles). Les berges ont été déboisées et un barrage d\'irrigation sans dispositif de franchissement a été construit. Les indices biologiques donnent : IBD = 5/20 (mauvais), IBG-DCE = 6/20 (médiocre), IPR classe mauvaise. (1) Identifiez les continuités rompues et la cause principale pour chacune. (2) Quels groupes biologiques sont les plus affectés par la suppression des radiers ? (3) Que signifie un IBD = 5/20 ? (4) Proposez 3 mesures de restauration prioritaires.',
+                  solution: '<strong>(1) Continuités rompues :</strong> longitudinale (barrage bloque les migrations de poissons) ; latérale (chenalisation supprime les échanges avec la plaine d\'inondation) ; verticale (recalibrage et imperméabilisation réduisent les échanges hyporhéiques) ; temporelle (rectification homogénéise les débits, supprime les crues morphogènes).<br><strong>(2) Groupes affectés par la perte des radiers :</strong> salmonidés (perte des sites de fraie sur graviers oxygénés), invertébrés benthiques rhéophiles (perte d\'abris sous galets), hyporheobios (colmatage accru).<br><strong>(3) IBD = 5/20 :</strong> milieu eutrophe ou chargé en matières organiques ; les diatomées indicatrices de bonne qualité ont disparu au profit d\'espèces tolérantes.<br><strong>(4) Mesures prioritaires :</strong> ① passe à poissons sur le barrage (continuité longitudinale) ; ② replantation d\'une ripisylve (ombrage, stabilisation, matière organique) ; ③ recharge granulométrique pour recréer des radiers (substrat grossier).',
+                },
+              },
+
+            ],
+          }, // fin gem-m5
+
+          /* ══ MODULE 6 — CONDUITE DE PROJET ══ */
+          {
+            id: 'gem-m6',
+            name: 'Conduite de projet',
+            ico: '📋',
+            color: '#5A7A2E',
+            colorl: '#F0F7E3',
+            chapitres: [
+
+              {
+                id: 'gem-17',
+                titre: 'La qualité physico-chimique de l\'eau',
+                fiche: {
+                  intro: 'Une rivière peut sembler claire et contenir des substances indésirables ; une eau trouble après une crue peut traduire un transport naturel. L\'apparence ne suffit pas : il faut mesurer des paramètres, préciser leur unité et leur méthode, et replacer les résultats dans leur contexte hydrologique et saisonnier avant toute interprétation.',
+                  points: [
+                    'Principaux paramètres physico-chimiques : température (°C), oxygène dissous (mg O₂/L), taux de saturation (%), pH (sans unité), conductivité (µS/cm), turbidité (FNU ou NTU selon méthode), MES (mg/L), formes de l\'azote et du phosphore (mg/L avec forme précisée), DBO₅ (mg O₂/L), DCO (mg O₂/L), COT (mg C/L). Le nom, l\'unité et la méthode doivent toujours être lus ensemble.',
+                    'Température : influence le métabolisme, les échanges gazeux, la solubilité des gaz et les cycles biologiques. Dépend de la météo, de l\'ombrage, des apports souterrains et du débit. Une valeur instantanée est incomplète — examiner le minimum, le maximum, l\'amplitude journalière et la durée au-dessus d\'un seuil d\'intérêt.',
+                    'Oxygène dissous (mg O₂/L) : apports — échanges atmosphériques, photosynthèse, mélange. Consommations — respiration, dégradation de matière organique, nitrification. À pression et salinité comparables, une eau froide peut contenir davantage d\'O₂ à saturation ; la concentration réelle ne se déduit pas de la température seule.',
+                    'Taux de saturation S_O₂ = 100 × C_mesurée / C_sat. Variations nycthémérales : hausse diurne (photosynthèse), baisse nocturne (respiration seule) — minimum souvent en fin de nuit. Une mesure à 17h ne décrit pas le minimum journalier. Sursaturation (> 100 %) peut accompagner une forte production photosynthétique mais n\'indique pas automatiquement un meilleur état écologique.',
+                    'pH = −log₁₀(a_H⁺). Échelle logarithmique : un écart d\'une unité = facteur 10 sur l\'activité des ions H⁺. Influencé par la géologie, les échanges de CO₂, la photosynthèse et le pouvoir tampon. Ne jamais calculer un mélange par moyenne arithmétique des pH : les équilibres chimiques ne s\'additionnent pas linéairement.',
+                    'Conductivité (µS/cm, ramenée à 25 °C) : capacité à conduire le courant, liée aux ions dissous. Peut signaler un changement d\'origine d\'eau, une dilution ou un apport. Conductivité élevée ≠ pollution (minéralisation naturelle géologique possible) ; conductivité faible ≠ absence de substances toxiques. Ne permet pas d\'identifier les ions responsables.',
+                    'Turbidité (FNU/NTU, propriété optique) ≠ MES (mg/L, masse par volume) : pas de conversion universelle. Une relation locale calibrée est nécessaire ; FNU et NTU ne sont pas strictement interchangeables selon l\'instrument. Les particules peuvent influencer la lumière, les habitats et le transport de substances — leur origine et leur durée d\'exposition comptent.',
+                    'DBO₅ (mg O₂/L) = demande biologique en oxygène dans un essai à 20 °C, 5 jours, obscurité. ≠ concentration d\'O₂ actuelle dans la rivière, ≠ totalité de la matière organique, ≠ O₂ réellement consommé dans le milieu. DCO = oxydation chimique dans l\'essai (inclut substances minérales réductrices). COT (mg C/L) = carbone organique total. Complémentaires mais non interchangeables.',
+                    'Formes de l\'azote : N organique, NH₄⁺ (ammonium), NH₃ (ammoniac non ionisé — équilibre pH et T°), NO₂⁻ (nitrites), NO₃⁻ (nitrates). Azote Kjeldahl ≠ azote total (n\'inclut normalement pas les nitrates et nitrites). La nitrification consomme de l\'O₂. Conversion : C(mg NO₃⁻/L) = C(mg N/L) × 62/14.',
+                    'Phosphore : orthophosphates, P dissous, P particulaire, P total. Toujours lire la base d\'expression (mg P/L ≠ mg PO₄/L pour la même quantité). Conversion : C(mg PO₄/L) ≈ C(mg P/L) × 95/31. Eutrophisation = enrichissement en N et P → développements végétaux → variations O₂/pH → dégradation de matière organique → effets sur biocénoses.',
+                    'Flux massique Ṁ = C × Q. C en mg/L, Q en m³/s → Ṁ en g/s. Ṁ (kg/j) = 86,4 × C × Q. Une dilution de concentration peut coexister avec une augmentation du flux si le débit augmente suffisamment. Bilan de mélange conservatif complet : C_m = (Q₁C₁ + Q₂C₂) / (Q₁ + Q₂). Ne s\'applique pas au pH.',
+                    'Bonnes pratiques : mesures in situ pour T, pH et O₂ (évoluent rapidement après prélèvement) ; protocoles de conservation validés pour le laboratoire. Limite de quantification (C < LQ) ≠ C = 0 — l\'absence n\'est pas démontrée. Données atypiques à examiner avant correction. Un diagnostic local ponctuel ne constitue pas un état écologique officiel (méthodes DCE définies par l\'OFB).',
+                  ],
+                  formules: [
+                    'S_{O_2} = 100\\,\\dfrac{C_{\\text{mesurée}}}{C_{\\text{sat}}}',
+                    'pH = -\\log_{10}(a_{H^+})',
+                    '\\dot{M}\\,[\\text{g/s}] = C\\,Q \\;\\; ; \\quad \\dot{M}\\,[\\text{kg/j}] = 86{,}4\\,C\\,Q',
+                    'C_m = \\dfrac{Q_1 C_1 + Q_2 C_2}{Q_1 + Q_2}',
+                    'C_{\\text{NO}_3^-} = C_N \\times \\dfrac{62}{14}',
+                    'C_{\\text{PO}_4} \\approx C_P \\times \\dfrac{95}{31}',
+                  ],
+                  retenir: 'Mesure ≠ interprétation. Toujours lire forme, unité et méthode ensemble. Concentration ≠ flux. Non quantifié ≠ absent. Diagnostic ponctuel ≠ état officiel. Ne jamais calculer un mélange de pH par moyenne arithmétique.',
+                },
+                flashcards: [
+                  { q: 'Calculer S_O₂ si C = 7,2 mg/L et C_sat = 9,0 mg/L.', r: 'S_O₂ = 100 × 7,2 / 9,0 = 80 % — sous-saturation.', expl: 'S_O₂ > 100 % = sursaturation (photosynthèse intense) ; ≈ 100 % = proche de l\'équilibre ; < 100 % = sous-saturation (respiration/dégradation dominante).' },
+                  { q: 'Quelle est la différence entre turbidité et MES ?', r: 'Turbidité = propriété optique (diffusion de la lumière, FNU/NTU). MES = masse de matières retenues sur filtre, en mg/L. Pas de conversion universelle entre les deux.', expl: 'Une relation locale peut être calibrée mais doit être validée pour chaque contexte (nature des particules, instrument utilisé).' },
+                  { q: 'Que représente (et ne représente pas) la DBO₅ ?', r: 'Représente : demande biologique en O₂ dans un essai à 20 °C pendant 5 jours. Ne représente pas : la concentration d\'O₂ actuelle, la totalité de la matière organique, ni l\'O₂ consommé in situ.', expl: 'La méthode (inhibition ou non de la nitrification) doit être précisée pour comparer des résultats.' },
+                  { q: 'C = 2 mg/L, Q = 0,50 m³/s. Calculer le flux en g/s et en kg/j.', r: 'Ṁ = 2 × 0,50 = 1 g/s. En kg/j : 1 × 86,4 = 86,4 kg/j.', expl: 'Attention : cette équivalence n\'est valable en masse journalière que si C × Q reste constant ou représente bien sa moyenne sur la journée.' },
+                  { q: 'Mélange : Q₁ = 1 m³/s, C₁ = 2 mg/L ; Q₂ = 0,50 m³/s, C₂ = 8 mg/L. Calculer C_m.', r: 'C_m = (1 × 2 + 0,50 × 8) / (1 + 0,50) = (2 + 4) / 1,50 = 4 mg/L.', expl: 'Cette formule suppose mélange complet, régime permanent, substance conservative, pas d\'autre entrée/sortie.' },
+                  { q: 'Convertir 3 mg N/L (forme nitrate) en mg NO₃⁻/L.', r: 'C(NO₃⁻) = 3 × 62/14 ≈ 13,29 mg NO₃⁻/L.', expl: 'Inverse : C(N) = C(NO₃⁻) × 14/62. Ex. : 22,14 mg NO₃⁻/L → 22,14 × 14/62 = 5,00 mg N/L.' },
+                  { q: 'Quand se produit le minimum d\'oxygène dissous dans un cours d\'eau végétalisé ?', r: 'En général en fin de nuit (~5h-7h) : la photosynthèse est absente depuis le coucher du soleil et la respiration a consommé de l\'O₂ toute la nuit.', expl: 'Une mesure à 17h peut indiquer une sursaturation (photosynthèse maximale) tout en cachant un déficit nocturne sévère.' },
+                  { q: 'Pourquoi ne pas calculer un mélange de pH par moyenne arithmétique ?', r: 'Le pH est une échelle logarithmique : un écart d\'une unité = facteur 10 sur l\'activité des ions H⁺. La moyenne arithmétique de pH 6 et pH 8 ne donne pas un pH de 7 pour le mélange.', expl: 'Il faut considérer les concentrations en ions H⁺ et les équilibres chimiques, notamment le pouvoir tampon de chaque eau.' },
+                  { q: 'Un résultat indique C < 0,005 mg/L. Peut-on conclure que la substance est absente ?', r: 'Non. La substance n\'est pas quantifiée au-dessus de la limite indiquée dans les conditions de l\'analyse. L\'absence n\'est pas démontrée.', expl: 'Traiter automatiquement ces valeurs comme zéro peut biaiser les moyennes et les calculs de flux.' },
+                  { q: 'Une conductivité élevée prouve-t-elle une pollution ?', r: 'Non. La géologie peut expliquer une minéralisation naturelle importante (eau très chargée en sels sans pollution). La conductivité ne permet pas d\'identifier les ions.', expl: 'À l\'inverse, une conductivité faible ne prouve pas l\'absence de substances toxiques (certaines ne conduisent pas le courant).' },
+                ],
+                schema: `<svg viewBox="0 0 520 275" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="275" fill="#f0f7ff" rx="10"/>
+  <text x="260" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a3a5c">Variations nycthémérales de l'O₂ dissous</text>
+  <!-- Zones nuit/jour : x_scale = 400/24 ≈ 16.67 px/h, origine x=60 -->
+  <!-- Nuit 0h→6h : x=60→160 -->
+  <rect x="60" y="32" width="100" height="185" fill="#dde1e8" opacity="0.55"/>
+  <!-- Jour 6h→20h : x=160→393 -->
+  <rect x="160" y="32" width="233" height="185" fill="#fef9c3" opacity="0.45"/>
+  <!-- Nuit 20h→24h : x=393→460 -->
+  <rect x="393" y="32" width="67" height="185" fill="#dde1e8" opacity="0.55"/>
+  <text x="110" y="47" text-anchor="middle" fill="#64748b" font-size="9">Nuit</text>
+  <text x="277" y="47" text-anchor="middle" fill="#d97706" font-size="9">Jour (photosynthèse active)</text>
+  <text x="427" y="47" text-anchor="middle" fill="#64748b" font-size="9">Nuit</text>
+  <!-- Axes : Y : 0 mg/L → y=217, 14 mg/L → y=32 ; 185px/14mg = 13.2px/mg -->
+  <line x1="60" y1="217" x2="470" y2="217" stroke="#555" stroke-width="1.5"/>
+  <line x1="60" y1="32" x2="60" y2="217" stroke="#555" stroke-width="1.5"/>
+  <!-- X ticks -->
+  <text x="60" y="232" text-anchor="middle" fill="#555">0h</text>
+  <text x="160" y="232" text-anchor="middle" fill="#555">6h</text>
+  <text x="260" y="232" text-anchor="middle" fill="#555">12h</text>
+  <text x="360" y="232" text-anchor="middle" fill="#555">18h</text>
+  <text x="460" y="232" text-anchor="middle" fill="#555">24h</text>
+  <text x="265" y="250" text-anchor="middle" fill="#555">Temps (h)</text>
+  <!-- Y ticks : 0→217, 4→164, 8→111, 12→59 -->
+  <text x="52" y="221" text-anchor="end" fill="#555">0</text>
+  <text x="52" y="167" text-anchor="end" fill="#555">4</text>
+  <text x="52" y="114" text-anchor="end" fill="#555">8</text>
+  <text x="52" y="62" text-anchor="end" fill="#555">12</text>
+  <text x="22" y="135" text-anchor="middle" fill="#555" transform="rotate(-90,22,135)">O₂ (mg/L)</text>
+  <!-- Courbe O₂ dissous (points t,mg/L → x=60+t*16.67, y=217-mg*13.2) -->
+  <!-- t=0:x=60,O₂=6,y=138 | t=5:x=143,O₂=4,y=164 | t=10:x=227,O₂=9,y=98 -->
+  <!-- t=14:x=293,O₂=12,y=58 | t=17:x=343,O₂=11.5,y=65 | t=20:x=393,O₂=8,y=111 -->
+  <!-- t=22:x=427,O₂=6.5,y=131 | t=24:x=460,O₂=6,y=138 -->
+  <polygon points="60,138 100,150 143,164 227,98 293,58 343,65 393,111 427,131 460,138 460,217 60,217"
+    fill="#bfdbfe" opacity="0.35"/>
+  <polyline points="60,138 100,150 143,164 227,98 293,58 343,65 393,111 427,131 460,138"
+    fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Ligne C_sat ≈ 9 mg/L → y = 217 - 9*13.2 = 98 -->
+  <line x1="60" y1="98" x2="460" y2="98" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="360" y="92" fill="#16a34a" font-size="9">C_sat ≈ 9 mg/L (100 %)</text>
+  <!-- Zone sursaturation (entre courbe et C_sat) -->
+  <text x="277" y="76" text-anchor="middle" fill="#7c3aed" font-size="9" font-style="italic">Sursaturation</text>
+  <!-- Point minimum -->
+  <circle cx="143" cy="164" r="4" fill="#dc2626"/>
+  <text x="143" y="178" text-anchor="middle" fill="#dc2626" font-size="9">Min ≈ 5h</text>
+  <text x="143" y="190" text-anchor="middle" fill="#dc2626" font-size="8">4 mg/L</text>
+  <!-- Point maximum -->
+  <circle cx="293" cy="58" r="4" fill="#059669"/>
+  <text x="310" y="54" fill="#059669" font-size="9">Max ≈ 14h</text>
+  <text x="310" y="65" fill="#059669" font-size="8">12 mg/L</text>
+  <!-- Mesure trompeuse à 17h -->
+  <circle cx="343" cy="65" r="3" fill="#f59e0b" stroke="white" stroke-width="1"/>
+  <text x="360" y="82" fill="#b45309" font-size="8">Mesure 17h :</text>
+  <text x="360" y="92" fill="#b45309" font-size="8">ne décrit pas le min</text>
+  <!-- Annotations processus -->
+  <text x="220" y="135" fill="#1d4ed8" font-size="9">Photosynthèse</text>
+  <text x="90" y="205" fill="#64748b" font-size="9">Respiration</text>
+  <text x="400" y="170" fill="#64748b" font-size="9">Resp.</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Rivière Bleue : Q₁ = 0,80 m³/s, nitrates = 8 mg NO₃⁻/L. Drain agricole : Q₂ = 0,20 m³/s, nitrates = 40 mg NO₃⁻/L. Oxygène dissous à 14h = 10,8 mg/L, C_sat fournie = 9,0 mg/L. (1) Calculer la concentration en NO₃⁻ après mélange. (2) Exprimer ce résultat en mg N/L. (3) Calculer le flux de NO₃⁻ après mélange (g/s et kg/j). (4) Calculer le taux de saturation en O₂. Peut-on exclure un déficit nocturne ?',
+                  solution: '<strong>(1) Mélange NO₃⁻ :</strong> C_m = (0,80 × 8 + 0,20 × 40) / (0,80 + 0,20) = (6,4 + 8,0) / 1,0 = <strong>14,4 mg NO₃⁻/L</strong>.<br><strong>(2) En mg N/L :</strong> 14,4 × 14/62 ≈ <strong>3,25 mg N/L</strong>.<br><strong>(3) Flux :</strong> Ṁ = 14,4 × 1,0 = <strong>14,4 g/s</strong> → 14,4 × 86,4 ≈ <strong>1 244 kg/j</strong> (débit massique équivalent).<br><strong>(4) Saturation :</strong> S_O₂ = 100 × 10,8 / 9,0 = <strong>120 %</strong> (sursaturation). Non, on ne peut pas exclure un déficit nocturne : la photosynthèse cesse la nuit, la respiration continue — le minimum peut survenir en fin de nuit à un niveau très inférieur.',
+                },
+              },
+
+              {
+                id: 'gem-18',
+                titre: 'Financement et taxe GEMAPI',
+                fiche: {
+                  intro: 'Le budget GEMAPI doit couvrir l\'ensemble du cycle de vie : études, travaux, entretien, surveillance et renouvellements. La taxe GEMAPI est un outil parmi d\'autres, facultatif et plafonné.',
+                  points: [
+                    '💰 Budget complet : études + foncier + procédures + travaux + MOE + surveillance + entretien + renouvellements + suivi',
+                    '🏛️ Taxe GEMAPI : facultative, recouvrée avec la TFB/TFNB/TH/CFE, plafonnée à 40 €/habitant (population légale) par an',
+                    '⚠️ Plafond ≠ facture individuelle : le produit voté peut être bien inférieur au plafond théorique selon les besoins',
+                    '💶 Agences de l\'eau : subventions (taux variables selon les opérations), avances remboursables pour études',
+                    '🇪🇺 Fonds européens : FEDER pour certains projets de prévention des inondations — via les Régions',
+                    '📊 Plan pluriannuel : un budget GEMAPI doit être projeté sur 5 à 10 ans pour intégrer l\'entretien et les gros renouvellements',
+                  ],
+                  formules: [
+                    'Plafond taxe = 40 € × population légale de référence',
+                    'Ex : 25 000 hab × 40 € = 1 000 000 € de plafond théorique maximal',
+                  ],
+                  retenir: 'Taxe GEMAPI = facultative + plafonnée 40 €/hab. Plafond ≠ produit voté. Budget GEMAPI = cycle complet (études→entretien→renouvellement). Agences + FEDER = cofinancements.',
+                },
+                flashcards: [
+                  { q: 'La taxe GEMAPI est-elle obligatoire ?', r: 'Non — elle est facultative. L\'EPCI peut financer la GEMAPI par son budget général', expl: 'Mais c\'est le seul impôt dédié à la GEMAPI. Sans elle, les ressources doivent venir du budget général.' },
+                  { q: 'Quel est le plafond de la taxe GEMAPI ?', r: '40 € par habitant (population légale de référence) par an — ce n\'est pas la contribution de chaque habitant', expl: 'C\'est le produit total maximum. En pratique, l\'EPCI vote un produit inférieur au plafond selon ses besoins réels.' },
+                  { q: 'Quels postes de dépense doit couvrir un budget GEMAPI ?', r: 'Études, foncier, procédures, travaux, MOE, surveillance, entretien, renouvellements, suivi', expl: 'L\'erreur fréquente est de ne budgéter que les travaux. L\'entretien récurrent et les renouvellements représentent souvent plus sur 20 ans.' },
+                  { q: 'Pour 25 000 habitants, quel est le plafond théorique de la taxe GEMAPI ?', r: '25 000 × 40 € = 1 000 000 € par an — mais l\'EPCI votera en général un produit inférieur', expl: 'Le plafond est un maximum légal, pas un objectif. Le produit voté doit correspondre aux charges prévisionnelles admissibles.' },
+                  { q: 'Comment les agences de l\'eau financent-elles les projets GEMAPI ?', r: 'Subventions (taux variables), avances pour études, accompagnement technique — selon les dispositifs du programme d\'intervention', expl: 'Les taux dépendent du type d\'opération, de la priorité du programme et de la localisation. Il faut vérifier le programme en vigueur.' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#F0F7E3"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#5A7A2E">Budget GEMAPI — cycle complet</text>
+  <rect x="8" y="18" width="264" height="16" fill="#5A7A2E" rx="3"/>
+  <text x="140" y="29" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff">Ressources disponibles</text>
+  <rect x="12" y="38" width="60" height="22" fill="#7A9A3E" rx="3"/>
+  <text x="42" y="49" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">Taxe GEMAPI</text>
+  <text x="42" y="58" text-anchor="middle" font-family="Arial" font-size="7" fill="#D0F0C0">≤40€/hab</text>
+  <rect x="78" y="38" width="60" height="22" fill="#2E7A5A" rx="3"/>
+  <text x="108" y="49" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">Agences eau</text>
+  <text x="108" y="58" text-anchor="middle" font-family="Arial" font-size="7" fill="#D0F0C0">subventions</text>
+  <rect x="144" y="38" width="60" height="22" fill="#1A5A4A" rx="3"/>
+  <text x="174" y="49" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">Budget général</text>
+  <text x="174" y="58" text-anchor="middle" font-family="Arial" font-size="7" fill="#D0F0C0">EPCI</text>
+  <rect x="210" y="38" width="60" height="22" fill="#4A8A3E" rx="3"/>
+  <text x="240" y="49" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">FEDER</text>
+  <text x="240" y="58" text-anchor="middle" font-family="Arial" font-size="7" fill="#D0F0C0">Région</text>
+  <rect x="8" y="66" width="264" height="14" fill="#C0D8A0" rx="3"/>
+  <text x="140" y="76" text-anchor="middle" font-family="Arial" font-size="8" fill="#3A5A1A" font-weight="bold">Postes de dépenses — cycle complet</text>
+  <rect x="8" y="84" width="38" height="28" fill="#D0EEB0" rx="2" stroke="#5A7A2E" stroke-width="0.5"/>
+  <text x="27" y="95" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">Études</text>
+  <rect x="50" y="84" width="38" height="28" fill="#C8E8A0" rx="2" stroke="#5A7A2E" stroke-width="0.5"/>
+  <text x="69" y="95" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">Foncier</text>
+  <rect x="92" y="84" width="42" height="28" fill="#B8D890" rx="2" stroke="#5A7A2E" stroke-width="0.5"/>
+  <text x="113" y="95" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">Travaux</text>
+  <rect x="138" y="84" width="42" height="28" fill="#A8C880" rx="2" stroke="#5A7A2E" stroke-width="0.5"/>
+  <text x="159" y="95" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">Surveill.</text>
+  <rect x="184" y="84" width="42" height="28" fill="#98B870" rx="2" stroke="#5A7A2E" stroke-width="0.5"/>
+  <text x="205" y="95" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">Entretien</text>
+  <rect x="230" y="84" width="42" height="28" fill="#88A860" rx="2" stroke="#5A7A2E" stroke-width="0.5"/>
+  <text x="251" y="95" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">Renouvel.</text>
+  <rect x="8" y="118" width="264" height="24" fill="#FFF9E8" rx="3" stroke="#C09A10" stroke-width="1"/>
+  <text x="14" y="129" font-family="Arial" font-size="8" font-weight="bold" fill="#8B6A10">Ex : 25 000 hab × 40€ = 1 000 000€ plafond</text>
+  <text x="14" y="139" font-family="Arial" font-size="7" fill="#555">Plafond ≠ produit voté ≠ contribution individuelle</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Une intercommunalité de 25 000 habitants envisage un programme GEMAPI sur 5 ans : études (80 000 €), travaux de restauration (400 000 €), dossier loi sur l\'eau (15 000 €), acquisition foncière (60 000 €), entretien annuel (20 000 €/an). Calculer le budget total sur 5 ans, le plafond de taxe disponible et proposer un plan de financement.',
+                  solution: '<strong>Budget 5 ans</strong> : 80 000 + 400 000 + 15 000 + 60 000 + (20 000 × 5) = <strong>655 000 €</strong><br><strong>Plafond taxe</strong> : 25 000 × 40 = 1 000 000 € max/an. Sur 5 ans = 5 000 000 € théoriques.<br><strong>Plan de financement</strong> : Taxe GEMAPI (655 000 × 40 % = 262 000 €) + Agence de l\'eau (40 % travaux = 160 000 €) + Budget général EPCI (solde = 233 000 €).<br>La taxe annuelle pourrait être votée à 655 000/5 = 131 000 €/an, soit 131 000/25 000 = <strong>5,24 €/habitant/an</strong>.',
+                },
+              },
+
+              {
+                id: 'gem-19',
+                titre: 'PAPI, concertation et gestion de crise',
+                fiche: {
+                  intro: 'Un PAPI (Programme d\'Actions de Prévention des Inondations) associe plusieurs dimensions de la réduction du risque dans une stratégie partagée. La concertation et la préparation à la gestion de crise en sont des composantes essentielles.',
+                  points: [
+                    '📋 PAPI = 7 axes : connaissance, surveillance/prévision, alerte/gestion de crise, maîtrise de l\'urbanisation, vulnérabilité, ECR (zones d\'expansion), ouvrages de protection',
+                    '🤝 Portage : collectivité ou groupement de collectivités, avec association de l\'État — labellisation par une commission nationale',
+                    '📣 Concertation : intégrer dès la conception — les variantes doivent encore être ouvertes quand la concertation commence',
+                    '⚠️ Responsabilités distinctes en crise : surveillance d\'une digue (gestionnaire), décision d\'évacuation (maire), secours (SDIS/Préfet)',
+                    '📞 PCS (Plan Communal de Sauvegarde) : obligatoire si PPRI. Définit la chaîne d\'alerte et les responsabilités locales',
+                    '🗺️ ORSEC : plan préfectoral de secours — le PCS communal s\'inscrit dans l\'ORSEC',
+                  ],
+                  formules: [],
+                  retenir: 'PAPI = 7 axes coordonnés. Concertation = avant de figer les variantes. PCS obligatoire si PPRI. Crise = 3 acteurs distincts (gestionnaire/maire/secours).',
+                },
+                flashcards: [
+                  { q: 'Quels sont les 7 axes d\'un PAPI ?', r: 'Connaissance — Surveillance/prévision — Alerte/crise — Urbanisme — Vulnérabilité — Zones d\'expansion — Ouvrages', expl: 'Le PAPI n\'est pas qu\'un programme de travaux : les 4 premiers axes sont souvent plus efficaces à court terme.' },
+                  { q: 'Qui décide l\'évacuation d\'une zone menacée ?', r: 'Le maire (pouvoir de police générale) — en lien avec le Préfet qui peut se substituer en cas de carence', expl: 'Le gestionnaire de la digue surveille et alerte. La décision d\'évacuation appartient au maire. Les secours relèvent du SDIS et du Préfet.' },
+                  { q: 'Qu\'est-ce qu\'un PCS et quand est-il obligatoire ?', r: 'Plan Communal de Sauvegarde — obligatoire si la commune est couverte par un PPRI (ou PPRN)', expl: 'Le PCS définit la chaîne d\'alerte locale, les rôles, les ressources et les procédures de crise au niveau communal.' },
+                  { q: 'Quand doit commencer la concertation dans un projet GEMAPI ?', r: 'Assez tôt pour que les variantes soient encore ouvertes — avant de figer la solution', expl: 'Une concertation sur une solution déjà décidée est perçue comme de la communication, pas comme une vraie participation. Les conflits naissent de ce décalage.' },
+                  { q: 'Qu\'est-ce que l\'ORSEC ?', r: 'Organisation de la Réponse de SEcurité Civile — plan préfectoral dans lequel s\'inscrit le PCS communal', expl: 'L\'ORSEC coordonne tous les acteurs de crise. Le PCS communal doit être compatible avec l\'ORSEC départemental.' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#F0F7E3"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#5A7A2E">PAPI — 7 axes</text>
+  <rect x="8" y="18" width="82" height="18" fill="#5A7A2E" rx="3"/>
+  <text x="49" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">1. Connaissance</text>
+  <rect x="98" y="18" width="82" height="18" fill="#5A7A2E" rx="3"/>
+  <text x="139" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">2. Surveillance</text>
+  <rect x="188" y="18" width="84" height="18" fill="#5A7A2E" rx="3"/>
+  <text x="230" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">3. Alerte / crise</text>
+  <rect x="8" y="40" width="82" height="18" fill="#7A9A3E" rx="3"/>
+  <text x="49" y="52" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">4. Urbanisme</text>
+  <rect x="98" y="40" width="82" height="18" fill="#7A9A3E" rx="3"/>
+  <text x="139" y="52" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">5. Vulnérabilité</text>
+  <rect x="188" y="40" width="84" height="18" fill="#7A9A3E" rx="3"/>
+  <text x="230" y="52" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">6. Zones exp.</text>
+  <rect x="98" y="62" width="82" height="18" fill="#9ABB5E" rx="3"/>
+  <text x="139" y="74" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">7. Ouvrages</text>
+  <rect x="8" y="86" width="264" height="20" fill="#D0EEB0" rx="3"/>
+  <text x="140" y="98" text-anchor="middle" font-family="Arial" font-size="8" fill="#3A5A1A" font-weight="bold">Responsabilités en gestion de crise</text>
+  <rect x="8" y="110" width="80" height="32" fill="#E0F0C0" rx="3"/>
+  <text x="48" y="122" text-anchor="middle" font-family="Arial" font-size="8" fill="#3A5A1A" font-weight="bold">Gestionnaire</text>
+  <text x="48" y="134" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Surveille la digue</text>
+  <rect x="98" y="110" width="80" height="32" fill="#D0E8B0" rx="3"/>
+  <text x="138" y="122" text-anchor="middle" font-family="Arial" font-size="8" fill="#3A5A1A" font-weight="bold">Maire</text>
+  <text x="138" y="134" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Décide évacuation</text>
+  <rect x="188" y="110" width="84" height="32" fill="#C0D8A0" rx="3"/>
+  <text x="230" y="122" text-anchor="middle" font-family="Arial" font-size="8" fill="#3A5A1A" font-weight="bold">SDIS / Préfet</text>
+  <text x="230" y="134" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Secours, ORSEC</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Pour une montée des eaux progressive sur une rivière (prévision SPC : dépassement seuil orange dans 8h, seuil rouge dans 14h), construire une matrice "qui fait quoi" avec les acteurs : SPC, gestionnaire de digue, maire, SDIS, EPCI, riverains.',
+                  solution: '<strong>H-8 (orange)</strong> : SPC émet bulletins d\'alerte. Gestionnaire : inspection de la digue, astreinte renforcée. Maire : active PCS, informe la cellule de crise, vérifie l\'alerte des riverains.<br><strong>H-4</strong> : Gestionnaire : rapport d\'état digue toutes les heures. Maire : décision préparation évacuation zones rouges. EPCI : mobilise matériel, bâches, pompes.<br><strong>H-rouge</strong> : Maire : décision d\'évacuation zones rouges. SDIS : pré-positionne moyens. Gestionnaire : surveillance continue, remonte au maire tout signe de défaillance.<br><strong>Post-crue</strong> : Gestionnaire : inspection dommages digue. EPCI : nettoyage, pompage. Maire : DCS (déclaration catastrophe naturelle). SDIS : bilan.',
+                },
+              },
+
+              {
+                id: 'gem-20',
+                titre: 'Suivi, évaluation et adaptation',
+                fiche: {
+                  intro: 'Le suivi commence avant les travaux par un état initial. Il doit répondre à des objectifs mesurables, tenir compte de la variabilité climatique et permettre l\'adaptation des actions au fil du temps.',
+                  points: [
+                    '📊 État initial : indispensable avant travaux — sans référence, impossible d\'évaluer les effets',
+                    '🎯 Indicateurs : spécifiques, mesurables, réalisables, pertinents, temporels (SMART) — liés aux objectifs',
+                    '🌡️ Variabilité climatique : comparer avant/après en tenant compte des années humides/sèches — ne pas conclure trop vite',
+                    '🔄 Adaptation : résultats décevants → revoir l\'action, renforcer, compléter — pas nécessairement tout recommencer',
+                    '🌍 Changement climatique : tester plusieurs scénarios dans la conception — conserver des marges d\'adaptation',
+                    '📋 OFB (Office Français de la Biodiversité) : propose des outils de suivi pour les projets de restauration et GEMAPI',
+                  ],
+                  formules: [],
+                  retenir: 'État initial avant travaux = obligatoire. Indicateurs SMART. Variabilité climatique = facteur confondant. Adapter ≠ tout changer. OFB = ressources méthodo.',
+                },
+                flashcards: [
+                  { q: 'Pourquoi l\'état initial est-il indispensable avant des travaux ?', r: 'Sans référence avant travaux, impossible d\'évaluer les effets — on ne peut que constater l\'état actuel', expl: 'Un "bon état" après travaux peut très bien être un état dégradé par rapport à avant, si on ne l\'a pas mesuré.' },
+                  { q: 'Qu\'est-ce qu\'un indicateur SMART ?', r: 'Spécifique, Mesurable, Réalisable, Pertinent, Temporel — lié à un objectif précis', expl: 'Ex : "améliorer la biodiversité" n\'est pas SMART. "Augmenter le nombre d\'espèces de poissons de 3 à 5 en 5 ans" l\'est.' },
+                  { q: 'Pourquoi la variabilité climatique est-elle un problème dans le suivi ?', r: 'Une bonne année pluvieuse peut masquer un effet positif, une sécheresse peut masquer un résultat négatif', expl: 'Il faut normaliser les résultats par les conditions météo ou sur une longue période. C\'est pourquoi le suivi doit durer plusieurs années.' },
+                  { q: 'Un projet ne donne pas les résultats attendus après 2 ans — que faire ?', r: 'Analyser pourquoi (pression persistante ? manque de temps ? conditions défavorables ?) avant de modifier l\'action', expl: 'Deux ans peut être insuffisant pour juger d\'une restauration écologique. Mais si une pression persiste, il faut la traiter.' },
+                  { q: 'Pourquoi intégrer plusieurs scénarios climatiques dans la conception d\'un projet GEMAPI ?', r: 'L\'incertitude sur le changement climatique impose de préserver des marges d\'adaptation dans les choix de conception', expl: 'Un ouvrage dimensionné pour T100 actuel peut être insuffisant pour T100 futur (intensification des pluies). Conserver des marges = éviter la maladaptation.' },
+                ],
+                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <rect width="280" height="148" rx="8" fill="#F0F7E3"/>
+  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#5A7A2E">Suivi-évaluation — indicateurs types</text>
+  <rect x="8" y="18" width="264" height="14" fill="#5A7A2E" rx="3"/>
+  <text x="140" y="28" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold">Objectif → Indicateur → Méthode → Fréquence</text>
+  <rect x="8" y="36" width="264" height="18" fill="#D0EEB0" rx="2"/>
+  <text x="12" y="46" font-family="Arial" font-size="8" fill="#3A5A1A" font-weight="bold">Restaurer connexion</text>
+  <text x="110" y="46" font-family="Arial" font-size="7" fill="#333">Durée/fréquence connexion lit majeur</text>
+  <text x="240" y="46" font-family="Arial" font-size="7" fill="#555">Annuelle</text>
+  <rect x="8" y="56" width="264" height="18" fill="#C8E8A0" rx="2"/>
+  <text x="12" y="66" font-family="Arial" font-size="8" fill="#3A5A1A" font-weight="bold">Améliorer habitats</text>
+  <text x="110" y="66" font-family="Arial" font-size="7" fill="#333">Diversité faciès, IPR (poissons)</text>
+  <text x="240" y="66" font-family="Arial" font-size="7" fill="#555">3 ans</text>
+  <rect x="8" y="76" width="264" height="18" fill="#B8D890" rx="2"/>
+  <text x="12" y="86" font-family="Arial" font-size="8" fill="#3A5A1A" font-weight="bold">Réduire vulnérabilité</text>
+  <text x="110" y="86" font-family="Arial" font-size="7" fill="#333">Nb. mesures réalisées / plan d'action</text>
+  <text x="240" y="86" font-family="Arial" font-size="7" fill="#555">Annuelle</text>
+  <rect x="8" y="96" width="264" height="18" fill="#A8C880" rx="2"/>
+  <text x="12" y="106" font-family="Arial" font-size="8" fill="#3A5A1A" font-weight="bold">Gérer l'ouvrage</text>
+  <text x="110" y="106" font-family="Arial" font-size="7" fill="#333">Inspections tracées, anomalies traitées</text>
+  <text x="240" y="106" font-family="Arial" font-size="7" fill="#555">Mensuelle</text>
+  <rect x="8" y="118" width="264" height="24" fill="#FFF9E8" rx="3" stroke="#C09A10" stroke-width="1"/>
+  <text x="14" y="129" font-family="Arial" font-size="8" font-weight="bold" fill="#8B6A10">⚠️ Variabilité climatique = facteur confondant</text>
+  <text x="14" y="139" font-family="Arial" font-size="7" fill="#555">Normaliser par les conditions météo | Suivi pluriannuel | Scénarios climatiques dans la conception</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Pour un projet de restauration de connexion lit/zone humide et amélioration des habitats, définir 3 indicateurs avec leur méthode de mesure, la fréquence et les seuils d\'alerte indiquant que l\'action ne produit pas les effets attendus.',
+                  solution: '<strong>Indicateur 1</strong> : Fréquence de connexion lit/zone humide — capteurs de niveau + photo interprétation. Fréquence : continue. Seuil alerte : 0 connexion après 3 années normales → vérifier obstruction.<br><strong>Indicateur 2</strong> : IPR (Indice Poissons Rivière) — pêche électrique. Fréquence : tous les 3 ans. Seuil alerte : pas de progression à 6 ans → identifier pression persistante.<br><strong>Indicateur 3</strong> : Diversité des faciès d\'écoulement (linéaire de mouilles, radiers, plats) — cartographie terrain. Fréquence : 2 ans après travaux puis 5 ans. Seuil alerte : recalibrage naturel du tronçon → pressions amont non traitées.',
+                },
+              },
+
+            ],
+          }, // fin gem-m6
+
+        ],
+      },
+    ],
+  },
+
+
+};
+
+/* ─── ÉTAT NAVIGATION ─────────────────────────────────────────────── */
+var _coursState = { fId: null, aId: null, mId: null, cId: null, flashIdx: 0, flashRevealed: false };
+var _coursEditing = false;
+var _coursOriginalValues = {};
+var _coursActiveEditEl = null;
+
+/* ─── UTILITAIRES ─────────────────────────────────────────────────── */
+function _coursGetFormation(fId)  { return COURS_DATA[fId]; }
+function _coursGetAnnee(fId, aId) {
+  var f = COURS_DATA[fId]; if (!f) return null;
+  return f.annees.find(function(a){ return a.id === aId; });
+}
+function _coursGetMatiere(fId, aId, mId) {
+  var a = _coursGetAnnee(fId, aId); if (!a) return null;
+  return a.matieres.find(function(m){ return m.id === mId; });
+}
+function _coursGetChapitre(fId, aId, mId, cId) {
+  var m = _coursGetMatiere(fId, aId, mId); if (!m) return null;
+  return m.chapitres.find(function(c){ return c.id === cId; });
+}
+function _nb(arr) { return arr ? arr.length : 0; }
+
+/* ─── HUB PRINCIPAL ──────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════
+   PROGRESSION FLASHCARDS
+═══════════════════════════════════════════════════ */
+function _flashProgressKey() {
+  var u = (typeof AUTH !== 'undefined' && AUTH.user) ? AUTH.user.email : 'guest';
+  return 'hc_flash_progress_' + u;
+}
+
+function _getAllFlashProgress() {
+  try { return JSON.parse(localStorage.getItem(_flashProgressKey()) || '{}'); } catch(e) { return {}; }
+}
+
+function _saveFlashProgress(fId, aId, mId, cId, pct, ok, total) {
+  var data = _getAllFlashProgress();
+  var key = fId + '|' + aId + '|' + mId + '|' + cId;
+  var prev = data[key];
+  data[key] = {
+    pct: pct, ok: ok, total: total,
+    date: Date.now(),
+    best: prev ? Math.max(prev.best || 0, pct) : pct,
+  };
+  localStorage.setItem(_flashProgressKey(), JSON.stringify(data));
+}
+
+function _getChapProgress(fId, aId, mId, cId) {
+  var data = _getAllFlashProgress();
+  return data[fId + '|' + aId + '|' + mId + '|' + cId] || null;
+}
+
+function renderCours() {
+  var _tb = document.getElementById('tab-bar'); if (_tb) _tb.style.display = 'none';
+  var mc = document.getElementById('main-content');
+  if (!mc) return;
+
+  try {
+    var keys = Object.keys(COURS_DATA);
+    var html = '<div class="module-hero" style="--cat-color:var(--c-form)">'
+      + '<span class="mh-icon">🎓</span>'
+      + '<div class="mh-title">Cours & Révisions</div>'
+      + '<div class="mh-sub">BTS GEMEAU · Licence Pro · Master · BUT — Fiches & Flashcards</div>'
+      + '<div class="mh-tags"><span class="mh-tag">Fiches résumées</span><span class="mh-tag">Flashcards QCM</span><span class="mh-tag">Référentiel EN</span></div>'
+      + '</div>'
+      + '<div class="section-header">Choisir une formation<span class="sh-count">' + keys.length + '</span></div>'
+      + '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">';
+
+    keys.forEach(function(fId) {
+      var f = COURS_DATA[fId];
+      if (!f) return;
+      var nbChaps = 0;
+      (f.annees || []).forEach(function(a) {
+        (a.matieres || []).forEach(function(m) { nbChaps += (m.chapitres || []).length; });
+      });
+      html += '<div class="mod-list-card" style="--cat-color:' + f.color + '" onclick="renderCoursFormation(\'' + fId + '\')">'
+        + '<div class="mlc-icon" style="background:' + f.colorl + ';font-size:22px">' + f.ico + '</div>'
+        + '<div class="mlc-body">'
+          + '<div style="font-size:10px;font-weight:800;color:' + f.color + ';text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px">' + f.sigle + ' · ' + f.niveau + '</div>'
+          + '<div class="mlc-name">' + f.name + '</div>'
+          + '<div class="mlc-sub">' + f.organisme + '</div>'
+          + '<div style="font-size:11px;color:var(--c-text-3);margin-top:4px;line-height:1.5">' + f.desc + '</div>'
+          + '<div style="margin-top:6px"><span style="background:' + f.colorl + ';color:' + f.color + ';font-size:10px;font-weight:700;padding:2px 8px;border-radius:var(--r-pill)">' + nbChaps + ' chapitres</span></div>'
+        + '</div>'
+        + '<span class="mlc-arrow">›</span>'
+        + '</div>';
+    });
+
+    html += '</div><div class="pb-nav"></div>';
+    mc.innerHTML = html;
+  } catch(e) {
+    mc.innerHTML = '<div style="padding:var(--s-4);color:var(--c-text-2);text-align:center">'
+      + '<div style="font-size:32px;margin-bottom:8px">⚠️</div>'
+      + '<div style="font-weight:700">Erreur de chargement</div>'
+      + '<div style="font-size:13px;margin-top:4px">' + (e.message || 'Rechargez la page') + '</div>'
+      + '</div>';
+  }
+}
+
+/* ─── VUE FORMATION ──────────────────────────────────────────────── */
+function renderCoursFormation(fId) {
+  _coursState.fId = fId;
+  var f = _coursGetFormation(fId); if (!f) return;
+  var html = _coursBreadcrumb([{ label: 'Cours', fn: 'renderCours()' }, { label: f.sigle }]);
+
+  html += '<div style="background:' + f.color + ';padding:20px var(--s-4) 16px">'
+    + '<div style="font-size:28px;margin-bottom:8px">' + f.ico + '</div>'
+    + '<div style="font-size:18px;font-weight:800;color:#fff">' + f.name + '</div>'
+    + '<div style="font-size:11px;color:rgba(255,255,255,.75);margin-top:4px">' + f.organisme + ' · ' + f.niveau + '</div>'
+    + '</div>';
+
+  html += _coursFormationDownloadBtn(fId);
+
+  f.annees.forEach(function(a) {
+    html += '<div class="section-header" style="padding-top:var(--s-3)">' + a.name + '</div>'
+      + '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">';
+    a.matieres.forEach(function(m) {
+      var done = m.chapitres.filter(function(c){ return c.fiche !== null; }).length;
+      html += '<div class="mod-list-card" style="--cat-color:' + m.color + '" onclick="renderCoursMatiere(\'' + fId + '\',\'' + a.id + '\',\'' + m.id + '\')">'
+        + '<div class="mlc-icon" style="background:' + m.colorl + ';font-size:20px">' + m.ico + '</div>'
+        + '<div class="mlc-body">'
+          + '<div class="mlc-name">' + m.name + '</div>'
+          + '<div style="margin-top:4px;display:flex;gap:6px;align-items:center">'
+            + '<span style="font-size:10px;color:var(--c-text-3)">' + m.chapitres.length + ' chapitre(s)</span>'
+            + (done > 0 ? '<span style="background:' + m.colorl + ';color:' + m.color + ';font-size:9px;font-weight:700;padding:1px 6px;border-radius:var(--r-pill)">' + done + ' disponible(s)</span>' : '<span style="background:var(--c-surface-2);color:var(--c-text-4);font-size:9px;font-weight:700;padding:1px 6px;border-radius:var(--r-pill)">Bientôt</span>')
+          + '</div>'
+        + '</div>'
+        + '<span class="mlc-arrow">›</span>'
+        + '</div>';
+    });
+    html += '</div>';
+  });
+
+  html += '<div class="pb-nav"></div>';
+  document.getElementById('main-content').innerHTML = html;
+  document.getElementById('main-content').scrollTop = 0;
+}
+
+/* ─── VUE MATIÈRE ────────────────────────────────────────────────── */
+function renderCoursMatiere(fId, aId, mId) {
+  _coursState.fId = fId; _coursState.aId = aId; _coursState.mId = mId;
+  var f = _coursGetFormation(fId);
+  var a = _coursGetAnnee(fId, aId);
+  var m = _coursGetMatiere(fId, aId, mId);
+  if (!m) return;
+
+  var html = _coursBreadcrumb([
+    { label: 'Cours', fn: 'renderCours()' },
+    { label: f.sigle, fn: 'renderCoursFormation(\'' + fId + '\')' },
+    { label: m.name },
+  ]);
+
+  html += '<div style="background:' + m.color + ';padding:16px var(--s-4)">'
+    + '<div style="font-size:22px;margin-bottom:6px">' + m.ico + '</div>'
+    + '<div style="font-size:16px;font-weight:800;color:#fff">' + m.name + '</div>'
+    + '<div style="font-size:11px;color:rgba(255,255,255,.75);margin-top:2px">' + a.name + ' · ' + f.sigle + '</div>'
+    + '</div>'
+    + _coursMatiereDownloadBtn(fId, aId, mId)
+    + '<div class="section-header" style="padding-top:var(--s-3)">Chapitres<span class="sh-count">' + m.chapitres.length + '</span></div>'
+    + '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">';
+
+  m.chapitres.forEach(function(c, i) {
+    var hasFiche = c.fiche !== null;
+    var nbCards  = c.flashcards ? c.flashcards.length : 0;
+    var prog     = hasFiche && nbCards > 0 ? _getChapProgress(fId, aId, mId, c.id) : null;
+
+    /* Badge de progression */
+    var badge = '';
+    var borderColor = hasFiche ? m.color : 'var(--c-border)';
+    if (prog) {
+      var best = prog.best || prog.pct;
+      if (best >= 80) {
+        badge = '<span style="background:var(--c-ok-l);color:var(--c-ok);font-size:10px;font-weight:800;padding:2px 8px;border-radius:var(--r-pill);border:1px solid var(--c-ok)">✅ ' + best + '%</span>';
+        borderColor = 'var(--c-ok)';
+      } else if (best >= 50) {
+        badge = '<span style="background:var(--c-warn-l);color:var(--c-warn);font-size:10px;font-weight:800;padding:2px 8px;border-radius:var(--r-pill);border:1px solid var(--c-warn)">💪 ' + best + '%</span>';
+        borderColor = 'var(--c-warn)';
+      } else {
+        badge = '<span style="background:var(--c-danger-l);color:var(--c-danger);font-size:10px;font-weight:800;padding:2px 8px;border-radius:var(--r-pill);border:1px solid var(--c-danger)">📖 ' + best + '%</span>';
+      }
+    }
+
+    /* Barre de progression mini */
+    var miniBar = '';
+    if (prog) {
+      var barColor = prog.best >= 80 ? 'var(--c-ok)' : prog.best >= 50 ? 'var(--c-warn)' : 'var(--c-danger)';
+      miniBar = '<div style="margin-top:6px;height:3px;background:var(--c-border);border-radius:2px;overflow:hidden">'
+        + '<div style="height:100%;width:' + (prog.best||prog.pct) + '%;background:' + barColor + ';border-radius:2px"></div>'
+        + '</div>';
+    }
+
+    html += '<div style="background:var(--c-surface);border:1.5px solid ' + borderColor + ';border-radius:var(--r-md);padding:var(--s-3) var(--s-4);cursor:' + (hasFiche ? 'pointer' : 'default') + ';opacity:' + (hasFiche ? '1' : '.55') + '"'
+      + (hasFiche ? ' onclick="renderCoursChapitre(\'' + fId + '\',\'' + aId + '\',\'' + mId + '\',\'' + c.id + '\')"' : '')
+      + '>'
+      + '<div style="display:flex;align-items:flex-start;gap:var(--s-3)">'
+        + '<div style="min-width:28px;height:28px;background:' + (hasFiche ? m.colorl : 'var(--c-surface-2)') + ';border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:' + (hasFiche ? m.color : 'var(--c-text-4)') + '">' + (i+1) + '</div>'
+        + '<div style="flex:1">'
+          + '<div style="font-size:13px;font-weight:700;color:' + (hasFiche ? 'var(--c-text)' : 'var(--c-text-3)') + ';line-height:1.4">' + c.titre + '</div>'
+          + '<div style="margin-top:5px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">'
+            + (hasFiche ? '<span style="background:' + m.colorl + ';color:' + m.color + ';font-size:9px;font-weight:700;padding:2px 6px;border-radius:var(--r-pill)">📚 Fiche</span>' : '')
+            + (nbCards > 0 ? '<span style="background:' + m.colorl + ';color:' + m.color + ';font-size:9px;font-weight:700;padding:2px 6px;border-radius:var(--r-pill)">🃏 ' + nbCards + '</span>' : '')
+            + (!hasFiche ? '<span style="background:var(--c-surface-2);color:var(--c-text-4);font-size:9px;padding:2px 6px;border-radius:var(--r-pill)">Bientôt disponible</span>' : '')
+            + badge
+          + '</div>'
+          + miniBar
+        + '</div>'
+        + (hasFiche ? '<span style="color:var(--c-text-4);font-size:18px">›</span>' : '')
+      + '</div></div>';
+  });
+
+  html += '</div><div class="pb-nav"></div>';
+  document.getElementById('main-content').innerHTML = html;
+  document.getElementById('main-content').scrollTop = 0;
+}
+
+/* ─── VUE CHAPITRE (FICHE RÉSUMÉE) ──────────────────────────────── */
+async function renderCoursChapitre(fId, aId, mId, cId) {
+  _coursState.fId = fId; _coursState.aId = aId; _coursState.mId = mId; _coursState.cId = cId;
+  _coursEditing = false;
+  _coursState._pendingFlashcards = null;
+  _coursState._pendingSolution = undefined;
+
+  var f = _coursGetFormation(fId);
+  var m = _coursGetMatiere(fId, aId, mId);
+  var c = _coursGetChapitre(fId, aId, mId, cId);
+  if (!c || !c.fiche) return;
+
+  /* Charger les surcharges CMS éventuelles */
+  var _editKey = 'cours.ch.' + fId + ':' + aId + ':' + mId + ':' + cId;
+  _coursState._editKey = _editKey;
+  if (typeof CMS !== 'undefined') {
+    await CMS.load([_editKey], {});
+    var _ovRaw = CMS.get(_editKey);
+    if (_ovRaw) {
+      try {
+        var _ov = JSON.parse(_ovRaw);
+        c = Object.assign({}, c);
+        if (_ov.titre)      c.titre      = _ov.titre;
+        if (_ov.fiche)      c.fiche      = Object.assign({}, c.fiche, _ov.fiche);
+        if (_ov.flashcards) c.flashcards = _ov.flashcards;
+        if (_ov.exercice)   c.exercice   = Object.assign({}, c.exercice || {}, _ov.exercice);
+      } catch(e) {}
+    }
+  }
+
+  if (c.schema) {
+    var _sk = fId+':'+aId+':'+mId+':'+cId;
+    if (_courseImageOverrides[_sk] === undefined) await _coursLoadImageOverride(_sk);
+  }
+
+  var fi = c.fiche;
+  var isAdminUser = typeof AUTH !== 'undefined' && AUTH.user && AUTH.user.plan === 'admin';
+  var esc = (typeof CMS !== 'undefined') ? CMS.escapeHtml : function(s) { return String(s||''); };
+
+  var html = _coursBreadcrumb([
+    { label: 'Cours', fn: 'renderCours()' },
+    { label: f.sigle, fn: 'renderCoursFormation(\'' + fId + '\')' },
+    { label: m.name, fn: 'renderCoursMatiere(\'' + fId + '\',\'' + aId + '\',\'' + mId + '\')' },
+    { label: 'Chapitre' },
+  ]);
+
+  /* Bouton éditeur admin */
+  if (isAdminUser) {
+    html += '<div style="padding:8px var(--s-4) 0;display:flex;justify-content:flex-end">'
+      + '<button id="cours-edit-btn" onclick="_coursToggleEditMode()" '
+      + 'style="padding:5px 12px;background:var(--c-primary-l);border:1.5px solid var(--c-primary);'
+      + 'border-radius:var(--r-pill);font-size:12px;font-weight:700;color:var(--c-primary);cursor:pointer">'
+      + '✏️ Éditeur</button>'
+      + '</div>';
+  }
+
+  html += '<div style="background:' + m.color + ';padding:16px var(--s-4) 20px">'
+    + '<div style="font-size:10px;font-weight:800;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">' + esc(m.name) + '</div>'
+    + '<div data-cours-edit data-field="titre" style="font-size:17px;font-weight:800;color:#fff;line-height:1.4">' + esc(c.titre) + '</div>'
+    + '</div>';
+
+  /* Badge progression si déjà fait */
+  var chapProg = _getChapProgress(fId, aId, mId, cId);
+  if (chapProg) {
+    var best = chapProg.best || chapProg.pct;
+    var pBg = best >= 80 ? '#EAF8F0' : best >= 50 ? '#FDF0D8' : '#FDECEA';
+    var pColor = best >= 80 ? '#166038' : best >= 50 ? '#886000' : '#A82018';
+    var pEmoji = best >= 80 ? '✅' : best >= 50 ? '💪' : '📖';
+    var pMsg = best >= 80 ? 'Chapitre maîtrisé' : best >= 50 ? 'En bonne progression' : 'À retravailler';
+    var pDate = new Date(chapProg.date).toLocaleDateString('fr-FR');
+    html += '<div style="margin:var(--s-3) var(--s-4) 0;background:' + pBg + ';border:1px solid ' + pColor + ';border-radius:var(--r-md);padding:10px 14px;display:flex;align-items:center;gap:10px">'
+      + '<div style="font-size:22px">' + pEmoji + '</div>'
+      + '<div style="flex:1">'
+        + '<div style="font-size:12px;font-weight:800;color:' + pColor + '">' + pMsg + ' — ' + best + '%</div>'
+        + '<div style="font-size:10px;color:' + pColor + ';opacity:.75">Meilleur score · ' + chapProg.ok + '/' + chapProg.total + ' cartes · ' + pDate + '</div>'
+        + '<div style="margin-top:5px;height:4px;background:rgba(0,0,0,.1);border-radius:2px;overflow:hidden">'
+          + '<div style="height:100%;width:' + best + '%;background:' + pColor + ';border-radius:2px"></div>'
+        + '</div>'
+      + '</div>'
+    + '</div>';
+  }
+
+  /* Introduction */
+  html += '<div style="padding:var(--s-3) var(--s-4) 0">'
+    + '<div style="background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-md);padding:var(--s-3)">'
+    + '<div data-cours-edit data-field="fiche.intro" style="font-size:12px;color:var(--c-text-3);line-height:1.7;font-style:italic">' + _coursAllowedTextHtml(fi.intro) + '</div>'
+    + '</div></div>';
+
+  /* Points clés */
+  html += '<div class="section-header" style="padding-top:var(--s-3)">📌 Points clés</div>'
+    + '<div style="padding:0 var(--s-4)">'
+    + '<div style="background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-md);padding:var(--s-3)">'
+    + '<ul style="margin:0;padding:0 0 0 var(--s-3);list-style:none">';
+  fi.points.forEach(function(p, i) {
+    html += '<li class="cours-list-item" style="display:flex;align-items:flex-start;gap:4px;margin-bottom:6px">'
+      + '<span data-cours-edit data-field="fiche.points.' + i + '" style="font-size:12px;color:var(--c-text);line-height:1.7;flex:1;padding-left:4px">' + _coursAllowedTextHtml(p) + '</span>'
+      + '<button class="cours-item-del" onclick="_coursDeleteItem(this)" title="Supprimer" style="display:none;background:none;border:none;cursor:pointer;color:var(--c-danger,#E53E3E);font-size:12px;padding:2px 4px;flex-shrink:0;margin-top:2px;line-height:1;opacity:.7">🗑</button>'
+      + '</li>';
+  });
+  html += '<li id="cours-add-point-row" style="display:none;list-style:none;padding-left:4px;margin-top:2px">'
+    + '<button onclick="_coursAddListItem(\'points\')" style="font-size:11px;color:var(--c-primary);background:none;border:1px dashed var(--c-primary);border-radius:var(--r-sm);padding:3px 10px;cursor:pointer">+ Ajouter un point</button>'
+    + '</li>';
+  html += '</ul></div></div>';
+
+  /* Formules */
+  if (fi.formules && fi.formules.length) {
+    html += '<div class="section-header" style="padding-top:var(--s-3)">📐 Formules clés</div>'
+      + '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:6px">';
+    fi.formules.forEach(function(form, i) {
+      html += '<div class="cours-list-item" style="display:flex;align-items:center;gap:4px">'
+        + '<div data-cours-edit data-field="fiche.formules.' + i + '" data-raw="' + esc(form) + '" style="flex:1;background:var(--c-primary-l);border-left:3px solid var(--c-primary);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:8px 12px;font-size:12px;color:var(--c-primary);font-weight:600">' + _coursRenderFormule(form) + '</div>'
+        + '<button class="cours-item-del" onclick="_coursDeleteItem(this)" title="Supprimer" style="display:none;background:none;border:none;cursor:pointer;color:var(--c-danger,#E53E3E);font-size:12px;padding:2px 4px;flex-shrink:0;line-height:1;opacity:.7">🗑</button>'
+        + '</div>';
+    });
+    html += '<div id="cours-add-formule-row" style="display:none;margin-top:2px">'
+      + '<button onclick="_coursAddListItem(\'formules\')" style="font-size:11px;color:var(--c-primary);background:none;border:1px dashed var(--c-primary);border-radius:var(--r-sm);padding:3px 10px;cursor:pointer">+ Ajouter une formule</button>'
+      + '</div>';
+    html += '</div>';
+  }
+
+  /* À retenir */
+  html += '<div style="padding:var(--s-3) var(--s-4)">'
+    + '<div style="background:var(--c-ok-l,#EAF8F0);border:1.5px solid var(--c-ok,#166038);border-radius:var(--r-md);padding:var(--s-3)">'
+    + '<div style="font-size:10px;font-weight:800;color:var(--c-ok,#166038);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">✅ À retenir</div>'
+    + '<div data-cours-edit data-field="fiche.retenir" style="font-size:12px;color:var(--c-text);font-weight:600;line-height:1.6">' + _coursAllowedTextHtml(fi.retenir) + '</div>'
+    + '</div></div>';
+
+  /* Schéma illustratif */
+  if (c.schema) {
+    var schemaKey = fId+':'+aId+':'+mId+':'+cId;
+    var overrideUrl = _courseImageOverrides[schemaKey] || null;
+    html += '<div class="section-header" style="padding-top:var(--s-3)">📊 Schéma</div>'
+      + '<div style="padding:0 var(--s-4)">'
+      + '<div id="schema-box-'+cId+'" style="background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-md);padding:var(--s-3);overflow-x:auto;text-align:center;position:relative">';
+    if (overrideUrl) {
+      html += '<img src="'+overrideUrl+'" style="max-width:100%;height:auto;border-radius:var(--r-sm)" alt="Schéma">';
+    } else {
+      html += c.schema;
+    }
+    if (isAdminUser) {
+      html += '<div style="display:flex;gap:6px;justify-content:flex-end;margin-top:8px">';
+      if (overrideUrl) {
+        html += '<button onclick="_coursRestoreSchema(\''+schemaKey+'\')" style="font-size:11px;padding:4px 10px;background:var(--c-danger-l,#FFF0F0);border:1px solid var(--c-danger,#E53E3E);border-radius:var(--r-sm);cursor:pointer;color:var(--c-danger,#E53E3E);font-weight:600">↩ Restaurer SVG</button>';
+      }
+      html += '<button onclick="_coursReplaceSchema(\''+schemaKey+'\',\''+cId+'\')" style="font-size:11px;padding:4px 10px;background:var(--c-primary-l,#EBF4FF);border:1px solid var(--c-primary,#2B6CB0);border-radius:var(--r-sm);cursor:pointer;color:var(--c-primary,#2B6CB0);font-weight:600">📷 Remplacer l\'image</button>';
+      html += '</div>';
+    }
+    html += '</div></div>';
+  }
+
+  /* Exercice d'application */
+  if (c.exercice) {
+    html += '<div class="section-header" style="padding-top:var(--s-3)">✏️ Exercice d\'application</div>'
+      + '<div style="padding:0 var(--s-4)">'
+      + '<div style="background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-md);padding:var(--s-3)">'
+      + '<div data-cours-edit data-field="exercice.enonce" style="font-size:13px;color:var(--c-text);line-height:1.7;margin-bottom:4px">' + _coursAllowedTextHtml(c.exercice.enonce) + '</div>'
+      + '<details style="margin-top:10px">'
+      + '<summary style="font-size:12px;font-weight:700;color:var(--c-primary);cursor:pointer;list-style:none;display:flex;align-items:center;gap:6px;padding:8px 10px;background:var(--c-primary-l);border-radius:var(--r-sm)">💡 Voir la correction</summary>'
+      + '<div id="cours-solution-display" style="margin-top:8px;padding:12px;background:var(--c-primary-l);border-left:3px solid var(--c-primary);border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:12px;color:var(--c-text);line-height:1.8">'
+      + _coursAllowedHtml(c.exercice.solution)
+      + '</div>'
+      + '</details>'
+      + '</div></div>';
+  }
+
+  /* Bouton fiche PDF */
+  html += _coursFicheDownloadBtn(fId, aId, mId, cId);
+
+  /* Bouton flashcards */
+  if (c.flashcards && c.flashcards.length) {
+    var _fa = (typeof _coursFlashAccess === 'function') ? _coursFlashAccess() : 'none';
+    var flashLabel, flashSub, flashBtnStyle;
+    if (_fa === 'unlimited') {
+      flashLabel = '🃏 Démarrer les flashcards (' + c.flashcards.length + ')';
+      flashSub = '';
+      flashBtnStyle = 'background:' + m.color + ';color:#fff;';
+    } else if (_fa === 'limited') {
+      var rem = (typeof _flashWeekRemaining === 'function') ? _flashWeekRemaining() : FLASH_PRO_WEEKLY_LIMIT;
+      flashLabel = '🃏 Démarrer les flashcards (' + c.flashcards.length + ')';
+      flashSub = '<div style="text-align:center;font-size:11px;color:var(--c-text-4);margin-top:6px">⚡ ' + rem + ' session' + (rem > 1 ? 's' : '') + ' restante' + (rem > 1 ? 's' : '') + ' cette semaine · Illimité avec Établissement</div>';
+      flashBtnStyle = rem > 0 ? 'background:' + m.color + ';color:#fff;' : 'background:var(--c-surface-2);color:var(--c-text-3);border:1.5px solid var(--c-border);';
+    } else {
+      flashLabel = '🔒 Flashcards — Plan Pro requis';
+      flashSub = '<div style="text-align:center;font-size:11px;color:var(--c-text-4);margin-top:6px">Les fiches de cours sont accessibles gratuitement</div>';
+      flashBtnStyle = 'background:var(--c-surface-2);color:var(--c-text-3);border:1.5px solid var(--c-border);';
+    }
+    html += '<div style="padding:0 var(--s-4) var(--s-4)">'
+      + '<button onclick="startFlashcards(\'' + fId + '\',\'' + aId + '\',\'' + mId + '\',\'' + cId + '\')" '
+      + 'style="width:100%;padding:14px;' + flashBtnStyle + 'border:none;border-radius:var(--r-md);font-family:var(--f-body);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">'
+      + flashLabel + '</button>'
+      + flashSub
+      + '</div>';
+  }
+
+  /* Barre de mise en forme + palette LaTeX (fixed, cachée par défaut) */
+  if (isAdminUser) {
+    html += '<div id="cours-format-bar">'
+      + '<div id="cformat-text" style="display:flex;align-items:center;gap:3px">'
+      + '<button class="cfmt-btn" onclick="document.execCommand(\'bold\')" title="Gras"><b>B</b></button>'
+      + '<button class="cfmt-btn" onclick="document.execCommand(\'italic\')" title="Italique"><i>I</i></button>'
+      + '<div class="cfmt-sep"></div>'
+      + '<button class="cfmt-btn cfmt-color" style="color:var(--c-primary,#2B6CB0)" onclick="_coursFormatColor(\'var(--c-primary,#2B6CB0)\')" title="Bleu">A</button>'
+      + '<button class="cfmt-btn cfmt-color" style="color:#38A169" onclick="_coursFormatColor(\'#38A169\')" title="Vert">A</button>'
+      + '<button class="cfmt-btn cfmt-color" style="color:#E53E3E" onclick="_coursFormatColor(\'#E53E3E\')" title="Rouge">A</button>'
+      + '<button class="cfmt-btn cfmt-color" onclick="_coursFormatColor(\'\')" title="Couleur normale" style="text-decoration:line-through;opacity:.5">A</button>'
+      + '</div>'
+      + '<div id="cformat-formula" style="display:none;align-items:center;gap:3px;flex-wrap:wrap">'
+      + '<button class="cfmt-btn" onclick="_coursInsertLatex(\'\\\\frac{}{}\')" title="Fraction">a/b</button>'
+      + '<button class="cfmt-btn" onclick="_coursInsertLatex(\'\\\\sqrt{}\')" title="Racine">√x</button>'
+      + '<button class="cfmt-btn" onclick="_coursInsertLatex(\'^{}\')" title="Exposant">x²</button>'
+      + '<button class="cfmt-btn" onclick="_coursInsertLatex(\'_{}\')" title="Indice">xₙ</button>'
+      + '<div class="cfmt-sep"></div>'
+      + '<button class="cfmt-btn" onclick="_coursInsertLatex(\'\\\\cdot\')" title="Point multiplication">·</button>'
+      + '<button class="cfmt-btn" onclick="_coursInsertLatex(\'\\\\times\')" title="Croix">×</button>'
+      + '<button class="cfmt-btn" onclick="_coursInsertLatex(\'\\\\div\')" title="Division">÷</button>'
+      + '<button class="cfmt-btn" onclick="_coursInsertLatex(\'\\\\leq\')" title="Inférieur ou égal">≤</button>'
+      + '<button class="cfmt-btn" onclick="_coursInsertLatex(\'\\\\geq\')" title="Supérieur ou égal">≥</button>'
+      + '<button class="cfmt-btn" onclick="_coursInsertLatex(\'\\\\approx\')" title="Environ">≈</button>'
+      + '<div class="cfmt-sep"></div>'
+      + '<button class="cfmt-btn" onclick="_coursInsertLatex(\'\\\\alpha\')">α</button>'
+      + '<button class="cfmt-btn" onclick="_coursInsertLatex(\'\\\\nu\')">ν</button>'
+      + '<button class="cfmt-btn" onclick="_coursInsertLatex(\'\\\\rho\')">ρ</button>'
+      + '<button class="cfmt-btn" onclick="_coursInsertLatex(\'\\\\mu\')">μ</button>'
+      + '<button class="cfmt-btn" onclick="_coursInsertLatex(\'\\\\pi\')">π</button>'
+      + '<button class="cfmt-btn" onclick="_coursInsertLatex(\'\\\\Delta\')">Δ</button>'
+      + '<button class="cfmt-btn" onclick="_coursInsertLatex(\'\\\\Sigma\')">Σ</button>'
+      + '</div>'
+      + '<span id="cformat-hint" style="font-size:10px;color:rgba(255,255,255,.35);margin-left:6px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>'
+      + '</div>';
+  }
+
+  /* Barre d'édition admin (fixed, cachée par défaut) */
+  if (isAdminUser) {
+    html += '<div id="cours-edit-bar">'
+      + '<button class="cedit-save" onclick="_coursSaveEdits()">💾 Sauvegarder</button>'
+      + '<button class="cedit-flash" onclick="_coursFlashcardsModal()">🃏 Flashcards</button>'
+      + (c.exercice ? '<button class="cedit-sol" onclick="_coursEditSolutionModal()">💡 Solution</button>' : '')
+      + '<button class="cedit-reset" onclick="_coursResetToOriginal()">↩ Réinitialiser</button>'
+      + '<span class="cedit-info">Cliquez sur un texte pour le modifier</span>'
+      + '<button class="cedit-cancel" onclick="_coursToggleEditMode()">✕ Annuler</button>'
+      + '</div>';
+  }
+
+  html += '<div class="pb-nav"></div>';
+  document.getElementById('main-content').innerHTML = html;
+  document.getElementById('main-content').scrollTop = 0;
+}
+
+/* ═══════════════════════════════════════════════════
+   FICHES DE RÉVISION TÉLÉCHARGEABLES (PDF)
+   Accès : Pro / Étab / Admin
+═══════════════════════════════════════════════════ */
+function _coursFicheAccess() {
+  var p = _coursUserPlan();
+  return (p === 'pro' || p === 'etab' || p === 'admin');
+}
+
+function _coursFicheDownloadBtn(fId, aId, mId, cId) {
+  var has = _coursFicheAccess();
+  return '<div style="padding:0 var(--s-4) var(--s-3)">'
+    + '<button onclick="' + (has ? '_downloadFichePDF(\'' + fId + '\',\'' + aId + '\',\'' + mId + '\',\'' + cId + '\')' : 'authToast(\'Fiches PDF réservées aux plans Pro, Établissement et Admin\')') + '" '
+    + 'style="width:100%;padding:13px;' + (has ? 'background:var(--c-surface);color:var(--c-primary);border:1.5px solid var(--c-primary)' : 'background:var(--c-surface-2);color:var(--c-text-3);border:1.5px solid var(--c-border)') + ';border-radius:var(--r-md);font-family:var(--f-body);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">'
+    + (has ? '📥 Télécharger la fiche de révision (PDF)' : '🔒 Fiche PDF — Plan Pro requis')
+    + '</button></div>';
+}
+
+function _coursMatiereDownloadBtn(fId, aId, mId) {
+  var has = _coursFicheAccess();
+  return '<div style="padding:var(--s-3) var(--s-4) 0">'
+    + '<button onclick="' + (has ? '_downloadMatierePDF(\'' + fId + '\',\'' + aId + '\',\'' + mId + '\')' : 'authToast(\'Fiches PDF réservées aux plans Pro, Établissement et Admin\')') + '" '
+    + 'style="width:100%;padding:13px;' + (has ? 'background:var(--c-surface);color:var(--c-primary);border:1.5px solid var(--c-primary)' : 'background:var(--c-surface-2);color:var(--c-text-3);border:1.5px solid var(--c-border)') + ';border-radius:var(--r-md);font-family:var(--f-body);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">'
+    + (has ? '📥 Télécharger ce thème (PDF)' : '🔒 Fiche thème PDF — Plan Pro requis')
+    + '</button></div>';
+}
+
+function _coursFormationDownloadBtn(fId) {
+  var has = _coursFicheAccess();
+  return '<div style="padding:var(--s-3) var(--s-4) 0">'
+    + '<button onclick="' + (has ? '_downloadFormationPDF(\'' + fId + '\')' : 'authToast(\'Fiches PDF réservées aux plans Pro, Établissement et Admin\')') + '" '
+    + 'style="width:100%;padding:13px;' + (has ? 'background:var(--c-surface);color:var(--c-primary);border:1.5px solid var(--c-primary)' : 'background:var(--c-surface-2);color:var(--c-text-3);border:1.5px solid var(--c-border)') + ';border-radius:var(--r-md);font-family:var(--f-body);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">'
+    + (has ? '📦 Télécharger toute la formation (PDF)' : '🔒 Pack complet PDF — Plan Pro requis')
+    + '</button></div>';
+}
+
+/* ─── Assainissement du texte pour jsPDF (polices standard = WinAnsi/Latin-1) ───
+   Les lettres grecques, symboles math et emojis ne sont pas supportés par les
+   polices standard de jsPDF : ils cassent le calcul de largeur de texte et
+   provoquent un chevauchement en cascade sur tout le reste de la ligne.
+   On les remplace par un équivalent texte lisible, et on retire tout le reste. */
+var _PDF_SYMBOL_MAP = {
+  'Δ':'D', 'Π':'Pi', 'Σ':'somme', 'α':'alpha', 'γ':'gamma', 'η':'eta', 'λ':'lambda',
+  'μ':'mu', 'ν':'nu', 'ξ':'xi', 'π':'pi', 'ρ':'rho', 'σ':'sigma', 'ω':'omega',
+  '∂':'d', '∇':'grad', '√':'racine', '∝':'prop. a', '≠':'!=',
+  '≤':'<=', '≥':'>=', '←':'<-', '→':'->', '↓':'(bas)', '↑':'(haut)',
+  '─':'-', '═':'=',
+  '⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁺':'+','⁻':'-',
+  '₀':'0','₁':'1','₂':'2','₃':'3','₄':'4','₅':'5','₆':'6','₇':'7','₈':'8','₉':'9'
+};
+/* Caractères hors Latin-1 mais quand même supportés par l'encodage WinAnsi
+   des polices standard jsPDF (tiret cadratin, puce, points de suspension...) */
+var _PDF_WINANSI_EXTRA = {
+  0x2013:1, 0x2014:1, 0x2018:1, 0x2019:1, 0x201C:1, 0x201D:1,
+  0x2022:1, 0x2026:1, 0x2030:1, 0x2039:1, 0x203A:1, 0x20AC:1, 0x2122:1
+};
+function _pdfSanitize(str) {
+  if (!str) return '';
+  var out = '';
+  for (var i = 0; i < str.length; i++) {
+    var ch = str[i];
+    var cp = str.codePointAt(i);
+    if (_PDF_SYMBOL_MAP[ch] !== undefined) { out += ' ' + _PDF_SYMBOL_MAP[ch] + ' '; continue; }
+    if (cp <= 0xFF || _PDF_WINANSI_EXTRA[cp]) { out += ch; continue; }
+    /* caractère hors Latin-1 (emoji, pictogramme, drapeau...) : on l'ignore */
+    if (cp > 0xFFFF) i++; /* sauter le 2e élément d'une paire surrogate */
+  }
+  out = out.replace(/^[\s:.\-–—]+/, '').replace(/\s{2,}/g, ' ').trim();
+  return out;
+}
+
+/* ─── Découpage du texte en segments stylés (surlignage) ───
+   - MOTS EN MAJUSCULES (déjà utilisés dans le contenu pour l'emphase) → orange
+   - Valeurs numériques + unité (ex: "9 810 Pa", "1 000 kg/m³") → bleu        */
+function _fichePdfSegments(rawText) {
+  var text = _pdfSanitize(rawText);
+  var NUM_RE = /\d[\d\s,.  ]*\s?(?:kg\/m³|m³\/[hs]|L\/s|Pa\.?s|m²\/s|kPa|MPa|GPa|N\/m³|m\s?CE|cm\s?CE|°C|mm|cm|km|m\/s²?|m³|N\b|Pa\b|bar|%)/g;
+  var segs = [], lastIdx = 0, m;
+  while ((m = NUM_RE.exec(text))) {
+    if (m.index > lastIdx) segs.push({ t: text.slice(lastIdx, m.index), style: 'normal' });
+    segs.push({ t: m[0], style: 'num' });
+    lastIdx = m.index + m[0].length;
+  }
+  if (lastIdx < text.length) segs.push({ t: text.slice(lastIdx), style: 'normal' });
+
+  var CAPS_RE = /\b[A-ZÀÂÉÈÊËÎÏÔŒÙÛÜŸÇ]{3,}\b/g;
+  var finalSegs = [];
+  segs.forEach(function(s) {
+    if (s.style !== 'normal') { finalSegs.push(s); return; }
+    var idx = 0, cm;
+    CAPS_RE.lastIndex = 0;
+    while ((cm = CAPS_RE.exec(s.t))) {
+      if (cm.index > idx) finalSegs.push({ t: s.t.slice(idx, cm.index), style: 'normal' });
+      finalSegs.push({ t: cm[0], style: 'caps' });
+      idx = cm.index + cm[0].length;
+    }
+    if (idx < s.t.length) finalSegs.push({ t: s.t.slice(idx), style: 'normal' });
+  });
+  return finalSegs;
+}
+
+/* ─── Rendu d'un texte multi-style avec retour à la ligne automatique ───
+   Renvoie le y final (bas du bloc) ── */
+function _drawRichText(doc, text, x0, y0, maxWidth, lineHeight, colors) {
+  var segments = _fichePdfSegments(text);
+  var x = x0, y = y0;
+  doc.setFontSize(9.3);
+  doc.setFont('helvetica', 'normal');
+  var spaceW = doc.getTextWidth(' ');
+
+  segments.forEach(function(seg) {
+    var tokens = seg.t.split(/(\s+)/).filter(function(w){ return w.length; });
+    tokens.forEach(function(w) {
+      if (/^\s+$/.test(w)) { x += spaceW; return; }
+      var bold = seg.style !== 'normal';
+      doc.setFont('helvetica', bold ? 'bold' : 'normal');
+      var ww = doc.getTextWidth(w);
+      if (x + ww > x0 + maxWidth) { x = x0; y += lineHeight; }
+      if (seg.style === 'num') {
+        doc.setFillColor.apply(doc, colors.numBg);
+        doc.rect(x - 0.4, y - 3.1, ww + 0.8, 4, 'F');
+        doc.setTextColor.apply(doc, colors.num);
+      } else if (seg.style === 'caps') {
+        doc.setFillColor.apply(doc, colors.capsBg);
+        doc.rect(x - 0.4, y - 3.1, ww + 0.8, 4, 'F');
+        doc.setTextColor.apply(doc, colors.caps);
+      } else {
+        doc.setTextColor.apply(doc, colors.normal);
+      }
+      doc.text(w, x, y);
+      x += ww + spaceW;
+    });
+  });
+  doc.setFont('helvetica', 'normal');
+  return y;
+}
+
+/* ─── Mesure le nombre de lignes qu'occupera un texte riche (pour la pagination) ─── */
+function _richTextLineCount(doc, text, maxWidth) {
+  var segments = _fichePdfSegments(text);
+  doc.setFontSize(9.3);
+  var x = 0, lines = 1;
+  var spaceW = doc.getTextWidth(' ');
+  segments.forEach(function(seg) {
+    var tokens = seg.t.split(/(\s+)/).filter(function(w){ return w.length; });
+    tokens.forEach(function(w) {
+      if (/^\s+$/.test(w)) { x += spaceW; return; }
+      doc.setFont('helvetica', seg.style !== 'normal' ? 'bold' : 'normal');
+      var ww = doc.getTextWidth(w);
+      if (x + ww > maxWidth) { x = 0; lines++; }
+      x += ww + spaceW;
+    });
+  });
+  doc.setFont('helvetica', 'normal');
+  return lines;
+}
+
+var _FICHE_COLORS = {
+  normal: [30, 38, 34], num: [12, 90, 150], numBg: [222, 238, 250],
+  caps: [180, 70, 10], capsBg: [253, 232, 210]
+};
+
+/* ─── Construit le contenu PDF d'UN chapitre, à partir de y, retourne y final ───
+   doc, m (matière), c (chapitre), y, W, MARGIN, cW, checkPage(needed) ── */
+function _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, checkPage, addPage) {
+  var fi = c.fiche;
+  var col = _hexToRgb(m.color);
+  var colL = _hexToRgb(m.colorl);
+
+  /* Bandeau titre chapitre */
+  checkPage(14);
+  doc.setFillColor.apply(doc, col);
+  doc.roundedRect(MARGIN, y, cW, 11, 1.5, 1.5, 'F');
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
+  doc.setTextColor(255,255,255);
+  doc.text(_pdfSanitize(c.titre), MARGIN + 4, y + 7.3);
+  y += 16;
+
+  /* Intro */
+  var introLines = doc.splitTextToSize(_pdfSanitize(fi.intro), cW - 8);
+  checkPage(introLines.length * 4.6 + 8);
+  doc.setFillColor(246, 248, 247);
+  doc.roundedRect(MARGIN, y, cW, introLines.length * 4.6 + 6, 1.5, 1.5, 'F');
+  doc.setFont('helvetica', 'italic'); doc.setFontSize(9);
+  doc.setTextColor(80, 92, 86);
+  introLines.forEach(function(l, i) { doc.text(l, MARGIN + 4, y + 5 + i * 4.6); });
+  y += introLines.length * 4.6 + 10;
+
+  /* Points clés */
+  checkPage(8);
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5);
+  doc.setTextColor.apply(doc, col);
+  doc.text('POINTS CLÉS', MARGIN, y);
+  y += 5;
+
+  fi.points.forEach(function(p) {
+    var nLines = _richTextLineCount(doc, p, cW - 9);
+    var blockH = nLines * 4.6 + 4;
+    checkPage(blockH + 2);
+    doc.setFillColor.apply(doc, colL);
+    doc.roundedRect(MARGIN, y, cW, blockH, 1.2, 1.2, 'F');
+    _drawRichText(doc, p, MARGIN + 4, y + 4.6, cW - 9, 4.6, _FICHE_COLORS);
+    y += blockH + 2.5;
+  });
+  y += 3;
+
+  /* Formules */
+  if (fi.formules && fi.formules.length) {
+    checkPage(8);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5);
+    doc.setTextColor(12, 90, 150);
+    doc.text('FORMULES CLÉS', MARGIN, y);
+    y += 5;
+    fi.formules.forEach(function(form) {
+      var formTxt = _pdfSanitize(form);
+      var formLines = doc.splitTextToSize(formTxt, cW - 8);
+      var fH = formLines.length * 4.4 + 3;
+      checkPage(fH + 1.5);
+      doc.setFillColor(222, 238, 250);
+      doc.roundedRect(MARGIN, y, cW, fH, 1.2, 1.2, 'F');
+      doc.setFont('courier', 'bold'); doc.setFontSize(9);
+      doc.setTextColor(12, 70, 120);
+      formLines.forEach(function(l, i) { doc.text(l, MARGIN + 4, y + 4.6 + i * 4.4); });
+      y += fH + 1.5;
+    });
+    y += 2;
+  }
+
+  /* À retenir */
+  var retLines = doc.splitTextToSize(_pdfSanitize(fi.retenir), cW - 10);
+  checkPage(retLines.length * 4.6 + 10);
+  doc.setFillColor(230, 248, 238);
+  doc.setDrawColor(22, 96, 56);
+  doc.setLineWidth(0.4);
+  doc.roundedRect(MARGIN, y, cW, retLines.length * 4.6 + 9, 1.5, 1.5, 'FD');
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(8.3);
+  doc.setTextColor(22, 96, 56);
+  doc.text('À RETENIR', MARGIN + 4, y + 5);
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(9.2);
+  doc.setTextColor(20, 50, 32);
+  retLines.forEach(function(l, i) { doc.text(l, MARGIN + 4, y + 10 + i * 4.6); });
+  y += retLines.length * 4.6 + 13;
+
+  return y;
+}
+
+function _hexToRgb(hex) {
+  hex = (hex || '#0A7460').replace('#', '');
+  if (hex.length === 3) hex = hex.split('').map(function(c){ return c + c; }).join('');
+  var num = parseInt(hex, 16);
+  return [(num >> 16) & 255, (num >> 8) & 255, num & 255];
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SYSTÈME DE DESIGN PDF HydroCalc — Maquette professionnelle v2.0
+   Composants réutilisables · cours.js · reglementation.js · auth.js
+   Palette thème-indépendante · Format A4 · Composants modulaires
+═══════════════════════════════════════════════════════════════════ */
+
+var _PDF_T = {
+  navy:    [6,   35,  84 ],
+  blue:    [0,   119, 232],
+  lblue:   [87,  184, 235],
+  lbg:     [239, 247, 253],
+  textDk:  [51,  65,  85 ],
+  textMd:  [100, 116, 139],
+  sep:     [216, 229, 240],
+  alertBg: [255, 243, 241],
+  alertBd: [210, 72,  54 ],
+  white:   [255, 255, 255],
+};
+
+function _pdfGetLogo(cb) {
+  try {
+    var img = new Image();
+    img.onload = function() {
+      try {
+        var cv = document.createElement('canvas');
+        cv.width = img.naturalWidth; cv.height = img.naturalHeight;
+        cv.getContext('2d').drawImage(img, 0, 0);
+        cb(cv.toDataURL('image/png'), img.naturalWidth, img.naturalHeight);
+      } catch(e) { cb(null, 0, 0); }
+    };
+    img.onerror = function() { cb(null, 0, 0); };
+    img.src = './images/logo-light.png';
+  } catch(e) { cb(null, 0, 0); }
+}
+
+function _pdfLogoImg(doc, x, y, targetW, logoB64, logoW, logoH, maxH) {
+  if (logoB64) {
+    try {
+      var h = (logoW && logoH) ? targetW * logoH / logoW : targetW * 0.38;
+      if (maxH && h > maxH) { targetW = targetW * maxH / h; h = maxH; }
+      doc.addImage(logoB64, 'PNG', x, y, targetW, h);
+      return;
+    } catch(e) {}
+  }
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(13);
+  doc.setTextColor.apply(doc, _PDF_T.blue);
+  doc.text('hydrocalc', x, y + 8);
+}
+
+function _pdfFooter(doc, W, MRG, ficheId, version, date, p, total) {
+  var T = _PDF_T;
+  doc.setDrawColor.apply(doc, T.sep); doc.setLineWidth(0.25);
+  doc.line(MRG, 283, W - MRG, 283);
+  var left = (ficheId ? 'Réf. ' + _pdfSanitize(ficheId) : 'HydroCalc')
+    + (version ? '  |  Version ' + version : '')
+    + (date    ? '  |  Date '    + date    : '');
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(7);
+  doc.setTextColor.apply(doc, T.textMd);
+  doc.text(left, MRG, 289);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor.apply(doc, T.navy);
+  doc.text(p + ' / ' + total, W - MRG, 289, { align: 'right' });
+}
+
+function _pdfContentHdr(doc, W, MRG, docTitle, logoB64, logoW, logoH) {
+  _pdfLogoImg(doc, MRG, 5, 32, logoB64, logoW, logoH, 13);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5);
+  doc.setTextColor.apply(doc, _PDF_T.textMd);
+  var titleTxt = _pdfSanitize(docTitle || '');
+  var maxTitleW = W - MRG * 2 - 38;
+  var titleLines = doc.splitTextToSize(titleTxt, maxTitleW);
+  doc.text(titleLines[0] || '', W - MRG, 14, { align: 'right' });
+  doc.setDrawColor.apply(doc, _PDF_T.blue); doc.setLineWidth(0.35);
+  doc.line(MRG, 22, W - MRG, 22);
+}
+
+function _pdfStampPages(doc, W, MRG, meta, logoB64, logoW, logoH) {
+  var total = doc.internal.getNumberOfPages();
+  for (var p = 2; p <= total; p++) {
+    doc.setPage(p);
+    _pdfContentHdr(doc, W, MRG, meta.title || '', logoB64, logoW, logoH);
+    _pdfFooter(doc, W, MRG, meta.ficheId || '', meta.version || '', meta.date || '', p, total);
+  }
+}
+
+function _pdfWaves(doc, W, yTop) {
+  var T = _PDF_T;
+  /* fond couvrant vagues + bande de méta — 80 mm */
+  doc.setFillColor.apply(doc, T.lbg);
+  doc.rect(0, yTop, W, 80, 'F');
+  /* 3 couches de vagues ; chaque couche = courbe de Bézier + retour bas */
+  var lrs = [
+    { c: [220, 237, 252], yOff: 32, d1: -18, d2: -5, dH: 22 },
+    { c: [175, 215, 248], yOff: 40, d1: -24, d2:  1, dH: 11 },
+    { c: [128, 190, 240], yOff: 47, d1: -28, d2:  3, dH:  7 },
+  ];
+  lrs.forEach(function(l) {
+    var ly = yTop + l.yOff;
+    doc.setFillColor.apply(doc, l.c);
+    doc.lines(
+      [[W * 0.30, l.d1, W * 0.65, l.d1 * 0.45, W, l.d2],
+       [0, l.dH], [-W, 0]],
+      0, ly, [1, 1], 'F', true
+    );
+  });
+}
+
+function _pdfMetaBand(doc, W, MRG, meta) {
+  var T = _PDF_T; var cW = W - MRG * 2;
+  var rY = 244, rH = 15;
+  doc.setFillColor(248, 251, 254);
+  doc.setDrawColor.apply(doc, T.sep); doc.setLineWidth(0.25);
+  doc.roundedRect(MRG, rY, cW, rH, 1.5, 1.5, 'FD');
+  var fields = [];
+  if (meta.ficheId)  fields.push(['Référence', meta.ficheId]);
+  if (meta.version)  fields.push(['Version',   meta.version]);
+  if (meta.date)     fields.push(['Date',       meta.date]);
+  if (meta.author)   fields.push(['Auteur',     meta.author]);
+  if (!fields.length) return;
+  var colW = cW / fields.length;
+  fields.forEach(function(f, i) {
+    var cx = MRG + i * colW + 4;
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(6.5);
+    doc.setTextColor.apply(doc, T.textMd);
+    doc.text(f[0], cx, rY + 5);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(8);
+    doc.setTextColor.apply(doc, T.navy);
+    doc.text(_pdfSanitize(f[1]), cx, rY + 11.5);
+    if (i < fields.length - 1) {
+      doc.setDrawColor.apply(doc, T.sep); doc.setLineWidth(0.2);
+      doc.line(MRG + (i + 1) * colW, rY + 3, MRG + (i + 1) * colW, rY + rH - 3);
+    }
+  });
+}
+
+/* ═══ PAGE DE COUVERTURE — page 1 de tout document HydroCalc PDF ═══
+   meta : { category, docType, ficheId, title, subtitle, description,
+            version, date, author }                                    */
+function _pdfCoverPage(doc, W, MRG, meta, logoB64, logoW, logoH) {
+  var T = _PDF_T; var cW = W - MRG * 2;
+
+  _pdfLogoImg(doc, MRG, 6, 55, logoB64, logoW, logoH);
+  if (meta.docType) {
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5);
+    doc.setTextColor.apply(doc, T.textMd);
+    doc.text(_pdfSanitize(meta.docType.toUpperCase()), W - MRG, 14, { align: 'right' });
+  }
+  doc.setDrawColor.apply(doc, T.sep); doc.setLineWidth(0.25);
+  doc.line(MRG, 37, W - MRG, 37);
+
+  if (meta.category) {
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5);
+    doc.setTextColor.apply(doc, T.blue);
+    doc.text(_pdfSanitize(meta.category.toUpperCase()), MRG, 47);
+    doc.setDrawColor.apply(doc, T.lblue); doc.setLineWidth(0.4);
+    doc.line(MRG, 49.5, MRG + 58, 49.5);
+  }
+
+  var titleTxt = _pdfSanitize(meta.title || 'Titre du document');
+  var titleLines = doc.splitTextToSize(titleTxt, cW - 5).slice(0, 4);
+  var tFs = titleLines.length > 3 ? 20 : (titleLines.length > 2 ? 24 : (titleLines.length > 1 ? 28 : 32));
+  var tLh = tFs * 0.42;
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(tFs);
+  doc.setTextColor.apply(doc, T.navy);
+  titleLines.forEach(function(l, i) { doc.text(l, MRG, 60 + i * tLh); });
+  var aY = 60 + titleLines.length * tLh + 6;
+
+  if (meta.subtitle) {
+    var sLines = doc.splitTextToSize(_pdfSanitize(meta.subtitle), cW - 5);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(14);
+    doc.setTextColor.apply(doc, T.blue);
+    sLines.forEach(function(l, i) { doc.text(l, MRG, aY + i * 6.5); });
+    aY += sLines.length * 6.5 + 5;
+  }
+
+  if (meta.description) {
+    var dLines = doc.splitTextToSize(_pdfSanitize(meta.description), cW - 5);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
+    doc.setTextColor.apply(doc, T.textDk);
+    dLines.slice(0, 6).forEach(function(l, i) { doc.text(l, MRG, aY + i * 5.2); });
+  }
+
+  _pdfWaves(doc, W, 183);
+  _pdfMetaBand(doc, W, MRG, meta);
+
+  doc.setDrawColor.apply(doc, T.blue); doc.setLineWidth(0.3);
+  doc.line(MRG, 270, W - MRG, 270);
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(6.5);
+  doc.setTextColor.apply(doc, T.blue);
+  doc.text(_pdfSanitize('CALCULER. COMPRENDRE. MAÎTRISER L\'HYDRAULIQUE.'), MRG, 276);
+  doc.setFillColor.apply(doc, T.lblue);
+  doc.circle(W - MRG, 275, 1.8, 'F');
+}
+
+function _pdfFicheHeader(doc, W, MARGIN, color, title, subtitle) {
+  var col = _hexToRgb(color);
+  doc.setFillColor.apply(doc, col);
+  doc.rect(0, 0, W, 24, 'F');
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(15);
+  doc.setTextColor(255,255,255);
+  doc.text('HydroCalc — Fiche de révision', MARGIN, 11);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
+  doc.setTextColor(255,255,255);
+  doc.text(_pdfSanitize(title), MARGIN, 18);
+  if (subtitle) {
+    doc.setFontSize(7.5);
+    doc.text(_pdfSanitize(subtitle), W - MARGIN, 18, { align: 'right' });
+  }
+}
+
+function _downloadFichePDF(fId, aId, mId, cId) {
+  if (!_coursFicheAccess()) { authToast('Fiches PDF réservées aux plans Pro, Établissement et Admin'); return; }
+  if (!window.jspdf) { authToast('Bibliothèque PDF non chargée — vérifiez votre connexion.'); return; }
+  var f = _coursGetFormation(fId), a = _coursGetAnnee(fId, aId), m = _coursGetMatiere(fId, aId, mId), c = _coursGetChapitre(fId, aId, mId, cId);
+  if (!c || !c.fiche) return;
+
+  _pdfGetLogo(function(logoB64, logoW, logoH) {
+    var jsPDF = window.jspdf.jsPDF;
+    var doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    var W = 210, MARGIN = 18, cW = W - MARGIN * 2, y = 30;
+
+    var ficheId = 'REV-' + (f ? f.sigle.toUpperCase().replace(/[^A-Z0-9]/g, '') : fId) + '-' + String(Number(cId) + 1).padStart(2, '0');
+    var meta = {
+      category:    'COURS • FICHES • RÉVISION',
+      docType:     'FICHE DE RÉVISION',
+      ficheId:     ficheId,
+      title:       c.titre,
+      subtitle:    m ? m.name : '',
+      description: (c.fiche.intro ? c.fiche.intro.slice(0, 220) : '') || ((f ? f.name : '') + (a ? ' · ' + a.name : '')),
+      version:     '1.0',
+      date:        new Date().toLocaleDateString('fr-FR'),
+      author:      'HydroCalc'
+    };
+
+    function checkPage(needed) { if (y + needed > 276) { doc.addPage(); y = 30; } }
+
+    _pdfCoverPage(doc, W, MARGIN, meta, logoB64, logoW, logoH);
+    doc.addPage(); y = 30;
+    y = _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, checkPage);
+    _pdfStampPages(doc, W, MARGIN, meta, logoB64, logoW, logoH);
+    doc.setProperties({ title: 'HydroCalc — ' + c.titre, author: 'HydroCalc', subject: m ? m.name : '' });
+    doc.save('HydroCalc_' + ficheId + '_' + c.titre.replace(/[^a-zA-Z0-9]/g, '_').slice(0, 40) + '.pdf');
+    if (typeof authToast === 'function') authToast('Fiche PDF téléchargée ✓');
+  });
+}
+
+function _downloadFormationPDF(fId) {
+  if (!_coursFicheAccess()) { authToast('Fiches PDF réservées aux plans Pro, Établissement et Admin'); return; }
+  if (!window.jspdf) { authToast('Bibliothèque PDF non chargée — vérifiez votre connexion.'); return; }
+  var f = _coursGetFormation(fId);
+  if (!f) return;
+
+  _pdfGetLogo(function(logoB64, logoW, logoH) {
+    var jsPDF = window.jspdf.jsPDF;
+    var doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    var W = 210, MARGIN = 18, cW = W - MARGIN * 2, y = 30;
+
+    var totalChap = 0;
+    f.annees.forEach(function(a) { a.matieres.forEach(function(m) { totalChap += m.chapitres.filter(function(c) { return c.fiche; }).length; }); });
+    var ficheId = 'REV-' + f.sigle.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    var meta = {
+      category:    'COURS • FICHES • RÉVISION',
+      docType:     'PACK DE RÉVISION',
+      ficheId:     ficheId,
+      title:       f.name,
+      subtitle:    f.organisme + ' · ' + f.niveau,
+      description: totalChap + ' fiche' + (totalChap > 1 ? 's' : '') + ' de révision',
+      version:     '1.0',
+      date:        new Date().toLocaleDateString('fr-FR'),
+      author:      'HydroCalc'
+    };
+
+    function checkPage(needed) { if (y + needed > 276) { doc.addPage(); y = 30; } }
+
+    _pdfCoverPage(doc, W, MARGIN, meta, logoB64, logoW, logoH);
+
+    f.annees.forEach(function(a) {
+      a.matieres.forEach(function(m) {
+        m.chapitres.forEach(function(c) {
+          if (!c.fiche) return;
+          doc.addPage(); y = 30;
+          y = _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, checkPage);
+        });
+      });
+    });
+
+    _pdfStampPages(doc, W, MARGIN, meta, logoB64, logoW, logoH);
+    doc.setProperties({ title: 'HydroCalc — ' + f.name, author: 'HydroCalc', subject: f.organisme });
+    doc.save('HydroCalc_' + f.sigle.replace(/[^a-zA-Z0-9]/g, '_') + '_fiches_revision.pdf');
+    if (typeof authToast === 'function') authToast('Pack PDF téléchargé (' + totalChap + ' fiches) ✓');
+  });
+}
+
+function _downloadMatierePDF(fId, aId, mId) {
+  if (!_coursFicheAccess()) { authToast('Fiches PDF réservées aux plans Pro, Établissement et Admin'); return; }
+  if (!window.jspdf) { authToast('Bibliothèque PDF non chargée — vérifiez votre connexion.'); return; }
+  var f = _coursGetFormation(fId), a = _coursGetAnnee(fId, aId), m = _coursGetMatiere(fId, aId, mId);
+  if (!m) return;
+  var chaps = m.chapitres.filter(function(c) { return c.fiche; });
+  if (!chaps.length) { authToast('Aucune fiche disponible pour ce thème.'); return; }
+
+  _pdfGetLogo(function(logoB64, logoW, logoH) {
+    var jsPDF = window.jspdf.jsPDF;
+    var doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    var W = 210, MARGIN = 18, cW = W - MARGIN * 2, y = 30;
+
+    var ficheId = 'REV-' + (f ? f.sigle.toUpperCase().replace(/[^A-Z0-9]/g, '') : fId) + '-' + (m ? m.name.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6) : mId);
+    var meta = {
+      category:    'COURS • FICHES • RÉVISION',
+      docType:     'FICHES DE RÉVISION',
+      ficheId:     ficheId,
+      title:       m.name,
+      subtitle:    (f ? f.sigle : '') + (a ? ' · ' + a.name : ''),
+      description: chaps.length + ' fiche' + (chaps.length > 1 ? 's' : '') + ' de révision',
+      version:     '1.0',
+      date:        new Date().toLocaleDateString('fr-FR'),
+      author:      'HydroCalc'
+    };
+
+    function checkPage(needed) { if (y + needed > 276) { doc.addPage(); y = 30; } }
+
+    _pdfCoverPage(doc, W, MARGIN, meta, logoB64, logoW, logoH);
+
+    chaps.forEach(function(c) {
+      doc.addPage(); y = 30;
+      y = _renderFichePdfBlock(doc, m, c, y, MARGIN, cW, checkPage);
+    });
+
+    _pdfStampPages(doc, W, MARGIN, meta, logoB64, logoW, logoH);
+    doc.setProperties({ title: 'HydroCalc — ' + m.name, author: 'HydroCalc', subject: f ? f.name : '' });
+    doc.save('HydroCalc_' + m.name.replace(/[^a-zA-Z0-9]/g, '_').slice(0, 50) + '_fiches.pdf');
+    if (typeof authToast === 'function') authToast('Fiches du thème téléchargées (' + chaps.length + ') ✓');
+  });
+}
+
+/* ─── FLASHCARDS ─────────────────────────────────────────────────── */
+var FLASH_PRO_WEEKLY_LIMIT = 7;
+
+function _coursUserPlan() {
+  if (typeof AUTH !== 'undefined' && AUTH.user) return AUTH.user.plan || 'free';
+  return 'guest';
+}
+
+function _coursFlashAccess() {
+  var p = _coursUserPlan();
+  if (p === 'etab' || p === 'admin') return 'unlimited';
+  if (p === 'pro')                   return 'limited';
+  return 'none';
+}
+
+/* ── Compteur hebdomadaire Pro ── */
+function _flashWeekKey() {
+  var u = (typeof AUTH !== 'undefined' && AUTH.user) ? AUTH.user.email : 'guest';
+  var now = new Date();
+  var startOfYear = new Date(now.getFullYear(), 0, 1);
+  var week = Math.floor((now - startOfYear) / 604800000);
+  return 'hc_flash_week_' + u + '_' + now.getFullYear() + '_' + week;
+}
+
+function _flashWeekCount() {
+  return parseInt(localStorage.getItem(_flashWeekKey()) || '0', 10);
+}
+
+function _flashWeekIncrement() {
+  var key = _flashWeekKey();
+  localStorage.setItem(key, (_flashWeekCount() + 1).toString());
+}
+
+function _flashWeekRemaining() {
+  return Math.max(0, FLASH_PRO_WEEKLY_LIMIT - _flashWeekCount());
+}
+
+function startFlashcards(fId, aId, mId, cId) {
+  var access = _coursFlashAccess();
+  var m = _coursGetMatiere(fId, aId, mId);
+  var c = _coursGetChapitre(fId, aId, mId, cId);
+
+  if (access === 'none') {
+    _coursState.fId = fId; _coursState.aId = aId; _coursState.mId = mId; _coursState.cId = cId;
+    _renderFlashcardPaywall(m, (c && c.flashcards) ? c.flashcards.length : 0, 'none');
+    return;
+  }
+
+  if (access === 'limited' && _flashWeekRemaining() === 0) {
+    _coursState.fId = fId; _coursState.aId = aId; _coursState.mId = mId; _coursState.cId = cId;
+    _renderFlashcardPaywall(m, (c && c.flashcards) ? c.flashcards.length : 0, 'weekly');
+    return;
+  }
+
+  if (access === 'limited') _flashWeekIncrement();
+
+  _coursState.fId = fId; _coursState.aId = aId; _coursState.mId = mId; _coursState.cId = cId;
+  _coursState.flashIdx = 0;
+  _coursState.flashRevealed = false;
+  _coursState.flashScores = [];
+  renderFlashcard();
+}
+
+function renderFlashcard() {
+  var c = _coursGetChapitre(_coursState.fId, _coursState.aId, _coursState.mId, _coursState.cId);
+  var m = _coursGetMatiere(_coursState.fId, _coursState.aId, _coursState.mId);
+  if (!c || !c.flashcards) return;
+
+  var cards = c.flashcards;
+  var idx = _coursState.flashIdx;
+  var revealed = _coursState.flashRevealed;
+
+  if (idx >= cards.length) { renderFlashcardScore(); return; }
+
+
+  var card = cards[idx];
+  var prog = Math.round((idx / cards.length) * 100);
+
+  var html = '<div style="min-height:100vh;background:var(--c-bg);display:flex;flex-direction:column">';
+
+  /* Barre de progression */
+  html += '<div style="padding:var(--s-3) var(--s-4) 0">'
+    + '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--s-2)">'
+      + '<button onclick="renderCoursChapitre(\'' + _coursState.fId + '\',\'' + _coursState.aId + '\',\'' + _coursState.mId + '\',\'' + _coursState.cId + '\')" '
+        + 'style="background:none;border:none;font-family:var(--f-body);font-size:12px;color:var(--c-text-3);cursor:pointer;padding:0">← Fiche</button>'
+      + '<div style="font-size:11px;font-weight:700;color:var(--c-text-4)">' + (idx+1) + ' / ' + cards.length + '</div>'
+    + '</div>'
+    + '<div style="height:4px;background:var(--c-border);border-radius:2px;overflow:hidden">'
+      + '<div style="height:100%;width:' + prog + '%;background:' + m.color + ';border-radius:2px;transition:width .3s"></div>'
+    + '</div></div>';
+
+  /* Carte */
+  html += '<div style="flex:1;padding:var(--s-4);display:flex;flex-direction:column;gap:var(--s-3)">';
+
+  /* Recto — question */
+  html += '<div style="background:var(--c-surface);border:2px solid ' + m.color + ';border-radius:var(--r-lg);padding:var(--s-4);text-align:center;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center">'
+    + '<div style="font-size:10px;font-weight:800;color:' + m.color + ';text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--s-2)">❓ Question</div>'
+    + '<div style="font-size:15px;font-weight:700;color:var(--c-text);line-height:1.5">' + card.q + '</div>'
+    + '</div>';
+
+  if (!revealed) {
+    /* Bouton retourner */
+    html += '<button onclick="_coursReveal()" '
+      + 'style="width:100%;padding:14px;background:' + m.color + ';color:#fff;border:none;border-radius:var(--r-md);font-family:var(--f-body);font-size:14px;font-weight:700;cursor:pointer">'
+      + '👁 Voir la réponse</button>';
+  } else {
+    /* Verso — réponse */
+    html += '<div style="background:' + m.colorl + ';border:2px solid ' + m.color + ';border-radius:var(--r-lg);padding:var(--s-4)">'
+      + '<div style="font-size:10px;font-weight:800;color:' + m.color + ';text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--s-2)">✅ Réponse</div>'
+      + '<div style="font-size:14px;font-weight:700;color:var(--c-text);line-height:1.6;margin-bottom:var(--s-2)">' + card.r + '</div>'
+      + (card.expl ? '<div style="font-size:11px;color:var(--c-text-3);line-height:1.6;padding-top:var(--s-2);border-top:1px solid ' + m.color + '30">💡 ' + card.expl + '</div>' : '')
+      + '</div>';
+    /* Boutons je savais / à revoir */
+    html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--s-2)">'
+      + '<button onclick="_coursFlashNext(false)" '
+        + 'style="padding:12px;background:var(--c-danger-l,#FDECEA);color:var(--c-danger,#A82018);border:1.5px solid var(--c-danger,#A82018);border-radius:var(--r-md);font-family:var(--f-body);font-size:13px;font-weight:700;cursor:pointer">'
+        + '🔁 À revoir</button>'
+      + '<button onclick="_coursFlashNext(true)" '
+        + 'style="padding:12px;background:var(--c-ok-l,#EAF8F0);color:var(--c-ok,#166038);border:1.5px solid var(--c-ok,#166038);border-radius:var(--r-md);font-family:var(--f-body);font-size:13px;font-weight:700;cursor:pointer">'
+        + '✅ Je savais</button>'
+      + '</div>';
+  }
+
+  html += '</div></div>';
+  document.getElementById('main-content').innerHTML = html;
+  document.getElementById('main-content').scrollTop = 0;
+}
+
+function _coursReveal() {
+  _coursState.flashRevealed = true;
+  renderFlashcard();
+}
+
+function _coursFlashNext(knew) {
+  _coursState.flashScores.push(knew);
+  _coursState.flashIdx++;
+  _coursState.flashRevealed = false;
+  renderFlashcard();
+}
+
+function renderFlashcardScore() {
+  var scores = _coursState.flashScores;
+  var total = scores.length;
+  var ok = scores.filter(function(s){ return s; }).length;
+  var pct = total ? Math.round(ok / total * 100) : 0;
+  var m = _coursGetMatiere(_coursState.fId, _coursState.aId, _coursState.mId);
+  var c = _coursGetChapitre(_coursState.fId, _coursState.aId, _coursState.mId, _coursState.cId);
+
+  /* ── Sauvegarder la progression ── */
+  _saveFlashProgress(_coursState.fId, _coursState.aId, _coursState.mId, _coursState.cId, pct, ok, total);
+
+  var emoji = pct >= 80 ? '🏆' : pct >= 50 ? '💪' : '📖';
+  var msg   = pct >= 80 ? 'Excellent ! Maîtrise solide du chapitre.' : pct >= 50 ? 'Bien ! Quelques points à retravailler.' : 'Continue à réviser, tu vas y arriver !';
+  var bg    = pct >= 80 ? '#166038' : pct >= 50 ? '#886000' : '#A82018';
+
+  var html = '<div style="padding:var(--s-4);text-align:center">'
+    + '<div style="font-size:56px;margin-bottom:var(--s-3)">' + emoji + '</div>'
+    + '<div style="font-size:22px;font-weight:800;color:' + bg + ';margin-bottom:var(--s-2)">' + pct + '%</div>'
+    + '<div style="font-size:14px;font-weight:700;color:var(--c-text);margin-bottom:4px">' + ok + ' / ' + total + ' cartes réussies</div>'
+    + '<div style="font-size:12px;color:var(--c-text-3);margin-bottom:var(--s-4)">' + msg + '</div>'
+    + '<div style="background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-md);padding:var(--s-3);margin-bottom:var(--s-3)">'
+      + '<div style="font-size:11px;font-weight:700;color:var(--c-text);margin-bottom:4px">' + c.titre + '</div>'
+      + '<div style="height:10px;background:var(--c-border);border-radius:5px;overflow:hidden">'
+        + '<div style="height:100%;width:' + pct + '%;background:' + bg + ';border-radius:5px;transition:width .5s"></div>'
+      + '</div>'
+    + '</div>'
+    + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--s-2)">'
+      + '<button onclick="startFlashcards(\'' + _coursState.fId + '\',\'' + _coursState.aId + '\',\'' + _coursState.mId + '\',\'' + _coursState.cId + '\')" '
+        + 'style="padding:12px;background:' + m.color + ';color:#fff;border:none;border-radius:var(--r-md);font-family:var(--f-body);font-size:13px;font-weight:700;cursor:pointer">🔄 Recommencer</button>'
+      + '<button onclick="renderCoursChapitre(\'' + _coursState.fId + '\',\'' + _coursState.aId + '\',\'' + _coursState.mId + '\',\'' + _coursState.cId + '\')" '
+        + 'style="padding:12px;background:' + m.colorl + ';color:' + m.color + ';border:1.5px solid ' + m.color + ';border-radius:var(--r-md);font-family:var(--f-body);font-size:13px;font-weight:700;cursor:pointer">📚 Revoir la fiche</button>'
+    + '</div></div>'
+    + '<div class="pb-nav"></div>';
+
+  document.getElementById('main-content').innerHTML = html;
+}
+
+function _renderFlashcardPaywall(m, totalCards, reason) {
+  var isNone    = reason === 'none';
+  var isWeekly  = reason === 'weekly';
+
+  var title   = isNone ? 'Accès non disponible' : 'Quota hebdomadaire atteint';
+  var emoji   = isNone ? '🔒' : '📅';
+  var message = isNone
+    ? 'Les flashcards sont réservées aux abonnés <strong>Pro</strong> et <strong>Établissement</strong>.<br>Le plan Gratuit donne accès aux fiches de cours uniquement.'
+    : 'Vous avez utilisé vos <strong>' + FLASH_PRO_WEEKLY_LIMIT + ' sessions Pro</strong> cette semaine.<br>Revenez lundi ou passez à la licence Établissement pour un accès illimité.';
+
+  var html = '<div style="min-height:100vh;background:var(--c-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center">'
+    + '<div style="font-size:48px;margin-bottom:16px">' + emoji + '</div>'
+    + '<div style="font-size:18px;font-weight:800;color:var(--c-text);margin-bottom:8px">' + title + '</div>'
+    + '<div style="font-size:13px;color:var(--c-text-3);line-height:1.7;margin-bottom:24px">' + message + '</div>'
+    + '<div style="background:var(--c-surface);border:1px solid var(--c-border);border-radius:14px;overflow:hidden;width:100%;max-width:300px;margin-bottom:24px">';
+
+  var plans = isNone
+    ? [
+        { ico:'⚡', name:'Pro', price:'5,90 €/mois', features:['7 sessions de flashcards / semaine','Calculateurs avancés','Export rapports'], btn:'Passer à Pro', action:'openSidebar()' },
+        { ico:'🏛️', name:'Établissement', price:'35 €/mois', features:['Sessions illimitées','Accès tout inclus','Licence professeur'], btn:'Licence Établissement', action:'openSidebar()' },
+      ]
+    : [
+        { ico:'🏛️', name:'Établissement', price:'35 €/mois', features:['Sessions illimitées chaque semaine','Accès tout inclus','Idéal pour les enseignants'], btn:'Passer Établissement', action:'openSidebar()' },
+      ];
+
+  plans.forEach(function(p, i) {
+    var border = i < plans.length - 1 ? 'border-bottom:1px solid var(--c-border);' : '';
+    html += '<div style="padding:14px 16px;' + border + 'text-align:left">'
+      + '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">'
+        + '<div style="font-size:14px;font-weight:800;color:var(--c-text)">' + p.ico + ' ' + p.name + '</div>'
+        + '<div style="font-size:12px;font-weight:700;color:var(--c-primary)">' + p.price + '</div>'
+      + '</div>'
+      + p.features.map(function(f){ return '<div style="font-size:11px;color:var(--c-text-3);margin-bottom:3px"><span style="color:var(--c-ok)">✓ </span>' + f + '</div>'; }).join('')
+      + '<button onclick="' + p.action + '" style="width:100%;margin-top:10px;padding:9px;background:var(--c-primary);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--f-body)">' + p.btn + '</button>'
+      + '</div>';
+  });
+
+  html += '</div>';
+
+  if (isNone && _coursUserPlan() === 'free') {
+    html += '<button onclick="if(typeof _showTrialOffer===\'function\')_showTrialOffer()" style="width:100%;max-width:300px;padding:13px;background:linear-gradient(135deg,var(--c-primary),#0d9e7e);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;font-family:var(--f-body);margin-bottom:10px">🚀 Essai Pro gratuit — 7 jours</button>';
+  }
+
+  html += '<button onclick="renderCoursChapitre(\'' + _coursState.fId + '\',\'' + _coursState.aId + '\',\'' + _coursState.mId + '\',\'' + _coursState.cId + '\')" style="width:100%;max-width:300px;padding:11px;background:none;border:1.5px solid var(--c-border);border-radius:12px;font-size:13px;color:var(--c-text-3);cursor:pointer;font-family:var(--f-body)">← Retour à la fiche</button>'
+    + '</div><div class="pb-nav"></div>';
+
+  document.getElementById('main-content').innerHTML = html;
+  document.getElementById('main-content').scrollTop = 0;
+}
+
+/* ─── BREADCRUMB ─────────────────────────────────────────────────── */
+function _coursBreadcrumb(items) {
+  var html = '<div style="padding:var(--s-2) var(--s-4);display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none;background:var(--c-surface-2);border-bottom:1px solid var(--c-border)">';
+  items.forEach(function(item, i) {
+    if (i > 0) html += '<span style="color:var(--c-text-4);font-size:12px">›</span>';
+    if (item.fn) {
+      html += '<button onclick="' + item.fn + '" style="background:none;border:none;font-family:var(--f-body);font-size:12px;color:var(--c-primary);cursor:pointer;white-space:nowrap;padding:2px 0">' + item.label + '</button>';
+    } else {
+      html += '<span style="font-size:12px;color:var(--c-text-3);white-space:nowrap;font-weight:600">' + item.label + '</span>';
+    }
+  });
+  html += '</div>';
+  return html;
+}
+
+/* ─── ADMIN : REMPLACEMENT DE SCHÉMAS ─────────────────────────────── */
+var _courseImageOverrides = {};
+
+async function _coursLoadImageOverride(key) {
+  if (!SupaDB) { _courseImageOverrides[key] = null; return; }
+  try {
+    var r = await SupaDB.from('course_image_overrides').select('image_url').eq('chapter_key', key).maybeSingle();
+    _courseImageOverrides[key] = (r.data && r.data.image_url) ? r.data.image_url : null;
+  } catch(e) { _courseImageOverrides[key] = null; }
+}
+
+async function _coursReplaceSchema(schemaKey, cId) {
+  var input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/png,image/jpeg,image/webp,image/gif,image/svg+xml';
+  input.onchange = async function() {
+    var file = input.files[0]; if (!file) return;
+    if (file.size > 8*1024*1024) { alert('Image trop lourde (max 8 Mo)'); return; }
+    var btn = document.querySelector('#schema-box-'+cId+' button[onclick*="_coursReplaceSchema"]');
+    if (btn) { btn.disabled = true; btn.textContent = '⏳ Upload…'; }
+    try {
+      var ext = (file.name.split('.').pop() || 'png').toLowerCase();
+      var safePath = schemaKey.replace(/:/g, '/') + '/' + Date.now() + '.' + ext;
+      var upRes = await SupaDB.storage.from('course-images').upload(safePath, file, { upsert: true, contentType: file.type });
+      if (upRes.error) throw upRes.error;
+      var urlRes = SupaDB.storage.from('course-images').getPublicUrl(safePath);
+      var url = urlRes.data.publicUrl;
+      var uid = (typeof AUTH !== 'undefined' && AUTH.user) ? AUTH.user.id : null;
+      var dbRes = await SupaDB.from('course_image_overrides').upsert(
+        { chapter_key: schemaKey, image_url: url, uploaded_by: uid },
+        { onConflict: 'chapter_key' }
+      );
+      if (dbRes.error) throw dbRes.error;
+      _courseImageOverrides[schemaKey] = url;
+      var box = document.getElementById('schema-box-' + cId);
+      if (box) {
+        var newImg = document.createElement('img');
+        newImg.src = url;
+        newImg.style.cssText = 'max-width:100%;height:auto;border-radius:var(--r-sm)';
+        newImg.alt = 'Schéma';
+        var svgEl = box.querySelector('svg');
+        var imgEl = box.querySelector('img');
+        if (svgEl) svgEl.replaceWith(newImg);
+        else if (imgEl) imgEl.replaceWith(newImg);
+        else box.insertBefore(newImg, box.firstChild);
+        var btnRow = box.querySelector('div[style*="justify-content:flex-end"]');
+        if (btnRow && !btnRow.querySelector('button[onclick*="_coursRestoreSchema"]')) {
+          var rb = document.createElement('button');
+          rb.setAttribute('onclick', '_coursRestoreSchema(\'' + schemaKey + '\')');
+          rb.style.cssText = 'font-size:11px;padding:4px 10px;background:var(--c-danger-l,#FFF0F0);border:1px solid var(--c-danger,#E53E3E);border-radius:var(--r-sm);cursor:pointer;color:var(--c-danger,#E53E3E);font-weight:600';
+          rb.textContent = '↩ Restaurer SVG';
+          btnRow.insertBefore(rb, btnRow.firstChild);
+        }
+      }
+      alert('✅ Schéma mis à jour avec succès !');
+    } catch(e) {
+      alert('❌ Erreur : ' + ((e && e.message) ? e.message : JSON.stringify(e)));
+    }
+    if (btn) { btn.disabled = false; btn.textContent = '📷 Remplacer l\'image'; }
+  };
+  input.click();
+}
+
+async function _coursRestoreSchema(schemaKey) {
+  if (!confirm('Supprimer l\'image personnalisée et restaurer le schéma SVG d\'origine ?')) return;
+  try {
+    var delRes = await SupaDB.from('course_image_overrides').delete().eq('chapter_key', schemaKey);
+    if (delRes.error) throw delRes.error;
+    delete _courseImageOverrides[schemaKey];
+    await renderCoursChapitre(_coursState.fId, _coursState.aId, _coursState.mId, _coursState.cId);
+  } catch(e) {
+    alert('❌ Erreur : ' + ((e && e.message) ? e.message : JSON.stringify(e)));
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   ÉDITEUR ADMIN — Interface d'édition in-place
+═══════════════════════════════════════════════════ */
+
+function _coursAllowedTextHtml(str) {
+  if (!str) return '';
+  try {
+    var tmp = document.createElement('div');
+    tmp.innerHTML = str;
+    var allowed = { strong:1, em:1, b:1, i:1, br:1, span:1 };
+    var clean = function(node) {
+      Array.from(node.childNodes).forEach(function(child) {
+        if (child.nodeType === 3) return;
+        if (child.nodeType === 1) {
+          var tag = child.tagName.toLowerCase();
+          if (!allowed[tag]) {
+            node.replaceChild(document.createTextNode(child.textContent), child);
+          } else {
+            if (tag === 'span') {
+              var color = child.style.color;
+              while (child.attributes.length) child.removeAttribute(child.attributes[0].name);
+              if (color) child.style.color = color;
+            } else {
+              while (child.attributes.length) child.removeAttribute(child.attributes[0].name);
+            }
+            clean(child);
+          }
+        } else { node.removeChild(child); }
+      });
+    };
+    clean(tmp);
+    return tmp.innerHTML;
+  } catch(e) {
+    return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+}
+
+function _coursRenderFormule(str) {
+  if (!str) return '';
+  if (typeof katex === 'undefined') {
+    return (typeof CMS !== 'undefined') ? CMS.escapeHtml(str) : String(str);
+  }
+  try {
+    return katex.renderToString(str, { throwOnError: false, displayMode: false, output: 'html' });
+  } catch(e) {
+    return (typeof CMS !== 'undefined') ? CMS.escapeHtml(str) : String(str);
+  }
+}
+
+function _coursAllowedHtml(str) {
+  if (!str) return '';
+  try {
+    var tmp = document.createElement('div');
+    tmp.innerHTML = str;
+    var allowed = { strong:1, em:1, b:1, i:1, br:1 };
+    var clean = function(node) {
+      Array.from(node.childNodes).forEach(function(child) {
+        if (child.nodeType === 3) return;
+        if (child.nodeType === 1) {
+          var tag = child.tagName.toLowerCase();
+          if (!allowed[tag]) {
+            node.replaceChild(document.createTextNode(child.textContent), child);
+          } else {
+            while (child.attributes.length) child.removeAttribute(child.attributes[0].name);
+            clean(child);
+          }
+        } else {
+          node.removeChild(child);
+        }
+      });
+    }
+    clean(tmp);
+    return tmp.innerHTML;
+  } catch(e) {
+    return (typeof CMS !== 'undefined') ? CMS.escapeHtml(str) : String(str);
+  }
+}
+
+function _coursAdminToast(msg) {
+  var t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;top:72px;left:50%;transform:translateX(-50%);'
+    + 'background:var(--c-navy,#061D33);color:#fff;padding:10px 20px;'
+    + 'border-radius:var(--r-pill);font-size:13px;font-weight:600;z-index:500;'
+    + 'white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.35);pointer-events:none';
+  document.body.appendChild(t);
+  setTimeout(function() { if (t.parentNode) t.parentNode.removeChild(t); }, 3000);
+}
+
+function _coursToggleEditMode() {
+  var entering = !_coursEditing;
+
+  if (!entering && _coursHasUnsavedChanges()) {
+    if (!confirm('Des modifications ne sont pas sauvegardées. Quitter sans sauvegarder ?')) return;
+    _coursState._pendingFlashcards = null;
+    _coursState._pendingSolution = undefined;
+  }
+
+  _coursEditing = entering;
+  var bar = document.getElementById('cours-edit-bar');
+  var btn = document.getElementById('cours-edit-btn');
+  var editables = document.querySelectorAll('[data-cours-edit]');
+  var delBtns = document.querySelectorAll('.cours-item-del');
+  var addPointRow = document.getElementById('cours-add-point-row');
+  var addFormuleRow = document.getElementById('cours-add-formule-row');
+
+  var fmtBar = document.getElementById('cours-format-bar');
+  var mc = document.getElementById('main-content');
+
+  if (_coursEditing) {
+    document.querySelectorAll('[data-field^="fiche.formules."]').forEach(function(el) {
+      var raw = el.getAttribute('data-raw') || el.textContent.trim();
+      el.textContent = raw;
+      el.setAttribute('data-raw', raw);
+      el.style.fontFamily = "'Courier New', monospace";
+    });
+    _coursOriginalValues = {};
+    editables.forEach(function(el) {
+      var f = el.getAttribute('data-field');
+      if (!f) return;
+      var isFormula = f.startsWith('fiche.formules.');
+      _coursOriginalValues[f] = isFormula ? el.textContent.trim() : el.innerHTML;
+    });
+    editables.forEach(function(el) {
+      el.contentEditable = 'true';
+      el.addEventListener('focus', _coursOnEditFocus, true);
+    });
+    delBtns.forEach(function(b) { b.style.display = 'block'; });
+    if (addPointRow) addPointRow.style.display = 'block';
+    if (addFormuleRow) addFormuleRow.style.display = 'block';
+    if (fmtBar) {
+      fmtBar.style.display = 'flex';
+      fmtBar.addEventListener('mousedown', _coursFormatBarMousedown, false);
+    }
+    if (bar) bar.style.display = 'flex';
+    if (mc) mc.classList.add('cours-editing');
+    if (btn) {
+      btn.textContent = '✕ Quitter éditeur';
+      btn.style.background = '#FFF0F0';
+      btn.style.borderColor = '#E53E3E';
+      btn.style.color = '#E53E3E';
+    }
+  } else {
+    _coursActiveEditEl = null;
+    editables.forEach(function(el) {
+      el.contentEditable = 'false';
+      el.removeEventListener('focus', _coursOnEditFocus, true);
+    });
+    document.querySelectorAll('[data-field^="fiche.formules."]').forEach(function(el) {
+      var raw = el.textContent.trim();
+      el.setAttribute('data-raw', raw);
+      el.innerHTML = _coursRenderFormule(raw);
+      el.style.fontFamily = '';
+    });
+    delBtns.forEach(function(b) { b.style.display = 'none'; });
+    if (addPointRow) addPointRow.style.display = 'none';
+    if (addFormuleRow) addFormuleRow.style.display = 'none';
+    if (fmtBar) {
+      fmtBar.style.display = 'none';
+      fmtBar.removeEventListener('mousedown', _coursFormatBarMousedown, false);
+    }
+    _coursOriginalValues = {};
+    if (bar) bar.style.display = 'none';
+    if (mc) mc.classList.remove('cours-editing');
+    if (btn) {
+      btn.textContent = '✏️ Éditeur';
+      btn.style.background = 'var(--c-primary-l)';
+      btn.style.borderColor = 'var(--c-primary)';
+      btn.style.color = 'var(--c-primary)';
+    }
+  }
+}
+
+function _coursFormatBarMousedown(e) {
+  e.preventDefault();
+}
+
+function _coursOnEditFocus(e) {
+  if (!_coursEditing) return;
+  _coursActiveEditEl = e.currentTarget;
+  var field = _coursActiveEditEl.getAttribute('data-field');
+  var isFormula = field && field.startsWith('fiche.formules.');
+  var textDiv = document.getElementById('cformat-text');
+  var fmlDiv = document.getElementById('cformat-formula');
+  var hint = document.getElementById('cformat-hint');
+  if (isFormula) {
+    if (textDiv) textDiv.style.display = 'none';
+    if (fmlDiv) fmlDiv.style.display = 'flex';
+    if (hint) hint.textContent = 'LaTeX · ex : \\frac{Q}{A}  |  \\sqrt{2 \\cdot g \\cdot D}';
+  } else {
+    if (textDiv) textDiv.style.display = 'flex';
+    if (fmlDiv) fmlDiv.style.display = 'none';
+    if (hint) hint.textContent = '';
+  }
+}
+
+function _coursFormatText(cmd) {
+  document.execCommand(cmd, false, null);
+}
+
+function _coursFormatColor(color) {
+  if (!color) {
+    document.execCommand('removeFormat', false, null);
+  } else {
+    document.execCommand('foreColor', false, color);
+  }
+}
+
+function _coursInsertLatex(snippet) {
+  var el = _coursActiveEditEl;
+  if (!el) return;
+  el.focus();
+  var sel = window.getSelection();
+  if (sel && sel.rangeCount && el.contains(sel.getRangeAt(0).commonAncestorContainer)) {
+    var range = sel.getRangeAt(0);
+    range.deleteContents();
+    var node = document.createTextNode(snippet);
+    range.insertNode(node);
+    range.setStartAfter(node);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+  } else {
+    var node = document.createTextNode(snippet);
+    el.appendChild(node);
+    var range = document.createRange();
+    range.setStartAfter(node);
+    range.collapse(true);
+    var sel2 = window.getSelection();
+    sel2.removeAllRanges();
+    sel2.addRange(range);
+  }
+}
+
+function _coursHasUnsavedChanges() {
+  var changed = false;
+  document.querySelectorAll('[data-cours-edit]').forEach(function(el) {
+    var f = el.getAttribute('data-field');
+    if (!f) return;
+    var isFormula = f.startsWith('fiche.formules.');
+    var current = isFormula ? el.textContent.trim() : el.innerHTML;
+    if (_coursOriginalValues[f] !== undefined && _coursOriginalValues[f] !== current) changed = true;
+    if (_coursOriginalValues[f] === undefined) changed = true;
+  });
+  return changed || !!_coursState._pendingFlashcards || _coursState._pendingSolution !== undefined;
+}
+
+function _coursDeleteItem(btn) {
+  var item = btn.closest('.cours-list-item');
+  if (!item) return;
+  var editableEl = item.querySelector('[data-cours-edit]');
+  var field = editableEl ? editableEl.getAttribute('data-field') : '';
+  var prefix = (field && field.startsWith('fiche.points.')) ? 'fiche.points.' : 'fiche.formules.';
+  item.parentNode.removeChild(item);
+  document.querySelectorAll('[data-field^="' + prefix + '"]').forEach(function(el, i) {
+    el.setAttribute('data-field', prefix + i);
+  });
+}
+
+function _coursAddListItem(type) {
+  var prefix = 'fiche.' + type + '.';
+  var nextIdx = document.querySelectorAll('[data-field^="' + prefix + '"]').length;
+  var isPoint = (type === 'points');
+
+  var item = document.createElement(isPoint ? 'li' : 'div');
+  item.className = 'cours-list-item';
+  item.style.cssText = isPoint
+    ? 'display:flex;align-items:flex-start;gap:4px;margin-bottom:6px'
+    : 'display:flex;align-items:center;gap:4px';
+
+  var text = document.createElement(isPoint ? 'span' : 'div');
+  text.setAttribute('data-cours-edit', '');
+  text.setAttribute('data-field', prefix + nextIdx);
+  if (!isPoint) text.setAttribute('data-raw', '');
+  text.contentEditable = 'true';
+  text.style.cssText = isPoint
+    ? 'font-size:12px;color:var(--c-text);line-height:1.7;flex:1;padding-left:4px;outline:2px dashed var(--c-cyan,#00B5D8);border-radius:4px;min-height:1em'
+    : 'flex:1;background:var(--c-primary-l);border-left:3px solid var(--c-primary);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:8px 12px;font-family:\'Courier New\',monospace;font-size:12px;color:var(--c-primary);font-weight:600;outline:2px dashed var(--c-cyan,#00B5D8);min-height:1em';
+
+  var delBtn = document.createElement('button');
+  delBtn.className = 'cours-item-del';
+  delBtn.title = 'Supprimer';
+  delBtn.style.cssText = 'background:none;border:none;cursor:pointer;color:var(--c-danger,#E53E3E);font-size:12px;padding:2px 4px;flex-shrink:0;line-height:1;opacity:.7' + (isPoint ? ';margin-top:2px' : '');
+  delBtn.textContent = '🗑';
+  delBtn.onclick = function() { _coursDeleteItem(this); };
+
+  item.appendChild(text);
+  item.appendChild(delBtn);
+
+  var addRow = document.getElementById('cours-add-' + (isPoint ? 'point' : 'formule') + '-row');
+  if (addRow) addRow.parentNode.insertBefore(item, addRow);
+  text.focus();
+}
+
+async function _coursResetToOriginal() {
+  if (!confirm('Supprimer toutes les modifications et revenir au contenu d\'origine ?')) return;
+  var st = _coursState;
+  if (!st._editKey || typeof CMS === 'undefined') return;
+  var resetBtn = document.querySelector('.cedit-reset');
+  if (resetBtn) { resetBtn.disabled = true; resetBtn.textContent = '⏳…'; }
+  try {
+    await CMS.upsert(st._editKey, '{}', 'json');
+    _coursEditing = false;
+    _coursOriginalValues = {};
+    await renderCoursChapitre(st.fId, st.aId, st.mId, st.cId);
+    _coursAdminToast('↩ Contenu réinitialisé au texte d\'origine');
+  } catch(e) {
+    if (resetBtn) { resetBtn.disabled = false; resetBtn.textContent = '↩ Réinitialiser'; }
+    _coursAdminToast('❌ ' + ((e && e.message) ? e.message : 'Erreur'));
+  }
+}
+
+async function _coursSaveEdits() {
+  var st = _coursState;
+  var editKey = st._editKey;
+  if (!editKey) return;
+  var baseC = _coursGetChapitre(st.fId, st.aId, st.mId, st.cId);
+  if (!baseC) return;
+
+  var override = { fiche: {} };
+
+  document.querySelectorAll('[data-cours-edit]').forEach(function(el) {
+    var field = el.getAttribute('data-field');
+    if (!field) return;
+    var isFormula = field.startsWith('fiche.formules.');
+    var isTitle = (field === 'titre');
+    var val = isFormula ? el.textContent.trim()
+            : isTitle   ? el.textContent.trim()
+            : _coursAllowedTextHtml(el.innerHTML);
+    if (field === 'titre') {
+      override.titre = val;
+    } else if (field === 'fiche.intro') {
+      override.fiche.intro = val;
+    } else if (field === 'fiche.retenir') {
+      override.fiche.retenir = val;
+    } else if (field.startsWith('fiche.points.')) {
+      if (!override.fiche.points) override.fiche.points = [];
+      var idx = parseInt(field.split('.')[2], 10);
+      if (!isNaN(idx)) override.fiche.points[idx] = val;
+    } else if (field.startsWith('fiche.formules.')) {
+      if (!override.fiche.formules) override.fiche.formules = [];
+      var idx = parseInt(field.split('.')[2], 10);
+      if (!isNaN(idx)) { override.fiche.formules[idx] = val; el.setAttribute('data-raw', val); }
+    } else if (field === 'exercice.enonce') {
+      if (!override.exercice) override.exercice = {};
+      override.exercice.enonce = val;
+    }
+  });
+
+  if (st._pendingSolution !== undefined) {
+    if (!override.exercice) override.exercice = {};
+    override.exercice.solution = st._pendingSolution;
+    st._pendingSolution = undefined;
+  }
+
+  if (st._pendingFlashcards) {
+    override.flashcards = st._pendingFlashcards;
+    st._pendingFlashcards = null;
+  }
+
+  var saveBtn = document.querySelector('.cedit-save');
+  if (saveBtn) { saveBtn.disabled = true; saveBtn.textContent = '⏳…'; }
+
+  try {
+    if (typeof CMS === 'undefined') throw new Error('CMS non disponible');
+    await CMS.upsert(editKey, JSON.stringify(override), 'json');
+    _coursEditing = false;
+    await renderCoursChapitre(st.fId, st.aId, st.mId, st.cId);
+    _coursAdminToast('✅ Modifications sauvegardées !');
+  } catch(e) {
+    if (saveBtn) { saveBtn.disabled = false; saveBtn.textContent = '💾 Sauvegarder'; }
+    _coursAdminToast('❌ ' + ((e && e.message) ? e.message : 'Erreur de sauvegarde'));
+  }
+}
+
+function _coursEditSolutionModal() {
+  var display = document.getElementById('cours-solution-display');
+  var current = _coursState._pendingSolution !== undefined
+    ? _coursState._pendingSolution
+    : (display ? display.innerHTML : '');
+
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:400;'
+    + 'display:flex;align-items:center;justify-content:center;padding:16px';
+
+  var modal = document.createElement('div');
+  modal.style.cssText = 'background:var(--c-surface);border-radius:var(--r-lg);width:100%;max-width:560px;'
+    + 'padding:20px;display:flex;flex-direction:column;gap:12px;max-height:80vh;overflow-y:auto;'
+    + 'box-shadow:0 8px 40px rgba(0,0,0,.3)';
+
+  var titleEl = document.createElement('div');
+  titleEl.style.cssText = 'font-weight:800;font-size:15px;color:var(--c-text)';
+  titleEl.textContent = '💡 Modifier la correction';
+
+  var info = document.createElement('div');
+  info.style.cssText = 'font-size:11px;color:var(--c-text-3);background:var(--c-surface-2);'
+    + 'border-radius:var(--r-sm);padding:8px 10px;line-height:1.6';
+  info.textContent = 'Balises autorisées : <strong> <em> <b> <i> <br> — les autres balises sont supprimées.';
+
+  var ta = document.createElement('textarea');
+  ta.value = current;
+  ta.style.cssText = 'width:100%;height:200px;padding:10px;border:1.5px solid var(--c-border);'
+    + 'border-radius:var(--r-md);font-family:monospace;font-size:12px;resize:vertical;'
+    + 'background:var(--c-bg);color:var(--c-text);box-sizing:border-box;outline:none';
+  ta.placeholder = 'Ex : <strong>Re = V × D / ν</strong> = 150 000<br>Régime turbulent.';
+
+  var btnRow = document.createElement('div');
+  btnRow.style.cssText = 'display:flex;gap:8px;justify-content:flex-end';
+
+  var cancelBtn = document.createElement('button');
+  cancelBtn.textContent = 'Annuler';
+  cancelBtn.style.cssText = 'padding:8px 14px;background:var(--c-surface-2);border:1px solid var(--c-border);'
+    + 'border-radius:var(--r-md);cursor:pointer;font-family:var(--f-body);color:var(--c-text);font-size:13px';
+  cancelBtn.onclick = function() { document.body.removeChild(overlay); };
+
+  var okBtn = document.createElement('button');
+  okBtn.textContent = '✅ Appliquer';
+  okBtn.style.cssText = 'padding:8px 16px;background:var(--c-primary);color:#fff;border:none;'
+    + 'border-radius:var(--r-md);cursor:pointer;font-family:var(--f-body);font-weight:700;font-size:13px';
+  okBtn.onclick = function() {
+    var sanitized = _coursAllowedHtml(ta.value);
+    _coursState._pendingSolution = sanitized;
+    if (display) display.innerHTML = sanitized;
+    document.body.removeChild(overlay);
+    _coursAdminToast('💡 Solution mise à jour — cliquez Sauvegarder pour confirmer');
+  };
+
+  btnRow.appendChild(cancelBtn);
+  btnRow.appendChild(okBtn);
+  modal.appendChild(titleEl);
+  modal.appendChild(info);
+  modal.appendChild(ta);
+  modal.appendChild(btnRow);
+  overlay.appendChild(modal);
+  overlay.onclick = function(e) { if (e.target === overlay) document.body.removeChild(overlay); };
+  document.body.appendChild(overlay);
+}
+
+function _coursFlashcardsModal() {
+  var st = _coursState;
+  var baseC = _coursGetChapitre(st.fId, st.aId, st.mId, st.cId);
+  if (!baseC) return;
+
+  var _fcSource;
+  if (st._pendingFlashcards) {
+    _fcSource = st._pendingFlashcards;
+  } else {
+    _fcSource = null;
+    if (st._editKey && typeof CMS !== 'undefined') {
+      var _fcRaw = CMS.get(st._editKey);
+      if (_fcRaw) { try { var _fcOv = JSON.parse(_fcRaw); if (_fcOv.flashcards) _fcSource = _fcOv.flashcards; } catch(e){} }
+    }
+    if (!_fcSource) _fcSource = baseC.flashcards || [];
+  }
+  var flashcards = _fcSource.map(function(fc) {
+    return { q: fc.q || '', r: fc.r || '', expl: fc.expl || '' };
+  });
+
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:400;'
+    + 'display:flex;align-items:flex-end;justify-content:center';
+
+  var modal = document.createElement('div');
+  modal.style.cssText = 'background:var(--c-surface);border-radius:16px 16px 0 0;width:100%;max-width:640px;'
+    + 'padding:20px;display:flex;flex-direction:column;max-height:88vh;overflow:hidden;'
+    + 'box-shadow:0 -4px 40px rgba(0,0,0,.3)';
+
+  var hdr = document.createElement('div');
+  hdr.style.cssText = 'display:flex;align-items:center;margin-bottom:16px;gap:8px;flex-shrink:0';
+  var hdrTitle = document.createElement('span');
+  hdrTitle.style.cssText = 'font-weight:800;font-size:15px;color:var(--c-text);flex:1';
+  hdrTitle.textContent = '🃏 Modifier les flashcards';
+  var closeHdrBtn = document.createElement('button');
+  closeHdrBtn.textContent = '✕';
+  closeHdrBtn.style.cssText = 'background:var(--c-surface-2);border:none;width:28px;height:28px;'
+    + 'border-radius:50%;cursor:pointer;font-size:14px;color:var(--c-text-3)';
+  closeHdrBtn.onclick = function() { document.body.removeChild(overlay); };
+  hdr.appendChild(hdrTitle);
+  hdr.appendChild(closeHdrBtn);
+
+  var container = document.createElement('div');
+  container.id = 'flash-cards-editor';
+  container.style.cssText = 'flex:1;overflow-y:auto;min-height:0';
+
+  function escFc(s) {
+    return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  window._coursFlashRenumber = function() {
+    Array.from(container.querySelectorAll('[data-fc-card]')).forEach(function(card, i) {
+      card.dataset.fcCard = i;
+      var lbl = card.querySelector('.fc-card-lbl');
+      if (lbl) lbl.textContent = 'Carte ' + (i + 1);
+    });
+  };
+
+  function makeCard(fc, idx) {
+    var card = document.createElement('div');
+    card.dataset.fcCard = idx;
+    card.style.cssText = 'border:1px solid var(--c-border);border-radius:var(--r-md);'
+      + 'padding:12px;margin-bottom:10px;background:var(--c-surface-2)';
+    card.innerHTML = '<div style="display:flex;align-items:center;margin-bottom:8px">'
+      + '<span class="fc-card-lbl" style="font-size:11px;font-weight:700;color:var(--c-text-3);flex:1">Carte ' + (idx+1) + '</span>'
+      + '<button onclick="this.closest(\'[data-fc-card]\').remove();_coursFlashRenumber()" '
+      + 'style="background:none;border:none;color:var(--c-text-3);cursor:pointer;font-size:14px;padding:2px 6px" title="Supprimer cette carte">🗑</button>'
+      + '</div>'
+      + '<label style="font-size:11px;color:var(--c-text-3)">❓ Question</label>'
+      + '<input data-fc="q" value="' + escFc(fc.q) + '" style="width:100%;margin:3px 0 8px;padding:7px 9px;border:1px solid var(--c-border);border-radius:var(--r-sm);font-size:12px;background:var(--c-bg);color:var(--c-text);box-sizing:border-box">'
+      + '<label style="font-size:11px;color:var(--c-text-3)">✅ Réponse</label>'
+      + '<input data-fc="r" value="' + escFc(fc.r) + '" style="width:100%;margin:3px 0 8px;padding:7px 9px;border:1px solid var(--c-border);border-radius:var(--r-sm);font-size:12px;background:var(--c-bg);color:var(--c-text);box-sizing:border-box">'
+      + '<label style="font-size:11px;color:var(--c-text-3)">💬 Explication (optionnel)</label>'
+      + '<input data-fc="expl" value="' + escFc(fc.expl||'') + '" style="width:100%;margin:3px 0 0;padding:7px 9px;border:1px solid var(--c-border);border-radius:var(--r-sm);font-size:12px;background:var(--c-bg);color:var(--c-text);box-sizing:border-box">';
+    return card;
+  }
+
+  flashcards.forEach(function(fc, idx) { container.appendChild(makeCard(fc, idx)); });
+
+  var addBtn = document.createElement('button');
+  addBtn.textContent = '+ Ajouter une carte';
+  addBtn.style.cssText = 'width:100%;padding:10px;background:var(--c-surface-2);'
+    + 'border:1.5px dashed var(--c-border);border-radius:var(--r-md);'
+    + 'font-size:13px;cursor:pointer;color:var(--c-text-3);margin:4px 0 12px;flex-shrink:0';
+  addBtn.onclick = function() {
+    var idx = container.querySelectorAll('[data-fc-card]').length;
+    var card = makeCard({ q:'', r:'', expl:'' }, idx);
+    container.appendChild(card);
+    card.querySelector('input').focus();
+  };
+
+  var btnRow = document.createElement('div');
+  btnRow.style.cssText = 'display:flex;gap:8px;justify-content:flex-end;padding-top:8px;flex-shrink:0';
+
+  var cancelBtn2 = document.createElement('button');
+  cancelBtn2.textContent = 'Annuler';
+  cancelBtn2.style.cssText = 'padding:9px 16px;background:var(--c-surface-2);border:1px solid var(--c-border);'
+    + 'border-radius:var(--r-md);cursor:pointer;font-family:var(--f-body);color:var(--c-text);font-size:13px';
+  cancelBtn2.onclick = function() { document.body.removeChild(overlay); };
+
+  var applyBtn = document.createElement('button');
+  applyBtn.textContent = '✅ Appliquer';
+  applyBtn.style.cssText = 'padding:9px 18px;background:var(--c-primary);color:#fff;border:none;'
+    + 'border-radius:var(--r-md);cursor:pointer;font-family:var(--f-body);font-weight:700;font-size:13px';
+  applyBtn.onclick = function() {
+    var cards = [];
+    container.querySelectorAll('[data-fc-card]').forEach(function(card) {
+      var q = card.querySelector('[data-fc="q"]').value.trim();
+      var r = card.querySelector('[data-fc="r"]').value.trim();
+      var expl = card.querySelector('[data-fc="expl"]').value.trim();
+      if (q && r) cards.push({ q:q, r:r, expl:expl });
+    });
+    st._pendingFlashcards = cards;
+    document.body.removeChild(overlay);
+    _coursAdminToast('🃏 ' + cards.length + ' carte(s) — cliquez Sauvegarder pour confirmer');
+  };
+
+  btnRow.appendChild(cancelBtn2);
+  btnRow.appendChild(applyBtn);
+  modal.appendChild(hdr);
+  modal.appendChild(container);
+  modal.appendChild(addBtn);
+  modal.appendChild(btnRow);
+  overlay.appendChild(modal);
+  overlay.onclick = function(e) { if (e.target === overlay) document.body.removeChild(overlay); };
+  document.body.appendChild(overlay);
+}
