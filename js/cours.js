@@ -7265,6 +7265,185 @@ const COURS_DATA = {
             ],
           }, // fin gem-m13
 
+          {
+            id: 'gem-m14',
+            name: 'Profils en long et en travers',
+            ico: '📊',
+            chapitres: [
+              {
+                id: 'gem-niv2',
+                titre: 'Profils en long et profils en travers',
+                fiche: {
+                  intro: 'Les mesures de terrain s\'organisent en profils pour décrire la géométrie d\'un cours d\'eau. Le profil en long suit l\'axe et révèle les pentes et ruptures longitudinales. Le profil en travers décrit la forme d\'une section. Ces deux représentations alimentent les calculs de section mouillée, les bilans de volume et les modèles hydrauliques. Leur fiabilité dépend du choix des points, de l\'orientation et des contrôles appliqués.',
+                  points: [
+                    'Profil en long = altitude en fonction de la distance cumulée suivant un axe. Profil en travers = coupe transversale, décrite par des couples (si, Zi). Ces deux représentations sont complémentaires : le profil en long ne décrit pas la largeur, le profil en travers ne décrit pas la continuité longitudinale.',
+                    'Chaînage = distance cumulée le long de l\'axe retenu. Un numéro de profil n\'est pas nécessairement une distance. Pour un cours d\'eau sinueux, le chaînage suit l\'axe — pas la ligne droite entre extrémités. Distinguer : position géographique, chaînage, identifiant du profil. Certains logiciels utilisent des identifiants décroissants vers l\'aval.',
+                    'Emplacement des profils en travers : aux changements de largeur, ruptures de pente, ouvrages, confluences, zones de débordement. Il n\'existe pas d\'espacement universel. Un secteur avec plusieurs transitions rapprochées demande plus de profils qu\'un tronçon régulier. Multiplier les profils au hasard ne remplace pas le choix des endroits hydrauliquement importants.',
+                    'Orientation des sections : approximativement perpendiculaire aux écoulements locaux. Dans le lit mineur et la plaine inondable, cette direction peut différer — une coupe peut être composée de plusieurs segments. Les sections ne doivent pas se croiser. Une coupe très oblique augmente artificiellement la largeur apparente.',
+                    'Rives définies en regardant vers l\'aval : rive gauche à gauche, rive droite à droite. Cette convention reste la même quelle que soit la position de l\'observateur pendant le levé. Préciser l\'orientation sur les documents. Une inversion peut attribuer un ouvrage ou une zone de débordement à la mauvaise rive.',
+                    'Relever les ruptures, pas un quadrillage régulier : sommet de berge, pied de berge, fond du chenal, bancs, fosses, crêtes de seuils, radiers, bords de chaussée. Exemple : deux points à la même altitude avec un fossé profond de 1 m entre eux — une interpolation directe efface entièrement ce fossé. L\'erreur vient du choix des points, pas de l\'instrument.',
+                    'Pente S = ΔZ/L. Une pente globale masque les variations locales. Pente du fond ≠ pente de la ligne d\'eau (la profondeur varie le long d\'un profil en remous). Pente de la ligne d\'eau ≠ pente de charge (qui inclut la hauteur de vitesse). Une ligne d\'eau relevée pendant une crue doit être datée : des niveaux mesurés à des heures différentes en montée peuvent produire un faux profil spatial.',
+                    'Echelles et exagération verticale : Ev = échelle_horizontale / échelle_verticale. Exemple : 1:2000 / 1:100 → Ev=20. Les variations verticales sont représentées 20 fois plus fortement. Ne pas mesurer un angle sur un tel dessin pour en déduire la pente réelle. Les deux échelles et Ev doivent être indiqués sur les documents.',
+                    'Intersection avec la ligne d\'eau : pour un segment (s1, Z1) → (s2, Z2), l\'intersection avec Z_eau est s_int = s1 + (Z_eau − Z1)/(Z2 − Z1) × (s2 − s1). Valable si le segment n\'est pas horizontal et si Z_eau est entre Z1 et Z2. La largeur au miroir T = s_droite − s_gauche.',
+                    'Section mouillée A = ∫h(s)ds (triangles et trapèzes pour des segments droits). Périmètre mouillé P = longueur du fond en contact avec l\'eau (sans la surface libre). Rayon hydraulique Rh = A/P. Profondeur hydraulique Dh = A/T. Ces deux grandeurs diffèrent de la profondeur maximale. Ne pas utiliser de profondeur négative dans le calcul — découper à la ligne d\'eau.',
+                    'Relations hydrauliques : v̄ = Q/A, Fr = v̄/√(gDh). Toute zone immergée ne contribue pas de la même façon au débit — des zones latérales peuvent contenir de l\'eau presque immobile. Certains modèles distinguent zones actives et zones d\'écoulement inefficace. Une dépression plus basse que Z_eau n\'est pas automatiquement inondée si une barrière empêche la connexion.',
+                    'Comparaison temporelle : même référence altimétrique, position et orientation compatibles, repères stables. Incertitude d\'une différence (observations indépendantes) : u_ΔZ = √(u1² + u2²). Volume entre profils : V ≈ (A1+A2)/2 × L. Distinguer volume géométrique, volume net érosion/dépôt, masse. Interpolation entre profils ne crée pas une observation : indiquer l\'origine (mesuré, extrait MNT, interpolé).',
+                  ],
+                  formules: [
+                    'S=\\dfrac{\\Delta Z}{L} \\qquad E_v=\\dfrac{\\text{échelle}_h}{\\text{échelle}_v}',
+                    's_{\\mathrm{int}}=s_1+\\dfrac{Z_{\\mathrm{eau}}-Z_1}{Z_2-Z_1}\\,(s_2-s_1) \\qquad T=s_d-s_g',
+                    'A=\\int h(s)\\,\\mathrm{d}s \\qquad R_h=\\dfrac{A}{P} \\qquad D_h=\\dfrac{A}{T}',
+                    'V\\approx\\dfrac{A_1+A_2}{2}L \\qquad u_{\\Delta Z}=\\sqrt{u_1^2+u_2^2}',
+                  ],
+                  retenir: 'Profil long : altitude vs distance. Profil travers : (si, Zi). Rives regardant aval. Ev=éch_h/éch_v. s_int par interpolation linéaire. A=∫h.ds; Rh=A/P; Dh=A/T. V≈(A1+A2)/2×L. Relever ruptures. Interpolation ≠ observation. Ligne d\'eau datée en crue.',
+                  sections: [
+                    {
+                      titre: '1. Définitions et construction des profils',
+                      sous_sections: [
+                        {
+                          titre: '1.1. Profil en long et chaînage',
+                          texte: '<p>Le <strong>profil en long</strong> représente l\'altitude en fonction de la distance cumulée suivant un axe (axe du cours d\'eau, fossé, conduite, ligne de projet). En abscisse : distance cumulée (chaînage). En ordonnée : altitude.</p><p>Le <strong>chaînage</strong> est la distance cumulée le long de l\'axe. Pour un cours d\'eau sinueux, il doit suivre cet axe — pas la ligne droite entre extrémités. Un numéro de profil n\'est pas une distance. Documenter : position géographique, chaînage et identifiant séparément.</p><p>Sur un même profil en long, on peut représenter Z_fond, Z_eau, Z_berge gauche et Z_berge droite. Ces lignes ne sont pas interchangeables et ne sont pas nécessairement parallèles.</p>'
+                        },
+                        {
+                          titre: '1.2. Profil en travers : points et orientation',
+                          texte: '<p>Le <strong>profil en travers</strong> est décrit par des couples (si, Zi) : distance transversale et altitude. C\'est une coupe géométrique — deux coupes à quelques mètres de distance peuvent présenter des formes différentes.</p><p><strong>Points à relever :</strong> sommet de berge, pied de berge, fond du chenal, bancs, fosses, crêtes de seuils, radiers, bords de chaussée. Un quadrillage régulier doit être complété par des points aux ruptures.</p><p><strong>Rives :</strong> définies en regardant vers l\'aval — rive gauche à gauche, droite à droite. Convention identique quelle que soit la position de l\'observateur. Préciser sur les documents. L\'orientation doit être examinée sur un plan, pas uniquement sur le dessin.</p><p><strong>Sections :</strong> approximativement perpendiculaires aux écoulements locaux, non croisées, couvrant les zones susceptibles de participer au scénario (ne pas limiter au lit mineur).</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '2. Pentes, échelles et lignes d\'eau',
+                      sous_sections: [
+                        {
+                          titre: '2.1. Calcul de pente et exagération verticale',
+                          texte: '<p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center;font-weight:bold">S = ΔZ / L</p><p><em>Exemple :</em> Z_am=100,80, Z_av=100,10, L=300 m → S=0,70/300≈0,233 %. Pentes locales : 0–100 m : 0,20 % ; 100–200 m : 0,10 % ; 200–300 m : 0,40 %. La pente globale masque ces variations.</p><p><strong>Exagération verticale :</strong> pour rendre une faible pente visible, les profils en long utilisent des échelles différentes.</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center;font-weight:bold">Ev = échelle_horizontale / échelle_verticale</p><p>Exemple : 1:2 000 / 1:100 → Ev=20. Ne pas mesurer un angle sur ce dessin pour en déduire la pente réelle. Indiquer les deux échelles et Ev.</p>'
+                        },
+                        {
+                          titre: '2.2. Ligne d\'eau et précautions temporelles',
+                          texte: '<p>Sur un profil en long, on peut tracer Z_fond et Z_eau — ces lignes ne sont pas parallèles près d\'un ouvrage ou en zone de remous. La <strong>pente de la ligne d\'eau</strong> ≠ <strong>pente de charge</strong> (qui inclut la hauteur de vitesse).</p><p><strong>Précaution importante :</strong> une ligne d\'eau relevée pendant une crue doit être datée et, si la rivière monte rapidement, horodatée point par point. Des niveaux mesurés à des heures différentes en montée peuvent produire un profil spatial faussé — une pente apparemment inversée peut n\'être qu\'un décalage temporel.</p><p><strong>Repères stables :</strong> pour les comparaisons entre campagnes, conserver des repères de section permanents. Vérifier position et orientation avant toute interprétation de différence.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '3. Section mouillée et grandeurs hydrauliques',
+                      sous_sections: [
+                        {
+                          titre: '3.1. Intersection et découpage',
+                          texte: '<p>Pour calculer une section mouillée, on cherche les intersections du profil avec Z_eau :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center;font-weight:bold">s_int = s₁ + (Z_eau − Z₁)/(Z₂ − Z₁) × (s₂ − s₁)</p><p>Valable si le segment n\'est pas horizontal et si Z_eau est encadrée par Z₁ et Z₂.</p><p><em>Exemple :</em> section fictive (par. 11 du cours) avec Z_eau=100,60 m :<br>Berge gauche : (0 ; 101) → (1 ; 100) → s_g = 0+0,60/1,00×1=0,40 m.<br>Berge droite : (3 ; 100) → (4 ; 101) → s_d = 3+0,60/1,00×1=3,60 m.<br>Largeur au miroir T = 3,60−0,40 = <strong>3,20 m</strong>.</p><p>Ne jamais utiliser une profondeur négative dans le calcul d\'aire — découper le segment à l\'intersection.</p>'
+                        },
+                        {
+                          titre: '3.2. Aire, périmètre et grandeurs dérivées',
+                          texte: '<p>Aire mouillée sur la section fictive (triangles + rectangle) :</p><p style="text-align:center">A = (0,60×0,60)/2 + 2×0,60 + (0,60×0,60)/2 = 0,18 + 1,20 + 0,18 = <strong>1,56 m²</strong></p><p>Périmètre mouillé (fond en contact avec l\'eau, sans surface libre) :</p><p style="text-align:center">P = 2 + 2×√(0,60²+0,60²) ≈ 2 + 1,697 ≈ <strong>3,697 m</strong></p><p>Rayon hydraulique : Rh = A/P = 1,56/3,697 ≈ <strong>0,422 m</strong>.<br>Profondeur hydraulique : Dh = A/T = 1,56/3,20 = <strong>0,488 m</strong>.</p><p>Ces grandeurs diffèrent de la profondeur maximale (ici 0,60 m). Avec Q=0,90 m³/s : v̄=0,90/1,56≈0,577 m/s. Fr=0,577/√(9,81×0,488)≈0,26 — régime fluvial.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '4. Comparaison temporelle et volumes',
+                      sous_sections: [
+                        {
+                          titre: '4.1. Comparaison entre campagnes',
+                          texte: '<p>Pour comparer deux levés à des dates différentes, vérifier :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Même référence altimétrique</li><li style="margin-bottom:4px">Position et orientation compatibles des sections</li><li style="margin-bottom:4px">Stabilité des repères de section</li><li style="margin-bottom:4px">Méthode et précision des deux campagnes</li><li style="margin-bottom:4px">Objets réellement mesurés (dépôt meuble vs fond ferme)</li></ul><p>Si une section est déplacée de quelques mètres dans un lit irrégulier, une différence apparente peut provenir de ce déplacement, pas d\'une évolution réelle.</p><p><strong>Incertitude d\'une différence</strong> (observations indépendantes) :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center;font-weight:bold">u_ΔZ = √(u₁² + u₂²)</p><p>Exemple : u₁=0,03 m, u₂=0,04 m → u_ΔZ=0,05 m. Une différence mesurée de 0,02 m ne permet pas d\'affirmer une évolution certaine.</p>'
+                        },
+                        {
+                          titre: '4.2. Estimation de volume entre profils',
+                          texte: '<p>Si deux sections encadrent un tronçon avec des aires de changement A₁ et A₂ :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center;font-weight:bold">V ≈ (A₁ + A₂) / 2 × L</p><p><em>Exemple :</em> A₁=0,40 m², A₂=0,80 m², L=50 m → V≈(0,40+0,80)/2×50=<strong>30 m³</strong>.</p><p>Cette approximation suppose une variation régulière entre les sections. Distinguer : volume géométrique apparent, volume net (érosion − dépôt), masse (nécessite une densité).</p><p><strong>Interpolation entre profils</strong> : peut estimer une géométrie intermédiaire dans un tronçon régulier, mais ne crée pas une observation. Elle peut manquer une fosse, un seuil ou une connexion latérale. Indiquer l\'origine des profils : mesuré, extrait MNT, interpolé.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '5. Ouvrages, zones inefficaces et erreurs fréquentes',
+                      sous_sections: [
+                        {
+                          titre: '5.1. Représenter les ouvrages et les zones inefficaces',
+                          texte: '<p>Un ouvrage demande des informations spécifiques — ne pas relier directement deux points de part et d\'autre en oubliant sa structure :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Pont</strong> : lit et berges, intrados, piles, culées, tablier</li><li style="margin-bottom:4px"><strong>Buse</strong> : radiers amont/aval, forme, dimensions, longueur, état des dépôts, approches</li></ul><p><strong>Zones d\'écoulement inefficace :</strong> toute zone immergée ne contribue pas au même débit longitudinal. Une zone latérale peut contenir de l\'eau presque immobile. Dans certains modèles, ces zones sont comptées dans le stockage mais pas dans le transport actif.</p><p>Une dépression plus basse que Z_eau n\'est pas automatiquement inondée si une barrière empêche toute connexion hydraulique.</p>'
+                        },
+                        {
+                          titre: '5.2. Dix erreurs fréquentes',
+                          texte: '<table style="width:100%;border-collapse:collapse;font-size:10px"><thead><tr style="background:var(--c-primary,#2563eb);color:white"><th style="padding:4px 6px;text-align:left">Erreur</th><th style="padding:4px 6px;text-align:left">Correction</th></tr></thead><tbody><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Confondre numéro de profil et chaînage</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Documenter les deux informations</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Définir les rives selon sa position de terrain</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Regarder vers l\'aval</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Couper le courant très obliquement</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Adapter l\'orientation à la direction des écoulements</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Limiter le levé au lit mineur</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Couvrir les zones concernées par les scénarios</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Oublier les ruptures de terrain</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Points caractéristiques aux changements de forme</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Déduire une pente de l\'apparence du dessin</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Utiliser les coordonnées et les échelles</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Utiliser une profondeur négative dans l\'aire mouillée</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Découper le segment à la ligne d\'eau</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Assimiler toute zone basse à une zone inondée</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Examiner les connexions hydrauliques</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Présenter un profil interpolé comme mesuré</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Indiquer l\'origine de chaque profil</td></tr><tr><td style="padding:4px 6px">Comparer deux coupes de positions différentes</td><td style="padding:4px 6px">Contrôler position, orientation et référence</td></tr></tbody></table>'
+                        }
+                      ]
+                    }
+                  ],
+                },
+                flashcards: [
+                  { q: 'Calculer la pente globale : fond passe de 120,80 m à 120,20 m sur 400 m.', r: 'S = (120,80−120,20)/400 = 0,60/400 = 0,0015 = 0,15 %.', expl: 'Une pente globale masque les variations locales. Pour détecter une rupture, calculer la pente par sous-tronçon. Sur un dessin avec exagération verticale, ne pas mesurer l\'angle pour en déduire la pente.' },
+                  { q: 'Exagération verticale : profil au 1:1 000 horizontal et 1:100 vertical.', r: 'Ev = 1000/100 = 10. Les reliefs sont représentés 10 fois plus fortement verticalement qu\'horizontalement.', expl: 'Indiquer obligatoirement les deux échelles et l\'exagération. Un dessin avec Ev≠1 déforme les angles — ne jamais mesurer une pente sur ce dessin.' },
+                  { q: 'Segment (0 ; 101)→(2 ; 100), Z_eau=100,50 m. Calculer s_int.', r: 's_int = 0 + (100,50−101)/(100−101) × 2 = (−0,50/−1,00) × 2 = 0,50 × 2 = 1,00 m.', expl: 'La formule utilise le rapport (Z_eau−Z₁)/(Z₂−Z₁). Vérifier que Z_eau est bien encadrée par Z₁ et Z₂, sinon l\'intersection n\'existe pas sur ce segment.' },
+                  { q: 'Section trapézoïdale : fond b=2 m, profondeur h=0,50 m, talus z=1. Calculer A.', r: 'A = b×h + z×h² = 2×0,50 + 1×0,50² = 1,00 + 0,25 = 1,25 m².', expl: 'Pour un trapèze symétrique de talus z (1 horizontal pour 1 vertical), la largeur au miroir T=b+2zh=2+2×0,50=3 m. La profondeur hydraulique Dh=A/T=1,25/3≈0,417 m.' },
+                  { q: 'Sur la section trapézoïdale (A=1,25 m²), Q=0,75 m³/s. Calculer v̄.', r: 'v̄ = Q/A = 0,75/1,25 = 0,60 m/s.', expl: 'v̄ est la vitesse moyenne sur la section. La distribution réelle des vitesses est non uniforme. Pour le nombre de Froude : Fr = v̄/√(g×Dh) = 0,60/√(9,81×0,417) ≈ 0,296 — régime fluvial.' },
+                  { q: 'Incertitude d\'une différence, mesures indépendantes : u₁=0,02 m, u₂=0,03 m.', r: 'u_ΔZ = √(0,02²+0,03²) = √(0,0004+0,0009) = √0,0013 ≈ 0,036 m.', expl: 'Une différence mesurée de 0,02 m ne permet pas d\'affirmer une évolution certaine si l\'incertitude de la différence est de 0,036 m. Cette formule suppose des erreurs indépendantes et non corrélées.' },
+                  { q: 'Volume approché : A₁=0,30 m², A₂=0,50 m², L=40 m.', r: 'V ≈ (0,30+0,50)/2 × 40 = 0,40 × 40 = 16 m³.', expl: 'Cette formule suppose une variation suffisamment régulière entre les deux profils. Pour un dépôt très hétérogène, deux profils seuls ne suffisent pas. Distinguer volume géométrique, volume net et masse.' },
+                  { q: 'Une ligne d\'eau semble monter vers l\'aval sur un profil de crue mesuré sur 2 heures de montée. Peut-on conclure à une pente inversée ?', r: 'Non. Une partie de l\'écart peut venir de l\'évolution temporelle du niveau. Il faut examiner les horaires, les conditions de mesure et la vitesse de montée avant toute conclusion.', expl: 'En montée rapide, les points mesurés plus tard sont à un niveau plus élevé. Si la mesure suit l\'amont avant l\'aval, le profil peut paraître inversé alors que la pente est normale.' },
+                ],
+                schema: `<svg viewBox="0 0 520 290" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="290" fill="#fefce8" rx="10"/>
+  <text x="260" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="#713f12">Profil en travers — section mouillée</text>
+  <!-- Section terrain -->
+  <!-- s: 0=10, 1=110, 3=310, 4=410 | Z: 101->200, 100->170, 100->170, 101->200 (scaled: Zmin=99.5->230, Zmax=101.5->90) -->
+  <!-- Scale: x = 10 + s*100, y = 230 - (Z-99.5)*70 -->
+  <!-- Points: A(10,160) B(110,230) C(310,230) D(410,160) -->
+  <!-- Ground terrain profile -->
+  <polyline points="10,160 110,230 310,230 410,160" fill="none" stroke="#78350f" stroke-width="3"/>
+  <!-- Fill terrain -->
+  <polygon points="10,160 110,230 310,230 410,160 460,130 460,260 10,260" fill="#d6d3d1" opacity="0.5"/>
+  <!-- Water line Z_eau=100.60 → y=230-(100.60-99.5)*70=230-77=153 -->
+  <!-- Intersections: s_g=0.40 → x=10+40=50; s_d=3.60 → x=10+360=370 -->
+  <line x1="50" y1="153" x2="370" y2="153" stroke="#3b82f6" stroke-width="2.5"/>
+  <!-- Water fill -->
+  <polygon points="50,153 110,230 310,230 370,153" fill="#bfdbfe" opacity="0.7"/>
+  <!-- Points caractéristiques -->
+  <circle cx="10" cy="160" r="5" fill="#16a34a"/>
+  <text x="10" y="148" text-anchor="middle" font-size="9" font-weight="bold" fill="#16a34a">SBG</text>
+  <text x="10" y="156" text-anchor="middle" font-size="8" fill="#16a34a">101,00</text>
+  <circle cx="110" cy="230" r="5" fill="#dc2626"/>
+  <text x="110" y="244" text-anchor="middle" font-size="9" font-weight="bold" fill="#dc2626">PBG</text>
+  <text x="110" y="253" text-anchor="middle" font-size="8" fill="#dc2626">100,00</text>
+  <circle cx="260" cy="230" r="4" fill="#dc2626"/>
+  <text x="260" y="244" text-anchor="middle" font-size="9" fill="#dc2626">Fond</text>
+  <circle cx="310" cy="230" r="5" fill="#dc2626"/>
+  <text x="310" y="244" text-anchor="middle" font-size="9" font-weight="bold" fill="#dc2626">PBD</text>
+  <circle cx="410" cy="160" r="5" fill="#16a34a"/>
+  <text x="410" y="148" text-anchor="middle" font-size="9" font-weight="bold" fill="#16a34a">SBD</text>
+  <text x="410" y="156" text-anchor="middle" font-size="8" fill="#16a34a">101,00</text>
+  <!-- Intersection points -->
+  <circle cx="50" cy="153" r="4" fill="#f97316"/>
+  <text x="50" y="143" text-anchor="middle" font-size="8" fill="#f97316">s_g=0,40</text>
+  <circle cx="370" cy="153" r="4" fill="#f97316"/>
+  <text x="370" y="143" text-anchor="middle" font-size="8" fill="#f97316">s_d=3,60</text>
+  <!-- Water level label -->
+  <text x="480" y="156" text-anchor="start" font-size="9" font-weight="bold" fill="#1d4ed8">Z_eau</text>
+  <text x="480" y="167" text-anchor="start" font-size="8" fill="#1d4ed8">100,60 m</text>
+  <!-- T arrow -->
+  <line x1="50" y1="120" x2="370" y2="120" stroke="#7c3aed" stroke-width="1.5"/>
+  <polygon points="48,118 48,122 43,120" fill="#7c3aed"/>
+  <polygon points="372,118 372,122 377,120" fill="#7c3aed"/>
+  <text x="210" y="115" text-anchor="middle" font-size="9" font-weight="bold" fill="#7c3aed">T = 3,20 m</text>
+  <!-- Depth arrow at center -->
+  <line x1="260" y1="153" x2="260" y2="228" stroke="#0369a1" stroke-width="1.5"/>
+  <polygon points="257,226 263,226 260,231" fill="#0369a1"/>
+  <polygon points="257,155 263,155 260,150" fill="#0369a1"/>
+  <text x="272" y="194" font-size="8.5" fill="#0369a1">h_max</text>
+  <text x="272" y="204" font-size="8.5" fill="#0369a1">0,60 m</text>
+  <!-- Results box -->
+  <rect x="10" y="38" width="500" height="52" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1"/>
+  <text x="260" y="55" text-anchor="middle" font-size="10" font-weight="bold" fill="#14532d">Résultats pour Z_eau = 100,60 m</text>
+  <text x="85" y="71" text-anchor="middle" font-size="9" fill="#14532d">A = 1,56 m²</text>
+  <text x="220" y="71" text-anchor="middle" font-size="9" fill="#14532d">P ≈ 3,70 m</text>
+  <text x="340" y="71" text-anchor="middle" font-size="9" fill="#14532d">R_h ≈ 0,422 m</text>
+  <text x="460" y="71" text-anchor="middle" font-size="9" fill="#14532d">D_h = 0,488 m</text>
+  <text x="260" y="84" text-anchor="middle" font-size="9" fill="#475569">v̄ = Q/A &nbsp;&nbsp; Fr = v̄/√(g·D_h) &nbsp;&nbsp; Rives définies en regardant vers l\'aval →</text>
+  <!-- Convention rives label -->
+  <text x="60" y="275" text-anchor="middle" font-size="9" fill="#1e3a8a">← Rive gauche</text>
+  <text x="460" y="275" text-anchor="middle" font-size="9" fill="#dc2626">Rive droite →</text>
+  <text x="260" y="275" text-anchor="middle" font-size="9" fill="#713f12">(regardant vers l\'aval)</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Section fictive en travers : (0 ; 101,00) SBG — (2 ; 100,00) PBG — (4 ; 100,00) PBD — (6 ; 101,00) SBD. Z_eau = 100,60 m. (1) Calculer s_g et s_d par interpolation. (2) Calculer T. (3) Calculer l\'aire mouillée A (triangles + rectangle). (4) Calculer P (talus à 45° de part et d\'autre). (5) Calculer Rh et Dh. (6) Pour Q=1,40 m³/s, calculer v̄ et Fr.',
+                  solution: '<strong>(1) Intersections :</strong> Segment BG (0;101)→(2;100) : s_g = 0 + (100,60−101)/(100−101)×2 = (−0,40/−1)×2 = <strong>0,80 m</strong>. Segment BD (4;100)→(6;101) : s_d = 4 + (100,60−100)/(101−100)×2 = (0,60/1)×2 = 4+1,20 = <strong>5,20 m</strong>.<br><strong>(2) T :</strong> T = 5,20 − 0,80 = <strong>4,40 m</strong>.<br><strong>(3) Aire :</strong> triangle gauche : base=1,20 m (=2−0,80), h_max=0,60 m → ½×1,20×0,60=0,36 m². Rectangle central : largeur=2,00 m (=4−2), h=0,60 m → 1,20 m². Triangle droit identique → 0,36 m². A = 0,36+1,20+0,36 = <strong>2,16 m²</strong> (noter : section plus large que l\'exemple § 11).<br><strong>(4) P :</strong> Talus à 45° → côté = √(1,20²+0,60²) = √(1,44+0,36) = √1,80 ≈ 1,342 m. Fond plat = 2 m. P = 2×1,342 + 2 ≈ <strong>4,683 m</strong>.<br><strong>(5) Rh et Dh :</strong> Rh = 2,16/4,683 ≈ <strong>0,461 m</strong>. Dh = 2,16/4,40 ≈ <strong>0,491 m</strong>.<br><strong>(6) v̄ et Fr :</strong> v̄ = 1,40/2,16 ≈ <strong>0,648 m/s</strong>. Fr = 0,648/√(9,81×0,491) ≈ 0,648/2,194 ≈ <strong>0,295</strong> — régime fluvial.',
+                },
+              },
+            ],
+          }, // fin gem-m14
+
         ],
       },
     ],
