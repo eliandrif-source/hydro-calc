@@ -7079,6 +7079,192 @@ const COURS_DATA = {
             ],
           }, // fin gem-m12
 
+          {
+            id: 'gem-m13',
+            name: 'Nivellement et levés de terrain',
+            ico: '📏',
+            chapitres: [
+              {
+                id: 'gem-niv1',
+                titre: 'Nivellement et levés de terrain',
+                fiche: {
+                  intro: 'Un modèle hydraulique ou un diagnostic de franchissabilité reposent sur des altitudes mesurées avec soin. Relever un radier de buse, comparer deux niveaux ou détecter un point bas exige une méthode organisée, des contrôles réalisés avant de quitter le terrain, et des données dont l\'origine reste traçable. La qualité d\'un levé dépend autant de sa préparation que de l\'instrument utilisé.',
+                  points: [
+                    'Nivellement ≠ levé topographique. Le nivellement vise à déterminer des différences d\'altitude. Un levé topographique décrit aussi les positions horizontales, les formes, les objets, les descriptions, les photographies et la qualité des mesures. Un nivellement seul ne fournit pas automatiquement les coordonnées horizontales des points.',
+                    'Définir le besoin avant l\'instrument. Préciser : objectif, étendue, objets à relever, précision nécessaire, référence horizontale et verticale, contrôles attendus, format de livraison. Une différence recherchée de quelques centimètres ne peut pas être étudiée sérieusement avec une méthode dont l\'incertitude est du même ordre, sans analyse complémentaire.',
+                    'Quatre méthodes principales : (1) Nivellement géométrique — visées horizontales sur mires, dénivelées précises. (2) Nivellement trigonométrique — distance + angle vertical avec station totale. (3) GNSS — coordonnées par satellites, qualité variable selon environnement et mode. (4) Scanner/photogrammétrie/bathymétrie — acquisition dense de surfaces. Ces méthodes peuvent être combinées. Le choix dépend de la précision, de la visibilité, de la végétation et de l\'accessibilité.',
+                    'Principe du nivellement géométrique : le niveau fournit une visée horizontale. Lecture arrière (LAR) sur le point connu A, lecture avant (LAV) sur le point B : ΔZ = LAR − LAV, ZB = ZA + LAR − LAV. Repère mnémotechnique : un point plus haut donne une lecture de mire plus petite. "Arrière" et "avant" désignent le rôle dans le cheminement, pas une direction géographique.',
+                    'Altitude de la ligne de visée : Z_visée = ZA + LAR. Puis, pour tout point P visible depuis la même station : ZP = Z_visée − LP. Cette altitude de ligne de visée n\'est pas la hauteur physique du trépied au-dessus du sol — c\'est une grandeur calculée, commune à toutes les lectures prises sans déplacer l\'instrument.',
+                    'Points de changement : quand les points suivants ne sont plus visibles, lire "avant" depuis la première station sur un point stable, déplacer le niveau, puis lire "arrière" sur exactement le même point. Ce point doit être stable et clairement identifiable. Un appui instable (sol meuble, végétation, pierre mobile) peut introduire un décalage transmis à toute la suite du cheminement.',
+                    'Trois configurations de cheminement : (1) Ouvert non encadré : départ connu, arrivée inconnue — contrôlabilité faible. (2) Encadré : départ et arrivée connus — fermeture possible. (3) Boucle fermée : retour au départ — dénivelée totale théoriquement nulle. Un retour ou un rattachement apporte une redondance. Revenir sur le même repère contrôle la cohérence du parcours, pas nécessairement la justesse du repère lui-même.',
+                    'Erreur de fermeture : pour un cheminement encadré, f = Z_calc − Z_réf. Une faible fermeture ne prouve pas que chaque point individuel est exact — des erreurs peuvent se compenser. La fermeture contrôle l\'arithmétique et décèle des erreurs grossières ; elle ne se substitue pas à des contrôles indépendants sur les points intermédiaires.',
+                    'Tolérance et compensation : la tolérance découlé de l\'objectif, du protocole et de l\'instrument. On ne compense qu\'après vérification du carnet, contrôle des calculs, recherche d\'erreurs grossières et examen des repères. Compensation proportionnelle (exercice simplifié) : ci = −f × Li/Ltotal. On ne compense pas une faute identifiée pour la faire disparaître ; on en recherche la cause et on reprend si nécessaire.',
+                    'Nivellement trigonométrique (station totale) : ZB − ZA = i + s×sin(θ) − r, avec i = hauteur d\'instrument, s = distance inclinée, θ = angle par rapport à l\'horizontale, r = hauteur de cible. Vérifier la convention d\'angle (angle par rapport à l\'horizontale ≠ angle zénithal). Une hauteur de prisme saisie erronée affecte tous les points relevés avec cette valeur — une erreur systématique n\'est pas détectée en multipliant les points.',
+                    'Points utiles en GEMAPI : pied et sommet de berge, fond du chenal, bancs et fosses, ruptures de pente, radiers de buses, crêtes de seuils, intrados, chaussées et remblais, connexions avec les zones humides. Un point supplémentaire sur une rupture importante peut être plus utile que plusieurs points sur une surface régulière. Z_fond = Z_eau − h (profondeur verticale mesurée). Documenter ce qui a été touché (dépôt meuble, fond ferme, sommet de bloc).',
+                    'Carnet de terrain et contrôles : chaque point possède un identifiant unique, un objet, des coordonnées, une référence, une méthode, un horodatage, un statut de qualité. Conserver les lectures brutes. Contrôler avant de quitter le terrain : fermeture sur repère, aller-retour, points répétés depuis une autre station. En présence d\'un écart, rechercher la cause avant de faire une moyenne. Archiver séparément observations brutes, calculs et résultats retenus.',
+                  ],
+                  formules: [
+                    '\\Delta Z = L_{\\mathrm{AR}} - L_{\\mathrm{AV}} \\qquad Z_B = Z_A + \\Delta Z',
+                    'Z_{\\mathrm{visée}} = Z_A + L_{\\mathrm{AR}} \\qquad Z_P = Z_{\\mathrm{visée}} - L_P',
+                    'f = Z_{\\mathrm{calc}} - Z_{\\mathrm{réf}} \\qquad c_i = -f\\,\\dfrac{L_i}{L_{\\mathrm{total}}}',
+                    'Z_B - Z_A = i + s\\sin\\theta - r \\qquad Z_{\\mathrm{fond}} = Z_{\\mathrm{eau}} - h',
+                  ],
+                  retenir: 'ΔZ=LAR−LAV. Z_visée=ZA+LAR. ZP=Z_visée−LP. Fermeture f=Z_calc−Z_réf. Compensation ci=−f×Li/Ltotal, seulement après vérification. Cheminement encadré > ouvert. Fermeture nulle ≠ chaque point exact. Hauteurs d\'instrument/cible mesurées et enregistrées. Bruts archivés.',
+                  sections: [
+                    {
+                      titre: '1. Méthodes et principe du nivellement géométrique',
+                      sous_sections: [
+                        {
+                          titre: '1.1. Choisir sa méthode',
+                          texte: '<p>Avant de choisir un instrument, définir le besoin : objectif, étendue, précision, référence, contrôles, format de livraison.</p><p>Les quatre grandes méthodes :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Nivellement géométrique</strong> : visées horizontales sur mires — le plus précis pour des dénivelées</li><li style="margin-bottom:4px"><strong>Nivellement trigonométrique</strong> : distance + angle vertical (station totale)</li><li style="margin-bottom:4px"><strong>GNSS</strong> : rapide pour le positionnement horizontal, vertical selon protocole</li><li style="margin-bottom:4px"><strong>Bathymétrie / scanner</strong> : acquisition dense, fond immergé, formes complexes</li></ul><p>Ces méthodes se combinent. Une acquisition dense ne remplace pas un rattachement et des contrôles fiables.</p>'
+                        },
+                        {
+                          titre: '1.2. Calcul d\'une dénivelée',
+                          texte: '<p>Le niveau fournit une ligne de visée horizontale. On lit sur une mire verticale :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center;font-weight:bold">ΔZ = L<sub>AR</sub> − L<sub>AV</sub> &nbsp;&nbsp; Z<sub>B</sub> = Z<sub>A</sub> + ΔZ</p><p>Exemple : Z<sub>A</sub>=125,000 m, L<sub>AR</sub>=1,425 m, L<sub>AV</sub>=0,875 m → ΔZ=+0,550 m → Z<sub>B</sub>=125,550 m.</p><p><strong>Altitude de la ligne de visée</strong> : Z_visée = Z<sub>A</sub> + L<sub>AR</sub> = 126,425 m. Puis pour tout point P depuis la même station : Z<sub>P</sub> = Z_visée − L<sub>P</sub>.</p><p>Repère : un point plus haut donne une lecture plus petite. "Arrière" et "avant" désignent le rôle dans le cheminement, pas une direction géographique.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '2. Cheminement et fermeture',
+                      sous_sections: [
+                        {
+                          titre: '2.1. Points de changement et configurations',
+                          texte: '<p>Quand les points suivants ne sont plus visibles, on utilise un <strong>point de changement</strong> :</p><ol style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Lecture avant depuis la station actuelle</li><li style="margin-bottom:4px">Déplacement du niveau</li><li style="margin-bottom:4px">Lecture arrière sur exactement le même point</li></ol><p>Ce point doit être stable — un appui instable transmet un décalage à toute la suite.</p><p><strong>Trois configurations :</strong></p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Cheminement encadré (départ + arrivée connus) — fermeture possible</li><li style="margin-bottom:4px">Boucle fermée — dénivelée totale théoriquement nulle</li><li style="margin-bottom:4px">Cheminement ouvert — contrôlabilité faible, éviter si possible</li></ul>'
+                        },
+                        {
+                          titre: '2.2. Calcul et interprétation de la fermeture',
+                          texte: '<p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center;font-weight:bold">f = Z<sub>calc</sub> − Z<sub>réf</sub></p><p>Exemple de cheminement (3 stations, départ Z<sub>A</sub>=100,000 m) :</p><table style="width:100%;border-collapse:collapse;font-size:10px;margin:6px 0"><thead><tr style="background:var(--c-primary,#2563eb);color:white"><th style="padding:3px 5px">Station</th><th style="padding:3px 5px">L<sub>AR</sub></th><th style="padding:3px 5px">L<sub>AV</sub></th><th style="padding:3px 5px">ΔZ</th></tr></thead><tbody><tr><td style="padding:3px 5px;text-align:center">1</td><td style="padding:3px 5px;text-align:center">1,250</td><td style="padding:3px 5px;text-align:center">0,850</td><td style="padding:3px 5px;text-align:center">+0,400</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:3px 5px;text-align:center">2</td><td style="padding:3px 5px;text-align:center">1,500</td><td style="padding:3px 5px;text-align:center">1,920</td><td style="padding:3px 5px;text-align:center">−0,420</td></tr><tr><td style="padding:3px 5px;text-align:center">3</td><td style="padding:3px 5px;text-align:center">1,780</td><td style="padding:3px 5px;text-align:center">1,156</td><td style="padding:3px 5px;text-align:center">+0,624</td></tr></tbody></table><p>ΣΔZ = +0,604 m → Z<sub>B,calc</sub>=100,604 m. Z<sub>B,réf</sub>=100,600 m → <strong>f = +4 mm</strong>. Contrôle arithmétique : ΣL<sub>AR</sub>−ΣL<sub>AV</sub> = 4,530−3,926 = 0,604 m ✓. Une faible fermeture ne prouve pas que chaque point est exact — des erreurs peuvent se compenser.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '3. Compensation et contrôles',
+                      sous_sections: [
+                        {
+                          titre: '3.1. Quand et comment compenser',
+                          texte: '<p>Une compensation répartit l\'écart résiduel sur les observations. Elle intervient <em>après</em> : vérification du carnet, contrôle des calculs, recherche d\'erreurs grossières, examen des repères, vérification de la tolérance.</p><p>On ne compense pas une faute identifiée. Compensation proportionnelle (exercice simplifié) :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center;font-weight:bold">c<sub>i</sub> = −f × L<sub>i</sub> / L<sub>total</sub></p><p><em>Exemple :</em> f=+4 mm, L₁=100 m, L₂=150 m, L₃=250 m, L_total=500 m.<br>c₁=−0,8 mm, c₂=−1,2 mm, c₃=−2,0 mm. Σci=−4 mm. Dénivelée corrigée : 0,604−0,004=0,600 m.</p><p>Les décimales supplémentaires servent à montrer la répartition ; elles ne démontrent pas une précision submillimétrique.</p>'
+                        },
+                        {
+                          titre: '3.2. Contrôles pratiques et bonnes pratiques',
+                          texte: '<p><strong>Bonnes pratiques au niveau :</strong> trépied stable, mire verticale, appui net pour les changements, distances arrière et avant équilibrées autant que possible.</p><p><strong>Contrôles avant de quitter le terrain :</strong></p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Fermeture sur repère d\'arrivée</li><li style="margin-bottom:4px">Aller-retour sur quelques points</li><li style="margin-bottom:4px">Points répétés depuis une autre station</li><li style="margin-bottom:4px">Contrôle de hauteur de cible</li></ul><p>Deux lectures successives sans changement de configuration vérifient surtout la répétabilité, pas d\'autres types d\'erreurs. En présence d\'un écart, rechercher la cause avant de faire une moyenne. Les reprises doivent rester compatibles avec les conditions de sécurité près des berges et des ouvrages.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '4. Nivellement trigonométrique et GNSS',
+                      sous_sections: [
+                        {
+                          titre: '4.1. Station totale : formule et pièges',
+                          texte: '<p>La station totale mesure distance inclinée et angle vertical. Dans une géométrie locale simplifiée :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center;font-weight:bold">Z<sub>B</sub> − Z<sub>A</sub> = i + s×sin(θ) − r</p><p>i = hauteur d\'instrument, s = distance inclinée, θ = angle par rapport à l\'horizontale, r = hauteur de cible.</p><p><em>Exemple :</em> i=1,50, s=30, θ=2°, r=1,80 → Z<sub>B</sub>−Z<sub>A</sub>=1,50+30×sin(2°)−1,80≈0,747 m.</p><p><strong>Attention :</strong> un angle zénithal ne s\'utilise pas directement dans cette formule. Une hauteur de prisme saisie erronée (+0,20 m) abaisse l\'altitude calculée de 0,20 m pour tous les points concernés. Une erreur systématique n\'est pas détectée en multipliant les points.</p>'
+                        },
+                        {
+                          titre: '4.2. GNSS et relevé des points GEMAPI',
+                          texte: '<p>Le GNSS fournit des coordonnées rapidement, mais sa qualité dépend du mode de mesure et de l\'environnement : visibilité du ciel, obstacles et réflexions, géométrie satellitaire, corrections disponibles, stabilité de la canne, hauteur d\'antenne. Un statut favorable affiché ne remplace pas des contrôles indépendants. Vérifier si le Z fourni est une hauteur ellipsoïdale ou une altitude déjà convertie.</p><p><strong>Points caractéristiques GEMAPI :</strong> pied et sommet de berge, fond du chenal, bancs et fosses, ruptures de pente, radiers de buses, crêtes de seuils, intrados, chaussées, connexions avec les zones humides. Un point sur une rupture vaut mieux que plusieurs sur une surface régulière.</p><p><strong>Z_fond</strong> : si l\'on mesure la profondeur h à la même verticale que le niveau d\'eau : Z_fond = Z_eau − h. Documenter l\'horodatage et ce qui a été touché (dépôt meuble, fond ferme, sommet de bloc).</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '5. Carnet de terrain et erreurs fréquentes',
+                      sous_sections: [
+                        {
+                          titre: '5.1. Structure du carnet et archivage',
+                          texte: '<p>Chaque point doit posséder : identifiant unique, objet, coordonnées, référence verticale, méthode, date/heure, statut de qualité, commentaire, photographie. Conserver les lectures brutes séparément des résultats calculés.</p><p>Les abréviations doivent être définies. Une mention "fond" sans précision peut devenir inexploitable lors d\'une campagne suivante. Un point incertain doit être signalé — ne pas le rendre artificiellement crédible par une présentation uniforme.</p><p>Archiver séparément : <strong>observations brutes</strong> / <strong>calculs</strong> / <strong>corrections</strong> / <strong>résultats retenus</strong> / <strong>données à reprendre</strong>.</p>'
+                        },
+                        {
+                          titre: '5.2. Neuf erreurs fréquentes',
+                          texte: '<table style="width:100%;border-collapse:collapse;font-size:10px"><thead><tr style="background:var(--c-primary,#2563eb);color:white"><th style="padding:4px 6px;text-align:left">Erreur</th><th style="padding:4px 6px;text-align:left">Prévention</th></tr></thead><tbody><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Mire inclinée</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Contrôler la verticalité</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Point de changement instable</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Choisir un appui stable et identifiable</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Hauteur de cible incorrecte (station totale)</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Mesurer et enregistrer les changements</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Repère déplacé ou mal identifié</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Contrôler plusieurs repères</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Niveau d\'eau relevé sans horodatage</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Horodater systématiquement</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Compensation d\'une faute grossière</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Rechercher la cause, reprendre si nécessaire</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Points trop espacés aux ruptures</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Adapter l\'échantillonnage aux changements de forme</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Suppression des observations brutes</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Archiver brut et corrigé séparément</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px">Confusion arrière / avant</td><td style="padding:4px 6px">Carnet structuré, relire avant de changer de station</td></tr></tbody></table>'
+                        }
+                      ]
+                    }
+                  ],
+                },
+                flashcards: [
+                  { q: 'L_AR=1,650 m, L_AV=2,125 m. Calculer ΔZ.', r: 'ΔZ = 1,650 − 2,125 = −0,475 m. Le point d\'arrivée est plus bas de 0,475 m.', expl: 'Un résultat négatif signifie que le point d\'arrivée est plus bas que le point de départ. Avec une même ligne de visée, un point plus haut donne une lecture de mire plus petite.' },
+                  { q: 'Z_A=80,250 m, ΔZ=−0,475 m. Calculer Z_B.', r: 'Z_B = 80,250 − 0,475 = 79,775 m.', expl: 'Z_B = Z_A + ΔZ = Z_A + L_AR − L_AV. On peut aussi calculer la ligne de visée (80,250 + L_AR) et soustraire L_AV, ce qui donne le même résultat.' },
+                  { q: 'Z_visée=102,430 m, lecture P=1,280 m. Calculer Z_P.', r: 'Z_P = 102,430 − 1,280 = 101,150 m.', expl: 'Z_visée est calculée une fois pour toute la station (Z_A + L_AR). Chaque point intermédiaire P donne Z_P = Z_visée − L_P sans recalculer la dénivelée depuis A.' },
+                  { q: 'Z_calc=95,418 m à l\'arrivée, Z_réf=95,410 m. Calculer la fermeture.', r: 'f = 95,418 − 95,410 = +0,008 m = +8 mm.', expl: 'L\'acceptabilité dépend du protocole défini avant le levé. Une valeur de 8 mm peut être excellente pour une reconnaissance ou insuffisante pour mesurer un déplacement de quelques millimètres.' },
+                  { q: 'Compensation : f=+6 mm, L₁=100 m, L₂=200 m. Calculer c₁ et c₂.', r: 'c₁ = −6×100/300 = −2 mm. c₂ = −6×200/300 = −4 mm. Σci = −6 mm.', expl: 'La compensation s\'applique APRÈS vérification du carnet, recherche d\'erreurs grossières et contrôle des repères. Elle répartit l\'écart résiduel de manière justifiable, elle ne masque pas une faute.' },
+                  { q: 'Z_eau=110,35 m, profondeur verticale h=0,82 m. Calculer Z_fond.', r: 'Z_fond = 110,35 − 0,82 = 109,53 m.', expl: 'Cette formule suppose que la profondeur et le niveau d\'eau sont mesurés au même emplacement et dans un état compatible. Documenter ce qui a été touché (dépôt meuble, fond ferme, etc.) et l\'horodatage.' },
+                  { q: 'Hauteur prisme réelle = 1,80 m. Saisie = 2,00 m. Quel effet sur les altitudes calculées ?', r: 'La hauteur saisie est trop grande de 0,20 m → l\'altitude calculée de chaque point est trop basse de 0,20 m. Corriger tous les points concernés et archiver la trace.', expl: 'C\'est une erreur systématique : elle affecte tous les points mesurés avec cette valeur sans que le levé paraisse incohérent en interne. Elle n\'est détectée que par comparaison avec un repère ou un contrôle indépendant.' },
+                  { q: 'Un cheminement revient exactement sur son altitude de départ. Tous les points sont-ils exacts ?', r: 'Non. Des erreurs peuvent se compenser le long du parcours, et le repère de départ lui-même peut être mal rattaché. Une fermeture nulle contrôle la cohérence arithmétique, pas la justesse absolue de chaque point.', expl: 'La fermeture est un contrôle nécessaire mais pas suffisant. Des contrôles indépendants (points répétés depuis une autre station, rattachement à plusieurs repères) apportent une redondance supplémentaire.' },
+                ],
+                schema: `<svg viewBox="0 0 520 290" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="290" fill="#fefce8" rx="10"/>
+  <text x="260" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="#713f12">Principe du nivellement géométrique</text>
+  <!-- Ground line -->
+  <path d="M20,230 Q80,225 120,228 Q160,231 200,229 Q240,227 280,230 Q320,233 360,228 Q400,223 440,226 Q480,229 500,228" fill="none" stroke="#78350f" stroke-width="2"/>
+  <rect x="20" y="230" width="480" height="10" fill="#d6d3d1"/>
+  <!-- Point A -->
+  <circle cx="100" cy="229" r="4" fill="#16a34a"/>
+  <text x="100" y="248" text-anchor="middle" font-size="10" font-weight="bold" fill="#16a34a">A</text>
+  <text x="100" y="260" text-anchor="middle" font-size="9" fill="#16a34a">Z_A</text>
+  <!-- Point P (intermediate) -->
+  <circle cx="250" cy="229" r="3" fill="#f97316"/>
+  <text x="250" y="248" text-anchor="middle" font-size="10" font-weight="bold" fill="#f97316">P</text>
+  <!-- Point B (higher) -->
+  <circle cx="410" cy="204" r="4" fill="#dc2626"/>
+  <text x="410" y="223" text-anchor="middle" font-size="10" font-weight="bold" fill="#dc2626">B</text>
+  <text x="410" y="236" text-anchor="middle" font-size="9" fill="#dc2626">Z_B</text>
+  <!-- Niveau (instrument) -->
+  <rect x="185" y="182" width="70" height="14" rx="4" fill="#64748b" stroke="#334155" stroke-width="1.5"/>
+  <text x="220" y="193" text-anchor="middle" font-size="9" fill="white" font-weight="bold">NIVEAU</text>
+  <!-- Tripod legs -->
+  <line x1="200" y1="196" x2="185" y2="218" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="220" y1="196" x2="220" y2="220" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="240" y1="196" x2="255" y2="218" stroke="#64748b" stroke-width="1.5"/>
+  <!-- Horizontal line of sight -->
+  <line x1="100" y1="189" x2="410" y2="189" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="260" y="184" text-anchor="middle" font-size="9" font-weight="bold" fill="#2563eb">Z_visée = Z_A + L_AR</text>
+  <!-- Mire A (back sight) -->
+  <rect x="96" y="189" width="8" height="40" fill="#fef08a" stroke="#ca8a04" stroke-width="1"/>
+  <line x1="100" y1="189" x2="100" y2="229" stroke="#ca8a04" stroke-width="0.5" stroke-dasharray="2,1"/>
+  <!-- LAR arrow -->
+  <line x1="115" y1="189" x2="115" y2="229" stroke="#16a34a" stroke-width="1.5"/>
+  <polygon points="112,227 118,227 115,232" fill="#16a34a"/>
+  <polygon points="112,191 118,191 115,186" fill="#16a34a"/>
+  <text x="122" y="210" font-size="9" font-weight="bold" fill="#16a34a">L_AR</text>
+  <!-- Mire B (fore sight) -->
+  <rect x="406" y="189" width="8" height="15" fill="#fef08a" stroke="#ca8a04" stroke-width="1"/>
+  <line x1="410" y1="189" x2="410" y2="204" stroke="#ca8a04" stroke-width="0.5" stroke-dasharray="2,1"/>
+  <!-- LAV arrow -->
+  <line x1="425" y1="189" x2="425" y2="204" stroke="#dc2626" stroke-width="1.5"/>
+  <polygon points="422,202 428,202 425,207" fill="#dc2626"/>
+  <polygon points="422,191 428,191 425,186" fill="#dc2626"/>
+  <text x="432" y="198" font-size="9" font-weight="bold" fill="#dc2626">L_AV</text>
+  <!-- LP arrow (intermediate point P) -->
+  <rect x="246" y="189" width="8" height="40" fill="#fed7aa" stroke="#ea580c" stroke-width="1"/>
+  <line x1="265" y1="189" x2="265" y2="229" stroke="#f97316" stroke-width="1.5"/>
+  <polygon points="262,227 268,227 265,232" fill="#f97316"/>
+  <polygon points="262,191 268,191 265,186" fill="#f97316"/>
+  <text x="272" y="212" font-size="9" font-weight="bold" fill="#f97316">L_P</text>
+  <!-- ΔZ arrow between ZA and ZB -->
+  <line x1="455" y1="204" x2="455" y2="229" stroke="#7c3aed" stroke-width="1.5"/>
+  <polygon points="452,206 458,206 455,202" fill="#7c3aed"/>
+  <polygon points="452,227 458,227 455,231" fill="#7c3aed"/>
+  <text x="460" y="218" font-size="9" font-weight="bold" fill="#7c3aed">ΔZ</text>
+  <!-- Formula box -->
+  <rect x="30" y="35" width="460" height="52" rx="8" fill="#f0f9ff" stroke="#0369a1" stroke-width="1"/>
+  <text x="260" y="52" text-anchor="middle" font-size="10" font-weight="bold" fill="#0c4a6e">ΔZ = L_AR − L_AV &nbsp;&nbsp;|&nbsp;&nbsp; Z_B = Z_A + ΔZ</text>
+  <text x="260" y="67" text-anchor="middle" font-size="10" fill="#0c4a6e">Z_visée = Z_A + L_AR &nbsp;&nbsp;|&nbsp;&nbsp; Z_P = Z_visée − L_P</text>
+  <text x="260" y="80" text-anchor="middle" font-size="9" fill="#475569">Point plus haut → lecture de mire plus petite</text>
+  <!-- Legend -->
+  <line x1="30" y1="268" x2="55" y2="268" stroke="#16a34a" stroke-width="2"/>
+  <text x="58" y="271" font-size="9" fill="#16a34a">L_AR (arrière)</text>
+  <line x1="140" y1="268" x2="165" y2="268" stroke="#dc2626" stroke-width="2"/>
+  <text x="168" y="271" font-size="9" fill="#dc2626">L_AV (avant)</text>
+  <line x1="250" y1="268" x2="275" y2="268" stroke="#f97316" stroke-width="2"/>
+  <text x="278" y="271" font-size="9" fill="#f97316">L_P (intermédiaire)</text>
+  <line x1="385" y1="268" x2="410" y2="268" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="413" y="271" font-size="9" fill="#2563eb">Z_visée</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Cheminement encadré entre A (Z=100,000 m) et B (Z_réf=100,600 m). Données : Station 1 : L_AR(A)=1,250 m, L_AV(P1)=0,850 m. Station 2 : L_AR(P1)=1,500 m, L_AV(P2)=1,920 m. Station 3 : L_AR(P2)=1,780 m, L_AV(B)=1,156 m. Depuis la station 3, lecture intermédiaire sur point P3 : L_P3=1,620 m. (1) Calculer les trois dénivelées et la dénivelée totale. (2) Calculer Z_B et la fermeture f. (3) Calculer Z_P3. (4) Compensation proportionnelle : L₁=100 m, L₂=150 m, L₃=250 m — calculer c₁, c₂, c₃ et les altitudes corrigées de P1 et P2.',
+                  solution: '<strong>(1) Dénivelées :</strong> ΔZ₁=1,250−0,850=+0,400 m. ΔZ₂=1,500−1,920=−0,420 m. ΔZ₃=1,780−1,156=+0,624 m. ΣΔZ=+0,604 m. Vérification : ΣL_AR−ΣL_AV=4,530−3,926=0,604 m ✓<br><strong>(2) Fermeture :</strong> Z_B=100,000+0,604=100,604 m. f=100,604−100,600=<strong>+0,004 m (+4 mm)</strong>.<br><strong>(3) Z_P3 :</strong> Z_visée (station 3) = Z_P2+L_AR(P2) = (100,000+0,400−0,420)+1,780 = 99,980+1,780 = <strong>101,760 m</strong>. Z_P3 = 101,760−1,620 = <strong>100,140 m</strong>.<br><strong>(4) Compensation :</strong> L_total=500 m. c₁=−0,004×100/500=−0,0008 m. c₂=−0,004×150/500=−0,0012 m. c₃=−0,004×250/500=−0,0020 m. Z_P1_corrigé=100,400−0,0008=<strong>100,3992 m</strong>. Z_P2_corrigé=99,980−0,0008−0,0012=<strong>99,9780 m</strong>. Les décimales servent à montrer la répartition — elles ne démontrent pas une précision submillimétrique du levé.',
+                },
+              },
+            ],
+          }, // fin gem-m13
+
         ],
       },
     ],
