@@ -7444,6 +7444,172 @@ const COURS_DATA = {
             ],
           }, // fin gem-m14
 
+          {
+            id: 'gem-m15',
+            name: 'SIG appliqué à la GEMAPI',
+            ico: '🗾',
+            chapitres: [
+              {
+                id: 'gem-sig2',
+                titre: 'SIG appliqué à la GEMAPI',
+                fiche: {
+                  intro: 'Un SIG réunit des données localisées, des informations descriptives et des outils d\'analyse. Il peut aider à localiser des ouvrages, repérer des secteurs à visiter, mesurer des surfaces ou comparer des scénarios. Mais une analyse spatiale ne vaut que par les données et les règles qui la construisent. Ce chapitre explique comment organiser un projet SIG GEMAPI, réaliser des croisements spatiaux contrôlés et produire des résultats traçables.',
+                  points: [
+                    'Un SIG associe géométrie (où), attributs (quoi) et métadonnées (comment/quand/quelle qualité). Une carte est une représentation du SIG, pas le SIG lui-même. Questions types : quels ouvrages n\'ont pas été visités ? Quels bâtiments intersectent une emprise ? Quels tronçons présentent des berges dégradées ? La qualité sémantique des champs est aussi importante que la qualité géométrique.',
+                    'Géométrie adaptée à l\'analyse : point, ligne ou polygone selon l\'usage. Un point pour inventorier un pont ne décrit pas son ouverture hydraulique. Une ligne de rivière ne représente pas sa largeur réelle. Une zone humide en polygone décrit son emprise, pas son état écologique. Le type de géométrie doit correspondre à l\'analyse recherchée.',
+                    'Organiser les couches : références (hydrographie, limites), terrain (points levés, profils), milieux, ouvrages, hydraulique (emprises, profondeurs, vitesses), enjeux (bâtiments, routes), analyses, restitution. Les couches sources doivent être conservées. Les traitements produisent de nouvelles données dont l\'origine reste identifiable. Éviter les fichiers "final", "final2", "dernier_final" sans description de leurs différences.',
+                    'Identifiants stables métier (OUV_0012, TRON_0045, OBS_2026_0087). Un identifiant ne doit pas dépendre uniquement de l\'ordre des lignes — certains traitements (jointures spatiales) régénèrent les identifiants techniques. Un ouvrage visité 5 fois = 1 ouvrage + 5 événements de visite. Distinguer : l\'objet, ses visites, ses photographies, ses mesures.',
+                    'Table attributaire : champs typés (texte, décimal, date), unités explicites, catégories contrôlées. Stocker 1,20 dans un champ numérique "en mètres" plutôt que le texte "environ 120 cm". Distinguer : zéro (valeur nulle retenue) / valeur manquante (non renseignée) / non applicable / non mesuré. Remplacer des valeurs manquantes par zéro fausse les statistiques.',
+                    'Sélection attributaire : utilise les informations de la table. Risques : variantes d\'écriture ("Buse"/"buses"/"BUS"), valeurs manquantes, unités, dates. Catégories contrôlées réduisent ces problèmes. Sélection spatiale : intersecte, contenu dans, touche, distance, contient — relations différentes, questions différentes. Définir la règle (critère d\'intersection) avant de compter.',
+                    'Jointure attributaire (clé commune) et jointure spatiale (relation géométrique). Un-à-plusieurs → peut multiplier les lignes. Exemple : 10 ouvrages × 3 visites = 30 lignes après jointure, toujours 10 ouvrages distincts. Vérifier l\'unicité des clés et la relation entre tables avant toute jointure. Un point sur la limite de deux secteurs peut appartenir aux deux — prévoir une règle explicite.',
+                    'Opérations géométriques : découpage (partie dans un périmètre), intersection (parties communes), différence (parties hors d\'une autre), dissolution (fusion selon critère). Tampon : distance autour d\'un objet. Préciser distance, unité, système, forme des extrémités, dissolution des chevauchements. Un tampon de 20 m autour de l\'axe ≠ 20 m depuis chaque berge. Un tampon ≠ délimitation physique ni limite réglementaire.',
+                    'Surfaces et longueurs : vérifier unités, système de coordonnées, méthode plane ou ellipsoïdale, validité des géométries. 1 ha = 10 000 m². Doubles comptes : A_union = A1 + A2 − A_commun. Une intersection produit des fragments géométriques — compter les identifiants distincts pour obtenir le nombre d\'objets. Affecter une précision compatible avec la qualité des données : afficher 12,500000 ha ne rend pas une limite imprécise plus fiable.',
+                    'Densités et indicateurs comparables : D = N/L (ouvrages/km). Une faible densité peut refléter un manque de prospection. Le dénominateur et la couverture de l\'inventaire doivent accompagner l\'indicateur. Comparer deux secteurs uniquement si les inventaires et définitions sont comparables. Un nombre brut dépend souvent de la taille du secteur ou de l\'effort d\'inventaire.',
+                    'Contrôle des géométries (auto-intersections, doublons, fragments vides, anneaux mal construits) et topologie du réseau (connexions, extrémités isolées, sens des lignes, doublons). Deux lignes qui se croisent sur la carte ne sont pas nécessairement connectées. Une correction automatique doit être contrôlée — elle peut modifier le nombre d\'objets et leur interprétation. Tolérance d\'accrochage justifiée et documentée.',
+                    'Carte thématique lisible : titre explicite, légende, unités, échelle, orientation, sources, dates, scénario, limites d\'interprétation. Couleurs adaptées : catégories → couleurs distinctes, valeurs croissantes → progression, positif/négatif → palette divergente. "Aucun problème observé" ≠ "secteur non visité" — représentation distincte. Conserver sources + paramètres + méthode, pas seulement le résultat final.',
+                  ],
+                  formules: [
+                    'A_{\\mathrm{union}} = A_1 + A_2 - A_{\\mathrm{commun}} \\qquad (\\text{éviter les doubles comptes})',
+                    'D = \\dfrac{N}{L} \\quad (\\text{ouvrages/km}) \\qquad 1\\ \\mathrm{ha} = 10\\,000\\ \\mathrm{m^2}',
+                    '\\text{Jointure 1-à-N} : N_{\\text{lignes}} = N_{\\text{objets}} \\times N_{\\text{lignes/objet}} \\quad \\text{identifiants distincts} \\leq N_{\\text{lignes}}',
+                    '\\text{Tampon axe} \\neq \\text{tampon berge} \\qquad \\text{Proximité géométrique} \\neq \\text{relation hydraulique}',
+                  ],
+                  retenir: 'SIG = géométrie + attributs + métadonnées. Identifiants stables. Zéro ≠ manquant ≠ inconnu. A_union=A1+A2−A_commun. D=N/L. Jointure peut multiplier les lignes. Tampon = géométrie, pas délimitation physique. Proximité ≠ causalité. Archiver méthode + sources + paramètres.',
+                  sections: [
+                    {
+                      titre: '1. Structure d\'un projet SIG GEMAPI',
+                      sous_sections: [
+                        {
+                          titre: '1.1. Composantes et organisation des couches',
+                          texte: '<p>Une donnée exploitable comporte trois composantes :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Géométrie</strong> : où se trouve l\'objet et quelle est sa forme ?</li><li style="margin-bottom:4px"><strong>Attributs</strong> : que sait-on de cet objet ?</li><li style="margin-bottom:4px"><strong>Métadonnées</strong> : comment, quand et avec quelle qualité a-t-il été produit ?</li></ul><p>Organiser les couches en groupes thématiques : références, terrain, milieux, ouvrages, hydraulique, enjeux, analyses, restitution. Conserver les couches sources. Les traitements produisent de nouvelles données dont l\'origine reste identifiable — éviter les fichiers "final", "final2", "dernier_final".</p><p>La qualité sémantique (définition des champs, catégories contrôlées) est aussi importante que la qualité géométrique. Un champ "mauvais état" sans définition est ambiguë (structurel ? obstruction ? continuité ? impression visuelle ?).</p>'
+                        },
+                        {
+                          titre: '1.2. Identifiants, tables et valeurs manquantes',
+                          texte: '<p><strong>Identifiants métier stables</strong> (OUV_0012, TRON_0045) — indépendants de l\'ordre des lignes. Certains traitements régénèrent les identifiants techniques. Un ouvrage visité 5 fois = 1 ouvrage + 5 événements de visite.</p><p><strong>Table attributaire :</strong> champs typés, unités explicites, catégories contrôlées. Stocker 1,20 dans un champ décimal "en mètres" plutôt que le texte "environ 120 cm".</p><p><strong>Distinguer quatre états différents :</strong></p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Zéro : valeur nulle retenue</li><li style="margin-bottom:4px">Valeur manquante : non renseignée</li><li style="margin-bottom:4px">Non applicable : indicateur sans sens pour cet objet</li><li style="margin-bottom:4px">Non mesuré : absence d\'observation</li></ul><p>Remplacer les valeurs manquantes par zéro fausse les statistiques.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '2. Sélections et jointures',
+                      sous_sections: [
+                        {
+                          titre: '2.1. Sélections attributaires et spatiales',
+                          texte: '<p><strong>Sélection attributaire</strong> : utilise les informations de la table. Risques : variantes d\'écriture ("Buse"/"buses"/"BUS"), valeurs manquantes, unités et dates mixtes. Les catégories contrôlées réduisent ces problèmes.</p><p><strong>Sélection spatiale</strong> : utilise une relation géométrique. Relations différentes → questions différentes :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Intersecte</strong> : bâtiments recoupant une emprise (inclut les limites)</li><li style="margin-bottom:4px"><strong>Contenu dans</strong> : points dans un secteur</li><li style="margin-bottom:4px"><strong>Distance</strong> : ouvrages proches d\'un cours d\'eau</li><li style="margin-bottom:4px"><strong>Contient entièrement</strong> : parcelles entièrement dans une zone</li></ul><p>La règle doit être définie <em>avant</em> le comptage. Un bâtiment qui touche seulement la limite peut être sélectionné par "intersecte".</p>'
+                        },
+                        {
+                          titre: '2.2. Jointures attributaires et spatiales',
+                          texte: '<p><strong>Jointure attributaire</strong> : relie deux tables par une clé commune. Préciser le résultat attendu : dernière visite, toutes les visites, nombre de visites, synthèse.</p><p><strong>Risque :</strong> une jointure 1-à-N multiplie les lignes. 10 ouvrages × 3 visites = 30 lignes après jointure — toujours 10 ouvrages distincts.</p><p><strong>Jointure spatiale</strong> : associe selon une relation géométrique. QGIS distingue jointure par localisation et jointure avec résumé statistique. Un point sur la limite de deux secteurs peut appartenir aux deux — prévoir une règle explicite (contrôle manuel, affectation selon fonctionnement réel, règle géométrique documentée).</p><p>La proximité spatiale n\'est pas une relation fonctionnelle : l\'ouvrage le plus proche n\'appartient pas nécessairement à ce chenal.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '3. Opérations géométriques et calculs',
+                      sous_sections: [
+                        {
+                          titre: '3.1. Découpage, intersection, tampon et dissolution',
+                          texte: '<p>Les principales opérations :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Découpage</strong> : partie d\'une couche dans un périmètre</li><li style="margin-bottom:4px"><strong>Intersection</strong> : parties communes entre deux couches</li><li style="margin-bottom:4px"><strong>Différence</strong> : partie d\'une couche hors d\'une autre</li><li style="margin-bottom:4px"><strong>Dissolution</strong> : fusion d\'objets selon un critère attributaire</li><li style="margin-bottom:4px"><strong>Tampon</strong> : zone à une distance donnée autour d\'un objet</li></ul><p>Pour un tampon, préciser : distance, unité, forme des extrémités, dissolution des chevauchements. Un tampon de 20 m autour de l\'axe ≠ 20 m depuis chaque berge (la rivière elle-même occupe une largeur). Un tampon ≠ délimitation physique ni limite réglementaire.</p>'
+                        },
+                        {
+                          titre: '3.2. Surfaces, longueurs et doubles comptes',
+                          texte: '<p>Avant tout calcul : vérifier unités, système de coordonnées, méthode (plane ou ellipsoïdale), validité des géométries.</p><p>Conversions : 1 ha = 10 000 m² ; 1 km = 1 000 m.</p><p><strong>Doubles comptes :</strong> si A₁=6 ha et A₂=5 ha se chevauchent sur 1,5 ha :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center;font-weight:bold">A_union = A₁ + A₂ − A_commun = 6 + 5 − 1,5 = 9,5 ha</p><p>Additionner 6+5=11 ha compterait deux fois le chevauchement.</p><p><strong>Fragmentation après intersection :</strong> une intersection produit des fragments géométriques — compter les <em>identifiants distincts</em>, pas les fragments. 28 fragments de 19 identifiants = 19 bâtiments.</p><p>Arrondir selon la qualité des données : afficher 12,500000 ha ne rend pas une limite imprécise plus fiable.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '4. Contrôle des données et topologie',
+                      sous_sections: [
+                        {
+                          titre: '4.1. Géométries invalides et topologie du réseau',
+                          texte: '<p>Erreurs géométriques courantes : polygones auto-intersectants, objets vides, doublons, anneaux mal construits, fragments très petits. Les outils de correction automatique modifient parfois le nombre d\'objets, les surfaces ou l\'interprétation — contrôler avant et après.</p><p>Topologie du réseau hydrographique :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Connexions et extrémités isolées</li><li style="margin-bottom:4px">Doublons et chevauchements de lignes</li><li style="margin-bottom:4px">Sens des lignes (amont → aval)</li><li style="margin-bottom:4px">Intersections réelles vs croisements visuels</li></ul><p>Deux lignes qui se croisent sur la carte ne sont pas nécessairement connectées (un canal peut passer au-dessus d\'un autre). Tolérance d\'accrochage justifiée — trop grande = relier artificiellement des chenaux proches.</p>'
+                        },
+                        {
+                          titre: '4.2. Densités, indicateurs et distance réseau',
+                          texte: '<p><strong>Densité :</strong> D = N/L (ouvrages/km). Le secteur B (10 ouvrages sur 2 km → 5/km) présente une densité plus élevée que A (12 ouvrages sur 6 km → 2/km). Mais cette comparaison n\'est pertinente que si les inventaires et définitions sont comparables.</p><p><strong>Distance directe vs distance dans le réseau :</strong> deux stations à 300 m à vol d\'oiseau peuvent être à 850 m le long des méandres. Pour une distance de déplacement dans le chenal, la distance réseau est plus pertinente. Mais elle nécessite des connexions correctes, un sens cohérent, le traitement des bras et des obstacles.</p><p>Même une distance réseau correcte ne garantit pas la franchissabilité biologique.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '5. Carte thématique et erreurs fréquentes',
+                      sous_sections: [
+                        {
+                          titre: '5.1. Produire une carte lisible',
+                          texte: '<p>Une carte doit répondre à une question identifiable. Elle comporte selon le besoin : titre explicite, légende, unités, échelle, orientation, sources, dates, scénario, limites d\'interprétation.</p><p>Couleurs adaptées au type d\'information :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Catégories différentes → couleurs distinctes</li><li style="margin-bottom:4px">Valeurs croissantes → progression visuelle</li><li style="margin-bottom:4px">Variation positive/négative → palette divergente</li><li style="margin-bottom:4px">Données absentes → symbole dédié, distinct de la classe la plus faible</li></ul><p>"Aucun problème observé" ≠ "secteur non visité" — représentation différente obligatoire. Pour comparer deux dates ou scénarios, conserver la même emprise, même échelle, mêmes classes, même palette — sinon la comparaison visuelle devient trompeuse. Archiver : sources, paramètres de traitement, date, logiciel et contrôles réalisés.</p>'
+                        },
+                        {
+                          titre: '5.2. Dix erreurs fréquentes',
+                          texte: '<table style="width:100%;border-collapse:collapse;font-size:10px"><thead><tr style="background:var(--c-primary,#2563eb);color:white"><th style="padding:4px 6px;text-align:left">Erreur</th><th style="padding:4px 6px;text-align:left">Correction</th></tr></thead><tbody><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Remplacer les valeurs inconnues par zéro</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Distinguer absence, inconnu et valeur nulle</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Compter les lignes après une jointure</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Compter les identifiants distincts</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Additionner des surfaces qui se chevauchent</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Calculer A_union = A₁+A₂−A_commun</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Utiliser un tampon comme délimitation physique</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Le présenter comme une construction géométrique</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Associer automatiquement au cours d\'eau le plus proche</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Vérifier la relation hydraulique réelle</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Corriger les géométries sans contrôle</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Comparer résultats avant et après correction</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Confondre proximité et causalité hydraulique</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Examiner le fonctionnement du système</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Comparer des cartes avec des classes différentes</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Harmoniser la représentation</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Ne conserver que le résultat final</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Archiver sources, paramètres et méthode</td></tr><tr><td style="padding:4px 6px">Traiter une carte comme une preuve complète</td><td style="padding:4px 6px">Examiner les données et les hypothèses sous-jacentes</td></tr></tbody></table>'
+                        }
+                      ]
+                    }
+                  ],
+                },
+                flashcards: [
+                  { q: 'Un champ "largeur" n\'est pas renseigné pour une buse. Peut-on saisir zéro pour permettre les calculs ?', r: 'Non. Zéro décrirait une largeur nulle. Il faut conserver une valeur manquante et identifier la mesure à réaliser.', expl: 'Remplacer des valeurs manquantes par zéro fausse les statistiques (moyennes, sommes, comptages). Les distinguer permet aussi de prioriser les investigations terrain.' },
+                  { q: 'Convertir 87 500 m² en hectares.', r: '87 500 / 10 000 = 8,75 ha.', expl: 'Arrondir selon la qualité des données. Si les limites proviennent d\'une carte au 1:25 000, afficher 8,7500 ha est trompeur sur la précision réelle.' },
+                  { q: 'A₁=8 ha, A₂=7 ha, A_commun=2 ha. Calculer A_union.', r: 'A_union = 8 + 7 − 2 = 13 ha.', expl: 'Additionner 8+7=15 ha compterait deux fois les 2 ha de chevauchement. Cette formule s\'applique aussi aux surfaces de zones humides, emprises d\'inondation ou tout polygone pouvant se superposer.' },
+                  { q: 'Un secteur contient 15 ouvrages recensés sur 5 km inventoriés. Calculer la densité.', r: 'D = 15/5 = 3 ouvrages/km. Cet indicateur ne mesure pas à lui seul la gravité des obstacles.', expl: 'Une faible densité peut refléter un manque de prospection, pas l\'absence d\'ouvrages. Le dénominateur (linéaire inventorié) et la couverture de l\'inventaire doivent accompagner l\'indicateur.' },
+                  { q: 'Une intersection produit 28 fragments provenant de 19 identifiants de bâtiments. Combien de bâtiments ont été intersectés ?', r: '19 bâtiments. Les 28 fragments sont des résultats géométriques — un bâtiment découpé en plusieurs morceaux reste un seul bâtiment.', expl: 'C\'est l\'erreur classique de la jointure avec fragmentation. Toujours conserver l\'identifiant initial et compter les identifiants distincts pour obtenir le nombre d\'objets réels.' },
+                  { q: 'Une bande de 15 m est créée autour de l\'axe d\'une rivière large de 10 m. Correspond-elle à 15 m depuis chaque berge ?', r: 'Non. Elle est calculée depuis l\'axe. Dans une configuration simplifiée, elle ne s\'étend qu\'à environ 10 m au-delà de chaque berge (15 m − 5 m de demi-largeur).', expl: 'Un tampon depuis l\'axe ≠ un tampon depuis la berge. Pour une bande depuis la berge, il faudrait travailler depuis les lignes de berge. Le tampon ne constitue pas non plus une délimitation réglementaire.' },
+                  { q: '10 ouvrages, chacun avec 3 visites. Combien de lignes après une jointure 1-à-N ? Combien d\'ouvrages ?', r: '10 × 3 = 30 lignes. Mais toujours 10 ouvrages distincts.', expl: 'Ne jamais compter les lignes d\'une table après une jointure pour obtenir le nombre d\'objets. Compter les identifiants uniques. Vérifier la cardinalité de la relation (1-à-1 ou 1-à-N) avant la jointure.' },
+                  { q: 'Un bâtiment intersecte une emprise de crue simulée. Peut-on conclure que son plancher est submergé ?', r: 'Non. Il faut examiner la cote du niveau d\'eau simulé, la cote du plancher, les accès de l\'eau et la précision des données.', expl: 'Un bâtiment intersectant une emprise peut avoir son plancher au-dessus du niveau simulé (garage enterré vs rez-de-chaussée surélevé). La carte d\'emprise est une représentation plane — elle ne distingue pas les niveaux internes des bâtiments.' },
+                ],
+                schema: `<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="300" fill="#fefce8" rx="10"/>
+  <text x="260" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="#713f12">Opérations SIG essentielles — vue d'ensemble</text>
+  <!-- Row 1: Sélections -->
+  <rect x="10" y="28" width="240" height="80" rx="7" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="130" y="44" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a8a">Sélection attributaire</text>
+  <text x="130" y="59" text-anchor="middle" font-size="9" fill="#1e40af">"type_ouvrage" = 'Buse'</text>
+  <text x="130" y="72" text-anchor="middle" font-size="9" fill="#1e40af">AND "obstruction" = 'Partielle'</text>
+  <text x="130" y="85" text-anchor="middle" font-size="8" fill="#64748b">⚠ variantes écriture, NULL</text>
+  <text x="130" y="97" text-anchor="middle" font-size="8" fill="#64748b">→ catégories contrôlées</text>
+  <rect x="270" y="28" width="240" height="80" rx="7" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="390" y="44" text-anchor="middle" font-size="10" font-weight="bold" fill="#14532d">Sélection spatiale</text>
+  <text x="390" y="59" text-anchor="middle" font-size="9" fill="#166534">intersecte / dans / touche</text>
+  <text x="390" y="72" text-anchor="middle" font-size="9" fill="#166534">à distance / contient</text>
+  <text x="390" y="85" text-anchor="middle" font-size="8" fill="#64748b">⚠ définir règle AVANT</text>
+  <text x="390" y="97" text-anchor="middle" font-size="8" fill="#64748b">→ limite = intersecte !</text>
+  <!-- Row 2: Jointures -->
+  <rect x="10" y="118" width="240" height="80" rx="7" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+  <text x="130" y="134" text-anchor="middle" font-size="10" font-weight="bold" fill="#831843">Jointure attributaire</text>
+  <text x="130" y="149" text-anchor="middle" font-size="9" fill="#9d174d">clé commune</text>
+  <text x="130" y="162" text-anchor="middle" font-size="9" fill="#9d174d">1-à-N → lignes multipliées</text>
+  <text x="130" y="175" text-anchor="middle" font-size="8" fill="#64748b">10 ouvrages × 3 visites = 30 lignes</text>
+  <text x="130" y="187" text-anchor="middle" font-size="8" fill="#64748b">→ compter id distincts</text>
+  <rect x="270" y="118" width="240" height="80" rx="7" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+  <text x="390" y="134" text-anchor="middle" font-size="10" font-weight="bold" fill="#7c2d12">Jointure spatiale</text>
+  <text x="390" y="149" text-anchor="middle" font-size="9" fill="#9a3412">relation géométrique</text>
+  <text x="390" y="162" text-anchor="middle" font-size="9" fill="#9a3412">par localisation / résumé stat.</text>
+  <text x="390" y="175" text-anchor="middle" font-size="8" fill="#64748b">⚠ pt sur limite = 2 secteurs</text>
+  <text x="390" y="187" text-anchor="middle" font-size="8" fill="#64748b">→ proximité ≠ relation fonct.</text>
+  <!-- Row 3: Calculs -->
+  <rect x="10" y="208" width="155" height="72" rx="7" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="87" y="224" text-anchor="middle" font-size="10" font-weight="bold" fill="#14532d">Surfaces</text>
+  <text x="87" y="238" text-anchor="middle" font-size="9" fill="#14532d">A_union=A₁+A₂−A_c</text>
+  <text x="87" y="251" text-anchor="middle" font-size="9" fill="#14532d">1 ha = 10 000 m²</text>
+  <text x="87" y="264" text-anchor="middle" font-size="8" fill="#64748b">→ id distincts, pas fragments</text>
+  <text x="87" y="274" text-anchor="middle" font-size="8" fill="#64748b">→ arrondir selon qualité</text>
+  <rect x="183" y="208" width="155" height="72" rx="7" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="260" y="224" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a8a">Densité</text>
+  <text x="260" y="238" text-anchor="middle" font-size="9" fill="#1e3a8a">D = N / L (ouvrages/km)</text>
+  <text x="260" y="251" text-anchor="middle" font-size="9" fill="#1e3a8a">D = N / S (ouvrages/km²)</text>
+  <text x="260" y="264" text-anchor="middle" font-size="8" fill="#64748b">→ dénominateur explicite</text>
+  <text x="260" y="274" text-anchor="middle" font-size="8" fill="#64748b">→ couverture inventaire</text>
+  <rect x="356" y="208" width="154" height="72" rx="7" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="433" y="224" text-anchor="middle" font-size="10" font-weight="bold" fill="#78350f">Tampon / Buffer</text>
+  <text x="433" y="238" text-anchor="middle" font-size="9" fill="#92400e">zone à distance donnée</text>
+  <text x="433" y="251" text-anchor="middle" font-size="9" fill="#92400e">axe ≠ berge ≠ réglementaire</text>
+  <text x="433" y="264" text-anchor="middle" font-size="8" fill="#64748b">→ dissoudre chevauchements</text>
+  <text x="433" y="274" text-anchor="middle" font-size="8" fill="#64748b">→ préciser distance + unité</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Analyse fictive — Rivière des Saules. (1) Trois ouvrages ont des chutes mesurées de 0,10 m, 0,20 m et 0,30 m. Deux autres n\'ont pas été mesurés — on saisit zéro. Calculer la moyenne des 3 vraies mesures, puis la fausse moyenne avec les 2 zéros. Quelle différence ? (2) Deux inventaires couvrent respectivement 6 ha et 5 ha, avec 1,5 ha communs. Calculer A_union. (3) Secteur A : 12 ouvrages sur 6 km. Secteur B : 10 ouvrages sur 2 km. Calculer les densités. Lequel est "plus dense" selon cet indicateur ? (4) Une intersection bâtiments × emprise produit 34 fragments. Les identifiants distincts de bâtiments sont au nombre de 21. Combien de bâtiments sont intersectés ? Peut-on conclure que tous leurs planchers sont submergés ?',
+                  solution: '<strong>(1) Valeurs manquantes :</strong> Moyenne vraie = (0,10+0,20+0,30)/3 = <strong>0,20 m</strong>. Avec 2 zéros : (0,10+0,20+0,30+0+0)/5 = 0,60/5 = <strong>0,12 m</strong>. Différence de 0,08 m sans aucune justification terrain. Les valeurs manquantes doivent rester manquantes.<br><strong>(2) Surface union :</strong> A_union = 6 + 5 − 1,5 = <strong>9,5 ha</strong>. Additionner 6+5=11 ha compterait deux fois les 1,5 ha de chevauchement.<br><strong>(3) Densités :</strong> D_A = 12/6 = 2 ouvrages/km. D_B = 10/2 = <strong>5 ouvrages/km</strong>. Le secteur B est "plus dense" selon cet indicateur. Mais cette conclusion n\'est pertinente que si les inventaires sont comparables. Une faible densité en A peut refléter une prospection moins exhaustive.<br><strong>(4) Bâtiments :</strong> <strong>21 bâtiments</strong> intersectés (les 34 fragments sont des artefacts géométriques — un bâtiment découpé par l\'emprise crée plusieurs fragments mais reste un seul bâtiment). Non, on ne peut pas conclure à la submersion des planchers : il faut examiner la cote du niveau d\'eau simulé, la cote du plancher, les accès de l\'eau et la précision des données.',
+                },
+              },
+            ],
+          }, // fin gem-m15
+
         ],
       },
     ],
