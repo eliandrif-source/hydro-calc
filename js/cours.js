@@ -7610,6 +7610,172 @@ const COURS_DATA = {
             ],
           }, // fin gem-m15
 
+          {
+            id: 'gem-m16',
+            name: 'MNT, LiDAR et qualité des données',
+            ico: '🏔️',
+            chapitres: [
+              {
+                id: 'gem-mnt1',
+                titre: 'MNT, LiDAR et qualité des données',
+                fiche: {
+                  intro: 'Un modèle numérique de terrain (MNT) est une représentation calculée du sol, obtenue à partir de mesures, de classifications et d\'interpolations. Les données LiDAR permettent aujourd\'hui des acquisitions à haute densité, mais une grille fine peut masquer un fond de rivière absent, une buse oubliée ou une erreur de classification. Ce chapitre explique comment comprendre, contrôler et préparer un MNT pour une étude GEMAPI.',
+                  points: [
+                    'MNT (modèle numérique de terrain) : représente le sol selon des règles de production, sous forme de grille régulière, de réseau de triangles ou de surface interpolée. MNS (modèle numérique de surface) : surface supérieure observée incluant végétation et bâtiments. MNH (modèle numérique de hauteur) = MNS − MNT. Un MNT n\'est pas le terrain lui-même : c\'est une représentation calculée dont il faut connaître le mode de production.',
+                    'Le LiDAR émet des impulsions laser et mesure le temps aller-retour : d = c×Δt/2. Pour obtenir des coordonnées, cette distance est combinée avec la position du capteur, son orientation, la direction du faisceau et des corrections instrumentales. Le résultat est un nuage de points 3D — pas un MNT prêt à l\'emploi.',
+                    'Le nuage de points contient : X, Y, Z, intensité de retour, numéro de retour, classe, date. Une impulsion peut produire plusieurs retours successifs (branches, feuilles, sol). Tous les faisceaux n\'atteignent pas le sol et toutes les surfaces ne produisent pas un retour exploitable. Le nuage est donc spatialement irrégulier.',
+                    'Classification : attribue à chaque point une catégorie (sol, végétation, bâtiment, eau, pont, bruit…). Deux erreurs critiques : classer de la végétation comme "sol" crée une surélévation fictive ; retirer un élément de terrain le prend pour du sursol. Un petit remblai végétalisé peut disparaître ; une végétation basse conservée produit une bosse artificielle. La classe est utile mais pas une garantie absolue.',
+                    'Densité globale ≠ densité au sol. Sous une végétation dense, beaucoup de retours décrivent les branches et les feuilles avec peu de points au sol. Pour une étude hydraulique, la présence de points sur une crête étroite ou une berge peut compter davantage que la densité moyenne de la dalle.',
+                    'Résolution (taille de cellule) ≠ précision (qualité des positions). Une maille de 0,50 m ne signifie pas une précision verticale de 0,50 m, ni qu\'un objet de cette taille est fidèlement représenté. Une cellule peut contenir plusieurs mesures ou être interpolée à partir de points voisins. La finesse de la grille ne prouve pas la finesse de l\'information mesurée.',
+                    'LiDAR topographique sur l\'eau : selon les conditions, les données représentent la surface de l\'eau, quelques retours particuliers, une absence de points ou une surface reconstruite. Des valeurs altimétrique sous une rivière ne prouvent pas que le fond est mesuré. LiDAR bathymétrique : longueurs d\'onde adaptées, efficacité dépendant de la transparence, profondeur, agitation, végétation aquatique et propriétés du fond.',
+                    'Compléter le fond : profils topobathymétriques, points levés, levés acoustiques. L\'assemblage contrôle références, dates, raccords aux berges, ruptures et zones d\'interpolation. Ponts : distinguer tablier, piles, culées, lit sous l\'ouvrage et remblais. Supprimer le tablier ne signifie pas supprimer la résistance ou la mise en charge. Une buse sous une route est souvent absente du raster.',
+                    'Sous végétation ou obstacles : rechercher les zones pauvres en points "sol", les triangles d\'interpolation très étendus, les bosses correspondant à de la végétation conservée, les ruptures effacées. Une apparence lisse peut être le résultat d\'un manque de mesures. Vérifier les dates d\'acquisition : la publication récente d\'un fichier ne garantit pas une acquisition récente.',
+                    'Rééchantillonnage : passer d\'une maille de 2 m à 0,50 m augmente le nombre de cellules mais ne crée pas de nouvelles mesures. Les méthodes (plus proche voisin, bilinéaire…) peuvent modifier minima, maxima et ruptures. Pour le terrain hydraulique, vérifier crêtes, seuils et points bas. Valeurs absentes ≠ altitude zéro : les remplacer par zéro crée une dépression artificielle profonde.',
+                    'Contrôle altimétrique : e_i = Z_MNT − Z_contrôle. Biais = Σe_i / N. RMSE = √(Σe_i² / N). Les points de contrôle doivent couvrir les situations importantes (terrain ouvert, berges, végétation, ouvrages). Un contrôle uniquement sur des surfaces faciles ne décrit pas la qualité globale. Propagation d\'erreur : h = Z_eau − Z_terrain. Si le terrain est surestimé de δ, la profondeur calculée est sous-estimée de δ.',
+                    'Préparer pour l\'hydraulique : distinguer artefacts et dépressions réelles (mares, zones humides, stockage), représenter les connexions (buses, ponts, fossés), conserver le terrain source + terrain modifié + justifications de chaque modification. Assembler plusieurs sources nécessite de contrôler références, unités, dates, résolution, précision et raccords. Une marche artificielle entre deux jeux peut agir comme un seuil.',
+                  ],
+                  formules: [
+                    'MNH = MNS - MNT \\qquad d_{\\mathrm{LiDAR}} = \\dfrac{c\\,\\Delta t}{2}',
+                    'e_i = Z_{\\mathrm{MNT},i} - Z_{\\mathrm{contrôle},i} \\qquad \\mathrm{Biais} = \\dfrac{1}{N}\\sum e_i',
+                    '\\mathrm{RMSE} = \\sqrt{\\dfrac{1}{N}\\sum e_i^2} \\qquad h = Z_{\\mathrm{eau}} - Z_{\\mathrm{terrain}}',
+                    '\\text{Résolution} \\neq \\text{Précision} \\qquad \\text{Densité globale} \\neq \\text{Densité au sol}',
+                  ],
+                  retenir: 'MNT ≠ terrain. MNH=MNS−MNT. Résolution ≠ précision. Densité globale ≠ densité au sol. LiDAR topo ne mesure pas le fond immergé. Valeurs absentes ≠ zéro. Rééchantillonner n\'ajoute pas de mesures. Lignes de rupture essentielles. Contrôler biais et RMSE. Archiver modifications + justifications.',
+                  sections: [
+                    {
+                      titre: '1. MNT, MNS, MNH et acquisition LiDAR',
+                      sous_sections: [
+                        {
+                          titre: '1.1. Trois produits à distinguer',
+                          texte: '<p>Un modèle numérique décrit le terrain selon une convention de production :</p><table style="width:100%;border-collapse:collapse;font-size:10px;margin:6px 0"><thead><tr style="background:var(--c-primary,#2563eb);color:white"><th style="padding:4px 8px;text-align:left">Produit</th><th style="padding:4px 8px;text-align:left">Signification</th><th style="padding:4px 8px;text-align:left">Ce qu\'il représente</th></tr></thead><tbody><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)"><strong>MNT</strong></td><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Modèle numérique de terrain</td><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Surface du sol selon les règles de production</td></tr><tr><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)"><strong>MNS</strong></td><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Modèle numérique de surface</td><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Surface supérieure : sol, bâtiments, végétation</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 8px"><strong>MNH</strong></td><td style="padding:4px 8px">Modèle numérique de hauteur</td><td style="padding:4px 8px">Hauteur des objets : MNH = MNS − MNT</td></tr></tbody></table><p>Exemple : Z_MNS = 154,80 m, Z_MNT = 142,30 m → MNH = 12,50 m. Cette différence est une hauteur estimée, pas une mesure directe de chaque arbre.</p><p>Un MNT n\'est pas le terrain lui-même. Il est calculé à partir de mesures, de classifications et d\'interpolations — sa méthode de production conditionne son interprétation.</p>'
+                        },
+                        {
+                          titre: '1.2. Principe du LiDAR et nuage de points',
+                          texte: '<p>Le LiDAR émet des impulsions laser et mesure le temps aller-retour pour obtenir une distance : <strong>d = c × Δt / 2</strong>. Pour produire des coordonnées, cette distance est combinée avec la position du capteur, son orientation et la direction du faisceau.</p><p>Le résultat est un <strong>nuage de points 3D</strong> — pas un MNT prêt à l\'emploi. Chaque point contient : X, Y, Z, intensité de retour, numéro de retour, classe, date.</p><p>Une impulsion peut produire plusieurs retours successifs lorsqu\'elle traverse la végétation avant d\'atteindre le sol. Mais tous les faisceaux n\'atteignent pas le sol, et certaines surfaces (eau, surfaces brillantes) ne produisent pas de retour exploitable. Le nuage est donc spatialement irrégulier.</p><p><strong>Classification :</strong> sol, végétation, bâtiment, eau, pont, bruit. Deux erreurs critiques : végétation classée "sol" → surélévation fictive ; terrain retiré → fond absent. La classe est utile mais pas une garantie absolue.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '2. Densité, résolution et précision',
+                      sous_sections: [
+                        {
+                          titre: '2.1. Densité globale ≠ densité au sol',
+                          texte: '<p>Une densité globale élevée ne signifie pas que le sol est bien observé partout. Il faut distinguer :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Densité d\'impulsions</li><li style="margin-bottom:4px">Densité totale de retours</li><li style="margin-bottom:4px"><strong>Densité de points classés "sol"</strong></li><li style="margin-bottom:4px">Répartition spatiale de ces points</li></ul><p>Sous une végétation dense, beaucoup de retours décrivent les branches et les feuilles, avec peu de points au sol. Pour une étude hydraulique, la présence de points sur une crête étroite ou une berge peut compter davantage que la densité moyenne de la dalle.</p>'
+                        },
+                        {
+                          titre: '2.2. Résolution ≠ précision et rééchantillonnage',
+                          texte: '<p>La <strong>résolution</strong> d\'un raster correspond à la taille de ses cellules (ex : 0,50 m × 0,50 m). La <strong>précision</strong> décrit la qualité des positions et altitudes mesurées.</p><p>Une maille de 50 cm ne signifie pas :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Une précision verticale de 50 cm</li><li style="margin-bottom:4px">Un point mesuré au centre de chaque cellule</li><li style="margin-bottom:4px">La représentation fidèle de tous les objets de cette taille</li></ul><p><strong>Rééchantillonnage :</strong> passer d\'une maille de 2 m à 0,50 m augmente le nombre de cellules, mais ne crée aucune mesure nouvelle. Les méthodes (plus proche voisin, bilinéaire…) peuvent modifier les minima, maxima et ruptures. Pour un terrain hydraulique, vérifier crêtes, seuils et points bas après rééchantillonnage.</p><p><strong>Valeurs absentes ≠ altitude zéro.</strong> Les remplacer par zéro crée une dépression artificielle potentiellement profonde.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '3. Eau, buses, végétation et dates',
+                      sous_sections: [
+                        {
+                          titre: '3.1. Limites sur l\'eau et compléter le fond',
+                          texte: '<p>Un LiDAR topographique classique ne fournit pas un relevé fiable du fond immergé. Selon les conditions, les données représentent la surface de l\'eau, quelques retours particuliers, une absence de points ou une surface reconstruite par interpolation. <strong>Des valeurs altimétrique dans le lit ne prouvent pas que le fond est mesuré.</strong></p><p>Le <strong>LiDAR bathymétrique</strong> utilise des longueurs d\'onde adaptées à la pénétration dans l\'eau. Son efficacité dépend de la transparence, de la profondeur, de l\'agitation, de la végétation aquatique et des propriétés du fond.</p><p>Pour compléter le fond d\'un modèle hydraulique : profils topobathymétriques, levés acoustiques, points mesurés. L\'assemblage doit contrôler références, dates, raccords aux berges et zones d\'interpolation.</p><p><strong>Ponts et buses :</strong> le tablier peut devoir être retiré pour représenter le passage inférieur, mais la résistance et la mise en charge de l\'ouvrage doivent être représentées. Une buse sous une route est souvent absente du raster — elle doit être ajoutée explicitement.</p>'
+                        },
+                        {
+                          titre: '3.2. Végétation, actualité et assemblage',
+                          texte: '<p>Sous une ripisylve dense, des broussailles ou des herbes hautes, le sol reconstruit peut être pauvre en points. Chercher : zones sans points "sol", triangles d\'interpolation très étendus, bosses correspondant à de la végétation conservée, ruptures effacées.</p><p><strong>Dates :</strong> distinguer date de mesure, de traitement, de publication, de téléchargement. La publication récente d\'un fichier ne garantit pas une acquisition récente. Depuis le levé : crues, érosion, dépôts, travaux, modification de buses, arasement de seuils.</p><p><strong>Assembler plusieurs sources :</strong> définir une priorité entre les sources. Contrôler systèmes de coordonnées, unités, dates, résolution, précision et raccords. Une marche artificielle entre deux jeux peut agir comme un seuil ou une digue dans le modèle. Conserver une couche indiquant la provenance de chaque zone et la méthode de reconstruction.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '4. Contrôle altimétrique et propagation d\'erreur',
+                      sous_sections: [
+                        {
+                          titre: '4.1. Biais et RMSE sur des points indépendants',
+                          texte: '<p>Pour chaque point de contrôle : <strong>e_i = Z_MNT − Z_contrôle</strong>.</p><p>Biais : <strong>Biais = Σe_i / N</strong> (décalage systématique).</p><p>RMSE : <strong>RMSE = √(Σe_i² / N)</strong> (erreur quadratique moyenne).</p><p>Exemple avec 4 points : e = +0,04 / −0,02 / +0,06 / 0,00 m.<br>Biais = (0,04−0,02+0,06+0,00)/4 = <strong>0,02 m</strong>.<br>RMSE = √((0,04²+0,02²+0,06²+0,00²)/4) ≈ <strong>0,037 m</strong>.</p><p>Ces résultats décrivent les 4 points contrôlés. Ils ne permettent pas de déclarer que tout le terrain est connu à 3,7 cm. Vérifier la répartition des points, leur propre incertitude et les secteurs non contrôlés (végétation, berges, ouvrages).</p>'
+                        },
+                        {
+                          titre: '4.2. Propagation d\'erreur et préparation pour l\'hydraulique',
+                          texte: '<p><strong>Profondeur d\'eau :</strong> h = Z_eau − Z_terrain. Si le terrain est surestimé de δ (trop haut), la profondeur calculée est sous-estimée de δ. Exemple : Z_eau = 100,80 m, vrai fond = 100,30 m → h réel = 0,50 m. Si le MNT donne Z_terrain = 100,45 m → h calculé = 0,35 m. Dans une simulation complète, l\'erreur peut aussi modifier le niveau d\'eau et les volumes.</p><p><strong>Dépressions :</strong> distinguer artefact, dépression réelle (mare, zone humide), passage souterrain non représenté, stockage temporaire. Remplir toutes les dépressions peut supprimer des fonctions hydrologiques réelles. Conserver une route comme barrière sans représenter sa buse peut détourner artificiellement le drainage.</p><p>Conserver : terrain source, terrain modifié, modifications et justifications. Toute modification doit correspondre à une hypothèse explicite. Un résultat surprenant peut être la réponse correcte à une géométrie incomplète, pas une erreur du solveur.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '5. Lignes de rupture et erreurs fréquentes',
+                      sous_sections: [
+                        {
+                          titre: '5.1. Lignes de rupture et leur rôle',
+                          texte: '<p>Une ligne de rupture matérialise un changement important de forme : sommet de berge, pied de talus, crête de digue, bord de fossé, mur, bord de chaussée. Ces éléments peuvent diriger ou bloquer les écoulements.</p><p>Leur représentation doit être cohérente avec la méthode de construction du terrain et avec le maillage hydraulique. Une route légèrement surélevée peut séparer deux zones de stockage — si sa crête est lissée, le modèle peut permettre un échange trop précoce. À l\'inverse, une surélévation artificielle peut empêcher un passage réel.</p><p>Pour l\'hydrologie : les directions d\'écoulement, accumulations et lignes de drainage dépendent directement des altitudes. Les dépressions interrompent les chemins calculés. Identifier artefacts vs dépressions réelles avant de "remplir".</p>'
+                        },
+                        {
+                          titre: '5.2. Dix erreurs fréquentes',
+                          texte: '<table style="width:100%;border-collapse:collapse;font-size:10px"><thead><tr style="background:var(--c-primary,#2563eb);color:white"><th style="padding:4px 6px;text-align:left">Erreur</th><th style="padding:4px 6px;text-align:left">Correction</th></tr></thead><tbody><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Confondre MNT et MNS</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Vérifier la surface représentée dans les spécifications</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Déduire la précision de la taille de cellule</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Consulter les spécifications et contrôles indépendants</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Assimiler densité globale et densité au sol</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Examiner les classes et leur répartition spatiale</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Supposer que le fond sous l\'eau est mesuré</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Vérifier la bathymétrie et compléter si nécessaire</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Rééchantillonner plus fin pour "améliorer" la précision</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Reconnaître qu\'aucune mesure n\'est ajoutée</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Remplacer les valeurs absentes par zéro</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Identifier la cause et combler selon contexte</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Remplir toutes les dépressions</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Distinguer artefacts et stockages réels</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Oublier les buses sous les routes</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Représenter les connexions explicitement</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Supprimer un pont sans traiter son fonctionnement</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Distinguer terrain et ouvrage hydraulique</td></tr><tr><td style="padding:4px 6px">Mélanger dates d\'acquisition sans vérification</td><td style="padding:4px 6px">Contrôler les changements intervenus entre levés</td></tr></tbody></table>'
+                        }
+                      ]
+                    }
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quelle différence entre MNT, MNS et MNH ?', r: 'MNT = surface du sol. MNS = surface supérieure (sol + bâtiments + végétation). MNH = hauteur des objets = MNS − MNT.', expl: 'Un MNT cherche à décrire le sol en écartant le sursol. Un MNS décrit ce que le capteur "voit" depuis le dessus. Le MNH s\'en déduit — à condition que les deux modèles soient compatibles en référence, date et méthode.' },
+                  { q: 'Z_MNS = 154,80 m, Z_MNT = 142,30 m. Calculer le MNH.', r: 'MNH = 154,80 − 142,30 = 12,50 m.', expl: 'Cette différence représente la hauteur estimée des objets (arbre, bâtiment…) au-dessus du sol modélisé. Elle n\'est pas une mesure directe de la hauteur réelle de chaque objet.' },
+                  { q: 'Un MNT à maille de 2 m est rééchantillonné à 0,5 m. La précision des mesures est-elle multipliée par quatre ?', r: 'Non. La grille est plus fine, mais aucune observation nouvelle n\'est créée. La précision des mesures reste inchangée.', expl: 'Le rééchantillonnage interpole des valeurs sur une grille plus petite. Il peut même dégrader la représentation des ruptures (crêtes, seuils) selon la méthode utilisée.' },
+                  { q: '4 points de contrôle, écarts : +0,04 / −0,02 / +0,06 / 0,00 m. Calculer le biais et la RMSE.', r: 'Biais = 0,02 m. RMSE = √((0,04²+0,02²+0,06²+0,00²)/4) ≈ 0,037 m.', expl: 'Ces résultats décrivent les 4 points contrôlés. Ils ne permettent pas de déclarer que tout le terrain est connu à ±3,7 cm. La répartition des points et les secteurs non contrôlés sont aussi importants.' },
+                  { q: 'Z_eau = 100,80 m. Vrai fond = 100,30 m. Le MNT donne Z_terrain = 100,45 m. Quelle est la profondeur calculée vs réelle ?', r: 'Réelle : 0,50 m. Calculée : 100,80 − 100,45 = 0,35 m. Le terrain est surestimé de 0,15 m → profondeur sous-estimée de 0,15 m.', expl: 'Une erreur de terrain se propage directement dans le calcul des profondeurs. Dans une simulation complète, elle modifie aussi les niveaux d\'eau calculés et les volumes de stockage.' },
+                  { q: 'Un MNT remplit parfaitement les cellules sous le lit d\'une rivière. Cela prouve-t-il que le fond est mesuré ?', r: 'Non. Ces valeurs peuvent représenter la surface de l\'eau, des retours particuliers ou une surface reconstruite par interpolation.', expl: 'Un LiDAR topographique classique ne pénètre pas l\'eau. Des valeurs altimétrique dans le lit ne prouvent pas une mesure du fond. La documentation de production est déterminante pour savoir ce que ces cellules représentent réellement.' },
+                  { q: 'Combien de cellules de 1 m × 1 m dans 1 ha ?', r: '1 ha = 10 000 m². Chaque cellule = 1 m². Soit 10 000 cellules.', expl: 'À 0,5 m de résolution : 1 ha = 10 000 m² / (0,25 m²/cellule) = 40 000 cellules. La résolution fine ne signifie pas une mesure fine dans tous les cas.' },
+                  { q: 'Une route forme une barrière continue dans le MNT, mais une buse la traverse. Peut-on conserver cette représentation ?', r: 'Non. Elle bloque artificiellement les écoulements. La connexion doit être représentée par une méthode adaptée (ouvrage hydraulique, connexion explicite).', expl: 'Un terrain raster ne représente pas naturellement deux niveaux superposés (route et passage inférieur). La buse doit être ajoutée comme une connexion hydraulique explicite avec sa capacité réelle.' },
+                ],
+                schema: `<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="300" fill="var(--c-bg,#f8fafc)" rx="10"/>
+  <text x="260" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="var(--c-text,#1e293b)">MNT, MNS, MNH — principe LiDAR et profil</text>
+  <!-- Avion/capteur LiDAR -->
+  <ellipse cx="260" cy="35" rx="22" ry="8" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.5"/>
+  <text x="260" y="38" text-anchor="middle" font-size="9" fill="#92400e">LiDAR</text>
+  <!-- Faisceaux laser -->
+  <line x1="248" y1="43" x2="120" y2="145" stroke="#f97316" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="256" y1="43" x2="180" y2="160" stroke="#f97316" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="264" y1="43" x2="260" y2="155" stroke="#f97316" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="272" y1="43" x2="340" y2="140" stroke="#f97316" stroke-width="1" stroke-dasharray="4,3"/>
+  <!-- Annotations faisceaux -->
+  <text x="155" y="103" font-size="8" fill="#f97316">d=cΔt/2</text>
+  <!-- MNS = surface supérieure -->
+  <!-- Arbres -->
+  <ellipse cx="120" cy="138" rx="20" ry="12" fill="#86efac" stroke="#16a34a" stroke-width="1"/>
+  <ellipse cx="180" cy="150" rx="15" ry="10" fill="#86efac" stroke="#16a34a" stroke-width="1"/>
+  <!-- Bâtiment -->
+  <rect x="330" y="120" width="30" height="22" fill="#fca5a5" stroke="#dc2626" stroke-width="1"/>
+  <polygon points="325,120 360,120 342,108" fill="#f87171" stroke="#dc2626" stroke-width="1"/>
+  <!-- MNS ligne -->
+  <path d="M 30,195 Q 80,185 120,150 Q 160,155 180,160 Q 220,155 260,155 Q 310,155 330,122 Q 360,120 380,142 Q 420,160 490,165" stroke="#ef4444" stroke-width="2" fill="none" stroke-dasharray="6,3"/>
+  <text x="495" y="168" font-size="9" fill="#dc2626" font-weight="bold">MNS</text>
+  <!-- Sol / MNT -->
+  <path d="M 30,215 Q 80,210 120,205 Q 160,208 180,215 Q 220,218 260,215 Q 310,212 330,208 Q 360,210 380,210 Q 420,212 490,215" stroke="#2563eb" stroke-width="2.5" fill="none"/>
+  <text x="495" y="218" font-size="9" fill="#2563eb" font-weight="bold">MNT</text>
+  <!-- MNH flèche -->
+  <line x1="345" y1="125" x2="345" y2="208" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="345" y1="125" x2="345" y2="208" stroke="#7c3aed" stroke-width="1.5" marker-start="url(#arr2)"/>
+  <defs>
+    <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#7c3aed"/></marker>
+    <marker id="arr2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M6,0 L0,3 L6,6 Z" fill="#7c3aed"/></marker>
+  </defs>
+  <text x="352" y="168" font-size="9" fill="#7c3aed" font-weight="bold">MNH</text>
+  <!-- Rivière -->
+  <rect x="210" y="215" width="60" height="18" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+  <text x="240" y="227" text-anchor="middle" font-size="8" fill="#1e40af">rivière</text>
+  <text x="240" y="242" text-anchor="middle" font-size="8" fill="#dc2626">fond ?</text>
+  <!-- Annotations bas -->
+  <text x="30" y="270" font-size="9" fill="#16a34a">● points sol (classifiés)</text>
+  <text x="155" y="270" font-size="9" fill="#f97316">● retours végétation</text>
+  <text x="290" y="270" font-size="9" fill="#1e40af">● résolution ≠ précision</text>
+  <!-- Légende MNT/MNS -->
+  <line x1="30" y1="285" x2="55" y2="285" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="60" y="288" font-size="9" fill="#2563eb">MNT (sol)</text>
+  <line x1="130" y1="285" x2="155" y2="285" stroke="#ef4444" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="160" y="288" font-size="9" fill="#dc2626">MNS (surface)</text>
+  <text x="295" y="288" font-size="9" fill="#7c3aed">↕ MNH = MNS−MNT</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Analyse fictive — Secteur de la Roselière. (1) Z_MNS = 148,60 m, Z_MNT = 136,20 m. Calculer le MNH. (2) Un MNT à maille de 2 m est rééchantillonné à 0,5 m pour un modèle hydraulique. Que dit-on de la précision après rééchantillonnage ? (3) Z_eau fixée à 101,20 m. Vrai fond = 100,60 m → profondeur réelle. Si le MNT donne Z_terrain = 100,82 m → profondeur calculée. Quelle erreur sur la profondeur ? (4) 5 points de contrôle, écarts : +0,03 / −0,01 / +0,05 / +0,02 / −0,01 m. Calculer biais et RMSE.',
+                  solution: '<strong>(1) MNH :</strong> MNH = Z_MNS − Z_MNT = 148,60 − 136,20 = <strong>12,40 m</strong>. Cette valeur représente la hauteur estimée des objets (végétation, bâtiment…) au-dessus du sol modélisé.<br><strong>(2) Rééchantillonnage :</strong> La résolution passe de 2 m à 0,5 m, soit 4× plus de cellules par axe. Mais aucune mesure nouvelle n\'est créée. La précision des mesures reste identique. Le rééchantillonnage peut même modifier légèrement les crêtes et points bas selon la méthode utilisée.<br><strong>(3) Profondeur :</strong> Réelle = 101,20 − 100,60 = <strong>0,60 m</strong>. Calculée = 101,20 − 100,82 = <strong>0,38 m</strong>. Erreur = 0,22 m. Le terrain surestimé de 0,22 m sous-estime la profondeur de 0,22 m.<br><strong>(4) Biais et RMSE :</strong> Σe = 0,03−0,01+0,05+0,02−0,01 = 0,08 m. Biais = 0,08/5 = <strong>0,016 m</strong>. Σe² = 0,0009+0,0001+0,0025+0,0004+0,0001 = 0,0040. RMSE = √(0,0040/5) = √0,0008 ≈ <strong>0,028 m</strong>. Ces résultats décrivent les 5 points contrôlés uniquement.',
+                },
+              },
+            ],
+          }, // fin gem-m16
+
         ],
       },
     ],
