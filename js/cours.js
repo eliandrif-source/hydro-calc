@@ -6373,18 +6373,18 @@ async function renderCoursChapitre(fId, aId, mId, cId) {
   /* Points clés */
   var _pointsHtml = '<div class="section-header" style="padding-top:var(--s-3)">📌 Points clés</div>'
     + '<div style="padding:0 var(--s-4)">'
-    + '<div style="background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-md);padding:var(--s-3)">'
-    + '<ul style="margin:0;padding:0 0 0 var(--s-3);list-style:none">';
+    + '<div style="display:flex;flex-direction:column;gap:8px">';
   fi.points.forEach(function(p, i) {
-    _pointsHtml += '<li class="cours-list-item" style="display:flex;align-items:flex-start;gap:4px;margin-bottom:6px">'
-      + '<span data-cours-edit data-field="fiche.points.' + i + '" style="font-size:12px;color:var(--c-text);line-height:1.7;flex:1;padding-left:4px">' + _coursAllowedTextHtml(p) + '</span>'
+    _pointsHtml += '<div class="cours-list-item" style="display:flex;align-items:flex-start;gap:10px;background:var(--c-surface);border:1px solid var(--c-border);border-left:3px solid var(--c-primary);border-radius:var(--r-md);padding:10px 14px">'
+      + '<span class="cours-point-badge" style="min-width:22px;height:22px;border-radius:50%;background:var(--c-primary);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">' + (i + 1) + '</span>'
+      + '<span data-cours-edit data-field="fiche.points.' + i + '" style="font-size:12.5px;color:var(--c-text);line-height:1.65;flex:1">' + _coursAllowedTextHtml(p) + '</span>'
       + '<button class="cours-item-del" onclick="_coursDeleteItem(this)" title="Supprimer" style="display:none;background:none;border:none;cursor:pointer;color:var(--c-danger,#E53E3E);font-size:12px;padding:2px 4px;flex-shrink:0;margin-top:2px;line-height:1;opacity:.7">🗑</button>'
-      + '</li>';
+      + '</div>';
   });
-  _pointsHtml += '<li id="cours-add-point-row" style="display:none;list-style:none;padding-left:4px;margin-top:2px">'
+  _pointsHtml += '<div id="cours-add-point-row" style="display:none;margin-top:2px">'
     + '<button onclick="_coursAddListItem(\'points\')" style="font-size:11px;color:var(--c-primary);background:none;border:1px dashed var(--c-primary);border-radius:var(--r-sm);padding:3px 10px;cursor:pointer">+ Ajouter un point</button>'
-    + '</li>';
-  _pointsHtml += '</ul></div></div>';
+    + '</div>';
+  _pointsHtml += '</div></div>';
 
   /* Formules */
   var _formulesHtml = '';
@@ -7726,10 +7726,16 @@ function _coursDeleteItem(btn) {
   var editableEl = item.querySelector('[data-cours-edit]');
   var field = editableEl ? editableEl.getAttribute('data-field') : '';
   var prefix = (field && field.startsWith('fiche.points.')) ? 'fiche.points.' : 'fiche.formules.';
-  item.parentNode.removeChild(item);
+  var container = item.parentNode;
+  container.removeChild(item);
   document.querySelectorAll('[data-field^="' + prefix + '"]').forEach(function(el, i) {
     el.setAttribute('data-field', prefix + i);
   });
+  if (prefix === 'fiche.points.') {
+    container.querySelectorAll('.cours-point-badge').forEach(function(badge, i) {
+      badge.textContent = i + 1;
+    });
+  }
 }
 
 function _coursAddListItem(type) {
@@ -7737,10 +7743,10 @@ function _coursAddListItem(type) {
   var nextIdx = document.querySelectorAll('[data-field^="' + prefix + '"]').length;
   var isPoint = (type === 'points');
 
-  var item = document.createElement(isPoint ? 'li' : 'div');
+  var item = document.createElement('div');
   item.className = 'cours-list-item';
   item.style.cssText = isPoint
-    ? 'display:flex;align-items:flex-start;gap:4px;margin-bottom:6px'
+    ? 'display:flex;align-items:flex-start;gap:10px;background:var(--c-surface);border:1px solid var(--c-border);border-left:3px solid var(--c-primary);border-radius:var(--r-md);padding:10px 14px'
     : 'display:flex;align-items:center;gap:4px';
 
   var text = document.createElement(isPoint ? 'span' : 'div');
@@ -7749,7 +7755,7 @@ function _coursAddListItem(type) {
   if (!isPoint) text.setAttribute('data-raw', '');
   text.contentEditable = 'true';
   text.style.cssText = isPoint
-    ? 'font-size:12px;color:var(--c-text);line-height:1.7;flex:1;padding-left:4px;outline:2px dashed var(--c-cyan,#00B5D8);border-radius:4px;min-height:1em'
+    ? 'font-size:12.5px;color:var(--c-text);line-height:1.65;flex:1;outline:2px dashed var(--c-cyan,#00B5D8);border-radius:4px;min-height:1em'
     : 'flex:1;background:var(--c-primary-l);border-left:3px solid var(--c-primary);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:8px 12px;font-family:\'Courier New\',monospace;font-size:12px;color:var(--c-primary);font-weight:600;outline:2px dashed var(--c-cyan,#00B5D8);min-height:1em';
 
   var delBtn = document.createElement('button');
@@ -7759,6 +7765,13 @@ function _coursAddListItem(type) {
   delBtn.textContent = '🗑';
   delBtn.onclick = function() { _coursDeleteItem(this); };
 
+  if (isPoint) {
+    var badge = document.createElement('span');
+    badge.className = 'cours-point-badge';
+    badge.style.cssText = 'min-width:22px;height:22px;border-radius:50%;background:var(--c-primary);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px';
+    badge.textContent = nextIdx + 1;
+    item.appendChild(badge);
+  }
   item.appendChild(text);
   item.appendChild(delBtn);
 
