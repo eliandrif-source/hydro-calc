@@ -5256,6 +5256,190 @@ const COURS_DATA = {
                 },
               },
 
+              {
+                id: 'gem-zh',
+                titre: 'Zones humides : fonctionnement, diagnostic et restauration',
+                fiche: {
+                  intro: 'Une prairie sèche en août peut être une zone humide. Les zones humides sont des milieux de transition entre terre et eau, influencés par une présence permanente ou temporaire d\'eau dans le sol ou à la surface. Pour les comprendre, il faut examiner l\'origine de l\'eau, ses variations, les sols, la végétation et les connexions avec les milieux voisins — puis distinguer trois démarches distinctes : identifier, délimiter, évaluer les fonctions.',
+                  points: [
+                    'Zone humide = présence d\'eau permanente ou temporaire dans le sol ou à la surface. L\'eau n\'est pas toujours visible : un sol saturé sans lame d\'eau apparente peut être une zone humide. Une visite estivale ne permet pas d\'exclure le caractère humide d\'un terrain.',
+                    'Identifier / délimiter / évaluer = trois démarches distinctes. Critères réglementaires (France : arrêté du 24 juin 2008 modifié) : sols ou végétation selon les protocoles applicables. Éviter deux raccourcis : exiger tous les indices à la fois, ou conclure sur une seule plante observée.',
+                    'Hydropériode = organisation temporelle de la présence d\'eau : fréquence, durée, saison, profondeur, vitesse de montée/baisse. Un niveau moyen ne résume pas l\'hydropériode — deux sites avec la même profondeur maximale mais des durées de submersion différentes ont des écologies différentes.',
+                    'Sources d\'alimentation : ① précipitations directes, ② ruissellement du bassin d\'alimentation (souvent bien plus grand que la ZH), ③ débordements de cours d\'eau, ④ échanges souterrains (nappe peut alimenter ou recevoir selon les niveaux), ⑤ apports marins (milieux littoraux). Une action hors du périmètre peut modifier l\'alimentation.',
+                    'Trois familles de fonctions : hydrologique (stockage, transfert, échanges nappe-cours d\'eau) ; biogéochimique (transformation, rétention ou export de substances) ; biologique (habitats, reproduction, alimentation, corridors). Toutes les ZH n\'assurent pas toutes les fonctions au même niveau.',
+                    'Stockage et atténuation des crues : effet dépend du stockage DISPONIBLE avant l\'événement (V_disponible = V_niveau - V_initial), de la connexion, de la vitesse de remplissage et de la position dans le bassin. Une zone déjà remplie ne dispose pas de capacité supplémentaire — présence de 10 ha de ZH ne garantit pas une réduction précise de crue.',
+                    'Erreur sur les volumes : si la nappe monte de h sous une parcelle, V ≠ A × h. Le stockage dépend de la porosité, de l\'état initial, des propriétés de rétention du sol. Variation de niveau ≠ volume de stockage. Bilan d\'eau : ΔS = VP + Vsurface,in + Vsouterrain,in - VET - Vsurface,out - Vsouterrain,out.',
+                    'Rétention ≠ destruction : une substance retenue dans les sédiments peut être remobilisée si les conditions changent (ex. phosphore libéré lors d\'une anoxie). Une ZH naturelle n\'est pas un système d\'épuration capable d\'accepter n\'importe quelle charge. Réduire les apports à la source reste une question distincte.',
+                    'Tourbières : accumulation de tourbe sous des conditions d\'engorgement. Stocks de carbone importants. Le drainage expose la MO à la décomposition → émissions GES. Réhumidification = étape essentielle mais ≠ restauration complète à court terme — les fonctions et communautés peuvent demander du temps.',
+                    'Diagnostic des pressions : drainage (modifie les sorties et niveaux), remblai (modifie le relief et le stockage), déconnexion du cours d\'eau, prélèvements, apports polluants, tassement, gestion inadaptée, espèces exotiques envahissantes. Une même pression peut produire des effets différents selon le site.',
+                    'Restauration = méthode guidée par le diagnostic : modifier un drainage, rétablir une connexion, retirer un remblai, adapter une gestion. Créer un plan d\'eau n\'est pas une réponse universelle — excaver une prairie humide peut détruire l\'habitat. La méthode doit suivre la cause.',
+                    'Suivi : état initial avant travaux obligatoire. Une année plus humide après travaux peut masquer l\'absence d\'effet ou amplifier un effet partiel. Distinguer ce qui est observé, mesuré, supposé, à vérifier. Surface restaurée ≠ fonctions rétablies.',
+                  ],
+                  formules: [
+                    '\\Delta S = V_P + V_{\\text{surf,in}} + V_{\\text{sout,in}} - V_{ET} - V_{\\text{surf,out}} - V_{\\text{sout,out}}',
+                    'V_{\\text{disponible}} = V_{\\text{niveau considéré}} - V_{\\text{initial}}',
+                    'V = A \\cdot h \\quad \\text{(stockage superficiel, surface plane)}',
+                    'V_P\\,[\\text{m}^3] = A\\,[\\text{m}^2] \\times h\\,[\\text{m}] = 10 \\times P\\,[\\text{mm}] \\times S\\,[\\text{ha}]',
+                  ],
+                  retenir: 'ZH ≠ lame d\'eau visible. Identifier ≠ délimiter ≠ évaluer. Hydropériode = durée + fréquence + saison + profondeur. Stockage disponible = V_niveau − V_initial. Nappe monte × surface ≠ volume stocké. Rétention ≠ destruction. Restauration = suivre la cause, pas créer une mare.',
+                  sections: [
+                    {
+                      titre: '1. Identifier, délimiter, évaluer : trois démarches distinctes',
+                      sous_sections: [
+                        {
+                          titre: '1.1. L\'identification',
+                          texte: '<p>L\'identification répond à la question : le terrain présente-t-il les caractéristiques d\'une zone humide ? Elle s\'appuie sur des indices relatifs à l\'eau (engorgement, niveaux), aux sols (traits pédologiques résultant de conditions d\'anaérobie) et à la végétation (espèces et communautés hygrophiles).</p><p>Une zone humide dégradée peut toujours être une zone humide. À l\'inverse, une bonne capacité de stockage ne suffit pas à qualifier réglementairement un terrain. <strong>Il faut éviter deux raccourcis symétriques :</strong> exiger systématiquement que tous les indices soient réunis, ou conclure sur une seule plante repérée.</p>'
+                        },
+                        {
+                          titre: '1.2. La délimitation et l\'évaluation fonctionnelle',
+                          texte: '<p>La <strong>délimitation</strong> trace les contours selon la méthode applicable (en France : arrêté du 24 juin 2008 modifié, mobilisant les critères pédologiques ou floristiques selon les protocoles). Une limite cadastrale ne constitue pas une limite écologique.</p><p>L\'<strong>évaluation fonctionnelle</strong> répond à la question : quelles fonctions le milieu assure-t-il et avec quelles limites ? La méthode nationale de l\'OFB fournit un cadre technique notamment pour les projets de compensation. Toutes les zones humides n\'assurent pas toutes les fonctions au même niveau.</p><p>Une visite estivale ne permet pas d\'exclure le caractère humide d\'un secteur. <strong>L\'observation doit porter sur la durée et la répétition de l\'engorgement, et pas seulement sur l\'état du terrain le jour de la visite.</strong></p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '2. L\'eau dans la zone humide : sources et hydropériode',
+                      sous_sections: [
+                        {
+                          titre: '2.1. Les sources d\'alimentation',
+                          texte: '<p>Une zone humide peut recevoir des apports de plusieurs origines :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Précipitations directes</strong> : eau tombant sur le site lui-même</li><li style="margin-bottom:4px"><strong>Ruissellement du bassin d\'alimentation</strong> : les terrains voisins peuvent contribuer — le bassin peut être bien plus grand que la ZH</li><li style="margin-bottom:4px"><strong>Débordements d\'un cours d\'eau</strong> : connexion dépendant d\'une cote, d\'une fréquence ou d\'un ouvrage</li><li style="margin-bottom:4px"><strong>Échanges souterrains</strong> : une nappe peut alimenter le site ou en recevoir les eaux — le sens peut varier selon les niveaux</li><li style="margin-bottom:4px"><strong>Apports marins</strong> : marées, intrusions salines (milieux littoraux)</li></ul><p><strong>Une action réalisée hors du périmètre humide peut modifier son alimentation.</strong> La première étape du diagnostic consiste à comprendre ces connexions.</p>'
+                        },
+                        {
+                          titre: '2.2. L\'hydropériode',
+                          texte: '<p>L\'hydropériode décrit l\'organisation temporelle de la présence d\'eau. Elle caractérise notamment : la fréquence des mises en eau, leur durée, leur saison, leur profondeur, la vitesse de montée et de descente.</p><p><em>Exemple :</em> deux prairies sont recouvertes par 20 cm d\'eau — l\'une pendant deux jours, l\'autre pendant trois mois. La profondeur maximale est identique, mais les conditions écologiques sont fondamentalement différentes. <strong>Un niveau moyen ne résume pas l\'hydropériode.</strong></p><p>Le suivi doit chercher à représenter les variations pertinentes pour les sols, les plantes et les autres organismes. Un piézomètre installé avant les travaux est indispensable pour distinguer les effets de la restauration des effets des variations climatiques.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '3. Les sols et la végétation comme indicateurs',
+                      sous_sections: [
+                        {
+                          titre: '3.1. Les sols hydromorphes',
+                          texte: '<p>L\'engorgement prolongé entraîne des conditions d\'anaérobie qui modifient les processus chimiques dans le sol, laissant des traces reconnaissables lors d\'un examen pédologique (taches de réduction, teintes grises ou bleutées, marbrures). Ces traits peuvent persister longtemps après une modification du régime hydrique.</p><p>Précautions d\'interprétation :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">La couleur du premier centimètre ne renseigne pas sur tout le profil</li><li style="margin-bottom:4px">Les traces doivent être replacées dans le contexte : matériau parental, profondeur, historique du site</li><li style="margin-bottom:4px">Un sol drainé peut conserver des traces d\'un fonctionnement antérieur — l\'indice pédologique et le fonctionnement actuel doivent être distingués</li></ul>'
+                        },
+                        {
+                          titre: '3.2. La végétation hygrophile',
+                          texte: '<p>Certaines espèces et communautés végétales sont adaptées aux conditions humides (hydrophytes, hélophytes, espèces hygrophiles). Leur présence, leur abondance et leur répartition contribuent au diagnostic.</p><p>Précautions :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">L\'identification doit être fiable — un simple repérage ne remplace pas le protocole</li><li style="margin-bottom:4px">La gestion peut masquer la végétation : fauche, pâturage, culture, perturbation récente</li><li style="margin-bottom:4px">La saison influence la détectabilité de certaines espèces</li><li style="margin-bottom:4px">L\'absence de végétation caractéristique lors d\'une visite unique ne suffit pas à conclure</li></ul>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '4. Les fonctions : hydrologiques, biogéochimiques, biologiques',
+                      sous_sections: [
+                        {
+                          titre: '4.1. Fonctions hydrologiques',
+                          texte: '<p><strong>Stockage et atténuation des crues :</strong> une zone humide peut recevoir et stocker temporairement une partie des apports. Mais l\'effet sur une crue dépend du stockage disponible avant l\'événement (V_dispo = V_niveau - V_initial), de la connexion, de la vitesse de remplissage et de la position dans le bassin. <strong>Une zone déjà remplie n\'a pas de capacité supplémentaire.</strong></p><p><strong>Soutien d\'étiage :</strong> certaines ZH restituent différée de l\'eau. Ce rôle dépend des gradients hydrauliques et des connexions souterraines. Une ZH peut aussi perdre de l\'eau par évapotranspiration. L\'expression « éponge naturelle » est insuffisante : elle ne décrit pas tous les comportements possibles.</p><p><strong>Erreur fréquente sur les volumes :</strong> si la nappe monte de h sous une parcelle de surface A, le stockage ≠ A × h — il faut tenir compte de la porosité et des propriétés de rétention du sol.</p>'
+                        },
+                        {
+                          titre: '4.2. Fonctions biogéochimiques et biologiques',
+                          texte: '<p><strong>Qualité de l\'eau :</strong> les ZH participent à plusieurs processus — dépôt de particules, prélèvement de nutriments par les organismes, transformations microbiennes (dénitrification), fixation de substances dans les sols. <strong>Rétention ≠ destruction :</strong> une substance retenue peut être remobilisée si les conditions changent (ex. phosphore sous anoxie). La capacité n\'est pas illimitée — réduire les apports à la source est une question distincte.</p><p><strong>Biodiversité :</strong> les ZH proposent des zones de reproduction, ressources alimentaires, refuges, corridors. La diversité des niveaux et des durées de mise en eau contribue à la diversité des conditions. Les milieux temporaires ont une valeur propre — l\'assèchement saisonnier peut participer au fonctionnement d\'un habitat. Relier systématiquement une dépression à une rivière n\'est pas toujours une amélioration.</p><p><strong>Tourbières :</strong> stocks de carbone importants dans la tourbe. Le drainage expose la MO à la décomposition → émissions de GES. Réhumidification = étape essentielle, mais le retour des fonctions et communautés peut demander du temps.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '5. Construire un bilan d\'eau',
+                      sous_sections: [
+                        {
+                          titre: '5.1. La formule du bilan',
+                          texte: '<p>Sur une période définie :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:8px 12px;border-radius:6px;font-weight:600;text-align:center">ΔS = VP + V<sub>surf,in</sub> + V<sub>sout,in</sub> − V<sub>ET</sub> − V<sub>surf,out</sub> − V<sub>sout,out</sub></p><p>Les termes sont des volumes sur la période. Si l\'on calcule un échange souterrain par différence des autres termes, le résidu intègre les erreurs de mesure — il ne devient pas automatiquement une mesure exacte de cet échange.</p>'
+                        },
+                        {
+                          titre: '5.2. Calculs de stockage',
+                          texte: '<p><strong>Volume précipité :</strong> VP (m³) = A (m²) × h (m) = 10 × P (mm) × S (ha)</p><p><em>Exemple :</em> 3 ha, pluie de 25 mm → VP = 10 × 25 × 3 = 750 m³</p><p><strong>Stockage superficiel (surface plane constante) :</strong> V = A × h</p><p><em>Exemple :</em> dépression de 8 000 m², hauteur supplémentaire moyenne 0,12 m → ΔV = 8 000 × 0,12 = 960 m³</p><p><strong>Stockage disponible :</strong> V_dispo = V_niveau − V_initial</p><p><em>Exemple :</em> V_initial = 700 m³, V_niveau = 2 100 m³ → V_dispo = 1 400 m³</p><p><strong>Ce que ces calculs ne donnent pas :</strong> le volume d\'eau dans les pores du sol, la recharge d\'une nappe, la réduction du débit de pointe, le stockage réellement disponible avant une crue. Lorsque la surface varie avec le niveau, il faut une relation hauteur–surface–volume.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '6. Diagnostiquer et restaurer',
+                      sous_sections: [
+                        {
+                          titre: '6.1. Identifier les pressions',
+                          texte: '<p>Les principales pressions sur les zones humides :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Drainage</strong> : modification des sorties et des niveaux</li><li style="margin-bottom:4px"><strong>Remblai</strong> : modification du relief, du stockage et des habitats</li><li style="margin-bottom:4px"><strong>Déconnexion</strong> : réduction ou transformation des mises en eau par un cours d\'eau</li><li style="margin-bottom:4px"><strong>Prélèvements</strong> : modification de l\'alimentation (nappe, prise d\'eau)</li><li style="margin-bottom:4px"><strong>Apports polluants</strong> : altération de l\'eau, du sol et des communautés</li><li style="margin-bottom:4px"><strong>Gestion inadaptée</strong> : dégradation de végétation, fermeture non souhaitée</li><li style="margin-bottom:4px"><strong>EEE</strong> : modification des communautés</li></ul><p>Un fossé peut avoir plusieurs fonctions et être connecté à d\'autres terrains. Son comblement ne doit pas être décidé uniquement parce qu\'il se trouve près d\'une ZH.</p>'
+                        },
+                        {
+                          titre: '6.2. Construire une restauration',
+                          texte: '<p>La restauration vise à rétablir des fonctions dégradées. Les actions possibles — modification d\'un drainage, rétablissement d\'une connexion, retrait d\'un remblai, adaptation d\'une gestion — doivent suivre la cause identifiée.</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Niveaux trop bas → d\'où vient l\'abaissement ?</li><li style="margin-bottom:4px">Inondation devenue rare → la connexion ou le régime a-t-il changé ?</li><li style="margin-bottom:4px">Nutriments excessifs → quelles sources et quels chemins ?</li><li style="margin-bottom:4px">Végétation cible absente → conditions physiques adaptées ? Sources de recolonisation ?</li></ul><p><strong>Créer un plan d\'eau n\'est pas une réponse universelle.</strong> Excaver une prairie humide peut détruire l\'habitat au lieu de le restaurer. Vérifier les effets sur les parcelles voisines, les accès, les bâtiments, les réseaux et autres habitats avant toute modification hydrologique.</p><p>Le suivi doit commencer avant les travaux (état initial), intégrer la variabilité climatique, et porter sur l\'hydropériode, les sols, la végétation, les habitats et les effets sur les secteurs voisins.</p>'
+                        }
+                      ]
+                    }
+                  ],
+                },
+                flashcards: [
+                  { q: 'Une prairie sèche en août peut-elle être une zone humide ?', r: 'Oui. L\'eau n\'est pas toujours visible : un sol saturé sans lame d\'eau peut caractériser une ZH. Une visite estivale ne permet pas d\'exclure le caractère humide d\'un terrain.', expl: 'Il faut examiner sols, végétation et données saisonnières. Les traces pédologiques persistent même en été.' },
+                  { q: 'Que signifie "hydropériode" ?', r: 'Organisation temporelle de la présence d\'eau : fréquence, durée, saison, profondeur, vitesse de montée/baisse. Un niveau moyen ne suffit pas à la décrire.', expl: 'Deux sites avec même profondeur maximale mais durées d\'inondation différentes ont des écologies très différentes.' },
+                  { q: 'Calculer V_disponible si V_initial = 500 m³ et V_niveau = 1 800 m³.', r: 'V_dispo = 1 800 - 500 = 1 300 m³. C\'est le seul stockage mobilisable supplémentaire — pas le volume total.', expl: 'Une zone déjà remplie (V_initial = V_niveau) n\'a aucune capacité supplémentaire, même si son volume total est important.' },
+                  { q: 'Pourquoi la nappe monte de 20 cm ≠ volume stocké A × 0,20 ?', r: 'Le stockage souterrain dépend de la porosité, de l\'état initial et des propriétés de rétention. La variation de niveau est une observation hydraulique — sa conversion en volume nécessite un modèle adapté.', expl: 'Surestimer les capacités de stockage par ce raccourci conduit à des erreurs importantes dans les bilans et les projets.' },
+                  { q: 'Qu\'est-ce que le bilan d\'eau d\'une zone humide ?', r: 'ΔS = VP + Vsurface,in + Vsouterrain,in - VET - Vsurface,out - Vsouterrain,out. Si ΔS > 0, le stockage augmente. Si ΔS < 0, il diminue.', expl: 'Un terme calculé par différence des autres intègre toutes leurs erreurs de mesure — ne pas lui accorder une précision apparente.' },
+                  { q: 'Rétention d\'un polluant dans une ZH = destruction ?', r: 'Non. Une substance retenue dans les sédiments peut être remobilisée si les conditions changent (ex. phosphore sous anoxie de fond, métaux lors d\'une perturbation).', expl: 'La capacité d\'une ZH n\'est pas illimitée. Réduire les apports à la source reste indispensable et distinct de la préservation du milieu.' },
+                  { q: 'Pourquoi créer un plan d\'eau n\'est pas toujours "restaurer une zone humide" ?', r: 'Excaver une prairie humide peut détruire l\'habitat naturel existant. La restauration doit viser le rétablissement des fonctions et du régime hydrique d\'origine, selon la cause du dysfonctionnement.', expl: 'Un plan d\'eau crée un habitat aquatique, pas nécessairement les conditions d\'une zone humide naturelle (sol, végétation, hydropériode).' },
+                  { q: 'Quels éléments un diagnostic de ZH doit-il couvrir ?', r: 'Contexte du bassin, données historiques, topographie, arrivées et sorties d\'eau, sols, végétation, habitats, ouvrages et drains, usages, pressions et leurs causes.', expl: 'Une seule visite par une seule saison est insuffisante. Le diagnostic doit intégrer des observations saisonnières et des données historiques.' },
+                ],
+                schema: `<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="300" fill="#f0fdf4" rx="10"/>
+  <text x="260" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#14532d">Zone humide — bilan d'eau et fonctions</text>
+  <!-- Zone humide centrale -->
+  <rect x="140" y="50" width="240" height="100" rx="8" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="260" y="98" text-anchor="middle" fill="#14532d" font-size="11" font-weight="bold">Zone Humide</text>
+  <text x="260" y="113" text-anchor="middle" fill="#15803d" font-size="9">ΔS = Entrées − Sorties</text>
+  <!-- Pluie -->
+  <line x1="260" y1="25" x2="260" y2="50" stroke="#3b82f6" stroke-width="2" marker-end="url(#aB)"/>
+  <text x="260" y="22" text-anchor="middle" fill="#1d4ed8" font-size="9">① Pluie directe</text>
+  <!-- Ruissellement -->
+  <line x1="60" y1="80" x2="140" y2="95" stroke="#0ea5e9" stroke-width="2" marker-end="url(#aB2)"/>
+  <text x="30" y="72" fill="#0369a1" font-size="8" font-weight="bold">② Ruissellt</text>
+  <text x="30" y="84" fill="#0369a1" font-size="8">bassin alim.</text>
+  <!-- Débordement cours d'eau -->
+  <rect x="10" y="110" width="100" height="30" rx="4" fill="#60a5fa" opacity="0.7"/>
+  <text x="60" y="129" text-anchor="middle" fill="#1e3a8a" font-size="8" font-weight="bold">Cours d\'eau</text>
+  <line x1="110" y1="125" x2="140" y2="125" stroke="#2563eb" stroke-width="2" marker-end="url(#aBl)"/>
+  <text x="75" y="108" text-anchor="middle" fill="#2563eb" font-size="8">③ Débord.</text>
+  <!-- Nappe (en dessous) -->
+  <rect x="140" y="175" width="240" height="22" rx="4" fill="#bfdbfe" opacity="0.8"/>
+  <text x="260" y="190" text-anchor="middle" fill="#1d4ed8" font-size="9">Nappe alluviale</text>
+  <!-- Échanges verticaux -->
+  <line x1="230" y1="150" x2="230" y2="175" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <line x1="242" y1="175" x2="242" y2="150" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="260" y="171" fill="#4338ca" font-size="8">④ Éch. sout.</text>
+  <!-- ET (sortie haut) -->
+  <line x1="380" y1="50" x2="380" y2="25" stroke="#f97316" stroke-width="2" marker-end="url(#aE)"/>
+  <text x="415" y="22" text-anchor="middle" fill="#c2410c" font-size="9" font-weight="bold">VET</text>
+  <!-- Sortie aval -->
+  <line x1="380" y1="100" x2="450" y2="100" stroke="#16a34a" stroke-width="2" marker-end="url(#aG)"/>
+  <text x="465" y="98" fill="#14532d" font-size="8" font-weight="bold">Sortie</text>
+  <text x="465" y="110" fill="#14532d" font-size="8">surf.</text>
+  <!-- Sortie sout aval -->
+  <line x1="380" y1="186" x2="450" y2="186" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#aSt)"/>
+  <text x="465" y="184" fill="#4338ca" font-size="8">Sortie</text>
+  <text x="465" y="196" fill="#4338ca" font-size="8">sout.</text>
+  <!-- Tableau des fonctions -->
+  <rect x="10" y="210" width="500" height="82" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="0.8"/>
+  <text x="260" y="226" text-anchor="middle" font-size="10" font-weight="bold" fill="#14532d">Trois familles de fonctions</text>
+  <rect x="18" y="232" width="150" height="52" rx="4" fill="#dcfce7"/>
+  <text x="93" y="247" text-anchor="middle" font-size="9" font-weight="bold" fill="#14532d">Hydrologique</text>
+  <text x="93" y="260" text-anchor="middle" font-size="8" fill="#555">Stockage, transfert</text>
+  <text x="93" y="272" text-anchor="middle" font-size="8" fill="#555">échanges nappe/CE</text>
+  <rect x="185" y="232" width="150" height="52" rx="4" fill="#d1fae5"/>
+  <text x="260" y="247" text-anchor="middle" font-size="9" font-weight="bold" fill="#14532d">Biogéochimique</text>
+  <text x="260" y="260" text-anchor="middle" font-size="8" fill="#555">Dénitrification</text>
+  <text x="260" y="272" text-anchor="middle" font-size="8" fill="#555">rétention substances</text>
+  <rect x="352" y="232" width="150" height="52" rx="4" fill="#bbf7d0"/>
+  <text x="427" y="247" text-anchor="middle" font-size="9" font-weight="bold" fill="#14532d">Biologique</text>
+  <text x="427" y="260" text-anchor="middle" font-size="8" fill="#555">Habitats, reproduction</text>
+  <text x="427" y="272" text-anchor="middle" font-size="8" fill="#555">alimentation, corridor</text>
+  <defs>
+    <marker id="aB" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#3b82f6"/></marker>
+    <marker id="aB2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0ea5e9"/></marker>
+    <marker id="aBl" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2563eb"/></marker>
+    <marker id="aE" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#f97316"/></marker>
+    <marker id="aG" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#16a34a"/></marker>
+    <marker id="aSt" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#6366f1"/></marker>
+  </defs>
+</svg>`,
+                exercice: {
+                  enonce: 'Zone humide de 3 ha. Sur une période d\'un mois : VP = 600 m³ (pluie), Vsurface,in = 1 400 m³, Vsouterrain,in = 300 m³, VET = 200 m³, Vsurface,out = 1 100 m³, Vsouterrain,out = 400 m³. Dans un secteur, la nappe monte de 25 cm sous 5 000 m². (1) Calculer ΔS. (2) Peut-on calculer le stockage souterrain par 5 000 × 0,25 ? (3) Sur 1,5 ha plan, la hauteur d\'eau superficielle augmente en moyenne de 0,10 m. Calculer le volume superficiel disponible. (4) Si V_initial était déjà de 900 m³ dans ce secteur, quel est le stockage disponible supplémentaire ?',
+                  solution: '<strong>(1) Bilan ΔS :</strong> ΔS = (600 + 1 400 + 300) − (200 + 1 100 + 400) = 2 300 − 1 700 = <strong>600 m³</strong>. Le stockage augmente de 600 m³ sur la période.<br><strong>(2) Stockage souterrain :</strong> Non — V ≠ A × h dans un milieu poreux. Le stockage réel dépend de la porosité, de l\'état de saturation initial et des propriétés de rétention. La hausse du niveau est une observation hydraulique, pas un volume directement calculable par ce produit.<br><strong>(3) Volume superficiel :</strong> A = 1,5 ha = 15 000 m². ΔV = 15 000 × 0,10 = <strong>1 500 m³</strong>. Ce calcul est valide pour une surface plane constante — il ne donne pas la recharge de nappe ni la réduction du débit de pointe.<br><strong>(4) Stockage disponible :</strong> V_dispo = 1 500 − 900 = <strong>600 m³</strong>. Le secteur avait déjà 900 m³ d\'eau avant cet événement — seuls 600 m³ supplémentaires étaient disponibles.',
+                },
+              },
+
             ],
           }, // fin gem-m5
 
