@@ -3440,6 +3440,13 @@ const COURS_DATA = {
     niveau: 'Professionnel',
     organisme: 'Formation continue — Collectivités',
     desc: 'Compétence obligatoire des EPCI à fiscalité propre depuis 2018 : gestion des milieux aquatiques et prévention des inondations. 20 chapitres du diagnostic territorial à la conduite de projet.',
+    themes: {
+      fondements:  { label: 'Fondements GEMAPI',              ico: '🏛️', color: '#0E6BA8' },
+      diagnostic:  { label: 'Diagnostic & Milieux aquatiques', ico: '🔍', color: '#2E7D32' },
+      prevention:  { label: 'Prévention & Conduite de projet', ico: '🛡️', color: '#B84A0E' },
+      hydraulique: { label: 'Hydraulique appliquée',           ico: '🌊', color: '#0277BD' },
+      geomatique:  { label: 'Géomatique & Données spatiales',  ico: '🗺️', color: '#D84315' },
+    },
     annees: [
       {
         id: 'an1',
@@ -3453,6 +3460,7 @@ const COURS_DATA = {
             ico: '📖',
             color: '#0E6BA8',
             colorl: '#E3F2FD',
+            ordre: 1, theme: 'fondements',
             chapitres: [
 
               {
@@ -4096,6 +4104,7 @@ const COURS_DATA = {
             ico: '🏛️',
             color: '#6B4F9E',
             colorl: '#F0EBFF',
+            ordre: 2, theme: 'fondements',
             chapitres: [
 
               {
@@ -4292,6 +4301,7 @@ const COURS_DATA = {
             ico: '🔍',
             color: '#2E7D9A',
             colorl: '#E3F6FF',
+            ordre: 3, theme: 'diagnostic',
             chapitres: [
 
               {
@@ -4638,6 +4648,7 @@ const COURS_DATA = {
             ico: '🛡️',
             color: '#B84A0E',
             colorl: '#FFF0E8',
+            ordre: 6, theme: 'prevention',
             chapitres: [
 
               {
@@ -5641,6 +5652,7 @@ const COURS_DATA = {
             ico: '📋',
             color: '#5A7A2E',
             colorl: '#F0F7E3',
+            ordre: 7, theme: 'prevention',
             chapitres: [
 
               {
@@ -6006,6 +6018,8 @@ const COURS_DATA = {
             id: 'gem-m7',
             name: 'Hydraulique à surface libre',
             ico: '🌊',
+            color: '#0277BD', colorl: '#E1F5FE',
+            ordre: 8, theme: 'hydraulique',
             chapitres: [
               {
                 id: 'gem-hsl1',
@@ -6193,6 +6207,8 @@ const COURS_DATA = {
             id: 'gem-m8',
             name: 'Rugosité et écoulement uniforme',
             ico: '📐',
+            color: '#01579B', colorl: '#E3F2FD',
+            ordre: 9, theme: 'hydraulique',
             chapitres: [
               {
                 id: 'gem-hsl2',
@@ -6366,6 +6382,8 @@ const COURS_DATA = {
             id: 'gem-m9',
             name: 'Énergie spécifique et régimes',
             ico: '⚡',
+            color: '#0288D1', colorl: '#E1F5FE',
+            ordre: 10, theme: 'hydraulique',
             chapitres: [
               {
                 id: 'gem-hsl3',
@@ -6557,6 +6575,8 @@ const COURS_DATA = {
             id: 'gem-m10',
             name: 'Remous et ouvrages de franchissement',
             ico: '🌉',
+            color: '#006064', colorl: '#E0F7FA',
+            ordre: 11, theme: 'hydraulique',
             chapitres: [
               {
                 id: 'gem-hsl4',
@@ -6732,6 +6752,8 @@ const COURS_DATA = {
             id: 'gem-m11',
             name: 'Initiation aux modèles hydrauliques',
             ico: '🖥️',
+            color: '#4A148C', colorl: '#F3E5F5',
+            ordre: 12, theme: 'hydraulique',
             chapitres: [
               {
                 id: 'gem-hsl5',
@@ -6920,6 +6942,8 @@ const COURS_DATA = {
             id: 'gem-m12',
             name: 'Cartographie et systèmes de coordonnées',
             ico: '🗺️',
+            color: '#E65100', colorl: '#FFF3E0',
+            ordre: 13, theme: 'geomatique',
             chapitres: [
               {
                 id: 'gem-sig1',
@@ -7083,6 +7107,8 @@ const COURS_DATA = {
             id: 'gem-m13',
             name: 'Nivellement et levés de terrain',
             ico: '📏',
+            color: '#BF360C', colorl: '#FBE9E7',
+            ordre: 14, theme: 'geomatique',
             chapitres: [
               {
                 id: 'gem-niv1',
@@ -7269,6 +7295,8 @@ const COURS_DATA = {
             id: 'gem-m14',
             name: 'Profils en long et en travers',
             ico: '📊',
+            color: '#558B2F', colorl: '#F1F8E9',
+            ordre: 15, theme: 'geomatique',
             chapitres: [
               {
                 id: 'gem-niv2',
@@ -7448,6 +7476,8 @@ const COURS_DATA = {
             id: 'gem-m15',
             name: 'SIG appliqué à la GEMAPI',
             ico: '🗾',
+            color: '#1B5E20', colorl: '#E8F5E9',
+            ordre: 16, theme: 'geomatique',
             chapitres: [
               {
                 id: 'gem-sig2',
@@ -7614,6 +7644,8 @@ const COURS_DATA = {
             id: 'gem-m16',
             name: 'MNT, LiDAR et qualité des données',
             ico: '🏔️',
+            color: '#795548', colorl: '#EFEBE9',
+            ordre: 17, theme: 'geomatique',
             chapitres: [
               {
                 id: 'gem-mnt1',
@@ -7780,6 +7812,8 @@ const COURS_DATA = {
             id: 'gem-m17',
             name: 'Hydromorphologie et sédiments',
             ico: '🌊',
+            color: '#2E7D32', colorl: '#E8F5E9',
+            ordre: 4, theme: 'diagnostic',
             chapitres: [
               {
                 id: 'gem-hmo1',
@@ -8595,6 +8629,8 @@ const COURS_DATA = {
             id: 'gem-m18',
             name: 'Mesures et diagnostic territorial',
             ico: '📏',
+            color: '#1565C0', colorl: '#E3F2FD',
+            ordre: 5, theme: 'diagnostic',
             chapitres: [
               {
                 id: 'gem-mes1',
@@ -9471,9 +9507,25 @@ function renderCoursFormation(fId) {
   html += _coursFormationDownloadBtn(fId);
 
   f.annees.forEach(function(a) {
-    html += '<div class="section-header" style="padding-top:var(--s-3)">' + a.name + '</div>'
-      + '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">';
-    a.matieres.forEach(function(m) {
+    var matieres = f.themes
+      ? a.matieres.slice().sort(function(x, y) { return (x.ordre || 99) - (y.ordre || 99); })
+      : a.matieres;
+    if (!f.themes) {
+      html += '<div class="section-header" style="padding-top:var(--s-3)">' + a.name + '</div>'
+        + '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">';
+    }
+    var lastTheme = null;
+    matieres.forEach(function(m) {
+      if (f.themes && m.theme !== lastTheme) {
+        if (lastTheme !== null) html += '</div>';
+        var th = f.themes[m.theme] || {};
+        html += '<div style="display:flex;align-items:center;gap:8px;padding:12px var(--s-4) 6px">'
+          + '<span style="font-size:16px">' + (th.ico || '') + '</span>'
+          + '<span style="font-size:11px;font-weight:700;color:' + (th.color || 'var(--c-text-1)') + ';letter-spacing:.04em;text-transform:uppercase">' + (th.label || m.theme) + '</span>'
+          + '</div>'
+          + '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">';
+        lastTheme = m.theme;
+      }
       var done = m.chapitres.filter(function(c){ return c.fiche !== null; }).length;
       html += '<div class="mod-list-card" style="--cat-color:' + m.color + '" onclick="renderCoursMatiere(\'' + fId + '\',\'' + a.id + '\',\'' + m.id + '\')">'
         + '<div class="mlc-icon" style="background:' + m.colorl + ';font-size:20px">' + m.ico + '</div>'
