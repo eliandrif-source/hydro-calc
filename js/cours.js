@@ -7952,6 +7952,169 @@ const COURS_DATA = {
                   solution: '<strong>(1) Largeur du lit mineur :</strong> On ne peut pas retenir automatiquement 5 m. Le lit mineur est délimité par les berges principales : <strong>18 m</strong>, incluant les deux bancs temporairement émergés. Les 5 m correspondent à l\'état mouillé observé lors de la visite (étiage ou débit moyen). La date et les conditions doivent accompagner cette mesure.<br><strong>(2) Connexion :</strong> Le niveau dépasse la cote du point bas (103,35 > 103,20 m) → une activation est possible. Mais la connexion ne fournit <strong>pas</strong> de débit connu : il faut vérifier le cheminement réellement ouvert, le niveau dans la prairie (si déjà remplie, les échanges s\'arrêtent), les pertes d\'énergie et la durée d\'activation.<br><strong>(3) Vitesse de recul :</strong> v_r = 4,8/8 = <strong>0,60 m/an</strong>. C\'est une <em>moyenne</em> sur 8 ans. Le déplacement peut s\'être concentré sur une ou deux crues. Prolonger d = 0,60 × t pour prévoir une position future illustre une hypothèse : il faut aussi examiner les mécanismes, les contraintes et les événements récents.<br><strong>(4) Volume de stockage :</strong> V = 40 000 × 0,25 = <strong>10 000 m³</strong>. Ce volume géométrique ne démontre <strong>pas</strong> une réduction du débit de pointe : il faudrait analyser quand la prairie se remplit (avant, pendant ou après la pointe), le débit entrant et sortant, et si elle était déjà remplie par un épisode précédent.',
                 },
               },
+              {
+                id: 'gem-hmo2',
+                titre: 'Érosion, transport et dépôt des sédiments',
+                fiche: {
+                  intro: 'L\'érosion met des matériaux en mouvement, le transport les déplace, le dépôt les stocke temporairement ou durablement. Ces trois processus peuvent se produire simultanément dans un même tronçon : une berge recule pendant qu\'un banc se forme quelques mètres plus loin. Ce chapitre explique comment les conditions hydrauliques, les propriétés des matériaux et leur disponibilité déterminent les transferts de sédiments et comment construire un bilan simple.',
+                  points: [
+                    'Un sédiment est un matériau particulaire susceptible d\'être transporté puis déposé : argile, limon, sable, gravier, galet, bloc, particule organique. Son comportement dépend de sa taille, masse volumique, forme, cohésion, arrangement et matière organique. Deux matériaux de même diamètre ne se comportent pas nécessairement de la même manière.',
+                    'Sources de matériaux : versants, ruissellement sur les sols, berges, fond du chenal, affluents, dépôts anciens remobilisés, activités humaines. Distinguer source potentielle et source effectivement connectée au réseau. Un sol érodé peut alimenter une dépression sans atteindre la rivière. Un fossé directement connecté peut transférer rapidement des particules.',
+                    'Trois processus fondamentaux : érosion (arrachement ou mobilisation), transport (déplacement des particules), dépôt (immobilisation sur le fond ou une autre surface). Un dépôt peut être remobilisé lors d\'un événement ultérieur — stockage temporaire. Une même particule peut alterner plusieurs fois déplacement et repos avant de parcourir une distance importante.',
+                    'Charriage : déplacement de particules à proximité du fond par roulement, glissement ou saltation. Intermittent — certains grains bougent, d\'autres restent en place. Absence de mouvement visible pendant une courte visite ≠ absence de transport annuel. Transport en suspension : particules maintenues dans la colonne d\'eau par turbulence. Mode de transport ≠ seule taille — un même grain peut être charrié dans une situation, en suspension dans une autre.',
+                    'Granulométrie : distribution des tailles caractérisée par D10, D50, D90. D50 = diamètre médian selon la méthode retenue (masse, comptage, volume). Préciser la méthode. Un comptage de surface et un prélèvement volumique ne décrivent pas la même population. Matériaux non cohésifs (sables, graviers) : résistance par poids immergé et arrangement. Matériaux cohésifs : interactions supplémentaires selon composition, teneur en eau, consolidation. Une argile consolidée peut résister davantage qu\'un sable meuble.',
+                    'La vitesse moyenne v̄ = Q/A ne suffit pas à caractériser les sollicitations sur les sédiments. Interviennent aussi profondeur, pente de charge, rugosité, turbulence, géométrie locale. Contrainte de cisaillement : τ_moy ≈ ρgR_hS_f (Pa). Cette estimation est moyenne sur le périmètre mouillé dans un écoulement uniforme simple. Exemple : ρ=1000, R_h=0,80, S_f=0,002 → τ ≈ 15,7 Pa. Pas la contrainte locale maximale autour d\'une pile ou dans un coude.',
+                    'Paramètre de Shields : θ = τ_b / [(ρ_s−ρ)gD]. Mise en mouvement examinée en comparant θ à une valeur critique θ_c — pas une constante universelle. Exemple : τ_b=15,7 Pa, ρ_s=2650, D=0,020 m → θ ≈ 0,049. Si θ_c=0,045, le modèle suggère une possibilité de mobilisation, mais les valeurs sont proches et les incertitudes sur contrainte, granulométrie et seuil empêchent une conclusion catégorique.',
+                    'Exposition, masquage et pavage : dans un mélange de tailles, certains petits grains sont protégés entre les gros, certains gros sont très exposés. Le départ préférentiel de certains matériaux peut laisser une couche de surface plus grossière (armure). Cette couche peut réduire la mobilité des matériaux sous-jacents, mais peut être perturbée lors d\'un événement mobilisateur. Granulométrie de surface ≠ composition de toute l\'épaisseur du lit.',
+                    'Compétence (aptitude à mobiliser certaines tailles), capacité de transport (flux possible dans les conditions données), transport effectif (flux réellement transporté). Un écoulement peut être capable de transporter sans disposer de matériaux. Des apports importants peuvent dépasser la capacité d\'un tronçon et favoriser un stockage. Deux rivières aux conditions hydrauliques proches peuvent avoir des transports effectifs très différents selon leurs apports.',
+                    'Flux en suspension : Ṁ = Q × C (kg/s). Exemple : Q=2 m³/s, C=200 mg/L=0,20 kg/m³ → Ṁ=0,40 kg/s. Sur 1h : M=0,40×3600=1440 kg. Intégration temporelle : M = ∫Q(t)C(t)dt. Turbidité ≠ concentration (mesure optique nécessitant étalonnage adapté). Transport pendant la crue : pour un même débit, la concentration peut différer à la montée, à la pointe et à la décrue — relation C=f(Q) peut présenter une hystérésis.',
+                    'Bilan sédimentaire : ΔV_stock = V_entrées + V_apports_latéraux − V_sorties − V_extractions (volumes solides). Frontières et unités doivent être explicites. Volume solide vs volume apparent : V_solide = (1−p) × V_apparent. Exemple : 400 m³ solides avec p=0,40 → V_apparent = 400/0,60 ≈ 667 m³. Cette conversion ne localise pas le dépôt ni ne démontre une épaisseur uniforme.',
+                    'Variation de stock ≠ transit total. Un tronçon peut recevoir et évacuer beaucoup de matériaux avec une variation nette faible. Deux levés montrant un volume presque inchangé ne prouvent pas un transport négligeable. Les berges incluses dans le périmètre : leur érosion = transfert interne, pas un apport. Un banc visible ≠ dysfonctionnement à supprimer — examiner sa dynamique, sa granulométrie et ses relations avec les écoulements avant toute intervention.',
+                  ],
+                  formules: [
+                    '\\tau_{\\mathrm{moy}} \\approx \\rho g R_h S_f \\qquad (\\text{Pa — estimation uniforme simple})',
+                    '\\theta = \\dfrac{\\tau_b}{(\\rho_s - \\rho)\\,g\\,D} \\qquad \\theta > \\theta_c \\Rightarrow \\text{mobilisation possible}',
+                    '\\dot{M} = Q\\,C \\qquad M = \\int Q(t)\\,C(t)\\,\\mathrm{d}t',
+                    '\\Delta V_{\\mathrm{stock}} = V_{\\mathrm{entr}} + V_{\\mathrm{lat}} - V_{\\mathrm{sort}} - V_{\\mathrm{extr}} \\qquad V_{\\mathrm{solide}} = (1-p)\\,V_{\\mathrm{apparent}}',
+                  ],
+                  retenir: 'Érosion → transport → dépôt (temporaire ou durable). τ_moy ≈ ρgR_hS_f. θ = τ_b/[(ρ_s−ρ)gD] — θ_c non universel. Ṁ = QC. M = ∫QC dt. ΔV_stock = entrées − sorties. V_solide = (1−p)V_apparent. Capacité ≠ transport effectif ≠ disponibilité. Turbidité ≠ concentration. Variation de stock ≠ transit total.',
+                  sections: [
+                    {
+                      titre: '1. Sédiments, sources et trois processus',
+                      sous_sections: [
+                        {
+                          titre: '1.1. Qu\'est-ce qu\'un sédiment et d\'où vient-il ?',
+                          texte: '<p>Un sédiment est un matériau particulaire pouvant être transporté puis déposé. On rencontre dans une rivière : argiles, limons, sables, graviers, galets, blocs et particules organiques. Leur comportement dépend de :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Taille</strong> : mise en mouvement et vitesse de chute</li><li style="margin-bottom:4px"><strong>Cohésion</strong> : résistance à l\'arrachement</li><li style="margin-bottom:4px"><strong>Arrangement</strong> : exposition et emboîtement</li><li style="margin-bottom:4px"><strong>Matière organique</strong> : agrégation</li></ul><p>Sources : versants, ruissellement, berges, fond, affluents, dépôts anciens remobilisés, activités humaines. <strong>Distinguer source potentielle et source effectivement connectée.</strong> Un sol érodé peut alimenter une dépression sans atteindre la rivière. Un fossé directement connecté peut transférer rapidement des particules.</p>'
+                        },
+                        {
+                          titre: '1.2. Érosion, transport, dépôt et modes de transport',
+                          texte: '<p>Les trois processus peuvent se produire simultanément sur le même tronçon :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Érosion</strong> : arrachement ou mobilisation</li><li style="margin-bottom:4px"><strong>Transport</strong> : déplacement des particules</li><li style="margin-bottom:4px"><strong>Dépôt</strong> : immobilisation — stockage temporaire ou durable</li></ul><p><strong>Charriage :</strong> roulement, glissement, saltation près du fond. Intermittent — absence de mouvement visible pendant une visite ≠ absence de transport annuel. Matériaux grossiers mobilisés surtout lors de crues.</p><p><strong>Suspension :</strong> particules maintenues dans la colonne d\'eau par turbulence. Mode de transport ≠ seule taille : un même grain peut être charrié dans une situation, en suspension dans une autre.</p><p><strong>Transport dissous ≠ transport particulaire :</strong> substances dissoutes, particules minérales, substances fixées sur particules — distinctions essentielles pour le suivi des nutriments ou contaminants.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '2. Granulométrie, cohésion et contrainte',
+                      sous_sections: [
+                        {
+                          titre: '2.1. Granulométrie et matériaux cohésifs',
+                          texte: '<p>La <strong>granulométrie</strong> décrit la distribution des tailles : D10, D50, D90. Le D50 est le diamètre médian selon la méthode retenue (masse, comptage, volume). Préciser la méthode — un comptage de surface et un prélèvement volumique ne décrivent pas la même population.</p><p>Matériaux <strong>non cohésifs</strong> (sables, graviers) : résistance par poids immergé, arrangement et contacts.<br>Matériaux <strong>cohésifs</strong> : interactions supplémentaires selon composition, teneur en eau, consolidation, matière organique. <strong>Une argile consolidée peut résister davantage qu\'un sable meuble.</strong> Les particules les plus fines ne sont pas toujours les plus faciles à arracher.</p><p><strong>Pavage / armure du lit :</strong> dans un mélange, le départ préférentiel de certains matériaux laisse une couche de surface plus grossière qui peut réduire la mobilité des matériaux sous-jacents — mais une crue suffisante peut la perturber.</p>'
+                        },
+                        {
+                          titre: '2.2. Contrainte de cisaillement et paramètre de Shields',
+                          texte: '<p>La vitesse moyenne v̄ = Q/A ne suffit pas à caractériser les sollicitations. Interviennent aussi : profondeur, pente, rugosité, turbulence, géométrie locale.</p><p><strong>Contrainte de cisaillement moyenne</strong> dans un écoulement uniforme simple :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center;font-weight:bold">τ_moy ≈ ρ × g × R_h × S_f (Pa)</p><p>Exemple : ρ=1000, R_h=0,80, S_f=0,002 → τ ≈ <strong>15,7 Pa</strong>. Pas la contrainte locale maximale autour d\'une pile ou dans un coude.</p><p><strong>Paramètre de Shields :</strong> θ = τ_b / [(ρ_s−ρ)gD]. Si θ > θ_c → mobilisation possible. θ_c n\'est pas une constante universelle. Exemple : τ_b=15,7 Pa, ρ_s=2650, D=0,020 m → θ ≈ 0,049. Pour θ_c=0,045, les valeurs sont proches — les incertitudes empêchent une conclusion catégorique.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '3. Capacité de transport et flux en suspension',
+                      sous_sections: [
+                        {
+                          titre: '3.1. Compétence, capacité et transport effectif',
+                          texte: '<p>Trois notions à distinguer :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Compétence</strong> : aptitude de l\'écoulement à mobiliser certaines tailles</li><li style="margin-bottom:4px"><strong>Capacité de transport</strong> : flux maximum possible dans les conditions données</li><li style="margin-bottom:4px"><strong>Transport effectif</strong> : flux réellement transporté</li></ul><p>Un écoulement capable de transporter peut ne pas disposer de matériaux. Des apports importants peuvent dépasser la capacité d\'un tronçon et favoriser un stockage. <strong>Deux rivières aux conditions hydrauliques proches peuvent avoir des transports effectifs très différents selon leurs apports.</strong></p>'
+                        },
+                        {
+                          titre: '3.2. Flux en suspension et turbidité',
+                          texte: '<p><strong>Flux massique instantané :</strong> Ṁ = Q × C (kg/s). Exemple : Q=2 m³/s, C=200 mg/L = 0,20 kg/m³ → Ṁ = <strong>0,40 kg/s</strong>. Sur 1h : M = 0,40 × 3600 = <strong>1 440 kg</strong>.</p><p>Quand débit et concentration varient : M = ∫Q(t)C(t)dt. Une mesure ponctuelle ne suffit pas à calculer une masse événementielle.</p><p><strong>Turbidité ≠ concentration :</strong> mesure optique dépendant de la taille, forme, couleur et composition des particules. Un étalonnage adapté est nécessaire.</p><p><strong>Transport pendant la crue :</strong> pour un même débit, la concentration peut différer à la montée vs la décrue (épuisement de la source, arrivée retardée de matériaux). La relation C=f(Q) peut présenter une hystérésis importante.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '4. Bilan sédimentaire et volume apparent',
+                      sous_sections: [
+                        {
+                          titre: '4.1. Établir un bilan',
+                          texte: '<p>Pour un tronçon et une période définis :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center;font-weight:bold">ΔV_stock = V_entrées + V_apports_latéraux − V_sorties − V_extractions</p><p>Frontières et unités doivent être explicites. Si les berges sont dans le périmètre : leur érosion = transfert interne (pas un apport). Si hors périmètre : leur contribution = apport latéral.</p><p>Exemple fictif : 1200 + 300 − 1100 = <strong>400 m³ solides</strong> stockés.</p><p><strong>Volume apparent vs solide :</strong> V_solide = (1−p) × V_apparent. Avec p=0,40 : V_apparent = 400/0,60 ≈ <strong>667 m³</strong>. Cette conversion suppose une porosité représentative et ne localise pas le dépôt.</p>'
+                        },
+                        {
+                          titre: '4.2. Limites des bilans et des levés répétés',
+                          texte: '<p>Un bilan mesure une <em>variation nette de stock</em>. Il ne donne pas directement tout le volume ayant transité. <strong>Un tronçon peut recevoir et évacuer beaucoup de matériaux avec une variation nette faible.</strong></p><p>Deux levés montrant un volume presque inchangé ≠ transport négligeable.</p><p>Un banc visible ≠ dysfonctionnement à supprimer. Un banc peut être une forme habituelle du lit, une accumulation temporaire, une réponse à un obstacle ou le résultat d\'un apport exceptionnel. Examiner sa dynamique et sa granulométrie avant toute intervention.</p><p>Un retrait de banc modifie le stock et la géométrie. Ses effets hydrauliques, sa durée et ses conséquences en aval doivent être examinés. Sa présence ne suffit pas à démontrer qu\'il cause les débordements.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '5. Mesure et erreurs fréquentes',
+                      sous_sections: [
+                        {
+                          titre: '5.1. Méthodes de mesure du transport',
+                          texte: '<p>Selon l\'objet étudié :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Suspension</strong> : prélèvements, capteurs de turbidité avec étalonnage</li><li style="margin-bottom:4px"><strong>Charriage</strong> : échantillonneurs de fond, dispositifs acoustiques</li><li style="margin-bottom:4px"><strong>Déplacement de grains</strong> : traceurs colorés ou radioactifs, suivis répétés</li><li style="margin-bottom:4px"><strong>Évolution du lit</strong> : profils comparés, bathymétrie</li><li style="margin-bottom:4px"><strong>Sources</strong> : cartographie, observations, analyses granulométriques ciblées</li></ul><p>Il faut couvrir les phases importantes des événements (montée, pointe, décrue) — pas seulement les conditions faciles à mesurer. Une mesure ponctuelle ne suffit pas à calculer une masse événementielle sans hypothèses supplémentaires.</p>'
+                        },
+                        {
+                          titre: '5.2. Dix erreurs fréquentes',
+                          texte: '<table style="width:100%;border-collapse:collapse;font-size:10px"><thead><tr style="background:var(--c-primary,#2563eb);color:white"><th style="padding:4px 6px;text-align:left">Erreur</th><th style="padding:4px 6px;text-align:left">Correction</th></tr></thead><tbody><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Déduire le transport de la seule vitesse moyenne</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Examiner contrainte, matériaux et disponibilité</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Considérer les particules fines comme toujours faciles à éroder</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Prendre en compte la cohésion et la consolidation</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Employer un seuil de Shields universel</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Vérifier domaine, méthode et incertitude</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Assimiler eau claire et absence de transport</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Examiner aussi le charriage</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Assimiler turbidité et concentration</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Utiliser un étalonnage adapté au site</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Calculer une masse de crue avec une seule mesure</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Suivre l\'évolution temporelle et intégrer</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Confondre variation de stock et transit</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Établir un bilan avec frontières explicites</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Mélanger volume solide et volume apparent</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Préciser la porosité et les conventions</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Considérer tout banc comme anormal</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Examiner la dynamique du banc</td></tr><tr><td style="padding:4px 6px">Supprimer un dépôt sans chercher sa cause</td><td style="padding:4px 6px">Diagnostiquer apports, transit et contraintes</td></tr></tbody></table>'
+                        }
+                      ]
+                    }
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quelle différence entre charriage et transport en suspension ?', r: 'Charriage : déplacement par roulement, glissement ou saltation près du fond. Suspension : particules maintenues dans la colonne d\'eau par turbulence. Le mode dépend des conditions hydrauliques, pas seulement de la taille des particules.', expl: 'Un même grain de sable peut être charrié dans un écoulement peu turbulent et mis en suspension dans un écoulement très turbulent. L\'absence de mouvement visible en surface ne démontre pas l\'absence de charriage au fond.' },
+                  { q: 'Calculer τ_moy avec ρ=1000, g=9,81, R_h=0,50 m, S_f=0,003.', r: 'τ_moy = 1000 × 9,81 × 0,50 × 0,003 = 14,7 Pa.', expl: 'C\'est une estimation moyenne sous l\'hypothèse d\'un écoulement permanent uniforme. La contrainte locale autour d\'une pile, d\'un bloc ou dans un coude peut être très différente.' },
+                  { q: 'D50 = 12 mm : que signifie-t-il ?', r: '50 % de la distribution considérée est située sous 12 mm, selon la méthode de mesure précisée. Ce n\'est pas le diamètre de tous les grains ni une valeur universelle.', expl: 'Il faut préciser si la distribution est établie par masse, comptage ou volume. Un comptage de surface et un prélèvement volumique peuvent donner des D50 différents sur le même tronçon.' },
+                  { q: 'Q = 1,5 m³/s, C = 100 mg/L. Calculer Ṁ, puis M sur 2h si le flux est constant.', r: 'C = 0,10 kg/m³. Ṁ = 1,5 × 0,10 = 0,15 kg/s. M = 0,15 × 7200 = 1080 kg.', expl: 'La constance du flux est une hypothèse de l\'exercice. En réalité, débit et concentration varient au cours d\'un événement. L\'intégration temporelle est nécessaire pour estimer une masse événementielle.' },
+                  { q: 'Bilan : entrées 900 m³, apports latéraux 100 m³, sorties 750 m³, aucune extraction. Calculer ΔV_stock.', r: 'ΔV_stock = 900 + 100 − 750 = 250 m³ solides stockés.', expl: 'Ce bilan renseigne sur la variation nette du stock, pas sur le volume total ayant transité. Il faut que les frontières du périmètre et les conventions de volume (solide ou apparent) soient explicitement définies.' },
+                  { q: '300 m³ de grains solides se déposent, porosité p = 0,40. Quel est le volume apparent du dépôt ?', r: 'V_apparent = V_solide / (1−p) = 300 / 0,60 = 500 m³.', expl: 'Le volume apparent inclut les vides entre les grains. Pour 300 m³ de grains, les 200 m³ restants correspondent aux espaces vides. Cette conversion suppose une porosité représentative et ne localise pas le dépôt.' },
+                  { q: 'Deux levés successifs montrent un volume de lit presque inchangé. Peut-on conclure à un transport sédimentaire négligeable ?', r: 'Non. Des apports et des sorties importants peuvent se compenser. Les levés renseignent d\'abord la variation nette du stock, pas le volume total ayant transité.', expl: 'Un tronçon peut recevoir 1000 m³ et en évacuer 980 m³ → variation nette de 20 m³ seulement, mais 1000 m³ de transit. À l\'inverse, un très faible transit peut produire une variation de stock visible si les apports dépassent les sorties.' },
+                  { q: 'θ = 0,048 pour θ_c = 0,045. Peut-on conclure avec certitude à une mobilisation des grains ?', r: 'Non. Les valeurs sont proches. Les incertitudes sur la contrainte, la granulométrie et la valeur critique empêchent une conclusion catégorique. Le calcul suggère une possibilité, pas une certitude.', expl: 'θ_c n\'est pas une constante universelle — elle dépend des conditions, de la méthode retenue et du contexte. Une légère surestimation de R_h ou de S_f peut suffire à inverser la conclusion pour des valeurs si proches du seuil.' },
+                ],
+                schema: `<svg viewBox="0 0 520 295" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="295" fill="var(--c-bg,#f8fafc)" rx="10"/>
+  <text x="260" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="var(--c-text,#1e293b)">Érosion, transport et dépôt — synthèse des processus</text>
+  <!-- Zone source/érosion -->
+  <rect x="10" y="28" width="145" height="80" rx="7" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="82" y="44" text-anchor="middle" font-size="10" font-weight="bold" fill="#991b1b">ÉROSION</text>
+  <text x="82" y="57" text-anchor="middle" font-size="9" fill="#b91c1c">Arrachement / mobilisation</text>
+  <text x="82" y="70" text-anchor="middle" font-size="8" fill="#64748b">berge · fond · versants</text>
+  <text x="82" y="81" text-anchor="middle" font-size="8" fill="#64748b">τ_moy ≈ ρgR_hS_f</text>
+  <text x="82" y="93" text-anchor="middle" font-size="8" fill="#64748b">θ = τ_b/[(ρ_s−ρ)gD]</text>
+  <!-- Zone transport -->
+  <rect x="188" y="28" width="145" height="80" rx="7" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.5"/>
+  <text x="260" y="44" text-anchor="middle" font-size="10" font-weight="bold" fill="#92400e">TRANSPORT</text>
+  <text x="260" y="57" text-anchor="middle" font-size="9" fill="#78350f">Charriage + Suspension</text>
+  <text x="260" y="70" text-anchor="middle" font-size="8" fill="#64748b">Ṁ = Q × C</text>
+  <text x="260" y="81" text-anchor="middle" font-size="8" fill="#64748b">M = ∫Q(t)C(t)dt</text>
+  <text x="260" y="93" text-anchor="middle" font-size="8" fill="#64748b">compétence / capacité</text>
+  <!-- Zone dépôt -->
+  <rect x="366" y="28" width="145" height="80" rx="7" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="438" y="44" text-anchor="middle" font-size="10" font-weight="bold" fill="#14532d">DÉPÔT</text>
+  <text x="438" y="57" text-anchor="middle" font-size="9" fill="#166534">Stockage temporaire/durable</text>
+  <text x="438" y="70" text-anchor="middle" font-size="8" fill="#64748b">t_chute ≈ h/w_s</text>
+  <text x="438" y="81" text-anchor="middle" font-size="8" fill="#64748b">V_sol=(1−p)V_app</text>
+  <text x="438" y="93" text-anchor="middle" font-size="8" fill="#64748b">banc · remblaiement</text>
+  <!-- Flèches horizontales -->
+  <defs>
+    <marker id="a1" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#64748b"/></marker>
+  </defs>
+  <line x1="155" y1="68" x2="188" y2="68" stroke="#64748b" stroke-width="2" marker-end="url(#a1)"/>
+  <line x1="333" y1="68" x2="366" y2="68" stroke="#64748b" stroke-width="2" marker-end="url(#a1)"/>
+  <!-- Flèche retour remobilisation -->
+  <path d="M 438,108 Q 438,125 260,125 Q 82,125 82,108" stroke="#7c3aed" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#a1)"/>
+  <text x="260" y="122" text-anchor="middle" font-size="8" fill="#7c3aed">remobilisation</text>
+  <!-- Profil de rivière schématique -->
+  <rect x="10" y="150" width="500" height="80" rx="5" fill="#eff6ff" stroke="#2563eb" stroke-width="1"/>
+  <text x="15" y="165" font-size="9" font-weight="bold" fill="#1e40af">Profil longitudinal schématique</text>
+  <!-- Berge gauche -->
+  <path d="M 40,230 L 40,175 L 140,175" stroke="#b45309" stroke-width="2" fill="none"/>
+  <!-- Fond + charriage -->
+  <path d="M 140,175 Q 180,185 220,182 Q 260,178 300,175 Q 340,172 380,178 L 480,178" stroke="#92400e" stroke-width="2" fill="#fef9c3"/>
+  <!-- Suspension cloud -->
+  <ellipse cx="220" cy="168" rx="35" ry="10" fill="#bfdbfe" stroke="#2563eb" stroke-width="1" opacity="0.8"/>
+  <text x="220" y="171" text-anchor="middle" font-size="8" fill="#1e40af">suspension</text>
+  <!-- Charriage arrow -->
+  <line x1="155" y1="183" x2="195" y2="183" stroke="#92400e" stroke-width="2" marker-end="url(#a1)"/>
+  <text x="175" y="196" text-anchor="middle" font-size="8" fill="#92400e">charriage</text>
+  <!-- Banc dépôt -->
+  <ellipse cx="370" cy="178" rx="30" ry="8" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.5"/>
+  <text x="370" y="181" text-anchor="middle" font-size="8" fill="#78350f">banc / dépôt</text>
+  <!-- Bilan rectangle -->
+  <rect x="10" y="245" width="500" height="40" rx="5" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="260" y="260" text-anchor="middle" font-size="9" font-weight="bold" fill="#14532d">BILAN : ΔV_stock = V_entrées + V_apports_lat − V_sorties − V_extractions</text>
+  <text x="260" y="277" text-anchor="middle" font-size="9" fill="#166534">ΔV_stock ≠ transit total · V_solide = (1−p) × V_apparent</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Analyse fictive — Tronçon de la Noue. (1) Calculer τ_moy : ρ=1000, g=9,81, R_h=0,60 m, S_f=0,0025. (2) Q=3 m³/s, C=150 mg/L. Calculer Ṁ. Sur 3h à flux constant, calculer M. (3) Bilan sur un tronçon : entrées 1200 m³, apports latéraux 200 m³, sorties 1100 m³, extraction de 80 m³. Calculer ΔV_stock (grains solides). (4) Ce stock solide a une porosité p=0,35. Quel est le volume apparent du dépôt ?',
+                  solution: '<strong>(1) Contrainte :</strong> τ_moy = 1000 × 9,81 × 0,60 × 0,0025 = <strong>14,7 Pa</strong>. C\'est une estimation moyenne sous l\'hypothèse d\'un écoulement permanent uniforme.<br><strong>(2) Flux en suspension :</strong> C = 150 mg/L = 0,15 kg/m³. Ṁ = 3 × 0,15 = <strong>0,45 kg/s</strong>. Sur 3h : M = 0,45 × 10 800 = <strong>4 860 kg</strong>. La constance du flux est une hypothèse de calcul.<br><strong>(3) Bilan :</strong> ΔV_stock = 1200 + 200 − 1100 − 80 = <strong>220 m³ solides</strong> stockés. Le bilan n\'indique pas où se localise ce stock ni le volume total ayant transité.<br><strong>(4) Volume apparent :</strong> V_apparent = V_solide / (1−p) = 220 / 0,65 ≈ <strong>338 m³</strong>. Cette conversion suppose une porosité représentative uniforme sur l\'ensemble du dépôt.',
+                },
+              },
             ],
           }, // fin gem-m17
 
