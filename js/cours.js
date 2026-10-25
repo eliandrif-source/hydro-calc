@@ -6002,6 +6002,193 @@ const COURS_DATA = {
             ],
           }, // fin gem-m6
 
+          {
+            id: 'gem-m7',
+            name: 'Hydraulique à surface libre',
+            ico: '🌊',
+            chapitres: [
+              {
+                id: 'gem-hsl1',
+                titre: 'Débit, vitesse et section mouillée',
+                fiche: {
+                  intro: 'L\'hydraulique à surface libre étudie les écoulements en contact avec l\'atmosphère — rivières, fossés, canaux, buses partiellement remplies. Pour un technicien GEMAPI, ces notions servent à interpréter un jaugeage, examiner le fonctionnement d\'un passage sous un pont ou comprendre les conséquences d\'une modification du lit. La question centrale : comment relier la quantité d\'eau qui traverse une section à la géométrie du lit et aux vitesses d\'écoulement ?',
+                  points: [
+                    'Débit Q (m³/s) = volume écoulé par unité de temps. Q = V/Δt pour un débit constant. 1 m³/s = 1 000 L/s = 3 600 m³/h. Si le débit varie pendant la mesure, le ratio donne le débit moyen sur l\'intervalle.',
+                    'Section mouillée A (m²) = aire occupée par l\'eau dans une coupe transversale perpendiculaire à l\'écoulement. Ne pas confondre avec la surface du bassin versant, la surface du plan d\'eau vue du dessus, la largeur ou le périmètre mouillé.',
+                    'Relation fondamentale : Q = A × v̄. Corolaires : v̄ = Q/A et A = Q/v̄. Cette relation lie débit, géométrie et vitesse moyenne. Elle est à la base de la méthode de mesure par exploration du champ des vitesses.',
+                    'Vitesse moyenne v̄ ≠ vitesse ponctuelle. La vitesse varie dans la section (frottements, géométrie, obstacles). v̄ est la moyenne pondérée par l\'aire : v̄ = (1/A)∫A vn dA. Une mesure ponctuelle au flotteur ne représente qu\'une trajectoire particulière, souvent proche de la surface.',
+                    'Section rectangulaire : A = b×h, P = b+2h, Rh = A/P. Section trapézoïdale : T = b+2zh, A = h(b+zh). Section naturelle irrégulière : A ≈ Σ [(hi+hi+1)/2 × (xi+1−xi)] par la méthode des trapèzes. Un relevé trop espacé peut manquer une fosse ou un banc.',
+                    'Calcul par sous-sections : Q ≈ Σ Ai×v̄i. La vitesse moyenne globale se calcule comme une moyenne PONDÉRÉE par les aires : v̄ = ΣAi×v̄i / ΣAi. La moyenne arithmétique des vitesses est fausse quand les sous-sections ont des aires différentes.',
+                    'Bilan de continuité sans apport latéral et sans stockage : Q_amont = Q_aval → A1×v1 = A2×v2. À débit égal, une section réduite → vitesse plus élevée. Attention : la profondeur peut aussi changer (le niveau monte), ce qui augmente également A.',
+                    'Bilan général avec stockage : dVs/dt = Q_amont + Q_latéral − Q_aval − Q_sorties. En crue, Vs peut augmenter → les débits amont et aval peuvent différer au même instant. Le bilan porte sur le système et la période définis.',
+                    'Relation hauteur-débit : propre au site. Une même hauteur ≠ même débit si les conditions ont changé (lit modifié, végétation, contrôle aval). La courbe de tarage est établie à partir de jaugeages réels sur le site (eaufrance.fr).',
+                    'Limites de Q = A×v̄ : la section seule ne suffit pas à déterminer la capacité hydraulique d\'un ouvrage. Il faut aussi les niveaux amont/aval, la pente, les frottements, les pertes d\'énergie aux transitions, les obstacles et l\'éventuelle mise en charge.',
+                    'Incertitude sur Q : (uQ/Q)² ≈ (uA/A)² + (uv/v̄)². Ex. : uA/A = 5 %, uv/v̄ = 8 % → uQ/Q ≈ 9,4 %. Afficher six décimales ne rend pas une mesure plus exacte. Un flotteur donne un ordre de grandeur, pas v̄ de la section.',
+                    'Conséquence écologique : deux sections avec la même vitesse moyenne peuvent offrir des habitats très différents selon la diversité des vitesses locales et les possibilités de refuge. Une vitesse moyenne seule ne décrit ni tous les habitats ni tous les risques d\'érosion.',
+                  ],
+                  formules: [
+                    'Q = A\\,\\bar{v} \\quad [\\text{m}^3/\\text{s}]',
+                    'Q \\approx \\sum_i A_i\\,\\bar{v}_i \\qquad \\bar{v} = \\frac{\\sum_i A_i\\,\\bar{v}_i}{\\sum_i A_i}',
+                    'A_{\\text{rect}} = b\\,h \\qquad A_{\\text{trap}} = h(b + zh) \\qquad A_{\\text{nat}} \\approx \\sum_i \\tfrac{h_i+h_{i+1}}{2}(x_{i+1}-x_i)',
+                    'A_1\\bar{v}_1 = A_2\\bar{v}_2 \\quad \\text{(continuité sans stockage)}',
+                    '\\frac{\\mathrm{d}V_s}{\\mathrm{d}t} = Q_{\\text{amont}} + Q_{\\text{latéral}} - Q_{\\text{aval}} - Q_{\\text{sorties}}',
+                  ],
+                  retenir: 'Q = A×v̄. Section mouillée ≠ largeur ni profondeur. Vitesse moyenne ≠ vitesse ponctuelle. Moyenne des vitesses doit être pondérée par les aires. Continuité : A1v1 = A2v2. Section seule ≠ capacité hydraulique. Hauteur-débit = relation propre au site.',
+                  sections: [
+                    {
+                      titre: '1. L\'écoulement à surface libre et les grandeurs fondamentales',
+                      sous_sections: [
+                        {
+                          titre: '1.1. Définition et contexte',
+                          texte: '<p>Un écoulement est dit à <strong>surface libre</strong> lorsque sa surface supérieure est en contact avec l\'atmosphère (pression ≈ pression atmosphérique, prise comme référence nulle en pression relative). C\'est le cas des rivières, fossés, canaux et buses partiellement remplies. Une conduite entièrement remplie relève d\'un autre fonctionnement : l\'<em>écoulement en charge</em>.</p><p><strong>La forme de l\'ouvrage ne suffit pas à déterminer le régime.</strong> Une même buse peut fonctionner à surface libre pour un événement et en charge pour un autre.</p>'
+                        },
+                        {
+                          titre: '1.2. Les quatre grandeurs essentielles',
+                          texte: '<p>Ces quatre grandeurs doivent rester distinctes :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Volume V (m³)</strong> : quelle quantité d\'eau ?</li><li style="margin-bottom:4px"><strong>Débit Q (m³/s)</strong> : quelle quantité par seconde ? Q = V/Δt pour un débit constant. Si le débit varie, ce ratio donne le débit moyen sur l\'intervalle.</li><li style="margin-bottom:4px"><strong>Vitesse v (m/s)</strong> : quel déplacement par seconde ?</li><li style="margin-bottom:4px"><strong>Section mouillée A (m²)</strong> : quelle aire est traversée ?</li></ul><p>Conversions : 1 m³/s = 1 000 L/s = 3 600 m³/h. Un débit de 1 m³/s et une vitesse de 1 m/s sont des grandeurs très différentes en nature et en valeur usuelle.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '2. La section mouillée : géométrie et calcul',
+                      sous_sections: [
+                        {
+                          titre: '2.1. Définitions géométriques',
+                          texte: '<p>La <strong>section mouillée A</strong> est l\'aire occupée par l\'eau dans une coupe transversale — perpendiculaire à la direction principale de l\'écoulement. Ne pas la confondre avec :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">la surface du bassin versant</li><li style="margin-bottom:4px">la surface du plan d\'eau vue du dessus</li><li style="margin-bottom:4px">la largeur T (largeur au miroir)</li><li style="margin-bottom:4px">le périmètre mouillé P (fond + berges en contact avec l\'eau)</li></ul><p>Autres grandeurs dérivées : <strong>rayon hydraulique</strong> Rh = A/P (interviendra dans les formules d\'écoulement), <strong>profondeur hydraulique</strong> Dh = A/T (utile pour caractériser les régimes). La surface libre n\'entre pas dans le périmètre mouillé.</p>'
+                        },
+                        {
+                          titre: '2.2. Calcul pour les trois types de section',
+                          texte: '<p><strong>Section rectangulaire</strong> (b = largeur, h = profondeur) :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 10px;border-radius:6px;margin:4px 0">A = b × h &nbsp;|&nbsp; P = b + 2h &nbsp;|&nbsp; Rh = A/P &nbsp;|&nbsp; Dh = h</p><p><em>Exemple :</em> b = 4 m, h = 0,75 m → A = 3 m², P = 5,5 m, Rh ≈ 0,545 m</p><p><strong>Section trapézoïdale</strong> (b = fond, h = profondeur, z = talus horizontal/vertical) :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 10px;border-radius:6px;margin:4px 0">T = b + 2zh &nbsp;|&nbsp; A = h(b + zh)</p><p><em>Exemple :</em> b = 2, h = 1, z = 1,5 → T = 5 m, A = 3,5 m². Utiliser T×h = 5 m² serait une surestimation.</p><p><strong>Section naturelle irrégulière</strong> : relevés (xi, hi), trapèzes élémentaires :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 10px;border-radius:6px;margin:4px 0">Ai ≈ (hi + hi+1)/2 × (xi+1 − xi), puis A ≈ ΣAi</p><p>Un relevé trop espacé peut manquer une fosse ou un banc. La méthode suppose un profil approchable par segments entre les points mesurés.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '3. La vitesse et la relation fondamentale Q = A×v̄',
+                      sous_sections: [
+                        {
+                          titre: '3.1. Vitesse moyenne et vitesse locale',
+                          texte: '<p>L\'eau ne se déplace pas partout à la même vitesse. La vitesse locale vn varie selon la position dans la section : les frottements ralentissent l\'écoulement près du fond et des berges ; la géométrie, les blocs, la végétation, les piles de pont et les courbures créent des zones accélérées, ralenties ou en recirculation.</p><p>La <strong>vitesse moyenne</strong> est la moyenne pondérée par l\'aire : v̄ = (1/A)∫A vn dA. <strong>Une mesure ponctuelle ne suffit pas à connaître la moyenne de toute une section.</strong></p><p>Un flotteur suit une trajectoire particulière, proche de la surface, et est influencé par le vent, les obstacles et sa profondeur d\'immersion. Il donne un ordre de grandeur, pas v̄ de la section. Le facteur correctif k (v̄ ≈ k × v_surface) n\'est pas une constante universelle.</p>'
+                        },
+                        {
+                          titre: '3.2. Q = A×v̄ et calcul par sous-sections',
+                          texte: '<p>La relation fondamentale :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:8px 12px;border-radius:6px;font-weight:600;text-align:center">Q = A × v̄</p><p>Pour une section hétérogène, on décompose en sous-sections :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 10px;border-radius:6px;margin:4px 0">Q ≈ ΣAi×v̄i &nbsp;|&nbsp; v̄ = ΣAi×v̄i / ΣAi</p><p><strong>Erreur fréquente :</strong> faire la moyenne arithmétique des vitesses. Ex. : v̄ ≠ (0,20+0,60+0,40)/3 = 0,40 m/s si les sous-sections n\'ont pas la même aire. La moyenne pondérée peut donner un débit 10 % différent.</p><p>Incertitude : (uQ/Q)² ≈ (uA/A)² + (uv/v̄)². Avec 5 % sur A et 8 % sur v, uQ/Q ≈ 9,4 %.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '4. Continuité et bilan de volume',
+                      sous_sections: [
+                        {
+                          titre: '4.1. Continuité sans stockage ni apport latéral',
+                          texte: '<p>Sur un tronçon sans apport latéral et sans variation de volume stocké :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 10px;border-radius:6px;margin:4px 0">Q_amont = Q_aval → A1×v̄1 = A2×v̄2</p><p><em>Exemple :</em> Q = 2,4 m³/s, A1 = 4 m², A2 = 2 m² → v̄1 = 0,60 m/s, v̄2 = 1,20 m/s.</p><p><strong>Attention au raccourci</strong> : « je divise la largeur par deux, donc je double la vitesse » suppose que la profondeur reste inchangée. Mais le niveau peut monter, augmentant aussi A. La continuité doit être complétée par des relations d\'énergie et les conditions aux limites.</p>'
+                        },
+                        {
+                          titre: '4.2. Bilan général avec stockage',
+                          texte: '<p>En période de crue, le volume stocké dans un tronçon peut varier :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 10px;border-radius:6px;margin:4px 0">dVs/dt = Q_amont + Q_latéral − Q_aval − Q_sorties</p><p><em>Exemple :</em> Q_amont = 3 m³/s, Q_latéral = 0,5 m³/s, Q_aval = 2,8 m³/s → dVs/dt = 0,7 m³/s → sur 1 h : ΔVs = 0,7×3600 = 2 520 m³ stockés.</p><p>Cela explique pourquoi les débits amont et aval peuvent différer au même instant. Les échanges doivent être définis par rapport au volume de contrôle choisi.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '5. Ce que les calculs ne suffisent pas à démontrer',
+                      sous_sections: [
+                        {
+                          titre: '5.1. Section ≠ capacité hydraulique',
+                          texte: '<p>La relation A = Q/v̄ donne une aire correspondant à une vitesse supposée. Elle ne démontre pas que l\'ouvrage produira effectivement cette vitesse et ce niveau. Il faut aussi :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">les niveaux amont et aval</li><li style="margin-bottom:4px">la pente et les frottements</li><li style="margin-bottom:4px">les pertes d\'énergie aux transitions</li><li style="margin-bottom:4px">les obstacles et dépôts</li><li style="margin-bottom:4px">l\'éventuelle mise en charge</li></ul><p>C\'est la distinction entre un <em>calcul de cohérence</em> et une <em>étude de fonctionnement hydraulique</em>.</p><p><strong>Hauteur d\'eau ≠ débit universel.</strong> La courbe de tarage (relation hauteur-débit) est propre au site et peut être modifiée par une évolution du lit, de la végétation ou du contrôle aval.</p>'
+                        },
+                        {
+                          titre: '5.2. Application GEMAPI',
+                          texte: '<p><strong>Prévention des inondations :</strong> repérer les passages où il faut étudier les niveaux, les pertes d\'énergie et les possibilités de débordement, pas seulement mesurer la largeur.</p><p><strong>Milieux aquatiques :</strong> une vitesse moyenne ne décrit pas toute la diversité des habitats. Des zones lentes coexistent avec des courants rapides au sein d\'une même section — c\'est cette hétérogénéité qui soutient la biodiversité.</p><p><strong>Restauration :</strong> élargir le lit modifie à la fois la section, la vitesse, les dépôts sédimentaires et les habitats. Les conséquences dépendent du débit, des profondeurs et de la diversité des formes — pas d\'une simple application de Q = A×v̄.</p><p><strong>Suivi :</strong> pour comparer des mesures dans le temps, documenter le contexte : niveau, date, section, méthode et incertitude.</p>'
+                        }
+                      ]
+                    }
+                  ],
+                },
+                flashcards: [
+                  { q: 'Calculer le débit si A = 1,8 m² et v̄ = 0,50 m/s.', r: 'Q = 1,8 × 0,50 = 0,90 m³/s = 900 L/s. Vérification dimensionnelle : m² × m/s = m³/s.', expl: 'Q = A×v̄ est la relation fondamentale. Toujours vérifier les unités : m² × m/s → m³/s.' },
+                  { q: 'Section trapézoïdale : b = 2 m, h = 0,80 m, z = 2. Calculer A.', r: 'A = h(b+zh) = 0,80×(2+2×0,80) = 0,80×3,60 = 2,88 m². Utiliser T×h = (b+2zh)×h = 3,6×0,80 = 2,88 m² donne le même résultat ici car A = Dh×T et Dh = A/T.', expl: 'Ne pas utiliser la largeur au miroir T multipliée par h directement pour un trapèze — sauf à constater que Dh = h dans ce cas, ce qui ne se généralise pas.' },
+                  { q: 'Trois sous-sections : A1=0,4 m², v1=0,20 m/s ; A2=0,8 m², v2=0,60 m/s ; A3=0,6 m², v3=0,40 m/s. Calculer Q et v̄.', r: 'Q = 0,4×0,20 + 0,8×0,60 + 0,6×0,40 = 0,08+0,48+0,24 = 0,80 m³/s. v̄ = 0,80/(0,4+0,8+0,6) = 0,80/1,8 = 0,444 m/s.', expl: 'La moyenne arithmétique (0,20+0,60+0,40)/3 = 0,40 m/s donnerait Q = 0,72 m³/s — erreur de −10 % car les aires sont différentes.' },
+                  { q: 'Un ouvrage a une section de 8 m². Peut-on dire qu\'il peut évacuer 16 m³/s ?', r: 'Non. Cela supposerait v̄ = 16/8 = 2 m/s. Il faut démontrer que cette combinaison correspond à un fonctionnement possible avec les niveaux, les pertes d\'énergie et le régime de l\'ouvrage.', expl: 'A seule ne détermine pas la capacité. Il faut compléter avec l\'hydraulique complète (Bernoulli, pertes de charge, conditions aux limites).' },
+                  { q: 'Continuité : Q = 2,4 m³/s, A1 = 4 m², A2 = 2 m². Calculer v̄1 et v̄2.', r: 'v̄1 = 2,4/4 = 0,60 m/s. v̄2 = 2,4/2 = 1,20 m/s. À débit égal, une section réduite → vitesse plus élevée.', expl: 'Ce raisonnement suppose que le débit est identique en amont et en aval (pas de stockage, pas d\'apport latéral). En crue, c\'est fréquemment faux.' },
+                  { q: 'Pendant 30 min : Q_in = 4 m³/s, Q_out = 3,5 m³/s. Calculer ΔVs.', r: 'dVs/dt = 4−3,5 = 0,5 m³/s. ΔVs = 0,5 × 30×60 = 900 m³ stockés dans le tronçon.', expl: 'Cela explique pourquoi Q_amont ≠ Q_aval au même instant en crue — le volume stocké dans le lit et les annexes augmente.' },
+                  { q: 'Pourquoi une même hauteur à l\'échelle peut donner des débits différents à deux dates ?', r: 'La courbe de tarage (hauteur-débit) est propre au site. Une modification du lit (sédimentation, curage), de la végétation ou du contrôle aval peut modifier la relation entre hauteur et débit.', expl: 'C\'est pourquoi les stations hydrométriques font régulièrement des jaugeages de contrôle et mettent à jour leur courbe de tarage.' },
+                  { q: 'Quelle est la différence entre Rh (rayon hydraulique) et Dh (profondeur hydraulique) ?', r: 'Rh = A/P (A divisée par le périmètre mouillé). Dh = A/T (A divisée par la largeur au miroir). Ce sont deux ratios différents — Rh intervient dans les formules d\'écoulement, Dh dans la caractérisation des régimes.', expl: 'Pour une section rectangulaire large (T >> h), P ≈ T et Rh ≈ Dh ≈ h. Pour des sections étroites ou des talus importants, les deux valeurs divergent significativement.' },
+                ],
+                schema: `<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="300" fill="#f0f9ff" rx="10"/>
+  <text x="260" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#0c4a6e">Q = A × v̄ — Section mouillée et sous-sections</text>
+  <!-- Section dessin rivière -->
+  <rect x="10" y="30" width="240" height="140" rx="6" fill="#fff" stroke="#94a3b8" stroke-width="0.8"/>
+  <text x="130" y="46" text-anchor="middle" font-size="10" font-weight="bold" fill="#0c4a6e">Section naturelle</text>
+  <!-- Fond de rivière -->
+  <polygon points="20,155 70,100 110,80 150,90 190,75 230,110 240,155" fill="#bfdbfe" opacity="0.7"/>
+  <path d="M20,155 Q70,100 110,80 Q150,90 190,75 Q230,110 240,155 Z" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+  <!-- Surface -->
+  <line x1="20" y1="65" x2="240" y2="65" stroke="#0ea5e9" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="130" y="61" text-anchor="middle" fill="#0369a1" font-size="8">Surface libre</text>
+  <!-- Sous-sections -->
+  <rect x="20" y="65" width="60" height="90" fill="#93c5fd" opacity="0.4"/>
+  <text x="50" y="115" text-anchor="middle" fill="#1e3a8a" font-size="8" font-weight="bold">A₁</text>
+  <text x="50" y="126" text-anchor="middle" fill="#1e3a8a" font-size="7">v̄₁ = 0,20</text>
+  <line x1="80" y1="65" x2="80" y2="155" stroke="#475569" stroke-width="0.8" stroke-dasharray="2,2"/>
+  <rect x="80" y="65" width="80" height="90" fill="#3b82f6" opacity="0.3"/>
+  <text x="120" y="108" text-anchor="middle" fill="#1e3a8a" font-size="8" font-weight="bold">A₂</text>
+  <text x="120" y="119" text-anchor="middle" fill="#1e3a8a" font-size="7">v̄₂ = 0,60</text>
+  <line x1="160" y1="65" x2="160" y2="155" stroke="#475569" stroke-width="0.8" stroke-dasharray="2,2"/>
+  <rect x="160" y="65" width="80" height="90" fill="#60a5fa" opacity="0.4"/>
+  <text x="200" y="115" text-anchor="middle" fill="#1e3a8a" font-size="8" font-weight="bold">A₃</text>
+  <text x="200" y="126" text-anchor="middle" fill="#1e3a8a" font-size="7">v̄₃ = 0,40</text>
+  <!-- Labels géométrie -->
+  <text x="25" y="78" fill="#0369a1" font-size="8">T (largeur)</text>
+  <line x1="20" y1="72" x2="240" y2="72" stroke="#0369a1" stroke-width="0.8" marker-start="url(#aT)" marker-end="url(#aT2)"/>
+  <!-- Sections formules en bas -->
+  <text x="10" y="165" fill="#475569" font-size="8">Fond (P mouillé)</text>
+  <!-- Formules box -->
+  <rect x="258" y="30" width="252" height="140" rx="6" fill="#fff" stroke="#94a3b8" stroke-width="0.8"/>
+  <text x="384" y="46" text-anchor="middle" font-size="10" font-weight="bold" fill="#0c4a6e">Formules essentielles</text>
+  <rect x="266" y="54" width="236" height="22" rx="4" fill="#dbeafe"/>
+  <text x="384" y="69" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a8a">Q = A × v̄</text>
+  <rect x="266" y="80" width="236" height="22" rx="4" fill="#dcfce7"/>
+  <text x="384" y="95" text-anchor="middle" font-size="9" fill="#14532d">Q ≈ Σ Aᵢ × v̄ᵢ  (sous-sections)</text>
+  <rect x="266" y="106" width="236" height="22" rx="4" fill="#fef3c7"/>
+  <text x="384" y="121" text-anchor="middle" font-size="9" fill="#92400e">v̄ = Σ Aᵢv̄ᵢ / Σ Aᵢ  (pondérée)</text>
+  <rect x="266" y="132" width="236" height="22" rx="4" fill="#f3e8ff"/>
+  <text x="384" y="147" text-anchor="middle" font-size="9" fill="#581c87">A₁v̄₁ = A₂v̄₂  (continuité)</text>
+  <!-- Tableau des sections -->
+  <rect x="10" y="182" width="500" height="108" rx="6" fill="#fff" stroke="#94a3b8" stroke-width="0.8"/>
+  <text x="260" y="198" text-anchor="middle" font-size="10" font-weight="bold" fill="#0c4a6e">Types de section</text>
+  <!-- Rectangulaire -->
+  <rect x="18" y="206" width="150" height="76" rx="4" fill="#dbeafe"/>
+  <text x="93" y="220" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a8a">Rectangulaire</text>
+  <rect x="48" y="228" width="90" height="30" fill="#93c5fd" opacity="0.6"/>
+  <text x="93" y="248" text-anchor="middle" font-size="8" fill="#1e3a8a">A = b × h</text>
+  <text x="93" y="260" text-anchor="middle" font-size="8" fill="#1e3a8a">P = b + 2h</text>
+  <text x="93" y="272" text-anchor="middle" font-size="7" fill="#64748b">Rh = A/P</text>
+  <!-- Trapézoïdale -->
+  <rect x="178" y="206" width="155" height="76" rx="4" fill="#dcfce7"/>
+  <text x="255" y="220" text-anchor="middle" font-size="9" font-weight="bold" fill="#14532d">Trapézoïdale</text>
+  <polygon points="220,258 235,228 275,228 290,258" fill="#86efac" opacity="0.6"/>
+  <text x="255" y="248" text-anchor="middle" font-size="8" fill="#14532d">T = b+2zh</text>
+  <text x="255" y="260" text-anchor="middle" font-size="8" fill="#14532d">A = h(b+zh)</text>
+  <text x="255" y="272" text-anchor="middle" font-size="7" fill="#64748b">z = talus H/V</text>
+  <!-- Naturelle -->
+  <rect x="343" y="206" width="160" height="76" rx="4" fill="#fef3c7"/>
+  <text x="423" y="220" text-anchor="middle" font-size="9" font-weight="bold" fill="#92400e">Naturelle irrégulière</text>
+  <polyline points="353,258 370,238 393,228 415,233 435,224 458,235 494,258" fill="none" stroke="#d97706" stroke-width="1.5"/>
+  <text x="423" y="255" text-anchor="middle" font-size="8" fill="#92400e">Aᵢ ≈ (hᵢ+hᵢ₊₁)/2</text>
+  <text x="423" y="267" text-anchor="middle" font-size="8" fill="#92400e">× (xᵢ₊₁−xᵢ)</text>
+  <text x="423" y="279" text-anchor="middle" font-size="7" fill="#64748b">A ≈ Σ Aᵢ</text>
+  <defs>
+    <marker id="aT" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M6,0 L0,3 L6,6 Z" fill="#0369a1"/></marker>
+    <marker id="aT2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0369a1"/></marker>
+  </defs>
+</svg>`,
+                exercice: {
+                  enonce: 'Section naturelle relevée : x = 0 m (h=0), 1 m (h=0,40), 2 m (h=0,80), 3 m (h=0,60), 4 m (h=0). (1) Calculer A par la méthode des trapèzes. (2) Avec v̄ = 0,50 m/s, calculer Q. (3) Trois sous-sections : A1=0,40 m² v1=0,20 m/s, A2=0,80 m² v2=0,60 m/s, A3=0,60 m² v3=0,40 m/s. Calculer Q et v̄ pondérée. (4) Comparer avec la moyenne arithmétique des vitesses et calculer l\'erreur relative.',
+                  solution: '<strong>(1) Section naturelle :</strong><br>A₁ = (0+0,40)/2 × 1 = 0,20 m² | A₂ = (0,40+0,80)/2 × 1 = 0,60 m² | A₃ = (0,80+0,60)/2 × 1 = 0,70 m² | A₄ = (0,60+0)/2 × 1 = 0,30 m²<br>A ≈ 0,20+0,60+0,70+0,30 = <strong>1,80 m²</strong><br><strong>(2) Débit :</strong> Q = 1,80 × 0,50 = <strong>0,90 m³/s = 900 L/s</strong><br><strong>(3) Sous-sections :</strong> Q = 0,40×0,20 + 0,80×0,60 + 0,60×0,40 = 0,08+0,48+0,24 = <strong>0,80 m³/s</strong>. v̄ = 0,80/(0,40+0,80+0,60) = 0,80/1,80 = <strong>0,444 m/s</strong><br><strong>(4) Moyenne arithmétique :</strong> (0,20+0,60+0,40)/3 = 0,40 m/s → Q = 1,80×0,40 = 0,72 m³/s. Erreur = (0,72−0,80)/0,80×100 = <strong>−10 %</strong>. Les trois vitesses ne représentent pas des aires identiques — la pondération est obligatoire.',
+                },
+              },
+            ],
+          }, // fin gem-m7
+
         ],
       },
     ],
