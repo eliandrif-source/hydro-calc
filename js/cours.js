@@ -6916,6 +6916,169 @@ const COURS_DATA = {
             ],
           }, // fin gem-m11
 
+          {
+            id: 'gem-m12',
+            name: 'Cartographie et systèmes de coordonnées',
+            ico: '🗺️',
+            chapitres: [
+              {
+                id: 'gem-sig1',
+                titre: 'Cartographie et systèmes de coordonnées',
+                fiche: {
+                  intro: 'Avant de calculer un niveau d\'eau ou de tracer une zone inondable, il faut situer les données dans un cadre cohérent. Une erreur de système de coordonnées peut déplacer une couche cartographique. Une erreur de référence altimétrique peut créer une fausse chute ou inverser une pente. Ce chapitre explique comment réunir des données géographiques dans des références horizontales et verticales cohérentes, effectuer des mesures adaptées à leur précision, et identifier les erreurs classiques.',
+                  points: [
+                    'Une coordonnée seule ne suffit pas. X=700 000, Y=6 600 000 ne localise rien sans : le système de référence, les unités, l\'ordre des axes, et si nécessaire la réalisation du référentiel. Z=125,40 peut désigner une altitude nationale, une hauteur ellipsoïdale ou une cote dans un repère local. Une coordonnée est un nombre accompagné d\'une définition.',
+                    'La Terre et ses représentations — quatre niveaux à distinguer : terrain réel (surface physique), ellipsoïde (support géométrique du positionnement), géoïde/quasi-géoïde (surfaces liées au champ de pesanteur et aux altitudes), projection cartographique (passage surface courbe → plan). L\'ellipsoïde ne reproduit ni les montagnes, ni les rivières. La surface du positionnement n\'est pas celle des altitudes.',
+                    'Coordonnées géographiques (φ, λ) exprimées en degrés angulaires : latitude situe au nord/sud de l\'équateur, longitude par rapport au méridien d\'origine. Ne pas appliquer Pythagore à des degrés — une différence de longitude de 0,01° correspond à une distance qui varie avec la latitude. Pour des calculs métriques, utiliser des coordonnées projetées.',
+                    'Conversion DMS → degrés décimaux : D_décimal = D + M/60 + S/3600. Le signe s\'applique à l\'angle complet (Ouest → négatif). Exemple : 48°15\'30\'\'N = 48,2583°. Vérifier aussi l\'ordre des axes : latitude puis longitude, ou longitude puis latitude — une inversion peut placer les données très loin du secteur.',
+                    'Coordonnées projetées (E, N ou X, Y) en mètres — permettent calculs métriques locaux (distances, surfaces, pentes). Mais une projection introduit des déformations : une distance mesurée dans le plan n\'est pas nécessairement exactement la distance horizontale sur le terrain. Pour une grande précision, des corrections de projection et d\'altitude s\'appliquent.',
+                    'Ce qu\'une projection conserve et déforme : conformité = conservation locale des angles ; équivalence = conservation des surfaces ; équidistance particulière = conservation de certaines distances. Aucune projection ne préserve tout simultanément. La déformation dépend de la position. Choisir en fonction de l\'étendue, de la localisation et des mesures recherchées.',
+                    'RGF93 = référentiel géodésique français 1993. Lambert-93 = une projection fondée sur ce référentiel. CC9Z = Coniques Conformes neuf zones. Un code EPSG identifie une définition, mais ne garantit pas la réalisation effectivement utilisée pour produire les données. Pour une étude précise : conserver définition complète, réalisation, époque, opération de transformation. Ne pas changer arbitrairement le code.',
+                    'Référence horizontale ≠ référence verticale : deux composantes indépendantes. Lambert-93 ne définit pas l\'altitude. "Coordonnées GPS" ne précise pas si Z est une hauteur ellipsoïdale ou une altitude déjà convertie. Documenter séparément : horizontale (référentiel, projection, unités, axes) et verticale (type, référence, unité). Quelques centimètres peuvent modifier l\'interprétation d\'un point bas ou d\'une pente faible.',
+                    'Références altimétriques en France métropolitaine : NGF-IGN69 (continentale), NGF-IGN78 (Corse). "NGF" seul est générique — peut masquer une référence historique (NGF-Lallemand). Un ancien plan "cotes NGF" demande vérification. Pour l\'outre-mer : référence propre au territoire. Comparer des altitudes uniquement après vérification de leur compatibilité.',
+                    'Hauteur ellipsoïdale (h_ell) ≠ altitude nationale (H_alt) : H_alt = h_ell − Δ, où Δ est la séparation fournie par la conversion choisie (grille RAF20 pour NGF-IGN69 en France continentale, outil Circé IGN). La correction n\'est pas une constante universelle. Enregistrer : références de départ/arrivée, opération, grille, version, zone de validité, précision annoncée.',
+                    'Attribuer un système ≠ transformer. Attribution : indiquer comment interpréter les valeurs existantes, sans recalculer. Transformation/reprojection : recalculer les coordonnées dans une autre référence. Erreur classique : attribuer un système géographique (degrés) à un fichier en mètres — les nombres ne changent pas mais sont interprétés incorrectement. Un SIG peut afficher plusieurs couches dans un système commun sans réécrire les fichiers sources.',
+                    'Résolution, précision, répétabilité et décimales sont quatre notions distinctes. Décimales affichées ≠ précision réelle. Un raster à maille 50 cm n\'a pas automatiquement une précision verticale de 50 cm. Agrandir une carte ne crée pas de nouvelles informations. Contrôle de cohérence en 8 étapes : (1) lire métadonnées, (2) identifier systèmes, (3) vérifier références verticales, (4) examiner étendues, (5) vérifier points reconnaissables, (6) transformer, (7) recontôler, (8) conserver originaux.',
+                  ],
+                  formules: [
+                    'D_{\\mathrm{décimal}}=D+\\dfrac{M}{60}+\\dfrac{S}{3600} \\quad (\\text{signe sur l\'angle complet})',
+                    'd_{\\mathrm{plan}}=\\sqrt{\\Delta X^2+\\Delta Y^2}',
+                    'S=\\dfrac{\\Delta Z}{L} \\qquad L_{\\mathrm{terrain}}=n\\times L_{\\mathrm{carte}}',
+                    'H_{\\mathrm{alt}}=h_{\\mathrm{ell}}-\\Delta \\quad (\\Delta\\text{ : séparation de conversion, variable dans l\'espace})',
+                  ],
+                  retenir: 'Coordonnées géog. en degrés ≠ mètres. Lambert-93 = projection, pas référence verticale. NGF-IGN69 pour altitudes métropole. h_ell − Δ = H_alt. Attribution ≠ transformation. Décimales ≠ précision. Agrandir ≠ plus d\'info. Contrôler cohérence (systèmes + verticales) avant toute analyse.',
+                  sections: [
+                    {
+                      titre: '1. Systèmes de coordonnées et références',
+                      sous_sections: [
+                        {
+                          titre: '1.1. Géographiques, projetées et référentiels',
+                          texte: '<p><strong>Coordonnées géographiques</strong> (φ, λ) : angles en degrés. Une différence de longitude n\'est pas une distance fixe en mètres — elle varie avec la latitude. Ne pas appliquer Pythagore à des degrés.</p><p><strong>Coordonnées projetées</strong> (E, N ou X, Y) : positions dans un plan, en mètres. Permettent calculs métriques locaux mais introduisent des déformations. La distance plane entre A et B : d=√(ΔX²+ΔY²).</p><p><strong>Référentiel géodésique</strong> : cadre du positionnement. En France métropolitaine : RGF93. Lambert-93 est une <em>projection</em> fondée sur le RGF93. Ce sont deux choses distinctes.</p><p>Conversion DMS → décimal : D+M/60+S/3600. Le signe s\'applique à l\'angle complet. Vérifier l\'ordre des axes (lat/lon ou lon/lat) : une inversion peut placer les données à des milliers de kilomètres.</p>'
+                        },
+                        {
+                          titre: '1.2. Codes EPSG et attribution de système',
+                          texte: '<p>Un code EPSG identifie une définition dans le registre géodésique. EPSG:2154 est courant pour Lambert-93, mais ne garantit pas toujours la réalisation effectivement utilisée pour produire les données.</p><p><strong>Attribution ≠ transformation :</strong></p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Attribution</strong> : on indique comment interpréter les valeurs existantes, sans recalculer leur position numérique.</li><li style="margin-bottom:4px"><strong>Transformation</strong> : on recalcule les coordonnées dans une autre référence, en conservant la même position physique.</li></ul><p>Erreur classique : attribuer un système géographique (degrés) à un fichier en mètres. Les nombres ne changent pas mais sont mal interprétés. Un SIG peut afficher plusieurs couches dans un système commun sans réécrire les fichiers sources — la couche conserve son propre système.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '2. Projections et déformations',
+                      sous_sections: [
+                        {
+                          titre: '2.1. Ce qu\'une projection conserve',
+                          texte: '<p>On ne peut pas représenter une surface courbe sur un plan sans déformation. Les projections privilégient certaines propriétés :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Conforme</strong> : conservation locale des angles (mais pas les surfaces ni toutes les distances)</li><li style="margin-bottom:4px"><strong>Équivalente</strong> : conservation des surfaces (mais déformation des angles)</li><li style="margin-bottom:4px"><strong>Équidistante</strong> : conservation de certaines distances selon des directions ou depuis certains points</li></ul><p>La déformation dépend de la position dans la projection. Le Lambert-93 est conforme, adapté à la France métropolitaine. Les Coniques Conformes 9 zones (CC9Z) limitent les déformations sur des bandes de latitude plus étroites.</p><p>Pour les territoires ultramarins, utiliser les références et projections propres au territoire, pas automatiquement un système métropolitain.</p>'
+                        },
+                        {
+                          titre: '2.2. Déformations pratiques et échelle',
+                          texte: '<p>Une distance mesurée en coordonnées projetées ≠ distance horizontale réelle sur le terrain, surtout pour de grandes étendues ou loin du méridien central. Pour une grande précision, des corrections de projection et d\'altitude s\'appliquent.</p><p><strong>Échelle cartographique</strong> 1:n — un centimètre représente n cm sur le terrain.<br><em>Exemples :</em> 1:500 → 1 cm = 5 m ; 1:5 000 → 1 cm = 50 m ; 1:25 000 → 1 cm = 250 m.</p><p>Agrandir une carte ne crée pas de nouvelles informations. Un fond conçu pour une lecture territoriale ne devient pas un levé topographique précis en zoomant. Résolution, précision, répétabilité et décimales sont quatre notions distinctes.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '3. Références altimétriques et conversion',
+                      sous_sections: [
+                        {
+                          titre: '3.1. NGF-IGN69, NGF-IGN78 et références verticales',
+                          texte: '<p>La référence verticale est indépendante du système horizontal. Lambert-93 ne définit pas l\'altitude.</p><p>France métropolitaine continentale : <strong>NGF-IGN69</strong>. Corse : <strong>NGF-IGN78</strong>. "NGF" seul peut masquer une référence historique (NGF-Lallemand). Un ancien plan portant "cotes NGF" demande vérification. Pour l\'outre-mer : référence propre au territoire.</p><p>Documenter séparément :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Horizontale</strong> : référentiel, projection, unités, axes</li><li style="margin-bottom:4px"><strong>Verticale</strong> : type de hauteur, référence, unité</li></ul><p>Quelques centimètres peuvent modifier l\'interprétation d\'un point bas ou d\'une pente faible. En hydraulique GEMAPI, cette distinction est essentielle.</p>'
+                        },
+                        {
+                          titre: '3.2. Hauteur ellipsoïdale et conversion verticale',
+                          texte: '<p>Un positionnement GNSS fournit une hauteur ellipsoïdale h_ell. Une altitude nationale H_alt est une autre grandeur.</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center;font-weight:bold">H_alt = h_ell − Δ</p><p>Δ est la séparation fournie par l\'opération de conversion choisie. Elle <strong>varie dans l\'espace</strong> — ce n\'est pas une constante universelle.</p><p>L\'IGN fournit la grille RAF20 pour NGF-IGN69 en France continentale, via l\'outil Circé. Enregistrer : références de départ/arrivée, opération, grille, version, zone de validité, précision annoncée.</p><p><em>Exemple fictif :</em> h_ell=172,46 m, Δ=47,32 m → H_alt=125,14 m. La vérifier avec un point de nivellement connu si possible.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '4. Mesures et précision',
+                      sous_sections: [
+                        {
+                          titre: '4.1. Calculs de distance et de pente',
+                          texte: '<p><strong>Distance plane</strong> (dans un même système projeté métrique) :</p><p style="text-align:center;font-weight:bold">d = √(ΔX² + ΔY²)</p><p><em>Exemple :</em> A=(700 000 ; 6 600 000), B=(700 300 ; 6 600 400) → ΔX=300, ΔY=400 → d=500 m.</p><p>Ce n\'est pas la longueur d\'un cours d\'eau sinueux. Pour mesurer une rivière, suivre son axe.</p><p><strong>Pente :</strong> S = ΔZ / L. Les deux altitudes doivent être compatibles (même référence). L doit correspondre à la longueur pertinente (axe du cours d\'eau pour une pente longitudinale).</p><p><em>Exemple :</em> Z_am=125,80 m, Z_av=125,30 m, L=500 m → S=0,50/500=0,001=0,1 %.</p>'
+                        },
+                        {
+                          titre: '4.2. Résolution, précision et décimales',
+                          texte: '<p>Quatre notions distinctes à ne pas confondre :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Résolution</strong> : quelle taille de détail est représentée ?</li><li style="margin-bottom:4px"><strong>Précision</strong> : quel écart peut exister avec la position réelle ?</li><li style="margin-bottom:4px"><strong>Répétabilité</strong> : les mesures répétées sont-elles proches ?</li><li style="margin-bottom:4px"><strong>Décimales affichées</strong> : comment la valeur est-elle écrite ?</li></ul><p>Une altitude 125,438726 m n\'est pas nécessairement connue au micromètre. Un raster à maille 50 cm n\'a pas automatiquement une précision verticale de 50 cm. Des mesures très proches peuvent partager un biais commun.</p><p>Indiquer la précision défendable au regard de la méthode et des contrôles, pas seulement reprendre les décimales du logiciel.</p><p><strong>Erreur d\'altitude commune :</strong> si les deux points ont un même décalage de +Δ, leur différence reste inchangée (et la pente aussi). Mais leur comparaison avec d\'autres données peut être faussée.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '5. Contrôle de cohérence et erreurs fréquentes',
+                      sous_sections: [
+                        {
+                          titre: '5.1. Démarche de contrôle des couches',
+                          texte: '<p>Avant une analyse multi-couches, suivre cette démarche :</p><ol style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Lire les métadonnées de chaque couche</li><li style="margin-bottom:4px">Identifier les systèmes horizontaux et unités</li><li style="margin-bottom:4px">Contrôler les références verticales</li><li style="margin-bottom:4px">Examiner les étendues géographiques</li><li style="margin-bottom:4px">Vérifier plusieurs points reconnaissables répartis sur le secteur</li><li style="margin-bottom:4px">Effectuer les transformations nécessaires</li><li style="margin-bottom:4px">Recontôler après transformation</li><li style="margin-bottom:4px">Conserver les données originales</li></ol><p>Un raccord correct sur un seul point ne prouve pas l\'absence de rotation ou de déformation. Ne pas déplacer manuellement une couche "pour qu\'elle colle à la photo" sans comprendre l\'origine du décalage. L\'image de fond possède aussi ses propres limites de précision.</p>'
+                        },
+                        {
+                          titre: '5.2. Dix erreurs fréquentes',
+                          texte: '<table style="width:100%;border-collapse:collapse;font-size:10px"><thead><tr style="background:var(--c-primary,#2563eb);color:white"><th style="padding:4px 6px;text-align:left">Erreur</th><th style="padding:4px 6px;text-align:left">Correction</th></tr></thead><tbody><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Mélanger degrés et mètres</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Identifier les unités de chaque couche</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Inverser latitude et longitude</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Vérifier l\'ordre des axes</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Attribuer un nouveau système pour convertir</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Utiliser une transformation adaptée</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Croire que Lambert-93 définit l\'altitude</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Documenter séparément la référence verticale</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Confondre h_ell et altitude nationale</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Vérifier la conversion déjà effectuée ou à réaliser</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Appliquer un décalage vertical constant partout</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Vérifier méthode et zone de validité</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Déduire la précision des décimales</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Consulter méthode, contrôles et métadonnées</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Mesurer une rivière par la distance entre extrémités</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Utiliser l\'axe du cours d\'eau</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Recaler visuellement sans diagnostic</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Rechercher la cause du décalage</td></tr><tr><td style="padding:4px 6px">Soustraire deux terrains non alignés</td><td style="padding:4px 6px">Harmoniser références et grilles</td></tr></tbody></table>'
+                        }
+                      ]
+                    }
+                  ],
+                },
+                flashcards: [
+                  { q: 'Convertir 47°30\'00\'\'N en degrés décimaux.', r: '47 + 30/60 = 47,5°. Positive car N.', expl: 'D_décimal = D + M/60 + S/3600. Pour l\'ouest, le signe négatif s\'applique à l\'angle complet. Vérifier l\'ordre des axes (lat/lon) dans le fichier de destination.' },
+                  { q: 'Convertir 1°15\'00\'\'O en degrés décimaux.', r: '−(1 + 15/60) = −1,25°. Négatif car O (convention ouest négatif).', expl: 'Le signe s\'applique à l\'angle entier, pas seulement aux degrés. Certains formats encodent l\'hémisphère séparément (O/E, N/S) — vérifier.' },
+                  { q: 'ΔX=120 m, ΔY=160 m. Calculer la distance plane.', r: 'd = √(120²+160²) = √(14400+25600) = √40000 = 200 m.', expl: 'Cette formule donne la distance droite dans le plan projeté, pas la longueur d\'un tracé sinueux ni la distance sur le terrain avec le relief.' },
+                  { q: 'Pente d\'un tronçon : dénivellation 0,90 m, longueur 600 m.', r: 'S = 0,90/600 = 0,0015 = 0,15 % = 1,5 ‰.', expl: 'Vérifier que les deux altitudes proviennent de la même référence et que L est la longueur pertinente (axe du cours d\'eau, pas la distance à vol d\'oiseau).' },
+                  { q: 'h_ell=180,25 m, séparation Δ=48,10 m. Calculer H_alt.', r: 'H_alt = 180,25 − 48,10 = 132,15 m.', expl: 'Δ n\'est pas une constante universelle : elle varie dans l\'espace. L\'opération n\'est valide que si la séparation Δ correspond bien au point et aux références utilisées.' },
+                  { q: 'Un fichier contient des coordonnées Lambert-93 confirmées mais sans définition. Que faire ?', r: 'Attribuer la définition Lambert-93/RGF93 correspondante. Pas de transformation — les coordonnées en mètres ne changent pas, on précise seulement comment les interpréter.', expl: 'Attribuer ≠ transformer. Une transformation recalcule les valeurs numériques vers une autre référence. L\'attribution ne modifie pas les nombres.' },
+                  { q: 'Deux altitudes ont toutes deux un décalage de +0,30 m. La pente calculée change-t-elle ?', r: 'Non : (Z₁+0,30)−(Z₂+0,30) = Z₁−Z₂. La pente est inchangée.', expl: 'Un décalage vertical commun n\'affecte pas les différences. En revanche, la comparaison avec un ouvrage ou une donnée d\'une autre source peut être faussée.' },
+                  { q: 'Sur une carte 1:5 000, une ligne mesure 3,2 cm. Quelle longueur terrain ?', r: 'L = 3,2 × 5 000 = 16 000 cm = 160 m.', expl: 'Valable si la carte est affichée ou imprimée à l\'échelle annoncée. Agrandir une carte ne crée pas de nouvelles informations — la précision intrinsèque des données ne change pas.' },
+                ],
+                schema: `<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="300" fill="#fefce8" rx="10"/>
+  <text x="260" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="#713f12">Surfaces de référence et hauteurs</text>
+  <!-- Terrain réel (irrégulier) -->
+  <path d="M10,120 Q40,95 70,105 Q100,115 120,90 Q150,65 180,80 Q210,95 240,75 Q270,55 300,70 Q330,85 360,65 Q390,45 420,60 Q450,75 480,65 Q500,58 510,62" fill="none" stroke="#78350f" stroke-width="2.5"/>
+  <text x="480" y="58" font-size="9" fill="#78350f" text-anchor="end">Terrain réel</text>
+  <!-- Ellipsoïde (courbe régulière) -->
+  <path d="M10,200 Q130,185 260,182 Q390,179 510,175" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="7,3"/>
+  <text x="505" y="172" font-size="9" fill="#2563eb" text-anchor="end">Ellipsoïde</text>
+  <!-- Quasi-géoïde / Géoïde (légèrement ondulée) -->
+  <path d="M10,160 Q80,152 160,155 Q230,158 300,150 Q380,143 460,148 Q485,150 510,147" fill="none" stroke="#16a34a" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="505" y="145" font-size="9" fill="#16a34a" text-anchor="end">Quasi-géoïde</text>
+  <!-- Point P on terrain -->
+  <circle cx="240" cy="75" r="4" fill="#dc2626"/>
+  <text x="244" y="72" font-size="10" font-weight="bold" fill="#dc2626">P</text>
+  <!-- h_ell arrow: from ellipsoid to point P -->
+  <line x1="240" y1="182" x2="240" y2="78" stroke="#2563eb" stroke-width="1.5"/>
+  <polygon points="237,80 243,80 240,74" fill="#2563eb"/>
+  <text x="244" y="135" font-size="9" font-weight="bold" fill="#2563eb">h_ell</text>
+  <!-- Delta arrow: from ellipsoid to quasi-geoid -->
+  <line x1="200" y1="158" x2="200" y2="182" stroke="#f97316" stroke-width="1.5"/>
+  <polygon points="197,179 203,179 200,184" fill="#f97316"/>
+  <polygon points="197,161 203,161 200,156" fill="#f97316"/>
+  <text x="205" y="172" font-size="9" font-weight="bold" fill="#f97316">Δ</text>
+  <!-- H_alt arrow: from quasi-geoid to point P -->
+  <line x1="160" y1="155" x2="160" y2="78" stroke="#16a34a" stroke-width="1.5"/>
+  <polygon points="157,80 163,80 160,74" fill="#16a34a"/>
+  <text x="165" y="118" font-size="9" font-weight="bold" fill="#16a34a">H_alt</text>
+  <!-- Formula box -->
+  <rect x="290" y="100" width="200" height="22" rx="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+  <text x="390" y="115" text-anchor="middle" font-size="11" font-weight="bold" fill="#14532d">H_alt = h_ell − Δ</text>
+  <!-- Projection illustration -->
+  <rect x="10" y="225" width="500" height="60" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1"/>
+  <text x="260" y="240" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a8a">Systèmes courants en France métropolitaine</text>
+  <rect x="20" y="246" width="145" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+  <text x="92" y="260" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a8a">Référence horiz.</text>
+  <text x="92" y="272" text-anchor="middle" font-size="9" fill="#1e3a8a">RGF93 / Lambert-93</text>
+  <rect x="187" y="246" width="145" height="32" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+  <text x="259" y="260" text-anchor="middle" font-size="9" font-weight="bold" fill="#14532d">Référence vert. continent.</text>
+  <text x="259" y="272" text-anchor="middle" font-size="9" fill="#14532d">NGF-IGN69 (RAF20)</text>
+  <rect x="354" y="246" width="145" height="32" rx="4" fill="#fce7f3" stroke="#db2777" stroke-width="1"/>
+  <text x="426" y="260" text-anchor="middle" font-size="9" font-weight="bold" fill="#831843">Attribution ≠ Transfo.</text>
+  <text x="426" y="272" text-anchor="middle" font-size="9" fill="#831843">Interpréter ≠ Recalculer</text>
+  <!-- Point cloud label -->
+  <text x="260" y="195" text-anchor="middle" font-size="8.5" fill="#64748b">(les surfaces sont schématiques — amplitudes volontairement exagérées)</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Étude de cas : trois documents décrivent le même repère de la rivière des Saules. Document A (ancien plan local) : cote = 100,00 m. Document B (levé récent) : NGF-IGN69 = 124,80 m. Document C (GNSS) : h_ell = 172,10 m. (1) Convertir la coordonnée 48°15\'30\'\'N en degrés décimaux. (2) La différence entre les documents A et B s\'explique-t-elle ? (3) Calculer la séparation Δ déduite des documents B et C. (4) Deux points proches ont Z_am=124,90 m et Z_av=124,40 m (NGF-IGN69) sur une longueur de 400 m. Calculer la pente. Si les deux valeurs avaient été entachées d\'un décalage commun de +0,30 m, la pente aurait-elle changé ?',
+                  solution: '<strong>(1) Conversion :</strong> 48 + 15/60 + 30/3600 = 48 + 0,250 + 0,00833 = <strong>48,2583°</strong>.<br><strong>(2) Écart A–B :</strong> 124,80 − 100,00 = <strong>24,80 m</strong>. Ce chiffre n\'est pas incohérent en soi : le document A utilise un repère local, le document B le NGF-IGN69. L\'écart suggère une translation verticale, mais il faudrait plusieurs points pour vérifier l\'ensemble du levé A.<br><strong>(3) Séparation :</strong> Δ = h_ell − H_alt = 172,10 − 124,80 = <strong>47,30 m</strong>. Cette valeur doit être confrontée à la grille RAF20 pour ce secteur. Si elle diffère, vérifier la conversion déjà effectuée ou les références utilisées.<br><strong>(4) Pente :</strong> S = (124,90 − 124,40) / 400 = 0,50 / 400 = <strong>0,00125 = 0,125 %</strong>. Avec un décalage commun +0,30 m : (124,90+0,30) − (124,40+0,30) = 0,50 m → pente inchangée. En revanche, si on compare l\'une de ces cotes à un seuil provenant d\'une autre source (sans ce décalage), la comparaison sera faussée de 0,30 m.',
+                },
+              },
+            ],
+          }, // fin gem-m12
+
         ],
       },
     ],
