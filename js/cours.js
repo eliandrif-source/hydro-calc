@@ -6553,6 +6553,369 @@ const COURS_DATA = {
             ],
           }, // fin gem-m9
 
+          {
+            id: 'gem-m10',
+            name: 'Remous et ouvrages de franchissement',
+            ico: '🌉',
+            chapitres: [
+              {
+                id: 'gem-hsl4',
+                titre: 'Remous, singularités et ouvrages de franchissement',
+                fiche: {
+                  intro: 'Un pont, une buse ou un seuil peut modifier les niveaux d\'eau bien au-delà de son emplacement. Ce chapitre explique comment appliquer un bilan d\'énergie entre deux sections, distinguer pertes réparties et localisées, analyser les fonctionnements d\'un pont ou d\'une buse, et identifier les données nécessaires à un diagnostic d\'ouvrage.',
+                  points: [
+                    'Remous = modification du profil de la surface libre sous l\'influence d\'un contrôle hydraulique (ouvrage, niveau aval, changement de géométrie). ≠ tourbillon. En régime fluvial (Fr<1), cette influence peut se propager vers l\'amont. Une eau visuellement calme peut être fortement influencée par un ouvrage situé à l\'aval.',
+                    'L\'aval influence l\'amont en régime fluvial : un seuil, une retenue, un pont contraignant, une confluence en crue, une marée ou une obstruction peuvent relever les niveaux à l\'amont. Un débordement local n\'indique pas que le problème se situe exactement là où l\'eau déborde.',
+                    'Variation progressive : profondeur change lentement sur une grande distance, pression hydrostatique approximativement valide. Variation rapide : changement fort sur une courte distance (ressaut, chute, entrée brusque) — accélérations verticales et recirculations. Les formules de profil progressif ne représentent pas les détails d\'une transition rapide.',
+                    'Bilan d\'énergie : H₁ = H₂ + ΔH (ΔH ≥ 0 dans le sens de l\'écoulement). Différence de niveaux ≠ perte de charge si les hauteurs de vitesse diffèrent. Exemple : Zwat,2=100 m, v̄₁=0,80 m/s, v̄₂=1,60 m/s, ΔH=0,15 m → Zwat,1 ≈ 100,248 m (écart =0,248 m ≠ 0,15 m).',
+                    'Pertes réparties : ΔHf ≈ Sf×L. Exemple : Sf=0,002, L=50 m → ΔHf=0,10 m. Pertes localisées : ΔHs = ζ×vref²/(2g). Exemple : ζ=0,40, v=3 m/s → ΔHs≈0,183 m. Le coefficient ζ n\'a de sens qu\'avec la géométrie et la vitesse de référence auxquelles il se rapporte.',
+                    'Rétrécissement : Q = A×v̄ → réduire A augmente v̄. Cette accélération redistribue l\'énergie : abaissement local de la surface, augmentation des pertes, possibilité de passage critique, remontée du niveau amont si le passage devient contraignant. Ne pas supposer que débit, profondeur et cote amont restent tous inchangés.',
+                    'Profil de remous (canal prismatique, faible pente, éc. permanent) : dh/dx = (S₀−Sf)/(1−Fr²). En régime fluvial (dénominateur > 0) avec Sf < S₀, la profondeur peut croître vers l\'aval. Attention : une profondeur croissante vers l\'aval ≠ une cote de surface libre croissante (le fond descend aussi). Formule délicate au voisinage de Fr=1.',
+                    'Pont = système complet : culées (rétrécissement), piles (obstruction), intrados (limite haute), tablier et remblai (surverse possible), lit (dépôts, affouillement). Fonctionnements possibles : surface libre, en charge, surverse chaussée, mixte, contournement. La stabilité structurelle est une question distincte du calcul des niveaux.',
+                    'Buse : comportement dépend de la section, longueur, pente, rugosité, forme d\'entrée, radier, niveau aval, dépôts. Contrôle à l\'entrée (géométrie d\'entrée limite) ou à la sortie (conduit + aval déterminants). Examiner les deux contrôles. Une amélioration d\'entrée n\'apporte pas le bénéfice attendu si le niveau aval ou le conduit domine.',
+                    'Niveau aval : un aval en crue peut réduire la capacité de passage d\'une buse, obligeant un niveau amont plus élevé pour le même débit. Examiner plusieurs conditions aval : niveau bas, habituel, élevé, concomitance possible avec la crue de l\'affluent. Un ouvrage satisfaisant avec un aval bas peut devenir contraignant avec un aval haut.',
+                    'Seuil déversant libre : Q = C×b×H^(3/2). Préciser où H est mesurée, si la vitesse d\'approche est prise en compte, la forme de la crête. C a les unités m^(1/2)/s. Cette formule ne s\'applique pas à un seuil noyé. L\'affouillement peut déchausser les fondations sans débordement — la vitesse moyenne seule ne suffit pas.',
+                    'Données minimales pour un diagnostic : altimétrie cohérente (repère unique, une différence de référence peut créer une fausse chute), géométrie et dimensions de l\'ouvrage, profils amont/aval, débit justifié, conditions aval, état de l\'ouvrage, enjeux écologiques. Construire des scénarios : état actuel vs projet, débits variés, obstruction partielle, dépôts.',
+                  ],
+                  formules: [
+                    'H_1 = H_2 + \\Delta H \\qquad H = z + h + \\alpha\\,\\dfrac{\\bar{v}^2}{2g}',
+                    '\\Delta H_f \\approx S_f L \\qquad \\Delta H_s = \\zeta\\,\\dfrac{v_{\\mathrm{ref}}^2}{2g}',
+                    '\\dfrac{\\mathrm{d}h}{\\mathrm{d}x} = \\dfrac{S_0 - S_f}{1 - Fr^2}',
+                    'Q = C\\,b\\,H^{3/2} \\quad (\\text{déversoir libre, H au-dessus de la crête})',
+                  ],
+                  retenir: 'H₁=H₂+ΔH (ΔH≥0). Pertes réparties Sf×L; localisées ζ×v²/(2g). Remous = modification profil, pas tourbillon. Fluvial : aval influence amont. dh/dx=(S₀−Sf)/(1−Fr²). Pont : surface libre/charge/surverse. Buse : entrée ou sortie peut contrôler. Q=CbH^(3/2) invalide si seuil noyé.',
+                  sections: [
+                    {
+                      titre: '1. Remous et propagation amont/aval',
+                      sous_sections: [
+                        {
+                          titre: '1.1. Qu\'est-ce qu\'un remous ?',
+                          texte: '<p>Un <strong>remous</strong> désigne une modification du profil de la surface libre sous l\'influence d\'un contrôle hydraulique : ouvrage, niveau aval, changement de section ou de rugosité. Il ne désigne pas nécessairement un tourbillon visible.</p><p>En régime fluvial (Fr&lt;1), les petites perturbations se propagent vers l\'amont : un niveau aval élevé peut relever les niveaux sur un long tronçon amont. Une eau visuellement calme peut donc être fortement influencée par un ouvrage situé à plusieurs centaines de mètres.</p><p>Un débordement local n\'indique pas que le problème se situe précisément là où l\'eau déborde : l\'obstacle peut être en aval.</p>'
+                        },
+                        {
+                          titre: '1.2. Variation progressive et variation rapide',
+                          texte: '<p>Deux grandes catégories :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Écoulement graduellement varié :</strong> profondeur change lentement sur une grande distance, pression approximativement hydrostatique — formules de profil applicables.</li><li style="margin-bottom:4px"><strong>Écoulement rapidement varié :</strong> transitions brusques (ressaut, chute, entrée dans une buse) — accélérations verticales et recirculations importantes.</li></ul><p>Les formules du profil progressif ne décrivent pas les détails internes d\'une transition rapide. On les applique aux sections situées avant et après la zone perturbée.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '2. Bilan d\'énergie et pertes de charge',
+                      sous_sections: [
+                        {
+                          titre: '2.1. Bilan entre deux sections',
+                          texte: '<p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center;font-weight:bold">H₁ = H₂ + ΔH &nbsp; avec &nbsp; H = z + h + v̄²/(2g)</p><p><strong>Attention :</strong> différence de niveaux d\'eau ≠ perte de charge si les hauteurs de vitesse diffèrent.</p><p><em>Exemple :</em> Zwat,2=100,00 m, v̄₁=0,80 m/s, v̄₂=1,60 m/s, ΔH=0,15 m.</p><p>Zwat,1 = 100,00 + (1,60²−0,80²)/19,62 + 0,15 = 100,00 + 0,098 + 0,15 ≈ <strong>100,248 m</strong>.</p><p>L\'écart de niveaux est 0,248 m, mais la perte de charge est seulement 0,15 m. La différence supplémentaire provient de la variation de hauteur de vitesse.</p>'
+                        },
+                        {
+                          titre: '2.2. Pertes réparties et localisées',
+                          texte: '<p><strong>Pertes réparties</strong> (frottement le long du tronçon) : ΔHf ≈ Sf × L.</p><p><em>Exemple :</em> Sf=0,0015, L=80 m → ΔHf=0,12 m.</p><p><strong>Pertes localisées</strong> (entrée de buse, contraction, obstacle) : ΔHs = ζ × vref²/(2g).</p><p><em>Exemple :</em> ζ=0,50, v=2 m/s → ΔHs = 0,50 × 4/19,62 ≈ 0,102 m.</p><p>Le coefficient ζ n\'a de sens qu\'accompagné de la géométrie, de la formulation et de la vitesse de référence. Deux sources utilisant des formulations différentes peuvent donner des ζ non comparables.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '3. Profil de remous et rétrécissements',
+                      sous_sections: [
+                        {
+                          titre: '3.1. Équation du profil progressif',
+                          texte: '<p>Pour un canal prismatique à faible pente :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center;font-weight:bold">dh/dx = (S₀ − Sf) / (1 − Fr²)</p><p>En régime fluvial (dénominateur &gt; 0), si Sf &lt; S₀, la profondeur peut croître vers l\'aval sous contrôle aval. Une profondeur croissante vers l\'aval ne signifie pas que la <em>cote</em> de la surface libre croît — le fond descend aussi.</p><p>L\'extension d\'un remous dépend du débit, de la pente, de la géométrie, de la rugosité et du niveau imposé à l\'aval. Il n\'existe pas de longueur universelle.</p>'
+                        },
+                        {
+                          titre: '3.2. Rétrécissement et redistribution d\'énergie',
+                          texte: '<p>Q = A×v̄ : réduire A implique d\'augmenter v̄ à débit constant. Cette accélération nécessite une redistribution de l\'énergie :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">abaissement local de la surface libre</li><li style="margin-bottom:4px">augmentation des pertes</li><li style="margin-bottom:4px">possibilité de passage critique</li><li style="margin-bottom:4px">remontée du niveau amont si le passage devient contraignant</li></ul><p>On ne peut pas supposer que débit, profondeur et niveau amont restent tous inchangés après une réduction importante de section. La continuité impose une relation entre débit et vitesse ; elle ne détermine pas à elle seule le profil d\'eau.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '4. Ponts et buses',
+                      sous_sections: [
+                        {
+                          titre: '4.1. Le pont : un système complet',
+                          texte: '<p>Un pont ne se réduit pas à la largeur entre culées. Éléments à examiner :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Culées</strong> : rétrécissement de la section</li><li style="margin-bottom:4px"><strong>Piles</strong> : obstruction et turbulence locale</li><li style="margin-bottom:4px"><strong>Intrados</strong> : limite supérieure de l\'ouverture</li><li style="margin-bottom:4px"><strong>Tablier et remblai</strong> : risque de surverse en montée des eaux</li><li style="margin-bottom:4px"><strong>Lit sous l\'ouvrage</strong> : dépôts et affouillement potentiel</li></ul><p>Fonctionnements possibles selon le débit : surface libre, en charge, surverse chaussée, combiné, contournement latéral. La stabilité structurelle est une question distincte du calcul des niveaux.</p>'
+                        },
+                        {
+                          titre: '4.2. La buse : contrôle entrée ou sortie',
+                          texte: '<p>Le comportement d\'une buse dépend de : section, longueur, pente, rugosité, forme d\'entrée, altitude du radier, niveau aval et dépôts.</p><p><strong>Contrôle à l\'entrée :</strong> la géométrie d\'entrée limite le débit. Améliorer l\'entrée peut augmenter la capacité.</p><p><strong>Contrôle à la sortie :</strong> l\'ensemble conduit + aval gouverne le fonctionnement. Améliorer l\'entrée n\'apporte pas le bénéfice attendu.</p><p>Les méthodes correctes examinent les deux contrôles et retiennent celui qui donne la charge amont la plus élevée. Employer uniquement Manning sur une section supposée pleine ne décrit pas toutes les configurations possibles.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '5. Seuils, affouillement et données nécessaires',
+                      sous_sections: [
+                        {
+                          titre: '5.1. Déversoirs, embâcles et affouillement',
+                          texte: '<p><strong>Seuil déversant libre :</strong> Q = C×b×H^(3/2). Préciser où H est mesurée, si la vitesse d\'approche est incluse, la forme de la crête. C a les unités m^(1/2)/s. Invalide si le seuil est noyé.</p><p><strong>Embâcles :</strong> une réduction de 30 % de l\'ouverture ≠ réduction de 30 % du débit — les niveaux et les cheminements changent. Diagnostiquer les situations de risque en distinguant les fonctions écologiques du bois et les risques liés aux ouvrages.</p><p><strong>Affouillement :</strong> érosion du fond pouvant déchausser les fondations sans qu\'il y ait débordement. La vitesse moyenne seule ne suffit pas — les matériaux, la géométrie, la durée sont aussi nécessaires.</p>'
+                        },
+                        {
+                          titre: '5.2. Données et scénarios',
+                          texte: '<p>Données minimales pour un diagnostic hydraulique d\'ouvrage :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Géométrie et altimétrie dans un <strong>repère cohérent</strong> (une erreur de référence peut créer une fausse chute)</li><li style="margin-bottom:4px">Profils amont et aval, pente, rugosité</li><li style="margin-bottom:4px">Débit justifié et conditions aval (bas, habituel, haut, concomitance)</li><li style="margin-bottom:4px">État de l\'ouvrage et enjeux écologiques</li></ul><p>Scénarios à comparer : état actuel vs projet, plusieurs débits, obstruction partielle plausible, dépôts, fonctionnement avec surverse. Un scénario d\'obstruction est une analyse de sensibilité, pas une prédiction.</p>'
+                        }
+                      ]
+                    }
+                  ],
+                },
+                flashcards: [
+                  { q: 'Calculer ΔHf pour Sf=0,002 et L=50 m.', r: 'ΔHf = 0,002 × 50 = 0,10 m. La perte répartie s\'accumule le long du tronçon proportionnellement à la pente de charge.', expl: 'Si Sf varie le long du tronçon (géométrie ou rugosité changeantes), il faut subdiviser le tronçon ou utiliser une valeur moyenne justifiée.' },
+                  { q: 'Calculer ΔHs pour ζ=0,40 et v=3 m/s.', r: 'ΔHs = 0,40 × 3²/(2×9,81) = 0,40 × 9/19,62 ≈ 0,183 m.', expl: 'ζ est sans dimension mais dépend de la formulation et de la vitesse de référence choisie. Ne pas comparer des ζ issus de formulations différentes.' },
+                  { q: 'Zwat,2=50,00 m, mêmes vitesses amont et aval, ΔH=0,30 m. Calculer Zwat,1.', r: 'Comme les hauteurs de vitesse sont égales, elles se compensent : Zwat,1 = 50,00 + 0,30 = 50,30 m.', expl: 'Quand les vitesses sont identiques, la différence de niveaux d\'eau est égale à la perte de charge. Sinon ces deux grandeurs diffèrent.' },
+                  { q: 'Pourquoi une eau visuellement calme peut-elle être influencée par un ouvrage distant ?', r: 'En régime fluvial (Fr<1), les petites perturbations se propagent vers l\'amont. Un seuil ou une retenue à l\'aval peut relever les niveaux loin en amont sans signes turbulents visibles.', expl: 'C\'est le principe du remous : une modification du profil de surface libre sous l\'influence d\'un contrôle aval. L\'eau calme ne signifie pas absence d\'effet hydraulique.' },
+                  { q: 'Qu\'est-ce que le contrôle à la sortie pour une buse ?', r: 'L\'ensemble conduit + conditions aval gouverne le fonctionnement. Le niveau aval, les pertes dans la buse et le radier de sortie déterminent ensemble la charge amont nécessaire.', expl: 'En contrôle sortie, améliorer l\'entrée n\'augmente pas la capacité — c\'est l\'aval ou le conduit qui limite. Il faut examiner les deux contrôles et prendre le plus contraignant.' },
+                  { q: 'Vrai ou faux : une différence de niveaux entre amont et aval est toujours égale à la perte de charge.', r: 'Faux. La différence de niveaux = ΔH + (v̄₂²−v̄₁²)/(2g). Elle n\'est égale à ΔH que si les vitesses sont identiques.', expl: 'Exemple : si l\'eau accélère dans un rétrécissement, la surface baisse à l\'aval sans que la perte de charge soit nécessairement faible.' },
+                  { q: 'Un pont passe un débit de crue sans débordement. Peut-il présenter un risque hydraulique ?', r: 'Oui : l\'affouillement peut déchausser les fondations, les piles peuvent être soumises à des efforts importants, et des embâcles peuvent aggraver la situation sans que l\'eau ne déborde.', expl: 'La capacité hydraulique (les niveaux), la stabilité structurelle et l\'affouillement sont trois dimensions indépendantes à examiner pour un pont.' },
+                  { q: 'Q = C×b×H^(3/2) s\'applique-t-il à un seuil noyé ?', r: 'Non. Cette formule n\'est valide que pour un déversoir libre. Un seuil noyé (niveau aval proche de la crête) suit des relations différentes avec des coefficients de noyage.', expl: 'Une formule de déversoir libre surestime le débit en conditions de noyage, ce qui peut conduire à sous-estimer les niveaux amont.' },
+                ],
+                schema: `<svg viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="280" fill="#fefce8" rx="10"/>
+  <text x="260" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="#713f12">Bilan hydraulique à travers un ouvrage</text>
+  <!-- Ground / fond -->
+  <path d="M 10,230 L 130,230 L 130,210 L 230,210 L 230,200 L 310,200 L 310,210 L 400,210 L 400,230 L 510,230" fill="none" stroke="#78350f" stroke-width="2"/>
+  <rect x="10" y="230" width="500" height="12" fill="#d6d3d1" rx="0"/>
+  <!-- Ouvrage (buse schématique) -->
+  <rect x="230" y="180" width="80" height="30" fill="#94a3b8" stroke="#475569" stroke-width="1.5" rx="2"/>
+  <text x="270" y="199" text-anchor="middle" font-size="10" font-weight="bold" fill="white">OUVRAGE</text>
+  <!-- Water surface amont (section 1) -->
+  <line x1="10" y1="180" x2="230" y2="180" stroke="#3b82f6" stroke-width="2"/>
+  <!-- Water surface aval (section 2) -->
+  <line x1="310" y1="190" x2="510" y2="190" stroke="#3b82f6" stroke-width="2"/>
+  <!-- Energy line amont -->
+  <line x1="10" y1="165" x2="230" y2="167" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <!-- Energy line aval -->
+  <line x1="310" y1="183" x2="510" y2="185" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <!-- Velocity head amont (section 1) -->
+  <line x1="80" y1="165" x2="80" y2="180" stroke="#dc2626" stroke-width="1" stroke-dasharray="2,2"/>
+  <text x="82" y="172" font-size="9" fill="#dc2626">v₁²/2g</text>
+  <!-- Velocity head aval (section 2) -->
+  <line x1="450" y1="183" x2="450" y2="190" stroke="#dc2626" stroke-width="1" stroke-dasharray="2,2"/>
+  <text x="452" y="187" font-size="9" fill="#dc2626">v₂²/2g</text>
+  <!-- Energy loss ΔH between energy lines -->
+  <line x1="300" y1="167" x2="300" y2="183" stroke="#f97316" stroke-width="1.5"/>
+  <polygon points="297,181 303,181 300,185" fill="#f97316"/>
+  <text x="305" y="177" font-size="10" font-weight="bold" fill="#f97316">ΔH</text>
+  <!-- Depth h1 at section 1 -->
+  <line x1="80" y1="180" x2="80" y2="230" stroke="#1d4ed8" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="70" y="208" text-anchor="end" font-size="9" fill="#1d4ed8">h₁</text>
+  <!-- Depth h2 at section 2 -->
+  <line x1="450" y1="190" x2="450" y2="230" stroke="#1d4ed8" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="462" y="213" font-size="9" fill="#1d4ed8">h₂</text>
+  <!-- z1 and z2 -->
+  <line x1="10" y1="230" x2="10" y2="260" stroke="#78350f" stroke-width="1"/>
+  <line x1="510" y1="230" x2="510" y2="260" stroke="#78350f" stroke-width="1"/>
+  <line x1="10" y1="257" x2="510" y2="257" stroke="#78350f" stroke-width="0.8" stroke-dasharray="2,2"/>
+  <text x="260" y="270" text-anchor="middle" font-size="9" fill="#78350f">repère altimétrique (z)</text>
+  <!-- Section labels -->
+  <text x="80" y="250" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a8a">①</text>
+  <text x="450" y="250" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a8a">②</text>
+  <!-- Legend -->
+  <line x1="15" y1="125" x2="45" y2="125" stroke="#3b82f6" stroke-width="2"/>
+  <text x="48" y="128" font-size="9" fill="#3b82f6">Surface libre</text>
+  <line x1="15" y1="140" x2="45" y2="140" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="48" y="143" font-size="9" fill="#dc2626">Ligne de charge H</text>
+  <!-- H1 and H2 labels -->
+  <text x="20" y="163" font-size="9" font-weight="bold" fill="#dc2626">H₁</text>
+  <text x="480" y="181" font-size="9" font-weight="bold" fill="#dc2626">H₂</text>
+  <!-- Key formula -->
+  <rect x="150" y="38" width="220" height="24" rx="6" fill="#fef08a" stroke="#ca8a04" stroke-width="1"/>
+  <text x="260" y="54" text-anchor="middle" font-size="11" font-weight="bold" fill="#713f12">H₁ = H₂ + ΔH</text>
+  <!-- Velocity arrows -->
+  <polygon points="95,177 115,177 105,170" fill="#3b82f6"/>
+  <text x="105" y="168" text-anchor="middle" font-size="9" fill="#3b82f6">v̄₁</text>
+  <polygon points="395,187 415,187 405,180" fill="#3b82f6"/>
+  <text x="405" y="178" text-anchor="middle" font-size="9" fill="#3b82f6">v̄₂</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Un passage hydraulique relie deux sections. Section aval : Zwat,2=98,50 m, v̄₂=2,00 m/s. Section amont : v̄₁=0,80 m/s. Pertes : entrée ζ₁=0,50 (vitesse de référence 2,00 m/s), réparties Sf=0,002 sur L=60 m, sortie ζ₂=1,00 (vitesse de référence 0,80 m/s). (1) Calculer la perte d\'entrée. (2) Calculer la perte répartie. (3) Calculer la perte de sortie. (4) Calculer ΔH total et Zwat,1.',
+                  solution: '<strong>(1) Perte entrée :</strong> ΔHs,1 = 0,50 × 2,00²/19,62 = 0,50 × 0,204 ≈ <strong>0,102 m</strong>.<br><strong>(2) Perte répartie :</strong> ΔHf = 0,002 × 60 = <strong>0,120 m</strong>.<br><strong>(3) Perte sortie :</strong> ΔHs,2 = 1,00 × 0,80²/19,62 = 1,00 × 0,033 ≈ <strong>0,033 m</strong>.<br><strong>(4) ΔH total :</strong> 0,102 + 0,120 + 0,033 ≈ <strong>0,255 m</strong>.<br><strong>Zwat,1 :</strong> = Zwat,2 + (v̄₂²−v̄₁²)/(2g) + ΔH = 98,50 + (4,00−0,64)/19,62 + 0,255 = 98,50 + 0,171 + 0,255 ≈ <strong>98,926 m</strong>.<br><em>À noter :</em> la différence de niveaux est 0,426 m mais la perte de charge totale est seulement 0,255 m — l\'écart (0,171 m) correspond à l\'augmentation de la hauteur de vitesse entre les deux sections.',
+                },
+              },
+            ],
+          }, // fin gem-m10
+
+          {
+            id: 'gem-m11',
+            name: 'Initiation aux modèles hydrauliques',
+            ico: '🖥️',
+            chapitres: [
+              {
+                id: 'gem-hsl5',
+                titre: 'Initiation aux modèles hydrauliques',
+                fiche: {
+                  intro: 'Un modèle hydraulique est une représentation simplifiée d\'un système d\'écoulement. Deux personnes utilisant le même logiciel peuvent produire des modèles différents d\'un même secteur. Ce chapitre explique comment choisir une représentation adaptée, préparer les données, caler et valider un modèle, et présenter ses résultats honnêtement.',
+                  points: [
+                    'Modèle hydraulique ≠ modèle hydrologique. Hydrologie : transforme une pluie en hydrogramme (quantité et timing des apports). Hydraulique : décrit comment cette eau circule (niveaux, vitesses, débordements). Le logiciel est un outil ; le modèle est construit par l\'utilisateur à partir de données, d\'hypothèses et de paramètres.',
+                    'Commencer par la question de gestion : secteur, événements, grandeurs à comparer, enjeux, précision nécessaire. « Modéliser la rivière » est trop vague. « Comparer les niveaux maximaux avant/après remplacement du pont pour trois scénarios hydrologiques » est exploitable.',
+                    'Modèle 1D : succession de profils en travers, v̄=Q/A. Adapté à un écoulement principalement longitudinal. Peut aussi représenter des réseaux et des échanges avec des zones de stockage si les connexions sont bien définies. La variabilité interne à la section est simplifiée.',
+                    'Modèle 2D horizontal : domaine discrétisé en cellules, inconnues h, u, v (composantes horizontales de vitesse moyennées sur la profondeur). |v|=√(u²+v²). Utile pour des débordements avec plusieurs directions d\'écoulement. Ne décrit pas les détails 3D autour d\'une pile ni les structures turbulentes verticales.',
+                    'Modèle couplé 1D–2D : lit mineur en 1D, plaine en 2D, échanges par débordement. Les interfaces doivent être contrôlées (altimétrie cohérente, volumes non comptés deux fois). Un modèle 2D construit avec une mauvaise topographie peut être moins pertinent qu\'un 1D correctement documenté.',
+                    'Permanent vs transitoire. Permanent : situation constante dans le temps, comparaison de profils pour plusieurs débits fixes. Transitoire : Q=Q(t), permet d\'étudier la montée, le stockage, le décalage des pointes, les durées de submersion. Un débit de pointe maintenu artificiellement ne reproduit pas l\'hydrogramme réel.',
+                    'Topographie et bathymétrie : résolution ≠ précision ≠ actualité. Un lidar aérien ne décrit pas le fond immergé. Les ouvrages et remblais doivent être explicitement représentés — une buse sous un remblai peut être absente du terrain brut. Représenter un bâtiment comme zone résistante ≠ obstacle imperméable.',
+                    'Conditions aux limites (échanges avec l\'extérieur du domaine) : débit ou hydrogramme en entrée, niveau ou relation h-Q en sortie. Conditions initiales (état au démarrage) : niveaux, débits, volumes stockés. Les deux sont distinctes. Une mise en régime peut être nécessaire avant la période d\'analyse.',
+                    'Maillage et pas de temps : en 2D, une maille plus fine peut mieux représenter les variations spatiales mais exige un pas de temps plus petit. Raffiner partout n\'est pas toujours utile. Nombre de Courant C = (|v|+c)×Δt/Δx, avec c=√(gh). Certains schémas implicites acceptent C>1 ; vérifier stabilité et précision.',
+                    'Calage : ajuster des paramètres justifiables pour rapprocher le modèle des observations (niveaux, débits, repères de crue, étendues). Ne pas caler uniquement sur le niveau maximal — un modèle peut reproduire ce max tout en se trompant sur l\'heure ou la durée. Vérifier d\'abord la géométrie et les conditions aux limites avant de modifier la rugosité.',
+                    'Validation indépendante : confronter le modèle calé à des observations qui n\'ont pas servi au calage (autre événement, autres stations). Si les paramètres sont modifiés pour mieux reproduire, c\'est un recalage. En l\'absence de données indépendantes, le déclarer explicitement. Une validation réussie ne garantit pas la fiabilité pour tout événement extrême.',
+                    'Résultats et incertitudes. Bilan de volume : Rv = Ventrées − Vsorties − ΔVs. Métriques : biais=(1/N)Σei, MAE=(1/N)Σ|ei|, RMSE=√((1/N)Σei²). Un biais nul peut masquer des compensations. Les maxima locaux ne sont pas simultanés : max(h×v) ≠ max(h)×max(v). Présenter les incertitudes au lieu de donner des centimètres comme une certitude.',
+                  ],
+                  formules: [
+                    '\\dfrac{\\partial A}{\\partial t} + \\dfrac{\\partial Q}{\\partial x} = q_\\ell \\qquad (\\text{continuité 1D})',
+                    '\\dfrac{\\partial h}{\\partial t} + \\dfrac{\\partial(hu)}{\\partial x} + \\dfrac{\\partial(hv)}{\\partial y} = r \\qquad (\\text{continuité 2D})',
+                    'C = \\dfrac{(|v|+c)\\,\\Delta t}{\\Delta x},\\quad c\\approx\\sqrt{g h} \\qquad (\\text{nombre de Courant})',
+                    'R_V = V_{\\text{entrées}} - V_{\\text{sorties}} - \\Delta V_s \\qquad \\mathrm{RMSE} = \\sqrt{\\dfrac{1}{N}\\sum_i e_i^2}',
+                  ],
+                  retenir: '1D: profils, v̄=Q/A. 2D: cellules h/u/v, |v|=√(u²+v²). Couplé: lit+plaine. C=(|v|+c)Δt/Δx. Calage: ajuster params sur obs. Validation: obs indépendantes. Rv=Ventrées−Vsorties−ΔVs. Maxima non simultanés. Question d\'abord, modèle ensuite.',
+                  sections: [
+                    {
+                      titre: '1. Choisir la représentation adaptée',
+                      sous_sections: [
+                        {
+                          titre: '1.1. 1D, 2D et couplé',
+                          texte: '<p><strong>Modèle 1D :</strong> cours d\'eau décrit par des profils en travers successifs et des ouvrages. Inconnues : niveau et débit par section. Adapté si l\'écoulement reste principalement longitudinal. Peut représenter des zones de stockage latérales si les connexions sont définies.</p><p><strong>Modèle 2D horizontal :</strong> domaine en cellules. Inconnues : h, u, v moyennés sur la profondeur. Utile pour des plaines inondables avec plusieurs directions d\'écoulement. Ne décrit pas les détails 3D autour d\'une pile.</p><p><strong>Couplage :</strong> lit mineur en 1D, plaine en 2D. Efficace pour adapter la représentation à chaque zone, mais les interfaces doivent être cohérentes (altimétrie, volumes).</p><p>Un nombre élevé de cellules ne garantit pas une meilleure précision si la topographie ou les paramètres sont incorrects.</p>'
+                        },
+                        {
+                          titre: '1.2. Permanent ou transitoire ?',
+                          texte: '<p><strong>Calcul permanent :</strong> situation constante dans le temps. Utile pour comparer des profils à plusieurs débits constants.</p><p><strong>Calcul transitoire :</strong> Q=Q(t). Permet d\'étudier la montée, le stockage, le décalage des pointes, les temps d\'arrivée et les durées de submersion.</p><p>Le choix dépend des phénomènes recherchés. Un débit de pointe maintenu artificiel pendant plusieurs heures peut remplir une zone davantage que l\'hydrogramme réel — ne pas confondre l\'hypothèse de calcul avec la reproduction de l\'événement.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '2. Données : topographie, ouvrages et conditions',
+                      sous_sections: [
+                        {
+                          titre: '2.1. Topographie et représentation des ouvrages',
+                          texte: '<p>Les données topographiques peuvent combiner : modèle numérique de terrain, profils de terrain et levés bathymétriques du fond immergé.</p><p>Distinctions importantes :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Résolution</strong> : taille des éléments décrits</li><li style="margin-bottom:4px"><strong>Précision</strong> : proximité avec la réalité</li><li style="margin-bottom:4px"><strong>Actualité</strong> : correspondance avec l\'état présent</li></ul><p>Un terrain brut ne suffit pas : une buse sous un remblai peut être absente du fichier topo, un tablier de pont peut créer une fausse dépression. Il faut vérifier les ouvertures, radiers, intrados, crêtes et passages secondaires.</p>'
+                        },
+                        {
+                          titre: '2.2. Conditions aux limites et initiales',
+                          texte: '<p><strong>Conditions aux limites</strong> (échanges continus avec l\'extérieur) :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Amont : débit constant ou hydrogramme Q(t)</li><li style="margin-bottom:4px">Aval : niveau constant, chronique, ou relation h-Q</li><li style="margin-bottom:4px">Bord fermé : absence de flux normal</li></ul><p><strong>Conditions initiales</strong> (état au démarrage) : niveaux, débits, volumes stockés — distinctes des conditions aux limites.</p><p>Démarrer avec une rivière sèche puis injecter immédiatement un fort débit peut produire une réponse non représentative. Une mise en régime préalable est souvent nécessaire. Vérifier que les effets du démarrage n\'altèrent pas la période analysée.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '3. Maillage, pas de temps et contrôles numériques',
+                      sous_sections: [
+                        {
+                          titre: '3.1. Maillage et nombre de Courant',
+                          texte: '<p>En 2D, les éléments structurants (crêtes de digues, berges, routes, fossés) doivent être correctement représentés. Une grande cellule traversant un remblai peut créer un échange non souhaité.</p><p>Pas de temps et stabilité — nombre de Courant pédagogique :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center;font-weight:bold">C = (|v| + c) × Δt / Δx &nbsp; avec &nbsp; c ≈ √(gh)</p><p><em>Exemple :</em> v=1 m/s, h=1 m → c≈3,13 m/s, Δx=10 m, Δt=2 s → C≈0,83.</p><p>Certains schémas implicites acceptent C&gt;1, mais stabilité numérique, précision numérique et pertinence physique sont trois questions distinctes.</p>'
+                        },
+                        {
+                          titre: '3.2. Vérifier le calcul et le bilan de volume',
+                          texte: '<p>Après la simulation, examiner :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">messages de convergence et oscillations anormales</li><li style="margin-bottom:4px">vitesses incohérentes ou alternances artificielles sec/mouillé</li><li style="margin-bottom:4px">niveaux aux interfaces 1D-2D</li><li style="margin-bottom:4px">bilan de volume</li></ul><p><strong>Bilan :</strong> ΔVs = Ventrées − Vsorties. Résidu Rv = Ventrées − Vsorties − ΔVs. <em>Exemple :</em> 100 000 − 82 000 − 17 000 = 1 000 m³ (1 %). Apprécier au regard de l\'objectif. Un faible résidu global ne garantit pas l\'absence d\'erreurs locales.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '4. Calage, validation et sensibilité',
+                      sous_sections: [
+                        {
+                          titre: '4.1. Calage',
+                          texte: '<p>Le calage consiste à ajuster des paramètres justifiables pour rapprocher le modèle des observations.</p><p>Démarche correcte :</p><ol style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Vérifier les données et références altimètriques</li><li style="margin-bottom:4px">Contrôler la géométrie et les ouvrages</li><li style="margin-bottom:4px">Vérifier les apports et les conditions aval</li><li style="margin-bottom:4px">Ajuster les paramètres dans des plages justifiables</li><li style="margin-bottom:4px">Comparer plusieurs indicateurs (niveaux, débits, étendues)</li></ol><p>Modifier fortement la rugosité pour compenser un pont mal décrit ou une cote aval incorrecte masque les vrais problèmes et donne un coefficient douteux pour d\'autres débits.</p>'
+                        },
+                        {
+                          titre: '4.2. Validation et métriques',
+                          texte: '<p><strong>Validation indépendante :</strong> confronter le modèle calé à des observations qui n\'ont pas servi au calage, sans modifier les paramètres. Si les paramètres changent, c\'est un recalage. En l\'absence de données indépendantes, le déclarer explicitement.</p><p><strong>Métriques :</strong></p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Biais = (1/N)Σei — sensible aux compensations</li><li style="margin-bottom:4px">MAE = (1/N)Σ|ei| — erreur absolue moyenne</li><li style="margin-bottom:4px">RMSE = √((1/N)Σei²) — pénalise les grands écarts</li></ul><p><em>Exemple :</em> écarts +0,10 ; −0,10 ; +0,20 m → biais=+0,067 m, MAE=0,133 m, RMSE=0,141 m. Un biais nul peut masquer deux grandes erreurs de signe opposé.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '5. Résultats, incertitudes et présentation',
+                      sous_sections: [
+                        {
+                          titre: '5.1. Lire les cartes de résultats',
+                          texte: '<p>Une carte de résultats doit préciser ce qu\'elle représente :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Profondeur maximale</strong> : max local de h(t)</li><li style="margin-bottom:4px"><strong>Niveau maximal</strong> : max local de la cote d\'eau</li><li style="margin-bottom:4px"><strong>Vitesse maximale</strong> : max local de |v(t)|</li><li style="margin-bottom:4px"><strong>Durée de submersion</strong> : durée au-dessus d\'un seuil défini</li></ul><p><strong>Attention :</strong> les maxima locaux ne sont pas simultanés. max(h × v) ≠ max(h) × max(v) en général. Utiliser ces produits au même instant, pas les maxima séparés.</p><p>Une carte d\'inondation pour un scénario ≠ carte complète du risque. Les enjeux exposés et leur vulnérabilité doivent aussi être considérés.</p>'
+                        },
+                        {
+                          titre: '5.2. Incertitudes et honnêteté scientifique',
+                          texte: '<p>Les incertitudes peuvent venir de :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Données</strong> : débits, altitudes, observations</li><li style="margin-bottom:4px"><strong>Paramètres</strong> : rugosité, coefficients d\'ouvrage</li><li style="margin-bottom:4px"><strong>Représentation</strong> : 1D/2D, fond fixe, obstacles simplifiés</li><li style="margin-bottom:4px"><strong>Calcul</strong> : maillage, pas de temps, solveur</li><li style="margin-bottom:4px"><strong>Scénarios</strong> : embâcle, niveau aval, fonctionnement d\'ouvrage</li></ul><p>Donner des résultats au centimètre sans analyse de sensibilité peut être trompeur. Une petite différence entre deux projets peut être robuste ou fragile selon les incertitudes. Les hypothèses doivent être documentées et les limites communiquées.</p>'
+                        }
+                      ]
+                    }
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quelle différence entre un modèle hydrologique et un modèle hydraulique ?', r: 'Hydrologique : transforme une pluie en hydrogramme (apports en quantité et timing). Hydraulique : décrit comment l\'eau circule (niveaux, vitesses, débordements). L\'hydrogramme peut être la donnée d\'entrée du modèle hydraulique.', expl: 'Certains outils combinent les deux. Dans ce cas, vérifier que les volumes ne sont pas comptés deux fois (infiltration, ruissellement, apports externes).' },
+                  { q: 'Ventrées=120 000 m³, Vsorties=104 000 m³, ΔVs=15 000 m³. Calculer le résidu.', r: 'Rv = 120 000 − 104 000 − 15 000 = 1 000 m³ (≈0,8 %). Ce résidu doit être analysé au regard de l\'objectif — il ne signifie pas automatiquement que le calcul est acceptable.', expl: 'Un faible résidu global n\'exclut pas des erreurs locales (échanges mal représentés entre le lit mineur et la plaine, par exemple).' },
+                  { q: 'Un biais de zéro signifie-t-il que le modèle est exact ?', r: 'Non. Un biais nul peut résulter de deux erreurs de signe opposé qui se compensent (+0,30 m et −0,30 m). Il faut regarder aussi la MAE et le RMSE.', expl: 'Le biais mesure l\'erreur systématique. La MAE mesure l\'amplitude moyenne des écarts. Le RMSE pénalise davantage les grands écarts individuels.' },
+                  { q: 'Un modèle 2D est-il toujours plus précis qu\'un modèle 1D ?', r: 'Non. La pertinence dépend du phénomène, des données et de l\'objectif. Un modèle 2D construit avec une mauvaise topographie peut être moins fiable qu\'un 1D bien documenté.', expl: 'Une approche 2D est pertinente quand les directions d\'écoulement sont multiples (plaine inondable). Elle n\'est pas utile si l\'écoulement est principalement longitudinal et que les données de terrain manquent.' },
+                  { q: 'Distinction condition aux limites / condition initiale.', r: 'Condition aux limites : échange continu avec l\'extérieur pendant toute la simulation (débit en entrée, niveau en sortie). Condition initiale : état du système au démarrage (niveaux, débits à t=0).', expl: 'Exemple : le niveau d\'une retenue à t=0 est une condition initiale. Le niveau imposé par cette retenue pendant toute la simulation est une condition aux limites.' },
+                  { q: 'v=1 m/s, h=1 m, Δx=10 m, Δt=2 s. Calculer le nombre de Courant C.', r: 'c = √(9,81×1) ≈ 3,13 m/s. C = (1+3,13)×2/10 = 4,13×2/10 ≈ 0,83.', expl: 'Il n\'existe pas un seuil universel. Certains schémas implicites acceptent C>1 ; d\'autres nécessitent C<1 pour la stabilité. Vérifier la documentation du solveur utilisé.' },
+                  { q: 'Qu\'est-ce qu\'une validation indépendante ?', r: 'Confronter le modèle calé à des observations qui n\'ont pas servi au calage, sans modifier les paramètres. Si les paramètres changent pour mieux reproduire le nouvel événement, c\'est un recalage, pas une validation.', expl: 'En l\'absence de données indépendantes, il faut le dire clairement. Une validation réussie ne garantit pas non plus la fiabilité pour tout événement extrême.' },
+                  { q: 'Peut-on multiplier le max de profondeur par le max de vitesse pour calculer le flux maximal ?', r: 'Non. max(h×v) ≠ max(h)×max(v) car ces maxima peuvent se produire à des instants différents. Exemple : h max à 10h (1,20 m, v=0,40 m/s → hv=0,48) et v max à 11h (h=0,80 m, v=1,00 m/s → hv=0,80).', expl: 'Multiplier les maxima séparés donne 1,20×1,00=1,20 m²/s, valeur qui n\'existe à aucun instant. Il faut calculer h×v à chaque pas de temps et prendre le maximum du produit.' },
+                ],
+                schema: `<svg viewBox="0 0 520 290" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="290" fill="#fefce8" rx="10"/>
+  <text x="260" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="#713f12">Approches de modélisation hydraulique</text>
+  <!-- 1D Block -->
+  <rect x="10" y="28" width="155" height="130" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="87" y="44" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e3a8a">Modèle 1D</text>
+  <text x="87" y="59" text-anchor="middle" font-size="9" fill="#1e3a8a">Profils en travers</text>
+  <line x1="25" y1="65" x2="150" y2="65" stroke="#bfdbfe" stroke-width="0.5"/>
+  <text x="87" y="78" text-anchor="middle" font-size="9" fill="#1e3a8a">Q = A × v̄</text>
+  <text x="87" y="91" text-anchor="middle" font-size="9" fill="#1e3a8a">1 niveau/section</text>
+  <text x="87" y="106" text-anchor="middle" font-size="9" fill="#64748b">✓ Chenal longitudinal</text>
+  <text x="87" y="118" text-anchor="middle" font-size="9" fill="#64748b">✓ Données limitées</text>
+  <text x="87" y="130" text-anchor="middle" font-size="9" fill="#64748b">✗ Directions multiples</text>
+  <text x="87" y="142" text-anchor="middle" font-size="9" fill="#64748b">✗ Variabilité interne</text>
+  <text x="87" y="154" text-anchor="middle" font-size="9" fill="#1e3a8a">réseaux + stockage</text>
+  <!-- 2D Block -->
+  <rect x="183" y="28" width="155" height="130" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="260" y="44" text-anchor="middle" font-size="11" font-weight="bold" fill="#14532d">Modèle 2D</text>
+  <text x="260" y="59" text-anchor="middle" font-size="9" fill="#14532d">Cellules (maillage)</text>
+  <line x1="198" y1="65" x2="323" y2="65" stroke="#bbf7d0" stroke-width="0.5"/>
+  <text x="260" y="78" text-anchor="middle" font-size="9" fill="#14532d">h, u, v (moy. vert.)</text>
+  <text x="260" y="91" text-anchor="middle" font-size="9" fill="#14532d">|v| = √(u²+v²)</text>
+  <text x="260" y="106" text-anchor="middle" font-size="9" fill="#64748b">✓ Plaines, urbain</text>
+  <text x="260" y="118" text-anchor="middle" font-size="9" fill="#64748b">✓ Flux multidirectionnels</text>
+  <text x="260" y="130" text-anchor="middle" font-size="9" fill="#64748b">✗ Détails 3D</text>
+  <text x="260" y="142" text-anchor="middle" font-size="9" fill="#64748b">✗ Coûteux en données</text>
+  <text x="260" y="154" text-anchor="middle" font-size="9" fill="#14532d">continuité + QM 2D</text>
+  <!-- Couplé Block -->
+  <rect x="356" y="28" width="155" height="130" rx="8" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+  <text x="433" y="44" text-anchor="middle" font-size="11" font-weight="bold" fill="#831843">Couplé 1D–2D</text>
+  <text x="433" y="59" text-anchor="middle" font-size="9" fill="#831843">Lit mineur + plaine</text>
+  <line x1="371" y1="65" x2="496" y2="65" stroke="#fbcfe8" stroke-width="0.5"/>
+  <text x="433" y="78" text-anchor="middle" font-size="9" fill="#831843">Échanges par dévers.</text>
+  <text x="433" y="91" text-anchor="middle" font-size="9" fill="#831843">Interfaces contrôlées</text>
+  <text x="433" y="106" text-anchor="middle" font-size="9" fill="#64748b">✓ Rivière + plaine</text>
+  <text x="433" y="118" text-anchor="middle" font-size="9" fill="#64748b">✓ Flexible</text>
+  <text x="433" y="130" text-anchor="middle" font-size="9" fill="#64748b">✗ Cohérence interfaces</text>
+  <text x="433" y="142" text-anchor="middle" font-size="9" fill="#64748b">✗ Complexité accrue</text>
+  <text x="433" y="154" text-anchor="middle" font-size="9" fill="#831843">pas d\'alt. incohérente</text>
+  <!-- Workflow -->
+  <rect x="10" y="170" width="500" height="108" rx="8" fill="#fff" stroke="#94a3b8" stroke-width="1"/>
+  <text x="260" y="186" text-anchor="middle" font-size="10" font-weight="bold" fill="#0f172a">Étapes clés d\'un modèle hydraulique</text>
+  <!-- Steps row -->
+  <rect x="18" y="193" width="68" height="28" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+  <text x="52" y="207" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#92400e">1. Question</text>
+  <text x="52" y="218" text-anchor="middle" font-size="8" fill="#92400e">de gestion</text>
+  <polygon points="88,207 96,204 96,210" fill="#64748b"/>
+  <rect x="98" y="193" width="68" height="28" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+  <text x="132" y="207" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#1e3a8a">2. Données</text>
+  <text x="132" y="218" text-anchor="middle" font-size="8" fill="#1e3a8a">topo, Q, niv</text>
+  <polygon points="168,207 176,204 176,210" fill="#64748b"/>
+  <rect x="178" y="193" width="68" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+  <text x="212" y="207" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#14532d">3. Construction</text>
+  <text x="212" y="218" text-anchor="middle" font-size="8" fill="#14532d">maillage, CL</text>
+  <polygon points="248,207 256,204 256,210" fill="#64748b"/>
+  <rect x="258" y="193" width="68" height="28" rx="4" fill="#fce7f3" stroke="#db2777" stroke-width="1"/>
+  <text x="292" y="207" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#831843">4. Calage</text>
+  <text x="292" y="218" text-anchor="middle" font-size="8" fill="#831843">observations</text>
+  <polygon points="328,207 336,204 336,210" fill="#64748b"/>
+  <rect x="338" y="193" width="68" height="28" rx="4" fill="#f0fdf4" stroke="#22c55e" stroke-width="1"/>
+  <text x="372" y="207" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#14532d">5. Validation</text>
+  <text x="372" y="218" text-anchor="middle" font-size="8" fill="#14532d">obs. indép.</text>
+  <polygon points="408,207 416,204 416,210" fill="#64748b"/>
+  <rect x="418" y="193" width="85" height="28" rx="4" fill="#fffbeb" stroke="#f59e0b" stroke-width="1"/>
+  <text x="460" y="207" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#78350f">6. Scénarios</text>
+  <text x="460" y="218" text-anchor="middle" font-size="8" fill="#78350f">+ incertitudes</text>
+  <!-- Key reminder at bottom -->
+  <text x="260" y="250" text-anchor="middle" font-size="9" font-weight="bold" fill="#dc2626">⚠ Vérifier :</text>
+  <text x="260" y="263" text-anchor="middle" font-size="9" fill="#475569">Bilan volume Rv = Ventrées − Vsorties − ΔVs</text>
+  <text x="260" y="276" text-anchor="middle" font-size="9" fill="#475569">max(h×v) calculé au même instant, pas max(h)×max(v)</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Modèle fictif sur la Rivière Claire. (1) Ventrées=80 000 m³, Vsorties=62 000 m³, ΔVs=17 500 m³. Calculer le résidu Rv et l\'exprimer en % des entrées. (2) Trois observations de niveaux donnent des écarts e₁=+0,10 m, e₂=−0,15 m, e₃=+0,25 m. Calculer le biais, la MAE et le RMSE. (3) À 14h : h=1,50 m, v=0,60 m/s → hv=? À 15h : h=0,90 m, v=1,20 m/s → hv=? La carte de résultats affiche max(h)×max(v)=1,50×1,20=1,80 m²/s — est-ce correct ?',
+                  solution: '<strong>(1) Bilan de volume :</strong> Rv = 80 000 − 62 000 − 17 500 = <strong>500 m³</strong> = 500/80 000 ≈ <strong>0,6 %</strong>. Ce résidu doit être examiné au regard de l\'objectif de l\'étude — ici 0,6 % semble faible, mais des erreurs locales peuvent exister même avec un bilan global satisfaisant.<br><strong>(2) Métriques :</strong> N=3, Σei = 0,10−0,15+0,25 = 0,20 → <strong>Biais = +0,067 m</strong>. Σ|ei| = 0,10+0,15+0,25 = 0,50 → <strong>MAE = 0,167 m</strong>. Σei² = 0,01+0,0225+0,0625 = 0,095 → <strong>RMSE = √(0,095/3) = √0,0317 ≈ 0,178 m</strong>.<br><strong>(3) Maxima non simultanés :</strong> hv(14h)=1,50×0,60=<strong>0,90 m²/s</strong>. hv(15h)=0,90×1,20=<strong>1,08 m²/s</strong>. Le maximum du produit est 1,08 m²/s (à 15h). La valeur 1,80 m²/s affichée par la carte est <strong>incorrecte</strong> — elle multiplie des maxima non simultanés. Cette erreur surestime d\'un facteur 1,67 l\'indicateur de flux.',
+                },
+              },
+            ],
+          }, // fin gem-m11
+
         ],
       },
     ],
