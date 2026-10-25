@@ -5440,6 +5440,197 @@ const COURS_DATA = {
                 },
               },
 
+              {
+                id: 'gem-diagnostic',
+                titre: 'Pressions sur les milieux aquatiques et diagnostic écologique',
+                fiche: {
+                  intro: 'Les chapitres précédents décrivent les habitats, la qualité de l\'eau, la ripisylve et les zones humides. Ce dernier chapitre du module réunit ces connaissances pour répondre à une question de terrain : pourquoi ce milieu fonctionne-t-il mal, et quelles actions permettraient réellement d\'améliorer la situation ? Une eau peu oxygénée, un lit colmaté ou une végétation appauvrie sont des symptômes — ils ne désignent pas automatiquement une cause. Un diagnostic solide relie les activités, les pressions exercées, les modifications du milieu et les conséquences biologiques avant de proposer des actions.',
+                  points: [
+                    'Distinguer quatre notions : ① activité (usage susceptible d\'agir sur le milieu), ② pression (action exercée), ③ état (conditions observées du milieu), ④ impact (conséquence sur une fonction ou un organisme). Une activité présente sur le bassin ne prouve pas, à elle seule, qu\'elle explique le problème — il faut un mécanisme plausible, une connexion, une cohérence temporelle et des éléments de preuve.',
+                    'Symptôme ≠ cause. Ex. : dépôts fins dans un lit peuvent provenir d\'une augmentation des apports amont, d\'une diminution de la capacité de transport, d\'un ralentissement local, d\'une modification du régime des débits ou de plusieurs mécanismes combinés. Retirer les dépôts sans traiter la cause → retour rapide. Le diagnostic doit répondre : d\'où viennent les matériaux, comment sont-ils transférés, pourquoi se déposent-ils ici ?',
+                    'Sept familles de pressions : hydrologiques (prélèvements, dérivations), morphologiques (rectification, approfondissement), sédimentaires (excès ou déficit de matériaux), physico-chimiques (nutriments, matière organique, substances toxiques), biologiques (EEE), latérales (déconnexion des annexes, drainage), riveraines (suppression de végétation, piétinement). Les limites entre familles sont pratiques — les mécanismes interagissent souvent.',
+                    'Les pressions interagissent et leurs effets ne sont pas toujours additifs. Un ouvrage peut simultanément modifier niveaux, vitesses, transport des sédiments, déplacements biologiques et température. Après réduction d\'une pollution, un autre facteur (manque d\'habitats, obstacle) peut rester limitant — l\'absence de réponse immédiate ne prouve pas l\'inutilité d\'une action. Suivre les mécanismes intermédiaires.',
+                    'Volume annuel ne suffit pas. Deux prélèvements annuels identiques peuvent produire des effets différents si l\'un est concentré en étiage. Il faut regarder la répartition temporelle, la localisation et les échanges souterrains. Une partie de l\'eau prélevée peut être restituée ailleurs, plus tard ou avec une qualité différente — le bilan porte sur le système et la période étudiés.',
+                    'Flux massique : Ṁ (g/s) = C × Q. Une diminution de concentration n\'établit pas une diminution du flux si le débit a augmenté. Mélange conservatif : Cm = ΣQiCi / ΣQi. Ex. : Qa = 0,020 m³/s, Ca = 4 mg/L, Qr = 0,180 m³/s, Cr = 0,10 mg/L → Cm = (0,180×0,10 + 0,020×4) / 0,200 = 0,49 mg/L. Ce calcul vérifie un scénario, pas une durée, une origine ou un impact biologique.',
+                    'Corrélation ≠ causalité. Deux phénomènes concomitants ne prouvent pas de relation cause-effet. La pluie peut être un déclencheur commun de deux phénomènes sans relier leur source. Éléments renforçant une explication : mécanisme cohérent, bonne connexion spatiale, ordre temporel compatible, répétition, bilan plausible, réponse observée quand la pression change. Ces éléments doivent être discutés avec leurs limites.',
+                    'Localiser la cause à la bonne échelle : bassin versant, réseau hydrographique, tronçon, site, microhabitat. Un radier colmaté peut provenir d\'apports de plusieurs km en amont — une action uniquement locale peut être insuffisante. À l\'inverse, un problème localisé près d\'un ouvrage ne nécessite pas d\'intervenir sur tout le bassin. L\'échelle d\'action doit correspondre aux mécanismes identifiés.',
+                    'Définir le fonctionnement attendu avant de diagnostiquer. Le point de comparaison peut s\'appuyer sur le type de cours d\'eau, la géologie, les observations historiques, des secteurs comparables. Un lit sableux ne doit pas être jugé à partir d\'une référence de torrent à galets. Une zone humide temporaire ne doit pas être évaluée comme un plan d\'eau permanent.',
+                    'Construire des hypothèses concurrentes — ne pas seulement chercher à confirmer la première idée. Ex. pour un déficit nocturne en oxygène : forte respiration nocturne, apport organique, modification thermique, eau entrante peu oxygénée, problème instrumental. L\'objectif est d\'identifier les mesures capables de distinguer ces hypothèses — pas d\'accumuler des éléments cohérents avec une seule.',
+                    'Choisir des objectifs mesurables : fonction ciblée, périmètre, indicateur, délai, conditions de comparaison. Trois niveaux : réalisation (longueur traitée), réduction de pression (flux mesuré), réponse du milieu (habitat ou communauté). Une action correctement réalisée peut ne pas atteindre toute la réponse attendue — mesurer les trois niveaux.',
+                    'Comparaison avant/après avec témoin : Δcomparée = (Xtraité,après − Xtraité,avant) − (Xtémoin,après − Xtémoin,avant). Ex. : traité 60→35 (−25), témoin 40→30 (−10), Δ = −15 points attribuables à l\'action. Limites : un seul avant/après ne prouve pas l\'effet causal. Vérifier la comparabilité, les variations naturelles et les autres changements survenus pendant la période.',
+                  ],
+                  formules: [
+                    '\\dot{M} = C \\cdot Q \\quad \\text{(flux massique, g/s)}',
+                    'C_m = \\frac{\\displaystyle\\sum_i Q_i C_i}{\\displaystyle\\sum_i Q_i} \\quad \\text{(mélange conservatif)}',
+                    '\\Delta_{\\text{comparée}} = (X_{T,\\text{ap}} - X_{T,\\text{av}}) - (X_{C,\\text{ap}} - X_{C,\\text{av}})',
+                  ],
+                  retenir: 'Activité ≠ pression ≠ état ≠ impact. Symptôme ≠ cause. Corrélation ≠ causalité. Ṁ = CQ. Fonctionnement attendu = référence adaptée au type. Hypothèses concurrentes. Réalisation ≠ efficacité. Avant/après sans témoin = interprétation limitée.',
+                  sections: [
+                    {
+                      titre: '1. Activité, pression, état, impact — et pourquoi cette distinction compte',
+                      sous_sections: [
+                        {
+                          titre: '1.1. Les quatre notions',
+                          texte: '<p>Ces quatre notions décrivent des étapes différentes d\'une chaîne :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Activité</strong> : usage ou pratique susceptible d\'agir sur le milieu (ex. irrigation)</li><li style="margin-bottom:4px"><strong>Pression</strong> : action exercée sur le système (ex. prélèvement d\'eau)</li><li style="margin-bottom:4px"><strong>État</strong> : conditions observées du milieu (ex. débit réduit, surface mouillée réduite)</li><li style="margin-bottom:4px"><strong>Impact</strong> : conséquence sur le fonctionnement ou les organismes (ex. isolement d\'habitats)</li></ul><p>Une <strong>réponse</strong> est l\'action destinée à modifier la situation. <em>Eaufrance</em> distingue les pressions et leurs conséquences possibles sur les débits, la qualité, les habitats et la biodiversité.</p>'
+                        },
+                        {
+                          titre: '1.2. Ce que cette distinction interdit',
+                          texte: '<p><strong>Une activité présente sur le bassin ne prouve pas, à elle seule, qu\'elle explique le problème observé.</strong> Pour établir un lien, il faut :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">un mécanisme plausible</li><li style="margin-bottom:4px">une connexion spatiale et hydrologique</li><li style="margin-bottom:4px">une cohérence temporelle</li><li style="margin-bottom:4px">des éléments de preuve indépendants</li></ul><p>Le diagnostic doit aussi séparer ce qui est <em>observé</em>, ce qui est <em>mesuré</em>, ce qui est <em>supposé</em> et ce qui reste <em>à vérifier</em>. Cette séparation évite de transformer trop vite une impression en conclusion. Elle est particulièrement utile lors d\'une première visite de terrain.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '2. Familles de pressions et leurs interactions',
+                      sous_sections: [
+                        {
+                          titre: '2.1. Les sept familles',
+                          texte: '<p>Les pressions sont regroupées en familles selon leur nature dominante :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Hydrologiques</strong> : prélèvements, dérivations, modifications des variations de débit</li><li style="margin-bottom:4px"><strong>Morphologiques</strong> : rectification, approfondissement, artificialisation des berges ou du lit</li><li style="margin-bottom:4px"><strong>Sédimentaires</strong> : excès d\'apports fins, interruption du transport, déficit de matériaux grossiers</li><li style="margin-bottom:4px"><strong>Physico-chimiques</strong> : nutriments, matière organique, substances toxiques, rejets thermiques</li><li style="margin-bottom:4px"><strong>Biologiques</strong> : introductions et propagation d\'espèces exotiques envahissantes</li><li style="margin-bottom:4px"><strong>Latérales</strong> : déconnexion des annexes, drainage, remblai</li><li style="margin-bottom:4px"><strong>Riveraines</strong> : suppression de végétation, piétinement, entretien inadapté</li></ul><p>Les limites entre ces familles sont pratiques — les mécanismes interagissent souvent. Un ouvrage peut simultanément modifier niveaux, vitesses, transport sédimentaire, déplacements biologiques et température.</p>'
+                        },
+                        {
+                          titre: '2.2. Interactions et facteur limitant',
+                          texte: '<p>Plusieurs pressions peuvent agir simultanément. Leurs effets combinés ne sont pas toujours additifs.</p><p>Exemple : un tronçon avec faible débit + peu d\'ombrage + apports de matière organique + ralentissement de l\'écoulement peut présenter un déficit en oxygène que chaque facteur isolément n\'aurait pas causé.</p><p>Après réduction d\'une pollution, <strong>un autre facteur peut rester limitant</strong> : manque d\'habitats, obstacle à la libre circulation, température. L\'absence de réponse biologique immédiate ne prouve pas l\'inutilité de l\'action — il faut suivre les mécanismes intermédiaires (flux, substrats, habitats) et pas seulement l\'état biologique global.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '3. Construire un diagnostic : périmètre, données, hypothèses',
+                      sous_sections: [
+                        {
+                          titre: '3.1. Formuler la question et définir le périmètre',
+                          texte: '<p>Une question vague produit un diagnostic non orienté. Une question précise oriente les paramètres, les stations, les heures de mesure et les hypothèses.</p><p><strong>Exemple vague :</strong> « pourquoi la rivière va-t-elle mal ? »<br><strong>Exemple exploitable :</strong> « quels mécanismes expliquent les faibles concentrations nocturnes en oxygène observées en été sur les 800 m en aval du village ? »</p><p>Le périmètre d\'observation peut être local, mais les causes peuvent se situer en amont. Il faut préciser l\'espace, la période et les composantes étudiées.</p><p>Un diagnostic de projet répond à une question de gestion. <strong>Il ne constitue pas, à lui seul, une nouvelle classification officielle de la masse d\'eau</strong>, qui utilise des paramètres et des règles définis selon les catégories (Eaufrance).</p>'
+                        },
+                        {
+                          titre: '3.2. Données, observations et hypothèses concurrentes',
+                          texte: '<p>Pour chaque jeu de données, vérifier : date, méthode, résolution, unité, qualité, complétude, domaine de validité. Une donnée précise mais ancienne peut être moins représentative qu\'une donnée récente plus limitée.</p><p>Sur le terrain, séparer trois colonnes :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><em>Observation</em> : fait constaté</li><li style="margin-bottom:4px"><em>Interprétation possible</em> : mécanisme envisageable</li><li style="margin-bottom:4px"><em>Niveau de vérification</em> : à confirmer, à mesurer, acquis</li></ul><p>Un bon diagnostic ne recherche pas uniquement des éléments confirmant la première idée. Il <strong>compare des hypothèses concurrentes</strong> et cherche les mesures capables de les distinguer. Ex. pour un déficit d\'oxygène nocturne : forte respiration, apport organique, modification thermique, eau entrante peu oxygénée, problème d\'instrument. Chacune appelle des données différentes.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '4. Quantifier et localiser les pressions',
+                      sous_sections: [
+                        {
+                          titre: '4.1. Flux massique et mélange',
+                          texte: '<p>Le flux massique relie concentration et débit : <strong>Ṁ = C × Q</strong>. Une diminution de concentration n\'établit pas une diminution du flux si le débit a augmenté en parallèle.</p><p>Le mélange conservatif complet donne : <strong>Cm = ΣQiCi / ΣQi</strong></p><p><em>Exemple :</em> apport (Qa = 0,020 m³/s, Ca = 4 mg/L) + rivière (Qr = 0,180 m³/s, Cr = 0,10 mg/L) → Cm = (0,180×0,10 + 0,020×4) / 0,200 = <strong>0,49 mg/L</strong></p><p>Ce calcul vérifie un scénario de mélange. Il ne démontre pas la durée de la situation, l\'origine exacte de la substance, son devenir, l\'impact biologique ni une conformité réglementaire.</p>'
+                        },
+                        {
+                          titre: '4.2. Localisation à la bonne échelle',
+                          texte: '<p>Chaque échelle pose ses propres questions :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Bassin versant</strong> : sources de sédiments, eau, substances</li><li style="margin-bottom:4px"><strong>Réseau hydrographique</strong> : continuités et contributions relatives</li><li style="margin-bottom:4px"><strong>Tronçon</strong> : morphologie, hydraulique, végétation</li><li style="margin-bottom:4px"><strong>Site</strong> : ouvrage, rejet, drain, habitat</li><li style="margin-bottom:4px"><strong>Microhabitat</strong> : conditions locales pour les organismes</li></ul><p>Un radier colmaté peut être lié à un apport provenant de plusieurs kilomètres en amont — une action uniquement sur le radier peut être insuffisante. À l\'inverse, un problème localisé près d\'un ouvrage ne nécessite pas d\'intervenir sur tout le bassin. <strong>L\'échelle d\'action doit correspondre aux mécanismes identifiés.</strong></p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '5. Objectifs mesurables et comparaison de solutions',
+                      sous_sections: [
+                        {
+                          titre: '5.1. Formuler des objectifs mesurables',
+                          texte: '<p>Un objectif doit préciser la fonction ciblée, le périmètre, l\'indicateur retenu, le délai et les conditions de comparaison.</p><p><strong>Trop général :</strong> « améliorer la qualité écologique »<br><strong>Exploitable :</strong> « réduire les apports de particules fines provenant des chemins identifiés, puis suivre leurs flux lors d\'événements comparables et l\'évolution du colmatage sur les habitats ciblés »</p><p>Trois niveaux d\'indicateurs :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Réalisation</strong> : longueur traitée → mesure l\'action</li><li style="margin-bottom:4px"><strong>Réduction de pression</strong> : diminution d\'un flux mesuré → mesure l\'effet sur la pression</li><li style="margin-bottom:4px"><strong>Réponse du milieu</strong> : évolution d\'un habitat ou d\'une communauté → mesure l\'efficacité écologique</li></ul><p>Une action correctement réalisée peut ne pas atteindre toute la réponse attendue.</p>'
+                        },
+                        {
+                          titre: '5.2. Comparer les options avant de décider',
+                          texte: '<p>Une comparaison doit inclure plusieurs options pertinentes : préservation, adaptation d\'un usage, réduction à la source, restauration d\'un processus, action locale, surveillance ou étude complémentaire.</p><p>Un problème potentiellement grave mais mal compris peut justifier d\'abord une investigation ciblée, pas nécessairement des travaux lourds immédiats. <strong>La priorité d\'étude et la priorité de travaux sont deux décisions distinctes.</strong></p><p>La hiérarchisation peut s\'appuyer sur : gravité, étendue, persistance, réversibilité, rôle du site dans le réseau, niveau de connaissance, faisabilité, risque d\'effets indésirables. Ces critères, pondérations et choix doivent rester visibles — une note globale opaque ne produit pas automatiquement une vérité scientifique.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '6. Suivre les effets : avant/après, témoin, indicateurs',
+                      sous_sections: [
+                        {
+                          titre: '6.1. Préparer le suivi avant les travaux',
+                          texte: '<p>Un suivi se prépare avant les travaux, pas après. Les éléments à prévoir :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">État initial — documenté, daté, localisé</li><li style="margin-bottom:4px">Objectifs et indicateurs choisis a priori</li><li style="margin-bottom:4px">Méthodes et protocoles reproductibles</li><li style="margin-bottom:4px">Calendrier incluant les périodes favorables à l\'observation</li><li style="margin-bottom:4px">Sites de comparaison (secteur non soumis à l\'action)</li><li style="margin-bottom:4px">Données hydrologiques associées pour replacer les résultats dans leur contexte climatique</li></ul><p>L\'OFB propose une démarche de suivi scientifique minimal des restaurations hydromorphologiques (ofb.gouv.fr).</p>'
+                        },
+                        {
+                          titre: '6.2. Comparaison avant/après avec secteur témoin',
+                          texte: '<p>Pour renforcer l\'analyse :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:8px 12px;border-radius:6px;font-weight:600;text-align:center">Δ<sub>comparée</sub> = (X<sub>T,après</sub> − X<sub>T,avant</sub>) − (X<sub>C,après</sub> − X<sub>C,avant</sub>)</p><p><em>Exemple :</em> indicateur de colmatage — traité : 60→35 (Δ = −25), témoin : 40→30 (Δ = −10) → Δcomparée = −15 points supplémentaires attribuables à l\'action.</p><p><strong>Limites :</strong> un seul avant et un seul après ne suffisent pas à prouver l\'effet causal. Vérifier la comparabilité des secteurs, les variations naturelles et les autres changements survenus entre les deux mesures. Une année plus humide après travaux peut amplifier un effet partiel ou masquer l\'absence d\'effet.</p>'
+                        }
+                      ]
+                    }
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quelle différence entre pression et impact ?', r: 'Pression = action exercée sur le milieu (ex. prélèvement). Impact = conséquence sur une fonction ou un organisme (ex. déconnexion d\'habitats). État = conditions observées du milieu entre les deux.', expl: 'Une activité présente ne prouve pas l\'impact — il faut un mécanisme, une connexion et une cohérence temporelle.' },
+                  { q: 'Des dépôts fins recouvrent un radier. Faut-il les retirer ?', r: 'Pas nécessairement. Retirer sans traiter la cause → retour possible. Il faut d\'abord répondre : d\'où viennent les matériaux, comment sont-ils transférés, pourquoi se déposent-ils ici, et sont-ils anormaux pour ce type de milieu ?', expl: 'Le symptôme indique un dysfonctionnement possible, pas la solution. Le retrait peut être justifié dans certains cas, mais ce n\'est pas une réponse par défaut.' },
+                  { q: 'Calculer le flux d\'un apport avec Q = 0,010 m³/s et C = 3 mg/L.', r: 'Ṁ = 3 × 0,010 = 0,030 g/s = 2,592 kg/j en flux équivalent, sans supposer que ces conditions durent toute la journée.', expl: 'Ṁ = C × Q. La conversion en kg/j = 0,030 × 86 400 = 2 592 g = 2,592 kg, valable seulement si le débit et la concentration restent constants sur 24 h.' },
+                  { q: 'Un apport (Q = 0,020 m³/s, C = 4 mg/L) rejoint une rivière (Q = 0,180 m³/s, C = 0,10 mg/L). Calculer Cm.', r: 'Cm = (0,180×0,10 + 0,020×4) / (0,180+0,020) = (0,018 + 0,080) / 0,200 = 0,49 mg/L.', expl: 'Formule du mélange conservatif : Cm = ΣQiCi / ΣQi. Ce calcul décrit un mélange instantané, pas une durée ni un impact biologique.' },
+                  { q: 'Après réduction d\'une pollution, les biologiques ne s\'améliorent pas. L\'action était-elle inutile ?', r: 'Pas nécessairement. Un autre facteur limitant (manque d\'habitats, obstacle, température) peut expliquer l\'absence de réponse. Il faut suivre les mécanismes intermédiaires (flux, substrats, habitats) et pas seulement l\'état biologique global.', expl: 'La réduction de la pression et la réponse biologique sont deux niveaux d\'indicateurs distincts. L\'un peut progresser sans que l\'autre réponde immédiatement.' },
+                  { q: 'Qu\'est-ce qu\'une hypothèse concurrente ?', r: 'Une explication alternative au même phénomène observé. Un bon diagnostic construit plusieurs hypothèses, puis cherche les mesures capables de les distinguer — pas seulement des éléments confirmant la première idée.', expl: 'Ex. déficit nocturne en O₂ : forte respiration, apport organique, modification thermique, eau entrante peu oxygénée, problème d\'instrument. Chacune appelle des données différentes.' },
+                  { q: 'Calculer Δcomparée si le secteur traité passe de 20 à 35 et le témoin de 15 à 20.', r: 'Δtraité = 35−20 = +15. Δtémoin = 20−15 = +5. Δcomparée = 15−5 = +10 unités supplémentaires sur le secteur traité.', expl: 'Formule : Δcomparée = (XT,après − XT,avant) − (XC,après − XC,avant). L\'attribution à l\'action reste à vérifier : comparabilité des secteurs, autres changements.' },
+                  { q: 'Corrélation entre pluie et hausse d\'une concentration : cela prouve-t-il la source ?', r: 'Non. La pluie peut être un déclencheur commun de plusieurs mécanismes : mobilisation depuis les sols, fonctionnement d\'un exutoire, remise en suspension, modification des proportions de différentes eaux. Identifier la source nécessite d\'autres éléments.', expl: 'Éléments renforçant une explication : mécanisme cohérent, connexion spatiale, ordre temporel, répétition, bilan plausible, réponse quand la pression change. Même réunis, ils restent à discuter.' },
+                ],
+                schema: `<svg viewBox="0 0 520 310" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="310" fill="#f0f9ff" rx="10"/>
+  <text x="260" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#0c4a6e">Diagnostic écologique — chaîne de raisonnement</text>
+  <!-- Chaîne DPSIR -->
+  <rect x="15" y="32" width="85" height="36" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+  <text x="57" y="53" text-anchor="middle" font-weight="bold" fill="#1e3a8a" font-size="10">Activité</text>
+  <text x="57" y="64" text-anchor="middle" fill="#1d4ed8" font-size="8">Usage, pratique</text>
+  <path d="M100,50 L115,50" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="115" y="32" width="80" height="36" rx="6" fill="#fef3c7" stroke="#d97706"/>
+  <text x="155" y="53" text-anchor="middle" font-weight="bold" fill="#92400e" font-size="10">Pression</text>
+  <text x="155" y="64" text-anchor="middle" fill="#b45309" font-size="8">Action exercée</text>
+  <path d="M195,50 L210,50" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="210" y="32" width="80" height="36" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="250" y="53" text-anchor="middle" font-weight="bold" fill="#14532d" font-size="10">État</text>
+  <text x="250" y="64" text-anchor="middle" fill="#166534" font-size="8">Conditions observées</text>
+  <path d="M290,50 L305,50" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="305" y="32" width="80" height="36" rx="6" fill="#fce7f3" stroke="#db2777"/>
+  <text x="345" y="53" text-anchor="middle" font-weight="bold" fill="#831843" font-size="10">Impact</text>
+  <text x="345" y="64" text-anchor="middle" fill="#9d174d" font-size="8">Conséquences</text>
+  <path d="M385,50 L400,50" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="400" y="32" width="105" height="36" rx="6" fill="#f3e8ff" stroke="#9333ea"/>
+  <text x="452" y="53" text-anchor="middle" font-weight="bold" fill="#581c87" font-size="10">Réponse</text>
+  <text x="452" y="64" text-anchor="middle" fill="#6b21a8" font-size="8">Action de gestion</text>
+  <!-- Familles de pressions -->
+  <text x="260" y="92" text-anchor="middle" font-size="11" font-weight="bold" fill="#0c4a6e">Familles de pressions</text>
+  <rect x="10" y="100" width="115" height="22" rx="4" fill="#bfdbfe"/>
+  <text x="67" y="115" text-anchor="middle" font-size="8.5" fill="#1e3a8a">① Hydrologiques</text>
+  <rect x="132" y="100" width="115" height="22" rx="4" fill="#fde68a"/>
+  <text x="189" y="115" text-anchor="middle" font-size="8.5" fill="#92400e">② Morphologiques</text>
+  <rect x="254" y="100" width="115" height="22" rx="4" fill="#d1fae5"/>
+  <text x="311" y="115" text-anchor="middle" font-size="8.5" fill="#14532d">③ Sédimentaires</text>
+  <rect x="376" y="100" width="133" height="22" rx="4" fill="#fce7f3"/>
+  <text x="442" y="115" text-anchor="middle" font-size="8.5" fill="#831843">④ Physico-chimiques</text>
+  <rect x="10" y="130" width="115" height="22" rx="4" fill="#e0e7ff"/>
+  <text x="67" y="145" text-anchor="middle" font-size="8.5" fill="#3730a3">⑤ Biologiques (EEE)</text>
+  <rect x="132" y="130" width="115" height="22" rx="4" fill="#fef3c7"/>
+  <text x="189" y="145" text-anchor="middle" font-size="8.5" fill="#92400e">⑥ Latérales</text>
+  <rect x="254" y="130" width="115" height="22" rx="4" fill="#d1fae5"/>
+  <text x="311" y="145" text-anchor="middle" font-size="8.5" fill="#14532d">⑦ Riveraines</text>
+  <!-- Étapes du diagnostic -->
+  <text x="260" y="172" text-anchor="middle" font-size="11" font-weight="bold" fill="#0c4a6e">Étapes du diagnostic</text>
+  <rect x="10" y="180" width="490" height="120" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="0.8"/>
+  <rect x="20" y="190" width="100" height="50" rx="4" fill="#dbeafe"/>
+  <text x="70" y="206" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#1e3a8a">1. Question</text>
+  <text x="70" y="218" text-anchor="middle" font-size="7.5" fill="#1d4ed8">Périmètre précis</text>
+  <text x="70" y="230" text-anchor="middle" font-size="7.5" fill="#1d4ed8">Fonctionnement</text>
+  <text x="70" y="242" text-anchor="middle" font-size="7.5" fill="#1d4ed8">attendu</text>
+  <rect x="130" y="190" width="100" height="50" rx="4" fill="#fef3c7"/>
+  <text x="180" y="206" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#92400e">2. Données</text>
+  <text x="180" y="218" text-anchor="middle" font-size="7.5" fill="#b45309">Qualifier chaque</text>
+  <text x="180" y="230" text-anchor="middle" font-size="7.5" fill="#b45309">source : date,</text>
+  <text x="180" y="242" text-anchor="middle" font-size="7.5" fill="#b45309">méthode, limite</text>
+  <rect x="240" y="190" width="100" height="50" rx="4" fill="#dcfce7"/>
+  <text x="290" y="206" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#14532d">3. Hypothèses</text>
+  <text x="290" y="218" text-anchor="middle" font-size="7.5" fill="#166534">Plusieurs explicat.</text>
+  <text x="290" y="230" text-anchor="middle" font-size="7.5" fill="#166534">concurrentes</text>
+  <text x="290" y="242" text-anchor="middle" font-size="7.5" fill="#166534">→ mesures utiles</text>
+  <rect x="350" y="190" width="100" height="50" rx="4" fill="#fce7f3"/>
+  <text x="400" y="206" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#831843">4. Objectifs</text>
+  <text x="400" y="218" text-anchor="middle" font-size="7.5" fill="#9d174d">Réalisation /</text>
+  <text x="400" y="230" text-anchor="middle" font-size="7.5" fill="#9d174d">Pression /</text>
+  <text x="400" y="242" text-anchor="middle" font-size="7.5" fill="#9d174d">Réponse biolog.</text>
+  <text x="260" y="270" text-anchor="middle" font-size="9" fill="#64748b" font-style="italic">Δcomparée = Δtraité − Δtémoin  |  Ṁ = CQ  |  Cm = ΣQiCi / ΣQi</text>
+  <defs>
+    <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+  </defs>
+</svg>`,
+                exercice: {
+                  enonce: 'Un apport latéral présente Q = 0,015 m³/s et C = 5 mg/L de MES. La rivière en amont a Q = 0,135 m³/s et C = 0,20 mg/L. (1) Calculer le flux de l\'apport en g/s et en kg/j. (2) Calculer la concentration de mélange aval Cm. (3) Six mois plus tard, la concentration de l\'apport est tombée à 2 mg/L mais le débit a doublé à 0,030 m³/s. Conclure sur l\'évolution du flux. (4) Un suivi AVANT/APRÈS donne : indicateur de colmatage traité 70→45, témoin 50→38. Calculer Δcomparée.',
+                  solution: '<strong>(1) Flux apport :</strong> Ṁ = C × Q = 5 × 0,015 = <strong>0,075 g/s</strong>. En kg/j = 0,075 × 86 400 = 6 480 g = <strong>6,48 kg/j</strong> (si ces conditions durent 24 h — hypothèse à vérifier).<br><strong>(2) Mélange :</strong> Cm = (0,135×0,20 + 0,015×5) / (0,135+0,015) = (0,027 + 0,075) / 0,150 = <strong>0,68 mg/L</strong>.<br><strong>(3) Évolution du flux :</strong> Ṁ_nouveau = 2 × 0,030 = <strong>0,060 g/s</strong>. La concentration a diminué de moitié (5→2), mais le débit a doublé — le flux ne diminue que modestement (0,075→0,060). <strong>Diminution de concentration ≠ diminution de flux</strong>.<br><strong>(4) Δcomparée :</strong> Δtraité = 45−70 = −25. Δtémoin = 38−50 = −12. Δcomparée = −25−(−12) = <strong>−13 points</strong> supplémentaires sur le secteur traité. Limite : un seul avant/après, comparabilité à vérifier.',
+                },
+              },
+
             ],
           }, // fin gem-m5
 
