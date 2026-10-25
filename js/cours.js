@@ -7776,6 +7776,185 @@ const COURS_DATA = {
             ],
           }, // fin gem-m16
 
+          {
+            id: 'gem-m17',
+            name: 'Hydromorphologie et sédiments',
+            ico: '🌊',
+            chapitres: [
+              {
+                id: 'gem-hmo1',
+                titre: 'Lit mineur, lit majeur et espace de mobilité',
+                fiche: {
+                  intro: 'L\'hydromorphologie étudie les relations entre les écoulements, les formes du lit, les sédiments et les connexions avec les espaces environnants. Un cours d\'eau fonctionne selon quatre dimensions : longitudinale (amont-aval), latérale (chenal-plaine), verticale (eau de surface-nappe) et temporelle. Pour comprendre une rivière et orienter une gestion GEMAPI, il faut donc regarder au-delà de la seule surface en eau visible le jour de la visite.',
+                  points: [
+                    'Hydromorphologie : relations entre écoulements, formes du lit et des berges, sédiments, et connexions avec les espaces environnants. Quatre dimensions : longitudinale (amont-aval), latérale (chenal-berges-plaine), verticale (eau de surface-sédiments-nappe) et temporelle (étiages, crues, saisons, évolutions du lit). Une forme n\'est pas un décor : un banc, une fosse ou une berge exprime une histoire et des processus.',
+                    'Chenal d\'étiage : partie du lit occupée par les faibles écoulements — unique, sinueux, réparti entre plusieurs bras ou discontinu. Ne représente pas toute la largeur du lit mineur. Exemple : une rivière en eau sur 3 m / 12 m entre berges. Les 3 m ne décrivent pas la géométrie utilisée par les débits plus élevés. Date et conditions hydrologiques doivent accompagner toute mesure de largeur en eau.',
+                    'Lit mineur : espace du chenal (ou des chenaux) délimité par les berges principales, mobilisé par les écoulements avant les débordements dans la plaine. Comprend : chenal en eau, bancs émergés, petites îles, chenaux secondaires. Délimitation délicate si berges peu marquées, lit multi-bras, rivière recalibrée ou terrasses intermédiaires. Méthode et indices utilisés doivent être indiqués.',
+                    'Débit à pleins bords : remplissage du chenal jusqu\'à une limite de débordement identifiée. Limites : deux berges à altitudes différentes, point bas débordant avant le reste du tronçon, limite morphologique ambiguë, incision ou aménagements modifiant la fréquence des débordements. Pas de période de retour fixe attribuée automatiquement.',
+                    'Lit majeur : espace de la plaine associé aux débordements. Contient prairies, boisements, bras anciens, zones humides, cultures, infrastructures. Sa participation dépend du niveau, des connexions et des obstacles. Distinguer : lit majeur (espace de fonctionnement), emprise d\'une crue observée, emprise simulée pour des hypothèses données, et zonage réglementaire (cadre juridique). Ces notions sont liées mais différentes.',
+                    'Annexes fluviales : bras secondaires, bras temporairement connectés, bras abandonnés, dépressions humides, mares. Alimentation depuis le cours d\'eau amont/aval, débordement, nappe, ruissellement local ou combinaison. Connexion latérale : emplacement, cote, fréquence d\'activation, durée, sens, volumes échangés. Absence de connexion superficielle instantanée ≠ absence de fonctionnement. Échanges verticaux : la rivière peut recevoir ou alimenter la nappe selon contexte, perméabilité, niveaux relatifs et colmatage.',
+                    'Espace de mobilité : espace dans lequel le lit peut se déplacer latéralement (≠ toute la zone inondable, ≠ bande de largeur constante, ≠ seule enveloppe des déplacements récents). Grande plaine inondée ≠ chenal très mobile. Berge reculant ≠ toute la plaine submergée. Aléa d\'inondation et mobilité du lit : deux phénomènes distincts à étudier ensemble.',
+                    'Mécanismes de déplacement du lit : recul d\'une berge, dépôt, migration d\'un méandre, élargissement ou rétrécissement, déplacement d\'un bras, recoupement de méandre, changement de chenal. Dans un méandre : érosion sur la rive extérieure, dépôt sur la rive intérieure — repère de lecture, pas description suffisante de chaque situation. Recoupement quand un passage plus direct devient actif. Avulsion = abandon partiel/total du chenal.',
+                    'Incision (abaissement du lit) et exhaussement (élévation par accumulation). Effets de l\'incision : hauteur de berges augmentée, connexions latérales modifiées, fondations exposées, échanges avec la nappe altérés. Une fosse profonde observée à une seule date ne démontre pas une incision récente. Tendance → données comparables dans le temps.',
+                    'Contraintes naturelles : versants proches, affleurements rocheux, matériaux peu érodables, vallée étroite, terrasses, faible disponibilité sédimentaire. Contraintes anthropiques : protection de berge, endiguement, rectification, extraction de matériaux, seuil ou barrage, remblai, recalibrage. Une rivière naturellement peu mobile n\'est pas dégradée uniquement parce qu\'elle ne méandre pas. Effets des interventions à examiner à l\'échelle du tronçon.',
+                    'Vitesse moyenne de recul : v_r = Δd/Δt. Exemple : 6 m en 12 ans → 0,50 m/an. Cette valeur résume la période, pas un rythme annuel constant. Le déplacement peut s\'être produit lors d\'une seule crue. Prolonger mécaniquement cette vitesse illustre une hypothèse, pas une prévision.',
+                    'Stockage en lit majeur : V ≈ A × h̄. Exemple : 2 ha × 0,20 m = 4 000 m³. Volume géométrique ≠ réduction d\'un débit de pointe. Il faut connaître le moment du remplissage, le débit entrant, les sorties, le volume déjà occupé et la synchronisation avec la crue. Espace de bon fonctionnement (EBF) : approche plus large que la seule mobilité — morphologie, écoulements, connexions, échanges souterrains, fonctions écologiques. Ne pas confondre besoins identifiés, contraintes existantes, objectifs négociés et actions réalisables.',
+                  ],
+                  formules: [
+                    'v_r = \\dfrac{\\Delta d}{\\Delta t} \\qquad (\\text{vitesse moyenne de recul — hypothèse, pas prévision})',
+                    'V \\approx A \\times \\bar{h} \\qquad (\\text{volume géométrique de stockage — pas réduction garantie de pointe})',
+                    'Z_{\\mathrm{connexion}} < Z_{\\mathrm{niveau}} \\Rightarrow \\text{activation possible} \\quad (\\neq \\text{débit connu})',
+                    '\\text{Dimensions} : \\text{longitudinale} + \\text{latérale} + \\text{verticale} + \\text{temporelle}',
+                  ],
+                  retenir: 'Chenal d\'étiage ⊂ lit mineur ⊂ lit majeur. Espace de mobilité ≠ zone inondable. v_r = Δd/Δt = moyenne, pas prévision. V ≈ A×h = géométrie, pas réduction garantie de pointe. Connexion = cote + cheminement + différence de charge. Incision nécessite données temporelles. EBF = approche fonctionnelle des espaces nécessaires au cours d\'eau.',
+                  sections: [
+                    {
+                      titre: '1. Chenal d\'étiage, lit mineur et lit majeur',
+                      sous_sections: [
+                        {
+                          titre: '1.1. De l\'étiage aux débordements',
+                          texte: '<p>Trois espaces à distinguer selon les débits :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Chenal d\'étiage</strong> : partie du lit occupée par les faibles écoulements. Peut être unique, sinueux ou réparti entre plusieurs bras. Ne représente pas toute la largeur du lit mineur.</li><li style="margin-bottom:4px"><strong>Lit mineur</strong> : espace du ou des chenaux délimité par les berges principales, mobilisé avant les débordements dans la plaine. Comprend chenal en eau, bancs, îles et chenaux secondaires.</li><li style="margin-bottom:4px"><strong>Lit majeur</strong> : espace de la plaine associé aux débordements. Contient prairies, boisements, bras anciens, zones humides, cultures, infrastructures.</li></ul><p>Exemple : une rivière en eau sur 3 m pour 12 m entre berges. Les 3 m correspondent à l\'étiage — ils ne décrivent pas la géométrie des débits plus élevés. Date et conditions hydrologiques doivent accompagner toute mesure.</p>'
+                        },
+                        {
+                          titre: '1.2. Débit à pleins bords et limites des notions',
+                          texte: '<p>Le <strong>débit à pleins bords</strong> correspond au remplissage du chenal jusqu\'à une limite de débordement. Difficultés : les deux berges ont souvent des altitudes différentes, un point bas peut déborder en premier, la limite morphologique peut être ambiguë, et l\'incision modifie la fréquence des débordements. Aucune période de retour universelle ne lui est automatiquement associée.</p><p>Pour le lit majeur, distinguer :</p><table style="width:100%;border-collapse:collapse;font-size:10px;margin:6px 0"><thead><tr style="background:var(--c-primary,#2563eb);color:white"><th style="padding:4px 8px;text-align:left">Notion</th><th style="padding:4px 8px;text-align:left">Ce qu\'elle décrit</th></tr></thead><tbody><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Lit majeur</td><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Organisation du relief et fonctionnement</td></tr><tr><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Emprise crue observée</td><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Surface atteinte pendant un événement</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Emprise simulée</td><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Surface calculée pour des hypothèses données</td></tr><tr><td style="padding:4px 8px">Zonage réglementaire</td><td style="padding:4px 8px">Périmètre défini dans un cadre juridique</td></tr></tbody></table>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '2. Annexes, connexions et échanges',
+                      sous_sections: [
+                        {
+                          titre: '2.1. Annexes fluviales et connexions latérales',
+                          texte: '<p>Les <strong>annexes fluviales</strong> comprennent : bras secondaires, bras temporairement connectés, bras abandonnés, dépressions humides, mares de plaine alluviale. Leur alimentation peut provenir du cours d\'eau (amont ou aval), d\'un débordement, de la nappe, du ruissellement local ou de combinaisons.</p><p>Une <strong>connexion latérale</strong> se caractérise par : emplacement, cote, fréquence d\'activation, durée, sens d\'écoulement, volumes et matériaux échangés.</p><p>Exemple fictif : passage à la cote Z_connexion = 102,40 m. Si le niveau local atteint 102,55 m, une entrée d\'eau peut devenir possible — <em>sous réserve</em> d\'un cheminement ouvert et d\'une différence de charge favorable. La seule comparaison des cotes ne donne ni le débit entrant ni le volume final.</p><p><strong>Absence de connexion visible ≠ absence de fonctionnement.</strong> Un bras sec lors d\'une visite peut conserver une fonction écologique ou hydrologique à d\'autres périodes.</p>'
+                        },
+                        {
+                          titre: '2.2. Échanges verticaux et espace de mobilité',
+                          texte: '<p><strong>Échanges verticaux :</strong> le cours d\'eau peut recevoir de l\'eau de la nappe (cours d\'eau gagnant) ou l\'alimenter (cours d\'eau perdant), avec des variations selon les secteurs et les saisons. Ces échanges dépendent de la perméabilité, des niveaux relatifs, de l\'épaisseur des alluvions, du colmatage et de la géologie. Une rivière bordée d\'alluvions ne recharge pas automatiquement la nappe en permanence.</p><p><strong>Espace de mobilité :</strong> espace dans lequel le lit peut se déplacer latéralement. Il est différent de la zone inondable (une grande plaine peut être inondée sans que le chenal soit mobile), de la seule bande de déplacements récents, et d\'une bande de largeur constante. L\'aléa d\'inondation et la mobilité du lit sont deux phénomènes distincts à analyser ensemble.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '3. Mobilité du lit et contraintes',
+                      sous_sections: [
+                        {
+                          titre: '3.1. Mécanismes de déplacement',
+                          texte: '<p>Évolutions possibles du lit : recul d\'une berge, dépôt, migration d\'un méandre, élargissement ou rétrécissement, déplacement d\'un bras, recoupement de méandre, changement de chenal.</p><p>Dans un méandre, on observe souvent érosion sur la rive extérieure et dépôt sur la rive intérieure. C\'est un repère de lecture, pas une description suffisante de chaque situation — la courbure, les matériaux et les contraintes modifient ce schéma.</p><p><strong>Recoupement :</strong> un méandre peut être recoupé quand un passage plus direct s\'active. <strong>Avulsion :</strong> abandon partiel ou total d\'un chenal pour un autre. Ces évolutions peuvent modifier rapidement les enjeux exposés.</p><p><strong>Incision</strong> (abaissement du lit) : hausse de la hauteur de berges, modification des connexions latérales, exposition de fondations. <strong>Exhaussement</strong> (élévation par dépôt) : modification des profondeurs et des débordements. Une fosse profonde observée à une seule date ne démontre pas une incision récente.</p>'
+                        },
+                        {
+                          titre: '3.2. Contraintes naturelles et anthropiques',
+                          texte: '<p><strong>Contraintes naturelles</strong> limitant la mobilité : versants proches, affleurements rocheux, matériaux peu érodables, vallée étroite, terrasses anciennes, faible disponibilité sédimentaire. Une rivière naturellement peu mobile n\'est pas dégradée parce qu\'elle ne méandre pas.</p><p><strong>Contraintes anthropiques :</strong></p><table style="width:100%;border-collapse:collapse;font-size:10px;margin:6px 0"><thead><tr style="background:var(--c-primary,#2563eb);color:white"><th style="padding:4px 8px;text-align:left">Intervention</th><th style="padding:4px 8px;text-align:left">Effets possibles</th></tr></thead><tbody><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Protection de berge</td><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Limitation locale du recul</td></tr><tr><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Endiguement</td><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Modification des échanges avec la plaine</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Rectification</td><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Modification de la longueur et de la pente</td></tr><tr><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Extraction de matériaux</td><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Perturbation du bilan sédimentaire</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 8px">Seuil / remblai / recalibrage</td><td style="padding:4px 8px">Niveaux, transit, sections et connexions modifiés</td></tr></tbody></table><p>Effets à examiner à l\'échelle du tronçon, pas uniquement au droit de l\'ouvrage.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '4. Mesures, vitesse de recul et stockage',
+                      sous_sections: [
+                        {
+                          titre: '4.1. Vitesse moyenne de recul et analyse photographique',
+                          texte: '<p><strong>Vitesse moyenne de recul :</strong> v_r = Δd / Δt. Exemple : berge reculant de 6 m en 12 ans → v_r = 0,50 m/an. Cette valeur résume la période — le déplacement peut s\'être produit lors d\'une seule crue, pas régulièrement. Prolonger mécaniquement : d_futur = v_r × t illustre une hypothèse, pas une prévision.</p><p><strong>Photographies aériennes :</strong> avant de comparer deux tracés, vérifier géoréférencement, résolution, saison, niveau d\'eau, végétation et définition de la limite dessinée. Une variation de surface en eau peut refléter un débit différent sans déplacement de berge. Un déplacement de 2 m n\'a pas la même signification si les documents sont précis à 20 cm ou à plusieurs mètres.</p>'
+                        },
+                        {
+                          titre: '4.2. Stockage en lit majeur et espace de bon fonctionnement',
+                          texte: '<p><strong>Volume géométrique de stockage :</strong> V ≈ A × h̄. Exemple : zone de 2 ha avec profondeur moyenne de 0,20 m → V ≈ 20 000 × 0,20 = 4 000 m³. Ce volume ne démontre pas une réduction donnée du débit de pointe. Il faut connaître le moment du remplissage, le débit entrant, les sorties, le volume déjà occupé et la synchronisation avec la crue.</p><p><strong>Espace de bon fonctionnement (EBF) :</strong> approche plus large que la seule mobilité. Elle examine les espaces nécessaires aux différentes fonctions (morphologie, écoulements, connexions, échanges souterrains, fonctions écologiques) et leurs relations avec le territoire. Distinguer : besoins fonctionnels identifiés / contraintes existantes / objectifs négociés / actions effectivement réalisables. Une limite d\'étude ne crée pas à elle seule une règle juridique ou une maîtrise foncière.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '5. Diagnostic spatial et erreurs fréquentes',
+                      sous_sections: [
+                        {
+                          titre: '5.1. Construire un diagnostic argumenté',
+                          texte: '<p>Un diagnostic spatial peut combiner : reconnaissance de terrain, profils, MNT, photographies aériennes, cartes anciennes, observations de crue, données sur les ouvrages, occupation du sol.</p><p>Produire des couches distinctes : lit actuel / formes anciennes / emprises observées ou simulées / déplacements historiques / contraintes / connexions / secteurs incertains. Superposer permet d\'argumenter une interprétation. Fusionner trop tôt en un seul polygone masque les différences de signification et de fiabilité.</p><p>Distinguer : mobilité observée / mobilité potentielle / évolution possible mais non démontrée. Ne pas transformer une hypothèse en prévision certaine. Les options de gestion (préservation, adaptation, restauration, déplacement d\'un enjeu, maintien d\'une protection justifiée) ne découlent pas d\'une seule carte.</p>'
+                        },
+                        {
+                          titre: '5.2. Dix erreurs fréquentes',
+                          texte: '<table style="width:100%;border-collapse:collapse;font-size:10px"><thead><tr style="background:var(--c-primary,#2563eb);color:white"><th style="padding:4px 6px;text-align:left">Erreur</th><th style="padding:4px 6px;text-align:left">Correction</th></tr></thead><tbody><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Assimiler lit mineur et surface en eau du jour</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Examiner les berges et les formes à différents niveaux</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Donner une période de retour fixe au plein bord</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Étudier le fonctionnement hydrologique local</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Confondre lit majeur et emprise d\'un scénario</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Identifier la nature de chaque limite</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Assimiler espace de mobilité et zone inondable</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Analyser séparément déplacement et submersion</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Considérer toute érosion comme anormale</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Examiner processus et exposition des enjeux</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Supposer qu\'une rivière naturelle doit méandrer</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Tenir compte du contexte géologique et de vallée</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Déduire une incision d\'une seule fosse</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Comparer des données temporelles comparables</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Prolonger une vitesse de recul comme prévision</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Étudier événements, mécanismes et contraintes</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Transformer un volume disponible en réduction de pointe</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Analyser les échanges dans le temps</td></tr><tr><td style="padding:4px 6px">Tracer une bande constante comme diagnostic</td><td style="padding:4px 6px">Utiliser relief, histoire et fonctionnement</td></tr></tbody></table>'
+                        }
+                      ]
+                    }
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quelle différence entre chenal d\'étiage et lit mineur ?', r: 'Le chenal d\'étiage est la partie en eau lors des faibles débits. Le lit mineur est l\'espace délimité par les berges principales, mobilisé avant les débordements — il inclut bancs, îles et chenaux secondaires temporairement émergés.', expl: 'Une rivière en eau sur 3 m pour 12 m entre berges illustre cette différence. Les 3 m correspondent à l\'étiage. La largeur du lit mineur prend en compte l\'ensemble de l\'espace actif à des débits plus élevés.' },
+                  { q: 'Une berge recule de 9 m en 15 ans. Calculer la vitesse moyenne de recul.', r: 'v_r = 9/15 = 0,60 m/an.', expl: 'C\'est une moyenne sur la période — le déplacement peut s\'être concentré sur une seule crue. Prolonger d_futur = 0,60 × t illustre une hypothèse, pas une prévision. Les mécanismes et contraintes doivent être examinés.' },
+                  { q: 'Une zone de 3 ha présente une profondeur moyenne de 0,15 m. Calculer le volume géométrique.', r: 'V = 30 000 × 0,15 = 4 500 m³.', expl: 'Ce volume géométrique ne démontre pas une réduction du débit de pointe. Pour évaluer une fonction hydraulique, il faut analyser le moment du remplissage, le débit entrant, les sorties et la synchronisation avec la crue.' },
+                  { q: 'Le lit majeur est-il équivalent à l\'emprise d\'un scénario de crue simulé ?', r: 'Non. Le lit majeur décrit un espace de fonctionnement et une organisation du relief. Une emprise simulée correspond à un calcul pour des hypothèses données. Les deux notions sont liées mais différentes.', expl: 'Un lit majeur peut être plus étendu qu\'une crue rare simulée (les crues extrêmes n\'ont pas toutes été modélisées). Inversement, certains secteurs inondables réglementairement peuvent avoir été modifiés.' },
+                  { q: 'Un passage est coté à 101,80 m. Le niveau de la rivière atteint 101,95 m. La connexion est-elle alimentée avec un débit connu ?', r: 'Non. La différence de cotes permet d\'envisager une activation. Mais le débit entrant dépend aussi du cheminement, du niveau dans la zone réceptrice et des pertes d\'énergie.', expl: 'Seule la comparaison des cotes ne suffit pas à calculer un débit. Il faut un cheminement réellement ouvert et une différence de charge favorable. Les volumes finaux dépendent en outre de la synchronisation avec la crue.' },
+                  { q: 'Un MNT révèle un point bas proche d\'un ancien bras. Cela garantit-il une connexion active lors des crues ?', r: 'Non. Il faut vérifier : réalité et stabilité du point bas, cheminement, fréquence d\'activation, conditions hydrologiques et état actuel de la végétation.', expl: 'Un point bas topographique peut être comblé par des dépôts, bloqué par de la végétation ou ne plus être connecté hydrauliquement. L\'identification d\'anciens bras est utile pour le diagnostic mais ne prédit pas un comportement futur.' },
+                  { q: 'Une berge recule dans une prairie sans enjeu immédiat. Faut-il automatiquement l\'enrocher ?', r: 'Non. Il faut d\'abord examiner le fonctionnement, la trajectoire possible, les enjeux à proximité et les effets d\'une intervention. Préserver une mobilité compatible avec les usages peut faire partie des options.', expl: 'Toute érosion n\'est pas une dégradation. Dans certains contextes, la mobilité d\'une berge contribue à la diversité des habitats. L\'endiguement ou l\'enrochement peuvent reporter ou aggraver des problèmes en aval.' },
+                  { q: 'L\'espace de mobilité est-il équivalent à la zone inondable ?', r: 'Non. Une grande plaine peut être inondée sans que le chenal soit mobile. Inversement, une berge peut reculer sans submersion de la plaine. Les deux phénomènes sont distincts et doivent être analysés ensemble.', expl: 'L\'espace de mobilité correspond à l\'espace dans lequel le lit peut évoluer latéralement. La zone inondable décrit les surfaces atteintes par un débordement. Ces espaces peuvent se chevaucher partiellement mais leurs délimitations et usages sont différents.' },
+                ],
+                schema: `<svg viewBox="0 0 520 295" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="295" fill="var(--c-bg,#f8fafc)" rx="10"/>
+  <text x="260" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="var(--c-text,#1e293b)">Coupe transversale — espaces du cours d'eau</text>
+  <!-- Ciel -->
+  <rect x="0" y="20" width="520" height="40" fill="#e0f2fe" rx="0"/>
+  <!-- Versant gauche -->
+  <polygon points="0,60 80,60 0,180" fill="#d4a373" stroke="#a16207" stroke-width="1"/>
+  <text x="28" y="130" font-size="9" fill="#78350f" transform="rotate(-40,28,130)">versant</text>
+  <!-- Versant droit -->
+  <polygon points="520,60 440,60 520,180" fill="#d4a373" stroke="#a16207" stroke-width="1"/>
+  <!-- Lit majeur gauche -->
+  <rect x="80" y="150" width="115" height="32" fill="#bef264" stroke="#65a30d" stroke-width="1"/>
+  <text x="137" y="170" text-anchor="middle" font-size="9" fill="#365314">Lit majeur</text>
+  <!-- Annexe -->
+  <ellipse cx="118" cy="145" rx="25" ry="8" fill="#93c5fd" stroke="#2563eb" stroke-width="1"/>
+  <text x="118" y="148" text-anchor="middle" font-size="8" fill="#1e3a8a">annexe</text>
+  <!-- Lit majeur droit -->
+  <rect x="325" y="150" width="115" height="32" fill="#bef264" stroke="#65a30d" stroke-width="1"/>
+  <text x="382" y="170" text-anchor="middle" font-size="9" fill="#365314">Lit majeur</text>
+  <!-- Espace de mobilité (flèche double) -->
+  <line x1="140" y1="192" x2="380" y2="192" stroke="#7c3aed" stroke-width="2"/>
+  <polygon points="140,192 148,188 148,196" fill="#7c3aed"/>
+  <polygon points="380,192 372,188 372,196" fill="#7c3aed"/>
+  <text x="260" y="202" text-anchor="middle" font-size="9" fill="#7c3aed" font-weight="bold">espace de mobilité</text>
+  <!-- Berge gauche -->
+  <line x1="195" y1="135" x2="195" y2="170" stroke="#b45309" stroke-width="2.5"/>
+  <text x="196" y="133" font-size="8" fill="#92400e">berge G</text>
+  <!-- Berge droite -->
+  <line x1="325" y1="135" x2="325" y2="170" stroke="#b45309" stroke-width="2.5"/>
+  <text x="316" y="133" font-size="8" fill="#92400e">berge D</text>
+  <!-- Fond du lit -->
+  <path d="M 195,155 Q 220,170 260,172 Q 300,170 325,155" stroke="#a16207" stroke-width="1.5" fill="#fef9c3"/>
+  <!-- Chenal en eau -->
+  <path d="M 215,155 Q 235,168 260,170 Q 285,168 305,155" fill="#3b82f6" stroke="#2563eb" stroke-width="1"/>
+  <text x="260" y="165" text-anchor="middle" font-size="9" fill="white" font-weight="bold">chenal</text>
+  <!-- Bancs émergés -->
+  <ellipse cx="212" cy="153" rx="12" ry="5" fill="#fef9c3" stroke="#ca8a04" stroke-width="1"/>
+  <text x="212" y="156" text-anchor="middle" font-size="7" fill="#78350f">banc</text>
+  <ellipse cx="308" cy="153" rx="12" ry="5" fill="#fef9c3" stroke="#ca8a04" stroke-width="1"/>
+  <text x="308" y="156" text-anchor="middle" font-size="7" fill="#78350f">banc</text>
+  <!-- Lit mineur accolade -->
+  <path d="M 195,215 L 195,220 L 260,220 L 260,215 M 325,215 L 325,220 L 260,220" stroke="#92400e" stroke-width="1.5" fill="none"/>
+  <text x="260" y="232" text-anchor="middle" font-size="9" fill="#92400e" font-weight="bold">lit mineur</text>
+  <!-- Nappe souterraine -->
+  <rect x="80" y="250" width="360" height="30" rx="5" fill="#bfdbfe" stroke="#2563eb" stroke-width="1" stroke-dasharray="5,3" opacity="0.7"/>
+  <text x="260" y="269" text-anchor="middle" font-size="9" fill="#1e40af">nappe (échanges verticaux)</text>
+  <!-- Flèches échanges nappe -->
+  <line x1="230" y1="242" x2="230" y2="250" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <line x1="290" y1="242" x2="290" y2="250" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <!-- Cote connexion -->
+  <line x1="95" y1="145" x2="160" y2="145" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="95" y="142" font-size="8" fill="#dc2626">Z_connexion</text>
+  <!-- Légende -->
+  <rect x="8" y="248" width="12" height="8" fill="#3b82f6"/>
+  <text x="24" y="256" font-size="8" fill="var(--c-text,#1e293b)">chenal</text>
+  <rect x="65" y="248" width="12" height="8" fill="#bef264" stroke="#65a30d" stroke-width="1"/>
+  <text x="81" y="256" font-size="8" fill="var(--c-text,#1e293b)">lit majeur</text>
+  <line x1="140" y1="252" x2="155" y2="252" stroke="#7c3aed" stroke-width="2"/>
+  <text x="160" y="256" font-size="8" fill="#7c3aed">espace mobilité</text>
+  <line x1="240" y1="252" x2="255" y2="252" stroke="#92400e" stroke-width="2"/>
+  <text x="260" y="256" font-size="8" fill="#92400e">berges lit mineur</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Analyse fictive — Méandre des Saules. (1) Une rivière est en eau sur 5 m lors de la visite. Ses berges principales sont espacées de 18 m avec deux bancs émergés. Quelle largeur retenir pour le lit mineur ? (2) Le MNT montre un point bas à la cote 103,20 m côté prairie. La rivière monte à 103,35 m lors d\'une crue. Peut-on conclure à une connexion active avec un débit connu ? (3) La rive extérieure du méandre a reculé de 4,8 m en 8 ans. Calculer v_r et indiquer ce qu\'elle signifie. (4) Une prairie inondable de 4 ha présente une profondeur moyenne de 0,25 m. Calculer V. Ce volume permet-il de déduire une réduction du débit de pointe ?',
+                  solution: '<strong>(1) Largeur du lit mineur :</strong> On ne peut pas retenir automatiquement 5 m. Le lit mineur est délimité par les berges principales : <strong>18 m</strong>, incluant les deux bancs temporairement émergés. Les 5 m correspondent à l\'état mouillé observé lors de la visite (étiage ou débit moyen). La date et les conditions doivent accompagner cette mesure.<br><strong>(2) Connexion :</strong> Le niveau dépasse la cote du point bas (103,35 > 103,20 m) → une activation est possible. Mais la connexion ne fournit <strong>pas</strong> de débit connu : il faut vérifier le cheminement réellement ouvert, le niveau dans la prairie (si déjà remplie, les échanges s\'arrêtent), les pertes d\'énergie et la durée d\'activation.<br><strong>(3) Vitesse de recul :</strong> v_r = 4,8/8 = <strong>0,60 m/an</strong>. C\'est une <em>moyenne</em> sur 8 ans. Le déplacement peut s\'être concentré sur une ou deux crues. Prolonger d = 0,60 × t pour prévoir une position future illustre une hypothèse : il faut aussi examiner les mécanismes, les contraintes et les événements récents.<br><strong>(4) Volume de stockage :</strong> V = 40 000 × 0,25 = <strong>10 000 m³</strong>. Ce volume géométrique ne démontre <strong>pas</strong> une réduction du débit de pointe : il faudrait analyser quand la prairie se remplit (avant, pendant ou après la pointe), le débit entrant et sortant, et si elle était déjà remplie par un épisode précédent.',
+                },
+              },
+            ],
+          }, // fin gem-m17
+
         ],
       },
     ],
