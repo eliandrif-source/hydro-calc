@@ -4951,6 +4951,86 @@ const COURS_DATA = {
                     '\\text{Bioindication DCE : IBD — IBG-DCE — IPR — IBMR}',
                   ],
                   retenir: 'Habitat ≠ espèce : l\'habitat est un lieu avec des conditions, l\'espèce en est l\'occupant. Un milieu riche = mosaïque d\'habitats diversifiés + quatre continuités fonctionnelles. Toute rupture de continuité dégrade l\'ensemble du système.',
+                  sections: [
+                    {
+                      titre: '1. L\'écosystème aquatique : biotope et biocénose',
+                      sous_sections: [
+                        {
+                          titre: '1.1. Le biotope',
+                          texte: '<p>Le biotope est l\'ensemble des conditions physiques et chimiques d\'un lieu : substrat, vitesse, profondeur, température, lumière, oxygène, nutriments. Ces paramètres définissent les possibilités d\'existence des organismes vivants.</p><p>Un biotope peut être caractérisé à plusieurs échelles : à l\'échelle du méandre (km), à celle du faciès d\'écoulement (dizaines à centaines de mètres), ou à celle du microhabitat (interstice du substrat, quelques centimètres). Ces échelles sont toutes pertinentes selon la question posée.</p>'
+                        },
+                        {
+                          titre: '1.2. La biocénose et les interactions',
+                          texte: '<p>La biocénose est l\'ensemble des organismes vivant dans un biotope : algues, macrophytes, macroinvertébrés, poissons, amphibiens. Chaque espèce a des exigences précises qui limitent sa présence à certains milieux.</p><p>La biocénose modifie en retour son biotope : les macrophytes ralentissent l\'écoulement local et favorisent la sédimentation, les invertébrés détritivores fragmentent la matière organique et accélèrent sa décomposition. <strong>La causalité est circulaire, pas unidirectionnelle.</strong></p><p>L\'écosystème aquatique remplit des fonctions d\'intérêt général : épuration de l\'eau (dégradation de la matière organique, dénitrification), soutien d\'étiage, régulation thermique, production de biomasse. Évaluer l\'état d\'un écosystème revient à évaluer sa capacité à continuer à remplir ces fonctions.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '2. La mosaïque d\'habitats : faciès et substrats',
+                      sous_sections: [
+                        {
+                          titre: '2.1. Les faciès d\'écoulement',
+                          texte: '<p>Un faciès est une unité homogène du lit caractérisée par ses conditions hydrauliques et sédimentaires. Les principaux faciès sont :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Radier</strong> : vitesse &gt; 30 cm/s, profondeur &lt; 30 cm, substrat grossier (galets, graviers). Zone de fraie des salmonidés, forte oxygénation.</li><li style="margin-bottom:4px"><strong>Mouille</strong> : vitesse &lt; 10 cm/s, profondeur &gt; 50 cm, substrat fin. Zone de refuge et d\'alimentation pour les prédateurs.</li><li style="margin-bottom:4px"><strong>Plat courant</strong> : conditions intermédiaires, biodiversité souvent la plus élevée.</li><li style="margin-bottom:4px"><strong>Plat lent</strong> : vitesse très réduite, dépôt de matières fines.</li></ul><p>La succession radier-mouille est la signature morphologique d\'un cours d\'eau sain. Sa disparition au profit d\'un profil uniforme traduit une chenalisation ou une incision du lit.</p>'
+                        },
+                        {
+                          titre: '2.2. Le substrat, le colmatage et la diversité d\'habitats',
+                          texte: '<p>La granulométrie conditionne la diversité de la faune benthique. Un substrat grossier offre de nombreux microhabitats dans ses interstices : abris pour les larves d\'invertébrés, sites de fraie pour les salmonidés dont les œufs sont enfouis dans des graviers oxygénés.</p><p>Le <strong>colmatage</strong> désigne l\'obstruction des interstices par des particules fines. Ses conséquences sont graves : asphyxie des œufs par réduction de la circulation d\'eau oxygénée, disparition de la faune benthique rhéophile, réduction des échanges hyporhéiques. Les sources principales sont l\'érosion des berges nues et les ruissellements agricoles chargés en MES.</p><p><strong>La richesse biologique est directement corrélée à la diversité des habitats.</strong> Un cours d\'eau recalibré peut afficher de bonnes valeurs physico-chimiques tout en hébergeant une biocénose appauvrie, faute de diversité morphologique. L\'évaluation DCE intègre donc des critères hydromorphologiques.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '3. La zone hyporhéique : continuité verticale',
+                      sous_sections: [
+                        {
+                          titre: '3.1. Définition et fonctionnement',
+                          texte: '<p>La zone hyporhéique est la zone de transition entre l\'eau de surface et l\'eau souterraine, localisée sous et latéralement au lit du cours d\'eau dans les alluvions. L\'eau de surface y pénètre sous l\'effet de gradients hydrauliques entre radiers (surpression) et mouilles (dépression), et ressort plus loin, modifiée chimiquement.</p><p>Cette circulation entretient la <strong>continuité verticale</strong>, l\'une des quatre continuités écologiques fondamentales. Elle peut être interrompue par l\'imperméabilisation du fond (béton, colmatage intense), isolant l\'eau de surface de la nappe alluviale.</p>'
+                        },
+                        {
+                          titre: '3.2. Rôles écologiques',
+                          texte: '<p>La zone hyporhéique remplit plusieurs fonctions :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Habitat spécialisé</strong> : faune hyporheobios (oligochètes, crustacés, nématodes adaptés à l\'absence de lumière)</li><li style="margin-bottom:4px"><strong>Tampon thermique</strong> : températures stables — refuge thermique vital pour les salmonidés en canicule</li><li style="margin-bottom:4px"><strong>Filtre biogéochimique</strong> : dénitrification (NO₃⁻ → N₂) — contribution à l\'épuration naturelle des eaux agricoles</li><li style="margin-bottom:4px"><strong>Oxygénation des frayères</strong> : les embryons de salmonidés dans les graviers dépendent de la circulation d\'eau oxygénée</li></ul>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '4. Les réseaux trophiques et la complémentarité des habitats',
+                      sous_sections: [
+                        {
+                          titre: '4.1. Organisation du réseau trophique',
+                          texte: '<p>Les niveaux trophiques s\'organisent ainsi :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Producteurs primaires</strong> : algues (périphyton), macrophytes — transforment l\'énergie solaire en matière organique</li><li style="margin-bottom:4px"><strong>Consommateurs primaires</strong> : macroinvertébrés brouteurs, filtreurs, détritivores</li><li style="margin-bottom:4px"><strong>Prédateurs secondaires</strong> : invertébrés prédateurs, petits poissons</li><li style="margin-bottom:4px"><strong>Prédateurs supérieurs</strong> : grands poissons, héron, martin-pêcheur, loutre</li></ul><p>Dans les petits cours d\'eau ombragés, la matière organique allochtone (feuilles, bois mort des arbres riverains) est souvent la source énergétique dominante. La suppression de la ripisylve prive directement l\'écosystème de cette source.</p>'
+                        },
+                        {
+                          titre: '4.2. Complémentarité des habitats sur le cycle de vie',
+                          texte: '<p>Les espèces aquatiques utilisent plusieurs habitats successifs. L\'exemple des salmonidés est pédagogique :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Fraie</strong> : sur graviers oxygénés (radiers)</li><li style="margin-bottom:4px"><strong>Alevins</strong> : zones peu profondes à courant modéré</li><li style="margin-bottom:4px"><strong>Tacons</strong> : radiers et plats courants riches en invertébrés</li><li style="margin-bottom:4px"><strong>Adultes</strong> : mouilles profondes, migrations longue distance pour les espèces amphihalines</li></ul><p><strong>La perte d\'un seul type d\'habitat critique peut suffire à briser le cycle reproductif sur tout un bassin versant.</strong> C\'est pourquoi la restauration doit viser la diversité des habitats et la continuité des corridors biologiques.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '5. Les quatre continuités écologiques',
+                      sous_sections: [
+                        {
+                          titre: '5.1. Longitudinale et latérale',
+                          texte: '<p><strong>Continuité longitudinale</strong> : libre circulation des espèces entre l\'amont et l\'aval, et transport de sédiments. Principale menace : obstacles transversaux (barrages, seuils). La DCE et la trame bleue (SRCE/SRADDET) imposent des dispositifs de franchissement sur les cours d\'eau classés.</p><p><strong>Continuité latérale</strong> : échanges entre le lit mineur et la plaine d\'inondation lors des crues. La plaine inondée devient une nurserie pour les juvéniles de poissons (alimentation abondante, prédation réduite). Elle est menacée par les digues longitudinales et l\'enfoncement du lit par incision. Restaurée par la reconnexion des bras morts et des méandres secondaires.</p>'
+                        },
+                        {
+                          titre: '5.2. Verticale et temporelle',
+                          texte: '<p><strong>Continuité verticale</strong> : assurée par les échanges hyporhéiques entre surface et nappe. Rompue par l\'imperméabilisation du fond. Indispensable à l\'oxygénation des frayères et à la dénitrification.</p><p><strong>Continuité temporelle</strong> : variabilité naturelle des débits (crues et étiages). Les crues entretiennent la dynamique morphologique et reconnectent le lit à la plaine. Les étiages génèrent des conditions de stress qui structurent la biodiversité. Les régularisations de débit (barrages réservoirs) altèrent cette continuité et appauvrissent les écosystèmes.</p><p><strong>Les quatre continuités sont interdépendantes.</strong> Un barrage coupe la longitudinale, modifie la latérale (piégeage des sédiments, modification des crues) et altère la temporelle (homogénéisation des débits).</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '6. La bioindication et les indices DCE',
+                      sous_sections: [
+                        {
+                          titre: '6.1. Le principe de la bioindication',
+                          texte: '<p>Un bioindicateur est un organisme dont la présence, l\'abondance ou l\'état renseigne sur les conditions du milieu. Contrairement à une mesure physico-chimique ponctuelle, un indice biologique <strong>intègre les effets des perturbations sur la durée de vie des organismes</strong> (semaines à années), révélant l\'état moyen réel.</p><p>Limite : réponse retardée après amélioration. Un cours d\'eau peut afficher de bonnes valeurs physico-chimiques tout en conservant des indices biologiques dégradés si les conditions n\'ont été corrigées que récemment.</p>'
+                        },
+                        {
+                          titre: '6.2. Les indices normalisés DCE',
+                          texte: '<p>La DCE impose l\'évaluation à partir de plusieurs éléments de qualité biologiques (EQB) :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>IBD</strong> (Indice Biologique Diatomées) : sensible à l\'eutrophisation et aux nutriments. Échelle 1-20.</li><li style="margin-bottom:4px"><strong>IBG-DCE</strong> : macroinvertébrés benthiques, sensibles aux dégradations générales (pollution, colmatage, altérations morphologiques). Échelle 1-20.</li><li style="margin-bottom:4px"><strong>IPR</strong> (Indice Poissons Rivière) : comparaison peuplement observé / peuplement de référence. Cinq classes.</li><li style="margin-bottom:4px"><strong>IBMR</strong> (Indice Biologique Macrophytique) : sensible aux nutriments N et P. Échelle 0-20.</li></ul><p><strong>Ces indices sont complémentaires — aucun n\'est exhaustif seul.</strong> Un diagnostic complet en mobilise plusieurs, replacés dans leur contexte hydrologique et géographique.</p>'
+                        }
+                      ]
+                    }
+                  ],
                 },
                 flashcards: [
                   { q: 'Quelle est la différence entre biotope et biocénose ?', r: 'Biotope = milieu physique et chimique (eau, substrat, température, lumière). Biocénose = ensemble des organismes vivant dans ce milieu. Les deux forment l\'écosystème.', expl: 'La relation est bidirectionnelle : la biocénose modifie aussi le biotope — macrophytes ralentissent l\'écoulement et favorisent la sédimentation.' },
@@ -5025,6 +5105,157 @@ const COURS_DATA = {
                 },
               },
 
+              {
+                id: 'gem-ripisylve',
+                titre: 'La ripisylve et la végétation riveraine',
+                fiche: {
+                  intro: 'La ripisylve est la végétation ligneuse et herbacée qui colonise les berges des cours d\'eau. Loin d\'être un simple décor, elle constitue un système fonctionnel complexe à l\'interface du milieu terrestre et aquatique. Sa gestion est au cœur de la GEMAPI : ni suppression systématique, ni laisser-aller, mais une gestion adaptée au site, aux enjeux et aux objectifs écologiques.',
+                  points: [
+                    'Définition : végétation arborée, arbustive et herbacée des berges et rives, en contact avec le cours d\'eau. Composition typique : aulnes glutineux, saules (blanc, fragile, pourpre, osier), frênes, peupliers. Diversité selon la géologie, l\'altitude, la largeur de la plaine alluviale et le régime hydrologique.',
+                    'Rôle thermique : ombrage de la végétation limite le réchauffement estival (jusqu\'à 4-6 °C d\'écart sur un petit cours d\'eau). Essentiel pour les salmonidés et espèces thermosensibles. Levier d\'adaptation au changement climatique — solubilité de l\'O₂ diminue avec la T°.',
+                    'Stabilisation des berges : systèmes racinaires (aulnes, saules) ancrent le sol et résistent à l\'érosion hydraulique. Efficacité surtout sur la berge supérieure. En pied de berge, l\'action érosive peut se poursuivre — diagnostiquer la cause avant d\'intervenir.',
+                    'Apports de matière organique allochtone : chutes de feuilles, branches et bois mort constituent une source d\'énergie majeure pour les invertébrés des petits cours d\'eau ombragés. Les bois morts en rivière créent des habitats, retiennent les sédiments et diversifient les faciès.',
+                    'Filtration des intrants agricoles : zone tampon qui ralentit les ruissellements, favorise l\'infiltration, l\'adsorption du phosphore et la dénitrification. Bande tampon réglementaire minimale : 5 m depuis le haut de berge (conditionnalité PAC). Efficacité maximale à 10-15 m.',
+                    'Corridor écologique (TVB) : corridor linéaire pour la faune semi-aquatique (loutre, vison, castor, chiroptères). Reconnecte des habitats isolés au sein de matrices agricoles ou urbaines. Rôle dans la trame verte et bleue reconnu par le SRCE/SRADDET.',
+                    'Gestion adaptée : suppression totale et laisser-aller sont deux erreurs symétriques. Gestion par rotation (recépage alterné de tronçons) = structure diversifiée en âge et composition. Respecter les périodes biologiques sensibles : éviter les travaux d\'abattage de mars à juillet (nidification).',
+                    'Espèces exotiques envahissantes (EEE) : renouée du Japon (rhizomes très persistants, difficile à éradiquer), balsamine de l\'Himalaya, buddléia, robinier. Chaque espèce nécessite un protocole adapté. Agir en priorité sur les foyers récents et les secteurs à haute valeur écologique.',
+                    'Bois mort en rivière : longtemps considéré comme gêne (risque d\'embâcle), reconnu aujourd\'hui comme élément structurant de l\'habitat — crée des zones de calme, diversifie les substrats, retient les sédiments grossiers. Ne retirer que si risque réel pour un ouvrage ou une infrastructure.',
+                    'Réglementation : travaux en ripisylve soumis à la loi sur l\'eau (déclaration ou autorisation selon rubrique IOTA). Zones Natura 2000 : évaluation d\'incidences possible. Droit de berge appartient généralement au riverain pour les cours d\'eau non domaniaux.',
+                  ],
+                  formules: [
+                    '\\text{Température : ripisylve dense} \\rightarrow \\Delta T \\approx -4 \\text{ à } -6\\,°C \\text{ (petit cours d\'eau)}',
+                    '\\text{Bande tampon minimale (PAC) : 5 m depuis le haut de berge}',
+                    '\\text{Bande optimale dénitrification : 10 à 15 m}',
+                  ],
+                  retenir: 'Ripisylve = 5 fonctions : thermique + stabilisation + matière organique + filtration + corridor TVB. Ni supprimer tout, ni laisser-aller : gestion par rotation. EEE : protocole espèce-dépendant, agir sur foyers récents. Bois mort = habitat, pas obstacle systématique.',
+                  sections: [
+                    {
+                      titre: '1. Composition et structure de la ripisylve',
+                      sous_sections: [
+                        {
+                          titre: '1.1. Les espèces caractéristiques',
+                          texte: '<p>La ripisylve des cours d\'eau de plaine ou de piedmont présente plusieurs strates :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Strate arborescente haute</strong> : aulne glutineux (<em>Alnus glutinosa</em>), frêne commun (<em>Fraxinus excelsior</em>), peupliers (<em>Populus</em> spp.)</li><li style="margin-bottom:4px"><strong>Strate arbustive</strong> : saule blanc (<em>Salix alba</em>), saule fragile (<em>Salix fragilis</em>), saule pourpre (<em>Salix purpurea</em>), fusain d\'Europe</li><li style="margin-bottom:4px"><strong>Strate herbacée</strong> : baldingère, phragmites, calamagrostide, impatiente des bois</li></ul><p>La composition varie selon l\'altitude, la géologie, le régime hydrologique et les usages riverains. La diversité de la ripisylve est un indicateur indirect de la qualité et de la naturalité du cours d\'eau.</p>'
+                        },
+                        {
+                          titre: '1.2. Zonation transversale',
+                          texte: '<p>La ripisylve présente une zonation liée au gradient d\'humidité et de fréquence d\'inondation :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Zone amphibie</strong> (berge inférieure, régulièrement inondée) : saules à enracinement traçant, hélophytes</li><li style="margin-bottom:4px"><strong>Zone riveraine stricte</strong> (berge supérieure, inondée lors des crues ordinaires) : aulnes, saule blanc</li><li style="margin-bottom:4px"><strong>Zone de transition</strong> (plaine alluviale, grandes crues seulement) : frênes, ormes, chênes pédonculés</li></ul><p>Cette zonation détermine la résistance à l\'érosion. La suppression de la zone amphibie fragilise immédiatement les berges. La perte de la zone de transition affecte surtout les fonctions de filtre et de corridor.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '2. Fonctions hydrologiques et écologiques',
+                      sous_sections: [
+                        {
+                          titre: '2.1. Régulation thermique',
+                          texte: '<p>L\'ombrage de la ripisylve limite le rayonnement solaire atteignant la surface de l\'eau. L\'effet est d\'autant plus marqué que le cours d\'eau est étroit et la végétation dense. Sur un petit cours d\'eau (&lt; 5 m de large), une ripisylve continue peut maintenir des températures estivales inférieures de 4 à 6 °C par rapport à un cours d\'eau déboisé.</p><p>Cette fonction est cruciale dans le contexte du changement climatique. Le maintien et la restauration de la ripisylve sont des mesures d\'adaptation pour les salmonidés et d\'autres espèces thermosensibles. La solubilité de l\'O₂ diminuant avec la température, l\'ombrage contribue aussi à maintenir l\'oxygénation.</p><p><strong>À noter :</strong> l\'effet est moins marqué sur les grands cours d\'eau, où l\'inertie thermique de la masse d\'eau joue un rôle prédominant.</p>'
+                        },
+                        {
+                          titre: '2.2. Stabilisation des berges et filtration des intrants',
+                          texte: '<p>Les systèmes racinaires des arbres et arbustes de berge renforcent mécaniquement le sol et résistent à l\'érosion hydraulique. L\'aulne est particulièrement efficace grâce à son enracinement dense. Cependant, l\'efficacité se limite à la partie où les racines sont présentes. En pied de berge, l\'action érosive de l\'eau peut se poursuivre — un pied de berge en érosion doit être diagnostiqué avant toute intervention.</p><p>La ripisylve et la bande enherbée ralentissent les ruissellements de surface, favorisant l\'infiltration et la rétention du phosphore. En zone saturée, la dénitrification bactérienne transforme les nitrates en azote gazeux. Cette fonction est optimale avec une bande large (idéalement 10-15 m), un sol naturellement hydromorphe et une connexion nappe-ripisylve fonctionnelle.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '3. Gestion et entretien',
+                      sous_sections: [
+                        {
+                          titre: '3.1. Principes de la gestion écologique',
+                          texte: '<p>Deux écueils sont à éviter :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>La suppression systématique</strong> : souvent justifiée par la crainte d\'embâcles ou par facilité d\'entretien. Elle prive le cours d\'eau de toutes les fonctions de la ripisylve et déstabilise les berges à moyen terme.</li><li style="margin-bottom:4px"><strong>Le laisser-aller total</strong> : peut conduire à un envahissement par des espèces indésirables, au développement d\'arbres instables dangereux, ou à une obstruction excessive du lit.</li></ul><p>La gestion par <strong>rotation</strong> (recépage alterné de tronçons) maintient une structure diversifiée en âge et en composition, assurant une continuité des fonctions tout en renouvelant la végétation.</p>'
+                        },
+                        {
+                          titre: '3.2. Calendrier et réglementation',
+                          texte: '<p>Les travaux en ripisylve doivent respecter :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Périodes biologiques</strong> : éviter les travaux d\'abattage et d\'élagage de mars à juillet (nidification)</li><li style="margin-bottom:4px"><strong>Loi sur l\'eau (IOTA)</strong> : les travaux susceptibles de modifier le profil en long ou en travers d\'un cours d\'eau font l\'objet d\'une déclaration ou d\'une autorisation selon le seuil</li><li style="margin-bottom:4px"><strong>Zones Natura 2000</strong> : une évaluation d\'incidences peut être requise</li></ul><p>Le droit de berge appartient généralement au riverain pour les cours d\'eau non domaniaux (propriétaire riverain = propriétaire de la berge jusqu\'au milieu du lit). L\'entretien de la ripisylve peut relever de la responsabilité du riverain ou être pris en charge par la collectivité compétente GEMAPI.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '4. Espèces exotiques envahissantes (EEE)',
+                      sous_sections: [
+                        {
+                          titre: '4.1. Principales EEE rivulaires',
+                          texte: '<p>Les espèces exotiques envahissantes les plus problématiques en bords de cours d\'eau en France :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Renouée du Japon</strong> (<em>Reynoutria japonica</em>) : rhizomes très persistants, peuplements denses monospécifiques, très difficile à éradiquer. Destabilise les berges en hiver (mort annuelle de la partie aérienne)</li><li style="margin-bottom:4px"><strong>Balsamine de l\'Himalaya</strong> (<em>Impatiens glandulifera</em>) : annuelle à dissémination explosive, colonise les berges perturbées</li><li style="margin-bottom:4px"><strong>Buddléia de David</strong> (<em>Buddleja davidii</em>) : colonise les substrats perturbés et les berges rocailleuses</li><li style="margin-bottom:4px"><strong>Robinier faux-acacia</strong> (<em>Robinia pseudoacacia</em>) : multiplication végétative rapide, s\'installe dans les ripisylves fragilisées</li></ul><p>Les foyers sont souvent créés par des perturbations des berges (travaux, crues morphogènes) exposant le sol nu, favorable à l\'installation des EEE.</p>'
+                        },
+                        {
+                          titre: '4.2. Stratégie de gestion des EEE',
+                          texte: '<p><strong>Renouée du Japon :</strong> arrachage des jeunes plants, fauche répétée (&gt; 4 fois/an pendant plusieurs années), recouvrement géotextile, concurrence par plantation dense d\'espèces indigènes. Ne jamais exporter la terre et les rhizomes sans précautions (risque de dispersion).</p><p><strong>Balsamine :</strong> arrachage avant floraison, fauchage répété sur plusieurs années.</p><p><strong>Principe général :</strong> intervenir en priorité sur les foyers les plus récents et les secteurs à haute valeur écologique. Établir une cartographie initiale, un suivi de l\'évolution et une évaluation des techniques employées. Un plan pluriannuel est indispensable — aucune méthode n\'est totalement efficace à court terme.</p>'
+                        }
+                      ]
+                    }
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quels sont les 5 rôles principaux de la ripisylve ?', r: '① Régulation thermique (ombrage -4 à -6 °C) ② Stabilisation des berges (racines) ③ Apports de MO allochtone (feuilles, bois mort) ④ Filtration des intrants agricoles (zone tampon) ⑤ Corridor écologique TVB.', expl: 'Ces fonctions sont complémentaires. La suppression de la ripisylve fragilise simultanément toutes ces dimensions.' },
+                  { q: 'Quelles espèces utilise-t-on pour une plantation de ripisylve en bord de berge ?', r: 'Berge inférieure : saules (boutures) — saule blanc, saule pourpre, saule osier. Berge supérieure : aulne glutineux. Arrière-rive : frêne, fusain, selon contexte.', expl: 'L\'aulne fixe aussi l\'azote atmosphérique grâce à sa symbiose avec Frankia — avantage dans les sols peu fertiles.' },
+                  { q: 'Pourquoi la ripisylve est-elle une mesure d\'adaptation au changement climatique ?', r: 'L\'ombrage limite le réchauffement estival de l\'eau (jusqu\'à -6 °C). Crucial pour les salmonidés (seuil critique ~20 °C) et maintient la solubilité de l\'O₂.', expl: 'Sur les grands cours d\'eau, l\'effet thermique de la ripisylve est moindre — il faut aussi agir sur les sources d\'eaux froides (affluents non réchauffés).' },
+                  { q: 'Quelle est la largeur réglementaire minimale de la bande tampon en France ?', r: '5 m depuis le haut de berge (conditionnalité PAC). Idéalement 10-15 m pour une efficacité maximale sur les nitrates (dénitrification).', expl: 'L\'efficacité dépend aussi de la pente du terrain, du type de sol et de la connexion entre la nappe et la ripisylve.' },
+                  { q: 'Pourquoi ne pas supprimer systématiquement la ripisylve pour réduire les embâcles ?', r: 'La suppression prive le cours d\'eau de l\'ombrage, de la stabilisation des berges, des apports de MO et du corridor. À moyen terme, les berges s\'érodent davantage et la MES augmente.', expl: 'Les embâcles problématiques sont rares. Une gestion sélective (abattage des arbres instables, débroussaillage ciblé) est préférable.' },
+                  { q: 'Quelle est la principale difficulté de la gestion de la renouée du Japon ?', r: 'Ses rhizomes très persistants peuvent régénérer même à partir de fragments. Aucune méthode n\'est totalement efficace à court terme. Un plan pluriannuel est indispensable.', expl: 'Ne jamais exporter la terre ou les rhizomes sans précautions. Agir en priorité sur les foyers récents, plus faciles à contrôler.' },
+                  { q: 'Quelles procédures réglementaires s\'appliquent aux travaux en ripisylve ?', r: 'Loi sur l\'eau (déclaration ou autorisation selon la rubrique IOTA), périodes biologiques (éviter nidification mars-juillet), évaluation d\'incidences Natura 2000 si applicable.', expl: 'Les plantations seules sont généralement exemptées. Les terrassements de berges associés peuvent déclencher la rubrique 3.1.1.0.' },
+                  { q: 'Quel est le rôle du bois mort en rivière ?', r: 'Il crée des habitats diversifiés (zones de calme, substrats variés), retient les sédiments grossiers et contribue aux réseaux trophiques. Son enlèvement systématique appauvrit les habitats.', expl: 'À ne retirer que s\'il présente un risque réel pour un ouvrage — après évaluation au cas par cas.' },
+                ],
+                schema: `<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="300" fill="#f0fdf4" rx="10"/>
+  <text x="260" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#14532d">Ripisylve — coupe transversale et fonctions</text>
+  <!-- Berge gauche avec ripisylve -->
+  <rect x="10" y="35" width="120" height="140" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+  <text x="70" y="52" text-anchor="middle" fill="#15803d" font-size="10" font-weight="bold">Ripisylve</text>
+  <!-- Arbres gauche -->
+  <ellipse cx="35" cy="85" rx="18" ry="24" fill="#4ade80" opacity="0.75"/>
+  <line x1="35" y1="109" x2="35" y2="140" stroke="#854d0e" stroke-width="3"/>
+  <ellipse cx="70" cy="77" rx="22" ry="28" fill="#16a34a" opacity="0.85"/>
+  <line x1="70" y1="105" x2="70" y2="140" stroke="#854d0e" stroke-width="3"/>
+  <ellipse cx="108" cy="87" rx="16" ry="22" fill="#4ade80" opacity="0.75"/>
+  <line x1="108" y1="109" x2="108" y2="140" stroke="#854d0e" stroke-width="3"/>
+  <!-- Sol + racines -->
+  <rect x="10" y="140" width="120" height="16" rx="2" fill="#92400e" opacity="0.55"/>
+  <line x1="35" y1="156" x2="22" y2="178" stroke="#78350f" stroke-width="1.5" opacity="0.7"/>
+  <line x1="35" y1="156" x2="48" y2="180" stroke="#78350f" stroke-width="1.5" opacity="0.7"/>
+  <line x1="70" y1="156" x2="55" y2="183" stroke="#78350f" stroke-width="1.5" opacity="0.7"/>
+  <line x1="70" y1="156" x2="78" y2="184" stroke="#78350f" stroke-width="1.5" opacity="0.7"/>
+  <line x1="108" y1="156" x2="96" y2="178" stroke="#78350f" stroke-width="1.5" opacity="0.7"/>
+  <!-- Cours d'eau central -->
+  <rect x="140" y="148" width="240" height="42" rx="5" fill="#60a5fa" opacity="0.75"/>
+  <text x="260" y="174" text-anchor="middle" fill="#1e3a8a" font-size="11" font-weight="bold">Cours d\'eau</text>
+  <!-- Berge droite (déboisée) -->
+  <rect x="390" y="35" width="120" height="140" rx="4" fill="#fef9c3" stroke="#d97706" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="450" y="52" text-anchor="middle" fill="#b45309" font-size="10" font-weight="bold">Sans ripisylve</text>
+  <text x="450" y="67" text-anchor="middle" fill="#b45309" font-size="8">Berge exposée</text>
+  <rect x="390" y="140" width="120" height="16" rx="2" fill="#92400e" opacity="0.25"/>
+  <!-- Soleil -->
+  <line x1="450" y1="22" x2="450" y2="50" stroke="#f59e0b" stroke-width="2"/>
+  <text x="450" y="20" text-anchor="middle" fill="#b45309" font-size="9" font-weight="bold">☀ Rayonn. direct</text>
+  <!-- Ombrage gauche -->
+  <line x1="70" y1="22" x2="70" y2="55" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="70" y="19" text-anchor="middle" fill="#15803d" font-size="9">☀ bloqué ✓</text>
+  <!-- Nappe alluviale -->
+  <rect x="10" y="190" width="500" height="18" rx="3" fill="#bfdbfe" opacity="0.65"/>
+  <text x="260" y="203" text-anchor="middle" fill="#1d4ed8" font-size="9">Nappe alluviale — échanges hyporhéiques</text>
+  <!-- Tableau fonctions -->
+  <rect x="10" y="215" width="500" height="78" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="0.8"/>
+  <text x="20" y="231" font-size="9" font-weight="bold" fill="#14532d">① Thermique</text>
+  <text x="20" y="243" font-size="8" fill="#555">−4 à −6 °C été</text>
+  <text x="115" y="231" font-size="9" font-weight="bold" fill="#14532d">② Stabilisation</text>
+  <text x="115" y="243" font-size="8" fill="#555">Racines → anti-érosion</text>
+  <text x="225" y="231" font-size="9" font-weight="bold" fill="#14532d">③ Mat. organique</text>
+  <text x="225" y="243" font-size="8" fill="#555">Feuilles, bois mort</text>
+  <text x="340" y="231" font-size="9" font-weight="bold" fill="#14532d">④ Filtration</text>
+  <text x="340" y="243" font-size="8" fill="#555">Tampon, dénitrif.</text>
+  <text x="430" y="231" font-size="9" font-weight="bold" fill="#14532d">⑤ Corridor</text>
+  <text x="430" y="243" font-size="8" fill="#555">TVB — loutre…</text>
+  <line x1="10" y1="252" x2="510" y2="252" stroke="#d1fae5" stroke-width="1"/>
+  <text x="20" y="265" font-size="8" fill="#b45309" font-weight="bold">Gestion :</text>
+  <text x="72" y="265" font-size="8" fill="#555">Rotation / recépage alterné — ni suppression totale, ni laisser-aller</text>
+  <text x="20" y="279" font-size="8" fill="#b45309" font-weight="bold">EEE :</text>
+  <text x="50" y="279" font-size="8" fill="#555">Renouée (rhizomes persistants), balsamine, buddléia — protocole espèce-dépendant, plan pluriannuel</text>
+  <text x="20" y="292" font-size="8" fill="#15803d" font-weight="bold">Bande tampon :</text>
+  <text x="100" y="292" font-size="8" fill="#555">5 m min. réglementaire (PAC) — 10-15 m optimal pour dénitrification</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Un syndicat de rivière envisage de restaurer 500 m de berges sur un cours d\'eau de 4 m de large. État actuel : berges déboisées depuis 15 ans, érosion de 20-30 cm/an, température estivale moyenne de 24 °C (seuil critique truite : 20 °C), foyer de renouée du Japon sur 80 m. (1) Identifiez les fonctions de la ripisylve perdues et leurs conséquences observées. (2) Proposez des espèces pour la berge inférieure et supérieure. (3) Proposez une stratégie pluriannuelle pour les 80 m de renouée. (4) Les plantations nécessitent-elles une procédure loi sur l\'eau ?',
+                  solution: '<strong>(1) Fonctions perdues et conséquences :</strong> thermique perdue → T° 24 °C (+4 °C au-dessus du seuil critique truite) → stress, potentiellement mortalité ; stabilisation perdue → érosion 20-30 cm/an, apport de MES ; MO allochtone perdue → réseau trophique appauvri ; filtration perdue → intrants agricoles non interceptés.<br><strong>(2) Espèces :</strong> berge inférieure (inondée fréquemment) : boutures de saule blanc, saule pourpre, saule osier — enracinement traçant résistant à l\'érosion ; berge supérieure : aulne glutineux en mélange, frêne en retrait. Plants de petite taille pour faciliter la reprise.<br><strong>(3) Gestion renouée :</strong> ① cartographier précisément le foyer ; ② fauche répétée ≥ 4 fois/an à partir du printemps, pendant 3 à 5 ans minimum ; ③ si persistance, envisager géotextile + plantation concurrentielle dense d\'aulnes et saules ; ④ ne jamais exporter les rhizomes ni la terre sans précautions ; ⑤ surveiller les foyers secondaires en aval (dissémination hydrique).<br><strong>(4) Procédure loi sur l\'eau :</strong> les plantations seules sur berges sont généralement exemptées. Si des terrassements (confortement du pied de berge, modelage) sont associés, la rubrique 3.1.1.0 (modification de profil en travers) peut être concernée — vérifier le seuil applicable (déclaration si surface > 1 000 m², autorisation si > 10 000 m²).',
+                },
+              },
+
             ],
           }, // fin gem-m5
 
@@ -5065,6 +5296,77 @@ const COURS_DATA = {
                     'C_{\\text{PO}_4} \\approx C_P \\times \\dfrac{95}{31}',
                   ],
                   retenir: 'Mesure ≠ interprétation. Toujours lire forme, unité et méthode ensemble. Concentration ≠ flux. Non quantifié ≠ absent. Diagnostic ponctuel ≠ état officiel. Ne jamais calculer un mélange de pH par moyenne arithmétique.',
+                  sections: [
+                    {
+                      titre: '1. Les paramètres de terrain : T°, O₂, pH, conductivité',
+                      sous_sections: [
+                        {
+                          titre: '1.1. Température et oxygène dissous',
+                          texte: '<p>La <strong>température</strong> influence le métabolisme des organismes, la solubilité des gaz et les cycles biologiques. Une valeur instantanée est insuffisante : il faut examiner l\'amplitude journalière, le minimum, le maximum et la durée au-dessus d\'un seuil critique.</p><p>L\'<strong>oxygène dissous</strong> résulte de l\'équilibre entre apports (échanges atmosphériques, photosynthèse, réaération) et consommations (respiration, dégradation de MO, nitrification). Une eau froide dissout davantage d\'O₂ à saturation. La concentration réelle ne se déduit pas de la seule température : elle doit être mesurée.</p>'
+                        },
+                        {
+                          titre: '1.2. Variations nycthémérales de l\'O₂',
+                          texte: '<p>Dans un cours d\'eau végétalisé, l\'O₂ varie fortement au cours de la journée :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Hausse diurne par photosynthèse — possible sursaturation (&gt; 100 %) en fin d\'après-midi</li><li style="margin-bottom:4px">Baisse nocturne par respiration seule</li><li style="margin-bottom:4px"><strong>Minimum en fin de nuit</strong> (vers 5h-7h), parfois à des niveaux stressants pour la faune</li></ul><p>Une mesure prise à 17h peut montrer une sursaturation, alors que le minimum nocturne est sévère. <strong>Une mesure ponctuelle ne décrit pas la dynamique journalière.</strong></p>'
+                        },
+                        {
+                          titre: '1.3. pH et conductivité',
+                          texte: '<p>Le <strong>pH</strong> (= −log₁₀[H⁺]) est influencé par la géologie, les échanges de CO₂, la photosynthèse et le pouvoir tampon. Son échelle est logarithmique : un écart d\'une unité = facteur 10 sur l\'activité des ions H⁺. <strong>Ne jamais calculer un mélange de pH par moyenne arithmétique</strong> : il faut raisonner en concentrations en H⁺ et en pouvoir tampon.</p><p>La <strong>conductivité</strong> (µS/cm à 25 °C) mesure la capacité de l\'eau à conduire le courant électrique, liée aux ions dissous. Une conductivité élevée peut traduire une minéralisation naturelle géologique, sans pollution. Une conductivité faible n\'exclut pas des substances toxiques non ioniques. La conductivité ne permet pas d\'identifier les ions responsables.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '2. Turbidité, MES et matières organiques',
+                      sous_sections: [
+                        {
+                          titre: '2.1. Turbidité et MES : ne pas confondre',
+                          texte: '<p>La <strong>turbidité</strong> (FNU ou NTU) est une propriété optique mesurée par diffusion de la lumière par les particules. Les <strong>MES</strong> (mg/L) sont mesurées par filtration et pesée.</p><p><strong>Turbidité ≠ MES :</strong> il n\'existe pas de conversion universelle. La relation dépend de la nature, de la taille et de la forme des particules, ainsi que de l\'instrument. FNU et NTU ne sont pas strictement interchangeables. Une relation locale calibrée est nécessaire pour estimer les MES à partir de la turbidité.</p><p>Les particules transportent des substances associées (phosphore, métaux) et peuvent affecter la photosynthèse, le colmatage des graviers et la biologie des espèces filtrantes.</p>'
+                        },
+                        {
+                          titre: '2.2. DBO₅, DCO et COT',
+                          texte: '<p>Ces paramètres caractérisent la charge en matières organiques, chacun à sa façon :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>DBO₅</strong> (mg O₂/L) : demande biologique en O₂ mesurée à 20 °C pendant 5 jours à l\'obscurité. Ce n\'est pas la concentration en O₂ de la rivière, ni la totalité de la MO, ni l\'O₂ réellement consommé in situ.</li><li style="margin-bottom:4px"><strong>DCO</strong> (mg O₂/L) : oxydation chimique par un oxydant fort — inclut des fractions non biodégradables et certaines substances minérales réductrices.</li><li style="margin-bottom:4px"><strong>COT</strong> (mg C/L) : carbone organique total — indépendant de la demande en O₂.</li></ul><p>Ces paramètres sont complémentaires et non interchangeables. Le rapport DCO/DBO₅ informe sur la biodégradabilité (ratio élevé = MO peu biodégradable).</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '3. L\'azote et ses formes',
+                      sous_sections: [
+                        {
+                          titre: '3.1. Les formes de l\'azote',
+                          texte: '<p>L\'azote existe sous plusieurs formes dans l\'eau :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>N organique</strong> : lié à la matière organique</li><li style="margin-bottom:4px"><strong>NH₄⁺</strong> (ammonium) : produit de la minéralisation de la MO</li><li style="margin-bottom:4px"><strong>NH₃</strong> (ammoniac non ionisé) : toxique pour les poissons — sa proportion dépend du pH et de la température</li><li style="margin-bottom:4px"><strong>NO₂⁻</strong> (nitrites) : forme intermédiaire de nitrification, indicatrice d\'un processus en cours</li><li style="margin-bottom:4px"><strong>NO₃⁻</strong> (nitrates) : forme oxydée terminale, mobile dans les aquifères</li></ul><p><strong>Attention :</strong> l\'azote Kjeldahl (NTK = N organique + NH₄⁺) n\'inclut pas les nitrates ni les nitrites. Toujours préciser la forme analysée et son unité.</p>'
+                        },
+                        {
+                          titre: '3.2. Nitrification et conversion',
+                          texte: '<p>La nitrification est l\'oxydation biologique : NH₄⁺ → NO₂⁻ → NO₃⁻. Elle consomme de l\'O₂ (environ 4,3 mg O₂ par mg NH₄⁺-N oxydé), ce qui peut contribuer à des déficits en O₂ à l\'aval de rejets chargés en ammonium.</p><p>Conversion entre formes :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">mg NO₃⁻/L = mg N/L × 62/14 (masse molaire NO₃⁻ = 14 + 3×16 = 62 g/mol)</li><li style="margin-bottom:4px">mg N/L = mg NO₃⁻/L × 14/62</li></ul><p>Ex. : 5 mg N/L × 62/14 ≈ 22,1 mg NO₃⁻/L.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '4. Le phosphore et l\'eutrophisation',
+                      sous_sections: [
+                        {
+                          titre: '4.1. Les formes du phosphore',
+                          texte: '<p>Le phosphore se présente sous plusieurs formes : orthophosphates (PO₄³⁻, directement assimilables par les végétaux), phosphore dissous total, phosphore particulaire, phosphore total. <strong>Toujours lire la base d\'expression :</strong> mg P/L ≠ mg PO₄/L.</p><p>Conversion : mg PO₄³⁻/L ≈ mg P/L × 95/31 (masses molaires : P = 31, PO₄ = 95 g/mol).</p><p>Les sédiments peuvent constituer un <strong>stock interne</strong> de phosphore : lors d\'anoxies de fond, le phosphore adsorbé sur les sédiments est relargué dans la colonne d\'eau, entretenant l\'eutrophisation même après réduction des apports externes.</p>'
+                        },
+                        {
+                          titre: '4.2. L\'eutrophisation',
+                          texte: '<p>L\'eutrophisation est l\'enrichissement excessif en nutriments (principalement N et P), entraînant une prolifération végétale (algues, cyanobactéries). Ses conséquences :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Fortes variations nycthémérales d\'O₂ et de pH</li><li style="margin-bottom:4px">Anoxie nocturne par respiration de la biomasse végétale</li><li style="margin-bottom:4px">Production de toxines par les cyanobactéries (risque sanitaire)</li><li style="margin-bottom:4px">Dégradation des peuplements biologiques</li></ul><p>Le phosphore est souvent le facteur limitant en eau douce : agir en priorité sur les apports en P (rejets d\'assainissement, lessivage agricole) est généralement plus efficace que sur l\'azote seul.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '5. Flux massique, bilan de mélange et interprétation',
+                      sous_sections: [
+                        {
+                          titre: '5.1. Le flux massique',
+                          texte: '<p>La concentration seule ne suffit pas pour caractériser un impact. Le <strong>flux massique</strong> combine concentration et débit :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Ṁ (g/s) = C (mg/L) × Q (m³/s)</li><li style="margin-bottom:4px">Ṁ (kg/j) = 86,4 × C × Q</li></ul><p>En période de crue, une dilution de la concentration peut coexister avec une augmentation du flux si le débit augmente suffisamment. <strong>Concentration ≠ flux.</strong> Un cours d\'eau à faible débit et forte concentration peut exporter moins de polluant qu\'un cours d\'eau à fort débit et faible concentration.</p>'
+                        },
+                        {
+                          titre: '5.2. Bilan de mélange et précautions d\'interprétation',
+                          texte: '<p>Bilan de mélange conservatif : C_m = (Q₁C₁ + Q₂C₂) / (Q₁ + Q₂). Suppose mélange complet, régime permanent, substance conservative, pas d\'autre entrée/sortie. <strong>Ne s\'applique pas au pH.</strong></p><p>Quelques erreurs fréquentes à éviter :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>C &lt; LQ ≠ absence</strong> : la substance n\'a pas pu être quantifiée — pas qu\'elle est absente</li><li style="margin-bottom:4px"><strong>Conductivité élevée ≠ pollution</strong> : minéralisation naturelle géologique possible</li><li style="margin-bottom:4px"><strong>Mesure à 17h ≠ état journalier</strong> pour l\'O₂</li><li style="margin-bottom:4px"><strong>Un seul prélèvement ≠ état représentatif</strong> : variabilité saisonnière à prendre en compte</li></ul><p>Un diagnostic ponctuel ne constitue pas un état écologique au sens DCE. Les méthodes officielles sont définies par l\'OFB (protocoles de prélèvement, indices, agrégation).</p>'
+                        }
+                      ]
+                    }
+                  ],
                 },
                 flashcards: [
                   { q: 'Calculer S_O₂ si C = 7,2 mg/L et C_sat = 9,0 mg/L.', r: 'S_O₂ = 100 × 7,2 / 9,0 = 80 % — sous-saturation.', expl: 'S_O₂ > 100 % = sursaturation (photosynthèse intense) ; ≈ 100 % = proche de l\'équilibre ; < 100 % = sous-saturation (respiration/dégradation dominante).' },
