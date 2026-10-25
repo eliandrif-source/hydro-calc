@@ -6362,6 +6362,197 @@ const COURS_DATA = {
             ],
           }, // fin gem-m8
 
+          {
+            id: 'gem-m9',
+            name: 'Énergie spécifique et régimes',
+            ico: '⚡',
+            chapitres: [
+              {
+                id: 'gem-hsl3',
+                titre: 'Énergie spécifique et régime d\'écoulement',
+                fiche: {
+                  intro: 'Deux écoulements transportant le même débit peuvent réagir très différemment à un obstacle ou à un changement de niveau aval. La clé est l\'énergie spécifique E = h + v̄²/(2g) et le nombre de Froude Fr = v̄/√(gDh). Ce chapitre montre comment identifier le régime d\'un écoulement, calculer la profondeur critique, lire la courbe d\'énergie et comprendre le ressaut hydraulique.',
+                  points: [
+                    'Énergie spécifique E = h + v̄²/(2g) : mesurée par rapport au fond local. ≠ charge totale H = z + h + v̄²/(2g) qui inclut l\'altitude z. Exemple : h=0,80 m, v̄=2 m/s → hauteur cinétique = 4/(2×9,81) ≈ 0,204 m → E ≈ 1,004 m. Si z=100 m, H=101,004 m mais la surface libre est à z+h=100,80 m.',
+                    'Le terme cinétique v̄²/(2g) croît avec le carré de la vitesse. À 1 m/s : 0,051 m ; à 2 m/s : 0,204 m ; à 4 m/s : 0,815 m. Doubler la vitesse multiplie ce terme par 4. Une faible profondeur ne signifie pas une faible énergie mécanique — dans un écoulement rapide et peu profond, le terme cinétique peut dominer.',
+                    'Profondeur hydraulique Dh = A/T (section mouillée / largeur de surface libre). ≠ rayon hydraulique Rh = A/P. Pour un rectangle : T=b → Dh=h. Manning-Strickler utilise Rh ; le nombre de Froude utilise Dh. Confondre les deux donne un Froude incorrect et une profondeur critique erronée.',
+                    'Nombre de Froude Fr = v̄/√(gDh). Sans dimension. Trois régimes : fluvial (Fr<1), critique (Fr=1), torrentiel (Fr>1). État LOCAL d\'une section — une rivière de plaine peut être torrentielle à un ouvrage ; un torrent peut avoir des zones fluviales. Le régime n\'est pas déterminé par le nom du cours d\'eau.',
+                    'Propagation des ondes : célérité c = √(gh) (rectangle). Fluvial (v̄ < c) : les ondes se propagent vers l\'amont et l\'aval → l\'aval peut influencer l\'amont. Torrentiel (v̄ > c) : les ondes sont entraînées vers l\'aval → contrôle par l\'amont seulement. Cela ne signifie pas qu\'une modification majeure en aval ne peut jamais atteindre l\'amont.',
+                    'Profondeur critique hc = (q²/g)^(1/3) pour une section rectangulaire (q = Q/b). Correspond au minimum de E(h) à q fixé. Ne dépend pas directement de la rugosité Ks ni de la pente S₀. Exemple : Q=2,40 m³/s, b=4 m → q=0,60 m²/s → hc=(0,36/9,81)^(1/3) ≈ 0,332 m.',
+                    'Énergie critique Ec = (3/2)hc. Pour l\'exemple : Ec ≈ 0,498 m. Toute énergie spécifique inférieure à Ec est incompatible avec ce débit q dans cette géométrie. Deux profondeurs distinctes sont possibles pour E > Ec : une sur la branche torrentielle (h < hc) et une sur la branche fluviale (h > hc).',
+                    'Profondeurs alternées : deux profondeurs donnant la même énergie spécifique E et le même q, l\'une sur chaque branche — sans dissipation. ≠ profondeurs conjuguées : avant/après ressaut, reliées par le bilan de quantité de mouvement, avec E₂ < E₁. Erreur classique : chercher la profondeur aval d\'un ressaut par conservation de l\'énergie.',
+                    'Remontée du fond Δz sans pertes et à largeur constante : E₂ = E₁ − Δz. Sur la branche fluviale, diminuer E rapproche de hc : la profondeur diminue et la vitesse augmente au-dessus de la bosse. Δzlim = E₁ − Ec. Exemple : E₁=0,904 m, Ec=0,498 m → Δzlim ≈ 0,405 m.',
+                    'Ressaut hydraulique : transition torrentiel → fluvial avec dissipation d\'énergie. Formule de Bélanger (canal rectangulaire horizontal, bilan QM) : h₂/h₁ = ½(√(1+8Fr₁²) − 1). Exemple : h₁=0,20 m, v̄₁=5 m/s → Fr₁≈3,57 → h₂≈0,915 m. Perte : ΔE = (h₂−h₁)³/(4h₁h₂) ≈ 0,499 m.',
+                    'Comparaison hn et hc : hn > hc → écoulement uniforme fluvial ; hn < hc → torrentiel. Exemple : hn≈0,88 m > hc≈0,332 m → fluvial. Ces profondeurs ont des équations indépendantes : hn dépend de Ks et S₀ (Manning-Strickler) ; hc dépend de q et g (condition critique). Les comparer caractérise le régime de l\'écoulement uniforme.',
+                    'Limites du modèle : calcul 1D, pression hydrostatique, α=1. Non applicable à l\'intérieur d\'un ressaut, près d\'une chute, d\'un jet ou d\'un seuil. Pour section non rectangulaire, condition critique : Q²T/(gA³)=1 — résolution numérique nécessaire. Calculer Fr identifie un état local ; expliquer le profil demande altitudes du fond, distances et conditions aval.',
+                  ],
+                  formules: [
+                    'E = h + \\dfrac{\\bar{v}^2}{2g} \\qquad H = z + h + \\dfrac{\\bar{v}^2}{2g}',
+                    'D_h = \\dfrac{A}{T} \\qquad Fr = \\dfrac{\\bar{v}}{\\sqrt{g\\,D_h}} \\qquad q = \\dfrac{Q}{b}',
+                    'h_c = \\left(\\dfrac{q^2}{g}\\right)^{1/3} \\qquad E_c = \\dfrac{3}{2}\\,h_c',
+                    '\\dfrac{h_2}{h_1} = \\dfrac{1}{2}\\!\\left(\\sqrt{1+8Fr_1^2}-1\\right) \\qquad \\Delta E = \\dfrac{(h_2-h_1)^3}{4h_1 h_2}',
+                    '\\dfrac{Q^2\\,T}{g\\,A^3} = 1 \\quad \\text{(condition critique générale)}',
+                  ],
+                  retenir: 'E = h + v̄²/(2g). Dh = A/T (≠ Rh). Fr = v̄/√(gDh) : fluvial Fr<1, torrentiel Fr>1. hc = (q²/g)^(1/3), Ec = (3/2)hc. hn > hc → uniforme fluvial. Ressaut : h₂/h₁ = ½(√(1+8Fr₁²)−1), ΔE=(h₂−h₁)³/(4h₁h₂). Profondeurs alternées (même E) ≠ conjuguées (après ressaut, E₂<E₁).',
+                  sections: [
+                    {
+                      titre: '1. Charge totale et énergie spécifique',
+                      sous_sections: [
+                        {
+                          titre: '1.1. Deux expressions de l\'énergie',
+                          texte: '<p><strong>Charge totale :</strong> H = z + h + v̄²/(2g), mesurée depuis un repère fixe (altitude z du fond + profondeur + hauteur de vitesse). Elle se conserve en l\'absence de pertes.</p><p><strong>Énergie spécifique :</strong> E = H − z = h + v̄²/(2g), mesurée depuis le fond local. Pour deux sections au même fond z, E se conserve si pas de pertes.</p><p><em>Exemple :</em> h=0,80 m, v̄=2 m/s → v̄²/(2g) = 4/19,62 ≈ 0,204 m → <strong>E = 1,004 m</strong>. Si z=100 m : H = 101,004 m, mais la surface de l\'eau est à z+h = 100,80 m — les 0,204 m de différence représentent l\'énergie cinétique.</p><p>L\'énergie spécifique s\'exprime en mètres, mais ne correspond pas à une hauteur d\'eau visible.</p>'
+                        },
+                        {
+                          titre: '1.2. Rôle croissant du terme cinétique',
+                          texte: '<p>Le terme v̄²/(2g) croît avec le <em>carré</em> de la vitesse :</p><table style="width:100%;border-collapse:collapse;font-size:11px;margin:6px 0"><tr style="background:var(--c-primary-l,#e8f4f8)"><th style="padding:4px 8px;text-align:left">Vitesse (m/s)</th><th style="padding:4px 8px;text-align:right">v̄²/(2g) (m)</th></tr><tr><td style="padding:3px 8px">0,5</td><td style="padding:3px 8px;text-align:right">0,013</td></tr><tr style="background:var(--c-bg-alt,#f8fafc)"><td style="padding:3px 8px">1,0</td><td style="padding:3px 8px;text-align:right">0,051</td></tr><tr><td style="padding:3px 8px">2,0</td><td style="padding:3px 8px;text-align:right">0,204</td></tr><tr style="background:var(--c-bg-alt,#f8fafc)"><td style="padding:3px 8px">4,0</td><td style="padding:3px 8px;text-align:right">0,815</td></tr><tr><td style="padding:3px 8px">6,0</td><td style="padding:3px 8px;text-align:right">1,835</td></tr></table><p>Doubler la vitesse multiplie ce terme par 4. Dans un écoulement lent et profond, h domine. Dans un écoulement rapide et peu profond, le terme cinétique peut devenir dominant : <strong>une faible profondeur ne signifie pas une faible énergie mécanique.</strong></p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '2. Profondeur hydraulique et nombre de Froude',
+                      sous_sections: [
+                        {
+                          titre: '2.1. Dh contre Rh',
+                          texte: '<p>Deux grandeurs géométriques distinctes :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Rh = A/P</strong> (rayon hydraulique) — utilisé dans Manning-Strickler</li><li style="margin-bottom:4px"><strong>Dh = A/T</strong> (profondeur hydraulique) — utilisé dans le nombre de Froude</li></ul><p>Pour un canal rectangulaire de largeur b : A=bh, T=b, P=b+2h → Dh = h et Rh = bh/(b+2h) &lt; h.</p><p>Les deux sont différents sauf pour un canal très large (b &gt;&gt; h → Rh ≈ h ≈ Dh). Pour un trapèze ou une section quelconque, l\'égalité Dh=h n\'est pas vérifiée.</p><p><strong>Erreur classique :</strong> utiliser Rh dans la formule de Froude → surestimer Fr et donc mal identifier le régime ou calculer hc incorrectement.</p>'
+                        },
+                        {
+                          titre: '2.2. Régimes et propagation des ondes',
+                          texte: '<p><strong>Fr = v̄/√(gDh)</strong> — sans dimension.</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Fr &lt; 1</strong> : régime fluvial (subcritique)</li><li style="margin-bottom:4px"><strong>Fr = 1</strong> : régime critique</li><li style="margin-bottom:4px"><strong>Fr &gt; 1</strong> : régime torrentiel (supercritique)</li></ul><p>Ces régimes décrivent un <em>état local</em>. Une rivière de plaine peut être torrentielle à un pont ; un torrent peut avoir des zones fluviales.</p><p><strong>Propagation des ondes</strong> (canal rectangulaire, célérité c = √(gh)) :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Fluvial (v̄ &lt; c) : les ondes se propagent dans les deux sens → <strong>l\'aval peut influencer l\'amont</strong></li><li style="margin-bottom:4px">Torrentiel (v̄ &gt; c) : les ondes sont emportées vers l\'aval → contrôle par l\'amont uniquement</li></ul><p>Ne pas confondre torrentiel et turbulent (Re élevé) : un écoulement fluvial peut être fortement turbulent.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '3. Profondeur critique et courbe d\'énergie spécifique',
+                      sous_sections: [
+                        {
+                          titre: '3.1. Dérivation de hc et Ec',
+                          texte: '<p>Pour un canal rectangulaire, E = h + q²/(2gh²). En dérivant par rapport à h à q fixé :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center">dE/dh = 1 − q²/(gh³) = 0 → <strong>hc = (q²/g)^(1/3)</strong></p><p>À la profondeur critique : q² = ghc³ → v̄c²/(2g) = hc/2 → <strong>Ec = (3/2)hc</strong>.</p><p><em>Exemple complet :</em> Q=2,40 m³/s, b=4 m.</p><ol style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">q = 2,40/4 = <strong>0,60 m²/s</strong></li><li style="margin-bottom:4px">hc = (0,60²/9,81)^(1/3) = (0,0367)^(1/3) ≈ <strong>0,332 m</strong></li><li style="margin-bottom:4px">Ec = 1,5 × 0,332 ≈ <strong>0,498 m</strong></li></ol><p>hc ne dépend pas directement de Ks ni de S₀ — c\'est une propriété du débit et de la largeur.</p>'
+                        },
+                        {
+                          titre: '3.2. Lire la courbe E(h)',
+                          texte: '<p>Pour q=0,60 m²/s, la courbe E(h) présente deux branches :</p><table style="width:100%;border-collapse:collapse;font-size:11px;margin:6px 0"><tr style="background:var(--c-primary-l,#e8f4f8)"><th style="padding:4px 6px;text-align:left">h (m)</th><th style="padding:4px 6px;text-align:right">v̄ (m/s)</th><th style="padding:4px 6px;text-align:right">Fr</th><th style="padding:4px 6px;text-align:right">E (m)</th><th style="padding:4px 6px">Régime</th></tr><tr><td style="padding:3px 6px">0,15</td><td style="padding:3px 6px;text-align:right">4,00</td><td style="padding:3px 6px;text-align:right">3,30</td><td style="padding:3px 6px;text-align:right">0,965</td><td style="padding:3px 6px;color:#ea580c">Torrentiel</td></tr><tr style="background:var(--c-bg-alt,#f8fafc)"><td style="padding:3px 6px">0,20</td><td style="padding:3px 6px;text-align:right">3,00</td><td style="padding:3px 6px;text-align:right">2,14</td><td style="padding:3px 6px;text-align:right">0,659</td><td style="padding:3px 6px;color:#ea580c">Torrentiel</td></tr><tr><td style="padding:3px 6px">0,25</td><td style="padding:3px 6px;text-align:right">2,40</td><td style="padding:3px 6px;text-align:right">1,53</td><td style="padding:3px 6px;text-align:right">0,544</td><td style="padding:3px 6px;color:#ea580c">Torrentiel</td></tr><tr style="background:var(--c-primary-l,#e8f4f8);font-weight:bold"><td style="padding:3px 6px">0,332</td><td style="padding:3px 6px;text-align:right">1,81</td><td style="padding:3px 6px;text-align:right">1,00</td><td style="padding:3px 6px;text-align:right">0,498</td><td style="padding:3px 6px;color:#dc2626">Critique</td></tr><tr style="background:var(--c-bg-alt,#f8fafc)"><td style="padding:3px 6px">0,50</td><td style="padding:3px 6px;text-align:right">1,20</td><td style="padding:3px 6px;text-align:right">0,54</td><td style="padding:3px 6px;text-align:right">0,573</td><td style="padding:3px 6px;color:#2563eb">Fluvial</td></tr><tr><td style="padding:3px 6px">0,88</td><td style="padding:3px 6px;text-align:right">0,68</td><td style="padding:3px 6px;text-align:right">0,23</td><td style="padding:3px 6px;text-align:right">0,904</td><td style="padding:3px 6px;color:#2563eb">Fluvial</td></tr></table><p>Pour E &gt; Ec = 0,498 m, deux profondeurs existent (une torrentielle, une fluviale) : ce sont les <strong>profondeurs alternées</strong>. L\'énergie et le débit ne suffisent pas toujours à sélectionner l\'état réel — les conditions aux limites comptent.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '4. Profondeur normale, profondeur critique et transitions',
+                      sous_sections: [
+                        {
+                          titre: '4.1. Comparer hn et hc',
+                          texte: '<p>Ces deux profondeurs ont des origines et des dépendances différentes :</p><table style="width:100%;border-collapse:collapse;font-size:11px;margin:6px 0"><tr style="background:var(--c-primary-l,#e8f4f8)"><th style="padding:4px 8px;text-align:left"></th><th style="padding:4px 8px">hn</th><th style="padding:4px 8px">hc</th></tr><tr><td style="padding:3px 8px">Définition</td><td style="padding:3px 8px">Écoulement uniforme</td><td style="padding:3px 8px">Minimum de E(h)</td></tr><tr style="background:var(--c-bg-alt,#f8fafc)"><td style="padding:3px 8px">Équation</td><td style="padding:3px 8px">Manning-Strickler</td><td style="padding:3px 8px">Condition critique</td></tr><tr><td style="padding:3px 8px">Dépend de Ks</td><td style="padding:3px 8px">Oui</td><td style="padding:3px 8px">Non (directement)</td></tr><tr style="background:var(--c-bg-alt,#f8fafc)"><td style="padding:3px 8px">Dépend de S₀</td><td style="padding:3px 8px">Oui</td><td style="padding:3px 8px">Non (directement)</td></tr></table><p><strong>hn &gt; hc</strong> → écoulement uniforme <strong>fluvial</strong>. &nbsp; <strong>hn &lt; hc</strong> → écoulement uniforme <strong>torrentiel</strong>.</p><p><em>Exemple :</em> hn ≈ 0,88 m &gt; hc ≈ 0,332 m → fluvial. Comparer ces profondeurs aide à caractériser le fonctionnement, mais ne remplace pas le calcul du profil réel au voisinage d\'un ouvrage.</p>'
+                        },
+                        {
+                          titre: '4.2. Effet d\'une remontée de fond',
+                          texte: '<p>Canal de largeur constante, remontée progressive de hauteur Δz. En négligeant les pertes :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center"><strong>E₂ = E₁ − Δz</strong></p><p>Sur la <strong>branche fluviale</strong>, diminuer E rapproche de hc : la profondeur diminue et la vitesse augmente au-dessus de la bosse. L\'eau peut sembler s\'abaisser localement alors que son énergie mécanique reste élevée.</p><p><strong>Δzlim = E₁ − Ec</strong> : au-delà, l\'état amont imposé ne permet plus de transporter le débit sans modification des conditions.</p><p><em>Exemple :</em> h₁=0,88 m, q=0,60 m²/s → E₁≈0,904 m, Ec≈0,498 m → <strong>Δzlim ≈ 0,405 m</strong>.</p><p>Avec pertes de charge ΔH : E₂ = E₁ − Δz − ΔH → Δzlim encore plus faible. Ce résultat est un modèle pédagogique, pas un critère de dimensionnement d\'ouvrage.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '5. Le ressaut hydraulique',
+                      sous_sections: [
+                        {
+                          titre: '5.1. Profondeurs conjuguées (formule de Bélanger)',
+                          texte: '<p>Un ressaut est une transition torrentiel → fluvial avec dissipation d\'énergie. La profondeur augmente brusquement, la vitesse diminue, une partie de l\'énergie mécanique est dissipée.</p><p>Pour un canal rectangulaire horizontal, en appliquant le bilan de quantité de mouvement (coefficients = 1, frottements négligés sur la longueur du ressaut) :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center;font-weight:bold">h₂/h₁ = ½ (√(1+8Fr₁²) − 1)</p><p><em>Exemple :</em> h₁=0,20 m, v̄₁=5 m/s.</p><ol style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Fr₁ = 5/√(9,81×0,20) ≈ <strong>3,57</strong></li><li style="margin-bottom:4px">h₂/h₁ = ½(√(1+8×12,74)−1) = ½(√102,9−1) ≈ <strong>4,57</strong></li><li style="margin-bottom:4px">h₂ ≈ 0,20×4,57 ≈ <strong>0,915 m</strong></li><li style="margin-bottom:4px">q = 0,20×5 = 1 m²/s → v̄₂ = 1/0,915 ≈ <strong>1,09 m/s</strong></li></ol><p><strong>Attention :</strong> h₂ ≠ profondeur alternée de h₁ (qui aurait même E). H₂ &lt; H₁ car le ressaut dissipe de l\'énergie.</p>'
+                        },
+                        {
+                          titre: '5.2. Dissipation d\'énergie et influence de l\'aval',
+                          texte: '<p>Perte d\'énergie spécifique dans un ressaut (canal rectangulaire horizontal) :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center;font-weight:bold">ΔE = (h₂ − h₁)³ / (4h₁h₂)</p><p><em>Suite de l\'exemple :</em> h₁=0,20 m, h₂=0,915 m → ΔE = (0,715)³/(4×0,20×0,915) ≈ 0,365/0,732 ≈ <strong>0,499 m</strong>.</p><p>Vérification : E₁ = 0,20+1,274 = 1,474 m ; E₂ = 0,915+0,061 = 0,976 m ; E₁−E₂ ≈ 0,498 m ✓</p><p><strong>Position et niveau aval :</strong> la position du ressaut dépend du niveau aval. Si le niveau aval dépasse la profondeur conjuguée, le ressaut peut être submergé — les performances de dissipation se dégradent.</p><p>Pour la GEMAPI : les ressauts sont à surveiller pour leurs effets sur l\'affouillement, les fluctuations de pression et les recirculations présentant un danger lors d\'interventions à proximité.</p>'
+                        }
+                      ]
+                    }
+                  ],
+                },
+                flashcards: [
+                  { q: 'Calculer E pour h=0,60 m et v̄=1,50 m/s.', r: 'E = 0,60 + 1,50²/(2×9,81) = 0,60 + 2,25/19,62 = 0,60 + 0,115 ≈ 0,715 m.', expl: 'La hauteur de vitesse vaut v̄²/(2g). À 1,5 m/s c\'est 0,115 m — non négligeable. À 3 m/s, ce serait 0,459 m, soit plus de 75 % de h.' },
+                  { q: 'Calculer Fr pour h=0,40 m, v̄=2,50 m/s, section rectangulaire. Identifier le régime.', r: 'Fr = 2,50/√(9,81×0,40) = 2,50/1,98 ≈ 1,26 → régime torrentiel (Fr > 1).', expl: 'Pour une section rectangulaire Dh = h, donc Fr = v̄/√(gh). Ici Fr > 1 : l\'eau est plus rapide que les ondes longues de gravité.' },
+                  { q: 'Calculer hc et Ec pour Q=2,40 m³/s, b=4 m.', r: 'q = 0,60 m²/s. hc = (0,60²/9,81)^(1/3) = (0,0367)^(1/3) ≈ 0,332 m. Ec = 1,5×0,332 ≈ 0,498 m.', expl: 'hc = (q²/g)^(1/3) et Ec = (3/2)hc. Ces résultats ne dépendent pas de Ks ni de S₀.' },
+                  { q: 'Un calcul donne E=0,45 m pour q=0,60 m²/s et b=4 m. Que penser de ce résultat ?', r: 'E=0,45 m < Ec=0,498 m. Dans le modèle considéré, cette valeur est incompatible avec ce débit et cette largeur. Vérifier les données, les altitudes de référence ou les hypothèses.', expl: 'L\'énergie minimale Ec=0,498 m est un plancher : aucune profondeur réelle ne peut donner E < Ec à q et largeur fixés.' },
+                  { q: 'hn=0,88 m, hc=0,332 m. Quel est le régime de l\'écoulement uniforme ?', r: 'hn > hc → écoulement uniforme fluvial. Cela n\'exclut pas des transitions torrentielles locales à un ouvrage.', expl: 'La comparaison hn/hc caractérise l\'écoulement uniforme. Si hn < hc, l\'uniforme serait torrentiel, ce qui est souvent le cas sur des pentes fortes.' },
+                  { q: 'Distinguer profondeurs alternées et profondeurs conjuguées.', r: 'Alternées : même E, même q, deux profondeurs sur les deux branches — sans dissipation. Conjuguées : avant/après ressaut, E₂ < E₁, liées par le bilan de quantité de mouvement.', expl: 'Erreur classique : chercher la profondeur après un ressaut par conservation de l\'énergie. Il faut le bilan de QM (formule de Bélanger).' },
+                  { q: 'h₁=0,20 m, v̄₁=5 m/s. Calculer Fr₁, puis la profondeur conjuguée h₂.', r: 'Fr₁ = 5/√(9,81×0,20) ≈ 3,57. h₂/h₁ = ½(√(1+8×3,57²)−1) ≈ ½(√102,9−1) ≈ 4,57. h₂ ≈ 0,20×4,57 ≈ 0,915 m.', expl: '√(1+8×12,74) = √102,9 ≈ 10,14. (10,14−1)/2 = 4,57. Vérification : q=h₁v̄₁=1 m²/s → v̄₂=1/0,915≈1,09 m/s → Fr₂≈0,37 bien fluvial.' },
+                  { q: 'Pourquoi la profondeur diminue-t-elle au-dessus d\'une bosse en régime fluvial ?', r: 'Sans pertes, E₂=E₁−Δz : l\'énergie spécifique diminue. Sur la branche fluviale, une E plus faible correspond à une profondeur plus faible et une vitesse plus grande — on se rapproche du point critique.', expl: 'L\'inverse se produit sur la branche torrentielle : une bosse de fond augmente la profondeur et réduit la vitesse en régime supercritique.' },
+                ],
+                schema: `<svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="500" height="320" fill="#fefce8" rx="10"/>
+  <text x="250" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="#713f12">Courbe d&apos;énergie spécifique — q = 0,60 m²/s</text>
+  <!-- Axes -->
+  <line x1="55" y1="290" x2="460" y2="290" stroke="#475569" stroke-width="1.5"/>
+  <line x1="55" y1="290" x2="55" y2="22" stroke="#475569" stroke-width="1.5"/>
+  <polygon points="456,287 456,293 464,290" fill="#475569"/>
+  <polygon points="52,26 58,26 55,19" fill="#475569"/>
+  <text x="462" y="308" font-size="10" font-weight="bold" fill="#0f172a">E (m)</text>
+  <text x="20" y="18" font-size="10" font-weight="bold" fill="#0f172a">h (m)</text>
+  <!-- Grid -->
+  <g stroke="#f1f5f9" stroke-width="0.5">
+    <line x1="122" y1="30" x2="122" y2="290"/>
+    <line x1="188" y1="30" x2="188" y2="290"/>
+    <line x1="255" y1="30" x2="255" y2="290"/>
+    <line x1="322" y1="30" x2="322" y2="290"/>
+    <line x1="388" y1="30" x2="388" y2="290"/>
+    <line x1="55" y1="247" x2="455" y2="247"/>
+    <line x1="55" y1="203" x2="455" y2="203"/>
+    <line x1="55" y1="160" x2="455" y2="160"/>
+    <line x1="55" y1="117" x2="455" y2="117"/>
+    <line x1="55" y1="73" x2="455" y2="73"/>
+  </g>
+  <!-- Dashed lines at critical point (Ec=0.498→x=221, hc=0.332→y=218) -->
+  <line x1="55" y1="218" x2="221" y2="218" stroke="#dc2626" stroke-width="1.2" stroke-dasharray="5,4"/>
+  <line x1="221" y1="290" x2="221" y2="218" stroke="#dc2626" stroke-width="1.2" stroke-dasharray="5,4"/>
+  <!-- Profondeurs alternées vertical dashed line at E=0.659 (x=275) -->
+  <line x1="275" y1="247" x2="275" y2="158" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="3,3"/>
+  <!-- Torrentielle branch (from top-right down to critical) -->
+  <polyline points="440,262 377,258 275,247 236,236 221,218" fill="none" stroke="#ea580c" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Fluviale branch (from critical up-right) -->
+  <polyline points="221,218 227,203 246,182 272,160 331,117 394,73 430,52" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Critical point -->
+  <circle cx="221" cy="218" r="5.5" fill="#dc2626" stroke="white" stroke-width="1.5"/>
+  <!-- Example points -->
+  <circle cx="356" cy="99" r="4" fill="#16a34a"/>
+  <circle cx="275" cy="247" r="4" fill="#7c3aed"/>
+  <!-- Profondeurs alternées point on fluviale branch -->
+  <circle cx="275" cy="158" r="3.5" fill="#94a3b8" stroke="white" stroke-width="1"/>
+  <!-- Tick labels X -->
+  <text x="55" y="305" text-anchor="middle" font-size="9" fill="#64748b">0</text>
+  <text x="122" y="305" text-anchor="middle" font-size="9" fill="#64748b">0,2</text>
+  <text x="188" y="305" text-anchor="middle" font-size="9" fill="#64748b">0,4</text>
+  <text x="255" y="305" text-anchor="middle" font-size="9" fill="#64748b">0,6</text>
+  <text x="322" y="305" text-anchor="middle" font-size="9" fill="#64748b">0,8</text>
+  <text x="388" y="305" text-anchor="middle" font-size="9" fill="#64748b">1,0</text>
+  <text x="455" y="305" text-anchor="middle" font-size="9" fill="#64748b">1,2</text>
+  <!-- Tick labels Y -->
+  <text x="48" y="250" text-anchor="end" font-size="9" fill="#64748b">0,2</text>
+  <text x="48" y="207" text-anchor="end" font-size="9" fill="#64748b">0,4</text>
+  <text x="48" y="163" text-anchor="end" font-size="9" fill="#64748b">0,6</text>
+  <text x="48" y="120" text-anchor="end" font-size="9" fill="#64748b">0,8</text>
+  <text x="48" y="76" text-anchor="end" font-size="9" fill="#64748b">1,0</text>
+  <!-- Critical labels -->
+  <text x="48" y="221" text-anchor="end" font-size="8" font-weight="bold" fill="#dc2626">hc</text>
+  <text x="221" y="315" text-anchor="middle" font-size="8" font-weight="bold" fill="#dc2626">Ec</text>
+  <!-- Critical annotation -->
+  <text x="232" y="212" font-size="9" font-weight="bold" fill="#dc2626">Point critique</text>
+  <text x="232" y="224" font-size="9" fill="#dc2626">hc=0,33 m / Ec=0,50 m</text>
+  <!-- Branch labels -->
+  <text x="362" y="254" font-size="10" font-weight="bold" fill="#ea580c">Torrentielle</text>
+  <text x="362" y="266" font-size="9" fill="#ea580c">(Fr &gt; 1)</text>
+  <text x="350" y="78" font-size="10" font-weight="bold" fill="#2563eb">Fluviale</text>
+  <text x="350" y="90" font-size="9" fill="#2563eb">(Fr &lt; 1)</text>
+  <!-- Point labels -->
+  <text x="360" y="95" font-size="9" fill="#16a34a">A: h=0,88 m (fluvial)</text>
+  <text x="278" y="244" font-size="9" fill="#7c3aed">C: h=0,20 m (torr.)</text>
+  <!-- Profondeurs alternées annotation -->
+  <text x="120" y="147" font-size="8.5" fill="#64748b">Profondeurs</text>
+  <text x="120" y="158" font-size="8.5" fill="#64748b">alternées ↕</text>
+  <line x1="178" y1="153" x2="266" y2="153" stroke="#94a3b8" stroke-width="0.8"/>
+  <polygon points="264,150 264,156 271,153" fill="#94a3b8"/>
+</svg>`,
+                exercice: {
+                  enonce: 'Section rectangulaire b=3 m, Q=3 m³/s. (1) Calculer q, hc et Ec. (2) Pour h=0,40 m : calculer v̄, Fr, E et identifier le régime. (3) Pour h=1,20 m : calculer v̄, Fr, E et vérifier E > Ec. (4) Un calcul propose E=0,60 m pour ce débit et cette largeur — identifier le problème. (5) En amont d\'une remontée Δz=0,25 m, h=1,20 m et q=1,00 m²/s. L\'écoulement peut-il rester fluvial sans modification de l\'état amont ?',
+                  solution: '<strong>(1) Profondeur critique :</strong> q = 3/3 = <strong>1,00 m²/s</strong>. hc = (1²/9,81)^(1/3) ≈ <strong>0,467 m</strong>. Ec = 1,5×0,467 ≈ <strong>0,701 m</strong>.<br><strong>(2) h=0,40 m :</strong> h &lt; hc=0,467 → branche torrentielle. v̄ = 1/0,40 = <strong>2,50 m/s</strong>. Fr = 2,50/√(9,81×0,40) ≈ <strong>1,26</strong> → torrentiel ✓. E = 0,40+0,319 = <strong>0,719 m</strong>.<br><strong>(3) h=1,20 m :</strong> h &gt; hc → fluvial. v̄ = 1/1,20 ≈ <strong>0,833 m/s</strong>. Fr = 0,833/√(9,81×1,20) ≈ <strong>0,243</strong> → fluvial ✓. E = 1,20+0,035 = <strong>1,235 m</strong> &gt; Ec=0,701 ✓.<br><strong>(4) E=0,60 m &lt; Ec=0,701 m</strong> → incompatible avec q=1 m²/s et b=3 m dans ce modèle. Vérifier les données d\'entrée (débit, largeur, altimétrie) avant de modifier les hypothèses.<br><strong>(5) Δzlim :</strong> E₁ = 1,235 m, Ec = 0,701 m → Δzlim = 1,235−0,701 = 0,534 m. Δz=0,25 m &lt; 0,534 m → E₂ = 1,235−0,25 = <strong>0,985 m &gt; Ec</strong> : l\'écoulement peut rester fluvial (la profondeur diminue et la vitesse augmente sans atteindre le point critique).',
+                },
+              },
+            ],
+          }, // fin gem-m9
+
         ],
       },
     ],
