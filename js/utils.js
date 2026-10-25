@@ -3,6 +3,9 @@
 function getV(id){ var e=document.getElementById(id); return e?e.value:''; }
 function getEl(id){ return document.getElementById(id)||null; }
 
+/* ─── BREADCRUMB (no-op — pas d'élément UI dédié) ─── */
+function setBreadcrumb() {}
+
 /* ─── STORAGE SÉCURISÉ (fallback mémoire si localStorage bloqué) ─── */
 var _memStore = {};
 var _safeStorage = {

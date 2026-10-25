@@ -1,4 +1,35 @@
 ﻿/* ═══════════════════════════════════════════════════
+   GATE BÊTA — code d'accès requis en phase de test
+═══════════════════════════════════════════════════ */
+var _BETA_KEY  = 'hc_beta_ok';
+var _BETA_CODE = 'Hydrocalc2026';
+
+function authGateSubmit() {
+  var input = document.getElementById('gate-input');
+  var val   = input ? input.value.trim() : '';
+  if (val === _BETA_CODE) {
+    try { localStorage.setItem(_BETA_KEY, '1'); } catch(e) {}
+    document.querySelectorAll('.auth-screen').forEach(function(s){ s.classList.add('hidden'); });
+    var _as = document.getElementById('auth-splash');
+    if (_as) _as.classList.remove('hidden');
+  } else {
+    var err = document.getElementById('gate-err');
+    if (err) err.style.display = 'block';
+    if (input) { input.value = ''; input.focus(); }
+  }
+}
+
+function _gateOrSplash() {
+  try { if (localStorage.getItem(_BETA_KEY) === '1') {
+    var _as = document.getElementById('auth-splash');
+    if (_as) _as.classList.remove('hidden');
+    return;
+  }} catch(e) {}
+  var _ag = document.getElementById('auth-gate');
+  if (_ag) _ag.classList.remove('hidden');
+}
+
+/* ═══════════════════════════════════════════════════
    SAUVEGARDE DES CALCULS
 ═══════════════════════════════════════════════════ */
 function getSavedCalcs() {
@@ -1872,7 +1903,7 @@ function authLogout() {
   DataStore.session.clearRemember();
   AUTH.user = null;
   document.querySelectorAll('.auth-screen').forEach(function(s){ s.classList.add('hidden'); });
-  var _as=document.getElementById('auth-splash'); if(_as) _as.classList.remove('hidden');
+  _gateOrSplash();
   var profileBtn = document.getElementById('profile-btn');
   if (profileBtn){ profileBtn.style.display = 'none'; profileBtn.textContent = '👤'; }
   authToast('Déconnexion réussie');
@@ -1991,8 +2022,8 @@ function buildProfile() {
     + '</div>';
   }
 
-  /* Compteur abonnés + Coffre — admin seulement */
-  if (u.plan === 'admin') {
+  /* Compteur abonnés + Coffre — admin et modo */
+  if (u.plan === 'admin' || u.plan === 'modo') {
     html += '<div id="admin-stats" style="padding:var(--s-2) var(--s-4) 0">'
       + '<div style="background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:var(--r-lg);padding:14px 16px">'
       + '<div style="color:rgba(255,255,255,.7);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Abonnés en temps réel</div>'
@@ -2058,7 +2089,7 @@ function deleteMyAccount() {
     .then(function() {
       AUTH.user = null;
       document.querySelectorAll('.auth-screen').forEach(function(s){ s.classList.add('hidden'); });
-      authShow('auth-splash');
+      _gateOrSplash();
       authToast('Compte supprimé. Au revoir !');
     })
     .catch(function(err) {
@@ -2334,7 +2365,8 @@ function _etabQty(delta) {
 
 /* ─── DASHBOARD ADMIN "COFFRE" ─── */
 function openCoffre() {
-  if (!AUTH.user || AUTH.user.plan !== 'admin') return;
+  var plan = AUTH.user && AUTH.user.plan;
+  if (plan !== 'admin' && plan !== 'modo') return;
   authShow('auth-coffre');
   buildCoffre();
 }
@@ -2346,11 +2378,13 @@ function buildCoffre() {
 
   if (!SupaDB) { el.innerHTML = '<div style="padding:24px;color:var(--c-text-3)">Supabase non connecté.</div>'; return; }
 
-  Promise.all([
+  var isAdmin = AUTH.user && AUTH.user.plan === 'admin';
+  var queries = [
     SupaDB.from('profiles').select('id,email,name,plan,profile,joined_at').order('joined_at', { ascending: false }),
-    SupaDB.from('payments').select('amount_cents,currency,status,created_at').order('created_at', { ascending: false }).limit(100),
-    SupaDB.from('subscriptions').select('plan,status').eq('status', 'active')
-  ]).then(function(results) {
+    isAdmin ? SupaDB.from('payments').select('amount_cents,currency,status,created_at').order('created_at', { ascending: false }).limit(100) : Promise.resolve({ data: [] }),
+    isAdmin ? SupaDB.from('subscriptions').select('plan,status').eq('status', 'active') : Promise.resolve({ data: [] })
+  ];
+  Promise.all(queries).then(function(results) {
     var profiles    = (results[0].data || []);
     var payments    = (results[1].data || []);
     var activeSubs  = (results[2].data || []);
@@ -2365,9 +2399,14 @@ function buildCoffre() {
 
     /* Résumé KPI */
     html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">';
-    var kpis = [
+    var kpis = isAdmin ? [
       { label:'Revenu total', val: (totalRevCents/100).toFixed(2) + ' €', ico:'💰' },
       { label:'Abonnés actifs', val: activeSubs.length, ico:'✅' },
+      { label:'Comptes Pro', val: countPro, ico:'⭐' },
+      { label:'Comptes Établ.', val: countEtab, ico:'🏫' },
+      { label:'Comptes Free', val: countFree, ico:'🆓' },
+      { label:'Total inscrits', val: profiles.length, ico:'👤' },
+    ] : [
       { label:'Comptes Pro', val: countPro, ico:'⭐' },
       { label:'Comptes Établ.', val: countEtab, ico:'🏫' },
       { label:'Comptes Free', val: countFree, ico:'🆓' },
@@ -2382,6 +2421,7 @@ function buildCoffre() {
     });
     html += '</div>';
 
+    if (isAdmin) {
     /* Derniers paiements */
     html += '<div style="font-weight:700;font-size:14px;margin-bottom:10px">Derniers paiements</div>';
     if (!payments.length) {
@@ -2399,6 +2439,7 @@ function buildCoffre() {
       });
       html += '</div>';
     }
+    } // fin if (isAdmin)
 
     /* Abonnés avec filtres/tri */
     window._coffreProfiles = profiles;
@@ -2435,9 +2476,11 @@ function _coffreChangePlan(userId, currentPlan, userName) {
   if (existing) existing.remove();
 
   var plans = [
-    { id:'free',  label:'Free',          color:'#6b7280' },
-    { id:'pro',   label:'Pro',           color:'#d97706' },
-    { id:'etab',  label:'Établissement', color:'#2563eb' },
+    { id:'free',  label:'Free',           color:'#6b7280' },
+    { id:'pro',   label:'Pro',            color:'#d97706' },
+    { id:'etab',  label:'Établissement',  color:'#2563eb' },
+    { id:'modo',  label:'🔧 Modérateur',  color:'#0891b2' },
+    { id:'admin', label:'⚡ Admin',        color:'#7c3aed' },
   ];
 
   var modal = document.createElement('div');
@@ -2494,8 +2537,8 @@ function _coffreRenderUsers() {
     var ord = { admin:0, etab:1, pro:2, free:3 };
     list.sort(function(a,b){ return (ord[a.plan]||9)-(ord[b.plan]||9); });
   }
-  var planColors = { free:'#6b7280', pro:'#d97706', etab:'#2563eb', admin:'#7c3aed' };
-  var planLabels = { free:'Free', pro:'Pro', etab:'Établissement', admin:'Admin' };
+  var planColors = { free:'#6b7280', pro:'#d97706', etab:'#2563eb', modo:'#0891b2', admin:'#7c3aed' };
+  var planLabels = { free:'Free', pro:'Pro', etab:'Établissement', modo:'Modérateur', admin:'Admin' };
   var profLabels = { 'etudiant-bts':'BTS GEMEAU','etudiant-sup':'Étudiant Sup.','technicien':'Technicien','ingenieur':'Ingénieur','spanc':'Agent SPANC','collectivite':'Collectivité','bureau-etude':'Bureau étude','autre':'Autre' };
   if (!list.length) { container.innerHTML = '<div style="color:var(--c-text-3);font-size:13px;padding:12px 0">Aucun compte pour ce filtre.</div>'; return; }
   var html = '';
@@ -2518,7 +2561,7 @@ function _coffreRenderUsers() {
         + '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0">'
           + '<div style="font-size:11px;font-weight:700;color:' + planColor + '">' + planLabel + '</div>'
           + '<div style="display:flex;gap:4px">'
-            + (p.plan !== 'admin' ? '<button onclick="_coffreChangePlan(\'' + idS + '\',\'' + planS + '\',\'' + nameS + '\')" style="font-size:10px;padding:3px 8px;border:1.5px solid var(--c-border);background:var(--c-bg-2);color:var(--c-text-2);border-radius:6px;cursor:pointer;font-weight:600">Plan</button>' : '')
+            + (AUTH.user && AUTH.user.plan === 'admin' ? '<button onclick="_coffreChangePlan(\'' + idS + '\',\'' + planS + '\',\'' + nameS + '\')" style="font-size:10px;padding:3px 8px;border:1.5px solid var(--c-border);background:var(--c-bg-2);color:var(--c-text-2);border-radius:6px;cursor:pointer;font-weight:600">Plan</button>' : '')
             + '<button onclick="_coffreResetPwd(\'' + emailS + '\',\'' + nameS + '\')" style="font-size:10px;padding:3px 8px;border:1.5px solid #d97706;background:#fff8ee;color:#d97706;border-radius:6px;cursor:pointer;font-weight:600">🔑 MDP</button>'
           + '</div>'
         + '</div>'
@@ -2529,7 +2572,8 @@ function _coffreRenderUsers() {
 }
 
 async function _coffreResetPwd(email, name) {
-  if (!SupaDB || !AUTH.user || AUTH.user.plan !== 'admin') return;
+  var plan = AUTH.user && AUTH.user.plan;
+  if (!SupaDB || (plan !== 'admin' && plan !== 'modo')) return;
   if (!confirm('Envoyer un email de réinitialisation à\n' + email + ' ?')) return;
   try {
     var res = await SupaDB.auth.resetPasswordForEmail(email, { redirectTo: 'https://hydrocalc.fr' });
@@ -2542,6 +2586,7 @@ async function _coffreResetPwd(email, name) {
 
 async function _coffreSetPlan(userId, newPlan) {
   if (!SupaDB || !AUTH.user || AUTH.user.plan !== 'admin') return;
+  if (newPlan === 'admin' && !confirm('Promouvoir cet utilisateur en ADMIN ?\nIl aura accès au Coffre fort et pourra gérer tous les comptes.')) return;
   var modal = document.getElementById('coffre-plan-modal');
   if (modal) modal.remove();
   try {
@@ -2556,10 +2601,7 @@ async function _coffreSetPlan(userId, newPlan) {
 
 /* INIT — vérification session Supabase au chargement */
 (function initAuth(){
-  function _showSplash() {
-    var _as = document.getElementById('auth-splash');
-    if (_as) _as.classList.remove('hidden');
-  }
+  function _showSplash() { _gateOrSplash(); }
 
   /* Compte démo (localStorage uniquement) */
   function _tryLocalDemo() {
@@ -2715,7 +2757,7 @@ function closeSidebar() {
 
 function openNavDrawer() {
   var el      = document.getElementById('hc-desk-sidebar');
-  var overlay = document.getElementById('sidebar-overlay');
+  var overlay = document.getElementById('hc-nav-overlay');
   if (el) {
     if (typeof renderDesktopNav === 'function') renderDesktopNav();
     el.classList.add('open');
@@ -2725,7 +2767,7 @@ function openNavDrawer() {
 
 function closeNavDrawer() {
   var el      = document.getElementById('hc-desk-sidebar');
-  var overlay = document.getElementById('sidebar-overlay');
+  var overlay = document.getElementById('hc-nav-overlay');
   if (el)      el.classList.remove('open');
   if (overlay) overlay.classList.remove('open');
 }

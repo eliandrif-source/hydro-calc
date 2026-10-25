@@ -3459,68 +3459,252 @@ const COURS_DATA = {
                 id: 'gem-1',
                 titre: 'Origine, principes et objectifs de la GEMAPI',
                 fiche: {
-                  intro: 'La GEMAPI (Gestion des Milieux Aquatiques et Prévention des Inondations) associe deux domaines interdépendants : le fonctionnement des milieux aquatiques et la prévention des inondations. Compétence obligatoire des EPCI à fiscalité propre depuis le 1er janvier 2018, elle impose de comprendre le territoire avant d\'intervenir : bassin versant, système fluvial, solidarité amont-aval, causes des désordres.',
+                  intro: 'La GEMAPI (Gestion des Milieux Aquatiques et Prévention des Inondations) associe deux domaines interdépendants : le fonctionnement des milieux aquatiques et la prévention des inondations. Compétence obligatoire des EPCI à fiscalité propre depuis le 1er janvier 2018 (loi MAPTAM 2014, loi NOTRe 2015), elle impose de comprendre le territoire avant d\'intervenir : système fluvial, bassin versant, solidarité amont-aval, causes des désordres. Ce premier chapitre pose les fondements conceptuels indispensables à toute démarche GEMAPI.',
                   points: [
                     '📐 GEMAPI = Gestion des Milieux Aquatiques + Prévention des Inondations — missions 1°, 2°, 5° et 8° de l\'art. L.211-7 du Code de l\'environnement',
                     '🏛️ Compétence obligatoire des EPCI à fiscalité propre depuis le 1er janvier 2018 (loi MAPTAM 2014 · loi NOTRe 2015 · ajustements loi 30 déc. 2017)',
+                    '🏞️ Système fluvial = lit mineur (zone en eau ordinaire) + lit majeur (espace de débordement) + berges + ripisylve + annexes fluviales — des secteurs peu profonds rapides n\'ont pas les mêmes fonctions que les secteurs profonds lents',
+                    '🌿 Ripisylve = végétation de berge — ombrage, habitats, maintien de certaines berges, matière organique — gestion site par site ; supprimer tout ou rien conserver sont deux erreurs symétriques',
+                    '🔗 Annexes fluviales : bras secondaires, anciens bras, dépressions inondables — connexion permanente ≠ connexion lors de crues : les conditions écologiques diffèrent profondément',
+                    '🪨 Sédiments (argiles → graviers) : équilibre apports/transport/dépôts façonne le lit — modifier cet équilibre → incision, exhaussement ou déplacement des zones d\'érosion · ne pas enlever des matériaux sans comprendre leur rôle',
                     '🌊 Crue ≠ inondation : crue = hausse du débit (peut rester dans le lit mineur) ; inondation = submersion temporaire d\'un espace habituellement hors d\'eau',
-                    '⚠️ Mécanismes distincts : débordement, ruissellement, remontée de nappe, submersion marine — chaque mécanisme demande une solution adaptée',
-                    '🗺️ Bassin versant : territoire dont les eaux convergent vers un exutoire commun — les limites topographiques ne décrivent pas tous les transferts (nappes, réseaux)',
-                    '🏡 La rivière est un système : lit mineur, lit majeur, berges, ripisylve, annexes fluviales, sédiments — une intervention en un point peut modifier les écoulements ailleurs',
-                    '📊 Risque = f(aléa, exposition, vulnérabilité) — on peut agir sur l\'aléa, sur l\'exposition ou sur la vulnérabilité des enjeux',
-                    '🤝 Solidarité amont-aval : accélérer l\'évacuation locale peut aggraver la situation en aval — le moment d\'arrivée des crues est aussi important que le volume',
-                    '🌱 Zones humides : fonctions multiples (rétention, biodiversité) mais capacité dépendant de l\'état, des connexions et de la topographie — l\'image de "l\'éponge" est insuffisante',
-                    '🏗️ Activités humaines modificatrices : imperméabilisation, drainage, remblais, rectification des lits — chaque transformation doit être analysée localement et à l\'aval',
+                    '⚠️ Mécanismes distincts : débordement · ruissellement · remontée de nappe · submersion marine · combinaison — identifier le mécanisme avant de chercher une solution',
+                    '📊 Aléa ≠ enjeux ≠ vulnérabilité : l\'aléa décrit le phénomène (hauteur, vitesse, durée, rapidité de montée) ; les enjeux sont les biens/personnes exposés ; la vulnérabilité traduit leur sensibilité — même hauteur d\'eau ≠ mêmes dommages',
+                    '🎯 Risque = f(aléa, exposition, vulnérabilité) — relation conceptuelle, pas numérique universelle — réduire le risque peut passer par l\'un ou l\'autre facteur',
+                    '🗺️ Bassin versant : territoire dont les eaux convergent vers un exutoire — organisation emboîtée (sous-bassins, affluents) — limites topographiques ne couvrent pas toujours nappes et réseaux',
+                    '🏘️ Commune insuffisante comme seule échelle : une inondation peut avoir des causes en amont · un affluent · un ouvrage aval · des transformations antérieures du territoire',
+                    '🤝 Solidarité amont-aval : accélérer l\'évacuation locale peut modifier l\'arrivée d\'eau en aval — le moment d\'arrivée des crues est aussi important que le volume — la solidarité est aussi foncière et financière',
+                    '🏗️ Imperméabilisation : limite l\'infiltration sur les surfaces concernées, mais l\'effet sur les crues dépend de la pluie, de l\'état du sol, des stockages et des cheminements — un % d\'imperméabilisation ne suffit pas à calculer une crue',
+                    '🛤️ Remblai : peut occuper un espace inondable, réduire un volume utile, faire obstacle ou dévier des eaux — effet dépendant de l\'emplacement et de la géométrie',
+                    '🔀 Rectification ≠ recalibrage : rectifier = modifier le tracé ; recalibrer = modifier la section — les effets sur niveaux, vitesses, transports et habitats doivent être étudiés localement et à l\'aval',
+                    '🌱 Zones humides : l\'image de "l\'éponge naturelle" est insuffisante — avant une crue, un milieu peut être saturé ; la capacité de stockage dépend de sa topographie, ses connexions et les possibilités d\'expansion',
                     '🔬 Démarche en 7 étapes : Décrire → Recueillir → Formuler hypothèses → Vérifier mécanismes → Définir objectifs → Comparer variantes → Suivre résultats',
-                    '🎯 Objectif premier : comprendre avant d\'intervenir — préserver ce qui fonctionne est une forme de gestion à part entière',
+                    '🎯 Objectif premier : comprendre avant d\'intervenir — préserver ce qui fonctionne est une forme de gestion à part entière — prévoir l\'entretien et le suivi dès la conception',
                   ],
                   formules: [
                     'Volume précipité : Vp = P × A (P en m, A en m²)',
                     'Ex. 30 mm sur 12 km² → Vp = 0,030 × 12 000 000 = 360 000 m³',
-                    'Volume écoulé estimé (hypothèse) : Ve = Ce × Vp → ex. 0,25 × 360 000 = 90 000 m³',
+                    'Volume écoulé estimé (hypothèse pédagogique) : Ve = Ce × Vp → ex. 0,25 × 360 000 = 90 000 m³',
                     'Ratio stockage : 15 000 / 90 000 × 100 ≈ 16,7 % — ne préjuge pas de la réduction du débit de pointe',
                     'Risque = f(aléa, exposition, vulnérabilité) — relation conceptuelle, pas numérique universelle',
+                    'Erreurs fréquentes : « Toute crue est catastrophe » · « Creuser résout tout » · « La végétation freine dangeureusement » · « La ZH absorbe toute la pluie » · « Une digue supprime le risque » · « Le problème est là où les dégâts apparaissent » · « Le modèle donne la vérité »',
                   ],
-                  retenir: 'GEMAPI = 4 missions L.211-7 + compétence EPCI depuis 2018 · Crue ≠ inondation · Risque = aléa + exposition + vulnérabilité · Bassin versant = échelle essentielle · Comprendre avant d\'intervenir.',
+                  retenir: 'GEMAPI = 4 missions L.211-7 + compétence EPCI depuis 2018 · Crue ≠ inondation · Aléa ≠ enjeux ≠ vulnérabilité · Risque = f(aléa, exposition, vulnérabilité) · Bassin versant = échelle essentielle · Solidarité amont-aval · L\'éponge = image insuffisante · Comprendre avant d\'intervenir.',
+                  sections: [
+                    {
+                      titre: '1. Le système physique de la rivière',
+                      sous_sections: [
+                        {
+                          titre: '1.1. Le lit mineur',
+                          texte: '<p>Le lit mineur est la zone en eau dans des conditions ordinaires. Il peut présenter une grande variété de formes et de profondeurs selon les secteurs.</p><p>Ces différences créent des habitats variés. Un secteur peu profond et rapide ne remplit pas les mêmes fonctions qu\'une zone plus profonde et plus lente.</p>'
+                        },
+                        {
+                          titre: '1.2. Le lit majeur',
+                          texte: '<p>Le lit majeur correspond à l\'espace susceptible d\'être occupé par le cours d\'eau lors de ses débordements.</p><p>Il ne faut pas l\'imaginer comme une surface plane qui se remplirait uniformément. Des routes, des remblais, des talus, des dépressions et des ouvrages peuvent modifier les cheminements de l\'eau. Selon l\'événement, certaines parties sont inondées et d\'autres restent hors d\'eau.</p>'
+                        },
+                        {
+                          titre: '1.3. Les berges',
+                          texte: '<p>Les berges constituent les limites latérales du lit mineur. Elles peuvent être naturelles, végétalisées, rocheuses ou artificialisées.</p><p>Leur stabilité dépend des matériaux qui les composent, de leur hauteur et de leur pente, de l\'action de l\'eau, de la végétation, des circulations d\'eau dans le sol, et des usages situés à proximité.</p><p><strong>À noter :</strong> une berge qui recule n\'indique pas automatiquement un dysfonctionnement. L\'érosion peut appartenir à la dynamique normale de la rivière. Elle devient un problème de gestion lorsqu\'elle menace des enjeux ou résulte d\'une perturbation.</p>'
+                        },
+                        {
+                          titre: '1.4. La ripisylve',
+                          texte: '<p>La ripisylve est la végétation située au bord des cours d\'eau. Elle peut contribuer à l\'ombrage, à la diversité des habitats et au maintien de certaines berges. Elle fournit également du bois et de la matière organique au milieu.</p><p>Sa gestion doit être adaptée au site. <strong>Conserver tous les arbres sans examen et supprimer toute la végétation sont deux approches trop simplificatrices.</strong></p>'
+                        },
+                        {
+                          titre: '1.5. Les annexes fluviales',
+                          texte: '<p>Ce sont des milieux liés au cours d\'eau principal : bras secondaires, anciens bras, dépressions inondables ou autres espaces connectés à différents moments.</p><p>Leur fonctionnement dépend de la fréquence, de la durée et du mode de connexion avec la rivière. Une connexion permanente et une connexion limitée à certaines crues n\'offrent pas les mêmes conditions écologiques.</p>'
+                        },
+                        {
+                          titre: '1.6. L\'eau, les sédiments et le vivant',
+                          texte: '<p>La rivière transporte de l\'eau, mais aussi des matériaux : argiles, limons, sables, graviers ou éléments plus grossiers.</p><p>L\'équilibre entre apports, transport et dépôts contribue à façonner le lit. Modifier cet équilibre peut entraîner une incision, un exhaussement ou un déplacement des zones d\'érosion.</p><p><strong>Conséquence pratique :</strong> avant d\'enlever des matériaux ou de fixer une berge, il faut comprendre leur rôle dans le fonctionnement du tronçon.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '2. Distinguer crue, inondation, aléa, enjeux et vulnérabilité',
+                      sous_sections: [
+                        {
+                          titre: '2.1. La crue',
+                          texte: '<p>Une crue correspond à une augmentation du débit et généralement du niveau d\'un cours d\'eau. <strong>Une crue peut rester contenue dans le lit mineur.</strong> Il n\'y a alors pas nécessairement de débordement.</p>'
+                        },
+                        {
+                          titre: '2.2. L\'inondation',
+                          texte: '<p>Une inondation correspond à la submersion temporaire d\'un espace habituellement hors d\'eau. Elle peut résulter de plusieurs mécanismes :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:3px">Débordement d\'un cours d\'eau</li><li style="margin-bottom:3px">Ruissellement</li><li style="margin-bottom:3px">Remontée de nappe</li><li style="margin-bottom:3px">Submersion marine</li><li style="margin-bottom:3px">Combinaison de plusieurs phénomènes</li></ul><p><strong>L\'identification du mécanisme est indispensable.</strong> Une solution adaptée à un débordement de rivière peut être inefficace contre une arrivée d\'eau souterraine.</p>'
+                        },
+                        {
+                          titre: '2.3. L\'aléa',
+                          texte: '<p>L\'aléa décrit le phénomène susceptible de se produire, en considérant notamment sa probabilité et ses caractéristiques. Pour une inondation, on peut étudier :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:3px">La hauteur d\'eau</li><li style="margin-bottom:3px">La vitesse d\'écoulement</li><li style="margin-bottom:3px">La durée de submersion</li><li style="margin-bottom:3px">La rapidité de montée</li><li style="margin-bottom:3px">Les matériaux transportés</li></ul><p><strong>Une même hauteur d\'eau ne produit pas les mêmes dangers selon la vitesse et les conditions locales.</strong></p>'
+                        },
+                        {
+                          titre: '2.4. Les enjeux',
+                          texte: '<p>Les enjeux sont les personnes, les biens, les activités, les équipements ou les milieux susceptibles d\'être affectés. Une école, un logement, une route, une station d\'épuration et une prairie constituent des enjeux différents.</p>'
+                        },
+                        {
+                          titre: '2.5. La vulnérabilité',
+                          texte: '<p>La vulnérabilité traduit la sensibilité des enjeux aux effets du phénomène. Deux bâtiments soumis à la même hauteur d\'eau peuvent subir des dommages différents.</p><p><strong>Exemple :</strong> dans le premier bâtiment, les équipements électriques et les produits sensibles se trouvent au rez-de-chaussée. Dans le second, ils sont placés en hauteur et les matériaux sont moins sensibles à l\'eau. L\'exposition est comparable, mais la vulnérabilité diffère.</p>'
+                        },
+                        {
+                          titre: '2.6. Le risque',
+                          texte: '<p>Le risque dépend de la rencontre entre le phénomène et les enjeux exposés, en tenant compte de leur vulnérabilité.</p><p style="background:var(--c-primary-l);padding:8px 12px;border-radius:6px;font-weight:600;text-align:center"><strong>Risque = f (aléa, exposition, vulnérabilité)</strong></p><p>Il s\'agit d\'une manière d\'organiser le raisonnement, pas d\'une formule numérique universelle.</p><p><em>Exemple :</em> une crue déborde dans une prairie sans bâtiment. Le même débit atteint plus loin un quartier dense. Le phénomène peut être comparable, mais les conséquences potentielles sont très différentes.</p><p><strong>À retenir :</strong> réduire le risque peut demander d\'agir sur les écoulements, sur l\'exposition des enjeux ou sur leur vulnérabilité.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '3. Le bassin versant et la solidarité amont-aval',
+                      sous_sections: [
+                        {
+                          titre: '3.1. Pourquoi raisonner à l\'échelle du bassin versant ?',
+                          texte: '<p>Un bassin versant est un territoire dont les eaux convergent vers un point de sortie commun, appelé exutoire. Un grand bassin peut être divisé en sous-bassins emboîtés : chaque affluent possède son propre territoire d\'alimentation.</p><p>Une commune peut subir une inondation dont une partie des causes se situe ailleurs : écoulements d\'un bassin amont, apport d\'un affluent, influence d\'un ouvrage aval, ou transformations antérieures du territoire. Une intervention limitée à la zone inondée peut alors traiter un symptôme sans répondre à l\'ensemble du problème.</p><p>Le technicien doit pouvoir passer d\'une échelle à l\'autre :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:3px"><strong>Site :</strong> que se passe-t-il précisément ici ?</li><li style="margin-bottom:3px"><strong>Tronçon :</strong> comment le secteur fonctionne-t-il avec ses voisins ?</li><li style="margin-bottom:3px"><strong>Bassin versant :</strong> comment les apports et les actions se combinent-ils ?</li></ul>'
+                        },
+                        {
+                          titre: '3.2. La solidarité amont-aval',
+                          texte: '<p>Un aménagement qui accélère l\'évacuation de l\'eau dans un secteur peut réduire certains débordements locaux, mais modifier l\'arrivée de l\'eau en aval. <strong>Le moment d\'arrivée des crues est aussi important que le volume.</strong></p><p>Si un aménagement décale une crue, il peut rapprocher ou éloigner les moments où les débits les plus élevés de plusieurs affluents se rejoignent. Il faut donc examiner la chronologie des écoulements, pas seulement les volumes.</p><p>La solidarité est également foncière et financière : un espace situé en amont peut être utile à la réduction du risque en aval, mais il a un propriétaire et des usages. Il faut alors examiner qui bénéficie de l\'action, qui supporte ses contraintes, et comment organiser la gestion.</p><p><strong>À retenir :</strong> le territoire doit être étudié comme un ensemble de secteurs reliés, et non comme une succession de problèmes indépendants.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '4. Les activités humaines et les zones humides',
+                      sous_sections: [
+                        {
+                          titre: '4.1. L\'imperméabilisation',
+                          texte: '<p>Les toitures, les voiries et les parkings limitent souvent l\'infiltration sur les surfaces concernées. Selon les réseaux et les aménagements, l\'eau peut être dirigée rapidement vers un point de rejet.</p><p>Mais <strong>l\'effet dépend aussi de la pluie, de l\'état initial du sol, des stockages existants et des cheminements.</strong> Un pourcentage d\'imperméabilisation ne suffit pas, à lui seul, à calculer une crue.</p>'
+                        },
+                        {
+                          titre: '4.2. Les remblais et la rectification',
+                          texte: '<p>Un remblai peut occuper un espace auparavant inondable, réduire un volume accessible à l\'eau, faire obstacle à un écoulement ou dévier les eaux vers un autre secteur. L\'effet dépend de son emplacement et de sa géométrie.</p><p><strong>Rectifier</strong> consiste à modifier le tracé. <strong>Recalibrer</strong> consiste à modifier la section du lit. Ces interventions peuvent changer les niveaux, les vitesses, les capacités de transport et les habitats. <strong>Un lit agrandi ne garantit pas une amélioration générale :</strong> les effets doivent être étudiés localement et à l\'aval.</p>'
+                        },
+                        {
+                          titre: '4.3. Les zones humides et les espaces inondables',
+                          texte: '<p>L\'image de <em>« l\'éponge naturelle »</em> peut aider à débuter, mais elle devient trompeuse si elle fait oublier les limites physiques. <strong>Avant un événement, un milieu peut déjà être très humide ou saturé.</strong> Sa capacité supplémentaire de stockage dépend alors de sa topographie, de ses connexions et des possibilités d\'expansion de l\'eau.</p><p>L\'intérêt hydraulique d\'un espace inondable dépend du volume mobilisable, du niveau à partir duquel l\'eau y entre, de la vitesse de remplissage, de la durée du stockage, des modalités de restitution et de sa position dans le bassin.</p><p><strong>À noter :</strong> une restauration peut présenter un intérêt écologique important tout en produisant un effet limité sur une crue majeure. Le projet doit annoncer séparément les effets recherchés et les moyens de les vérifier.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '5. Du constat à la décision — méthode en 7 étapes',
+                      texte: '<p>Voici la méthode pour organiser un premier raisonnement professionnel :</p>',
+                      sous_sections: [
+                        {
+                          titre: 'Étape 1 — Décrire le problème',
+                          texte: '<p>Préciser ce qui s\'est produit, où, quand et avec quelles conséquences. Cette formulation décrit un fait sans attribuer immédiatement une cause. <em>Ex. : « Lors de l\'événement étudié, de l\'eau a pénétré dans huit bâtiments situés à proximité du pont. »</em></p>'
+                        },
+                        {
+                          titre: 'Étape 2 — Recueillir les informations',
+                          texte: '<p>Rechercher photographies, témoignages, traces de niveaux, données de pluie et de débit, topographie, plans des ouvrages, événements anciens et modifications du territoire. Chaque information doit être accompagnée de sa source et de ses limites.</p>'
+                        },
+                        {
+                          titre: 'Étapes 3 et 4 — Formuler puis vérifier les hypothèses',
+                          texte: '<p>Plusieurs hypothèses peuvent coexister (le pont limite-t-il l\'écoulement ? l\'eau vient-elle d\'un affluent ? un niveau aval bloque-t-il l\'évacuation ?). Comparer ensuite chaque hypothèse aux observations. <strong>Une photographie d\'un pont encombré ne prouve pas, à elle seule, qu\'il explique toute l\'inondation.</strong></p>'
+                        },
+                        {
+                          titre: 'Étapes 5 et 6 — Définir les objectifs puis comparer les variantes',
+                          texte: '<p>Formuler un résultat recherché dans un secteur et pour des conditions définies. Examiner plusieurs possibilités, y compris une intervention limitée ou une adaptation progressive. Comparer leur efficacité, leurs effets sur les milieux, leurs contraintes, leur coût et leurs besoins de gestion.</p>'
+                        },
+                        {
+                          titre: 'Étape 7 — Suivre les résultats',
+                          texte: '<p>Définir les indicateurs <em>avant</em> les travaux. Sans état initial, il sera difficile d\'évaluer ce qui a changé. Une opération ne s\'arrête pas à la réception des travaux : il faut prévoir l\'entretien, les inspections et l\'adaptation éventuelle.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '6. Étude de cas — La Rivière Claire',
+                      texte: '<p>La Rivière Claire traverse trois communes : un secteur amont (prairie, cultures, petits affluents), un centre-bourg (pont ancien, bâtiments riverains) et un aval (plaine inondable, zone humide, route en remblai). Après une crue, des habitants demandent un curage général.</p>',
+                      sous_sections: [
+                        {
+                          titre: 'Première erreur à éviter',
+                          texte: '<p>Il serait prématuré de conclure que les dépôts visibles expliquent toute l\'inondation. Ils peuvent être une cause partielle, une conséquence de la crue ou un élément habituel du fonctionnement du lit. Leur rôle doit être étudié.</p>'
+                        },
+                        {
+                          titre: 'Distinguer fait et interprétation',
+                          texte: '<p>Une photographie montrant du bois contre le pont est une <em>observation</em> ; un habitant indiquant une montée très rapide est un <em>témoignage</em> ; affirmer que le pont aurait causé toute la crue est une <em>hypothèse</em> à confronter aux données hydrauliques ; un résultat de modèle est à examiner selon son calage et ses incertitudes.</p>'
+                        },
+                        {
+                          titre: 'Trois variantes à comparer',
+                          texte: '<ul style="margin:4px 0 4px 16px;padding:0"><li style="margin-bottom:6px"><strong>Variante A</strong> — Intervention ciblée au droit du pont : vise un problème local, à vérifier sur niveaux et vitesses aval.</li><li style="margin-bottom:6px"><strong>Variante B</strong> — Restauration d\'un espace d\'expansion : nécessite d\'étudier foncier, usages et restitution des eaux.</li><li><strong>Variante C</strong> — Programme combiné : action locale + espace inondable + réduction de vulnérabilité des bâtiments, avec coordination multi-acteurs.</li></ul>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '7. Erreurs fréquentes à éviter',
+                      texte: '<table style="width:100%;border-collapse:collapse;font-size:11px"><thead><tr><th style="background:var(--c-primary);color:#fff;padding:6px 8px;text-align:left;border-radius:4px 0 0 0">Affirmation</th><th style="background:var(--c-primary);color:#fff;padding:6px 8px;text-align:left">Pourquoi insuffisante</th><th style="background:var(--c-primary);color:#fff;padding:6px 8px;text-align:left;border-radius:0 4px 0 0">Raisonnement attendu</th></tr></thead><tbody><tr style="background:var(--c-surface-2,#f8f9fa)"><td style="padding:6px 8px;border-bottom:1px solid var(--c-border)">« Toute crue est une catastrophe »</td><td style="padding:6px 8px;border-bottom:1px solid var(--c-border)">Une crue peut rester dans le lit mineur</td><td style="padding:6px 8px;border-bottom:1px solid var(--c-border)">Distinguer phénomène et conséquences</td></tr><tr><td style="padding:6px 8px;border-bottom:1px solid var(--c-border)">« Il suffit de creuser la rivière »</td><td style="padding:6px 8px;border-bottom:1px solid var(--c-border)">Les effets dépendent du site et se propagent</td><td style="padding:6px 8px;border-bottom:1px solid var(--c-border)">Étudier niveaux, sédiments et aval</td></tr><tr style="background:var(--c-surface-2,#f8f9fa)"><td style="padding:6px 8px;border-bottom:1px solid var(--c-border)">« La végétation freine dangereusement »</td><td style="padding:6px 8px;border-bottom:1px solid var(--c-border)">Son rôle varie selon localisation et état</td><td style="padding:6px 8px;border-bottom:1px solid var(--c-border)">Réaliser une analyse ciblée</td></tr><tr><td style="padding:6px 8px;border-bottom:1px solid var(--c-border)">« La zone humide absorbe toute la pluie »</td><td style="padding:6px 8px;border-bottom:1px solid var(--c-border)">Capacité et connexions sont limitées</td><td style="padding:6px 8px;border-bottom:1px solid var(--c-border)">Évaluer le fonctionnement réel</td></tr><tr style="background:var(--c-surface-2,#f8f9fa)"><td style="padding:6px 8px;border-bottom:1px solid var(--c-border)">« Une digue supprime le risque »</td><td style="padding:6px 8px;border-bottom:1px solid var(--c-border)">Toute protection possède des limites</td><td style="padding:6px 8px;border-bottom:1px solid var(--c-border)">Identifier le risque résiduel</td></tr><tr><td style="padding:6px 8px;border-bottom:1px solid var(--c-border)">« Le problème est là où les dégâts apparaissent »</td><td style="padding:6px 8px;border-bottom:1px solid var(--c-border)">Certaines causes sont éloignées</td><td style="padding:6px 8px;border-bottom:1px solid var(--c-border)">Examiner plusieurs échelles</td></tr><tr style="background:var(--c-surface-2,#f8f9fa)"><td style="padding:6px 8px">« Le modèle donne la vérité »</td><td style="padding:6px 8px">Il dépend de données et d\'hypothèses</td><td style="padding:6px 8px">Examiner le calage et les incertitudes</td></tr></tbody></table>'
+                    }
+                  ],
                 },
                 flashcards: [
                   { q: 'Que signifie GEMAPI ?', r: 'Gestion des Milieux Aquatiques et Prévention des Inondations', expl: 'Ces deux dimensions sont interdépendantes : une intervention sur les milieux peut modifier les écoulements, et réciproquement. Elles s\'étudient ensemble.' },
                   { q: 'Depuis quand et par qui la GEMAPI est-elle exercée ?', r: 'Depuis le 1er janvier 2018 par les EPCI à fiscalité propre (loi MAPTAM 2014)', expl: 'Communautés de communes, d\'agglomération, urbaines et métropoles. La loi NOTRe 2015 a précisé l\'attribution. La loi de 2017 a ajouté des possibilités de délégation à un EPAGE ou EPTB.' },
                   { q: 'Quelles sont les 4 missions GEMAPI de l\'art. L.211-7 ?', r: '1° Aménagement de bassin · 2° Entretien de cours d\'eau · 5° Défense contre inondations · 8° Protection des écosystèmes', expl: 'La numérotation (1, 2, 5, 8) correspond aux alinéas de l\'article. Tout ce qui concerne l\'eau ne relève pas automatiquement de la GEMAPI.' },
+                  { q: 'Quelle différence entre lit mineur et lit majeur ?', r: 'Lit mineur = zone en eau ordinaire ; lit majeur = espace occupé par le cours d\'eau lors des débordements', expl: 'Le lit majeur n\'est pas une surface plane qui se remplirait uniformément : routes, remblais, talus et ouvrages modifient les cheminements. Selon l\'événement, certaines parties sont inondées et d\'autres restent hors d\'eau.' },
+                  { q: 'Qu\'est-ce que les annexes fluviales et pourquoi leur mode de connexion compte-t-il ?', r: 'Bras secondaires, anciens bras, dépressions inondables liés au cours d\'eau principal — connexion permanente ≠ connexion lors de crues = conditions écologiques différentes', expl: 'Une connexion permanente n\'offre pas les mêmes habitats qu\'une connexion limitée à certaines crues. La fréquence, la durée et le mode de connexion définissent le fonctionnement.' },
+                  { q: 'Pourquoi ne faut-il pas enlever des sédiments sans diagnostic préalable ?', r: 'Les sédiments participent à l\'équilibre du lit ; leur retrait peut provoquer une incision, un exhaussement ou un déplacement des zones d\'érosion', expl: 'La rivière transporte argiles, limons, sables, graviers. Modifier l\'équilibre apports/transport/dépôts peut entraîner des effets loin du point d\'intervention.' },
                   { q: 'Quelle est la différence entre une crue et une inondation ?', r: 'Crue = hausse du débit (peut rester dans le lit mineur) ; inondation = submersion temporaire d\'un espace habituellement hors d\'eau', expl: 'Identifier le mécanisme est indispensable. Une solution adaptée à un débordement peut être inefficace contre une remontée de nappe.' },
+                  { q: 'Quelle différence entre aléa, enjeux et vulnérabilité ?', r: 'Aléa = phénomène (hauteur, vitesse, durée) · Enjeux = personnes/biens exposés · Vulnérabilité = sensibilité des enjeux aux effets', expl: 'Ex. : deux bâtiments avec la même hauteur d\'eau. Dans le premier, équipements au rez-de-chaussée : vulnérabilité forte. Dans le second, équipements en hauteur et matériaux résistants : vulnérabilité faible. Même exposition, dommages différents.' },
                   { q: 'Comment définit-on le risque d\'inondation ?', r: 'Risque = f(aléa, exposition, vulnérabilité) — relation conceptuelle, pas numérique universelle', expl: 'On peut réduire le risque en agissant sur les écoulements (aléa), sur la localisation des enjeux (exposition) ou sur leur résistance à l\'eau (vulnérabilité).' },
                   { q: 'Qu\'est-ce qu\'un bassin versant et pourquoi est-ce l\'échelle essentielle ?', r: 'Territoire dont toutes les eaux convergent vers un même exutoire — les causes peuvent être situées en dehors de la zone sinistrée', expl: 'Un grand bassin contient des sous-bassins emboîtés. Les limites topographiques ne couvrent pas toujours les nappes et les réseaux. Travailler à la seule échelle communale peut déplacer le problème.' },
-                  { q: 'Que désigne la ripisylve et quel est son rôle ?', r: 'Végétation bordant les cours d\'eau — ombrage, habitats, maintien de certaines berges', expl: 'Sa gestion doit être adaptée au site. Supprimer toute la végétation comme tout conserver sans examen sont deux erreurs symétriques.' },
+                  { q: 'Pourquoi l\'imperméabilisation ne permet-elle pas seule de calculer une crue ?', r: 'L\'effet dépend aussi de la pluie, de l\'état initial du sol, des stockages existants et des cheminements — un % d\'imperméabilisation n\'est pas un outil de calcul de crue', expl: 'Des toitures et voiries limitent l\'infiltration sur ces surfaces, mais l\'eau peut être tamponnée par des stockages, déviée ou infiltrée ailleurs. L\'analyse doit intégrer l\'ensemble du bassin.' },
+                  { q: 'Que désigne la ripisylve et quel est son rôle ?', r: 'Végétation bordant les cours d\'eau — ombrage, habitats, maintien de certaines berges, apport de bois et matière organique', expl: 'Sa gestion doit être adaptée au site. Supprimer toute la végétation comme tout conserver sans examen sont deux erreurs symétriques. Le rôle d\'un arbre dépend de sa localisation et de son état.' },
+                  { q: 'Pourquoi l\'image de "l\'éponge naturelle" est-elle insuffisante pour les zones humides ?', r: 'Avant un événement, le milieu peut être saturé — sa capacité de stockage supplémentaire dépend de sa topographie, ses connexions et ses possibilités d\'expansion', expl: 'Un milieu peut avoir un intérêt écologique fort tout en offrant une capacité de stockage limitée lors d\'une crue majeure. Les deux objectifs (hydraulique et écologique) doivent être annoncés séparément.' },
+                  { q: 'Qu\'est-ce que la rectification d\'un cours d\'eau et que faut-il vérifier ?', r: 'Rectifier = modifier le tracé ; recalibrer = modifier la section — les effets sur niveaux, vitesses, habitats et transport solide doivent être étudiés localement et à l\'aval', expl: 'Un lit agrandi ne garantit pas une amélioration générale. L\'abaissement du niveau en un point peut provoquer une incision en amont et un dépôt en aval.' },
                   { q: 'Pourquoi le volume précipité ne permet-il pas de déduire directement le débit de pointe ?', r: 'Il manque la distribution temporelle de la pluie, les pertes, les stockages et les temps de transfert', expl: 'Ex. : 25 mm sur 8 km² = 200 000 m³ précipités. Un ratio volume stocké / volume écoulé ne préjuge pas de la réduction du débit de pointe.' },
                   { q: 'Quelles sont les 7 étapes du diagnostic territorial GEMAPI ?', r: 'Décrire → Recueillir → Formuler hypothèses → Vérifier → Définir objectifs → Comparer variantes → Suivre résultats', expl: 'Distinguer faits, hypothèses et conclusions à chaque étape. Plusieurs variantes doivent être comparées, y compris une intervention limitée ou une adaptation progressive.' },
                   { q: 'Quelle est la compétence clé à maîtriser après le chapitre 1 ?', r: 'Expliquer pourquoi une intervention locale doit être replacée dans le fonctionnement du bassin versant et l\'organisation du territoire', expl: 'Une note prudente et bien argumentée est plus utile qu\'une solution affirmée sans démonstration. La gestion n\'implique pas nécessairement des travaux.' },
                 ],
-                schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
-  <rect width="280" height="148" rx="8" fill="#E3F2FD"/>
-  <text x="140" y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#0E6BA8">4 missions GEMAPI — art. L.211-7 CE</text>
-  <rect x="8" y="20" width="30" height="118" fill="#0E6BA8" rx="4"/>
-  <text x="23" y="88" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold" transform="rotate(-90,23,88)">L.211-7</text>
-  <rect x="44" y="22" width="228" height="26" fill="#fff" rx="4" opacity=".85"/>
-  <text x="56" y="33" font-family="Arial" font-size="10" font-weight="bold" fill="#0E6BA8">1°</text>
-  <text x="70" y="33" font-family="Arial" font-size="9" fill="#1A3A5C">Aménagement de bassin hydrographique</text>
-  <text x="56" y="43" font-family="Arial" font-size="8" fill="#5A7A9C">Planification, études, aménagements structurants</text>
-  <rect x="44" y="52" width="228" height="26" fill="#B3D9F5" rx="4"/>
-  <text x="56" y="63" font-family="Arial" font-size="10" font-weight="bold" fill="#0E6BA8">2°</text>
-  <text x="70" y="63" font-family="Arial" font-size="9" fill="#1A3A5C">Entretien des cours d'eau, canaux, plans d'eau</text>
-  <text x="56" y="73" font-family="Arial" font-size="8" fill="#5A7A9C">Végétation, embâcles, accès riverains</text>
-  <rect x="44" y="82" width="228" height="26" fill="#fff" rx="4" opacity=".85"/>
-  <text x="56" y="93" font-family="Arial" font-size="10" font-weight="bold" fill="#C05A10">5°</text>
-  <text x="70" y="93" font-family="Arial" font-size="9" fill="#1A3A5C">Défense contre les inondations et contre la mer</text>
-  <text x="56" y="103" font-family="Arial" font-size="8" fill="#5A7A9C">Digues, systèmes d'endiguement, zones d'expansion</text>
-  <rect x="44" y="112" width="228" height="26" fill="#B3D9F5" rx="4"/>
-  <text x="56" y="123" font-family="Arial" font-size="10" font-weight="bold" fill="#1A7A4A">8°</text>
-  <text x="70" y="123" font-family="Arial" font-size="9" fill="#1A3A5C">Protection des écosystèmes et zones humides</text>
-  <text x="56" y="133" font-family="Arial" font-size="8" fill="#5A7A9C">Ripisylve, continuité écologique, restauration</text>
+                schema: `<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="max-width:300px;width:100%">
+  <rect width="300" height="200" rx="8" fill="#E3F2FD"/>
+  <text x="150" y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#0E6BA8">Risque = f(Aléa · Exposition · Vulnérabilité)</text>
+  <rect x="8" y="20" width="88" height="52" fill="#1565C0" rx="6"/>
+  <text x="52" y="37" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold" fill="#fff">ALÉA</text>
+  <text x="52" y="50" text-anchor="middle" font-family="Arial" font-size="8" fill="#CCE4FF">Hauteur · Vitesse</text>
+  <text x="52" y="62" text-anchor="middle" font-family="Arial" font-size="8" fill="#CCE4FF">Durée · Rapidité</text>
+  <rect x="106" y="20" width="88" height="52" fill="#C05A10" rx="6"/>
+  <text x="150" y="37" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold" fill="#fff">ENJEUX</text>
+  <text x="150" y="50" text-anchor="middle" font-family="Arial" font-size="8" fill="#FFE4CC">Personnes · Biens</text>
+  <text x="150" y="62" text-anchor="middle" font-family="Arial" font-size="8" fill="#FFE4CC">Équipements · Milieux</text>
+  <rect x="204" y="20" width="88" height="52" fill="#1A7A4A" rx="6"/>
+  <text x="248" y="37" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="#fff">VULNÉRABILITÉ</text>
+  <text x="248" y="50" text-anchor="middle" font-family="Arial" font-size="8" fill="#CCFFDD">Sensibilité</text>
+  <text x="248" y="62" text-anchor="middle" font-family="Arial" font-size="8" fill="#CCFFDD">des enjeux</text>
+  <rect x="8" y="80" width="284" height="22" fill="#0E6BA8" rx="4"/>
+  <text x="150" y="95" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff">Bassin versant = eaux → exutoire commun (emboîté)</text>
+  <rect x="8" y="106" width="136" height="40" fill="#fff" rx="4" opacity=".85"/>
+  <text x="76" y="120" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="#0E6BA8">Système fluvial</text>
+  <text x="76" y="133" text-anchor="middle" font-family="Arial" font-size="8" fill="#1A3A5C">Lit mineur · Lit majeur</text>
+  <text x="76" y="144" text-anchor="middle" font-family="Arial" font-size="8" fill="#1A3A5C">Berges · Ripisylve · Annexes</text>
+  <rect x="156" y="106" width="136" height="40" fill="#B3D9F5" rx="4"/>
+  <text x="224" y="120" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="#0E6BA8">Solidarité amont-aval</text>
+  <text x="224" y="133" text-anchor="middle" font-family="Arial" font-size="8" fill="#1A3A5C">Volume ET chronologie</text>
+  <text x="224" y="144" text-anchor="middle" font-family="Arial" font-size="8" fill="#1A3A5C">Foncier · Financement</text>
+  <rect x="8" y="152" width="284" height="40" fill="#F0F8E8" rx="4"/>
+  <text x="150" y="165" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="#1A5C2A">7 étapes du diagnostic</text>
+  <text x="150" y="178" text-anchor="middle" font-family="Arial" font-size="8" fill="#1A5C2A">Décrire → Recueillir → Hypothèses → Vérifier</text>
+  <text x="150" y="189" text-anchor="middle" font-family="Arial" font-size="8" fill="#1A5C2A">→ Objectifs → Variantes → Suivre</text>
 </svg>`,
-                exercice: {
-                  enonce: '(1) Une rivière voit son débit augmenter fortement mais l\'eau reste dans le lit mineur. Y a-t-il une inondation par débordement ?\n(2) Un secteur prairal connaissait des débordements ; il accueille désormais 20 logements. Les crues n\'ont pas changé. Pourquoi le risque a-t-il augmenté ?\n(3) Calcule le volume précipité pour 25 mm sur 8 km². Peut-on déduire directement le débit maximal ?\n(4) Un rapport affirme : « La restauration de 5 ha de zone humide supprimera les inondations du village. » Pourquoi cette conclusion est-elle insuffisante ?',
-                  solution: '<strong>(1)</strong> Il y a une crue, mais pas d\'inondation par débordement : l\'eau ne quitte pas le lit mineur.<br><strong>(2)</strong> Les enjeux exposés ont augmenté (personnes et biens). Le risque évolue sans modification de l\'aléa : c\'est l\'exposition qui a changé.<br><strong>(3)</strong> Vp = 0,025 × 8 000 000 = <strong>200 000 m³</strong>. Non : il manque la distribution temporelle, les pertes, les stockages et les temps de transfert.<br><strong>(4)</strong> La surface seule ne caractérise pas l\'effet hydraulique. Il faut le volume mobilisable, les connexions, l\'état initial. Le terme « supprimera » garantit un résultat non démontré.',
-                },
+                exercices: [
+                  {
+                    n: '1',
+                    enonce: 'Une rivière voit son débit augmenter fortement mais l\'eau reste dans le lit mineur. Y a-t-il une crue ? Une inondation par débordement ?',
+                    solution: 'Il y a une crue. En revanche, aucun débordement n\'est décrit : l\'eau ne quitte pas le lit mineur. On ne peut donc pas conclure à une inondation par débordement.',
+                  },
+                  {
+                    n: '2',
+                    enonce: 'Un secteur prairal connaissait des débordements ; il accueille désormais 20 logements. Les crues n\'ont pas changé. Pourquoi le risque a-t-il augmenté ?',
+                    solution: 'Les enjeux exposés ont augmenté (personnes et biens). Le risque évolue sans modification de l\'aléa : c\'est l\'exposition qui a changé. Une prairie et 20 logements exposés au même phénomène n\'ont pas la même vulnérabilité.',
+                  },
+                  {
+                    n: '3',
+                    enonce: 'Une commune souhaite évacuer plus rapidement les eaux vers la commune voisine. Quelles questions faut-il poser avant de retenir cette solution ?',
+                    solution: '<ul style="margin:4px 0 4px 16px;padding:0"><li style="margin-bottom:4px">Quel débit supplémentaire ou décalage temporel sera transmis en aval ?</li><li style="margin-bottom:4px">Comment ce débit se combinera-t-il avec les autres apports ?</li><li style="margin-bottom:4px">Quels niveaux en résulteront en aval ?</li><li style="margin-bottom:4px">Quels enjeux pourraient être affectés ?</li><li>Existe-t-il des variantes plus favorables à l\'ensemble du bassin ?</li></ul>',
+                  },
+                  {
+                    n: '4',
+                    enonce: 'Une pluie uniforme de 25 mm tombe sur un bassin de 8 km². Calcule le volume précipité. Peut-on en déduire directement le débit maximal à l\'exutoire ?',
+                    solution: '<strong>Vp = 0,025 × 8 000 000 = 200 000 m³</strong><br><br>Non. Il manque la distribution temporelle de la pluie, les pertes (infiltration, interception), les stockages, les temps de transfert et les caractéristiques du bassin. Le volume précipité n\'est pas le volume écoulé.',
+                  },
+                  {
+                    n: '5',
+                    enonce: 'Un rapport affirme : « La restauration de 5 ha de zone humide supprimera les inondations du village. » Pourquoi cette conclusion est-elle insuffisante ?',
+                    solution: 'La surface seule ne suffit pas à caractériser l\'effet hydraulique. Il faut connaître le volume mobilisable, les connexions avec le cours d\'eau, l\'état initial du milieu, le fonctionnement pendant les crues et les limites de l\'action. Le terme <em>« supprimera »</em> suppose une garantie qui n\'est pas démontrée par les informations fournies.',
+                  },
+                ],
               },
 
               {
@@ -5452,44 +5636,128 @@ async function renderCoursChapitre(fId, aId, mId, cId) {
     + '<div data-cours-edit data-field="fiche.intro" style="font-size:12px;color:var(--c-text-3);line-height:1.7;font-style:italic">' + _coursAllowedTextHtml(fi.intro) + '</div>'
     + '</div></div>';
 
+  /* Cours complet — layout 2 colonnes desktop */
+  var _sectionsHtml = '';
+  var _sideHtml = '';
+
+  if (fi.sections && fi.sections.length) {
+    /* Sommaire (colonne droite) */
+    _sideHtml += '<div class="cours-toc">'
+      + '<div class="cours-toc-title">📖 Sommaire</div>';
+    fi.sections.forEach(function(sec, idx) {
+      if (sec.titre) {
+        _sideHtml += '<a class="cours-toc-link" href="#cours-sec-' + idx + '">'
+          + '<span class="cours-toc-num">' + (idx + 1) + '</span>'
+          + '<span>' + sec.titre.replace(/^\d+\.\s*/, '') + '</span>'
+          + '</a>';
+      }
+    });
+    _sideHtml += '</div>';
+
+    /* Sections cours (colonne gauche) */
+    _sectionsHtml += '<div class="section-header" style="padding-top:var(--s-3)">📖 Cours</div>';
+    _sectionsHtml += '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:8px">';
+    fi.sections.forEach(function(sec, idx) {
+      _sectionsHtml += '<div id="cours-sec-' + idx + '" style="background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-md);overflow:hidden">';
+      if (sec.titre) {
+        _sectionsHtml += '<div style="background:var(--c-primary);padding:8px 14px">'
+          + '<div style="font-size:12px;font-weight:700;color:#fff">' + sec.titre + '</div>'
+          + '</div>';
+      }
+      _sectionsHtml += '<div style="display:flex;gap:0">';
+      _sectionsHtml += '<div style="flex:1;padding:12px 14px;min-width:0">';
+      if (sec.texte) {
+        _sectionsHtml += '<div style="font-size:12px;color:var(--c-text);line-height:1.85">' + sec.texte + '</div>';
+      }
+      if (sec.sous_sections && sec.sous_sections.length) {
+        sec.sous_sections.forEach(function(ss) {
+          _sectionsHtml += '<div style="margin-top:14px">';
+          if (ss.titre) {
+            _sectionsHtml += '<div style="font-size:12px;font-weight:700;color:var(--c-primary);margin-bottom:5px;padding-bottom:4px;border-bottom:1px solid var(--c-primary-l)">' + ss.titre + '</div>';
+          }
+          if (ss.texte) {
+            _sectionsHtml += '<div style="font-size:12px;color:var(--c-text);line-height:1.85">' + ss.texte + '</div>';
+          }
+          _sectionsHtml += '</div>';
+        });
+      }
+      _sectionsHtml += '</div>';
+      if (sec.schema) {
+        _sectionsHtml += '<div style="width:176px;flex-shrink:0;border-left:1px solid var(--c-border);padding:10px;display:flex;flex-direction:column;gap:6px;background:var(--c-bg)">'
+          + '<div style="font-size:10px;font-weight:600;color:var(--c-text-light,#6b7280);text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px">Schéma</div>'
+          + sec.schema
+          + '</div>';
+      }
+      _sectionsHtml += '</div></div>';
+    });
+    _sectionsHtml += '</div>';
+  }
+
   /* Points clés */
-  html += '<div class="section-header" style="padding-top:var(--s-3)">📌 Points clés</div>'
+  var _pointsHtml = '<div class="section-header" style="padding-top:var(--s-3)">📌 Points clés</div>'
     + '<div style="padding:0 var(--s-4)">'
     + '<div style="background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-md);padding:var(--s-3)">'
     + '<ul style="margin:0;padding:0 0 0 var(--s-3);list-style:none">';
   fi.points.forEach(function(p, i) {
-    html += '<li class="cours-list-item" style="display:flex;align-items:flex-start;gap:4px;margin-bottom:6px">'
+    _pointsHtml += '<li class="cours-list-item" style="display:flex;align-items:flex-start;gap:4px;margin-bottom:6px">'
       + '<span data-cours-edit data-field="fiche.points.' + i + '" style="font-size:12px;color:var(--c-text);line-height:1.7;flex:1;padding-left:4px">' + _coursAllowedTextHtml(p) + '</span>'
       + '<button class="cours-item-del" onclick="_coursDeleteItem(this)" title="Supprimer" style="display:none;background:none;border:none;cursor:pointer;color:var(--c-danger,#E53E3E);font-size:12px;padding:2px 4px;flex-shrink:0;margin-top:2px;line-height:1;opacity:.7">🗑</button>'
       + '</li>';
   });
-  html += '<li id="cours-add-point-row" style="display:none;list-style:none;padding-left:4px;margin-top:2px">'
+  _pointsHtml += '<li id="cours-add-point-row" style="display:none;list-style:none;padding-left:4px;margin-top:2px">'
     + '<button onclick="_coursAddListItem(\'points\')" style="font-size:11px;color:var(--c-primary);background:none;border:1px dashed var(--c-primary);border-radius:var(--r-sm);padding:3px 10px;cursor:pointer">+ Ajouter un point</button>'
     + '</li>';
-  html += '</ul></div></div>';
+  _pointsHtml += '</ul></div></div>';
 
   /* Formules */
+  var _formulesHtml = '';
   if (fi.formules && fi.formules.length) {
-    html += '<div class="section-header" style="padding-top:var(--s-3)">📐 Formules clés</div>'
+    _formulesHtml += '<div class="section-header" style="padding-top:var(--s-3)">📐 Formules clés</div>'
       + '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:6px">';
     fi.formules.forEach(function(form, i) {
-      html += '<div class="cours-list-item" style="display:flex;align-items:center;gap:4px">'
+      _formulesHtml += '<div class="cours-list-item" style="display:flex;align-items:center;gap:4px">'
         + '<div data-cours-edit data-field="fiche.formules.' + i + '" data-raw="' + esc(form) + '" style="flex:1;background:var(--c-primary-l);border-left:3px solid var(--c-primary);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:8px 12px;font-size:12px;color:var(--c-primary);font-weight:600">' + _coursRenderFormule(form) + '</div>'
         + '<button class="cours-item-del" onclick="_coursDeleteItem(this)" title="Supprimer" style="display:none;background:none;border:none;cursor:pointer;color:var(--c-danger,#E53E3E);font-size:12px;padding:2px 4px;flex-shrink:0;line-height:1;opacity:.7">🗑</button>'
         + '</div>';
     });
-    html += '<div id="cours-add-formule-row" style="display:none;margin-top:2px">'
+    _formulesHtml += '<div id="cours-add-formule-row" style="display:none;margin-top:2px">'
       + '<button onclick="_coursAddListItem(\'formules\')" style="font-size:11px;color:var(--c-primary);background:none;border:1px dashed var(--c-primary);border-radius:var(--r-sm);padding:3px 10px;cursor:pointer">+ Ajouter une formule</button>'
       + '</div>';
-    html += '</div>';
+    _formulesHtml += '</div>';
   }
 
-  /* À retenir */
-  html += '<div style="padding:var(--s-3) var(--s-4)">'
+  /* À retenir — version complète éditables (colonne gauche) */
+  var _retenirHtml = '<div style="padding:var(--s-3) var(--s-4)">'
     + '<div style="background:var(--c-ok-l,#EAF8F0);border:1.5px solid var(--c-ok,#166038);border-radius:var(--r-md);padding:var(--s-3)">'
     + '<div style="font-size:10px;font-weight:800;color:var(--c-ok,#166038);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">✅ À retenir</div>'
     + '<div data-cours-edit data-field="fiche.retenir" style="font-size:12px;color:var(--c-text);font-weight:600;line-height:1.6">' + _coursAllowedTextHtml(fi.retenir) + '</div>'
     + '</div></div>';
+
+  /* Colonne droite : copie compacte lecture-seule de "À retenir" (split par ·) */
+  var _retenirRaw = (fi.retenir || '').replace(/<[^>]+>/g, '');
+  var _retenirItems = _retenirRaw.indexOf('·') !== -1
+    ? _retenirRaw.split('·').map(function(s) { return s.trim(); }).filter(Boolean)
+    : (_retenirRaw.trim() ? [_retenirRaw.trim()] : []);
+  if (_retenirItems.length) {
+    _sideHtml += '<div class="cours-side-retenir">'
+      + '<div class="cours-side-retenir-hdr">✅ À retenir</div>';
+    _retenirItems.forEach(function(item) {
+      _sideHtml += '<div class="cours-side-retenir-item">'
+        + '<span class="cours-side-retenir-dot">▸</span>'
+        + '<span>' + item + '</span>'
+        + '</div>';
+    });
+    _sideHtml += '</div>';
+  }
+
+  /* Layout 2 colonnes : sections à gauche, sommaire+retenir à droite */
+  html += '<div class="cours-2col">'
+    + '<div class="cours-2col-main">' + _sectionsHtml + '</div>'
+    + '<div class="cours-2col-side"><div class="cours-2col-sticky">' + _sideHtml + '</div></div>'
+    + '</div>';
+
+  /* Sous le layout : Points clés + Formules + À retenir (éditables, pleine largeur) */
+  html += _pointsHtml + _formulesHtml + _retenirHtml;
 
   /* Schéma illustratif */
   if (c.schema) {
@@ -5514,19 +5782,30 @@ async function renderCoursChapitre(fId, aId, mId, cId) {
     html += '</div></div>';
   }
 
-  /* Exercice d'application */
-  if (c.exercice) {
-    html += '<div class="section-header" style="padding-top:var(--s-3)">✏️ Exercice d\'application</div>'
-      + '<div style="padding:0 var(--s-4)">'
-      + '<div style="background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-md);padding:var(--s-3)">'
-      + '<div data-cours-edit data-field="exercice.enonce" style="font-size:13px;color:var(--c-text);line-height:1.7;margin-bottom:4px">' + _coursAllowedTextHtml(c.exercice.enonce) + '</div>'
-      + '<details style="margin-top:10px">'
-      + '<summary style="font-size:12px;font-weight:700;color:var(--c-primary);cursor:pointer;list-style:none;display:flex;align-items:center;gap:6px;padding:8px 10px;background:var(--c-primary-l);border-radius:var(--r-sm)">💡 Voir la correction</summary>'
-      + '<div id="cours-solution-display" style="margin-top:8px;padding:12px;background:var(--c-primary-l);border-left:3px solid var(--c-primary);border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:12px;color:var(--c-text);line-height:1.8">'
-      + _coursAllowedHtml(c.exercice.solution)
-      + '</div>'
-      + '</details>'
-      + '</div></div>';
+  /* Exercices d'application */
+  var _exos = c.exercices || (c.exercice ? [{ n: '1', enonce: c.exercice.enonce, solution: c.exercice.solution }] : null);
+  if (_exos && _exos.length) {
+    html += '<div class="section-header" style="padding-top:var(--s-3)">✏️ Exercices d\'application</div>'
+      + '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:8px">';
+    _exos.forEach(function(ex, idx) {
+      var num = ex.n || String(idx + 1);
+      html += '<div style="border:1px solid var(--c-border);border-radius:var(--r-md);overflow:hidden">'
+        + '<div style="background:var(--c-primary);padding:8px 12px;display:flex;align-items:center;gap:8px">'
+          + '<div style="background:rgba(255,255,255,.22);border-radius:50%;width:22px;height:22px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff">' + num + '</div>'
+          + '<div style="font-size:12px;font-weight:600;color:#fff">Exercice ' + num + '</div>'
+        + '</div>'
+        + '<div style="padding:10px 12px;background:var(--c-surface)">'
+          + '<div style="font-size:12px;color:var(--c-text);line-height:1.75">' + (ex.enonce || '') + '</div>'
+          + '<details style="margin-top:8px">'
+            + '<summary style="font-size:12px;font-weight:700;color:var(--c-primary);cursor:pointer;list-style:none;display:flex;align-items:center;gap:6px;padding:8px 10px;background:var(--c-primary-l);border-radius:var(--r-sm)">💡 Voir la correction</summary>'
+            + '<div style="margin-top:6px;padding:10px 12px;background:var(--c-primary-l);border-left:3px solid var(--c-primary);border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:12px;color:var(--c-text);line-height:1.8">'
+              + (ex.solution || '')
+            + '</div>'
+          + '</details>'
+        + '</div>'
+      + '</div>';
+    });
+    html += '</div>';
   }
 
   /* Bouton fiche PDF */

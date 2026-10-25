@@ -45,71 +45,127 @@
 <!-- ═══ ÉCRANS D'AUTHENTIFICATION ═══ -->
 
 <!-- SPLASH AUTH -->
-<div class="auth-screen" id="auth-splash">
+<div class="auth-screen" id="auth-gate">
   <div class="auth-splash">
     <img class="auth-logo" src="./images/icon.png" alt="HydroCalc" style="width:72px;height:72px;object-fit:contain;">
     <div class="auth-app-name">HydroCalc</div>
-    <div class="auth-tagline">Application hydraulique professionnelle<br>Techniciens eau · BTS GEMEAU · Ingénieurs</div>
-    <div class="auth-btns">
-      <button class="auth-btn auth-btn-primary" onclick="authShow('auth-login')">
-        <span class="auth-btn-ico">🔑</span>
-        <div class="auth-btn-text">
-          <div class="auth-btn-title">Se connecter</div>
-          <div class="auth-btn-sub">Accéder à mon espace</div>
-        </div>
-      </button>
-      <button class="auth-btn auth-btn-outline" onclick="authShow('auth-register')">
-        <span class="auth-btn-ico">✨</span>
-        <div class="auth-btn-text">
-          <div class="auth-btn-title">Créer un compte</div>
-          <div class="auth-btn-sub">Gratuit · Sans engagement</div>
-        </div>
-      </button>
-      <button class="auth-btn" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.12);justify-content:center;font-size:12px" onclick="authContinueGuest()">
-        Continuer sans compte →
+    <div class="auth-tagline">Application en cours de développement<br>Accès restreint · Version bêta</div>
+    <div style="margin-top:32px;width:100%;max-width:320px">
+      <div id="gate-err" style="display:none;background:rgba(220,38,38,.15);color:#fca5a5;border-radius:8px;padding:10px 14px;font-size:12px;margin-bottom:12px;text-align:center">Code incorrect. Réessayez.</div>
+      <input id="gate-input" type="password" placeholder="Code d'accès bêta"
+        style="width:100%;padding:13px 16px;border-radius:12px;border:1.5px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#fff;font-size:15px;font-family:inherit;text-align:center;letter-spacing:.12em;outline:none;margin-bottom:12px"
+        onkeydown="if(event.key==='Enter')authGateSubmit()">
+      <button onclick="authGateSubmit()"
+        style="width:100%;padding:14px;background:#fff;color:#0a2820;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">
+        Accéder →
       </button>
     </div>
-    <div class="auth-version">v2.0 · 14 modules · 60+ calculateurs</div>
+    <div class="auth-version">Phase de test · Accès restreint</div>
+  </div>
+</div>
+
+<div class="auth-screen hidden" id="auth-splash">
+  <div class="auth-splash">
+    <div class="aspl-icon-wrap">
+      <img src="./images/icon.png" alt="HydroCalc" class="aspl-icon">
+    </div>
+    <div class="aspl-title"><span>Hydro</span><span class="aspl-title-accent">Calc</span></div>
+    <div class="aspl-accent-line"></div>
+    <div class="aspl-tagline">CALCULER · ANALYSER · AGIR</div>
+    <p class="aspl-desc">Application hydraulique professionnelle<br>Techniciens eau · BTS GEMEAU · Ingénieurs</p>
+    <div class="aspl-card">
+      <button class="aspl-btn aspl-btn-primary" onclick="authShow('auth-login')">
+        <span class="aspl-btn-ico">🔑</span>
+        <div class="aspl-btn-body">
+          <div class="aspl-btn-title">Se connecter</div>
+          <div class="aspl-btn-sub">Accéder à mon espace</div>
+        </div>
+        <span class="aspl-btn-arr">→</span>
+      </button>
+      <button class="aspl-btn aspl-btn-glass" onclick="authShow('auth-register')">
+        <span class="aspl-btn-ico">✨</span>
+        <div class="aspl-btn-body">
+          <div class="aspl-btn-title">Créer un compte</div>
+          <div class="aspl-btn-sub">Gratuit · Sans engagement</div>
+        </div>
+        <span class="aspl-btn-arr">→</span>
+      </button>
+      <div class="aspl-or"><span>ou</span></div>
+      <button class="aspl-btn aspl-btn-ghost" onclick="authContinueGuest()">
+        Continuer sans compte &nbsp;→
+      </button>
+    </div>
+    <div class="auth-version">Phase bêta · Accès restreint</div>
   </div>
 </div>
 
 <!-- CONNEXION -->
 <div class="auth-screen hidden" id="auth-login">
-  <div class="auth-form-wrap">
-    <div class="auth-form-hdr">
-      <div class="auth-back" onclick="authShow('auth-splash')">←</div>
-      <div class="auth-hdr-title">Connexion</div>
-    </div>
-    <div class="auth-body">
-      <div class="auth-icon">👋</div>
-      <div class="auth-title">Bon retour !</div>
-      <div class="auth-sub">Connectez-vous pour accéder à votre espace HydroCalc et retrouver votre progression.</div>
-      <div class="auth-error" id="login-err">Email ou mot de passe incorrect.</div>
-      <label class="auth-label">Adresse e-mail</label>
-      <input class="auth-input" type="email" id="login-email" placeholder="votre@email.fr" autocomplete="email">
-      <label class="auth-label">Mot de passe</label>
-      <div class="auth-pwd-wrap">
-        <input class="auth-input" type="password" id="login-pwd" placeholder="Votre mot de passe" autocomplete="current-password">
-        <button type="button" class="auth-pwd-toggle" onclick="toggleAuthPwd('login-pwd', this)" title="Afficher/masquer le mot de passe">👁</button>
-      </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:-8px;margin-bottom:16px">
-        <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--c-text-3);cursor:pointer">
-          <input type="checkbox" id="login-remember" style="width:15px;height:15px;accent-color:var(--c-primary)">
-          Se souvenir de moi
-        </label>
-        <span class="auth-link" style="font-size:12px" onclick="authShow('auth-forgot')">Mot de passe oublié ?</span>
-      </div>
-      <button class="auth-btn-submit" onclick="authLogin()">Se connecter</button>
-      <div class="auth-divider">
-        <div class="auth-divider-line"></div>
-        <div class="auth-divider-txt">ou</div>
-        <div class="auth-divider-line"></div>
-      </div>
-      <button class="auth-btn-ghost" onclick="authShow('auth-register')">Créer un compte gratuitement</button>
-      <div class="auth-hint">
-        Compte démo : <span class="auth-link" onclick="authDemoFill()">demo@hydrocalc.fr</span> / <strong>hydro2024</strong>
+  <div class="alog-split">
+
+    <!-- Gauche : paysage + présentation -->
+    <div class="alog-left">
+      <div class="alog-left-inner">
+        <div class="alog-brand">
+          <img src="./images/icon.png" alt="HydroCalc" style="width:38px;height:38px;object-fit:contain">
+          <div>
+            <div class="alog-brand-name">HydroCalc</div>
+            <div class="alog-brand-sub">CALCULER. COMPRENDRE. MAÎTRISER L'HYDRAULIQUE.</div>
+          </div>
+        </div>
+        <div class="alog-headline">Des outils puissants<br>pour une gestion<br><span class="alog-accent">durable de l'eau</span></div>
+        <ul class="alog-features">
+          <li><div class="alog-feat-ico">🧮</div><div><strong>Calculateurs</strong>Dimensionnement et analyses</div></li>
+          <li><div class="alog-feat-ico">📚</div><div><strong>Cours & Réglementation</strong>BTS GEMEAU · LP · Ingénieurs</div></li>
+          <li><div class="alog-feat-ico">📄</div><div><strong>Rapports</strong>Des études claires et professionnelles</div></li>
+          <li><div class="alog-feat-ico">💬</div><div><strong>Messagerie chiffrée</strong>Collaboration sécurisée E2E</div></li>
+        </ul>
+        <div class="alog-footer-txt">DES SOLUTIONS CONCRÈTES<br>POUR LES MÉTIERS DE L'EAU</div>
       </div>
     </div>
+
+    <!-- Droite : card formulaire -->
+    <div class="alog-right">
+      <div class="alog-mobile-hdr">
+        <img src="./images/icon.png" alt="" style="width:30px;height:30px;object-fit:contain">
+        <div>
+          <div style="font-weight:800;font-size:15px;color:#fff">HydroCalc</div>
+          <div style="font-size:9px;letter-spacing:.1em;color:rgba(255,255,255,.65)">CALCULER · ANALYSER · AGIR</div>
+        </div>
+      </div>
+      <div class="alog-card">
+        <div class="alog-card-brand">
+          <img src="./images/logo-light.png" alt="HydroCalc" style="height:64px;object-fit:contain;max-width:220px">
+        </div>
+        <h2 class="alog-card-title">Bon retour !</h2>
+        <p class="alog-card-sub">Connectez-vous pour accéder à votre espace HydroCalc et retrouver votre progression.</p>
+        <div class="auth-error" id="login-err">Email ou mot de passe incorrect.</div>
+        <label class="alog-label">Adresse e-mail</label>
+        <div class="alog-input-wrap">
+          <svg class="alog-input-ico" viewBox="0 0 20 20" fill="none" stroke="#90a4ae" stroke-width="1.6"><rect x="2" y="5" width="16" height="11" rx="2"/><path d="M2 7l8 5 8-5"/></svg>
+          <input class="alog-input" type="email" id="login-email" placeholder="votre@email.fr" autocomplete="email">
+        </div>
+        <label class="alog-label">Mot de passe</label>
+        <div class="alog-input-wrap">
+          <svg class="alog-input-ico" viewBox="0 0 20 20" fill="none" stroke="#90a4ae" stroke-width="1.6"><rect x="5" y="9" width="10" height="8" rx="1.5"/><path d="M7 9V7a3 3 0 016 0v2"/></svg>
+          <input class="alog-input" type="password" id="login-pwd" placeholder="Votre mot de passe" autocomplete="current-password" style="padding-right:44px">
+          <button type="button" class="auth-pwd-toggle alog-pwd-toggle" onclick="toggleAuthPwd('login-pwd', this)">👁</button>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+          <label style="display:flex;align-items:center;gap:7px;font-size:12.5px;color:#607d8b;cursor:pointer">
+            <input type="checkbox" id="login-remember" style="width:15px;height:15px;accent-color:#1565c0">
+            Se souvenir de moi
+          </label>
+          <span style="font-size:12.5px;color:#1565c0;font-weight:700;cursor:pointer" onclick="authShow('auth-forgot')">Mot de passe oublié ?</span>
+        </div>
+        <button class="auth-btn-submit alog-btn-primary" onclick="authLogin()">Se connecter &nbsp;→</button>
+        <div class="auth-divider"><div class="auth-divider-line"></div><div class="auth-divider-txt">ou</div><div class="auth-divider-line"></div></div>
+        <button class="auth-btn-ghost alog-btn-ghost" onclick="authShow('auth-register')">Créer un compte gratuitement</button>
+        <p class="alog-register-link">Vous n'avez pas encore de compte ?&nbsp;<span onclick="authShow('auth-register')" style="color:#1565c0;font-weight:700;cursor:pointer">Créer un compte</span></p>
+      </div>
+    </div>
+
+  </div>
   </div>
 </div>
 
@@ -256,6 +312,8 @@
 
 <!-- ═══ APP PRINCIPALE ═══ -->
 <div id="shell">
+  <!-- Overlay drawer mobile (à l'intérieur de #shell pour que z-index fonctionne correctement) -->
+  <div id="hc-nav-overlay"></div>
   <!-- SIDEBAR DESKTOP (masquee sur mobile) -->
   <div class="hc-desk-sidebar" id="hc-desk-sidebar"></div>
 
