@@ -8115,6 +8115,168 @@ const COURS_DATA = {
                   solution: '<strong>(1) Contrainte :</strong> τ_moy = 1000 × 9,81 × 0,60 × 0,0025 = <strong>14,7 Pa</strong>. C\'est une estimation moyenne sous l\'hypothèse d\'un écoulement permanent uniforme.<br><strong>(2) Flux en suspension :</strong> C = 150 mg/L = 0,15 kg/m³. Ṁ = 3 × 0,15 = <strong>0,45 kg/s</strong>. Sur 3h : M = 0,45 × 10 800 = <strong>4 860 kg</strong>. La constance du flux est une hypothèse de calcul.<br><strong>(3) Bilan :</strong> ΔV_stock = 1200 + 200 − 1100 − 80 = <strong>220 m³ solides</strong> stockés. Le bilan n\'indique pas où se localise ce stock ni le volume total ayant transité.<br><strong>(4) Volume apparent :</strong> V_apparent = V_solide / (1−p) = 220 / 0,65 ≈ <strong>338 m³</strong>. Cette conversion suppose une porosité représentative uniforme sur l\'ensemble du dépôt.',
                 },
               },
+              {
+                id: 'gem-hmo3',
+                titre: 'Incision, exhaussement et déséquilibres sédimentaires',
+                fiche: {
+                  intro: 'L\'incision abaisse le fond d\'un cours d\'eau sur un tronçon ; l\'exhaussement l\'élève par accumulation. Ces évolutions ne se lisent pas sur une photo : elles nécessitent des données comparables dans le temps, des bilans explicites et une recherche de causes à plusieurs échelles. Une rivière qui s\'approfondit n\'est pas nécessairement plus sûre ; un banc qui apparaît n\'est pas nécessairement anormal. Ce chapitre enseigne à démontrer, quantifier et interpréter ces évolutions avant d\'agir.',
+                  points: [
+                    'Incision : abaissement du fond à l\'échelle d\'un tronçon. Distinguer de : fosse naturelle, affouillement local autour d\'une pile, déplacement du thalweg dans une section, différence entre levés mal raccordés. Pour parler d\'incision : préciser quelle partie s\'abaisse, sur quelle distance, pendant quelle période et avec quelle qualité de mesure. Un point plus bas ne suffit pas à démontrer un abaissement généralisé.',
+                    'Exhaussement : élévation du fond par accumulation de matériaux. ≠ toute apparition d\'un banc (un banc peut se déplacer sans augmentation du stock total). Plus grande surface émergée ≠ exhaussement (peut refléter un niveau d\'eau plus faible). Se démontre par une évolution altimétrique ou volumique, pas par l\'aspect visuel.',
+                    'Équilibre dynamique ≠ immobilité : une rivière en équilibre peut présenter érosions, dépôts, déplacements de chenal et ajustements après crues. Déséquilibre = tendance persistante (ex. déficit sédimentaire entraînant abaissement du lit). Bilan sédimentaire : ΔV_stock = V_entrées + V_apports_latéraux − V_sorties − V_extractions. Périmètre et unités doivent être explicites. Berge dans le périmètre → son érosion = transfert interne.',
+                    'Causes possibles d\'incision : réduction des apports sédimentaires amont, extraction de matériaux, abaissement d\'un contrôle aval, rectification (longueur/pente), concentration des écoulements, changement du régime hydrologique, perturbations successives cumulées. Érosion régressive : propagation de l\'aval vers l\'amont quand un niveau de contrôle est abaissé. Ces causes sont des hypothèses à vérifier.',
+                    'Causes possibles d\'exhaussement : augmentation des apports, diminution des possibilités de transfert, modification de l\'aval, retenue, événement exceptionnel, combinaison de facteurs. Affouillement local (autour d\'une pile) ≠ abaissement général — les deux peuvent se cumuler. Fosse partiellement comblée après l\'événement peut masquer un creusement plus important survenu pendant celui-ci.',
+                    'Indices d\'incision : racines exposées, berges hautes, fondations visibles, radiers de buses perchés, affleurements nouveaux, annexes moins souvent connectées, abaissement confirmé par levés. Chaque indice a d\'autres explications possibles — racines exposées = érosion latérale possible ; buse perchée = installation d\'origine mal positionnée. Un indice oriente, ne démontre pas seul la cause ni la date.',
+                    'Comparer des profils : ΔZ(s) = Z_t2(s) − Z_t1(s). Vérifier références altimétriques, position des profils, méthode et précision. Taux moyen : r_Z = ΔZ/Δt. Exemple : fond de 100,45 → 100,15 m en 6 ans → ΔZ = −0,30 m → r_Z = −0,05 m/an. Pas une évolution régulière — une seule crue peut avoir produit l\'essentiel du changement. Ne pas prolonger mécaniquement pour prévoir.',
+                    'Volumes d\'érosion et de dépôt : ΔV ≈ ΣΔZ_i × a_i. Exemple : 1500 m² × (−0,20 m) = −300 m³ ; 800 m² × (+0,15 m) = +120 m³ → ΔV_net = −180 m³. Ce volume géométrique apparent ≠ grains solides exportés (porosité, compactage, limites). Incertitude de différence : u_ΔZ = √(u1²+u2²). Bilan net faible peut masquer forte redistribution interne.',
+                    'Conséquences hydrauliques : profondeur pour un débit donné, vitesses, pertes d\'énergie, points de débordement, stockage, connexions avec bras secondaires. Incision peut réduire certains débordements locaux mais modifier la propagation et les connexions. Exhaussement peut relever les niveaux localement. Pas de relation universelle entre variation du fond et variation du niveau d\'eau — cote aval, largeur, rugosité et ouvrages restent déterminants.',
+                    'Conséquences écologiques et hydrogéologiques : habitats, diversité des substrats, profondeurs, connexions aux annexes, échanges avec la nappe, végétation riveraine. Incision peut contribuer à la déconnexion de milieux latéraux dans certains contextes. Dépôt peut créer un habitat mais aussi recouvrir un substrat ou colmater des interstices. Effets selon la nature du changement, pas seulement son signe.',
+                    'Conséquences pour les ouvrages : fondations de ponts, protections de berges, conduites enterrées, prises d\'eau, sorties de buses, appuis de passerelles. Affouillement des ponts en site affouillable : analyser aléa et vulnérabilité des structures. Absence de débordement ≠ absence de risque structurel. Analyse doit associer géométrie du lit et connaissance de l\'ouvrage.',
+                    'Options de gestion selon mécanisme et enjeux : suivi sans travaux immédiats, réduction d\'un apport excessif identifié, restauration de transferts sédimentaires, adaptation d\'un ouvrage, restauration de mobilité compatible avec les enjeux, recharge sédimentaire étudiée (granulométrie, volumes, qualité, effets aval), protection ciblée, déplacement ou adaptation d\'un enjeu, gestion ponctuelle d\'une accumulation. <strong>Traiter un symptôme local ≠ corriger le fonctionnement général.</strong>',
+                  ],
+                  formules: [
+                    '\\Delta Z = Z_{t_2} - Z_{t_1} \\qquad r_Z = \\dfrac{\\Delta Z}{\\Delta t} \\quad (\\text{m/an — moyenne, pas prévision})',
+                    '\\Delta V \\approx \\sum_i \\Delta Z_i\\,a_i \\qquad (\\text{volumes d\'érosion et dépôt séparés})',
+                    'u_{\\Delta Z} = \\sqrt{u_1^2 + u_2^2} \\qquad (\\text{incertitudes indépendantes})',
+                    '\\Delta V_{\\mathrm{stock}} = V_{\\mathrm{entr}} + V_{\\mathrm{lat}} - V_{\\mathrm{sort}} - V_{\\mathrm{extr}} \\qquad (\\text{périmètre et unités explicites})',
+                  ],
+                  retenir: 'Incision = abaissement tronçon. Exhaussement = accumulation. ≠ fosse locale, ≠ banc déplacé. r_Z = ΔZ/Δt. ΔV ≈ ΣΔZ×a. Bilan net faible peut masquer forte redistribution. u_ΔZ = √(u1²+u2²). Plusieurs causes possibles simultanées. Traiter symptôme ≠ corriger cause. Suivi conçu pour tester des hypothèses.',
+                  sections: [
+                    {
+                      titre: '1. Incision, exhaussement et équilibre dynamique',
+                      sous_sections: [
+                        {
+                          titre: '1.1. Définitions et distinctions',
+                          texte: '<p><strong>Incision</strong> : abaissement du fond à l\'échelle d\'un tronçon. À distinguer de :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Fosse naturelle ou buse naturelle (contrôle lithologique)</li><li style="margin-bottom:4px">Affouillement local autour d\'une pile de pont</li><li style="margin-bottom:4px">Déplacement du thalweg dans la section</li><li style="margin-bottom:4px">Artefact de comparaison (levés mal raccordés)</li></ul><p><strong>Exhaussement</strong> : élévation du fond par accumulation. ≠ toute apparition d\'un banc — un banc peut se déplacer sans augmentation du stock. Plus grande surface émergée peut refléter un niveau d\'eau plus faible. Se démontre par une évolution altimétrique ou volumique.</p><p><strong>Équilibre dynamique ≠ immobilité.</strong> Déséquilibre = tendance persistante (déficit sédimentaire, incision progressive…). Une rivière peut être en ajustement normal sans que toute évolution soit anormale, sans que l\'on doive lui redonner une forme historique précise.</p>'
+                        },
+                        {
+                          titre: '1.2. Bilan sédimentaire et périmètre explicite',
+                          texte: '<p>Pour un tronçon et une période définis :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:6px 12px;border-radius:6px;text-align:center;font-weight:bold">ΔV_stock = V_entrées + V_apports_latéraux − V_sorties − V_extractions</p><p>Si ΔV_stock < 0 → le stock diminue. Si > 0 → le stock augmente. Une diminution du stock peut se traduire par un abaissement, un élargissement, une disparition de bancs, ou une combinaison. Le bilan explique une variation de stock ; il ne détermine pas seul la nouvelle géométrie.</p><p>Le périmètre compte : une berge qui s\'effondre dans le chenal est un transfert interne si la berge est dans le périmètre, un apport latéral si elle est hors périmètre. Préciser aussi si l\'on travaille en volume solide ou volume apparent (avec vides).</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '2. Causes et indices d\'évolution',
+                      sous_sections: [
+                        {
+                          titre: '2.1. Causes possibles et érosion régressive',
+                          texte: '<p>Causes possibles d\'incision :</p><table style="width:100%;border-collapse:collapse;font-size:10px;margin:6px 0"><thead><tr style="background:var(--c-primary,#2563eb);color:white"><th style="padding:4px 8px;text-align:left">Mécanisme</th><th style="padding:4px 8px;text-align:left">Conséquence possible</th></tr></thead><tbody><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Réduction des apports amont</td><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Moins de matériaux disponibles</td></tr><tr><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Extraction de matériaux</td><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Diminution directe du stock</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Abaissement d\'un contrôle aval</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Réorganisation du profil longitudinal</td></tr><tr><td style="padding:4px 8px">Rectification / régime modifié</td><td style="padding:4px 8px">Longueur, pente, sollicitations changées</td></tr></tbody></table><p><strong>Érosion régressive :</strong> propagation de l\'aval vers l\'amont quand un niveau de contrôle est abaissé. Une marche migre vers l\'amont. Ne signifie pas qu\'une suppression d\'ouvrage provoque systématiquement une incision dommageable — l\'ajustement dépend des matériaux et des contrôles restants.</p><p>Ces causes sont des <em>hypothèses à vérifier</em>, pas des conclusions automatiques.</p>'
+                        },
+                        {
+                          titre: '2.2. Indices de terrain et leurs limites',
+                          texte: '<p><strong>Indices d\'incision</strong> possibles : racines exposées, berges hautes, fondations visibles, radiers de buses perchés, affleurements nouveaux, annexes moins souvent connectées, abaissement confirmé par levés.</p><p><strong>Chaque indice a d\'autres explications :</strong></p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Racines exposées → peut être érosion latérale</li><li style="margin-bottom:4px">Berge haute → peut être ancienne</li><li style="margin-bottom:4px">Buse perchée → peut avoir été installée trop haut dès l\'origine</li></ul><p>Un indice oriente la recherche ; il ne démontre pas seul la cause ni la date. Une chronologie (travaux, crues, levés) est nécessaire pour relier les observations aux événements. Une évolution observée après des travaux n\'est pas automatiquement causée par eux.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '3. Comparer des profils et calculer des volumes',
+                      sous_sections: [
+                        {
+                          titre: '3.1. Profils, taux moyen et incertitude',
+                          texte: '<p>Différence de deux campagnes : <strong>ΔZ(s) = Z_t2(s) − Z_t1(s)</strong>. Valeur négative = abaissement au point comparé.</p><p>Vérifier : références altimétriques, position des profils, orientation, méthode, précision et identification du fond (thalweg vs banc ?). Un thalweg qui se déplace latéralement peut faire croire à une incision en un point alors qu\'un dépôt apparaît ailleurs.</p><p><strong>Taux moyen :</strong> r_Z = ΔZ/Δt. Exemple : fond de 100,45 → 100,15 m en 6 ans → ΔZ = −0,30 m → r_Z = −0,05 m/an. Résume la période — une seule crue peut avoir produit l\'essentiel du changement. Ne pas prolonger pour prévoir.</p><p><strong>Incertitude :</strong> u_ΔZ = √(u1²+u2²). Exemple : u1=u2=0,04 m → u_ΔZ ≈ 0,057 m. Une variation de 0,02 m est difficile à distinguer de l\'incertitude. Erreurs corrélées sur un grand nombre de cellules ne disparaissent pas simplement par addition.</p>'
+                        },
+                        {
+                          titre: '3.2. Volumes d\'érosion et dépôt',
+                          texte: '<p>Volume pour une cellule : ΔV_i ≈ ΔZ_i × a_i. Total : <strong>ΔV ≈ Σ ΔZ_i × a_i</strong>.</p><p>Exemple fictif : 1500 m² s\'abaissent de 0,20 m → V_érosion = 300 m³. 800 m² se rehaussent de 0,15 m → V_dépôt = 120 m³. ΔV_net = −180 m³.</p><p>Ce résultat est géométrique et apparent. Il ne correspond pas directement à 180 m³ de grains solides exportés — porosité, compactage, apports et sorties hors emprise doivent être considérés.</p><p><strong>Conserver les volumes d\'érosion et de dépôt séparément.</strong> Un bilan net faible peut masquer 500 m³ érodés et 480 m³ déposés — les changements sont importants même si leur différence est faible.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '4. Conséquences et options de gestion',
+                      sous_sections: [
+                        {
+                          titre: '4.1. Conséquences hydrauliques, écologiques et sur les ouvrages',
+                          texte: '<p><strong>Hydrauliques :</strong> profondeur pour un débit donné, vitesses, pertes d\'énergie, points de débordement, stockage, connexions avec bras secondaires. Incision peut réduire certains débordements locaux mais modifier la propagation. Exhaussement peut relever les niveaux localement. Pas de relation universelle entre variation du fond et variation du niveau d\'eau.</p><p><strong>Écologiques :</strong> habitats, substrats, connexions aux annexes, échanges avec la nappe. Incision peut contribuer à déconnexion de milieux latéraux. Dépôt peut créer ou colmater un habitat selon sa nature.</p><p><strong>Ouvrages :</strong> fondations de ponts, conduites enterrées, prises d\'eau, sorties de buses. Affouillement des ponts : analyser aléa (dynamique du lit) et vulnérabilité (fondations, profondeur d\'encastrement). <strong>Absence de débordement ≠ absence de risque structurel.</strong></p>'
+                        },
+                        {
+                          titre: '4.2. Démarche de diagnostic et options de gestion',
+                          texte: '<p>Pour un abaissement confirmé, plusieurs hypothèses causales doivent être examinées simultanément :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Apports réduits → chercher ruptures d\'alimentation amont</li><li style="margin-bottom:4px">Extraction → archives, localisation, volumes</li><li style="margin-bottom:4px">Contrôle aval abaissé → profils longitudinaux</li><li style="margin-bottom:4px">Déplacement du chenal → cartographie complète</li></ul><p><strong>Options de gestion :</strong> suivi sans travaux immédiats, restauration de transferts, adaptation d\'un ouvrage, recharge sédimentaire (granulométrie, volumes, qualité, effets aval), protection ciblée, déplacement d\'un enjeu.</p><p><strong>Traiter un symptôme local ≠ corriger le fonctionnement général.</strong> Un dépôt qui revient après chaque retrait signale que la cause reste active. La recharge ou l\'enlèvement ne suppriment pas le mécanisme si la source ou le déficit de transfert persistent.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '5. Suivi et erreurs fréquentes',
+                      sous_sections: [
+                        {
+                          titre: '5.1. Construire un suivi adapté',
+                          texte: '<p>Le suivi doit répondre aux incertitudes du diagnostic. Indicateurs possibles :</p><table style="width:100%;border-collapse:collapse;font-size:10px;margin:6px 0"><thead><tr style="background:var(--c-primary,#2563eb);color:white"><th style="padding:4px 8px;text-align:left">Indicateur</th><th style="padding:4px 8px;text-align:left">Information recherchée</th></tr></thead><tbody><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Altitude fond sur profils fixes</td><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Évolution verticale</td></tr><tr><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Volumes érosion/dépôt séparés</td><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Redistribution et variation de stock</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Cote relative d\'un radier</td><td style="padding:4px 8px;border-bottom:1px solid var(--c-border,#e5e7eb)">Évolution de connexion d\'une annexe</td></tr><tr><td style="padding:4px 8px">État des fondations d\'un pont</td><td style="padding:4px 8px">Exposition à l\'affouillement</td></tr></tbody></table><p>Un suivi annuel seul peut manquer les mécanismes d\'une crue. Des observations événementielles peuvent être nécessaires lorsqu\'elles sont réalisables dans des conditions adaptées.</p>'
+                        },
+                        {
+                          titre: '5.2. Distinctions et erreurs à éviter',
+                          texte: '<table style="width:100%;border-collapse:collapse;font-size:10px"><thead><tr style="background:var(--c-primary,#2563eb);color:white"><th style="padding:4px 6px;text-align:left">Erreur</th><th style="padding:4px 6px;text-align:left">Correction</th></tr></thead><tbody><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Confondre fosse locale et incision généralisée</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Examiner les profils amont et aval</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Conclure à une incision depuis une buse perchée</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Vérifier la géométrie initiale d\'installation</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Confondre exhaussement et banc déplacé</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Comparer volumes, pas seulement formes</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Prolonger un taux moyen comme prévision</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Étudier les mécanismes et événements</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Supposer que bilan net faible = transport faible</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Conserver volumes d\'érosion et dépôt séparément</td></tr><tr><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Associer variation observée à une cause unique</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Tester plusieurs hypothèses simultanément</td></tr><tr style="background:rgba(0,0,0,0.03)"><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Ignorer le risque d\'affouillement en l\'absence de débordement</td><td style="padding:4px 6px;border-bottom:1px solid var(--c-border,#e5e7eb)">Analyser aléa et vulnérabilité des fondations</td></tr><tr><td style="padding:4px 6px">Traiter le symptôme sans chercher la cause</td><td style="padding:4px 6px">Diagnostiquer apports, transfert et contrôles</td></tr></tbody></table>'
+                        }
+                      ]
+                    }
+                  ],
+                },
+                flashcards: [
+                  { q: 'Une fosse apparaît autour d\'une pile, mais les profils amont et aval restent comparables. Peut-on parler d\'incision généralisée ?', r: 'Non. Il s\'agit d\'abord d\'un affouillement local. Une incision généralisée nécessite un abaissement sur l\'ensemble d\'un tronçon, documenté par des profils comparables.', expl: 'Affouillement local et incision peuvent se cumuler, mais ils doivent être distingués. L\'affouillement au droit d\'un pont peut progresser sans que le lit amont ou aval soit affecté.' },
+                  { q: 'Un fond s\'abaisse de 0,24 m en 8 ans. Calculer r_Z.', r: 'r_Z = −0,24/8 = −0,03 m/an.', expl: 'C\'est une valeur moyenne sur 8 ans. L\'essentiel du changement peut s\'être produit lors d\'une seule crue. Ce taux ne peut pas être prolongé mécaniquement pour estimer la géométrie future.' },
+                  { q: 'Bilan : entrées 700 m³, apports latéraux 100 m³, sorties 950 m³. Calculer ΔV_stock et interpréter.', r: 'ΔV_stock = 700+100−950 = −150 m³ solides. Le stock diminue. La forme de cet ajustement (abaissement, élargissement, disparition de bancs) reste à déterminer.', expl: 'Le bilan explique une variation de volume, pas la nouvelle géométrie. Un abaissement de 1 cm sur 15 000 m² de section ou un abaissement de 30 cm sur 500 m² représentent tous les deux 150 m³.' },
+                  { q: 'Une zone de 2000 m² s\'abaisse en moyenne de 0,12 m. Quel est le volume géométrique apparent ?', r: 'V = 2000 × 0,12 = 240 m³.', expl: 'Ce volume est géométrique et apparent. Pour obtenir un volume de grains solides, il faut multiplier par (1−p). Il correspond à l\'érosion de cette seule emprise, sans préjuger des apports ou sorties globales du tronçon.' },
+                  { q: '500 m³ d\'érosion, 480 m³ de dépôt. Bilan net ? Les changements sont-ils négligeables ?', r: 'ΔV_net = 480−500 = −20 m³. Les changements ne sont pas négligeables : 500 m³ ont été érodés et 480 m³ déposés, même si la variation nette est faible.', expl: 'Un bilan net quasi nul peut masquer une importante redistribution interne. Dans ce cas, le tronçon est en cours de remaniement actif malgré un volume net stable. Conserver érosion et dépôt séparément est essentiel.' },
+                  { q: 'Deux levés ont chacun une incertitude-type indépendante de 0,04 m. Calculer u_ΔZ.', r: 'u_ΔZ = √(0,04²+0,04²) = √0,0032 ≈ 0,057 m.', expl: 'Une variation mesurée de 0,02 m est impossible à distinguer de l\'incertitude avec ces levés. Une variation de 0,30 m est plus nette, mais des biais systématiques (décalage référence, végétation) peuvent s\'ajouter à cette incertitude aléatoire.' },
+                  { q: 'Une sortie de buse est 0,25 m au-dessus du fond actuel. Cela prouve-t-il une incision récente ?', r: 'Non. Il faut connaître la géométrie initiale de l\'installation. La buse peut avoir été posée dans cette configuration dès l\'origine, ou le fond peut avoir été abaissé pour d\'autres raisons.', expl: 'Un radier perché est un indice qui oriente la recherche, pas une preuve. Sans levé antérieur de référence ou données d\'installation, on ne peut pas distinguer une incision récente d\'un défaut initial de calage.' },
+                  { q: 'Un dépôt revient systématiquement après chaque retrait. Quelle question doit être approfondie ?', r: 'Il faut rechercher les apports, les conditions de transfert et les contrôles hydrauliques qui produisent l\'accumulation. Répéter le retrait sans agir sur ces causes ne résout pas le problème.', expl: 'Un dépôt récurrent signale un déséquilibre persistant entre apports et capacité de transfert à cet endroit. La cause peut être : apport amont excessif, réduction de capacité (rétrécissement, ouvrage), changement de pente ou de rugosité.' },
+                ],
+                schema: `<svg viewBox="0 0 520 295" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="295" fill="var(--c-bg,#f8fafc)" rx="10"/>
+  <text x="260" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="var(--c-text,#1e293b)">Profil longitudinal — incision, exhaussement et affouillement</text>
+  <!-- Profil de référence -->
+  <text x="15" y="38" font-size="9" fill="#64748b" font-style="italic">profil t₁ (référence)</text>
+  <text x="15" y="50" font-size="9" fill="#dc2626" font-style="italic">profil t₂ (comparaison)</text>
+  <line x1="15" y1="44" x2="55" y2="44" stroke="#64748b" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="15" y1="56" x2="55" y2="56" stroke="#dc2626" stroke-width="2"/>
+  <!-- Axes -->
+  <line x1="40" y1="75" x2="40" y2="260" stroke="#94a3b8" stroke-width="1"/>
+  <line x1="40" y1="255" x2="500" y2="255" stroke="#94a3b8" stroke-width="1"/>
+  <text x="270" y="272" text-anchor="middle" font-size="9" fill="#64748b">Distance longitudinale →</text>
+  <text x="20" y="170" text-anchor="middle" font-size="9" fill="#64748b" transform="rotate(-90,20,170)">Altitude</text>
+  <!-- Profil t1 (fond référence) -->
+  <path d="M 50,200 Q 110,195 150,192 Q 190,190 210,188 Q 240,186 270,185 Q 310,184 350,182 Q 390,180 430,182 Q 460,184 490,186"
+        stroke="#94a3b8" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+  <!-- Zone incision (aval gauche) -->
+  <path d="M 50,215 Q 110,210 150,207 Q 180,205 210,203"
+        stroke="#dc2626" stroke-width="2" fill="none"/>
+  <!-- Flèche incision -->
+  <line x1="125" y1="195" x2="125" y2="208" stroke="#dc2626" stroke-width="1.5" marker-end="url(#ia)"/>
+  <defs><marker id="ia" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#dc2626"/></marker></defs>
+  <rect x="65" y="215" width="110" height="15" rx="3" fill="#fee2e2" stroke="#dc2626" stroke-width="1"/>
+  <text x="120" y="226" text-anchor="middle" font-size="8" fill="#991b1b">INCISION ΔZ &lt; 0</text>
+  <!-- Zone stable (milieu) -->
+  <path d="M 210,188 Q 240,186 270,185 Q 310,184 350,182"
+        stroke="#dc2626" stroke-width="2" fill="none"/>
+  <!-- Zone exhaussement -->
+  <path d="M 350,175 Q 390,170 430,168 Q 460,166 490,168"
+        stroke="#dc2626" stroke-width="2" fill="none"/>
+  <!-- Flèche exhaussement -->
+  <line x1="420" y1="179" x2="420" y2="170" stroke="#16a34a" stroke-width="1.5" marker-end="url(#ea)"/>
+  <defs><marker id="ea" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#16a34a"/></marker></defs>
+  <rect x="360" y="152" width="115" height="15" rx="3" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+  <text x="417" y="163" text-anchor="middle" font-size="8" fill="#14532d">EXHAUSSEMENT ΔZ &gt; 0</text>
+  <!-- Affouillement local sous pont -->
+  <rect x="225" y="178" width="6" height="45" fill="#475569"/>
+  <rect x="255" y="178" width="6" height="45" fill="#475569"/>
+  <rect x="223" y="176" width="42" height="6" fill="#475569"/>
+  <text x="257" y="172" text-anchor="middle" font-size="8" fill="#475569">pont</text>
+  <!-- Fosse affouillement -->
+  <path d="M 210,203 Q 235,220 248,218 Q 252,218 265,222 Q 278,220 290,205"
+        stroke="#f97316" stroke-width="2" fill="#fff7ed"/>
+  <text x="250" y="231" text-anchor="middle" font-size="8" fill="#c2410c">affouillement</text>
+  <text x="250" y="240" text-anchor="middle" font-size="8" fill="#c2410c">local</text>
+  <!-- ΔZ flèche exemple -->
+  <line x1="480" y1="184" x2="480" y2="169" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="483" y="178" font-size="8" fill="#7c3aed">ΔZ</text>
+  <!-- Légende bas -->
+  <text x="40" y="285" font-size="9" fill="#dc2626">● Incision : ΔZ &lt; 0 — r_Z = ΔZ/Δt</text>
+  <text x="210" y="285" font-size="9" fill="#16a34a">● Exhaussement : ΔZ &gt; 0</text>
+  <text x="360" y="285" font-size="9" fill="#c2410c">● Affouillement local</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Analyse fictive — Tronçon de la Rivière Claire. (1) Trois profils espacés de 200 m montrent des abaissements de −0,18 m, −0,24 m et −0,15 m en 10 ans. Calculer le taux moyen pour chaque profil. (2) Sur une emprise de 3500 m², 2000 m² s\'abaissent de 0,18 m et 1500 m² se rehaussent de 0,10 m. Calculer les volumes d\'érosion et de dépôt, puis la variation nette. (3) Deux levés ont des incertitudes-types indépendantes de 0,03 m et 0,05 m. Calculer u_ΔZ. La variation de 0,08 m du profil le moins érodé est-elle significative ?',
+                  solution: '<strong>(1) Taux moyens :</strong> r_Z1 = −0,18/10 = −0,018 m/an. r_Z2 = −0,24/10 = <strong>−0,024 m/an</strong>. r_Z3 = −0,15/10 = −0,015 m/an. Ces taux résument les 10 ans — ils ne supposent pas une évolution régulière. L\'abaissement peut s\'être produit lors d\'une ou deux crues importantes.<br><strong>(2) Volumes :</strong> V_érosion = 2000 × 0,18 = <strong>360 m³</strong>. V_dépôt = 1500 × 0,10 = <strong>150 m³</strong>. ΔV_net = 150 − 360 = <strong>−210 m³</strong>. Le bilan net est négatif, mais 360 m³ ont été érodés et 150 m³ redéposés — la redistribution est importante même si les deux zones partiellement se compensent. Il faut conserver les deux volumes séparément dans le suivi.<br><strong>(3) Incertitude :</strong> u_ΔZ = √(0,03²+0,05²) = √(0,0009+0,0025) = √0,0034 ≈ <strong>0,058 m</strong>. Une variation de 0,08 m est à peine supérieure à l\'incertitude aléatoire combinée (~1,4×u_ΔZ). Elle n\'est pas clairement significative, surtout si des biais systématiques (décalage de référence, végétation) peuvent s\'ajouter. Des points de contrôle stables sont nécessaires pour renforcer la conclusion.',
+                },
+              },
             ],
           }, // fin gem-m17
 
