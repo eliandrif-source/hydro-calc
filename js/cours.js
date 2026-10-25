@@ -6189,6 +6189,179 @@ const COURS_DATA = {
             ],
           }, // fin gem-m7
 
+          {
+            id: 'gem-m8',
+            name: 'Rugosité et écoulement uniforme',
+            ico: '📐',
+            chapitres: [
+              {
+                id: 'gem-hsl2',
+                titre: 'Rugosité et formules d\'écoulement uniforme',
+                fiche: {
+                  intro: 'Q = A×v̄ relie débit, section et vitesse, mais ne permet pas de déterminer la vitesse produite par une pente et une géométrie données. Pour cela, il faut prendre en compte la résistance à l\'écoulement : fond, berges, végétation et irrégularités dissipent de l\'énergie. La formule de Manning-Strickler permet d\'estimer le débit d\'un écoulement permanent uniforme à partir de la géométrie, de la pente et d\'un coefficient de rugosité.',
+                  points: [
+                    'Écoulement permanent = pas de variation dans le temps (∂Q/∂t = 0). Écoulement uniforme = pas de variation dans l\'espace (∂h/∂x = 0). Ces deux conditions sont indépendantes : un écoulement peut être permanent sans être uniforme (amont ≠ aval) ou uniforme sans être permanent.',
+                    'Trois pentes à distinguer : S₀ (pente du fond), Sw (pente de la surface libre), Sf (pente de charge = perte de charge par unité de longueur). En écoulement permanent uniforme à faible pente seulement : S₀ = Sw = Sf. En écoulement non uniforme ces trois pentes ne sont pas égales.',
+                    'Formule de Strickler : v̄ = Ks × Rh^(2/3) × √Sf, donc Q = Ks × A × Rh^(2/3) × √Sf. Formule de Manning : identique avec n = 1/Ks. Grand Ks = faible résistance. Grand n = forte résistance — dans le sens CONTRAIRE à Ks.',
+                    'Rayon hydraulique : Rh = A/P (section mouillée / périmètre mouillé). ≠ profondeur, ≠ moitié de la largeur. Pour un rectangle : Rh = bh/(b+2h). Exemple : b=4 m, h=0,75 m → A=3 m², P=5,5 m, Rh=0,545 m.',
+                    'Conversion pente : S₀ = Δz/L (sans unité, valeur décimale dans la formule). 0,1 % = 0,001 (pas 0,1). Pente sous √ : une pente multipliée par 4 → Q multiplié par 2 seulement. Une erreur de pente peut avoir un impact aussi grand que le choix du coefficient.',
+                    'Sensibilité à la rugosité : Q ∝ Ks (à A, Rh, S₀ fixés). +20 % de Ks → +20 % de Q. Pour n : Q ∝ 1/n. +20 % de n → ×(1/1,2) = −16,7 % de Q. Ces relations supposent la profondeur fixée.',
+                    'Sensibilité à la pente : Q ∝ √S₀. Doubler S₀ → Q multiplié par √2 ≈ 1,41, pas par 2. Sur cours d\'eau peu pentu, une petite erreur altimétrique peut représenter une grande part de la dénivellation mesurée.',
+                    'Profondeur normale hn : profondeur telle que Q = Ks×A(hn)×Rh(hn)^(2/3)×√S₀. Se résout par essais successifs ou solveur numérique. hn ≠ profondeur réellement observée si un contrôle amont/aval impose un remous ou une transition.',
+                    'La rugosité représente un ensemble de résistances : matériaux du fond, formes (bancs, ondulations), végétation (herbiers, tiges), obstacles (bois, racines), configuration (sinuosité, variations de section). Un coefficient constant est une hypothèse de modélisation, pas une propriété immuable — il peut varier avec le niveau d\'eau.',
+                    'Choix du coefficient : observer le site (fond, berges, végétation, obstacles, régularité), définir la situation étudiée (étiage ≠ crue débordante), consulter des références comparables, retenir une plage plausible (centrale + hypothèses haute/basse), confronter aux observations (niveaux et débits mesurés).',
+                    'Sections composées (lit mineur + lit majeur) : une seule rugosité ne représente pas des zones très différentes. Approche par sous-sections : Ki = Ks,i×Ai×Rh,i^(2/3), puis Q ≈ (ΣKi)×√Sf. La frontière entre sous-sections n\'est pas une paroi solide — elle ne crée pas de frottement.',
+                    'Limite principale : le calcul uniforme ne convient pas à proximité d\'un seuil, d\'une chute, d\'un pont, d\'une confluence, d\'un changement marqué de section ou d\'un niveau aval imposant un remous. Le calage ne doit pas compenser des erreurs de géométrie, de débit ou de cote aval — vérifier d\'abord les données.',
+                  ],
+                  formules: [
+                    'Q = K_s \\cdot A \\cdot R_h^{2/3} \\cdot \\sqrt{S_f} \\qquad K_s = \\dfrac{1}{n}',
+                    'R_h = \\dfrac{A}{P} \\qquad S_0 = \\dfrac{\\Delta z}{L}',
+                    'Q \\propto K_s \\quad Q \\propto \\sqrt{S_0} \\quad \\text{(à géométrie fixée)}',
+                    '\\text{Canal très large : } Q \\approx K_s b\\,h^{5/3}\\sqrt{S_0} \\quad h_n \\approx \\left(\\dfrac{Q}{K_s b\\sqrt{S_0}}\\right)^{3/5}',
+                  ],
+                  retenir: 'Manning-Strickler : Q = Ks×A×Rh^(2/3)×√Sf. Grand Ks = faible résistance (≠ grand n). Rh = A/P (≠ profondeur). Pente en décimal dans la formule. Q ∝ Ks et Q ∝ √S₀. hn par essais. Uniforme = hypothèse, pas réalité au pont ou au seuil.',
+                  sections: [
+                    {
+                      titre: '1. Écoulement permanent, uniforme : deux conditions distinctes',
+                      sous_sections: [
+                        {
+                          titre: '1.1. Définitions et distinction',
+                          texte: '<p><strong>Permanent</strong> : en un point donné, les caractéristiques ne changent pas dans le temps (∂Q/∂t = 0). Un canal traversé par un débit constant est approximativement permanent.</p><p><strong>Uniforme</strong> : la profondeur et la vitesse moyenne ne varient pas le long du tronçon (∂h/∂x = 0). Cela suppose un canal prismatique (même forme sur toute la longueur), une pente et une rugosité constantes, et l\'absence de contrôle à proximité.</p><p><strong>Les deux conditions sont indépendantes.</strong> Un débit stable dans un canal avec rétrécissement est permanent mais non uniforme (la vitesse change d\'un endroit à l\'autre). Un canal en régime varié avec le même débit instantané partout serait uniforme mais non permanent.</p><p>L\'approximation d\'un écoulement permanent uniforme est moins représentative à proximité d\'un seuil, d\'un pont, d\'une confluence ou d\'un changement marqué de section.</p>'
+                        },
+                        {
+                          titre: '1.2. Les trois pentes',
+                          texte: '<p>Trois pentes doivent être distinguées :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>S₀</strong> : pente du fond (diminution d\'altitude du fond par unité de longueur)</li><li style="margin-bottom:4px"><strong>Sw</strong> : pente de la surface libre (diminution d\'altitude de l\'eau)</li><li style="margin-bottom:4px"><strong>Sf</strong> : pente de charge ou de frottement (perte de charge répartie par unité de longueur)</li></ul><p>En écoulement permanent uniforme à faible pente seulement : <strong>S₀ = Sw = Sf</strong>. En dehors de ce cas (remous, transition), ces trois pentes ne sont pas égales — remplacer automatiquement Sf par S₀ peut être incorrect.</p><p>Calcul de la pente : S₀ = Δz/L (valeur décimale). 0,6 m de dénivelé sur 300 m → S₀ = 0,002 = 0,2 %. La pente entre dans la formule sous une racine : une pente multiplée par 4 double le débit, pas plus.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '2. La formule de Manning-Strickler',
+                      sous_sections: [
+                        {
+                          titre: '2.1. Formule et coefficients',
+                          texte: '<p>La formule de Strickler (unités SI) :</p><p style="background:var(--c-primary-l,#e8f4f8);padding:8px 12px;border-radius:6px;font-weight:600;text-align:center">v̄ = Ks × Rh<sup>2/3</sup> × √Sf &nbsp;→&nbsp; Q = Ks × A × Rh<sup>2/3</sup> × √Sf</p><p>Formule de Manning : identique avec n = 1/Ks. Unités : [n] = s·m<sup>−1/3</sup>, [Ks] = m<sup>1/3</sup>/s.</p><p><strong>Sens des coefficients :</strong></p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">Grand Ks → faible résistance → Q plus élevé</li><li style="margin-bottom:4px">Grand n → forte résistance → Q plus faible</li><li style="margin-bottom:4px">Augmenter Ks et augmenter n produisent des effets <em>opposés</em></li></ul><p>Exemples de conversion : n=0,025 ↔ Ks=40 ; n=0,033 ↔ Ks=30 ; n=0,040 ↔ Ks=25 ; n=0,050 ↔ Ks=20.</p>'
+                        },
+                        {
+                          titre: '2.2. Exemple complet pas à pas',
+                          texte: '<p>Canal rectangulaire fictif : b=4 m, h=0,75 m, Ks=30, S₀=0,001.</p><ol style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">A = 4×0,75 = <strong>3 m²</strong></li><li style="margin-bottom:4px">P = 4+2×0,75 = <strong>5,50 m</strong></li><li style="margin-bottom:4px">Rh = 3/5,50 = <strong>0,545 m</strong></li><li style="margin-bottom:4px">v̄ = 30 × 0,545<sup>2/3</sup> × √0,001 = 30 × 0,666 × 0,0316 ≈ <strong>0,633 m/s</strong></li><li style="margin-bottom:4px">Q = 3 × 0,633 ≈ <strong>1,90 m³/s</strong></li></ol><p>Ce résultat correspond à une profondeur de 0,75 m sous hypothèse uniforme. Ce n\'est pas automatiquement la capacité maximale du canal.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '3. La rugosité : nature et choix',
+                      sous_sections: [
+                        {
+                          titre: '3.1. Ce que représente le coefficient',
+                          texte: '<p>Le coefficient de rugosité représente un ensemble de résistances, pas seulement la texture du fond :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Matériaux</strong> : sable, graviers, galets, blocs</li><li style="margin-bottom:4px"><strong>Formes</strong> : ondulations, bancs, irrégularités longitudinales</li><li style="margin-bottom:4px"><strong>Végétation</strong> : herbiers souples, tiges rigides, branches immergées</li><li style="margin-bottom:4px"><strong>Obstacles</strong> : bois mort, racines, éléments construits</li><li style="margin-bottom:4px"><strong>Configuration</strong> : sinuosité, variations de section</li></ul><p>La catégorie « cours d\'eau naturel avec végétation » peut désigner des situations très différentes (quelques plantes couchées par le courant, ou plaine inondable boisée). Un coefficient constant est une hypothèse de modélisation. La rugosité effective peut varier avec le niveau d\'eau : à faible profondeur, les graviers occupent une part plus grande de la hauteur disponible.</p>'
+                        },
+                        {
+                          titre: '3.2. Choisir et documenter le coefficient',
+                          texte: '<p>Démarche défendable :</p><ol style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px"><strong>Observer</strong> : décrire fond, berges, végétation, obstacles, régularité et conditions d\'immersion</li><li style="margin-bottom:4px"><strong>Définir la situation</strong> : étiage, plein bord, débordement — les résistances diffèrent</li><li style="margin-bottom:4px"><strong>Consulter des références comparables</strong> : photos et descriptions de sites documentés valent mieux qu\'une catégorie générale</li><li style="margin-bottom:4px"><strong>Retenir une plage</strong> : valeur centrale + hypothèses haute (plus de résistance) et basse</li><li style="margin-bottom:4px"><strong>Confronter aux observations</strong> : niveaux et débits mesurés permettent d\'évaluer la cohérence</li></ol><p>Le calage ne doit pas compenser des erreurs de géométrie, de débit estimé ou de cote aval. Un résultat correct pour un seul niveau ne garantit pas la validité pour d\'autres crues.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '4. Sensibilité et profondeur normale',
+                      sous_sections: [
+                        {
+                          titre: '4.1. Analyses de sensibilité',
+                          texte: '<p><strong>Sensibilité à la rugosité</strong> (A, Rh, S₀ fixés) : Q ∝ Ks. +20 % de Ks → +20 % de Q. Pour n : Q ∝ 1/n → +20 % de n → −16,7 % de Q.</p><p><em>Exemple :</em> même section, S₀=0,001 :</p><ul style="margin:6px 0 6px 16px;padding:0"><li>Ks=20 → Q≈1,27 m³/s</li><li>Ks=30 → Q≈1,90 m³/s</li><li>Ks=40 → Q≈2,53 m³/s</li></ul><p><strong>Sensibilité à la pente</strong> : Q ∝ √S₀. Doubler S₀ → Q×√2≈1,41 (pas ×2). Quadrupler S₀ → Q×2.</p><p><em>Exemple :</em> S₀=0,0005 → Q≈1,34 ; S₀=0,001 → Q≈1,90 ; S₀=0,002 → Q≈2,69 m³/s.</p><p><strong>Conséquence :</strong> sur cours d\'eau peu pentu, une erreur altimétrique peut avoir autant d\'impact que le choix du coefficient de rugosité.</p>'
+                        },
+                        {
+                          titre: '4.2. Profondeur normale et canal très large',
+                          texte: '<p>La <strong>profondeur normale hn</strong> est la profondeur correspondant à l\'écoulement uniforme pour un Q, une géométrie, une pente et un Ks donnés. Elle se résout par essais successifs.</p><p><em>Exemple :</em> b=4 m, Ks=30, S₀=0,001, Q=2,40 m³/s :</p><ul style="margin:6px 0 6px 16px;padding:0"><li>h=0,85 m → Q≈2,29 m³/s</li><li>h=0,88 m → Q≈2,40 m³/s ✓</li><li>h=0,90 m → Q≈2,49 m³/s</li></ul><p>→ <strong>hn ≈ 0,88 m</strong>, v̄ ≈ 2,40/3,52 ≈ 0,68 m/s.</p><p><strong>Canal très large</strong> (b >> h) : Rh ≈ h → Q ≈ Ks×b×h<sup>5/3</sup>×√S₀ → hn ≈ (Q/(Ks×b×√S₀))<sup>3/5</sup>. À vérifier : dans l\'exemple b=4/h=0,75, remplacer Rh=0,545 par h=0,75 n\'est pas négligeable.</p><p><strong>Rappel :</strong> hn ≠ profondeur réellement observée en présence d\'un contrôle aval (seuil, pont, remous). Une végétation plus dense peut relever le niveau sans réduire le débit si celui-ci est imposé par le bassin versant.</p>'
+                        }
+                      ]
+                    },
+                    {
+                      titre: '5. Sections composées et limites du calcul uniforme',
+                      sous_sections: [
+                        {
+                          titre: '5.1. Lits composés',
+                          texte: '<p>Lors d\'un débordement, le lit mineur et les plaines d\'inondation ont des profondeurs et des rugosités très différentes. Une seule rugosité moyenne ne représente pas ce fonctionnement.</p><p>Approche simplifiée par sous-sections : pour chaque sous-section i, calculer la capacité hydraulique Ki = Ks,i×Ai×Rh,i<sup>2/3</sup>, puis Q ≈ (ΣKi)×√Sf.</p><p>Points d\'attention :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">La frontière entre sous-sections n\'est pas une paroi solide — ne pas lui attribuer de frottement</li><li style="margin-bottom:4px">Les échanges de quantité de mouvement entre lit mineur et lit majeur peuvent compliquer le fonctionnement</li><li style="margin-bottom:4px">Un calcul global avec un seul coefficient peut masquer des écarts importants entre zones</li></ul>'
+                        },
+                        {
+                          titre: '5.2. Ce que le calcul uniforme ne peut pas conclure',
+                          texte: '<p>Le calcul Manning-Strickler sous hypothèse uniforme ne démontre pas :</p><ul style="margin:6px 0 6px 16px;padding:0"><li style="margin-bottom:4px">que le pont ou le seuil aval n\'impose pas de contrainte hydraulique</li><li style="margin-bottom:4px">l\'évolution des niveaux sur l\'ensemble du secteur</li><li style="margin-bottom:4px">les conséquences sur l\'érosion ou les sédiments</li><li style="margin-bottom:4px">les effets écologiques d\'une modification de rugosité</li><li style="margin-bottom:4px">l\'évolution de la propagation d\'une crue</li></ul><p>Exemple typique d\'erreur : « retirer la végétation augmente la capacité et résout les inondations ». Le calcul montre l\'effet d\'un changement de Ks à profondeur fixée et sous hypothèse uniforme — il ne suffit pas à conclure sur le fonctionnement global du secteur.</p>'
+                        }
+                      ]
+                    }
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quelle est la différence entre écoulement permanent et uniforme ?', r: 'Permanent : pas de variation dans le temps (∂Q/∂t = 0) en un point. Uniforme : pas de variation longitudinale (∂h/∂x = 0). Les deux sont indépendants — un écoulement peut être permanent sans être uniforme.', expl: 'Un débit stable dans un canal avec rétrécissement est permanent (Q constant dans le temps) mais non uniforme (v et h varient le long du canal).' },
+                  { q: 'Calculer v̄ avec Ks=30, Rh=0,545 m, S₀=0,001.', r: 'v̄ = 30 × 0,545^(2/3) × √0,001 = 30 × 0,666 × 0,03162 ≈ 0,633 m/s.', expl: '0,545^(2/3) ≈ 0,666. √0,001 = 0,03162. Vérification dimensionnelle : m^(1/3)/s × m^(2/3) × 1 = m/s.' },
+                  { q: 'Un coefficient n = 0,040 correspond à quel Ks ?', r: 'Ks = 1/n = 1/0,040 = 25 m^(1/3)/s. Relation inverse : grand n = forte résistance = petit Ks.', expl: 'Augmenter n et augmenter Ks ont des effets opposés sur le débit. Confondre les deux sens est une erreur fréquente.' },
+                  { q: 'Une dénivellation de 0,40 m sur 200 m donne quelle pente à entrer dans la formule ?', r: 'S₀ = 0,40/200 = 0,002 (valeur décimale). = 0,2 % = 2 ‰. Dans la formule : utiliser 0,002, pas 0,2 ni 2.', expl: 'Erreur fréquente : entrer 0,2 au lieu de 0,002. La pente étant sous √, cela multiplie la vitesse par √100 = 10.' },
+                  { q: 'Q ∝ √S₀. Si la pente est multipliée par 4, que devient Q ?', r: 'Q × √4 = Q × 2. Quadrupler la pente double le débit (pas ×4). Doubler la pente → Q×√2 ≈ ×1,41.', expl: 'La racine carrée "amortit" l\'effet de la pente. Sur un cours d\'eau peu pentu, une erreur altimétrique peut avoir autant d\'impact que le choix de rugosité.' },
+                  { q: 'Q = 2,40 m³/s, b = 4 m, Ks = 30, S₀ = 0,001 : la profondeur normale est-elle 0,88 m ?', r: 'Oui, par essais successifs : h=0,85 m → Q≈2,29 ; h=0,88 m → Q≈2,40 ✓ ; h=0,90 m → Q≈2,49. Donc hn ≈ 0,88 m.', expl: 'hn se résout par itération car A et Rh dépendent tous deux de h. Il n\'existe pas de formule explicite pour les sections rectangulaires.' },
+                  { q: 'Peut-on utiliser S₀ = Sf juste en amont d\'un seuil ?', r: 'Non. Le seuil peut créer un remous qui relève le niveau et modifie la pente de la surface libre. La régularité géométrique seule ne garantit pas l\'uniformité de l\'écoulement.', expl: 'S₀ = Sf est valable seulement loin de tout contrôle hydraulique, sur un tronçon régulier. À proximité d\'un seuil, d\'un pont ou d\'une confluence, l\'écoulement est non uniforme.' },
+                  { q: 'Pourquoi caler uniquement la rugosité pour reproduire un niveau observé peut être insuffisant ?', r: 'Le mauvais résultat peut venir d\'une géométrie incorrecte, d\'un débit mal estimé, d\'une cote aval erronée ou d\'un ouvrage mal représenté. Modifier Ks pour compenser masque ces problèmes et donne un coefficient dont la validité pour d\'autres crues est douteuse.', expl: 'Reproduire un seul niveau avec un seul débit ne valide pas le modèle pour d\'autres conditions. Vérifier d\'abord les données d\'entrée avant d\'ajuster le coefficient.' },
+                ],
+                schema: `<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="11">
+  <rect width="520" height="300" fill="#fefce8" rx="10"/>
+  <text x="260" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#713f12">Manning-Strickler — résumé visuel</text>
+  <!-- Formule centrale -->
+  <rect x="10" y="28" width="500" height="36" rx="8" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5"/>
+  <text x="260" y="49" text-anchor="middle" font-size="13" font-weight="bold" fill="#713f12">Q = Ks × A × Rh²/³ × √Sf</text>
+  <text x="260" y="60" text-anchor="middle" font-size="9" fill="#92400e">avec Rh = A/P et Ks = 1/n — valable en écoulement permanent uniforme</text>
+  <!-- Bloc géométrie -->
+  <rect x="10" y="75" width="155" height="95" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="0.8"/>
+  <text x="87" y="91" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e3a8a">Géométrie</text>
+  <text x="87" y="105" text-anchor="middle" font-size="9" fill="#1e3a8a">A = b × h (rect.)</text>
+  <text x="87" y="118" text-anchor="middle" font-size="9" fill="#1e3a8a">P = b + 2h</text>
+  <text x="87" y="131" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a8a">Rh = A/P</text>
+  <text x="87" y="144" text-anchor="middle" font-size="9" fill="#1e3a8a">≠ profondeur h</text>
+  <text x="87" y="157" text-anchor="middle" font-size="8" fill="#64748b">b=4, h=0,75 → Rh≈0,545</text>
+  <!-- Bloc pente -->
+  <rect x="175" y="75" width="155" height="95" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="0.8"/>
+  <text x="252" y="91" text-anchor="middle" font-size="10" font-weight="bold" fill="#14532d">Pente</text>
+  <text x="252" y="105" text-anchor="middle" font-size="9" fill="#14532d">S₀ = Δz / L (décimal)</text>
+  <text x="252" y="118" text-anchor="middle" font-size="9" fill="#14532d">0,1 % → 0,001</text>
+  <text x="252" y="131" text-anchor="middle" font-size="9" font-weight="bold" fill="#14532d">Q ∝ √S₀</text>
+  <text x="252" y="144" text-anchor="middle" font-size="9" fill="#14532d">×4 S₀ → ×2 Q</text>
+  <text x="252" y="157" text-anchor="middle" font-size="8" fill="#64748b">S₀ = Sf (uniforme seult.)</text>
+  <!-- Bloc rugosité -->
+  <rect x="340" y="75" width="170" height="95" rx="6" fill="#fce7f3" stroke="#db2777" stroke-width="0.8"/>
+  <text x="425" y="91" text-anchor="middle" font-size="10" font-weight="bold" fill="#831843">Rugosité</text>
+  <text x="425" y="105" text-anchor="middle" font-size="9" fill="#831843">Ks = 1/n</text>
+  <text x="425" y="118" text-anchor="middle" font-size="9" font-weight="bold" fill="#831843">Q ∝ Ks</text>
+  <text x="425" y="131" text-anchor="middle" font-size="9" fill="#831843">Grand Ks → peu résistant</text>
+  <text x="425" y="144" text-anchor="middle" font-size="9" fill="#831843">Grand n → fort résistant</text>
+  <text x="425" y="157" text-anchor="middle" font-size="8" fill="#64748b">n=0,033↔Ks=30 ; n=0,040↔25</text>
+  <!-- Tableau sensibilité -->
+  <rect x="10" y="180" width="245" height="110" rx="6" fill="#fff" stroke="#94a3b8" stroke-width="0.8"/>
+  <text x="132" y="196" text-anchor="middle" font-size="10" font-weight="bold" fill="#0c4a6e">Sensibilité (b=4, h=0,75, S₀=0,001)</text>
+  <text x="20" y="210" font-size="9" font-weight="bold" fill="#475569">Ks</text>
+  <text x="80" y="210" text-anchor="middle" font-size="9" font-weight="bold" fill="#475569">Q (m³/s)</text>
+  <text x="165" y="210" text-anchor="middle" font-size="9" font-weight="bold" fill="#475569">Écart / Ks=30</text>
+  <line x1="15" y1="213" x2="245" y2="213" stroke="#e2e8f0" stroke-width="0.8"/>
+  <text x="20" y="226" font-size="9" fill="#0369a1">20</text><text x="80" y="226" text-anchor="middle" font-size="9" fill="#0369a1">1,27</text><text x="165" y="226" text-anchor="middle" font-size="9" fill="#dc2626">−33 %</text>
+  <text x="20" y="242" font-size="9" font-weight="bold" fill="#14532d">30</text><text x="80" y="242" text-anchor="middle" font-size="9" font-weight="bold" fill="#14532d">1,90</text><text x="165" y="242" text-anchor="middle" font-size="9" fill="#14532d">référence</text>
+  <text x="20" y="258" font-size="9" fill="#7c3aed">40</text><text x="80" y="258" text-anchor="middle" font-size="9" fill="#7c3aed">2,53</text><text x="165" y="258" text-anchor="middle" font-size="9" fill="#16a34a">+33 %</text>
+  <line x1="15" y1="263" x2="245" y2="263" stroke="#e2e8f0" stroke-width="0.8"/>
+  <text x="132" y="278" text-anchor="middle" font-size="8" fill="#94a3b8">Q ∝ Ks (à géométrie et S₀ fixes)</text>
+  <!-- Profondeur normale -->
+  <rect x="265" y="180" width="245" height="110" rx="6" fill="#fff" stroke="#94a3b8" stroke-width="0.8"/>
+  <text x="387" y="196" text-anchor="middle" font-size="10" font-weight="bold" fill="#0c4a6e">Profondeur normale (Q=2,40 m³/s)</text>
+  <text x="275" y="210" font-size="9" font-weight="bold" fill="#475569">h testé</text>
+  <text x="390" y="210" text-anchor="middle" font-size="9" font-weight="bold" fill="#475569">Q calculé</text>
+  <text x="490" y="210" text-anchor="middle" font-size="9" font-weight="bold" fill="#475569"></text>
+  <line x1="270" y1="213" x2="505" y2="213" stroke="#e2e8f0" stroke-width="0.8"/>
+  <text x="275" y="226" font-size="9" fill="#475569">0,85 m</text><text x="390" y="226" text-anchor="middle" font-size="9" fill="#dc2626">2,29 m³/s</text><text x="490" y="226" text-anchor="middle" font-size="9" fill="#dc2626">trop faible</text>
+  <text x="275" y="242" font-size="9" font-weight="bold" fill="#14532d">0,88 m</text><text x="390" y="242" text-anchor="middle" font-size="9" font-weight="bold" fill="#14532d">2,40 m³/s</text><text x="490" y="242" text-anchor="middle" font-size="9" fill="#14532d">✓ hn</text>
+  <text x="275" y="258" font-size="9" fill="#475569">0,90 m</text><text x="390" y="258" text-anchor="middle" font-size="9" fill="#7c3aed">2,49 m³/s</text><text x="490" y="258" text-anchor="middle" font-size="9" fill="#7c3aed">trop élevé</text>
+  <line x1="270" y1="263" x2="505" y2="263" stroke="#e2e8f0" stroke-width="0.8"/>
+  <text x="387" y="278" text-anchor="middle" font-size="8" fill="#94a3b8">résolution par essais successifs</text>
+</svg>`,
+                exercice: {
+                  enonce: 'Canal rectangulaire : b=3 m, h=0,50 m, Ks=30, S₀=0,001. (1) Calculer A, P, Rh. (2) Calculer Q et v̄. (3) Ks passe à 24 : quel est le nouveau Q ? Calculer l\'écart relatif. (4) S₀ est multiplié par 4 (→ 0,004) avec Ks=30 : quel est le nouveau Q ?',
+                  solution: '<strong>(1) Géométrie :</strong> A = 3×0,50 = <strong>1,50 m²</strong>. P = 3+2×0,50 = <strong>4,00 m</strong>. Rh = 1,50/4,00 = <strong>0,375 m</strong>.<br><strong>(2) Débit :</strong> v̄ = 30 × 0,375<sup>2/3</sup> × √0,001 = 30 × 0,531 × 0,0316 ≈ <strong>0,50 m/s</strong>. Q = 1,50 × 0,50 ≈ <strong>0,75 m³/s</strong>.<br><strong>(3) Sensibilité Ks :</strong> Q₂/Q₁ = 24/30 = 0,80 → Q₂ ≈ 0,75 × 0,80 = <strong>0,60 m³/s</strong>. Écart = −20 % (Q ∝ Ks à géométrie et S₀ fixés).<br><strong>(4) Sensibilité S₀ :</strong> Q₂/Q₁ = √(0,004/0,001) = √4 = 2 → Q₂ ≈ 0,75 × 2 = <strong>1,50 m³/s</strong>. Quadrupler la pente double le débit (et non le quadruple).',
+                },
+              },
+            ],
+          }, // fin gem-m8
+
         ],
       },
     ],
