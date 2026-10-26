@@ -9970,6 +9970,159 @@ const COURS_DATA = {
                 },
               },
 
+              {
+                id: 'gem-ent5',
+                titre: 'Restaurer la continuité écologique',
+                fiche: {
+                  intro: 'Supprimer un seuil, abaisser sa hauteur, modifier sa gestion, construire une passe à poissons ou aménager un bras de contournement sont des réponses différentes à des problèmes différents. Elles ne restaurent pas nécessairement les mêmes fonctions. Ce chapitre donne les repères pour analyser les effets d\'un ouvrage sur la circulation des organismes et le transport des sédiments, comparer les familles de solutions et évaluer l\'efficacité des interventions avec les bons indicateurs.',
+                  points: [
+                    '🔄 4 dimensions de la continuité : longitudinale (déplacements amont-aval, transit sédimentaire), latérale (accès aux annexes et au lit majeur), verticale (échanges eau de surface/substrat/nappe), temporelle (disponibilité aux bonnes périodes) — un seuil peut affecter plusieurs dimensions simultanément',
+                    '🎯 Décrire les fonctions avant la solution : montaison ≠ dévalaison ≠ transit sédimentaire — une passe peut améliorer un passage biologique sans modifier la retenue ni rétablir le transit des matériaux grossiers',
+                    '📏 Différence de niveau aval/amont ≠ hauteur construite : varie selon le débit et la gestion — un ouvrage peut être peu contraignant à fort débit et fortement limitant à l\'étiage',
+                    '⬆️⬇️ Montaison (vers l\'amont) ≠ dévalaison (vers l\'aval) : difficultés différentes, solutions différentes — un dispositif de montaison n\'est pas automatiquement efficace pour la dévalaison ; à proximité d\'une prise d\'eau, examiner toutes les voies possibles',
+                    '📉 Effets cumulés : P = p^n — ex. 4 obstacles avec probabilité conditionnelle p = 0,8 : P = 0,8^4 = 0,4096 ≈ 41 % — ne pas multiplier sans précaution des taux provenant d\'espèces, saisons ou méthodes différentes',
+                    '🏗️ 6 familles de solutions : suppression / abaissement ou ouverture partielle / modification de gestion / bras de contournement / passe à poissons / adaptation d\'un franchissement — choisir selon les fonctions à rétablir, pas seulement selon le coût',
+                    '💥 Suppression : rétablit circulation, sédiments et écoulements courants — mais exige étude du profil en long, des matériaux mobilisables, de la stabilité des berges, des niveaux et des ouvrages voisins (pont, conduites, fondations)',
+                    '🚪 Attractivité d\'une passe : 5 étapes — (1) arriver au voisinage, (2) trouver et rejoindre l\'entrée, (3) franchir le dispositif, (4) quitter la sortie, (5) poursuivre le déplacement — évaluer uniquement les poissons à l\'intérieur peut masquer ceux qui ne trouvent jamais l\'entrée',
+                    '⛏️ Volume sédimentaire V = L × b × e : 100 × 8 × 0,30 = 240 m³ (volume géométrique) ≠ quantité transportée immédiatement après travaux — granulométrie, qualité et stratégie de libération à examiner avant tout choix',
+                    '📊 3 indicateurs distincts : T_entrée = N_entrée / N_référence ; T_conditionnel = N_sortie / N_entrée ; T_global = N_sortie / N_référence — ex. 70 entrent / 100 : T_entrée = 70 % ; 56 sortent / 70 entrent : T_conditionnel = 80 % ; 56 sortent / 100 : T_global = 56 %',
+                    '⚠️ Profil en long après suppression : rechercher affleurements résistants, ouvrages proches, fondations, conduites, anciens remblaiements — l\'étude doit couvrir la zone susceptible de répondre, pas seulement l\'emprise de l\'ouvrage',
+                    '🌿 Bénéfice ≠ longueur accessible : 10 km supplémentaires ne garantissent pas un bénéfice proportionnel — qualité des habitats, autres obstacles, hydrologie, présence de populations sources et pressions restantes doivent être examinés',
+                  ],
+                  formules: [
+                    'Effets cumulés : P_parcours = p^n — p = probabilité conditionnelle de franchir un obstacle, n = nombre d\'obstacles ; ex. p = 0,8, n = 4 → P = 0,8⁴ = 0,4096 ≈ 41 % ; ne pas mélanger des taux d\'espèces ou de saisons différentes',
+                    'Volume sédimentaire estimé : V = L × b × e (m³) — ex. 100 m × 8 m × 0,30 m = 240 m³ (volume géométrique) ; ne représente pas directement la quantité remobilisée après travaux',
+                    'Taux d\'entrée : T_entrée = (N_entrée / N_référence) × 100 — ex. 70 / 100 = 70 % ; taux de passage conditionnel : T_c = (N_sortie / N_entrée) × 100 — ex. 56 / 70 = 80 %',
+                    'Taux de passage global : T_global = (N_sortie / N_référence) × 100 — ex. 56 / 100 = 56 % ; T_global = T_entrée × T_conditionnel (ex. 0,70 × 0,80 = 0,56)',
+                  ],
+                  retenir: 'Continuité biologique ≠ continuité sédimentaire · Montaison ≠ dévalaison · Différence de niveau ≠ hauteur construite · P = p^n : effets cumulés entre obstacles · Suppression = variante à étudier sérieusement, pas à exclure ni retenir sans analyse · Passe : 5 étapes à vérifier dont l\'attractivité · V = L×b×e = volume géométrique des sédiments, pas volume remobilisé · T_entrée ≠ T_conditionnel ≠ T_global · Bénéfice ≠ longueur accessible.',
+                  sections: [
+                    {
+                      titre: 'Comprendre les fonctions de la continuité',
+                      ss: [
+                        {
+                          titre: 'Quatre dimensions et fonctions à rétablir',
+                          texte: 'La continuité comprend quatre dimensions : longitudinale (déplacements amont-aval et transit sédimentaire), latérale (accès aux annexes et au lit majeur), verticale (échanges entre eau de surface, substrat et nappe) et temporelle (disponibilité des connexions aux périodes nécessaires). Un seuil peut affecter plusieurs dimensions simultanément. Une étude doit préciser ce que l\'on cherche à améliorer : accès à des habitats de reproduction, déplacement entre zones de croissance et de refuge, dévalaison moins dommageable, réduction d\'un retard de migration, rétablissement du transport de certaines fractions sédimentaires, réduction d\'un effet de retenue. Ces objectifs ne sont pas interchangeables. Le projet doit afficher plusieurs objectifs distincts lorsque plusieurs fonctions sont concernées.',
+                        },
+                        {
+                          titre: 'Organismes, montaison, dévalaison et franchissabilité',
+                          texte: 'L\'analyse ne doit pas se limiter à la présence de grands poissons migrateurs. Il faut examiner les espèces présentes ou susceptibles de recoloniser, les stades de développement, les périodes de déplacement, les habitats à relier et les capacités de nage. Les capacités d\'un adulte ne représentent pas celles d\'un juvénile. La montaison (vers l\'amont) et la dévalaison (vers l\'aval) nécessitent des analyses distinctes : les facteurs limitants et les solutions ne sont pas les mêmes. Un dispositif de montaison n\'est pas automatiquement efficace pour la dévalaison. Les facteurs limitants possibles comprennent une chute, une vitesse excessive, une profondeur insuffisante, une longueur trop importante, une turbulence défavorable, l\'absence de zones de repos, une entrée difficile à trouver ou une sortie mal raccordée.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Analyser l\'ouvrage et son contexte',
+                      ss: [
+                        {
+                          titre: 'Caractériser l\'ouvrage et le transport sédimentaire',
+                          texte: 'Les données utiles comprennent : type et géométrie, niveaux amont et aval, ouvertures et organes mobiles, modes de fonctionnement, état apparent, fondations, usages et gestionnaire. Il faut distinguer la hauteur construite de l\'ouvrage et la différence de niveau d\'eau entre l\'amont et l\'aval dans une situation donnée : cette différence varie avec le débit et la gestion. Un ouvrage peut être peu contraignant à certains débits et fortement limitant à d\'autres. La continuité sédimentaire doit être examinée séparément : un ouvrage peut laisser passer des particules fines tout en retenant les matériaux grossiers. La présence d\'un dépôt amont ne signifie pas que tout peut être libéré sans étude ; l\'absence de dépôt visible ne prouve pas une continuité sédimentaire satisfaisante.',
+                        },
+                        {
+                          titre: 'Effets cumulés et raisonnement à l\'échelle du réseau',
+                          texte: 'L\'intérêt d\'une intervention dépend aussi des habitats accessibles après travaux, des obstacles voisins, de la qualité de l\'eau et de la présence de populations sources. Plusieurs obstacles partiellement franchissables peuvent produire une limitation importante sur un parcours. Dans un exemple simplifié, si la probabilité conditionnelle de franchir chacun de quatre ouvrages est de 0,8, alors P_parcours = 0,8^4 = 0,4096 ≈ 41 %. Ce calcul suppose que les probabilités correspondent au même parcours et aux mêmes conditions. Il ne faut pas multiplier sans précaution des taux provenant d\'espèces, de saisons ou de méthodes différentes. Ouvrir l\'accès à 10 km ne garantit pas un bénéfice proportionnel à cette longueur si ces kilomètres sont peu favorables ou fragmentés par d\'autres obstacles.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Choisir entre les familles de solutions',
+                      ss: [
+                        {
+                          titre: 'Suppression, abaissement et gestion des organes mobiles',
+                          texte: 'La suppression peut rétablir plusieurs processus : circulation des organismes, transit sédimentaire, écoulements courants, évolution des habitats anciennement retenus. Elle exige d\'étudier l\'évolution du profil en long, les matériaux mobilisables, la stabilité des berges, les ouvrages voisins (pont, conduites, fondations), les niveaux et les usages. L\'abaissement peut réduire la différence de niveau, mais une brèche étroite peut créer un passage localement difficile. Réduire la hauteur ne suffit pas à démontrer une restauration complète. La modification de gestion (vannes) nécessite de définir les périodes d\'ouverture, les vitesses de variation des niveaux, les responsabilités et les moyens de contrôle. Une règle théorique sans personnel disponible ni entretien fiable ne constitue pas une garantie de fonctionnement.',
+                        },
+                        {
+                          titre: 'Passes à poissons, bras de contournement et attractivité',
+                          texte: 'Une passe cherche à proposer un itinéraire compatible avec les capacités des espèces visées, en termes de vitesses, profondeurs, turbulence et plage de débits. Une passe ne supprime généralement pas tous les effets de l\'ouvrage sur les habitats et les sédiments. L\'attractivité est une condition essentielle : il faut franchir 5 étapes — arriver au voisinage, trouver et rejoindre l\'entrée, franchir le dispositif, quitter la sortie, poursuivre le déplacement. Évaluer uniquement les poissons observés à l\'intérieur peut masquer ceux qui ne trouvent jamais l\'entrée. Un bras de contournement doit être examiné pour son alimentation, sa stabilité, son attractivité et ses raccordements — son apparence naturelle ne garantit pas son efficacité.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Étudier les conséquences et préparer le chantier',
+                      ss: [
+                        {
+                          titre: 'Niveaux, sédiments et profil en long',
+                          texte: 'Un ouvrage peut maintenir un niveau d\'eau amont utilisé par une prise d\'eau, un canal, une annexe ou certains habitats. Sa modification peut affecter ces relations : il faut étudier les cotes et les conditions de fonctionnement. Avant modification, les questions essentielles sur les sédiments comprennent la quantité, la granulométrie, la qualité, la fraction mobilisable, la destination possible et la vitesse de transfert. Le volume géométrique V = L × b × e (ex. 100 × 8 × 0,30 = 240 m³) ne signifie pas que ce volume sera transporté immédiatement. La suppression peut entraîner une réorganisation du lit amont : rechercher les affleurements résistants, les ouvrages proches, les fondations et les conduites. L\'étude doit couvrir la zone susceptible de répondre, pas seulement l\'emprise de l\'ouvrage retiré.',
+                        },
+                        {
+                          titre: 'Conduire le chantier et clarifier les responsabilités',
+                          texte: 'Le chantier peut produire temporairement de la turbidité, des variations de niveau, une mobilisation sédimentaire et des perturbations d\'habitats. La préparation doit définir le phasage, la gestion des écoulements, les précautions pour les organismes, les contrôles et les critères d\'arrêt. Le projet doit identifier le propriétaire, le maître d\'ouvrage, l\'exploitant, les gestionnaires d\'usages associés et les responsables de l\'entretien futur. Un ouvrage sans usage apparent n\'est pas nécessairement dépourvu de propriétaire ou d\'interactions importantes. La concertation doit porter sur des variantes concrètes et leurs conséquences, avec une distinction claire entre faits établis et incertitudes.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Mesurer l\'efficacité et suivre',
+                      ss: [
+                        {
+                          titre: 'T_entrée, T_conditionnel et T_global',
+                          texte: 'Trois indicateurs répondent à des questions différentes. Le taux d\'entrée T_entrée = (N_entrée / N_référence) × 100 mesure la proportion atteignant le dispositif. Le taux de passage conditionnel T_conditionnel = (N_sortie / N_entrée) × 100 mesure le franchissement une fois l\'entrée atteinte. Le taux de passage global T_global = (N_sortie / N_référence) × 100 mesure le résultat final. Exemple : 70 poissons entrent parmi 100 de référence (T_entrée = 70 %), 56 atteignent la sortie parmi 70 (T_conditionnel = 80 %) → T_global = 56 %. T_global = T_entrée × T_conditionnel = 0,70 × 0,80 = 0,56. Un comptage uniquement à la sortie ne suffit pas à estimer l\'efficacité sans connaître la population de référence et les conditions du suivi.',
+                        },
+                        {
+                          titre: 'Comparaison multicritère et suivi',
+                          texte: 'La comparaison des variantes doit porter sur plusieurs critères : continuité biologique (espèces et déplacements améliorés), continuité sédimentaire (fractions pouvant transiter), habitats (apparition, évolution, disparition), hydraulique (effets sur les niveaux), usages (adaptations nécessaires), exploitation (entretien et manœuvres), coût global (études, travaux, entretien, renouvellement, suivi) et incertitudes (données pouvant modifier le choix). Une passe peut améliorer le passage partiel de certaines espèces sans modifier tous les effets de retenue. La suppression peut rétablir davantage de processus mais exige des études plus larges. Les indicateurs de suivi doivent préciser leurs dénominateurs : espèces, stades, conditions hydrologiques, durée de suivi et capacités de détection.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quelles sont les 4 dimensions de la continuité écologique ?', r: 'Longitudinale (amont-aval, sédiments), latérale (annexes, lit majeur), verticale (substrat, nappe), temporelle (disponibilité aux bonnes périodes)', expl: 'Un seuil peut affecter plusieurs dimensions simultanément. Les objectifs doivent être explicités avant de choisir une solution.' },
+                  { q: 'Quelle différence entre montaison et dévalaison ?', r: 'Montaison = déplacement vers l\'amont ; dévalaison = vers l\'aval — difficultés et solutions différentes', expl: 'Un dispositif de montaison n\'est pas automatiquement efficace pour la dévalaison. Les facteurs limitants ne sont pas les mêmes.' },
+                  { q: 'Comment calculer l\'effet cumulé de plusieurs obstacles ?', r: 'P_parcours = p^n — ex. 4 obstacles avec p = 0,8 : P = 0,8^4 ≈ 41 %', expl: 'Ne pas multiplier sans précaution des taux provenant d\'espèces, de saisons ou de méthodes différentes.' },
+                  { q: 'Quelles sont les 5 étapes pour franchir une passe à poissons ?', r: 'Arriver au voisinage, trouver et rejoindre l\'entrée, franchir le dispositif, quitter la sortie, poursuivre le déplacement', expl: 'Évaluer uniquement les poissons à l\'intérieur peut masquer ceux qui ne trouvent jamais l\'entrée. L\'attractivité est une condition essentielle.' },
+                  { q: 'Que représente V = 100 × 8 × 0,30 = 240 m³ de sédiments ?', r: 'Un volume géométrique estimé — ne signifie pas que 240 m³ seront remobilisés immédiatement après travaux', expl: 'Granulométrie, qualité et stratégie de libération doivent être examinées avant tout choix. Aucune extraction ne se décide sur le seul volume.' },
+                  { q: 'Quelle différence entre T_entrée, T_conditionnel et T_global ?', r: 'T_entrée = N_entrée/N_réf (70%) ; T_conditionnel = N_sortie/N_entrée (80%) ; T_global = N_sortie/N_réf (56% = 70%×80%)', expl: 'Un comptage à la sortie seule ne suffit pas à estimer l\'efficacité sans connaître la population de référence.' },
+                  { q: 'Pourquoi la suppression d\'un seuil demande-t-elle une étude préalable approfondie ?', r: 'Car elle peut mobiliser des sédiments, modifier le profil en long, affecter les ouvrages voisins (pont, conduites), changer les niveaux et les usages', expl: 'L\'étude doit couvrir la zone susceptible de répondre à l\'intervention, pas seulement l\'emprise de l\'ouvrage retiré.' },
+                  { q: 'Ouvrir l\'accès à 10 km de cours d\'eau garantit-il un bénéfice proportionnel ?', r: 'Non — qualité des habitats, autres obstacles, hydrologie, populations sources et pressions restantes doivent être examinés', expl: 'Ces 10 km peuvent être peu favorables, intermittents ou encore fragmentés par d\'autres obstacles.' },
+                ],
+                schema: `<svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg" style="max-width:320px;width:100%">
+  <rect width="320" height="220" rx="8" fill="#EEF4FB"/>
+  <text x="160" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#0E3A6E">Restauration de la continuité — cadre de décision</text>
+  <rect x="8" y="18" width="305" height="22" fill="#0E3A6E" rx="4"/>
+  <text x="160" y="32" text-anchor="middle" font-family="Arial" font-size="8" fill="#D0E8FF">Longitudinale · Latérale · Verticale · Temporelle</text>
+  <rect x="8" y="46" width="145" height="32" fill="#2E7D32" rx="4"/>
+  <text x="80" y="59" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">MONTAISON</text>
+  <text x="80" y="71" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C8F0C8">Chute · Vitesse · Attractivité</text>
+  <rect x="167" y="46" width="145" height="32" fill="#B84A0E" rx="4"/>
+  <text x="239" y="59" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">DÉVALAISON</text>
+  <text x="239" y="71" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#FFD0A0">Piégeage · Blessures · Retard</text>
+  <rect x="8" y="84" width="305" height="12" fill="#37474F" rx="2"/>
+  <text x="160" y="93.5" text-anchor="middle" font-family="Arial" font-size="8" fill="#CFD8DC">Montaison ≠ Dévalaison — solutions différentes</text>
+  <rect x="8" y="102" width="48" height="36" fill="#0E6BA8" rx="3"/>
+  <text x="32" y="115" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#fff">Suppres-</text>
+  <text x="32" y="125" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#fff">sion</text>
+  <rect x="62" y="102" width="48" height="36" fill="#1565C0" rx="3"/>
+  <text x="86" y="115" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#fff">Abaisse-</text>
+  <text x="86" y="125" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#fff">ment</text>
+  <rect x="116" y="102" width="48" height="36" fill="#6B4F9E" rx="3"/>
+  <text x="140" y="115" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#fff">Gestion</text>
+  <text x="140" y="125" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#fff">vannes</text>
+  <rect x="170" y="102" width="48" height="36" fill="#2E7D32" rx="3"/>
+  <text x="194" y="115" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#fff">Passe</text>
+  <text x="194" y="125" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#fff">poissons</text>
+  <rect x="224" y="102" width="48" height="36" fill="#558B2F" rx="3"/>
+  <text x="248" y="115" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#fff">Bras de</text>
+  <text x="248" y="125" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#fff">contorn.</text>
+  <rect x="278" y="102" width="42" height="36" fill="#37474F" rx="3"/>
+  <text x="299" y="115" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#fff">Adapter</text>
+  <text x="299" y="125" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#fff">buse</text>
+  <rect x="8" y="144" width="145" height="38" fill="#E3F0FB" rx="4"/>
+  <text x="80" y="157" text-anchor="middle" font-family="Arial" font-size="8" fill="#0E3A6E" font-weight="bold">Effets cumulés</text>
+  <text x="80" y="169" text-anchor="middle" font-family="Arial" font-size="9" fill="#0E3A6E">P = p^n</text>
+  <text x="80" y="179" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#537A9E">0,8^4 ≈ 41 %</text>
+  <rect x="162" y="144" width="150" height="38" fill="#E8F5E9" rx="4"/>
+  <text x="237" y="157" text-anchor="middle" font-family="Arial" font-size="8" fill="#1B4D1B" font-weight="bold">Indicateurs d\'efficacité</text>
+  <text x="237" y="169" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#1B4D1B">T_entrée · T_cond · T_global</text>
+  <text x="237" y="179" text-anchor="middle" font-family="Arial" font-size="7" fill="#2E7D32">ex. 70% × 80% = 56%</text>
+  <rect x="8" y="188" width="305" height="24" fill="#FFF8E1" rx="4"/>
+  <text x="160" y="200" text-anchor="middle" font-family="Arial" font-size="8" fill="#7A5C00" font-weight="bold">V = L × b × e (sédiments) · Bénéfice ≠ longueur accessible</text>
+  <text x="160" y="210" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#7A5C00">100 × 8 × 0,30 = 240 m³ géométrique ≠ volume remobilisé</text>
+</svg>`,
+                exercice: {
+                  enonce: '(1) "Construire une passe à poissons" est-il un objectif fonctionnel ?\n(2) Une passe améliore la montaison. Peut-on conclure que le transit sédimentaire est restauré ?\n(3) 3 obstacles avec probabilité conditionnelle p = 0,9. Calculer P_parcours.\n(4) Sur 80 poissons arrivés, 40 entrent dans une passe et 36 la franchissent. Calculer T_entrée, T_conditionnel et T_global.\n(5) Un dépôt couvre 60 m de long, 5 m de large, épaisseur moyenne 0,40 m. Calculer V. Ce volume sera-t-il transporté immédiatement ?\n(6) Une buse reste en eau toute l\'année. Est-elle nécessairement franchissable ?\n(7) Un seuil paraît sans usage. Peut-on engager sa suppression sans autre étude ?\n(8) Une intervention ouvre l\'accès à 10 km de cours d\'eau. Cela garantit-il un bénéfice écologique important ?',
+                  solution: '<strong>(1)</strong> Non — c\'est une solution envisagée. L\'objectif fonctionnel pourrait être d\'améliorer l\'accès de certaines espèces à des habitats identifiés pendant les périodes nécessaires.<br><strong>(2)</strong> Non. Le transport des sédiments doit être examiné séparément.<br><strong>(3)</strong> P = 0,9^3 = <strong>0,729</strong> → 72,9 % dans les hypothèses du calcul.<br><strong>(4)</strong> T_entrée = 40 / 80 × 100 = <strong>50 %</strong> — T_conditionnel = 36 / 40 × 100 = <strong>90 %</strong> — T_global = 36 / 80 × 100 = <strong>45 %</strong>. L\'entrée constitue une limitation possible ; il faut examiner l\'attractivité.<br><strong>(5)</strong> V = 60 × 5 × 0,40 = <strong>120 m³</strong> (volume géométrique estimé). Non — la granulométrie, la qualité et les conditions de mobilisation doivent être examinées.<br><strong>(6)</strong> Non. Profondeur, vitesse, longueur, raccordements et espèces concernées doivent être examinés.<br><strong>(7)</strong> Non. Il faut examiner la propriété, les usages réels, les procédures applicables, les sédiments, les niveaux et les effets sur les ouvrages et habitats voisins.<br><strong>(8)</strong> Non. Il faut considérer la qualité des habitats, les autres obstacles, l\'hydrologie, les populations sources et les pressions restantes.',
+                },
+              },
+
             ],
           }, // fin gem-m19
 
