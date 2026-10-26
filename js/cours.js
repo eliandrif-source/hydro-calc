@@ -10126,6 +10126,787 @@ const COURS_DATA = {
             ],
           }, // fin gem-m19
 
+          {
+            id: 'gem-m20',
+            name: 'Zones humides et solutions fondées sur la nature',
+            ico: '🌿',
+            color: '#1B5E20',
+            colorl: '#E8F5E9',
+            ordre: 6, theme: 'zones_humides',
+            chapitres: [
+
+              {
+                id: 'gem-zh1',
+                titre: 'Diagnostic fonctionnel d\'une zone humide',
+                fiche: {
+                  intro: 'Une zone humide peut présenter une eau libre permanente, une submersion temporaire, une nappe proche de la surface ou un engorgement saisonnier sans eau visible. La question centrale du diagnostic fonctionnel est : d\'où vient l\'eau, comment circule-t-elle et quelles fonctions la zone humide assure-t-elle réellement ? Ce chapitre pose les bases d\'un diagnostic qui relie l\'eau, les sols, la végétation, les connexions et les usages dans l\'espace et dans le temps.',
+                  points: [
+                    '📚 Trois démarches distinctes : identification (indices de zone humide), délimitation (périmètre réglementaire justifié) et diagnostic fonctionnel (mécanismes et fonctions) — objectifs distincts même si les données peuvent être partagées.',
+                    '💧 Zone humide ≠ eau visible : L.211-1 CE retient inondation, engorgement ou végétation caractéristique — pas de présence simultanée exigée — une visite sèche ne suffit pas à exclure le caractère humide.',
+                    '🗺️ Six types de fonctionnement : fond de vallée (nappe + débordements), dépression (pluie + ruissellement), versant (sources), plaine alluviale (crues + nappe alluviale), tourbière (pluie ± souterrain), littoral (marées + eau douce) — un même site peut combiner plusieurs alimentations.',
+                    '📐 Périmètre fonctionnel souvent étendu : bassin versant de surface, apports souterrains, cours d\'eau voisin, fossés, ouvrages, terrains à l\'aval — la limite foncière n\'est pas nécessairement une limite hydrologique.',
+                    '📖 Reconstituer l\'histoire : fossés anciens, drainage, remblaiement, modification du cours d\'eau — sources : photographies aériennes, plans, archives de travaux, témoignages — distinguer faits documentés et souvenirs imprécis.',
+                    '⚖️ Bilan hydrique : ΔS = P + V_surf,entr + V_sout,entr − ET − V_surf,sort − V_sout,sort — chaque connexion doit être décrite par son sens, son intensité, sa durée et ses conditions d\'activation.',
+                    '⏱️ Hydropériode : régime temporel de présence de l\'eau — fréquence, durée, saison, profondeur, vitesses de montée et de baisse, variabilité inter-annuelle — une moyenne annuelle ne remplace pas le calendrier hydrologique.',
+                    '🧱 Porosité ≠ saturation ≠ perméabilité : un sol saturé n\'est pas nécessairement imperméable — il peut transmettre de l\'eau si le gradient et la perméabilité le permettent.',
+                    '📏 Piézomètre : H = Z_repère − d — un seul point renseigne sur sa formation et son emplacement, pas sur toute la zone humide — connaître profondeur, crépine, matériaux traversés et cote du repère.',
+                    '📉 Gradient hydraulique : i = ΔH / L — indique un potentiel d\'écoulement de A vers B mais ne donne pas directement un débit (perméabilité et géométrie nécessaires).',
+                    '🌱 Distinguer fonction (rétention d\'eau, dénitrification), service (bénéfice pour la société) et usage (fauche, pâturage) — une fonction peut exister sans service directement identifié — le soutien d\'étiage n\'est pas une propriété universelle.',
+                    '🔬 MNE-ZH v2 (OFB) : méthode nationale d\'évaluation indicateur par indicateur — ne fournit pas automatiquement un débit de soutien d\'étiage, une réduction de crue ou une masse de pollution éliminée — respecter protocole et limites.',
+                  ],
+                  formules: [
+                    'Bilan hydrique : ΔS = P + V_surf,entr + V_sout,entr − ET − V_surf,sort − V_sout,sort — variation du stock (m³) = apports − sorties sur la période',
+                    'Piézomètre : H = Z_repère − d — H = charge hydraulique (m), Z_repère = cote du repère (m NGF), d = profondeur mesurée jusqu\'à l\'eau (m) ; ex. Z = 98,70 m, d = 0,45 m → H = 98,25 m',
+                    'Gradient hydraulique : i = ΔH / L — ΔH = différence de charge (m), L = distance (m) ; ex. ΔH = 0,10 m, L = 50 m → i = 0,002 (potentiel d\'écoulement de A vers B)',
+                    'Stockage superficiel : V = A × h — A = superficie (m²), h = hauteur moyenne (m) ; ex. 2 ha (20 000 m²) × 0,10 m = 2 000 m³',
+                  ],
+                  retenir: 'Délimiter ≠ diagnostiquer — deux démarches aux objectifs distincts. L\'absence d\'eau visible ne suffit pas à exclure le caractère humide (L.211-1 CE). Périmètre fonctionnel > limite foncière. Bilan hydrique : ΔS = P + apports − ET − sorties. Piézomètre : H = Z_repère − d. Gradient : i = ΔH/L (potentiel, pas débit direct). Saturation ≠ imperméabilité. Hydropériode = calendrier, pas seulement moyenne. Fonction ≠ service ≠ usage.',
+                  sections: [
+                    {
+                      titre: 'Identification, délimitation et diagnostic',
+                      ss: [
+                        {
+                          titre: 'Trois démarches complémentaires',
+                          texte: 'L\'identification repère les indices de zone humide. La délimitation établit un périmètre justifié selon la méthode applicable. Le diagnostic fonctionnel explique les mécanismes et les fonctions. Ces travaux peuvent partager des données mais leurs objectifs restent distincts : une carte de délimitation ne permet pas à elle seule de calculer un stockage de crue ou un soutien d\'étiage. Inversement, un fonctionnement hydrologique intéressant ne remplace pas la démarche réglementaire de délimitation.',
+                        },
+                        {
+                          titre: 'Zone humide sans eau visible',
+                          texte: 'L\'article L.211-1 du Code de l\'environnement retient une définition faisant intervenir les conditions d\'inondation ou d\'engorgement et, alternativement, la végétation lorsqu\'elle existe. Il n\'est pas nécessaire d\'exiger la présence simultanée d\'eau en surface et de végétation caractéristique. Une zone sèche en été peut conserver son caractère humide par engorgement saisonnier ou nappe proche de la surface. Une visite en période sèche ne suffit donc pas à exclure le caractère humide d\'un terrain.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Alimentations et périmètre fonctionnel',
+                      ss: [
+                        {
+                          titre: 'Diversité des fonctionnements',
+                          texte: 'Six grands types de fonctionnement : fond de vallée (nappe + débordements, relations rivière–nappe), dépression (pluie + ruissellement + nappe, exutoires et durée de mise en eau), versant ou pied de versant (sources, zones d\'émergence), plaine alluviale (crues + nappe alluviale, connexions et déconnexions), tourbière (pluie seule, eaux souterraines ou combinaison, régime hydrique) et milieu littoral (marées, eau douce, nappe, salinité). Un même site peut combiner plusieurs alimentations. Le diagnostic doit déterminer l\'importance et la saisonnalité de chaque contribution.',
+                        },
+                        {
+                          titre: 'Périmètre fonctionnel étendu',
+                          texte: 'Le périmètre d\'étude dépasse souvent les limites de la zone humide. Il peut comprendre le bassin versant de surface, les secteurs contribuant à l\'alimentation souterraine, le cours d\'eau voisin, les fossés et drains, les ouvrages de régulation et les terrains situés à l\'aval. Une zone humide de quelques hectares peut dépendre d\'une alimentation provenant d\'un secteur beaucoup plus étendu. Le bassin topographique visible sur un modèle de terrain ne correspond pas toujours au bassin d\'alimentation souterraine. La limite foncière n\'est pas nécessairement une limite hydrologique.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Bilan hydrique et hydropériode',
+                      ss: [
+                        {
+                          titre: 'Construire un bilan hydrique',
+                          texte: 'Pour un volume de contrôle défini : ΔS = P + V_surf,entr + V_sout,entr − ET − V_surf,sort − V_sout,sort. Le sens des échanges peut varier selon la saison : un fossé peut évacuer l\'eau lorsque le site est haut, puis recevoir une remontée depuis l\'aval lors d\'une crue. Chaque connexion doit être décrite par son sens, son intensité, sa durée et ses conditions d\'activation. L\'infiltration ne doit pas être comptée comme sortie si elle constitue un transfert interne au volume de contrôle comprenant le sol concerné.',
+                        },
+                        {
+                          titre: 'Hydropériode et calendrier hydrologique',
+                          texte: 'L\'hydropériode décrit le régime temporel de présence de l\'eau : fréquence, durée, saison, profondeur, vitesses de montée et de baisse, variabilité inter-annuelle. Deux sites inondés le même nombre de jours annuels mais à des périodes différentes peuvent avoir des conséquences écologiques très différentes. Une moyenne annuelle ne remplace pas la description du calendrier hydrologique. La végétation peut répondre avec retard à un changement hydrologique, compliquant l\'interprétation.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Mesures piézométriques et stockage',
+                      ss: [
+                        {
+                          titre: 'Piézomètres et gradients hydrauliques',
+                          texte: 'H = Z_repère − d. Pour utiliser un piézomètre, il faut connaître la profondeur, la position de la crépine, les matériaux traversés et la cote du repère. Pour deux points comparables : i = ΔH / L. Ce gradient indique un potentiel d\'écoulement de A vers B si les points représentent une même formation hydrauliquement connectée. Il ne suffit pas à calculer un débit : il faut aussi les propriétés du milieu et la géométrie des échanges. Un seul piézomètre renseigne sur sa zone de mesure, pas sur toute la zone humide.',
+                        },
+                        {
+                          titre: 'Stockage superficiel et saturation',
+                          texte: 'V = A × h pour une lame d\'eau superficielle approximativement uniforme. Le stockage dans le sol dépend de l\'évolution de la teneur en eau : ΔV = A × e × Δθ. Ces estimations ne donnent pas directement un débit restitué ni une réduction de pointe de crue. Un sol saturé n\'est pas imperméable : la saturation signifie que les pores sont remplis d\'eau, mais la circulation dépend de la perméabilité et des gradients hydrauliques. Il serait incorrect de conclure qu\'aucun échange ne peut avoir lieu parce que le sol est saturé.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Fonctions, services et évaluation',
+                      ss: [
+                        {
+                          titre: 'Distinguer fonctions, services et usages',
+                          texte: 'La fonction est le processus écologique (rétention temporaire d\'eau, transformation de l\'azote, stockage de carbone). Le service est le bénéfice pour la société résultant de certaines fonctions. L\'usage est la pratique humaine (fauche, pâturage, promenade). Affirmer qu\'une zone humide peut stocker de l\'eau ≠ affirmer qu\'elle protège nécessairement un quartier aval — la deuxième affirmation demande une analyse complémentaire. Le soutien d\'étiage n\'est pas une propriété universelle de toute zone humide.',
+                        },
+                        {
+                          titre: 'MNE-ZH v2 et diagnostic intégré',
+                          texte: 'La méthode nationale d\'évaluation des fonctions des zones humides (OFB, version 2) propose une évaluation indicateur par indicateur et fonction par fonction, utile notamment pour examiner la vraisemblance d\'une équivalence fonctionnelle dans les démarches de compensation. Elle ne fournit pas automatiquement un débit de soutien d\'étiage, une réduction de crue ou une masse de pollution éliminée. La synthèse doit distinguer : fonctions documentées, fonctions plausibles, fonctions non évaluées, pressions confirmées et hypothèses à vérifier.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Différence entre délimitation et diagnostic fonctionnel ?', r: 'Délimitation = périmètre réglementaire justifié ; diagnostic fonctionnel = mécanismes, alimentations et fonctions — objectifs distincts.', expl: 'Une carte de délimitation ne permet pas de calculer un stockage de crue. Un fonctionnement intéressant ne remplace pas la démarche réglementaire.' },
+                  { q: 'Pourquoi une visite sèche ne suffit-elle pas à exclure le caractère humide ?', r: 'L.211-1 CE retient inondation, engorgement OU végétation — pas de présence simultanée d\'eau exigée.', expl: 'Engorgement saisonnier, nappe proche de la surface ou végétation hygrophile suffisent selon les critères. Les traces dans le sol persistent après des conditions sèches.' },
+                  { q: 'Formule du bilan hydrique d\'une zone humide ?', r: 'ΔS = P + V_surf,entr + V_sout,entr − ET − V_surf,sort − V_sout,sort', expl: 'Variation du stock = apports (pluie, surface, souterrain) − sorties (ET, surface, souterrain). Le sens des échanges peut s\'inverser selon la saison.' },
+                  { q: 'Comment calculer un niveau piézométrique ?', r: 'H = Z_repère − d (d = profondeur mesurée jusqu\'à l\'eau)', expl: 'Un seul piézomètre renseigne sur sa formation et son emplacement, pas sur toute la zone humide. Connaître la cote du repère, la profondeur et la crépine.' },
+                  { q: 'Un gradient hydraulique donne-t-il un débit ?', r: 'Non — i = ΔH / L indique un potentiel d\'écoulement mais le débit nécessite aussi la perméabilité et la géométrie.', expl: 'i = ΔH / L. Il faut connaître la conductivité hydraulique et la section effective pour calculer un débit souterrain (loi de Darcy).' },
+                  { q: 'Saturation d\'un sol implique-t-elle imperméabilité ?', r: 'Non — un sol saturé peut transmettre de l\'eau si la perméabilité et les gradients le permettent.', expl: 'La saturation signifie que les pores sont remplis d\'eau. La transmission dépend de la perméabilité, de la structure des pores et des gradients hydrauliques.' },
+                  { q: 'Qu\'est-ce que l\'hydropériode ?', r: 'Le régime temporel de présence de l\'eau : fréquence, durée, saison, profondeur, vitesses de montée/baisse, variabilité inter-annuelle.', expl: 'Deux sites inondés le même nombre de jours annuels mais à des périodes différentes peuvent avoir des conséquences écologiques très différentes.' },
+                  { q: 'Différence entre fonction, service et usage d\'une zone humide ?', r: 'Fonction = processus (rétention d\'eau) ; service = bénéfice sociétal ; usage = pratique humaine (fauche, pâturage).', expl: 'Une fonction peut exister sans service identifié. Un usage peut être présent sans bon fonctionnement écologique. Le soutien d\'étiage n\'est pas universel.' },
+                ],
+                schema: `<svg viewBox="0 0 700 370" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="13">
+                <defs>
+                  <marker id="bl" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#1565C0"/></marker>
+                  <marker id="or" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#E65100"/></marker>
+                </defs>
+                <text x="350" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#1B5E20">Diagnostic fonctionnel d'une zone humide</text>
+                <!-- Entrees -->
+                <rect x="10" y="46" width="160" height="30" rx="5" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="90" y="66" text-anchor="middle" fill="#0D47A1" font-weight="bold">Pluie (P)</text>
+                <rect x="10" y="90" width="160" height="30" rx="5" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="90" y="110" text-anchor="middle" fill="#0D47A1" font-weight="bold">Apports de surface</text>
+                <rect x="10" y="134" width="160" height="30" rx="5" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="90" y="154" text-anchor="middle" fill="#0D47A1" font-weight="bold">Apports souterrains</text>
+                <!-- Fleches entrees -->
+                <line x1="170" y1="61" x2="226" y2="122" stroke="#1565C0" stroke-width="1.8" marker-end="url(#bl)"/>
+                <line x1="170" y1="105" x2="226" y2="135" stroke="#1565C0" stroke-width="1.8" marker-end="url(#bl)"/>
+                <line x1="170" y1="149" x2="226" y2="147" stroke="#1565C0" stroke-width="1.8" marker-end="url(#bl)"/>
+                <!-- Zone humide -->
+                <ellipse cx="350" cy="138" rx="122" ry="62" fill="#B2DFDB" stroke="#00695C" stroke-width="2.5"/>
+                <text x="350" y="124" text-anchor="middle" font-size="14" font-weight="bold" fill="#004D40">Zone humide</text>
+                <text x="350" y="142" text-anchor="middle" font-size="12" fill="#004D40">ΔS = entrees − sorties</text>
+                <text x="350" y="160" text-anchor="middle" font-size="11" fill="#00695C">sols · hydropériode · vegetation</text>
+                <!-- Fleches sorties -->
+                <line x1="474" y1="112" x2="530" y2="61" stroke="#E65100" stroke-width="1.8" marker-end="url(#or)"/>
+                <line x1="474" y1="135" x2="530" y2="105" stroke="#E65100" stroke-width="1.8" marker-end="url(#or)"/>
+                <line x1="474" y1="150" x2="530" y2="149" stroke="#E65100" stroke-width="1.8" marker-end="url(#or)"/>
+                <!-- Sorties -->
+                <rect x="530" y="46" width="160" height="30" rx="5" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="610" y="66" text-anchor="middle" fill="#BF360C" font-weight="bold">Evapotranspiration</text>
+                <rect x="530" y="90" width="160" height="30" rx="5" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="610" y="110" text-anchor="middle" fill="#BF360C" font-weight="bold">Sorties de surface</text>
+                <rect x="530" y="134" width="160" height="30" rx="5" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="610" y="154" text-anchor="middle" fill="#BF360C" font-weight="bold">Sorties souterraines</text>
+                <!-- Formules -->
+                <rect x="10" y="228" width="210" height="50" rx="6" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1.5"/>
+                <text x="115" y="250" text-anchor="middle" font-weight="bold" fill="#4A148C">Piezometre</text>
+                <text x="115" y="268" text-anchor="middle" font-size="12" fill="#4A148C">H = Z_repere − d</text>
+                <rect x="245" y="228" width="210" height="50" rx="6" fill="#E8EAF6" stroke="#283593" stroke-width="1.5"/>
+                <text x="350" y="250" text-anchor="middle" font-weight="bold" fill="#1A237E">Gradient hydraulique</text>
+                <text x="350" y="268" text-anchor="middle" font-size="12" fill="#1A237E">i = ΔH / L</text>
+                <rect x="480" y="228" width="210" height="50" rx="6" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5"/>
+                <text x="585" y="250" text-anchor="middle" font-weight="bold" fill="#1B5E20">Stockage</text>
+                <text x="585" y="268" text-anchor="middle" font-size="12" fill="#1B5E20">V = A × h</text>
+                <!-- Notes -->
+                <text x="350" y="316" text-anchor="middle" font-size="11" fill="#555">Sens des echanges variable selon la saison — connexion : sens + intensite + duree + conditions</text>
+                <text x="350" y="334" text-anchor="middle" font-size="11" fill="#555">Saturation ≠ impermeabilite · Fonction ≠ Service ≠ Usage · Perimetre fonctionnel > limite fonciere</text>
+              </svg>`,
+                exercice: {
+                  enonce: '(1) Une parcelle est sèche en surface en août. Peut-on conclure qu\'elle n\'est pas une zone humide ?\n(2) Citez les trois démarches relatives aux zones humides et précisez ce qui les distingue.\n(3) Sur une période, un site reçoit 3 000 m³ et en restitue 2 200 m³ (ET incluse dans les sorties). Calculez ΔS.\n(4) Le repère d\'un piézomètre est à 98,70 m. L\'eau est mesurée à 0,45 m sous ce repère. Calculez H.\n(5) Deux points comparables ont des charges de 98,25 m et 98,13 m, distants de 40 m. Calculez le gradient.\n(6) Un sol est saturé. Peut-il encore transmettre de l\'eau ? Justifiez.\n(7) Une zone humide reste en eau au printemps. Peut-on affirmer qu\'elle soutient l\'étiage en août ?\n(8) Un fossé traverse une prairie humide. Son comblement est-il automatiquement bénéfique ?',
+                  solution: '<strong>(1)</strong> Non — il faut examiner les sols, la végétation et les critères applicables (L.211-1 CE) ; une visite sèche ne suffit pas à exclure le caractère humide.<br><strong>(2)</strong> Identification (indices), délimitation (périmètre réglementaire), diagnostic fonctionnel (mécanismes et fonctions) — objectifs distincts même si les données peuvent être partagées.<br><strong>(3)</strong> ΔS = 3 000 − 2 200 = <strong>800 m³</strong> — le stock augmente.<br><strong>(4)</strong> H = 98,70 − 0,45 = <strong>98,25 m</strong> dans le référentiel utilisé.<br><strong>(5)</strong> i = 0,12 / 40 = <strong>0,003</strong> — potentiel d\'écoulement de A vers B (ne donne pas un débit).<br><strong>(6)</strong> Oui — la saturation signifie que les pores sont remplis d\'eau ; la circulation dépend de la perméabilité et des gradients.<br><strong>(7)</strong> Non — il faut connaître les échanges, les stocks disponibles, les sorties et l\'évapotranspiration pendant la période concernée.<br><strong>(8)</strong> Non — il faut vérifier son rôle, les effets sur les terrains voisins, les usages, les habitats et les autres connexions avant de proposer une action.',
+                },
+              }, // fin gem-zh1
+
+              {
+                id: 'gem-zh2',
+                titre: 'Restauration hydrologique des zones humides',
+                fiche: {
+                  intro: 'Restaurer une zone humide hydrologique ne signifie pas nécessairement inonder davantage en permanence. La restauration vise à rétablir un régime hydrique compatible avec les fonctions du milieu, sans provoquer de nouveaux désordres sur le site ou les terrains voisins. Ce chapitre utilise le diagnostic fonctionnel pour préparer une restauration : définir un objectif mesurable, identifier la cause de dégradation, choisir une intervention adaptée et concevoir un suivi permettant de distinguer effets des travaux et variations climatiques.',
+                  points: [
+                    '🎯 Restauration hydrologique : rétablir les alimentations, sorties, connexions, niveaux, durées d\'engorgement, périodes d\'inondation et fluctuations saisonnières — ne se limite pas à une remise en eau visible.',
+                    '⚖️ Distinguer restauration (rétablir fonctions altérées d\'un milieu existant), création (nouveau milieu humide), gestion (maintenir ou orienter un fonctionnement) et réhabilitation partielle (retrouver certaines fonctions sans reconstituer toutes les caractéristiques antérieures).',
+                    '🔍 Vérifier la cause de dégradation : drainage superficiel ou enterré, incision d\'un cours d\'eau, interruption d\'alimentation, pompage, remblaiement, modification d\'exutoire, changement de gestion — plusieurs facteurs peuvent agir ensemble.',
+                    '📊 Bilan avant/après travaux : ΔS = V_entrées − V_sorties — neutraliser un fossé peut réduire certaines sorties sans rétablir les apports manquants et sans créer de nouvelles précipitations.',
+                    '📅 Régime hydrique recherché : niveau hivernal, baisse printanière, minima estivaux, reprise automnale, épisodes de submersion — viser un calendrier de fonctionnement, pas seulement une cote moyenne.',
+                    '🔧 Six familles d\'intervention : neutralisation de fossé, traitement de drains enterrés, reconnexion au cours d\'eau, adaptation d\'un exutoire, restauration du cours d\'eau voisin, modification des pratiques de gestion.',
+                    '📐 Stockage dans le sol : ΔV = A × e × Δθ — A = superficie, e = épaisseur, Δθ = variation de teneur en eau volumique — cette estimation ne donne pas directement un débit restitué.',
+                    '💧 Qualité de l\'alimentation : quantité, saisonnalité, température, composition, matières en suspension — un milieu pauvre en nutriments peut être dégradé par une eau plus riche même si son humidité augmente.',
+                    '🌿 Tourbières : drainage favorise oxydation de la matière organique, émissions de carbone, affaissement — la remise en eau limite la dégradation mais ne reconstitue pas immédiatement la tourbe perdue.',
+                    '🚜 Chantier sur sols sensibles : risques de tassement, orniérage, pollution et dispersion d\'espèces envahissantes — définir accès, zones de circulation, portance, matériels adaptés, phasage et conditions d\'arrêt.',
+                    '📋 Effets sur les usages : portance des sols, dates d\'accès, pratiques de fauche et pâturage, niveaux près des bâtiments — anticiper avec les personnes concernées avant les travaux.',
+                    '📈 Suivi avant-après avec site témoin : ΔS_comparative = variation site restauré − variation témoin — une hausse des niveaux après travaux peut aussi résulter d\'une année plus pluvieuse.',
+                  ],
+                  formules: [
+                    'Bilan hydrique avant travaux : ΔS = V_entrées − V_sorties — ex. 5 000 − 5 600 = −600 m³ (déstockage) ; après action sur sorties : 5 000 − 5 200 = −200 m³ (déstockage réduit mais persistant)',
+                    'Stockage dans le sol : ΔV = A × e × Δθ — A = superficie (m²), e = épaisseur concernée (m), Δθ = variation de teneur en eau volumique ; ex. 20 000 m² × 0,40 m × 0,10 = 800 m³',
+                    'Comparaison avant-après avec témoin : ΔS_comparative = variation site restauré − variation témoin ; ex. +0,25 m − +0,10 m = +0,15 m (suggère réponse supplémentaire liée aux travaux)',
+                  ],
+                  retenir: 'Restaurer ≠ inonder en permanence. L\'intervention doit traiter une cause démontrée. Réduire le drainage ne crée pas de nouvelles ressources en eau. Calendrier hydrologique > cote moyenne. Connexion peut apporter une eau inadaptée. Drains et exutoires peuvent concerner plusieurs propriétés. Tourbières drainées : remise en eau limite la dégradation mais ne reconstitue pas la tourbe. ΔV = A × e × Δθ (stockage sol). Suivi avant-après avec témoin météorologique.',
+                  sections: [
+                    {
+                      titre: 'Définir l\'objectif et la référence',
+                      ss: [
+                        {
+                          titre: 'Restauration, création et gestion',
+                          texte: 'La restauration hydrologique vise à rétablir des caractéristiques du régime de l\'eau qui ont été altérées. Elle peut concerner les alimentations, les sorties, les connexions, les niveaux, les durées d\'engorgement, les périodes d\'inondation ou les fluctuations saisonnières. Elle se distingue de la création (mettre en place un nouveau milieu) et de la gestion (maintenir ou orienter un fonctionnement). Un état ancien ne peut pas toujours être reconstitué : l\'extraction de tourbe, l\'affaissement des sols ou l\'urbanisation peuvent avoir modifié durablement le site.',
+                        },
+                        {
+                          titre: 'Formuler des objectifs mesurables',
+                          texte: 'Un objectif doit préciser la fonction visée, le secteur, la période, la variable suivie et les limites à respecter. Exemple : réduire l\'assèchement printanier précoce dans les secteurs bas, sans créer de submersion permanente ni perturber le réseau voisin. Il n\'existe pas une profondeur de nappe idéale applicable à toutes les zones humides. Les valeurs cibles doivent être justifiées localement. Il faut aussi examiner les conséquences pour les usages et les terrains voisins.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Causes de dégradation et familles d\'intervention',
+                      ss: [
+                        {
+                          titre: 'Identifier la cause de dégradation',
+                          texte: 'Les causes possibles comprennent : drainage superficiel ou enterré, incision d\'un cours d\'eau, interruption d\'une alimentation, pompage, remblaiement, modification d\'un exutoire, changement de gestion d\'un ouvrage, évolution des pratiques. Plusieurs facteurs peuvent agir ensemble. Une zone humide qui s\'assèche plus tôt peut avoir un fossé drainant ET une réduction des apports du versant. Neutraliser le fossé peut ralentir les sorties sans rétablir les apports manquants. L\'intervention doit agir sur un mécanisme suffisamment étayé par le diagnostic.',
+                        },
+                        {
+                          titre: 'Six familles d\'intervention',
+                          texte: 'La neutralisation d\'un fossé cherche à réduire une évacuation artificielle (vérifier contournement et effets voisins). Le traitement de drains enterrés nécessite d\'identifier le réseau réel et ses connexions. La reconnexion au cours d\'eau rétablit certains échanges (vérifier niveaux, qualité et saisonnalité). L\'adaptation d\'un exutoire modifie le régime de sortie (vérifier capacité et débordements). La restauration du cours d\'eau voisin peut réduire un effet drainant. La modification des pratiques réduit une pression sans travaux lourds.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Bilan hydrique et régime recherché',
+                      ss: [
+                        {
+                          titre: 'Comprendre le bilan avant et après travaux',
+                          texte: 'ΔS = V_entrées − V_sorties. Si une action réduit les sorties de 400 m³ alors que ΔS initial était de −600 m³, le nouveau ΔS est −200 m³ : le déstockage est réduit mais persiste. Neutraliser un fossé ne crée pas de nouvelles précipitations. En réalité, une modification du niveau peut aussi modifier les autres flux : le calcul constitue un premier raisonnement, pas une prévision complète. La qualité de l\'alimentation doit aussi être vérifiée : un milieu pauvre en nutriments peut être dégradé par une eau plus riche.',
+                        },
+                        {
+                          titre: 'Régime hydrique recherché et tourbières',
+                          texte: 'Une cote moyenne ne suffit pas à décrire le régime. Il faut examiner le niveau hivernal, la baisse printanière, les minima estivaux, la reprise automnale, les épisodes de submersion et les années sèches. La restauration doit viser un calendrier de fonctionnement compatible avec les habitats, pas seulement une hauteur d\'eau. Dans les tourbières, le drainage favorise l\'oxydation de la matière organique, les émissions de carbone et l\'affaissement. La remise en eau limite la dégradation, mais la reconstitution de la tourbe s\'inscrit dans une temporalité longue.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Chantier sur sols sensibles et qualité de l\'eau',
+                      ss: [
+                        {
+                          titre: 'Organiser un chantier sur sols humides',
+                          texte: 'Un chantier peut dégrader le milieu qu\'il cherche à restaurer par tassement, orniérage, création de chemins d\'écoulement, pollution, destruction de végétation ou dispersion d\'espèces envahissantes. La préparation doit définir les accès, les zones de circulation, la portance, les matériels adaptés, le stockage des matériaux, le phasage et les conditions d\'arrêt. Une faible pression au sol constitue un paramètre utile mais ne garantit pas à elle seule l\'absence d\'impact. Un dispositif provisoire mal conçu peut créer un écoulement concentré ou une submersion imprévue.',
+                        },
+                        {
+                          titre: 'Effets sur les usages et les terrains voisins',
+                          texte: 'La restauration peut modifier la portance des sols, les dates d\'accès, les pratiques de fauche et de pâturage, les conditions de circulation, les niveaux près des bâtiments et le fonctionnement de réseaux. Ces effets doivent être anticipés avec les personnes concernées. Un bénéfice écologique sur le site ne dispense pas d\'examiner les conséquences au-delà de ses limites. Il faut identifier les propriétaires, les exploitants, les accords fonciers et les responsabilités futures, notamment pour les réseaux partagés.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Suivi et évaluation des résultats',
+                      ss: [
+                        {
+                          titre: 'Concevoir le suivi avant les travaux',
+                          texte: 'L\'état initial est indispensable. Les indicateurs peuvent porter sur les niveaux (chroniques piézométriques), l\'hydropériode (durée et saison de saturation), les échanges (entrées, sorties, gradients), les sols, la végétation (composition et trajectoire), les usages et les effets voisins. Les mesures doivent répondre aux objectifs. Un programme de suivi doit associer chaque mesure à une question précise. Un phasage progressif peut permettre de vérifier une hypothèse et d\'ajuster l\'étape suivante.',
+                        },
+                        {
+                          titre: 'Distinguer effets des travaux et variations climatiques',
+                          texte: 'Une hausse des niveaux après travaux ne démontre pas à elle seule leur efficacité : elle peut résulter d\'une année plus pluvieuse. Une comparaison avant-après avec un secteur témoin comparable peut aider. ΔS_comparative = variation site restauré − variation témoin. Les réponses hydrologiques et biologiques ont des temporalités différentes : une végétation qui n\'évolue pas immédiatement ne signifie pas un échec. Il faut poursuivre un suivi adapté et vérifier les autres facteurs limitants avant de conclure.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quelle différence entre restauration et création d\'une zone humide ?', r: 'Restauration = rétablir des fonctions altérées d\'un milieu existant ; création = mettre en place un nouveau milieu humide.', expl: 'Creuser une mare dans une prairie drainée ne restaure pas nécessairement le fonctionnement de toute la prairie. Il faut expliciter ce qui restera différent de la référence.' },
+                  { q: 'Neutraliser un fossé suffit-il à restaurer une zone humide ?', r: 'Pas nécessairement — cela réduit certaines sorties mais ne rétablit pas les apports manquants ni ne crée de nouvelles précipitations.', expl: 'Si la dégradation résulte de plusieurs facteurs (drainage + réduction des apports), neutraliser le fossé seul peut s\'avérer insuffisant. L\'intervention doit traiter la cause principale.' },
+                  { q: 'Comment formuler un objectif de restauration mesurable ?', r: 'Préciser : la fonction visée, le secteur, la période, la variable suivie et les limites à respecter.', expl: 'Pas une cote idéale universelle — les valeurs cibles doivent être justifiées localement selon les habitats recherchés et les contraintes du site.' },
+                  { q: 'Formule de stockage dans le sol ?', r: 'ΔV = A × e × Δθ (A superficie, e épaisseur, Δθ variation de teneur en eau volumique)', expl: 'Ex. 20 000 m² × 0,40 m × 0,10 = 800 m³. Cette estimation ne garantit pas un volume de soutien d\'étiage : dépend des gradients et des conditions d\'écoulement.' },
+                  { q: 'Pourquoi vérifier la qualité de l\'eau avant de rétablir une alimentation ?', r: 'Un milieu pauvre en nutriments peut être dégradé par une eau plus riche même si cette alimentation augmente son humidité.', expl: 'Saisonnalité, température, composition et matières en suspension doivent être compatibles avec le milieu. Une connexion peut aussi introduire des espèces indésirables.' },
+                  { q: 'Quel est l\'effet du drainage sur une tourbière ?', r: 'Il favorise l\'oxydation de la matière organique, les émissions de carbone, l\'affaissement et la transformation de la végétation.', expl: 'La remise en eau limite la dégradation mais ne reconstitue pas immédiatement la tourbe. Le retour de processus d\'accumulation s\'inscrit dans une temporalité longue.' },
+                  { q: 'Comment distinguer l\'effet des travaux d\'une variation climatique dans le suivi ?', r: 'Comparer avec un secteur témoin : ΔS_comparative = variation site restauré − variation témoin.', expl: 'Une hausse des niveaux peut résulter d\'une année plus pluvieuse. La comparaison avec un témoin comparable permet de mieux attribuer les changements observés.' },
+                  { q: 'Que risque-t-on en ignorant les effets voisins d\'une restauration ?', r: 'Modifier les niveaux, la portance, les accès ou les usages de terrains hors périmètre sans l\'avoir anticipé avec les personnes concernées.', expl: 'Un réseau de drains ou un exutoire partagé peut affecter des parcelles voisines. Les accords fonciers et responsabilités futures doivent être établis avant les travaux.' },
+                ],
+                schema: `<svg viewBox="0 0 700 360" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="13">
+                <defs>
+                  <marker id="gr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#2E7D32"/></marker>
+                  <marker id="rd" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#C62828"/></marker>
+                </defs>
+                <text x="350" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#1B5E20">Restauration hydrologique — familles d'intervention</text>
+                <!-- Zone humide avant -->
+                <rect x="10" y="40" width="300" height="100" rx="8" fill="#FFEBEE" stroke="#C62828" stroke-width="2"/>
+                <text x="160" y="64" text-anchor="middle" font-weight="bold" fill="#B71C1C">Avant : desequilibre</text>
+                <text x="160" y="82" text-anchor="middle" font-size="12" fill="#C62828">ΔS = V_entrees − V_sorties &lt; 0</text>
+                <text x="160" y="100" text-anchor="middle" font-size="11" fill="#C62828">drainage · incision · interruption alimentation</text>
+                <text x="160" y="118" text-anchor="middle" font-size="11" fill="#C62828">ex. 5 000 − 5 600 = −600 m³</text>
+                <!-- Fleche vers apres -->
+                <line x1="320" y1="90" x2="380" y2="90" stroke="#555" stroke-width="2" marker-end="url(#gr)"/>
+                <text x="350" y="84" text-anchor="middle" font-size="11" fill="#555">action</text>
+                <!-- Zone humide apres -->
+                <rect x="390" y="40" width="300" height="100" rx="8" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+                <text x="540" y="64" text-anchor="middle" font-weight="bold" fill="#1B5E20">Apres : equilibre ameliore</text>
+                <text x="540" y="82" text-anchor="middle" font-size="12" fill="#2E7D32">ΔS = V_entrees − V_sorties reduit</text>
+                <text x="540" y="100" text-anchor="middle" font-size="11" fill="#2E7D32">regime hydrique retrouve</text>
+                <text x="540" y="118" text-anchor="middle" font-size="11" fill="#2E7D32">ex. 5 000 − 5 200 = −200 m³</text>
+                <!-- Six familles -->
+                <text x="350" y="170" text-anchor="middle" font-weight="bold" fill="#1B5E20">Six familles d'intervention</text>
+                <rect x="10" y="182" width="200" height="32" rx="5" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="110" y="202" text-anchor="middle" font-size="12" fill="#0D47A1">Neutraliser un fosse</text>
+                <rect x="220" y="182" width="200" height="32" rx="5" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.5"/>
+                <text x="320" y="202" text-anchor="middle" font-size="12" fill="#1B5E20">Traiter les drains enterres</text>
+                <rect x="430" y="182" width="260" height="32" rx="5" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="560" y="202" text-anchor="middle" font-size="12" fill="#BF360C">Reconnecter au cours d'eau</text>
+                <rect x="10" y="224" width="200" height="32" rx="5" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1.5"/>
+                <text x="110" y="244" text-anchor="middle" font-size="12" fill="#4A148C">Adapter l'exutoire</text>
+                <rect x="220" y="224" width="200" height="32" rx="5" fill="#E8EAF6" stroke="#283593" stroke-width="1.5"/>
+                <text x="320" y="244" text-anchor="middle" font-size="12" fill="#1A237E">Restaurer le cours d'eau</text>
+                <rect x="430" y="224" width="260" height="32" rx="5" fill="#FBE9E7" stroke="#BF360C" stroke-width="1.5"/>
+                <text x="560" y="244" text-anchor="middle" font-size="12" fill="#BF360C">Modifier les pratiques</text>
+                <!-- Formules bas -->
+                <rect x="10" y="278" width="320" height="50" rx="6" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5"/>
+                <text x="170" y="298" text-anchor="middle" font-weight="bold" fill="#1B5E20">Stockage dans le sol</text>
+                <text x="170" y="318" text-anchor="middle" font-size="12" fill="#1B5E20">ΔV = A × e × Δθ</text>
+                <rect x="360" y="278" width="330" height="50" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="525" y="298" text-anchor="middle" font-weight="bold" fill="#0D47A1">Suivi comparatif</text>
+                <text x="525" y="318" text-anchor="middle" font-size="12" fill="#0D47A1">Δ_comp = Δ_restaure − Δ_temoin</text>
+              </svg>`,
+                exercice: {
+                  enonce: '(1) « Boucher tous les fossés » est-il un objectif de restauration ?\n(2) Un site reçoit 4 000 m³ et perd 4 800 m³. Calculez ΔS. Une action réduit les sorties de 400 m³ : quel est le nouveau ΔS ?\n(3) Pour 1 ha, une épaisseur de 0,50 m et Δθ = 0,08. Calculez ΔV.\n(4) Une zone humide pauvre en nutriments manque d\'eau. Peut-on lui apporter directement une eau riche en nutriments ?\n(5) Un collecteur traverse le site mais dessert aussi une parcelle voisine. Peut-on l\'obturer sans accord ?\n(6) Après travaux, le niveau moyen augmente de 20 cm. Dans un témoin, il augmente de 12 cm. Calculez la différence comparative.\n(7) Une prairie humide devient un plan d\'eau permanent après intervention. Est-ce nécessairement une réussite ?\n(8) Le niveau remonte après les travaux mais la végétation n\'évolue pas encore. Peut-on conclure à un échec écologique ?',
+                  solution: '<strong>(1)</strong> Non — c\'est une famille d\'actions, pas un objectif. L\'objectif doit décrire le fonctionnement à rétablir et les conditions à respecter.<br><strong>(2)</strong> ΔS = 4 000 − 4 800 = <strong>−800 m³</strong> (déstockage). Après action : ΔS = 4 000 − 4 400 = <strong>−400 m³</strong> (réduit mais persistant).<br><strong>(3)</strong> ΔV = 10 000 × 0,50 × 0,08 = <strong>400 m³</strong> — estimation homogène, pas un volume garanti de soutien d\'étiage.<br><strong>(4)</strong> Pas sans analyse — l\'apport peut modifier fortement les sols, la végétation et les habitats du milieu pauvre en nutriments.<br><strong>(5)</strong> Non — il faut établir son fonctionnement, les droits et les conséquences pour les autres terrains concernés.<br><strong>(6)</strong> Δ_comparative = 20 − 12 = <strong>8 cm</strong> — suggère une réponse supplémentaire liée aux travaux, à interpréter avec les conditions de comparaison.<br><strong>(7)</strong> Non — une prairie humide permanentement submergée peut perdre les habitats et les espèces que la restauration visait à préserver.<br><strong>(8)</strong> Pas immédiatement — les réponses hydrologiques et biologiques ont des temporalités différentes ; poursuivre le suivi et vérifier les autres facteurs.',
+                },
+              }, // fin gem-zh2
+
+              {
+                id: 'gem-zh3',
+                titre: 'Les zones d\'expansion des crues',
+                fiche: {
+                  intro: 'La superficie d\'une zone d\'expansion des crues ne suffit pas à évaluer son efficacité. Il faut comprendre quand l\'eau entre, combien de temps elle reste, par où elle ressort et ce qui se passe ailleurs dans le bassin. Ce chapitre relie la géométrie, les échanges et le calendrier de fonctionnement d\'une zone d\'expansion aux bénéfices attendus, aux effets locaux et aux conditions de gestion.',
+                  points: [
+                    '🌊 Zone d\'expansion des crues : espace de transit, de stockage temporaire et de ralentissement en lit majeur — préservation (maintenir une fonction existante), restauration (rétablir une fonction altérée) et augmentation du stockage sont trois démarches distinctes.',
+                    '📐 Volume stocké en fonction du niveau : V = f(Z) — pour une surface plane simplifiée : V = A × h ; sur terrain réel la surface inondée augmente avec le niveau — utiliser la topographie.',
+                    '📊 Volume disponible : V_disponible = V_limite − V_initial — ex. 30 000 − 8 000 = 22 000 m³ — la cote limite doit être justifiée (topographie, ouvrage, contrainte).',
+                    '⏱️ Bilan dynamique : dV/dt = Q_entrant − Q_sortant — si Q_entr > Q_sort le volume augmente ; si Q_entr < Q_sort il diminue — le stockage est une accumulation de différences de débit dans le temps.',
+                    '📈 Hydrogramme Q = f(t) : deux crues à même pointe peuvent avoir des volumes très différents — durée, vitesse de montée, forme, pointes successives et conditions initiales influencent tous la réponse.',
+                    '⚠️ Remplissage trop précoce : si la zone se remplit avant la pointe, elle ne dispose plus de capacité au moment où le stockage serait utile — le bon volume doit être accessible au bon moment.',
+                    '🔢 Écrêtement théorique : pour un dépassement triangulaire de hauteur ΔQ et de durée T, V = ½ × ΔQ × T — approximation de bilan, pas un dimensionnement complet.',
+                    '📉 Réduction de pointe : R_Q = (Q_max,réf − Q_max,projet) / Q_max,réf × 100 — une réduction de 10 % du débit ≠ 10 % de baisse de niveau ≠ 10 % de réduction des dommages.',
+                    '🔄 Restitution et crues successives : l\'eau stockée doit être évacuée — une restitution différée peut prolonger les débits élevés ; une seconde crue avant vidange réduit le volume disponible.',
+                    '🗺️ Synchronisation avec les affluents : retarder une contribution peut éloigner ou rapprocher deux pointes selon les temps de propagation — ne jamais additionner les maxima des affluents comme s\'ils survenaient simultanément.',
+                    '🌿 Fonctions écologiques : préservation ou reconnexion du lit majeur peut favoriser certains habitats et dynamiques alluviales, mais les effets dépendent de la saison, durée, vitesses, sédiments et qualité de l\'eau.',
+                    '🌾 Activité agricole : effets dépendent de la saison, culture, durée de submersion, vitesses, dépôts et temps de ressuyage — anticiper avec les exploitants et identifier les mécanismes d\'indemnisation (art. L.211-12).',
+                  ],
+                  formules: [
+                    'Stockage géométrique : V = A × h — A = superficie (m²), h = hauteur moyenne (m) ; ex. 5 ha (50 000 m²) × 0,40 m = 20 000 m³',
+                    'Volume disponible : V_dispo = V_limite − V_initial — ex. 30 000 − 8 000 = 22 000 m³ (la mobilisation dépend des échanges pendant l\'événement)',
+                    'Bilan dynamique : dV/dt = Q_entrant − Q_sortant ; accroissement pendant Δt : ΔV = (Q_entr − Q_sort) × Δt — ex. apport net 4 m³/s pendant 30 min → ΔV = 4 × 1 800 = 7 200 m³',
+                    'Réduction de pointe : R_Q = (Q_max,réf − Q_max,projet) / Q_max,réf × 100 — ex. (80 − 72) / 80 × 100 = 10 % (≠ réduction proportionnelle de niveau ou de dommages)',
+                  ],
+                  retenir: 'Zone d\'expansion ≠ réservoir dimensionné — préserver, restaurer et augmenter sont trois démarches distinctes. V = A × h (stockage). V_dispo = V_limite − V_initial. dV/dt = Q_entr − Q_sort. Moment du remplissage déterminant. Restitution peut aggraver une seconde crue. Retarder une pointe peut éloigner ou rapprocher la synchronisation avec un affluent. R_Q ≠ réduction proportionnelle de niveau. Effets agricoles et fonciers font partie du projet.',
+                  sections: [
+                    {
+                      titre: 'Définir et délimiter la zone d\'expansion',
+                      ss: [
+                        {
+                          titre: 'Préservation, restauration et augmentation du stockage',
+                          texte: 'Préserver consiste à maintenir une fonction existante (éviter un remblaiement). Restaurer consiste à rétablir une fonction altérée (réouvrir une connexion interrompue). Augmenter artificiellement le stockage consiste à modifier les conditions pour retenir davantage d\'eau. Ces démarches ont des conséquences différentes. Une zone qui fonctionne déjà contribue à la situation actuelle : son volume ne peut pas être compté intégralement comme un bénéfice supplémentaire d\'un nouveau projet. Il faut toujours définir la situation de référence.',
+                        },
+                        {
+                          titre: 'Délimiter le système hydraulique',
+                          texte: 'Le périmètre d\'étude comprend généralement le cours d\'eau, l\'espace d\'expansion, les entrées et sorties, les affluents concernés, les remblais et infrastructures, les secteurs pouvant subir un remous et les enjeux à l\'aval. Il faut repérer les passages peu visibles : buses, fossés, ouvrages sous voirie, dépressions, ouvertures dans les remblais. Une route peut séparer deux compartiments apparemment continus sur une carte. Leur fonctionnement dépend alors des passages disponibles.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Volume disponible et bilan dynamique',
+                      ss: [
+                        {
+                          titre: 'Volume stocké et volume disponible',
+                          texte: 'Le volume stocké varie avec le niveau : V = f(Z). Pour une surface plane simplifiée : V = A × h. Sur terrain réel, la surface inondée augmente souvent avec le niveau et la topographie doit être utilisée. Le volume disponible avant l\'événement est : V_dispo = V_limite − V_initial. La cote limite doit être justifiée par la topographie, un niveau admissible ou le fonctionnement des ouvrages. Ce volume disponible ne garantit pas qu\'il sera entièrement mobilisé pendant l\'événement.',
+                        },
+                        {
+                          titre: 'Bilan dynamique et hydrogramme',
+                          texte: 'dV/dt = Q_entrant − Q_sortant. Pendant 30 minutes avec un apport net constant de 4 m³/s : ΔV = 4 × 30 × 60 = 7 200 m³. Deux crues à même pointe peuvent avoir des durées très différentes. L\'hydrogramme décrit la forme et la durée de la crue : vitesse de montée, volume total, pointes successives, conditions initiales. Un projet testé uniquement sur une crue courte peut être moins performant pour une crue longue à même débit de pointe.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Moment du remplissage et synchronisation',
+                      ss: [
+                        {
+                          titre: 'Importance du moment du remplissage',
+                          texte: 'Un espace qui commence à stocker dès les premiers débordements peut se remplir avant l\'arrivée du maximum. Au moment de la pointe, il peut ne plus disposer que d\'une faible capacité supplémentaire. À l\'inverse, une connexion qui s\'active trop tard peut laisser passer la pointe avant de mobiliser le volume. Il faut donc examiner : le niveau d\'activation, la capacité d\'entrée, le volume disponible, l\'évolution du débit et les sorties pendant le remplissage. Le bon volume doit être accessible au moment où il est utile.',
+                        },
+                        {
+                          titre: 'Restitution et synchronisation avec les affluents',
+                          texte: 'L\'eau stockée doit ensuite être évacuée. Une restitution différée peut prolonger les débits élevés et aggraver une autre pointe arrivant plus tard. Il faut tester une succession d\'événements : si la première crue remplit partiellement la zone, la seconde dispose d\'un volume disponible réduit. La synchronisation avec les affluents doit être vérifiée : retarder la pointe d\'un cours d\'eau peut améliorer ou aggraver la situation après une confluence. Les maxima des affluents ne doivent pas être additionnés comme s\'ils survenaient nécessairement au même instant.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Évaluer les effets et les conséquences',
+                      ss: [
+                        {
+                          titre: 'Quantifier le bénéfice hydraulique',
+                          texte: 'Un indicateur simple : R_Q = (Q_max,réf − Q_max,projet) / Q_max,réf × 100. Pour Q_max,réf = 80 m³/s et Q_max,projet = 72 m³/s, R_Q = 10 %. Ce résultat ne signifie pas 10 % de baisse de niveau, ni 10 % de réduction de surface inondée, ni 10 % de réduction des dommages. Ces effets doivent être calculés ou évalués séparément. L\'analyse doit porter sur les niveaux amont, les hauteurs dans l\'espace mobilisé, les vitesses aux entrées/sorties, les routes, bâtiments isolés, réseaux, berges et secteurs aval.',
+                        },
+                        {
+                          titre: 'Fonctions écologiques et activité agricole',
+                          texte: 'La préservation ou la reconnexion d\'un lit majeur peut favoriser certains habitats et dynamiques alluviales, mais les effets dépendent de la saison, durée, vitesses, sédiments et qualité de l\'eau. Les conséquences agricoles dépendent du moment du cycle cultural, de la durée de submersion, des dépôts et du temps de ressuyage. L\'article L.211-12 prévoit un cadre de servitudes pour certains espaces dont la capacité est artificiellement accrue — ce dispositif ne s\'applique pas automatiquement à toute zone naturellement inondable. Les dommages naturels et les conséquences supplémentaires du projet doivent être distingués.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Comparer les variantes et organiser le suivi',
+                      ss: [
+                        {
+                          titre: 'Comparer des variantes complètes',
+                          texte: 'Les variantes possibles : préservation de l\'existant (éviter une perte de fonction), reconnexion (retrouver une fonction interrompue), augmentation du stockage (gain potentiel pour certains événements), réduction de vulnérabilité (limiter les conséquences sur les enjeux), combinaison d\'actions. Les coûts doivent inclure études, foncier, travaux, entretien, suivi et conséquences à gérer. Plusieurs scénarios doivent être testés : crue courte, crue longue, événements successifs, niveau aval élevé, état initial humide, obstruction partielle.',
+                        },
+                        {
+                          titre: 'Organiser le suivi du fonctionnement',
+                          texte: 'Le suivi peut comprendre : niveau dans la zone, niveau du cours d\'eau, début et fin de connexion, débits si mesurables, durée de submersion, étendue inondée, dépôts et érosions, dommages et conditions de remise en état. Il faut comparer les observations aux hypothèses du projet. Un quartier non inondé après travaux ne démontre pas à lui seul l\'efficacité de l\'aménagement : l\'événement aurait peut-être été non dommageable sans lui. L\'objectif n\'est pas de promettre une protection absolue mais de préciser pour quelles situations le projet apporte un bénéfice.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Différence entre préserver, restaurer et augmenter le stockage ?', r: 'Préserver = maintenir l\'existant ; restaurer = rétablir une fonction altérée ; augmenter = modifier les conditions pour retenir davantage — trois démarches aux conséquences différentes.', expl: 'Un volume déjà fonctionnel ne peut pas être compté intégralement comme bénéfice supplémentaire d\'un nouveau projet. Définir la situation de référence est indispensable.' },
+                  { q: 'Formule du volume stocké en surface ?', r: 'V = A × h (A = superficie, h = hauteur moyenne) ; sur terrain réel utiliser la topographie.', expl: 'Ex. 5 ha × 0,40 m = 20 000 m³. Sur terrain réel, la surface inondée croît avec le niveau. L\'hypothèse d\'un plan d\'eau horizontal peut être insuffisante lors d\'écoulements importants.' },
+                  { q: 'Comment calculer le volume disponible ?', r: 'V_dispo = V_limite − V_initial (la zone peut déjà contenir de l\'eau avant la crue).', expl: 'Ex. 30 000 − 8 000 = 22 000 m³. La cote limite doit être justifiée : topographie, niveau admissible ou fonctionnement des ouvrages.' },
+                  { q: 'Formule du bilan dynamique d\'une zone de stockage ?', r: 'dV/dt = Q_entrant − Q_sortant — ΔV = (Q_entr − Q_sort) × Δt', expl: 'Ex. apport net 4 m³/s pendant 30 min → ΔV = 4 × 1 800 = 7 200 m³. Le stockage est une accumulation de différences de débit dans le temps.' },
+                  { q: 'Pourquoi le moment du remplissage est-il déterminant ?', r: 'Si la zone se remplit avant la pointe, elle ne dispose plus de capacité utile au moment critique — le bon volume doit être accessible au bon moment.', expl: 'Une connexion qui s\'active trop tard peut aussi laisser passer la pointe. Examiner le niveau d\'activation, la capacité d\'entrée, le volume disponible et les sorties pendant le remplissage.' },
+                  { q: 'Que signifie R_Q = 10 % ?', r: 'Réduction de 10 % du débit de pointe — ne signifie pas automatiquement 10 % de baisse de niveau ni 10 % de réduction des dommages.', expl: 'R_Q = (Q_max,réf − Q_max,projet) / Q_max,réf × 100. Les effets sur les niveaux, surfaces inondées et dommages doivent être calculés séparément.' },
+                  { q: 'Pourquoi vérifier la synchronisation avec les affluents ?', r: 'Retarder une pointe peut éloigner ou rapprocher deux pointes selon les temps de propagation — l\'effet à la confluence n\'est pas automatiquement bénéfique.', expl: 'Les maxima des affluents ne doivent pas être additionnés comme s\'ils survenaient nécessairement au même instant. L\'évaluation doit se faire à l\'échelle du réseau pertinent.' },
+                  { q: 'Art. L.211-12 et zones d\'expansion des crues ?', r: 'Cadre de servitudes pour certains espaces dont la capacité est artificiellement accrue — ne s\'applique pas automatiquement à toute zone naturellement inondable.', expl: 'Distinguer dommages naturels et conséquences supplémentaires du projet. Les mécanismes d\'indemnisation, leurs conditions et les responsabilités doivent être établis dans le cadre adapté.' },
+                ],
+                schema: `<svg viewBox="0 0 700 360" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="13">
+                <defs>
+                  <marker id="bl2" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#1565C0"/></marker>
+                </defs>
+                <text x="350" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#0D47A1">Zones d'expansion des crues — fonctionnement</text>
+                <!-- Cours d'eau -->
+                <rect x="10" y="50" width="120" height="120" rx="8" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+                <text x="70" y="100" text-anchor="middle" font-weight="bold" fill="#0D47A1">Cours</text>
+                <text x="70" y="118" text-anchor="middle" font-weight="bold" fill="#0D47A1">d'eau</text>
+                <text x="70" y="136" text-anchor="middle" font-size="11" fill="#1565C0">Q = f(t)</text>
+                <text x="70" y="154" text-anchor="middle" font-size="11" fill="#1565C0">hydrogramme</text>
+                <!-- Fleche connexion -->
+                <line x1="130" y1="110" x2="190" y2="110" stroke="#1565C0" stroke-width="2" marker-end="url(#bl2)"/>
+                <text x="160" y="104" text-anchor="middle" font-size="11" fill="#1565C0">entrée</text>
+                <!-- Zone expansion -->
+                <rect x="190" y="50" width="320" height="120" rx="8" fill="#B2DFDB" stroke="#00695C" stroke-width="2.5"/>
+                <text x="350" y="88" text-anchor="middle" font-size="14" font-weight="bold" fill="#004D40">Zone d'expansion</text>
+                <text x="350" y="108" text-anchor="middle" font-size="12" fill="#004D40">dV/dt = Q_entr − Q_sort</text>
+                <text x="350" y="126" text-anchor="middle" font-size="11" fill="#00695C">V = A × h</text>
+                <text x="350" y="144" text-anchor="middle" font-size="11" fill="#00695C">V_dispo = V_lim − V_initial</text>
+                <!-- Fleche sortie -->
+                <line x1="510" y1="110" x2="570" y2="110" stroke="#1565C0" stroke-width="2" marker-end="url(#bl2)"/>
+                <text x="540" y="104" text-anchor="middle" font-size="11" fill="#1565C0">sortie</text>
+                <!-- Aval -->
+                <rect x="570" y="50" width="120" height="120" rx="8" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+                <text x="630" y="100" text-anchor="middle" font-weight="bold" fill="#1B5E20">Aval</text>
+                <text x="630" y="118" text-anchor="middle" font-weight="bold" fill="#1B5E20">Enjeux</text>
+                <text x="630" y="136" text-anchor="middle" font-size="11" fill="#2E7D32">R_Q = ΔQ/Q_ref</text>
+                <text x="630" y="154" text-anchor="middle" font-size="11" fill="#2E7D32">× 100</text>
+                <!-- Formules bas -->
+                <rect x="10" y="198" width="210" height="70" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="115" y="220" text-anchor="middle" font-weight="bold" fill="#BF360C">Volume stocke</text>
+                <text x="115" y="240" text-anchor="middle" font-size="12" fill="#E65100">V = A × h</text>
+                <text x="115" y="258" text-anchor="middle" font-size="11" fill="#BF360C">V_dispo = V_lim − V_init</text>
+                <rect x="245" y="198" width="210" height="70" rx="6" fill="#E8EAF6" stroke="#283593" stroke-width="1.5"/>
+                <text x="350" y="220" text-anchor="middle" font-weight="bold" fill="#1A237E">Bilan dynamique</text>
+                <text x="350" y="240" text-anchor="middle" font-size="12" fill="#283593">dV/dt = Q_entr − Q_sort</text>
+                <text x="350" y="258" text-anchor="middle" font-size="11" fill="#1A237E">ΔV = Q_net × Δt</text>
+                <rect x="480" y="198" width="210" height="70" rx="6" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5"/>
+                <text x="585" y="220" text-anchor="middle" font-weight="bold" fill="#1B5E20">Reduction pointe</text>
+                <text x="585" y="240" text-anchor="middle" font-size="12" fill="#2E7D32">R_Q = ΔQ/Q_ref × 100</text>
+                <text x="585" y="258" text-anchor="middle" font-size="11" fill="#1B5E20">≠ reduction de niveau</text>
+                <!-- Notes -->
+                <text x="350" y="302" text-anchor="middle" font-size="11" fill="#555">Moment du remplissage determinant — synchronisation avec affluents a verifier</text>
+                <text x="350" y="320" text-anchor="middle" font-size="11" fill="#555">Preservation ≠ restauration ≠ augmentation du stockage · Situation de reference obligatoire</text>
+                <text x="350" y="338" text-anchor="middle" font-size="11" fill="#555">Restitution differee peut aggraver une 2e crue — tester crues successives</text>
+              </svg>`,
+                exercice: {
+                  enonce: '(1) Une surface de 4 ha reçoit une hauteur moyenne supplémentaire de 0,30 m. Calculez V.\n(2) Une zone peut contenir 25 000 m³ à la cote étudiée et contient déjà 7 000 m³. Calculez V_dispo.\n(3) Pendant 20 min, le débit entrant est 6 m³/s et le sortant 2 m³/s. Calculez ΔV.\n(4) Un dépassement triangulaire : hauteur 8 m³/s, durée 3 heures. Calculez le volume théorique.\n(5) La pointe passe de 60 à 54 m³/s. Calculez R_Q.\n(6) Une zone est presque pleine avant le maximum de la crue. Que faut-il examiner ?\n(7) Un projet retarde la pointe d\'un cours d\'eau. Peut-on conclure qu\'il améliore nécessairement la situation après une confluence ?\n(8) Une parcelle est naturellement inondable. Une augmentation de durée de submersion est-elle sans conséquence ?',
+                  solution: '<strong>(1)</strong> V = 40 000 × 0,30 = <strong>12 000 m³</strong> dans l\'hypothèse d\'une hauteur moyenne représentative.<br><strong>(2)</strong> V_dispo = 25 000 − 7 000 = <strong>18 000 m³</strong> — sa mobilisation dépend des échanges pendant l\'événement.<br><strong>(3)</strong> ΔV = (6 − 2) × 20 × 60 = <strong>4 800 m³</strong> sur la période.<br><strong>(4)</strong> V = ½ × 8 × (3 × 3 600) = <strong>43 200 m³</strong> — approximation de bilan, ne dimensionne pas les entrées, sorties ou ouvrages.<br><strong>(5)</strong> R_Q = (60 − 54) / 60 × 100 = <strong>10 %</strong> — les niveaux et dommages ne diminuent pas nécessairement dans la même proportion.<br><strong>(6)</strong> La capacité restante, le niveau d\'activation, les sorties et la possibilité de mobiliser le stockage au moment pertinent (avant la pointe).<br><strong>(7)</strong> Non — il faut vérifier si ce retard éloigne ou rapproche la pointe de celle de l\'affluent (synchronisation).<br><strong>(8)</strong> Non — cette augmentation peut modifier les dommages, le ressuyage, les accès et les conditions d\'exploitation agricole.',
+                },
+              }, // fin gem-zh3
+
+              {
+                id: 'gem-zh4',
+                titre: 'Ruissellement, érosion et pratiques agricoles',
+                fiche: {
+                  intro: 'Une coulée boueuse observée dans un village peut résulter de plusieurs mécanismes combinés : pluie intense, sol sensible, faible couverture végétale, tassement, concentration dans un chemin et arrivée d\'eau par un fossé. Le diagnostic doit dépasser la parcelle visible. Ce chapitre relie production du ruissellement, érosion des sols et transfert sédimentaire à une stratégie territoriale combinant leviers agronomiques et aménagements du paysage.',
+                  points: [
+                    '💧 Ruissellement ≠ érosion : le ruissellement est l\'écoulement de surface ; l\'érosion est l\'arrachement et le déplacement de matériaux — une eau peu chargée peut transporter beaucoup de particules si le sol est facilement détachable.',
+                    '🌧️ Ruissellement par dépassement de l\'infiltration : si i(t) > f(t), l\'excédent peut alimenter le stockage superficiel puis l\'écoulement — ex. i = 30 mm/h, f = 10 mm/h → excédent potentiel = 20 mm/h (≠ débit à l\'exutoire).',
+                    '💦 Ruissellement par saturation : sol déjà très humide, nappe proche, fond de vallon — la pluie n\'a pas besoin d\'être exceptionnellement intense — les deux mécanismes peuvent coexister dans un même bassin.',
+                    '🧱 Battance et tassement : la battance dégrade la structure superficielle et peut former une croûte réduisant l\'infiltration — le tassement (traces de roues) peut concentrer les écoulements et les relier vers l\'aval.',
+                    '🗺️ Production, transfert, dépôt : la connectivité peut être aussi déterminante que l\'intensité locale de l\'érosion — une parcelle peu érosive mais directement connectée à un fossé peut contribuer davantage qu\'une parcelle fortement érosive isolée.',
+                    '📊 Volume ruisselé : V_r = C_v × P × A — C_v = coefficient volumique de ruissellement (≠ coefficient de pointe), P = hauteur de pluie (m), A = surface (m²) — ex. 0,20 × 0,030 × 100 000 = 600 m³.',
+                    '⚗️ Flux de matières en suspension : F_s = Q × C (kg/s) — pour obtenir la masse sur une période : M = F_s × Δt — ex. Q = 0,20 m³/s, C = 1 kg/m³ → F_s = 0,20 kg/s ; M = 0,20 × 1 800 = 360 kg.',
+                    '🌿 Leviers agronomiques sur la production : couverture du sol adaptée, rotations limitant les périodes sensibles, préservation de la structure, gestion des circulations — à construire avec les exploitants selon les parcelles.',
+                    '🌾 Bandes enherbées et haies : efficacité dépend de la position, largeur, couverture, état hydrique et caractère diffus ou concentré de l\'arrivée d\'eau — un écoulement concentré dans une brèche peut contourner l\'ensemble de la bande.',
+                    '🔗 Combiner les niveaux d\'action : production (couverture, structure), transfert (haies, bandes), concentration (chemins adaptés), stockage-dépôt, réduction de vulnérabilité des enjeux — les dispositifs aval ne doivent pas remplacer les améliorations évitables en amont.',
+                    '📋 Diagnostic partagé : ne pas attribuer trop vite la responsabilité à la parcelle visible au-dessus du dommage — elle peut recevoir de l\'eau d\'une route, d\'un chemin ou d\'un fossé amont.',
+                    '📈 Suivi et comparaison : R_M = (M_réf − M_action) / M_réf × 100 — sans comparabilité des pluies, des états initiaux et des mesures, le calcul ne démontre pas l\'effet propre de l\'action.',
+                  ],
+                  formules: [
+                    'Volume ruisselé : V_r = C_v × P × A — C_v = coefficient volumique de ruissellement, P = hauteur de pluie (m), A = superficie (m²) ; ex. C_v = 0,20, P = 30 mm = 0,030 m, A = 100 000 m² → V_r = 600 m³',
+                    'Flux de matières en suspension : F_s = Q × C (kg/s) — Q = débit (m³/s), C = concentration (kg/m³) ; ex. Q = 0,20 m³/s, C = 1 kg/m³ → F_s = 0,20 kg/s',
+                    'Masse transportée : M = F_s × Δt (kg) — ex. F_s = 0,20 kg/s constant pendant 30 min → M = 0,20 × 1 800 = 360 kg (dans un événement réel, Q et C varient)',
+                    'Réduction de masse : R_M = (M_réf − M_action) / M_réf × 100 — ex. (500 − 300) / 500 × 100 = 40 % (sous réserve de comparabilité des pluies et états initiaux)',
+                  ],
+                  retenir: 'Ruissellement ≠ érosion. Dépassement infiltration i > f ET saturation → deux mécanismes. Battance et tassement concentrent les écoulements. Production + transfert + dépôt : connectivité aussi importante que l\'intensité locale. V_r = C_v × P × A. F_s = Q × C. M = F_s × Δt. Parcelle au-dessus du dommage ≠ forcément principale source. Combiner leviers agronomiques et aménagements. Suivi : comparabilité des pluies indispensable.',
+                  sections: [
+                    {
+                      titre: 'Production du ruissellement et érosion',
+                      ss: [
+                        {
+                          titre: 'Mécanismes de production et battance',
+                          texte: 'Ruissellement par dépassement de l\'infiltration : quand l\'intensité de pluie i(t) dépasse la capacité d\'infiltration f(t), l\'excédent peut alimenter l\'écoulement — ex. i = 30 mm/h, f = 10 mm/h → excédent potentiel 20 mm/h. Ruissellement par saturation : sol déjà très humide, nappe proche, fond de vallon — la pluie n\'a pas besoin d\'être intense. Les deux mécanismes peuvent coexister. La battance dégrade la structure superficielle et peut former une croûte réduisant l\'infiltration — sensibilité dépendant de la texture, de la stabilité des agrégats et de la couverture.',
+                        },
+                        {
+                          titre: 'Conditions initiales et tassement',
+                          texte: 'Deux pluies identiques peuvent produire des réponses très différentes selon l\'humidité initiale, la couverture, l\'état de surface, le tassement et les travaux récents. Un sol sec n\'absorbe pas nécessairement toute pluie intense si une croûte superficielle limite l\'infiltration. Le tassement (traces de roues) peut concentrer les écoulements, les relier entre parcelles et créer des chemins préférentiels vers l\'aval. Une mesure d\'infiltration hors trace ne représente pas nécessairement le comportement de cette trace. La variabilité à l\'intérieur d\'une parcelle peut être importante.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Transfert, connectivité et cartographie',
+                      ss: [
+                        {
+                          titre: 'Séparer production, transfert et dépôt',
+                          texte: 'Production : où l\'eau et les sédiments sont-ils générés ? Transfert : quels chemins les conduisent vers l\'aval ? Dépôt : où les matériaux s\'accumulent-ils ? Une parcelle peut produire des sédiments restant stockés à proximité. Une autre peut produire moins de matériaux mais être directement connectée à un fossé rejoignant une habitation. La connectivité peut être aussi déterminante que l\'intensité de l\'érosion locale. L\'absence de grande ravine ne signifie pas absence de perte de sol.',
+                        },
+                        {
+                          titre: 'Cartographier les cheminements réels',
+                          texte: 'Les éléments à relever : talwegs, ruptures de pente, haies et talus, chemins, fossés, buses, routes et entrées de propriétés. Le modèle numérique de terrain fournit une première lecture — il doit être complété sur le terrain : une buse non représentée ou un talus peut modifier le cheminement calculé. Les traces laissées après un événement sont particulièrement utiles : végétation couchée, dépôts, rigoles, lignes de déchets, marques d\'eau. Ne pas attribuer trop vite la responsabilité à la parcelle visible : elle peut recevoir de l\'eau d\'une route, d\'un chemin ou d\'un fossé amont.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Estimer le ruissellement et le transport sédimentaire',
+                      ss: [
+                        {
+                          titre: 'Volume ruisselé et débit de pointe',
+                          texte: 'V_r = C_v × P × A. Le coefficient C_v dépend de l\'événement et des conditions — il ne doit pas être considéré comme une constante d\'une culture. Deux événements peuvent produire 600 m³ de ruissellement, l\'un sur une courte durée, l\'autre sur plusieurs heures, avec des conséquences très différentes. Diviser le volume par la durée donne un débit moyen, pas le débit maximal. Le débit de pointe dépend de la distribution temporelle de la pluie, de la surface contributive, des temps de transfert et de la synchronisation des apports.',
+                        },
+                        {
+                          titre: 'Flux de matières en suspension',
+                          texte: 'F_s = Q × C (kg/s). Si débit et concentration restent constants pendant Δt : M = F_s × Δt. Dans un événement réel, les deux variables évoluent et il faut intégrer leur produit dans le temps. Ce calcul ne mesure pas nécessairement tout le transport solide (les matériaux se déplaçant sur le fond ne sont pas inclus). Indicateur de réduction : R_M = (M_réf − M_action) / M_réf × 100 — sans comparabilité des conditions, le calcul ne démontre pas l\'effet propre de l\'action.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Leviers agronomiques et aménagements',
+                      ss: [
+                        {
+                          titre: 'Agir sur la production et le transfert',
+                          texte: 'Leviers sur la production : couverture du sol adaptée, rotations limitant les périodes sensibles, préservation de la structure, gestion des circulations. Leviers sur le transfert : bandes enherbées (efficacité dépend de la position, largeur, couverture, état hydrique et caractère diffus de l\'arrivée d\'eau), haies et fascines (implantation correspondant aux axes de transfert réels), interruption de longues pentes cultivées, maintien de prairies dans certains secteurs. Un écoulement concentré dans une brèche peut contourner une grande partie d\'une bande enherbée.',
+                        },
+                        {
+                          titre: 'Aménager les axes concentrés et les infrastructures',
+                          texte: 'Lorsqu\'un écoulement converge naturellement, organiser un cheminement moins érosif peut être plus réaliste que le disperser : talweg enherbé, passage adapté, exutoire stabilisé. Les routes, chemins et fossés peuvent produire du ruissellement, intercepter des écoulements, les concentrer ou les détourner — le diagnostic doit associer leurs gestionnaires. Une buse obstruée peut expliquer un débordement local, mais son nettoyage peut rétablir un transfert important vers l\'aval. La stratégie doit être fonctionnelle lorsque certaines actions atteignent leurs limites.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Stratégie territoriale et suivi',
+                      ss: [
+                        {
+                          titre: 'Construire un programme partagé',
+                          texte: 'Le programme doit préciser les secteurs prioritaires, les pratiques et contraintes, les responsables, les accords nécessaires, les travaux et l\'entretien. Les exploitants apportent des informations essentielles sur les sols, les circulations, les calendriers et les écoulements observés. Les autres acteurs incluent communes, gestionnaires routiers, syndicats de bassin et conseillers agronomiques. La priorité peut être donnée à un secteur avec forte connexion à un enjeu, même s\'il ne constitue pas la plus grande surface. Les dispositifs aval ne doivent pas devenir l\'unique réponse à une production évitable en amont.',
+                        },
+                        {
+                          titre: 'Suivre les résultats et interpréter',
+                          texte: 'Le suivi peut comprendre pluies, états de surface, couverture, volumes, débits, concentrations, ravines, dépôts, dommages et état des dispositifs. R_M = (M_réf − M_action) / M_réf × 100. Sans comparabilité des pluies, des états initiaux et des mesures, le calcul ne démontre pas l\'effet propre de l\'action. Un pourcentage d\'efficacité issu d\'un site expérimental ne doit pas être transféré automatiquement à tout un bassin. Les améliorations agronomiques ne garantissent pas une absence d\'écoulement lors de tout événement.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Différence entre ruissellement et érosion hydrique ?', r: 'Ruissellement = écoulement de surface ; érosion = arrachement et déplacement de matériaux — une eau peu chargée peut être très érosive si le sol est facilement détachable.', expl: 'Une surface revêtue peut produire un ruissellement important mais peu de sédiments sur place. Un sol nu fragile peut produire peu de ruissellement mais une érosion diffuse importante.' },
+                  { q: 'Quels sont les deux mécanismes de production du ruissellement ?', r: 'Dépassement de l\'infiltration (i > f) et saturation du sol (nappe proche, sol trop humide).', expl: 'Les deux mécanismes peuvent coexister dans un même bassin. Un sol sec n\'absorbe pas nécessairement toute pluie intense si une croûte superficielle limite l\'infiltration.' },
+                  { q: 'Formule du volume ruisselé ?', r: 'V_r = C_v × P × A (C_v = coefficient volumique, P = hauteur de pluie en m, A = superficie en m²)', expl: 'Ex. C_v = 0,20, P = 30 mm = 0,030 m, A = 100 000 m² → V_r = 600 m³. Le coefficient dépend de l\'événement et des conditions, pas seulement de la culture.' },
+                  { q: 'Formule du flux de matières en suspension ?', r: 'F_s = Q × C (kg/s) — Q débit (m³/s), C concentration (kg/m³)', expl: 'Ex. Q = 0,20 m³/s, C = 1 kg/m³ → F_s = 0,20 kg/s. La masse sur une période : M = F_s × Δt (si flux constant). Dans un événement réel, Q et C varient.' },
+                  { q: 'Pourquoi la connectivité est-elle aussi importante que l\'intensité de l\'érosion ?', r: 'Une parcelle peu érosive directement connectée à un enjeu peut contribuer davantage qu\'une parcelle très érosive mais isolée.', expl: 'Distinguer production (où l\'eau et les sédiments sont générés), transfert (chemins vers l\'aval) et dépôt (où les matériaux s\'accumulent). Cartographier les cheminements réels.' },
+                  { q: 'Qu\'est-ce que la battance ?', r: 'Dégradation de la structure superficielle du sol sous l\'effet des pluies, pouvant former une croûte qui réduit l\'infiltration.', expl: 'Sensibilité dépendant de la texture, de la stabilité des agrégats, de la matière organique, de la couverture et de l\'énergie des pluies. Observer l\'état réel du sol, pas seulement la culture.' },
+                  { q: 'Quand une bande enherbée peut-elle être contournée ?', r: 'Quand l\'écoulement arrive concentré dans une brèche ou une ornière — l\'eau peut traverser la bande sans bénéfice.', expl: 'L\'efficacité dépend de la position, largeur, couverture, état hydrique et caractère diffus ou concentré de l\'arrivée d\'eau. Vérifier le chemin réel de l\'eau sur le terrain.' },
+                  { q: 'Comment interpréter R_M = 40 % après travaux ?', r: 'Réduction estimée de 40 % de la masse transportée — valide seulement si les pluies et états initiaux sont comparables.', expl: 'Sans comparabilité des conditions (pluies, état du sol, période), le calcul ne démontre pas l\'effet propre de l\'action. Un résultat expérimental ne se transfère pas automatiquement à tout un bassin.' },
+                ],
+                schema: `<svg viewBox="0 0 700 360" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="13">
+                <defs>
+                  <marker id="br" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#6D4C41"/></marker>
+                  <marker id="gn" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#2E7D32"/></marker>
+                </defs>
+                <text x="350" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#4E342E">Ruissellement et erosion — chaine de processus</text>
+                <!-- Production -->
+                <rect x="10" y="50" width="180" height="80" rx="8" fill="#FBE9E7" stroke="#BF360C" stroke-width="2"/>
+                <text x="100" y="78" text-anchor="middle" font-weight="bold" fill="#BF360C">Production</text>
+                <text x="100" y="96" text-anchor="middle" font-size="11" fill="#BF360C">i &gt; f ou saturation</text>
+                <text x="100" y="114" text-anchor="middle" font-size="11" fill="#BF360C">battance · tassement</text>
+                <!-- Fleche transfert -->
+                <line x1="190" y1="90" x2="250" y2="90" stroke="#6D4C41" stroke-width="2" marker-end="url(#br)"/>
+                <text x="220" y="84" text-anchor="middle" font-size="11" fill="#6D4C41">transfert</text>
+                <!-- Transfert -->
+                <rect x="250" y="50" width="200" height="80" rx="8" fill="#FFF8E1" stroke="#F57F17" stroke-width="2"/>
+                <text x="350" y="78" text-anchor="middle" font-weight="bold" fill="#E65100">Transfert</text>
+                <text x="350" y="96" text-anchor="middle" font-size="11" fill="#E65100">cheminements · connectivite</text>
+                <text x="350" y="114" text-anchor="middle" font-size="11" fill="#E65100">fossés · chemins · buses</text>
+                <!-- Fleche depot -->
+                <line x1="450" y1="90" x2="510" y2="90" stroke="#6D4C41" stroke-width="2" marker-end="url(#br)"/>
+                <text x="480" y="84" text-anchor="middle" font-size="11" fill="#6D4C41">depot</text>
+                <!-- Enjeu -->
+                <rect x="510" y="50" width="180" height="80" rx="8" fill="#FFEBEE" stroke="#C62828" stroke-width="2"/>
+                <text x="600" y="78" text-anchor="middle" font-weight="bold" fill="#C62828">Depot / Enjeu</text>
+                <text x="600" y="96" text-anchor="middle" font-size="11" fill="#C62828">dommages visibles</text>
+                <text x="600" y="114" text-anchor="middle" font-size="11" fill="#C62828">MES · depots · ravines</text>
+                <!-- Actions -->
+                <text x="350" y="166" text-anchor="middle" font-weight="bold" fill="#1B5E20">Leviers d'action</text>
+                <rect x="10" y="178" width="195" height="44" rx="6" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.5"/>
+                <text x="107" y="198" text-anchor="middle" font-size="12" fill="#1B5E20">Couverture · structure sol</text>
+                <text x="107" y="214" text-anchor="middle" font-size="11" fill="#2E7D32">rotations · circulations</text>
+                <rect x="215" y="178" width="195" height="44" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="312" y="198" text-anchor="middle" font-size="12" fill="#0D47A1">Haies · bandes enherbees</text>
+                <text x="312" y="214" text-anchor="middle" font-size="11" fill="#1565C0">talwegs · fascines</text>
+                <rect x="420" y="178" width="270" height="44" rx="6" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1.5"/>
+                <text x="555" y="198" text-anchor="middle" font-size="12" fill="#4A148C">Exutoires · reduction vulnerabilite</text>
+                <text x="555" y="214" text-anchor="middle" font-size="11" fill="#6A1B9A">infrastructures · adaptation</text>
+                <!-- Formules -->
+                <rect x="10" y="244" width="210" height="50" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="115" y="265" text-anchor="middle" font-weight="bold" fill="#BF360C">Volume ruissele</text>
+                <text x="115" y="283" text-anchor="middle" font-size="12" fill="#E65100">V_r = C_v × P × A</text>
+                <rect x="245" y="244" width="210" height="50" rx="6" fill="#E8EAF6" stroke="#283593" stroke-width="1.5"/>
+                <text x="350" y="265" text-anchor="middle" font-weight="bold" fill="#1A237E">Flux MES</text>
+                <text x="350" y="283" text-anchor="middle" font-size="12" fill="#283593">F_s = Q × C</text>
+                <rect x="480" y="244" width="210" height="50" rx="6" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5"/>
+                <text x="585" y="265" text-anchor="middle" font-weight="bold" fill="#1B5E20">Reduction masse</text>
+                <text x="585" y="283" text-anchor="middle" font-size="12" fill="#2E7D32">R_M = ΔM/M_ref × 100</text>
+                <!-- Note -->
+                <text x="350" y="328" text-anchor="middle" font-size="11" fill="#555">Connectivite aussi importante que l'intensite locale — diagnostic partage avec exploitants et gestionnaires</text>
+                <text x="350" y="346" text-anchor="middle" font-size="11" fill="#555">Comparaison avant/apres : comparabilite des pluies et etats initiaux indispensable</text>
+              </svg>`,
+                exercice: {
+                  enonce: '(1) Une route produit un écoulement important mais peu chargé à son départ. Est-ce contradictoire ?\n(2) Une pluie atteint 25 mm/h et la capacité d\'infiltration locale est 8 mm/h. Calculez l\'excédent instantané potentiel.\n(3) Pour 5 ha, une pluie de 20 mm et C_v = 0,15. Calculez V_r.\n(4) Débit = 0,10 m³/s, concentration = 2 kg/m³. Calculez le flux instantané de matières en suspension.\n(5) Ce flux reste constant pendant 15 min. Calculez la masse transportée.\n(6) Une bande enherbée est présente mais l\'eau passe par une ornière. Est-elle efficace ?\n(7) Après travaux, une coulée disparaît mais l\'orage suivant est beaucoup plus faible. Peut-on quantifier l\'efficacité ?\n(8) Une commune propose seulement d\'agrandir un fossé vers l\'aval. Que faut-il examiner en plus ?',
+                  solution: '<strong>(1)</strong> Non — ruissellement et érosion sont distincts. L\'eau peut ensuite provoquer une érosion ailleurs sur son chemin.<br><strong>(2)</strong> 25 − 8 = <strong>17 mm/h</strong> — excédent instantané potentiel dans cette représentation locale (≠ débit à l\'exutoire).<br><strong>(3)</strong> V_r = 50 000 × 0,020 × 0,15 = <strong>150 m³</strong> dans les hypothèses retenues.<br><strong>(4)</strong> F_s = 0,10 × 2 = <strong>0,20 kg/s</strong>.<br><strong>(5)</strong> M = 0,20 × 900 = <strong>180 kg</strong> dans l\'hypothèse de constance du flux.<br><strong>(6)</strong> Non dans ce cas — l\'écoulement concentré contourne la fonction de la bande. Examiner la concentration, le passage et les possibilités d\'adaptation.<br><strong>(7)</strong> Non — les conditions ne sont pas comparables pour attribuer et quantifier l\'effet des travaux.<br><strong>(8)</strong> Examiner l\'effet sur les transferts et les enjeux aval, comparer avec des actions sur les sources et les cheminements en amont.',
+                },
+              }, // fin gem-zh4
+
+              {
+                id: 'gem-zh5',
+                titre: 'Adaptation aux sécheresses et au changement climatique',
+                fiche: {
+                  intro: 'Comment choisir aujourd\'hui des actions qui resteront utiles dans plusieurs futurs possibles ? L\'adaptation ne consiste pas à appliquer un pourcentage uniforme de baisse des débits à tous les cours d\'eau. Elle demande de comprendre les vulnérabilités locales, d\'examiner plusieurs scénarios et de prévoir des possibilités d\'ajustement. L\'objectif est de décider malgré l\'incertitude, sans la masquer ni attendre qu\'elle disparaisse.',
+                  points: [
+                    '🌡️ Trois formes de sécheresse distinctes : météorologique (déficit de précipitations), des sols/agricole (eau disponible insuffisante dans le sol), hydrologique (faiblesse inhabituellement des débits ou niveaux). Elles peuvent se succéder, se combiner ou évoluer avec un décalage — une pluie peut humidifier la surface sans rétablir immédiatement une nappe.',
+                    '💧 Étiage, sécheresse et manque d\'eau : l\'étiage correspond à une période de faibles débits naturels ; la sécheresse hydrologique désigne un déficit par rapport à une référence ; le manque d\'eau pour un usage dépend aussi de la demande et des règles de gestion — un territoire peut connaître des tensions avec des conditions climatiques proches de la normale si les demandes dépassent les possibilités du système.',
+                    '📊 Saisonnalité : un cumul annuel proche du passé peut masquer des hivers plus arrosés, des étés plus secs, des pluies plus concentrées, des périodes sans pluie plus longues, des changements de recharge — la disponibilité saisonnière est déterminante pour les milieux et les usages.',
+                    '🔍 Distinguer observation, prévision et projection : observation = ce qui s\'est produit ; prévision = court à moyen terme dans une situation donnée ; projection climatique = évolutions simulées sous certaines hypothèses ; projection hydrologique = réponse du système hydrologique ; test de sensibilité = effet d\'une modification d\'hypothèse.',
+                    '🇫🇷 TRACC — Trajectoire de Réchauffement de Référence pour l\'Adaptation au Changement Climatique : +2 °C à 2030, +2,7 °C à 2050, +4 °C à 2100 (France métropolitaine vs ère préindustrielle) — ces valeurs ne signifient pas une hausse uniforme dans toutes les régions ni à toutes les saisons.',
+                    '📈 Variation relative : ΔX% = (X_futur − X_référence) / X_référence × 100 — ex. (0,28 − 0,40) / 0,40 × 100 = −30% — ne signifie pas que tous les indicateurs diminuent dans la même proportion.',
+                    '🎲 Ensemble de modèles ≠ probabilité automatique : si 18 simulations sur 20 indiquent une baisse, on peut décrire un accord majoritaire de l\'ensemble mais on ne peut pas conclure automatiquement à 90 % de probabilité — les simulations ne sont pas nécessairement indépendantes ni représentatives d\'une distribution probabiliste complète.',
+                    '🌿 Restauration des zones humides : peut préserver des sols, des habitats et certains échanges hydrologiques mais toute zone humide ne soutient pas directement l\'étiage — une partie de l\'eau repart par évapotranspiration et les connexions peuvent être limitées.',
+                    '⚡ Effet rebond : un gain d\'efficacité peut être compensé par une augmentation des usages — ex. besoin unitaire −20 % mais activité +25 % → volume total identique : 1 000 × 0,80 × 1,25 = 1 000.',
+                    '🔄 Maladaptation : action qui accroît certaines vulnérabilités ou déplace les difficultés — développer une dépendance à une ressource incertaine, transférer la pression vers une nappe connectée au cours d\'eau, supprimer des habitats pour un bénéfice hydraulique mal démontré.',
+                    '🏗️ Action robuste : reste satisfaisante dans plusieurs futurs, même si elle n\'est pas optimale dans chacun — améliorer la connaissance, réduire les pertes évitables, préserver les espaces fonctionnels, organiser le suivi.',
+                    '📅 Trajectoire d\'adaptation : actions immédiates + options à préparer + indicateurs + points de réexamen + délais — les critères de réexamen doivent laisser assez de temps pour agir avant la défaillance.',
+                  ],
+                  formules: [
+                    'Variation relative d\'un indicateur : ΔX% = (X_futur − X_référence) / X_référence × 100 — ex. (0,28 − 0,40) / 0,40 × 100 = −30 % ; ex. exercice 3 : (0,35 − 0,50) / 0,50 × 100 = −30 %',
+                    'Effet rebond sur volume total : V_total = V_unitaire_réf × (1 − gain_efficacité) × (1 + croissance) — ex. 1 000 × 0,80 × 1,25 = 1 000 (le volume reste identique malgré l\'efficacité améliorée) ; ex. exercice 5 : 0,75 × 1,20 = 0,90 (réduction de 10%, pas 25%)',
+                  ],
+                  retenir: 'Trois formes de sécheresse distinctes. Étiage naturel ≠ sécheresse. Observation ≠ prévision ≠ projection. TRACC : +2 °C (2030), +2,7 °C (2050), +4 °C (2100). ΔX% = (X_futur − X_ref) / X_ref × 100. Ensemble de modèles ≠ probabilité automatique. Restauration ≠ soutien d\'étiage automatique. Effet rebond : efficacité ≠ réduction du total. Maladaptation = créer une dépendance accrue. Action robuste = utile dans plusieurs futurs. Trajectoire = actions + réexamen.',
+                  sections: [
+                    {
+                      titre: 'Formes de sécheresse et mécanismes du changement',
+                      ss: [
+                        {
+                          titre: 'Les trois formes de sécheresse',
+                          texte: 'Sécheresse météorologique : déficit de précipitations sur une période donnée. Sécheresse des sols (souvent dite agricole) : eau disponible insuffisante dans le sol pour les besoins considérés. Sécheresse hydrologique : faiblesse inhabituelle des débits ou des niveaux des ressources. Ces sécheresses peuvent se succéder, se combiner ou évoluer avec un décalage. Une pluie peut humidifier la surface sans rétablir immédiatement une nappe ou un débit. Distinguer étiage (période de faibles débits dans le fonctionnement normal), sécheresse hydrologique (situation déficitaire par rapport à une référence) et manque d\'eau pour un usage (dépend aussi de la demande, des équipements et des règles de gestion).',
+                        },
+                        {
+                          titre: 'Mécanismes du changement climatique sur l\'hydrologie',
+                          texte: 'Le réchauffement influence : la demande évaporative de l\'atmosphère, la durée des périodes de végétation, l\'enneigement, la répartition saisonnière des écoulements, la température de l\'eau, les besoins de certains usages. Distinguer évapotranspiration potentielle (demande évaporative de référence) et évapotranspiration réelle (flux effectivement réalisé, limité par l\'eau disponible) — une hausse de la demande atmosphérique ne signifie pas que l\'ET réelle augmente partout sans limite. Ne pas raisonner uniquement sur la pluie annuelle : examiner les cumuls saisonniers, la distribution des épisodes, les températures, les débits, les niveaux souterrains et les conditions initiales.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Projections et incertitudes',
+                      ss: [
+                        {
+                          titre: 'Distinguer observation, prévision et projection',
+                          texte: 'Observation : que s\'est-il produit ? Prévision : que pourrait-il se produire à court ou moyen terme dans une situation donnée ? Projection climatique : quelles évolutions sont simulées sous certaines hypothèses climatiques ? Projection hydrologique : comment le système hydrologique pourrait-il répondre à ces conditions ? Test de sensibilité : que se passe-t-il si l\'on modifie une hypothèse ? Une projection pour le milieu du siècle ne prédit pas la météo du 15 juillet 2050 — elle décrit des distributions et des caractéristiques possibles sur une période. TRACC : +2 °C à 2030, +2,7 °C à 2050, +4 °C à 2100 (France métropolitaine vs ère préindustrielle).',
+                        },
+                        {
+                          titre: 'Sources d\'incertitude et ensemble de modèles',
+                          texte: 'Les principales incertitudes concernent : l\'évolution des émissions, la réponse climatique, la variabilité naturelle, les modèles hydrologiques, les données de référence, les usages futurs, les décisions de gestion. Un ensemble de modèles peut s\'accorder sur le sens d\'une évolution tout en divergeant sur son intensité. Présenter une plage de résultats est souvent plus utile qu\'afficher une valeur unique avec plusieurs décimales. Si 18 simulations sur 20 indiquent une baisse, on peut décrire un accord majoritaire de l\'ensemble — on ne peut pas automatiquement conclure à exactement 90 % de probabilité. Avant d\'utiliser un résultat : vérifier la variable, l\'unité, la période de référence, l\'horizon ou le niveau de réchauffement, le scénario, les modèles, la résolution, les limites. DRIAS-Eau et Explore2 pour les projections hydrologiques françaises.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Vulnérabilités et leviers d\'action',
+                      ss: [
+                        {
+                          titre: 'Diagnostiquer les vulnérabilités',
+                          texte: 'Vulnérabilités écologiques : réduction des surfaces en eau, fragmentation des habitats, échauffement, modification de l\'oxygénation, perte d\'accès aux refuges. Un cours d\'eau naturellement intermittent possède un fonctionnement différent d\'un cours d\'eau historiquement permanent qui subit de nouveaux assecs. Vulnérabilités des usages : dépendance à une ressource unique, saisonnalité des besoins, possibilités de réduction, qualité nécessaire, marges opérationnelles. Les prélèvements ne sont pas toujours équivalents à une consommation nette — une partie peut revenir au milieu, mais à un autre endroit, à un autre moment ou avec une qualité différente. Préserver les refuges (secteurs alimentés par des eaux souterraines, zones plus ombragées, habitats profonds, affluents aux conditions différentes).',
+                        },
+                        {
+                          titre: 'Articuler sobriété, efficacité et adaptation',
+                          texte: 'Sobriété : réduire certains besoins ou niveaux de consommation. Efficacité : fournir un service avec moins d\'eau. Adaptation : modifier l\'organisation pour fonctionner dans de nouvelles conditions. Un gain d\'efficacité ne garantit pas une baisse du prélèvement total (effet rebond) — il faut suivre les résultats à l\'échelle pertinente, pas seulement la performance unitaire. Examiner les solutions de stockage avec un bilan complet : ressource de remplissage, disponibilité dans les futurs étudiés, effets sur les milieux et les autres usages, évaporation, qualité, sécurité, années successivement déficitaires. Reconnaître la maladaptation : action accroissant certaines vulnérabilités ou déplaçant les difficultés.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Stratégie d\'adaptation',
+                      ss: [
+                        {
+                          titre: 'Choisir des actions robustes',
+                          texte: 'Une action robuste reste satisfaisante dans plusieurs futurs, même si elle n\'est pas optimale dans chacun. Exemples à évaluer localement : améliorer la connaissance des prélèvements, réduire des pertes évitables, préserver les espaces fonctionnels, limiter de nouvelles expositions, restaurer des habitats dégradés, organiser le suivi et la coordination. « Sans regret » ne signifie pas « sans coût » ni « sans effet indésirable ». Tester la stratégie dans plusieurs scénarios : comparer les actions dans un tableau futur A / futur B / futur C avec leur dépendance principale — ne pas transformer une grille pédagogique en notation scientifique automatique.',
+                        },
+                        {
+                          titre: 'Construire une trajectoire d\'adaptation révisable',
+                          texte: 'Une trajectoire organise les décisions dans le temps : actions immédiates, options à préparer, indicateurs, points de réexamen, délais de réalisation. Les critères de réexamen doivent laisser assez de temps pour agir — attendre la défaillance complète avant de préparer une solution peut rendre l\'adaptation beaucoup plus difficile. Pour chaque décision : pourquoi agir maintenant, dans quels futurs l\'action reste-t-elle utile, quelles limites conserve-t-elle, à quel moment faudra-t-il la réexaminer ? La stratégie vise des fonctions préservées et des dépendances réduites, avec des décisions révisables.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quelles sont les trois formes de sécheresse ?', r: 'Météorologique (déficit précipitations), des sols/agricole (eau insuffisante dans le sol), hydrologique (débits ou niveaux anormalement faibles).', expl: 'Elles peuvent se succéder avec décalage — une pluie peut humidifier la surface sans rétablir immédiatement une nappe. Ne pas confondre étiage naturel et sécheresse hydrologique.' },
+                  { q: 'Que représente la TRACC ?', r: 'Trajectoire de Réchauffement de Référence pour l\'Adaptation au Changement Climatique : +2 °C (2030), +2,7 °C (2050), +4 °C (2100) pour la France métropolitaine vs ère préindustrielle.', expl: 'Ne pas extrapoler : pas une hausse uniforme par région ni par saison. Conserver la référence, le territoire et la variable associés à chaque chiffre.' },
+                  { q: 'Formule de la variation relative d\'un indicateur hydrologique ?', r: 'ΔX% = (X_futur − X_référence) / X_référence × 100', expl: 'Ex. (0,28 − 0,40) / 0,40 × 100 = −30 %. Ne signifie pas que tous les débits journaliers diminuent de 30 % ni que la durée des assecs augmente dans la même proportion.' },
+                  { q: 'Peut-on interpréter « 18 modèles sur 20 donnent une baisse » comme 90 % de probabilité ?', r: 'Non — les simulations ne sont pas nécessairement indépendantes ni représentatives d\'une distribution probabiliste. On peut décrire un accord majoritaire de l\'ensemble.', expl: 'La médiane d\'un ensemble n\'est pas une prévision certaine — c\'est un résumé parmi d\'autres.' },
+                  { q: 'Qu\'est-ce que l\'effet rebond dans l\'adaptation à la sécheresse ?', r: 'Un gain d\'efficacité peut être compensé par une augmentation des usages — ex. −20 % unitaire mais +25 % de production → volume total identique : 1 000 × 0,80 × 1,25 = 1 000.', expl: 'Suivre le volume total à l\'échelle pertinente, pas seulement la performance unitaire d\'un équipement.' },
+                  { q: 'Qu\'est-ce qu\'une maladaptation ?', r: 'Une action qui accroît certaines vulnérabilités ou déplace les difficultés — ex. développer une dépendance à une ressource incertaine, transférer la pression vers une nappe connectée au cours d\'eau.', expl: 'Une amélioration immédiate peut masquer une dépendance future accrue. Examiner les effets à long terme sur les autres territoires et milieux.' },
+                  { q: 'Qu\'est-ce qu\'une action robuste ?', r: 'Une action qui reste satisfaisante dans plusieurs futurs possibles, même si elle n\'est pas optimale dans chacun.', expl: '« Sans regret » ne signifie pas « sans coût » ni « sans effet indésirable ». Chaque action doit rester justifiée par ses bénéfices, ses contraintes et son contexte.' },
+                  { q: 'La restauration d\'une zone humide garantit-elle un soutien d\'étiage en été ?', r: 'Non — toute zone humide ne soutient pas directement l\'étiage. Une partie de l\'eau repart par évapotranspiration et les connexions peuvent être limitées.', expl: 'Annoncer les fonctions documentées, pas des bénéfices supposés. Une restauration peut être pertinente même si son bénéfice principal n\'est pas une augmentation mesurable du débit estival.' },
+                ],
+                schema: `<svg viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
+                <text x="350" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#1A237E">Trajectoire d'adaptation — decider malgre l'incertitude</text>
+                <!-- Scenarios futurs -->
+                <rect x="10" y="42" width="660" height="60" rx="8" fill="#E8EAF6" stroke="#3949AB" stroke-width="1.5"/>
+                <text x="340" y="62" text-anchor="middle" font-weight="bold" fill="#1A237E">Construire plusieurs futurs coerents</text>
+                <text x="175" y="82" text-anchor="middle" font-size="11" fill="#283593">Futur A : etes plus secs</text>
+                <text x="350" y="82" text-anchor="middle" font-size="11" fill="#283593">Futur B : recharge reduite</text>
+                <text x="525" y="82" text-anchor="middle" font-size="11" fill="#283593">Futur C : forte variabilite</text>
+                <!-- Vulnerabilites -->
+                <rect x="10" y="118" width="200" height="70" rx="6" fill="#FBE9E7" stroke="#D84315" stroke-width="1.5"/>
+                <text x="110" y="140" text-anchor="middle" font-weight="bold" fill="#BF360C">Vulnerabilites</text>
+                <text x="110" y="158" text-anchor="middle" font-size="11" fill="#D84315">milieux : refuges · ombrage</text>
+                <text x="110" y="174" text-anchor="middle" font-size="11" fill="#D84315">usages : dependance</text>
+                <!-- Actions -->
+                <rect x="230" y="118" width="200" height="70" rx="6" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.5"/>
+                <text x="330" y="140" text-anchor="middle" font-weight="bold" fill="#1B5E20">Actions robustes</text>
+                <text x="330" y="158" text-anchor="middle" font-size="11" fill="#2E7D32">sobriete · efficacite</text>
+                <text x="330" y="174" text-anchor="middle" font-size="11" fill="#2E7D32">restauration · suivi</text>
+                <!-- Malaptation -->
+                <rect x="450" y="118" width="220" height="70" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="560" y="140" text-anchor="middle" font-weight="bold" fill="#BF360C">Risques maladaptation</text>
+                <text x="560" y="158" text-anchor="middle" font-size="11" fill="#E65100">dependance accrue</text>
+                <text x="560" y="174" text-anchor="middle" font-size="11" fill="#E65100">deplacement difficultes</text>
+                <!-- Formules -->
+                <rect x="10" y="206" width="320" height="44" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="170" y="226" text-anchor="middle" font-weight="bold" fill="#0D47A1">Variation relative</text>
+                <text x="170" y="242" text-anchor="middle" font-size="12" fill="#1565C0">ΔX% = (X_futur − X_ref) / X_ref × 100</text>
+                <rect x="350" y="206" width="320" height="44" rx="6" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1.5"/>
+                <text x="510" y="226" text-anchor="middle" font-weight="bold" fill="#4A148C">Effet rebond</text>
+                <text x="510" y="242" text-anchor="middle" font-size="12" fill="#6A1B9A">V = V_ref × (1−gain) × (1+croissance)</text>
+                <!-- Trajectoire -->
+                <rect x="10" y="268" width="660" height="72" rx="8" fill="#E0F7FA" stroke="#00838F" stroke-width="2"/>
+                <text x="340" y="287" text-anchor="middle" font-weight="bold" fill="#006064">Trajectoire d'adaptation reelle et revisable</text>
+                <text x="110" y="306" text-anchor="middle" font-size="11" fill="#00695C">Maintenant</text>
+                <text x="110" y="320" text-anchor="middle" font-size="10" fill="#00838F">reduire pressions</text>
+                <text x="260" y="306" text-anchor="middle" font-size="11" fill="#00695C">A preparer</text>
+                <text x="260" y="320" text-anchor="middle" font-size="10" fill="#00838F">etudes · foncier</text>
+                <text x="410" y="306" text-anchor="middle" font-size="11" fill="#00695C">A surveiller</text>
+                <text x="410" y="320" text-anchor="middle" font-size="10" fill="#00838F">etiages · temperatures</text>
+                <text x="570" y="306" text-anchor="middle" font-size="11" fill="#00695C">A reexaminer</text>
+                <text x="570" y="320" text-anchor="middle" font-size="10" fill="#00838F">selon criteres definis</text>
+                <text x="340" y="335" text-anchor="middle" font-size="10" fill="#00695C">Criteres de reexamen suffisamment tot pour pouvoir agir avant la defaillance</text>
+                <!-- TRACC note -->
+                <text x="350" y="358" text-anchor="middle" font-size="10.5" fill="#555">TRACC : +2°C (2030) · +2,7°C (2050) · +4°C (2100) — France metropolitaine vs ere preindustrielle</text>
+                <text x="350" y="374" text-anchor="middle" font-size="10.5" fill="#555">Projection ≠ prevision datee · Ensemble modeles ≠ probabilite automatique</text>
+              </svg>`,
+                exercice: {
+                  enonce: '(1) Les pluies reviennent, mais les niveaux souterrains restent faibles. Quelle forme de sécheresse persiste ?\n(2) Une étude fournit une évolution moyenne pour 2041–2070. Prévoit-elle le débit du 1er août 2050 ?\n(3) Un indicateur passe de 0,50 à 0,35 m³/s. Calculez la variation relative.\n(4) Neuf simulations sur dix donnent une baisse. Peut-on annoncer exactement 90 % de probabilité ?\n(5) Le besoin unitaire baisse de 25 %, mais le nombre d\'unités produites augmente de 20 %. Quelle est la variation du volume total ?\n(6) Une zone humide restaurée présente davantage d\'eau au printemps. Est-ce une preuve de soutien d\'étiage en août ?\n(7) Un investissement permet d\'augmenter fortement une activité dépendante d\'une ressource dont la disponibilité future est incertaine. Quel risque identifier ?\n(8) Une action est légèrement moins performante dans le scénario médian, mais reste utile dans tous les scénarios étudiés. Comment la qualifier ?',
+                  solution: '<strong>(1)</strong> La sécheresse hydrologique persiste — la météorologique s\'atténue mais les réponses des compartiments sont décalées.<br><strong>(2)</strong> Non — elle décrit des caractéristiques possibles sur une période, pas la chronologie exacte d\'une année future.<br><strong>(3)</strong> ΔX% = (0,35 − 0,50) / 0,50 × 100 = <strong>−30 %</strong>. Préciser lequel, pour quel scénario et quelle période.<br><strong>(4)</strong> Non — les simulations ne sont pas nécessairement indépendantes ni représentatives d\'une distribution probabiliste. On peut décrire un accord majoritaire de l\'ensemble.<br><strong>(5)</strong> 0,75 × 1,20 = <strong>0,90</strong> → réduction de 10 %, et non 25 %.<br><strong>(6)</strong> Non — il faut connaître les échanges et le devenir de l\'eau durant l\'été ; une partie peut repartir par évapotranspiration.<br><strong>(7)</strong> Risque de maladaptation : dépendance accrue à une ressource incertaine dans les futurs défavorables. Tester les scénarios et comparer avec des adaptations de la demande.<br><strong>(8)</strong> Action robuste — plus utile qu\'une action très performante dans un seul futur et défaillante dans les autres.',
+                },
+              }, // fin gem-zh5
+
+            ],
+          }, // fin gem-m20
+
         ],
       },
     ],
