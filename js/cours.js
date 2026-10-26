@@ -3443,6 +3443,7 @@ const COURS_DATA = {
     themes: {
       fondements:  { label: 'Fondements GEMAPI',              ico: '🏛️', color: '#0E6BA8' },
       diagnostic:  { label: 'Diagnostic & Milieux aquatiques', ico: '🔍', color: '#2E7D32' },
+      gestion:     { label: 'Entretien & Restauration',        ico: '🔧', color: '#37474F' },
       prevention:  { label: 'Prévention & Conduite de projet', ico: '🛡️', color: '#B84A0E' },
       hydraulique: { label: 'Hydraulique appliquée',           ico: '🌊', color: '#0277BD' },
       geomatique:  { label: 'Géomatique & Données spatiales',  ico: '🗺️', color: '#D84315' },
@@ -9384,6 +9385,166 @@ const COURS_DATA = {
               },
             ],
           }, // fin gem-m18
+
+          /* ══ MODULE 19 — ENTRETIEN ET RESTAURATION ══ */
+          {
+            id: 'gem-m19',
+            name: 'Entretien et restauration des cours d\'eau',
+            ico: '🔧',
+            color: '#37474F',
+            colorl: '#ECEFF1',
+            ordre: 5.5, theme: 'gestion',
+            chapitres: [
+
+              {
+                id: 'gem-ent1',
+                titre: 'Entretien régulier et travaux de modification',
+                fiche: {
+                  intro: 'Un cours d\'eau est un milieu mobile qui produit naturellement des dépôts, des érosions et des déplacements de bois. Avant de choisir une intervention, il faut qualifier sa nature exacte : s\'agit-il de maintenir un fonctionnement existant (entretien régulier), de rétablir des fonctions altérées (restauration) ou de modifier la géométrie du lit (curage, recalibrage, rectification) ? Le cadre légal — art. L.215-14 et R.215-2 du Code de l\'environnement — encadre ces opérations et conditionne leur régime administratif. Ce chapitre donne les repères nécessaires pour qualifier, préparer et justifier une intervention en cours d\'eau.',
+                  points: [
+                    '📋 Art. L.215-14 : obligation d\'entretien régulier du propriétaire riverain — préserver l\'équilibre du profil, permettre les écoulements naturels, contribuer au bon fonctionnement écologique ; vise les embâcles, débris, atterrissements et végétation des rives — pas un décapage général du lit',
+                    '⚠️ Art. R.215-2 : le déplacement ou l\'enlèvement localisé de sédiments ne doit pas modifier sensiblement les profils longitudinal et transversal du lit mineur — la qualification repose sur les caractéristiques et les effets de l\'opération, pas sur un volume ou une épaisseur seuil',
+                    '🔄 5 opérations à distinguer : entretien régulier (maintenir sans modifier), restauration (rétablir une fonction altérée), curage (extraction de matériaux accumulés), recalibrage (modifier les dimensions de section), rectification (modifier le tracé)',
+                    '⚠️ Le nom du chantier ne suffit pas à en déterminer la nature — un curage peut produire un recalibrage ; une restauration peut comporter des terrassements importants ; la qualification repose sur les effets réels',
+                    '📐 Volume en place : V = L × b × e (m³) — fournit une estimation géométrique ; ne détermine ni l\'utilité du retrait, ni son innocuité, ni son régime administratif ; le volume transporté peut différer du volume en place',
+                    '📏 Rectification : S = ΔZ / L — raccourcir le tracé de 750 m à 500 m avec ΔZ = 1,5 m fait passer S de 0,002 à 0,003 (+ 50 %) ; la vitesse n\'augmente pas nécessairement du même pourcentage',
+                    '🌊 Q = A·V exprime une relation entre débit, section et vitesse — ne suffit pas à calculer la capacité après terrassement : pente de charge, rugosité, singularités, niveau aval et stockage interviennent également',
+                    '🌿 Un atterrissement naturel peut participer au fonctionnement (diversité des écoulements, habitats, réserve de matériaux) — la présence seule ne justifie pas l\'extraction ; comparer un dépôt stable et une accumulation rapide après rupture de berge',
+                    '⛏️ Effets possibles d\'une extraction : nouvel apport de matériaux, érosion du fond, déstabilisation des berges, évolution régressive vers l\'amont, modification des habitats — une extraction répétée peut traiter une conséquence sans résoudre sa cause',
+                    '📄 Fiche d\'intervention : identifiant + localisation, problème constaté, objectif, périmètre exact, éléments à conserver, méthode et accès, niveaux à respecter, gestion des matériaux, contraintes écologiques, conditions d\'arrêt, contrôles après travaux',
+                    '📅 Calendrier : pas de période universelle — dépend des espèces présentes, de leurs phases sensibles, des conditions hydrologiques, de la température, de la portance des accès et des usages ; l\'étiage peut correspondre à une forte fragilité du milieu',
+                    '✅ Contrôle de fin de chantier (conformité de l\'exécution) ≠ suivi fonctionnel (efficacité dans le temps) — un chantier conforme peut ne pas atteindre l\'objectif ; la réapparition d\'un dépôt peut révéler une cause non traitée',
+                  ],
+                  formules: [
+                    'Volume en place : V = L × b × e (m³) — L longueur, b largeur, e épaisseur ; ex. 40 × 2 × 0,15 = 12 m³ (estimation géométrique, pas une qualification)',
+                    'Pente géométrique : S = ΔZ / L — ΔZ dénivellation (m), L longueur du tracé (m) ; ex. ΔZ = 1,5 m : S = 0,002 pour 750 m → S = 0,003 pour 500 m après rectification (+ 50 %)',
+                    'Débit : Q = A · V (m³/s) — A section mouillée, V vitesse moyenne ; un agrandissement de section ne garantit pas une réduction équivalente des niveaux',
+                    'Volume accumulé : ΔV = Q × Δt — si un exutoire est obstrué ; Déficit = ΔV − V_disponible (pour évaluer le stockage nécessaire)',
+                  ],
+                  retenir: 'Entretien ≠ uniformisation du lit · Le nom du chantier ne qualifie pas l\'opération · V = L·b·e = estimation géométrique, pas une qualification · S = ΔZ/L augmente quand le tracé est raccourci · Q = A·V ne garantit pas la capacité après terrassement · Atterrissement ≠ automatiquement à retirer · Contrôle de chantier ≠ suivi fonctionnel · Art. L.215-14 et R.215-2 encadrent l\'entretien et les sédiments.',
+                  sections: [
+                    {
+                      titre: 'Cadre légal de l\'entretien régulier',
+                      ss: [
+                        {
+                          titre: 'Art. L.215-14 — Obligations et finalités',
+                          texte: 'L\'article L.215-14 prévoit une obligation d\'entretien régulier du propriétaire riverain pour les cours d\'eau non domaniaux. Cet entretien poursuit trois finalités complémentaires : préserver l\'équilibre du profil, permettre les écoulements naturels, contribuer au bon fonctionnement écologique. Il concerne les embâcles, débris, atterrissements et végétation des rives. Il ne prescrit pas un décapage général du lit. La notion de profil d\'équilibre n\'impose pas de maintenir chaque point du fond à une altitude fixe : le lit peut évoluer naturellement sous l\'effet des débits et des apports sédimentaires.',
+                        },
+                        {
+                          titre: 'Art. R.215-2 — La limite concernant les sédiments',
+                          texte: 'L\'article R.215-2 précise que le déplacement ou l\'enlèvement localisé de sédiments ne doit pas modifier sensiblement les profils longitudinal et transversal du lit mineur. Cette condition impose d\'examiner la localisation du dépôt, l\'étendue de l\'intervention, l\'épaisseur retirée, les niveaux avant et après, et les effets sur le fonctionnement du lit. Il n\'existe pas de règle automatique basée sur un volume ou une épaisseur seuil : la qualification repose sur l\'ensemble des caractéristiques et des effets de l\'opération.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Les cinq familles d\'intervention',
+                      ss: [
+                        {
+                          titre: 'Entretien, restauration et curage',
+                          texte: 'L\'entretien régulier vise à maintenir un fonctionnement compatible avec les objectifs légaux sans modifier sensiblement le lit. La restauration poursuit un objectif fonctionnel précis — améliorer la circulation des organismes, le transit sédimentaire, les habitats ou les échanges avec le lit majeur — et doit justifier la fonction altérée et le mécanisme d\'action ; la finalité écologique ne dispense pas des procédures. Le curage désigne une extraction de matériaux accumulés : il faut préciser la nature, le volume, la localisation, la profondeur, la qualité et la destination des matériaux. Le nom du chantier ne suffit pas : un curage peut produire un recalibrage dans les faits.',
+                        },
+                        {
+                          titre: 'Recalibrage et rectification — effets sur le profil',
+                          texte: 'Le recalibrage modifie les dimensions de la section du lit (largeur, profondeur, talus) et peut affecter les niveaux, les vitesses, la répartition des contraintes, le transport sédimentaire et les habitats. La rectification modifie le tracé en réduisant les sinuosités. Pour une même dénivellation ΔZ, raccourcir la longueur L augmente la pente géométrique S = ΔZ / L : un tracé passant de 750 m à 500 m avec ΔZ = 1,5 m voit S passer de 0,002 à 0,003, soit une augmentation de 50 %. La vitesse n\'augmente pas automatiquement du même pourcentage : section, rugosité et conditions aval interviennent. Un gain de section géométrique n\'est pas un pourcentage équivalent de réduction du risque.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Quantifier et évaluer',
+                      ss: [
+                        {
+                          titre: 'Estimer un volume sans lui faire dire plus qu\'il ne peut',
+                          texte: 'Pour une extraction d\'épaisseur approximativement uniforme, le volume en place est estimé par V = L × b × e. Exemple : 40 m × 2 m × 0,15 m = 12 m³. Ce calcul fournit une estimation géométrique : il ne démontre ni l\'utilité du retrait, ni son innocuité, ni son régime administratif. Le volume transporté peut différer du volume en place selon la teneur en eau et le foisonnement. La nomenclature de l\'art. R.214-1 examine la finalité, la localisation, les dimensions et les effets — pas seulement un volume. Un projet favorable au milieu peut lui aussi nécessiter une procédure.',
+                        },
+                        {
+                          titre: 'Dépôts naturels et effets d\'une extraction',
+                          texte: 'Un atterrissement peut participer à la diversité des écoulements, fournir des habitats et orienter le chenal. La question utile n\'est pas « y a-t-il un dépôt ? » mais « quel rôle joue-t-il et quelles conséquences produit-il ? ». Retirer des matériaux peut favoriser un nouvel apport, une érosion du fond, une déstabilisation des berges ou une évolution régressive vers l\'amont. Une extraction répétée traite parfois une conséquence sans résoudre sa cause. Q = A·V ne suffit pas à calculer la capacité après terrassement : un agrandissement local peut avoir peu d\'effet si le contrôle principal est en aval, et peut aussi déplacer les zones de dépôt ou modifier les conditions d\'écoulement ailleurs.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Préparer et conduire une intervention',
+                      ss: [
+                        {
+                          titre: 'Fiche d\'intervention et choix des variantes',
+                          texte: 'Une fiche opérationnelle doit préciser : identifiant et localisation du site, problème constaté, objectif recherché, périmètre exact, éléments à conserver, méthode et accès, niveaux ou limites à respecter, gestion des matériaux, contraintes écologiques, conditions d\'arrêt, contrôles après travaux. Préférer des prescriptions précises aux formulations ouvertes (« retirer ce qui gêne »). Pour tout problème documenté, comparer au moins trois variantes : (A) intervention minimale + surveillance, (B) traitement ciblé de la cause identifiée, (C) modification ou restauration plus large. La variante minimale n\'est pas un abandon : elle peut inclure un suivi et des seuils d\'alerte définis pour le site.',
+                        },
+                        {
+                          titre: 'Calendrier, chantier et destination des matériaux',
+                          texte: 'Il n\'existe pas de période universelle convenant à tous les travaux et à tous les cours d\'eau. Le calendrier dépend des espèces présentes, de leurs phases sensibles, des conditions hydrologiques, de la température de l\'eau, de la portance des accès, des usages et des prescriptions applicables. L\'étiage facilite parfois l\'accès mais peut correspondre à une forte fragilité du milieu (faible dilution, température élevée, habitats concentrés). Maîtriser les effets du chantier : remise en suspension, pollutions accidentelles, dégradation des berges, destruction d\'habitats, dispersion d\'espèces envahissantes. Les matériaux extraits (déchets, végétaux, bois, sédiments) nécessitent une gestion planifiée à l\'avance — la qualité et la destination doivent être examinées avant le début du chantier.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Contrôler la réalisation et suivre les effets',
+                      ss: [
+                        {
+                          titre: 'Contrôle de chantier vs suivi fonctionnel',
+                          texte: 'Le contrôle de fin de chantier vérifie la conformité de l\'exécution : périmètre traité, éléments conservés, géométrie obtenue, matériaux évacués, état des accès, écarts au projet. Le suivi fonctionnel examine l\'efficacité dans le temps : réapparition d\'un dépôt, évolution du fond, stabilité des berges, réponse des habitats, comportement lors des événements. Ces deux évaluations sont distinctes. Un chantier conforme peut ne pas atteindre l\'objectif fonctionnel. La réapparition d\'un dépôt ne prouve pas une mauvaise exécution mais peut révéler une cause non traitée.',
+                        },
+                        {
+                          titre: 'Étude de cas — Franchissement des Saules',
+                          texte: 'Accumulation de branches et de sédiments estimée à 12 m³ (V = 40 × 2 × 0,15) devant un franchissement — berges végétalisées, niveaux anciens mal connus, bâtiments en amont. Trois variantes : (A) retrait des branches identifiées + suivi — intervention limitée ; (B) variante A + retrait ciblé de sédiments selon un profil défini — nécessite justification géométrique, fonctionnelle et administrative ; (C) approfondissement et élargissement sur 300 m — modification importante nécessitant une étude élargie. La variante C ne peut pas être présentée comme un simple entretien. La variante B ne se justifie pas uniquement par le faible volume. Le choix dépend du diagnostic, des effets et des contraintes — pas seulement du coût immédiat.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Que vise l\'entretien régulier au sens de l\'art. L.215-14 ?', r: 'Préserver l\'équilibre du profil, permettre les écoulements naturels, contribuer au bon fonctionnement écologique', expl: 'Il concerne les embâcles, débris, atterrissements et végétation des rives — pas un décapage général. La notion d\'équilibre admet l\'évolution naturelle du lit.' },
+                  { q: 'Quelle condition pose l\'art. R.215-2 sur les sédiments ?', r: 'Le déplacement ou enlèvement localisé ne doit pas modifier sensiblement les profils longitudinal et transversal', expl: 'La qualification ne repose pas sur un volume ou une épaisseur seuil mais sur l\'ensemble des caractéristiques et des effets de l\'opération.' },
+                  { q: 'Comment estimer le volume en place d\'une extraction ?', r: 'V = L × b × e — ex. 40 m × 2 m × 0,15 m = 12 m³', expl: 'Ce calcul fournit une estimation géométrique : il ne détermine ni l\'utilité, ni l\'innocuité, ni le régime administratif. Le volume transporté peut différer du volume en place.' },
+                  { q: 'Quel est l\'effet d\'une rectification sur la pente géométrique ?', r: 'S = ΔZ / L augmente quand le tracé est raccourci : 750 m → 500 m (ΔZ = 1,5 m) → S passe de 0,002 à 0,003 (+ 50 %)', expl: 'La vitesse n\'augmente pas nécessairement du même pourcentage : section, rugosité et conditions aval interviennent aussi.' },
+                  { q: 'Pourquoi Q = A·V ne garantit-il pas la capacité après terrassement ?', r: 'Car pente de charge, rugosité, singularités, niveau aval et stockage interviennent également', expl: 'Un agrandissement local peut avoir peu d\'effet si le contrôle principal est en aval. Il peut aussi déplacer les zones de dépôt ou modifier les conditions ailleurs.' },
+                  { q: 'Un atterrissement doit-il toujours être retiré ?', r: 'Non — il peut participer au fonctionnement (diversité des écoulements, habitats, réserve de matériaux)', expl: 'La question utile est : quel rôle joue-t-il et quelles conséquences produit-il ? Un dépôt stable n\'appelle pas la même réponse qu\'une accumulation rapide après rupture de berge.' },
+                  { q: 'Quelle différence entre contrôle de chantier et suivi fonctionnel ?', r: 'Le contrôle vérifie la conformité de l\'exécution ; le suivi évalue l\'efficacité dans le temps', expl: 'Un chantier conforme peut ne pas atteindre l\'objectif. La réapparition d\'un dépôt peut révéler une cause non traitée plutôt qu\'une mauvaise exécution.' },
+                  { q: 'Quelle est la règle sur le calendrier des interventions ?', r: 'Il n\'existe pas de période universelle : examiner espèces, phases sensibles, hydrologie, température, accès, usages', expl: 'L\'étiage facilite l\'accès mais peut correspondre à une forte fragilité du milieu : faible dilution, température élevée, habitats concentrés.' },
+                ],
+                schema: `<svg viewBox="0 0 320 205" xmlns="http://www.w3.org/2000/svg" style="max-width:320px;width:100%">
+  <rect width="320" height="205" rx="8" fill="#EEF4FB"/>
+  <text x="160" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#0E3A6E">Opérations en cours d'eau — distinctions clés</text>
+  <rect x="8" y="18" width="147" height="48" fill="#0E6BA8" rx="4"/>
+  <text x="81" y="31" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">ENTRETIEN RÉGULIER</text>
+  <text x="81" y="43" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C8E0F8">Maintenir sans modifier sensiblement</text>
+  <text x="81" y="55" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C8E0F8">profils longitudinal / transversal</text>
+  <rect x="163" y="18" width="149" height="48" fill="#2E7D32" rx="4"/>
+  <text x="237" y="31" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">RESTAURATION</text>
+  <text x="237" y="43" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C8F0D0">Rétablir une fonction altérée</text>
+  <text x="237" y="55" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C8F0D0">Justifier mécanisme et objectif</text>
+  <rect x="8" y="72" width="94" height="52" fill="#B84A0E" rx="4"/>
+  <text x="55" y="86" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">CURAGE</text>
+  <text x="55" y="98" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#FFD0A0">Extraction accumulée</text>
+  <text x="55" y="110" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#FFD0A0">V = L × b × e</text>
+  <text x="55" y="118" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#FFB870">art. L.215-15</text>
+  <rect x="108" y="72" width="96" height="52" fill="#6B4F9E" rx="4"/>
+  <text x="156" y="86" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">RECALIBRAGE</text>
+  <text x="156" y="98" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#E0D0FF">Modifier dimensions</text>
+  <text x="156" y="110" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#E0D0FF">largeur · profondeur</text>
+  <text x="156" y="118" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#C0A8FF">Effets → habitats</text>
+  <rect x="210" y="72" width="102" height="52" fill="#795548" rx="4"/>
+  <text x="261" y="86" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">RECTIFICATION</text>
+  <text x="261" y="98" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#FFD8B0">Modifier le tracé</text>
+  <text x="261" y="110" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#FFD8B0">S = ΔZ / L ↑</text>
+  <text x="261" y="118" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#FFC090">si L raccourci</text>
+  <rect x="8" y="130" width="305" height="18" fill="#0E3A6E" rx="3"/>
+  <text x="160" y="142" text-anchor="middle" font-family="Arial" font-size="8" fill="#D0E8FF">Le nom du chantier ne qualifie pas l'opération — seuls les effets réels comptent</text>
+  <rect x="8" y="153" width="145" height="44" fill="#E3F0FB" rx="4"/>
+  <text x="80" y="165" text-anchor="middle" font-family="Arial" font-size="8" fill="#0E3A6E" font-weight="bold">Volume estimé</text>
+  <text x="80" y="178" text-anchor="middle" font-family="Arial" font-size="9.5" fill="#0E3A6E">V = L × b × e (m³)</text>
+  <text x="80" y="192" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#537A9E">Ex. 40 × 2 × 0,15 = 12 m³</text>
+  <rect x="162" y="153" width="150" height="44" fill="#F5EBD0" rx="4"/>
+  <text x="237" y="165" text-anchor="middle" font-family="Arial" font-size="8" fill="#7A4A0E" font-weight="bold">Pente après rectification</text>
+  <text x="237" y="178" text-anchor="middle" font-family="Arial" font-size="9.5" fill="#7A4A0E">S = ΔZ / L</text>
+  <text x="237" y="192" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#A06020">750→500 m (ΔZ=1,5 m) : +50%</text>
+</svg>`,
+                exercice: {
+                  enonce: '(1) Un projet élargit un lit de 2 m et abaisse son fond de 0,5 m sur 200 m. Peut-on le qualifier d\'entretien courant ?\n(2) Calculer V pour L = 30 m, b = 1,5 m, e = 0,2 m.\n(3) ΔZ = 1,5 m, tracé initial 750 m rectifié à 500 m. Calculer S1, S2 et l\'écart relatif.\n(4) Un banc de graviers est présent dans une courbe, sans dommage démontré. Faut-il le retirer ?\n(5) La réapparition d\'un dépôt deux mois après extraction prouve-t-elle une mauvaise exécution ?\n(6) Une restauration écologique dispense-t-elle de procédures administratives ?\n(7) Les travaux sont programmés en été car le débit est faible. Cette justification suffit-elle ?\n(8) Volume estimé : 9 m³. Ce résultat détermine-t-il seul le régime administratif ?',
+                  solution: '<strong>(1)</strong> Non — élargir et approfondir de telles dimensions s\'apparente à un recalibrage. Les effets et le cadre administratif doivent être examinés.<br><strong>(2)</strong> V = 30 × 1,5 × 0,2 = <strong>9 m³</strong> en place. Ce calcul ne qualifie pas l\'opération.<br><strong>(3)</strong> S1 = 1,5 / 750 = <strong>0,002</strong> — S2 = 1,5 / 500 = <strong>0,003</strong> — Écart = (0,003 − 0,002) / 0,002 = <strong>+ 50 %</strong>. La vitesse n\'augmente pas automatiquement de 50 %.<br><strong>(4)</strong> Non — sans dommage ni dysfonctionnement démontré, un banc de graviers dans une courbe peut participer au fonctionnement naturel du cours d\'eau.<br><strong>(5)</strong> Pas nécessairement — cela peut révéler une cause non traitée (ex. un ouvrage créant une zone de dépôt récurrente). Il faut réexaminer l\'origine des apports et le fonctionnement sédimentaire.<br><strong>(6)</strong> Non. La finalité écologique ne suffit pas. Les caractéristiques du projet, les rubriques applicables et les autres enjeux doivent être examinés.<br><strong>(7)</strong> Non — il faut aussi vérifier les espèces présentes, leurs phases sensibles, la température de l\'eau, les habitats, les accès et les prescriptions applicables. L\'étiage peut correspondre à une forte fragilité du milieu.<br><strong>(8)</strong> Non. La qualification repose sur les effets, la localisation, la géométrie et la finalité — pas sur un volume seul.',
+                },
+              },
+
+            ],
+          }, // fin gem-m19
 
         ],
       },
