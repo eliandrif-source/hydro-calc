@@ -12415,6 +12415,149 @@ const COURS_DATA = {
 
             ],
           }, // fin gem-m22
+          {
+            id: 'gem-m23',
+            name: 'Réglementation et foncier',
+            ico: '⚖️',
+            color: '#1A237E',
+            colorl: '#E8EAF6',
+            ordre: 23, theme: 'reglementation',
+            chapitres: [
+              {
+                id: 'gem-r1',
+                titre: 'Code de l\'environnement et cadre GEMAPI',
+                fiche: {
+                  intro: 'Qui peut intervenir sur un milieu aquatique, pour quelles actions et dans quelles conditions ? Une solution techniquement pertinente peut exiger plusieurs démarches avant sa réalisation. Ce chapitre présente la méthode : séparer compétence, foncier, procédures et financement — quatre questions indépendantes à traiter chacune sur leur propre base.',
+                  points: [
+                    '📋 4 questions à séparer dès le départ : (1) qui peut porter l\'opération (compétence et périmètre), (2) sur quels terrains peut-on agir (propriété et droits d\'accès), (3) quelles démarches permettent de réaliser les travaux (procédures environnementales), (4) comment payer et entretenir l\'aménagement (ressources financières). Une réponse positive dans une colonne ne règle pas les trois autres.',
+                    '🌊 GEMAPI = gestion des milieux aquatiques et prévention des inondations. 4 missions (art. L. 211-7, I) : 1° aménager un bassin hydrographique, 2° entretenir et aménager les cours d\'eau et milieux en eau, 5° défense contre les inondations et contre la mer, 8° protéger et restaurer les milieux aquatiques, les zones humides et les formations boisées riveraines. Le rattachement d\'une action dépend de son objectif réel — la proximité d\'une rivière ne suffit pas.',
+                    '🏛️ EPAGE vs EPTB : EPAGE = organisation de la gestion et de la maîtrise d\'ouvrage à une échelle hydrographique cohérente ; EPTB = coordination et cohérence à l\'échelle d\'un bassin ou d\'un ensemble de sous-bassins (art. L. 213-12). La présence d\'un EPTB ne signifie pas qu\'il réalise tous les travaux du bassin.',
+                    '⚖️ Transfert ≠ délégation ≠ prestation : le transfert = l\'organisme bénéficiaire exerce la compétence ; la délégation = exercice de missions confié dans un cadre conventionnel légal ; la prestation = un intervenant réalise une tâche pour le compte du maître d\'ouvrage sans recevoir de compétence. Un bureau d\'études ne devient pas maître d\'ouvrage en préparant un dossier.',
+                    '🚔 Maîtrise d\'ouvrage ≠ pouvoirs de police : la maîtrise d\'ouvrage organise une opération (objectifs, études, financement, travaux, gestion). Les pouvoirs de police (prévention des troubles, contrôle) restent aux autorités habilitées. L\'exercice de la GEMAPI ne transfère pas automatiquement au maître d\'ouvrage les pouvoirs de police du maire ou de l\'État.',
+                    '🌿 Entretien des cours d\'eau non domaniaux : l\'art. L. 215-14 prévoit une obligation d\'entretien régulier du propriétaire riverain (équilibre du cours d\'eau, écoulement naturel, état écologique). La création de la GEMAPI ne supprime pas cette obligation. Entretenir ≠ supprimer systématiquement la végétation — le besoin d\'intervention doit être établi.',
+                    '📏 Qualification d\'un cours d\'eau (art. L. 215-7-1) : 3 critères cumulatifs — lit naturel à l\'origine, alimentation par une source, débit suffisant pendant une majeure partie de l\'année. À éviter : "il est sec en août → c\'est un fossé" ; "il est rectiligne → c\'est un fossé". Un ancien cours d\'eau peut avoir été rectifié.',
+                    '🏗️ IOTA = installations, ouvrages, travaux et activités (art. L. 214-3). Selon leurs caractéristiques et effets, les opérations relèvent d\'une déclaration ou d\'une autorisation. Le raisonnement commence par les données concrètes : longueur, surfaces, volumes, effets sur les niveaux, ouvrages, chantier. Le titre du projet ne détermine pas son régime.',
+                    '📜 DIG = déclaration d\'intérêt général : outil pour certaines interventions publiques sur des propriétés privées. À distinguer de l\'autorisation environnementale, des droits fonciers nécessaires et de la déclaration d\'utilité publique. La DIG ne transfère pas automatiquement la propriété des parcelles.',
+                    '📑 Documents de planification : SDAGE, SAGE (PAGD = compatibilité pour les décisions administratives ; règlement = conformité), PGRI, PPR, documents d\'urbanisme. "Conforme aux documents en vigueur" ≠ démonstration suffisante. Il faut relever les dispositions pertinentes et expliquer comment le projet y répond.',
+                    '💰 Taxe GEMAPI = ressource facultative pour financer cette compétence. Son existence ne détermine ni les droits fonciers ni les autorisations. Un plan de financement intègre études, démarches, travaux, mesures environnementales, surveillance, entretien et renouvellements.',
+                    '📁 Traçabilité juridique : conserver compétence, foncier, procédures et planification dans une fiche synthétique. Toute modification importante du projet (augmentation d\'emprise, changement d\'accès) peut modifier les besoins fonciers, les impacts et les démarches applicables.',
+                  ],
+                  formules: [],
+                  retenir: 'GEMAPI = 4 missions : 1° bassin, 2° cours d\'eau, 5° inondations/mer, 8° milieux/zones humides. 4 questions : compétence / foncier / procédures / financement (indépendantes). EPAGE = maîtrise d\'ouvrage hydrographique ; EPTB = coordination de bassin. Transfert ≠ délégation ≠ prestation. MO ≠ police. Entretien riverain L.215-14 subsiste. Cours d\'eau L.215-7-1 : 3 critères (lit naturel + source + débit). IOTA : analyse sur les effets réels, pas sur le titre du projet. DIG ≠ autorisation ≠ titre foncier. PAGD = compatibilité ; règlement SAGE = conformité. Taxe GEMAPI facultative. Tracer compétence + foncier + procédures + planification.',
+                  sections: [
+                    {
+                      titre: 'GEMAPI : compétence, acteurs et rôles',
+                      ss: [
+                        {
+                          titre: 'Les 4 missions GEMAPI et les 4 questions à séparer',
+                          texte: 'GEMAPI = gestion des milieux aquatiques et prévention des inondations. 4 missions de l\'art. L. 211-7, I : 1° aménager un bassin hydrographique ou une partie de bassin, 2° entretenir et aménager les cours d\'eau et certains autres milieux en eau avec leurs accès, 5° organiser la défense contre les inondations et contre la mer, 8° protéger et restaurer les milieux aquatiques, les zones humides et les formations boisées riveraines. Le rattachement d\'une action dépend de son objectif et de son contenu réel — la proximité d\'une rivière ne suffit pas. D\'autres missions de l\'art. L. 211-7 (eau potable, assainissement, eaux pluviales, érosion des sols) ne font pas partie de la GEMAPI. Un programme mixte doit être décomposé en actions pour préciser le porteur et le financement de chacune. 4 questions indépendantes à traiter : (1) qui peut porter l\'opération ? (compétence, périmètre, actes justificatifs) ; (2) sur quels terrains peut-on agir ? (propriété, droits d\'accès, servitudes) ; (3) quelles démarches permettent les travaux ? (procédures environnementales, autres autorisations) ; (4) comment payer et entretenir ? (ressources, conventions de financement). Une réponse positive dans une colonne ne règle pas les trois autres. Ex. : une communauté de communes compétente avec budget suffisant peut ne pas encore avoir obtenu le droit d\'accéder à la parcelle.',
+                        },
+                        {
+                          titre: 'Acteurs, rôles et distinctions essentielles',
+                          texte: 'Depuis le 1er janvier 2018, la GEMAPI relève en principe des intercommunalités à fiscalité propre. Son exercice peut être organisé avec des structures de bassin (EPAGE, EPTB). EPAGE = organisation de la gestion et de la maîtrise d\'ouvrage à une échelle hydrographique cohérente. EPTB = coordination et cohérence à l\'échelle d\'un bassin ou d\'un ensemble de sous-bassins (art. L. 213-12) — la présence d\'un EPTB ne signifie pas qu\'il réalise tous les travaux. Les actes institutionnels permettent de vérifier qui est effectivement habilité à agir. Transfert = l\'organisme bénéficiaire exerce la compétence transférée dans le périmètre défini. Délégation = exercice de missions confié dans un cadre conventionnel légal. Prestation = un intervenant réalise une tâche pour le compte du maître d\'ouvrage (ne transfère pas la compétence). La collectivité doit conserver la capacité de décider, de valider et de suivre ses engagements. Maîtrise d\'ouvrage ≠ pouvoirs de police : la MO organise (objectifs, études, financement, travaux, gestion) ; les pouvoirs de police (prévenir des troubles, imposer des mesures, contrôler) restent aux autorités habilitées. L\'exercice de la GEMAPI ne transfère pas automatiquement les pouvoirs de police du maire ou de l\'État. En crue, distinguer : surveillance des ouvrages, transmission des observations, décisions de sauvegarde, organisation des secours.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Cadre réglementaire et méthode',
+                      ss: [
+                        {
+                          titre: 'Cours d\'eau, foncier et entretien riverain',
+                          texte: 'Qualification d\'un cours d\'eau (art. L. 215-7-1) : 3 critères cumulatifs — lit naturel à l\'origine, alimentation par une source, débit suffisant pendant une majeure partie de l\'année (l\'écoulement peut être intermittent). À éviter : "il est sec en août donc ce n\'est pas un cours d\'eau" ; "il est rectiligne donc c\'est nécessairement un fossé". Un ancien cours d\'eau peut avoir été rectifié. En cas d\'incertitude, documenter et solliciter le service compétent avant de retenir une qualification déterminante. Statut foncier ≠ protection environnementale : plusieurs qualifications peuvent se superposer (propriété privée/publique, cours d\'eau domanial/non domanial, zone humide, habitat d\'espèces protégées, périmètre de protection, PPR). Être propriétaire ne suffit pas à déterminer les travaux réalisables. Entretien riverain (art. L. 215-14) : propriétaire riverain d\'un cours d\'eau non domanial a une obligation d\'entretien régulier (équilibre du cours d\'eau, écoulement naturel, état écologique). La GEMAPI ne supprime pas cette obligation. Une intervention publique peut être organisée pour conduire un programme cohérent. Entretenir ≠ supprimer systématiquement la végétation et le bois — le besoin d\'intervention doit être établi. Droits d\'accès pour toute la durée du projet : études, travaux, exploitation, interventions exceptionnelles — une convention limitée aux travaux peut laisser sans solution l\'entretien futur. Identifier aussi les utilisateurs du terrain (exploitant agricole, locataire).',
+                        },
+                        {
+                          titre: 'IOTA, DIG, planification et traçabilité',
+                          texte: 'IOTA (art. L. 214-3) = Installations, Ouvrages, Travaux et Activités. Les opérations peuvent relever d\'une déclaration ou d\'une autorisation selon leurs caractéristiques et effets. La nomenclature précise les rubriques et seuils à examiner. Le raisonnement commence par les données concrètes : longueur de cours d\'eau concernée, surfaces affectées, volumes déplacés, modification des niveaux ou écoulements, caractéristiques des ouvrages, effets temporaires du chantier. Le titre du projet ne détermine pas son régime — une restauration doit également être examinée au regard de ses effets. Autres procédures à examiner selon le projet : espèces protégées, incidences Natura 2000, évaluation environnementale, sites protégés, urbanisme, occupation du domaine public. DIG = déclaration d\'intérêt général : outil pour des interventions publiques sur des propriétés privées. À distinguer de l\'autorisation environnementale, des droits fonciers et de la déclaration d\'utilité publique. La DIG ne transfère pas automatiquement la propriété. Documents de planification : SDAGE, SAGE (PAGD = rapport de compatibilité pour les décisions administratives ; règlement = rapport de conformité), PGRI, PPR, urbanisme. Relever les dispositions pertinentes et expliquer comment le projet y répond — "conforme aux documents en vigueur" ne constitue pas une démonstration. Taxe GEMAPI = ressource facultative ; son existence ne détermine ni les droits fonciers ni les autorisations. Traçabilité : conserver dans une fiche — opération, compétence, foncier, procédures, documents locaux, décisions obtenues, incertitudes, prochaine étape. Toute modification importante (emprise, accès) exige un réexamen.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quelles sont les 4 missions qui composent la GEMAPI ?', r: '1° aménager un bassin hydrographique ou une partie de bassin ; 2° entretenir et aménager les cours d\'eau et milieux en eau ; 5° organiser la défense contre les inondations et contre la mer ; 8° protéger et restaurer les milieux aquatiques, les zones humides et les formations boisées riveraines (art. L. 211-7, I).', expl: 'Le rattachement d\'une action dépend de son objectif réel, pas de sa proximité avec une rivière. L\'eau potable, l\'assainissement et les eaux pluviales ne font pas partie de la GEMAPI.' },
+                  { q: 'Quelles sont les 4 questions à séparer pour un projet d\'intervention ?', r: '(1) Qui peut porter l\'opération (compétence) ; (2) sur quels terrains peut-on agir (propriété et droits d\'accès) ; (3) quelles démarches permettent les travaux (procédures) ; (4) comment payer et entretenir (financement). Une réponse positive dans une colonne ne règle pas les trois autres.', expl: 'Ex. : une intercommunalité compétente avec budget peut ne pas encore avoir obtenu les droits d\'accès à la parcelle. Ces quatre dimensions s\'examinent séparément.' },
+                  { q: 'Quelle différence entre EPAGE et EPTB ?', r: 'EPAGE = organisation de la gestion et de la maîtrise d\'ouvrage à une échelle hydrographique cohérente. EPTB = coordination et cohérence à l\'échelle d\'un bassin ou ensemble de sous-bassins. La présence d\'un EPTB ne signifie pas qu\'il réalise tous les travaux.', expl: 'Art. L. 213-12. Leurs missions concrètes doivent être vérifiées dans les statuts et actes applicables. L\'EPTB peut coordonner des actions portées par plusieurs maîtres d\'ouvrage.' },
+                  { q: 'La GEMAPI supprime-t-elle l\'obligation d\'entretien des propriétaires riverains ?', r: 'Non. L\'art. L. 215-14 prévoit l\'obligation d\'entretien régulier du propriétaire riverain d\'un cours d\'eau non domanial. La création de la GEMAPI ne fait pas disparaître cette obligation.', expl: 'Une intervention publique peut être organisée dans un cadre adapté pour un programme cohérent à l\'échelle d\'un tronçon. Entretenir ≠ supprimer systématiquement la végétation — le besoin d\'intervention doit être établi.' },
+                  { q: 'Quels sont les 3 critères de qualification d\'un cours d\'eau (art. L. 215-7-1) ?', r: 'Lit naturel à l\'origine + alimentation par une source + débit suffisant pendant une majeure partie de l\'année. L\'écoulement peut être intermittent. À éviter : conclure à un fossé parce que la rivière est sèche en août ou rectiligne.', expl: 'Un ancien cours d\'eau peut avoir été rectifié. En cas d\'incertitude, documenter la situation et solliciter le service compétent avant de retenir une qualification déterminante pour le projet.' },
+                  { q: 'Qu\'est-ce que l\'IOTA et comment déterminer le régime applicable ?', r: 'IOTA = Installations, Ouvrages, Travaux et Activités (art. L. 214-3). Le régime (déclaration ou autorisation) dépend des caractéristiques et effets réels de l\'opération, pas de son titre. Partir des données concrètes : longueur, surfaces, volumes, modifications d\'écoulements, effets du chantier.', expl: 'La nomenclature précise les rubriques et seuils. Une opération présentée comme une restauration doit aussi être examinée au regard de ses effets. Le titre du projet ne détermine pas son régime.' },
+                  { q: 'Quelle différence entre PAGD et règlement dans un SAGE ?', r: 'PAGD (plan d\'aménagement et de gestion durable) : rapport de compatibilité pour les décisions administratives concernées. Règlement : rapport de conformité pour les règles applicables. La portée exacte dépend du texte et de l\'opération.', expl: '"Conforme aux documents en vigueur" ne constitue pas une démonstration suffisante. Il faut relever les dispositions pertinentes et expliquer comment le projet y répond.' },
+                  { q: 'La taxe GEMAPI et la compétence GEMAPI suffisent-elles pour démarrer des travaux ?', r: 'Non. La taxe est une ressource facultative de financement — elle ne détermine ni les droits fonciers ni les autorisations. La compétence est nécessaire mais ne règle pas les trois autres questions (foncier, procédures, financement complet).', expl: 'Un plan de financement complet intègre études, démarches, acquisitions, travaux, mesures environnementales, surveillance et entretien. Le calendrier doit découler du cadrage global du projet.' },
+                ],
+                schema: `<svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
+                <text x="350" y="20" text-anchor="middle" font-size="15" font-weight="bold" fill="#1A237E">Code de l'environnement et cadre GEMAPI</text>
+                <!-- 4 missions -->
+                <rect x="10" y="28" width="680" height="36" rx="5" fill="#E8EAF6" stroke="#283593" stroke-width="1.5"/>
+                <text x="350" y="46" text-anchor="middle" font-weight="bold" fill="#1A237E">GEMAPI — 4 missions (art. L. 211-7, I)</text>
+                <text x="350" y="59" text-anchor="middle" font-size="10.5" fill="#283593">1° Bassin hydrographique · 2° Cours d'eau et milieux en eau · 5° Inondations et mer · 8° Milieux aquatiques, zones humides</text>
+                <!-- 4 questions -->
+                <rect x="10" y="70" width="160" height="52" rx="5" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="90" y="88" text-anchor="middle" font-weight="bold" fill="#0D47A1">Compétence</text>
+                <text x="90" y="103" text-anchor="middle" font-size="10.5" fill="#1565C0">Qui peut porter</text>
+                <text x="90" y="116" text-anchor="middle" font-size="10.5" fill="#1565C0">l'opération ?</text>
+                <rect x="180" y="70" width="160" height="52" rx="5" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5"/>
+                <text x="260" y="88" text-anchor="middle" font-weight="bold" fill="#1B5E20">Foncier</text>
+                <text x="260" y="103" text-anchor="middle" font-size="10.5" fill="#2E7D32">Sur quels terrains</text>
+                <text x="260" y="116" text-anchor="middle" font-size="10.5" fill="#2E7D32">peut-on agir ?</text>
+                <rect x="350" y="70" width="160" height="52" rx="5" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="430" y="88" text-anchor="middle" font-weight="bold" fill="#BF360C">Procédures</text>
+                <text x="430" y="103" text-anchor="middle" font-size="10.5" fill="#E65100">Quelles démarches</text>
+                <text x="430" y="116" text-anchor="middle" font-size="10.5" fill="#E65100">pour réaliser ?</text>
+                <rect x="520" y="70" width="170" height="52" rx="5" fill="#FCE4EC" stroke="#AD1457" stroke-width="1.5"/>
+                <text x="605" y="88" text-anchor="middle" font-weight="bold" fill="#880E4F">Financement</text>
+                <text x="605" y="103" text-anchor="middle" font-size="10.5" fill="#AD1457">Comment payer</text>
+                <text x="605" y="116" text-anchor="middle" font-size="10.5" fill="#AD1457">et entretenir ?</text>
+                <text x="350" y="138" text-anchor="middle" font-size="11" font-style="italic" fill="#C62828">Une réponse positive dans une colonne ne règle pas les trois autres</text>
+                <!-- Acteurs -->
+                <rect x="10" y="148" width="213" height="52" rx="5" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1.5"/>
+                <text x="116" y="165" text-anchor="middle" font-weight="bold" fill="#4A148C">EPAGE / EPTB</text>
+                <text x="116" y="179" text-anchor="middle" font-size="10.5" fill="#6A1B9A">EPAGE = MO hydrographique</text>
+                <text x="116" y="192" text-anchor="middle" font-size="10.5" fill="#7B1FA2">EPTB = coordination de bassin</text>
+                <!-- MO ≠ police -->
+                <rect x="233" y="148" width="234" height="52" rx="5" fill="#E8EAF6" stroke="#283593" stroke-width="1.5"/>
+                <text x="350" y="165" text-anchor="middle" font-weight="bold" fill="#1A237E">Maîtrise d'ouvrage ≠ Police</text>
+                <text x="350" y="179" text-anchor="middle" font-size="10.5" fill="#283593">MO organise · Police = autorités habilitées</text>
+                <text x="350" y="192" text-anchor="middle" font-size="10.5" fill="#3949AB">GEMAPI ≠ transfert des pouvoirs de police</text>
+                <!-- Entretien riverain -->
+                <rect x="477" y="148" width="213" height="52" rx="5" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+                <text x="583" y="165" text-anchor="middle" font-weight="bold" fill="#C62828">Entretien riverain</text>
+                <text x="583" y="179" text-anchor="middle" font-size="10.5" fill="#C62828">L. 215-14 subsiste malgré GEMAPI</text>
+                <text x="583" y="192" text-anchor="middle" font-size="10.5" fill="#BF360C">Besoin d'intervention à établir</text>
+                <!-- Cours d'eau -->
+                <rect x="10" y="206" width="213" height="44" rx="5" fill="#E0F7FA" stroke="#00838F" stroke-width="1.5"/>
+                <text x="116" y="224" text-anchor="middle" font-weight="bold" fill="#006064">Cours d'eau (L. 215-7-1)</text>
+                <text x="116" y="238" text-anchor="middle" font-size="10.5" fill="#00838F">Lit naturel + source + débit (peut être intermittent)</text>
+                <!-- IOTA -->
+                <rect x="233" y="206" width="234" height="44" rx="5" fill="#FFF8E1" stroke="#F57F17" stroke-width="1.5"/>
+                <text x="350" y="224" text-anchor="middle" font-weight="bold" fill="#E65100">IOTA (L. 214-3)</text>
+                <text x="350" y="238" text-anchor="middle" font-size="10.5" fill="#E65100">Déclaration ou autorisation selon effets réels</text>
+                <!-- DIG -->
+                <rect x="477" y="206" width="213" height="44" rx="5" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.5"/>
+                <text x="583" y="224" text-anchor="middle" font-weight="bold" fill="#1B5E20">DIG</text>
+                <text x="583" y="238" text-anchor="middle" font-size="10.5" fill="#2E7D32">≠ autorisation · ≠ titre foncier</text>
+                <!-- Planification -->
+                <rect x="10" y="256" width="330" height="44" rx="5" fill="#FBE9E7" stroke="#BF360C" stroke-width="1.5"/>
+                <text x="175" y="274" text-anchor="middle" font-weight="bold" fill="#BF360C">Planification</text>
+                <text x="175" y="288" text-anchor="middle" font-size="10.5" fill="#C62828">SDAGE · SAGE : PAGD (compatibilité) / règlement (conformité) · PGRI · PPR</text>
+                <!-- Transfert -->
+                <rect x="355" y="256" width="335" height="44" rx="5" fill="#E8EAF6" stroke="#3949AB" stroke-width="1.5"/>
+                <text x="522" y="274" text-anchor="middle" font-weight="bold" fill="#1A237E">Transfert ≠ Délégation ≠ Prestation</text>
+                <text x="522" y="288" text-anchor="middle" font-size="10.5" fill="#283593">Prestation ≠ compétence · Collectivité conserve le rôle de décision</text>
+                <!-- Bas -->
+                <rect x="10" y="308" width="680" height="80" rx="7" fill="#EFEBE9" stroke="#5D4037" stroke-width="2"/>
+                <text x="350" y="328" text-anchor="middle" font-weight="bold" fill="#3E2723">Méthode de cadrage juridique d'un projet</text>
+                <text x="350" y="343" text-anchor="middle" font-size="11" fill="#5D4037">1) Décrire le problème et les objectifs · 2) Identifier le porteur · 3) Définir l'emprise</text>
+                <text x="350" y="357" text-anchor="middle" font-size="11" fill="#5D4037">4) Recenser enjeux environnementaux et fonciers · 5) Étudier des variantes · 6) Échanger avec les services</text>
+                <text x="350" y="371" text-anchor="middle" font-size="11" fill="#5D4037">7) Confirmer procédures et délais · 8) Adapter le calendrier (saisons d'inventaire, périodes d'intervention)</text>
+                <text x="350" y="383" text-anchor="middle" font-size="10" fill="#5D4037">Traçabilité : fiche synthétique à réexaminer à chaque modification importante du projet</text>
+              </svg>`,
+                exercice: {
+                  enonce: '(1) Une intercommunalité compétente en GEMAPI souhaite restaurer une berge privée. Peut-elle commencer les travaux immédiatement ?\n(2) Un cours d\'eau est sec lors d\'une visite en août. Peut-on conclure qu\'il s\'agit d\'un fossé ?\n(3) Un propriétaire estime que la GEMAPI l\'a libéré de toute obligation d\'entretien du cours d\'eau. Est-ce correct ?\n(4) Un bureau d\'études prépare le dossier IOTA pour le compte d\'une communauté de communes. Qui est le maître d\'ouvrage ?\n(5) Une subvention est accordée pour un projet. Peut-on démarrer les travaux ?\n(6) Pourquoi distinguer une restauration de zone humide et un cheminement touristique dans un même programme ?\n(7) Le propriétaire accepte l\'intervention sur sa parcelle. Le volet environnemental est-il réglé ?\n(8) Une variante ajoute une piste d\'accès à un projet de restauration. Faut-il reprendre le cadrage ?',
+                  solution: '<strong>(1)</strong> Non — la compétence est nécessaire mais ne règle pas les trois autres questions : elle doit sécuriser les droits d\'accès fonciers et déterminer les procédures environnementales applicables avant tout démarrage.<br><strong>(2)</strong> Non — la qualification repose sur trois critères cumulatifs (lit naturel, source, débit suffisant la majeure partie de l\'année) ; l\'écoulement peut être intermittent. Un cours d\'eau sec en août peut conserver sa qualification juridique.<br><strong>(3)</strong> Non — l\'art. L. 215-14 maintient l\'obligation d\'entretien régulier du propriétaire riverain. La GEMAPI ne supprime pas automatiquement cette obligation.<br><strong>(4)</strong> La communauté de communes — le bureau d\'études réalise une prestation mais ne reçoit pas de compétence. Le maître d\'ouvrage conserve son rôle de décision et de suivi.<br><strong>(5)</strong> Non — l\'accord financier ne signifie pas que les droits fonciers et les autorisations environnementales sont réunis. Il ne permet pas, à lui seul, de conclure que toutes les conditions de réalisation sont remplies.<br><strong>(6)</strong> Leurs objectifs, compétences, procédures, financements et contraintes peuvent différer, même s\'ils partagent une emprise. Un programme mixte doit être décomposé pour préciser le porteur et le cadre de chaque action.<br><strong>(7)</strong> Non — l\'accord foncier et les démarches environnementales répondent à des exigences distinctes. Être propriétaire ne suffit pas à déterminer les travaux réalisables.<br><strong>(8)</strong> Oui — la piste peut concerner d\'autres parcelles, de nouveaux habitats et des impacts supplémentaires. Toute modification importante du projet exige un réexamen du cadrage.',
+                },
+              }, // fin gem-r1
+
+            ],
+          }, // fin gem-m23
 
         ],
       },
