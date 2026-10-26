@@ -11834,6 +11834,160 @@ const COURS_DATA = {
                 },
               }, // fin gem-op1
 
+              {
+                id: 'gem-op2',
+                titre: 'Bases de géotechnique des ouvrages en terre',
+                fiche: {
+                  intro: 'Une digue peut sembler solide tout en présentant une couche de fondation compressible, des circulations d\'eau mal maîtrisées ou des matériaux hétérogènes. L\'aspect extérieur ne suffit pas pour connaître les propriétés du massif. La compétence à maîtriser : expliquer comment les matériaux, leur mise en œuvre, les fondations et les pressions d\'eau déterminent ensemble le comportement d\'une digue en terre.',
+                  points: [
+                    '🔬 Le sol comporte 3 phases : solides (Vs), eau (Vw), air (Va). Volume total V = Vs + Vw + Va. Vides : Vv = Vw + Va. Deux terres de couleur semblable peuvent avoir des comportements très différents. Le nom d\'un sol n\'est pas une valeur de calcul.',
+                    '📊 Porosité : n = Vv/V. Indice des vides : e = Vv/Vs. Saturation : Sr = Vw/Vv. Ex. (1 L) : Vv=0,35 L, Vs=0,65 L, Vw=0,25 L → n=35%, e=0,54, Sr=71%. Un sol saturé a encore des vides (remplis d\'eau). Saturation ≠ imperméabilité.',
+                    '💧 Teneur en eau : w = mw/ms. Masse volumique sèche : ρd = ms/V = ρ/(1+w). Ex. : ρ=2000 kg/m³, w=0,15 → ρd = 2000/1,15 ≈ 1739 kg/m³. Dans la formule, 15% s\'écrit 0,15.',
+                    '🏗️ Compactage : réorganise les grains mécaniquement pour réduire les vides d\'air. Essai Proctor → courbe teneur en eau / ρd → identifie l\'optimum. Contrôle : Kc = (ρd_chantier / ρd_réf) × 100. Ex. : 1,76/1,84×100 ≈ 95,7%. Un résultat satisfaisant en un point ne démontre pas l\'homogénéité de tout le remblai.',
+                    '⚖️ Contrainte effective : σ\' = σ − u. Ex. : σ=100 kPa, u=40 kPa → σ\'=60 kPa. Si u monte à 70 kPa : σ\'=30 kPa. Une augmentation de pression d\'eau réduit la résistance disponible sans modification visible de la géométrie.',
+                    '🔺 Résistance au cisaillement (Mohr-Coulomb) : τf = c\' + σ\'n × tan(φ\'). Ex. : c\'=5 kPa, φ\'=30°, σ\'n=60 kPa → τf ≈ 39,6 kPa. Pour σ\'n=30 kPa → τf ≈ 22,3 kPa. Ces paramètres dépendent des essais. Cohésion apparente sur sol partiellement sec ≠ cohésion après saturation.',
+                    '🌊 Loi de Darcy (écoulement saturé unidimensionnel) : Q = K × i × A, avec i = ΔH/L. Ex. : K=10⁻⁵ m/s, ΔH=2 m, L=10 m, A=20 m² → Q=4×10⁻⁵ m³/s = 0,04 L/s. Q/A est une vitesse de Darcy, pas la vitesse réelle dans les pores.',
+                    '📐 Charge hydraulique : H = z + u/γw. L\'eau circule des charges élevées vers les faibles — un écoulement ascendant peut exister sous le pied d\'une digue. Ex. : z=98 m, u=19,62 kPa → H=98+2=100 m.',
+                    '🏛️ Fondation : couche compressible, alluvions perméables, ancien chenal, ouvrages enterrés. Une digue peu perméable sur une couche sableuse peut laisser passer l\'eau sous son assise. Un sondage unique ne décrit pas plusieurs kilomètres d\'ouvrage.',
+                    '📉 Tassement différentiel : peut provoquer une baisse locale de crête, des fissures, des déformations de conduites. Ex. : crête à 104,80 m, tassement de 0,12 m → cote nouvelle = 104,68 m. La différence géométrique avec l\'eau à 104,30 m passe de 0,50 m à 0,38 m.',
+                    '🔄 Décrue rapide : le niveau extérieur baisse rapidement mais les pressions internes dans un matériau peu drainant persistent → situation moins favorable pour le talus côté rivière. Il faut examiner la chronologie complète : montée, maintien en charge et décrue.',
+                    '⚗️ Étanchéité / Filtration / Drainage : 3 fonctions complémentaires. Un drain très perméable sans filtre adapté peut entraîner des particules. L\'érosion interne (entraînement de particules par les écoulements) peut être favorisée par une fissure, un mauvais contact autour d\'une conduite, une transition mal filtrée. Ne jamais improviser le bouchage d\'une sortie d\'eau.',
+                  ],
+                  formules: [
+                    'Porosité : n = Vv/V — ex. 0,35/1 = 35%',
+                    'Indice des vides : e = Vv/Vs — ex. 0,35/0,65 ≈ 0,54',
+                    'Degré de saturation : Sr = Vw/Vv — ex. 0,25/0,35 ≈ 71%',
+                    'Teneur en eau : w = mw/ms — ex. 20 g/100 g = 20%',
+                    'Masse volumique sèche : ρd = ρ/(1+w) — ex. 2000/1,15 ≈ 1739 kg/m³ (écrire w en décimal : 15% → 0,15)',
+                    'Indice de plasticité : Ip = wL − wP — ex. 45% − 23% = 22 points',
+                    'Contrôle compactage : Kc = (ρd_chantier/ρd_réf) × 100 (%) — ex. 1,76/1,84×100 ≈ 95,7%',
+                    'Contrainte effective : σ\' = σ − u (kPa) — ex. 100 − 40 = 60 kPa',
+                    'Cisaillement Mohr-Coulomb : τf = c\' + σ\'n × tan(φ\') — ex. 5 + 60×tan30° ≈ 39,6 kPa',
+                    'Loi de Darcy : Q = K × i × A (m³/s), avec i = ΔH/L — ex. 10⁻⁵ × 0,2 × 20 = 4×10⁻⁵ m³/s',
+                    'Charge hydraulique : H = z + u/γw (m) — ex. 98 + 19620/9810 = 100 m',
+                    'Tassement : Z_nouveau = Z_crête − tassement — ex. 104,80 − 0,12 = 104,68 m',
+                  ],
+                  retenir: '3 phases : solides / eau / air. n=Vv/V, e=Vv/Vs, Sr=Vw/Vv. w=mw/ms, ρd=ρ/(1+w). Ip=wL−wP. Kc=(ρd_ch/ρd_réf)×100. σ\'=σ−u. τf=c\'+σ\'n×tan(φ\'). Q=K×i×A. H=z+u/γw. Fondation = partie essentielle. Décrue rapide = situation défavorable. Érosion interne : ne pas boucher une sortie d\'eau sans analyse. Étanchéité / filtration / drainage = 3 fonctions complémentaires.',
+                  sections: [
+                    {
+                      titre: 'Caractérisation du sol et compactage',
+                      ss: [
+                        {
+                          titre: 'Trois phases, porosité, saturation et teneur en eau',
+                          texte: 'Un sol comprend : phase solide (grains, volume Vs), phase liquide (eau, Vw), phase gazeuse (air, Va). V = Vs + Vw + Va. Vides : Vv = Vw + Va. Porosité : n = Vv/V. Indice des vides : e = Vv/Vs. Degré de saturation : Sr = Vw/Vv. Ex. (1 L) : Vs=0,65 L, Vw=0,25 L, Va=0,10 L → Vv=0,35 L, n=35%, e=0,35/0,65≈0,54, Sr=0,25/0,35≈71%. Un sol saturé a ses vides remplis d\'eau — saturation ≠ imperméabilité. Teneur en eau : w = mw/ms. Masse volumique sèche : ρd = ρ/(1+w). Ex. : ρ=2000 kg/m³, w=0,15 → ρd=1739 kg/m³ (écrire w en décimal). Indice de plasticité (sols fins) : Ip = wL − wP. Ex. : wL=45%, wP=23% → Ip=22 points. Cet indice aide à caractériser le matériau — il ne donne pas directement résistance, perméabilité ni aptitude définitive à constituer une digue.',
+                        },
+                        {
+                          titre: 'Compactage, essai Proctor et contrôle',
+                          texte: 'Le compactage réorganise mécaniquement les grains pour réduire les vides d\'air. Il peut augmenter ρd, limiter les tassements ultérieurs, améliorer les propriétés mécaniques et modifier la conductivité hydraulique. Son efficacité dépend du matériau, de son humidité, de l\'épaisseur des couches et des moyens. Trop humide → déformation sans atteindre les caractéristiques recherchées ; trop sec → mottes et vides difficiles à supprimer. L\'essai Proctor (NF P94-093, variantes normal/modifié) établit la relation teneur en eau/ρd et identifie l\'optimum de compactage. Contrôle : Kc = (ρd_chantier/ρd_réf) × 100. Ex. : 1,76/1,84×100 ≈ 95,7%. Un résultat satisfaisant en un point ne démontre pas l\'homogénéité de tout le remblai. Il n\'existe pas un pourcentage universel pour toutes les digues. Compactage ≠ consolidation : le compactage est une action de mise en œuvre (rapide) ; la consolidation est une évolution sous chargement dans un sol saturé (dissipation lente des surpressions d\'eau). Une digue correctement compactée peut tasser car sa fondation argileuse se consolide.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Pressions, résistance et circulation de l\'eau',
+                      ss: [
+                        {
+                          titre: 'Contrainte effective, cisaillement et drainage',
+                          texte: 'Dans un sol saturé : contrainte effective σ\' = σ − u (u = pression interstitielle). Ex. : σ=100 kPa, u=40 kPa → σ\'=60 kPa. Si u monte à 70 kPa, σ\'=30 kPa — les contacts entre grains sont moins chargés, la résistance diminue sans modification visible de la géométrie. Résistance au cisaillement (Mohr-Coulomb en contraintes effectives) : τf = c\' + σ\'n × tan(φ\'). Ex. : c\'=5 kPa, φ\'=30°, σ\'n=60 kPa → τf ≈ 39,6 kPa ; pour σ\'n=30 kPa → τf ≈ 22,3 kPa. Ces paramètres dépendent des essais — cohésion apparente sur sol partiellement sec ≠ cohésion après saturation. Comportement drainé (pressions se dissipent) vs non drainé (surpressions se développent) : dépend de la conductivité hydraulique, des distances de drainage, de la compressibilité et de la durée du phénomène. Ne pas mélanger paramètres drainés et méthode non drainée sans justification.',
+                        },
+                        {
+                          titre: 'Loi de Darcy, charge hydraulique et hétérogénéité',
+                          texte: 'Conductivité hydraulique K (m/s) ≠ porosité : beaucoup de vides très petits et mal connectés → porosité élevée, conductivité faible. Loi de Darcy (écoulement saturé unidirectionnel homogène) : Q = K × i × A, i = ΔH/L. Ex. : K=10⁻⁵ m/s, ΔH=2 m, L=10 m, A=20 m² → Q=4×10⁻⁵ m³/s = 0,04 L/s. Q/A est une vitesse de Darcy, pas la vitesse réelle dans les pores. Charge hydraulique : H = z + u/γw. L\'eau circule des charges élevées vers les faibles — écoulement ascendant possible sous le pied d\'une digue. Ex. : z=98 m, u=19,62 kPa → H=100 m. Hétérogénéité et anisotropie : Kh ≠ Kv dans un remblai en couches ; une ancienne couche sableuse peut conduire l\'eau sous une partie argileuse. Attribuer une seule K à tout l\'ouvrage peut masquer un chemin préférentiel.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Fondation, tassements et surveillance',
+                      ss: [
+                        {
+                          titre: 'Fondation, tassements et décrue',
+                          texte: 'La fondation peut présenter : couches compressibles, alluvions perméables, ancien chenal, horizons faibles, discontinuités rocheuses, ouvrages enterrés. Une digue peu perméable sur couche sableuse peut laisser passer l\'eau sous son assise. Un sondage unique ne décrit pas plusieurs kilomètres d\'ouvrage. Tassement uniforme → baisse globale de crête. Tassement différentiel → fissures, ouvertures aux raccordements, déformation de conduites. Ex. : crête initiale 104,80 m, tassement 0,12 m → Z_nouveau=104,68 m. Différence avec eau à 104,30 m passe de 0,50 m à 0,38 m. Décrue rapide : niveau extérieur baisse mais pressions internes persistent dans un matériau peu drainant → talus côté rivière rencontre une situation moins favorable. Examiner la chronologie complète (montée, maintien, décrue), pas uniquement le maximum. La stabilité d\'un talus s\'analyse avec poids, géométrie, pressions interstitielles, propriétés mécaniques, couches de fondation — un coefficient > 1 ne suffit pas à valider un projet, les exigences dépendent de la méthode et des hypothèses.',
+                        },
+                        {
+                          titre: 'Étanchéité, filtration, drainage et érosion interne',
+                          texte: 'Trois fonctions complémentaires : étanchéité (limiter les circulations), filtration (laisser passer l\'eau en retenant les particules), drainage (collecter et évacuer pour maîtriser les pressions). Un drain très perméable sans filtre adapté peut favoriser l\'entraînement de particules. Un dispositif d\'étanchéité peut reporter les écoulements vers une autre zone. Érosion interne : entraînement de particules par des écoulements dans le remblai, la fondation ou leurs interfaces. Favorisée par une fissure, un mauvais contact autour d\'une conduite, une transition de matériaux mal filtrée, des gradients localement élevés. Une humidité en pied ne prouve pas, seule, une érosion interne — un écoulement nouveau, évolutif ou transportant des particules mérite une attention particulière. Ne jamais improviser le bouchage d\'une sortie d\'eau : cela peut modifier défavorablement les pressions. Reconnaissances associent : archives, sondages, essais de laboratoire, essais en place, piézomètres, suivi topographique, géophysique (informations indirectes à confronter aux sondages). Les investigations doivent elles-mêmes ne pas créer de nouveaux chemins d\'eau.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Un sol peut avoir une forte porosité et une faible conductivité hydraulique — est-ce possible ?', r: 'Oui — des vides très petits et mal connectés donnent une porosité élevée avec une conductivité faible. Porosité = quantité de vides, conductivité = facilité de circulation.', expl: 'Il ne faut pas confondre les deux notions. Attribuer une seule conductivité K à tout l\'ouvrage peut masquer un chemin préférentiel dû à l\'hétérogénéité.' },
+                  { q: 'Formule de la contrainte effective. Que se passe-t-il si la pression interstitielle augmente ?', r: 'σ\' = σ − u. Si u augmente à contrainte totale σ constante, σ\' diminue → les contacts entre grains sont moins chargés, la résistance au cisaillement diminue.', expl: 'Ex. : σ=100 kPa, u=40 → σ\'=60 kPa. Si u monte à 70 → σ\'=30 kPa. C\'est invisible géométriquement, mais la résistance mobilisable a fortement diminué.' },
+                  { q: 'Comment calculer la masse volumique sèche à partir de la masse volumique humide ?', r: 'ρd = ρ/(1+w) — écrire w en décimal. Ex. : ρ=2040 kg/m³, w=20% → w=0,20 → ρd=2040/1,20=1700 kg/m³.', expl: 'La teneur en eau w s\'écrit en décimal dans la formule (15% → 0,15, pas 15). La masse volumique sèche mesure la densité du squelette solide.' },
+                  { q: 'Qu\'est-ce que le Kc et que démontre-t-il seul ?', r: 'Kc = (ρd_chantier/ρd_réf) × 100. Ex. : 1,76/1,84×100 ≈ 95,7%. Seul, il ne suffit pas à déclarer le remblai conforme — il faut aussi connaître la référence utilisée, les exigences et la répartition des contrôles.', expl: 'Un résultat satisfaisant en un point ne démontre pas l\'homogénéité de tout le remblai. Il n\'existe pas un pourcentage universel pour toutes les digues.' },
+                  { q: 'Calculez Q avec la loi de Darcy : K=2×10⁻⁵ m/s, i=0,15, A=30 m².', r: 'Q = K × i × A = 2×10⁻⁵ × 0,15 × 30 = 9×10⁻⁵ m³/s = 0,09 L/s.', expl: 'Q/A est une vitesse de Darcy, pas la vitesse réelle de l\'eau dans les pores. Cette formule s\'applique à un écoulement saturé unidirectionnel dans un matériau homogène.' },
+                  { q: 'Pourquoi la décrue peut-elle être défavorable pour le talus côté rivière ?', r: 'Le niveau extérieur baisse mais les pressions internes dans un matériau peu drainant peuvent persister. Le talus peut rencontrer une situation moins favorable qu\'au maximum de la crue.', expl: 'Il faut examiner la chronologie complète (montée, maintien en charge, décrue), pas uniquement le maximum. Le calcul hydraulique interne doit représenter les situations pertinentes.' },
+                  { q: 'Pourquoi ne faut-il pas improviser le bouchage d\'une sortie d\'eau dans une digue ?', r: 'Cela peut modifier défavorablement les pressions interstitielles et déplacer les écoulements. Une sortie d\'eau peut signaler une érosion interne — boucher sans analyser peut aggraver la situation.', expl: 'Un écoulement nouveau, évolutif ou transportant des particules mérite une attention particulière et une interprétation selon les consignes de surveillance, pas une intervention improvisée.' },
+                  { q: 'Quelle différence entre compactage et consolidation ?', r: 'Compactage : action mécanique rapide qui réduit les vides d\'air. Consolidation : déformation lente d\'un sol saturé sous chargement, liée à la dissipation des surpressions d\'eau. Une digue bien compactée peut tasser car sa fondation argileuse se consolide.', expl: 'Le problème peut venir de la fondation, pas du remblai. Les deux processus peuvent coexister et ne doivent pas être confondus.' },
+                ],
+                schema: `<svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
+                <text x="350" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#3E2723">Geotechnique des ouvrages en terre</text>
+                <!-- 3 phases -->
+                <rect x="10" y="34" width="210" height="54" rx="6" fill="#EFEBE9" stroke="#5D4037" stroke-width="1.5"/>
+                <text x="115" y="53" text-anchor="middle" font-weight="bold" fill="#3E2723">3 phases du sol</text>
+                <text x="115" y="69" text-anchor="middle" font-size="11" fill="#5D4037">Solides Vs · Eau Vw · Air Va</text>
+                <text x="115" y="83" text-anchor="middle" font-size="11" fill="#5D4037">V = Vs+Vw+Va · Vv = Vw+Va</text>
+                <!-- Parametres sol -->
+                <rect x="235" y="34" width="455" height="54" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="462" y="53" text-anchor="middle" font-weight="bold" fill="#0D47A1">Parametres d'identification</text>
+                <text x="462" y="69" text-anchor="middle" font-size="11" fill="#1565C0">n=Vv/V · e=Vv/Vs · Sr=Vw/Vv · w=mw/ms</text>
+                <text x="462" y="83" text-anchor="middle" font-size="11" fill="#1565C0">ρd = ρ/(1+w) · Ip = wL − wP</text>
+                <!-- Compactage -->
+                <rect x="10" y="102" width="210" height="54" rx="6" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.5"/>
+                <text x="115" y="121" text-anchor="middle" font-weight="bold" fill="#1B5E20">Compactage</text>
+                <text x="115" y="137" text-anchor="middle" font-size="11" fill="#2E7D32">Kc = (ρd_ch/ρd_ref) × 100</text>
+                <text x="115" y="151" text-anchor="middle" font-size="11" fill="#388E3C">≠ Consolidation (lente)</text>
+                <!-- Contrainte effective -->
+                <rect x="235" y="102" width="215" height="54" rx="6" fill="#FBE9E7" stroke="#BF360C" stroke-width="1.5"/>
+                <text x="342" y="121" text-anchor="middle" font-weight="bold" fill="#BF360C">Contrainte effective</text>
+                <text x="342" y="137" text-anchor="middle" font-size="13" fill="#BF360C">σ\' = σ − u</text>
+                <text x="342" y="151" text-anchor="middle" font-size="11" fill="#C62828">u augmente → σ\' diminue → resistance baisse</text>
+                <!-- Cisaillement -->
+                <rect x="460" y="102" width="230" height="54" rx="6" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1.5"/>
+                <text x="575" y="121" text-anchor="middle" font-weight="bold" fill="#4A148C">Cisaillement</text>
+                <text x="575" y="137" text-anchor="middle" font-size="11.5" fill="#6A1B9A">τf = c\' + σ\'n · tan(φ\')</text>
+                <text x="575" y="151" text-anchor="middle" font-size="10.5" fill="#6A1B9A">ex. 5+60·tan30° ≈ 39,6 kPa</text>
+                <!-- Darcy -->
+                <rect x="10" y="170" width="210" height="54" rx="6" fill="#FFF8E1" stroke="#F57F17" stroke-width="1.5"/>
+                <text x="115" y="189" text-anchor="middle" font-weight="bold" fill="#E65100">Loi de Darcy</text>
+                <text x="115" y="205" text-anchor="middle" font-size="12" fill="#E65100">Q = K · i · A</text>
+                <text x="115" y="219" text-anchor="middle" font-size="11" fill="#E65100">i = ΔH/L · Q ≠ vitesse reelle</text>
+                <!-- Charge hydraulique -->
+                <rect x="235" y="170" width="215" height="54" rx="6" fill="#E8EAF6" stroke="#283593" stroke-width="1.5"/>
+                <text x="342" y="189" text-anchor="middle" font-weight="bold" fill="#1A237E">Charge hydraulique</text>
+                <text x="342" y="205" text-anchor="middle" font-size="12" fill="#283593">H = z + u/γw</text>
+                <text x="342" y="219" text-anchor="middle" font-size="11" fill="#3949AB">ecoulement ascendant possible</text>
+                <!-- Fondation -->
+                <rect x="460" y="170" width="230" height="54" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+                <text x="575" y="189" text-anchor="middle" font-weight="bold" fill="#C62828">Fondation</text>
+                <text x="575" y="205" text-anchor="middle" font-size="11" fill="#C62828">Partie essentielle · couche permeable</text>
+                <text x="575" y="219" text-anchor="middle" font-size="11" fill="#C62828">1 sondage ≠ tout le kilometrage</text>
+                <!-- Tassement + decrue -->
+                <rect x="10" y="238" width="330" height="44" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="175" y="257" text-anchor="middle" font-weight="bold" fill="#E65100">Tassement differentiel</text>
+                <text x="175" y="273" text-anchor="middle" font-size="11" fill="#BF360C">Z_new = Z_crete − tassement · fissures · conduites</text>
+                <rect x="355" y="238" width="335" height="44" rx="6" fill="#FCE4EC" stroke="#AD1457" stroke-width="1.5"/>
+                <text x="522" y="257" text-anchor="middle" font-weight="bold" fill="#880E4F">Decrue rapide = situation critique</text>
+                <text x="522" y="273" text-anchor="middle" font-size="11" fill="#AD1457">pressions internes persistent · examiner chronologie</text>
+                <!-- ETF -->
+                <rect x="10" y="296" width="680" height="44" rx="6" fill="#E0F7FA" stroke="#00838F" stroke-width="2"/>
+                <text x="175" y="315" text-anchor="middle" font-weight="bold" fill="#006064">Etancheite</text>
+                <text x="175" y="331" text-anchor="middle" font-size="11" fill="#00695C">limiter circulations</text>
+                <text x="350" y="315" text-anchor="middle" font-weight="bold" fill="#006064">Filtration</text>
+                <text x="350" y="331" text-anchor="middle" font-size="11" fill="#00695C">eau passe, particules retenues</text>
+                <text x="550" y="315" text-anchor="middle" font-weight="bold" fill="#006064">Drainage</text>
+                <text x="550" y="331" text-anchor="middle" font-size="11" fill="#00695C">collecter, maitriser pressions</text>
+                <!-- Erosion interne -->
+                <rect x="10" y="354" width="680" height="36" rx="8" fill="#EFEBE9" stroke="#5D4037" stroke-width="2"/>
+                <text x="350" y="372" text-anchor="middle" font-weight="bold" fill="#3E2723">Erosion interne : ne jamais boucher une sortie d\'eau sans analyse · observer : ecoulement nouveau, evolutif, avec particules</text>
+                <text x="350" y="385" text-anchor="middle" font-size="11" fill="#5D4037">Aspect exterieur insuffisant · Nom d\'un sol ≠ valeur de calcul</text>
+              </svg>`,
+                exercice: {
+                  enonce: '(1) Porosité d\'un échantillon de 2 L contenant 0,7 L de vides.\n(2) Ces vides contiennent 0,56 L d\'eau. Degré de saturation.\n(3) Masse volumique sèche : ρ=2040 kg/m³, w=20%.\n(4) Contrôle compactage : ρd_chantier=1,80 t/m³, ρd_réf=1,88 t/m³. Calculez Kc.\n(5) Contrainte effective : σ=120 kPa, u=50 kPa. Si u monte à 80 kPa, quelle nouvelle σ\' ?\n(6) Loi de Darcy : K=2×10⁻⁵ m/s, i=0,15, A=30 m².\n(7) Pourquoi un drain très perméable ne suffit-il pas sans filtre adapté ?\n(8) Pourquoi le talus côté rivière peut-il être vulnérable lors d\'une décrue rapide ?',
+                  solution: '<strong>(1)</strong> n = 0,7/2 = <strong>35%</strong>.<br><strong>(2)</strong> Sr = 0,56/0,7 = <strong>80%</strong> — sol non totalement saturé.<br><strong>(3)</strong> ρd = 2040/1,20 = <strong>1700 kg/m³</strong> (w=20% → 0,20 en décimal).<br><strong>(4)</strong> Kc = 1,80/1,88 × 100 ≈ <strong>95,7%</strong>. La conformité dépend des exigences du projet et des autres contrôles.<br><strong>(5)</strong> σ\' = 120−50 = <strong>70 kPa</strong>. Si u=80 kPa : σ\' = 120−80 = <strong>40 kPa</strong> — la résistance disponible a diminué sans modification géométrique.<br><strong>(6)</strong> Q = 2×10⁻⁵ × 0,15 × 30 = <strong>9×10⁻⁵ m³/s</strong> = 0,09 L/s.<br><strong>(7)</strong> Il faut empêcher l\'entraînement des particules du remblai vers le drain. Une filtration adaptée est nécessaire, ainsi que la vérification de la capacité et du fonctionnement de la sortie.<br><strong>(8)</strong> L\'action de l\'eau extérieure diminue mais les pressions internes dans un matériau peu drainant persistent. La résistance et l\'équilibre du talus doivent être vérifiés pour cette situation transitoire.',
+                },
+              }, // fin gem-op2
+
             ],
           }, // fin gem-m22
 
