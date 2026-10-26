@@ -11368,6 +11368,167 @@ const COURS_DATA = {
                 },
               }, // fin gem-pi3
 
+              {
+                id: 'gem-pi4',
+                titre: 'Urbanisme et prévention des inondations',
+                fiche: {
+                  intro: 'L\'urbanisme détermine durablement l\'exposition future d\'un territoire. Surélever un plancher ne suffit pas à rendre un projet acceptable : il faut également examiner ses accès, ses réseaux, son effet sur les écoulements, la population accueillie et les règles applicables. La compétence à maîtriser : intégrer les risques d\'inondation dans un choix d\'aménagement en articulant connaissances techniques, documents applicables, usages, écoulements et fonctionnement du territoire.',
+                  points: [
+                    '🏙️ L\'urbanisme modifie le risque sans toucher au débit : en augmentant les personnes exposées, en imperméabilisant les sols, en déviant les écoulements, en réduisant les volumes d\'expansion ou en créant des dépendances aux réseaux. La prévention doit considérer l\'usage autant que la forme construite.',
+                    '📊 Trois niveaux distincts : connaissance technique (quels phénomènes ?), cadre juridique (quelles règles ?), choix d\'aménagement (quelle implantation ?). Ces niveaux se complètent — une possibilité réglementaire ne dispense pas d\'examiner les conséquences du projet.',
+                    '📋 Principaux documents : SCoT (stratégie territoriale), PLU/PLUi (règles et orientations locales), PPRI (réglementation des projets au regard des risques), PGRI (planification à l\'échelle du bassin), SDAGE/SAGE, PAPI, études et atlas. Ils n\'ont ni la même fonction ni la même portée juridique.',
+                    '🚦 PPRI (Plan de Prévention des Risques Inondation) : élaboré sous l\'autorité du préfet. Trois pièces : note de présentation, documents graphiques, règlement. Peut encadrer les projets nouveaux, certaines transformations, les constructions existantes et des mesures de réduction de vulnérabilité. La lecture de la seule carte est insuffisante.',
+                    '⚖️ PPRI approuvé = servitude d\'utilité publique, annexé au PLU. Le PLU et le PPRI ne sont pas deux options entre lesquelles choisir — il faut examiner l\'ensemble des règles. Un classement en zone urbaine du PLU ne garantit pas la possibilité de tout projet.',
+                    '🎨 Ne jamais lire un zonage à la couleur seule. Vérifier : la localisation exacte, la zone réglementaire, les dispositions générales, la catégorie du projet, les conditions et exceptions éventuelles, les prescriptions techniques. Les catégories et leurs effets se lisent dans le document local.',
+                    '🗺️ Carte d\'aléa ≠ zonage réglementaire. L\'aléa représente un phénomène selon une méthode ; le zonage traduit une politique et des règles. Attention aux limites cartographiques à leur échelle — déplacer graphiquement un bâtiment de quelques millimètres sur un plan peu précis ne démontre pas sa mise hors d\'eau.',
+                    '🚫 Absence de PPRI ≠ absence de risque. L\'article R.111-2 du Code de l\'urbanisme peut permettre un refus ou des prescriptions lorsqu\'un projet est susceptible de porter atteinte à la sécurité ou à la salubrité publiques. Son application doit être motivée.',
+                    '📐 Volume géométrique d\'un remblai simplifié : V = S × h — ex. 1 500 m² × 0,40 m = 600 m³. Ce calcul géométrique ne donne pas le volume hydraulique soustrait pour chaque crue, qui dépend des niveaux et de la topographie initiale. Une excavation de même volume ailleurs ne prouve pas automatiquement une compensation hydraulique.',
+                    '📏 Cote de plancher : Z_plancher = Z_référence + marge (hypothèse de projet). La valeur à appliquer provient du cadre et de la conception du projet, pas d\'une règle nationale. Préciser le référentiel altimétrique, la cote de terrain, la méthode, l\'incertitude.',
+                    '🌊 Préserver les axes d\'écoulement : un talweg sec une grande partie de l\'année peut fonctionner lors d\'une pluie intense. Ne pas être inondé sur sa parcelle ne suffit pas si le projet aggrave la situation ailleurs.',
+                    '🔄 Effets cumulés : plusieurs petits projets peuvent ensemble réduire l\'espace disponible, augmenter les surfaces imperméables, multiplier les enjeux. Lire à l\'échelle du quartier, de la vallée et du bassin.',
+                    '✅ Le choix du site est une mesure de prévention à part entière. Comparer les implantations avant que les choix architecturaux et financiers soient figés. Un plancher hors d\'eau ne garantit pas un quartier fonctionnel pendant une inondation.',
+                  ],
+                  formules: [
+                    'Volume géométrique simplifié d\'un remblai : V = S × h (m³) — S = surface (m²), h = hauteur de remblai (m) ; ex. 1 500 m² × 0,40 m = 600 m³ ; ne donne pas le volume hydraulique soustrait',
+                    'Cote de plancher : Z_plancher = Z_référence + marge (m) — ex. Z_référence = 104,20 m, marge hypothèse projet = 0,30 m → Z_plancher = 104,50 m ; la marge dépend du document et du projet',
+                  ],
+                  retenir: 'Urbanisme modifie le risque sans modifier le débit. 3 niveaux : connaissance / règles / choix d\'aménagement. Documents : SCoT, PLU/PLUi, PPRI, PGRI, SDAGE/SAGE, PAPI. PPRI = 3 pièces, servitude d\'utilité publique. Ne pas lire un zonage par la couleur seule. Carte aléa ≠ zonage réglementaire. Absence PPRI ≠ absence de risque (R.111-2 CU). V remblai = S × h (géométrique). Z_plancher = Z_ref + marge (hypothèse projet). Préserver talwegs et cheminements. Effets cumulés. Choix du site = mesure de prévention.',
+                  sections: [
+                    {
+                      titre: 'Comprendre pourquoi l\'urbanisme influence le risque',
+                      ss: [
+                        {
+                          titre: 'Comment l\'aménagement modifie l\'exposition',
+                          texte: 'Un aménagement peut modifier : le nombre de personnes exposées, la nature des activités, les surfaces imperméabilisées, les cheminements de l\'eau, les volumes disponibles pour les crues, les accès et les dépendances aux réseaux. Le risque peut donc augmenter sans modification du climat ni du débit de la rivière. Ex. : transformer un bâtiment peu occupé en hébergement permanent augmente l\'exposition humaine même si l\'emprise reste identique. La prévention doit considérer l\'usage autant que la forme construite. Un même bâtiment peut accueillir des usages très différents (logement : occupation nocturne et autonomie ; établissement de santé : continuité des soins ; école : effectifs et organisation ; entrepôt : stocks et pollution ; parking : accès et évacuation). Un changement d\'usage peut accroître la vulnérabilité sans augmenter la surface.',
+                        },
+                        {
+                          titre: 'Trois niveaux de raisonnement',
+                          texte: 'Connaissance technique : quels phénomènes peuvent affecter le site ? Cadre juridique : quelles règles et procédures s\'appliquent ? Choix d\'aménagement : quelle implantation et quelle organisation sont pertinentes ? Ces niveaux se complètent. Une étude peut montrer une exposition non représentée dans une ancienne carte. Une règle peut interdire une opération même si le concepteur propose des adaptations techniques. Une possibilité réglementaire ne dispense pas d\'examiner les conséquences et les vulnérabilités du projet.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Documents et cadre juridique',
+                      ss: [
+                        {
+                          titre: 'Principaux documents et leurs rôles',
+                          texte: 'SCoT : stratégie territoriale d\'aménagement. PLU ou PLUi : règles et orientations locales (zonage, règlement écrit, documents graphiques, orientations d\'aménagement et de programmation, annexes). Carte communale : délimite des secteurs selon son régime propre. PPRN/PPRI : réglemente les projets au regard des risques. PGRI : planification à l\'échelle du bassin. SDAGE et SAGE : gestion de l\'eau. PAPI : programme d\'actions de prévention. Études, atlas, porter à connaissance : information sur les risques. Ces documents n\'ont ni la même fonction ni la même portée juridique. Un programme de travaux n\'est pas une autorisation de construire. Une carte technique n\'est pas nécessairement un zonage réglementaire. L\'article L.152-1 du Code de l\'urbanisme distingue la conformité au règlement et la compatibilité avec les OAP — ces rapports juridiques ne se confondent pas.',
+                        },
+                        {
+                          titre: 'PPRI, portée et lecture',
+                          texte: 'PPRI : élaboré sous l\'autorité du préfet, avec association des collectivités et concertation. Trois pièces : note de présentation, documents graphiques, règlement. Peut encadrer les projets nouveaux, certaines transformations, les constructions existantes et des mesures de prévention. La lecture de la seule carte est insuffisante. Un PPRI approuvé vaut servitude d\'utilité publique et doit être annexé aux documents d\'urbanisme. Le PLU et le PPRI ne constituent pas deux options entre lesquelles le porteur de projet choisit — il faut examiner l\'ensemble des règles. Un classement urbain du PLU ne garantit pas la possibilité de réaliser n\'importe quel projet. Ne jamais lire un zonage à la couleur seule : vérifier la localisation exacte, la zone, les dispositions générales, la catégorie du projet, les conditions et exceptions, les prescriptions techniques.',
+                        },
+                        {
+                          titre: 'Absence de PPRI et article R.111-2',
+                          texte: 'L\'absence de PPRI ne signifie pas absence de risque. Les informations disponibles comprennent : événements historiques, études hydrauliques, cartes de ruissellement, données sur les nappes, observations locales, informations de l\'État. L\'article R.111-2 du Code de l\'urbanisme peut permettre, selon l\'appréciation du projet, un refus ou des prescriptions particulières lorsqu\'un projet est susceptible de porter atteinte à la sécurité ou à la salubrité publiques. Son application doit être motivée par la situation et les caractéristiques du projet. L\'absence de zonage ne constitue pas une attestation de sécurité. Carte d\'aléa ≠ zonage réglementaire : l\'aléa représente un phénomène selon une méthode et des hypothèses ; le zonage traduit une politique de prévention et des règles. Une limite cartographique doit être interprétée à son échelle.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Choix d\'implantation et effets sur les écoulements',
+                      ss: [
+                        {
+                          titre: 'Comparer les implantations et préserver les cheminements',
+                          texte: 'La première question : existe-t-il une implantation répondant au besoin avec moins d\'exposition et moins d\'effets sur l\'eau ? Critères : aléas, accès, réseaux, fonctions du lit majeur, ruissellement, foncier, usages voisins. Déplacer un projet peut éviter des adaptations coûteuses et des dépendances durables. Cette comparaison doit intervenir avant que les choix architecturaux et financiers soient figés. Le choix du site est une mesure de prévention à part entière. Préserver les axes d\'écoulement : un projet peut barrer ou dévier un chemin d\'eau par un bâtiment, un mur, un remblai, une clôture, une voirie ou une rampe. Un talweg sec une grande partie de l\'année peut fonctionner lors d\'une pluie intense. Analyser : l\'origine des apports, les passages, les points de concentration, les exutoires, les secteurs affectés par une déviation. Ne pas être inondé sur sa parcelle ne suffit pas si le projet aggrave la situation ailleurs.',
+                        },
+                        {
+                          titre: 'Effets des remblais et cote de plancher',
+                          texte: 'Un remblai peut soustraire un volume à l\'expansion, réduire une section de passage, relever localement les niveaux, déplacer les écoulements ou isoler un secteur. Volume géométrique simplifié : V = S × h — ex. 2 000 m² × 0,50 m = 1 000 m³. Ce calcul ne donne pas directement le volume hydraulique soustrait pour chaque crue, qui dépend des niveaux et de la topographie initiale. Une excavation de même volume ailleurs ne prouve pas automatiquement une compensation hydraulique : connexion, altitude et moment du remplissage comptent. Surélever un plancher peut réduire certains dommages, mais il faut encore examiner les accès, les réseaux, les locaux bas, les stationnements, les équipements extérieurs, les efforts sur la structure et l\'isolement. Cote de plancher : Z_plancher = Z_référence + marge (hypothèse projet) — ex. Z_ref = 104,20 m, marge = 0,30 m → Z_plancher = 104,50 m. La valeur à appliquer provient du cadre et du projet, pas d\'une règle nationale. Un plancher hors d\'eau ne garantit pas un quartier fonctionnel pendant une inondation.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Réseaux, effets cumulés et renouvellement urbain',
+                      ss: [
+                        {
+                          titre: 'Gestion des eaux pluviales et dépassement',
+                          texte: 'Un projet peut modifier les volumes et les pointes de ruissellement. La démarche examine : limitation des surfaces imperméables, conservation des sols, infiltration, stockage, cheminements superficiels, exutoires. L\'infiltration n\'est pas adaptée partout : sol, nappe, fondations, pollutions et effets voisins doivent être vérifiés. Des surfaces perméables peuvent présenter une efficacité réduite si elles sont colmatées. Prévoir ce qui se passe lorsque les dispositifs sont dépassés : parcours de l\'eau en cas de pluie supérieure aux hypothèses, obstruction, saturation, indisponibilité, niveau aval élevé. La gestion des pluies courantes et celle des événements rares répondent à des besoins différents. Un dispositif performant pour les pluies ordinaires ne démontre pas la maîtrise des écoulements exceptionnels.',
+                        },
+                        {
+                          titre: 'Effets cumulés, renouvellement urbain et acteurs',
+                          texte: 'Effets cumulés : plusieurs petits projets peuvent ensemble réduire l\'espace disponible, augmenter les surfaces imperméables, multiplier les enjeux, fragmenter les cheminements. Comparer le projet à la situation actuelle, aux opérations connues, aux orientations et aux capacités futures. Le renouvellement urbain peut être l\'occasion de déplacer les fonctions sensibles, réduire les sous-sols vulnérables, réorganiser les accès, libérer des cheminements, désimperméabiliser. Mais il peut aussi augmenter le nombre de personnes exposées : examiner vulnérabilité par logement ET nombre total d\'enjeux. Une amélioration technique unitaire ne garantit pas une diminution globale du risque. Acteurs : État (connaissance, PPR, contrôle), collectivité compétente en urbanisme (planification), autorité compétente pour l\'autorisation, acteur GEMAPI (expertise milieux et ouvrages), gestionnaires de réseaux, porteur de projet, propriétaires et usagers. Le titulaire de la compétence GEMAPI n\'est pas automatiquement l\'autorité délivrant l\'autorisation d\'urbanisme.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Un projet peut-il aggraver le risque d\'inondation sans modifier le débit de la rivière ?', r: 'Oui — en augmentant les personnes exposées, en imperméabilisant, en déviant les écoulements ou en réduisant les volumes d\'expansion. Le risque dépend de l\'usage et de l\'implantation, pas seulement du débit.', expl: 'Transformer un bâtiment peu occupé en hébergement permanent accroît l\'exposition humaine même si son emprise reste identique. La prévention doit considérer l\'usage autant que la forme construite.' },
+                  { q: 'Un PPR approuvé a-t-il une portée sur le PLU ?', r: 'Oui — il vaut servitude d\'utilité publique et doit être annexé aux documents d\'urbanisme. Le PLU et le PPRI ne sont pas deux options ; il faut appliquer l\'ensemble des règles.', expl: 'Un classement en zone urbaine du PLU ne garantit pas la possibilité de tout projet. La lecture du PPRI exige ses trois pièces : note de présentation, documents graphiques et règlement.' },
+                  { q: 'Peut-on déterminer les travaux autorisés en regardant uniquement la couleur d\'un zonage ?', r: 'Non — il faut lire la légende, les dispositions générales et le règlement de la zone, et vérifier la catégorie du projet et les éventuelles conditions.', expl: 'Utiliser une règle simplifiée comme "bleu = autorisé avec plancher surélevé" serait incorrect. Les catégories et leurs effets doivent être lus dans le document local.' },
+                  { q: 'L\'absence de PPRI signifie-t-elle absence de risque ?', r: 'Non — le risque doit être pris en compte. L\'article R.111-2 du Code de l\'urbanisme peut permettre un refus ou des prescriptions si le projet porte atteinte à la sécurité ou à la salubrité publiques.', expl: 'Les informations disponibles (événements historiques, études, données nappes) restent valides. L\'absence de zonage ne constitue pas une attestation de sécurité.' },
+                  { q: 'Quelle est la formule du volume géométrique simplifié d\'un remblai ?', r: 'V = S × h — ex. 1 500 m² × 0,40 m = 600 m³. Ce calcul ne donne pas le volume hydraulique soustrait pour chaque crue.', expl: 'L\'effet hydraulique réel dépend des niveaux, de la topographie initiale, de la connexion et du moment de remplissage. Une excavation de volume égal ailleurs ne prouve pas automatiquement une compensation.' },
+                  { q: 'Un syndicat GEMAPI émet une analyse hydraulique favorable. Cela vaut-il autorisation d\'urbanisme ?', r: 'Non — son analyse contribue au dossier mais ne remplace pas la décision de l\'autorité compétente ni les autres procédures.', expl: 'Le titulaire de la compétence GEMAPI n\'est pas automatiquement l\'autorité délivrant l\'autorisation d\'urbanisme. Une bonne coordination n\'efface pas la répartition des responsabilités.' },
+                  { q: 'Un plancher hors d\'eau garantit-il le fonctionnement du quartier pendant une inondation ?', r: 'Non — il faut aussi examiner les accès, les réseaux, les locaux bas, les stationnements, les équipements extérieurs et les efforts sur la structure.', expl: 'Une construction sur appuis peut modifier les écoulements ou retenir des débris. La solution doit aussi être autorisée par les règles applicables.' },
+                  { q: 'Pourquoi comparer plusieurs implantations avant de figer la conception ?', r: 'Pour identifier si une implantation répond au besoin avec moins d\'exposition et moins d\'effets sur l\'eau, avant que les choix architecturaux et financiers soient figés. Le choix du site est une mesure de prévention à part entière.', expl: 'Déplacer un projet peut éviter des adaptations coûteuses et des dépendances durables. Les critères comprennent aléas, accès, réseaux, fonctions du lit majeur, ruissellement et foncier.' },
+                ],
+                schema: `<svg viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
+                <text x="350" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#0D47A1">Urbanisme et prevention des inondations</text>
+                <!-- 3 niveaux -->
+                <text x="350" y="46" text-anchor="middle" font-weight="bold" fill="#37474F" font-size="13">3 niveaux de raisonnement</text>
+                <rect x="10" y="52" width="210" height="44" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="115" y="70" text-anchor="middle" font-weight="bold" fill="#0D47A1">Connaissance technique</text>
+                <text x="115" y="87" text-anchor="middle" font-size="11" fill="#1565C0">Quels phenomenes ?</text>
+                <rect x="245" y="52" width="210" height="44" rx="6" fill="#FFF8E1" stroke="#F57F17" stroke-width="1.5"/>
+                <text x="350" y="70" text-anchor="middle" font-weight="bold" fill="#E65100">Cadre juridique</text>
+                <text x="350" y="87" text-anchor="middle" font-size="11" fill="#E65100">Quelles regles ?</text>
+                <rect x="480" y="52" width="210" height="44" rx="6" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.5"/>
+                <text x="585" y="70" text-anchor="middle" font-weight="bold" fill="#1B5E20">Choix d'amenagement</text>
+                <text x="585" y="87" text-anchor="middle" font-size="11" fill="#2E7D32">Quelle implantation ?</text>
+                <!-- Documents -->
+                <text x="350" y="118" text-anchor="middle" font-weight="bold" fill="#37474F" font-size="13">Documents principaux</text>
+                <rect x="10" y="124" width="100" height="36" rx="5" fill="#EDE7F6" stroke="#6A1B9A" stroke-width="1.5"/>
+                <text x="60" y="145" text-anchor="middle" font-size="11" font-weight="bold" fill="#4A148C">SCoT</text>
+                <rect x="120" y="124" width="100" height="36" rx="5" fill="#EDE7F6" stroke="#6A1B9A" stroke-width="1.5"/>
+                <text x="170" y="145" text-anchor="middle" font-size="11" font-weight="bold" fill="#4A148C">PLU / PLUi</text>
+                <rect x="230" y="124" width="100" height="36" rx="5" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+                <text x="280" y="141" text-anchor="middle" font-size="11" font-weight="bold" fill="#C62828">PPRI</text>
+                <text x="280" y="154" text-anchor="middle" font-size="10" fill="#C62828">servitude UP</text>
+                <rect x="340" y="124" width="100" height="36" rx="5" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.5"/>
+                <text x="390" y="145" text-anchor="middle" font-size="11" font-weight="bold" fill="#1B5E20">PGRI</text>
+                <rect x="450" y="124" width="115" height="36" rx="5" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="507" y="145" text-anchor="middle" font-size="11" font-weight="bold" fill="#0D47A1">SDAGE / SAGE</text>
+                <rect x="575" y="124" width="115" height="36" rx="5" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="632" y="145" text-anchor="middle" font-size="11" font-weight="bold" fill="#E65100">PAPI</text>
+                <!-- PPRI detail -->
+                <rect x="10" y="174" width="320" height="46" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+                <text x="170" y="192" text-anchor="middle" font-weight="bold" fill="#C62828">PPRI — 3 pieces a lire</text>
+                <text x="170" y="209" text-anchor="middle" font-size="11" fill="#B71C1C">Note de presentation · Documents graphiques · Reglement</text>
+                <text x="170" y="218" text-anchor="middle" font-size="10" fill="#C62828">Couleur seule insuffisante · PLU + PPRI = ensemble des regles</text>
+                <!-- Formules -->
+                <rect x="345" y="174" width="345" height="46" rx="6" fill="#FBE9E7" stroke="#BF360C" stroke-width="1.5"/>
+                <text x="517" y="192" text-anchor="middle" font-weight="bold" fill="#BF360C">Formules</text>
+                <text x="517" y="208" text-anchor="middle" font-size="11.5" fill="#BF360C">V = S × h (geometrique seulement)</text>
+                <text x="517" y="221" text-anchor="middle" font-size="11" fill="#BF360C">Z_plancher = Z_ref + marge (hypothese projet)</text>
+                <!-- Absence PPRI -->
+                <rect x="10" y="234" width="320" height="36" rx="6" fill="#FFF8E1" stroke="#F57F17" stroke-width="1.5"/>
+                <text x="170" y="252" text-anchor="middle" font-weight="bold" fill="#E65100">Absence PPRI ≠ absence de risque</text>
+                <text x="170" y="268" text-anchor="middle" font-size="11" fill="#E65100">R.111-2 CU · refus ou prescriptions possibles</text>
+                <!-- Alea vs reglementaire -->
+                <rect x="345" y="234" width="345" height="36" rx="6" fill="#E8EAF6" stroke="#283593" stroke-width="1.5"/>
+                <text x="517" y="252" text-anchor="middle" font-weight="bold" fill="#1A237E">Carte alea ≠ zonage reglementaire</text>
+                <text x="517" y="268" text-anchor="middle" font-size="11" fill="#3949AB">phenomene vs politique de prevention</text>
+                <!-- Principes cles -->
+                <rect x="10" y="284" width="215" height="44" rx="6" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.5"/>
+                <text x="117" y="302" text-anchor="middle" font-weight="bold" fill="#1B5E20">Choix du site = prevention</text>
+                <text x="117" y="318" text-anchor="middle" font-size="11" fill="#2E7D32">Comparer avant de figer la conception</text>
+                <rect x="240" y="284" width="215" height="44" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="347" y="302" text-anchor="middle" font-weight="bold" fill="#E65100">Preserver les talwegs</text>
+                <text x="347" y="318" text-anchor="middle" font-size="11" fill="#E65100">sec ≠ inactif · effet sur voisins</text>
+                <rect x="470" y="284" width="220" height="44" rx="6" fill="#FCE4EC" stroke="#AD1457" stroke-width="1.5"/>
+                <text x="580" y="302" text-anchor="middle" font-weight="bold" fill="#880E4F">Effets cumules</text>
+                <text x="580" y="318" text-anchor="middle" font-size="11" fill="#AD1457">lire a l'echelle du bassin</text>
+                <!-- Plancher -->
+                <rect x="10" y="342" width="680" height="30" rx="8" fill="#E0F7FA" stroke="#00838F" stroke-width="2"/>
+                <text x="350" y="356" text-anchor="middle" font-size="12" font-weight="bold" fill="#006064">Plancher hors d'eau ≠ quartier fonctionnel · Usage autant que forme construite</text>
+                <text x="350" y="370" text-anchor="middle" font-size="11" fill="#00695C">Accès · Réseaux · Locaux bas · Stationnements · Équipements extérieurs</text>
+              </svg>`,
+                exercice: {
+                  enonce: '(1) Une parcelle est classée en zone urbaine du PLU. Peut-on conclure que tout projet y est autorisé ?\n(2) Une commune n\'a pas de PPRI, mais connaît des inondations documentées. Peut-on construire sans restrictions ?\n(3) Une parcelle apparaît en bleu sur un plan. Peut-on déterminer les travaux autorisés sans lire le règlement ?\n(4) Un remblai simplifié couvre 1 500 m² sur 0,40 m. Calculez V.\n(5) Un projet retire 600 m³ d\'espace et prévoit une excavation de 600 m³ située en hauteur, difficilement connectée. Y a-t-il compensation hydraulique ?\n(6) Un plancher est hors d\'eau pour le scénario étudié, mais l\'unique accès est submergé. Le projet est-il satisfaisant ?\n(7) Un syndicat GEMAPI émet une analyse hydraulique favorable. Cela vaut-il autorisation d\'urbanisme ?\n(8) Une opération réduit la vulnérabilité de chaque logement, mais triple le nombre de logements exposés. Est-ce satisfaisant ?',
+                  solution: '<strong>(1)</strong> Non — il faut examiner le règlement, les servitudes, les risques, les autres pièces et la nature précise du projet. Le classement urbain ne garantit pas tout.<br><strong>(2)</strong> Non — le risque existe. L\'article R.111-2 du CU peut permettre un refus ou des prescriptions. L\'absence de PPRI n\'est pas une attestation de sécurité.<br><strong>(3)</strong> Non — la légende, les dispositions générales et le règlement de la zone sont indispensables. Une couleur seule est insuffisante.<br><strong>(4)</strong> V = 1 500 × 0,40 = <strong>600 m³</strong> (géométrique). L\'effet hydraulique réel doit être étudié séparément.<br><strong>(5)</strong> Non — l\'égalité des volumes ne démontre pas l\'équivalence hydraulique. Les cotes, connexions et temporalités doivent être examinées.<br><strong>(6)</strong> Non — la vulnérabilité fonctionnelle demeure. L\'analyse ne peut pas s\'arrêter au plancher.<br><strong>(7)</strong> Non — son analyse contribue au dossier mais ne remplace pas la décision de l\'autorité compétente ni les autres procédures.<br><strong>(8)</strong> Non — il faut évaluer le risque global. Une amélioration par logement ne garantit pas une réduction des conséquences totales.',
+                },
+              }, // fin gem-pi4
+
             ],
           }, // fin gem-m21
 
