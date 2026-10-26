@@ -12279,6 +12279,140 @@ const COURS_DATA = {
                 },
               }, // fin gem-op4
 
+              {
+                id: 'gem-op5',
+                titre: 'Submersion marine et dynamiques littorales',
+                fiche: {
+                  intro: 'À la côte, le niveau de la mer, les vagues et la morphologie évoluent ensemble. Un ouvrage peut être franchi avant que le niveau moyen dépasse sa crête. Une plage qui s\'abaisse pendant une tempête laisse davantage d\'énergie atteindre la protection. Un estuaire peut recevoir simultanément une crue et une surcote marine. Raisonner à l\'échelle du système côtier — et pas seulement au droit d\'une digue — est la compétence centrale de ce chapitre.',
+                  points: [
+                    '🌊 3 modes de submersion marine : débordement (niveau dépasse un point bas ou une crête), franchissement (vagues projettent de l\'eau au-delà d\'un obstacle sans que le niveau moyen le dépasse), rupture (brèche dans un ouvrage ou un cordon). Ces mécanismes peuvent se combiner : des franchissements peuvent dégrader l\'arrière d\'un ouvrage, puis contribuer à une rupture.',
+                    '⚡ Submersion ≠ érosion : la submersion = entrée d\'eau ; l\'érosion = enlèvement de matériaux. Mais les deux interagissent : une plage abaissée atténue moins les vagues, un cordon aminci est plus vulnérable, une brèche crée de nouveaux courants. Une carte du recul du trait de côte ne remplace pas une carte de submersion.',
+                    '🌙 Marnage : M = Z_pleine_mer − Z_basse_mer (dans le même référentiel). Ex. : 6,20 − 1,40 = 4,80 m. Le coefficient de marée est un indicateur d\'importance, pas une hauteur universelle applicable partout.',
+                    '📈 Surcote : S(t) = Z_observé(t) − Z_prédit(t). Si S > 0 = surcote, si S < 0 = décote. Ex. : 5,10 − 4,35 = 0,75 m. Ce résidu intègre plusieurs phénomènes (pression atmosphérique, vent, dynamique de la tempête, configuration côtière). Il n\'est pas nécessairement dû à la seule pression.',
+                    '⚠️ Simultanéité déterminante : le maximum de surcote ne survient pas nécessairement à pleine mer. Additionner séparément le maximum de marée et le maximum de surcote surestime le niveau atteint. Il faut étudier des chronologies cohérentes, pas juxtaposer des maxima.',
+                    '🌊 Vagues : H_1/3 = moyenne des hauteurs du tiers le plus haut des vagues. H_m0 = hauteur significative spectrale (proche mais définie différemment). Ces indicateurs statistiques ne sont pas des hauteurs maximales. Houle (propagée depuis le large) ≠ mer du vent (générée localement). L\'état du vent à terre ne suffit pas à apprécier le danger maritime.',
+                    '📐 Wave setup = surélévation du niveau moyen local liée au déferlement des vagues. Run-up / R_u2% = élévation atteinte par le jet de rive, dépassée par 2 % des montées dans les conditions considérées (ni hauteur permanente, ni limite absolue). Ne pas ajouter toute la hauteur significative au niveau marin pour obtenir une cote de submersion.',
+                    '📏 Franchissements : q = débit moyen (m³/s/m) ; Q = q×L ; V = q×L×Δt. Ex. : 2 L/s/m sur 100 m pendant 30 min → V = 0,002×100×1 800 = 360 m³. Le débit moyen masque des passages intermittents parfois violents. Ce n\'est pas un seuil universel de sécurité.',
+                    '🗂️ Référentiel vertical : hauteur de marée (au-dessus du zéro hydrographique) ≠ cote NGF du terrain. Z_eau = Z_zéro_hydro_dans_référentiel_terrestre + hauteur_eau. Ex. : −3,20 + 5,10 = 1,90 m. La correspondance doit provenir des références locales (Shom, RAM).',
+                    '🏖️ Cellule sédimentaire = compartiment côtier à échanges cohérents. Un ouvrage retenant du sable sur un secteur peut priver un secteur voisin de ses apports. Le périmètre pertinent dépasse souvent la parcelle ou la commune. Volume, points bas et continuité du cordon dunaire comptent autant que sa hauteur maximale.',
+                    '📊 Niveau marin relatif = niveau de la mer rapporté au terrain local. Un affaissement du sol accentue la hausse relative. Une hausse de quelques décimètres peut modifier la fréquence et la durée des dépassements, pas seulement l\'hauteur d\'eau maximale.',
+                    '🌍 Projections climatiques : préciser scénario, horizon, période de référence, secteur géographique et intervalle d\'incertitude. Les valeurs mondiales GIEC ne sont pas directement des cotes de projet locales. Événements combinés (crue + niveau marin) : leur fréquence dépend de la dépendance entre les phénomènes ; une crue centennale + un niveau centennal ≠ automatiquement un événement combiné centennal.',
+                  ],
+                  formules: [
+                    'Marnage : M = Z_pleine_mer − Z_basse_mer (m) — ex. 6,20 − 1,40 = 4,80 m (même référentiel)',
+                    'Surcote instantanée : S = Z_observé − Z_prédit (m) — ex. 5,10 − 4,35 = 0,75 m',
+                    'Effet pression atmosphérique (baromètre inverse) : Δη ≈ −Δp / (ρ_w × g) — ex. baisse 20 hPa → Δη ≈ 0,20 m (ordre de grandeur)',
+                    'Référentiel vertical : Z_eau = Z_zéro_hydro + hauteur_eau — ex. −3,20 + 5,10 = 1,90 m',
+                    'Volume franchi : V = q × L × Δt (m³) — ex. 0,002 m³/s/m × 100 m × 1800 s = 360 m³',
+                  ],
+                  retenir: 'Submersion = entrée d\'eau (débordement / franchissement / rupture). Érosion = enlèvement de matériaux (interagissent). M = Z_PM − Z_BM. S = Z_obs − Z_prédit. Simultanéité : ne pas additionner les maxima séparés. H_1/3 et H_m0 = indicateurs statistiques, pas hauteur max. Wave setup = surélévation locale due aux vagues. R_u2% = 2% des montées du jet de rive. V = q×L×Δt. Référentiel vertical indispensable (zéro hydro ≠ NGF). Cellule sédimentaire = périmètre pertinent. Niveau marin relatif = mer / terrain local. Hausse = fréquence accrue des dépassements. Crue centennale + marine centennale ≠ forcément combinaison centennale.',
+                  sections: [
+                    {
+                      titre: 'Phénomènes marins et niveaux',
+                      ss: [
+                        {
+                          titre: 'Modes de submersion, érosion et marée',
+                          texte: 'Submersion marine = inondation temporaire de terrains côtiers par eau d\'origine marine. 3 modes : débordement (niveau dépasse crête ou point bas), franchissement (vagues projettent de l\'eau au-delà d\'un obstacle sans que le niveau moyen le dépasse — des terrains plus élevés que le niveau moyen peuvent être touchés), rupture (brèche dans un ouvrage ou cordon). Ces modes peuvent se succéder ou se combiner : franchissements → dégradation de l\'arrière → rupture. Submersion ≠ érosion : érosion = enlèvement de matériaux et évolution du rivage. Mais interaction : plage abaissée → moins d\'atténuation des vagues ; cordon aminci → plus vulnérable ; brèche → nouveaux courants. Une carte de recul du trait de côte ne remplace pas une carte de submersion. Marée astronomique : interaction gravitationnelle Terre-Lune-Soleil modulée par la géométrie des bassins. M = Z_PM − Z_BM. Ex. : 6,20 − 1,40 = 4,80 m. Le coefficient de marée = indicateur d\'importance, pas hauteur universelle. Surcote S = Z_observé − Z_prédit. Décote si S < 0. Ex. : 5,10 − 4,35 = 0,75 m. Ce résidu intègre pression, vent, dynamique de la tempête et configuration côtière. Effet pression atmosphérique (baromètre inverse) : Δη ≈ −Δp/(ρ_w×g). Ex. : baisse 20 hPa → Δη ≈ 0,20 m (ordre de grandeur, pas prévision complète).',
+                        },
+                        {
+                          titre: 'Simultanéité, vagues et wave setup',
+                          texte: 'Simultanéité déterminante : le maximum de surcote ≠ forcément à pleine mer. Ex. fictif : à 15 h, marée 3,80 m + surcote 1,10 m = 4,90 m ; à 17 h, marée 4,60 m + surcote 0,65 m = 5,25 m. Maximum observé = 5,25 m, mais addition des maxima séparés donnerait 5,70 m (jamais atteint). Il faut étudier des chronologies cohérentes. Vagues : H_1/3 = moyenne des hauteurs du tiers le plus haut — indicateur statistique, pas hauteur max. H_m0 = hauteur significative spectrale (proche de H_1/3 mais définie différemment). Mer du vent (générée localement) ≠ houle (propagée depuis une zone lointaine). Plusieurs systèmes de directions et périodes différentes peuvent coexister. L\'état du vent à terre ne suffit pas à apprécier le danger maritime. Transformation à l\'approche de la côte : modification de la hauteur avec la profondeur, réfraction, diffraction, déferlement, réflexion. Bathymétrie peut concentrer ou disperser l\'énergie. Les caractéristiques offshore ne s\'appliquent pas directement au pied d\'un ouvrage sans analyser leur transformation. Wave setup = surélévation du niveau moyen local liée au déferlement. Son estimation doit tenir compte du domaine d\'application de la méthode : une formule adaptée à une configuration ne s\'applique pas automatiquement à une autre. Attention au double comptage si la donnée de niveau inclut déjà une contribution. Run-up : R_u2% = élévation dépassée par 2 % des montées du jet de rive dans les conditions considérées. Ni hauteur permanente, ni limite absolue. Ne pas ajouter toute la hauteur significative au niveau marin pour obtenir une cote de submersion.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Morphologie littorale et dynamiques sédimentaires',
+                      ss: [
+                        {
+                          titre: 'Franchissements, référentiel vertical et terrains bas',
+                          texte: 'Franchissements : q (m³/s/m) = débit moyen par unité de longueur. Q = q×L. V = q×L×Δt. Ex. : q=2 L/s/m=0,002 m³/s/m sur 100 m pendant 30 min → V=0,002×100×1800=360 m³. Le débit moyen masque des passages intermittents parfois violents (volumes par vague individuels). Ce n\'est pas un seuil universel de sécurité. Référentiel vertical indispensable : zéro hydrographique (ZH) ≠ référentiel altimétrique terrestre (NGF). Z_eau = Z_ZH_dans_référentiel_terrestre + hauteur_eau. Ex. fictif : ZH à −3,20 m (référentiel terrestre), hauteur d\'eau = 5,10 m → Z_eau = 1,90 m. La correspondance doit provenir des références locales (RAM du Shom). Terrains bas : même si la mer atteint une cote donnée, tous les terrains sous cette cote ne sont pas instantanément remplis. Il faut considérer les connexions, obstacles, débits entrants, durée, volumes et possibilités de vidange. Un terrain bas isolé ≠ terrain bas directement connecté à une brèche. Estuaires : la mer peut freiner l\'évacuation d\'une crue et créer un remous. La chronologie (crue, marée, surcote, pluies) est déterminante. Crue centennale + niveau marin centennal ≠ automatiquement événement combiné centennal : la fréquence de la combinaison dépend de la dépendance entre les phénomènes.',
+                        },
+                        {
+                          titre: 'Cellules sédimentaires, érosion et adaptation',
+                          texte: 'Plages et dunes = système mobile : pendant certaines tempêtes, le sable peut quitter le haut de plage, alimenter des formes sous-marines, puis revenir. La dune représente un stock mobilisable. Son érosion devient préoccupante quand la géométrie restante ne permet plus de limiter les entrées d\'eau ou quand des enjeux sont menacés. Il faut examiner largeur, volume, points bas et évolution, pas seulement la hauteur maximale. Cellule sédimentaire = compartiment côtier à échanges de sédiments cohérents (littoraux, plage-avant-côte, plage-dune, embouchure). Un ouvrage retenant du sable sur un secteur peut réduire les apports vers un secteur voisin. Le périmètre pertinent dépasse souvent la parcelle ou la commune. Abaissement de la plage → expose davantage le pied de l\'ouvrage, modifie le déferlement, augmente les sollicitations. La fonction réelle de chaque ouvrage doit être explicitée (protection portuaire ≠ protection contre submersion de terrains arrière). Eaux intérieures : zone littorale peut recevoir simultanément eau marine, ruissellement, cours d\'eau et remontées de nappe. La montée de la mer ferme les clapets → la submersion peut se prolonger après la baisse marine. La décrue marine ≠ retour immédiat au fonctionnement normal du territoire. 6 stratégies d\'adaptation : préserver les espaces mobiles, restaurer des milieux, recharger une plage, maintenir/adapter des ouvrages, adapter les usages et bâtiments, recomposer le territoire. Une solution fondée sur la nature ≠ automatiquement protection suffisante contre tout événement. Une défense rigide ≠ solution durable en tout lieu. Niveau marin relatif = niveau de la mer rapporté au terrain local ; une hausse peut modifier la fréquence et la durée des dépassements, pas seulement l\'hauteur d\'eau maximale.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quelle différence entre débordement et franchissement dans une submersion marine ?', r: 'Débordement : le niveau moyen dépasse la crête ou un point bas. Franchissement : des vagues projettent de l\'eau au-delà d\'un obstacle sans que le niveau moyen le dépasse. Des terrains plus élevés que le niveau moyen peuvent être touchés.', expl: 'Ces modes peuvent se combiner : franchissements → dégradation → rupture. Géorisques distingue ces mécanismes et rappelle que des projections peuvent atteindre des terrains plus élevés que le niveau moyen de l\'événement.' },
+                  { q: 'Comment calcule-t-on la surcote instantanée ?', r: 'S = Z_observé − Z_prédit. Si S > 0 = surcote, si S < 0 = décote. Ex. : 5,10 − 4,35 = 0,75 m. Les deux valeurs doivent utiliser le même référentiel.', expl: 'Ce résidu intègre plusieurs phénomènes (pression atmosphérique, vent, dynamique de la tempête, configuration côtière) — pas seulement la pression. Il n\'est pas équivalent à la surcote atmosphérique seule.' },
+                  { q: 'Peut-on additionner le maximum de marée et le maximum de surcote pour obtenir le niveau maximal atteint ?', r: 'Non. Le maximum de surcote ne survient pas nécessairement à pleine mer. Additionner les maxima séparés surestime le niveau réellement atteint. Il faut étudier des chronologies cohérentes.', expl: 'Ex. fictif : marée max 4,60 m + surcote max 1,10 m = 5,70 m. Mais aux instants où chaque maximum survient, le niveau réel ne dépasse pas 5,25 m. La simultanéité est déterminante.' },
+                  { q: 'Qu\'est-ce que la hauteur significative H_1/3 ?', r: 'La moyenne des hauteurs du tiers des vagues les plus hautes dans un état de mer. C\'est un indicateur statistique, pas la hauteur maximale. Des vagues individuelles peuvent dépasser cette valeur.', expl: 'H_m0 (hauteur significative spectrale) est proche de H_1/3 mais définie différemment. Houle (propagée depuis le large) ≠ mer du vent (générée localement). L\'état du vent à terre ne suffit pas à apprécier le danger maritime.' },
+                  { q: 'Comment convertir une hauteur d\'eau en cote altimétrique terrestre ?', r: 'Z_eau = Z_zéro_hydro_dans_référentiel_terrestre + hauteur_eau. Ex. fictif : ZH à −3,20 m (terrestre), hauteur 5,10 m → Z_eau = 1,90 m. La correspondance doit provenir des références locales (RAM du Shom).', expl: 'Hauteur de marée (au-dessus du zéro hydrographique) et cote NGF ne peuvent pas être comparées directement. Le référentiel vertical est indispensable pour comparer mer, terrain et ouvrages.' },
+                  { q: 'Comment calcule-t-on le volume d\'eau franchi par une digue ?', r: 'V = q × L × Δt. Avec q en m³/s/m, L en mètres, Δt en secondes. Ex. : 2 L/s/m = 0,002 m³/s/m sur 100 m pendant 30 min → V = 0,002 × 100 × 1800 = 360 m³.', expl: 'Le débit moyen masque des passages intermittents parfois violents (volumes par vague individuelle bien supérieurs). Ce n\'est pas un seuil universel de sécurité. EurOtop distingue débit moyen et volumes par vague.' },
+                  { q: 'Pourquoi une crue centennale associée à un niveau marin centennal n\'est-elle pas automatiquement un événement combiné centennal ?', r: 'La fréquence de la combinaison dépend de la dépendance entre les phénomènes et de leur simultanéité. Elle exige une analyse spécifique. Des phénomènes indépendants combinés ont une fréquence plus faible que chacun séparément.', expl: 'Dans un estuaire, la mer peut freiner l\'évacuation d\'une crue et créer un remous. La chronologie (crue, marée, surcote, pluies) est déterminante. Une crue avec mer basse peut différer d\'une crue modérée avec niveau marin élevé.' },
+                  { q: 'Quels éléments faut-il examiner pour évaluer la contribution d\'une dune à la protection littorale ?', r: 'Largeur, volume, points bas, continuité et évolution du cordon — pas seulement la hauteur maximale. La dune représente un stock sédimentaire mobilisable. Son érosion devient préoccupante quand la géométrie restante ne permet plus de limiter les entrées d\'eau.', expl: 'Le volume et les points bas sont au moins aussi importants que la crête. Une dune qui conserve la même hauteur mais perd beaucoup de largeur et de volume offre une protection réduite.' },
+                ],
+                schema: `<svg viewBox="0 0 700 410" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
+                <text x="350" y="20" text-anchor="middle" font-size="15" font-weight="bold" fill="#01579B">Submersion marine et dynamiques littorales</text>
+                <!-- 3 modes -->
+                <rect x="10" y="28" width="680" height="28" rx="5" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="350" y="47" text-anchor="middle" font-size="11" fill="#0D47A1">3 modes : <tspan font-weight="bold">Débordement</tspan> (niveau &gt; crête) · <tspan font-weight="bold">Franchissement</tspan> (vagues projettent de l'eau) · <tspan font-weight="bold">Rupture</tspan> (brèche) — peuvent se combiner</text>
+                <!-- Marnage + Surcote -->
+                <rect x="10" y="62" width="330" height="54" rx="5" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5"/>
+                <text x="175" y="80" text-anchor="middle" font-weight="bold" fill="#1B5E20">Niveaux</text>
+                <text x="175" y="95" text-anchor="middle" font-size="11.5" fill="#2E7D32">Marnage : M = Z_PM − Z_BM (ex. 6,20−1,40 = 4,80 m)</text>
+                <text x="175" y="109" text-anchor="middle" font-size="11.5" fill="#2E7D32">Surcote : S = Z_obs − Z_prédit (ex. 5,10−4,35 = 0,75 m)</text>
+                <!-- Simultanéité -->
+                <rect x="355" y="62" width="335" height="54" rx="5" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="522" y="80" text-anchor="middle" font-weight="bold" fill="#BF360C">Simultanéité déterminante</text>
+                <text x="522" y="95" text-anchor="middle" font-size="11" fill="#E65100">Max marée + max surcote ≠ niveau réellement atteint</text>
+                <text x="522" y="109" text-anchor="middle" font-size="11" fill="#E65100">Étudier des chronologies cohérentes</text>
+                <!-- Vagues -->
+                <rect x="10" y="122" width="213" height="52" rx="5" fill="#E8EAF6" stroke="#283593" stroke-width="1.5"/>
+                <text x="116" y="140" text-anchor="middle" font-weight="bold" fill="#1A237E">Vagues</text>
+                <text x="116" y="155" text-anchor="middle" font-size="10.5" fill="#283593">H_1/3 / H_m0 = indicateurs statistiques</text>
+                <text x="116" y="168" text-anchor="middle" font-size="10.5" fill="#3949AB">Houle ≠ mer du vent · Vent à terre ≠ danger maritime</text>
+                <!-- Setup / Run-up -->
+                <rect x="233" y="122" width="213" height="52" rx="5" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1.5"/>
+                <text x="339" y="140" text-anchor="middle" font-weight="bold" fill="#4A148C">Wave setup / Run-up</text>
+                <text x="339" y="155" text-anchor="middle" font-size="10.5" fill="#6A1B9A">Setup = surélévation locale due aux vagues</text>
+                <text x="339" y="168" text-anchor="middle" font-size="10.5" fill="#7B1FA2">R_u2% = 2% des montées dépassent cette cote</text>
+                <!-- Franchissement -->
+                <rect x="456" y="122" width="234" height="52" rx="5" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+                <text x="573" y="140" text-anchor="middle" font-weight="bold" fill="#C62828">Franchissement</text>
+                <text x="573" y="155" text-anchor="middle" font-size="11.5" fill="#C62828">V = q × L × Δt</text>
+                <text x="573" y="168" text-anchor="middle" font-size="10.5" fill="#BF360C">Ex. 0,002×100×1800 = 360 m³ · débit moyen ≠ vague max</text>
+                <!-- Référentiel vertical -->
+                <rect x="10" y="180" width="330" height="44" rx="5" fill="#FBE9E7" stroke="#BF360C" stroke-width="2"/>
+                <text x="175" y="198" text-anchor="middle" font-weight="bold" fill="#BF360C">Référentiel vertical (indispensable)</text>
+                <text x="175" y="212" text-anchor="middle" font-size="11" fill="#C62828">Z_eau = Z_zéro_hydro + hauteur_eau · ex. −3,20+5,10 = 1,90 m</text>
+                <!-- Morpho -->
+                <rect x="355" y="180" width="335" height="44" rx="5" fill="#E0F7FA" stroke="#00838F" stroke-width="1.5"/>
+                <text x="522" y="198" text-anchor="middle" font-weight="bold" fill="#006064">Morphologie littorale</text>
+                <text x="522" y="212" text-anchor="middle" font-size="10.5" fill="#00838F">Dune : volume + points bas + continuité (pas seulement hauteur)</text>
+                <!-- Cellule séd -->
+                <rect x="10" y="230" width="213" height="44" rx="5" fill="#FFF8E1" stroke="#F57F17" stroke-width="1.5"/>
+                <text x="116" y="248" text-anchor="middle" font-weight="bold" fill="#E65100">Cellule sédimentaire</text>
+                <text x="116" y="262" text-anchor="middle" font-size="10" fill="#E65100">Périmètre pertinent &gt; parcelle ou commune</text>
+                <!-- Niveau relatif -->
+                <rect x="233" y="230" width="213" height="44" rx="5" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.5"/>
+                <text x="339" y="248" text-anchor="middle" font-weight="bold" fill="#1B5E20">Niveau marin relatif</text>
+                <text x="339" y="262" text-anchor="middle" font-size="10" fill="#2E7D32">Hausse = fréquence accrue des dépassements</text>
+                <!-- Estuaire -->
+                <rect x="456" y="230" width="234" height="44" rx="5" fill="#FCE4EC" stroke="#AD1457" stroke-width="1.5"/>
+                <text x="573" y="248" text-anchor="middle" font-weight="bold" fill="#880E4F">Estuaires / événements combinés</text>
+                <text x="573" y="262" text-anchor="middle" font-size="10" fill="#AD1457">Crue + marine : fréquence ≠ min(T_crue, T_marine)</text>
+                <!-- Adaptation -->
+                <rect x="10" y="280" width="680" height="50" rx="5" fill="#EFEBE9" stroke="#5D4037" stroke-width="1.5"/>
+                <text x="350" y="298" text-anchor="middle" font-weight="bold" fill="#3E2723">6 stratégies d'adaptation</text>
+                <text x="350" y="312" text-anchor="middle" font-size="10.5" fill="#5D4037">Préserver espaces mobiles · Restaurer milieux · Recharger plage · Maintenir/adapter ouvrages · Adapter usages · Recomposer territoire</text>
+                <text x="350" y="325" text-anchor="middle" font-size="10.5" fill="#5D4037">Solution fondée sur la nature ≠ protection universelle · Défense rigide ≠ solution durable partout</text>
+                <!-- Bas -->
+                <rect x="10" y="338" width="680" height="60" rx="7" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+                <text x="350" y="356" text-anchor="middle" font-weight="bold" fill="#0D47A1">Raisonner à l'échelle du système côtier</text>
+                <text x="350" y="371" text-anchor="middle" font-size="11" fill="#1565C0">Phénomènes hydrodynamiques + morphologiques + territoriaux combinés</text>
+                <text x="350" y="384" text-anchor="middle" font-size="10.5" fill="#1565C0">Érosion ↔ submersion (interagissent) · Décrue marine ≠ retour immédiat au fonctionnement normal</text>
+                <text x="350" y="395" text-anchor="middle" font-size="10" fill="#1565C0">Fin module 12 — 60 chapitres sur 80</text>
+              </svg>`,
+                exercice: {
+                  enonce: '(1) Niveau observé 4,85 m, marée prédite 4,10 m. Calculez la surcote.\n(2) Zéro hydrographique fictif à −2,70 m (référentiel terrestre), hauteur d\'eau 4,30 m. Calculez la cote altimétrique.\n(3) La marée maximale et la surcote maximale surviennent à 3 heures d\'intervalle. Peut-on les additionner pour reconstituer le niveau maximal réel ?\n(4) Une prévision annonce une hauteur significative de 4 m. Aucune vague ne peut donc dépasser 4 m — vrai ou faux ?\n(5) q = 3 L/s/m sur 80 m pendant 20 minutes. Calculez le volume franchi.\n(6) Une dune conserve la même hauteur maximale mais sa largeur diminue fortement. Sa contribution à la protection est-elle inchangée ?\n(7) Une hausse hypothétique de 0,30 m réduit-elle seulement de 0,30 m la différence entre la crête et l\'eau ?\n(8) Une crue fluviale et un niveau marin sont chacun qualifiés de centennaux. Leur combinaison est-elle nécessairement centennale ?',
+                  solution: '<strong>(1)</strong> S = 4,85 − 4,10 = <strong>0,75 m</strong>. Les deux valeurs doivent utiliser le même référentiel.<br><strong>(2)</strong> Z = −2,70 + 4,30 = <strong>1,60 m</strong>. La correspondance doit provenir des références locales.<br><strong>(3)</strong> Non — il faut additionner les contributions aux mêmes instants. Juxtaposer les maxima séparés surestime le niveau réellement atteint.<br><strong>(4)</strong> Faux — H_1/3 et H_m0 sont des indicateurs statistiques : des vagues individuelles peuvent dépasser cette valeur. Ce n\'est pas la hauteur maximale.<br><strong>(5)</strong> V = 0,003 × 80 × 1200 = <strong>288 m³</strong>. Le débit moyen masque des passages intermittents parfois violents.<br><strong>(6)</strong> Non — son volume, ses points bas, sa continuité et sa résistance à l\'érosion doivent également être examinés. La hauteur maximale seule ne suffit pas.<br><strong>(7)</strong> Géométriquement possible, mais les effets peuvent aussi concerner la fréquence des dépassements, la transformation des vagues, la durée de fermeture des exutoires et l\'évolution du littoral.<br><strong>(8)</strong> Non — la fréquence de la combinaison dépend de la dépendance entre les phénomènes et de leur simultanéité. Elle exige une analyse spécifique.',
+                },
+              }, // fin gem-op5
+
             ],
           }, // fin gem-m22
 
