@@ -9825,6 +9825,151 @@ const COURS_DATA = {
                 },
               },
 
+              {
+                id: 'gem-ent4',
+                titre: 'Gestion des berges et génie végétal',
+                fiche: {
+                  intro: 'Une berge qui recule n\'est pas nécessairement une berge dégradée. L\'érosion latérale participe au fonctionnement de nombreux cours d\'eau. Cependant, cette évolution peut menacer un bâtiment, une route, un réseau ou un usage. La décision repose sur deux analyses complémentaires : le mécanisme d\'évolution de la berge et les conséquences possibles pour les enjeux exposés. Ce chapitre donne les repères pour distinguer les mécanismes, évaluer la nécessité d\'intervenir, comparer les stratégies et comprendre les conditions de fonctionnement des techniques végétales.',
+                  points: [
+                    '🌊 Érosion hydraulique (enlèvement et transport de matériaux au pied ou en surface) ≠ instabilité géotechnique (déplacement d\'une masse de sol sous l\'effet des forces) — peuvent se combiner : le sapement du pied supprime un appui et peut provoquer un effondrement du talus',
+                    '🌧️ Décrue rapide : le niveau baisse plus vite que l\'eau contenue dans la berge → le soutien extérieur diminue alors que des pressions internes peuvent persister → la berge peut devenir instable APRÈS la pointe de crue, pas seulement pendant',
+                    '📋 Avant de protéger : évaluer si la mobilité peut être acceptée — l\'érosion latérale fournit des sédiments, renouvelle des habitats, crée des berges abruptes, alimente en bois le cours d\'eau — surveillance si aucun enjeu significatif n\'est menacé',
+                    '↩️ Comparer le recul de l\'enjeu à la stabilisation : déplacer une clôture, un chemin ou un accès peut réduire le besoin de protection et préserver le fonctionnement du cours d\'eau — intégrer coût initial, faisabilité foncière, entretien futur et risques résiduels',
+                    '🌿 Génie végétal : utilisation de végétaux vivants et de leurs propriétés biologiques et mécaniques — phase initiale : tenue assurée par ancrages et géométrie ; phase établie : racines et parties aériennes participent — une crue avant l\'enracinement peut solliciter un ouvrage peu développé',
+                    '🌱 Bouturage : nécessite identification des espèces, fraîcheur du matériel, contact avec le sol, accès à l\'humidité — toutes les espèces ne bouturent pas de la même manière ; émission de quelques feuilles ≠ enracinement suffisant',
+                    '🌾 Fascines de ligneux : points critiques = niveau d\'implantation, stabilité du pied, ancrage, contact avec les matériaux arrière, raccordements — affouillement peut déstabiliser une fascine même si elle reprend biologiquement',
+                    '🔬 Pas de vitesse universelle pour choisir la technique : la résistance dépend de la durée de sollicitation, de la turbulence, de l\'affouillement, de l\'état de développement de la végétation et de la qualité d\'exécution — utiliser les valeurs issues de retours d\'expérience avec leurs hypothèses',
+                    '📐 T_r = (N_vivants / N_suivis) × 100 — ex. 144/180 = 80 % ; un taux global peut masquer une zone entière de mortalité localisée en pied de berge',
+                    '📏 v_r = Δx / Δt — ex. 1,2 m / 4 ans = 0,30 m/an (vitesse de recul historique moyenne) ; ce n\'est pas une prévision déterministe : l\'essentiel du déplacement peut avoir eu lieu lors d\'une seule crue',
+                    '⚖️ Rubrique 3.1.4.0 : distingue les protections par techniques autres que végétales vivantes — un projet végétal doit quand même examiner les autres caractéristiques (terrassements, effets sur le lit, habitats) et les autres rubriques applicables',
+                    '🔧 Suivi = 5 dimensions : conformité (implantation, géométrie, ancrages), reprise biologique (survie, couverture), comportement mécanique (déplacements, arrachements), fonctionnement hydraulique (affouillement, contournement), effets voisins (érosion aux extrémités)',
+                  ],
+                  formules: [
+                    'Taux de reprise : T_r = (N_vivants / N_suivis) × 100 (%) — ex. 144 / 180 × 100 = 80 % ; préciser la date, le périmètre et la méthode ; un taux global peut masquer une zone de mortalité localisée',
+                    'Vitesse de recul : v_r = Δx / Δt — ex. 1,2 m / 4 ans = 0,30 m/an (moyenne historique) ; ne signifie pas que la berge reculera de 0,30 m chaque année',
+                    'Taux de couverture végétale : T_c = (S_couverte / S_totale) × 100 (%) — ex. 18 m² / 30 m² = 60 % ; indicateur de colonisation du talus en cours de suivi',
+                    'Pente de talus : p = H / L — ex. berge de hauteur H = 2 m pour une emprise horizontale L = 3 m → p = 2/3 ≈ 0,67 ; la pente adaptée dépend des matériaux, des circulations d\'eau et de la géométrie',
+                  ],
+                  retenir: 'Érosion hydraulique ≠ instabilité géotechnique · Décrue rapide = risque persistant après la pointe · Évaluer si la mobilité peut être acceptée avant de protéger · Recul de l\'enjeu = variante à comparer · Phase initiale ≠ phase établie pour le génie végétal · Fascine : le pied et les raccordements sont critiques · T_r = taux de reprise, pas d\'absence de zone de mortalité · v_r = moyenne historique, pas de prévision déterministe · Pas de vitesse universelle pour choisir la technique.',
+                  sections: [
+                    {
+                      titre: 'Comprendre l\'évolution d\'une berge',
+                      ss: [
+                        {
+                          titre: 'Distinguer érosion et instabilité géotechnique',
+                          texte: 'Deux familles de mécanismes doivent être séparées. L\'érosion hydraulique correspond à l\'enlèvement et au transport de matériaux par les écoulements (encoche au pied, érosion de surface). L\'instabilité géotechnique correspond au déplacement d\'une masse de sol (glissement, effondrement). Ces mécanismes peuvent se combiner : un sapement du pied supprime un appui et peut provoquer l\'effondrement de la partie sous-cavée. Un mécanisme important est celui de la décrue rapide : lorsque le niveau du cours d\'eau baisse plus vite que l\'eau contenue dans la berge, le soutien extérieur diminue alors que des pressions internes peuvent persister. Une berge peut ainsi devenir instable après la pointe de crue, même lorsque le niveau redescend. Ce risque dépend de la perméabilité, de la géométrie et des matériaux.',
+                        },
+                        {
+                          titre: 'Observer et identifier les causes à plusieurs échelles',
+                          texte: 'Les indices observables comprennent une encoche au pied, des blocs récemment tombés, des fissures en arrière de la crête, un bombement du talus, des suintements, des traces de ruissellement, des racines mises à nu et des déformations d\'ouvrages proches. Chaque indice doit être daté, localisé et associé aux conditions de visite. Une observation visuelle oriente le diagnostic, elle ne remplace pas toujours une expertise géotechnique. La recherche des causes doit être menée à plusieurs échelles : affouillement localisé (courbure, obstacle, rétrécissement), érosion sur un long secteur (incision, déficit sédimentaire), ravinement depuis la crête (ruissellement concentré, rejet), dégradation près d\'un accès (piétinement, circulation). Il faut examiner le lit, les berges voisines, les apports d\'eau et les usages.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Décider si une intervention est nécessaire',
+                      ss: [
+                        {
+                          titre: 'Accepter la mobilité ou intervenir',
+                          texte: 'L\'érosion latérale contribue à fournir des sédiments, renouveler certains habitats, créer des berges abruptes, alimenter la rivière en bois et déplacer les formes du chenal. La première question est donc : quelles conséquences cette mobilité produit-elle réellement ? Si aucun enjeu significatif n\'est menacé, une surveillance ou un accompagnement peut être préférable à une protection. Accepter la mobilité est une décision de gestion argumentée, pas une absence de réflexion. Elle nécessite de connaître les usages, les limites foncières et les évolutions possibles. Avant de stabiliser, il faut comparer les possibilités de recul : déplacer une clôture, reculer un chemin, modifier un accès ou réserver un espace à la rivière peut réduire le besoin de protection et préserver le fonctionnement du cours d\'eau.',
+                        },
+                        {
+                          titre: 'Comparer les grandes stratégies de gestion',
+                          texte: 'Six stratégies peuvent être comparées : surveillance (suivre sans travaux immédiats — conséquences compatibles avec le délai), accompagnement (réduire les pressions, laisser une marge de mobilité — espace disponible), recul de l\'enjeu (éloigner ce qui est exposé — faisabilité technique et foncière), stabilisation végétale (végétaux vivants et dispositifs associés — conditions hydrauliques, géotechniques et biologiques adaptées), protection mixte (parties végétales et éléments structurels — justification de chaque composant), protection minérale ou structurelle (ouvrage conçu à cet effet — enjeu et contraintes justifiant cette solution). Le choix doit porter sur la stratégie avant de porter sur le matériau.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Les techniques végétales',
+                      ss: [
+                        {
+                          titre: 'Bouturage et fascines de ligneux',
+                          texte: 'Le bouturage utilise des fragments de végétaux capables de produire de nouvelles racines. Il exige : identification précise des espèces, qualité et fraîcheur du matériel, stockage adapté, bon contact avec le sol et accès à l\'humidité. Toutes les espèces ne bouturent pas de la même manière. Une bouture qui émet quelques feuilles n\'a pas nécessairement développé un enracinement suffisant pour assurer sa survie et la fonction attendue. Une fascine de ligneux est constituée de branches regroupées et maintenues par des ancrages. Les points essentiels sont le niveau d\'implantation, la stabilité du pied, l\'ancrage, le contact avec les matériaux arrière et les raccordements. Une fascine ne se résume pas à un fagot posé au bord de l\'eau. Une fosse d\'affouillement peut déstabiliser la fascine même si elle reprend biologiquement.',
+                        },
+                        {
+                          titre: 'Hélophytes, ensemencement et conditions de reprise',
+                          texte: 'Les hélophytes sont des plantes enracinées dans des sols saturés, dont une partie se développe au-dessus de l\'eau. Elles peuvent être utilisées dans certains secteurs à faibles sollicitations et ne constituent pas une solution universelle pour stabiliser une rive fortement affouillée. L\'ensemencement peut couvrir le sol, limiter l\'érosion de surface et accompagner la reprise d\'une végétation adaptée, mais ne traite pas un glissement profond ni nécessairement un affouillement. Pour toutes les techniques végétales, il faut distinguer la phase initiale (tenue assurée par les ancrages et la géométrie) de la phase établie (racines et parties aériennes participent à la résistance). Une crue survenant avant l\'enracinement peut solliciter un ouvrage encore peu développé biologiquement. Les lits de plants et plançons et les couches de branches doivent être conçus comme un ensemble cohérent.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Traiter le pied et les raccordements',
+                      ss: [
+                        {
+                          titre: 'Pied de berge, affouillement et solutions mixtes',
+                          texte: 'Le pied constitue souvent le point critique d\'une protection de berge. L\'affouillement peut former une fosse, provoquer la perte des matériaux situés derrière l\'ouvrage et entraîner une instabilité progressive. Les extrémités amont et aval demandent également une attention particulière : une protection correctement exécutée sur sa partie centrale peut être contournée ou déstabilisée par ses raccordements. Le dimensionnement doit porter sur le système complet, y compris ce qui se situe sous l\'eau et aux extrémités. Une solution mixte associe une partie structurelle en pied et un talus végétalisé. Elle doit être justifiée par les mécanismes observés, et non par principe. La présence d\'une base minérale n\'est pas toujours indispensable ; les végétaux ne suffisent pas toujours non plus.',
+                        },
+                        {
+                          titre: 'Choisir les espèces et niveaux d\'implantation',
+                          texte: 'Le choix des espèces doit intégrer le climat, le sol, la fréquence de submersion, la durée des sécheresses, l\'ensoleillement, la capacité d\'enracinement et la compatibilité avec les usages. Le niveau d\'implantation est aussi important que l\'espèce : une plante adaptée à une berge humide peut échouer si elle est installée trop haut et se dessèche ; une plantation trop basse peut subir une submersion incompatible avec sa reprise. Il n\'existe pas de valeur unique de vitesse permettant de choisir la technique : la résistance dépend aussi de la durée de sollicitation, de la turbulence, de l\'affouillement, de l\'état de développement de la végétation et de la qualité d\'exécution. Les valeurs issues de retours d\'expérience ont un domaine de validité et doivent être utilisées avec leurs hypothèses.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Contrôler la réalisation et suivre les effets',
+                      ss: [
+                        {
+                          titre: 'T_r, v_r et cadre réglementaire',
+                          texte: 'Le taux de reprise T_r = (N_vivants / N_suivis) × 100 doit préciser la date, le périmètre et la méthode d\'observation. Pour 144 plants vivants parmi 180 suivis, T_r = 80 %. Ce taux global peut masquer une zone entière de mortalité en pied de berge. La vitesse de recul v_r = Δx / Δt donne la vitesse moyenne historique : pour 1,2 m en 4 ans, v_r = 0,30 m/an. Cette moyenne ne signifie pas que la berge reculera de 0,30 m chaque année : l\'essentiel du déplacement peut être survenu lors d\'une seule crue. Sur le plan administratif, la rubrique 3.1.4.0 distingue les protections par techniques autres que végétales vivantes. Un projet végétal doit quand même examiner les terrassements, les effets sur le lit, les habitats et les autres rubriques applicables.',
+                        },
+                        {
+                          titre: 'Les cinq dimensions du suivi',
+                          texte: 'Le suivi doit distinguer cinq dimensions. La conformité vérifie l\'implantation, la géométrie, les matériaux et les ancrages. La reprise biologique examine la survie, la croissance, l\'enracinement et la couverture. Le comportement mécanique suit les déplacements, les déformations et les arrachements. Le fonctionnement hydraulique contrôle l\'affouillement, le contournement et les dépôts. Les effets voisins évaluent l\'érosion aux extrémités ou sur d\'autres secteurs. Les visites doivent être programmées selon les phases de développement et après les événements pertinents. Un ouvrage verdoyant peut présenter un problème de pied. À l\'inverse, une couverture encore faible peut correspondre à une phase normale d\'installation. Une végétation vivante ne garantit pas la stabilité mécanique.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quelle différence entre érosion hydraulique et instabilité géotechnique ?', r: 'Érosion = enlèvement et transport de matériaux ; instabilité = déplacement d\'une masse de sol — peuvent se combiner', expl: 'Le sapement du pied supprime un appui et peut provoquer l\'effondrement de la partie sous-cavée.' },
+                  { q: 'Pourquoi une berge peut-elle devenir instable après la pointe de crue ?', r: 'Lors d\'une décrue rapide, le soutien extérieur diminue alors que des pressions internes peuvent persister', expl: 'Le risque dépend de la perméabilité, de la géométrie et des matériaux. L\'instabilité peut survenir après la pointe, pas seulement pendant.' },
+                  { q: 'Quand la mobilité d\'une berge peut-elle être acceptée ?', r: 'Quand aucun enjeu significatif n\'est menacé — accepter la mobilité est une décision argumentée, pas une absence de réflexion', expl: 'L\'érosion latérale fournit des sédiments, renouvelle des habitats et alimente la rivière en bois.' },
+                  { q: 'Qu\'est-ce que le génie végétal et quelles sont ses deux phases ?', r: 'Utilisation de végétaux vivants — phase initiale : tenue par ancrages et géométrie ; phase établie : racines et parties aériennes participent', expl: 'Une crue avant l\'enracinement peut solliciter un ouvrage encore peu développé biologiquement.' },
+                  { q: 'Quel est le point critique d\'une fascine de ligneux ?', r: 'Le pied de berge : niveau d\'implantation, ancrage, contact avec les matériaux arrière, raccordements — affouillement peut déstabiliser même une fascine qui reprend', expl: 'Le dimensionnement doit porter sur le système complet, y compris ce qui est sous l\'eau et aux extrémités.' },
+                  { q: 'Comment calculer le taux de reprise T_r et comment l\'interpréter ?', r: 'T_r = (N_vivants / N_suivis) × 100 — ex. 144/180 = 80 % ; ne masque pas une zone de mortalité localisée', expl: 'Il faut préciser la date, le périmètre et la méthode. Un taux global peut dissimuler des problèmes locaux.' },
+                  { q: 'Que signifie v_r = Δx / Δt = 0,30 m/an ?', r: 'Une vitesse de recul moyenne de 0,30 m/an — ce n\'est pas une prévision déterministe pour les années suivantes', expl: 'L\'essentiel du déplacement peut s\'être produit lors d\'une seule crue. Les conditions futures peuvent être différentes.' },
+                  { q: 'Un projet végétal est-il exempt de procédures administratives ?', r: 'Non — les terrassements, les effets sur le lit, les habitats et d\'autres rubriques peuvent être concernés', expl: 'La rubrique 3.1.4.0 distingue les protections par techniques autres que végétales vivantes, mais d\'autres caractéristiques s\'appliquent.' },
+                ],
+                schema: `<svg viewBox="0 0 320 215" xmlns="http://www.w3.org/2000/svg" style="max-width:320px;width:100%">
+  <rect width="320" height="215" rx="8" fill="#F1F3F5"/>
+  <text x="160" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#37474F">Gestion des berges — cadre de décision</text>
+  <rect x="8" y="18" width="145" height="50" fill="#0E6BA8" rx="4"/>
+  <text x="80" y="32" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">ÉROSION HYDRAULIQUE</text>
+  <text x="80" y="45" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C8E0F8">Enlèvement et transport</text>
+  <text x="80" y="57" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C8E0F8">au pied ou en surface</text>
+  <rect x="167" y="18" width="145" height="50" fill="#B84A0E" rx="4"/>
+  <text x="239" y="32" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">INSTABILITÉ GÉO.</text>
+  <text x="239" y="45" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#FFD0A0">Déplacement d\'une masse</text>
+  <text x="239" y="57" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#FFD0A0">Décrue rapide → risque</text>
+  <text x="160" y="78" text-anchor="middle" font-family="Arial" font-size="8" fill="#37474F">⟷ peuvent se combiner</text>
+  <rect x="8" y="84" width="305" height="14" fill="#37474F" rx="3"/>
+  <text x="160" y="94" text-anchor="middle" font-family="Arial" font-size="8" fill="#CFD8DC">Évaluer les enjeux avant de choisir une stratégie</text>
+  <rect x="8" y="104" width="55" height="38" fill="#2E7D32" rx="3"/>
+  <text x="35" y="117" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Surveiller</text>
+  <rect x="69" y="104" width="55" height="38" fill="#1565C0" rx="3"/>
+  <text x="96" y="117" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Accompagner</text>
+  <rect x="130" y="104" width="55" height="38" fill="#6B4F9E" rx="3"/>
+  <text x="157" y="117" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Reculer</text>
+  <text x="157" y="129" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#E0D0FF">l\'enjeu</text>
+  <rect x="191" y="104" width="55" height="38" fill="#388E3C" rx="3"/>
+  <text x="218" y="117" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Végétaliser</text>
+  <rect x="252" y="104" width="60" height="38" fill="#795548" rx="3"/>
+  <text x="282" y="117" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Protection</text>
+  <text x="282" y="129" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#FFD8B0">mixte/minérale</text>
+  <rect x="8" y="148" width="145" height="36" fill="#E3F0FB" rx="4"/>
+  <text x="80" y="161" text-anchor="middle" font-family="Arial" font-size="8" fill="#0E3A6E" font-weight="bold">Taux de reprise</text>
+  <text x="80" y="175" text-anchor="middle" font-family="Arial" font-size="9" fill="#0E3A6E">T_r = N_v/N_s × 100</text>
+  <rect x="162" y="148" width="150" height="36" fill="#F5EBD0" rx="4"/>
+  <text x="237" y="161" text-anchor="middle" font-family="Arial" font-size="8" fill="#7A4A0E" font-weight="bold">Vitesse de recul</text>
+  <text x="237" y="175" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A4A0E">v_r = Δx / Δt (m/an)</text>
+  <rect x="8" y="190" width="305" height="18" fill="#FFF8E1" rx="4"/>
+  <text x="160" y="202" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#7A5C00">5 dimensions du suivi : conformité · biologique · mécanique · hydraulique · effets voisins</text>
+</svg>`,
+                exercice: {
+                  enonce: '(1) Une encoche se forme au pied de berge, puis une masse de terre tombe dans le lit. Quel mécanisme est probable ?\n(2) Une clôture est menacée par l\'érosion mais peut être déplacée de 5 m sur la parcelle. Faut-il nécessairement protéger la berge ?\n(3) Le niveau de la rivière baisse rapidement après une crue alors que la berge reste saturée. Pourquoi la situation peut-elle être défavorable ?\n(4) Sur 250 plants suivis, 200 sont vivants. Calculer T_r et indiquer une limite de cet indicateur.\n(5) Une berge a reculé de 2 m en 5 ans. Calculer v_r. Peut-on prévoir exactement 4 m de recul dans 10 ans ?\n(6) Une berge est affectée par un glissement profond. Un simple ensemencement suffit-il ?\n(7) Une fascine reprend bien (couverture végétale satisfaisante), mais une fosse apparaît sous son pied. Que faut-il examiner ?\n(8) Un projet de restauration utilise exclusivement des végétaux vivants. Peut-on conclure qu\'aucune procédure administrative n\'est à examiner ?',
+                  solution: '<strong>(1)</strong> Érosion hydraulique au pied suivie d\'une rupture par sous-cavage. Il faut aussi vérifier si d\'autres facteurs (eau dans le sol, instabilité plus profonde) sont présents.<br><strong>(2)</strong> Pas nécessairement. Le recul de la clôture doit être comparé à la stabilisation, en tenant compte des usages, du coût, de l\'entretien et de l\'évolution possible.<br><strong>(3)</strong> Le soutien exercé par l\'eau extérieure diminue tandis que des pressions internes persistent. La stabilité dépend de la perméabilité, des matériaux et de la géométrie du terrain.<br><strong>(4)</strong> T_r = (200 / 250) × 100 = <strong>80 %</strong>. Limite : ce taux global peut masquer une zone entière de mortalité localisée, notamment en pied de berge.<br><strong>(5)</strong> v_r = 2 / 5 = <strong>0,40 m/an</strong>. Non — cette moyenne historique n\'est pas une prévision déterministe. L\'essentiel du déplacement peut être survenu lors d\'une seule crue.<br><strong>(6)</strong> Non. L\'ensemencement peut limiter l\'érosion superficielle mais ne traite pas le mécanisme profond. Il faut identifier la cause du glissement.<br><strong>(7)</strong> La réussite biologique ne garantit pas la stabilité mécanique. Il faut examiner l\'affouillement, la perte de matériaux derrière l\'ouvrage et les conséquences sur la tenue d\'ensemble.<br><strong>(8)</strong> Non. Il faut examiner les terrassements, les effets sur le lit, les habitats et les autres rubriques applicables, indépendamment de la nature végétale des matériaux utilisés.',
+                },
+              },
+
             ],
           }, // fin gem-m19
 
