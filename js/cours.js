@@ -11988,6 +11988,153 @@ const COURS_DATA = {
                 },
               }, // fin gem-op2
 
+              {
+                id: 'gem-op3',
+                titre: 'Modes de défaillance et surveillance des ouvrages',
+                fiche: {
+                  intro: 'Une fissure, une sortie d\'eau ou un affaissement ne donnent pas immédiatement un diagnostic. Leur signification dépend de leur localisation, de leur évolution et des conditions hydrauliques. La compétence à maîtriser : reconnaître une évolution potentiellement dangereuse, la décrire sans surinterprétation et transmettre à temps les informations nécessaires aux décisions de sécurité.',
+                  points: [
+                    '📋 4 termes à distinguer : anomalie (écart au comportement attendu), désordre (dégradation constatée), défaillance (perte d\'une fonction), rupture (perte d\'intégrité d\'une partie de l\'ouvrage), brèche (ouverture permettant un passage d\'eau). Une vanne bloquée = défaillance sans rupture. L\'emploi de mots précis évite de minimiser ou de surestimer.',
+                    '🔗 Scénario de défaillance : sollicitation → mécanisme → dégradation → perte de fonction → conséquences. Ex. fictif : niveau monte → eau circule autour d\'une conduite → particules entraînées → cavité → affaissement → ouverture. Toutes les étapes ne sont pas visibles.',
+                    '⚡ 6 familles de défaillance : surverse érosive (eau passe sur la crête → érosion parement), érosion externe (courant ou vagues → perte de matériaux), érosion interne (entraînement de particules dans le massif), instabilité (glissement de sol), défaillance d\'équipement (organe indisponible), contournement (passage autour du dispositif). Un même ouvrage peut être exposé à plusieurs familles simultanément.',
+                    '💧 Surverse érosive : sur un remblai non conçu pour cet écoulement, l\'eau peut arracher la couverture, creuser des rigoles, concentrer les écoulements, éroder le parement. Une faible hauteur de surverse n\'est pas automatiquement sans danger. Surverse non prévue ≠ déversement sur tronçon conçu et vérifié pour cette fonction.',
+                    '🔍 Érosion interne — signes à observer : apparition d\'une nouvelle sortie d\'eau, évolution du débit, particules transportées, dépôts autour de l\'émergence, extension de la zone humide, affaissement voisin. Une eau claire ne démontre pas l\'absence de danger. Une eau trouble peut avoir plusieurs origines — ne pas retarder une alerte justifiée.',
+                    '📏 Mesure de débit d\'une sortie (pédagogique) : Q = V / Δt. Ex. : 6 L en 20 s → Q=0,30 L/s ; mesure ultérieure : 12 L en 20 s → Q=0,60 L/s (doubling). Ne permet pas de calculer un délai avant rupture. Ne pas modifier une sortie ou s\'approcher d\'un terrain instable uniquement pour mesurer.',
+                    '🌿 Végétation, animaux fouisseurs, usages : les terriers créent des chemins préférentiels ; les racines peuvent interagir avec le remblai ; les arbres peuvent masquer des désordres. Arracher une souche ou intervenir dans un terrier sans méthode adaptée peut aggraver la situation. L\'entretien doit être organisé et documenté.',
+                    '🕐 5 moments de surveillance : période normale (état de référence), avant événement (préparation opérationnelle), pendant montée (réponse à la mise en charge), pendant niveaux élevés (phénomènes actifs), décrue (effets du décalage des pressions), après événement (dommages et retour d\'expérience). Digue examinée uniquement à sec = pas observée dans toutes ses conditions.',
+                    '📝 Décrire les faits avant de proposer une cause : constat (ce qui est observé ou mesuré) | interprétation (mécanismes envisagés) | décision (suites). "Sortie d\'eau nouvelle, eau chargée de particules, dépôt autour de l\'émergence au repère S-042" est plus utile que "renard hydraulique confirmé" si le mécanisme n\'est pas établi.',
+                    '📡 Auscultation : mesure de niveaux d\'eau, pressions internes, déplacements, débits de drainage. Une valeur inhabituelle peut être un changement réel ou une panne/déplacement du capteur. Un courbe plate peut représenter un capteur bloqué — elle ne prouve pas la stabilité.',
+                    '🚨 Alerte exploitable : qui appelle, quel ouvrage, où et quand, ce qui est constaté, comment ça évolue, conditions hydrauliques, actions déjà entreprises, besoins immédiats. Prévoir un relais si le premier interlocuteur ne répond pas. L\'alerte repose sur les faits préoccupants et leur évolution — le diagnostic détaillé peut se poursuivre après l\'activation des mesures.',
+                    '🛡️ Sécurité des équipes = condition préalable. Les conditions peuvent rendre une visite impossible : sol instable, courant, vagues, visibilité insuffisante. "Non observé" ≠ "sans anomalie". Ne jamais rester sur une zone en cours de dégradation pour obtenir une mesure supplémentaire.',
+                  ],
+                  formules: [
+                    'Débit d\'une sortie d\'eau : Q = V / Δt (L/s) — ex. 6 L / 20 s = 0,30 L/s ; mesure pédagogique seulement, ne permet pas de calculer un délai avant rupture',
+                    'Évolution du débit : ΔQ/Q₁ × 100 (%) — ex. (0,50−0,20)/0,20 × 100 = 150% (débit multiplié par 2,5) ; ne suffit pas à prévoir une rupture',
+                  ],
+                  retenir: 'Anomalie / désordre / défaillance / rupture / brèche : 4 termes précis. Scénario : sollicitation → mécanisme → dégradation → perte de fonction. 6 familles : surverse érosive / érosion ext / érosion interne / instabilité / défaillance équipement / contournement. Q = V/Δt. Eau claire ≠ absence de danger. Décrire les faits avant la cause. Seuils propres à l\'ouvrage, pas de valeur nationale universelle. Alerte : qui / quoi / où / quand / comment ça évolue. Sécurité équipes = condition préalable. Non observé ≠ sans anomalie.',
+                  sections: [
+                    {
+                      titre: 'Familles de défaillance et mécanismes',
+                      ss: [
+                        {
+                          titre: 'Vocabulaire précis et scénarios',
+                          texte: 'Anomalie : écart au comportement attendu. Désordre : dégradation constatée. Défaillance : perte d\'une fonction. Rupture : perte d\'intégrité d\'une partie de l\'ouvrage. Brèche : ouverture permettant un passage d\'eau. Une vanne bloquée = défaillance sans rupture de remblai. Une fissure = désordre sans perte immédiate de protection. Une brèche résulte souvent d\'une succession : érosion → affaissement → ouverture. L\'emploi de mots précis évite de minimiser ou de surestimer. Scénario de défaillance : sollicitation → mécanisme → dégradation → perte de fonction → conséquences. Exemple fictif : niveau monte → eau circule autour d\'une conduite → particules entraînées → cavité → terrain s\'affaisse → ouverture dans la zone protégée. Toutes les étapes ne sont pas visibles ; l\'intérêt est d\'identifier les signes possibles et les moyens de surveillance.',
+                        },
+                        {
+                          titre: 'Six familles et mécanismes spécifiques',
+                          texte: '6 familles : surverse érosive (eau passe sur la crête → arrache couverture, creuse rigoles, érode parement — faible surverse peut être dangereuse ; distinguer surverse non prévue et déversement sur tronçon conçu), érosion externe (courant ou vagues attaquent surface ou pied — l\'affouillement supprime le soutien d\'un talus sans modifier immédiatement la crête ; le pied immergé peut être dégradé sans qu\'on le voie depuis la crête), érosion interne (entraînement de particules dans le massif, fondation ou interfaces — favorisée par une fissure, un contact autour d\'une conduite, une transition mal filtrée, des gradients élevés ; ne pas boucher une sortie d\'eau sans analyse), instabilité (glissement d\'une masse de sol — indices : fissure en partie haute, marche dans le terrain, déplacement de parement, bourrelet en pied, inclinaison d\'éléments fixés), défaillance d\'équipement (clapet absent/bloqué, vanne indisponible, batardeau non installable, pompe hors service, capteur défectueux — voir un équipement en place ≠ opérationnel), contournement (eau passe autour sans dégrader — digue intacte possible malgré inondation). Un même ouvrage peut être exposé à plusieurs familles simultanément.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Surveillance et observation',
+                      ss: [
+                        {
+                          titre: 'Observer, mesurer et décrire correctement',
+                          texte: 'Signes d\'érosion interne à suivre : apparition d\'une nouvelle sortie, évolution du débit, présence de particules, dépôts autour de l\'émergence, extension de la zone humide, affaissement voisin. Eau claire ≠ absence de danger. Eau trouble → plusieurs origines possibles ; ne pas retarder une alerte justifiée par une évolution préoccupante. Mesure de débit (si conditions sûres et dispositif adapté) : Q = V/Δt. Ex. : 6 L / 20 s = 0,30 L/s. Si mesure ultérieure : 12 L / 20 s = 0,60 L/s (débit doublé). Ne permet pas de calculer un délai avant rupture. Instabilités : fissure + déplacement de talus ≠ fissuration superficielle de dessiccation — rechercher la cohérence entre plusieurs signes. Tassements et fontis : localisation, forme, dimensions, profondeur apparente, date de découverte, changements depuis la dernière observation. Ne pas combler une dépression avant d\'en comprendre l\'origine. Conduites et raccordements = points sensibles : examiner aussi les terrains voisins. Végétation et terriers : entretien organisé et documenté — arracher une souche sans méthode adaptée peut dégrader le remblai.',
+                        },
+                        {
+                          titre: 'Temps de surveillance, seuils et auscultation',
+                          texte: 'Moments de surveillance : période normale (état de référence), avant événement (préparation), montée des eaux (réponse à la mise en charge), niveaux élevés (phénomènes actifs), décrue (pressions internes peuvent persister), après événement (dommages et retour d\'expérience). Digue examinée uniquement à sec = pas observée dans toutes ses conditions. Décrire les faits avant la cause : Constat (observé/mesuré) → Interprétation (mécanismes envisagés) → Décision. "Sortie d\'eau nouvelle, eau chargée de particules, dépôt autour de l\'émergence au repère S-042 à 10 h 20" est plus utile que "renard hydraulique confirmé" si le mécanisme n\'est pas établi. Comparer des observations comparables : même point de mesure, même méthode, même unité, référence altimétrique stable, photographies cadrées comparablement, noter le niveau de la rivière et les conditions de visibilité. Auscultation : niveaux, pressions internes, déplacements, débits de drainage. Valeur inhabituelle → peut être réelle ou panne/déplacement du capteur. Courbe plate peut représenter un capteur bloqué — elle ne prouve pas la stabilité. Seuils propres à chaque ouvrage (arrêté du 8 août 2022 pour les systèmes d\'endiguement) — il n\'existe pas de seuil national unique type "fissure de 5 mm = rupture imminente". Un signe grave peut justifier une alerte avant le franchissement d\'un seuil de niveau d\'eau.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Alerte, intervention et retour d\'expérience',
+                      ss: [
+                        {
+                          titre: 'Transmettre une alerte exploitable et assurer la sécurité',
+                          texte: 'Message d\'alerte utile : (1) qui appelle, (2) quel ouvrage, (3) où et quand, (4) ce qui est constaté, (5) comment ça évolue, (6) conditions hydrauliques connues, (7) actions déjà entreprises, (8) besoins immédiats. Ex. : "Équipe Saules 2, à 10h35. Au repère S-042, sortie d\'eau nouvelle avec transport visible de particules. Extension de la zone humide depuis 10h20. Observation maintenue depuis le chemin sécurisé. Responsable d\'astreinte demandé." La chaîne de transmission doit prévoir un relais si le premier interlocuteur ne répond pas. Sécurité des équipes = condition préalable : sol instable, accès coupé, courant, vagues, visibilité insuffisante ou perte de communication peuvent rendre la visite impossible. "Non observé — accès indisponible" ≠ "sans désordre". Alerte ≠ intervention sur l\'ouvrage : ne pas improviser un bouchage, une excavation ou un pompage — cela peut modifier les pressions et aggraver la situation. Une mesure provisoire ≠ réparation durable.',
+                        },
+                        {
+                          titre: 'Examen après crue et organisation',
+                          texte: 'La baisse de l\'eau ne signifie pas que tous les risques ont disparu. Examen post-événement : niveaux et traces d\'écoulement, érosions, tassements, dégâts aux protections, anomalies des organes, changements par rapport à l\'état initial. Limites d\'observation : parties immergées non visibles — les mentionner explicitement. Le registre conserve la chronologie, les manœuvres et les constats. Le rapport de surveillance rassemble les éléments utiles à l\'appréciation de la sécurité (arrêté du 8 août 2022). Visite courante ≠ visite technique approfondie ≠ diagnostic spécialisé : non interchangeables. Parcours de surveillance : identifier tronçons et équipements, points singuliers, anomalies connues, positions d\'observation, accès et possibilités de repli. Les zones non visitées doivent être signalées explicitement. Les points de repère doivent être stables (identifiant + repérage sur le linéaire + localisation cartographique).',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quelle différence entre anomalie, défaillance et rupture ?', r: 'Anomalie : écart au comportement attendu. Défaillance : perte d\'une fonction (ex. vanne bloquée). Rupture : perte d\'intégrité d\'une partie de l\'ouvrage. On peut avoir une défaillance sans rupture.', expl: 'Une brèche est une ouverture permettant le passage d\'eau. L\'emploi de mots précis évite de minimiser ou de surestimer la situation.' },
+                  { q: 'Une sortie d\'eau claire en pied de digue est-elle automatiquement sans danger ?', r: 'Non — une eau claire ne démontre pas l\'absence de danger. Il faut examiner l\'apparition, l\'évolution, la localisation, les pressions et les autres signes.', expl: 'Une eau trouble peut avoir plusieurs origines. Ne pas retarder une alerte justifiée par une évolution préoccupante. Ne jamais boucher une sortie d\'eau sans analyse — cela peut modifier défavorablement les pressions.' },
+                  { q: 'Comment calculer l\'évolution du débit d\'une sortie d\'eau ?', r: 'Q = V/Δt. Ex. : 6 L en 20 s = 0,30 L/s. Évolution : (Q2−Q1)/Q1 × 100. Ex. : 0,60 L/s puis 0,30 L/s au départ → +100%.', expl: 'Un doublement du débit mesuré ne permet pas de calculer un délai avant rupture. La mesure doit être associée à son heure, sa méthode et les conditions hydrauliques.' },
+                  { q: 'Qu\'indique un piézomètre dont la valeur ne varie plus alors que tous les autres réagissent ?', r: 'Une défaillance de mesure est possible (panne, déplacement du capteur). Une courbe plate peut représenter un capteur bloqué — elle ne prouve pas la stabilité.', expl: 'Il faut vérifier la chaîne de mesure et comparer avec les observations. La vérification d\'un capteur ne doit pas retarder les mesures de protection justifiées par plusieurs signes concordants.' },
+                  { q: 'Quels éléments doit contenir un message d\'alerte exploitable ?', r: 'Qui appelle, quel ouvrage, où et quand, ce qui est constaté, comment ça évolue, conditions hydrauliques, actions déjà entreprises, besoins immédiats.', expl: 'La chaîne de transmission doit prévoir un relais si le premier interlocuteur ne répond pas. L\'alerte repose sur les faits — le diagnostic détaillé peut se poursuivre après l\'activation des mesures.' },
+                  { q: 'Que signifie "non observé" dans un rapport de surveillance ?', r: '"Non observé — accès indisponible" ne signifie pas "sans désordre". Les zones non visitées doivent être signalées explicitement avec la raison et les suites prévues.', expl: 'Les points de repère doivent être stables (identifiant + repérage sur le linéaire + localisation cartographique). "Près du grand arbre" devient inutilisable si l\'arbre disparaît.' },
+                  { q: 'Peut-on improviser un bouchage d\'une sortie d\'eau préoccupante ?', r: 'Non — un bouchage improvisé peut modifier les pressions interstitielles et aggraver la situation. La décision d\'intervenir sur l\'ouvrage doit rester articulée avec les consignes du gestionnaire.', expl: 'L\'observateur peut déclencher une alerte sans connaître la réparation nécessaire. Une mesure provisoire ≠ réparation durable. Les équipes de surveillance ne sont pas forcément les équipes de réparation.' },
+                  { q: 'Pourquoi observer la digue pendant la décrue et après l\'événement ?', r: 'Pendant la décrue : pressions internes peuvent persister dans un matériau peu drainant → situation moins favorable pour le talus. Après l\'événement : la baisse de l\'eau ne signifie pas que tous les risques ont disparu.', expl: 'L\'examen post-événement recherche : niveaux et traces d\'écoulement, érosions, tassements, dégâts aux protections, anomalies des organes, changements par rapport à l\'état initial. Mentionner les parties non observées (immergées).' },
+                ],
+                schema: `<svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
+                <text x="350" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#3E2723">Modes de defaillance et surveillance</text>
+                <!-- 5 termes -->
+                <rect x="10" y="34" width="680" height="36" rx="6" fill="#EFEBE9" stroke="#5D4037" stroke-width="1.5"/>
+                <text x="136" y="52" text-anchor="middle" font-size="11" fill="#3E2723"><tspan font-weight="bold">Anomalie</tspan> : ecart</text>
+                <text x="272" y="52" text-anchor="middle" font-size="11" fill="#3E2723"><tspan font-weight="bold">Desordre</tspan> : degradation</text>
+                <text x="408" y="52" text-anchor="middle" font-size="11" fill="#3E2723"><tspan font-weight="bold">Defaillance</tspan> : perte fct</text>
+                <text x="544" y="52" text-anchor="middle" font-size="11" fill="#3E2723"><tspan font-weight="bold">Rupture</tspan> : integrite</text>
+                <text x="660" y="52" text-anchor="middle" font-size="11" fill="#3E2723"><tspan font-weight="bold">Breche</tspan></text>
+                <text x="350" y="65" text-anchor="middle" font-size="10.5" fill="#5D4037">Vanne bloquee = defaillance sans rupture · Employer les mots exacts</text>
+                <!-- 6 familles -->
+                <text x="350" y="90" text-anchor="middle" font-weight="bold" fill="#37474F" font-size="13">6 familles de defaillance</text>
+                <rect x="10" y="96" width="107" height="44" rx="5" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+                <text x="63" y="114" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#C62828">Surverse</text>
+                <text x="63" y="130" text-anchor="middle" font-size="10" fill="#C62828">erosive</text>
+                <rect x="127" y="96" width="107" height="44" rx="5" fill="#FBE9E7" stroke="#BF360C" stroke-width="1.5"/>
+                <text x="180" y="114" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#BF360C">Erosion</text>
+                <text x="180" y="130" text-anchor="middle" font-size="10" fill="#BF360C">externe</text>
+                <rect x="244" y="96" width="107" height="44" rx="5" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="297" y="114" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#E65100">Erosion</text>
+                <text x="297" y="130" text-anchor="middle" font-size="10" fill="#E65100">interne</text>
+                <rect x="361" y="96" width="107" height="44" rx="5" fill="#FFF8E1" stroke="#F57F17" stroke-width="1.5"/>
+                <text x="414" y="114" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#E65100">Instabilite</text>
+                <text x="414" y="130" text-anchor="middle" font-size="10" fill="#E65100">glissement</text>
+                <rect x="478" y="96" width="107" height="44" rx="5" fill="#E8EAF6" stroke="#283593" stroke-width="1.5"/>
+                <text x="531" y="114" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#1A237E">Defaillance</text>
+                <text x="531" y="130" text-anchor="middle" font-size="10" fill="#1A237E">equipement</text>
+                <rect x="595" y="96" width="95" height="44" rx="5" fill="#FCE4EC" stroke="#AD1457" stroke-width="1.5"/>
+                <text x="642" y="114" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#880E4F">Contourne-</text>
+                <text x="642" y="130" text-anchor="middle" font-size="10" fill="#AD1457">ment</text>
+                <!-- Signes erosion interne -->
+                <rect x="10" y="154" width="330" height="54" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="175" y="173" text-anchor="middle" font-weight="bold" fill="#E65100">Erosion interne — signes</text>
+                <text x="175" y="188" text-anchor="middle" font-size="11" fill="#BF360C">Nouvelle sortie · Particules · Depots · Zone humide evolutive</text>
+                <text x="175" y="201" text-anchor="middle" font-size="11" fill="#E65100">Eau claire ≠ absence de danger · Ne pas boucher sans analyse</text>
+                <!-- Formule -->
+                <rect x="355" y="154" width="335" height="54" rx="6" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.5"/>
+                <text x="522" y="173" text-anchor="middle" font-weight="bold" fill="#1B5E20">Mesure de debit</text>
+                <text x="522" y="189" text-anchor="middle" font-size="12" fill="#2E7D32">Q = V / Δt (L/s)</text>
+                <text x="522" y="203" text-anchor="middle" font-size="11" fill="#388E3C">ex. 6L/20s = 0,30 L/s · ne calcule pas un delai</text>
+                <!-- Observer -->
+                <rect x="10" y="222" width="215" height="44" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="117" y="241" text-anchor="middle" font-weight="bold" fill="#0D47A1">Decrire les faits</text>
+                <text x="117" y="257" text-anchor="middle" font-size="11" fill="#1565C0">Constat → Interpretation → Decision</text>
+                <!-- Seuils -->
+                <rect x="240" y="222" width="215" height="44" rx="6" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1.5"/>
+                <text x="347" y="241" text-anchor="middle" font-weight="bold" fill="#4A148C">Seuils propres a l'ouvrage</text>
+                <text x="347" y="257" text-anchor="middle" font-size="11" fill="#6A1B9A">Pas de valeur nationale universelle</text>
+                <!-- Alerte -->
+                <rect x="470" y="222" width="220" height="44" rx="6" fill="#FBE9E7" stroke="#BF360C" stroke-width="1.5"/>
+                <text x="580" y="241" text-anchor="middle" font-weight="bold" fill="#BF360C">Alerte exploitable</text>
+                <text x="580" y="257" text-anchor="middle" font-size="11" fill="#C62828">Qui · Quoi · Ou · Quand · Evolution</text>
+                <!-- Securite + Non observe -->
+                <rect x="10" y="280" width="330" height="44" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="2"/>
+                <text x="175" y="299" text-anchor="middle" font-weight="bold" fill="#C62828">Securite equipes = condition prealable</text>
+                <text x="175" y="315" text-anchor="middle" font-size="11" fill="#C62828">Arreter l'observation si terrain instable · signe grave = alerte avant seuil de niveau</text>
+                <rect x="355" y="280" width="335" height="44" rx="6" fill="#EFEBE9" stroke="#5D4037" stroke-width="1.5"/>
+                <text x="522" y="299" text-anchor="middle" font-weight="bold" fill="#3E2723">"Non observe" ≠ "sans anomalie"</text>
+                <text x="522" y="315" text-anchor="middle" font-size="11" fill="#5D4037">Mentionner les zones non visitees et la raison</text>
+                <!-- Conclusion -->
+                <rect x="10" y="338" width="680" height="50" rx="8" fill="#E0F7FA" stroke="#00838F" stroke-width="2"/>
+                <text x="350" y="356" text-anchor="middle" font-weight="bold" fill="#006064">Scénario : sollicitation → mecanisme → degradation → perte de fonction → consequences</text>
+                <text x="350" y="372" text-anchor="middle" font-size="11" fill="#00695C">Reconnaitre · Decrire sans surinterpretation · Transmettre a temps · Apres-crue : baisse de l'eau ≠ tous les risques ont disparu</text>
+                <text x="350" y="384" text-anchor="middle" font-size="10.5" fill="#00838F">Visite courante ≠ visite technique approfondie ≠ diagnostic specialise</text>
+              </svg>`,
+                exercice: {
+                  enonce: '(1) Un clapet reste ouvert et laisse entrer l\'eau de la rivière. Le remblai est intact. Qu\'est-ce que c\'est ?\n(2) Un agent observe une fissure nouvelle en crête. Peut-il écrire "glissement confirmé" ?\n(3) Un dispositif collecte 9 litres en 30 secondes. Calculez Q.\n(4) Un débit passe de 0,20 à 0,50 L/s. Calculez l\'augmentation en %.\n(5) Une sortie d\'eau est claire. Peut-on la déclarer sans danger ?\n(6) Un piézomètre ne varie plus alors que tous les autres réagissent à la montée de la rivière. Comment interpréter ?\n(7) Un tronçon n\'a pas été visité car l\'accès est inondé. Comment le renseigner ?\n(8) Une émergence transporte des particules et un affaissement voisin apparaît. Faut-il attendre de confirmer le mécanisme avant d\'alerter ?',
+                  solution: '<strong>(1)</strong> Une <strong>défaillance fonctionnelle d\'un équipement</strong>. Une brèche dans le remblai n\'est pas nécessaire pour perdre la protection.<br><strong>(2)</strong> Non, sauf éléments suffisants établissant ce mécanisme. Il doit décrire la fissure, sa localisation, ses dimensions et les signes associés, puis formuler des hypothèses et transmettre selon les consignes.<br><strong>(3)</strong> Q = 9/30 = <strong>0,30 L/s</strong>. La mesure doit être associée à son heure, sa méthode et les conditions hydrauliques.<br><strong>(4)</strong> (0,50−0,20)/0,20 × 100 = <strong>150%</strong> (débit multiplié par 2,5). Ne suffit pas à calculer un délai avant rupture.<br><strong>(5)</strong> Non — il faut examiner son apparition, son évolution, sa localisation, les pressions et les autres signes. L\'absence de particules visibles n\'exclut pas un problème.<br><strong>(6)</strong> Une défaillance de mesure est possible. Vérifier la chaîne de mesure et comparer les observations — une courbe plate peut représenter un capteur bloqué.<br><strong>(7)</strong> <strong>"Non observé — accès indisponible"</strong>, avec l\'heure, la raison et les suites prévues. Ne pas le classer "sans désordre".<br><strong>(8)</strong> Non. L\'alerte repose sur les faits préoccupants et leur évolution. Le diagnostic peut se poursuivre après l\'activation des mesures, depuis des conditions sûres.',
+                },
+              }, // fin gem-op3
+
             ],
           }, // fin gem-m22
 
