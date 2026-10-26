@@ -11674,6 +11674,168 @@ const COURS_DATA = {
 
             ],
           }, // fin gem-m21
+          {
+            id: 'gem-m22',
+            name: 'Ouvrages de protection et littoral',
+            ico: '🧱',
+            color: '#3E2723',
+            colorl: '#EFEBE9',
+            ordre: 22, theme: 'ouvrages',
+            chapitres: [
+              {
+                id: 'gem-op1',
+                titre: 'Digues et systèmes d\'endiguement',
+                fiche: {
+                  intro: 'Une digue ne se comprend pas uniquement par sa hauteur. Sa résistance, ses raccordements, les ouvrages qui la traversent et l\'organisation de son exploitation déterminent aussi son efficacité. Le système d\'endiguement rassemble les ouvrages nécessaires pour assurer une protection cohérente. La compétence à maîtriser : analyser une protection contre les inondations comme un système complet, en reliant ses ouvrages, sa zone protégée, ses conditions de fonctionnement et ses limites.',
+                  points: [
+                    '🧱 Une digue est un ouvrage faisant obstacle à l\'entrée de l\'eau dans un secteur exposé. Elle peut rester peu sollicitée pendant des années puis subir une charge hydraulique importante lors d\'une crue. L\'absence récente d\'inondation ne démontre pas sa résistance actuelle.',
+                    '🔗 Système d\'endiguement : ensemble cohérent d\'ouvrages (digue, mur, batardeau mobile, vanne/clapet, station de pompage, raccordements) nécessaires pour assurer une protection. Une digue isolée peut être inefficace si l\'eau la contourne ou emprunte un passage non maîtrisé.',
+                    '🗺️ Zone protégée : territoire bénéficiant de la protection dans les conditions définies. Ne correspond pas automatiquement à toute la commune, à toutes les parcelles derrière la digue, ni à une bande parallèle à l\'ouvrage. Sa délimitation repose sur l\'analyse des venues d\'eau.',
+                    '📏 Niveau de protection ≠ hauteur de digue. Le niveau de protection caractérise la performance du système (référencé à un débit, une cote ou un niveau marin). La hauteur géométrique décrit l\'ouvrage. Une digue haute peut présenter une fondation vulnérable ou un passage insuffisamment fermé.',
+                    '📐 Revanche : R = Z_crête − Z_eau. Ex. : 105,20 − 104,60 = 0,60 m. Cette différence géométrique ne démontre pas la sécurité : il faut aussi considérer les vagues, les incertitudes, les tassements et les conditions hydrauliques locales. Une revanche positive n\'exclut ni rupture ni franchissement par vagues.',
+                    '💧 Pression hydrostatique locale : p = ρgh. Ex. : h = 2 m → p = 1 000 × 9,81 × 2 = 19 620 Pa = 19,62 kPa. Ce résultat est une pression locale — il ne donne ni la stabilité d\'un talus ni la résistance globale d\'une digue.',
+                    '🌊 Accumulation d\'eau derrière la digue (eaux intérieures) : ΔV = (Q_apports − Q_évacuation) × Δt. Ex. : (0,8 − 0,3) × 7 200 s = 3 600 m³. Si S = 2 ha : Δh = 3 600 / 20 000 = 0,18 m (valeur moyenne, eau concentrée dans les dépressions réelles).',
+                    '⏱️ Marge de fermeture d\'un ouvrage mobile : T_marge = T_disponible − T_mobilisation − T_pose. Ex. : 90 − 25 − 40 = 25 min. Si T_marge < 0 : l\'organisation ne permet pas d\'achever la fermeture à temps.',
+                    '⚠️ Contournement : l\'eau passe autour des ouvrages sans les dégrader — par une extrémité, un point bas, un affluent ou un passage sous infrastructure. Une digue intacte peut coexister avec une inondation du quartier. Absence de brèche ≠ système efficace.',
+                    '🔥 5 familles de défaillance : surverse érosive (eau passe sur la crête et dégrade), érosion externe (courant ou vagues attaquent le parement), érosion interne (écoulements entraînent des particules à l\'intérieur), instabilité (glissement d\'un talus ou fondation), défaillance d\'équipement (fermeture ou organe ne remplit plus sa fonction).',
+                    '👥 Classement réglementaire par population protégée : classe A > 30 000 pers., classe B 3 000–30 000 pers., classe C ≤ 3 000 pers. (avec distinctions selon le texte). Population protégée ≠ population municipale. Le classement ne précise pas la hauteur des ouvrages.',
+                    '🚫 La protection ne supprime pas : ruissellement venant des versants, accumulation d\'eaux pluviales, remontée de nappe, refoulements de réseaux, débordements d\'un cours d\'eau intérieur. Une digue peut même empêcher l\'évacuation gravitaire lors d\'une crue. Le niveau de protection ne doit jamais être présenté comme une garantie générale d\'absence d\'inondation.',
+                  ],
+                  formules: [
+                    'Revanche : R = Z_crête − Z_eau (m) — ex. 105,20 − 104,60 = 0,60 m ; valeur géométrique locale, pas une démonstration de sécurité',
+                    'Pression hydrostatique : p = ρgh (Pa) — ρ = 1 000 kg/m³, g = 9,81 m/s², h = profondeur (m) ; ex. h=2m → p = 19 620 Pa = 19,62 kPa ; pression locale seulement',
+                    'Accumulation intérieure : ΔV = (Q_apports − Q_évacuation) × Δt (m³) — ex. (0,8−0,3)×7 200 = 3 600 m³',
+                    'Hauteur moyenne d\'accumulation : Δh = ΔV / S (m) — S = surface horizontale (m²) ; ex. 3 600/20 000 = 0,18 m ; valeur moyenne, eau concentrée dans les dépressions',
+                    'Marge de fermeture : T_marge = T_disponible − T_mobilisation − T_pose (min) — si T_marge < 0 : fermeture non réalisable dans ce scénario',
+                  ],
+                  retenir: 'Digue = obstacle à l\'eau, pas une garantie. Système = ensemble cohérent d\'ouvrages. Zone protégée ≠ toute la commune. Niveau de protection ≠ hauteur de digue. R = Z_crête − Z_eau. p = ρgh (pression locale). ΔV = (Q_apports − Q_évacu) × Δt ; Δh = ΔV/S. T_marge = T_dispo − T_mob − T_pose. 5 familles : surverse érosive / érosion ext / érosion interne / instabilité / défaillance équipement. Contournement ≠ brèche. Classe A/B/C par population. Risques résiduels subsistent.',
+                  sections: [
+                    {
+                      titre: 'Digue, système et zone protégée',
+                      ss: [
+                        {
+                          titre: 'Qu\'est-ce qu\'une digue et comment la distinguer d\'autres ouvrages',
+                          texte: 'Une digue est un ouvrage aménagé pour faire obstacle à l\'entrée de l\'eau dans un secteur exposé : remblai en terre, mur en béton ou maçonnerie, ouvrage mixte, ensemble avec fermetures mobiles. Elle peut rester peu sollicitée pendant des années puis subir une charge hydraulique importante lors d\'une crue. L\'absence récente d\'inondation ne démontre pas sa résistance actuelle. Distinctions importantes : la protection de berge (enrochements) limite l\'érosion sans empêcher le débordement ; un mur de soutènement retient des terres et n\'est pas automatiquement conçu pour retenir l\'eau ; un remblai routier porte une infrastructure — sa contribution éventuelle à la protection doit être étudiée. L\'apparence d\'un ouvrage ne suffit pas à définir sa fonction.',
+                        },
+                        {
+                          titre: 'Système d\'endiguement et zone protégée',
+                          texte: 'Un système d\'endiguement rassemble les ouvrages nécessaires pour assurer une protection cohérente : digue principale, mur de protection, batardeau mobile, vanne ou clapet, station de pompage, dispositif de drainage interne, accès de service, instrumentation. Les terrains naturels (coteau, éperon rocheux) peuvent contribuer à la fermeture — mais leur rôle physique ne les intègre pas au système réglementaire ; un chemin en déblai traversant ce relief peut créer un passage. La zone protégée est le territoire bénéficiant de la protection pour l\'aléa et les conditions considérés. Elle ne correspond pas automatiquement à toute la commune ni à toutes les parcelles derrière la digue. Sa délimitation repose sur l\'analyse des venues d\'eau. Ex. : deux quartiers derrière la même digue peuvent avoir des situations différentes si un chenal secondaire alimente l\'un d\'eux par l\'aval.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Niveau de protection, revanche et profil en long',
+                      ss: [
+                        {
+                          titre: 'Niveau de protection et revanche',
+                          texte: 'Le niveau de protection caractérise la limite jusqu\'à laquelle la zone n\'est pas inondée par débordement, contournement ou rupture, lorsque l\'eau provient du cours d\'eau ou de la mer. Il s\'exprime par référence à un débit, une cote ou un niveau marin. Il ne faut pas le confondre avec la hauteur géométrique de la digue. Ex. : crête à 105,20 m, mais l\'analyse du système ne justifie la protection que jusqu\'à 104,30 m — on ne peut pas annoncer une protection jusqu\'à 105,20 m au seul motif que le sommet atteint cette cote. Revanche en un point : R = Z_crête − Z_eau. Ex. : 105,20 − 104,60 = 0,60 m. Cette valeur ne démontre pas la sécurité : il faut aussi les vagues, les incertitudes, les tassements et les conditions locales. Une revanche positive n\'exclut ni rupture ni franchissement par vagues. Pression hydrostatique : p = ρgh. Ex. : h = 2 m → p = 19 620 Pa = 19,62 kPa. Ce résultat est une pression locale — il ne donne ni la stabilité d\'un talus ni la résistance globale.',
+                        },
+                        {
+                          titre: 'Profil en long et continuité',
+                          texte: 'La crête n\'est pas à cote constante et la surface d\'eau non plus. L\'analyse compare les deux profils sur tout le linéaire. Ex. : point A : crête 105,20 m, eau 104,60 m, différence 0,60 m ; point B : 105,00/104,70 m, différence 0,30 m ; point C : 104,80/104,75 m, différence 0,05 m. Le point C mérite une attention particulière — mais le point A pourrait présenter une fragilité structurelle non visible dans ce tableau. Il faut croiser géométrie, hydraulique et résistance. Continuité : extrémités, raccordements entre ouvrages, passages routiers, conduites, portes et ouvertures, intersections avec d\'autres infrastructures. Une transition mur rigide/remblai peut subir des mouvements différentiels. La durée de la crue compte autant que son maximum : une mise en charge prolongée laisse davantage de temps aux circulations internes pour évoluer ; la décrue peut aussi être critique.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Défaillances, contournement et eaux intérieures',
+                      ss: [
+                        {
+                          titre: 'Cinq familles de défaillance et contournement',
+                          texte: '5 familles de défaillance : surverse érosive (eau passe sur la crête et dégrade l\'ouvrage), érosion externe (courant ou vagues attaquent le parement ou le pied), érosion interne (écoulements entraînent des particules à l\'intérieur), instabilité (partie du remblai ou de la fondation se déplace), défaillance d\'équipement (fermeture ou organe ne remplit plus sa fonction). Une même rupture peut résulter d\'une succession de mécanismes. Distinctions : surverse = eau passe sur la crête sous l\'effet du niveau ; franchissement par vagues = peut se produire même avec niveau moyen sous la crête ; brèche = ouverture résultant d\'une dégradation ou rupture. Un tronçon conçu pour le déversement ≠ remblai ordinaire soumis à surverse non prévue ; mais si l\'eau déversée atteint la zone, la résistance de l\'ouvrage ne la garantit pas sèche. Contournement : l\'eau passe autour sans dégrader l\'ouvrage — par extrémité, point bas, affluent, passage sous infrastructure. Digue intacte ≠ système efficace.',
+                        },
+                        {
+                          titre: 'Eaux intérieures, ouvrages mobiles et classement',
+                          texte: 'Accumulation intérieure : ΔV = (Q_apports − Q_évacuation) × Δt. Ex. : (0,8−0,3) × 7 200 s = 3 600 m³. Répartie sur 2 ha : Δh = 3 600 / 20 000 = 0,18 m en moyenne. La protection contre la rivière ne supprime pas le ruissellement des versants, les eaux pluviales, les remontées de nappe, les refoulements de réseaux. Une digue peut même bloquer l\'évacuation gravitaire : la rivière monte → clapet se ferme → pluie intérieure ne peut plus sortir par cette voie. Ouvrages mobiles : T_marge = T_disponible − T_mobilisation − T_pose. Ex. : 90−25−40 = 25 min. Si T_marge < 0 : organisation incompatible avec le scénario. Classement par population protégée : A > 30 000, B 3 000–30 000, C ≤ 3 000 pers. (avec distinctions réglementaires). Population protégée ≠ population municipale. Le classement ne précise pas la hauteur ni le niveau de protection. Risques résiduels : événement dépassant le niveau de protection, défaillance, fermeture non réalisée, autre mécanisme d\'entrée d\'eau. Le niveau de protection ne doit jamais être présenté comme une garantie générale.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Des enrochements sur une berge protègent-ils les maisons voisines contre les débordements ?', r: 'Non — les enrochements peuvent limiter l\'érosion sans empêcher la montée de l\'eau au-dessus de la berge. L\'apparence d\'un ouvrage ne suffit pas à définir sa fonction.', expl: 'Il faut étudier les niveaux et les chemins de débordement. Une protection de berge et une digue de protection ont des fonctions distinctes.' },
+                  { q: 'Qu\'est-ce que la revanche d\'une digue et que démontre-t-elle ?', r: 'R = Z_crête − Z_eau. Ex. : 105,20 − 104,60 = 0,60 m. C\'est une valeur géométrique locale — elle ne démontre pas la sécurité. Une revanche positive n\'exclut ni rupture ni franchissement par vagues.', expl: 'Il faut croiser géométrie, hydraulique et résistance sur tout le profil en long. Le point avec la plus petite revanche n\'est pas nécessairement le seul point critique.' },
+                  { q: 'Qu\'est-ce qu\'un contournement et comment en distingue-t-on l\'effet d\'une brèche ?', r: 'Le contournement : l\'eau passe autour sans dégrader l\'ouvrage (extrémité, point bas, affluent). Une digue intacte peut coexister avec une inondation. Absence de brèche ≠ système efficace.', expl: 'La brèche est une ouverture résultant d\'une dégradation ou rupture. Ces deux situations n\'ont pas les mêmes conséquences ni les mêmes causes.' },
+                  { q: 'Formule du volume d\'accumulation derrière une digue fermée ?', r: 'ΔV = (Q_apports − Q_évacuation) × Δt. Ex. : (0,8−0,3) × 7 200 s = 3 600 m³. Δh = ΔV/S pour une hauteur moyenne.', expl: 'Ex. : 3 600 / 20 000 = 0,18 m sur 2 ha. Dans un quartier réel, l\'eau se concentre dans les dépressions. La fermeture d\'un clapet peut bloquer l\'évacuation gravitaire des eaux de pluie.' },
+                  { q: 'Comment se calcule la marge de déploiement d\'un batardeau ?', r: 'T_marge = T_disponible − T_mobilisation − T_pose. Ex. : 70−30−45 = −5 min → organisation incompatible avec ce scénario.', expl: 'Un exercice de pose permet de confronter les délais supposés aux conditions pratiques. La marge dépend de la prévision, de la circulation et de la disponibilité réelle des équipes.' },
+                  { q: 'Quelles sont les 5 grandes familles de défaillance d\'une digue ?', r: 'Surverse érosive, érosion externe, érosion interne, instabilité, défaillance d\'équipement. Une même rupture peut résulter d\'une succession de mécanismes.', expl: 'Ex. : érosion du pied → fragilisation du talus → glissement. La durée de la crue compte autant que son maximum. La décrue peut aussi être critique.' },
+                  { q: 'Quel critère détermine la classe réglementaire d\'un système d\'endiguement ?', r: 'La population maximale susceptible d\'être exposée dans la zone protégée. A > 30 000, B 3 000–30 000, C ≤ 3 000 personnes (avec distinctions réglementaires).', expl: 'Population protégée ≠ population municipale ≠ habitants permanents. Le classement n\'indique pas la hauteur des ouvrages ni leur niveau de protection.' },
+                  { q: 'La présence d\'une digue supprime-t-elle tous les risques d\'inondation dans la zone protégée ?', r: 'Non — le ruissellement des versants, les eaux pluviales, les remontées de nappe et les refoulements de réseaux subsistent. Les risques résiduels (dépassement, défaillance, fermeture non réalisée) demeurent.', expl: 'Le niveau de protection ne doit jamais être présenté comme une garantie générale. L\'information des habitants, l\'adaptation des bâtiments et la préparation de crise restent nécessaires.' },
+                ],
+                schema: `<svg viewBox="0 0 700 390" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
+                <text x="350" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#3E2723">Digues et systemes d'endiguement</text>
+                <!-- Systeme -->
+                <rect x="10" y="34" width="680" height="36" rx="6" fill="#EFEBE9" stroke="#5D4037" stroke-width="2"/>
+                <text x="350" y="52" text-anchor="middle" font-weight="bold" fill="#3E2723" font-size="13">Systeme = ensemble coherent d'ouvrages + raccordements + appuis naturels</text>
+                <text x="350" y="66" text-anchor="middle" font-size="11" fill="#5D4037">Digue · Mur · Batardeau · Vanne/clapet · Station de pompage · Instrumentation</text>
+                <!-- Zone protegee + niveau protection -->
+                <rect x="10" y="84" width="330" height="44" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="175" y="103" text-anchor="middle" font-weight="bold" fill="#0D47A1">Zone protegee</text>
+                <text x="175" y="119" text-anchor="middle" font-size="11" fill="#1565C0">Territoire dans les conditions definies · ≠ toute la commune</text>
+                <rect x="355" y="84" width="335" height="44" rx="6" fill="#FBE9E7" stroke="#BF360C" stroke-width="1.5"/>
+                <text x="522" y="103" text-anchor="middle" font-weight="bold" fill="#BF360C">Niveau de protection ≠ hauteur de digue</text>
+                <text x="522" y="119" text-anchor="middle" font-size="11" fill="#C62828">Performance du systeme vs caracteristique geometrique</text>
+                <!-- Formules -->
+                <rect x="10" y="142" width="160" height="54" rx="6" fill="#FFF8E1" stroke="#F57F17" stroke-width="1.5"/>
+                <text x="90" y="161" text-anchor="middle" font-weight="bold" fill="#E65100">Revanche</text>
+                <text x="90" y="177" text-anchor="middle" font-size="12" fill="#E65100">R = Z_crete − Z_eau</text>
+                <text x="90" y="191" text-anchor="middle" font-size="10.5" fill="#E65100">geometrique, pas securite</text>
+                <rect x="180" y="142" width="160" height="54" rx="6" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1.5"/>
+                <text x="260" y="161" text-anchor="middle" font-weight="bold" fill="#4A148C">Pression</text>
+                <text x="260" y="177" text-anchor="middle" font-size="12" fill="#6A1B9A">p = ρgh</text>
+                <text x="260" y="191" text-anchor="middle" font-size="10.5" fill="#6A1B9A">h=2m → 19,62 kPa</text>
+                <rect x="350" y="142" width="165" height="54" rx="6" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.5"/>
+                <text x="432" y="161" text-anchor="middle" font-weight="bold" fill="#1B5E20">Accumulation</text>
+                <text x="432" y="177" text-anchor="middle" font-size="11" fill="#2E7D32">ΔV = (Q_ap − Q_ev) × Δt</text>
+                <text x="432" y="191" text-anchor="middle" font-size="10.5" fill="#388E3C">Δh = ΔV / S</text>
+                <rect x="525" y="142" width="165" height="54" rx="6" fill="#E8EAF6" stroke="#283593" stroke-width="1.5"/>
+                <text x="607" y="161" text-anchor="middle" font-weight="bold" fill="#1A237E">Fermeture mobile</text>
+                <text x="607" y="177" text-anchor="middle" font-size="11" fill="#283593">T = T_dispo − T_mob − T_pose</text>
+                <text x="607" y="191" text-anchor="middle" font-size="10.5" fill="#3949AB">si T&lt;0 : incompatible</text>
+                <!-- 5 defaillances -->
+                <text x="350" y="218" text-anchor="middle" font-weight="bold" fill="#37474F" font-size="13">5 familles de defaillance</text>
+                <rect x="10" y="224" width="124" height="40" rx="5" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+                <text x="72" y="242" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#C62828">Surverse</text>
+                <text x="72" y="258" text-anchor="middle" font-size="10" fill="#C62828">erosive</text>
+                <rect x="144" y="224" width="124" height="40" rx="5" fill="#FBE9E7" stroke="#BF360C" stroke-width="1.5"/>
+                <text x="206" y="242" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#BF360C">Erosion</text>
+                <text x="206" y="258" text-anchor="middle" font-size="10" fill="#BF360C">externe</text>
+                <rect x="278" y="224" width="124" height="40" rx="5" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="340" y="242" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#E65100">Erosion</text>
+                <text x="340" y="258" text-anchor="middle" font-size="10" fill="#E65100">interne</text>
+                <rect x="412" y="224" width="124" height="40" rx="5" fill="#FFF8E1" stroke="#F57F17" stroke-width="1.5"/>
+                <text x="474" y="242" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#E65100">Instabilite</text>
+                <text x="474" y="258" text-anchor="middle" font-size="10" fill="#E65100">glissement</text>
+                <rect x="546" y="224" width="144" height="40" rx="5" fill="#E8EAF6" stroke="#283593" stroke-width="1.5"/>
+                <text x="618" y="242" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#1A237E">Defaillance</text>
+                <text x="618" y="258" text-anchor="middle" font-size="10" fill="#1A237E">equipement</text>
+                <!-- Classement -->
+                <rect x="10" y="278" width="210" height="50" rx="6" fill="#EFEBE9" stroke="#5D4037" stroke-width="1.5"/>
+                <text x="115" y="297" text-anchor="middle" font-weight="bold" fill="#3E2723">Classement</text>
+                <text x="115" y="312" text-anchor="middle" font-size="11" fill="#5D4037">A &gt;30 000 · B 3 000–30 000</text>
+                <text x="115" y="325" text-anchor="middle" font-size="11" fill="#5D4037">C ≤ 3 000 pers. protegees</text>
+                <!-- Contournement -->
+                <rect x="235" y="278" width="220" height="50" rx="6" fill="#FCE4EC" stroke="#AD1457" stroke-width="1.5"/>
+                <text x="345" y="297" text-anchor="middle" font-weight="bold" fill="#880E4F">Contournement</text>
+                <text x="345" y="312" text-anchor="middle" font-size="11" fill="#AD1457">eau passe autour sans degrader</text>
+                <text x="345" y="325" text-anchor="middle" font-size="11" fill="#AD1457">absence breche ≠ systeme efficace</text>
+                <!-- Risque residuel -->
+                <rect x="470" y="278" width="220" height="50" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="580" y="297" text-anchor="middle" font-weight="bold" fill="#E65100">Risque residuel</text>
+                <text x="580" y="312" text-anchor="middle" font-size="11" fill="#E65100">ruissellement · nappe · pluie</text>
+                <text x="580" y="325" text-anchor="middle" font-size="11" fill="#E65100">depassement · defaillance</text>
+                <!-- Conclusion -->
+                <rect x="10" y="342" width="680" height="40" rx="8" fill="#E0F7FA" stroke="#00838F" stroke-width="2"/>
+                <text x="350" y="360" text-anchor="middle" font-weight="bold" fill="#006064">Protection = systeme complet · Niveau de protection ≠ garantie d'absence d'inondation</text>
+                <text x="350" y="376" text-anchor="middle" font-size="11" fill="#00695C">Zone protegee · Revanche · Continuite · 5 mecanismes · Contournement · Eaux interieures · Risque residuel</text>
+              </svg>`,
+                exercice: {
+                  enonce: '(1) Des enrochements protègent une berge. Les maisons voisines sont-elles protégées contre les débordements ?\n(2) La crête est à 108,40 m et l\'eau calculée à 107,85 m. Calculez la revanche.\n(3) Une digue reste intacte, mais l\'eau entre dans le quartier par une route à son extrémité. Quel mécanisme ?\n(4) Pendant 1 h, Q_apports = 0,6 m³/s et Q_évacuation = 0,2 m³/s. Calculez ΔV.\n(5) T_disponible = 70 min, mobilisation 30 min, pose 45 min. Calculez T_marge.\n(6) Un système protège 8 000 personnes. Quelle classe ?\n(7) La digue empêche l\'entrée de la rivière, mais une forte pluie provoque une accumulation derrière. Est-ce nécessairement une rupture du système ?\n(8) Un tronçon conçu pour supporter un déversement laisse entrer de l\'eau sans se dégrader. La zone reste-t-elle sèche ?',
+                  solution: '<strong>(1)</strong> Non — les enrochements limitent l\'érosion sans empêcher la montée de l\'eau. Il faut étudier les niveaux et les chemins de débordement.<br><strong>(2)</strong> R = 108,40 − 107,85 = <strong>0,55 m</strong>. Valeur géométrique — pas une démonstration de sécurité.<br><strong>(3)</strong> Un <strong>contournement</strong>. La résistance du remblai n\'empêche pas l\'inondation lorsque la fermeture hydraulique est incomplète.<br><strong>(4)</strong> ΔV = (0,6−0,2) × 3 600 = <strong>1 440 m³</strong>. Il faut ensuite déterminer où ce volume peut se répartir.<br><strong>(5)</strong> T_marge = 70−30−45 = <strong>−5 min</strong>. L\'organisation ne permet pas d\'achever la fermeture à temps dans ce scénario.<br><strong>(6)</strong> Classe <strong>B</strong> (3 000 < 8 000 ≤ 30 000 personnes). Le classement n\'indique pas la hauteur ni le niveau de protection.<br><strong>(7)</strong> Non — c\'est un problème d\'évacuation des eaux intérieures. Il faut identifier l\'origine de l\'eau et les fonctions attendues des équipements.<br><strong>(8)</strong> Non — l\'ouvrage peut conserver son intégrité alors que l\'eau atteint la zone. Résistance structurelle ≠ absence d\'inondation.',
+                },
+              }, // fin gem-op1
+
+            ],
+          }, // fin gem-m22
 
         ],
       },
