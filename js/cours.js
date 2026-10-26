@@ -11214,6 +11214,160 @@ const COURS_DATA = {
                 },
               }, // fin gem-pi2
 
+              {
+                id: 'gem-pi3',
+                titre: 'Réduction de la vulnérabilité des bâtiments, des activités et des réseaux',
+                fiche: {
+                  intro: 'Comment adapter un enjeu exposé pour améliorer la sécurité, réduire les dommages et faciliter la reprise après une inondation ? Installer une protection devant une porte ne suffit pas toujours — l\'eau peut entrer par le sol, un réseau ou une autre ouverture. Un bâtiment peut rester sec tout en étant privé d\'électricité ou inaccessible. La réduction de la vulnérabilité demande un diagnostic global, suivi de mesures cohérentes et entretenues.',
+                  points: [
+                    '🎯 Trois résultats à distinguer : sécurité des personnes (éviter leur mise en difficulté), limitation des dommages (préserver ou rendre moins sensibles les éléments), reprise plus rapide (conditionner le redémarrage). Mettre un serveur hors d\'eau ne garantit pas l\'accès au bâtiment. Le programme doit préciser le bénéfice attendu de chaque mesure.',
+                    '📐 Relever les cotes utiles : seuils, planchers, sous-sols, aérations, équipements sensibles — toutes en référentiel cohérent. ΔZ = Z_eau − Z_seuil — ex. Z_eau = 102,40 m, Z_seuil = 102,15 m → ΔZ = 0,25 m. Cette différence ne donne pas la hauteur intérieure : cheminements et durée interviennent.',
+                    '🚿 Identifier toutes les voies d\'entrée d\'eau : portes, garages, aérations, passages de câbles, parois et joints, dalle de sous-sol, refoulement d\'évacuation, cour anglaise, rampe. Protéger une ouverture tout en ignorant les autres peut produire un bénéfice très limité.',
+                    '🏗️ Quatre stratégies d\'adaptation : éviter (déplacer/surélever les fonctions), résister (limiter l\'entrée d\'eau), adapter à l\'entrée d\'eau (réduire les dommages si l\'eau pénètre), relocaliser (déplacer durablement un enjeu). Peuvent être combinées selon les parties du bâtiment. Accepter techniquement une inondation ≠ local occupable pendant l\'événement.',
+                    '💧 Pression hydrostatique : p = ρgh. Résultante sur paroi verticale de largeur b, hauteur h : F = ½ρgbh². Ex. b = 1 m, h = 0,60 m → F ≈ 1 766 N. Force ∝ h² : doubler h multiplie F par 4. Ne valide pas une paroi — calcul pédagogique seulement.',
+                    '⏱️ Marge de déploiement : T_marge = T_disponible − T_mobilisation − T_installation. Ex. 90 − 20 − 50 = 20 min de marge. Ne garantit pas la faisabilité — ajouter incertitudes, perte d\'accès et conditions de sécurité. Ne jamais attendre avant d\'appliquer les consignes des autorités.',
+                    '🔧 Clapet antiretour : traite certains refoulements mais pas toutes les voies d\'eau. Sa fermeture peut empêcher l\'évacuation normale des eaux intérieures. Vérifier pertinence, position, entretien et fonctionnement du réseau lors de sa fermeture.',
+                    '⚓ Flottabilité (cuves, équipements) : F_A = ρgV_i. Ex. V_i = 2 m³ → F_A = 1 000 × 9,81 × 2 = 19 620 N. La stabilité dépend aussi du poids, du contenu, des appuis et des ancrages. Calcul illustratif — ne dimensionne pas les ancrages.',
+                    '💻 Redondance ≠ indépendance : deux serveurs dans le même sous-sol peuvent être affectés simultanément — pas de redondance face à l\'inondation. Une sauvegarde n\'est utile que si elle reste accessible et exploitable indépendamment du sinistre. Un site de repli doit être vérifié sur son exposition au même événement.',
+                    '📋 Dommages évités : D_évités = D_sans_mesure − D_avec_mesure. Ex. 80 000 − 30 000 = 50 000 €. Concerne le scénario et les hypothèses retenus — pas une économie annuelle garantie. Évaluer aussi sécurité, délai de reprise, fiabilité du déploiement et coûts d\'entretien.',
+                    '🔄 Retour au fonctionnement : organiser avant le sinistre — constat structures, contrôle installations, nettoyage, séchage, vérification sanitaire, ordre de remise en service. Distinguer "le local est accessible" et "le local peut reprendre son usage habituel". Un équipement jamais testé ≠ preuve d\'efficacité opérationnelle.',
+                    '⚠️ Limites des protections : performance annoncée d\'un produit ≠ performance du bâtiment équipé. Déplacer un tableau électrique en laissant les équipements indispensables exposés ne résout qu\'une partie du problème. La protection doit être examinée comme un système complet.',
+                  ],
+                  formules: [
+                    'Différence de cote : ΔZ = Z_eau − Z_seuil (m) — ex. 102,40 − 102,15 = 0,25 m ; ne donne pas la hauteur intérieure',
+                    'Résultante hydrostatique simplifiée : F = ½ρgbh² (N) — ρ = 1 000 kg/m³, g = 9,81 m/s², b = largeur (m), h = hauteur d\'eau (m) ; ex. b=1m, h=0,60m → F ≈ 1 766 N ; force ∝ h² : h×2 → F×4',
+                    'Marge de déploiement : T_marge = T_disponible − T_mobilisation − T_installation (min) — ex. 90 − 20 − 50 = 20 min ; si négatif, déploiement incompatible avec le scénario',
+                    'Poussée d\'Archimède : F_A = ρgV_i (N) — V_i = volume immergé (m³) ; ex. V_i = 1,5 m³ → F_A ≈ 14 715 N ; ne dimensionne pas les ancrages',
+                    'Dommages évités : D_évités = D_sans_mesure − D_avec_mesure (€) — ex. 80 000 − 30 000 = 50 000 € pour le scénario retenu',
+                  ],
+                  retenir: 'Sécurité personnes > limitation dommages > reprise rapide. ΔZ = Z_eau − Z_seuil. Identifier toutes les voies d\'eau. F = ½ρgbh² (∝ h²). Quatre stratégies : éviter, résister, adapter, relocaliser. T_marge = T_dispo − T_mob − T_instal. Clapet antiretour ≠ solution universelle. F_A = ρgV_i (flottabilité). Redondance ≠ indépendance si même cause de défaillance. D_évités = D_avant − D_après. Retour à la normale se prépare avant l\'événement.',
+                  sections: [
+                    {
+                      titre: 'Diagnostic et identification des voies d\'entrée',
+                      ss: [
+                        {
+                          titre: 'Périmètre du diagnostic et scénarios de référence',
+                          texte: 'Le périmètre doit comprendre : le bâtiment, les terrains et accès, les équipements, les réseaux, les occupants, les activités et les dépendances extérieures. La limite de propriété ne correspond pas toujours à la limite du système vulnérable. Pour chaque scénario : hauteur extérieure, vitesse, durée, rapidité de montée, origine de l\'eau, contamination possible, coupures de réseaux, accessibilité. Une protection conçue pour une entrée de surface ne traite pas nécessairement une remontée de nappe. Examiner aussi un scénario dépassant les capacités prévues pour comprendre les limites et les conséquences résiduelles.',
+                        },
+                        {
+                          titre: 'Relever les cotes et identifier toutes les voies d\'entrée d\'eau',
+                          texte: 'Relever en référentiel cohérent : seuils de portes, planchers, sous-sols, entrées de garages, aérations, équipements sensibles, accès, réseaux et points de refoulement. ΔZ = Z_eau − Z_seuil — ex. Z_eau = 102,40 m, Z_seuil = 102,15 m → ΔZ = 0,25 m. Cette différence ne donne pas la hauteur intérieure. Voies d\'entrée à inspecter : ouvertures principales (portes, garages, fenêtres basses), ouvertures techniques (aérations, passages de câbles), parois et joints (fissures, raccordements), sous-sol (sol, dalle, murs enterrés), réseaux (refoulement d\'évacuation), espaces adjacents (cour anglaise, rampe). Protéger une ouverture tout en ignorant les autres peut produire un bénéfice très limité.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Stratégies d\'adaptation et calculs de base',
+                      ss: [
+                        {
+                          titre: 'Quatre stratégies et mise hors d\'eau des fonctions sensibles',
+                          texte: 'Éviter : déplacer ou surélever certaines fonctions (faisabilité technique et foncière à vérifier). Résister : limiter l\'entrée d\'eau (résistance du bâtiment et conditions d\'exploitation). Adapter à l\'entrée d\'eau : réduire les dommages quand l\'eau pénètre (usages compatibles et remise en service). Relocaliser : déplacer durablement un enjeu. Ces stratégies peuvent être combinées par parties de bâtiment. Mettre hors d\'eau les fonctions sensibles : équipements électriques, chauffage, informatique, archives, produits dangereux. La cote d\'implantation doit être justifiée par les scénarios et les incertitudes — pas une hauteur standard appliquée uniformément. Vérifier les supports, connexions et composants restés plus bas.',
+                        },
+                        {
+                          titre: 'Pression hydrostatique et déploiement des protections amovibles',
+                          texte: 'Résultante hydrostatique simplifiée : F = ½ρgbh². Pour h = 0,60 m, b = 1 m : F ≈ 1 766 N. Force ∝ h² : doubler h multiplie F par 4 — illustre l\'importance de la hauteur dans le dimensionnement. Dispositifs de protection (batardeaux, fermetures) : efficacité dépend du support, des fixations, des joints, de l\'ensemble des voies d\'eau et de l\'entretien. Performance d\'un produit ≠ performance du bâtiment équipé. Marge de déploiement : T_marge = T_disponible − T_mobilisation − T_installation. Ex. 90 − 20 − 50 = 20 min. Si T_marge < 0 : incompatible avec le scénario. Ne jamais attendre avant d\'appliquer les consignes de sécurité des autorités.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Sous-sols, réseaux et flottabilité',
+                      ss: [
+                        {
+                          titre: 'Sous-sols, clapets antiretour et flottabilité',
+                          texte: 'Un sous-sol peut subir : entrées d\'eau, pressions sur les murs, poussée sous la dalle, refoulements. L\'extraction d\'eau peut modifier l\'équilibre des pressions — un pompage improvisé avec niveaux extérieurs élevés peut être inadapté à certaines structures. Clapet antiretour : peut traiter certains refoulements mais ne traite pas toutes les voies d\'eau. Sa fermeture empêche aussi l\'évacuation normale des eaux intérieures — vérifier pertinence, position, entretien. Flottabilité : F_A = ρgV_i — ex. V_i = 1,5 m³ → F_A ≈ 14 715 N. La stabilité dépend aussi du poids, du contenu, des appuis et des ancrages. Ce calcul illustre le mécanisme, il ne dimensionne pas les ancrages.',
+                        },
+                        {
+                          titre: 'Réseaux du bâtiment et réseaux territoriaux',
+                          texte: 'Réseaux du bâtiment : électricité, gaz, eau, assainissement, chauffage, télécommunications — adaptations et remises en service par intervenants compétents. Réseaux territoriaux : identifier les nœuds critiques, les zones desservies, les possibilités d\'isolement, les itinéraires alternatifs, les conditions de réparation et les dépendances entre opérateurs. La stratégie doit être construite avec les gestionnaires. Une collectivité ne peut pas déduire le fonctionnement précis d\'un réseau à partir de la seule localisation de ses équipements visibles.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Continuité, retour au fonctionnement et efficacité',
+                      ss: [
+                        {
+                          titre: 'Plan de continuité et redondance',
+                          texte: 'Plan de continuité d\'activité : activités indispensables, ressources minimales, responsables, solutions alternatives, dépendances, conditions d\'activation, tests. Une sauvegarde informatique n\'est utile que si elle reste accessible, exploitable et indépendante du sinistre. Un site de repli doit être vérifié : capacité, accès, réseaux, personnel et exposition éventuelle au même événement. Redondance ≠ indépendance si les deux solutions partagent le même point de défaillance — deux serveurs dans le même sous-sol peuvent être affectés simultanément. Autonomie annoncée : vérifier la consommation réelle, les équipements alimentés, le carburant, la maintenance et l\'accès au réapprovisionnement.',
+                        },
+                        {
+                          titre: 'Retour au fonctionnement et évaluation de l\'efficacité',
+                          texte: 'Organiser le retour avant le sinistre : constat des structures, contrôles des installations, nettoyage, gestion des déchets, séchage, remplacement, vérification sanitaire, ordre de remise en service. Distinguer "le local est accessible" et "le local peut reprendre son usage habituel". Un bâtiment apparemment sec peut conserver des équipements endommagés ou de l\'humidité dans ses assemblages. Évaluation : D_évités = D_sans_mesure − D_avec_mesure — ex. 80 000 − 30 000 = 50 000 € pour le scénario retenu. Non une économie annuelle garantie — évaluer aussi sécurité, délai de reprise, fiabilité du déploiement. Un équipement jamais testé ≠ preuve d\'efficacité opérationnelle.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quels sont les trois résultats recherchés par la réduction de vulnérabilité ?', r: 'Sécurité des personnes (éviter la mise en difficulté), limitation des dommages (préserver les éléments sensibles), reprise plus rapide (conditionner le redémarrage).', expl: 'Mettre un serveur hors d\'eau peut préserver les données sans garantir l\'accès au bâtiment. Le programme doit préciser le bénéfice attendu de chaque mesure.' },
+                  { q: 'Formule de la résultante hydrostatique simplifiée sur une paroi verticale ?', r: 'F = ½ρgbh² — ρ = 1 000 kg/m³, g = 9,81 m/s², b = largeur (m), h = hauteur d\'eau (m). Force ∝ h² : doubler h multiplie F par 4.', expl: 'Ex. b=1m, h=0,60m → F ≈ 1 766 N. Ce calcul illustre le mécanisme — il ne valide pas une paroi ni un batardeau.' },
+                  { q: 'Comment calculer la marge de déploiement d\'un dispositif amovible ?', r: 'T_marge = T_disponible − T_mobilisation − T_installation. Si T_marge < 0 : incompatible avec le scénario.', expl: 'Ex. 90 − 20 − 50 = 20 min. Ne jamais attendre avant d\'appliquer les consignes des autorités. Ajouter les incertitudes et la perte possible d\'accès.' },
+                  { q: 'Quelle est la poussée d\'Archimède sur un volume immergé de 1,5 m³ ?', r: 'F_A = ρgV_i = 1 000 × 9,81 × 1,5 ≈ 14 715 N.', expl: 'La stabilité dépend aussi du poids de la cuve, du contenu, des appuis et des ancrages. Ce calcul illustre le mécanisme — il ne dimensionne pas les ancrages.' },
+                  { q: 'Deux serveurs dans le même sous-sol constituent-ils une redondance fiable ?', r: 'Non — ils peuvent être affectés simultanément. Une redondance n\'est pas indépendante si les deux solutions partagent le même point de défaillance.', expl: 'Un site de repli doit vérifier sa propre exposition au même événement. Une sauvegarde n\'est utile que si elle reste accessible et exploitable indépendamment du sinistre.' },
+                  { q: 'Un batardeau devant la porte principale suffit-il à protéger un bâtiment ?', r: 'Non si d\'autres voies d\'entrée d\'eau subsistent (aérations, passages de câbles, dalle, refoulement de réseau). La protection doit être évaluée comme un système complet.', expl: 'Performance annoncée d\'un produit ≠ performance du bâtiment équipé. Identifier et traiter toutes les voies d\'entrée avant de conclure sur l\'efficacité.' },
+                  { q: 'Qu\'est-ce que les dommages évités pour un scénario ?', r: 'D_évités = D_sans_mesure − D_avec_mesure — ex. 80 000 − 30 000 = 50 000 €. C\'est pour ce scénario et ces hypothèses, pas une économie annuelle garantie.', expl: 'Évaluer aussi sécurité des personnes, délai de reprise, fiabilité du déploiement et coûts d\'entretien. Un équipement jamais testé ≠ preuve d\'efficacité opérationnelle.' },
+                  { q: 'Peut-on remettre les équipements en service dès que l\'eau a quitté un local ?', r: 'Non — il faut d\'abord procéder aux contrôles adaptés (structures, installations, vérification sanitaire). Accessible ≠ peut reprendre son usage habituel.', expl: 'Un bâtiment apparemment sec peut conserver des équipements endommagés ou de l\'humidité dans ses assemblages. Le retour au fonctionnement se prépare avant l\'événement.' },
+                ],
+                schema: `<svg viewBox="0 0 700 370" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
+                <text x="350" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#0D47A1">Reduction de vulnerabilite — systeme complet</text>
+                <!-- 3 resultats -->
+                <rect x="10" y="36" width="210" height="50" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="115" y="56" text-anchor="middle" font-weight="bold" fill="#0D47A1">Securite</text>
+                <text x="115" y="72" text-anchor="middle" font-size="11" fill="#1565C0">eviter mise en difficulte</text>
+                <rect x="245" y="36" width="210" height="50" rx="6" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.5"/>
+                <text x="350" y="56" text-anchor="middle" font-weight="bold" fill="#1B5E20">Moins de dommages</text>
+                <text x="350" y="72" text-anchor="middle" font-size="11" fill="#2E7D32">elements moins sensibles</text>
+                <rect x="480" y="36" width="210" height="50" rx="6" fill="#FFF8E1" stroke="#F57F17" stroke-width="1.5"/>
+                <text x="585" y="56" text-anchor="middle" font-weight="bold" fill="#E65100">Reprise plus rapide</text>
+                <text x="585" y="72" text-anchor="middle" font-size="11" fill="#E65100">conditionner redemarrage</text>
+                <!-- 4 strategies -->
+                <text x="350" y="106" text-anchor="middle" font-weight="bold" fill="#37474F" font-size="13">Quatre strategies</text>
+                <rect x="10" y="114" width="155" height="44" rx="6" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1.5"/>
+                <text x="87" y="132" text-anchor="middle" font-weight="bold" fill="#4A148C">Eviter</text>
+                <text x="87" y="150" text-anchor="middle" font-size="11" fill="#6A1B9A">deplacer · surélever</text>
+                <rect x="175" y="114" width="155" height="44" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="252" y="132" text-anchor="middle" font-weight="bold" fill="#0D47A1">Resister</text>
+                <text x="252" y="150" text-anchor="middle" font-size="11" fill="#1565C0">limiter entree d'eau</text>
+                <rect x="340" y="114" width="175" height="44" rx="6" fill="#FFF8E1" stroke="#F57F17" stroke-width="1.5"/>
+                <text x="427" y="132" text-anchor="middle" font-weight="bold" fill="#E65100">Adapter</text>
+                <text x="427" y="150" text-anchor="middle" font-size="11" fill="#E65100">reduire si eau penetre</text>
+                <rect x="525" y="114" width="165" height="44" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+                <text x="607" y="132" text-anchor="middle" font-weight="bold" fill="#C62828">Relocaliser</text>
+                <text x="607" y="150" text-anchor="middle" font-size="11" fill="#C62828">deplacer durablement</text>
+                <!-- Formules -->
+                <rect x="10" y="174" width="215" height="54" rx="6" fill="#FBE9E7" stroke="#BF360C" stroke-width="1.5"/>
+                <text x="117" y="193" text-anchor="middle" font-weight="bold" fill="#BF360C">Force hydrostatique</text>
+                <text x="117" y="210" text-anchor="middle" font-size="12" fill="#BF360C">F = ½ρgbh²</text>
+                <text x="117" y="224" text-anchor="middle" font-size="10.5" fill="#C62828">h×2 → F×4</text>
+                <rect x="240" y="174" width="215" height="54" rx="6" fill="#E8EAF6" stroke="#283593" stroke-width="1.5"/>
+                <text x="347" y="193" text-anchor="middle" font-weight="bold" fill="#1A237E">Marge deploiement</text>
+                <text x="347" y="210" text-anchor="middle" font-size="12" fill="#283593">T = T_dispo − T_mob − T_inst</text>
+                <text x="347" y="224" text-anchor="middle" font-size="10.5" fill="#3949AB">si T&lt;0 : incompatible</text>
+                <rect x="470" y="174" width="220" height="54" rx="6" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.5"/>
+                <text x="580" y="193" text-anchor="middle" font-weight="bold" fill="#1B5E20">Dommages evites</text>
+                <text x="580" y="210" text-anchor="middle" font-size="12" fill="#2E7D32">D_evites = D_avant − D_apres</text>
+                <text x="580" y="224" text-anchor="middle" font-size="10.5" fill="#388E3C">pour le scenario retenu</text>
+                <!-- Archimede -->
+                <rect x="10" y="244" width="215" height="44" rx="6" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1.5"/>
+                <text x="117" y="263" text-anchor="middle" font-weight="bold" fill="#4A148C">Flottabilite</text>
+                <text x="117" y="281" text-anchor="middle" font-size="12" fill="#6A1B9A">F_A = ρgV_i</text>
+                <!-- Voies eau -->
+                <rect x="240" y="244" width="450" height="44" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="465" y="263" text-anchor="middle" font-weight="bold" fill="#E65100">Toutes les voies d'eau</text>
+                <text x="465" y="281" text-anchor="middle" font-size="11" fill="#BF360C">Portes · aerations · cables · dalle · refoulement · rampe · cour anglaise</text>
+                <!-- Retour -->
+                <rect x="10" y="304" width="680" height="50" rx="8" fill="#E0F7FA" stroke="#00838F" stroke-width="2"/>
+                <text x="350" y="322" text-anchor="middle" font-weight="bold" fill="#006064">Retour au fonctionnement — preparer avant l'evenement</text>
+                <text x="175" y="340" text-anchor="middle" font-size="11" fill="#00695C">Constat structures</text>
+                <text x="330" y="340" text-anchor="middle" font-size="11" fill="#00695C">Controle installations</text>
+                <text x="490" y="340" text-anchor="middle" font-size="11" fill="#00695C">Verification sanitaire</text>
+                <text x="635" y="340" text-anchor="middle" font-size="11" fill="#00695C">Remise en service</text>
+                <text x="350" y="354" text-anchor="middle" font-size="10.5" fill="#00838F">Accessible ≠ peut reprendre son usage · Equipement jamais teste ≠ preuve d'efficacite</text>
+              </svg>`,
+                exercice: {
+                  enonce: '(1) Un bâtiment possède un batardeau devant la porte principale, mais une aération basse reste ouverte. Est-il protégé ?\n(2) La cote d\'eau est de 85,60 m et le seuil de 85,25 m. Calculez ΔZ.\n(3) Dans le modèle simplifié, que se passe-t-il à la résultante hydrostatique F si la hauteur d\'eau double ?\n(4) Délai disponible : 60 min. Mobilisation : 20 min. Installation : 45 min. Le déploiement est-il compatible ?\n(5) Une cuve est partiellement immergée avec V_i = 1,5 m³. Calculez F_A.\n(6) Deux serveurs sont installés dans le même sous-sol. Est-ce une redondance fiable contre l\'inondation ?\n(7) Une mesure ramène les dommages estimés de 120 000 € à 45 000 € pour un scénario. Calculez D_évités.\n(8) L\'eau a quitté le local. Peut-on remettre immédiatement tous les équipements en service ?',
+                  solution: '<strong>(1)</strong> Non — une voie d\'entrée subsiste. La performance doit être évaluée à l\'échelle du bâtiment entier.<br><strong>(2)</strong> ΔZ = 85,60 − 85,25 = <strong>0,35 m</strong>. La hauteur intérieure dépend des cheminements et de la durée.<br><strong>(3)</strong> F est multipliée par <strong>4</strong>, car F ∝ h² — cela ne constitue pas une vérification de résistance.<br><strong>(4)</strong> T_marge = 60 − 20 − 45 = <strong>−5 min</strong> — incompatible avec ce scénario, avant même les incertitudes.<br><strong>(5)</strong> F_A = 1 000 × 9,81 × 1,5 ≈ <strong>14 715 N</strong>. Il faut d\'autres données pour apprécier la stabilité et les ancrages.<br><strong>(6)</strong> Non — ils peuvent être affectés simultanément. Redondance ≠ indépendance si même point de défaillance.<br><strong>(7)</strong> D_évités = 120 000 − 45 000 = <strong>75 000 €</strong> pour ce scénario. Ce n\'est pas un gain annuel certain.<br><strong>(8)</strong> Non — les contrôles adaptés (structures, installations, vérification sanitaire) restent nécessaires. Accessible ≠ peut reprendre son usage habituel.',
+                },
+              }, // fin gem-pi3
+
             ],
           }, // fin gem-m21
 
