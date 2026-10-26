@@ -9543,6 +9543,288 @@ const COURS_DATA = {
                 },
               },
 
+              {
+                id: 'gem-ent2',
+                titre: 'Gestion de la ripisylve et des embâcles',
+                fiche: {
+                  intro: 'La végétation des berges et le bois présent dans le cours d\'eau participent au fonctionnement du milieu. Avant toute intervention, il faut qualifier ce qui existe : une ripisylve est composée de strates, d\'âges et d\'espèces dont les fonctions sont complémentaires. Un tronc dans le lit n\'est pas automatiquement un déchet. Un embâcle devant un ouvrage n\'est pas automatiquement sans danger. Ce chapitre donne les repères pour distinguer, analyser et décider de manière justifiée, en distinguant les fonctions écologiques des risques liés aux enjeux exposés.',
+                  points: [
+                    '🌿 Ripisylve = formations végétales ligneuses associées aux rives (cordon étroit, boisement large ou mosaïque) — structure influencée par fréquence d\'inondation, nappe, matériaux, climat, usages et histoire des interventions ; ne se résume pas à une rangée d\'arbres réguliers',
+                    '⚖️ 6 fonctions complémentaires : ombrage (réduction du rayonnement), maintien des sols (renforcement local par les racines), habitats (cavités, bois mort), continuité écologique (déplacement/refuge), apports organiques (réseaux trophiques), interception de certains transferts — à apprécier ensemble : une coupe peut réduire plusieurs fonctions simultanément',
+                    '🌲 Racines ≠ berge indestructible : la stabilité dépend aussi de la hauteur/pente de berge, des sols, des circulations d\'eau, de l\'érosion au pied, du poids des arbres — examiner le système arbre–racines–sol–écoulement, pas l\'arbre isolément',
+                    '🔎 Identifier les pressions avant de prescrire des coupes (piétinement, coupes répétées, pâturage, modification de la nappe, EEE, dépérissement) — une plantation échoue probablement si la pression qui empêche la régénération reste active',
+                    '🪵 Bois en rivière (tronc/branche/souche dans le lit) ≠ embâcle ligneux (accumulation pouvant retenir d\'autres matériaux) ≠ déchets anthropiques (plastique, ferraille, mobilier) — distinction essentielle pour les inventaires et prescriptions de chantier',
+                    '💀 Bois mort : crée des abris, diversifie les vitesses et profondeurs, retient des matières organiques, contribue à la formation de fosses et dépôts, fournit des supports à de nombreux organismes — ne pas l\'assimiler systématiquement à un déchet à évacuer',
+                    '⚡ Mobilité du bois : longueur, diamètre, densité, ancrage dans la berge, enfouissement, orientation, niveaux d\'eau — un tronc immobile à l\'étiage peut être mobilisé en crue ; un arbre relié à sa souche n\'est pas garanti stable lors d\'un événement important',
+                    '🔗 Analyser la chaîne : Source → transport → accumulation → conséquences — un arbre éloigné d\'un ouvrage peut être pertinent si le transport est possible ; un bois proche mais fortement enchâssé peut avoir un comportement différent',
+                    '📐 T_o = (A_obstruée / A_référence) × 100 : 1,2 m² / 4 m² = 30 % (taux d\'obstruction géométrique) — ne signifie pas que le débit possible diminue de 30 %',
+                    '📏 L_rives = 2 × L_tronçon (ex. 2 × 600 = 1 200 m) ; T = (L_couvertes / L_rives) × 100 : 780 / 1 200 × 100 = 65 % — décrit une présence, ne mesure pas la largeur, la diversité ni l\'état écologique',
+                    '🗂️ Grille : conserver / surveiller / adapter partiellement / retirer / faire expertiser — analyser la situation APRÈS intervention : un retrait partiel peut rendre les fragments plus mobiles',
+                    '📊 Volume de bois retiré = indicateur d\'activité, pas de réussite — la réussite s\'évalue par les objectifs atteints, les conséquences évitées et les fonctions conservées',
+                  ],
+                  formules: [
+                    'Taux d\'obstruction géométrique : T_o = (A_obstruée / A_référence) × 100 (%) — ex. 1,2 m² / 4 m² = 30 % ; ne représente pas directement une perte de capacité hydraulique de 30 %',
+                    'Longueur totale des rives : L_rives = 2 × L_tronçon — ex. L = 600 m → L_rives = 1 200 m',
+                    'Couverture linéaire des rives : T = (L_couvertes / L_rives) × 100 (%) — ex. 780 m / 1 200 m × 100 = 65 % ; décrit la présence, pas la qualité',
+                  ],
+                  retenir: 'Ripisylve ≠ rangée d\'arbres réguliers · 6 fonctions complémentaires à apprécier ensemble · Racines ≠ stabilité garantie · Identifier la pression avant de prescrire · Bois en rivière ≠ embâcle ≠ déchets · Bois mort = habitat, pas déchet systématique · Mobilité évaluer pour une gamme de situations · Chaîne : source → transport → accumulation → conséquences · T_o = obstruction géométrique, pas perte de capacité · Volume retiré = activité, pas réussite.',
+                  sections: [
+                    {
+                      titre: 'La ripisylve : structure et fonctions',
+                      ss: [
+                        {
+                          titre: 'Structure et composition',
+                          texte: 'La ripisylve correspond aux formations végétales ligneuses associées aux rives. Sa structure dépend de la fréquence des inondations, de la profondeur de la nappe, des matériaux, du climat, des usages et de l\'histoire des interventions. Une visite doit examiner : largeur, continuité, strates (herbacées/arbustes/arbres), âges, composition, régénération (semis, rejets), état apparent (dépérissement, déchaussement) et habitats particuliers (cavités, bois mort, racines immergées). Une ripisylve exclusivement composée d\'arbres du même âge peut présenter une faible capacité de renouvellement. Des ouvertures ponctuelles peuvent faire partie d\'une mosaïque naturelle : toute discontinuité n\'est pas automatiquement une dégradation.',
+                        },
+                        {
+                          titre: 'Fonctions et limites — appréciation d\'ensemble',
+                          texte: 'La ripisylve assure 6 fonctions complémentaires : ombrage (réduction du rayonnement sur l\'eau), maintien des sols (renforcement local par les racines), habitats (cavités, racines, diversité végétale), continuité écologique (déplacement et refuge), apports organiques (réseaux trophiques), interception de certains transferts (ralentissement, rétention, transformations). Une coupe peut réduire plusieurs fonctions simultanément. Les racines améliorent la cohésion des matériaux proches de la surface, mais la stabilité dépend aussi de la hauteur et de la pente de la berge, des sols, des circulations d\'eau, de l\'érosion au pied et du poids des arbres. Il faut examiner le système arbre–racines–sol–écoulement, et non l\'arbre isolément.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Le bois en rivière',
+                      ss: [
+                        {
+                          titre: 'Distinguer bois, embâcle et déchets',
+                          texte: 'Trois catégories à distinguer : bois en rivière (tronc, branche, souche dans le lit), embâcle ligneux (accumulation pouvant retenir d\'autres matériaux), déchets anthropiques (plastique, ferraille, mobilier). Un tronc isolé n\'est pas nécessairement un embâcle. Un embâcle n\'est pas nécessairement totalement imperméable à l\'écoulement. Conserver du bois pour ses fonctions écologiques ne signifie pas conserver les déchets qui y sont piégés. Cette distinction doit apparaître dans les inventaires et les prescriptions de chantier. Les principales sources du bois comprennent la chute naturelle, l\'érosion des berges, les tempêtes, les glissements, le transport depuis l\'amont et les résidus de coupe mal gérés.',
+                        },
+                        {
+                          titre: 'Fonctions du bois mort',
+                          texte: 'Le bois présent dans un cours d\'eau peut créer des abris, diversifier les vitesses et profondeurs, retenir des matières organiques, contribuer à la formation de fosses et dépôts, fournir des supports à de nombreux organismes et participer à la dynamique des berges et du lit. Son intérêt varie selon sa position, sa taille, sa stabilité et le contexte. Le bois naturel ne doit donc pas être assimilé systématiquement à un déchet. Il faut cependant distinguer sa présence dans un secteur peu fréquenté de sa présence à proximité d\'un ouvrage : la lecture est différente dans les deux cas.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Mobilité et risques liés au bois',
+                      ss: [
+                        {
+                          titre: 'Évaluer la mobilité potentielle',
+                          texte: 'La mobilité dépend de la longueur et du diamètre, de la densité et de l\'état du bois, de la présence d\'une souche, de l\'ancrage dans la berge, de l\'enfouissement, de l\'orientation et des niveaux exercés par l\'eau. Un tronc immobile à l\'étiage peut être mobilisé en crue. Il faut distinguer « stable lors de la visite » et « mobilité évaluée pour une gamme de situations hydrologiques ». Lorsque les conséquences potentielles sont importantes, une expertise adaptée peut être nécessaire. Les indices à observer et photographier lors d\'une visite : inclinaison, fissures, cavité, soulèvement du sol, racines déchaussées, branche rompue, changement récent de position.',
+                        },
+                        {
+                          titre: 'Chaîne source → transport → accumulation → conséquences',
+                          texte: 'La présence de bois mobile ne suffit pas à caractériser un risque important. Il faut examiner : quels éléments pourraient être mobilisés (source), existe-t-il un cheminement vers l\'ouvrage (transport), quels obstacles peuvent retenir le bois (accumulation), quels niveaux ou débordements pourraient en résulter (conséquences). Un arbre éloigné d\'un ouvrage peut être pertinent si le transport est possible. Cette logique évite les coupes systématiques fondées sur une distance arbitraire au pont. Le taux d\'obstruction géométrique T_o = (A_obstruée / A_référence) × 100 : si l\'aire obstruée est de 1,2 m² pour une ouverture de référence de 4 m², T_o = 30 %. Cela ne signifie pas que le débit possible diminue de 30 %.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Décider et intervenir sur la végétation',
+                      ss: [
+                        {
+                          titre: 'Grille de décision et gestion sélective',
+                          texte: 'Cinq orientations peuvent être examinées pour chaque arbre ou accumulation : conserver (fonctions utiles, absence de conséquence préoccupante), surveiller (évolution possible ou incertitude), adapter partiellement (une partie pose problème, avec possibilité de préserver d\'autres fonctions), retirer (conséquences justifiant l\'enlèvement) ou faire expertiser (incertitude déterminante sur la stabilité). Cette grille ne produit pas une décision automatique. Une intervention partielle peut rendre les fragments plus mobiles : il faut analyser la situation après intervention. Les interventions possibles : élagage ciblé, recépage adapté, abattage ponctuel, accompagnement de la régénération, protection contre une pression identifiée.',
+                        },
+                        {
+                          titre: 'Renouvellement et espèces envahissantes',
+                          texte: 'Pour le renouvellement : laisser se développer les semis présents, réduire les pressions qui empêchent leur croissance, protéger ponctuellement les jeunes sujets, compléter par une plantation justifiée. Une plantation échoue probablement si la pression reste active. Concernant les espèces envahissantes et les dépérissements, il faut identifier le problème, déterminer les voies de dispersion, choisir une méthode adaptée et prévoir la destination des résidus. Une coupe ou un broyage mal préparé peut aggraver certaines situations. Le calendrier doit tenir compte de la reproduction des oiseaux, des gîtes, des habitats aquatiques, de l\'hydrologie et des accès.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Préparer le chantier et organiser le suivi',
+                      ss: [
+                        {
+                          titre: 'Sécurité et gestion des matériaux',
+                          texte: 'Les embâcles peuvent contenir des troncs sous tension, des branches cintrées, des souches instables, des éléments suspendus, des déchets coupants et des zones de courant concentré. Le chantier doit prévoir des accès, des zones d\'exclusion, une coordination et des conditions d\'arrêt adaptées. Il ne faut pas improviser le retrait d\'un embâcle pendant une crue ni se placer sur une accumulation pour l\'examiner. La gestion des produits de coupe doit distinguer : déchets anthropiques (filières adaptées), résidus végétaux, bois conservé pour ses fonctions écologiques, matériaux concernés par une EEE. Un tas de branches déposé dans une zone mobilisable par les eaux peut alimenter une nouvelle accumulation.',
+                        },
+                        {
+                          titre: 'Indicateurs de couverture et inventaire',
+                          texte: 'La couverture linéaire des rives se calcule en deux étapes : L_rives = 2 × L_tronçon (ex. 2 × 600 = 1 200 m), puis T = (L_couvertes / L_rives) × 100 — ex. 780 / 1 200 × 100 = 65 %. Ce taux décrit une présence, pas la largeur, la diversité ni l\'état écologique. L\'inventaire de chaque élément peut comprendre : identifiant, coordonnées, date, nature, dimensions estimées, ancrage apparent, enjeux associés, effets observés, intérêt écologique, incertitudes, décision et justification, échéance de contrôle. La gestion différenciée à l\'échelle du tronçon évite d\'appliquer une consigne générale à des secteurs de natures différentes.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quelles sont les 6 fonctions principales de la ripisylve ?', r: 'Ombrage, maintien des sols, habitats, continuité écologique, apports organiques, interception de certains transferts', expl: 'Ces fonctions doivent être appréciées ensemble. Une coupe peut en réduire plusieurs simultanément.' },
+                  { q: 'Pourquoi les racines ne rendent-elles pas une berge indestructible ?', r: 'Car hauteur/pente de berge, sols, circulations d\'eau, érosion au pied et poids des arbres interviennent aussi', expl: 'Il faut examiner le système arbre–racines–sol–écoulement, pas l\'arbre isolément.' },
+                  { q: 'Quelle distinction fondamentale entre bois en rivière, embâcle et déchets ?', r: 'Bois en rivière = tronc/branche dans le lit ; embâcle = accumulation pouvant retenir d\'autres matériaux ; déchets = objets anthropiques', expl: 'Cette distinction doit apparaître dans les inventaires et les prescriptions de chantier.' },
+                  { q: 'Quels rôles peut jouer le bois mort dans un cours d\'eau ?', r: 'Abris, diversification des vitesses/profondeurs, rétention de matières organiques, fosses, supports d\'organismes, dynamique des berges', expl: 'Son intérêt varie selon sa position, sa taille, sa stabilité et le contexte. Ne pas l\'assimiler systématiquement à un déchet.' },
+                  { q: 'Qu\'est-ce que le taux d\'obstruction géométrique T_o ?', r: 'T_o = (A_obstruée / A_référence) × 100 — ex. 1,2 m² / 4 m² = 30 %', expl: 'Ne représente pas directement une perte de capacité hydraulique de 30 % : porosité, débit et géométrie du site interviennent.' },
+                  { q: 'Comment calculer la couverture linéaire des rives ?', r: 'L_rives = 2 × L_tronçon ; T = (L_couvertes / L_rives) × 100 — ex. 780 / 1 200 × 100 = 65 %', expl: 'Ce taux décrit une présence, pas la largeur, la diversité ni l\'état écologique.' },
+                  { q: 'Quelles orientations retenir dans la grille de décision pour le bois ?', r: 'Conserver / surveiller / adapter partiellement / retirer / faire expertiser — selon fonctions et conséquences', expl: 'Un retrait partiel peut rendre des fragments plus mobiles. La situation après intervention doit être analysée.' },
+                  { q: 'Le volume de bois retiré mesure-t-il la qualité d\'une gestion ?', r: 'Non — c\'est un indicateur d\'activité ; la réussite s\'évalue par les objectifs atteints, les fonctions conservées et les conséquences évitées', expl: 'Retirer davantage de bois chaque année ne démontre pas l\'atteinte des objectifs fonctionnels.' },
+                ],
+                schema: `<svg viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg" style="max-width:320px;width:100%">
+  <rect width="320" height="210" rx="8" fill="#EEF6EE"/>
+  <text x="160" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#1B4D1B">Ripisylve et bois en rivière — distinctions clés</text>
+  <rect x="8" y="18" width="305" height="34" fill="#2E7D32" rx="4"/>
+  <text x="160" y="31" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">RIPISYLVE — 6 fonctions complémentaires</text>
+  <text x="160" y="44" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C8F0C8">Ombrage · Sols · Habitats · Continuité · Apports organiques · Interception</text>
+  <rect x="8" y="58" width="93" height="48" fill="#0E6BA8" rx="4"/>
+  <text x="54" y="72" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">BOIS EN RIVIÈRE</text>
+  <text x="54" y="84" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C8E0F8">Tronc · branche</text>
+  <text x="54" y="96" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C8E0F8">souche dans le lit</text>
+  <rect x="108" y="58" width="106" height="48" fill="#B84A0E" rx="4"/>
+  <text x="161" y="72" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">EMBÂCLE</text>
+  <text x="161" y="84" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#FFD0A0">Accumulation pouvant</text>
+  <text x="161" y="96" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#FFD0A0">retenir d\'autres matériaux</text>
+  <rect x="221" y="58" width="99" height="48" fill="#6B4F9E" rx="4"/>
+  <text x="270" y="72" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">DÉCHETS</text>
+  <text x="270" y="84" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#E0D0FF">Plastique · ferraille</text>
+  <text x="270" y="96" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#E0D0FF">mobilier · objets</text>
+  <rect x="8" y="112" width="305" height="15" fill="#1B4D1B" rx="3"/>
+  <text x="160" y="122.5" text-anchor="middle" font-family="Arial" font-size="8" fill="#C8F0C8">Chaîne : Source → Transport → Accumulation → Conséquences</text>
+  <rect x="8" y="133" width="145" height="34" fill="#E3F0FB" rx="4"/>
+  <text x="80" y="146" text-anchor="middle" font-family="Arial" font-size="8" fill="#0E3A6E" font-weight="bold">Obstruction géométrique</text>
+  <text x="80" y="160" text-anchor="middle" font-family="Arial" font-size="9" fill="#0E3A6E">T_o = A_ob/A_réf × 100</text>
+  <rect x="162" y="133" width="150" height="34" fill="#E8F5E9" rx="4"/>
+  <text x="237" y="146" text-anchor="middle" font-family="Arial" font-size="8" fill="#1B4D1B" font-weight="bold">Couverture des rives</text>
+  <text x="237" y="160" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#1B4D1B">T = Lcouv/Lrives × 100</text>
+  <rect x="8" y="174" width="305" height="28" fill="#FFF8E1" rx="4"/>
+  <text x="160" y="186" text-anchor="middle" font-family="Arial" font-size="8" fill="#7A5C00" font-weight="bold">Grille de décision</text>
+  <text x="160" y="198" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#7A5C00">Conserver · Surveiller · Adapter · Retirer · Expertiser</text>
+</svg>`,
+                exercice: {
+                  enonce: '(1) Un arbre est incliné vers la rivière. Peut-on conclure qu\'il faut l\'abattre ?\n(2) Un tronc immergé offre des abris et aucun effet préoccupant n\'est identifié. Quelle orientation examiner en premier ?\n(3) Une accumulation occupe 0,9 m² pour une ouverture de référence de 3 m². Calculer T_o.\n(4) Un tronçon mesure 800 m. Végétation ligneuse : 500 m rive gauche, 620 m rive droite. Calculer la couverture linéaire.\n(5) Une équipe propose de couper un tronc en petits morceaux et de les laisser dans le lit. Pourquoi faut-il réexaminer cette proposition ?\n(6) Une ripisylve ne présente aucun jeune arbre ; les jeunes pousses sont régulièrement consommées par le bétail. La plantation seule est-elle suffisante ?\n(7) Une intervention est prévue hors de la période habituelle de nidification. Peut-on supprimer les vérifications écologiques ?\n(8) Un gestionnaire a retiré davantage de bois que l\'année précédente. Cela prouve-t-il une amélioration ?',
+                  solution: '<strong>(1)</strong> Non. Il faut examiner l\'état, l\'ancrage, l\'évolution et les conséquences possibles d\'une chute. L\'inclinaison seule ne suffit pas.<br><strong>(2)</strong> La conservation, en appréciant sa mobilité et les enjeux éventuels en aval.<br><strong>(3)</strong> T_o = (0,9 / 3) × 100 = <strong>30 %</strong> géométrique. Ce taux ne représente pas directement une perte de capacité hydraulique de 30 %.<br><strong>(4)</strong> L_rives = 2 × 800 = 1 600 m — T = (500 + 620) / 1 600 × 100 = <strong>70 %</strong>.<br><strong>(5)</strong> Le découpage peut augmenter la mobilité des fragments et déplacer le problème vers l\'aval. La situation après intervention doit être évaluée.<br><strong>(6)</strong> Probablement pas. Il faut traiter la pression (pâturage) et organiser la protection des jeunes sujets.<br><strong>(7)</strong> Non. D\'autres espèces, habitats ou phases sensibles peuvent être concernés. Le calendrier ne remplace pas l\'examen du site.<br><strong>(8)</strong> Non. Le volume retiré est un indicateur d\'activité. La réussite s\'évalue par les objectifs atteints, les conséquences évitées et les fonctions conservées.',
+                },
+              },
+
+              {
+                id: 'gem-ent3',
+                titre: 'Restauration du lit et des connexions',
+                fiche: {
+                  intro: 'La restauration d\'un cours d\'eau ne se réduit pas à lui donner une apparence plus naturelle. Un méandre recréé peut disparaître si les processus sédimentaires sont incompatibles avec la géométrie imposée. Une annexe remise en eau ne devient pas automatiquement une zone fonctionnelle. Ce chapitre donne les repères pour choisir une intervention cohérente avec le type de cours d\'eau, ses contraintes et les fonctions recherchées, en reliant les formes aux processus et les connexions aux conditions hydrologiques réelles.',
+                  points: [
+                    '🔄 3 dimensions à distinguer : restaurer les processus (transit sédimentaire, mobilité latérale, débordement), les formes (méandre, banc, fosse, bras secondaire) ou les habitats (substrat, profondeur, abri) — une forme incompatible avec les processus disparaît rapidement',
+                    '🔎 Identifier les altérations avant de choisir : un lit peu sinueux peut être naturel, une granulométrie fine peut correspondre au fonctionnement attendu, une annexe temporairement sèche peut présenter un intérêt écologique — diagnostiquer quelle fonction est altérée, par quelle pression, à quelle échelle',
+                    '⚗️ Vérifier que la cause peut être traitée : ajouter des graviers ne résout pas un apport excessif de particules fines ; reméandrer ne corrige pas toutes les pressions du bassin — une intervention locale peut avoir une efficacité limitée si une pression majeure persiste',
+                    '🌱 Récupération naturelle : possible si la pression est supprimée et si l\'énergie, les matériaux, la mobilité et le temps sont disponibles — peut être une stratégie de restauration à condition d\'être argumentée et suivie',
+                    '📏 Reméandrage : S = ΔZ/L — allonger le tracé de 600 m à 900 m avec ΔZ = 1,8 m fait passer S de 0,003 à 0,002 (−33 %) ; la vitesse ne diminue pas automatiquement d\'autant (section, rugosité et conditions aval interviennent)',
+                    '📐 Indice de sinuosité : I_s = L_chenal / L_référence — ex. 900 m / 600 m = 1,5 (décrit la géométrie, pas la qualité écologique) ; ne pas imposer une sinuosité uniforme sans examiner relief, matériaux, ouvrages et contraintes foncières',
+                    '⛏️ Volume de recharge : V = L × b × e — ex. 120 × 3 × 0,25 = 90 m³ (enveloppe géométrique simplifiée incluant les vides) ; ne représente pas directement le volume livré ni une masse ; passer à une masse nécessite la masse volumique apparente pertinente',
+                    '💧 Échanges avec le sous-sol : une recharge ou un nouveau lit peut modifier les écoulements dans les matériaux ; examiner nappe, perméabilité, pertes éventuelles, drains et échanges avec les parcelles voisines — aucune étanchéification systématique sans diagnostic',
+                    '🌊 5 types d\'annexes : bras secondaire actif / connecté par l\'aval / annexe connectée en crue / ancien méandre isolé en surface / dépression temporaire — connexion permanente ≠ meilleure ; l\'objectif dépend des habitats et fonctions recherchés',
+                    '🕰️ Connexion : Z_eau(t) > Z_connexion → durée de dépassement de la cote ≠ durée d\'alimentation de l\'annexe (pertes de charge, géométrie de passage, remplissage et vidange à examiner)',
+                    '📦 Stockage : ΔV ≈ A × Δh — ex. 3 ha × 0,20 m = 30 000 × 0,20 = 6 000 m³ (volume estimé dans les hypothèses retenues) ; ne donne pas directement une réduction du débit de pointe (synchronisation des apports et dynamique de vidange à analyser)',
+                    '🔀 Devenir de l\'ancien chenal après reméandrage : peut rester un axe concurrent, drainer des terrains, devenir une annexe ou nécessiter une obturation — décision à fonder sur les niveaux, les échanges souterrains, les habitats et les usages',
+                  ],
+                  formules: [
+                    'Pente géométrique : S = ΔZ / L — ΔZ dénivellation, L longueur du tracé ; ex. ΔZ = 1,8 m : S1 = 1,8/600 = 0,003 → S2 = 1,8/900 = 0,002 après allongement (−33 %) ; la vitesse ne diminue pas automatiquement d\'autant',
+                    'Indice de sinuosité : I_s = L_chenal / L_référence — ex. 900 m / 600 m = 1,5 ; décrit la géométrie, pas la qualité écologique',
+                    'Volume de recharge : V = L × b × e (m³) — ex. 120 × 3 × 0,25 = 90 m³ (enveloppe géométrique ; le volume livré dépend de la mise en œuvre)',
+                    'Stockage estimé : ΔV ≈ A × Δh — A surface inondée (m²), Δh hauteur moyenne supplémentaire (m) ; ex. 30 000 × 0,20 = 6 000 m³ ; ne donne pas directement la réduction du débit de pointe',
+                  ],
+                  retenir: 'Restaurer une forme ≠ restaurer un processus · La référence doit correspondre au contexte · S = ΔZ/L : allonger le tracé réduit la pente géométrique · I_s = L_chenal/L_référence décrit la géométrie, pas la qualité · V = L×b×e = enveloppe géométrique, pas volume livré ni masse · Vérifier les échanges avec le sous-sol lors d\'une recharge · Connexion permanente ≠ meilleure · ΔV ≈ A×Δh ≠ réduction directe de la pointe · Le devenir de l\'ancien chenal doit être étudié.',
+                  sections: [
+                    {
+                      titre: 'Comprendre avant de restaurer',
+                      ss: [
+                        {
+                          titre: 'Processus, formes et habitats — trois dimensions à distinguer',
+                          texte: 'La restauration d\'un cours d\'eau peut cibler trois dimensions distinctes mais liées. Les processus concernent le fonctionnement : transit sédimentaire, mobilité latérale, débordement, échanges avec le sous-sol. Les formes concernent la géométrie : méandre, banc, fosse, bras secondaire, profil en long. Les habitats concernent les conditions biologiques : substrat de reproduction, zone peu profonde, abri, température. Une forme artificiellement créée peut disparaître rapidement si elle est incompatible avec les processus. Inversement, supprimer une contrainte peut permettre au cours d\'eau de recréer progressivement certaines formes. Une restauration durable cherche autant que possible à rétablir les conditions du fonctionnement plutôt qu\'à entretenir indéfiniment une géométrie imposée.',
+                        },
+                        {
+                          titre: 'Identifier les altérations et vérifier la cause traitable',
+                          texte: 'Les altérations fréquentes comprennent la rectification, l\'élargissement excessif, l\'incision, la fixation des berges, la déconnexion des annexes, l\'interruption du transit sédimentaire et la disparition de la diversité des écoulements. Mais une observation isolée ne suffit pas : un lit peu sinueux peut être naturel, une granulométrie fine peut correspondre au fonctionnement attendu. Le diagnostic doit préciser quelle fonction est altérée, par quelle pression et à quelle échelle. Ensuite, vérifier que la cause peut être traitée : ajouter des graviers ne résout pas un apport excessif de fines ; reméandrer ne corrige pas toutes les pressions du bassin. La récupération naturelle, si la pression est supprimée et si l\'énergie, les matériaux et la mobilité sont disponibles, peut être une stratégie à part entière, à condition d\'être argumentée et suivie.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Reméandrage et tracé',
+                      ss: [
+                        {
+                          titre: 'Pente géométrique et indice de sinuosité',
+                          texte: 'Le reméandrage consiste à rétablir un tracé plus sinueux dans un secteur ayant subi une rectification. Pour une dénivellation ΔZ fixée, allonger le tracé L diminue la pente géométrique S = ΔZ / L : si L passe de 600 m à 900 m avec ΔZ = 1,8 m, S passe de 0,003 à 0,002, soit une diminution d\'un tiers. La vitesse ne diminue pas automatiquement d\'autant : la section, la rugosité et les conditions aval interviennent. L\'indice de sinuosité I_s = L_chenal / L_référence décrit la géométrie : 900 m / 600 m = 1,5. Il ne mesure pas directement la qualité écologique. Un tracé de restauration ne doit pas être une succession de courbes identiques : il faut examiner le relief, les matériaux, les zones de mobilité, les ouvrages et les contraintes foncières.',
+                        },
+                        {
+                          titre: 'Profil en long, sections et raccordements',
+                          texte: 'Le profil en long relie les altitudes du fond sur le parcours. Il doit tenir compte des raccordements amont et aval, des points de contrôle, des ouvrages, de la pente disponible, des matériaux et des échanges avec les annexes. Un mauvais raccordement peut créer une rupture de pente, une érosion ou un dépôt non souhaité. Les sections doivent être examinées pour plusieurs débits : faibles débits, débits mobilisant les matériaux, débordements et événements importants. Dans certains lits surdimensionnés, un chenal de basses eaux plus resserré peut améliorer les conditions à l\'étiage, mais ses effets en crue et son évolution sédimentaire doivent aussi être étudiés. Une restauration ne vise pas nécessairement une section régulière tout au long du tronçon.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Recharge sédimentaire',
+                      ss: [
+                        {
+                          titre: 'V = L × b × e et choix des matériaux',
+                          texte: 'La recharge consiste à apporter des matériaux pour répondre à un déficit identifié. Elle peut viser une granulométrie adaptée, une rehausse du fond, la diversification des habitats ou le rétablissement d\'une alimentation sédimentaire. Le volume de la recharge est estimé par V = L × b × e : pour 120 m, 3 m de largeur moyenne et 0,25 m d\'épaisseur, V = 120 × 3 × 0,25 = 90 m³. Ce calcul fournit une enveloppe géométrique incluant les vides entre grains. Le volume livré dépend des modalités de mise en œuvre. Pour passer à une masse, il faut connaître la masse volumique apparente pertinente. Le choix des matériaux doit considérer la nature géologique, la distribution des tailles, la forme des grains, la proportion de fines et les capacités de transport du cours d\'eau. Des matériaux trop grossiers restent artificiellement immobiles ; des matériaux trop fins peuvent être rapidement déplacés ou colmater certains habitats.',
+                        },
+                        {
+                          titre: 'Échanges avec le sous-sol et mobilité',
+                          texte: 'Une recharge ou un nouveau lit peut modifier les écoulements dans les matériaux. Une couche grossière peut, selon le contexte, favoriser un écoulement sous la surface du lit — effet particulièrement important à examiner à l\'étiage. Les questions à traiter comprennent le niveau de la nappe, la perméabilité des formations, les pertes d\'eau éventuelles, les échanges avec les parcelles voisines et la présence de drains. L\'eau qui disparaît localement n\'est pas nécessairement perdue à l\'échelle du bassin, mais cette redistribution peut compromettre les habitats aquatiques recherchés. Aucune solution d\'étanchéification ne doit être prescrite systématiquement sans diagnostic.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Bras secondaires et reconnexion',
+                      ss: [
+                        {
+                          titre: 'Types de connexions et fonctionnement attendu',
+                          texte: 'Cinq types d\'annexes peuvent être distingués : bras secondaire actif (écoulement régulier en parallèle), bras connecté par l\'aval (influencé par le niveau du cours d\'eau), annexe connectée en crue (échanges lors de certains débordements), ancien méandre isolé en surface (alimentation par nappe ou crue rare), dépression temporaire. Une connexion permanente n\'est pas automatiquement préférable à une connexion temporaire. Une connexion doit être décrite par sa fréquence, sa durée, sa saisonnalité, son sens d\'écoulement, les vitesses associées et les conditions de déconnexion. La cote de connexion Z_connexion définit le seuil de dépassement : la durée de dépassement de Z_eau(t) > Z_connexion n\'est pas la durée d\'alimentation effective de l\'annexe (pertes de charge, géométrie de passage et conditions de remplissage à examiner).',
+                        },
+                        {
+                          titre: 'Reconnexion au lit majeur et stockage',
+                          texte: 'La reconnexion du lit majeur peut passer par une restauration des niveaux du lit, une modification ciblée d\'un obstacle latéral ou une ouverture de connexion adaptée. Il faut examiner les effets sur les terrains concernés : fréquence, profondeur, durée d\'inondation et vitesses. Pour une surface inondée A (m²) et une hauteur moyenne supplémentaire Δh, une estimation simplifiée donne ΔV ≈ A × Δh : pour 3 ha (30 000 m²) et Δh = 0,20 m, ΔV ≈ 6 000 m³. Ce calcul estime un volume de stockage supplémentaire dans les hypothèses retenues. Il ne donne pas directement une réduction du débit de pointe : le moment du remplissage, la synchronisation des apports, la capacité disponible et la dynamique de vidange doivent être analysés.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Variantes, chantier et suivi',
+                      ss: [
+                        {
+                          titre: 'Comparer les variantes et ancien chenal',
+                          texte: 'La comparaison de variantes peut inclure : récupération naturelle accompagnée (réduire les pressions, laisser évoluer — vérifier la capacité réelle de réponse), intervention ciblée (traiter un verrou ou un déficit localisé — vérifier la cohérence avec le fonctionnement global), restauration plus complète (recomposer le lit et certaines connexions — analyser les effets, l\'emprise et la faisabilité). Il faut intégrer les contraintes foncières, les réseaux, les ouvrages et les procédures applicables. Lorsqu\'un nouveau tracé est créé, l\'ancien chenal peut rester un axe concurrent, drainer des terrains, devenir une annexe ou nécessiter une obturation. Laisser l\'ancien chenal ouvert sans analyse peut détourner une partie des débits attendus dans le nouveau lit.',
+                        },
+                        {
+                          titre: 'Conduire le chantier et évaluer la trajectoire',
+                          texte: 'Le chantier peut modifier temporairement les écoulements, la turbidité, les accès et les échanges entre chenaux. La préparation doit définir le phasage, les zones à préserver, la gestion des matériaux, les contrôles topographiques, les conditions d\'arrêt et les responsabilités. La remise en eau est une phase importante : un raccordement mal exécuté peut concentrer les écoulements ou créer une rupture de profil. Le suivi doit relier les indicateurs aux objectifs : faciès et profondeurs pour la diversification, profils et granulométrie pour le fonctionnement sédimentaire, fréquence et durée de connexion pour les annexes. Une érosion ou un dépôt après travaux n\'est pas automatiquement un échec : vérifier si c\'est un ajustement attendu ou une évolution incompatible avec les objectifs.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quelle différence entre restaurer des processus, des formes et des habitats ?', r: 'Processus = fonctionnement (transit sédimentaire, mobilité) ; formes = géométrie (méandre, banc) ; habitats = conditions biologiques — une forme incompatible avec les processus disparaît rapidement', expl: 'Une restauration durable cherche à rétablir les conditions du fonctionnement plutôt qu\'à entretenir une géométrie imposée.' },
+                  { q: 'Que donne S = ΔZ/L quand on passe de 600 m à 900 m (ΔZ = 1,8 m) ?', r: 'S passe de 0,003 à 0,002 (−33 %) — la vitesse ne diminue pas automatiquement d\'autant', expl: 'Section, rugosité et conditions aval interviennent aussi dans l\'évolution des vitesses.' },
+                  { q: 'Qu\'est-ce que l\'indice de sinuosité ?', r: 'I_s = L_chenal / L_référence — ex. 900 m / 600 m = 1,5 ; décrit la géométrie, pas la qualité écologique', expl: 'La longueur de référence doit être explicitée (axe de vallée ou distance entre extrémités). L\'indice ne mesure pas directement la fonctionnalité.' },
+                  { q: 'Comment estimer le volume d\'une recharge sédimentaire ?', r: 'V = L × b × e — ex. 120 × 3 × 0,25 = 90 m³ (enveloppe géométrique incluant les vides)', expl: 'Le volume livré dépend de la mise en œuvre. Pour passer à une masse, il faut la masse volumique apparente pertinente.' },
+                  { q: 'Une connexion permanente d\'une annexe est-elle toujours préférable ?', r: 'Non — une connexion temporaire peut être écologiquement pertinente ; l\'objectif dépend des habitats et fonctions visés', expl: 'La connexion doit être décrite par sa fréquence, durée, saisonnalité et conditions de déconnexion.' },
+                  { q: 'ΔV ≈ A × Δh donne-t-il directement la réduction de la pointe de crue ?', r: 'Non — il faut analyser le moment du remplissage, la synchronisation des apports et la dynamique de vidange', expl: 'Ex. 30 000 m² × 0,20 m = 6 000 m³ de stockage estimé. Ce volume ne se traduit pas mécaniquement en réduction de pointe.' },
+                  { q: 'Pourquoi faut-il étudier le devenir de l\'ancien chenal après reméandrage ?', r: 'Car il peut capter une partie des écoulements et compromettre le fonctionnement du nouveau tracé ; son comblement peut aussi détruire des fonctions existantes', expl: 'La décision repose sur les niveaux, les échanges souterrains, les débits, les habitats et les usages.' },
+                  { q: 'La récupération naturelle peut-elle être une stratégie de restauration ?', r: 'Oui, si la pression est supprimée et si l\'énergie, les matériaux et la mobilité sont disponibles — à condition d\'être argumentée et suivie', expl: 'Laisser évoluer le milieu peut être pertinent pour un cours d\'eau énergétique disposant des matériaux nécessaires.' },
+                ],
+                schema: `<svg viewBox="0 0 320 215" xmlns="http://www.w3.org/2000/svg" style="max-width:320px;width:100%">
+  <rect width="320" height="215" rx="8" fill="#EEF4FB"/>
+  <text x="160" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#0E3A6E">Restauration du lit — distinctions clés</text>
+  <rect x="8" y="18" width="145" height="44" fill="#0E6BA8" rx="4"/>
+  <text x="80" y="32" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">PROCESSUS</text>
+  <text x="80" y="45" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C8E0F8">Transit sédimentaire</text>
+  <text x="80" y="56" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C8E0F8">Mobilité · Débordement</text>
+  <rect x="167" y="18" width="145" height="44" fill="#2E7D32" rx="4"/>
+  <text x="239" y="32" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">FORMES</text>
+  <text x="239" y="45" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C8F0C8">Méandre · Banc · Fosse</text>
+  <text x="239" y="56" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C8F0C8">Bras secondaire</text>
+  <rect x="8" y="68" width="305" height="14" fill="#0E3A6E" rx="3"/>
+  <text x="160" y="78" text-anchor="middle" font-family="Arial" font-size="8" fill="#D0E8FF">Une forme incompatible avec les processus disparaît rapidement</text>
+  <rect x="8" y="88" width="93" height="44" fill="#E3F0FB" rx="4"/>
+  <text x="54" y="101" text-anchor="middle" font-family="Arial" font-size="8" fill="#0E3A6E" font-weight="bold">Pente</text>
+  <text x="54" y="114" text-anchor="middle" font-family="Arial" font-size="9" fill="#0E3A6E">S = ΔZ / L</text>
+  <text x="54" y="126" text-anchor="middle" font-family="Arial" font-size="7" fill="#537A9E">600→900 m : −33%</text>
+  <rect x="108" y="88" width="100" height="44" fill="#F5EBD0" rx="4"/>
+  <text x="158" y="101" text-anchor="middle" font-family="Arial" font-size="8" fill="#7A4A0E" font-weight="bold">Sinuosité</text>
+  <text x="158" y="114" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A4A0E">I_s = L_c / L_réf</text>
+  <text x="158" y="126" text-anchor="middle" font-family="Arial" font-size="7" fill="#A06020">900/600 = 1,5</text>
+  <rect x="215" y="88" width="97" height="44" fill="#E8F5E9" rx="4"/>
+  <text x="263" y="101" text-anchor="middle" font-family="Arial" font-size="8" fill="#1B4D1B" font-weight="bold">Recharge</text>
+  <text x="263" y="114" text-anchor="middle" font-family="Arial" font-size="9" fill="#1B4D1B">V = L × b × e</text>
+  <text x="263" y="126" text-anchor="middle" font-family="Arial" font-size="7" fill="#2E7D32">120×3×0,25 = 90 m³</text>
+  <rect x="8" y="138" width="305" height="38" fill="#37474F" rx="4"/>
+  <text x="160" y="151" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">CONNEXIONS</text>
+  <text x="160" y="164" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#CFD8DC">Z_eau &gt; Z_connexion → durée dépassement ≠ durée alimentation</text>
+  <text x="160" y="172" text-anchor="middle" font-family="Arial" font-size="7" fill="#B0BEC5">(pertes de charge, géométrie, remplissage et vidange à examiner)</text>
+  <rect x="8" y="182" width="305" height="26" fill="#FFF8E1" rx="4"/>
+  <text x="160" y="194" text-anchor="middle" font-family="Arial" font-size="8" fill="#7A5C00" font-weight="bold">Stockage estimé : ΔV ≈ A × Δh</text>
+  <text x="160" y="205" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#7A5C00">ex. 30 000 m² × 0,20 m = 6 000 m³ ≠ réduction directe de la pointe</text>
+</svg>`,
+                exercice: {
+                  enonce: '(1) Un cours d\'eau est peu sinueux. Faut-il nécessairement le reméandrer ?\n(2) ΔZ = 2 m ; tracé initial 500 m, allongé à 800 m. Calculer S1, S2 et l\'écart relatif.\n(3) Calculer I_s pour un chenal de 1 200 m et une longueur de référence de 800 m.\n(4) Calculer V pour une recharge : L = 80 m, b = 2,5 m, e = 0,20 m.\n(5) Un ancien méandre se connecte seulement lors de certaines crues. Faut-il forcément l\'alimenter toute l\'année ?\n(6) Une surface de 2 ha reçoit Δh = 0,15 m. Calculer ΔV. Peut-on en déduire la réduction du débit de pointe ?\n(7) Un nouveau lit est creusé, mais l\'ancien chenal reste plus bas et directement connecté. Quel problème faut-il examiner ?\n(8) Des bancs se déplacent après une crue. Est-ce nécessairement un défaut du projet ?',
+                  solution: '<strong>(1)</strong> Non. Il faut déterminer si ce tracé résulte d\'une altération et si une sinuosité plus importante est cohérente avec le contexte.<br><strong>(2)</strong> S1 = 2 / 500 = <strong>0,004</strong> — S2 = 2 / 800 = <strong>0,0025</strong> — Écart = (0,0025 − 0,004) / 0,004 = <strong>−37,5 %</strong>. Ce pourcentage ne s\'applique pas directement à la vitesse.<br><strong>(3)</strong> I_s = 1 200 / 800 = <strong>1,5</strong> selon la référence choisie. Il ne démontre pas à lui seul un bon fonctionnement écologique.<br><strong>(4)</strong> V = 80 × 2,5 × 0,20 = <strong>40 m³</strong> (enveloppe géométrique ; le volume livré dépend des modalités de mise en œuvre).<br><strong>(5)</strong> Non. Un fonctionnement temporaire peut être pertinent. La connexion recherchée dépend des habitats et des fonctions visés.<br><strong>(6)</strong> A = 20 000 m² — ΔV ≈ 20 000 × 0,15 = <strong>3 000 m³</strong>. Non, on ne peut pas en déduire directement la réduction du débit de pointe : il faut analyser la dynamique de remplissage, la synchronisation des apports et la vidange.<br><strong>(7)</strong> L\'ancien chenal peut continuer à capter une partie importante des écoulements et compromettre le fonctionnement attendu du nouveau tracé.<br><strong>(8)</strong> Non. Leur mobilité peut faire partie du fonctionnement recherché. Il faut vérifier les conséquences sur les objectifs, les raccordements et les enjeux.',
+                },
+              },
+
             ],
           }, // fin gem-m19
 
