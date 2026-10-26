@@ -11065,6 +11065,155 @@ const COURS_DATA = {
                 },
               }, // fin gem-pi1
 
+              {
+                id: 'gem-pi2',
+                titre: 'Les différents mécanismes d\'inondation',
+                fiche: {
+                  intro: 'Comment identifier le mécanisme responsable d\'une inondation et ses interactions avec les autres phénomènes ? Une cave inondée peut recevoir de l\'eau par la rue, par le sol ou par un réseau. Une route submergée peut intercepter un ruissellement de versant, subir un débordement ou empêcher une évacuation. Le mécanisme détermine les données à collecter, les modèles à utiliser et les actions pertinentes.',
+                  points: [
+                    '🌊 Crue ≠ inondation : une crue = augmentation du débit/niveau d\'un cours d\'eau (peut rester dans le lit mineur) ; une inondation = submersion temporaire d\'un espace habituellement hors d\'eau (peut survenir sans débordement de rivière visible). Ne pas attribuer toute présence d\'eau au fonctionnement de la rivière voisine.',
+                    '📋 Six mécanismes principaux : débordement de cours d\'eau, ruissellement, remontée de nappe, surcharge/refoulement de réseau, phénomène torrentiel, submersion marine. Ces catégories peuvent se combiner — la limite entre espace rural et urbain n\'est pas une limite hydrologique.',
+                    '💧 Débordement : le point d\'entrée dans un quartier peut être éloigné du tronçon situé juste devant — reconstituer les connexions, pas seulement mesurer la distance à la rivière. Un niveau aval élevé (cours d\'eau récepteur, confluence, ouvrage, condition marine) peut relever les niveaux en amont et expliquer un débordement d\'affluent même sans débit exceptionnel local.',
+                    '⚙️ Ouvrages et embâcles : un pont, une buse ou un embâcle peut modifier les niveaux amont, les vitesses et les chemins de contournement. La présence d\'un embâcle après la crue ne démontre pas qu\'il était présent avant la pointe. La chronologie est déterminante.',
+                    '🏙️ Ruissellement : se forme lorsque les apports circulent en surface (pluie > infiltration, sol saturé, surfaces imperméables, collecte dépassée). Une inondation peut se produire loin d\'un cours d\'eau cartographié. Une eau produite sur un versant agricole peut rejoindre une route, entrer dans un réseau puis ressortir dans un quartier.',
+                    '🔧 Réseaux : mise en charge possible sans manque de diamètre — un niveau aval élevé peut limiter l\'évacuation même avec des conduites dégagées. Agrandir une conduite peut être peu efficace si l\'exutoire reste noyé. Distinguer réseau pluvial, d\'assainissement, unitaire, drainage et connexions particulières.',
+                    '🌍 Remontée de nappe : peut affecter caves, sous-sols, ouvrages enterrés et terrains bas avant d\'apparaître en surface. Temporalité variable — peut persister après la décrue. Une cave inondée après la décrue suggère une contribution souterraine mais ne la prouve pas. Comparer les chroniques plutôt que se fier à la seule présence d\'eau.',
+                    '⛰️ Phénomènes torrentiels : crues rapides avec interactions importantes eau/matériaux. Érosion, transport de blocs et bois, dépôts rapides, obstruction d\'ouvrages, changements de chenal. Une analyse fondée uniquement sur le débit liquide peut être insuffisante. Régime torrentiel (Fr > 1) ≠ lave torrentielle ≠ crue rapide — trois notions distinctes.',
+                    '📏 Utiliser les cotes pour examiner une hypothèse : ΔH = Z_nappe − Z_plancher — ex. Z_plancher = 95,20 m, H_nappe = 95,45 m → ΔH = 0,25 m. Rend plausible une pression souterraine, mais ne démontre pas une hauteur intérieure de 25 cm. Représentativité du piézomètre et structure du bâtiment à examiner.',
+                    '🔗 Inondations combinées : ruissellement → réseau → rivière haute limitant l\'évacuation → regards débordent → nappe prolonge les infiltrations. Distinguer phénomène déclencheur, mécanismes aggravants, voies de propagation et facteurs prolongeant la submersion.',
+                    '⏱️ Chronologie : si l\'eau entre dans les bâtiments avant le débordement de la rivière, celui-ci ne peut pas expliquer seul le début. Il peut aggraver ou prolonger la situation. Une montée lente peut produire une inondation longue et très dommageable.',
+                    '⚠️ Réponses inadaptées : protéger la rive ≠ traiter le ruissellement du versant ; agrandir une conduite ≠ traiter un exutoire noyé ; fermer une ouverture ≠ empêcher une entrée par le sol. Le modèle doit représenter les mécanismes déterminants pour la décision.',
+                  ],
+                  formules: [
+                    'Différence de cote pour hypothèse nappe/plancher : ΔH = H_nappe − Z_plancher (m) — ex. H_nappe = 72,55 m, Z_plancher = 72,30 m → ΔH = 0,25 m ; rend plausible une pression souterraine sur la structure, à confirmer par la représentativité du piézomètre et les connexions du bâtiment',
+                  ],
+                  retenir: 'Crue ≠ inondation. Six mécanismes : débordement, ruissellement, nappe, réseau, torrentiel, submersion marine. Connexions déterminent les chemins d\'eau (pas la distance à la rivière). Niveau aval contrôle les débordements en amont. Réseau peut déborder sans manque de diamètre. Remontée nappe persiste après décrue. Chronologie pour tester les hypothèses. ΔH = H_nappe − Z_plancher. Régime torrentiel ≠ lave torrentielle. Modèle doit représenter les mécanismes déterminants.',
+                  sections: [
+                    {
+                      titre: 'Débordement de cours d\'eau et conditions aval',
+                      ss: [
+                        {
+                          titre: 'Mécanisme de débordement et cheminements',
+                          texte: 'Le débordement apparaît lorsque le niveau atteint des points permettant à l\'eau de quitter le lit mineur. Il dépend du débit, de la géométrie, de la rugosité, des ouvrages, des niveaux aval et des connexions latérales. L\'eau peut emprunter des chemins très différents du chenal principal : anciens bras, routes, dépressions, passages sous remblais. Le point d\'entrée dans un quartier peut être éloigné du tronçon situé juste devant — reconstituer les connexions, pas seulement mesurer la distance à la rivière. Examiner la chronologie de la montée : vitesse, temps entre premiers indices et conséquences, durée de submersion, déroulement de la décrue.',
+                        },
+                        {
+                          titre: 'Conditions aval et effets des ouvrages',
+                          texte: 'Un niveau aval élevé peut ralentir l\'écoulement et relever les niveaux en amont — causes possibles : crue sur le cours d\'eau récepteur, confluence, ouvrage, condition marine, restriction hydraulique. Un affluent peut déborder avec un débit non exceptionnel si le cours d\'eau principal présente un niveau élevé — un diagnostic limité au bassin de l\'affluent peut manquer le contrôle principal. Ouvrages et embâcles modifient les niveaux amont, vitesses et débordements. Distinguer effet de la géométrie initiale, d\'une obstruction, d\'une modification du lit et du niveau aval. La chronologie est déterminante : la présence d\'un embâcle après la crue ne démontre pas qu\'il était présent avant la pointe.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Ruissellement et réseaux',
+                      ss: [
+                        {
+                          titre: 'Ruissellement : formation, cheminements et connexions',
+                          texte: 'Le ruissellement se forme lorsque les apports circulent en surface : pluie dépassant la capacité d\'infiltration, sol saturé, surfaces imperméabilisées, capacités de collecte dépassées. Une inondation peut se produire loin d\'un cours d\'eau cartographié. La limite entre espace rural et urbain ne constitue pas une limite hydrologique — une eau produite sur un versant agricole peut rejoindre une route, entrer dans un réseau puis ressortir dans un quartier. Reconstituer les axes : ravines, dépôts, marques sur les murs, végétation couchée, témoignages. Le modèle de terrain doit être complété par buses, bordures, murs, remblais et passages sous voirie.',
+                        },
+                        {
+                          titre: 'Surcharge et refoulement des réseaux',
+                          texte: 'Un réseau peut se mettre en charge quand les apports et les conditions d\'évacuation produisent une élévation de la ligne piézométrique — causes : apports dépassant les capacités, obstruction, niveau aval élevé, panne d\'équipement, connexions inadaptées. L\'eau peut ressortir par des regards ou des branchements — une inondation par réseau n\'implique pas automatiquement un manque de diamètre. Agrandir une conduite peut être peu efficace si l\'exutoire reste noyé par un niveau aval élevé. Distinguer réseau pluvial, d\'assainissement, unitaire, drainage — identifier nature et cheminement pour les enjeux sanitaires et la remise en service.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Remontée de nappe et phénomènes torrentiels',
+                      ss: [
+                        {
+                          titre: 'Remontée de nappe : mécanisme et limites des cartes',
+                          texte: 'Une remontée de nappe correspond à une élévation des eaux souterraines pouvant affecter caves, sous-sols, ouvrages enterrés et réseaux. L\'eau peut atteindre les parties enterrées avant d\'apparaître en surface. Temporalité variable : réponse rapide dans certains contextes, retardée ou prolongée dans d\'autres. Une cave restant inondée après la décrue peut suggérer une contribution souterraine, mais d\'autres causes sont possibles (drainage insuffisant, eau piégée). Comparer les chroniques plutôt que se fier à la seule présence d\'eau. Les cartes de sensibilité nationales ne fournissent pas une hauteur future sous une maison ni une limite précise à la parcelle — un zonage national ne remplace pas une investigation locale quand la décision dépend de quelques dizaines de centimètres.',
+                        },
+                        {
+                          titre: 'Crues torrentielles et laves torrentielles',
+                          texte: 'Les crues torrentielles se caractérisent par des écoulements rapides avec interactions importantes eau/lit/matériaux : érosion intense, transport de blocs et de bois, dépôts rapides, obstruction d\'ouvrages, changements de chenal. Une analyse fondée uniquement sur le débit liquide peut être insuffisante. Distinguer : crue rapide (temporalité de la réponse), régime torrentiel hydraulique (écoulement supercritique, Fr > 1), crue torrentielle (contexte torrentiel avec interactions matériaux), lave torrentielle (mélange très chargé dont le comportement nécessite une analyse spécifique). Dans les cônes de déjection, une accumulation peut relever le fond, obstruer un passage et favoriser un changement de trajectoire — le couloir actuel ne représente pas nécessairement toutes les trajectoires possibles. Ruptures d\'ouvrage ou d\'embâcle peuvent se superposer à une crue en cours.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Mécanismes combinés, chronologie et choix des outils',
+                      ss: [
+                        {
+                          titre: 'Inondations combinées et construction d\'une chronologie',
+                          texte: 'Plusieurs mécanismes peuvent agir simultanément : ruissellement → réseau en charge → rivière haute limitant l\'évacuation → regards débordent → nappe prolonge les infiltrations. Distinguer phénomène déclencheur, mécanismes aggravants, voies de propagation et facteurs prolongeant la submersion. Une chronologie aide à tester les hypothèses — si l\'eau entre dans les bâtiments avant le débordement de la rivière, celui-ci ne peut pas expliquer seul le début. Il peut aggraver ou prolonger ensuite. Vérifier la qualité des heures et la concordance des horodatages.',
+                        },
+                        {
+                          titre: 'Choisir les données et le modèle adaptés au mécanisme',
+                          texte: 'Adapter les données au mécanisme diagnostiqué : débordement (niveaux, débits, topographie, ouvrages), ruissellement (pluie, états de surface, cheminements), réseau (plans, niveaux, exutoires), nappe (piézométrie, géologie, chroniques), torrentiel (sources sédimentaires, volumes, dépôts, profils). La sophistication d\'un modèle ne garantit pas sa pertinence — un modèle détaillé de la rivière ne représentera pas correctement une entrée d\'eau par réseau si cette connexion est absente. Un modèle à fond fixe peut manquer une modification rapide de géométrie liée aux dépôts. Le modèle doit représenter les mécanismes déterminants pour la décision.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quelle est la différence entre crue et inondation ?', r: 'Crue = augmentation du débit/niveau d\'un cours d\'eau (peut rester dans le lit). Inondation = submersion temporaire d\'un espace habituellement hors d\'eau (peut survenir sans débordement visible).', expl: 'Ne pas attribuer toute présence d\'eau au fonctionnement de la rivière voisine. Une inondation peut survenir loin de tout cours d\'eau cartographié.' },
+                  { q: 'Comment un niveau aval élevé peut-il provoquer un débordement d\'affluent ?', r: 'Le cours d\'eau récepteur à niveau élevé ralentit l\'écoulement et remonte les niveaux en amont — l\'affluent peut déborder même avec un débit non exceptionnel.', expl: 'Un diagnostic limité au bassin de l\'affluent peut manquer le contrôle principal. Sources : confluence, ouvrage, condition marine, restriction hydraulique.' },
+                  { q: 'Un réseau peut-il déborder même sans obstruction ni manque de diamètre ?', r: 'Oui — un niveau aval élevé (rivière en crue à l\'exutoire) peut limiter l\'évacuation et provoquer une mise en charge avec débordement par les regards.', expl: 'Agrandir une conduite peut être peu efficace si l\'exutoire reste noyé. Identifier les connexions et les conditions à l\'exutoire avant de proposer des travaux.' },
+                  { q: 'Quelle formule pour tester une hypothèse de remontée de nappe ?', r: 'ΔH = H_nappe − Z_plancher (en m) — ex. H_nappe = 95,45 m, Z_plancher = 95,20 m → ΔH = 0,25 m.', expl: 'Rend plausible une pression souterraine, mais ne démontre pas une hauteur intérieure de 25 cm. Vérifier la représentativité du piézomètre et les connexions de la structure.' },
+                  { q: 'Quelle est la différence entre lave torrentielle et régime torrentiel hydraulique ?', r: 'Régime torrentiel = écoulement supercritique (Fr > 1), notion hydraulique. Lave torrentielle = mélange très chargé (eau, matériaux fins, blocs, bois) demandant une analyse spécifique.', expl: 'Une lave torrentielle ne se traite pas simplement comme de l\'eau claire avec une rugosité plus élevée. Crue rapide est encore différent (temporalité de la réponse hydrologique).' },
+                  { q: 'L\'eau entre dans un bâtiment à 14 h, la rivière déborde à 17 h. Que peut-on conclure ?', r: 'Le débordement de la rivière ne peut pas expliquer seul le début de l\'inondation. D\'autres voies d\'entrée doivent être recherchées (ruissellement, réseau, nappe).', expl: 'Le débordement peut néanmoins aggraver ou prolonger la situation. Construire une chronologie pour tester les hypothèses et les hiérarchiser.' },
+                  { q: 'Pourquoi une carte de sensibilité aux remontées de nappe ne suffit-elle pas localement ?', r: 'Elle ne donne pas le niveau futur sous une maison précise ni une limite à la parcelle. Un zonage national ne remplace pas une investigation locale quand la décision dépend de quelques dizaines de centimètres.', expl: 'Consulter les métadonnées et les limites d\'utilisation. Mobiliser piézométrie, géologie et chroniques locales pour un diagnostic précis.' },
+                  { q: 'Pourquoi agrandir une conduite peut-il être inefficace ?', r: 'Si l\'exutoire est noyé par un niveau aval élevé (rivière en crue), la capacité de la conduite est limitée par les conditions à son débouché, pas par sa section.', expl: 'Identifier toujours les conditions à l\'exutoire avant de proposer des solutions de capacité. Une intervention inadaptée au mécanisme peut ne rien résoudre.' },
+                ],
+                schema: `<svg viewBox="0 0 700 370" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
+                <text x="350" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#0D47A1">Mecanismes d'inondation — identifier l'origine avant d'agir</text>
+                <!-- 6 mecanismes -->
+                <rect x="10" y="36" width="100" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="60" y="58" text-anchor="middle" font-weight="bold" fill="#0D47A1" font-size="11">Debordement</text>
+                <text x="60" y="73" text-anchor="middle" font-size="10" fill="#1565C0">cours d'eau</text>
+                <text x="60" y="87" text-anchor="middle" font-size="10" fill="#1565C0">connexions</text>
+                <rect x="120" y="36" width="100" height="64" rx="6" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.5"/>
+                <text x="170" y="58" text-anchor="middle" font-weight="bold" fill="#1B5E20" font-size="11">Ruissellement</text>
+                <text x="170" y="73" text-anchor="middle" font-size="10" fill="#2E7D32">surface</text>
+                <text x="170" y="87" text-anchor="middle" font-size="10" fill="#2E7D32">cheminements</text>
+                <rect x="230" y="36" width="100" height="64" rx="6" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1.5"/>
+                <text x="280" y="58" text-anchor="middle" font-weight="bold" fill="#4A148C" font-size="11">Nappe</text>
+                <text x="280" y="73" text-anchor="middle" font-size="10" fill="#6A1B9A">remontee</text>
+                <text x="280" y="87" text-anchor="middle" font-size="10" fill="#6A1B9A">sous-sol</text>
+                <rect x="340" y="36" width="100" height="64" rx="6" fill="#FFF8E1" stroke="#F57F17" stroke-width="1.5"/>
+                <text x="390" y="58" text-anchor="middle" font-weight="bold" fill="#E65100" font-size="11">Reseau</text>
+                <text x="390" y="73" text-anchor="middle" font-size="10" fill="#E65100">surcharge</text>
+                <text x="390" y="87" text-anchor="middle" font-size="10" fill="#E65100">refoulement</text>
+                <rect x="450" y="36" width="100" height="64" rx="6" fill="#FBE9E7" stroke="#C62828" stroke-width="1.5"/>
+                <text x="500" y="55" text-anchor="middle" font-weight="bold" fill="#BF360C" font-size="11">Torrentiel</text>
+                <text x="500" y="70" text-anchor="middle" font-size="10" fill="#C62828">transport</text>
+                <text x="500" y="84" text-anchor="middle" font-size="10" fill="#C62828">solide</text>
+                <rect x="560" y="36" width="130" height="64" rx="6" fill="#E8EAF6" stroke="#283593" stroke-width="1.5"/>
+                <text x="625" y="55" text-anchor="middle" font-weight="bold" fill="#1A237E" font-size="11">Submersion</text>
+                <text x="625" y="70" text-anchor="middle" font-size="10" fill="#283593">marine</text>
+                <text x="625" y="84" text-anchor="middle" font-size="10" fill="#283593">ch. 60</text>
+                <!-- Crue vs inondation -->
+                <rect x="10" y="116" width="330" height="44" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="175" y="136" text-anchor="middle" font-weight="bold" fill="#E65100">Crue ≠ Inondation</text>
+                <text x="175" y="152" text-anchor="middle" font-size="11" fill="#BF360C">Crue peut rester dans le lit · Inondation peut survenir sans riviere visible</text>
+                <rect x="360" y="116" width="330" height="44" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="525" y="136" text-anchor="middle" font-weight="bold" fill="#E65100">Niveau aval controle</text>
+                <text x="525" y="152" text-anchor="middle" font-size="11" fill="#BF360C">Riviere principale haute → debordement d'affluent sans debit exceptionnel</text>
+                <!-- Chronologie -->
+                <rect x="10" y="176" width="680" height="54" rx="8" fill="#E8EAF6" stroke="#3949AB" stroke-width="2"/>
+                <text x="350" y="195" text-anchor="middle" font-weight="bold" fill="#1A237E">Chronologie pour tester les hypotheses</text>
+                <text x="175" y="212" text-anchor="middle" font-size="11" fill="#283593">Debut pluie → ecoulements → reseau</text>
+                <text x="350" y="212" text-anchor="middle" font-size="11" fill="#283593">→ debordement riviere (17h)</text>
+                <text x="525" y="212" text-anchor="middle" font-size="11" fill="#283593">→ persistance nappe (jours)</text>
+                <text x="350" y="226" text-anchor="middle" font-size="10.5" fill="#3949AB">Eau dans batiment a 14h → debordement riviere a 17h ne peut expliquer seul le debut</text>
+                <!-- Formule nappe -->
+                <rect x="10" y="246" width="280" height="44" rx="6" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1.5"/>
+                <text x="150" y="265" text-anchor="middle" font-weight="bold" fill="#4A148C">Test hypothese nappe</text>
+                <text x="150" y="283" text-anchor="middle" font-size="12" fill="#6A1B9A">ΔH = H_nappe − Z_plancher</text>
+                <!-- Reponses inadaptees -->
+                <rect x="310" y="246" width="380" height="44" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+                <text x="500" y="265" text-anchor="middle" font-weight="bold" fill="#C62828">Reponses inadaptees a eviter</text>
+                <text x="500" y="283" text-anchor="middle" font-size="11" fill="#D32F2F">Agrandir conduite si exutoire noye · Proteger rive si ruissellement versant · Modele riviere si nappe</text>
+                <!-- Regles -->
+                <rect x="10" y="306" width="680" height="50" rx="6" fill="#E0F7FA" stroke="#00838F" stroke-width="1.5"/>
+                <text x="350" y="325" text-anchor="middle" font-weight="bold" fill="#006064">Diagnostiquer le mecanisme avant de choisir l'action</text>
+                <text x="350" y="341" text-anchor="middle" font-size="11" fill="#00695C">Donnees : debordement (niveaux/topo) · ruissellement (pluie/cheminements) · reseau (plans/exutoires) · nappe (piezo/geologie)</text>
+                <text x="350" y="355" text-anchor="middle" font-size="11" fill="#00695C">Modele doit representer les mecanismes determinants · Sophistication ≠ pertinence</text>
+              </svg>`,
+                exercice: {
+                  enonce: '(1) Le débit d\'un cours d\'eau augmente fortement mais il reste dans son lit. Crue ou inondation ?\n(2) Une route dans un talweg est submergée après un orage, sans cours d\'eau permanent à proximité. Quel mécanisme ?\n(3) Un réseau déborde alors que ses conduites sont dégagées. Son exutoire est sous un niveau de rivière élevé. Quelle cause probable ?\n(4) Z_plancher d\'une cave = 72,30 m, charge souterraine mesurée = 72,55 m. Calculez ΔH et interprétez.\n(5) L\'eau entre dans une habitation à 14 h. Le débordement de la rivière commence à 17 h. Quelle conclusion ?\n(6) Des dépôts de blocs modifient le fond et obstruent un pont. Un modèle d\'eau claire à géométrie fixe suffit-il ?\n(7) Une maison se situe en zone sensible aux remontées de nappe. Peut-on en déduire une hauteur précise dans sa cave ?\n(8) Une action supprime le débordement de la rivière, mais les rues continuent à recevoir l\'eau des versants. Que conclure ?',
+                  solution: '<strong>(1)</strong> Crue — sans inondation sur le secteur considéré (eau restée dans le lit mineur).<br><strong>(2)</strong> Ruissellement concentré dans le talweg — l\'absence de rivière permanente n\'exclut pas une inondation.<br><strong>(3)</strong> Le niveau aval (rivière en crue à l\'exutoire) peut limiter l\'évacuation — mise en charge sans obstruction ni manque de diamètre.<br><strong>(4)</strong> ΔH = 72,55 − 72,30 = <strong>0,25 m</strong>. Rend plausible une pression souterraine, mais ne démontre pas une hauteur intérieure de 25 cm — vérifier représentativité du piézomètre et connexions.<br><strong>(5)</strong> Le débordement de la rivière ne peut pas expliquer seul le début. D\'autres voies doivent être recherchées (ruissellement, réseau, nappe). Il peut aggraver ou prolonger ensuite.<br><strong>(6)</strong> Non — le transport solide, les dépôts et l\'évolution de l\'ouverture du pont peuvent être déterminants et ne sont pas représentés.<br><strong>(7)</strong> Non — une analyse locale et les caractéristiques du bâtiment sont nécessaires. Un zonage national ne suffit pas quand la décision dépend de quelques dizaines de centimètres.<br><strong>(8)</strong> Le ruissellement reste à traiter séparément. Une intervention sur un mécanisme ne supprime pas automatiquement les autres.',
+                },
+              }, // fin gem-pi2
+
             ],
           }, // fin gem-m21
 
