@@ -10907,6 +10907,167 @@ const COURS_DATA = {
             ],
           }, // fin gem-m20
 
+          {
+            id: 'gem-m21',
+            name: 'Prévention des inondations',
+            ico: '🏠',
+            color: '#0D47A1',
+            colorl: '#E3F2FD',
+            ordre: 21, theme: 'inondations',
+            chapitres: [
+
+              {
+                id: 'gem-pi1',
+                titre: 'Aléas, enjeux et vulnérabilité',
+                fiche: {
+                  intro: 'Sur quelles composantes du risque faut-il agir pour réduire les conséquences d\'une inondation ? Une diminution du niveau d\'eau peut être utile, mais elle ne suffit pas toujours. Un établissement peut rester hors d\'eau et perdre son alimentation électrique. Ce chapitre relie le phénomène physique aux conséquences possibles, puis aux actions capables de les réduire.',
+                  points: [
+                    '🌊 Cinq notions distinctes : Aléa (quel phénomène ?), Enjeu (quoi peut être affecté ?), Exposition (l\'enjeu est-il soumis au phénomène ?), Vulnérabilité (pourquoi peut-il subir des dommages ?), Risque (quelles conséquences dommageables ?). Un bâtiment exposé peut avoir fait l\'objet d\'adaptations ; un bâtiment moins exposé peut être très vulnérable à une coupure de réseau.',
+                    '📐 Risque = Aléa × Enjeux × Vulnérabilité est un schéma conceptuel — non une formule de calcul direct. Pour quantifier, il faut définir les événements, leur fréquence, les enjeux concernés, les conséquences étudiées et les incertitudes.',
+                    '🎯 Trois objectifs de la stratégie nationale : améliorer la sécurité des populations exposées ; limiter puis réduire les dommages ; raccourcir le retour à un fonctionnement normal. Ces objectifs sont complémentaires — une action peut maintenir un service essentiel sans réduire les dommages matériels.',
+                    '🌊 Aléa : plusieurs paramètres — hauteur, vitesse, rapidité de montée, durée, débris et sédiments, qualité de l\'eau, étendue. Deux événements atteignant la même hauteur maximale peuvent avoir des conséquences très différentes. Ne pas associer automatiquement les maxima de hauteur et de vitesse s\'ils ne se produisent pas au même instant.',
+                    '📅 Période de retour T : probabilité annuelle p = 1/T — ex. T = 100 ans → p = 1 %. Ce n\'est pas un calendrier — deux dépassements peuvent survenir à quelques années d\'intervalle. Une pluie centennale ne produit pas automatiquement une crue centennale.',
+                    '🔢 Probabilité sur N ans : P(au moins un dépassement) = 1 − (1 − p)^N — ex. p = 1 %, N = 30 ans → P ≈ 26 %. Une faible probabilité annuelle peut devenir significative sur plusieurs décennies.',
+                    '🏢 Enjeux non réductibles à leur valeur financière : archives irremplaçables, petit poste électrique conditionnant l\'AEP de plusieurs communes, route peu fréquentée devenant essentielle pour les secours. L\'exposition varie dans le temps (heure, saison, activité) — une même personne peut être comptée plusieurs fois dans des bases différentes.',
+                    '🔗 Vulnérabilité multi-dimensionnelle : physique (matériaux, ouvertures), humaine (mobilité, autonomie), fonctionnelle (dépendance aux réseaux), économique, organisationnelle, sociale. Les dimensions se renforcent. Une chaîne de dépendance peut affecter des territoires hors zone inondée — ex. poste électrique → pompage → AEP → établissement de santé.',
+                    '💸 Dommages directs (contact eau) et indirects (perturbations qui suivent) — lors d\'une évaluation, éviter les doubles comptes. La valeur d\'un équipement et les conséquences de son indisponibilité sont deux dimensions différentes.',
+                    '🛡️ Trois leviers de prévention : agir sur l\'aléa (modifier le phénomène), sur l\'exposition (éviter/réduire la présence d\'enjeux), sur la vulnérabilité (réduire les conséquences). Une réduction hydraulique doit être traduite en conséquences concrètes avant d\'être présentée comme un bénéfice territorial.',
+                    '📊 Espérance de dommage : E[D] = Σ pᵢ × Dᵢ pour des catégories mutuellement exclusives — ex. 8 % × 100 000 + 2 % × 1 000 000 = 28 000 €/an. Ce n\'est pas une dépense annuelle certaine. Ne pas appliquer directement aux probabilités de dépassement de crues emboîtées (non exclusives).',
+                    '⚠️ Risque résiduel : subsiste après les actions — événements plus importants, défaillance, obstruction, vulnérabilité restante. Dire qu\'un secteur bénéficie d\'une protection ne signifie pas qu\'aucune inondation ne peut s\'y produire.',
+                  ],
+                  formules: [
+                    'Probabilité annuelle de dépassement : p = 1/T — ex. T = 100 ans → p = 1/100 = 1 % ; T = 50 ans → p = 2 %',
+                    'Probabilité d\'au moins un dépassement en N ans : P = 1 − (1 − p)^N — ex. p = 1 %, N = 30 ans : P = 1 − 0,99^30 ≈ 26 % ; p = 2 %, N = 20 ans : P = 1 − 0,98^20 ≈ 33,2 %',
+                    'Espérance de dommage (catégories exclusives) : E[D] = Σ pᵢ × Dᵢ — ex. p₁ = 8 %, D₁ = 100 000 €, p₂ = 2 %, D₂ = 1 000 000 € → E[D] = 8 000 + 20 000 = 28 000 €/an',
+                  ],
+                  retenir: 'Aléa ≠ risque. Exposition ≠ vulnérabilité. Période de retour T = 1/p, pas un calendrier. P(N ans) = 1 − (1−p)^N. Enjeux non réductibles à leur valeur financière. Exposition variable dans le temps. Vulnérabilité multi-dimensionnelle. Dépendances hors zone inondée. E[D] = Σ pᵢDᵢ (catégories exclusives). Trois leviers : aléa, exposition, vulnérabilité. Risque résiduel toujours présent.',
+                  sections: [
+                    {
+                      titre: 'Notions fondamentales et caractérisation de l\'aléa',
+                      ss: [
+                        {
+                          titre: 'Les cinq notions et le schéma conceptuel du risque',
+                          texte: 'Aléa : quel phénomène peut se produire (ex. débordement atteignant certaines hauteurs et vitesses). Enjeu : ce qui peut être affecté (personnes, logements, réseaux, activités). Exposition : l\'enjeu est-il soumis au phénomène (bâtiment dans l\'emprise d\'un scénario). Vulnérabilité : pourquoi et comment peut-il subir des dommages (équipements sensibles en sous-sol). Risque : quelles conséquences dommageables (blessures, pertes, interruption de service). Risque = Aléa × Enjeux × Vulnérabilité est un schéma conceptuel, non une formule de calcul direct. Pour quantifier : définir les événements, leur fréquence, les enjeux, les conséquences étudiées et les incertitudes.',
+                        },
+                        {
+                          titre: 'Paramètres de l\'aléa et construction d\'un scénario explicite',
+                          texte: 'Caractériser l\'aléa par : hauteur (atteinte des planchers et équipements), vitesse (efforts, transport d\'objets), rapidité de montée (temps disponible pour agir), durée (dégradation, interruption prolongée), débris et sédiments (chocs, obstruction), qualité de l\'eau (contamination), étendue (diversité des secteurs touchés). Un scénario explicite doit préciser le mécanisme, les conditions hydrologiques, l\'état des ouvrages, les hypothèses d\'obstruction ou de défaillance et les limites. Ne pas mélanger deux scénarios différents dans une seule conclusion sans explication.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Probabilités et analyse sur la durée d\'un projet',
+                      ss: [
+                        {
+                          titre: 'Interpréter une période de retour',
+                          texte: 'Dans un cadre probabiliste stationnaire, un événement de période de retour T correspond à une probabilité annuelle de dépassement p = 1/T. Pour T = 100 ans : p = 0,01 = 1 %. Cela ne signifie pas qu\'un événement survient régulièrement une fois tous les cent ans — deux dépassements peuvent se produire à quelques années d\'intervalle. La période de retour doit aussi être associée à une grandeur précise. Une pluie centennale ne produit pas automatiquement une crue centennale. Lorsque le climat ou le bassin évolue, l\'hypothèse de probabilité constante doit être réexaminée.',
+                        },
+                        {
+                          titre: 'Probabilité sur la durée d\'un projet',
+                          texte: 'Sous hypothèses de probabilité annuelle constante et d\'années indépendantes : P(au moins un dépassement en N ans) = 1 − (1 − p)^N. Pour p = 1 % et N = 30 ans : P = 1 − 0,99^30 ≈ 26 %. Pour p = 2 % et N = 20 ans : P = 1 − 0,98^20 ≈ 33,2 %. Une faible probabilité annuelle peut devenir significative sur plusieurs décennies. Il s\'agit de la probabilité de dépassement de l\'événement défini, pas directement de celle d\'un dommage particulier.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Enjeux, exposition et vulnérabilité',
+                      ss: [
+                        {
+                          titre: 'Enjeux et exposition variable',
+                          texte: 'Les enjeux comprennent : personnes, logements, établissements sensibles, services essentiels, activités économiques, infrastructures, patrimoine, milieux naturels. Leur importance ne dépend pas seulement du coût de remplacement — archives irremplaçables, petit poste technique conditionnant l\'AEP de plusieurs communes, route peu fréquentée essentielle pour les secours. L\'exposition varie selon l\'heure, le jour, la saison, les activités et le scénario. Distinguer capacité maximale, fréquentation habituelle, personnes effectivement présentes, population résidente — ne pas additionner sans contrôle (une même personne peut apparaître dans plusieurs bases).',
+                        },
+                        {
+                          titre: 'Vulnérabilité multi-dimensionnelle et dépendances',
+                          texte: 'Dimensions : physique (matériaux, ouvertures, niveaux des équipements), humaine (mobilité, autonomie), fonctionnelle (dépendance aux réseaux et aux accès), économique, organisationnelle, sociale. Ces dimensions peuvent se renforcer. Examiner les dépendances et effets en cascade : ex. poste électrique affecté → pompage interrompu → service d\'eau perturbé → établissement de santé fragilisé (hors zone inondée). Identifier équipements critiques, territoires desservis, solutions de secours, leur autonomie, conditions de redémarrage. La vulnérabilité d\'un territoire ne se limite pas à la somme des bâtiments dans une emprise d\'inondation.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Dommages, leviers et risque résiduel',
+                      ss: [
+                        {
+                          titre: 'Dommages directs/indirects et espérance de dommage',
+                          texte: 'Dommages directs : résultent du contact avec l\'eau ou de ses effets physiques immédiats. Dommages indirects : résultent des perturbations qui suivent — ex. machine endommagée → arrêt de production ; poste électrique inondé → interruption d\'activités hors zone ; station de pompage arrêtée → perturbation d\'un service essentiel. Lors d\'une évaluation économique, éviter les doubles comptes. Espérance de dommage pour catégories mutuellement exclusives : E[D] = Σ pᵢDᵢ. Ex. 8 % × 100 000 + 2 % × 1 000 000 = 28 000 €/an. Ce n\'est pas une dépense annuelle certaine — c\'est une moyenne probabilisée dans les hypothèses retenues.',
+                        },
+                        {
+                          titre: 'Trois leviers, risque résiduel et stratégies combinées',
+                          texte: 'Agir sur l\'aléa : modifier le phénomène subi — vérifier les événements couverts, les effets ailleurs, les modes de défaillance, les conséquences d\'un dépassement. Agir sur l\'exposition : éviter de nouveaux enjeux sensibles, déplacer un équipement, conserver les espaces pour les écoulements — une protection ne transforme pas un secteur en espace sans risque. Agir sur la vulnérabilité : adapter les équipements, les matériaux, les procédures, les moyens de continuité. Risque résiduel : ce qui subsiste après les actions (événements plus importants, phénomènes non traités, défaillance). Le risque résiduel doit être décrit et communiqué. La stratégie doit combiner les leviers plutôt que rechercher un ouvrage seul capable de résoudre toutes les situations.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quelle est la différence entre exposition et vulnérabilité ?', r: 'Exposition = l\'enjeu est soumis au phénomène (localisation dans l\'emprise). Vulnérabilité = pourquoi et comment l\'enjeu peut subir des dommages (équipements sensibles, dépendances).', expl: 'Un bâtiment très exposé peut avoir fait l\'objet d\'adaptations. Un bâtiment hors d\'eau peut être vulnérable à une coupure de réseau. Les deux dimensions sont distinctes.' },
+                  { q: 'Qu\'est-ce que la période de retour centennale signifie concrètement ?', r: 'Probabilité annuelle de dépassement p = 1 % — non un événement survenant une fois par siècle. Deux dépassements peuvent se produire à quelques années d\'intervalle.', expl: 'Une pluie centennale ne produit pas automatiquement une crue centennale. Quand le climat évolue, l\'hypothèse de probabilité constante doit être réexaminée.' },
+                  { q: 'Formule de la probabilité d\'au moins un dépassement en N ans ?', r: 'P = 1 − (1 − p)^N', expl: 'Ex. p = 1 %, N = 30 ans : P = 1 − 0,99^30 ≈ 26 %. Une faible probabilité annuelle devient significative sur plusieurs décennies.' },
+                  { q: 'Quels sont les trois leviers de prévention des inondations ?', r: 'Agir sur l\'aléa (modifier le phénomène), sur l\'exposition (éviter/réduire la présence d\'enjeux), sur la vulnérabilité (réduire les conséquences).', expl: 'Ces leviers sont complémentaires. L\'intérêt est de les combiner plutôt que de rechercher un ouvrage seul capable de résoudre toutes les situations.' },
+                  { q: 'Qu\'est-ce qu\'une chaîne de dépendance dans le contexte des inondations ?', r: 'Un équipement critique inondé peut perturber un service affectant des territoires hors zone inondée — ex. poste électrique → pompage → AEP → établissement de santé.', expl: 'La vulnérabilité d\'un territoire ne se limite pas à la somme des bâtiments dans l\'emprise d\'inondation. Identifier les équipements critiques, leurs territoires desservis et les solutions de secours.' },
+                  { q: 'Comment calculer une espérance de dommage annuelle ?', r: 'E[D] = Σ pᵢ × Dᵢ pour des catégories mutuellement exclusives — ex. 8 % × 100 000 + 2 % × 1 000 000 = 28 000 €/an.', expl: 'Ce n\'est pas une dépense annuelle certaine. Ne pas appliquer directement aux probabilités de dépassement de crues emboîtées (qui ne sont pas exclusives).' },
+                  { q: 'Qu\'est-ce que le risque résiduel ?', r: 'Ce qui subsiste après les actions mises en place — événements plus importants, phénomènes non traités, défaillance, obstruction, vulnérabilité restante.', expl: 'Dire qu\'un secteur bénéficie d\'une protection ne signifie pas qu\'aucune inondation ne peut s\'y produire. Le risque résiduel doit être décrit et communiqué.' },
+                  { q: 'Peut-on annoncer une réduction des dommages de 15 % si le niveau maximal baisse de 15 cm ?', r: 'Non — il faut examiner les seuils d\'entrée d\'eau, les équipements, les usages et les fonctions de dommage adaptées. Une réduction hydraulique doit être traduite en conséquences concrètes.', expl: 'Un abaissement de 20 cm peut éviter l\'entrée d\'eau dans certains bâtiments et ne rien changer pour d\'autres. Il peut aussi laisser subsister une coupure d\'accès.' },
+                ],
+                schema: `<svg viewBox="0 0 700 370" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
+                <text x="350" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#1A237E">Construire une strategie de prevention des inondations</text>
+                <!-- Cinq notions -->
+                <rect x="10" y="36" width="680" height="64" rx="8" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="350" y="56" text-anchor="middle" font-weight="bold" fill="#0D47A1">Cinq notions a distinguer</text>
+                <text x="80" y="74" text-anchor="middle" font-size="11" fill="#1565C0">Alea</text>
+                <text x="80" y="88" text-anchor="middle" font-size="10" fill="#283593">phenomene</text>
+                <text x="215" y="74" text-anchor="middle" font-size="11" fill="#1565C0">Enjeu</text>
+                <text x="215" y="88" text-anchor="middle" font-size="10" fill="#283593">ce qui est affecte</text>
+                <text x="350" y="74" text-anchor="middle" font-size="11" fill="#1565C0">Exposition</text>
+                <text x="350" y="88" text-anchor="middle" font-size="10" fill="#283593">enjeu soumis au phenomene</text>
+                <text x="490" y="74" text-anchor="middle" font-size="11" fill="#1565C0">Vulnerabilite</text>
+                <text x="490" y="88" text-anchor="middle" font-size="10" fill="#283593">pourquoi des dommages</text>
+                <text x="625" y="74" text-anchor="middle" font-size="11" fill="#1565C0">Risque</text>
+                <text x="625" y="88" text-anchor="middle" font-size="10" fill="#283593">consequences possibles</text>
+                <!-- Probabilites -->
+                <rect x="10" y="116" width="210" height="60" rx="6" fill="#FFF8E1" stroke="#F57F17" stroke-width="1.5"/>
+                <text x="115" y="135" text-anchor="middle" font-weight="bold" fill="#E65100">Periode de retour</text>
+                <text x="115" y="153" text-anchor="middle" font-size="12" fill="#BF360C">p = 1/T</text>
+                <text x="115" y="169" text-anchor="middle" font-size="11" fill="#E65100">ex. T=100 → p=1% par an</text>
+                <rect x="240" y="116" width="220" height="60" rx="6" fill="#FFF8E1" stroke="#F57F17" stroke-width="1.5"/>
+                <text x="350" y="135" text-anchor="middle" font-weight="bold" fill="#E65100">Probabilite sur N ans</text>
+                <text x="350" y="153" text-anchor="middle" font-size="12" fill="#BF360C">P = 1 − (1−p)^N</text>
+                <text x="350" y="169" text-anchor="middle" font-size="11" fill="#E65100">p=1%, N=30 → P≈26%</text>
+                <rect x="480" y="116" width="210" height="60" rx="6" fill="#FBE9E7" stroke="#BF360C" stroke-width="1.5"/>
+                <text x="585" y="135" text-anchor="middle" font-weight="bold" fill="#BF360C">Esperance dommage</text>
+                <text x="585" y="153" text-anchor="middle" font-size="12" fill="#BF360C">E[D] = Σ pᵢ × Dᵢ</text>
+                <text x="585" y="169" text-anchor="middle" font-size="11" fill="#C62828">categories exclusives</text>
+                <!-- Trois leviers -->
+                <text x="350" y="200" text-anchor="middle" font-weight="bold" fill="#1B5E20" font-size="13">Trois leviers de prevention</text>
+                <rect x="10" y="210" width="210" height="70" rx="6" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.5"/>
+                <text x="115" y="230" text-anchor="middle" font-weight="bold" fill="#1B5E20">Agir sur l'alea</text>
+                <text x="115" y="248" text-anchor="middle" font-size="11" fill="#2E7D32">espace expansion</text>
+                <text x="115" y="264" text-anchor="middle" font-size="11" fill="#2E7D32">zones humides · ouvrages</text>
+                <text x="115" y="276" text-anchor="middle" font-size="10" fill="#388E3C">→ verifier modes de defaillance</text>
+                <rect x="240" y="210" width="220" height="70" rx="6" fill="#E8EAF6" stroke="#3949AB" stroke-width="1.5"/>
+                <text x="350" y="230" text-anchor="middle" font-weight="bold" fill="#1A237E">Agir sur l'exposition</text>
+                <text x="350" y="248" text-anchor="middle" font-size="11" fill="#283593">ne pas creer nouveaux enjeux</text>
+                <text x="350" y="264" text-anchor="middle" font-size="11" fill="#283593">deplacer · reorganiser</text>
+                <text x="350" y="276" text-anchor="middle" font-size="10" fill="#3949AB">→ protection ≠ secteur sans risque</text>
+                <rect x="480" y="210" width="210" height="70" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="585" y="230" text-anchor="middle" font-weight="bold" fill="#BF360C">Agir sur la vulnerabilite</text>
+                <text x="585" y="248" text-anchor="middle" font-size="11" fill="#E65100">equip. techniques · materiaux</text>
+                <text x="585" y="264" text-anchor="middle" font-size="11" fill="#E65100">procedures · continuite</text>
+                <text x="585" y="276" text-anchor="middle" font-size="10" fill="#BF360C">→ verifier conditions reelles</text>
+                <!-- Risque residuel -->
+                <rect x="10" y="294" width="680" height="36" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+                <text x="350" y="313" text-anchor="middle" font-weight="bold" fill="#C62828">Risque residuel : ce qui subsiste apres les actions — a decrire et communiquer</text>
+                <text x="350" y="325" text-anchor="middle" font-size="11" fill="#D32F2F">Evenements plus importants · defaillance · obstruction · vulnerabilite restante · phenomenes non traites</text>
+                <!-- Note bas -->
+                <text x="350" y="358" text-anchor="middle" font-size="10.5" fill="#555">Combiner les leviers — ne pas chercher un ouvrage seul capable de tout resoudre</text>
+                <text x="350" y="372" text-anchor="middle" font-size="10.5" fill="#555">Reductions hydrauliques → a traduire en consequences concretes avant d'etre presentees comme benefice</text>
+              </svg>`,
+                exercice: {
+                  enonce: '(1) Un local est situé dans une emprise inondable et contient ses équipements électriques en sous-sol. Quelle notion décrit la localisation ? Quelle notion décrit la position des équipements ?\n(2) Une crue centennale s\'est produite cette année. Peut-on écarter un nouvel événement comparable l\'année prochaine ?\n(3) Calculez P pour un dépassement annuel de probabilité 2 %, sur 20 ans.\n(4) Un établissement reste hors d\'eau, mais son unique accès est submergé. Quel type de vulnérabilité ?\n(5) Un projet réduit le niveau maximal de 15 cm. Peut-on annoncer une réduction des dommages de 15 % ?\n(6) Deux catégories dommageables exclusives : p₁ = 5 %, D₁ = 200 000 € ; p₂ = 1 %, D₂ = 2 000 000 €. Calculez E[D].\n(7) Une protection limite les débordements du cours d\'eau, mais ne traite pas le ruissellement. Que reste-t-il ?\n(8) Un équipement essentiel pourrait être exposé, mais sa cote d\'implantation est inconnue. Que faire ?',
+                  solution: '<strong>(1)</strong> Localisation = exposition au scénario. Position des équipements en sous-sol = facteur de vulnérabilité physique.<br><strong>(2)</strong> Non — la période de retour n\'est pas un calendrier. Dans le modèle stationnaire, la probabilité annuelle reste de 1 % quelle que soit l\'année précédente.<br><strong>(3)</strong> P = 1 − 0,98^20 ≈ <strong>33,2 %</strong>.<br><strong>(4)</strong> Vulnérabilité fonctionnelle liée à l\'isolement. L\'absence d\'inondation du bâtiment ne signifie pas absence de conséquence.<br><strong>(5)</strong> Non — il faut examiner les seuils d\'entrée d\'eau, les équipements et les fonctions de dommage. Une réduction hydraulique ≠ réduction proportionnelle des dommages.<br><strong>(6)</strong> E[D] = 0,05 × 200 000 + 0,01 × 2 000 000 = 10 000 + 20 000 = <strong>30 000 €/an</strong>.<br><strong>(7)</strong> Le ruissellement constitue une composante du risque résiduel — à étudier séparément.<br><strong>(8)</strong> Une mesure altimétrique peut être prioritaire si elle conditionne la décision. L\'inconnue ne justifie pas un classement automatique en faible risque.',
+                },
+              }, // fin gem-pi1
+
+            ],
+          }, // fin gem-m21
+
         ],
       },
     ],
