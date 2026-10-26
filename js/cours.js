@@ -7814,7 +7814,7 @@ const COURS_DATA = {
             name: 'Hydromorphologie et sédiments',
             ico: '🌊',
             color: '#2E7D32', colorl: '#E8F5E9',
-            ordre: 4, theme: 'diagnostic',
+            ordre: 17, theme: 'diagnostic',
             chapitres: [
               {
                 id: 'gem-hmo1',
@@ -8631,7 +8631,7 @@ const COURS_DATA = {
             name: 'Mesures et diagnostic territorial',
             ico: '📏',
             color: '#1565C0', colorl: '#E3F2FD',
-            ordre: 5, theme: 'diagnostic',
+            ordre: 18, theme: 'diagnostic',
             chapitres: [
               {
                 id: 'gem-mes1',
@@ -9393,7 +9393,7 @@ const COURS_DATA = {
             ico: '🔧',
             color: '#37474F',
             colorl: '#ECEFF1',
-            ordre: 5.5, theme: 'gestion',
+            ordre: 19, theme: 'gestion',
             chapitres: [
 
               {
@@ -10132,7 +10132,7 @@ const COURS_DATA = {
             ico: '🌿',
             color: '#1B5E20',
             colorl: '#E8F5E9',
-            ordre: 6, theme: 'zones_humides',
+            ordre: 20, theme: 'zones_humides',
             chapitres: [
 
               {
