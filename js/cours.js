@@ -11529,6 +11529,149 @@ const COURS_DATA = {
                 },
               }, // fin gem-pi4
 
+              {
+                id: 'gem-pi5',
+                titre: 'Stockages et gestion des écoulements',
+                fiche: {
+                  intro: 'Un bassin de rétention ne fait pas disparaître l\'eau : il modifie la répartition du débit dans le temps. L\'eau retenue finit par ressortir, et une restitution prolongée peut être acceptable ou problématique selon les enjeux à l\'aval. La compétence à maîtriser : expliquer et vérifier le fonctionnement d\'un stockage pendant toute une crue, depuis son remplissage jusqu\'à sa vidange, en intégrant ses limites et ses conséquences à l\'aval.',
+                  points: [
+                    '💧 Stocker ≠ faire disparaître : le volume entrant finit par ressortir. L\'aménagement modifie la répartition du débit dans le temps. L\'écrêtement réduit le débit de pointe, mais peut prolonger l\'écoulement soutenu — ce qui peut être acceptable ou problématique selon les enjeux aval.',
+                    '📊 6 fonctions à distinguer : stockage (accumuler temporairement), écrêtement (réduire le débit max), ralentissement (modifier la propagation), dérivation (diriger vers un autre chemin), évacuation (transiter vers l\'aval), infiltration (transférer vers le sous-sol). Un aménagement qui retarde une crue sans diminuer son maximum ne produit pas nécessairement un écrêtement.',
+                    '⚖️ Bilan fondamental : dV/dt = Q_entrant − Q_sortant. Si Q_entrant > Q_sortant : le volume augmente. Si Q_entrant < Q_sortant : le bassin se vide. Tous les chemins de sortie doivent être inclus.',
+                    '🔢 Variation de volume : ΔV = (Q_entrant_moy − Q_sortant_moy) × Δt. Ex. : (8 − 3) × 1 200 s = 6 000 m³ d\'augmentation. Si V_initial = 4 000 m³, alors V_final = 10 000 m³. Ce ΔV est une variation, pas le volume total.',
+                    '📐 Excès triangulaire : V_excès = ½ × durée(s) × excès_max. Ex. : ½ × (3×3600) × 6 = 32 400 m³. Ce calcul suppose que l\'on peut laisser passer le débit cible et stocker l\'excédent — pas un dimensionnement complet.',
+                    '📏 Capacité disponible : V_dispo = V(Z_limite) − V(Z_initial). Ex. : 42 000 − 12 000 = 30 000 m³. La capacité évolue avec les dépôts, une vidange incomplète, la nappe ou des usages permanents. Volume total ≠ volume disponible pour la crue.',
+                    '🔧 Loi d\'orifice (approximation) : Q = Cd × Ao × √(2gH). Q ∝ √H : multiplier H par 4 double théoriquement Q. Ne remplace pas l\'analyse d\'une conduite longue ni d\'une sortie noyée.',
+                    '🌊 Niveau aval : quand l\'aval monte, la restitution peut devenir moins efficace. Q_sortant = f(Z_amont, Z_aval). Un bassin qui se vide bien vers un cours d\'eau bas peut se vider beaucoup plus lentement lors d\'une crue aval.',
+                    '⚡ Prise d\'eau : si la prise ne peut admettre que 3 m³/s mais qu\'il faudrait dériver 8 m³/s, la majorité du débit continue vers l\'aval malgré un grand bassin. La performance dépend du couple "capacité de stockage – capacité d\'alimentation".',
+                    '⏱️ Vidange : T = V_à_évacuer / Q_net_moyen. Ex. : 18 000 / 0,5 = 36 000 s = 10 h. Le débit net = débit sortant − apports persistants. Avec une sortie gravitaire, le débit diminue quand le niveau baisse. Un bassin efficace quand il est vide peut être moins performant quelques heures plus tard.',
+                    '🔀 Effets aval et confluences : réduire le max à la sortie du bassin ne garantit pas une réduction identique plus loin. Un décalage peut augmenter le débit à un instant critique si un affluent non aménagé est en crue simultanément. Comparer les hydrogrammes complets à plusieurs points.',
+                    '⚠️ Défaillances : sortie obstruée (montée accrue), vanne bloquée ouverte (perte d\'écrêtement), vanne bloquée fermée (remplissage excessif), mesure erronée (commande inadaptée), érosion, rupture de remblai. Distinguer efficacité de protection (écrêtement) et sécurité de l\'ouvrage — deux questions séparées.',
+                  ],
+                  formules: [
+                    'Bilan : dV/dt = Q_entrant − Q_sortant (m³/s) — si positif le bassin se remplit, si négatif il se vide',
+                    'Variation de volume : ΔV = (Q_moy_entrant − Q_moy_sortant) × Δt (m³) — ex. (8−3)×1200 = 6 000 m³ ; ΔV ≠ volume total stocké',
+                    'Excès triangulaire : V_excès = ½ × T(s) × excès_max (m³) — ex. ½ × 10 800 × 6 = 32 400 m³ ; première estimation théorique seulement',
+                    'Capacité disponible : V_dispo = V(Z_limite) − V(Z_initial) (m³) — ex. 42 000 − 12 000 = 30 000 m³',
+                    'Loi d\'orifice (approx.) : Q = Cd × Ao × √(2gH) (m³/s) — Q ∝ √H : H×4 → Q×2 ; ne remplace pas l\'analyse complète',
+                    'Vidange : T = V_à_évacuer / Q_net_moyen (s) — ex. 18 000 / 0,5 = 36 000 s = 10 h ; Q_net = sortant − apports persistants',
+                  ],
+                  retenir: 'Stocker ≠ faire disparaître. dV/dt = Q_entrant − Q_sortant. ΔV = (Q_e_moy − Q_s_moy) × Δt. V_excès_triangle = ½ × T × excès_max. V_dispo = V(Z_limite) − V(Z_initial). Q = Cd×Ao×√(2gH), Q ∝ √H. Niveau aval peut bloquer la restitution. Prise d\'eau peut limiter l\'efficacité malgré grand bassin. T_vidange = V / Q_net. Effets aval sur hydrogrammes complets. Efficacité ≠ sécurité de l\'ouvrage.',
+                  sections: [
+                    {
+                      titre: 'Principes de base du stockage',
+                      ss: [
+                        {
+                          titre: 'Ce que fait vraiment un bassin de rétention',
+                          texte: 'Un bassin de rétention reçoit de l\'eau, en conserve temporairement une partie puis la restitue. Dans un système où les infiltrations et l\'évaporation sont négligeables, le volume entrant finit par ressortir si le bassin revient à son état initial. L\'aménagement modifie principalement la répartition du débit dans le temps. Ex. : apport intense pendant 2 heures retenu puis restitué sur plusieurs heures → le débit maximal diminue, mais l\'écoulement soutenu dure plus longtemps. Cette prolongation peut être acceptable ou problématique selon les enjeux : terrains agricoles, réseaux, accès, milieux naturels, confluence aval. L\'efficacité dépend autant du calendrier de restitution que de la capacité de stockage. Fonctions à distinguer : stockage (accumuler), écrêtement (réduire le débit max), ralentissement (modifier la propagation), dérivation (diriger ailleurs), évacuation (transiter vers l\'aval), infiltration (transférer vers le sous-sol). Un aménagement qui retarde sans diminuer le maximum ne produit pas nécessairement un écrêtement.',
+                        },
+                        {
+                          titre: 'Volume disponible vs volume total',
+                          texte: 'Un bassin sec reste vide hors crue : les écoulements ordinaires traversent un passage de fond. Lors d\'une crue, les apports dépassent la capacité de passage et l\'eau s\'accumule. Cette configuration conserve une capacité disponible à condition que la vidange précédente soit achevée et que les organes fonctionnent. Une retenue déjà remplie pour un autre usage ne dispose pas automatiquement d\'une grande capacité d\'écrêtement. Volume total de la retenue ≠ volume disponible pour la crue. Définir l\'objectif avant de choisir le volume : quels enjeux, quels événements étudiés, quels niveaux posent problème, quels effets supplémentaires sont acceptables ou à éviter, quelles contraintes de sécurité. Identifier le mécanisme de l\'inondation avant de choisir le moyen de la réduire.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Calcul du bilan et des volumes',
+                      ss: [
+                        {
+                          titre: 'Bilan fondamental et variation de volume',
+                          texte: 'Bilan fondamental : dV/dt = Q_entrant − Q_sortant. Trois situations : Q_e > Q_s → volume augmente ; Q_e = Q_s → volume stable momentanément ; Q_e < Q_s → bassin se vide. Le débit sortant total doit inclure tous les chemins : restitution principale, déversement, autres sorties. Si précipitations directes, infiltration ou échanges avec la nappe sont significatifs, ils doivent figurer dans le bilan. Variation de volume sur un intervalle à débits constants (ou représentés par leur moyenne) : ΔV = (Q_e_moy − Q_s_moy) × Δt. Ex. : pendant 20 min, Q_e = 8 m³/s, Q_s = 3 m³/s → Δt = 20×60 = 1 200 s → ΔV = (8−3)×1200 = 6 000 m³. Si V_initial = 4 000 m³ : V_final = 10 000 m³. Attention : 6 000 m³ est une augmentation, pas le volume total.',
+                        },
+                        {
+                          titre: 'Volume théorique d\'écrêtement et capacité disponible',
+                          texte: 'Pour une crue simple, excès à stocker : V_excès = ∫ max(Q_entrant(t) − Q_cible, 0) dt. Si l\'excès forme un triangle — durée T, excès maximal Q_max : V_excès = ½ × T(s) × Q_max. Ex. : durée 3 h, excès max 6 m³/s → V_excès = ½ × 10 800 × 6 = 32 400 m³. Ce calcul suppose que l\'on peut laisser passer le débit cible et stocker l\'excédent : il ne vérifie ni la capacité de l\'entrée, ni le fonctionnement réel de la sortie, ni le niveau maximal, ni les contraintes aval. Première estimation théorique, pas un dimensionnement complet. Capacité disponible : V_dispo = V(Z_limite) − V(Z_initial). Ex. : 42 000 − 12 000 = 30 000 m³. La capacité évolue avec les dépôts, une vidange incomplète, la remontée de nappe, des modifications du terrain ou des usages maintenant l\'eau. La cote limite doit être explicitée — tout le volume sous le sommet d\'un remblai n\'est pas librement mobilisable.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Restitution, niveau aval et exploitation',
+                      ss: [
+                        {
+                          titre: 'Loi d\'orifice, niveau aval et prise d\'eau',
+                          texte: 'Débit de restitution : une ouverture fixe ne fournit pas un débit constant — lorsque la charge augmente, le débit augmente. Approximation d\'orifice : Q = Cd × Ao × √(2gH). Si H est multiplié par 4, Q est multiplié par 2 (Q ∝ √H). Cette expression ne remplace pas l\'analyse d\'une conduite longue, d\'une entrée complexe, des pertes de charge ou d\'une sortie noyée. Niveau aval : quand l\'aval monte, la restitution peut devenir moins efficace. Q_sortant = f(Z_amont, Z_aval) — le fonctionnement ne dépend plus seulement du niveau du bassin. Une capacité satisfaisante avec aval libre peut devenir insuffisante avec les conditions aval réelles. Prise d\'eau (stockage en dérivation) : si le besoin de dérivation atteint 8 m³/s mais que la prise ne peut admettre que 3 m³/s, la majorité du débit continue vers l\'aval. La performance dépend du couple "capacité de stockage – capacité d\'alimentation". Examiner : cote de déclenchement, capacité de la prise, niveau dans le bassin, risques d\'obstruction, éventuels retours vers le cours d\'eau.',
+                        },
+                        {
+                          titre: 'Vidange, crues successives et effets aval',
+                          texte: 'Vidange : T = V_à_évacuer / Q_net_moyen. Ex. : 18 000 m³, Q_net = 0,5 m³/s → T = 36 000 s = 10 h. Q_net = sortant − apports persistants. Avec une sortie gravitaire, le débit diminue quand le niveau baisse. Les événements successifs sont à examiner : une première pluie remplit le bassin, une seconde survient avant la vidange complète → bassin efficace à vide, beaucoup moins performant quelques heures plus tard. Effets aval : réduire le max à la sortie du bassin ne garantit pas une réduction identique plus loin. Apports des affluents, temps de propagation et niveaux aval interviennent. Ex. : un décalage de restitution peut augmenter le débit à une confluence si un affluent non aménagé est en crue simultanément (branche aménagée 30 m³/s + autre affluent 50 m³/s = 80 m³/s > 20+50=70 m³/s sans aménagement à cet instant). Il faut comparer les hydrogrammes complets à plusieurs points du bassin versant.',
+                        },
+                        {
+                          titre: 'Défaillances, sécurité et exploitation',
+                          texte: 'Dysfonctionnements à examiner : sortie partiellement obstruée (montée plus importante du niveau), entrée bouchée (stockage insuffisamment mobilisé), vanne bloquée ouverte (perte d\'écrêtement), vanne bloquée fermée (remplissage accru), mesure de niveau erronée (commande inadaptée), érosion d\'un organe, rupture d\'un remblai. Ces scénarios ne sont pas seulement théoriques. Efficacité de protection ≠ sécurité de l\'ouvrage : deux questions séparées. Un ouvrage peut perdre son efficacité d\'écrêtement tout en évacuant la crue dans des conditions prévues. Un déversement prévu sur un ouvrage conçu à cet effet ≠ surverse incontrôlée sur un remblai. Pour les barrages concernés, l\'arrêté technique du 6 août 2018 encadre les exigences de sécurité. Exploitation : suivi des dépôts, entretien des accès et organes, vérification des mesures, préparation des consignes, observations après événement. Les interventions pendant une crue doivent rester compatibles avec la sécurité des agents.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Qu\'est-ce que l\'écrêtement d\'une crue ?', r: 'La réduction du débit maximal d\'une crue. Un aménagement qui retarde une crue sans diminuer son maximum ne produit pas nécessairement un écrêtement.', expl: 'L\'efficacité dépend autant du calendrier de restitution que de la capacité de stockage. La prolongation de l\'écoulement soutenu peut être acceptable ou problématique selon les enjeux aval.' },
+                  { q: 'Formule de la variation de volume stocké ?', r: 'ΔV = (Q_entrant_moy − Q_sortant_moy) × Δt. Ex. : (8−3) × 1 200 s = 6 000 m³. Ce ΔV est une variation, pas le volume total stocké.', expl: 'Si V_initial = 4 000 m³, V_final = 10 000 m³. Attention : 6 000 m³ est l\'augmentation. Tous les chemins de sortie doivent être inclus dans Q_sortant.' },
+                  { q: 'Comment calculer la capacité disponible d\'un bassin ?', r: 'V_dispo = V(Z_limite) − V(Z_initial). Ex. : 42 000 − 12 000 = 30 000 m³. Volume total ≠ volume disponible pour la crue.', expl: 'La capacité évolue avec les dépôts, une vidange incomplète, la remontée de nappe ou des usages permanents. La cote limite utilisée doit être explicitée.' },
+                  { q: 'Comment calculer le volume d\'un excès triangulaire à stocker ?', r: 'V_excès = ½ × durée(s) × excès_max. Ex. : ½ × (3×3 600) × 6 = 32 400 m³. Première estimation théorique, pas un dimensionnement complet.', expl: 'Ce calcul suppose qu\'on peut laisser passer le débit cible et stocker l\'excédent. Il ne vérifie ni la capacité de l\'entrée, ni le fonctionnement réel de la sortie, ni le niveau maximal.' },
+                  { q: 'Si la charge H d\'un orifice est multipliée par 4, par combien le débit est-il multiplié ?', r: 'Par 2 — car Q ∝ √H dans la loi d\'orifice simplifiée Q = Cd × Ao × √(2gH).', expl: 'Cette expression ne remplace pas l\'analyse d\'une conduite longue, d\'une entrée complexe, des pertes de charge ou d\'une sortie noyée.' },
+                  { q: 'Pourquoi un bassin efficace peut-il devenir peu performant lors d\'une seconde crue ?', r: 'Si la première crue n\'a pas eu le temps de se vidanger complètement, la capacité disponible est réduite. T = V_à_évacuer / Q_net_moyen — le débit net diminue quand le niveau baisse.', expl: 'Il faut toujours examiner les événements successifs. Un bassin efficace quand il est vide peut être beaucoup moins performant quelques heures plus tard.' },
+                  { q: 'Un bassin réduit le débit max de 20 % à sa sortie. Peut-on annoncer 20 % de hauteur en moins dans le village ?', r: 'Non — la relation entre débit et niveau dépend de la géométrie, des ouvrages, des apports intermédiaires et des conditions aval. La hauteur doit être évaluée au droit du village.', expl: 'Les apports des affluents et les temps de propagation interviennent. Un décalage peut même augmenter le débit à une confluence si un affluent est en crue simultanément.' },
+                  { q: 'Quelle différence entre efficacité de protection et sécurité d\'un ouvrage ?', r: 'Ce sont deux questions séparées. Un ouvrage peut perdre son efficacité d\'écrêtement tout en restant stable. Un ouvrage efficace pour une crue donnée peut présenter un danger si un organe essentiel est bloqué.', expl: 'Pour les barrages concernés, l\'arrêté du 6 août 2018 encadre les exigences de sécurité. Les vérifications ne se limitent pas à la crue pour laquelle on souhaite un bénéfice de protection.' },
+                ],
+                schema: `<svg viewBox="0 0 700 390" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
+                <text x="350" y="22" text-anchor="middle" font-size="15" font-weight="bold" fill="#0D47A1">Stockages et gestion des ecoulements</text>
+                <!-- Bilan central -->
+                <rect x="200" y="34" width="300" height="50" rx="8" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+                <text x="350" y="55" text-anchor="middle" font-weight="bold" fill="#0D47A1" font-size="13">Bilan : dV/dt = Q_entrant − Q_sortant</text>
+                <text x="350" y="72" text-anchor="middle" font-size="11.5" fill="#1565C0">Q_e &gt; Q_s → remplit · Q_e = Q_s → stable · Q_e &lt; Q_s → vide</text>
+                <!-- 3 formules cles -->
+                <rect x="10" y="98" width="215" height="54" rx="6" fill="#FBE9E7" stroke="#BF360C" stroke-width="1.5"/>
+                <text x="117" y="117" text-anchor="middle" font-weight="bold" fill="#BF360C">Variation de volume</text>
+                <text x="117" y="133" text-anchor="middle" font-size="12" fill="#BF360C">ΔV = (Q_e − Q_s) × Δt</text>
+                <text x="117" y="147" text-anchor="middle" font-size="10.5" fill="#C62828">ex. (8−3)×1200 = 6 000 m³</text>
+                <rect x="242" y="98" width="215" height="54" rx="6" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.5"/>
+                <text x="350" y="117" text-anchor="middle" font-weight="bold" fill="#1B5E20">Exces triangulaire</text>
+                <text x="350" y="133" text-anchor="middle" font-size="12" fill="#2E7D32">V = ½ × T(s) × Q_max</text>
+                <text x="350" y="147" text-anchor="middle" font-size="10.5" fill="#388E3C">ex. ½×10800×6 = 32 400 m³</text>
+                <rect x="474" y="98" width="215" height="54" rx="6" fill="#FFF8E1" stroke="#F57F17" stroke-width="1.5"/>
+                <text x="582" y="117" text-anchor="middle" font-weight="bold" fill="#E65100">Capacite disponible</text>
+                <text x="582" y="133" text-anchor="middle" font-size="12" fill="#E65100">V_dispo = V(Z_lim) − V(Z_ini)</text>
+                <text x="582" y="147" text-anchor="middle" font-size="10.5" fill="#E65100">ex. 42000−12000 = 30 000 m³</text>
+                <!-- Orifice + vidange -->
+                <rect x="10" y="166" width="215" height="54" rx="6" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1.5"/>
+                <text x="117" y="185" text-anchor="middle" font-weight="bold" fill="#4A148C">Loi d'orifice</text>
+                <text x="117" y="201" text-anchor="middle" font-size="12" fill="#6A1B9A">Q = Cd·Ao·√(2gH)</text>
+                <text x="117" y="215" text-anchor="middle" font-size="10.5" fill="#6A1B9A">H×4 → Q×2 (Q ∝ √H)</text>
+                <rect x="242" y="166" width="215" height="54" rx="6" fill="#E8EAF6" stroke="#283593" stroke-width="1.5"/>
+                <text x="350" y="185" text-anchor="middle" font-weight="bold" fill="#1A237E">Vidange</text>
+                <text x="350" y="201" text-anchor="middle" font-size="12" fill="#283593">T = V / Q_net_moyen</text>
+                <text x="350" y="215" text-anchor="middle" font-size="10.5" fill="#3949AB">ex. 18000/0,5 = 10 h</text>
+                <!-- Alertes -->
+                <rect x="474" y="166" width="215" height="54" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+                <text x="582" y="185" text-anchor="middle" font-weight="bold" fill="#C62828">Prise d'eau limite</text>
+                <text x="582" y="201" text-anchor="middle" font-size="11" fill="#C62828">Grand bassin inutile si</text>
+                <text x="582" y="215" text-anchor="middle" font-size="11" fill="#C62828">la prise est trop petite</text>
+                <!-- Aval + crues successives -->
+                <rect x="10" y="234" width="330" height="44" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="175" y="253" text-anchor="middle" font-weight="bold" fill="#E65100">Effets aval et confluences</text>
+                <text x="175" y="269" text-anchor="middle" font-size="11" fill="#BF360C">Decalage peut augmenter le debit a une confluence · hydrogrammes complets</text>
+                <rect x="355" y="234" width="335" height="44" rx="6" fill="#FCE4EC" stroke="#AD1457" stroke-width="1.5"/>
+                <text x="522" y="253" text-anchor="middle" font-weight="bold" fill="#880E4F">Crues successives</text>
+                <text x="522" y="269" text-anchor="middle" font-size="11" fill="#AD1457">Bassin partiellement plein → capacite reduite · simuler evenements succesifs</text>
+                <!-- Niveau aval -->
+                <rect x="10" y="292" width="330" height="36" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="175" y="310" text-anchor="middle" font-weight="bold" fill="#0D47A1">Niveau aval bloque la restitution</text>
+                <text x="175" y="324" text-anchor="middle" font-size="11" fill="#1565C0">Q_sortant = f(Z_amont, Z_aval) · aval libre ≠ aval en crue</text>
+                <!-- Securite -->
+                <rect x="355" y="292" width="335" height="36" rx="6" fill="#FFF8E1" stroke="#F57F17" stroke-width="1.5"/>
+                <text x="522" y="310" text-anchor="middle" font-weight="bold" fill="#E65100">Efficacite ≠ Securite</text>
+                <text x="522" y="324" text-anchor="middle" font-size="11" fill="#E65100">deux questions separees · arrete 6 aout 2018</text>
+                <!-- Conclusion -->
+                <rect x="10" y="342" width="680" height="40" rx="8" fill="#E0F7FA" stroke="#00838F" stroke-width="2"/>
+                <text x="350" y="360" text-anchor="middle" font-weight="bold" fill="#006064">Stocker ≠ faire disparaitre · Volume total ≠ Volume disponible</text>
+                <text x="350" y="376" text-anchor="middle" font-size="11" fill="#00695C">Identifier le mecanisme avant de choisir le moyen · Examiner remplissage, vidange et consequences aval</text>
+              </svg>`,
+                exercice: {
+                  enonce: '(1) Un bassin reçoit 9 m³/s et restitue 4 m³/s pendant 15 min. Quel volume supplémentaire stocke-t-il ?\n(2) Le volume à la cote limite étudiée est de 55 000 m³. Le bassin contient déjà 17 000 m³. Quelle est la capacité disponible ?\n(3) Un excès de débit triangulaire dure 2 h et atteint 7 m³/s. Calculez son volume.\n(4) Il reste 12 000 m³ à évacuer. Le débit net moyen de vidange vaut 0,4 m³/s. Combien de temps faut-il ?\n(5) Pour un orifice fonctionnant dans les mêmes conditions, la charge passe de 0,5 m à 2 m. Par combien le débit est-il multiplié ?\n(6) Un bassin dispose de 50 000 m³ libres, mais sa prise ne peut absorber que 2 m³/s alors qu\'il faudrait dériver 5 m³/s. Le volume suffit-il à prouver son efficacité ?\n(7) Un bassin diminue de 20 % le débit max à sa sortie. Peut-on annoncer 20 % de hauteur d\'eau en moins dans le village ?\n(8) Pour une crue dépassant l\'objectif d\'écrêtement, un évacuateur fonctionne comme prévu. Est-ce une défaillance ?',
+                  solution: '<strong>(1)</strong> ΔV = (9−4) × 15×60 = 5 × 900 = <strong>4 500 m³</strong>.<br><strong>(2)</strong> V_dispo = 55 000 − 17 000 = <strong>38 000 m³</strong>.<br><strong>(3)</strong> V = ½ × (2×3 600) × 7 = ½ × 7 200 × 7 = <strong>25 200 m³</strong>.<br><strong>(4)</strong> T = 12 000 / 0,4 = 30 000 s = <strong>8 h 20 min</strong>. Des apports supplémentaires changeraient cette durée.<br><strong>(5)</strong> Q₂/Q₁ = √(2/0,5) = √4 = <strong>2</strong> — le débit double dans les hypothèses de la loi d\'orifice.<br><strong>(6)</strong> Non — la capacité d\'alimentation empêche de mobiliser le stockage au rythme nécessaire. Il faut simuler les débits réellement dérivés.<br><strong>(7)</strong> Non — la relation entre débit et niveau dépend de la géométrie, des apports intermédiaires et des conditions aval. La hauteur doit être évaluée au droit du village.<br><strong>(8)</strong> Non — son fonctionnement peut appartenir au comportement prévu de l\'ouvrage. Réduction insuffisante et défaillance structurelle sont deux situations différentes.',
+                },
+              }, // fin gem-pi5
+
             ],
           }, // fin gem-m21
 
