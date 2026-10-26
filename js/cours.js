@@ -12135,6 +12135,150 @@ const COURS_DATA = {
                 },
               }, // fin gem-op3
 
+              {
+                id: 'gem-op4',
+                titre: 'Études de dangers et organisation de l\'exploitation',
+                fiche: {
+                  intro: 'Une étude de dangers (EDD) ne vaut que si ses conclusions guident l\'exploitation quotidienne. Elle identifie les performances réelles des ouvrages, leurs limites et les conséquences possibles d\'un dépassement ou d\'une défaillance. Le passage de l\'analyse technique à l\'organisation opérationnelle — consignes, délais, exercices, actualisation — est l\'enjeu central. Commander une étude ne transfère pas l\'exploitation au bureau d\'études.',
+                  points: [
+                    '📋 L\'EDD répond à six questions liées : quels ouvrages assurent la protection, contre quels événements, dans quelles conditions fonctionnent-ils, comment peuvent-ils défaillir, quelles conséquences en résultent, quelles mesures maîtrisent ces risques. Elle associe caractéristiques physiques, environnement et exploitation.',
+                    '⚖️ Champ d\'application (Code de l\'environnement) : systèmes d\'endiguement toutes classes, aménagements hydrauliques, barrages classes A et B. Réalisation par un organisme agréé (art. R. 214-116). Le gestionnaire s\'approprie les résultats, les transmet au préfet avec ses engagements.',
+                    '📁 5 documents complémentaires : dossier technique (que sait-on ?), EDD (quelles performances et dangers ?), document d\'organisation (qui fait quoi ?), consignes opérationnelles (quelle action concrète ?), registre (que s\'est-il passé ?). Une consigne peut reprendre une conclusion d\'EDD sans en remplacer la justification technique.',
+                    '🗂️ Structure réglementaire d\'une EDD système d\'endiguement (arrêté 7 avril 2017) : résumé non technique + document A (synthèse : système, zone protégée, protection, organisation) + document B (analyses et justifications). Simplifier la présentation ≠ supprimer les hypothèses et incertitudes.',
+                    '🔍 Inventaire des connaissances : chaque donnée doit préciser ce qu\'elle permet de connaître réellement (plan ancien = état actuel ?, levé = date et référentiel ?, sondage = représentatif ?). Une hypothèse adoptée faute de mesure ne doit pas devenir, au fil des versions, un fait présenté comme certain.',
+                    '⚡ Dépendance commune : deux équipements ne constituent pas deux protections indépendantes si une cause commune peut les rendre simultanément indisponibles. Ex. : deux pompes sur le même tableau électrique exposé à l\'inondation ; groupe électrogène stocké dans le local inondé contenant le tableau. Il faut vérifier l\'indépendance réelle, les délais et les conditions d\'utilisation.',
+                    '📊 Probabilité conditionnelle : P(E) = probabilité d\'un événement ; P(D|E) = probabilité de défaillance sachant cet événement ; P(E∩D) = P(E)×P(D|E). Ex. : P(E)=0,02 × P(D|E)=0,10 → P(E∩D)=0,002. Ce résultat ne représente que la branche étudiée, pas l\'ensemble des risques.',
+                    '⏱️ Marge temporelle : T_marge = T_disponible − T_détection − T_décision − T_mobilisation − T_action. Si T_marge ≤ 0, l\'organisation ne permet pas d\'achever l\'action. Le temps disponible commence à un événement de référence clairement défini, pas à l\'ouverture d\'une brèche.',
+                    '📅 Distinctions performance actuelle / transitoire / future : un niveau de protection dépendant d\'une réparation future ne doit pas être présenté comme déjà assuré. Une consigne reposant sur une équipe non encore constituée n\'est pas opérationnelle.',
+                    '🔄 Actualisation périodique des EDD (art. R. 214-117) : classe A = 10 ans, classe B = 15 ans, classe C = 20 ans. Ces échéances ne dispensent pas de traiter une anomalie ou une modification entre deux actualisations. Une recommandation non réalisée reste un sujet à traiter, même si elle figure déjà dans un rapport.',
+                    '🚨 Trois messages distincts vers les autorités : (1) phénomène naturel préoccupant annoncé, (2) défaillance ou dépassement plausible, (3) entrée d\'eau ou rupture constatée. Attendre la rupture constatée peut laisser trop peu de temps pour protéger les personnes.',
+                    '🏋️ Exercices et tests : vérifier que les contacts fonctionnent, que les clés et matériels sont accessibles, que les équipes comprennent les consignes et que les délais sont réalistes. Une difficulté observée révèle une amélioration nécessaire avant un événement réel — ce n\'est pas un échec.',
+                  ],
+                  formules: [
+                    'Probabilité d\'un scénario (branche) : P(E∩D) = P(E) × P(D|E) — ne représente que la branche étudiée, pas le risque total du système',
+                    'Marge temporelle : T_marge = T_disponible − T_détection − T_décision − T_mobilisation − T_action (min) — si ≤ 0, l\'organisation n\'est pas compatible avec le délai',
+                  ],
+                  retenir: 'EDD = analyse performances + limites + dangers. Organisme agréé réalise, gestionnaire s\'approprie. Champ : SE toutes classes + AH + barrages A/B. Structure : résumé NT + doc A + doc B. Actualisation : A=10 ans, B=15 ans, C=20 ans. Dépendance commune = cause unique rendant plusieurs moyens indisponibles. P(E∩D)=P(E)×P(D|E). T_marge = T_dispo − détection − décision − mobilisation − action. 3 états : actuel / transitoire / futur. 3 messages : phénomène annoncé / défaillance plausible / rupture constatée. Exercices = vérification de l\'organisation réelle. Recommandation non réalisée = sujet à traiter.',
+                  sections: [
+                    {
+                      titre: 'Objectifs et structure de l\'EDD',
+                      ss: [
+                        {
+                          titre: 'À quoi sert une EDD et qui est concerné',
+                          texte: 'L\'EDD répond à six questions : quels ouvrages assurent la protection, contre quels événements, dans quelles conditions, comment peuvent-ils défaillir, quelles conséquences, quelles mesures. Elle ne se limite pas à décrire les ouvrages : elle doit permettre de prendre des décisions. Champ d\'application (Code de l\'environnement) : systèmes d\'endiguement toutes classes (pas seulement A et B), aménagements hydrauliques, barrages classes A et B. Réalisation par un organisme agréé (art. R. 214-116). Structure réglementaire (arrêté du 7 avril 2017) : résumé non technique (fidèle aux limites), document A (synthèse : système, zone protégée, protection, organisation), document B (analyses et justifications techniques). Simplifier la présentation ne signifie pas supprimer les hypothèses ou les incertitudes. Rôles : le gestionnaire fournit les données, s\'approprie les résultats, les transmet au préfet avec ses engagements. Commander une étude ne transfère pas l\'exploitation quotidienne au bureau d\'études. Les exploitants et agents de terrain apportent leur connaissance opérationnelle — elle doit intervenir pendant l\'étude, pas seulement lors de sa restitution.',
+                        },
+                        {
+                          titre: 'Documents complémentaires et périmètre d\'analyse',
+                          texte: '7 documents distincts et complémentaires : dossier technique (que sait-on de l\'ouvrage et de son histoire ?), étude de dangers (performances et risques justifiés ?), document d\'organisation (qui fait quoi ?), consignes opérationnelles (quelle action concrète ?), registre (que s\'est-il passé ?), rapport de surveillance (résultats du suivi sur la période ?), plan communal de sauvegarde (missions de sauvegarde de la commune ?). Une consigne peut reprendre une conclusion d\'EDD sans en remplacer la justification. Une analyse détaillée n\'est pas toujours utilisable directement par une équipe d\'astreinte. Périmètre : tronçons de digue, murs et fermetures, conduites traversantes, équipements hydrauliques, raccordements, appuis naturels, zones susceptibles de recevoir de l\'eau. Exemple : limiter l\'étude au remblai principal ferait manquer un passage routier dont la fermeture conditionne toute la protection. Inventaire des connaissances : plan ancien = état actuel ?, levé = date et référentiel connus ?, sondage = représentatif ?, essai de fermeture = réalisé avec les moyens réellement disponibles ? Une hypothèse adoptée faute de mesure ne doit pas devenir, au fil des versions, un fait présenté comme certain.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Analyses techniques et scénarios',
+                      ss: [
+                        {
+                          titre: 'Sollicitations, scénarios et dépendances communes',
+                          texte: 'Sollicitations : une crue ne se réduit pas à une cote maximale. On examine : montée, durée, décrue, vitesses, affluents, embâcles, conditions aval. En contexte maritime : niveau, vagues et leur combinaison. Ne pas combiner des valeurs maximales de phénomènes incompatibles. Familles de scénarios (pédagogiques) : fonctionnement attendu, dépassement, défaillance d\'un composant, situation dégradée (travaux), événements combinés. L\'objectif est de couvrir les mécanismes pertinents, pas de multiplier des simulations quasi-identiques. Analyse des dépendances communes : deux équipements ne constituent pas deux protections indépendantes si une cause unique peut les rendre simultanément indisponibles. Exemples : deux pompes sur le même tableau électrique exposé à l\'inondation ; deux capteurs sur la même alimentation ; groupe électrogène stocké dans le local inondé contenant le tableau — sa présence ne démontre pas une continuité de service. Il faut vérifier l\'indépendance réelle, les délais de mise en œuvre et les conditions d\'utilisation. Analyse cause → défaillance → conséquence : distinguer ce qui déclenche, ce qui se dégrade et ce que cela provoque — une action sur les conséquences ne supprime pas nécessairement la cause.',
+                        },
+                        {
+                          titre: 'Probabilités, modélisations et incertitudes',
+                          texte: 'Probabilité conditionnelle : P(E) = probabilité d\'un événement ; P(D|E) = probabilité de défaillance sachant cet événement. Pour une branche correctement définie : P(E∩D) = P(E)×P(D|E). Ex. : 0,02 × 0,10 = 0,002. Ce résultat ne représente que la branche étudiée — d\'autres événements et défaillances contribuent au risque. Ne pas additionner des scénarios qui se recouvrent comme s\'ils étaient disjoints. Modélisation des conséquences : emprise inondée, hauteurs, vitesses, temps d\'arrivée, durées de submersion. Pour une brèche : résultats très dépendants de sa localisation, géométrie et cinétique d\'ouverture. Une carte calculée représente les conséquences des hypothèses choisies, pas la photographie d\'un événement futur. Les maxima de hauteur et de vitesse ne sont pas nécessairement simultanés — examiner les séries temporelles si besoin. La précision graphique ne doit pas être confondue avec la précision physique du calcul. Incertitudes : hydrologie, topographie, matériaux, comportement d\'un équipement, paramètres de brèche, délais humains. Analyse de sensibilité : faire varier les hypothèses pour observer leurs effets. Ex. fictif : brèche → route atteinte en 25, 40 ou 60 min selon hypothèse — retenir uniquement 60 min pour l\'organisation serait fragile. Expliquer quelles décisions restent valables malgré les incertitudes et lesquelles nécessitent des données supplémentaires.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'De la conclusion à l\'action opérationnelle',
+                      ss: [
+                        {
+                          titre: 'Traduire une recommandation en consigne vérifiable',
+                          texte: 'Distinguer performance actuelle, transitoire (travaux en cours) et future (après travaux). Un niveau de protection dépendant d\'une réparation future ≠ déjà assuré. Une consigne reposant sur une équipe non encore constituée ≠ opérationnelle. Traduction opérationnelle : passage critique à fermer → procédure, responsables et essais ; fondation insuffisamment connue → investigations ciblées ; risque d\'obstruction → contrôle et entretien adaptés ; accès potentiellement coupé → positionnement anticipé ; dépendance électrique commune → analyse et adaptation du secours. Chaque action devrait préciser : responsable, échéance, moyens et preuve de réalisation. Consigne utilisable : quel événement déclenche l\'action ?, qui décide ?, qui réalise ?, avec quels moyens ?, jusqu\'à quand l\'action est-elle possible ?, comment vérifier son achèvement ?, que faire si elle échoue ?, qui informer ? Marge temporelle : T_marge = T_disponible − T_détection − T_décision − T_mobilisation − T_action. Si T_marge ≤ 0 : l\'organisation n\'est pas compatible. Il faut aussi considérer les incertitudes, accès, tâches concurrentes et vitesse d\'une crue plus rapide. Le temps disponible commence à un événement de référence défini, pas à l\'ouverture d\'une brèche.',
+                        },
+                        {
+                          titre: 'Coordination, exercices et actualisation',
+                          texte: 'Distinction des responsabilités : le gestionnaire surveille les ouvrages et transmet les informations techniques. Les autorités compétentes organisent la sauvegarde et les secours. Trois messages distincts : (1) phénomène naturel préoccupant annoncé, (2) défaillance ou dépassement plausible, (3) entrée d\'eau ou rupture constatée. Attendre la rupture constatée peut laisser trop peu de temps. La coordination doit préciser : interlocuteurs, informations utiles, moyens de communication, modalités de confirmation de réception, solutions en cas d\'indisponibilité. Exercices : vérifier que les contacts fonctionnent, que les clés et matériels sont accessibles, que les équipes comprennent les consignes, que les délais sont réalistes. Une difficulté observée révèle une amélioration nécessaire avant un événement réel. Exemple : la procédure prévoit deux équipes simultanées, mais les mêmes agents figurent dans les deux listes — l\'exercice révèle une incompatibilité que le dossier papier masquait. Actualisation périodique (art. R. 214-117) : classe A = 10 ans, classe B = 15 ans, classe C = 20 ans. Ces délais ne dispensent pas de traiter une anomalie ou modification entre deux actualisations. Un suivi interne doit enregistrer les changements d\'ouvrages, incidents, travaux, résultats d\'essais et avancement des engagements. Une recommandation non réalisée reste un sujet à traiter.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'À quoi sert une EDD ?', r: 'Répondre à 6 questions : quels ouvrages, contre quels événements, dans quelles conditions, comment défaillir, quelles conséquences, quelles mesures. Elle permet de prendre des décisions — ne se limite pas à décrire les ouvrages.', expl: 'Commander une étude ne transfère pas l\'exploitation quotidienne au bureau d\'études. Le gestionnaire doit s\'approprier les résultats et porter ses engagements.' },
+                  { q: 'Quels ouvrages sont soumis à EDD ?', r: 'Systèmes d\'endiguement (toutes classes, y compris C), aménagements hydrauliques, barrages classes A et B. Réalisation par organisme agréé (art. R. 214-116).', expl: 'Tous les systèmes d\'endiguement sont concernés, pas seulement ceux de classe A. Ne pas confondre les catégories — un barrage peut être élément d\'un aménagement hydraulique.' },
+                  { q: 'Quelle est la structure réglementaire d\'une EDD pour un système d\'endiguement ?', r: 'Résumé non technique + document A (synthèse : système, zone protégée, protection, organisation) + document B (analyses et justifications). Arrêté du 7 avril 2017.', expl: 'Simplifier la présentation ne signifie pas supprimer les hypothèses et incertitudes. Un bon résumé non technique reste fidèle aux limites de l\'étude.' },
+                  { q: 'Qu\'est-ce qu\'une dépendance commune dans une EDD ?', r: 'Deux équipements en apparence indépendants partageant une cause de défaillance commune (même alimentation électrique, même accès, même réseau). Une seule cause peut rendre les deux indisponibles simultanément.', expl: 'Ex. : deux pompes sur le même tableau exposé à l\'inondation. Ou groupe électrogène stocké dans le local inondé contenant le tableau. L\'analyse doit vérifier l\'indépendance réelle, les délais et les conditions d\'utilisation.' },
+                  { q: 'Comment calculer P(E∩D) pour une branche de scénario ?', r: 'P(E∩D) = P(E) × P(D|E). Ex. : P(E)=0,02 × P(D|E)=0,10 → 0,002. Ce résultat représente la branche étudiée, pas l\'ensemble des risques du système.', expl: 'Ne pas additionner des scénarios qui se recouvrent. P(E) est la probabilité de l\'événement, P(D|E) la probabilité de défaillance sachant cet événement.' },
+                  { q: 'Comment calculer la marge temporelle d\'une action ?', r: 'T_marge = T_disponible − T_détection − T_décision − T_mobilisation − T_action. Si T_marge ≤ 0, l\'organisation ne permet pas d\'achever l\'action dans le délai.', expl: 'Le temps disponible commence à un événement de référence défini — pas à l\'ouverture d\'une brèche. Il faut aussi considérer les incertitudes, accès, tâches concurrentes et crue plus rapide.' },
+                  { q: 'Pourquoi distinguer performance actuelle, transitoire et future ?', r: 'Un niveau de protection dépendant d\'une réparation future ne doit pas être présenté comme déjà assuré. Une consigne reposant sur une équipe non constituée n\'est pas opérationnelle. La performance annoncée doit correspondre à un état identifiable et vérifiable.', expl: 'Ces trois états doivent rester clairement séparés dans l\'EDD. L\'état transitoire (travaux en cours) peut conduire à des restrictions ou mesures temporaires.' },
+                  { q: 'Quelle est la périodicité d\'actualisation des EDD pour un système d\'endiguement de classe B ?', r: '15 ans à compter de la réception de la précédente étude par le préfet (art. R. 214-117). Le préfet peut demander une actualisation anticipée si des circonstances remettent en cause les hypothèses initiales.', expl: 'Classe A = 10 ans, Classe B = 15 ans, Classe C = 20 ans. Ces délais ne dispensent pas de traiter une anomalie ou modification entre deux actualisations. Une recommandation non réalisée reste à traiter.' },
+                ],
+                schema: `<svg viewBox="0 0 700 410" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
+                <text x="350" y="20" text-anchor="middle" font-size="15" font-weight="bold" fill="#3E2723">Étude de dangers — du diagnostic à l'action</text>
+                <!-- EDD 6 questions -->
+                <rect x="10" y="28" width="680" height="28" rx="5" fill="#EFEBE9" stroke="#5D4037" stroke-width="1.5"/>
+                <text x="350" y="47" text-anchor="middle" font-size="11" fill="#3E2723">EDD : quels ouvrages · contre quels événements · dans quelles conditions · comment défaillir · quelles conséquences · quelles mesures</text>
+                <!-- Structure -->
+                <rect x="10" y="62" width="213" height="44" rx="5" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5"/>
+                <text x="116" y="80" text-anchor="middle" font-weight="bold" fill="#1B5E20">Structure EDD</text>
+                <text x="116" y="96" text-anchor="middle" font-size="10.5" fill="#2E7D32">Résumé NT · Doc A (synthèse) · Doc B (justifications)</text>
+                <!-- Champ application -->
+                <rect x="233" y="62" width="213" height="44" rx="5" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="339" y="80" text-anchor="middle" font-weight="bold" fill="#0D47A1">Champ d'application</text>
+                <text x="339" y="96" text-anchor="middle" font-size="10.5" fill="#1565C0">SE toutes classes · AH · Barrages A/B</text>
+                <!-- Rôles -->
+                <rect x="456" y="62" width="234" height="44" rx="5" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="573" y="80" text-anchor="middle" font-weight="bold" fill="#BF360C">Rôles</text>
+                <text x="573" y="96" text-anchor="middle" font-size="10.5" fill="#E65100">Organisme agréé réalise · Gestionnaire s'approprie</text>
+                <!-- Dépendance commune -->
+                <rect x="10" y="114" width="330" height="50" rx="5" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+                <text x="175" y="132" text-anchor="middle" font-weight="bold" fill="#C62828">Dépendance commune</text>
+                <text x="175" y="148" text-anchor="middle" font-size="11" fill="#C62828">Cause unique → plusieurs moyens indisponibles simultanément</text>
+                <text x="175" y="160" text-anchor="middle" font-size="10.5" fill="#BF360C">2 pompes même tableau · groupe élec. dans local inondé</text>
+                <!-- Probabilité -->
+                <rect x="355" y="114" width="335" height="50" rx="5" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1.5"/>
+                <text x="522" y="132" text-anchor="middle" font-weight="bold" fill="#4A148C">Probabilité conditionnelle</text>
+                <text x="522" y="148" text-anchor="middle" font-size="12" fill="#6A1B9A">P(E∩D) = P(E) × P(D|E)</text>
+                <text x="522" y="162" text-anchor="middle" font-size="11" fill="#7B1FA2">Ex. : 0,02 × 0,10 = 0,002 · branche seulement, pas risque total</text>
+                <!-- Marge temporelle -->
+                <rect x="10" y="172" width="680" height="52" rx="5" fill="#E8EAF6" stroke="#283593" stroke-width="1.5"/>
+                <text x="350" y="190" text-anchor="middle" font-weight="bold" fill="#1A237E">Marge temporelle</text>
+                <text x="350" y="206" text-anchor="middle" font-size="12" fill="#283593">T_marge = T_disponible − T_détection − T_décision − T_mobilisation − T_action</text>
+                <text x="350" y="218" text-anchor="middle" font-size="11" fill="#3949AB">Ex. : 120−10−10−25−45 = 30 min ✓ · 100−10−15−30−50 = −5 min ✗ (organisation inadaptée)</text>
+                <!-- 3 états -->
+                <rect x="10" y="232" width="213" height="44" rx="5" fill="#FFF8E1" stroke="#F57F17" stroke-width="1.5"/>
+                <text x="116" y="250" text-anchor="middle" font-weight="bold" fill="#E65100">3 états</text>
+                <text x="116" y="266" text-anchor="middle" font-size="10.5" fill="#E65100">Actuel · Transitoire (travaux) · Futur</text>
+                <!-- 3 messages -->
+                <rect x="233" y="232" width="213" height="44" rx="5" fill="#FCE4EC" stroke="#AD1457" stroke-width="1.5"/>
+                <text x="339" y="250" text-anchor="middle" font-weight="bold" fill="#880E4F">3 messages d'alerte</text>
+                <text x="339" y="260" text-anchor="middle" font-size="10" fill="#AD1457">Phénomène annoncé · Défaillance plausible</text>
+                <text x="339" y="272" text-anchor="middle" font-size="10" fill="#AD1457">Rupture constatée (trop tard = risque)</text>
+                <!-- Actualisation -->
+                <rect x="456" y="232" width="234" height="44" rx="5" fill="#E0F7FA" stroke="#00838F" stroke-width="1.5"/>
+                <text x="573" y="250" text-anchor="middle" font-weight="bold" fill="#006064">Actualisation EDD</text>
+                <text x="573" y="266" text-anchor="middle" font-size="10.5" fill="#00838F">A=10 ans · B=15 ans · C=20 ans</text>
+                <!-- Consigne -->
+                <rect x="10" y="284" width="330" height="44" rx="5" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.5"/>
+                <text x="175" y="302" text-anchor="middle" font-weight="bold" fill="#1B5E20">Consigne utilisable</text>
+                <text x="175" y="314" text-anchor="middle" font-size="10.5" fill="#2E7D32">Déclencheur · Qui décide/réalise · Moyens · Délai limite</text>
+                <text x="175" y="326" text-anchor="middle" font-size="10.5" fill="#388E3C">Vérification · Si échec · Qui informer</text>
+                <!-- Exercices -->
+                <rect x="355" y="284" width="335" height="44" rx="5" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="522" y="302" text-anchor="middle" font-weight="bold" fill="#BF360C">Exercices</text>
+                <text x="522" y="314" text-anchor="middle" font-size="10.5" fill="#E65100">Contacts · Clés · Matériels · Délais réalistes</text>
+                <text x="522" y="326" text-anchor="middle" font-size="10.5" fill="#E65100">Difficulté observée = amélioration à faire avant crise</text>
+                <!-- Bas -->
+                <rect x="10" y="336" width="680" height="62" rx="7" fill="#EFEBE9" stroke="#5D4037" stroke-width="2"/>
+                <text x="350" y="354" text-anchor="middle" font-weight="bold" fill="#3E2723">De la conclusion technique à l'organisation opérationnelle</text>
+                <text x="350" y="369" text-anchor="middle" font-size="11" fill="#5D4037">Recommandation → responsable + échéance + moyens + preuve de réalisation</text>
+                <text x="350" y="381" text-anchor="middle" font-size="11" fill="#5D4037">Une recommandation non réalisée reste un sujet à traiter, même si elle figure déjà dans un rapport</text>
+                <text x="350" y="396" text-anchor="middle" font-size="10.5" fill="#5D4037">L'étude et l'exploitation doivent se corriger mutuellement quand les faits révèlent un écart</text>
+              </svg>`,
+                exercice: {
+                  enonce: '(1) Un système d\'endiguement de classe C est-il soumis à EDD ?\n(2) Une EDD conclut qu\'un niveau de protection sera justifié après remplacement d\'une fermeture. Peut-on l\'annoncer avant les travaux ?\n(3) Deux pompes sont raccordées au même tableau électrique exposé à l\'inondation. Constituent-elles une redondance complète ?\n(4) P(E)=0,01 et P(D|E)=0,20. Calculez P(E∩D).\n(5) T_disponible=100 min, détection=10, décision=15, mobilisation=30, action=50. L\'organisation est-elle compatible ?\n(6) Une carte indique la hauteur max. et la vitesse max. d\'une cellule. Sont-elles forcément simultanées ?\n(7) Une conduite inconnue est découverte dans une digue. La prochaine actualisation est dans plusieurs années. Peut-on attendre ?\n(8) L\'EDD recommande de "renforcer la préparation à la fermeture". Que manque-t-il pour rendre cette action suivable ?',
+                  solution: '<strong>(1)</strong> Oui — les systèmes d\'endiguement sont soumis à EDD quelle que soit leur classe (A, B ou C).<br><strong>(2)</strong> Non. Il faut distinguer performance actuelle et performance future. Le niveau n\'est pas assuré tant que les travaux ne sont pas achevés et l\'organisation opérationnelle.<br><strong>(3)</strong> Non — une cause commune (panne du tableau exposé) peut rendre les deux pompes indisponibles simultanément. L\'alimentation, la commande et les conditions d\'accès doivent être examinées.<br><strong>(4)</strong> P(E∩D) = 0,01 × 0,20 = <strong>0,002</strong>. Ce résultat représente uniquement la branche étudiée, pas l\'ensemble des risques du système.<br><strong>(5)</strong> T_marge = 100−10−15−30−50 = <strong>−5 min</strong>. L\'organisation ne permet pas d\'achever l\'action dans le délai. Il faut revoir les délais ou l\'organisation.<br><strong>(6)</strong> Non — les maxima de hauteur et de vitesse peuvent survenir à des heures différentes. Pour une analyse nécessitant des valeurs simultanées, il faut examiner les séries temporelles.<br><strong>(7)</strong> Non — il faut examiner les conséquences de cette découverte sur les hypothèses et la sécurité, puis engager les suites appropriées sans attendre l\'échéance périodique.<br><strong>(8)</strong> Un responsable désigné, un contenu précis de l\'action, des moyens identifiés, une échéance fixée, une procédure validée et un critère de vérification — par exemple un exercice démontrant la faisabilité dans les conditions et délais retenus.',
+                },
+              }, // fin gem-op4
+
             ],
           }, // fin gem-m22
 
