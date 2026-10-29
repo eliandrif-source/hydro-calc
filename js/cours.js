@@ -13111,6 +13111,152 @@ const COURS_DATA = {
 
             ],
           }, // fin gem-m23
+          {
+            id: 'gem-m24',
+            name: 'Financement et commande publique',
+            ico: '💰',
+            color: '#1B5E20',
+            colorl: '#E8F5E9',
+            ordre: 24, theme: 'financement',
+            chapitres: [
+              {
+                id: 'gem-f1',
+                titre: 'Budget d\'une opération et coût global',
+                fiche: {
+                  intro: 'Un projet peut être financé à la construction tout en générant des dépenses futures difficiles à supporter. Le budget d\'une opération GEMAPI ne se réduit pas au marché de travaux : il faut chiffrer les études, le foncier, les mesures environnementales, l\'entretien, le renouvellement et la fin de vie. L\'objectif est de produire un budget traçable, compréhensible et actualisable.',
+                  points: [
+                    '📊 3 niveaux de coût : coût des travaux (prestations du chantier) / coût de l\'opération (études + foncier + travaux + accompagnement) / coût global (coût initial + dépenses futures sur une période définie). Une comparaison entre solutions n\'est valable que si leurs périmètres sont identiques.',
+                    '🎯 Point de vue à annoncer avant tout résultat : MO (dépenses et recettes de son budget) / gestionnaire (moyens d\'exploitation) / acteurs publics (dépense publique totale) / évaluation socio-économique (coûts et bénéfices pour la collectivité). Une subvention réduit le besoin du bénéficiaire, elle ne fait pas disparaître les ressources nécessaires.',
+                    '🔢 Estimation par poste : Ci = Qi × Pi. Vérifier le contenu du prix unitaire : deux prix identiques en apparence peuvent couvrir des prestations différentes. Erreurs fréquentes : mètres linéaires vs m², volumes en place vs transportés, tonnes vs m³. Pour convertir : M = ρ × V.',
+                    '🔍 Dépenses souvent oubliées en GEMAPI : accès provisoires, installations de chantier, gestion des eaux pendant les travaux, réseaux à protéger, analyses de sédiments, filières d\'évacuation, remises en état agricoles, contrôles et essais, suivis après travaux, temps interne des agents. Attention au double comptage.',
+                    '💶 TVA : CTTC = CHT × (1 + t). Toutes les lignes ne suivent pas le même traitement : acquisitions, indemnités et prestations à examiner selon leur régime. Ne pas appliquer automatiquement 20 % à la totalité de l\'opération.',
+                    '🏦 FCTVA = compensation forfaitaire de charges de TVA supportées par les bénéficiaires éligibles. ≠ récupération automatique et immédiate de toute la TVA. Identifier les dépenses éligibles, faire confirmer, estimer le versement et son calendrier. Ne pas financer sur un FCTVA supposé acquis.',
+                    '📈 Réserve d\'estimation : répondre à des incertitudes explicites (quantités, accès, sédiments, réseaux, phasage, méthodes). ≠ provision comptable. ≠ autorisation de modifier les marchés. Distinguer aléas techniques et inflation : ne pas imputer à "l\'inflation" une hausse résultant d\'un changement de programme.',
+                    '🤝 Subvention : taux × assiette déterminée (≠ coût total). Plafonds, dépenses admissibles, calendrier et justificatifs à vérifier. Distinguer aides envisagées / demandées / attribuées / encaissées. AP/CP : autorisations de programme (engagements) et crédits de paiement (paiements annuels).',
+                    '💧 Trésorerie : un projet équilibré sur le papier peut manquer de liquidités. Besoin temporaire = dépenses cumulées payées − aides encaissées − ressources propres mobilisées. Le besoin dépend du calendrier des encaissements/décaissements, pas seulement du montant final.',
+                    '📐 Coût global non actualisé : Cglobal = C0 + Σ(Et + Rt) + FN − VN. Avec actualisation : Cactualisé = C0 + Σ(Et + Rt)/(1+r)^t + (FN − VN)/(1+r)^N. Cohérence obligatoire : prix constants → taux réel / prix courants → taux nominal. Valeur résiduelle = valeur encore disponible à l\'horizon, pas nécessairement une recette de vente.',
+                    '🔄 Coût prévisionnel final (pendant l\'exécution) = dépenses réalisées + reste à réaliser + risques résiduels. Éviter le double comptage du financement : si l\'investissement initial est déjà inclus dans la comparaison, ne pas ajouter aussi le remboursement du capital emprunté.',
+                  ],
+                  formules: [
+                    { label: 'Coût d\'un poste', formule: 'Ci = Qi × Pi', variables: [{ sym: 'Ci', desc: 'coût du poste' }, { sym: 'Qi', desc: 'quantité' }, { sym: 'Pi', desc: 'prix unitaire' }] },
+                    { label: 'Masse depuis volume', formule: 'M = ρ × V', variables: [{ sym: 'M', desc: 'masse' }, { sym: 'ρ', desc: 'masse volumique du matériau' }, { sym: 'V', desc: 'volume' }] },
+                    { label: 'TVA', formule: 'C_TTC = C_HT × (1 + t)', variables: [{ sym: 'C_TTC', desc: 'coût TTC' }, { sym: 'C_HT', desc: 'coût hors taxes' }, { sym: 't', desc: 'taux de TVA (ex. 0,20)' }] },
+                    { label: 'Coût global non actualisé', formule: 'C_global = C₀ + Σ(Eₜ + Rₜ) + F_N − V_N', variables: [{ sym: 'C₀', desc: 'coût initial' }, { sym: 'Eₜ', desc: 'exploitation et entretien année t' }, { sym: 'Rₜ', desc: 'renouvellements année t' }, { sym: 'F_N', desc: 'coût de fin de période' }, { sym: 'V_N', desc: 'valeur résiduelle' }] },
+                    { label: 'Coût global actualisé', formule: 'C_act = C₀ + Σ(Eₜ+Rₜ)/(1+r)ᵗ + (F_N−V_N)/(1+r)^N', variables: [{ sym: 'r', desc: 'taux d\'actualisation (réel si prix constants, nominal si prix courants)' }] },
+                    { label: 'Coût prévisionnel final', formule: 'CPF = dépenses réalisées + reste à réaliser + risques résiduels', variables: [] },
+                    { label: 'Besoin temporaire de trésorerie', formule: 'BT = dépenses cumulées payées − aides encaissées − ressources propres mobilisées', variables: [] },
+                  ],
+                  retenir: '3 niveaux : travaux / opération / global. Annoncer le point de vue. Ci = Qi × Pi (vérifier le contenu). M = ρ × V. Oublis fréquents : accès, sédiments, temps interne. CTTC = CHT(1+t). FCTVA ≠ récupération auto. Réserve = incertitudes explicites ≠ provision comptable ≠ autorisation de modifier. Subvention = taux × assiette (≠ coût total). AP/CP. Trésorerie : décalage encaissements/décaissements. Coût global = C0 + Σ(E+R) + FN − VN. Actualisation : cohérence prix/taux. CPF = réalisé + reste + risques.',
+                  sections: [
+                    {
+                      titre: 'Construction budgétaire et gestion des incertitudes',
+                      ss: [
+                        {
+                          titre: 'Périmètre, postes et estimation',
+                          texte: '3 niveaux de coût : coût des travaux (prestations du chantier) / coût de l\'opération (études + foncier + travaux + accompagnement) / coût global (coût initial + dépenses futures sur une période définie). Une comparaison entre solutions n\'est valable que si leurs périmètres sont identiques. Conventions de calcul à préciser avant de chiffrer : périmètre technique, date des prix, traitement TVA, durée d\'analyse, dépenses incluses/exclues, hypothèses de fonctionnement. Postes à décomposer : études préalables, conception et suivi, foncier, travaux, mesures environnementales, accompagnement, mise en service, gestion future. Un poste absent du tableau peut avoir été oublié. Estimation par poste : Ci = Qi × Pi. Vérifier le contenu du prix unitaire — deux prix identiques peuvent couvrir des prestations différentes. Erreurs fréquentes sur les quantités : m linéaires vs m², volumes en place vs transportés, tonnes vs m³. M = ρ × V. Conserver la source de chaque quantité (plan, relevé, modèle ou hypothèse). Dépenses souvent oubliées : accès provisoires, installations de chantier, gestion des eaux pendant les travaux, réseaux à protéger ou déplacer, analyses de sédiments, filières d\'évacuation, remises en état agricoles, contrôles et essais, suivis après travaux, temps interne des agents. Attention au double comptage. Classification investissement/fonctionnement : ne se déduit pas du seul intitulé "travaux", à vérifier avec le service financier. Précision selon le stade : opportunité → faisabilité → avant-projet → projet → consultation → exécution. Pas de pourcentage d\'incertitude universel. Une estimation à l\'euro près peut rester très incertaine si les volumes ou la géotechnique sont mal connus.',
+                        },
+                        {
+                          titre: 'Réserves, TVA, FCTVA et subventions',
+                          texte: 'Réserve d\'estimation : répondre à des incertitudes explicites — quantité de matériaux, difficultés d\'accès, qualité des sédiments, découverte de réseaux, contraintes de phasage. ≠ provision comptable. ≠ autorisation de modifier les marchés. Distinguer inflation (évolution des prix dans le temps) et aléas techniques (quantités, conditions du site, méthodes) : ne pas attribuer à "l\'inflation" une hausse résultant d\'un changement de programme. TVA : CTTC = CHT × (1 + t). 100 k€ HT → 120 k€ TTC à 20 %. Traitement à examiner ligne par ligne : acquisitions, indemnités et prestations selon leur régime. Ne pas appliquer automatiquement 20 % à la totalité. FCTVA = compensation forfaitaire de charges de TVA pour bénéficiaires éligibles. ≠ récupération automatique et immédiate de toute la TVA. Identifier les dépenses éligibles, faire confirmer, estimer le versement et son calendrier. Ne pas financer le projet sur un FCTVA supposé acquis — les régimes peuvent évoluer. Subvention : taux × assiette déterminée. Ex. : 40 % × 800 k€ = 320 k€ (≠ 40 % × 1 106 k€). Conditions : dépenses admissibles, plafonds, calendrier, justificatifs. Distinguer aides envisagées / demandées / attribuées / encaissées. AP/CP : autorisations de programme (encadrent les engagements pluriannuels) et crédits de paiement (paiements annuels correspondants). Trésorerie : besoin temporaire = dépenses cumulées payées − aides encaissées − ressources propres mobilisées. Le besoin dépend du calendrier des encaissements et décaissements, pas seulement du montant final des aides.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Coût global et comparaison de variantes',
+                      ss: [
+                        {
+                          titre: 'Exploitation, renouvellement et coût global',
+                          texte: 'Pour chiffrer l\'exploitation et l\'entretien : opérations nécessaires + fréquence + moyens humains + consommables + prestations externes + contrôles + interventions après événement. Ex. : 2 agents × 6 h × 4 fois/an = 48 heures-agent/an. Ajouter déplacements, compte rendu, gestion des anomalies. Un coût annuel moyen ne dispense pas de prévoir les années comportant des dépenses exceptionnelles. Renouvellement et fin de vie : les composants n\'ont pas tous la même durée de service. Sur la période d\'analyse : renouvellements, grosses réparations, dépose éventuelle, remise en état, valeur résiduelle. La valeur résiduelle = valeur encore disponible à l\'horizon étudié, ≠ nécessairement une recette de vente. Estimer avec la même méthode pour toutes les variantes. Coût global non actualisé : Cglobal = C0 + Σ(Et + Rt) + FN − VN. Coût global actualisé : Cactualisé = C0 + Σ(Et + Rt)/(1+r)^t + (FN − VN)/(1+r)^N. Cohérence obligatoire : prix constants → taux réel / prix courants (intégrant inflation) → taux nominal. Le taux doit être justifié. Exemple de comparaison sur 20 ans (coûts fictifs) : variante A (coût initial 600k, entretien 18k/an, renouvellement 120k en an 10) vs variante B (720k, 10k/an, 60k en an 12). Sans actualisation : A = 1 080k€, B = 980k€. Avec taux réel fictif 3 % : A ≈ 957k€, B ≈ 911k€. La variante B coûte davantage au départ, mais moins sur la période. Cette comparaison suppose des services rendus comparables. Analyse de sensibilité : tester entretien plus fréquent, durée différente, remplacement anticipé, hausse énergétique, changement de taux. Coût prévisionnel final (pendant l\'exécution) = dépenses réalisées + reste à réaliser + risques résiduels. Éviter le double comptage du financement : si l\'investissement est déjà inclus dans la comparaison, ne pas ajouter aussi le remboursement du capital emprunté.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Quels sont les 3 niveaux de coût à distinguer pour une opération GEMAPI ?', r: 'Coût des travaux (prestations du chantier) / coût de l\'opération (études + foncier + travaux + accompagnement) / coût global (coût initial + dépenses futures sur une période définie).', expl: 'Une comparaison entre solutions n\'est valable que si leurs périmètres sont identiques. Ex. : le prix d\'une station de pompage ne comprend pas nécessairement l\'alimentation électrique, les études, l\'accès, la maintenance et le renouvellement.' },
+                  { q: 'Comment calculer le coût d\'un poste à partir des quantités ?', r: 'Ci = Qi × Pi. Il faut ensuite vérifier le contenu exact du prix unitaire : deux prix identiques en apparence peuvent couvrir des prestations différentes.', expl: 'Erreurs fréquentes : confondre mètres linéaires et m², volumes en place et volumes transportés, tonnes et m³. Conserver la source de chaque quantité (plan, relevé, modèle ou hypothèse).' },
+                  { q: 'Quelles sont les dépenses souvent oubliées dans les budgets GEMAPI ?', r: 'Accès provisoires, installations de chantier, gestion des eaux pendant les travaux, réseaux à protéger ou déplacer, analyses de sédiments, filières d\'évacuation, remises en état agricoles, contrôles et essais, suivis après travaux, temps interne des agents.', expl: 'Le temps interne mérite d\'être estimé même lorsqu\'il ne génère pas de facture supplémentaire. Attention au double comptage : une dépense déjà incluse dans un prix de marché ne doit pas être ajoutée une seconde fois.' },
+                  { q: 'Qu\'est-ce que le FCTVA et en quoi diffère-t-il d\'une récupération directe de TVA ?', r: 'Le FCTVA est une compensation forfaitaire de charges de TVA pour les bénéficiaires éligibles. Il ≠ récupération automatique et immédiate de toute la TVA. L\'éligibilité dépend des dépenses, du bénéficiaire et des règles applicables.', expl: 'Identifier les dépenses potentiellement éligibles, faire confirmer leur traitement, estimer le versement et son calendrier. Ne pas financer le projet sur un FCTVA supposé acquis — les régimes de versement peuvent évoluer.' },
+                  { q: 'Comment calculer le montant d\'une subvention et quelle erreur fréquente éviter ?', r: 'Montant = taux × assiette déterminée. Ex. : 40 % × 800 k€ = 320 k€. Erreur à éviter : appliquer le taux au coût total de l\'opération si l\'assiette retenue par le financeur est différente.', expl: 'Les conditions peuvent aussi porter sur les dépenses admissibles, les plafonds, le calendrier et les justificatifs. Distinguer aides envisagées, demandées, attribuées et encaissées.' },
+                  { q: 'Pourquoi un projet équilibré sur le papier peut-il manquer de liquidités en cours d\'exécution ?', r: 'Parce que les factures peuvent être payables avant le versement des subventions. Besoin temporaire = dépenses cumulées payées − aides encaissées − ressources propres mobilisées. Le besoin dépend du calendrier des encaissements et décaissements.', expl: 'Une aide attribuée mais versée après les travaux ne supprime pas le besoin de trésorerie : les dépenses doivent pouvoir être payées avant son encaissement.' },
+                  { q: 'Quelle règle de cohérence respecter entre types de prix et taux d\'actualisation ?', r: 'Prix constants (sans inflation) → taux d\'actualisation réel. Prix courants (intégrant l\'inflation) → taux d\'actualisation nominal. Mélanger les deux fausse la comparaison.', expl: 'L\'actualisation ramène les dépenses futures à une date de référence, elle se distingue de l\'inflation et de l\'actualisation contractuelle d\'un prix de marché. Le taux doit être justifié selon l\'analyse.' },
+                  { q: 'Un faible coût initial garantit-il un coût global moindre ?', r: 'Non — l\'entretien annuel plus élevé et les renouvellements peuvent inverser le résultat sur la période d\'analyse. Ex. fictif : variante A (600k initial, 18k/an) vs variante B (720k initial, 10k/an) → sur 20 ans avec actualisation, B est moins coûteuse.', expl: 'La comparaison suppose des services rendus comparables. Elle ne suffit pas si les performances ou les effets écologiques diffèrent. Tester la robustesse : entretien plus fréquent, durée différente, remplacement anticipé, changement de taux.' },
+                ],
+                schema: `<svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
+                <text x="350" y="20" text-anchor="middle" font-size="14" font-weight="bold" fill="#1B5E20">Budget d'une opération · Coût global · Comparaison de variantes</text>
+                <!-- 3 niveaux -->
+                <rect x="10" y="28" width="210" height="48" rx="5" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5"/>
+                <text x="115" y="46" text-anchor="middle" font-weight="bold" fill="#1B5E20">Coût des travaux</text>
+                <text x="115" y="60" text-anchor="middle" font-size="10.5" fill="#2E7D32">Prestations du chantier</text>
+                <text x="115" y="71" text-anchor="middle" font-size="10" fill="#388E3C">Une composante seulement</text>
+                <rect x="230" y="28" width="225" height="48" rx="5" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.5"/>
+                <text x="342" y="46" text-anchor="middle" font-weight="bold" fill="#1B5E20">Coût de l'opération</text>
+                <text x="342" y="60" text-anchor="middle" font-size="10.5" fill="#2E7D32">Études + foncier + travaux + accompagnement</text>
+                <text x="342" y="71" text-anchor="middle" font-size="10" fill="#388E3C">+ mesures env. + mise en service</text>
+                <rect x="465" y="28" width="225" height="48" rx="5" fill="#E8F5E9" stroke="#1B5E20" stroke-width="2"/>
+                <text x="577" y="46" text-anchor="middle" font-weight="bold" fill="#1B5E20">Coût global</text>
+                <text x="577" y="60" text-anchor="middle" font-size="10.5" fill="#2E7D32">Coût initial + dépenses futures</text>
+                <text x="577" y="71" text-anchor="middle" font-size="10" fill="#388E3C">sur une période définie</text>
+                <!-- Formules clés -->
+                <rect x="10" y="84" width="210" height="76" rx="4" fill="#FFF9C4" stroke="#F9A825" stroke-width="1.5"/>
+                <text x="115" y="100" text-anchor="middle" font-weight="bold" fill="#E65100">Estimation</text>
+                <text x="115" y="113" text-anchor="middle" font-size="11" fill="#F57F17">Ci = Qi × Pi</text>
+                <text x="115" y="126" text-anchor="middle" font-size="10.5" fill="#E65100">M = ρ × V</text>
+                <text x="115" y="139" text-anchor="middle" font-size="10.5" fill="#F57F17">CTTC = CHT × (1 + t)</text>
+                <text x="115" y="152" text-anchor="middle" font-size="10" fill="#E65100">Vérifier le contenu de Pi !</text>
+                <rect x="230" y="84" width="225" height="76" rx="4" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="342" y="100" text-anchor="middle" font-weight="bold" fill="#0D47A1">Coût global non actualisé</text>
+                <text x="342" y="113" text-anchor="middle" font-size="10.5" fill="#1565C0">C_gl = C₀ + Σ(Eₜ+Rₜ) + F_N − V_N</text>
+                <text x="342" y="126" text-anchor="middle" font-weight="bold" fill="#0D47A1">Coût global actualisé</text>
+                <text x="342" y="139" text-anchor="middle" font-size="10" fill="#1565C0">C_act = C₀ + Σ(Eₜ+Rₜ)/(1+r)ᵗ</text>
+                <text x="342" y="152" text-anchor="middle" font-size="10" fill="#283593">Prix constants → r réel · Prix courants → r nominal</text>
+                <rect x="465" y="84" width="225" height="76" rx="4" fill="#FCE4EC" stroke="#C62828" stroke-width="1.5"/>
+                <text x="577" y="100" text-anchor="middle" font-weight="bold" fill="#B71C1C">Trésorerie</text>
+                <text x="577" y="113" text-anchor="middle" font-size="10.5" fill="#C62828">BT = dép. payées − aides encaissées</text>
+                <text x="577" y="126" text-anchor="middle" font-size="10.5" fill="#C62828">     − ressources propres mobilisées</text>
+                <text x="577" y="139" text-anchor="middle" font-weight="bold" fill="#B71C1C">Coût prévisionnel final</text>
+                <text x="577" y="152" text-anchor="middle" font-size="10" fill="#C62828">CPF = réalisé + reste à réaliser + risques</text>
+                <!-- Points à retenir -->
+                <rect x="10" y="168" width="335" height="98" rx="5" fill="#E8EAF6" stroke="#3949AB" stroke-width="1.5"/>
+                <text x="177" y="184" text-anchor="middle" font-weight="bold" fill="#1A237E">TVA · FCTVA · Subventions · AP/CP</text>
+                <text x="177" y="197" text-anchor="middle" font-size="10.5" fill="#283593">TVA : vérifier ligne par ligne — ≠ appliquer 20 % à tout</text>
+                <text x="177" y="210" text-anchor="middle" font-size="10.5" fill="#283593">FCTVA = compensation forfaitaire, éligibilité à confirmer</text>
+                <text x="177" y="223" text-anchor="middle" font-size="10" fill="#3949AB">≠ récupération auto · Ne pas financer sur FCTVA supposé acquis</text>
+                <text x="177" y="236" text-anchor="middle" font-size="10.5" fill="#283593">Subvention = taux × assiette (≠ coût total)</text>
+                <text x="177" y="249" text-anchor="middle" font-size="10.5" fill="#283593">AP (engagements pluriannuels) / CP (paiements annuels)</text>
+                <text x="177" y="260" text-anchor="middle" font-size="10" fill="#3949AB">Aides : envisagées ≠ demandées ≠ attribuées ≠ encaissées</text>
+                <rect x="355" y="168" width="335" height="98" rx="5" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="522" y="184" text-anchor="middle" font-weight="bold" fill="#BF360C">Dépenses souvent oubliées</text>
+                <text x="522" y="197" text-anchor="middle" font-size="10.5" fill="#E65100">Accès provisoires · Gestion des eaux · Réseaux</text>
+                <text x="522" y="210" text-anchor="middle" font-size="10.5" fill="#E65100">Analyses sédiments · Filières évacuation</text>
+                <text x="522" y="223" text-anchor="middle" font-size="10.5" fill="#F57F17">Remises en état agricoles · Suivis post-travaux</text>
+                <text x="522" y="236" text-anchor="middle" font-size="10.5" fill="#E65100">Temps interne des agents</text>
+                <text x="522" y="249" text-anchor="middle" font-size="10" fill="#BF360C">Attention au double comptage !</text>
+                <text x="522" y="260" text-anchor="middle" font-size="10" fill="#F57F17">Réserve = incertitudes explicites ≠ provision comptable</text>
+                <!-- Comparaison variantes -->
+                <rect x="10" y="274" width="680" height="74" rx="5" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5"/>
+                <text x="350" y="291" text-anchor="middle" font-weight="bold" fill="#1B5E20">Comparaison de variantes sur 20 ans (exemple pédagogique, €, taux fictif 3 %)</text>
+                <text x="180" y="305" text-anchor="middle" font-weight="bold" font-size="11" fill="#1B5E20">Variante A</text>
+                <text x="510" y="305" text-anchor="middle" font-weight="bold" font-size="11" fill="#1B5E20">Variante B</text>
+                <text x="180" y="318" text-anchor="middle" font-size="10.5" fill="#2E7D32">600k + 20×18k + 120k = 1 080k€</text>
+                <text x="510" y="318" text-anchor="middle" font-size="10.5" fill="#2E7D32">720k + 20×10k + 60k = 980k€</text>
+                <text x="180" y="331" text-anchor="middle" font-size="10.5" fill="#388E3C">Actualisé ≈ 957k€</text>
+                <text x="510" y="331" text-anchor="middle" font-size="10.5" fill="#388E3C">Actualisé ≈ 911k€  ← moins cher sur 20 ans</text>
+                <text x="350" y="342" text-anchor="middle" font-size="10" font-style="italic" fill="#BF360C">Comparaison valide uniquement si services rendus comparables · Tester la sensibilité</text>
+                <!-- Bas -->
+                <rect x="10" y="356" width="680" height="52" rx="7" fill="#FFF9C4" stroke="#F9A825" stroke-width="2"/>
+                <text x="350" y="374" text-anchor="middle" font-weight="bold" fill="#E65100">Budget traçable, compréhensible et actualisable</text>
+                <text x="350" y="389" text-anchor="middle" font-size="11" fill="#F57F17">Chaque montant : source + date + hypothèse · Annoncer le point de vue avant tout résultat</text>
+                <text x="350" y="402" text-anchor="middle" font-size="10.5" fill="#E65100">Précision adaptée au stade · Pas de pourcentage d'incertitude universel</text>
+              </svg>`,
+                exercice: {
+                  enonce: '(1) Un marché de travaux de 500 000 € représente-t-il nécessairement le coût total du projet ?\n(2) Calculer le coût de 1 500 m³ à 32 €/m³.\n(3) Une prestation de 80 000 € HT est soumise à 20 % de TVA. Quel montant TTC prévoir ?\n(4) Une aide de 30 % porte sur une assiette de 600 000 € pour une opération de 900 000 €. Quel montant calculer ?\n(5) Une aide est attribuée mais sera versée après les travaux. Supprime-t-elle le besoin de trésorerie ?\n(6) Une réserve de projet permet-elle de commander librement des travaux supplémentaires ?\n(7) La variante ayant le plus faible coût initial est-elle toujours la moins coûteuse ?\n(8) Peut-on utiliser des prix intégrant l\'inflation avec un taux réel sans adaptation ?',
+                  solution: '<strong>(1)</strong> Non. Il faut ajouter études, foncier, mesures environnementales, accompagnement, entretien futur, etc., sans compter deux fois les dépenses déjà incluses dans le marché.<br><strong>(2)</strong> 1 500 × 32 = 48 000 €. Il reste à vérifier le contenu du prix unitaire (extraction, transport, réemploi ou traitement inclus ?).<br><strong>(3)</strong> 80 000 × 1,20 = 96 000 € TTC.<br><strong>(4)</strong> 600 000 × 30 % = 180 000 €. Appliquer 30 % au coût total (900 000) aurait donné un montant différent et injustifié.<br><strong>(5)</strong> Non. Les dépenses doivent pouvoir être payées avant l\'encaissement de l\'aide. Le besoin de trésorerie dépend du calendrier des encaissements et décaissements.<br><strong>(6)</strong> Non. La réserve répond à des incertitudes identifiées ; les règles budgétaires, contractuelles et réglementaires restent applicables.<br><strong>(7)</strong> Non. L\'entretien annuel et les renouvellements peuvent inverser le résultat sur la durée. Ex. : 600k + 20×18k + 120k = 1 080k€ vs 720k + 20×10k + 60k = 980k€.<br><strong>(8)</strong> Non. Prix courants intégrant l\'inflation → taux nominal cohérent. Mélanger prix courants et taux réel fausse la comparaison.',
+                },
+              }, // fin gem-f1
+
+            ],
+          }, // fin gem-m24
 
         ],
       },
