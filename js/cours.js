@@ -49,6 +49,43 @@ const COURS_DATA = {
                     'ν = μ / ρ — viscosité cinématique (m²/s)',
                     'γ = ρ × g — poids volumique (N/m³)',
                   ],
+                                    sections: [
+                    {
+                      titre: "Masse volumique, densité et comportement thermique",
+                      ss: [
+                        {
+                          titre: "Masse volumique de l'eau",
+                          texte: "La masse volumique de l'eau (ρ) atteint son maximum à 4 °C, valant 999,97 kg/m³, et diminue légèrement de part et d'autre. En pratique hydraulique, on retient ρ = 1 000 kg/m³ à 20 °C. Cette valeur intervient dans tous les calculs de pression (P = ρgh) et de débit-masse. La densité d de l'eau par rapport à elle-même vaut 1 par définition.",
+                        },
+                        {
+                          titre: "Variation des propriétés avec la température",
+                          texte: "La température modifie profondément les propriétés de l'eau. La masse volumique passe de 999,8 kg/m³ à 20 °C à 958 kg/m³ à 100 °C. La pression de vapeur saturante Pv augmente de 0,023 bar à 20 °C jusqu'à 1 bar à 100 °C : lorsque la pression locale descend sous Pv, l'eau se vaporise localement (cavitation). La conductivité thermique et la chaleur spécifique varient peu, ce qui rend l'eau excellente pour le transport de chaleur.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Viscosité et régimes d'écoulement",
+                      ss: [
+                        {
+                          titre: "Viscosité dynamique et cinématique",
+                          texte: "La viscosité dynamique μ (Pa·s) quantifie la résistance interne du fluide au cisaillement. La viscosité cinématique ν = μ/ρ (m²/s) est la grandeur la plus utilisée en hydraulique. À 20 °C, ν ≈ 1,0 × 10⁻⁶ m²/s. La viscosité diminue fortement quand la température augmente : à 60 °C, ν ≈ 0,47 × 10⁻⁶ m²/s, soit deux fois moins. Cette dépendance thermique est capitale pour comprendre pourquoi l'eau chaude s'écoule plus facilement dans les conduites.",
+                        },
+                        {
+                          titre: "Nombre de Reynolds et régimes d'écoulement",
+                          texte: "Le nombre de Reynolds Re = V·D/ν compare les forces d'inertie aux forces visqueuses. Pour Re < 2 000, l'écoulement est laminaire (filets parallèles, faibles pertes). Pour Re > 4 000, il est turbulent (tourbillons, pertes plus importantes). Entre 2 000 et 4 000 se trouve la zone de transition. En distribution d'eau (D = 100 mm, V = 1 m/s, ν = 10⁻⁶ m²/s), Re ≈ 100 000 : l'écoulement est toujours turbulent en pratique.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Tension superficielle et propriétés particulières",
+                      ss: [
+                        {
+                          titre: "Tension superficielle",
+                          texte: "La tension superficielle σ ≈ 0,073 N/m à 20 °C résulte des forces d'attraction entre molécules d'eau en surface. Elle explique la capillarité (montée de l'eau dans les sols fins), la formation de ménisques et la capacité des insectes à marcher sur l'eau. En hydraulique des conduites sous pression, la tension superficielle est négligeable devant les forces de pression, mais elle joue un rôle dans la migration des polluants en milieu poreux.",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'À 20 °C : ρ ≈ 1 000 kg/m³, ν ≈ 10⁻⁶ m²/s. La viscosité diminue avec la chaleur.',
                 },
                 flashcards: [
@@ -100,6 +137,34 @@ const COURS_DATA = {
                     'P = P₀ + ρgh — pression hydrostatique',
                     'Π = ρ·g·V — poussée d\'Archimède (N)',
                     'H_piézo = z + P/(ρg) — charge piézométrique (m)',
+                  ],
+                                    sections: [
+                    {
+                      titre: "Loi fondamentale de l'hydrostatique",
+                      ss: [
+                        {
+                          titre: "Pression hydrostatique et hauteur de colonne d'eau",
+                          texte: "Dans un fluide au repos, la pression augmente avec la profondeur selon la loi P = P₀ + ρgh, où P₀ est la pression en surface, ρ la masse volumique et h la profondeur. Cette relation donne la correspondance pratique : 1 bar de pression ≈ 10 mètres de colonne d'eau (10 m CE). Ainsi une conduite sous 4 bar supporte une pression équivalente à 40 m de hauteur d'eau. Ce calcul s'applique à la conception des réservoirs, des conduites et des ouvrages de génie civil hydraulique.",
+                        },
+                        {
+                          titre: "Pression absolue et pression relative",
+                          texte: "La pression absolue est mesurée par rapport au vide absolu (0 Pa). La pression relative (ou manométrique) est mesurée par rapport à la pression atmosphérique locale, qui vaut environ 1,013 bar au niveau de la mer. La relation est : P_abs = P_rel + P_atm. Les manomètres de terrain mesurent généralement des pressions relatives : un manomètre indiquant 3 bar signifie une pression absolue de 4,013 bar. Pour les calculs de cavitation, on utilise toujours les pressions absolues.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Mesure de la pression — piézométrie",
+                      ss: [
+                        {
+                          titre: "Ligne piézométrique",
+                          texte: "La ligne piézométrique représente la hauteur de pression P/(ρg) exprimée en mètres de colonne d'eau, en fonction de la position dans le réseau. Pour une conduite horizontale, la ligne piézométrique descend continûment du point amont (haute pression) vers l'aval (basse pression) en raison des pertes de charge. En un point de mesure, la cote piézométrique = altitude z + hauteur de pression P/(ρg).",
+                        },
+                        {
+                          titre: "Instruments de mesure de pression",
+                          texte: "Les manomètres à aiguille (Bourdon) sont utilisés pour les contrôles ponctuels sur les réseaux AEP. Les capteurs de pression piézorésistifs (signal 4-20 mA) permettent la surveillance en continu dans les systèmes de télégestion. En hydraulique à surface libre (canaux, rivières), la pression est directement liée au niveau d'eau : mesurer le niveau revient à mesurer la pression. Les limnimètres (capteurs de niveau) sont utilisés pour les stations hydrométrique.",
+                        },
+                      ],
+                    },
                   ],
                   retenir: '1 bar ≈ 10 m CE. La pression absolue = pression relative + 1,013 bar atmosphérique.',
                 },
@@ -160,6 +225,34 @@ const COURS_DATA = {
                     'z₁ + P₁/(ρg) + V₁²/(2g) = z₂ + P₂/(ρg) + V₂²/(2g) + h_f — Bernoulli généralisé',
                     'Re = V·D/ν — nombre de Reynolds (sans dimension)',
                   ],
+                                    sections: [
+                    {
+                      titre: "Théorème de Bernoulli",
+                      ss: [
+                        {
+                          titre: "Conservation de la charge totale",
+                          texte: "Le théorème de Bernoulli exprime la conservation de l'énergie mécanique d'un fluide parfait (sans viscosité) entre deux sections d'une conduite : H = z + P/(ρg) + V²/(2g) = constante. H est la charge totale (en mètres). Le terme z est l'énergie de position (altitude), P/(ρg) l'énergie de pression et V²/(2g) l'énergie cinétique. Ces trois termes représentent chacun une hauteur de colonne d'eau exprimée en mètres.",
+                        },
+                        {
+                          titre: "Bernoulli généralisé avec pertes de charge",
+                          texte: "Pour un fluide réel, les frottements dissipent de l'énergie. Le Bernoulli généralisé entre deux sections 1 et 2 s'écrit : z₁ + P₁/(ρg) + V₁²/(2g) = z₂ + P₂/(ρg) + V₂²/(2g) + hf₁₋₂, où hf représente les pertes de charge entre les deux sections. En cas de pompe, on ajoute la hauteur manométrique totale Hm : on injecte de l'énergie au fluide. Cette équation est le fondement de tout dimensionnement hydraulique.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Applications pratiques de Bernoulli",
+                      ss: [
+                        {
+                          titre: "Effet Venturi",
+                          texte: "L'effet Venturi illustre le théorème de Bernoulli : dans un rétrécissement de conduite, la vitesse augmente et la pression diminue. Si la section passe de S₁ à S₂ < S₁, la vitesse passe de V₁ à V₂ = V₁·S₁/S₂ (continuité). La chute de pression associée est ΔP = ρ(V₂² - V₁²)/2. Ce phénomène est utilisé dans les débitmètres Venturi, les aspirateurs à jet d'eau (venturi-pompe) et peut provoquer de la cavitation si la pression locale descend sous la pression de vapeur saturante.",
+                        },
+                        {
+                          titre: "Vitesse d'efflux et déversoir",
+                          texte: "Bernoulli permet de calculer la vitesse de sortie d'un orifice dans une paroi : V = √(2gh), formule de Torricelli (h = hauteur de liquide au-dessus de l'orifice). Pour les déversoirs à crête mince, le débit est Q = C × L × h^(3/2) où C est un coefficient de débit et L la longueur de déversoir. Ces formules sont utilisées pour calibrer les déversoirs d'orage et mesurer les débits en rivière.",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'Bernoulli = conservation de la charge totale H = z + P/(ρg) + V²/(2g). Les pertes de charge h_f réduisent H.',
                 },
                 flashcards: [
@@ -216,6 +309,34 @@ const COURS_DATA = {
                     'V = K·Rh^(2/3)·I^(1/2) — Manning-Strickler (m/s)',
                     'Δhs = ξ·V²/(2g) — pertes singulières (m)',
                     'J = Δh/L — gradient hydraulique (m/m)',
+                  ],
+                                    sections: [
+                    {
+                      titre: "Pertes de charge régulières",
+                      ss: [
+                        {
+                          titre: "Formule de Darcy-Weisbach",
+                          texte: "Les pertes de charge régulières (ou linéaires) sont dues au frottement du fluide contre les parois sur toute la longueur L d'une conduite : J = λ × (L/D) × V²/(2g), où J est la perte de charge en mètres, λ le coefficient de frottement (sans dimension), D le diamètre et V la vitesse moyenne. Ce coefficient λ dépend du régime d'écoulement (Re) et de la rugosité relative ε/D de la conduite (fonte, PVC, acier...).",
+                        },
+                        {
+                          titre: "Détermination du coefficient de frottement",
+                          texte: "En régime turbulent rugueux, le coefficient λ est déterminé par l'abaque de Moody ou par la formule de Colebrook-White (implicite). Pour les conduites en eau potable, on retient souvent λ ≈ 0,02 pour les conduites plastiques nouvelles. La formule simplifiée de Manning-Strickler Q = K × S × Rh^(2/3) × i^(1/2) est très utilisée pour les conduites à surface libre et les canaux, K étant le coefficient de Strickler (80-100 pour béton lisse, 30-50 pour rivière naturelle).",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Pertes de charge singulières",
+                      ss: [
+                        {
+                          titre: "Calcul des pertes singulières",
+                          texte: "Les pertes de charge singulières (ou locales) se produisent aux changements de section, coudes, vannes, raccords et branchements. Elles sont exprimées sous la forme : hs = ξ × V²/(2g), où ξ est un coefficient adimensionnel caractéristique de l'obstacle (ξ ≈ 0,3 pour un coude à 90°, ξ ≈ 1 à 10 pour une vanne selon son ouverture). Pour les réseaux complexes, les pertes singulières sont souvent estimées à 10-20 % des pertes régulières.",
+                        },
+                        {
+                          titre: "Bilan des pertes de charge dans un réseau",
+                          texte: "Dans un réseau réel, les pertes de charge totales entre deux points sont la somme de toutes les pertes régulières et singulières rencontrées sur le trajet. La courbe de réseau représente cette somme en fonction du débit : Hreseau = Hstatique + k×Q². Plus le débit est élevé, plus les pertes augmentent (en Q²). Cette courbe est croisée avec la courbe de pompe pour trouver le point de fonctionnement.",
+                        },
+                      ],
+                    },
                   ],
                   retenir: 'Les pertes de charge totales = Σ pertes régulières + Σ pertes singulières. Elles s\'additionnent dans le Bernoulli généralisé.',
                 },
@@ -276,6 +397,34 @@ const COURS_DATA = {
                     'NPSH_dispo = (P_asp - P_vap)/(ρg) - h_asp — charge nette disponible',
                     'η = ρgQH / P_moteur — rendement global (sans dimension)',
                     'P = ρ·g·Q·H / η — puissance absorbée (W)',
+                  ],
+                                    sections: [
+                    {
+                      titre: "Pompes centrifuges et courbes caractéristiques",
+                      ss: [
+                        {
+                          titre: "Hauteur manométrique totale et courbe pompe",
+                          texte: "La hauteur manométrique totale HMT est la hauteur d'eau équivalente à l'énergie fournie par la pompe au fluide. Elle est mesurée comme la différence de charge entre le refoulement et l'aspiration. La courbe pompe HMT = f(Q) est fournie par le constructeur : HMT diminue quand le débit Q augmente. Le rendement maximal (η_max ≈ 70-85 %) est atteint au point de fonctionnement nominal. La puissance absorbée est P = ρgQH/η.",
+                        },
+                        {
+                          titre: "Point de fonctionnement",
+                          texte: "Le point de fonctionnement d'une installation est l'intersection de la courbe pompe (HMT = f(Q) décroissante) avec la courbe de réseau (H_res = H_stat + k×Q², croissante). C'est le seul point où l'énergie fournie par la pompe compense exactement les pertes et la hauteur statique. Si l'installation change (vanne fermée, tuyau bouché), le point de fonctionnement se déplace sur les courbes. Pour deux pompes en série, les HMT s'additionnent ; en parallèle, les débits s'additionnent.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Cavitation et NPSH",
+                      ss: [
+                        {
+                          titre: "Phénomène de cavitation",
+                          texte: "La cavitation se produit lorsque la pression locale dans la roue de la pompe descend en dessous de la pression de vapeur saturante Pv de l'eau. Des bulles de vapeur se forment et implosent violemment, causant bruit, vibrations et érosion rapide des aubages. La cavitation se manifeste par un bruit de gravier dans la pompe, une chute du débit et une dégradation des performances. Elle est à éviter absolument car elle détruit la pompe en quelques heures.",
+                        },
+                        {
+                          titre: "Critère NPSH",
+                          texte: "Le NPSH (Net Positive Suction Head) est la marge de pression disponible à l'aspiration pour éviter la cavitation. Le NPSH disponible (NPSHd) dépend de l'installation : hauteur géométrique d'aspiration, pertes de charge à l'aspiration, pression atmosphérique et température de l'eau. Le NPSH requis (NPSHr) est une donnée constructeur pour chaque pompe. La condition de bon fonctionnement est : NPSHd > NPSHr + marge de sécurité (0,5 à 1 m). Pour améliorer NPSHd, on réduit la hauteur d'aspiration ou on augmente la pression d'alimentation.",
+                        },
+                      ],
+                    },
                   ],
                   retenir: 'Le point de fonctionnement = intersection pompe-réseau. Toujours vérifier NPSH_dispo > NPSH_requis pour éviter la cavitation.',
                 },
@@ -345,6 +494,34 @@ const COURS_DATA = {
                     'pH = -log[H⁺] — définition du pH',
                     'O₂ sat. (mg/L) ≈ 14,6 – 0,39·T (approximation pratique entre 0 et 30 °C)',
                   ],
+                                    sections: [
+                    {
+                      titre: "Paramètres physiques de l'eau",
+                      ss: [
+                        {
+                          titre: "Température et turbidité",
+                          texte: "La température de l'eau potable doit être inférieure à 25 °C pour le confort et inférieures à 12 °C pour limiter le développement bactérien. La turbidité mesure la transparence de l'eau par la diffusion de lumière par les particules en suspension. Elle s'exprime en NTU (Nephelometric Turbidity Unit). La norme eau potable impose une turbidité inférieure à 1 NTU en sortie de traitement et à 0,3 NTU à la membrane de filtration. Une turbidité élevée protège les micro-organismes contre la désinfection.",
+                        },
+                        {
+                          titre: "Conductivité électrique",
+                          texte: "La conductivité électrique mesure la capacité de l'eau à conduire le courant, proportionnelle à la concentration en ions dissous. Elle s'exprime en µS/cm. Une eau pure distillée a une conductivité proche de 0 µS/cm. L'eau de pluie vaut environ 20-50 µS/cm. L'eau potable typique se situe entre 200 et 1 000 µS/cm. Une conductivité élevée (> 2 500 µS/cm) dépasse la valeur guide européenne et peut indiquer une minéralisation excessive ou une pollution aux sels.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Paramètres chimiques fondamentaux",
+                      ss: [
+                        {
+                          titre: "pH et équilibre acido-basique",
+                          texte: "Le pH mesure l'acidité ou l'alcalinité de l'eau sur une échelle logarithmique de 0 à 14. Un pH = 7 correspond à la neutralité à 25 °C. L'eau potable doit avoir un pH compris entre 6,5 et 9 selon la réglementation française. Un pH trop bas (eau acide) provoque la corrosion des canalisations et lixiviation du plomb ou du cuivre. Un pH trop élevé diminue l'efficacité de la désinfection au chlore et peut provoquer des incrustations calcaires.",
+                        },
+                        {
+                          titre: "Oxygène dissous",
+                          texte: "L'oxygène dissous (OD) est essentiel à la vie aquatique. À 20 °C, la concentration de saturation est de 9,1 mg/L. Une eau bien oxygénée contient plus de 8 mg/L d'OD. En dessous de 5 mg/L, les poissons sont en stress. En dessous de 2 mg/L (hypoxie), on observe la mort des espèces sensibles et le développement de bactéries anaérobies productrices de H₂S. L'eutrophisation, les rejets de matières organiques et les températures élevées réduisent l'OD.",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'pH 6,5–9, turbidité < 1 NTU, conductivité reflet de la minéralisation, O₂ dissous indicateur de vie aquatique.',
                 },
                 flashcards: [
@@ -399,6 +576,34 @@ const COURS_DATA = {
                     'TH (°f) = (Ca²⁺ en mg/L / 4,01) + (Mg²⁺ en mg/L / 2,43)',
                     'IL = pH_réel – pH_s  (pH_s calculé en fonction de TH, TAC, T°, conductivité)',
                     '1 °f = 10 mg/L CaCO₃ = 0,1 mmol/L',
+                  ],
+                                    sections: [
+                    {
+                      titre: "Dureté et titre alcalimétrique",
+                      ss: [
+                        {
+                          titre: "Titre hydrotimétrique (TH) — dureté",
+                          texte: "Le titre hydrotimétrique (TH) mesure la concentration en ions calcium Ca²⁺ et magnésium Mg²⁺, responsables de la dureté de l'eau. Il s'exprime en degrés français (°f) : 1°f = 4 mg/L de Ca²⁺ ou équivalent. Une eau douce a TH < 15°f (Bretagne, Massif central), une eau dure TH > 30°f (régions calcaires). L'eau dure forme du tartre (calcaire) dans les chauffe-eau, machines à laver et chaudières. Au-delà de 40°f, un adoucissement peut être nécessaire.",
+                        },
+                        {
+                          titre: "Titre alcalimétrique complet (TAC)",
+                          texte: "Le TAC mesure la concentration en bicarbonates (HCO₃⁻) et carbonates (CO₃²⁻) qui constituent le pouvoir tampon de l'eau, c'est-à-dire sa capacité à résister aux variations de pH. Il s'exprime en °f (1°f = 6,1 mg/L HCO₃⁻). Une eau avec un bon TAC (> 12°f) est naturellement stable vis-à-vis du pH. Un TAC faible rend l'eau agressive vis-à-vis des matériaux cimentaires. L'indice de Langelier (IL) combine le pH réel et le pH de saturation en calcite pour diagnostiquer le comportement de l'eau.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Équilibre calco-carbonique et traitement",
+                      ss: [
+                        {
+                          titre: "Indice de Langelier et comportement de l'eau",
+                          texte: "L'indice de Langelier IL = pH - pHs compare le pH réel de l'eau à son pH de saturation en calcite (pHs). Si IL > 0, l'eau est incrustante (tend à déposer du calcaire, protégeant les canalisations). Si IL < 0, l'eau est agressive (tend à dissoudre le calcaire et à corroder les canalisations métalliques). L'eau idéale pour la distribution a un IL légèrement positif (+0,2 à +0,5) pour former une couche protectrice sans former de tartre excessif.",
+                        },
+                        {
+                          titre: "Traitements de correction de l'équilibre",
+                          texte: "Pour une eau agressive (IL < 0), on peut ajouter du lait de chaux (Ca(OH)₂) ou du calcaire concassé (reminéralisation par percolation) pour augmenter le pH et la minéralisation. Pour une eau trop dure ou incrustante, on utilise des adoucisseurs par échangeurs d'ions (remplacement des Ca²⁺/Mg²⁺ par Na⁺) ou des antitartres (ajout de polyphosphates qui inhibent la cristallisation). L'ajustement du pH par CO₂ gazeux est très précis mais coûteux.",
+                        },
+                      ],
+                    },
                   ],
                   retenir: 'TH > 30 °f = eau dure (entartrage). IL < 0 = eau agressive (corrosion canalisations). TAC = pouvoir tampon de l\'eau.',
                 },
@@ -465,6 +670,34 @@ const COURS_DATA = {
                   formules: [
                     'Conversion : NO₃⁻ (mg N/L) × 4,43 = NO₃⁻ (mg/L) — attention aux deux expressions',
                   ],
+                                    sections: [
+                    {
+                      titre: "Nitrates, pesticides et origines agricoles",
+                      ss: [
+                        {
+                          titre: "Nitrates — enjeux et normes",
+                          texte: "Les nitrates (NO₃⁻) proviennent principalement des engrais azotés et des déjections animales. La norme eau potable impose une limite de 50 mg/L (directive européenne). Au-delà de 50 mg/L, le risque de méthémoglobinémie (maladie du nourrisson bleu) est documenté. Des valeurs guide de 25 mg/L sont recommandées pour les nourrissons. Les nitrates ne sont éliminés ni par filtration ni par chloration : leur traitement nécessite une dénitrification biologique, une osmose inverse ou une dilution avec une eau peu chargée.",
+                        },
+                        {
+                          titre: "Pesticides et herbicides",
+                          texte: "La norme pour les pesticides en eau potable est de 0,1 µg/L par substance et 0,5 µg/L pour la somme des pesticides. Ces valeurs sont très strictes (ppb) car ces molécules ont des effets perturbateurs endocriniens. Les herbicides (atrazine, désethyl-atrazine, métolachlore) et fongicides contaminent les nappes avec une persistance pluriannuelle. Le traitement passe par le charbon actif en grain (CAG) ou des membranes de nanofiltration/osmose inverse.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Micropolluants émergents et métaux",
+                      ss: [
+                        {
+                          titre: "PFAS et polluants émergents",
+                          texte: "Les PFAS (substances per- et polyfluoroalkylées) sont des polluants persistants qualifiés de 'polluants éternels' car non biodégradables. Depuis janvier 2026, la réglementation française impose une limite de 0,1 µg/L pour chaque PFAS individuel et de 0,5 µg/L pour la somme des 20 PFAS réglementés. Ils proviennent des mousses anti-incendie, emballages alimentaires et revêtements antiadhésifs. Leur traitement nécessite du charbon actif en grain (adsorption) ou une osmose inverse.",
+                        },
+                        {
+                          titre: "Métaux lourds et contaminants inorganiques",
+                          texte: "Les métaux lourds les plus surveill és en eau potable sont le plomb (Pb < 10 µg/L, objectif 5 µg/L en 2036), l'arsenic (As < 10 µg/L) et le nickel (Ni < 20 µg/L). Le plomb provient principalement du lessivage des vieilles canalisations en plomb encore présentes dans les réseaux intérieurs des bâtiments construits avant 1948. Sa réduction passe par le remplacement des branchements plomb et la stabilisation chimique de l'eau (pH légèrement basique, phosphates). L'arsenic est d'origine géologique dans certaines régions.",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'Nitrates < 50 mg/L, pesticides < 0,1 µg/L/substance, PFAS < 0,1 µg/L (norme 2026), Pb < 10 µg/L.',
                 },
                 flashcards: [
@@ -521,6 +754,34 @@ const COURS_DATA = {
                     '1 mg/L = 1 ppm (partie par million) = 1 g/m³',
                     '1 µg/L = 1 ppb (partie par milliard) = 0,001 mg/L',
                     '1 ng/L = 1 ppt (partie par trillion) = 0,000001 mg/L',
+                  ],
+                                    sections: [
+                    {
+                      titre: "Mesures terrain et laboratoire",
+                      ss: [
+                        {
+                          titre: "Paramètres mesurables sur le terrain",
+                          texte: "Certains paramètres doivent être mesurés directement sur le terrain car ils évoluent rapidement après le prélèvement : la température, le pH, l'oxygène dissous, la conductivité et le potentiel redox (Eh). On utilise une sonde multiparamètre portable ou une sonde de plongée à pointe magnétique. Ces appareils mesurent simultanément 5 à 8 paramètres et s'étalonnent sur le terrain avec des solutions étalon. La turbidité est aussi mesurable sur le terrain avec un turbidimètre portable.",
+                        },
+                        {
+                          titre: "Analyses en laboratoire accrédité",
+                          texte: "Les analyses réglementaires de conformité de l'eau potable doivent être réalisées par un laboratoire accrédité COFRAC (Comité Français d'Accréditation). L'accréditation garantit la compétence technique, la traçabilité des mesures et la qualité des résultats. Les analyses les plus sensibles (pesticides, PFAS, HAP, métaux traces) nécessitent des équipements de pointe : spectrométrie de masse (LCMS/MS), chromatographie gazeuse (GC-MS) ou ICP-MS pour les métaux. Le prélèvement doit être effectué dans des flacons adaptés (verre, HDPE) avec conservation au froid.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Unités et ordres de grandeur",
+                      ss: [
+                        {
+                          titre: "Conversions et unités analytiques",
+                          texte: "Les concentrations en micropolluants s'expriment souvent en µg/L (microgrammes par litre), équivalent aux ppb (parties par milliard, 10⁻⁹ en masse/volume). Les niveaux encore plus faibles utilisent le ng/L (nanogrammes par litre) = ppt (parties par trillion, 10⁻¹²). Pour le contrôle des eaux, les mg/L (= ppm) sont courants pour les paramètres majeurs (nitrates, sulfates). Maîtriser ces conversions est essentiel pour interpréter les résultats d'analyse et les comparer aux valeurs réglementaires.",
+                        },
+                        {
+                          titre: "Contrôle sanitaire et autosurveillance",
+                          texte: "Le contrôle sanitaire des eaux destinées à la consommation humaine (EDCH) est réalisé par les ARS (Agences Régionales de Santé) selon une fréquence définie par la réglementation (de quelques fois par an pour les petites UDI à plusieurs fois par semaine pour les grandes). Les exploitants effectuent en parallèle une autosurveillance plus fréquente sur des paramètres sélectionnés. Les résultats sont publiés sur le site du ministère de la Santé et dans la notice d'information annuelle adressée aux abonnés.",
+                        },
+                      ],
+                    },
                   ],
                   retenir: 'Mesures terrain = multiparamètre. Labo accrédité COFRAC pour la conformité AEP. µg/L = ppb, ng/L = ppt.',
                 },
@@ -606,6 +867,34 @@ const COURS_DATA = {
                     'DBO₅ (mg O₂/L) : demande biochimique en O₂ sur 5 jours à 20 °C — mesure la biodégradabilité',
                     'DCO (mg O₂/L) : demande chimique en O₂ — mesure la totalité de la pollution organique oxydable',
                   ],
+                                    sections: [
+                    {
+                      titre: "Eutrophisation et cycles des nutriments",
+                      ss: [
+                        {
+                          titre: "Mécanisme de l'eutrophisation",
+                          texte: "L'eutrophisation est l'enrichissement excessif d'un milieu aquatique en nutriments (azote et phosphore), qui stimule la croissance des algues et des cyanobactéries. Ce phénomène se déroule en plusieurs étapes : les apports de N et P (agriculture, assainissement) provoquent des blooms algaux en été. La décomposition de cette biomasse par les bactéries consomme tout l'oxygène dissous, créant une hypoxie puis une anoxie. Les poissons et invertébrés meurent. Les lacs peu profonds et les milieux à faible renouvellement sont les plus vulnérables.",
+                        },
+                        {
+                          titre: "Rôle du phosphore comme facteur limitant",
+                          texte: "En milieu lacustre, le phosphore est généralement le facteur limitant de la croissance algale. Un apport de seulement 1 mg/L de phosphore peut générer 100 mg/L de biomasse algale. C'est pourquoi les directives européennes imposent des limites strictes pour les rejets en milieu sensible (P total < 1 mg/L pour les rejets de STEP > 10 000 EH en zone sensible). Le phosphore provient des engrais, des détergents (orthophosphates) et des rejets urbains.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "DBO5 et DCO — matières organiques",
+                      ss: [
+                        {
+                          titre: "DBO5 — demande biochimique en oxygène",
+                          texte: "La DBO5 (Demande Biochimique en Oxygène à 5 jours) mesure la quantité d'oxygène consommée par les micro-organismes pour biodégrader les matières organiques en 5 jours à 20 °C à l'obscurité. Elle représente uniquement la fraction biodégradable. Les eaux usées domestiques brutes ont une DBO5 de 200-300 mg/L. La norme de rejet en rivière est DBO5 < 25 mg/L pour les STEP > 2 000 EH. La DBO5 est un indicateur direct de l'impact d'un rejet sur l'oxygène du milieu récepteur.",
+                        },
+                        {
+                          titre: "DCO et rapport DCO/DBO5",
+                          texte: "La DCO (Demande Chimique en Oxygène) mesure la quantité d'oxygène nécessaire pour oxyder chimiquement l'ensemble des matières oxydables (biodégradables + récalcitrantes) par le dichromate de potassium. Elle est toujours supérieure à la DBO5 et plus rapide à mesurer (2 h vs 5 jours). Le rapport DCO/DBO5 renseigne sur la biodégradabilité : un ratio < 2 indique une eau facilement biodégradable (eaux domestiques). Un ratio > 3-4 indique la présence de composés réfractaires (eaux industrielles, pharmaceutiques). La norme de rejet est DCO < 125 mg/L.",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'Eutrophisation = trop de N et P → algues → hypoxie. DBO₅ mesure la pollution biodégradable, DCO la pollution totale.',
                 },
                 flashcards: [
@@ -669,6 +958,34 @@ const COURS_DATA = {
                     'Log reduction = log₁₀(C_entrée / C_sortie) — mesure l\'efficacité d\'une barrière de traitement',
                     'Objectif OMS : 6 log de réduction pour les virus, 4 log pour Cryptosporidium',
                   ],
+                                    sections: [
+                    {
+                      titre: "Protozoaires pathogènes résistants au chlore",
+                      ss: [
+                        {
+                          titre: "Cryptosporidium et Giardia",
+                          texte: "Cryptosporidium parvum et Giardia intestinalis sont des protozoaires parasites dont les formes de résistance (oocystes et kystes) survivent à la désinfection au chlore aux doses habituelles. Cryptosporidium provoque une cryptosporidiose (diarrhées sévères), particulièrement dangereuse pour les immunodéprimés. Giardia cause la giardiase (diarrhées, crampes). Ces parasites se transmettent par ingestion d'eau contaminée. En France, la filtration (membranes ou filtration sur sable après coagulation) et l'irradiation UV sont les barrières physiques imposées pour les eaux de surface.",
+                        },
+                        {
+                          titre: "Pourquoi le chlore est-il insuffisant",
+                          texte: "Le chlore désinfecte efficacement les bactéries et certains virus, mais les oocystes de Cryptosporidium nécessitent des doses de chlore 80 fois supérieures aux doses normales pour être inactivés (CT = 7 200 mg·min/L). Ces doses sont inapplicables en eau potable car elles créeraient des sous-produits de chloration en concentrations dangereuses. C'est pourquoi la réglementation impose une approche multi-barrières : filtration physique (rétention des oocystes > 4 µm) + UV (inactivation des résidus) + chlore résiduel (protection du réseau).",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Légionelles et bactéries spécifiques",
+                      ss: [
+                        {
+                          titre: "Legionella pneumophila — mode de transmission",
+                          texte: "Legionella pneumophila est la bactérie responsable de la légionellose (pneumonie grave). Contrairement à la plupart des pathogènes hydriques, la légionellose ne se transmet pas par ingestion mais par inhalation d'aérosols d'eau contaminée (tours aéroréfrigérantes, douches, bains à remous). La bactérie prolifère entre 25 et 45 °C dans les biofilms des réseaux d'eau chaude sanitaire. La prévention impose de maintenir le réseau ECS au-dessus de 60 °C (pasteurisation) et de ne pas avoir de zones mortes ou de bras à faible renouvellement.",
+                        },
+                        {
+                          titre: "Surveillance et contrôle des Légionelles",
+                          texte: "La recherche des Légionelles est obligatoire dans les établissements recevant du public (hôpitaux, hôtels, établissements de soins) et dans les tours aéroréfrigérantes (TAR). La valeur limite est 1 000 UFC/L pour les installations à risque. En dessous de 100 UFC/L, pas d'action. Au-dessus de 1 000 UFC/L, fermeture et choc thermique ou choc chloré obligatoires. La méthode de référence est la culture sur milieu gélosé BCYE (résultats en 10 jours) ; des méthodes PCR permettent des résultats rapides (24 h).",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'Cryptosporidium et Giardia résistent au chlore → barrière physique (filtration, UV) obligatoire. Legionella = aérosol, pas ingestion.',
                 },
                 flashcards: [
@@ -720,6 +1037,34 @@ const COURS_DATA = {
                   formules: [
                     'UFC = Unités Formant Colonies (méthode de dénombrement bactériologique)',
                     'NPP = Nombre le Plus Probable (méthode statistique pour dénombrer des microorganismes)',
+                  ],
+                                    sections: [
+                    {
+                      titre: "Indicateurs bactériologiques de contamination fécale",
+                      ss: [
+                        {
+                          titre: "Escherichia coli comme indicateur fécal",
+                          texte: "Escherichia coli est la bactérie indicatrice de contamination fécale de référence en eau potable. Sa présence indique une contamination par des matières fécales humaines ou animales. La norme européenne et française impose une concentration de 0 UFC/100 mL dans l'eau distribuée, sans aucune dérogation. E. coli est abondante dans les intestins (10⁸ à 10⁹ UFC/g de fèces) mais survit peu dans l'environnement, ce qui en fait un excellent indicateur de contamination récente. Sa détection est simple et rapide (24 h de culture à 44 °C).",
+                        },
+                        {
+                          titre: "Entérocoques intestinaux",
+                          texte: "Les entérocoques (Streptococcus faecalis, S. faecium) sont également utilisés comme indicateurs fécaux avec la même exigence de 0 UFC/100 mL en eau potable. Plus résistants que E. coli dans l'environnement, ils sont un meilleur indicateur de contamination ancienne ou de pollution fécale d'origine humaine (vs animale). En eau de baignade, les entérocoques sont l'indicateur prioritaire car ils survivent mieux dans l'eau salée. En cas de dépassement, la baignade est interdite au-dessus de 200 UFC/100 mL.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Bactéries coliformes et gestion des contaminations",
+                      ss: [
+                        {
+                          titre: "Coliformes totaux et coliformes thermotolérants",
+                          texte: "Les coliformes totaux (dont E. coli) regroupent plusieurs genres bactériens (Klebsiella, Enterobacter, Citrobacter...). Leur présence dans l'eau traitée peut indiquer soit une contamination fécale (E. coli) soit des défauts de traitement ou de désinfection (coliformes environnementaux). Les coliformes thermotolérants (ou fécaux), détectés à 44 °C, sont un sous-groupe plus spécifique de la contamination fécale. La norme eau potable est 0 UFC/100 mL pour les coliformes totaux aussi.",
+                        },
+                        {
+                          titre: "Procédures en cas de non-conformité",
+                          texte: "En cas de dépassement bactériologique, la procédure réglementaire impose une investigation immédiate (renouvellement de l'analyse, recherche de la cause), une information de l'ARS dans les 24 heures, et si le risque sanitaire est confirmé, une information des consommateurs avec restriction d'usage (consigne eau non potable). Les actions correctives incluent un renforcement de la chloration, un nettoyage/désinfection du réseau et la recherche et réparation des points de contamination (brèches, siphons, interconnexions non conformes).",
+                        },
+                      ],
+                    },
                   ],
                   retenir: '0 E. coli / 100 mL = exigence absolue eau potable. 0 entérocoques / 100 mL. E. coli = indicateur fécal de référence.',
                 },
@@ -775,6 +1120,34 @@ const COURS_DATA = {
                   formules: [
                     'Note IBD : de 1 (très mauvais) à 20 (très bon état) selon la composition des assemblages de diatomées',
                     'Note IBGN : de 0 à 20, calculée à partir de la diversité taxonomique et de la présence de groupes sentinelles',
+                  ],
+                                    sections: [
+                    {
+                      titre: "Indices biologiques et évaluation de l'état écologique",
+                      ss: [
+                        {
+                          titre: "IBD — Indice Biologique Diatomées",
+                          texte: "L'Indice Biologique Diatomées (IBD) évalue la qualité chimique de l'eau à partir des communautés de diatomées (algues unicellulaires siliceuses microscopiques). Les diatomées réagissent rapidement aux variations de nutriments (azote, phosphore) et de pH. L'IBD est calculé à partir du recensement des espèces prélevées par grattage des pierres du fond. Il est noté de 0 à 20 ; au-dessus de 17 = très bon état, en dessous de 8 = mauvais état. L'IBD est un excellent indicateur des pressions agricoles (enrichissement en nutriments).",
+                        },
+                        {
+                          titre: "IBGN et IPR — macroinvertébrés et poissons",
+                          texte: "L'IBGN (Indice Biologique Global Normalisé) utilise les macroinvertébrés benthiques (larves d'insectes, vers, mollusques) comme indicateurs des conditions physico-chimiques et hydromorphologiques. Il reflète les conditions intégrées sur plusieurs mois. L'IPR (Indice Poissons Rivière) compare la composition actuelle du peuplement piscicole à un peuplement de référence pour le type de cours d'eau. Les poissons étant au sommet de la chaîne alimentaire et mobiles, l'IPR intègre toutes les pressions : chimiques, physiques et biologiques.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Mise en œuvre et interprétation des indices",
+                      ss: [
+                        {
+                          titre: "Protocoles d'échantillonnage normalisés",
+                          texte: "Chaque indice biologique répond à un protocole d'échantillonnage normalisé (norme AFNOR). Pour l'IBGN : prélèvements sur 8 faciès d'écoulement différents au filet surber (0,05 m²). Pour l'IBD : grattage de galets immergés avec une brosse. Pour l'IPR : pêche électrique exhaustive (électronarcose temporaire des poissons sur un tronçon). Ces protocoles garantissent la reproductibilité et la comparabilité des résultats entre stations et entre années.",
+                        },
+                        {
+                          titre: "Interprétation dans le cadre de la DCE",
+                          texte: "La DCE (Directive Cadre sur l'Eau) impose l'évaluation de l'état écologique à partir de plusieurs éléments de qualité biologique (EQB), dont les IBD, IBGN et IPR font partie pour les cours d'eau. L'état écologique global est déterminé par le 'principe du one out, all out' : c'est le moins bon des résultats qui détermine l'état final. Même si deux indices sont en bon état, un seul indice en état moyen classe la masse d'eau en état moyen. Ce principe est délibérément strict pour inciter à traiter toutes les pressions simultanément.",
+                        },
+                      ],
+                    },
                   ],
                   retenir: 'IBD = diatomées (chimique). IBGN = invertébrés (physico-chimique). IPR = poissons (intégrateur global). Tous requis par la DCE.',
                 },
@@ -845,6 +1218,34 @@ const COURS_DATA = {
                     '💰 Redevances des Agences : "pollueur-payeur" et "préleveur-payeur" → financement des travaux d\'épuration et de restauration',
                   ],
                   formules: [],
+                                    sections: [
+                    {
+                      titre: "Principes et architecture du droit de l'eau",
+                      ss: [
+                        {
+                          titre: "L'eau, patrimoine commun de la nation",
+                          texte: "Le Code de l'environnement (article L210-1) pose un principe fondateur : 'l'eau fait partie du patrimoine commun de la nation'. Ce principe signifie que l'eau ne peut pas être appropriée et que son usage est encadré dans l'intérêt général. Il justifie l'intervention de la puissance publique pour gérer la ressource, fixer des règles d'usage et imposer des redevances. La loi sur l'eau de 1992 a consacré ce principe et créé les outils de planification (SDAGE, SAGE) et de gestion par bassin versant.",
+                        },
+                        {
+                          titre: "Organisation institutionnelle",
+                          texte: "La gestion de l'eau en France est organisée à plusieurs niveaux : le ministère de l'Environnement fixe les orientations nationales, les 6 agences de l'eau (Rhône-Méditerranée-Corse, Loire-Bretagne, Seine-Normandie, Rhin-Meuse, Adour-Garonne, Artois-Picardie) financent les actions à l'échelle des grands bassins hydrographiques, et les comités de bassin (parlements de l'eau) associent collectivités, usagers et État. Les DREAL (directions régionales) instruisent les dossiers IOTA et contrôlent les installations.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Planification et régime d'autorisation",
+                      ss: [
+                        {
+                          titre: "SDAGE et SAGE — outils de planification",
+                          texte: "Le SDAGE (Schéma Directeur d'Aménagement et de Gestion des Eaux) est le document de planification de la politique de l'eau à l'échelle d'un grand bassin hydrographique, révisé tous les 6 ans. Il fixe les objectifs de qualité et de quantité et les orientations pour les atteindre. Le SAGE (Schéma d'Aménagement et de Gestion des Eaux) décline le SDAGE à l'échelle d'un sous-bassin ou d'un système aquifère. Les décisions des autorités administratives dans le domaine de l'eau doivent être compatibles avec le SDAGE.",
+                        },
+                        {
+                          titre: "Régime IOTA — Installations, Ouvrages, Travaux, Activités",
+                          texte: "La nomenclature 'eau' (article R214-1 du Code de l'environnement) classe les IOTA en deux régimes selon leur impact potentiel sur les eaux et les milieux aquatiques : le régime d'Autorisation (A) pour les projets à fort impact, nécessitant une étude d'impact, une enquête publique et un arrêté préfectoral ; le régime de Déclaration (D) pour les projets à impact plus faible, nécessitant une déclaration préalable. Certains projets sous seuil sont dispensés de toute procédure. Le non-respect de ces obligations constitue un délit pénal.",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'L\'eau = patrimoine commun (L210-1). SDAGE = outil de planification bassin. Agences de l\'eau = financement. IOTA = régime d\'autorisation des travaux.',
                 },
                 flashcards: [
@@ -904,6 +1305,34 @@ const COURS_DATA = {
                     '📊 Programme de surveillance obligatoire : réseau de contrôle de surveillance (RCS) + contrôle opérationnel (RCO)',
                   ],
                   formules: [],
+                                    sections: [
+                    {
+                      titre: "Directive Cadre sur l'Eau (DCE 2000/60/CE)",
+                      ss: [
+                        {
+                          titre: "Principes et objectifs de la DCE",
+                          texte: "La Directive Cadre sur l'Eau (DCE) adoptée en 2000 constitue le cadre réglementaire européen de la politique de l'eau. Elle impose aux États membres d'atteindre le 'bon état' de toutes les masses d'eau de surface et souterraines d'ici 2027 (avec possibilités de report justifié). Son originalité est d'adopter une approche écosystémique : l'état de l'eau n'est plus évalué uniquement par sa composition chimique mais par la qualité de ses communautés biologiques (diatomées, invertébrés, poissons).",
+                        },
+                        {
+                          titre: "Double évaluation — état écologique et état chimique",
+                          texte: "La DCE évalue les masses d'eau selon deux critères indépendants. L'état écologique est évalué sur 5 classes (Très bon, Bon, Moyen, Médiocre, Mauvais) à partir des éléments biologiques et des paramètres physico-chimiques généraux. L'état chimique est évalué de façon binaire (Bon ou Mauvais) selon le respect des Normes de Qualité Environnementale (NQE) pour 45 substances prioritaires, dont 8 substances dangereuses prioritaires pour lesquelles l'objectif est le 'zéro rejet' (mercure, cadmium, certains PCB). Le résultat global est le plus défavorable des deux.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Masses d'eau fortement modifiées et dérogations",
+                      ss: [
+                        {
+                          titre: "Masses d'Eau Fortement Modifiées (MEFM)",
+                          texte: "Certains cours d'eau ne peuvent atteindre le bon état écologique sans compromettre un usage économique ou social important (navigation fluviale, production hydroélectrique, protection contre les inondations). Ces masses d'eau sont désignées comme Fortement Modifiées (MEFM). Pour elles, l'objectif n'est pas le 'bon état' mais le 'bon potentiel écologique' (BPE), qui intègre les meilleures mesures d'amélioration compatibles avec le maintien des usages. Les canaux navigables, les retenues hydroélectriques et certains ports sont classés MEFM.",
+                        },
+                        {
+                          titre: "Procédure de report d'échéance",
+                          texte: "L'article 4.4 de la DCE autorise des reports d'échéance pour atteindre le bon état, justifiés par des raisons techniques (complexité des travaux, délai de récupération naturel), économiques (coût disproportionné) ou de force majeure. Ces reports doivent être explicitement justifiés dans le SDAGE et notifiés à la Commission européenne. En France, environ 40 % des masses d'eau bénéficient d'un tel report pour 2027, ce qui reflète l'ampleur des pressions agricoles et morphologiques qui subsistent.",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'DCE 2000 : bon état écologique + chimique d\'ici 2027. 5 classes d\'état. 45 substances prioritaires dont 8 "zéro rejet". Évaluation par indices biologiques.',
                 },
                 flashcards: [
@@ -960,6 +1389,34 @@ const COURS_DATA = {
                     '📊 Légionelles dans les eaux chaudes sanitaires : < 1 000 UFC/L (recommandation Directive)',
                   ],
                   formules: [],
+                                    sections: [
+                    {
+                      titre: "Réglementation eau potable — nouvelles normes",
+                      ss: [
+                        {
+                          titre: "Directive EU 2020/2184 et transposition française",
+                          texte: "La directive européenne 2020/2184 sur la qualité de l'eau potable (révisée après 30 ans) a introduit de nouvelles exigences transposées en droit français par le décret du 7 décembre 2023. Elle impose notamment des valeurs limites pour les PFAS (0,1 µg/L par substance, 0,5 µg/L pour la somme), un abaissement du seuil de plomb (de 25 µg/L à 10 µg/L désormais, puis 5 µg/L en 2036), et l'introduction de médicaments et perturbateurs endocriniens dans le suivi. Elle rend également obligatoire l'approche par les risques (Water Safety Plan) pour toutes les unités de distribution dès 2026.",
+                        },
+                        {
+                          titre: "Water Safety Plan — approche par les risques",
+                          texte: "L'approche par les risques (Water Safety Plan, WSP) est issue des recommandations de l'OMS. Elle impose aux exploitants d'eau potable de réaliser une analyse complète des risques sur l'ensemble de la chaîne, de la ressource au robinet du consommateur. Cette analyse identifie les points critiques (captage vulnérable, réseau vieillissant, station sans alarme...), évalue leur probabilité et leur impact, et définit des mesures préventives. Elle remplace progressivement l'approche réactive (analyser et constater les problèmes) par une approche préventive.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Contrôle sanitaire et obligations d'information",
+                      ss: [
+                        {
+                          titre: "Fréquences de contrôle et paramètres",
+                          texte: "Le contrôle sanitaire des eaux est réalisé par les ARS (Agences Régionales de Santé) selon un programme de surveillance défini par arrêté. La fréquence varie de quelques analyses par an pour les petites unités (< 100 m³/j) à plusieurs centaines d'analyses par an pour les grandes agglomérations. Les paramètres contrôlés incluent les indicateurs microbiologiques (E. coli, entérocoques), les paramètres physico-chimiques majeurs et les contaminants émergents (pesticides, PFAS, nitrates). Les résultats sont disponibles en ligne sur le site du ministère de la Santé.",
+                        },
+                        {
+                          titre: "Information des consommateurs et gestion des non-conformités",
+                          texte: "Les distributeurs d'eau sont tenus d'informer les abonnés de la qualité de l'eau dans la notice annuelle remise avec la facture. En cas de non-conformité, une information immédiate des consommateurs et de l'ARS est obligatoire, accompagnée de mesures de gestion (restriction d'usage, distribution de bouteilles d'eau si nécessaire). Les grandes unités de distribution (> 10 000 m³/j) doivent publier leurs données en open data. La transparence de l'information est un axe majeur de la directive 2020/2184.",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'PFAS : 0,1 µg/L par substance (nouveau). Pb : 10 µg/L (→ 5 µg/L en 2036). E. coli : 0/100 mL. Approche par les risques obligatoire dès 2026.',
                 },
                 flashcards: [
@@ -1041,6 +1498,34 @@ const COURS_DATA = {
                     '⚖️ Arrêté du 11/01/2007 : fixe les procédés de traitement autorisés pour l\'eau potable en France',
                   ],
                   formules: [],
+                                    sections: [
+                    {
+                      titre: "Choix de la filière de traitement",
+                      ss: [
+                        {
+                          titre: "Traitement selon la qualité de la ressource",
+                          texte: "Le choix de la filière de traitement dépend de la qualité de la ressource. Une eau souterraine de bonne qualité (nappe captive, faiblement minéralisée, sans pesticides) ne nécessite souvent qu'une désinfection au chlore ou aux UV avant distribution. Une eau de surface (rivière, lac) est exposée aux turbidités élevées, aux algues, aux microorganismes, aux matières organiques et aux micropolluants : elle nécessite une filière complète (coagulation-floculation-décantation-filtration-désinfection). Une eau souterraine captant sous une zone agricole peut nécessiter en plus un traitement de dénitrification ou de pesticides.",
+                        },
+                        {
+                          titre: "Principe des barrières multiples",
+                          texte: "La réglementation et les bonnes pratiques imposent une approche multi-barrières : plusieurs étapes de traitement indépendantes, chacune capables d'éliminer une partie des contaminants, de sorte qu'aucune défaillance unique ne compromette la qualité finale. Les 4 grandes familles de barrières sont : la barrière physique (filtration, membranes), la barrière chimique (coagulation, oxydation), la barrière biologique (dénitrification, biodégradation sur CAG) et la désinfection. Cette redondance est la fondation de la sécurité sanitaire en eau potable.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Traitement des polluants émergents",
+                      ss: [
+                        {
+                          titre: "Charbon actif en grain (CAG)",
+                          texte: "Le charbon actif en grain est le principal outil de traitement des micropollants organiques (pesticides, médicaments, HAP, goûts et odeurs). L'adsorption sur le carbone poreux (surface spécifique ≥ 1 000 m²/g) piège les molécules organiques. Les performances dépendent de l'EBCT (Empty Bed Contact Time, temps de contact à lit vide) : un EBCT ≥ 10 minutes est recommandé. Le CAG se sature progressivement et doit être régénéré (four) ou remplacé tous les 1 à 5 ans selon la charge en micropolluants.",
+                        },
+                        {
+                          titre: "Membranes et osmose inverse",
+                          texte: "Pour les polluants inorganiques persistants (nitrates, arsenic, PFAS), les technologies membranaires offrent une solution robuste. La nanofiltration (NF) élimine sélectivement les divalents (dureté, pesticides) avec un taux de conversion de 70-85 %. L'osmose inverse (OI) élimine quasi-totalement tous les solutés mais consomme plus d'énergie et produit un concentrat (10-40 % du volume) à valoriser ou éliminer. Une reminéralisation (ajout de CO₂ + calcaire ou chaux) est toujours nécessaire après OI pour remettre l'eau en équilibre calco-carbonique.",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'Eau souterraine propre → désinfection seule. Eau de surface → filière complète. Polluants émergents → CAG ou membranes. Toujours plusieurs barrières.',
                 },
                 flashcards: [
@@ -1113,6 +1598,34 @@ const COURS_DATA = {
                     'Al₂(SO₄)₃ + 6H₂O → 2Al(OH)₃↓ + 3SO₄²⁻ + 6H⁺ — réaction de coagulation à l\'aluminium',
                     'Dose coagulant ≈ 10–100 mg/L selon turbidité et COT de l\'eau brute',
                   ],
+                                    sections: [
+                    {
+                      titre: "Coagulation et floculation",
+                      ss: [
+                        {
+                          titre: "Principe de la coagulation",
+                          texte: "Les particules colloïdales naturellement présentes dans l'eau (argiles, substances humiques) portent des charges négatives de surface qui les maintiennent en suspension stable. La coagulation consiste à neutraliser ces charges par l'ajout de coagulants chargés positivement : sels d'aluminium (sulfate d'alumine, chlorure d'aluminium) ou de fer (chlorure ferrique). Les ions Al³⁺ ou Fe³⁺ forment des hydroxydes qui précipitent et neutralisent les charges colloïdales, permettant aux particules de s'approcher. Le pH optimal pour l'aluminium est de 6 à 7,5.",
+                        },
+                        {
+                          titre: "Floculation et formation des flocs",
+                          texte: "Après coagulation, les particules déstabilisées s'agglomèrent en flocs sous l'effet d'une agitation douce dans le floculateur. Les flocculants (polymères organiques, polyacrylamide) peuvent être ajoutés pour renforcer la cohésion des flocs. L'agitation doit être suffisante pour assurer les contacts entre particules mais pas trop violente pour ne pas briser les flocs formés. Des palettes rotatives à vitesse décroissante ou des cascades de chicanes (turbulences contrôlées) sont utilisées. La floculation dure généralement 20 à 40 minutes.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Décantation et contrôle du procédé",
+                      ss: [
+                        {
+                          titre: "Décantation — séparation des flocs",
+                          texte: "La décantation (ou sédimentation) sépare les flocs formés de l'eau clarifiée par gravité dans un décanteur statique ou à lamelles. La vitesse ascensionnelle (Vs = débit/surface) doit être inférieure à la vitesse de chute des flocs (loi de Stokes). Les décanteurs à lamelles inclinées augmentent la surface effective sans augmenter l'emprise au sol : ils permettent des vitesses ascensionnelles de 2 à 5 m/h contre 1 m/h pour un décanteur traditionnel. Les boues de décantation (flocs sédimentés) représentent 0,2 à 0,5 % du volume traité.",
+                        },
+                        {
+                          titre: "Jar-test — optimisation du dosage",
+                          texte: "Le jar-test est un protocole de laboratoire qui simule à petite échelle le processus de coagulation-floculation-décantation. Il consiste à essayer plusieurs doses de coagulant sur des échantillons d'eau brute traités simultanément dans des éprouvettes agitées, puis à mesurer la turbidité résiduelle après décantation. Ce test permet de déterminer la dose optimale de coagulant selon la qualité de l'eau brute (qui varie avec les saisons, les crues...). Le jar-test doit être répété régulièrement, notamment après chaque changement de qualité d'eau significatif.",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'Coagulation = neutralisation des charges. Floculation = agglomération. Décantation = séparation par gravité. pH optimal Al : 6–7,5. Dosage par jar-test.',
                 },
                 flashcards: [
@@ -1181,6 +1694,34 @@ const COURS_DATA = {
                     'EBCT (Empty Bed Contact Time) = volume CAG / débit — temps de contact minimum pour adsorption efficace ≥ 10–15 min',
                     'Taux de chargement filtration rapide : 5–10 m/h',
                   ],
+                                    sections: [
+                    {
+                      titre: "Filtration sur sable — clarification",
+                      ss: [
+                        {
+                          titre: "Filtration rapide sur sable",
+                          texte: "La filtration rapide sur sable est une étape clé de clarification qui élimine les flocs résiduels et les particules fines en suspension non retenues par la décantation. L'eau percolate vers le bas à travers une couche de sable siliceux de 0,6 à 1,2 mm. Les particules sont retenues par tamisage et par adsorption sur les grains de sable. La vitesse de filtration est de 5 à 10 m/h. Le filtre colmate progressivement (montée en perte de charge) et doit être lavé à contre-courant (air + eau) toutes les 24 à 72 heures pour régénérer sa capacité filtrante.",
+                        },
+                        {
+                          titre: "Filtration lente sur sable et autres technologies",
+                          texte: "La filtration lente sur sable (0,1 à 0,3 m/h) développe en surface une couche biologique active (schmutzdecke) qui dégrade les matières organiques et retient les micro-organismes. Elle est efficace mais nécessite de grandes surfaces. Les filtres à membranes (microfiltration, ultrafiltration) offrent une barrière physique absolue pour les micro-organismes (Cryptosporidium, Giardia) mais nécessitent des nettoyages chimiques fréquents (rétrolavage, nettoyage chimique en place ou CIP).",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Charbon actif en grain — élimination des micropolluants",
+                      ss: [
+                        {
+                          titre: "Adsorption sur charbon actif en grain",
+                          texte: "Le charbon actif en grain (CAG) est produit par activation thermique (700-1 000 °C sous atmosphère inerte) de charbon de bois, de noix de coco ou de charbon minéral. Cette activation développe une très grande surface interne (800 à 1 500 m²/g). Les molécules organiques (pesticides, médicaments, goûts, odeurs) s'adsorbent à la surface par des liaisons de Van der Waals. L'efficacité d'élimination dépend de la structure de la molécule (les molécules apolaires et de taille intermédiaire s'adsorbent mieux), de la dose de CAG et de l'EBCT.",
+                        },
+                        {
+                          titre: "EBCT et durée de vie du charbon actif",
+                          texte: "L'EBCT (Empty Bed Contact Time) est le rapport entre le volume de CAG et le débit volumique : EBCT = V_CAG / Q. Il représente le temps de contact théorique entre l'eau et le charbon. Une valeur minimale de 10 minutes est recommandée pour une bonne efficacité sur les pesticides (abattement > 90 %). Le CAG se sature progressivement : les molécules adsorbées occupent les sites disponibles jusqu'à la percée (breakthrough), qui se traduit par une remontée des concentrations en sortie. La durée de vie varie de 6 mois à 5 ans selon la charge en micropolluants. La régénération thermique du CAG à 800 °C permet de réutiliser le matériau.",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'Filtration rapide = clarification mécanique. CAG = adsorption micropollants (pesticides, goûts/odeurs). EBCT ≥ 10 min pour efficacité du CAG.',
                 },
                 flashcards: [
@@ -1237,6 +1778,34 @@ const COURS_DATA = {
                   formules: [
                     'CT (mg·min/L) = C_désinfectant (mg/L) × t_contact (min) — efficacité de la désinfection',
                     'Log-inactivation = f(CT, T°, pH) — se lit sur les tables CT de l\'OMS',
+                  ],
+                                    sections: [
+                    {
+                      titre: "Désinfection au chlore",
+                      ss: [
+                        {
+                          titre: "Chloration et spectre d'action",
+                          texte: "Le chlore est le désinfectant universel de l'eau potable car il est efficace contre les bactéries, les virus et certains protozoaires, et maintient un résiduel dans le réseau de distribution assurant une protection continue. Il est utilisé sous forme gazeuse (Cl₂), d'hypochlorite de sodium (eau de Javel, NaOCl) ou d'hypochlorite de calcium. En solution aqueuse, le chlore se dissocie en acide hypochloreux (HClO) et en ion hypochlorite (ClO⁻). HClO est 80 fois plus bactéricide que ClO⁻ : son efficacité est donc meilleure à pH bas.",
+                        },
+                        {
+                          titre: "Sous-produits de chloration et THM",
+                          texte: "La réaction du chlore avec les matières organiques naturelles (acides humiques, fulviques) forme des sous-produits de chloration (SPD) dont les trihalométhanes (THM : chloroforme CHCl₃, bromodichlorométhane, dibromochlorométhane...) et les acides haloacétiques. La norme européenne impose THM total < 100 µg/L. Pour minimiser les THM, on réduit les précurseurs avant la chloration (coagulation-filtration-CAG), on ajuste le pH à la valeur optimale et on chlore en fin de filière. La chloramination (ajout d'ammoniaque + chlore = monochloramine) forme moins de THM mais est moins bactéricide.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "UV, ozone et désinfection complémentaire",
+                      ss: [
+                        {
+                          titre: "Désinfection par ultraviolets",
+                          texte: "Les ultraviolets (λ = 254 nm) inactivent les micro-organismes en endommageant leur ADN, rendant la reproduction impossible. Les UV sont particulièrement efficaces contre Cryptosporidium et Giardia (résistants au chlore) à des doses de 40 mJ/cm². Ils n'ont aucun effet résiduel dans le réseau et ne forment pas de sous-produits. Les réacteurs UV sont des enceintes traversées par l'eau devant des lampes UV-C. La dose efficace dépend de la turbidité de l'eau (un contrôle de turbidité < 1 NTU est requis). Les UV ne remplacent pas la chloration : ils sont utilisés en complément.",
+                        },
+                        {
+                          titre: "Ozonation",
+                          texte: "L'ozone (O₃) est un oxydant très puissant qui élimine les virus, bactéries, micropolluants organiques (pesticides, médicaments), goûts et odeurs. Il est produit sur place par décharge électrique dans l'air sec ou l'oxygène pur. La dose typique est de 1 à 5 mg/L avec un temps de contact de 5 à 15 minutes. L'ozone se décompose rapidement (pas de résiduel) en formant du OH° (radicaux hydroxyle), encore plus oxydants. Il peut créer des sous-produits (bromates si eau riche en bromures, aldéhydes) et doit être suivi d'une filtration sur CAG pour éliminer les produits de réaction. Le coût d'investissement est élevé.",
+                        },
+                      ],
+                    },
                   ],
                   retenir: 'Chlore = désinfectant + résiduel réseau. UV = efficace Cryptosporidium, pas de résiduel. Ozone = puissant mais pas de résiduel. THM < 100 µg/L.',
                 },
@@ -1301,6 +1870,34 @@ const COURS_DATA = {
                   formules: [
                     'Taux de conversion r = Q_perméat / Q_alimentation × 100 (%) — ex : r = 75 % → 25 % de concentrat',
                     'Flux membranaire J = Q_perméat / Surface (L/h/m² ou LMH)',
+                  ],
+                                    sections: [
+                    {
+                      titre: "Nanofiltration et osmose inverse",
+                      ss: [
+                        {
+                          titre: "Principe des membranes de filtration tertiaire",
+                          texte: "Les membranes de nanofiltration (NF) et d'osmose inverse (OI) éliminent les solutés dissous par un mécanisme de sélection de taille et de charge électrostatique à l'échelle nanométrique, contrairement à la microfiltration et l'ultrafiltration qui n'éliminent que les particules. La pression de travail est de 5 à 15 bar pour la NF et de 15 à 75 bar pour l'OI. La sélectivité de la NF est intermédiaire : elle retient les ions divalents (Ca²⁺, Mg²⁺, SO₄²⁻) et les molécules organiques > 200 Da (pesticides, hormones) mais laisse passer les monovalents (Na⁺, Cl⁻).",
+                        },
+                        {
+                          titre: "Taux de conversion et concentrat",
+                          texte: "En osmose inverse, la membrane sépare l'alimentation en deux flux : le perméat (eau traitée, 60 à 80 % du volume) et le concentrat (10 à 40 %, riche en tous les solutés retenus). La gestion du concentrat est l'un des défis principaux de l'OI : il ne peut pas être rejeté sans traitement dans un cours d'eau à faible débit (salinité, micropolluants concentrés). Les solutions incluent le rejet en mer, l'évaporation, la valorisation industrielle ou le recyclage partiel. Un taux de conversion de 75 % signifie que 25 % du débit d'entrée devient concentrat.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Reminéralisation et bilan économique",
+                      ss: [
+                        {
+                          titre: "Nécessité de la reminéralisation",
+                          texte: "L'eau sortant d'une membrane d'OI est quasi-pure (conductivité < 50 µS/cm, pH acide, proche de l'eau distillée) et donc très agressive vis-à-vis des canalisations. Elle doit être reminéralisée avant distribution. Les techniques utilisées sont : la percolation sur calcaire concassé (ajout de CaCO₃ avec CO₂ dissous), l'injection directe de CaCl₂ + NaHCO₃ ou le mélange avec de l'eau non traitée. L'objectif est d'atteindre un indice de Langelier légèrement positif (+0,2 à +0,5) et une conductivité de 200 à 400 µS/cm.",
+                        },
+                        {
+                          titre: "Consommation énergétique et coût",
+                          texte: "L'osmose inverse est la technique de traitement la plus énergivore : 0,5 à 1 kWh/m³ pour l'eau douce contre 3 à 6 kWh/m³ pour l'eau de mer (dessalement). Des récupérateurs d'énergie (échangeurs de pression) permettent de récupérer jusqu'à 40 % de l'énergie du concentrat pour comprimer l'alimentation. Le coût de traitement par OI est de 0,20 à 0,50 €/m³ pour l'eau douce, contre 0,05 à 0,15 €/m³ pour une filière conventionnelle. Ce surcoût est justifié lorsque la ressource est très contaminée ou insuffisante.",
+                        },
+                      ],
+                    },
                   ],
                   retenir: 'OI = élimination totale mais énergivore + concentrat. NF = sélectif (dureté, pesticides). Toujours reminéraliser le perméat. Taux conversion OI : 60–80 %.',
                 },
@@ -1391,6 +1988,34 @@ const COURS_DATA = {
                     'Pente minimale auto-curage EU : I ≥ 2 ‰ pour DN200, à vérifier avec Manning-Strickler',
                     'Vitesse d\'auto-curage : V ≥ 0,6 m/s à pleine section (EU), V ≥ 0,3 m/s à débit de pointe (EP)',
                   ],
+                                    sections: [
+                    {
+                      titre: "Systèmes de collecte des eaux usées et pluviales",
+                      ss: [
+                        {
+                          titre: "Système séparatif",
+                          texte: "Le système séparatif possède deux réseaux indépendants : un réseau d'eaux usées domestiques (EU) qui conduit à la station d'épuration, et un réseau d'eaux pluviales (EP) qui rejette directement au milieu naturel (rivière, infiltration). Ce système est recommandé par la réglementation car il évite de diluer les EU avec les EP (surcharges hydrauliques de la STEP par temps de pluie) et d'envoyer les eaux pluviales (chargées en MES et polluants routiers) à la STEP. En France, les nouvelles zones d'aménagement sont obligatoirement construites en séparatif.",
+                        },
+                        {
+                          titre: "Système unitaire et déversoirs d'orage",
+                          texte: "Le système unitaire collecte EU + EP dans un même réseau. Il est courant dans les villes anciennes. Par temps sec, il fonctionne normalement. Par temps de pluie, les apports d'eaux pluviales dépassent la capacité de la STEP : des déversoirs d'orage (DO) permettent de déverser une partie du flux dilué directement au milieu récepteur pour éviter la submersion du réseau. Ces déversements polluent le milieu aquatique. Les politiques d'assainissement tendent à convertir les réseaux unitaires vers le séparatif, ou à mieux gérer les déversements.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Conception et entretien des réseaux d'assainissement",
+                      ss: [
+                        {
+                          titre: "Conditions d'auto-curage",
+                          texte: "Un réseau d'assainissement gravitaire doit s'auto-curer, c'est-à-dire que la vitesse d'écoulement doit être suffisante pour entraîner les dépôts solides et éviter les obstructions. La condition d'auto-curage est une vitesse minimale de 0,6 m/s pour un débit de pointe. La pente minimale recommandée est de 2 à 3 ‰ pour les collecteurs de diamètre courant (DN200 à DN400). Pour les grandes conduites (DN > 600), la pente peut être réduite. Les réseaux à faible pente (terrain plat) nécessitent des postes de refoulement (pompage) pour assurer le transport vers la STEP.",
+                        },
+                        {
+                          titre: "Eaux parasites et diagnostic réseau",
+                          texte: "Les eaux parasites sont des eaux non prévues qui s'infiltrent dans le réseau EU (eaux claires parasites permanentes — nappe, drains) ou qui s'y déversent accidentellement (raccordements non conformes d'eaux pluviales sur le réseau EU). Elles diluent les effluents, surcharge la STEP, réduisent son efficacité de traitement et augmentent les coûts. Le diagnostic réseau (inspection télévisée, tests à la fumée, mesures de débit) permet de localiser les points d'entrée parasites. La réduction des eaux parasites est l'une des actions les plus rentables en assainissement.",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'Séparatif = 2 réseaux (EU + EP). Unitaire = 1 réseau + déversoirs d\'orage. Auto-curage : V ≥ 0,6 m/s, pente ≥ 2 ‰. Diagnostiquer les eaux parasites.',
                 },
                 flashcards: [
@@ -1461,6 +2086,34 @@ const COURS_DATA = {
                     'Q_EP = C × i × A / 360 — méthode rationnelle (L/s)',
                     'Q = K · A · Rh^(2/3) · I^(1/2) — Manning-Strickler',
                   ],
+                                    sections: [
+                    {
+                      titre: "Dimensionnement hydraulique des réseaux",
+                      ss: [
+                        {
+                          titre: "Débit de pointe des eaux usées",
+                          texte: "Le débit de pointe des eaux usées est calculé à partir du débit moyen journalier (Q_moy = Qspec × N_habitants, avec Qspec ≈ 150 à 200 L/j/hab). Le coefficient de pointe k = Qpointe/Qmoy varie selon la taille du réseau : k ≈ 3 pour les petites collectivités (< 1 000 EH), k ≈ 1,5 à 2 pour les grandes agglomérations. Ces coefficients prennent en compte les variations temporelles (matin, midi, soir) et saisonnières des usages. Les débits industriels doivent être rajoutés au débit domestique selon leurs caractéristiques propres.",
+                        },
+                        {
+                          titre: "Méthode rationnelle pour les eaux pluviales",
+                          texte: "La méthode rationnelle permet de calculer le débit de pointe des eaux pluviales : Q = C × i × A, où C est le coefficient de ruissellement (sans unité, dépend de l'imperméabilisation : C ≈ 0,9 pour toiture, 0,2 pour pelouse), i l'intensité pluviométrique pour la pluie de projet (m/s ou mm/h, tiré des courbes Intensité-Durée-Fréquence IDF locales) et A la surface du bassin versant drainé (m²). Elle s'applique pour des bassins < 50 ha environ. Pour de plus grands bassins, des modèles pluie-débit ou des méthodes de Caquot sont utilisés.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Dimensionnement des sections de canalisation",
+                      ss: [
+                        {
+                          titre: "Formule de Manning-Strickler",
+                          texte: "La formule de Manning-Strickler Q = K × S × Rh^(2/3) × i^(1/2) est la référence pour dimensionner les collecteurs gravitaires. K est le coefficient de Strickler (70-80 pour PVC, 60-70 pour béton). S est la section mouillée (m²), Rh le rayon hydraulique (= S/P_mouillé, m), i la pente du fil d'eau (m/m). Pour un collecteur circulaire de diamètre D, la section pleine est S = π D²/4. On dimensionne pour fonctionner à 70-80 % de la section pleine (surface libre en haut) afin de conserver une lame d'air et d'assurer l'auto-curage.",
+                        },
+                        {
+                          titre: "Choix des matériaux et profil type",
+                          texte: "Les collecteurs sont le plus souvent en PVC (DN 200 à DN 600), béton armé (DN > 400), grès (réseaux anciens) ou polyéthylène (PEHD). Le PVC assainissement lisse offre un coefficient K élevé (80-90) et une résistance à la corrosion acide. Le béton est utilisé pour les grands diamètres. Les collecteurs sont posés avec une pente minimale de 2-3 ‰ sur un lit de sable soigneusement compacté. Les regards de visite (espacés de 50 à 80 m maximum) permettent l'inspection et le curage.",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'Débit de pointe EU = k × Q_moy. Méthode rationnelle pour EP. Manning-Strickler pour dimensionner. Fonctionner à 70–80 % de la section pleine.',
                 },
                 flashcards: [
@@ -1516,6 +2169,34 @@ const COURS_DATA = {
                     'Charge massique Cm = Q×DBO₅ / (V×X) [kg DBO₅/kg MVS/j] — critère de dimensionnement',
                     'IB (Indice de Boue) = volume boues sédimentées 30 min (mL) / concentration boues (g/L)',
                     'EH (Equivalent Habitant) = 60 g DBO₅/j — unité de référence de charge polluante',
+                  ],
+                                    sections: [
+                    {
+                      titre: "Traitement biologique par boues activées",
+                      ss: [
+                        {
+                          titre: "Principe du procédé à boues activées",
+                          texte: "Le traitement biologique par boues activées repose sur des bactéries aérobies en suspension dans un bassin d'aération. Ces micro-organismes dégradent les matières organiques dissoutes (DBO, DCO) en utilisant l'oxygène fourni par des diffuseurs à bulles fines ou des turbines de surface. Le mélange eau + bactéries (liqueur mixte) passe ensuite dans un clarificateur (décanteur secondaire) où les boues sédimentent par gravité. Les boues sédimentées sont recirculées dans le bassin d'aération pour maintenir une concentration en biomasse de 3 à 5 g MVES/L.",
+                        },
+                        {
+                          titre: "Charge massique et âge des boues",
+                          texte: "La charge massique Cm = DBO5_entrante / (Q × MVES × V) exprime la quantité de DBO apportée par kg de biomasse et par jour (kg DBO5/kg MVES/j). Un procédé à faible charge (Cm < 0,1 kg/kg/j) produit une eau épurée de haute qualité (bonne nitrification) et des boues stabilisées (moins de problèmes lors de l'épandage). Un procédé à forte charge (Cm > 0,3) est moins efficace mais moins coûteux en investissement. L'âge des boues (θ = MVES_bassin / MVES_extraites/j) est lié inversement à la charge : forte charge = âge faible (3-5 jours), faible charge = âge élevé (15-25 jours).",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Clarification et qualité des boues",
+                      ss: [
+                        {
+                          titre: "Indice de Boues (IB) et décantabilité",
+                          texte: "L'Indice de Boues (IB ou SVI — Sludge Volume Index) mesure la décantabilité des boues activées. Il est déterminé par un essai de sédimentation de 30 minutes dans une éprouvette de 1 litre : IB = Volume boues sédimentées (mL/g MVES). Des boues filamenteuses (bulking) ont IB > 200-250 mL/g et décantent très mal, entraînant des fuites de boues dans le clarificateur et une dégradation de la qualité de l'effluent. Des boues de bonne décantabilité ont IB ≤ 150 mL/g. Le bulking filamenteux est favorisé par les faibles rapports N et P, les variations brutales de charge ou la carence en oxygène.",
+                        },
+                        {
+                          titre: "Traitement de l'azote et du phosphore",
+                          texte: "Pour traiter l'azote, le procédé à boues activées intègre une nitrification (oxydation NH₄⁺ → NO₃⁻ par Nitrosomonas et Nitrobacter, en conditions aérobies) et une dénitrification (réduction NO₃⁻ → N₂ par bactéries hétérotrophes, en conditions anoxiques — sans O₂ libre). Un schéma de type Bardenpho (alternance de zones aérobies et anoxiques) permet d'atteindre N total < 10 mg/L. Pour le phosphore, le déphosphatation biologique (luxuriant accumulation dans les bactéries PAO en conditions anaérobies) ou chimique (précipitation par sels de fer ou d'aluminium) permet d'atteindre P total < 1-2 mg/L.",
+                        },
+                      ],
+                    },
                   ],
                   retenir: 'Boues activées = bactéries aérobies + aération + clarificateur. Faible charge = meilleure qualité + boues stabilisées. IB ≤ 150 = boues bien décantables.',
                 },
@@ -1590,6 +2271,34 @@ const COURS_DATA = {
                   formules: [
                     'Production de biogaz ≈ 0,35 m³ CH₄/kg DCO éliminée — estimation rendement méthanisation',
                     'Production boues ≈ 60–120 g MS/EH/j (varie selon le procédé)',
+                  ],
+                                    sections: [
+                    {
+                      titre: "Normes de rejet et conformité des STEP",
+                      ss: [
+                        {
+                          titre: "Valeurs limites de rejet réglementaires",
+                          texte: "L'arrêté du 21 juillet 2015 fixe les valeurs limites de concentration pour les rejets des STEP selon leur taille (en Équivalent-Habitant, EH). Pour les STEP > 2 000 EH, les seuils sont : DBO5 < 25 mg/L, DCO < 125 mg/L, MES < 35 mg/L. Pour les rejets en zone sensible ou pour les STEP > 10 000 EH, des exigences supplémentaires s'appliquent : NGL (azote global) < 10-15 mg/L, Pt (phosphore total) < 1-2 mg/L. La conformité est évaluée sur 24 heures (mesures composites proportionnelles au débit), pas sur des prélèvements instantanés.",
+                        },
+                        {
+                          titre: "Autosurveillance et déclaration réglementaire",
+                          texte: "Les exploitants de STEP > 120 kg/j de DBO5 doivent mettre en place un programme d'autosurveillance : mesures en continu du débit entrant et sortant, de la turbidité en sortie, et analyses périodiques de l'effluent et des boues. Les données sont transmises mensuellement à l'autorité de tutelle via le portail national ROSEAU (Réseau d'Observation et de Surveillance des Eaux Usées). Des bilans 24 heures (mesures toutes les 2 heures) sont réalisés plusieurs fois par an pour vérifier la conformité des rejets.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Gestion et valorisation des boues",
+                      ss: [
+                        {
+                          titre: "Digestion anaérobie et production de biogaz",
+                          texte: "La digestion anaérobie (ou méthanisation) est le procédé de stabilisation des boues de STEP le plus répandu pour les grandes installations. Des bactéries anaérobies dégradent les matières organiques des boues en 3 phases : hydrolyse, acidogenèse, méthanogenèse. Le biogaz produit contient 60-70 % de méthane (CH₄) et peut être valorisé en chaleur, électricité (cogénération) ou injecté dans le réseau de gaz naturel. La digestion réduit la masse de boues de 30-50 %, élimine les germes pathogènes (pasteurisation à 55 °C) et améliore l'aptitude à l'épandage.",
+                        },
+                        {
+                          titre: "Voies de valorisation des boues digérées",
+                          texte: "En France, l'épandage agricole est la voie principale de valorisation des boues de STEP (environ 60 % des boues). Les boues apportent de la matière organique et des éléments fertilisants (azote, phosphore, potassium). Un plan d'épandage agréé par la DREAL est obligatoire, avec des analyses régulières des boues (métaux lourds, pathogènes, micropolluants) et du sol récepteur. Les autres voies sont l'incinération (avec ou sans récupération d'énergie, 25 % des boues) et la mise en décharge (en diminution). La compostage avec des matières végétales produit un amendement organique commercialisable.",
+                        },
+                      ],
+                    },
                   ],
                   retenir: 'Normes rejet : DBO₅ < 25, DCO < 125, NGL < 15 mg/L. Boues : digestion → biogaz + stabilisation → épandage agricole (voie principale en France).',
                 },
@@ -1667,6 +2376,34 @@ const COURS_DATA = {
                     '🏠 Vente immobilière : rapport SPANC < 3 ans obligatoire dans le Dossier de Diagnostic Technique (DDT)',
                   ],
                   formules: [],
+                                    sections: [
+                    {
+                      titre: "Réglementation de l'assainissement non collectif",
+                      ss: [
+                        {
+                          titre: "Cadre réglementaire de l'ANC",
+                          texte: "L'assainissement non collectif (ANC) concerne les habitations non raccordées au réseau public d'assainissement (environ 5 millions d'installations en France). L'arrêté du 7 septembre 2009 définit les prescriptions techniques applicables aux dispositifs d'ANC. Il interdit les nouvelles fosses septiques simples (remplacement obligatoire par une fosse toutes eaux). Les eaux usées traitées doivent être évacuées préférentiellement par infiltration dans le sol, ou à défaut par rejet vers le milieu hydraulique superficiel (avec autorisation préfectorale).",
+                        },
+                        {
+                          titre: "SPANC et obligations des propriétaires",
+                          texte: "Le SPANC (Service Public d'Assainissement Non Collectif) est un service public communal chargé du contrôle obligatoire de toutes les installations d'ANC. Les contrôles sont réalisés au moins tous les 10 ans (ou tous les 8 ans pour les installations jugées à risque). En cas de vente immobilière, un contrôle datant de moins de 3 ans est obligatoire. L'arrêté du 27 avril 2012 fixe les modalités du contrôle et les 4 types de missions du SPANC. Les propriétaires sont tenus d'entretenir et vidanger régulièrement leur installation.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Implantation et contraintes réglementaires",
+                      ss: [
+                        {
+                          titre: "Distances réglementaires d'implantation",
+                          texte: "L'arrêté de 2009 impose des distances minimales d'implantation pour les dispositifs d'ANC : 35 m minimum de tout captage d'eau destiné à la consommation humaine (puits, source), 3 m minimum de la limite de propriété, 5 m minimum des bâtiments avec cave ou sous-sol, et aucune plantation d'arbres à moins de 3 m du dispositif de traitement. Ces distances visent à protéger les ressources en eau et à faciliter l'accès pour l'entretien. Des distances plus importantes peuvent être prescrites par arrêté préfectoral dans les zones sensibles.",
+                        },
+                        {
+                          titre: "Non-conformités et délais de mise en conformité",
+                          texte: "Le SPANC classe les installations selon leur conformité. Une installation présentant un danger pour la santé humaine ou une atteinte à l'environnement est classée 'non conforme avec danger' : le propriétaire dispose de 1 an pour réaliser les travaux. Une installation sans danger mais non conforme dispose en général de 4 ans. L'arrêté du 27 avril 2024 a réformé les modalités de contrôle et introduit un carnet numérique de l'installation, accessible par le propriétaire et le SPANC, pour améliorer la traçabilité des contrôles et des entretiens.",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'Fosse septique interdite à neuf (2009). Distance captage : 35 m. NC avec danger : 1 an de délai. SPANC contrôle tous les 10 ans. Arrêté 2024 = carnet numérique.',
                 },
                 flashcards: [
@@ -1733,6 +2470,34 @@ const COURS_DATA = {
                     'Volume FTE (L) = 3 000 + (nbre PP – 5) × 1 000  pour nbre PP > 5',
                     'Surface tranchées (m) = 5 × nbre PP (longueur totale avec espacement ≥ 1,5 m entre tranchées)',
                   ],
+                                    sections: [
+                    {
+                      titre: "Filières de traitement ANC classiques",
+                      ss: [
+                        {
+                          titre: "Fosse toutes eaux et prétraitement",
+                          texte: "La fosse toutes eaux (FTE) est le prétraitement de référence de l'ANC. Elle reçoit l'ensemble des eaux usées domestiques (eaux-vannes WC + eaux ménagères). Par décantation et digestion anaérobie partielle, elle retient les matières solides (boues) et les graisses (croûte), et laisse partir les eaux décantées vers la filière de traitement. Le volume minimal est de 3 000 L pour 5 personnes (600 L/PP minimum). Elle doit être vidangée régulièrement (tous les 4 ans environ) par un prestataire agréé. Les boues sont traitées en STEP.",
+                        },
+                        {
+                          titre: "Épandage par tranchées d'infiltration",
+                          texte: "Les tranchées d'infiltration sont la filière de dispersion des effluents prétraités la plus courante. Elles sont composées de tuyaux perforés posés dans un lit de graviers (5-15 mm) dans des tranchées de 0,5 m de large et 0,8-1,2 m de profondeur. La surface d'épandage est calculée selon le débit et la perméabilité du sol : 5 m de tranchée par pièce principale (PP). La condition de faisabilité est une perméabilité de saturation Ksat ≥ 10 mm/h (mesure Porchet), soit un sol sablo-limoneux minimum. Les argiles pures (Ksat < 5 mm/h) sont incompatibles.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Filières alternatives et microstations",
+                      ss: [
+                        {
+                          titre: "Lit filtrant drainé — filière sur sol imperméable",
+                          texte: "Lorsque le sol est imperméable (Ksat < 10 mm/h), l'évacuation par infiltration est impossible. Le lit filtrant drainé (LFD) est alors utilisé : l'effluent prétraité est réparti sur un massif filtrant en sable (0,25-4 mm, perméabilité artificielle) posé sur un drain de collecte. L'effluent filtré est ensuite rejeté vers le milieu hydraulique superficiel (fossé, cours d'eau) après autorisation préfectorale. La surface du lit est calculée selon le débit : 5 m²/PP environ. Un lit filtrant planté de roseaux améliore les performances épuratoires.",
+                        },
+                        {
+                          titre: "Microstations d'épuration",
+                          texte: "Les microstations sont des dispositifs autonomes compact s qui réalisent un traitement biologique (boues activées, lit bactérien, filtre à roseaux) dans une cuve préfabriquée. Elles traitent les eaux brutes sans prétraitement préalable. Elles conviennent aux petites surfaces de terrain ou aux sols imperméables. Cependant, elles nécessitent un contrat d'entretien obligatoire (arrêté de 2009) avec un prestataire qualifié, une alimentation électrique permanente et sont plus sensibles aux variations de charge. Le coût d'entretien annuel est de 200 à 500 €, contre moins de 100 € pour un épandage classique.",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'FTE : 3 000 L pour 5 PP. Tranchées : 5 m/PP, sol Ksat ≥ 10 mm/h. Si sol imperméable : lit filtrant drainé. Microstation : contrat entretien obligatoire.',
                 },
                 flashcards: [
@@ -1795,6 +2560,34 @@ const COURS_DATA = {
                   formules: [
                     'Ksat (mm/h) = π × r² × ΔH / (8 × r × Δt) — formule de Porchet simplifiée',
                     '   r = rayon du trou (m), ΔH = variation du niveau d\'eau (m), Δt = temps (h)',
+                  ],
+                                    sections: [
+                    {
+                      titre: "Missions et contrôles du SPANC",
+                      ss: [
+                        {
+                          titre: "Les 4 types de missions du SPANC",
+                          texte: "Le SPANC exerce 4 types de missions réglementaires : le contrôle de conception et d'implantation (avant travaux, vérification de la conformité du projet), le contrôle de réalisation (à la fin des travaux, avant remblaiement), le contrôle de bon fonctionnement et d'entretien (contrôles périodiques des installations existantes, tous les 8 à 10 ans), et le contrôle pour vente immobilière (rapport obligatoire de moins de 3 ans). Ces missions sont distinctes des activités facultatives que certains SPANC proposent en régie (vidange, entretien).",
+                        },
+                        {
+                          titre: "Financement et redevance SPANC",
+                          texte: "Le SPANC est financé par une redevance annuelle payée par les propriétaires d'installations d'ANC. Cette redevance couvre les coûts des contrôles obligatoires. Son montant varie de 50 à 150 € par an selon les communes et la fréquence des contrôles. Le SPANC peut être géré en régie directe par la commune ou par le groupement de communes (EPCI), ou délégué à un prestataire privé. Une mauvaise gestion ou un sous-financement du SPANC entraîne un contrôle insuffisant du territoire, avec des risques sanitaires et environnementaux non détectés.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Tests de perméabilité et aide à la conception",
+                      ss: [
+                        {
+                          titre: "Test de Porchet — mesure de Ksat in situ",
+                          texte: "Le test de Porchet (ou essai à la tarière) est la méthode de référence pour mesurer la perméabilité de saturation (Ksat) du sol en vue d'un projet d'ANC. Il consiste à creuser un trou à la tarière à la profondeur d'épandage prévue, à le remplir d'eau et à mesurer la vitesse de descente du niveau. La formule de Porchet donne Ksat en mm/h. Un Ksat ≥ 10 mm/h indique un sol apte à l'épandage par infiltration. Ce test doit être réalisé aux périodes de sol ressuyé (printemps, automne) pour représenter les conditions défavorables réelles.",
+                        },
+                        {
+                          titre: "Étude de faisabilité et choix de filière",
+                          texte: "Une étude de sol et de faisabilité est obligatoire avant tout projet d'ANC. Elle comprend des sondages pédologiques (description du profil de sol, épaisseur des couches perméables, niveau de nappe), des tests de perméabilité et une analyse de la topographie. Les résultats orientent vers la filière adaptée : tranchées d'infiltration si Ksat ≥ 10 mm/h et nappe suffisamment profonde, lit filtrant drainé si sol imperméable mais rejet possible, microstation si contraintes fortes. L'étude doit être réalisée par un bureau d'études ou un professionnel qualifié QUALIFELEC ou QUALIPRO ANC.",
+                        },
+                      ],
+                    },
                   ],
                   retenir: 'SPANC = 4 types de contrôles. NC avec danger = 1 an. Porchet mesure le Ksat. Rapport SPANC < 3 ans obligatoire en vente. Redevance = financement service.',
                 },
@@ -1876,6 +2669,34 @@ const COURS_DATA = {
                     'Rapport de sinuosité = longueur du chenal / longueur de la vallée (méandriforme > 1,5)',
                     'Q plein bord ≈ Q de référence morphogène = débit formateur du lit mineur (T ≈ 1,5–2 ans)',
                   ],
+                                    sections: [
+                    {
+                      titre: "Morphologie du cours d'eau et dynamique fluviale",
+                      ss: [
+                        {
+                          titre: "Lit mineur, lit moyen et lit majeur",
+                          texte: "La section transversale d'un cours d'eau comprend plusieurs lits emboîtés. Le lit mineur est la zone en eau dans des conditions ordinaires, délimitée par les berges. Le lit moyen est inondé lors des crues courantes (1 à 2 ans de période de retour). Le lit majeur correspond à l'ensemble de la plaine alluviale inondée lors des crues rares (10 à 100 ans). La distinction entre ces lits est fondamentale pour la prévention des inondations : les zones constructibles s'arrêtent en principe à la limite du lit majeur délimitée dans les PPRI (Plans de Prévention du Risque Inondation).",
+                        },
+                        {
+                          titre: "Dynamique fluviale et transport solide",
+                          texte: "Un cours d'eau n'est pas un canal fixe : il évolue en permanence en érodant ses berges et en déposant des sédiments. Le transport solide comprend la charge de fond (galets, sables qui roulent ou sautillent sur le fond) et la charge en suspension (limons, argiles transportés dans la masse d'eau). Le coefficient de sinuosité (rapport longueur curviligne / longueur à vol d'oiseau) distingue les cours d'eau rectilignes (sinuosité < 1,5), méandriformes (sinuosité > 1,5) et en tresses (lit large avec de multiples chenaux et dépôts). La rectification détruit la sinuosité naturelle et accélère les crues aval.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Ripisylve et continuité écologique",
+                      ss: [
+                        {
+                          titre: "Rôle de la ripisylve",
+                          texte: "La ripisylve est la végétation ligneuse (arbres, arbustes) qui borde les cours d'eau. Elle joue plusieurs rôles essentiels : stabilisation des berges par les racines (résistance à l'érosion), ombrage limitant le réchauffement de l'eau (crucial pour les salmonidés), apport de litière organique nourrissant les invertébrés aquatiques, filtration des pesticides et nitrates venant des champs adjacents, et refuges pour la faune (oiseaux, mammifères semi-aquatiques). Sa gestion doit être raisonnée : ni coupe rase systématique, ni abandon total. L'élagage sélectif et le maintien des arbres morts sont recommandés.",
+                        },
+                        {
+                          titre: "Continuité écologique des cours d'eau",
+                          texte: "La continuité écologique est la capacité d'un cours d'eau à permettre la libre circulation des espèces aquatiques (poissons migrateurs : saumon, truite de mer, anguille) et le libre transit des sédiments (gravier) sans obstruction. Les obstacles (barrages, seuils, buses busées mal dimensionnées) fragmentent les habitats et bloquent la migration reproductrice. Le classement des cours d'eau en liste 1 (aucun obstacle nouveau) et liste 2 (obligation d'équipement des obstacles existants) oblige à créer des passes à poissons ou à effacer les ouvrages avant 2027.",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'Lit mineur = entre berges. Lit majeur = inondable. Ripisylve protège les berges. Continuité écologique (DCE) = libre passage poissons + sédiments.',
                 },
                 flashcards: [
@@ -1935,6 +2756,34 @@ const COURS_DATA = {
                     '📊 Résultats France 2022 : ~ 43 % des masses d\'eau en bon ou très bon état écologique | ~ 37 % en bon état chimique hors ubiquitaires',
                   ],
                   formules: [],
+                                    sections: [
+                    {
+                      titre: "Évaluation de l'état écologique selon la DCE",
+                      ss: [
+                        {
+                          titre: "Les cinq classes d'état écologique",
+                          texte: "La DCE définit cinq classes d'état écologique pour les cours d'eau : Très bon (état de référence non perturbé), Bon (légèrement dégradé par rapport à la référence), Moyen (modérément perturbé), Médiocre (fortement perturbé) et Mauvais (sévèrement perturbé). L'objectif de la DCE est d'atteindre au minimum la classe 'Bon' pour toutes les masses d'eau d'ici 2027. L'état écologique est déterminé par le principe du 'one out, all out' : c'est le moins bon résultat parmi tous les éléments de qualité biologique et physico-chimiques qui détermine l'état final.",
+                        },
+                        {
+                          titre: "Paramètres physico-chimiques généraux",
+                          texte: "En soutien aux éléments biologiques, la DCE évalue également les paramètres physico-chimiques généraux qui conditionnent la biologie : conditions thermiques (température), oxygénation (O₂ dissous, taux de saturation), état d'acidification (pH), nutriments (nitrates, phosphore total, orthophosphates) et conductivité. Ces paramètres ne déterminent pas à eux seuls l'état écologique, mais constituent des indicateurs de pression. Un excès de phosphore (P total > 0,1-0,2 mg/L) peut dégrader l'état écologique même si les indices biologiques semblent corrects à court terme.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Masses d'eau fortement modifiées et résultats DCE",
+                      ss: [
+                        {
+                          titre: "Désignation des MEFM et objectif de bon potentiel",
+                          texte: "Certaines masses d'eau ont été profondément modifiées par des usages économiques essentiels (navigation, hydroélectricité, alimentation en eau, lutte contre les inondations). Ces Masses d'Eau Fortement Modifiées (MEFM) ne peuvent pas atteindre le bon état écologique sans nuire à ces usages. Pour elles, la DCE fixe un objectif réduit : le bon potentiel écologique (BPE). Le BPE correspond aux meilleures conditions biologiques atteignables compte tenu des contraintes physiques imposées par les usages. Les retenues de grands barrages EDF sont des MEFM typiques en France.",
+                        },
+                        {
+                          titre: "Bilan DCE 2022 et enjeux de la prochaine échéance",
+                          texte: "Selon le bilan 2022 de l'Agence Européenne pour l'Environnement, seulement 43 % des masses d'eau de surface françaises sont en bon ou très bon état écologique, et 37 % en bon état chimique (hors ubiquitaires comme le mercure et les PBDE présents dans presque tous les milieux). La France fait ainsi partie des pays les moins avancés dans l'atteinte des objectifs DCE 2027. Les principales causes de non-atteinte du bon état sont les pressions agricoles (nitrates, pesticides, colmatage des fonds), les perturbations hydromorphologiques (seuils, barrages, rectifications) et les pressions urbaines (imperméabilisation, rejets de STEP).",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'Bon état = bon état écologique (IBD/IBGN/IPR ≥ bon) ET bon état chimique (45 SP). MEFM = bon potentiel. France 2022 : ~43 % bon état écologique.',
                 },
                 flashcards: [
@@ -1996,6 +2845,34 @@ const COURS_DATA = {
                     '🌍 Conventions et protections : Convention RAMSAR | Natura 2000 (Habitats, Oiseaux) | arrêtés de biotope | inscription SDAGE',
                   ],
                   formules: [],
+                                    sections: [
+                    {
+                      titre: "Définition et fonctions des zones humides",
+                      ss: [
+                        {
+                          titre: "Définition réglementaire et types de zones humides",
+                          texte: "L'article L211-1 du Code de l'environnement définit les zones humides comme des 'terrains habituellement inondés ou gorgés d'eau douce, salée ou saumâtre de façon permanente ou temporaire'. On distingue plusieurs types selon leur contexte : les tourbières (accumulation de tourbe sur sol saturé en eau), les prairies humides (inondations périodiques en lit majeur), les roselières et cariçaies (végétation aquatique enracinée), les ripisylves (bords de cours d'eau), les marais côtiers et les mangroves (tropicales). Chaque type a ses propres caractéristiques hydrologiques et biologiques.",
+                        },
+                        {
+                          titre: "Fonctions hydrologiques et épuratoires",
+                          texte: "Les zones humides rendent des services écosystémiques essentiels. Sur le plan hydrologique, elles stockent temporairement les crues en lit majeur (1 ha de zone humide peut stocker 1 000 à 5 000 m³ d'eau), soutiennent les débits d'étiage par restitution lente, et rechargent les nappes phréatiques. Sur le plan épuratoire, elles assimilent les nutriments : la dénitrification bactérienne transforme les nitrates en azote gazeux (abattement de 60-90 % de NO₃⁻ possible), tandis que le phosphore est retenu par adsorption sur les sédiments et par absorption végétale. Ce rôle de filtre naturel est particulièrement précieux en aval des zones agricoles.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Identification, protection et compensation",
+                      ss: [
+                        {
+                          titre: "Critères d'identification réglementaires",
+                          texte: "L'arrêté du 24 juin 2008 définit trois critères alternatifs pour identifier réglementairement une zone humide : la présence de végétation hygrophile (espèces inscrites sur la liste officielle : saules, joncs, carex, menthe aquatique, baldingère...), la présence d'un sol hydromorphe (traces de gleyfication : couleurs grises et taches rouille, horizons réductiques), ou l'inondation permanente ou temporaire (≥ 1 mois par an). Un seul critère suffit. L'expertise est réalisée par des écologues et pédologues : grattage de sol à la tarière, relevé phytosociologique.",
+                        },
+                        {
+                          titre: "Séquence ERC et compensation",
+                          texte: "La séquence Éviter-Réduire-Compenser (ERC) est obligatoire pour tout projet pouvant impacter une zone humide. La compensation doit être réalisée avant la destruction et respecter un ratio minimal de 2:1 en surface (créer ou restaurer 2 ha de zone humide pour chaque hectare détruit). La compensation doit être fonctionnellement équivalente (même type de zone humide, même bassin versant si possible). Cette obligation découle de la Loi sur l'eau, du Code de l'environnement et de la doctrine nationale ERC de 2012, renforcée par la Loi biodiversité de 2016 (séquence ERC généralisée à tous les projets impactant la biodiversité).",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'Zones humides = régulation crues + épuration N/P + biodiversité. Identification : végétation hygrophile ou sol hydromorphe. Compensation ERC : ratio ≥ 2:1.',
                 },
                 flashcards: [
@@ -2068,6 +2945,34 @@ const COURS_DATA = {
                     'Loi de Faraday (débitmètre EM) : U = B × D × V (U = tension induite, B = champ magnétique, D = diamètre, V = vitesse)',
                     'Signal standard industriel : 4 mA = 0 % de la mesure — 20 mA = 100 % de la plage',
                   ],
+                                    sections: [
+                    {
+                      titre: "Technologies de débitmétrie",
+                      ss: [
+                        {
+                          titre: "Débitmètre électromagnétique — principe et applications",
+                          texte: "Le débitmètre électromagnétique (ou EM) exploite la loi de Faraday : un fluide conducteur en mouvement dans un champ magnétique génère une force électromotrice (tension) proportionnelle à sa vitesse. La formule est U = B × D × V, où B est l'induction magnétique, D le diamètre de la conduite et V la vitesse moyenne. Le signal est ensuite converti en débit Q = V × S. Ce débitmètre est très précis (±0,5 %), ne comporte aucun organe mobile et n'induit aucune perte de charge. Il est le standard dans les réseaux AEP et EU, applicable à tout fluide conducteur (conductivité σ > 5 µS/cm).",
+                        },
+                        {
+                          titre: "Débitmètres ultrasoniques — transit-time et Doppler",
+                          texte: "Les débitmètres ultrasoniques utilisent des ondes sonores à haute fréquence. Le débitmètre transit-time mesure le temps de propagation des ultrasons dans et contre le sens de l'écoulement : la différence de temps est proportionnelle à la vitesse. Il nécessite une eau claire (sans bulles ni particules) et peut être monté en clamp-on (capteurs collés sur l'extérieur sans perçage, idéal pour les diagnostics temporaires). Le débitmètre Doppler mesure le décalage fréquentiel des ultrasons réfléchis par les particules ou bulles en suspension : il est adapté aux eaux usées chargées et aux boues.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Capteurs de pression, niveau et qualité",
+                      ss: [
+                        {
+                          titre: "Capteurs de pression et de niveau",
+                          texte: "Les capteurs de pression piézorésistifs (membrane déformable) convertissent la pression en signal électrique 4-20 mA. Ils couvrent des plages de 0-1 bar (réseaux basse pression) à 0-600 bar (hydraulique industrielle) avec une précision de ±0,1 à ±0,5 % de l'étendue de mesure. Les capteurs de niveau ultrasoniques mesurent la distance par écho sans contact avec le liquide (idéal pour réservoirs propres). Les capteurs de niveau piézométriques, immergés au fond d'un puits ou d'une cuve, mesurent la pression de la colonne d'eau (H = P/ρg) et sont robustes pour les milieux chargés ou les eaux usées.",
+                        },
+                        {
+                          titre: "Sonde multiparamètre et capteurs en ligne",
+                          texte: "Les sondes multiparamètres mesurent simultanément 5 à 8 paramètres (T°, pH, conductivité, O₂ dissous, turbidité, redox) en un seul déploiement sur le terrain ou dans une rivière. Elles utilisent des membranes et électrodes spécifiques à chaque paramètre et s'étalonnent avec des solutions de référence. Les capteurs en ligne pour la qualité incluent : les sondes nitrates UV (absorbance à 220 nm, sans réactif), les turbidimètres à diffusion (néphélométrie, NTU), les analyseurs de chlore résiduel (ampérométrie) et les sondes pH/redox. Ces capteurs alimentent les systèmes SCADA pour une surveillance en continu.",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'Débitmètre EM = précis, eau conductrice (AEP/EU). Doppler = eaux chargées. Signal 4–20 mA = standard industriel. Sonde multiparamètre = diagnostic rapide terrain.',
                 },
                 flashcards: [
@@ -2130,6 +3035,34 @@ const COURS_DATA = {
                     '🔒 Cybersécurité ICS : les systèmes industriels eau sont des infrastructures critiques — segmentation réseau, mises à jour, authentification',
                   ],
                   formules: [],
+                                    sections: [
+                    {
+                      titre: "Automates programmables industriels (API)",
+                      ss: [
+                        {
+                          titre: "Architecture et fonctionnement de l'API",
+                          texte: "Un automate programmable industriel (API, PLC en anglais) est un calculateur robuste conçu pour les environnements industriels (poussière, vibrations, variations de température). Il comprend une unité centrale (CPU), des modules d'entrées (lectures des capteurs : 4-20 mA, tout-ou-rien) et de sorties (commandes d'actionneurs : relais, variateurs), et une interface de communication réseau. Son fonctionnement est cyclique : à chaque cycle (1 à 100 ms), il lit les entrées, exécute le programme et met à jour les sorties. En cas de coupure d'alimentation, un API reprend son programme au redémarrage.",
+                        },
+                        {
+                          titre: "Langages de programmation — norme IEC 61131-3",
+                          texte: "La norme IEC 61131-3 normalise 5 langages de programmation d'API. Le Ladder (LD) est le plus utilisé en industrie de l'eau : il représente graphiquement la logique de commande sous forme d'un schéma à relais (héritage des armoires électriques). Le FBD (Functional Block Diagram) utilise des blocs fonctionnels connectés entre eux (PID, temporisateurs, comparateurs). Le Texte Structuré (ST) ressemble à un langage informatique (Pascal-like) et est privilégié pour les calculs complexes. Le Grafcet/SFC (Sequential Function Chart) décrit les séquences d'automatisme par étapes et transitions.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "SCADA, IHM et cybersécurité",
+                      ss: [
+                        {
+                          titre: "SCADA et supervision des installations",
+                          texte: "Le SCADA (Supervisory Control And Data Acquisition) est un logiciel de supervision centralisé qui collecte les données de nombreux API ou RTU distants, les affiche sous forme de synoptiques animés, mémorise les historiques dans une base de données de séries temporelles (historian) et gère les alarmes. Le système SCADA est la 'tour de contrôle' de l'opérateur. Il communique avec les API via des protocoles standardisés : Modbus TCP/IP, OPC-UA (standard d'interopérabilité) ou DNP3 (télécontrôle eau/énergie). Il est distinct de l'API : la panne du SCADA n'arrête pas l'installation, les API continuant leur automatisme local.",
+                        },
+                        {
+                          titre: "Cybersécurité des systèmes industriels",
+                          texte: "Les systèmes SCADA et API de l'eau constituent des infrastructures critiques (classées OIV, Opérateurs d'Importance Vitale) dont la compromission pourrait mettre en danger la santé publique. En 2021, une attaque sur une usine de potabilisation en Floride a failli entraîner une surdose de soude caustique. Les mesures de cybersécurité imposées par l'ANSSI en France incluent : la segmentation des réseaux (isolation du réseau SCADA d'Internet), l'authentification forte des opérateurs, la gestion des mises à jour (patch management) et la sauvegarde sécurisée des configurations API.",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'API = cerveau de l\'automatisme. SCADA = supervision globale. Modbus = protocole terrain standard en eau. Cycle : lecture capteurs → programme → commande actionneurs.',
                 },
                 flashcards: [
@@ -2201,6 +3134,34 @@ const COURS_DATA = {
                   formules: [
                     'Rendement réseau = Volume facturé / Volume mis en distribution × 100 (%)',
                     'ILP (Indice Linéaire de Perte) = Pertes réelles (m³/j) / longueur réseau (km) — seuil de performance',
+                  ],
+                                    sections: [
+                    {
+                      titre: "Architecture et réseaux de télégestion",
+                      ss: [
+                        {
+                          titre: "RTU et structure d'une architecture de télégestion",
+                          texte: "La télégestion d'un réseau d'eau ou d'une STEP repose sur une architecture à 3 niveaux. Sur le terrain, des RTU (Remote Terminal Units) — petits automates avec interface radio — collectent les mesures des capteurs locaux et exécutent les commandes envoyées par le serveur. Les RTU communiquent avec le serveur de télégestion via un réseau de transmission (4G, LoRaWAN, radio UHF, fibre). Le serveur de télégestion centralise, stocke et affiche les données, génère les alarmes et permet les commandes à distance. Les RTU isolés sont souvent alimentés par panneaux solaires et batteries.",
+                        },
+                        {
+                          titre: "Réseaux de communication — 4G et LoRaWAN",
+                          texte: "Le réseau cellulaire 4G/LTE est la solution la plus répandue pour la télégestion car il offre une couverture nationale, un débit élevé et un déploiement sans infrastructure propre. Il convient pour les RTU nécessitant des échanges fréquents ou importants en volume. LoRaWAN (Long Range Wide Area Network) est un réseau IoT bas débit conçu pour des objets très basse consommation : portée de 10-15 km en campagne, débit de 250 bits/s à 11 kb/s, consommation de quelques mA permettant une autonomie sur batterie de plusieurs années. LoRa est idéal pour les capteurs de niveau, pression et débit n'envoyant qu'un relevé toutes les 15 minutes.",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "Autosurveillance et performance des réseaux",
+                      ss: [
+                        {
+                          titre: "Autosurveillance réglementaire des STEP",
+                          texte: "L'arrêté du 22 juin 2007 impose une autosurveillance obligatoire pour les STEP dépassant certains seuils de capacité. Les STEP > 120 kg/j DBO5 doivent mesurer en continu les débits entrants et sortants et la turbidité en sortie. Les STEP > 600 kg/j doivent instrumenter les concentrations de DBO5, DCO, MES, NTK et phosphore. Les données sont transmises mensuellement à la base nationale ROSEAU (INERIS/OFB). La télégestion permet d'automatiser cette transmission de données et de réduire les coûts de surveillance.",
+                        },
+                        {
+                          titre: "Indicateurs de performance des réseaux AEP",
+                          texte: "Le rendement de réseau (R = volume facturé / volume mis en distribution × 100) et l'Indice Linéaire de Perte (ILP = pertes réelles / longueur de réseau, en m³/j/km) sont les indicateurs de référence pour évaluer les pertes d'un réseau AEP. Un réseau performant a R ≥ 85 % et ILP < 3 m³/j/km. La télégestion contribue directement à l'amélioration de ces indicateurs en permettant la détection de fuites nocturnes (suivi du débit minimum nocturne entre 2h et 4h du matin), la sectorisation du réseau et la réactivité face aux ruptures. La réduction des pertes est un enjeu majeur de gestion durable de la ressource.",
+                        },
+                      ],
+                    },
                   ],
                   retenir: 'Télégestion = RTU + réseau comm. (4G, LoRa) + serveur. Fonctions : mesure, alarmes, commandes, historiques. Autosurveillance STEP obligatoire (arrêté 2007).',
                 },
