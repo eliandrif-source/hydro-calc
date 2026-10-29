@@ -3261,6 +3261,34 @@ const COURS_DATA = {
                   'Ce = Q / P — coefficient d\'écoulement (–)',
                   'Module = débit moyen interannuel (m³/s ou L/s/km²)',
                 ],
+                sections: [
+                  {
+                    titre: "1. Le cycle hydrologique",
+                    ss: [
+                      {
+                        titre: "1.1. Les grands flux du cycle",
+                        texte: "<p>Le cycle hydrologique décrit la circulation permanente de l'eau entre l'atmosphère, la surface et le sous-sol. Les flux principaux sont : précipitations (P), évapotranspiration réelle (ETR), ruissellement de surface (Q), infiltration vers les nappes, et percolation vers les aquifères profonds.</p><p>L'interception par la végétation retient une partie des précipitations, qui s'évapore sans atteindre le sol. La rétention de surface remplit les dépressions avant le ruissellement. Ces pertes initiales peuvent représenter plusieurs millimètres par événement pluvieux.</p>",
+                      },
+                      {
+                        titre: "1.2. L'évapotranspiration",
+                        texte: "<p>L'<strong>ETP</strong> (évapotranspiration potentielle) est la quantité d'eau évaporée et transpirée si l'eau est disponible en quantité illimitée. La formule de Penman-Monteith (FAO) est la référence internationale — elle intègre température, humidité, vent et rayonnement solaire.</p><p>L'<strong>ETR</strong> (évapotranspiration réelle) est toujours ≤ ETP. Elle est limitée par la disponibilité en eau du sol. En France, ETR annuelle ≈ 400–600 mm selon les régions. La différence ETP − ETR mesure le déficit hydrique.</p>",
+                      },
+                    ],
+                  },
+                  {
+                    titre: "2. Le bilan hydrologique",
+                    ss: [
+                      {
+                        titre: "2.1. L'équation du bilan",
+                        texte: "<p>Le bilan hydrologique s'écrit P = ETR + Q + ΔS, où ΔS est la variation du stock (nappes, neige, humidité du sol). Sur une longue période (> 10 ans) et à l'échelle annuelle, ΔS → 0 et le bilan se réduit à Q = P − ETR.</p><p>Le bassin versant est l'unité naturelle de calcul du bilan. Ses limites sont définies par la ligne de partage des eaux topographique. Pour les bassins karstiques, les limites souterraines peuvent différer des limites topographiques.</p>",
+                      },
+                      {
+                        titre: "2.2. Coefficient d'écoulement et module",
+                        texte: "<p>Le <strong>coefficient d'écoulement</strong> Ce = Q/P est la fraction des précipitations qui s'écoule vers les cours d'eau. Il varie de 0,05 en milieu aride à 0,8 en montagne imperméable. En France métropolitaine, Ce moyen ≈ 0,3–0,5.</p><p>Le <strong>module</strong> est le débit moyen interannuel (m³/s). C'est la référence hydrologique d'une station. Le module spécifique (L/s/km²) permet de comparer des bassins de tailles différentes. Le module sert de base au calcul réglementaire du débit réservé (module/10).</p>",
+                      },
+                    ],
+                  },
+                ],
                 retenir: 'Bilan : P = ETR + Q + ΔS. Ce = Q/P. Le bassin versant = unité de gestion. Module = débit moyen interannuel. Données : banque HYDRO, Vigicrues.',
               },
               flashcards: [
@@ -3316,6 +3344,34 @@ const COURS_DATA = {
                 formules: [
                   'Q = C × i × A / 360 — méthode rationnelle (L/s, A en ha, i en mm/h)',
                   'p = 1/T — probabilité annuelle de dépassement d\'une crue de période de retour T',
+                ],
+                sections: [
+                  {
+                    titre: "1. Précipitations et ruissellement urbain",
+                    ss: [
+                      {
+                        titre: "1.1. Les courbes IDF et leur utilisation",
+                        texte: "<p>Les courbes Intensité-Durée-Fréquence (IDF) donnent, pour une durée et une fréquence données, l'intensité maximale moyenne de la pluie. Elles sont publiées par Météo-France (système SHYREG) et sont indispensables pour le dimensionnement des réseaux d'eaux pluviales et des ouvrages de rétention.</p><p>Chaque courbe est valable pour une station ou une zone climatique. Il ne faut pas utiliser les valeurs d'une région voisine sans vérification. La durée critique est le temps de concentration du bassin versant drainé.</p>",
+                      },
+                      {
+                        titre: "1.2. Coefficient de ruissellement et imperméabilisation",
+                        texte: "<p>Le coefficient de ruissellement C traduit la proportion de la pluie qui génère du ruissellement. En milieu urbain, C varie entre 0,20 (jardins) et 0,95 (toitures, voiries). Pour un bassin mixte, on calcule un coefficient pondéré par les surfaces : Cm = Σ(Ci × Ai) / Σ Ai.</p><p>L'imperméabilisation croissante des bassins versants urbains augmente les débits de pointe et réduit les temps de concentration. Un bassin urbanisé répond plus vite et avec un débit plus élevé à la même pluie qu'un bassin naturel.</p>",
+                      },
+                    ],
+                  },
+                  {
+                    titre: "2. Dimensionnement des crues de projet",
+                    ss: [
+                      {
+                        titre: "2.1. La méthode rationnelle",
+                        texte: "<p>La méthode rationnelle Q = C × i × A est utilisée pour les petits bassins urbains (< 1 km²). Q est le débit de pointe (m³/s), C le coefficient de ruissellement global, i l'intensité de la pluie pour la durée tc (m/s) et A la superficie du bassin (m²).</p><p>La pluie de projet est choisie avec une fréquence adaptée à l'usage (T = 10 ans pour les réseaux courants, T = 100 ans pour les ouvrages structurants). La durée est le temps de concentration du bassin. La méthode rationnelle ne donne qu'un débit de pointe, pas un volume ni un hydrogramme.</p>",
+                      },
+                      {
+                        titre: "2.2. Crue de projet et dimensionnement",
+                        texte: "<p>La crue de projet est la crue retenue pour le dimensionnement d'un ouvrage. Son choix résulte d'une analyse des enjeux protégés et d'un arbitrage coût/bénéfice. Une prise d'eau sera dimensionnée pour le QMNA5 ; une digue contre les inondations sera dimensionnée pour la crue centennale voire plus.</p><p>Le débit de pointe d'une crue T ne s'additionne pas directement avec celui d'une autre crue T sur un confluent — la simultanéité des pics dépend des temps de réponse respectifs des sous-bassins.</p>",
+                      },
+                    ],
+                  },
                 ],
                 retenir: 'IDF = outil clé pour le dimensionnement EP. Crue T100 = p=1%. Méthode rationnelle pour BV < 2 km². PPRI = zonage réglementaire inondation.',
               },
@@ -3375,6 +3431,34 @@ const COURS_DATA = {
                 formules: [
                   'Débit réservé = Module / 10 (règle générale — art. L214-18 Code envt)',
                   'QMNA5 = débit mensuel minimum dépassé 4 années sur 5 (fréquence de non-dépassement 20 %)',
+                ],
+                sections: [
+                  {
+                    titre: "1. Les étiages : définition et caractérisation",
+                    ss: [
+                      {
+                        titre: "1.1. Définition et indicateurs d'étiage",
+                        texte: "<p>L'étiage est la période de l'année durant laquelle le débit d'un cours d'eau est à son niveau le plus bas. En France, l'étiage estival (juillet-septembre) résulte de la conjonction de faibles précipitations et d'une forte évapotranspiration.</p><p>Le <strong>QMNA5</strong> (débit mensuel minimal annuel de fréquence quinquennale sèche) est le débit mensuel moyen le plus faible susceptible d'être atteint en étiage avec une probabilité de 1/5 par an. C'est la valeur de référence réglementaire pour caractériser un étiage sévère.</p>",
+                      },
+                      {
+                        titre: "1.2. Facteurs aggravants",
+                        texte: "<p>Les étiages sont aggravés par : les prélèvements agricoles intensifs (irrigation par aspersion ou gravitaire), les restitutions différées par les grands barrages, la réduction des zones humides qui jouent un rôle de régulation des débits, et le changement climatique (diminution des précipitations estivales, hausse de l'évapotranspiration).</p><p>L'imperméabilisation des sols réduit la recharge des nappes souterraines, qui alimentent les cours d'eau en étiage (débit de base). Un bassin très imperméabilisé peut être à sec en été alors qu'un bassin naturel équivalent maintient un débit de base.</p>",
+                      },
+                    ],
+                  },
+                  {
+                    titre: "2. Le débit réservé et sa gestion",
+                    ss: [
+                      {
+                        titre: "2.1. La règle du module/10 et les dérogations",
+                        texte: "<p>La loi sur l'eau (art. L.214-18 CE) fixe un débit minimal à maintenir en aval de tout ouvrage ou prélèvement : par défaut, 1/10 du module ou 1/20 dans certains cas. Ce débit réservé garantit un minimum vital pour la vie aquatique en aval.</p><p>Pour les cours d'eau à enjeux environnementaux particuliers (zones Natura 2000, frayères, réservoirs biologiques), le débit réservé peut être fixé à une valeur plus élevée que le module/10 par arrêté préfectoral ou par le SDAGE.</p>",
+                      },
+                      {
+                        titre: "2.2. Enjeux environnementaux des étiages",
+                        texte: "<p>En étiage sévère, la concentration des polluants augmente (dilution réduite), la température de l'eau monte (risque de mortalité piscicole), et l'oxygène dissous peut chuter. Les espèces les plus sensibles (salmonidés notamment) sont les premières affectées.</p><p>La gestion des étiages implique une coordination entre gestionnaires des cours d'eau, agriculteurs, industriels et services de l'État. Les comités sécheresse organisent les restrictions de prélèvements quand les niveaux de crise sont atteints (niveaux d'alerte, d'alerte renforcée et de crise).</p>",
+                      },
+                    ],
+                  },
                 ],
                 retenir: 'QMNA5 = débit de référence réglementaire. Débit réservé = module/10. Étiages aggravés par le CC (-20 à -40% d\'ici 2050). VCN10 = indicateur de sévérité.',
               },
@@ -3437,6 +3521,34 @@ const COURS_DATA = {
                   '🏛️ Services eau : SPIC (Service Public Industriel et Commercial) — délégués à des entreprises privées (DSP) ou gérés en régie',
                 ],
                 formules: [],
+                sections: [
+                  {
+                    titre: "1. Statut juridique de l'eau et des cours d'eau",
+                    ss: [
+                      {
+                        titre: "1.1. L'eau, patrimoine commun de la nation",
+                        texte: "<p>L'article L.210-1 du Code de l'environnement pose le principe fondateur : « L'eau fait partie du patrimoine commun de la nation. Sa protection, sa mise en valeur et le développement de la ressource utilisable, dans le respect des équilibres naturels, sont d'intérêt général. » Ce principe oriente toute la réglementation de l'eau.</p><p>L'eau n'est pas une propriété privée commercialisable. Son usage est encadré par des droits et des obligations. Les collectivités publiques sont garantes de la protection et de la gestion durable de la ressource pour les générations futures.</p>",
+                      },
+                      {
+                        titre: "1.2. Cours d'eau domaniaux et non domaniaux",
+                        texte: "<p>Les <strong>cours d'eau domaniaux</strong> appartiennent au domaine public fluvial de l'État, des régions ou des départements. Leur lit et leurs berges sont propriété publique. Leur entretien relève du gestionnaire domanial.</p><p>Les <strong>cours d'eau non domaniaux</strong> ont un lit appartenant aux riverains (art. L.215-2 CE) : chaque riverain est propriétaire jusqu'au milieu du cours d'eau (talweg). L'obligation d'entretien régulier incombe aux riverains (art. L.215-14), sous peine de substitution par la collectivité après mise en demeure.</p>",
+                      },
+                    ],
+                  },
+                  {
+                    titre: "2. Propriété des berges et servitudes",
+                    ss: [
+                      {
+                        titre: "2.1. Droits et obligations des riverains",
+                        texte: "<p>Le propriétaire riverain a le droit d'usage de l'eau (usage domestique, irrigation dans certaines limites) et l'obligation d'entretien régulier du cours d'eau (débroussaillage, enlèvement des embâcles). Il ne peut ni dériver le cours d'eau ni modifier son régime sans autorisation.</p><p>Le droit de pêche sur les cours d'eau non domaniaux appartient aux riverains, qui peuvent le louer ou le conférer à une association agréée. Sur les cours d'eau domaniaux, il appartient à l'État.</p>",
+                      },
+                      {
+                        titre: "2.2. Servitudes et droits des tiers",
+                        texte: "<p>Le Code de l'environnement établit des servitudes légales au bénéfice de la collectivité : servitude de marche-pied (3,25 m sur les berges navigables), servitude de passage pour l'entretien des cours d'eau non domaniaux (art. L.215-18), et servitude dans les zones de rétention des crues.</p><p>Un projet de restauration ou d'aménagement sur un cours d'eau non domanial requiert l'accord des propriétaires riverains ou une procédure de déclaration d'utilité publique (DUP). L'intervention sans accord ni procédure constitue une voie de fait.</p>",
+                      },
+                    ],
+                  },
+                ],
                 retenir: 'Eau = patrimoine commun (L210-1). Cours d\'eau domaniaux = État/collectivités. Cours d\'eau non domaniaux = riverains. Eaux souterraines = propriétaire terrain (sous conditions).',
               },
               flashcards: [
@@ -3496,6 +3608,34 @@ const COURS_DATA = {
                   '🌡️ Arrêtés-cadre sécheresse : mesures de restriction des usages de l\'eau par niveau d\'alerte (vigilance → crise). Préfet de département',
                 ],
                 formules: [],
+                sections: [
+                  {
+                    titre: "1. Les procédures IOTA",
+                    ss: [
+                      {
+                        titre: "1.1. Les trois régimes de la nomenclature eau",
+                        texte: "<p>La nomenclature eau (art. R.214-1 CE) classe les Installations, Ouvrages, Travaux et Activités (IOTA) impactant les milieux aquatiques en trois régimes selon leur impact potentiel :</p><ul style=\"margin:6px 0 6px 16px\"><li><strong>Autorisation (A)</strong> : impacts significatifs, arrêté préfectoral requis, enquête publique possible</li><li><strong>Déclaration (D)</strong> : impacts modérés, dossier déposé en préfecture (DDT)</li><li><strong>Aucune formalité</strong> : impacts négligeables</li></ul><p>Un projet peut relever de plusieurs rubriques, dont certaines en A et d'autres en D — c'est le régime le plus contraignant qui s'applique à l'ensemble.</p>",
+                      },
+                      {
+                        titre: "1.2. Contenu du dossier et instruction",
+                        texte: "<p>Le dossier de déclaration ou d'autorisation comprend : description du projet, état initial du site, incidences sur la ressource en eau et les milieux aquatiques, mesures ERC (éviter, réduire, compenser), et pour les autorisations : étude d'impact selon le niveau de risque.</p><p>L'instruction est réalisée par la DDT (Direction Départementale des Territoires) avec avis de l'OFB et des autres services concernés. Une autorisation est assortie de prescriptions que le pétitionnaire doit respecter.</p>",
+                      },
+                    ],
+                  },
+                  {
+                    titre: "2. La police de l'eau",
+                    ss: [
+                      {
+                        titre: "2.1. Organisation de la police de l'eau",
+                        texte: "<p>La police administrative de l'eau est exercée par le préfet, avec l'appui de la DDT et de l'OFB (Office Français de la Biodiversité). Elle vise à prévenir les atteintes aux milieux aquatiques et à faire respecter les prescriptions des autorisations et déclarations.</p><p>L'OFB dispose de gardes de l'environnement assermentés qui exercent des missions de police judiciaire (constatation des infractions, procès-verbaux). Leurs pouvoirs couvrent les milieux aquatiques, la faune et la flore sauvages.</p>",
+                      },
+                      {
+                        titre: "2.2. Sanctions et mise en conformité",
+                        texte: "<p>Les infractions à la police de l'eau peuvent faire l'objet de sanctions administratives (mise en demeure, consignation, travaux d'office) et pénales (amende, voire emprisonnement pour les infractions les plus graves). La mise en demeure impose un délai pour régulariser la situation.</p><p>La régularisation d'un ouvrage existant sans autorisation nécessite un dossier de régularisation déposé à la DDT. L'administration peut accorder une mise en conformité progressive selon le risque environnemental et les difficultés techniques.</p>",
+                      },
+                    ],
+                  },
+                ],
                 retenir: 'IOTA = 3 régimes (autorisation, déclaration, sans formalité). OFB + DDT = police de l\'eau. DIG = intervention collective sur terrain privé. Infraction → remise en état + amende.',
               },
               flashcards: [
@@ -3562,6 +3702,34 @@ const COURS_DATA = {
                   'Taux de renouvellement = km renouvelés / km total × 100 (% par an)',
                   'Taux de casse = nombre de réparations de fuites / 100 km de réseau / an — indicateur de dégradation',
                 ],
+                sections: [
+                  {
+                    titre: "1. Diagnostic des réseaux et renouvellement",
+                    ss: [
+                      {
+                        titre: "1.1. L'état du réseau français",
+                        texte: "<p>Les réseaux d'eau potable français ont une durée de vie théorique de 50 à 100 ans selon les matériaux (fonte, PVC, polyéthylène). Le taux de renouvellement recommandé est de 1 à 1,5 %/an du linéaire total pour maintenir le patrimoine. En France, le taux réel moyen est d'environ 0,6 %/an — insuffisant pour renouveler l'ensemble du réseau en un siècle.</p><p>Un sous-investissement prolongé conduit à une dégradation progressive du réseau, des pertes par fuites croissantes et un risque sanitaire accru. Le diagnostic patrimonial est indispensable pour prioriser les interventions.</p>",
+                      },
+                      {
+                        titre: "1.2. Techniques de diagnostic",
+                        texte: "<p>Le diagnostic des réseaux d'eau potable combine : inspection caméra (pour les conduites accessibles), écoute acoustique (corrélation de fuites par des géophones), pré-localisation radar (GPR), et analyse des données de pression et de débit (sectorisation).</p><p>L'Indice Linéaire de Pertes (ILP) et le rendement de réseau sont les indicateurs clés. La connaissance du réseau (plan cadastral, matériaux, âges, incidents) est le premier prérequis d'un programme de renouvellement efficace.</p>",
+                      },
+                    ],
+                  },
+                  {
+                    titre: "2. Maintenance préventive et corrective",
+                    ss: [
+                      {
+                        titre: "2.1. Le plan de maintenance préventive",
+                        texte: "<p>La maintenance préventive vise à anticiper les défaillances avant qu'elles surviennent. Elle comprend : nettoyage régulier des conduites (hydrocurage), surveillance des appareils de régulation (vannes, réducteurs de pression, ventouses), entretien des réservoirs (visite annuelle, nettoyage quinquennal) et vérification des poteaux d'incendie.</p><p>Un plan de maintenance est programmé sur plusieurs années, avec des fréquences adaptées à chaque type d'équipement. Il s'intègre dans le Schéma Directeur d'Alimentation en Eau Potable (SDAEP).</p>",
+                      },
+                      {
+                        titre: "2.2. Gestion des incidents",
+                        texte: "<p>La maintenance corrective intervient après une défaillance : réparation de casse, renouvellement d'une section défaillante, remplacement d'un équipement. Chaque incident doit être enregistré (date, localisation, cause, intervention) pour alimenter le système d'information patrimonial.</p><p>La hiérarchisation des urgences dépend du débit de fuite, des enjeux en aval (quartier alimenté, risque d'effondrement, contamination) et des ressources disponibles. Un réseau correctement documenté permet d'intervenir plus rapidement et d'isoler les zones affectées sans couper l'alimentation de quartiers non concernés.</p>",
+                      },
+                    ],
+                  },
+                ],
                 retenir: 'Renouvellement cible : 1–1,5 %/an. France : 0,6 % = insuffisant. Maintenance préventive planifiée > corrective. Techniques sans tranchée pour réhabilitation. RPQS obligatoire.',
               },
               flashcards: [
@@ -3625,6 +3793,34 @@ const COURS_DATA = {
                   'ILP (m³/j/km) = Pertes (m³/j) / linéaire réseau (km)',
                   'Pertes = V_mis_en_distribution – V_consommé_autorisé',
                 ],
+                sections: [
+                  {
+                    titre: "1. Calcul du rendement et indicateurs de pertes",
+                    ss: [
+                      {
+                        titre: "1.1. Le rendement de distribution",
+                        texte: "<p>Le rendement de distribution R = V_consommé / V_produit × 100 (%). V_consommé inclut les volumes facturés aux abonnés, les volumes non-facturés autorisés (défense incendie, lavage des rues, besoins propres du service) et les pertes apparentes (compteurs défaillants, fraudes). V_produit est le volume mis en distribution.</p><p>Seuil réglementaire d'alerte : rendement < 50 % pour les communes rurales (abonnement ≤ 500 m³/j) ou < 65 % pour les communes urbaines. En dessous de ce seuil, l'agence de l'eau peut limiter ses aides.</p>",
+                      },
+                      {
+                        titre: "1.2. L'Indice Linéaire de Pertes (ILP)",
+                        texte: "<p>L'ILP = Volume perdu (m³/j) / longueur du réseau (km) permet de comparer les performances indépendamment de la taille du réseau. Un ILP ≤ 3 m³/j/km est considéré comme performant ; au-delà de 5–8 selon la densité urbaine, des actions correctives s'imposent.</p><p>Les pertes sont de deux types : réelles (fuites visibles ou souterraines) et apparentes (erreurs de comptage, branchements illicites). Une action sur la pression réduit les pertes réelles mais n'améliore pas les pertes apparentes.</p>",
+                      },
+                    ],
+                  },
+                  {
+                    titre: "2. Stratégies d'amélioration du rendement",
+                    ss: [
+                      {
+                        titre: "2.1. Sectorisation et gestion nocturne des débits",
+                        texte: "<p>La sectorisation consiste à diviser le réseau en zones isolées mesurées séparément. La mesure des débits nocturnes (2h-4h du matin, quand la consommation réelle est quasi nulle) permet de détecter les fuites par secteur : un débit nocturne élevé révèle des fuites importantes.</p><p>La sectorisation associée à des débitmètres et des enregistreurs de pression forme un système de surveillance dynamique qui permet de détecter rapidement une casse ou une fuite et de cibler les interventions.</p>",
+                      },
+                      {
+                        titre: "2.2. Gestion de la pression et réhabilitation",
+                        texte: "<p>La pression est le principal facteur d'aggravation des fuites : réduire la pression de service réduit le débit de fuite (relation quasi-linéaire) et prolonge la durée de vie des conduites. Les réducteurs de pression (RP) permettent de créer des zones à pression maîtrisée.</p><p>La réhabilitation des conduites les plus dégradées (gainage, éclatement, remplacement) est complémentaire de la gestion de pression. Elle doit être priorisée par l'analyse des données patrimoniales (âge, matériau, fréquence des casses) et des résultats de la sectorisation.</p>",
+                      },
+                    ],
+                  },
+                ],
                 retenir: 'Rendement = V_consommé/V_produit. ILP = pertes/km. Seuil alerte : rendement < 50 % ou ILP > 10 → plan d\'action obligatoire. Détection : corrélateur acoustique.',
               },
               flashcards: [
@@ -3677,6 +3873,34 @@ const COURS_DATA = {
                   '📋 Obligations : producteurs > 1 000 m³/j doivent soumettre leur PGSSE à l\'ARS avant 2026. Mise à jour tous les 6 ans minimum',
                 ],
                 formules: [],
+                sections: [
+                  {
+                    titre: "1. Le Plan de Gestion de la Sécurité Sanitaire de l'Eau",
+                    ss: [
+                      {
+                        titre: "1.1. Objectifs et fondements du PGSSE",
+                        texte: "<p>Le Plan de Gestion de la Sécurité Sanitaire de l'Eau (PGSSE), équivalent français du Water Safety Plan de l'OMS, est obligatoire en France depuis la transposition de la directive européenne 2020/2184 (décret de 2022, application 2023). Il remplace et enrichit l'approche réglementaire classique.</p><p>Son objectif est de passer d'une logique réactive (analyse de l'eau au robinet) à une logique préventive (identification et maîtrise des risques à chaque étape de la chaîne de l'eau, de la ressource au robinet).</p>",
+                      },
+                      {
+                        titre: "1.2. Les étapes du PGSSE",
+                        texte: "<p>Le PGSSE comprend 5 étapes principales : 1) Constitution de l'équipe pluridisciplinaire ; 2) Description du système de production et de distribution ; 3) Identification et analyse des dangers (contaminants, événements anormaux) ; 4) Définition et mise en œuvre des mesures de maîtrise ; 5) Vérification de l'efficacité et amélioration continue.</p><p>Le PGSSE doit être documenté, régulièrement mis à jour (après tout incident significatif, au minimum tous les 5 ans) et partagé avec l'Agence Régionale de Santé (ARS) qui assure la surveillance sanitaire.</p>",
+                      },
+                    ],
+                  },
+                  {
+                    titre: "2. Analyse des risques et mesures barrières",
+                    ss: [
+                      {
+                        titre: "2.1. Identification des dangers et évaluation des risques",
+                        texte: "<p>L'approche ABR (Analyse Basée sur les Risques) consiste à identifier tous les dangers potentiels sur la chaîne de l'eau (contamination microbiologique, chimique, physique), à évaluer leur probabilité et leur gravité, et à classer les risques par niveau de priorité.</p><p>Les sources de contamination à analyser : la ressource (qualité naturelle, pollutions agricoles, industrielles, accidentelles), le captage (protection du périmètre), le traitement (efficacité des barrières, pannes), le stockage (réservoirs) et la distribution (matériaux, stagnation, contamination par refoulement).</p>",
+                      },
+                      {
+                        titre: "2.2. Les mesures barrières et le plan d'urgence",
+                        texte: "<p>Une mesure barrière est toute action technique ou organisationnelle qui empêche ou réduit l'exposition à un danger. Les barrières successives forment la défense en profondeur : protection de la ressource, traitement (chloration, UV, filtration membranaire), surveillance (turbidimétrie, chlore résiduel), et surveillance du réseau.</p><p>Le plan d'urgence (ou plan de continuité d'activité) prévoit les actions à mener en cas de défaillance d'une barrière ou de contamination avérée : avis de non-consommation, alimentation de secours, communication aux abonnés, analyse des causes et remédiation.</p>",
+                      },
+                    ],
+                  },
+                ],
                 retenir: 'PGSSE = Water Safety Plan obligatoire depuis 2023. ABR = identifier les risques de la source au robinet. Surveillance opérationnelle = temps réel. Soumis à l\'ARS avant 2026.',
               },
               flashcards: [
@@ -3763,6 +3987,34 @@ const COURS_DATA = {
                   'T = K × e — transmissivité (m²/s)',
                   'v_réelle = K × i / ω_eff — vitesse réelle de l\'eau (ω_eff = porosité efficace)',
                 ],
+                sections: [
+                  {
+                    titre: "1. Types d'aquifères et paramètres hydrauliques",
+                    ss: [
+                      {
+                        titre: "1.1. Nappe libre, nappe captive et nappe semi-captive",
+                        texte: "<p>Une <strong>nappe libre</strong> (ou phréatique) a sa surface supérieure à pression atmosphérique — le niveau piézométrique coïncide avec la nappe. Une <strong>nappe captive</strong> est confinée entre deux couches imperméables (aquiclude) et se trouve sous pression — le niveau piézométrique s'élève au-dessus du toit de l'aquifère, parfois jusqu'à la surface (puits artésien).</p><p>Une <strong>nappe semi-captive</strong> est surmontée d'un aquitard (couche peu perméable) qui permet des échanges verticaux lents. Ces échanges compliquent l'interprétation des pompages d'essai.</p>",
+                      },
+                      {
+                        titre: "1.2. Perméabilité, transmissivité et coefficient d'emmagasinement",
+                        texte: "<p>La <strong>perméabilité K</strong> (m/s) est la capacité d'un milieu à transmettre l'eau. Elle varie de 10⁻¹⁰ m/s (argiles) à 10⁻² m/s (graviers). La <strong>transmissivité T = K × e</strong> (m²/s) est le produit de K par l'épaisseur saturée e — c'est le paramètre directement mesurable par les pompages d'essai.</p><p>Le <strong>coefficient d'emmagasinement S</strong> (sans dimension) est la fraction du volume d'eau libéré par unité de baisse du niveau piézométrique et par unité de surface. En nappe libre S ≈ 0,01 à 0,30 (porosité efficace) ; en nappe captive S ≈ 10⁻⁵ à 10⁻³ (compressibilité).</p>",
+                      },
+                    ],
+                  },
+                  {
+                    titre: "2. La loi de Darcy et les écoulements souterrains",
+                    ss: [
+                      {
+                        titre: "2.1. Loi de Darcy et gradient hydraulique",
+                        texte: "<p>La loi de Darcy exprime la vitesse de Darcy (ou vitesse de filtration) : v = K × i, où i = dh/dL est le gradient hydraulique (variation de charge hydraulique par unité de longueur). Le débit volumique est Q = K × i × A (A = section transversale).</p><p>La loi de Darcy est valide pour les écoulements laminaires (Re < 10 dans les milieux poreux). Dans les milieux très perméables (graviers grossiers, karst), les écoulements turbulents nécessitent des approches non-linéaires.</p>",
+                      },
+                      {
+                        titre: "2.2. Équation de continuité et surfaces piézométriques",
+                        texte: "<p>En régime permanent et sans source/puits, l'équation de continuité donne : ∂²h/∂x² + ∂²h/∂y² = 0 (équation de Laplace). La carte piézométrique représente les lignes équipotentielles (même charge hydraulique) et les lignes de flux (perpendiculaires aux équipotentielles).</p><p>Les surfaces piézométriques permettent d'identifier les zones de recharge (convergence des flux vers la nappe), les zones de décharge (sources, cours d'eau drainants) et la direction générale des écoulements souterrains.</p>",
+                      },
+                    ],
+                  },
+                ],
                 retenir: 'Nappe libre : surface libre à Patm. Captive : sous pression. K (m/s) = perméabilité. T = K×e = transmissivité. S très petit pour nappe captive.',
               },
               flashcards: [
@@ -3820,6 +4072,34 @@ const COURS_DATA = {
                   's = Q/(4πT) × W(u) — Theis (u = r²S/4Tt)',
                   's ≈ Q/(4πT) × [ln(2,25Tt) – ln(r²S)] — Cooper-Jacob (u < 0,05)',
                   'Pente Cooper-Jacob : Δs = Q × ln(10) / (4πT) = 0,183 × Q / T',
+                ],
+                sections: [
+                  {
+                    titre: "1. Méthodes d'interprétation des pompages d'essai",
+                    ss: [
+                      {
+                        titre: "1.1. Méthode de Theis",
+                        texte: "<p>La solution de Theis (1935) décrit l'évolution du rabattement s en fonction du temps t à distance r d'un puits pompant à débit constant Q dans un aquifère infini, homogène et isotrope en nappe captive : s = (Q/4πT) × W(u), où u = r²S/(4Tt) et W(u) est la fonction de puits.</p><p>L'interprétation graphique superpose la courbe de terrain (s vs t sur papier log-log) avec la courbe type de Theis. Le calage permet de déterminer T et S. C'est la méthode de référence applicable à toutes les configurations au moins approximativement.</p>",
+                      },
+                      {
+                        titre: "1.2. Méthode de Cooper-Jacob",
+                        texte: "<p>Pour des temps suffisamment longs (u < 0,05, soit t > r²S/0,2T), la fonction W(u) se simplifie et le rabattement varie linéairement avec le logarithme du temps : s = (Q/4πT) × ln(2,25Tt/r²S).</p><p>Sur un graphique semi-log (s vs log t), les points s'alignent sur une droite de pente m = Q/(4πT) × ln(10). L'intersection avec l'axe t₀ donne S = 2,25T × t₀/r². La méthode est plus simple à appliquer que Theis mais nécessite de vérifier la condition u < 0,05.</p>",
+                      },
+                    ],
+                  },
+                  {
+                    titre: "2. Courbes de remontée et limites des méthodes",
+                    ss: [
+                      {
+                        titre: "2.1. Interprétation des courbes de remontée",
+                        texte: "<p>Après l'arrêt du pompage, le niveau remonte selon la méthode de Theis-Jacob : le rabattement résiduel s' = (Q/4πT) × ln(t/t'), où t est le temps depuis le début du pompage et t' le temps depuis son arrêt. Sur un graphique semi-log (s' vs log(t/t')), les points s'alignent sur une droite permettant de calculer T indépendamment de S.</p><p>Les courbes de remontée sont moins sensibles aux effets de paroi du puits que les courbes de descente — elles fournissent souvent une estimation de T plus fiable.</p>",
+                      },
+                      {
+                        titre: "2.2. Effets de paroi, limites et incertitudes",
+                        texte: "<p>Les principaux facteurs qui font dévier les courbes d'une solution de Theis simple sont : les effets de paroi (skin) du puits, le stockage dans le puits, la désaturation partielle de la nappe (nappe libre), la présence de barrières ou de limites du domaine aquifère, et la double perméabilité (aquifère fracturé).</p><p>L'interprétation d'un pompage d'essai doit toujours être accompagnée d'une analyse de sensibilité et d'une discussion sur les hypothèses. Les valeurs de T et S issues d'un seul essai sont ponctuelles — elles ne représentent pas nécessairement tout l'aquifère.</p>",
+                      },
+                    ],
+                  },
                 ],
                 retenir: 'Theis = référence (toutes conditions). Cooper-Jacob = approximation graphique simple (t grand). Pente droite → T. Ordonnée origine → S. Récupération → vérification T.',
               },
@@ -3883,6 +4163,34 @@ const COURS_DATA = {
                   'Ss × ∂h/∂t = ∂/∂x(Kx·∂h/∂x) + ∂/∂y(Ky·∂h/∂y) + ∂/∂z(Kz·∂h/∂z) + W — équation de diffusivité',
                   'Résidu = h_calculé – h_observé → minimiser par calibration',
                 ],
+                sections: [
+                  {
+                    titre: "1. Structure d'un modèle MODFLOW",
+                    ss: [
+                      {
+                        titre: "1.1. Grille tridimensionnelle et couches géologiques",
+                        texte: "<p>MODFLOW (USGS) résout l'équation aux dérivées partielles de l'écoulement souterrain en 3D par différences finies sur une grille rectangulaire. Chaque maille est caractérisée par ses paramètres hydrauliques (K, T, S) et ses conditions aux limites.</p><p>La grille doit être assez fine pour représenter les hétérogénéités importantes (failles, changements de faciès) et les structures d'intérêt (puits, cours d'eau), mais pas trop fine pour rester calculable. Un raffinement local est possible pour les zones d'intérêt.</p>",
+                      },
+                      {
+                        titre: "1.2. Conditions aux limites",
+                        texte: "<p>Les conditions aux limites définissent comment le modèle interagit avec son environnement : charge imposée (rivière, lac à cote fixe), flux imposé (recharge pluviale, prélèvement), ou condition mixte (drain qui débite selon le gradient entre aquifère et drain — rivière drainante ou alimentante).</p><p>Le choix des conditions aux limites est crucial. Une limite mal définie à la frontière du modèle peut générer des artefacts numériques et des erreurs significatives, notamment pour les simulations de pompage ou d'impact sur les cours d'eau.</p>",
+                      },
+                    ],
+                  },
+                  {
+                    titre: "2. Calibration et incertitudes",
+                    ss: [
+                      {
+                        titre: "2.1. Procédure de calage",
+                        texte: "<p>La calibration consiste à ajuster les paramètres du modèle (K, T, S par zones, recharge) jusqu'à ce que les charges hydrauliques calculées reproduisent les observations piézométriques. Elle se mesure par des critères statistiques (erreur quadratique moyenne, erreur normalisée) et visuellement par les cartes piézométriques.</p><p>Le calage en régime permanent précède généralement le calage en régime transitoire. Un bon calage en permanent n'implique pas un bon calage en transitoire (les volumes d'emmagasinement S peuvent être mal estimés).</p>",
+                      },
+                      {
+                        titre: "2.2. Analyse de sensibilité et incertitudes",
+                        texte: "<p>L'analyse de sensibilité évalue comment les résultats varient quand un paramètre change de ±20 à ±50 %. Les paramètres auxquels le modèle est le plus sensible méritent une caractérisation de terrain plus poussée.</p><p>Un modèle calibré n'est pas unique — différentes combinaisons de paramètres peuvent reproduire les mêmes observations. L'incertitude sur les prévisions doit être explicitement quantifiée (plage de variation, scénarios). Un modèle numérique ne remplace pas l'expertise hydrogéologique — il la structure et l'objective.</p>",
+                      },
+                    ],
+                  },
+                ],
                 retenir: 'MODFLOW = standard mondial (USGS, gratuit). Grille 3D + conditions limites. Calibration = ajuster K/Ss sur piézomètres réels. Toujours vérifier l\'incertitude.',
               },
               flashcards: [
@@ -3943,6 +4251,34 @@ const COURS_DATA = {
                   '🔴 Concentrat OI contenant PFAS : problème majeur → incinération haute température (> 1 100°C) nécessaire pour destruction',
                 ],
                 formules: [],
+                sections: [
+                  {
+                    titre: "1. Propriétés et sources des PFAS",
+                    ss: [
+                      {
+                        titre: "1.1. La liaison C-F et la persistance environnementale",
+                        texte: "<p>Les PFAS (poly- et perfluoroalkyl substances) forment une famille d'environ 12 000 composés caractérisés par des liaisons carbone-fluor (C-F) parmi les plus stables de la chimie organique. Cette liaison confère aux PFAS une résistance à la dégradation chimique, biologique et thermique — d'où leur surnom de « polluants éternels ».</p><p>Les PFAS sont persistants dans l'environnement et bioaccumulables dans les organismes vivants, notamment les longues chaînes (PFOS, PFOA). Ils se retrouvent dans les sols, les eaux souterraines, les eaux de surface et les organismes, parfois loin des sources.</p>",
+                      },
+                      {
+                        titre: "1.2. Sources et voies de contamination",
+                        texte: "<p>Les principales sources de PFAS sont : les mousses anti-incendie AFFF (aéroports, bases militaires, sites industriels), les emballages alimentaires et ustensiles non-adhésifs (Téflon), les textiles imperméabilisés (Gore-Tex), les boues d'épuration agricoles, et certains procédés industriels (galvanoplastie, industrie papetière).</p><p>Les voies de contamination humaine : eau de boisson, alimentation (poissons, légumes irrigués avec eau contaminée), poussières intérieures. La contamination des captages d'eau potable à proximité de sites AFFF est un enjeu majeur en France (cartographie ANSES/BRGM).</p>",
+                      },
+                    ],
+                  },
+                  {
+                    titre: "2. Normes et techniques de traitement",
+                    ss: [
+                      {
+                        titre: "2.1. Valeurs guide et normes 2026",
+                        texte: "<p>La directive européenne 2020/2184 (transposée en France) fixe dès 2026 des valeurs paramétriques pour les PFAS dans l'eau potable : 0,1 µg/L pour chaque PFAS individuellement et 0,5 µg/L pour la somme des 20 PFAS les plus fréquents.</p><p>Ces valeurs sont nettement plus strictes que les anciens seuils. De nombreux captages français (particulièrement en Bretagne, Île-de-France, zones industrielles) nécessiteront des traitements complémentaires ou seront abandonnés. L'ANSES a publié en 2023 ses recommandations sur les PFAS à analyser en priorité.</p>",
+                      },
+                      {
+                        titre: "2.2. Techniques de dépollution",
+                        texte: "<p>Les PFAS sont très difficiles à éliminer par les traitements conventionnels (chloration, UV, coagulation-floculation). Les techniques efficaces sont : le charbon actif en grain (CAG) ou en poudre (CAP), la nanofiltration (NF) et l'osmose inverse (OI), et les procédés d'oxydation avancée (POA) associés à d'autres traitements.</p><p>Chaque technique a ses limites : le charbon actif se sature et génère des résidus concentrés ; l'osmose inverse produit des concentrats chargés en PFAS à traiter. La décontamination des sols saturés reste un défi technique et économique majeur.</p>",
+                      },
+                    ],
+                  },
+                ],
                 retenir: 'PFAS = 12 000 composés, liaison C-F indestructible. Sources : AFFF, Téflon, boues. Norme : 0,1 µg/L/substance. Traitement : CAG (C8+) ou OI. Concentrat = incinération.',
               },
               flashcards: [
@@ -3996,6 +4332,34 @@ const COURS_DATA = {
                   '🌡️ Effets PE à faible dose : courbe dose-réponse non linéaire (effet cocktail — mélange de PE à faibles doses = synergie toxique)',
                 ],
                 formules: [],
+                sections: [
+                  {
+                    titre: "1. Mécanismes d'action des perturbateurs endocriniens",
+                    ss: [
+                      {
+                        titre: "1.1. Imitation et blocage des hormones",
+                        texte: "<p>Les perturbateurs endocriniens (PE) sont des substances exogènes qui interfèrent avec le système hormonal des organismes. Ils agissent à des concentrations très faibles (ng/L à µg/L) selon plusieurs mécanismes : imitation d'hormones naturelles (agonistes), blocage des récepteurs hormonaux (antagonistes), modification de la synthèse ou du métabolisme des hormones.</p><p>L'éthinylestradiol (EE2), principal contraceptif oral, féminise les poissons à des concentrations de quelques ng/L — effets documentés sur les populations de poissons dans les rivières en aval des rejets urbains.</p>",
+                      },
+                      {
+                        titre: "1.2. Microplastiques et effets cocktail",
+                        texte: "<p>Les microplastiques (< 5 mm) et nanoplastiques (< 1 µm) sont omniprésents dans les milieux aquatiques. Ils ne sont pas directement des PE mais peuvent adsorber des contaminants hydrophobes (PCB, HAP, PFAS) et les transporter jusqu'aux organismes.</p><p>L'effet cocktail décrit la synergie entre plusieurs PE présents simultanément à des concentrations individuellement inférieures aux seuils d'effet. Des mélanges de PE à faibles doses individuelles peuvent produire des effets combinés significatifs — une réglementation basée sur chaque substance isolément peut sous-estimer le risque réel.</p>",
+                      },
+                    ],
+                  },
+                  {
+                    titre: "2. Surveillance et techniques de traitement",
+                    ss: [
+                      {
+                        titre: "2.1. Surveillance et normes réglementaires",
+                        texte: "<p>La directive-cadre sur l'eau (DCE) inclut les PE dans sa liste de substances prioritaires. La surveillance dans les masses d'eau implique des analyses chimiques et des bioessais (tests sur organismes aquatiques) pour détecter les effets endocriniens.</p><p>Pour l'eau potable, les concentrations réglementaires en pesticides (0,1 µg/L par substance) et en certains composés organochlorés existent, mais il n'existe pas encore de valeur paramétriques spécifiques pour la plupart des PE dans l'eau potable en Europe.</p>",
+                      },
+                      {
+                        titre: "2.2. Ozonation, charbon actif et limites du traitement",
+                        texte: "<p>L'ozonation oxyde les molécules organiques et peut détruire les PE à des doses modérées (2–5 mg O₃/L). Elle est souvent couplée au charbon actif biologique (CAB) qui dégrade les sous-produits d'ozonation et piège les résidus. Cette combinaison est efficace sur les PE polaires (EE2, bisphénol A, triclosan).</p><p>Les microplastiques ne sont pas éliminés par les traitements conventionnels ni par l'ozonation — seule la microfiltration membranaire (UF) les retient efficacement. Les nanoplastiques passent même à travers la plupart des membranes. Le traitement des PE et des microplastiques à grande échelle reste coûteux.</p>",
+                      },
+                    ],
+                  },
+                ],
                 retenir: 'PE = hormones mimétiques à ng/L. EE2 féminise les poissons. Traitement : ozonation + CAG. Microplastiques = < 5 mm. Nanoplastiques franchissent les barrières bio.',
               },
               flashcards: [
@@ -4062,6 +4426,34 @@ const COURS_DATA = {
                   'Forçage radiatif (W/m²) = mesure de l\'effet de serre additionnel. +4 W/m² pour RCP8.5',
                   'Résilience hydrologique = capacité d\'un système eau à absorber les chocs climatiques sans changement de régime',
                 ],
+                sections: [
+                  {
+                    titre: "1. Projections climatiques et impacts hydrologiques",
+                    ss: [
+                      {
+                        titre: "1.1. Les scénarios RCP et SSP",
+                        texte: "<p>Les scénarios climatiques du GIEC (RCP puis SSP) décrivent différentes trajectoires d'émissions de gaz à effet de serre. RCP8.5 (ou SSP5-8.5) correspond au scénario « sans action » : +3 à +5°C en France d'ici 2100. RCP4.5 (SSP2-4.5) correspond à des émissions stabilisées : +1,5 à +2,5°C.</p><p>Ces scénarios sont des outils de planification, pas des prévisions. Ils permettent d'encadrer la gamme des futurs possibles et de tester la robustesse des aménagements face à différentes hypothèses climatiques.</p>",
+                      },
+                      {
+                        titre: "1.2. Impacts sur les modules et les extrêmes",
+                        texte: "<p>En France, les projections convergent vers : une réduction des débits moyens annuels de −10 % à −40 % selon les bassins (Loire, Adour-Garonne les plus affectés), une avance et un allongement des étiages estivaux, une augmentation des extrêmes de précipitations intenses (crues éclairs) dans certaines régions (Méditerranée, Pyrénées).</p><p>Les incertitudes restent importantes à l'échelle locale. Les projections hydrologiques combinent les incertitudes des scénarios d'émissions, des modèles climatiques globaux et des modèles hydrologiques régionaux.</p>",
+                      },
+                    ],
+                  },
+                  {
+                    titre: "2. Vulnérabilité des systèmes hydrologiques",
+                    ss: [
+                      {
+                        titre: "2.1. Étiages prolongés et sécheresses",
+                        texte: "<p>Le changement climatique prolonge et intensifie les sécheresses hydrologiques. En France, les crises d'été 2022 et 2023 (premières ruptures d'alimentation en eau potable sur des communes) illustrent la vulnérabilité croissante des territoires.</p><p>Les impacts en cascade : étiages sévères → hausse des températures de l'eau → mortalité piscicole, prolifération cyanobactéries → restrictions d'usage → conflits d'usages (agriculture, alimentation en eau potable, énergie hydroélectrique, refroidissement nucléaire).</p>",
+                      },
+                      {
+                        titre: "2.2. Crues et précipitations extrêmes",
+                        texte: "<p>Le changement climatique augmente l'intensité des précipitations extrêmes (relation de Clausius-Clapeyron : +7 %/°C d'augmentation de la capacité maximale de l'atmosphère à contenir de la vapeur d'eau). Les crues éclair dans le Sud de la France (épisodes cévenols) pourraient s'intensifier.</p><p>La montée du niveau marin amplifie les risques de submersion côtière et complique l'évacuation gravitaire des eaux de ruissellement. La conception des ouvrages de protection doit intégrer un niveau de la mer futur, pas seulement le niveau actuel.</p>",
+                      },
+                    ],
+                  },
+                ],
                 retenir: 'RCP8.5 = +4°C d\'ici 2100. Modules en baisse de –10 à –40 %. Étiages plus sévères. Glaciers en voie de disparition. Conflits d\'usage agriculture/AEP/milieux.',
               },
               flashcards: [
@@ -4123,6 +4515,34 @@ const COURS_DATA = {
                   '📋 Plans de gestion sécheresse (PGS) : obligation pour les collectivités > 5 000 abonnés. Scénarios d\'alimentation alternative, réduction des fuites prioritaire',
                 ],
                 formules: [],
+                sections: [
+                  {
+                    titre: "1. Adapter l'alimentation en eau potable",
+                    ss: [
+                      {
+                        titre: "1.1. Réduction des pertes et REUT",
+                        texte: "<p>La réduction des fuites de réseau est le levier de sobriété le plus efficace à court terme : chaque m³ économisé sur les pertes est un m³ prélevé en moins dans la ressource. Les interconnexions entre réseaux augmentent la résilience en permettant des secours mutuels lors d'une crise de disponibilité.</p><p>La réutilisation des eaux usées traitées (REUT), encadrée par le règlement européen 2020/741, permet d'utiliser des eaux usées traitées de qualité appropriée pour l'irrigation agricole, les espaces verts, les usages industriels. Elle réduit la pression sur les ressources en eau conventionnelles en été.</p>",
+                      },
+                      {
+                        titre: "1.2. Stockage et nouvelles ressources",
+                        texte: "<p>La recharge artificielle des aquifères (RAA) permet de stocker l'eau en période excédentaire pour la mobiliser en étiage. Les retenues collinaires complètent les capacités de stockage pour l'agriculture et l'eau potable. Ces solutions doivent être évaluées au regard de leur impact sur le régime hydrologique local.</p><p>Le dessalement de l'eau de mer est une solution extrême réservée aux zones côtières sans autre ressource — il consomme 4 à 6 kWh/m³, soit 10 à 20 fois plus que le traitement conventionnel, et génère des rejets salins.</p>",
+                      },
+                    ],
+                  },
+                  {
+                    titre: "2. Adapter l'assainissement et protéger les milieux",
+                    ss: [
+                      {
+                        titre: "2.1. Réseaux d'assainissement face aux pluies intenses",
+                        texte: "<p>Les réseaux unitaires et séparatifs dimensionnés pour les pluies historiques sont de plus en plus sollicités par des pluies intenses plus fréquentes. Les surverses des déversoirs d'orage augmentent, rejetant des effluents dilués mais potentiellement chargés en bactéries et polluants dans les cours d'eau ou la mer.</p><p>La désimperméabilisation des surfaces urbaines (jardins, tranchées drainantes, revêtements perméables, toitures végétalisées) réduit à la source le volume entrant dans les réseaux et retarde les pics de crue. Le règlement de service peut imposer des volumes de rétention à la parcelle.</p>",
+                      },
+                      {
+                        titre: "2.2. Rejet en milieu récepteur appauvri",
+                        texte: "<p>L'assainissement est conçu pour rejeter dans un milieu récepteur capable de diluer et de dégrader les effluents traités. Avec des étiages plus sévères, les débits de dilution diminuent et les normes de rejet actuelles peuvent devenir insuffisantes pour protéger le milieu récepteur.</p><p>Des traitements complémentaires (tertiaire : dénitrification poussée, élimination du phosphore, désinfection UV) peuvent être nécessaires sur les STEP rejetant dans des cours d'eau à faible débit d'étiage. La réglementation devra s'adapter à la réduction des débits de dilution attendue.</p>",
+                      },
+                    ],
+                  },
+                ],
                 retenir: 'REUT = réutilisation EUT (règlement UE 2020/741). Économies : fuites + compteurs intelligents. Sécurisation = interconnexions + stockage. Dessalement = dernier recours.',
               },
               flashcards: [
@@ -4210,6 +4630,34 @@ const COURS_DATA = {
                   'c = √(E/ρ) — célérité de l\'onde (E = module de compressibilité, ρ = masse volumique)',
                   'ΣQ_nœud = 0 et ΣΔH_maille = 0 — équations de Hardy-Cross',
                 ],
+                sections: [
+                  {
+                    titre: "1. Simulation hydraulique des réseaux sous pression",
+                    ss: [
+                      {
+                        titre: "1.1. Principes de la simulation avec EPANET",
+                        texte: "<p>EPANET (USEPA, logiciel libre) simule le comportement hydraulique et la qualité de l'eau dans les réseaux sous pression. Il résout à chaque pas de temps les équations d'équilibre nodale (conservation des masses) et de perte de charge (Hazen-Williams ou Darcy-Weisbach) pour calculer les débits dans chaque tronçon et les pressions à chaque nœud.</p><p>Un modèle EPANET est constitué de nœuds (jonctions, réservoirs, ouvrages de stockage), de tronçons (conduites, pompes, vannes) et de consommations associées aux nœuds. Sa fiabilité dépend de la qualité des données d'entrée (diameètres, rugosités, consommations).</p>",
+                      },
+                      {
+                        titre: "1.2. Calage et utilisation du modèle",
+                        texte: "<p>Le calage d'un modèle de réseau compare les pressions et débits simulés aux mesures de terrain. Les écarts révèlent des imprécisions sur les rugosités, les diamètres réels (encrassement), les consommations ou la présence de fermetures partielles non documentées.</p><p>Un modèle calibré permet : le diagnostic des pressions insuffisantes, la recherche des origines de contaminations, l'optimisation de la chloration, la simulation de scénarios de défaillance (panne d'une pompe, casse d'une conduite principale) et le dimensionnement des extensions.</p>",
+                      },
+                    ],
+                  },
+                  {
+                    titre: "2. Coups de bélier et protection",
+                    ss: [
+                      {
+                        titre: "2.1. Phénomène et calcul",
+                        texte: "<p>Un coup de bélier est une onde de pression qui se propage dans une conduite suite à un changement brusque de vitesse (fermeture rapide de vanne, arrêt de pompe). La surpression maximale est donnée par la formule de Joukowski : ΔP = ρ × c × ΔV, où c est la célérité de l'onde acoustique dans la conduite (souvent 800–1 400 m/s pour les conduites métalliques).</p><p>La célérité c dépend du module d'élasticité du fluide et des parois. Pour une conduite en fonte DN 400 : c ≈ 1 100 m/s. Si ΔV = 1 m/s, ΔP = 1000 × 1100 × 1 = 1,1 MPa = 11 bar — soit une pression qui peut dépasser la résistance des conduites âgées.</p>",
+                      },
+                      {
+                        titre: "2.2. Dispositifs de protection",
+                        texte: "<p>Les principaux dispositifs de protection contre les coups de bélier sont : vannes à fermeture lente (≥ 10 secondes), réservoirs d'air (anti-bélier), chambres d'expansion, soupapes de décharge, et clapets anti-retour. Chaque dispositif a son domaine d'application optimal.</p><p>L'analyse transiente (simulation numérique des coups de bélier) est indispensable pour les réseaux complexes ou à forte pression. Elle permet de vérifier que les pressions maximales et minimales restent dans les limites admissibles des conduites et des équipements.</p>",
+                      },
+                    ],
+                  },
+                ],
                 retenir: 'EPANET = simulation réseau (gratuit). Coup de bélier : ΔP = ρcΔV. Protection : chaudière ou vanne lente. Pressions cibles : 2–6 bar. V : 0,5–2 m/s.',
               },
               flashcards: [
@@ -4272,6 +4720,34 @@ const COURS_DATA = {
                 formules: [
                   'Q₂ = Q₁ × (N₂/N₁) | H₂ = H₁ × (N₂/N₁)² | P₂ = P₁ × (N₂/N₁)³ — lois de similitude',
                   'NPSH_dispo = (P_atm + ρgh_asp – P_vap) / (ρg) — NPSH disponible',
+                ],
+                sections: [
+                  {
+                    titre: "1. Courbes caractéristiques et point de fonctionnement",
+                    ss: [
+                      {
+                        titre: "1.1. La courbe H-Q d'une pompe",
+                        texte: "<p>La courbe H-Q (hauteur manométrique totale en fonction du débit) caractérise une pompe à une vitesse de rotation donnée. Elle décroît généralement du débit nul (débit de démarrage) vers un débit maximal à hauteur nulle (débit de noyade). Le point de meilleur rendement (PMR) correspond au rendement hydraulique maximal.</p><p>La courbe de la tuyauterie est définie par : H_tuyau = H_stat + K × Q², où H_stat est la hauteur statique (différence de niveaux) et K × Q² les pertes de charge. Le point de fonctionnement est l'intersection de la courbe pompe et de la courbe tuyauterie.</p>",
+                      },
+                      {
+                        titre: "1.2. Pompes en série et en parallèle",
+                        texte: "<p><strong>Pompes en série :</strong> les hauteurs s'additionnent pour un même débit. Utilisées quand H_stat est élevée et que la pompe seule ne peut pas assurer le refoulement. La courbe résultante est obtenue en additionnant les H pour chaque Q.</p><p><strong>Pompes en parallèle :</strong> les débits s'additionnent pour une même hauteur. Utilisées pour augmenter le débit tout en conservant la même hauteur. La courbe résultante est obtenue en additionnant les Q pour chaque H. Dans les deux cas, le point de fonctionnement réel peut être décevant si la courbe de la tuyauterie n'est pas prise en compte.</p>",
+                      },
+                    ],
+                  },
+                  {
+                    titre: "2. Variateurs de fréquence et économies d'énergie",
+                    ss: [
+                      {
+                        titre: "2.1. Les lois d'affinité",
+                        texte: "<p>Les lois d'affinité (lois de similitude) décrivent le comportement d'une pompe centrifuge quand sa vitesse de rotation N varie : Q ∝ N (débit proportionnel à la vitesse), H ∝ N² (hauteur proportionnelle au carré), P ∝ N³ (puissance proportionnelle au cube).</p><p>Conséquence : réduire la vitesse de 20 % (N₂ = 0,8 × N₁) réduit le débit de 20 %, la hauteur de 36 % et la puissance de 49 %. Ces économies cubiques rendent les variateurs de fréquence (VFD) très attractifs pour les applications à débit variable.</p>",
+                      },
+                      {
+                        titre: "2.2. Variateurs de fréquence et multi-pompage",
+                        texte: "<p>Un variateur de fréquence (VFD ou VSP) module la vitesse de la pompe pour adapter le débit à la demande sans utiliser de vannes de régulation (qui dissipent de l'énergie par perte de charge). Il permet aussi les démarrages progressifs qui éliminent les surcharges électriques et réduisent les coups de bélier.</p><p>Dans les stations de pompage à débit variable (eau potable, assainissement), le multi-pompage (plusieurs pompes en parallèle avec VFD) permet d'adapter finement la puissance hydraulique à la demande. La maintenance préventive inclut la vérification de la courbe H-Q réelle par rapport à la courbe constructeur.</p>",
+                      },
+                    ],
+                  },
                 ],
                 retenir: 'VSP : P ∝ N³ → réduire N = économies cubed. VFD = variateur de fréquence. Multi-pompes en parallèle = flexibilité. Vérifier NPSH_dispo > NPSH_requis.',
               },
@@ -4338,6 +4814,34 @@ const COURS_DATA = {
                   'U = k × u_c — incertitude élargie (k=2 → confiance 95 %)',
                   'Classe de précision = erreur maximale admissible / plage de mesure × 100 (%)',
                   'Signal 4–20 mA : valeur mesurée = (I – 4) × (Vmax – Vmin) / 16 + Vmin',
+                ],
+                sections: [
+                  {
+                    titre: "1. Qualité métrologique des mesures",
+                    ss: [
+                      {
+                        titre: "1.1. Justesse, fidélité et exactitude",
+                        texte: "<p>La <strong>justesse</strong> traduit l'absence de biais systématique — une mesure juste donne en moyenne la vraie valeur. Elle se corrige par l'étalonnage. La <strong>fidélité</strong> (ou répétabilité) traduit la dispersion des mesures répétées dans les mêmes conditions — une mesure fidèle est reproductible. L'<strong>exactitude</strong> combine les deux : une mesure exacte est à la fois juste et fidèle.</p><p>Un capteur très reproductible peut être très biaisé (exemple : piézomètre dérivant lentement) — répétabilité ≠ exactitude.</p>",
+                      },
+                      {
+                        titre: "1.2. Incertitude de mesure et expression des résultats",
+                        texte: "<p>L'incertitude de mesure U quantifie le doute sur la valeur mesurée. L'incertitude élargie U = 2u (avec u = incertitude-type) correspond à un intervalle de confiance d'environ 95 %. Elle doit être exprimée avec le résultat : Q = 1,23 ± 0,05 m³/s (U, k=2).</p><p>Les sources d'incertitude sont cumulatives : incertitude du capteur + incertitude de la courbe de tarage + incertitude de la mesure de niveau. La propagation des incertitudes (quadratique pour des sources indépendantes) donne l'incertitude résultante.</p>",
+                      },
+                    ],
+                  },
+                  {
+                    titre: "2. Étalonnage et types de capteurs hydrauliques",
+                    ss: [
+                      {
+                        titre: "2.1. Procédure d'étalonnage",
+                        texte: "<p>L'étalonnage consiste à comparer les indications d'un capteur à celles d'un étalon de référence dans des conditions contrôlées. Il doit être réalisé périodiquement (fréquence selon la dérive connue du capteur et les exigences réglementaires) et documenté par un certificat d'étalonnage.</p><p>La traçabilité métrologique garantit que l'étalon utilisé est lui-même raccordé à des étalons nationaux (LNE en France) et internationaux (BIPM). Sans traçabilité, l'étalonnage ne peut pas être vérifié par un tiers.</p>",
+                      },
+                      {
+                        titre: "2.2. Capteurs de niveau, débit et qualité",
+                        texte: "<p>Les principaux capteurs en hydraulique fluviale : limniphones à bulles (niveau), capteurs ultrasoniques (niveau sans contact), capteurs piézométriques (pression en fond de rivière), radar (niveau sans contact pour les grands ouvrages). La courbe de tarage relie le niveau mesuré au débit.</p><p>Pour la qualité de l'eau : sondes multiparamètres (T°, O₂, pH, conductivité, turbidité), spectrophotomètres UV (nitrates, MO), fluorimètres. Ces capteurs dérivent dans le temps (biofilm, colmatage) et nécessitent un entretien et un contrôle fréquents. Un résultat aberrant doit toujours faire vérifier le capteur avant d'être interprété comme un événement réel.</p>",
+                      },
+                    ],
+                  },
                 ],
                 retenir: 'Justesse = biais (étalonnage). Fidélité = dispersion (répétabilité). U = 2u = incertitude à 95 %. COFRAC obligatoire pour mesures AEP. Compteurs vieillissent → sous-comptent.',
               },
@@ -4702,6 +5206,38 @@ const COURS_DATA = {
                     'Ex. (4 − 3) m³/s × 7 200 s = 7 200 m³ sur 2 h → reste 12 000 − 7 200 = 4 800 m³ disponibles',
                     'Risque résiduel = risque qui subsiste malgré la protection (événement > niveau prévu, défaillance, autre mécanisme)',
                   ],
+                  sections: [
+                    {
+                      titre: "1. Les quatre missions et leurs numéros",
+                      ss: [
+                        {
+                          titre: "1.1. Mission 1° : aménagement de bassin",
+                          texte: "<p>La mission 1° porte sur l'aménagement d'un bassin ou d'une fraction de bassin hydrographique. Elle vise l'organisation des écoulements à une échelle cohérente avec la géographie de l'eau, pas avec les limites administratives.</p><p>Concrètement, cela peut inclure des actions de ralentissement dynamique, de stockage temporaire ou de restauration de la continuité. L'échelle du bassin versant est déterminante : une intervention locale peut avoir des effets aval imprévus si la vision d'ensemble manque.</p>",
+                        },
+                        {
+                          titre: "1.2. Mission 2° : entretien et aménagement des cours d'eau",
+                          texte: "<p>La mission 2° recouvre l'entretien régulier et l'aménagement des cours d'eau, canaux et plans d'eau. Il faut noter que l'obligation d'entretien des propriétaires riverains (art. L.215-14 du Code de l'environnement) subsiste — la GEMAPI ne la supprime pas.</p><p><strong>Entretenir ≠ nettoyer intégralement.</strong> Un arbre tombé peut offrir des habitats ou stabiliser une berge. L'analyse précède la décision d'intervenir.</p>",
+                        },
+                        {
+                          titre: "1.3. Missions 5° et 8°",
+                          texte: "<p><strong>Mission 5°</strong> : défense contre les inondations et contre la mer. Un système d'endiguement est un ensemble fonctionnel (art. R.562-13), pas une digue considérée seule. L'eau peut entrer par un passage routier, une buse ou un autre chemin même si la digue est en bon état.</p><p><strong>Mission 8°</strong> : protection et restauration des milieux aquatiques, des zones humides et de la ripisylve. Elle a sa propre justification — il n'est pas nécessaire de démontrer un bénéfice anti-inondation mesurable pour relever de cette mission.</p>",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "2. Qualifier une opération",
+                      ss: [
+                        {
+                          titre: "2.1. La méthode : objectifs d'abord",
+                          texte: "<p>Identifier la mission d'une opération exige d'analyser ses objectifs, son fonctionnement et ses effets — pas seulement son intitulé ou son aspect visuel. Un projet peut relever simultanément de plusieurs missions.</p><p>Les numéros 1, 2, 5 et 8 ne se suivent pas parce que la GEMAPI ne reprend qu'une partie des missions du I de l'art. L.211-7. Les autres items (4° eaux pluviales, par exemple) ne deviennent pas GEMAPI automatiquement.</p>",
+                        },
+                        {
+                          titre: "2.2. Ce que la qualification ne résout pas",
+                          texte: "<p>Qualifier une mission est une étape du montage, pas une autorisation générale d'intervenir. Quatre questions restent distinctes : la compétence, la propriété des terrains, les droits d'intervention et les procédures réglementaires.</p><p>Un projet peut être parfaitement qualifié au titre de la GEMAPI et nécessiter malgré tout une autorisation loi sur l'eau, un accord foncier avec des propriétaires ou une évaluation environnementale.</p>",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'GEMAPI = missions 1° + 2° + 5° + 8° de l\'art. L.211-7 · Plusieurs missions possibles pour un projet · Compétence ≠ propriété ≠ autorisation · ΔV = (Q_ent − Q_sort) × Δt · Qualifier ≠ autoriser.',
                 },
                 flashcards: [
@@ -4768,6 +5304,34 @@ const COURS_DATA = {
                     'Ex. exutoire fermé 40 min : 0,15 × 2 400 = 360 m³ — si dispo = 250 m³ → déficit = 110 m³',
                     'Ex. stockage pluvial 30 min : 0,20 × 1 800 = 360 m³ — dépasse un dispo de 300 m³ de 60 m³',
                     'Déficit = ΔV_accumulé − V_disponible → indique si la capacité est suffisante dans les hypothèses',
+                  ],
+                  sections: [
+                    {
+                      titre: "1. Les domaines connexes essentiels",
+                      ss: [
+                        {
+                          titre: "1.1. Eau potable, assainissement collectif et SPANC",
+                          texte: "<p>L'eau potable (captages, traitement, distribution) et l'assainissement collectif (réseaux, stations) sont des compétences distinctes de la GEMAPI. Leurs équipements peuvent être exposés aux crues, ce qui crée des zones de coordination utile sans pour autant fusionner les responsabilités.</p><p>Le SPANC contrôle les installations d'assainissement non collectif. Même si une installation se situe près d'un cours d'eau, son contrôle ne relève pas de la GEMAPI.</p>",
+                        },
+                        {
+                          titre: "1.2. Eaux pluviales, urbanisme et voirie",
+                          texte: "<p>La gestion des eaux pluviales urbaines (GEPU, 4° de l'art. L.211-7) est une compétence distincte de la GEMAPI. Un clapet anti-retour empêche le retour de rivière mais peut aussi bloquer l'évacuation des eaux du quartier — il faut analyser l'ensemble.</p><p>Le PLU agit sur l'imperméabilisation et les obstacles. Le PPRI est une servitude réglementaire. Les ponts et buses relèvent de leurs propriétaires sans que ceux-ci deviennent automatiquement gestionnaires de la rivière.</p>",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "2. Méthode et documents de planification",
+                      ss: [
+                        {
+                          titre: "2.1. Qualifier le fonctionnement avant de répartir",
+                          texte: "<p>La règle de méthode centrale : analyser le fonctionnement physique avant de désigner les responsables. Le lieu du dommage ne suffit pas à identifier la cause ni le responsable — une rue inondée peut résulter d'un réseau saturé, d'un retour de rivière ou d'un ruissellement de versant.</p><p>La matrice de responsabilités distingue : qui définit, qui commande, qui décide, qui possède, qui exploite, qui entretient, qui finance, qui reçoit les données. Une réunion commune n'est pas une fusion de compétences.</p>",
+                        },
+                        {
+                          titre: "2.2. Les documents de planification et de crise",
+                          texte: "<p>Les documents ne sont pas interchangeables : <strong>GEMAPI</strong> est une compétence · <strong>SDAGE/SAGE</strong> est une planification de bassin · <strong>PPRI</strong> est un document réglementaire · <strong>PCS/PICS</strong> organise la gestion de crise · <strong>PAPI</strong> est un programme d'actions coordonné — pas une compétence en soi.</p><p>En situation de crise, la GEMAPI fournit des informations sur les ouvrages et les niveaux, mais les décisions de sécurité civile relèvent du maire ou du préfet selon l'échelle.</p>",
+                        },
+                      ],
+                    },
                   ],
                   retenir: 'Compétence connexe ≠ GEMAPI · Qualifier le fonctionnement avant de répartir · Clapet = solution partielle · PAPI = programme, pas compétence · Réunion commune ≠ fusion · ΔV = Q × Δt.',
                 },
@@ -4842,6 +5406,34 @@ const COURS_DATA = {
                     'Attention : vérifier dépenses éligibles, assiette HT ou TTC, plafonds, règles de cumul et calendrier de versement',
                     'Résultat technique exploitable = données + méthode + hypothèses + incertitudes + domaine d\'utilisation',
                   ],
+                  sections: [
+                    {
+                      titre: "1. Les fonctions dans un projet GEMAPI",
+                      ss: [
+                        {
+                          titre: "1.1. Maître d'ouvrage, AMO et maître d'œuvre",
+                          texte: "<p>Le <strong>maître d'ouvrage (MOA)</strong> définit le programme, l'enveloppe financière et organise les décisions. Il porte la responsabilité du projet. Lui confier une tâche ne suffit pas à régler toutes les questions de responsabilité juridique.</p><p>L'<strong>AMO</strong> (assistance à maîtrise d'ouvrage) aide le MOA à préparer et suivre ses décisions — il ne peut pas signer à sa place ni engager des dépenses. Le <strong>maître d'œuvre (MOE)</strong> assure la conception et le suivi technique selon le contrat. Ces missions peuvent coexister chez le même organisme, mais restent distinctes.</p>",
+                        },
+                        {
+                          titre: "1.2. Services de l'État et OFB",
+                          texte: "<p>Les DDT et DREAL exercent des missions d'instruction et de contrôle — l'instruction ne signifie pas que l'État se substitue au maître d'ouvrage dans la conception. Une autorisation administrative ne garantit pas l'absence de défaut technique.</p><p>L'OFB apporte connaissance, expertise, et exerce des missions de police administrative et judiciaire. Un avis favorable lors d'une visite ne remplace pas les décisions nécessaires. Identifier le bon interlocuteur selon la question posée est indispensable.</p>",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "2. Financement, propriété et responsabilités",
+                      ss: [
+                        {
+                          titre: "2.1. Restes à charge et aides",
+                          texte: "<p>Le reste à charge se calcule : Coût prévisionnel − Σ aides attribuées. Ce calcul arithmétique ne suffit pas — il faut vérifier les dépenses éligibles, l'assiette (HT ou TTC), les plafonds de chaque aide, les règles de cumul et le calendrier de versement.</p><p><strong>Un accord de financement n'est pas une autorisation de travaux.</strong> Les deux démarches sont parallèles et indépendantes. Un projet peut être financé et non encore autorisé, ou autorisé et non encore financé.</p>",
+                        },
+                        {
+                          titre: "2.2. Propriété, exploitation et obligation des riverains",
+                          texte: "<p>La GEMAPI ne supprime pas l'obligation d'entretien régulier du propriétaire riverain (art. L.215-14 CE). La compétence d'un EPCI ou d'un syndicat de bassin ne se substitue pas automatiquement aux droits et obligations des riverains sur les cours d'eau non domaniaux.</p><p>Propriétaire ≠ exploitant ≠ gestionnaire : ces rôles peuvent être portés par des acteurs différents. Un accord avec le propriétaire ne règle pas toutes les conséquences pour l'exploitant agricole, ni les questions de gestion ultérieure.</p>",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'Responsabilité ≠ compétence ≠ autorisation · Fonctions à distribuer : MOA, AMO, MOE, entreprise, gestionnaire · EPAGE/EPTB : vérifier les statuts · Financement ≠ autorisation · Riverain conserve L.215-14.',
                 },
                 flashcards: [
@@ -4914,6 +5506,34 @@ const COURS_DATA = {
                     'Ex. B = 240 000 € · coefficients 50 %, 30 %, 20 % · membre à 40 %/30 %/25 %',
                     'Ci = 240 000 × (0,50×0,40 + 0,30×0,30 + 0,20×0,25) = 240 000 × 0,34 = 81 600 €',
                     'Ex. clé simple : C = 180 000 × 0,35 = 63 000 € (si la clé s\'applique à l\'ensemble de l\'assiette)',
+                  ],
+                  sections: [
+                    {
+                      titre: "1. Trois montages distincts",
+                      ss: [
+                        {
+                          titre: "1.1. Le transfert de compétence",
+                          texte: "<p>Dans le transfert (art. L.5211-61 CGCT), la structure bénéficiaire <em>devient</em> compétente dans le périmètre défini. L'organisme cédant est dessaisi dans ce périmètre — il ne peut plus exercer parallèlement la mission transférée, même s'il reste membre de la structure et participe financièrement.</p><p>Le transfert peut porter sur certaines missions seulement, sur une partie du territoire, ou être réparti entre plusieurs structures sur des parties distinctes. Les biens sont mis à disposition selon un procès-verbal contradictoire (art. L.1321-1 CGCT), sans changement automatique de propriétaire.</p>",
+                        },
+                        {
+                          titre: "1.2. La délégation et la prestation de service",
+                          texte: "<p>Dans la <strong>délégation</strong>, l'exercice est confié par convention — la compétence reste chez le délégant qui contrôle l'exécution. Seules certaines structures habilitées peuvent recevoir une délégation (EPAGE, EPTB, syndicats du VII bis de l'art. L.213-12).</p><p>La <strong>prestation de service</strong> est un contrat par lequel un tiers (bureau d'études, syndicat, entreprise) exécute une tâche définie. Même si la prestation est importante, elle ne transfère jamais la compétence. Commander une étude hydraulique ne rend pas le bureau d'études compétent GEMAPI.</p>",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "2. La convention de délégation",
+                      ss: [
+                        {
+                          titre: "2.1. Contenu obligatoire (art. R.1111-1)",
+                          texte: "<p>Une convention de délégation doit préciser : les missions déléguées, le territoire, la durée, les objectifs mesurables, les moyens, les décisions de chaque partie, le financement, les indicateurs de suivi, les conditions de modification et les dispositions de fin de convention.</p><p>Une formule vague comme « l'EPAGE s'occupe de la rivière » ne répond à aucune de ces questions. La durée doit être cohérente avec le cycle complet de l'action : études, travaux, réception et suivi post-travaux.</p>",
+                        },
+                        {
+                          titre: "2.2. Les clés de répartition pondérées",
+                          texte: "<p>Quand plusieurs membres contribuent à un budget commun, la clé pondérée répartit les charges de façon équitable : <strong>Ci = B × (α × Pi/PT + β × Ai/AT + γ × Li/LT)</strong>, avec α + β + γ = 1.</p><p>Les coefficients (part de population, de superficie, de linéaire…) doivent être justifiés par les caractéristiques du service rendu et ne pas être calqués sur un territoire voisin. Ex. B = 240 000 €, coefficients 50/30/20 %, membre à 40/30/25 % : Ci = 240 000 × 0,34 = 81 600 €.</p>",
+                        },
+                      ],
+                    },
                   ],
                   retenir: 'Transfert ≠ délégation ≠ prestation · Délégation = exercice confié, compétence conservée · Mise à disposition ≠ propriété · Groupement de commandes ≠ fusion des compétences · Ci = B × clé pondérée.',
                 },
@@ -4999,6 +5619,34 @@ const COURS_DATA = {
                     'p = \\rho g h \\quad (\\rho \\approx 1\\,000\\,\\text{kg/m}^3,\\ g \\approx 9{,}81\\,\\text{m/s}^2 \\Rightarrow 1\\,\\text{m} \\approx 9\\,810\\,\\text{Pa})',
                     '1\\,\\text{m/s} = 3{,}6\\,\\text{km/h} \\qquad 1\\,\\text{L/s} = 3{,}6\\,\\text{m}^3/\\text{h} \\qquad 1\\,\\text{m}^3 = 1\\,000\\,\\text{L}',
                     '\\text{Homogénéité : } [Q = Av] = \\mathsf{L}^2 \\cdot \\mathsf{LT}^{-1} = \\mathsf{L}^3\\mathsf{T}^{-1} = [Q] \\;\\checkmark',
+                  ],
+                  sections: [
+                    {
+                      titre: "1. Les grandeurs de base en hydraulique",
+                      ss: [
+                        {
+                          titre: "1.1. Longueurs, surfaces et volumes",
+                          texte: "<p>Une grandeur physique est toujours une <strong>valeur numérique × unité</strong>. Écrire « 150 » sans préciser m³/s, L/s ou m³/h ne dit rien de l'écoulement réel.</p><p>Les conversions exigent de respecter la dimension : 1 m² = 10 000 cm² (facteur au carré, non 100) ; 1 m³ = 1 000 L ; 1 ha = 10 000 m² ; 1 km² = 100 ha. Une erreur de facteur 1 000 transforme un débit modeste en crue sur une feuille de calcul.</p>",
+                        },
+                        {
+                          titre: "1.2. Temps, débits et vitesse",
+                          texte: "<p>1 heure = 3 600 secondes (pas 3 500, pas 6 000). 1 m³/s = 1 000 L/s = 3 600 m³/h — il faut convertir le volume ET le temps simultanément.</p><p>La relation fondamentale Q = A × v̄ associe section mouillée (m²) et vitesse moyenne (m/s) pour donner le débit (m³/s). Débit, vitesse et volume sont des grandeurs de natures différentes — elles ne s'additionnent pas.</p>",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "2. Pluie, pente et vérification dimensionnelle",
+                      ss: [
+                        {
+                          titre: "2.1. Volume précipité et intensité",
+                          texte: "<p>1 mm de pluie sur 1 m² = 1 litre. La formule générale est : <strong>Vp[m³] = 10 × P[mm] × A[ha]</strong> (le facteur 10 vient de la conversion 0,001 × 10 000 — ce n'est pas un coefficient hydrologique).</p><p>L'intensité moyenne imoy = P/Δt (résultat en mm/h si P en mm et Δt en heures). La hauteur tombée reste P — deux événements d'intensité moyenne identique peuvent avoir des répartitions temporelles très différentes avec des effets très différents sur les crues.</p>",
+                        },
+                        {
+                          titre: "2.2. Analyse dimensionnelle",
+                          texte: "<p>Vérifier l'homogénéité d'une formule : [Q] = L³T⁻¹. La formule Q = A × v̄ est homogène car [A] = L² et [v] = LT⁻¹ → L² × LT⁻¹ = L³T⁻¹ ✓. La formule Q = A + v ne l'est pas (on additionne L² et LT⁻¹).</p><p><strong>Attention :</strong> une formule homogène n'est pas nécessairement physiquement correcte — le modèle doit aussi être vérifié. L'analyse dimensionnelle est un filtre, pas une validation.</p>",
+                        },
+                      ],
+                    },
                   ],
                   retenir: 'Grandeur = valeur × unité · 1 ha = 10 000 m² · 1 m³ = 1 000 L · 1 h = 3 600 s · Q = Av · V = Qt · Vp[m³] = 10 × P[mm] × A[ha] · imoy = P/Δt · homogène ≠ correct.',
                 },
@@ -5099,6 +5747,34 @@ const COURS_DATA = {
                     '\\text{Cercle plein :}\\; A = \\dfrac{\\pi D^2}{4},\\quad P_m = \\pi D,\\quad R_h = \\dfrac{D}{4}',
                     'A \\approx \\sum_i \\dfrac{h_i+h_{i+1}}{2}\\,(x_{i+1}-x_i) \\quad \\text{(profil irregulier, methode trapèzes)}',
                     'S_0 = \\dfrac{\\Delta Z}{L} \\quad;\\quad V = A\\,L \\quad;\\quad V_{\\text{dispo}} = V_{\\text{max}} - V_{\\text{initial}}',
+                  ],
+                  sections: [
+                    {
+                      titre: "1. Les grandeurs géométriques d'une section",
+                      ss: [
+                        {
+                          titre: "1.1. Section mouillée et périmètre mouillé",
+                          texte: "<p>La <strong>section mouillée A</strong> est l'aire occupée par l'eau dans la coupe transversale (m²). Elle intervient dans Q = A·v̄. Ne pas la confondre avec la section totale de l'ouvrage.</p><p>Le <strong>périmètre mouillé Pm</strong> est le contour solide immergé : fond + berges en contact avec l'eau. La surface libre (air) n'en fait <strong>pas</strong> partie. Erreur classique sur un canal rectangulaire ouvert 3 m × 1 m : Pm = 3 + 1 + 1 = 5 m (non 8 m). Seuls les contours solides génèrent du frottement hydraulique.</p>",
+                        },
+                        {
+                          titre: "1.2. Rayon hydraulique, profondeur hydraulique et hauteur d'eau",
+                          texte: "<p><strong>Rh = A/Pm</strong> — caractérise le rapport entre section disponible et frottement des parois. Son nom est trompeur : Rh n'est généralement pas le rayon géométrique d'un cercle (pour une buse D = 1,20 m : Rh = D/4 = 0,30 m, rayon géométrique = 0,60 m).</p><p><strong>Dh = A/T</strong> (T = largeur au miroir) — différent de y sauf pour la section rectangulaire. <strong>y = Z_eau − Z_fond</strong> (différence entre deux cotes du même référentiel — ne pas confondre cote altimétrique et hauteur d'eau).</p>",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "2. Les formes standard et les profils irréguliers",
+                      ss: [
+                        {
+                          titre: "2.1. Rectangle, trapèze et talus",
+                          texte: "<p><strong>Rectangle :</strong> A = by, Pm = b + 2y, Rh = by/(b+2y), Dh = y (seul cas où Dh = y).</p><p><strong>Trapèze symétrique :</strong> T = b + 2zy, A = y(b + zy), Pm = b + 2y√(1+z²). Le talus z = 2 signifie 2 m horizontal pour 1 m vertical. La longueur immergée du talus est ℓ = y√(1+z²) (théorème de Pythagore). Pour un trapèze dissymétrique, utiliser zg et zd distincts.</p>",
+                        },
+                        {
+                          titre: "2.2. Cercle plein et profil irrégulier",
+                          texte: "<p><strong>Cercle plein :</strong> A = πD²/4, Pm = πD, Rh = D/4. Utiliser le diamètre <em>intérieur</em>. Une conduite à mi-remplissage a le même Rh qu'une conduite pleine, mais une section différente.</p><p><strong>Profil irrégulier :</strong> méthode des trapèzes — Ai = (hi + hi+1)/2 × Δxi. Ne jamais utiliser la profondeur maximale sur toute la largeur : cela surestimerait la section jusqu'à ×2.</p>",
+                        },
+                      ],
+                    },
                   ],
                   retenir: 'Pm = contour solide immergé (jamais la surface libre) · Rh = A/Pm · Dh = A/T · Dh = y uniquement pour le rectangle · z = horiz/vert · longueur talus = y√(1+z²) · Rh cercle plein = D/4 · Profil irrégulier : méthode des trapèzes, jamais profondeur max × largeur.',
                 },
@@ -5205,6 +5881,34 @@ const COURS_DATA = {
                     'V \\approx \\displaystyle\\sum_i \\dfrac{Q_i+Q_{i+1}}{2}\\,\\Delta t_i \\quad (\\Delta t \\text{ en secondes si } Q \\text{ en m}^3\\text{/s})',
                     'V_{\\text{dispo}} = V_{\\text{max}} - V_{\\text{initial}} \\quad;\\quad V_{\\text{final}} = V_{\\text{initial}} + \\Delta V_{\\text{apport}}',
                   ],
+                  sections: [
+                    {
+                      titre: "1. Fonctions et lecture de graphiques",
+                      ss: [
+                        {
+                          titre: "1.1. Domaine de validité et types de relations",
+                          texte: "<p>Une fonction y = f(x) doit toujours être accompagnée de son domaine de validité : V(h) valable seulement pour 0 ≤ h ≤ 2 m, par exemple. Appliquer la relation hors de ce domaine (extrapolation) est risqué — le comportement peut changer radicalement (débordement, nouvelle zone inondée).</p><p>La <strong>relation affine</strong> y = ax + b a une pente a = (y₂−y₁)/(x₂−x₁) avec unité (ex. m³/s), et une valeur initiale b ≠ 0 (bassin avec volume initial). La <strong>proportionnalité</strong> y = ax passe obligatoirement par l'origine.</p>",
+                        },
+                        {
+                          titre: "1.2. Lire un graphique avec rigueur",
+                          texte: "<p>Avant toute lecture : vérifier le titre, les unités des axes, l'échelle (linéaire ou logarithmique) et la légende. Un axe tronqué amplifie visuellement des variations faibles. Une courbe lissée n'est pas une mesure continue — elle interpole entre des points discrets.</p><p>Le taux de variation moyen Δy/Δx a une unité (ex. m/h pour une montée de niveau). Ce n'est pas la vitesse de déplacement de l'eau, mais une vitesse verticale de variation du niveau.</p>",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "2. Interpolation et calcul de volume",
+                      ss: [
+                        {
+                          titre: "2.1. Interpolation linéaire et interpolation inverse",
+                          texte: "<p>La position relative λ = (x − x₁)/(x₂ − x₁) est toujours comprise entre 0 et 1 pour une interpolation. Si λ < 0 ou λ > 1, c'est une extrapolation.</p><p>Interpolation directe : y(x) = y₁ + λ(y₂ − y₁). Interpolation inverse (chercher x à partir de y) : x = x₁ + (y − y₁)/(y₂ − y₁) × (x₂ − x₁). Cette dernière n'est valable que si la relation est monotone.</p>",
+                        },
+                        {
+                          titre: "2.2. Volume sous un hydrogramme",
+                          texte: "<p>La méthode des trapèzes : V ≈ Σ (Qi + Qi+1)/2 × Δti. <strong>Δt doit impérativement être en secondes si Q est en m³/s.</strong> Utiliser Δt en heures avec Q en m³/s produit un résultat 3 600 fois trop petit.</p><p>Le maximum mesuré sur un hydrogramme n'est pas nécessairement le maximum réel — le pic peut avoir eu lieu entre deux mesures. Pour l'estimer, il faut un pas de temps plus fin ou une modélisation complémentaire.</p>",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'Domaine de validité obligatoire · a = (y₂−y₁)/(x₂−x₁) possède une unité · λ = (x−x₁)/(x₂−x₁) ∈ [0,1] · y = y₁ + λ(y₂−y₁) · interpolation inverse : x = x₁ + (y−y₁)/(y₂−y₁)·(x₂−x₁) · hors domaine = extrapolation à signaler · Δt en secondes pour V en m³.',
                 },
                 flashcards: [
@@ -5297,6 +6001,34 @@ const COURS_DATA = {
                     '\\bar{Q} = \\dfrac{V_{\\text{ecoule}}}{\\Delta t} \\quad \\text{(moyenne temporelle a partir du volume)}',
                     'A_{\\min} = b_{\\min}\\times y_{\\min} \\quad;\\quad A_{\\max} = b_{\\max}\\times y_{\\max} \\quad \\text{(bornes sur A = by)}',
                   ],
+                  sections: [
+                    {
+                      titre: "1. Indicateurs de position et de dispersion",
+                      ss: [
+                        {
+                          titre: "1.1. Moyenne et médiane",
+                          texte: "<p>La <strong>moyenne arithmétique</strong> x̄ = Σxi/n est l'équilibre arithmétique de la série. Elle est sensible aux valeurs extrêmes : une crue décennale tire la moyenne bien au-dessus de la valeur typique. La <strong>moyenne pondérée</strong> x̄p = Σwi·xi / Σwi est indispensable quand les observations n'ont pas la même durée (ex. Q=2 m³/s pendant 1 h + Q=8 m³/s pendant 3 h → x̄p = 6,5 ≠ (2+8)/2 = 5).</p><p>La <strong>médiane</strong> est la valeur centrale du classement. Elle est moins sensible aux valeurs extrêmes : si la valeur maximale passe de 12 à 120, la médiane ne change pas mais la moyenne augmente fortement.</p>",
+                        },
+                        {
+                          titre: "1.2. Étendue, quartiles et écart-type",
+                          texte: "<p>L'<strong>étendue</strong> E = xmax − xmin décrit la dispersion globale mais ne repose que sur deux valeurs. L'<strong>IQR</strong> = Q3 − Q1 décrit la dispersion de la moitié centrale — les conventions de calcul des quartiles varient selon les logiciels. Une valeur est atypique si x < Q1 − 1,5×IQR ou x > Q3 + 1,5×IQR.</p><p>L'<strong>écart-type descriptif</strong> σ = √(Σ(xi−x̄)²/n) décrit les données disponibles. L'<strong>estimateur s</strong> divise par (n−1) pour estimer la variabilité de la population. Les deux ont la même unité que les données.</p>",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "2. Fiabilité des données et incertitudes",
+                      ss: [
+                        {
+                          titre: "2.1. Valeurs atypiques, biais et variabilité",
+                          texte: "<p>Une valeur atypique est d'abord un point à examiner, pas à supprimer automatiquement. Elle peut représenter un événement réel (crue exceptionnelle) ou une erreur de saisie. La question à poser : « Cette valeur est-elle crédible et appartient-elle au phénomène étudié ? »</p><p>La <strong>variabilité</strong> exprime que le phénomène change réellement. Le <strong>biais</strong> est un décalage systématique du dispositif de mesure. L'<strong>incertitude</strong> est la dispersion possible de la valeur mesurée. Faible dispersion des mesures ≠ absence de biais.</p>",
+                        },
+                        {
+                          titre: "2.2. Données manquantes et propagation des bornes",
+                          texte: "<p><strong>0 ≠ donnée manquante</strong> : Q = 0 signifie un débit nul mesuré. Remplacer une valeur manquante par 0 diminue artificiellement la moyenne. Il faut documenter les valeurs manquantes et ne jamais les remplacer silencieusement.</p><p>La propagation des bornes : pour A = b × y avec b = 4,00 ± 0,05 m et y = 0,80 ± 0,02 m, Amin = 3,95 × 0,78 = 3,081 m², Amax = 4,05 × 0,82 = 3,321 m². L'arrondi doit être cohérent avec la qualité des données — afficher cinq décimales sur un résultat fondé sur des données à deux chiffres significatifs est trompeur.</p>",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'x̄ = Σxi/n · x̄p = Σwi·xi / Σwi · E = xmax−xmin · IQR = Q3−Q1 · σ = √(Σ(xi−x̄)²/n) ou s avec n−1 · CV% = σ/x̄ × 100 · valeur atypique ≠ valeur fausse · répétabilité ≠ absence de biais · 0 ≠ donnée manquante.',
                 },
                 flashcards: [
@@ -5377,6 +6109,34 @@ const COURS_DATA = {
                     'H_1 + H_p = H_2 + H_t + h_L \\quad;\\quad h_L = H_1 - H_2 \\text{ (sans machine)}',
                     '\\mathcal{P}_h = \\rho g Q H_p \\quad;\\quad \\mathcal{P}_{\\text{elec}} = \\dfrac{\\mathcal{P}_h}{\\eta}',
                   ],
+                  sections: [
+                    {
+                      titre: "1. Pression et forces hydrauliques",
+                      ss: [
+                        {
+                          titre: "1.1. Masse, poids et pression hydrostatique",
+                          texte: "<p>Masse m = ρV (kg), poids Fg = mg (N). Écrire « pression de 2 tonnes » mélange masse, force et pression — il faut préciser. La pression uniforme p = F/A (Pa = N/m²) ; la force résultante F = p × A ne s'applique que si la pression est uniforme sur toute la surface.</p><p>La pression hydrostatique relative prel = ρgh ne dépend que de la profondeur — pas de la largeur ou de la forme du bassin. Repère pratique : 10 m de colonne d'eau ≈ 1 bar. Deux points à la même profondeur dans une même masse d'eau au repos ont la même pression.</p>",
+                        },
+                        {
+                          titre: "1.2. Forces sur les parois et poussée d'Archimède",
+                          texte: "<p>Pour une paroi verticale rectangulaire de largeur b depuis la surface jusqu'à h : F = ½ρgbh². La répartition est triangulaire — la résultante agit à 2h/3 sous la surface, pas au milieu. Si l'eau est présente des deux côtés, calculer la force nette en tenant compte des deux niveaux.</p><p>Ne pas confondre pression absolue (pabs = patm + prel) et pression relative (prel). À la surface libre ouverte, prel = 0 mais pabs = patm ≠ 0. Mélanger les deux dans une équation produit des erreurs de 100 000 Pa.</p>",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "2. Bilan de volume, continuité et énergie",
+                      ss: [
+                        {
+                          titre: "2.1. Bilan de volume et équation de continuité",
+                          texte: "<p>Le bilan de volume : dV/dt = ΣQe − ΣQs. Un bassin monte même si la pompe fonctionne tant que Qe > Qs. La vitesse de montée dh/dt = (Qe−Qs)/S(h) — une surface plus grande entraîne une montée plus lente pour le même débit net.</p><p>L'équation de continuité en régime permanent sans échange latéral : A₁v̄₁ = A₂v̄₂ = Q. Une section plus petite implique une vitesse plus grande. Dans une rivière naturelle, une diminution de largeur ne réduit pas la section dans les mêmes proportions car la hauteur d'eau change.</p>",
+                        },
+                        {
+                          titre: "2.2. Charge hydraulique et pertes d'énergie",
+                          texte: "<p>La charge hydraulique H = z + p/(ρg) + αv̄²/(2g) exprime l'énergie par unité de poids en mètres. Elle diminue dans le sens de l'écoulement (pertes). Les pertes de charge hL = H₁ − H₂ ≥ 0 représentent une dissipation d'énergie mécanique — pas une perte d'eau.</p><p>La pression peut augmenter malgré des pertes si la conduite descend suffisamment. Puissance hydraulique Ph = ρgQHp (W) ; puissance électrique Pélec = Ph/η. Distinguer kW (puissance) et kWh (énergie consommée sur une durée).</p>",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'm=ρV [kg] · Fg=mg [N] · p=ρgh (hydrostatique) · hp=p/(ρg) · F=½ρgbh² (paroi vert.) · dV/dt=ΣQe−ΣQs · dh/dt=(Qe−Qs)/S · A₁v₁=A₂v₂ · H=z+p/(ρg)+v²/(2g) · hL=H₁−H₂ · Ph=ρgQHp · Pélec=Ph/η.',
                 },
                 flashcards: [
@@ -5448,6 +6208,34 @@ const COURS_DATA = {
                     '\\text{Volume de pluie : } V_P = P \\times A \\quad (P \\text{ en m}, A \\text{ en m}^2)',
                     '\\text{Conversions : } 1\\,\\text{km}^2 = 100\\,\\text{ha} = 1\\,000\\,000\\,\\text{m}^2',
                     '\\text{Écart relatif : } e = \\dfrac{A_2 - A_1}{A_1} \\times 100\\,\\%',
+                  ],
+                  sections: [
+                    {
+                      titre: "1. Définition et délimitation d'un bassin versant",
+                      ss: [
+                        {
+                          titre: "1.1. Qu'est-ce qu'un bassin versant ?",
+                          texte: "<p>Un bassin versant est le territoire dont toutes les eaux convergent vers un même point de sortie appelé exutoire. Sa délimitation suit la ligne de partage des eaux (ligne de crête topographique) et peut être réalisée sur carte topographique ou sur MNT.</p><p>Les bassins versants sont emboîtés : chaque affluent possède son propre sous-bassin. Un grand bassin peut être subdivisé en autant de sous-bassins que nécessaire selon l'échelle de l'étude. Les limites topographiques ne coïncident pas toujours avec les limites des nappes souterraines.</p>",
+                        },
+                        {
+                          titre: "1.2. Méthode de délimitation",
+                          texte: "<p>La délimitation se réalise en identifiant les lignes de crête qui séparent les eaux vers des exutoires différents. Sur un MNT, des algorithmes d'accumulation de flux permettent de délimiter automatiquement les bassins.</p><p>Les erreurs fréquentes : utiliser les limites administratives (communes, départements) à la place des limites hydrauliques ; oublier les captures souterraines dans les terrains karstiques ; confondre le bassin d'alimentation d'une nappe et le bassin versant topographique.</p>",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "2. Caractéristiques morphométriques et réseau hydrographique",
+                      ss: [
+                        {
+                          titre: "2.1. Paramètres de forme et superficie",
+                          texte: "<p>La superficie du bassin versant (km² ou ha) détermine le volume potentiel de ruissellement. La pente moyenne du bassin influence la vitesse de réponse aux précipitations. La forme du bassin (allongé ou ramassé) conditionne la simultanéité des apports à l'exutoire.</p><p>Le dénivelé spécifique Ds = D × S^(-1/2) (D = dénivelé altimétrique, S = superficie) est un indicateur de relief utilisé dans les méthodes de Gradex. Il conditionne les vitesses de transfert et les pics de crue.</p>",
+                        },
+                        {
+                          titre: "2.2. Réseau hydrographique et temps de concentration",
+                          texte: "<p>La densité de drainage (longueur totale du réseau / superficie) traduit la capacité du bassin à évacuer les eaux. Un réseau dense répond plus rapidement aux précipitations.</p><p>Le temps de concentration tc est le temps nécessaire à l'eau tombée au point le plus éloigné pour atteindre l'exutoire. Il détermine la durée critique pour le dimensionnement. Plusieurs formules empiriques existent (Giandotti, Kirpich) — les appliquer en dehors de leur domaine de calibration conduit à des résultats peu fiables.</p>",
+                        },
+                      ],
+                    },
                   ],
                   retenir: 'Le bassin versant est défini par un exutoire, pas par le nom d\'un cours d\'eau. Sa délimitation topographique est une hypothèse à confronter aux ouvrages, au fonctionnement souterrain et au terrain. Surface totale ≠ surface contributive à un épisode.',
                 },
@@ -5523,6 +6311,34 @@ const COURS_DATA = {
                     'P_{\\text{moy}} = \\dfrac{\\sum_i P_i A_i}{A_{\\text{total}}}',
                     'V_P = P \\times A \\;\\; ; \\quad V_P = 10PA \\;\\text{(mm, ha)} \\;\\; ; \\quad V_P = 1000PA \\;\\text{(mm, km}^2\\text{)}',
                     'p = \\dfrac{1}{T} \\;\\;; \\quad P(\\geq 1 \\text{ en }N) = 1-(1-p)^N',
+                  ],
+                  sections: [
+                    {
+                      titre: "1. Mesure et représentativité des précipitations",
+                      ss: [
+                        {
+                          titre: "1.1. Instruments et réseaux de mesure",
+                          texte: "<p>Le pluviomètre mesure la hauteur de pluie cumulée (mm). Le pluviographe enregistre la pluie en continu, permettant de calculer des intensités à pas de temps variable. Le réseau Météo-France (environ 3 000 postes) est complété par des radars météorologiques (réseau ARAMIS).</p><p>La mesure pluviométrique est ponctuelle. La pluie capturée par un pluviomètre ne représente pas la pluie tombée sur l'ensemble du bassin versant. Plus le bassin est grand et la pluie convective, plus l'écart peut être important.</p>",
+                        },
+                        {
+                          titre: "1.2. Pluie ponctuelle, pluie de bassin et cumul vs intensité",
+                          texte: "<p>La <strong>pluie de bassin</strong> est estimée à partir de plusieurs postes par des méthodes de moyenne (arithmétique, Thiessen, krigeage). La méthode de Thiessen pondère chaque poste selon la surface du polygone qui lui est associé.</p><p>Cumul ≠ intensité : 30 mm en 24 h (intensité ≈ 1,25 mm/h) et 30 mm en 30 min (intensité ≈ 60 mm/h) sont deux événements très différents pour le ruissellement. La pluie reçue est la donnée brute — ce qui ruisselle dépend aussi du sol, de la végétation et du degré de saturation.</p>",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "2. Analyse fréquentielle et courbes IDF",
+                      ss: [
+                        {
+                          titre: "2.1. Période de retour et fréquence",
+                          texte: "<p>La période de retour T (années) est l'inverse de la probabilité annuelle de dépassement p = 1/T. Une pluie de période de retour 10 ans a une probabilité de 10 % d'être dépassée chaque année — elle peut survenir plusieurs fois en dix ans ou ne pas survenir pendant 50 ans.</p><p>L'analyse fréquentielle ajuste une loi statistique (GEV, Gumbel, log-normale) aux données observées. La fiabilité de l'ajustement dépend de la longueur de la série — avec 20 ans de données, estimer la pluie centennale reste très incertain.</p>",
+                        },
+                        {
+                          titre: "2.2. Courbes IDF et utilisation",
+                          texte: "<p>Les courbes Intensité-Durée-Fréquence (IDF) donnent l'intensité maximale moyenne pour une durée et une fréquence données. Elles sont construites à partir des données pluviographiques et sont publiées par Météo-France (SHYREG).</p><p>Utiliser une courbe IDF requiert de connaître sa zone géographique de validité, sa période de construction et ses hypothèses. Une même durée et une même fréquence peuvent correspondre à des intensités très différentes selon la région. Les IDF ne renseignent pas sur la distribution temporelle de la pluie, indispensable pour la modélisation.</p>",
+                        },
+                      ],
+                    },
                   ],
                   retenir: 'Cumul ≠ intensité. Mesure ponctuelle ≠ pluie de bassin. Pluie reçue ≠ ruissellement. Période de retour = probabilité, pas calendrier. Toujours préciser durée, unités, méthode et incertitudes.',
                 },
@@ -5641,6 +6457,34 @@ const COURS_DATA = {
                     'C_V = \\dfrac{V_e}{V_P} \\;\\;; \\quad V_e = C_V \\times P \\times A',
                     'V_e = \\sum_i C_{V,i}\\, P_i\\, A_i \\quad (\\text{bassin hétérogène})',
                   ],
+                  sections: [
+                    {
+                      titre: "1. Les processus de production",
+                      ss: [
+                        {
+                          titre: "1.1. Infiltration, interception et rétention",
+                          texte: "<p>Avant de ruisseler, la pluie subit des pertes initiales : interception par la végétation, remplissage des dépressions de surface, infiltration dans le sol. Le taux d'infiltration dépend du type de sol, de sa structure, de son degré de saturation avant la pluie et de l'intensité de la pluie.</p><p>Le ruissellement de surface (Hortonien) se produit quand l'intensité de la pluie dépasse la capacité d'infiltration. Le ruissellement par saturation se produit quand le sol est saturé, même à faible intensité — c'est souvent le mécanisme dominant en France.</p>",
+                        },
+                        {
+                          titre: "1.2. Coefficient de ruissellement",
+                          texte: "<p>Le coefficient de ruissellement Cr = lame ruisselée / pluie nette est le rapport entre la lame d'eau qui ruisselle et la précipitation efficace. Il varie selon l'imperméabilisation des surfaces, la pente, l'état de la végétation et les conditions antécédentes.</p><p>Les valeurs typiques : 0,70–0,95 pour les surfaces imperméabilisées (toits, routes), 0,20–0,50 pour les pelouses, 0,10–0,30 pour les forêts. Ces valeurs sont des moyennes — elles ne décrivent pas le comportement lors d'un événement spécifique.</p>",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "2. Le bilan hydrologique",
+                      ss: [
+                        {
+                          titre: "2.1. Écrire et utiliser le bilan",
+                          texte: "<p>Le bilan hydrologique s'écrit : P = ETR + Q + ΔS (précipitations = évapotranspiration réelle + ruissellement + variation du stock). Définir le système avant d'écrire le bilan est essentiel : quel est le volume de contrôle ? Quels flux traversent ses limites ?</p><p>À l'échelle annuelle et sur une longue série, ΔS ≈ 0. Le bilan devient alors Q = P − ETR. Cette simplification ne s'applique pas à l'échelle d'un événement ni à une année sèche ou humide exceptionnelle.</p>",
+                        },
+                        {
+                          titre: "2.2. Pertes, stockages et production nette",
+                          texte: "<p>La pluie nette (ou pluie efficace) est la fraction de la pluie brute qui contribue au ruissellement, après déduction des pertes. Les méthodes de calcul (SCS-CN, Horton, Green-Ampt) estiment ces pertes selon les caractéristiques du sol et de l'occupation des terres.</p><p>Le coefficient d'abattement CV permet de passer d'une pluie ponctuelle à une pluie de bassin. Il est inférieur à 1 et diminue quand la superficie du bassin augmente — plus le bassin est grand, moins la pluie est uniforme sur son étendue.</p>",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'Pluie reçue ≠ ruissellement. Définir le système avant d\'écrire le bilan. CV n\'est pas une constante et ne donne pas le débit de pointe. L\'état initial du bassin est aussi important que la pluie.',
                 },
                 flashcards: [
@@ -5736,6 +6580,34 @@ const COURS_DATA = {
                     'Q_s(t) = Q_s(0)\\,e^{-t/K} \\quad (\\text{après arrêt des apports})',
                     'V_e - V_s = \\Delta S \\quad (\\text{conservation du volume})',
                   ],
+                  sections: [
+                    {
+                      titre: "1. L'hydrogramme de crue",
+                      ss: [
+                        {
+                          titre: "1.1. Production et transfert",
+                          texte: "<p>La réponse d'un bassin à une précipitation se décompose en deux phases : la <strong>production</strong> (transformation de la pluie en pluie nette par les processus d'infiltration et de rétention) et le <strong>transfert</strong> (propagation de la lame ruisselée jusqu'à l'exutoire par le réseau hydrographique).</p><p>Ces deux phases sont distinctes. Modifier le réseau de drainage (rectification, curage) agit sur le transfert sans changer la production. Végétaliser les berges ou créer des zones de rétention agit sur les deux. Un modèle doit explicitement séparer ces fonctions.</p>",
+                        },
+                        {
+                          titre: "1.2. Lire et interpréter un hydrogramme",
+                          texte: "<p>Un hydrogramme représente le débit Q(t) à l'exutoire d'un bassin. Les parties caractéristiques sont : la montée (phase de production et début de transfert), le pic (débit maximal), la décrue (transfert du volume stocké) et le débit de base (nappe).</p><p>Le temps de montée et la durée de la crue reflètent le temps de concentration du bassin. Un bassin petit et imperméable produit un hydrogramme bref et pointu. Un grand bassin boisé produit un hydrogramme long et atténué.</p>",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "2. Volumes et superposition d'hydrogrammes",
+                      ss: [
+                        {
+                          titre: "2.1. Calcul du volume de crue",
+                          texte: "<p>Le volume de crue est l'aire sous l'hydrogramme. Par la méthode des trapèzes : V = Σ (Qi + Qi+1)/2 × Δti. Le débit de pointe est la valeur maximale du débit — il est distinct du volume, qui dépend aussi de la durée de l'épisode.</p><p><strong>Volume ≠ débit de pointe.</strong> Un hydrogramme peut avoir un débit de pointe élevé et un volume faible (orage bref et intense). À l'inverse, une longue pluie à intensité modérée peut produire un volume élevé avec un pic modéré.</p>",
+                        },
+                        {
+                          titre: "2.2. Superposition d'hydrogrammes",
+                          texte: "<p>Quand deux cours d'eau confluent, leurs hydrogrammes se superposent. L'hydrogramme de crue à la confluence n'est pas la somme des débits de pointe — la simultanéité des pics dépend des temps de concentration respectifs.</p><p><strong>Ne jamais additionner les pointes comme si elles survenaient au même moment.</strong> Décaler temporellement les hydrogrammes avant de les superposer permet d'obtenir l'hydrogramme de crue résultant réaliste. Cette erreur est fréquente dans les études sommaires.</p>",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'Production ≠ transfert. Volume ≠ débit de pointe. Ne jamais additionner les pointes des affluents sans vérifier la simultanéité. Contrôler le volume à chaque étape.',
                 },
                 flashcards: [
@@ -5827,6 +6699,34 @@ const COURS_DATA = {
                     'p_m = \\dfrac{m}{n+1} \\;\\; ; \\quad T_m = \\dfrac{n+1}{m} \\quad (\\text{position empirique})',
                     'VCN3 = \\min_k\\!\\left(\\dfrac{Q_{j,k}+Q_{j,k+1}+Q_{j,k+2}}{3}\\right)',
                     'V_D = \\int \\max\\bigl(0,\\,Q_s - Q(t)\\bigr)\\,dt',
+                  ],
+                  sections: [
+                    {
+                      titre: "1. Statistiques hydrologiques et périodes de retour",
+                      ss: [
+                        {
+                          titre: "1.1. La période de retour : définition et interprétation",
+                          texte: "<p>La période de retour T (années) est l'inverse de la probabilité annuelle de dépassement : p = 1/T. Une crue décennale a une probabilité de 10 % d'être dépassée chaque année — ce n'est pas un calendrier. Elle peut se produire deux fois en cinq ans ou ne pas survenir pendant 30 ans.</p><p>La probabilité de ne pas observer une crue T au moins une fois en n années est (1−1/T)ⁿ. Pour T = 10 ans et n = 30 ans : (0,9)³⁰ ≈ 4 % — il y a donc 96 % de chances d'observer au moins une crue décennale en 30 ans.</p>",
+                        },
+                        {
+                          titre: "1.2. Utilisation des méthodes statistiques",
+                          texte: "<p>L'analyse fréquentielle ajuste une loi statistique aux débits annuels maximaux (Gumbel, GEV, log-normale). La fiabilité de l'estimation dépend de la longueur de la série disponible — avec 30 ans de données, estimer la crue centennale reste très incertain.</p><p>Crue ≠ inondation : une crue peut rester dans le lit mineur. L'expression « crue centennale » décrit une probabilité annuelle — pas la crue qui arrive tous les 100 ans exactement. Il ne faut pas dire « la centennale est passée, on a 100 ans devant nous ».</p>",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "2. Étiages et indicateurs réglementaires",
+                      ss: [
+                        {
+                          titre: "2.1. Le QMNA5 et le débit réservé",
+                          texte: "<p>Le <strong>QMNA5</strong> est le débit mensuel minimal annuel de fréquence quinquennale sèche — le plus faible débit mensuel moyen susceptible d'être atteint ou dépassé en étiage avec une probabilité de 1/5 par an. C'est la valeur de référence réglementaire pour caractériser l'étiage.</p><p>Le <strong>débit réservé</strong> (débit minimal biologique) est fixé à 1/10 du module (débit moyen interannuel) par défaut, ou à une valeur plus élevée selon les enjeux environnementaux. Tout prélèvement ou ouvrage doit respecter ce seuil.</p>",
+                        },
+                        {
+                          titre: "2.2. Facteurs aggravants des étiages",
+                          texte: "<p>Les étiages s'aggravent avec les prélèvements agricoles (irrigation), les restitutions différées des barrages, le changement climatique (réduction des modules, avancement des étiages estivaux) et l'imperméabilisation des sols (moins de recharge des nappes).</p><p>La surveillance des étiages repose sur le réseau hydrométrique national (HYDRO) et les bulletins de situation hydrologique (BSH) produits par les DREAL. La détermination du QMNA5 nécessite des séries d'au moins 20 ans de données mensuelles.</p>",
+                        },
+                      ],
+                    },
                   ],
                   retenir: 'Période de retour = probabilité annuelle (1/T), pas un calendrier. Crue ≠ inondation. Pluie rare ≠ crue rare. Toujours accompagner une valeur statistique de sa variable, sa période de données et ses incertitudes.',
                 },
@@ -6811,6 +7711,34 @@ const COURS_DATA = {
                     'Plafond taxe = 40 € × population légale de référence',
                     'Ex : 25 000 hab × 40 € = 1 000 000 € de plafond théorique maximal',
                   ],
+                  sections: [
+                    {
+                      titre: "1. La taxe GEMAPI",
+                      ss: [
+                        {
+                          titre: "1.1. Principes et plafond",
+                          texte: "<p>La taxe GEMAPI est une taxe facultative instaurée par la loi MAPTAM. Les EPCI à fiscalité propre peuvent l'instaurer pour financer les missions GEMAPI. Son produit est plafonné à 40 €/habitant/an.</p><p>Le plafond n'est pas le produit voté — l'EPCI peut voter un produit inférieur au plafond selon ses besoins réels. La taxe est répartie entre les contribuables locaux par les services fiscaux.</p>",
+                        },
+                        {
+                          titre: "1.2. Budget GEMAPI et emploi de la taxe",
+                          texte: "<p>Le budget GEMAPI doit être isolé (budget annexe ou service individualisé) pour tracer l'emploi des fonds. La taxe finance uniquement les dépenses relevant des quatre missions GEMAPI — pas les compétences connexes.</p><p>La taxe peut être reversée à un syndicat ou un EPAGE qui exerce les missions par délégation. Les modalités de reversement sont fixées par convention.</p>",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "2. Autres sources de financement",
+                      ss: [
+                        {
+                          titre: "2.1. Agences de l'eau et fonds européens",
+                          texte: "<p>Les agences de l'eau (Artois-Picardie, Loire-Bretagne, Rhin-Meuse, Rhône-Méditerranée-Corse, Seine-Normandie, Adour-Garonne) cofinancent les projets de restauration des milieux aquatiques, de lutte contre les inondations et d'amélioration de la continuité écologique, selon leurs programmes d'intervention.</p><p>Les fonds FEDER et FEADER peuvent cofinancer des actions GEMAPI dans le cadre des programmes opérationnels régionaux. Les conditions d'éligibilité et les taux de cofinancement varient selon les régions et les priorités définies.</p>",
+                        },
+                        {
+                          titre: "2.2. Conditions à vérifier avant de compter sur une aide",
+                          texte: "<p>Chaque aide nécessite de vérifier : l'éligibilité des dépenses (HT ou TTC), le plafond de l'assiette, les règles de cumul entre aides, les conditions de versement (avance, acomptes, solde) et le calendrier.</p><p>Un accord de financement n'est pas une autorisation de travaux et ne dispense pas des procédures réglementaires. La capacité d'avance de trésorerie doit être anticipée car les versements sont souvent décalés par rapport aux dépenses.</p>",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'Taxe GEMAPI = facultative + plafonnée 40 €/hab. Plafond ≠ produit voté. Budget GEMAPI = cycle complet (études→entretien→renouvellement). Agences + FEDER = cofinancements.',
                 },
                 flashcards: [
@@ -6875,6 +7803,34 @@ const COURS_DATA = {
                     '🗺️ ORSEC : plan préfectoral de secours — le PCS communal s\'inscrit dans l\'ORSEC',
                   ],
                   formules: [],
+                  sections: [
+                    {
+                      titre: "1. Le PAPI et ses sept axes",
+                      ss: [
+                        {
+                          titre: "1.1. Les sept axes du PAPI",
+                          texte: "<p>Le Programme d'Actions de Prévention des Inondations (PAPI) structure la stratégie locale en 7 axes : 1 - connaissance du risque, 2 - surveillance et prévision, 3 - alerte et gestion de crise, 4 - prise en compte du risque dans l'urbanisme, 5 - réduction de la vulnérabilité, 6 - ralentissement des écoulements, 7 - protection des lieux habités (digues).</p><p>Le PAPI n'est pas une compétence — c'est un outil de coordination entre maîtres d'ouvrage. Plusieurs acteurs (EPCI, syndicats, communes, DDT) peuvent contribuer à différents axes du même PAPI.</p>",
+                        },
+                        {
+                          titre: "1.2. Dépôt, labellisation et financement",
+                          texte: "<p>Le PAPI est soumis à la labellisation par la Commission Mixte Inondation (CMI) pour un accès aux financements du Fonds Barnier (FPRNM). La labellisation examine la cohérence de la stratégie, la réalité des engagements et le rapport coût/bénéfice.</p><p>Un PAPI d'intention peut précéder un PAPI complet pour les territoires en cours de structuration. La durée classique est de 6 ans, avec un bilan à mi-parcours.</p>",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "2. Concertation et gestion de crise",
+                      ss: [
+                        {
+                          titre: "2.1. La concertation dans les projets GEMAPI",
+                          texte: "<p>La concertation doit avoir lieu <em>avant de figer les variantes</em>. Une réunion d'information organisée après que les décisions sont prises n'est pas une concertation — c'est une présentation. La participation des riverains, des usagers et des acteurs locaux en amont améliore la robustesse des projets.</p><p>Les outils : réunion publique, enquête publique (obligatoire pour les autorisations), commission locale de l'eau (SAGE), comité de rivière. Chaque outil a un statut juridique et des effets différents.</p>",
+                        },
+                        {
+                          titre: "2.2. Le PCS et la gestion de crise",
+                          texte: "<p>Le Plan Communal de Sauvegarde (PCS) est obligatoire pour les communes soumises à un PPR approuvé ou situées dans le périmètre d'un PPI. Il organise la réponse communale face à un événement (alerte, évacuation, accueil des sinistrés).</p><p>La GEMAPI fournit des données et des informations sur les ouvrages, les niveaux et les zones à risque — mais les décisions de sécurité civile (évacuation, ouverture de centres d'hébergement) relèvent du maire ou du préfet selon l'échelle. Ces responsabilités ne se confondent pas.</p>",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'PAPI = 7 axes coordonnés. Concertation = avant de figer les variantes. PCS obligatoire si PPRI. Crise = 3 acteurs distincts (gestionnaire/maire/secours).',
                 },
                 flashcards: [
@@ -6933,6 +7889,34 @@ const COURS_DATA = {
                     '📋 OFB (Office Français de la Biodiversité) : propose des outils de suivi pour les projets de restauration et GEMAPI',
                   ],
                   formules: [],
+                  sections: [
+                    {
+                      titre: "1. Le suivi d'une action GEMAPI",
+                      ss: [
+                        {
+                          titre: "1.1. État initial et indicateurs SMART",
+                          texte: "<p>L'état initial est une photographie du territoire avant les travaux — il est obligatoire et doit être réalisé avant toute intervention, pas reconstruit a posteriori. Il doit documenter les paramètres qui seront suivis : niveaux de crue, surfaces inondées, état des habitats, qualité de l'eau, espèces présentes.</p><p>Les indicateurs de suivi doivent être <strong>SMART</strong> : Spécifiques (ce qu'on mesure exactement), Mesurables (méthode et unité précises), Atteignables (réalistes), Pertinents (liés à l'objectif), Temporellement définis (à quelle échéance).</p>",
+                        },
+                        {
+                          titre: "1.2. Le tableau de bord de suivi",
+                          texte: "<p>Un tableau de bord efficace distingue les indicateurs de réalisation (travaux réalisés ? budget consommé ?) et les indicateurs de résultat (les objectifs sont-ils atteints ?). Produire une étude est une réalisation — disposer d'un diagnostic permettant de décider est un résultat.</p><p>La variabilité climatique naturelle peut masquer ou amplifier les effets d'une action. Un suivi sur au moins 5 à 10 ans permet de distinguer l'effet de l'action de la variabilité interannuelle. Les résultats immédiats peuvent être trompeurs.</p>",
+                        },
+                      ],
+                    },
+                    {
+                      titre: "2. Évaluation et adaptation",
+                      ss: [
+                        {
+                          titre: "2.1. Distinguer réalisation, résultat et impact",
+                          texte: "<p>La réalisation est ce qui a été fait (km de berges restaurées, ouvrages construits). Le résultat est le changement directement attribuable à l'action (surfaces inondées réduites, connectivité améliorée). L'impact est la contribution à des objectifs plus larges (amélioration de l'état écologique, réduction du risque sur le territoire).</p><p>Une action peut être réalisée à 100 % sans produire les résultats attendus — parce que les hypothèses de départ étaient incorrectes, parce que le contexte a changé ou parce que d'autres facteurs ont contrebalancé les effets.</p>",
+                        },
+                        {
+                          titre: "2.2. Retour d'expérience et adaptation",
+                          texte: "<p>Le retour d'expérience (REX) est la démarche structurée pour tirer des enseignements des succès et des échecs. Il doit être organisé après chaque événement majeur (crue, travaux difficiles, incident d'exploitation) et documenté pour les équipes futures.</p><p>L'adaptation consiste à ajuster la stratégie à partir des résultats du suivi et du retour d'expérience. Elle n'est pas un aveu d'échec — c'est la démonstration que le gestionnaire comprend son territoire et réagit à l'évolution des connaissances et du contexte.</p>",
+                        },
+                      ],
+                    },
+                  ],
                   retenir: 'État initial avant travaux = obligatoire. Indicateurs SMART. Variabilité climatique = facteur confondant. Adapter ≠ tout changer. OFB = ressources méthodo.',
                 },
                 flashcards: [
