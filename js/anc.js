@@ -456,13 +456,14 @@ function renderANCHome() {
   });
   html += '</div></div>';
 
-  /* Raccourcis calculateurs */
+  /* Outils principaux */
   html += '<div style="padding:var(--s-2) var(--s-4)">'
-    +'<div style="font-size:10px;font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--s-2)">Calculateurs ANC</div>'
-    +'<div style="display:flex;gap:var(--s-2);flex-wrap:wrap">'
-    +'<button onclick="showModule(\'calc-anc\')" style="padding:7px 14px;background:var(--c-anc-l);border:1px solid var(--c-anc);border-radius:var(--r-md);font-size:12px;font-weight:700;color:var(--c-anc);cursor:pointer">⚡ Épandage · FTE · Porchet</button>'
-    +'<button onclick="renderANCComparateur()" style="padding:7px 14px;background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-md);font-size:12px;color:var(--c-text-2);cursor:pointer">📊 Comparer les filières</button>'
-    +'<button onclick="renderANCAideChoix()" style="padding:7px 14px;background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-md);font-size:12px;color:var(--c-text-2);cursor:pointer">🧭 Quelle filière ?</button>'
+    +'<div style="font-size:10px;font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--s-2)">Outils</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--s-2)">'
+    +'<button onclick="renderANCAideChoix()" style="padding:var(--s-3);background:var(--c-anc-l);border:1.5px solid var(--c-anc);border-radius:var(--r-md);font-size:12px;font-weight:700;color:var(--c-anc);cursor:pointer;text-align:left">📐 Dimensionnement<br><span style="font-size:10px;font-weight:400;opacity:.8">Filière · Surfaces · Budget</span></button>'
+    +'<button onclick="renderANCConformite()" style="padding:var(--s-3);background:#F0FFF4;border:1.5px solid #059669;border-radius:var(--r-md);font-size:12px;font-weight:700;color:#059669;cursor:pointer;text-align:left">✅ Conformité SPANC<br><span style="font-size:10px;font-weight:400;opacity:.8">Grille de contrôle interactive</span></button>'
+    +'<button onclick="showModule(\'calc-anc\')" style="padding:var(--s-3);background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-md);font-size:12px;color:var(--c-text-2);cursor:pointer;text-align:left">⚡ Calculateurs<br><span style="font-size:10px;opacity:.7">Épandage · FTE · Porchet</span></button>'
+    +'<button onclick="renderANCDiag()" style="padding:var(--s-3);background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-md);font-size:12px;color:var(--c-text-2);cursor:pointer;text-align:left">🔍 Diagnostic<br><span style="font-size:10px;opacity:.7">Symptômes · Causes</span></button>'
     +'</div>'
   +'</div>';
 
@@ -919,6 +920,179 @@ function renderANCSymptome(symId) {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   GRILLE DE CONFORMITÉ SPANC
+   ═══════════════════════════════════════════════════════════ */
+var _ancConformiteState = {};
+
+var ANC_CONFORMITE = [
+  { section:'Prétraitement', items:[
+    { id:'pt1', label:'Prétraitement primaire présent (fosse toutes eaux ou équivalent agréé CE)', gravite:'danger', regle:'Art. 6 — Arrêté 07/09/2009' },
+    { id:'pt2', label:'Ventilation primaire présente — Ø ≥ 100 mm sortant au-dessus du faîtage', gravite:'danger', regle:'Art. 6' },
+    { id:'pt3', label:'Tampon d\'accès identifiable et accessible sans outillage', gravite:'majeur', regle:'Art. 6' },
+    { id:'pt4', label:'Aucune eau pluviale raccordée à la fosse', gravite:'majeur', regle:'Art. 6 + CSP L.1331-1' },
+    { id:'pt5', label:'Niveau de boues < 50 % du volume utile (vidange à programmer si dépassé)', gravite:'mineur', regle:'Arrêté 07/09/2009' },
+    { id:'pt6', label:'Préfiltre présent et dégagé (si filière classique)', gravite:'mineur', regle:'DTU 64.1' },
+  ]},
+  { section:'Traitement secondaire', items:[
+    { id:'ts1', label:'Filière de traitement secondaire présente et raccordée à la fosse', gravite:'danger', regle:'Art. 7 — Arrêté 07/09/2009' },
+    { id:'ts2', label:'Aucune construction ni dalle béton sur la zone de traitement', gravite:'danger', regle:'Art. 7' },
+    { id:'ts3', label:'Aucune circulation mécanique sur la filière d\'épandage', gravite:'majeur', regle:'Art. 7' },
+    { id:'ts4', label:'Regard de répartition calé à l\'horizontal (si présent)', gravite:'majeur', regle:'DTU 64.1' },
+    { id:'ts5', label:'Végétation herbacée uniquement — pas d\'arbres ni arbustes à racines profondes', gravite:'mineur', regle:'Art. 7' },
+    { id:'ts6', label:'Dispositif agréé CE : contrat d\'entretien en vigueur (si microstation / filtre compact)', gravite:'majeur', regle:'NF EN 12566 + agrément CE' },
+  ]},
+  { section:'Évacuation', items:[
+    { id:'ev1', label:'Mode d\'évacuation défini : infiltration ou rejet autorisé (jamais non défini)', gravite:'danger', regle:'Art. 8 — Arrêté 07/09/2009' },
+    { id:'ev2', label:'Distance minimale 35 m de tout captage AEP ou puits privé respectée', gravite:'danger', regle:'Art. 1' },
+    { id:'ev3', label:'Absence de rejet non autorisé vers fossé, cours d\'eau ou milieu superficiel', gravite:'danger', regle:'Art. 8 + L.216-6 CE' },
+    { id:'ev4', label:'Regard de collecte en sortie de filière accessible pour prélèvement', gravite:'mineur', regle:'Art. 8' },
+  ]},
+  { section:'Fonctionnement général', items:[
+    { id:'gen1', label:'Absence d\'odeurs anormales à l\'intérieur de l\'habitation', gravite:'danger', regle:'Critère fonctionnel' },
+    { id:'gen2', label:'Absence de remontée ou d\'épandage d\'effluents en surface visible', gravite:'danger', regle:'Critère fonctionnel' },
+    { id:'gen3', label:'Poste de relevage (si présent) : alarme et flotteur fonctionnels', gravite:'majeur', regle:'Arrêté 07/09/2009' },
+    { id:'gen4', label:'Carnet d\'entretien ou justificatifs de vidange disponibles', gravite:'mineur', regle:'Arrêté 07/09/2009' },
+  ]},
+];
+
+function renderANCConformite() {
+  var tb = document.getElementById('tab-bar');
+  if (tb) tb.style.display = 'none';
+  _ancConformiteState = {};
+
+  var totalItems = ANC_CONFORMITE.reduce(function(n,s){ return n+s.items.length; }, 0);
+
+  var html = '<div style="display:flex;align-items:center;gap:var(--s-2);padding:var(--s-3) var(--s-4);border-bottom:1px solid var(--c-border);position:sticky;top:0;background:var(--c-bg);z-index:10">'
+    +'<button onclick="renderANCHome()" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--c-text-3);padding:0;line-height:1">←</button>'
+    +'<div style="flex:1"><div style="font-size:10px;color:var(--c-text-4)">ANC</div>'
+    +'<div style="font-size:13px;font-weight:800;color:var(--c-text)">✅ Grille de conformité SPANC</div></div>'
+  +'</div>';
+
+  html += '<div style="padding:var(--s-3) var(--s-4)">';
+
+  html += '<div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:var(--r-md);padding:var(--s-3);margin-bottom:var(--s-3);font-size:11px;color:#1E40AF;line-height:1.5">'
+    +'Pour chaque critère : <strong>C</strong> = Conforme &nbsp;·&nbsp; <strong>NC</strong> = Non conforme &nbsp;·&nbsp; <strong>NV</strong> = Non vérifiable<br>'
+    +'<span style="color:#64748B;font-size:10px">Outil pédagogique — ne remplace pas la conclusion officielle du SPANC.</span>'
+  +'</div>';
+
+  html += '<div id="anc-conf-score" style="background:var(--c-surface-2);border-radius:var(--r-md);padding:var(--s-3);margin-bottom:var(--s-3);display:flex;gap:var(--s-3);align-items:center">'
+    +'<div style="flex:1"><div style="font-size:10px;color:var(--c-text-4);font-weight:700;text-transform:uppercase;letter-spacing:.05em">Score</div>'
+    +'<div id="anc-conf-score-txt" style="font-size:13px;font-weight:800;color:var(--c-text-3)">0 / '+totalItems+' évalués</div></div>'
+    +'<div id="anc-conf-danger-badge" style="display:none;font-size:10px;font-weight:700;color:#DC2626;background:#FEE2E2;padding:3px 8px;border-radius:20px">0 NC danger</div>'
+  +'</div>';
+
+  ANC_CONFORMITE.forEach(function(sec) {
+    html += '<div style="margin-bottom:var(--s-3)">'
+      +'<div style="font-size:10px;font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--s-2)">'+sec.section+'</div>'
+      +'<div style="display:flex;flex-direction:column;gap:6px">';
+
+    sec.items.forEach(function(item) {
+      var gravColor = item.gravite==='danger' ? '#DC2626' : (item.gravite==='majeur' ? '#D97706' : '#64748B');
+      var gravLabel = item.gravite==='danger' ? 'D' : (item.gravite==='majeur' ? 'M' : 'm');
+      html += '<div id="anc-ci-'+item.id+'" style="background:var(--c-surface);border:1px solid var(--c-border);border-left:3px solid '+gravColor+';border-radius:var(--r-md);padding:var(--s-2) var(--s-3)">'
+        +'<div style="display:flex;align-items:flex-start;gap:var(--s-2);margin-bottom:6px">'
+        +'<span style="font-size:9px;font-weight:800;color:'+gravColor+';background:'+gravColor+'18;border-radius:4px;padding:2px 5px;flex-shrink:0;margin-top:1px">'+gravLabel+'</span>'
+        +'<div style="font-size:11px;color:var(--c-text-2);line-height:1.45;flex:1">'+item.label+'</div>'
+        +'</div>'
+        +'<div style="display:flex;gap:5px">'
+        +'<button data-conf-item="'+item.id+'" data-conf-val="C" onclick="_ancConformiteClick(\''+item.id+'\',\'C\')" style="flex:1;padding:5px 0;border-radius:var(--r-sm);border:1.5px solid #059669;background:#fff;font-size:11px;font-weight:700;color:#059669;cursor:pointer;transition:all .1s">C</button>'
+        +'<button data-conf-item="'+item.id+'" data-conf-val="NC" onclick="_ancConformiteClick(\''+item.id+'\',\'NC\')" style="flex:1;padding:5px 0;border-radius:var(--r-sm);border:1.5px solid #DC2626;background:#fff;font-size:11px;font-weight:700;color:#DC2626;cursor:pointer;transition:all .1s">NC</button>'
+        +'<button data-conf-item="'+item.id+'" data-conf-val="NV" onclick="_ancConformiteClick(\''+item.id+'\',\'NV\')" style="flex:1;padding:5px 0;border-radius:var(--r-sm);border:1.5px solid #94A3B8;background:#fff;font-size:11px;font-weight:700;color:#64748B;cursor:pointer;transition:all .1s">NV</button>'
+        +'</div>'
+        +'<div style="font-size:9px;color:var(--c-text-4);margin-top:4px">'+item.regle+'</div>'
+      +'</div>';
+    });
+
+    html += '</div></div>';
+  });
+
+  html += '<div id="anc-conf-resume" style="display:none;background:var(--c-surface-2);border-radius:var(--r-md);padding:var(--s-3);margin-top:var(--s-3)">'
+    +'<div style="font-size:10px;font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--s-2)">Récapitulatif des non-conformités</div>'
+    +'<div id="anc-conf-nc-list"></div>'
+  +'</div>';
+
+  html += '</div><div class="pb-nav"></div>';
+  document.getElementById('main-content').innerHTML = html;
+}
+
+function _ancConformiteClick(itemId, val) {
+  _ancConformiteState[itemId] = val;
+
+  ANC_CONFORMITE.forEach(function(sec) {
+    sec.items.forEach(function(item) {
+      if (item.id !== itemId) return;
+      var btns = document.querySelectorAll('[data-conf-item="'+itemId+'"]');
+      btns.forEach(function(b) {
+        var bval = b.getAttribute('data-conf-val');
+        var active = bval === val;
+        var col = bval==='C' ? '#059669' : (bval==='NC' ? '#DC2626' : '#94A3B8');
+        b.style.background = active ? col : '#fff';
+        b.style.color = active ? '#fff' : col;
+        b.style.opacity = active ? '1' : '0.6';
+      });
+      var row = document.getElementById('anc-ci-'+itemId);
+      if (row) {
+        var gravColor = item.gravite==='danger' ? '#DC2626' : (item.gravite==='majeur' ? '#D97706' : '#64748B');
+        row.style.borderLeft = '3px solid ' + (val==='NC' ? gravColor : (val==='C' ? '#059669' : '#94A3B8'));
+        row.style.background = val==='NC' ? '#FFF5F5' : (val==='C' ? '#F0FFF4' : 'var(--c-surface)');
+      }
+    });
+  });
+
+  _ancUpdateConformiteScore();
+}
+
+function _ancUpdateConformiteScore() {
+  var totalItems = ANC_CONFORMITE.reduce(function(n,s){ return n+s.items.length; }, 0);
+  var C=0, NC=0, NV=0, NCdanger=0;
+  var ncItems = [];
+
+  ANC_CONFORMITE.forEach(function(sec) {
+    sec.items.forEach(function(item) {
+      var v = _ancConformiteState[item.id];
+      if (v==='C') C++;
+      else if (v==='NC') { NC++; ncItems.push(item); if (item.gravite==='danger') NCdanger++; }
+      else if (v==='NV') NV++;
+    });
+  });
+
+  var evaluated = C+NC+NV;
+  var scoreTxt = document.getElementById('anc-conf-score-txt');
+  var badge = document.getElementById('anc-conf-danger-badge');
+  if (scoreTxt) {
+    var pct = evaluated ? Math.round(C/evaluated*100) : 0;
+    var col = NC===0 ? (evaluated===totalItems?'#059669':'var(--c-text-3)') : (NCdanger>0?'#DC2626':'#D97706');
+    scoreTxt.innerHTML = '<span style="color:'+col+';font-size:15px">'+C+' C</span> &nbsp;·&nbsp; '
+      +'<span style="color:#DC2626">'+NC+' NC</span> &nbsp;·&nbsp; '
+      +'<span style="color:#94A3B8">'+NV+' NV</span>'
+      +'<span style="font-size:10px;color:var(--c-text-4);margin-left:8px">'+evaluated+'/'+totalItems+'</span>';
+  }
+  if (badge) {
+    if (NCdanger>0) { badge.style.display=''; badge.textContent=NCdanger+' NC danger'; }
+    else badge.style.display='none';
+  }
+
+  var resume = document.getElementById('anc-conf-resume');
+  var ncList = document.getElementById('anc-conf-nc-list');
+  if (resume && ncList) {
+    if (ncItems.length) {
+      resume.style.display='';
+      ncList.innerHTML = ncItems.map(function(item) {
+        var gc = item.gravite==='danger'?'#DC2626':(item.gravite==='majeur'?'#D97706':'#64748B');
+        return '<div style="padding:var(--s-2) var(--s-3);background:#fff;border:1px solid '+gc+'44;border-left:3px solid '+gc+';border-radius:var(--r-sm);margin-bottom:5px">'
+          +'<div style="font-size:11px;font-weight:700;color:'+gc+'">'+item.gravite.toUpperCase()+' — '+item.section+'</div>'
+          +'<div style="font-size:11px;color:var(--c-text-2);margin-top:2px;line-height:1.4">'+item.label+'</div>'
+          +'<div style="font-size:9px;color:var(--c-text-4);margin-top:3px">'+item.regle+'</div>'
+        +'</div>';
+      }).join('');
+    } else {
+      resume.style.display = evaluated===totalItems ? '' : 'none';
+      if (evaluated===totalItems) ncList.innerHTML = '<div style="padding:var(--s-3);font-size:12px;color:#059669;font-weight:700">✅ Aucune non-conformité relevée.</div>';
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
    COMPARATEUR — REDIRECT VERS CALCULATEUR EXISTANT
    ═══════════════════════════════════════════════════════════ */
 function renderANCComparateur() {
@@ -927,7 +1101,7 @@ function renderANCComparateur() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   AIDE AU CHOIX — WIZARD
+   WIZARD DE DIMENSIONNEMENT COMPLET
    ═══════════════════════════════════════════════════════════ */
 var _ancWizardState = { step:0, answers:{} };
 
@@ -942,28 +1116,35 @@ function renderANCAideChoix(step, answers) {
   var html = '<div style="display:flex;align-items:center;gap:var(--s-2);padding:var(--s-3) var(--s-4);border-bottom:1px solid var(--c-border);position:sticky;top:0;background:var(--c-bg);z-index:10">'
     +'<button onclick="renderANCHome()" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--c-text-3);padding:0;line-height:1">←</button>'
     +'<div style="flex:1"><div style="font-size:10px;color:var(--c-text-4)">ANC</div>'
-    +'<div style="font-size:13px;font-weight:800;color:var(--c-text)">🧭 Quelle filière étudier ?</div></div>'
+    +'<div style="font-size:13px;font-weight:800;color:var(--c-text)">📐 Dimensionnement ANC</div></div>'
   +'</div>';
 
   var steps = [
-    { q:'Perméabilité du sol (test Porchet)', opts:['K < 1 mm/min (imperméable)','K = 1–15 mm/min (perméable)','K > 15 mm/min (très perméable)','Non testée'], key:'perm' },
-    { q:'Profondeur de nappe', opts:['Nappe affleurante (< 0,7 m)','Nappe profonde (> 0,7 m)','Non connue'], key:'nappe' },
-    { q:'Surface disponible', opts:['< 50 m²','50–200 m²','> 200 m²'], key:'surface' },
-    { q:'Alimentation électrique disponible à proximité', opts:['Oui','Non'], key:'elec' },
-    { q:'Usage de l\'habitation', opts:['Résidence principale (occupation permanente)','Résidence secondaire (occupation intermittente)'], key:'usage' },
+    { q:'Capacité de l\'habitation', sub:'Nombre d\'équivalents-habitants (EH) — 1 EH par pièce principale habitée', opts:['1–2 EH (studio, T2)','3–4 EH (T3, T4)','5 EH (T5 ou maison standard)','6–10 EH (grande maison)'], key:'eh' },
+    { q:'Perméabilité du sol (test Porchet)', sub:'Résultat de l\'essai de perméabilité', opts:['K < 1 mm/min — sol imperméable (argile)','K = 1–5 mm/min — sol peu perméable','K = 5–15 mm/min — sol perméable (limon, sable)','K > 15 mm/min — sol très perméable (sable)','Test non réalisé'], key:'perm' },
+    { q:'Profondeur de nappe phréatique', sub:'Profondeur mesurée ou estimée en période de hautes eaux', opts:['< 0,7 m — nappe affleurante','0,7 – 2 m — nappe proche','> 2 m — nappe profonde','Non connue'], key:'nappe' },
+    { q:'Surface disponible pour la filière', sub:'Emprise maximale utilisable (hors accès, plantations, constructions)', opts:['< 30 m²','30 – 100 m²','100 – 300 m²','> 300 m²'], key:'surface' },
+    { q:'Alimentation électrique disponible', sub:'À moins de 30 m de la zone de traitement', opts:['Oui','Non'], key:'elec' },
+    { q:'Type d\'occupation', sub:'Influence la tolérance à l\'intermittence des filières biologiques', opts:['Résidence principale — occupation permanente','Résidence secondaire — occupation saisonnière ou intermittente'], key:'usage' },
   ];
 
   if (step < steps.length) {
     var s = steps[step];
+    var pct = Math.round((step / steps.length) * 100);
     html += '<div style="padding:var(--s-3) var(--s-4)">';
+    html += '<div style="background:var(--c-surface-2);border-radius:4px;height:4px;margin-bottom:var(--s-3);overflow:hidden">'
+      +'<div style="height:100%;width:'+pct+'%;background:var(--c-anc);border-radius:4px;transition:width .3s"></div>'
+    +'</div>';
     html += '<div style="background:var(--c-anc-l);border-radius:var(--r-md);padding:var(--s-3);margin-bottom:var(--s-3)">'
-      +'<div style="font-size:10px;color:var(--c-anc);font-weight:700;margin-bottom:4px">Question '+(step+1)+' / '+steps.length+'</div>'
+      +'<div style="font-size:10px;color:var(--c-anc);font-weight:700;margin-bottom:4px">'+( step+1)+' / '+steps.length+'</div>'
       +'<div style="font-size:13px;font-weight:800;color:var(--c-text)">'+s.q+'</div>'
+      +(s.sub?'<div style="font-size:10px;color:var(--c-text-4);margin-top:4px;line-height:1.4">'+s.sub+'</div>':'')
     +'</div>';
     html += '<div style="display:flex;flex-direction:column;gap:var(--s-2)">';
     s.opts.forEach(function(opt){
       html += '<button onclick="ancWizardNext('+step+',\''+s.key+'\','+JSON.stringify(opt)+')" '
-        +'style="padding:var(--s-3) var(--s-4);background:var(--c-surface);border:1.5px solid var(--c-border);border-radius:var(--r-md);font-size:13px;font-weight:600;color:var(--c-text);cursor:pointer;text-align:left">'
+        +'style="padding:var(--s-3) var(--s-4);background:var(--c-surface);border:1.5px solid var(--c-border);border-radius:var(--r-md);font-size:13px;font-weight:600;color:var(--c-text);cursor:pointer;text-align:left;transition:border-color .1s" '
+        +'onmousedown="this.style.borderColor=\'var(--c-anc)\'" onmouseup="this.style.borderColor=\'var(--c-border)\'">'
         +opt+'</button>';
     });
     html += '</div>';
@@ -984,48 +1165,92 @@ function ancWizardNext(step, key, val) {
 }
 
 function _ancWizardResult(ans) {
-  var filières = [];
   var perm = ans.perm||'';
   var nappe = ans.nappe||'';
   var surface = ans.surface||'';
   var elec = ans.elec||'';
   var usage = ans.usage||'';
+  var ehStr = ans.eh||'';
 
-  if (nappe.indexOf('affleurante')>=0) {
-    filières.push({nom:'Tertre d\'infiltration',raison:'Nappe affleurante — filière surélevée obligatoire',ico:'⛰️'});
-  } else if (perm.indexOf('< 1')>=0) {
-    filières.push({nom:'Filtre à sable drainé',raison:'Sol imperméable (K < 1 mm/min) — infiltration impossible',ico:'🟠'});
-    if (elec==='Oui') filières.push({nom:'Microstation agréée CE',raison:'Sol imperméable + électricité disponible',ico:'⚙️'});
-    filières.push({nom:'Filtre compact agréé CE',raison:'Sol imperméable + surface réduite',ico:'📦'});
-  } else if (perm.indexOf('1–15')>=0) {
-    filières.push({nom:'Tranchées d\'épandage',raison:'Sol perméable (K = 1–15 mm/min) — filière classique',ico:'🌿'});
-    filières.push({nom:'Filtre à sable non drainé',raison:'Sol perméable — alternative compacte',ico:'🪨'});
-  } else if (perm.indexOf('> 15')>=0) {
-    filières.push({nom:'Tranchées d\'épandage',raison:'Sol très perméable — vérifier la protection des captages (35 m)',ico:'🌿'});
-    filières.push({nom:'Filtre à sable drainé',raison:'Perméabilité élevée — distance sécurité à respecter',ico:'🟠'});
+  var eh = ehStr.indexOf('1–2')>=0 ? 2 : (ehStr.indexOf('3–4')>=0 ? 4 : (ehStr.indexOf('5 EH')>=0 ? 5 : (ehStr.indexOf('6–10')>=0 ? 8 : 4)));
+  var vFosse = Math.max(eh * 200, 3000);
+  var isAffleurante = nappe.indexOf('0,7 m')>=0;
+  var isImperméable = perm.indexOf('< 1')>=0;
+  var isPeuPerm = perm.indexOf('1–5')>=0;
+  var isPerméable = perm.indexOf('5–15')>=0;
+  var isTrèsPerméable = perm.indexOf('> 15')>=0;
+  var isPetiteSurface = surface.indexOf('< 30')>=0 || surface.indexOf('30 –')>=0;
+  var isSecondaire = usage.indexOf('secondaire')>=0;
+
+  var filières = [];
+
+  if (isAffleurante) {
+    var sTertre = eh * 6;
+    filières.push({ nom:'Tertre d\'infiltration', ico:'⛰️', raison:'Nappe affleurante → filière surélevée obligatoire', dim:'Fosse '+vFosse+' L · Surface tertre ≈ '+sTertre+' m²', budget:'15 000 – 28 000 €', entretien:'Vidange fosse ~3 ans', warn:null });
+    if (elec==='Oui') filières.push({ nom:'Microstation agréée CE', ico:'⚙️', raison:'Nappe affleurante + électricité : filière compacte possible', dim:'Fosse '+vFosse+' L · Emprise selon agrément', budget:'8 000 – 14 000 € + contrat ~300 €/an', entretien:'Contrat annuel obligatoire', warn: isSecondaire ? 'Sensible à l\'intermittence — vérifier l\'agrément CE' : null });
+  } else if (isImperméable) {
+    var sFSD = eh * 4;
+    filières.push({ nom:'Filtre à sable vertical drainé', ico:'🟠', raison:'Sol imperméable (K < 1 mm/min) → évacuation par drain obligatoire', dim:'Fosse '+vFosse+' L · Surface filtre ≈ '+sFSD+' m² · Exutoire requis', budget:'10 000 – 18 000 €', entretien:'Vidange fosse ~3 ans · curage drains ~5 ans', warn:'Exutoire = autorisation obligatoire (fossé ou milieu)' });
+    if (elec==='Oui') filières.push({ nom:'Microstation agréée CE', ico:'⚙️', raison:'Sol imperméable + électricité', dim:'Fosse '+vFosse+' L · Emprise selon agrément CE', budget:'8 000 – 14 000 € + contrat ~300 €/an', entretien:'Contrat annuel obligatoire', warn: isSecondaire ? 'Sensible à l\'intermittence — vérifier l\'agrément CE' : null });
+    filières.push({ nom:'Filtre compact agréé CE', ico:'📦', raison:'Sol imperméable + faible emprise', dim:'Fosse '+vFosse+' L · Emprise réduite selon modèle', budget:'7 000 – 13 000 €', entretien:'Selon guide agrément CE', warn:null });
+  } else if (isPeuPerm || isPerméable) {
+    var kMoy = isPeuPerm ? 3 : 10;
+    var sTranch = Math.round(eh * 200 / (kMoy * 1.44 * 30));
+    var sFSVND = eh * 5;
+    var sFPR = eh * 5;
+    filières.push({ nom:'Tranchées d\'épandage', ico:'🌿', raison:'Sol perméable — filière classique adaptée', dim:'Fosse '+vFosse+' L · Surface épandage ≈ '+Math.max(sTranch,eh*10)+' m² (à affiner avec Porchet)', budget:'5 000 – 10 000 €', entretien:'Vidange fosse ~3 ans · entretien minimal', warn:null });
+    filières.push({ nom:'Filtre à sable non drainé', ico:'🪨', raison:'Sol perméable — filtre artificiel, infiltration naturelle sous massif', dim:'Fosse '+vFosse+' L · Surface filtre ≈ '+sFSVND+' m²', budget:'8 000 – 14 000 €', entretien:'Vidange fosse ~3 ans', warn:null });
+    if (!isPetiteSurface) filières.push({ nom:'Filtre planté de roseaux (FPR)', ico:'🌾', raison:'Sol perméable + grande emprise disponible', dim:'Fosse '+vFosse+' L · Surface FPR ≈ '+sFPR+' m²', budget:'15 000 – 30 000 €', entretien:'Fauche annuelle · vidange fosse ~3 ans', warn:null });
+  } else if (isTrèsPerméable) {
+    filières.push({ nom:'Tranchées d\'épandage', ico:'🌿', raison:'Sol très perméable — épandage efficace', dim:'Fosse '+vFosse+' L · Surface épandage à calculer (test Porchet requis)', budget:'5 000 – 10 000 €', entretien:'Vidange fosse ~3 ans', warn:'K > 15 mm/min → vérifier la distance 35 m aux captages AEP' });
   } else {
-    filières.push({nom:'Test de perméabilité (Porchet) requis',raison:'Sans résultat de perméabilité, aucune filière ne peut être dimensionnée',ico:'🔬'});
+    filières.push({ nom:'Test de perméabilité (Porchet) indispensable', ico:'🔬', raison:'Sans résultat de perméabilité, aucune filière ne peut être dimensionnée', dim:'—', budget:'~150–300 € (prestataire agréé)', entretien:'—', warn:'Obligatoire avant toute conception de filière d\'épandage' });
   }
 
-  if (surface.indexOf('< 50')>=0 && elec==='Oui') filières = [{nom:'Microstation agréée CE',raison:'Surface très réduite + électricité disponible',ico:'⚙️'},{nom:'Filtre compact agréé CE',raison:'Surface très réduite',ico:'📦'}];
-  if (usage.indexOf('secondaire')>=0) filières = filières.map(function(f){ return Object.assign({},f,{note:'Vérifier la tolérance à l\'intermittence — surtout pour les microstations'}); });
+  if (isPetiteSurface && elec==='Oui') {
+    filières = [
+      { nom:'Microstation agréée CE', ico:'⚙️', raison:'Surface très réduite + électricité disponible — filière la plus compacte', dim:'Fosse '+vFosse+' L · Emprise selon agrément CE', budget:'8 000 – 14 000 € + contrat ~300 €/an', entretien:'Contrat annuel obligatoire', warn: isSecondaire ? 'Sensible à l\'intermittence' : null },
+      { nom:'Filtre compact agréé CE', ico:'📦', raison:'Surface réduite, pas de contrainte électrique stricte', dim:'Fosse '+vFosse+' L · Emprise réduite selon modèle', budget:'7 000 – 13 000 €', entretien:'Selon guide agrément CE', warn:null },
+    ];
+  }
 
   var html = '<div style="padding:var(--s-3) var(--s-4)">';
+
   html += '<div style="background:#D1FAE5;border:1.5px solid #059669;border-radius:var(--r-md);padding:var(--s-3);margin-bottom:var(--s-3)">'
-    +'<div style="font-size:11px;font-weight:800;color:#065F46;margin-bottom:4px">Filières potentiellement à étudier</div>'
-    +'<div style="font-size:10px;color:#065F46;line-height:1.5">Cette sélection est indicative. Elle ne remplace pas une étude de conception ni le contrôle du SPANC. Toujours vérifier les conditions locales.</div>'
+    +'<div style="font-size:11px;font-weight:800;color:#065F46;margin-bottom:4px">Filières à étudier — '+eh+' EH</div>'
+    +'<div style="font-size:10px;color:#065F46;line-height:1.5">Dimensionnements indicatifs (Arrêté 07/09/2009 + DTU 64.1). Ils doivent être affinés par un bureau d\'études et validés par le SPANC.</div>'
   +'</div>';
-  html += '<div style="display:flex;flex-direction:column;gap:var(--s-2);margin-bottom:var(--s-3)">';
-  filières.forEach(function(f){
-    html += '<div style="padding:var(--s-3);background:var(--c-surface);border:1px solid var(--c-border);border-left:3px solid #059669;border-radius:var(--r-md)">'
-      +'<div style="font-size:13px;font-weight:700;color:var(--c-text)">'+f.ico+' '+f.nom+'</div>'
-      +'<div style="font-size:11px;color:var(--c-text-3);margin-top:4px">'+f.raison+'</div>'
-      +(f.note?'<div style="font-size:10px;color:#D97706;margin-top:4px">⚠ '+f.note+'</div>':'')
+
+  html += '<div style="background:var(--c-surface-2);border-radius:var(--r-md);padding:var(--s-2) var(--s-3);margin-bottom:var(--s-3);display:flex;flex-wrap:wrap;gap:var(--s-2)">';
+  [{l:'Fosse toutes eaux',v:vFosse+' L min.'},{l:'Capacité',v:eh+' EH'},{l:'Perméabilité',v:perm.split(' ')[0]||'—'},{l:'Nappe',v:nappe.split(' –')[0]||'—'}].forEach(function(r){
+    html += '<div style="background:#fff;border:1px solid var(--c-border);border-radius:var(--r-sm);padding:4px 10px;text-align:center">'
+      +'<div style="font-size:9px;color:var(--c-text-4);text-transform:uppercase">'+r.l+'</div>'
+      +'<div style="font-size:12px;font-weight:800;color:var(--c-text)">'+r.v+'</div>'
     +'</div>';
   });
   html += '</div>';
-  html += '<button onclick="renderANCAideChoix(0,{})" style="width:100%;padding:var(--s-3);background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-md);font-size:13px;cursor:pointer;color:var(--c-text-2)">↩ Recommencer</button>';
-  html += '<button onclick="showModule(\'calc-anc\')" style="width:100%;margin-top:var(--s-2);padding:var(--s-3);background:var(--c-anc-l);border:1px solid var(--c-anc);border-radius:var(--r-md);font-size:13px;cursor:pointer;color:var(--c-anc);font-weight:700">⚡ Calculer les surfaces</button>';
+
+  html += '<div style="display:flex;flex-direction:column;gap:var(--s-2);margin-bottom:var(--s-3)">';
+  filières.forEach(function(f, i){
+    var highlight = i===0 ? 'border:1.5px solid #059669;background:#F0FFF4' : 'border:1px solid var(--c-border);background:var(--c-surface)';
+    html += '<div style="'+highlight+';border-radius:var(--r-md);padding:var(--s-3)">'
+      +(i===0?'<div style="font-size:9px;font-weight:800;color:#059669;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Filière recommandée</div>':'')
+      +'<div style="font-size:13px;font-weight:700;color:var(--c-text);margin-bottom:4px">'+f.ico+' '+f.nom+'</div>'
+      +'<div style="font-size:11px;color:var(--c-text-3);margin-bottom:6px">'+f.raison+'</div>'
+      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:10px">'
+        +'<div style="background:var(--c-surface-2);border-radius:var(--r-sm);padding:4px 7px"><span style="color:var(--c-text-4)">Dimensions · </span><span style="font-weight:700;color:var(--c-text)">'+f.dim+'</span></div>'
+        +'<div style="background:var(--c-surface-2);border-radius:var(--r-sm);padding:4px 7px"><span style="color:var(--c-text-4)">Budget · </span><span style="font-weight:700;color:var(--c-text)">'+f.budget+'</span></div>'
+        +'<div style="background:var(--c-surface-2);border-radius:var(--r-sm);padding:4px 7px;grid-column:1/-1"><span style="color:var(--c-text-4)">Entretien · </span><span style="color:var(--c-text-2)">'+f.entretien+'</span></div>'
+      +'</div>'
+      +(f.warn?'<div style="margin-top:6px;font-size:10px;color:#D97706;background:#FFFBEB;border-radius:var(--r-sm);padding:4px 8px">⚠ '+f.warn+'</div>':'')
+    +'</div>';
+  });
+  html += '</div>';
+
+  html += '<div style="display:flex;gap:var(--s-2);margin-bottom:var(--s-2)">'
+    +'<button onclick="renderANCAideChoix(0,{})" style="flex:1;padding:var(--s-3);background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-md);font-size:12px;cursor:pointer;color:var(--c-text-2)">↩ Recommencer</button>'
+    +'<button onclick="showModule(\'calc-anc\')" style="flex:2;padding:var(--s-3);background:var(--c-anc-l);border:1.5px solid var(--c-anc);border-radius:var(--r-md);font-size:12px;cursor:pointer;color:var(--c-anc);font-weight:700">⚡ Calculer précisément</button>'
+  +'</div>';
   html += '</div>';
   return html;
 }
