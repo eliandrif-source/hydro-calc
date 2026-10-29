@@ -15492,8 +15492,9 @@ async function renderCoursChapitre(fId, aId, mId, cId) {
       if (sec.texte) {
         _sectionsHtml += '<div style="font-size:12px;color:var(--c-text);line-height:1.85">' + sec.texte + '</div>';
       }
-      if (sec.sous_sections && sec.sous_sections.length) {
-        sec.sous_sections.forEach(function(ss) {
+      var _secSubs = sec.sous_sections || sec.ss || [];
+      if (_secSubs.length) {
+        _secSubs.forEach(function(ss) {
           _sectionsHtml += '<div style="margin-top:14px">';
           if (ss.titre) {
             _sectionsHtml += '<div style="font-size:12px;font-weight:700;color:var(--c-primary);margin-bottom:5px;padding-bottom:4px;border-bottom:1px solid var(--c-primary-l)">' + ss.titre + '</div>';
