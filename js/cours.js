@@ -13389,6 +13389,135 @@ const COURS_DATA = {
                 },
               }, // fin gem-f2
 
+              {
+                id: 'gem-f3',
+                titre: 'Subventions et montage financier',
+                fiche: {
+                  intro: 'Une opération peut être techniquement pertinente et pourtant perdre son financement à cause d\'un engagement trop précoce, d\'une dépense inéligible ou d\'un justificatif manquant. Construire un montage financier consiste à relier chaque dépense à une aide justifiée, à respecter les calendriers et à organiser les paiements jusqu\'au solde.',
+                  points: [
+                    '🎯 Ordre de travail : (1) constater le problème, (2) diagnostic, (3) comparer les solutions, (4) définir les objectifs, (5) estimer les dépenses, (6) rechercher les financements compatibles. Choisir un équipement uniquement parce qu\'un appel à projets le finance peut conduire à une dépense peu utile et à de nouvelles charges d\'entretien. Un financement favorable améliore la faisabilité, il ne démontre pas la pertinence.',
+                    '🏛️ Financeurs à cartographier : agence de l\'eau (12e programmes 2025-2030, par bassin) / fonds Barnier FPRNM (prévention risques naturels, notamment PAPI) / État (PAPI, DDT/DDTM) / Région ou département / FEDER et programmes européens 2021-2027. Pour chaque piste : contact, règlement, calendrier, bénéficiaires admissibles, dépenses concernées. Pas transposer le taux d\'une collectivité voisine sans vérifier son contexte.',
+                    '📊 Assiette éligible ≠ coût total : l\'aide = taux × assiette retenue par le financeur. Ex. : assiette 360 000 € sur coût total 400 000 € → aide à 50 % = 180 000 € = 45 % du coût total, malgré un taux annoncé de 50 %. Toujours calculer en euros, puis déduire le taux réel.',
+                    '⚙️ Plafond : S = min(t × A, S_max). Ex. : t = 40 %, A = 300 000 €, S_max = 100 000 € → calcul brut = 120 000 €, aide retenue = 100 000 €. Conserver le calcul dans le tableau, pas seulement le résultat.',
+                    '➕ Cumul : ne pas additionner les taux de plusieurs aides. Convertir chaque aide en euros, additionner les montants, diviser par le coût total. Ex. : A = 40 % × 400 000 € = 160 000 € + B = 20 % × 100 000 € = 20 000 € → total 180 000 € sur 500 000 € = 36 %, pas 60 %.',
+                    '🔑 Participation minimale MO (art. L. 1111-10 CGCT) : en principe 20 % du total des financements apportés par des personnes publiques. Dérogations applicables à vérifier. Pas de règle universelle selon laquelle toute aide publique est plafonnée à 80 % — les régimes sont distincts.',
+                    '📅 Commencement d\'exécution (décret 2018-514) : premier acte juridique passé pour réaliser le projet. ≠ première facture. Peut résulter de l\'acceptation d\'un devis, de la signature d\'un engagement, d\'un bon de commande, ou du lancement d\'une réalisation en régie. Ne doit pas précéder la réception de la demande (sauf dérogation). Autorisation de démarrer ≠ décision attributive : un financeur peut autoriser le démarrage sans garantir l\'aide.',
+                    '📄 Décision attributive (décret 2018-514) : seul document valant accord de financement. En extraire : bénéficiaire, opération financée, assiette, montant maximal, dates, modalités de versement, obligations et conditions de reversement. Une ligne de financement dans un programme ≠ recette encaissée.',
+                    '💳 Versements : avance (première disponibilité) / acomptes (avancement justifié) / solde (clôture après vérification). Besoin de trésorerie = D_payées − R_encaissées − F_disponibles. Une aide attribuée mais non versée ne permet pas de payer les entreprises à échéance.',
+                    '🔄 Modifications et dépassements : toute modification importante (technique, localisation, coût, calendrier) à examiner avec le financeur AVANT engagement. Aide plafonnée ≠ augmentation automatique si le chantier coûte davantage. Reste à financer = coût total − aides retenues. Pour les aides proportionnelles, une diminution des dépenses peut aussi réduire le versement définitif.',
+                    '📁 Piste documentaire : pour chaque dépense — justification technique + procédure de commande + engagement + réalisation + facture + paiement + affectation au financement demandé. Conserver livrables, comptes rendus, photos, preuves des obligations de communication.',
+                  ],
+                  formules: [
+                    { label: 'Aide simple', formule: 'S = t × A', variables: [{ sym: 'S', desc: 'montant de l\'aide' }, { sym: 't', desc: 'taux du financeur' }, { sym: 'A', desc: 'assiette éligible retenue' }] },
+                    { label: 'Aide avec plafond', formule: 'S = min(t × A , S_max)', variables: [{ sym: 'S_max', desc: 'plafond du dispositif' }] },
+                    { label: 'Taux réel d\'aide (plusieurs financeurs)', formule: 'taux_réel = Σ aides_en_€ / coût_total', variables: [] },
+                    { label: 'Reste à financer', formule: 'R = coût_total − Σ aides_retenues', variables: [] },
+                    { label: 'Besoin temporaire de trésorerie', formule: 'BT = D_payées − R_encaissées − F_disponibles', variables: [{ sym: 'D_payées', desc: 'paiements cumulés' }, { sym: 'R_encaissées', desc: 'aides encaissées' }, { sym: 'F_disponibles', desc: 'fonds propres disponibles' }] },
+                    { label: 'TVA', formule: 'C_TTC = C_HT × (1 + t_TVA)', variables: [] },
+                  ],
+                  retenir: 'Besoin → diagnostic → solutions → objectifs → dépenses → financements (pas l\'inverse). Assiette éligible ≠ coût total. S = t × A. S avec plafond = min(t×A, S_max). Ne pas additionner les taux : convertir en € puis diviser. Art. L. 1111-10 : participation MO ≥ 20 % des financements publics (vérifier dérogations). Commencement d\'exécution = premier acte juridique ≠ première facture. Autorisation de démarrer ≠ décision attributive. Décision attributive = seul accord réel. Versements : avance / acomptes / solde. BT = D_payées − R_encaissées − F_disponibles. Modifications : examiner AVANT engagement avec le financeur. Reste = coût − aides. Piste documentaire pour chaque dépense.',
+                  sections: [
+                    {
+                      titre: 'Identifier et solliciter les financeurs',
+                      ss: [
+                        {
+                          titre: 'Ordre de travail, cartographie et éligibilité',
+                          texte: 'La recherche d\'aides commence après une première définition du besoin. Ordre : (1) constater le problème, (2) diagnostic, (3) comparer les solutions, (4) définir les objectifs, (5) estimer les dépenses, (6) rechercher les financements compatibles. Un financement favorable améliore la faisabilité, il ne démontre pas la pertinence. Financeurs à cartographier : agence de l\'eau (12e programmes 2025-2030, par bassin, conditions non uniformes entre bassins, peuvent évoluer) ; fonds Barnier FPRNM (prévention des risques naturels majeurs, opérations ciblées, pas un taux unique pour toute GEMAPI, instruction par DDT/DDTM) ; État (PAPI, inscription fiche-action ≠ décision attributive) ; Région et département (dispositifs à vérifier sur le territoire) ; FEDER et programmes européens 2021–2027 (adapter climatique, risques, biodiversité, identifier autorité de gestion, objectif spécifique, territoire admissible, partenaires, indicateurs attendus). Pour chaque piste : contact, règlement et sa version et date, calendrier, bénéficiaires admissibles, dépenses concernées. Fiche d\'éligibilité par financeur : qui peut demander, pour quelle opération, sur quel territoire, quelles dépenses, quel calcul (taux/plafond/forfait), date d\'admissibilité, engagements, calendrier de versement. Ajouter la date de consultation et la version du règlement. Assiette éligible ≠ coût total : l\'aide = taux × assiette retenue. Ex. : assiette 360 000 € sur coût total 400 000 € à 50 % → aide 180 000 € = 45 % du coût total. Plafond : S = min(t × A, S_max). Ex. : t = 40 %, A = 300 000 €, S_max = 100 000 € → brut 120 000 € → aide retenue 100 000 €. TVA : préciser si les montants sont HT ou TTC, examiner le régime du bénéficiaire et les règles du financeur. Traitement de la TVA à identifier séparément.',
+                        },
+                        {
+                          titre: 'Cumul, participation MO et conditions de démarrage',
+                          texte: 'Cumul : ne pas additionner les taux. Convertir chaque aide en euros, sommer les montants, diviser par le coût total. Ex. : A = 40 % × 400 000 = 160 000 € + B = 20 % × 100 000 = 20 000 € → total 180 000 € sur 500 000 € = 36 %, pas 60 %. Vérifier les règles de cumul propres à chaque dispositif. Déclarer tous les cofinancements dans le dossier. Distinguer cofinancer une dépense (régulier si autorisé) et faire financer plusieurs fois la totalité de cette dépense (fausse le montage). Pour une activité économique éventuelle : faire examiner les règles d\'aides d\'État. Participation minimale MO (art. L. 1111-10 CGCT) : en principe 20 % du total des financements publics. Vérifier les exceptions et dérogations. Pas de règle universelle "toute aide publique ≤ 80 %". Commencement d\'exécution (décret 2018-514) : premier acte juridique — acceptation d\'un devis, signature d\'un engagement, bon de commande, lancement en régie. Ne doit pas précéder la réception de la demande (sauf dérogation). ≠ première facture. Autorisation de démarrer ≠ décision attributive : un financeur peut autoriser le démarrage sans garantir l\'aide. Pour un projet multifinancé, l\'autorisation d\'un partenaire ne règle pas les conditions des autres. Décision attributive (décret 2018-514) = seul accord valant financement. En extraire : bénéficiaire, opération, assiette, montant maximal, dates, modalités de versement, obligations. Lire comme un document de travail, désigner un responsable pour chaque échéance. Dossier solide : problème constaté + objectifs mesurables + solutions étudiées + solution retenue + contenu des prestations + coûts justifiés + maîtrise foncière + organisation de l\'entretien + résultats attendus avec valeurs cibles issues du diagnostic.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Organiser les versements, modifications et suivi',
+                      ss: [
+                        {
+                          titre: 'Versements, trésorerie, modifications et piste documentaire',
+                          texte: 'Versements : avance (première disponibilité selon conditions) / acomptes (accompagnent l\'avancement justifié) / solde (clôt le financement après vérification). Modalités et justificatifs dépendent de la décision et du règlement. Besoin de trésorerie = D_payées − R_encaissées − F_disponibles. Ex. : 450 000 − 120 000 − 200 000 = 130 000 €. Une aide attribuée non versée ne permet pas de payer les entreprises à échéance. Construire un tableau de trésorerie avec les dates probables, pas seulement les totaux annuels. Modifications et dépassements : tout changement important (technique, localisation, coût, calendrier, contenu) à examiner avec le financeur AVANT engagement. Aide plafonnée ≠ augmentation automatique si chantier plus coûteux. Reste à financer augmente du surplus. Pour les aides proportionnelles, une diminution des dépenses réelles peut réduire le versement définitif (décret 2018 : calcul à partir des dépenses réelles dans les limites de la décision). Scénario défavorable à tester : coût en hausse + une aide refusée. Piste documentaire pour chaque dépense : justification technique + procédure de commande + engagement + réalisation + facture + paiement + affectation. Conserver livrables, comptes rendus, photos, preuves des obligations de communication. Tableau de suivi : code, objet, montant, part éligible, financeur, date paiement. Charges futures : entretien + surveillance + suivi + petites réparations. Présenter aux élus le reste à charge initial et les engagements futurs séparément.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'Dans quel ordre aborder les subventions par rapport à la définition du projet ?', r: 'D\'abord : (1) constater le problème, (2) diagnostic, (3) comparer solutions, (4) définir objectifs, (5) estimer dépenses. Ensuite seulement : (6) rechercher les financements compatibles. Un financement favorable améliore la faisabilité, il ne démontre pas la pertinence.', expl: 'Choisir un équipement uniquement parce qu\'un appel à projets le finance peut conduire à une dépense peu utile et à de nouvelles charges d\'entretien.' },
+                  { q: 'Pourquoi l\'aide obtenue peut-elle représenter moins que le taux annoncé par rapport au coût total ?', r: 'Parce que le taux s\'applique à l\'assiette éligible, qui peut être inférieure au coût total. Ex. : 50 % × 360 000 € = 180 000 € sur un coût total de 400 000 € = 45 % du coût total.', expl: 'Toujours calculer chaque aide en euros à partir de son assiette, puis calculer le taux réel = Σ aides / coût total. Ne jamais additionner les taux directement.' },
+                  { q: 'Comment appliquer un plafond à une aide ?', r: 'S = min(t × A, S_max). Ex. : t = 40 %, A = 300 000 €, S_max = 100 000 € → calcul brut = 120 000 €, aide retenue = 100 000 €.', expl: 'Conserver le calcul dans le tableau financier, pas seulement le résultat final. D\'autres plafonds peuvent s\'appliquer : coût admissible par unité, dépenses par catégorie, montant total.' },
+                  { q: 'Qu\'est-ce que le commencement d\'exécution selon le décret 2018-514 ?', r: 'Le premier acte juridique passé pour réaliser le projet : acceptation d\'un devis, signature d\'un engagement, bon de commande, ou lancement d\'une réalisation en régie. Il ne doit pas précéder la réception de la demande (sauf dérogation). ≠ première facture.', expl: 'Cette notion est déterminante pour l\'éligibilité. Un devis accepté avant le dépôt de la demande peut suffire à rendre le dossier irrecevable, même si les travaux n\'ont pas commencé physiquement.' },
+                  { q: 'Quelle différence entre une autorisation de démarrer et la décision attributive ?', r: 'Autorisation de démarrer = permission de commencer sans risquer l\'irrecevabilité, sans garantir l\'aide. Décision attributive = seul document valant accord de financement, avec bénéficiaire, montant, dates, conditions. Pour un projet multifinancé, l\'autorisation d\'un partenaire ne règle pas les conditions des autres.', expl: 'Une notification conservée sans traduction dans le planning et le suivi comptable expose à des oublis évitables. Désigner un responsable pour chaque échéance dès réception.' },
+                  { q: 'Comment calculer le taux réel d\'aide lorsque plusieurs financeurs interviennent sur des assiettes différentes ?', r: 'Convertir chaque aide en euros (S = t × A), additionner les montants, diviser par le coût total. Ex. : A = 40 % × 400 000 = 160 000 € + B = 20 % × 100 000 = 20 000 € → 180 000 / 500 000 = 36 %. Dire "40 % + 20 % = 60 %" serait incorrect.', expl: 'Déclarer tous les cofinancements dans le dossier. Vérifier les règles de cumul de chaque dispositif. Distinguer cofinancer une dépense (autorisé selon règles) et faire financer plusieurs fois la totalité.' },
+                  { q: 'Qu\'arrive-t-il aux aides plafonnées si le coût du chantier augmente ?', r: 'L\'aide plafonnée ne change pas automatiquement. Le reste à financer augmente du surplus. Ex. : coût passe de 500 000 € à 580 000 €, aide reste à 200 000 € → reste à financer passe de 300 000 € à 380 000 €.', expl: 'Pour les aides proportionnelles, une diminution des dépenses réelles peut au contraire réduire le versement définitif (calcul à partir des dépenses réelles). Toute modification importante doit être examinée avec le financeur avant engagement.' },
+                  { q: 'Comment calculer le besoin temporaire de trésorerie à une date donnée ?', r: 'BT = D_payées − R_encaissées − F_disponibles. Ex. : 450 000 − 120 000 − 200 000 = 130 000 €. Une aide attribuée mais non encore versée ne permet pas de payer les entreprises à échéance.', expl: 'Construire un tableau avec les dates probables d\'encaissements et décaissements, pas seulement les totaux annuels. Les versements (avance, acomptes, solde) suivent des modalités et justificatifs propres à chaque décision.' },
+                ],
+                schema: `<svg viewBox="0 0 700 430" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
+                <text x="350" y="20" text-anchor="middle" font-size="14" font-weight="bold" fill="#1B5E20">Subventions · Montage financier · Suivi jusqu'au solde</text>
+                <!-- Ordre de travail -->
+                <rect x="10" y="28" width="680" height="30" rx="5" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5"/>
+                <text x="350" y="45" text-anchor="middle" font-size="11" fill="#1B5E20">Problème → Diagnostic → Solutions → Objectifs → Dépenses → <tspan font-weight="bold">Financements</tspan> (pas l'inverse)</text>
+                <!-- Calculs clés -->
+                <rect x="10" y="66" width="215" height="80" rx="4" fill="#FFF9C4" stroke="#F9A825" stroke-width="1.5"/>
+                <text x="117" y="83" text-anchor="middle" font-weight="bold" fill="#E65100">Aide simple</text>
+                <text x="117" y="97" text-anchor="middle" font-size="11" fill="#F57F17">S = t × A</text>
+                <text x="117" y="110" text-anchor="middle" font-weight="bold" fill="#E65100">Avec plafond</text>
+                <text x="117" y="123" text-anchor="middle" font-size="11" fill="#F57F17">S = min(t × A , S_max)</text>
+                <text x="117" y="136" text-anchor="middle" font-size="10.5" fill="#E65100">Taux réel = Σ aides € / coût total</text>
+                <text x="117" y="141" text-anchor="middle" font-size="10" fill="#BF360C">≠ additionner les taux !</text>
+                <rect x="235" y="66" width="225" height="80" rx="4" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="347" y="83" text-anchor="middle" font-weight="bold" fill="#0D47A1">Trésorerie &amp; solde</text>
+                <text x="347" y="96" text-anchor="middle" font-size="11" fill="#1565C0">BT = D_payées − R_encaissées</text>
+                <text x="347" y="109" text-anchor="middle" font-size="11" fill="#1565C0">        − F_disponibles</text>
+                <text x="347" y="122" text-anchor="middle" font-size="10.5" fill="#283593">R = coût_total − Σ aides_retenues</text>
+                <text x="347" y="135" text-anchor="middle" font-size="10.5" fill="#1565C0">Avance → Acomptes → Solde</text>
+                <text x="347" y="141" text-anchor="middle" font-size="10" fill="#BF360C">Aide attribuée ≠ aide versée</text>
+                <rect x="470" y="66" width="220" height="80" rx="4" fill="#FCE4EC" stroke="#C62828" stroke-width="1.5"/>
+                <text x="580" y="83" text-anchor="middle" font-weight="bold" fill="#B71C1C">Commencement d'exécution</text>
+                <text x="580" y="96" text-anchor="middle" font-size="10.5" fill="#C62828">= 1er acte juridique</text>
+                <text x="580" y="109" text-anchor="middle" font-size="10.5" fill="#C62828">Devis accepté · Engagement signé</text>
+                <text x="580" y="122" text-anchor="middle" font-size="10.5" fill="#C62828">Bon de commande · Régie lancée</text>
+                <text x="580" y="135" text-anchor="middle" font-size="10" fill="#BF360C">≠ Première facture</text>
+                <text x="580" y="141" text-anchor="middle" font-size="10" fill="#C62828">≠ Autorisation de démarrer</text>
+                <!-- Exemple Saules -->
+                <rect x="10" y="154" width="680" height="80" rx="5" fill="#E8EAF6" stroke="#3949AB" stroke-width="1.5"/>
+                <text x="350" y="171" text-anchor="middle" font-weight="bold" fill="#1A237E">Exemple — Projet des Saules (fictif, HT)</text>
+                <text x="175" y="185" text-anchor="middle" font-size="10.5" fill="#283593">Coût total : 500 000 € · Assiette A : 480 000 € · Assiette B : 400 000 €</text>
+                <text x="175" y="198" text-anchor="middle" font-size="10.5" fill="#283593">S_A = min(480k × 40%, 180k) = 180 000 €</text>
+                <text x="175" y="211" text-anchor="middle" font-size="10.5" fill="#283593">S_B = 400k × 15% = 60 000 €</text>
+                <text x="175" y="224" text-anchor="middle" font-size="10" fill="#1A237E">Taux réel = 240 000 / 500 000 = 48 %</text>
+                <text x="510" y="185" text-anchor="middle" font-weight="bold" font-size="11" fill="#BF360C">Scénario défavorable</text>
+                <text x="510" y="198" text-anchor="middle" font-size="10.5" fill="#C62828">Coût → 550 000 € · Aide B refusée</text>
+                <text x="510" y="211" text-anchor="middle" font-size="10.5" fill="#C62828">R = 550 000 − 180 000 = 370 000 €</text>
+                <text x="510" y="224" text-anchor="middle" font-size="10" fill="#B71C1C">Besoin MO augmente de 110 000 €</text>
+                <!-- Étapes du financement -->
+                <rect x="10" y="242" width="680" height="54" rx="5" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="350" y="259" text-anchor="middle" font-weight="bold" fill="#BF360C">Étapes du financement à distinguer</text>
+                <text x="350" y="273" text-anchor="middle" font-size="10.5" fill="#E65100">Fiche-action PAPI → Dossier déposé → Décision attributive → Versement demandé → Recette encaissée</text>
+                <text x="350" y="286" text-anchor="middle" font-size="10.5" fill="#F57F17">Seule la décision attributive régulièrement notifiée vaut accord de financement (décret 2018-514)</text>
+                <text x="350" y="292" text-anchor="middle" font-size="10" fill="#E65100">Lire la décision comme un document de travail · Désigner un responsable pour chaque échéance</text>
+                <!-- Piste documentaire -->
+                <rect x="10" y="304" width="335" height="54" rx="4" fill="#E8F5E9" stroke="#388E3C" stroke-width="1"/>
+                <text x="177" y="320" text-anchor="middle" font-weight="bold" fill="#1B5E20">Piste documentaire par dépense</text>
+                <text x="177" y="333" text-anchor="middle" font-size="10.5" fill="#2E7D32">Justif. technique → Procédure → Engagement</text>
+                <text x="177" y="346" text-anchor="middle" font-size="10.5" fill="#2E7D32">→ Réalisation → Facture → Paiement → Affectation</text>
+                <text x="177" y="354" text-anchor="middle" font-size="10" fill="#388E3C">+ livrables · photos · obligations de communication</text>
+                <rect x="355" y="304" width="335" height="54" rx="4" fill="#E8F5E9" stroke="#388E3C" stroke-width="1"/>
+                <text x="522" y="320" text-anchor="middle" font-weight="bold" fill="#1B5E20">L. 1111-10 CGCT · Modifications</text>
+                <text x="522" y="333" text-anchor="middle" font-size="10.5" fill="#2E7D32">Participation MO ≥ 20 % financements publics</text>
+                <text x="522" y="346" text-anchor="middle" font-size="10.5" fill="#2E7D32">Vérifier dérogations · Pas de règle "≤ 80 %"</text>
+                <text x="522" y="354" text-anchor="middle" font-size="10" fill="#388E3C">Toute modif. importante → examiner avec financeur AVANT</text>
+                <!-- Bas -->
+                <rect x="10" y="366" width="680" height="54" rx="7" fill="#FFF9C4" stroke="#F9A825" stroke-width="2"/>
+                <text x="350" y="384" text-anchor="middle" font-weight="bold" fill="#E65100">Montage compréhensible, justifiable et réalisable dans le temps</text>
+                <text x="350" y="399" text-anchor="middle" font-size="11" fill="#F57F17">Charges futures à présenter séparément des aides au chantier</text>
+                <text x="350" y="412" text-anchor="middle" font-size="10.5" fill="#E65100">Tester le scénario défavorable : coût + hausse, aide − refus → reste à financer MO</text>
+              </svg>`,
+                exercice: {
+                  enonce: '(1) Un projet coûte 300 000 €. L\'assiette retenue est de 240 000 €, taux fictif 50 %. Calculer l\'aide et le taux réel.\n(2) Aide à 60 % de 200 000 €, plafonnée à 100 000 €. Quel montant ?\n(3) A finance 40 % de 400 000 €. B finance 20 % de 100 000 €. Coût total 500 000 €. Taux réel ?\n(4) Un devis engageant est accepté avant le dépôt. Les travaux n\'ont pas commencé. Le dossier est-il forcément recevable ?\n(5) Une autorisation de démarrer garantit-elle l\'aide ?\n(6) Paiements 300 000 €, aides encaissées 80 000 €, fonds propres disponibles 150 000 €. Besoin de trésorerie ?\n(7) Une décision fictive prévoit 40 % des dépenses admissibles, plafond 100 000 €. Dépenses finales admissibles : 200 000 €. Aide versée ?\n(8) Coût initial 600 000 €, aides 300 000 €. Le coût passe à 680 000 €, aides inchangées. Reste à financer ?',
+                  solution: '<strong>(1)</strong> S = 240 000 × 50 % = 120 000 €. Taux réel = 120 000 / 300 000 = 40 %, malgré un taux annoncé de 50 %.<br><strong>(2)</strong> 200 000 × 60 % = 120 000 €, mais le plafond est 100 000 €. Aide retenue : 100 000 €.<br><strong>(3)</strong> A = 40 % × 400 000 = 160 000 € + B = 20 % × 100 000 = 20 000 € = 180 000 €. Taux réel = 180 000 / 500 000 = 36 %. Dire "40 % + 20 % = 60 %" serait incorrect.<br><strong>(4)</strong> Pas nécessairement. L\'acceptation d\'un devis engageant peut constituer le commencement d\'exécution au sens du décret 2018-514, rendant le dossier irrecevable sans dérogation.<br><strong>(5)</strong> Non. Une autorisation de démarrer permet de commencer sans risquer l\'irrecevabilité, mais ne garantit pas l\'attribution. Seule la décision attributive vaut accord.<br><strong>(6)</strong> BT = 300 000 − 80 000 − 150 000 = 70 000 €.<br><strong>(7)</strong> 40 % × 200 000 = 80 000 €. L\'aide est de 80 000 € (sous le plafond de 100 000 €).<br><strong>(8)</strong> Reste initial = 600 000 − 300 000 = 300 000 €. Reste final = 680 000 − 300 000 = 380 000 €. Augmentation : 80 000 €.',
+                },
+              }, // fin gem-f3
+
             ],
           }, // fin gem-m24
 
