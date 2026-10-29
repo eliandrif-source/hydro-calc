@@ -13255,6 +13255,140 @@ const COURS_DATA = {
                 },
               }, // fin gem-f1
 
+              {
+                id: 'gem-f2',
+                titre: 'Taxe GEMAPI et ressources financières',
+                fiche: {
+                  intro: 'La taxe GEMAPI est une ressource facultative et affectée : son absence ne supprime pas les missions à exercer. Son plafond de 40 € par habitant est un plafond territorial global — il ne correspond pas à une cotisation individuelle de 40 €. Compétence GEMAPI et institution de la taxe sont deux décisions distinctes.',
+                  points: [
+                    '🏛️ Taxe GEMAPI = ressource facultative et affectée. Compétence GEMAPI ≠ obligation d\'instituer la taxe. Un EPCI peut financer par ses ressources générales, par la taxe, ou par combinaison. Le choix fiscal ne suffit pas à apprécier la qualité de la politique de gestion des milieux aquatiques.',
+                    '📅 Institution (décision préalable) ≠ vote annuel du produit. Institution : délibération avant le 1er octobre pour application l\'année suivante (art. 1639 A bis CGI). Vote annuel du produit : notification aux services fiscaux avant le 15 avril en principe (art. 1639 A). Erreur à éviter : confondre les deux dates.',
+                    '🔢 Plafond démographique : P = 40 × N_référence (population DGF = L. 2334-2 CGCT). ≠ population municipale ni nombre de foyers. Double plafond : P_voté ≤ min(40 × N_référence, C_GEMAPI). Le plafond le plus bas s\'applique. Ex. : 40 × 18 500 = 740 000 € vs charges 520 000 € → plafond applicable = 520 000 €.',
+                    '⚠️ 40 € ≠ cotisation individuelle. Ratio territorial = produit voté / N_référence (indicateur de présentation). La cotisation individuelle dépend de la base imposable du contribuable et du taux additionnel. Ex. : 360 000 € / 18 000 = 20 €/habitant → ratio uniquement, pas une facture.',
+                    '💳 Impôts supports : taxe foncière bâti + taxe foncière non bâti + taxe d\'habitation résidences secondaires + CFE. Cotisation = base imposable × taux additionnel. Répartition par règles du CGI, pas selon la proximité d\'une rivière. Exonérations possibles (ex. logements HLM sous conditions) ≠ exonération générale de tous leurs biens.',
+                    '📌 Dépenses finançables = charges de la compétence GEMAPI uniquement (incluant renouvellement et annuités d\'emprunts correspondants). Présence d\'eau ≠ rattachement automatique à la GEMAPI. Pour un agent polyvalent : C_affecté = coût_total × part_GEMAPI. La clé de répartition doit être explicable et révisable.',
+                    '🔗 Contribution syndicale : l\'EPCI verse → le syndicat dépense = une seule dépense finale. Ne pas compter deux fois dans une consolidation. La taxe levée par l\'EPCI peut financer cette contribution. Un syndicat mixte ne bénéficie pas directement du pouvoir fiscal de l\'EPCI.',
+                    '💰 Besoin de financement : B = D − R_autres − F_mobilisables. Vérifier les deux plafonds, les sections budgétaires et les dates d\'encaissement. Subventions : documenter assiette éligible, taux, plafond, calendrier, conditions. Distinguer aide envisagée / demandée / accordée / versement demandé / encaissée.',
+                    '🏦 Emprunt = financement de l\'investissement ≠ combler un déficit de fonctionnement. Remboursement annuel capital (capital constant) = emprunt / durée. Intérêts = charge de fonctionnement. Vérifier capacité à supporter remboursements + entretien + études + autres engagements.',
+                    '⏱️ Trésorerie ≠ équilibre annuel : besoin immédiat = factures à payer − trésorerie disponible pour l\'opération. Une aide versée après les travaux ne permet pas de payer les factures antérieures sans organiser le décalage. Suivre les dates probables, pas seulement les totaux annuels.',
+                    '📊 Programmation pluriannuelle (ex. 5 ans) ≠ vote annuel du produit. Actualiser lorsque les opérations changent. Report d\'excédent possible. Participation des bénéficiaires (L. 151-36 CRPM) : impossible de les combiner avec la taxe GEMAPI instituée pour les mêmes dépenses.',
+                  ],
+                  formules: [
+                    { label: 'Plafond démographique', formule: 'P_pop = 40 × N_référence', variables: [{ sym: 'P_pop', desc: 'plafond en euros' }, { sym: 'N_référence', desc: 'population DGF (L. 2334-2 CGCT)' }] },
+                    { label: 'Double plafond (produit voté)', formule: 'P_voté ≤ min(40 × N_référence , C_GEMAPI)', variables: [{ sym: 'C_GEMAPI', desc: 'charges annuelles prévisionnelles de la compétence' }] },
+                    { label: 'Ratio territorial (indicateur)', formule: 'ratio = produit_voté / N_référence', variables: [] },
+                    { label: 'Cotisation individuelle (mécanique)', formule: 'cotisation = base_imposable × taux_additionnel', variables: [] },
+                    { label: 'Dépense commune affectée GEMAPI', formule: 'C_affecté = C_total × part_GEMAPI', variables: [{ sym: 'part_GEMAPI', desc: 'fraction documentée de l\'activité relevant de la GEMAPI' }] },
+                    { label: 'Besoin de financement', formule: 'B = D − R_autres − F_mobilisables', variables: [{ sym: 'D', desc: 'dépenses prévues' }, { sym: 'R_autres', desc: 'autres recettes' }, { sym: 'F_mobilisables', desc: 'financements antérieurs disponibles' }] },
+                    { label: 'Remboursement annuel capital (capital constant)', formule: 'annuité_capital = emprunt / durée', variables: [] },
+                    { label: 'Besoin immédiat de trésorerie', formule: 'BT = factures_à_payer − trésorerie_disponible', variables: [] },
+                  ],
+                  retenir: 'Taxe GEMAPI = facultative et affectée. Institution (avant 1er oct.) ≠ vote annuel produit (avant 15 avr.). Plafond : 40 × N_référence (population DGF). Double plafond : min(40×N, C_GEMAPI). 40 €/hab = plafond territorial ≠ cotisation individuelle. Cotisation = base × taux additionnel. Impôts supports : foncier bâti/non bâti + TH résidences secondaires + CFE. Dépenses finançables = charges GEMAPI uniquement. Clé de répartition dépenses communes. Double comptage syndicat à éviter. B = D − R_autres − F_mobilisables. Emprunt ≠ combler déficit fonctionnement. Trésorerie : dates probables, pas totaux annuels. Participation bénéficiaires ≠ si taxe instituée.',
+                  sections: [
+                    {
+                      titre: 'Taxe GEMAPI : institution, produit et plafonds',
+                      ss: [
+                        {
+                          titre: 'Caractère facultatif, institution et vote annuel',
+                          texte: 'La compétence GEMAPI et l\'institution de sa taxe sont deux décisions de nature différente. La compétence relève des EPCI à fiscalité propre ; la taxe est une possibilité de financement. Son absence ne supprime pas les missions à exercer. Un EPCI peut financer par ses ressources générales, par la taxe spécifique, ou une combinaison. Un syndicat mixte ne bénéficie pas directement du pouvoir fiscal prévu pour l\'EPCI. Institution de la taxe : délibération avant le 1er octobre pour application l\'année suivante (art. 1639 A bis CGI). Des dispositions particulières existent pour certaines créations ou fusions. Vote annuel du produit : notification aux services fiscaux en principe avant le 15 avril (art. 1639 A), avec adaptations possibles. Deux décisions distinctes : institution (faire entrer la taxe en application) ≠ vote annuel (fixer le montant attendu pour l\'exercice). Produit fiscal = montant global attendu. L\'assemblée vote un produit global, pas une somme identique à chaque habitant. Ex. : voter 360 000 € signifie rechercher cette recette globale, pas envoyer 12 000 factures de 30 €. Impôts supports : taxe foncière sur les propriétés bâties + taxe foncière sur les propriétés non bâties + taxe d\'habitation sur les résidences secondaires + cotisation foncière des entreprises. Répartition par règles du CGI, pas selon la proximité d\'une rivière. Cotisation = base imposable × taux additionnel. Exonérations : certains logements HLM et assimilés attribués sous conditions de ressources — ≠ exonération générale de tous leurs biens.',
+                        },
+                        {
+                          titre: 'Plafonds, ratio territorial et dépenses finançables',
+                          texte: 'Plafond démographique : P_pop = 40 × N_référence (population DGF = L. 2334-2 CGCT). Utiliser la population de référence, pas la population municipale ni le nombre de foyers. Ex. : 40 × 18 500 = 740 000 €. Ce calcul fournit une limite, pas une justification à lever ce montant. Double plafond : P_voté ≤ min(40 × N_référence, C_GEMAPI). Ex. : 740 000 € vs charges 520 000 € → plafond applicable = 520 000 €. Le produit effectivement retenu peut être inférieur si d\'autres ressources financent une partie des dépenses. 40 € ≠ cotisation individuelle : la cotisation dépend de la base imposable et du taux additionnel. Certains habitants ne supportent pas directement la taxe (non assujettis à l\'impôt support). Ratio territorial = produit voté / N_référence : indicateur de présentation uniquement. Ex. : 360 000 / 18 000 = 20 €/habitant → à présenter comme ratio territorial, pas comme "chaque habitant paiera 20 €". Dépenses finançables = charges de la compétence GEMAPI uniquement (études, travaux, entretien, renouvellement, annuités d\'emprunts GEMAPI). Présence d\'eau ≠ rattachement GEMAPI. Dépenses communes : C_affecté = C_total × part_GEMAPI. La clé de répartition doit être documentée, explicable et révisable. Ex. : agent 58 000 €/an × 60 % GEMAPI = 34 800 € affectés.',
+                        },
+                      ],
+                    },
+                    {
+                      titre: 'Ressources, besoin de financement et stratégie',
+                      ss: [
+                        {
+                          titre: 'Construire le besoin et mobiliser les ressources',
+                          texte: 'Besoin de financement : B = D − R_autres − F_mobilisables. Ex. : 650 000 − 150 000 − 100 000 − 50 000 = 350 000 €. Vérifier les deux plafonds, les sections budgétaires et les dates d\'encaissement. Contribution syndicale : double comptage à éviter — si l\'EPCI verse 180 000 € au syndicat qui les dépense pour les opérations, cela représente 180 000 € d\'actions dans une consolidation, pas 360 000 €. Subventions : documenter assiette éligible, taux, plafond, calendrier et conditions de versement. Tableau de suivi : dispositif repéré / demande déposée / aide accordée / versement demandé / recette encaissée. Budget général : peut contribuer seul ou en complément. Présenter plusieurs scénarios aux élus (A : ressources générales élevées + taxe faible, B : intermédiaire, C : ressources générales faibles + taxe élevée) pour un programme clairement défini. Emprunt = financement de l\'investissement ≠ déficit de fonctionnement. Remboursement annuel capital (capital constant) = emprunt / durée. Ex. : 400 000 € sur 20 ans → 20 000 €/an de capital + intérêts + frais. Examiner capacité à supporter remboursements + entretien + études + autres engagements. Participation des bénéficiaires (L. 151-36 CRPM) : impossible si la taxe GEMAPI est instituée pour les mêmes dépenses. Le bénéfice supposé des travaux ne crée pas un droit de facturer. Trésorerie : besoin immédiat = factures à payer − trésorerie disponible. Ex. : 240 000 € − 100 000 € = 140 000 € de besoin immédiat, même si une aide de 160 000 € arrive en décembre. Suivre les dates probables, pas les totaux annuels. FCTVA : prévoir colonnes distinctes (montant dépense, traitement TVA, éligibilité examinée, montant prévisionnel, année d\'encaissement). Présenter un scénario confirmé et un scénario prudent si incertain. Programmation pluriannuelle ≠ vote annuel du produit. Actualiser lorsque les opérations changent de calendrier ou de contenu. Un décalage de réalisation peut conduire à reporter un excédent sur l\'exercice suivant.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                flashcards: [
+                  { q: 'La taxe GEMAPI est-elle obligatoire pour exercer la compétence GEMAPI ?', r: 'Non — la taxe est facultative et affectée. Un EPCI peut financer sa GEMAPI par ses ressources générales, par la taxe, ou par combinaison. L\'absence de taxe ne supprime pas les missions à exercer.', expl: 'Le choix fiscal ne suffit pas à apprécier la qualité d\'une politique de gestion des milieux aquatiques. Deux EPCI peuvent conduire des programmes comparables avec des choix fiscaux différents.' },
+                  { q: 'Quelle différence entre l\'institution de la taxe et le vote annuel de son produit ?', r: 'Institution = décision de rendre la taxe applicable sur le territoire (délibération avant le 1er octobre pour application l\'année suivante, art. 1639 A bis CGI). Vote annuel du produit = fixer le montant attendu pour l\'exercice (notification aux services fiscaux en principe avant le 15 avril, art. 1639 A).', expl: 'Erreur fréquente : confondre les deux dates. La décision d\'institution est préalable. Elle ne fixe pas définitivement les recettes de toutes les années futures.' },
+                  { q: 'Comment calculer le plafond démographique de la taxe GEMAPI ?', r: 'P_pop = 40 × N_référence, où N_référence est la population au sens de l\'article L. 2334-2 du CGCT (population DGF). ≠ population municipale ni nombre de foyers.', expl: 'Ex. : 40 × 18 500 = 740 000 €. Ce calcul fournit une limite, pas une justification à lever ce montant. Un second plafond s\'applique : le produit voté ne peut dépasser les charges annuelles prévisionnelles GEMAPI.' },
+                  { q: 'Les 40 €/habitant représentent-ils la somme que chaque habitant paiera ?', r: 'Non — c\'est un plafond territorial global. La cotisation individuelle dépend de la base imposable du contribuable et du taux additionnel appliqué sur les impôts supports. Certains habitants ne supportent pas la taxe s\'ils ne sont pas assujettis à l\'impôt support.', expl: 'Le ratio territorial (produit voté / N_référence) est un indicateur de présentation, pas une facture. Ex. : 360 000 / 18 000 = 20 €/habitant → ratio à expliquer comme tel, pas comme "chaque habitant paiera 20 €".' },
+                  { q: 'Sur quels impôts la taxe GEMAPI est-elle répartie ?', r: 'Taxe foncière sur les propriétés bâties + taxe foncière sur les propriétés non bâties + taxe d\'habitation sur les résidences secondaires + cotisation foncière des entreprises (CFE). La répartition suit les règles du CGI, pas la proximité d\'une rivière.', expl: 'Cotisation individuelle = base imposable × taux additionnel. Exonérations possibles pour certains logements HLM attribués sous conditions de ressources — non généralisable à tous leurs biens.' },
+                  { q: 'Comment éviter le double comptage lorsqu\'un EPCI verse une contribution à un syndicat ?', r: 'Dans une présentation consolidée, la contribution versée par l\'EPCI et les dépenses du syndicat financées par cette contribution représentent une seule et même dépense finale. Ex. : EPCI verse 180 000 € → syndicat dépense 180 000 € = 180 000 € d\'actions, pas 360 000 €.', expl: 'Un syndicat mixte ne bénéficie pas directement du pouvoir fiscal de l\'EPCI. La taxe levée par l\'EPCI peut servir à financer la contribution au syndicat.' },
+                  { q: 'Un emprunt peut-il financer durablement un déficit d\'entretien courant ?', r: 'Non — l\'emprunt finance l\'investissement. Il ne doit pas combler un déficit de fonctionnement. Le remboursement du capital doit être couvert par des ressources propres ; les intérêts constituent une charge de fonctionnement.', expl: 'Remboursement annuel capital (capital constant) = emprunt / durée. Ex. : 400 000 € sur 20 ans → 20 000 €/an de capital + intérêts. Vérifier la capacité à supporter simultanément remboursements, entretien, études et autres engagements.' },
+                  { q: 'Peut-on financer des travaux GEMAPI par des participations des propriétaires riverains si la taxe est déjà instituée ?', r: 'Non — les participations des bénéficiaires (L. 151-36 CRPM) ne peuvent financer des dépenses GEMAPI lorsque la taxe correspondante est instituée. Le bénéfice supposé des travaux ne crée pas un droit de facturer.', expl: 'Il ne suffit pas de renommer la participation "contribution volontaire obligatoire" ou "frais de protection" pour contourner cette règle. Vérifier le fondement juridique, la procédure et l\'existence de la taxe sur le territoire.' },
+                ],
+                schema: `<svg viewBox="0 0 700 430" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
+                <text x="350" y="20" text-anchor="middle" font-size="14" font-weight="bold" fill="#1B5E20">Taxe GEMAPI · Ressources financières · Stratégie de financement</text>
+                <!-- Taxe : institution vs produit -->
+                <rect x="10" y="28" width="328" height="58" rx="5" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5"/>
+                <text x="174" y="45" text-anchor="middle" font-weight="bold" fill="#1B5E20">Institution de la taxe</text>
+                <text x="174" y="58" text-anchor="middle" font-size="10.5" fill="#2E7D32">Délibération avant le 1er octobre de l'année N−1</text>
+                <text x="174" y="70" text-anchor="middle" font-size="10.5" fill="#2E7D32">Art. 1639 A bis CGI · Décision préalable à l'application</text>
+                <text x="174" y="81" text-anchor="middle" font-size="10" fill="#388E3C">FACULTATIF — absence ≠ suppression des missions</text>
+                <rect x="348" y="28" width="342" height="58" rx="5" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.5"/>
+                <text x="519" y="45" text-anchor="middle" font-weight="bold" fill="#1B5E20">Vote annuel du produit</text>
+                <text x="519" y="58" text-anchor="middle" font-size="10.5" fill="#2E7D32">Notification en principe avant le 15 avril</text>
+                <text x="519" y="70" text-anchor="middle" font-size="10.5" fill="#2E7D32">Art. 1639 A CGI · Montant global attendu</text>
+                <text x="519" y="81" text-anchor="middle" font-size="10" fill="#388E3C">≠ somme identique à chaque habitant</text>
+                <!-- Plafonds -->
+                <rect x="10" y="94" width="680" height="54" rx="5" fill="#FFF9C4" stroke="#F9A825" stroke-width="2"/>
+                <text x="350" y="111" text-anchor="middle" font-weight="bold" fill="#E65100">Double plafond du produit voté</text>
+                <text x="175" y="126" text-anchor="middle" font-size="11" fill="#F57F17">P_pop = 40 × N_référence (population DGF)</text>
+                <text x="175" y="140" text-anchor="middle" font-size="10.5" fill="#E65100">Ex. : 40 × 18 500 = 740 000 €</text>
+                <text x="350" y="133" text-anchor="middle" font-weight="bold" fill="#BF360C">P_voté ≤ min(P_pop , C_GEMAPI)</text>
+                <text x="525" y="126" text-anchor="middle" font-size="11" fill="#F57F17">C_GEMAPI = charges annuelles prévisionnelles</text>
+                <text x="525" y="140" text-anchor="middle" font-size="10.5" fill="#E65100">Ex. : 520 000 € → plafond applicable = 520 000 €</text>
+                <!-- 40 € ≠ cotisation -->
+                <rect x="10" y="156" width="335" height="70" rx="5" fill="#FCE4EC" stroke="#C62828" stroke-width="1.5"/>
+                <text x="177" y="173" text-anchor="middle" font-weight="bold" fill="#B71C1C">40 €/hab ≠ cotisation individuelle</text>
+                <text x="177" y="186" text-anchor="middle" font-size="10.5" fill="#C62828">Ratio territorial = produit_voté / N_référence</text>
+                <text x="177" y="199" text-anchor="middle" font-size="10.5" fill="#C62828">Cotisation = base_imposable × taux_additionnel</text>
+                <text x="177" y="212" text-anchor="middle" font-size="10" fill="#BF360C">Impôts supports : foncier bâti + non bâti + TH résid. sec. + CFE</text>
+                <text x="177" y="221" text-anchor="middle" font-size="10" fill="#C62828">Répartition : règles CGI, pas proximité rivière</text>
+                <!-- Dépenses finançables -->
+                <rect x="355" y="156" width="335" height="70" rx="5" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+                <text x="522" y="173" text-anchor="middle" font-weight="bold" fill="#0D47A1">Dépenses finançables</text>
+                <text x="522" y="186" text-anchor="middle" font-size="10.5" fill="#1565C0">Charges GEMAPI uniquement</text>
+                <text x="522" y="199" text-anchor="middle" font-size="10.5" fill="#1565C0">Présence d'eau ≠ rattachement GEMAPI</text>
+                <text x="522" y="212" text-anchor="middle" font-size="10.5" fill="#283593">C_affecté = C_total × part_GEMAPI</text>
+                <text x="522" y="221" text-anchor="middle" font-size="10" fill="#1565C0">Clé documentée, explicable et révisable</text>
+                <!-- Besoin financement -->
+                <rect x="10" y="234" width="440" height="66" rx="5" fill="#E8EAF6" stroke="#3949AB" stroke-width="1.5"/>
+                <text x="225" y="251" text-anchor="middle" font-weight="bold" fill="#1A237E">Construire le besoin de financement</text>
+                <text x="225" y="265" text-anchor="middle" font-size="11" fill="#283593">B = D − R_autres − F_mobilisables</text>
+                <text x="225" y="278" text-anchor="middle" font-size="10.5" fill="#3949AB">Ex. : 660 000 − 120 000 − 100 000 − 60 000 = 380 000 €</text>
+                <text x="225" y="291" text-anchor="middle" font-size="10.5" fill="#283593">Subventions : envisagées ≠ demandées ≠ accordées ≠ encaissées</text>
+                <text x="225" y="296" text-anchor="middle" font-size="10" fill="#BF360C">Double comptage syndicat à éviter</text>
+                <!-- Emprunt / trésorerie -->
+                <rect x="460" y="234" width="230" height="66" rx="5" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+                <text x="575" y="251" text-anchor="middle" font-weight="bold" fill="#BF360C">Emprunt · Trésorerie</text>
+                <text x="575" y="264" text-anchor="middle" font-size="10.5" fill="#E65100">Emprunt ≠ combler déficit fonctionnement</text>
+                <text x="575" y="277" text-anchor="middle" font-size="10.5" fill="#F57F17">Annuité capital = emprunt / durée</text>
+                <text x="575" y="290" text-anchor="middle" font-size="10.5" fill="#E65100">BT = factures − trésorerie disponible</text>
+                <text x="575" y="296" text-anchor="middle" font-size="10" fill="#BF360C">Suivre dates probables, pas totaux annuels</text>
+                <!-- Étude de cas bas -->
+                <rect x="10" y="308" width="680" height="58" rx="5" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5"/>
+                <text x="350" y="325" text-anchor="middle" font-weight="bold" fill="#1B5E20">Exemple — Bassin des Saules (fictif, 18 500 hab.)</text>
+                <text x="175" y="340" text-anchor="middle" font-size="10.5" fill="#2E7D32">Total dépenses : 660 000 €</text>
+                <text x="175" y="353" text-anchor="middle" font-size="10.5" fill="#2E7D32">Autres financements : 280 000 €</text>
+                <text x="175" y="360" text-anchor="middle" font-size="10" fill="#388E3C">Besoin taxe : 380 000 €</text>
+                <text x="420" y="340" text-anchor="middle" font-size="10.5" fill="#2E7D32">Plafond démo. : 40 × 18 500 = 740 000 €</text>
+                <text x="420" y="353" text-anchor="middle" font-size="10.5" fill="#2E7D32">380 000 &lt; 660 000 &lt; 740 000 ✓</text>
+                <text x="420" y="360" text-anchor="middle" font-size="10" fill="#388E3C">Ratio : 380 000 / 18 500 ≈ 20,54 €/hab (territorial, ≠ cotisation)</text>
+                <!-- Bas -->
+                <rect x="10" y="374" width="680" height="46" rx="7" fill="#FFF9C4" stroke="#F9A825" stroke-width="2"/>
+                <text x="350" y="392" text-anchor="middle" font-weight="bold" fill="#E65100">Relier chaque ressource à une dépense identifiée, une année et un responsable</text>
+                <text x="350" y="407" text-anchor="middle" font-size="11" fill="#F57F17">Participation bénéficiaires (L. 151-36 CRPM) : impossible si taxe GEMAPI instituée pour les mêmes dépenses</text>
+                <text x="350" y="415" text-anchor="middle" font-size="10" fill="#E65100">Programmation pluriannuelle ≠ vote annuel · FCTVA : scénario confirmé + scénario prudent</text>
+              </svg>`,
+                exercice: {
+                  enonce: '(1) Calculer le plafond démographique pour 12 400 habitants.\n(2) Plafond démographique 496 000 €, charges GEMAPI 350 000 €. Quel est le plafond applicable ?\n(3) Dépenses 500 000 €, autres recettes 140 000 €, financement antérieur disponible 60 000 €. Quel est le besoin restant ?\n(4) Un élu annonce 18 €/habitant. Un contribuable reçoit un avis de 52 €. Y a-t-il nécessairement une erreur ?\n(5) Un élu affirme : "Le produit doit toujours être voté avant le 1er octobre." Quelle est l\'erreur ?\n(6) Un EPCI verse 200 000 € à un syndicat, qui les dépense pour les travaux. Quel montant retenir en consolidation ?\n(7) Peut-on emprunter pour combler durablement le déficit annuel d\'entretien courant ?\n(8) Une opération est reportée après perception de la taxe. Faut-il automatiquement reconduire le même produit ?',
+                  solution: '<strong>(1)</strong> 12 400 × 40 = 496 000 €. Il s\'agit du plafond lié à la population DGF.<br><strong>(2)</strong> Le plafond applicable est 350 000 € (le plus bas des deux). P_voté ≤ min(496 000, 350 000) = 350 000 €.<br><strong>(3)</strong> 500 000 − 140 000 − 60 000 = 300 000 €. Il reste à vérifier les deux plafonds et la structure budgétaire.<br><strong>(4)</strong> Non — le ratio territorial (18 €/habitant) n\'est pas une cotisation individuelle. Celle-ci dépend de la base imposable du contribuable et du taux additionnel sur l\'impôt support.<br><strong>(5)</strong> Il confond la décision d\'institution (avant le 1er octobre) et la détermination annuelle du produit (notification en principe avant le 15 avril).<br><strong>(6)</strong> 200 000 € dans une consolidation — le flux interne EPCI → syndicat ne crée pas de double dépense. Les 200 000 € représentent la dépense finale d\'action, pas 400 000 €.<br><strong>(7)</strong> Non. L\'emprunt finance l\'investissement. Un déficit récurrent d\'entretien courant (fonctionnement) doit être résolu par un financement de fonctionnement adapté.<br><strong>(8)</strong> Non. Il faut actualiser les dépenses prévisionnelles, les ressources déjà disponibles et le besoin réel avant de fixer le produit annuel.',
+                },
+              }, // fin gem-f2
+
             ],
           }, // fin gem-m24
 
