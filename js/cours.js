@@ -3960,6 +3960,7 @@ const COURS_DATA = {
     ico: '🔬',
     color: '#5A189A',
     colorl: '#F3E8FF',
+    bannerStyle: 'background-image:linear-gradient(to right,#5A189A 38%,rgba(90,24,154,0.88) 54%,rgba(90,24,154,0.35) 75%,transparent 92%),url(\'./images/master-eau-banner.webp\');background-size:cover;background-position:right center;background-color:#5A189A',
     niveau: 'Bac+5',
     organisme: 'Universités — AgroParisTech — SupAgro',
     desc: 'Hydrologie, hydrogéologie, modélisation (MODFLOW), qualité des eaux, changement climatique. Débouchés : BRGM, bureaux d\'études, Agences de l\'eau.',
