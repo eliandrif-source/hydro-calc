@@ -484,7 +484,7 @@ function renderANCHome() {
   var tb = document.getElementById('tab-bar');
   if (tb) tb.style.display = 'none';
 
-  var html = '<div class="module-hero" style="--cat-color:var(--c-anc)">'
+  var html = '<div class="module-hero" style="--cat-color:var(--c-anc);background-image:linear-gradient(to right,#065F46 38%,rgba(6,95,70,0.88) 54%,rgba(6,95,70,0.35) 75%,transparent 92%),url(\'./images/anc-banner.webp\');background-size:cover;background-position:right center;background-color:#065F46">'
     +'<span class="mh-icon">🏡</span>'
     +'<div class="mh-title">Assainissement Non Collectif</div>'
     +'<div class="mh-sub">Comprendre · Diagnostiquer · Dimensionner</div>'
