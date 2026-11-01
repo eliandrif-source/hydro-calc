@@ -374,6 +374,88 @@ function _ancSVG(id) {
   +'<text x="252" y="142" font-size="8" fill="#059669" font-family="sans-serif">Vers filière</text>'
   +'<text x="150" y="210" text-anchor="middle" font-size="8" fill="#D97706" font-family="sans-serif">⚠ Ne jamais condamner ni obstruer</text>'
   +'</svg>',
+
+'tertre-infiltration': '<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px;height:auto;display:block;margin:0 auto">'
+  +'<defs><marker id="ta" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#059669"/></marker></defs>'
+  +'<line x1="0" y1="135" x2="300" y2="135" stroke="#92400E" stroke-width="1.5"/>'
+  +'<text x="5" y="148" font-size="8" fill="#92400E" font-family="sans-serif">Sol naturel (nappe haute)</text>'
+  +'<polygon points="40,135 65,55 235,55 260,135" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>'
+  +'<rect x="72" y="68" width="156" height="35" fill="#FEF9C3" stroke="#CA8A04" stroke-width="1.5"/>'
+  +'<text x="150" y="84" text-anchor="middle" font-size="9" fill="#713F12" font-family="sans-serif" font-weight="700">MASSIF SABLE 0,25–4 mm</text>'
+  +'<text x="150" y="96" text-anchor="middle" font-size="8" fill="#92400E" font-family="sans-serif">épaisseur ≥ 0,70 m</text>'
+  +'<rect x="72" y="58" width="156" height="12" fill="#D9F99D"/>'
+  +'<text x="150" y="68" text-anchor="middle" font-size="8" fill="#365314" font-family="sans-serif">Couche répartition — gravier 20/40</text>'
+  +'<line x1="72" y1="62" x2="228" y2="62" stroke="#1550A0" stroke-width="2"/>'
+  +'<circle cx="100" cy="62" r="3" fill="#1550A0"/><circle cx="150" cy="62" r="3" fill="#1550A0"/><circle cx="200" cy="62" r="3" fill="#1550A0"/>'
+  +'<text x="150" y="52" text-anchor="middle" font-size="8" fill="#1550A0" font-family="sans-serif">Tuyaux de distribution perforés</text>'
+  +'<line x1="0" y1="100" x2="72" y2="88" stroke="#1550A0" stroke-width="2.5"/>'
+  +'<polygon points="67,83 67,93 78,88" fill="#1550A0"/>'
+  +'<text x="35" y="93" font-size="8" fill="#1550A0" font-family="sans-serif">Fosse FTE</text>'
+  +'<line x1="150" y1="103" x2="150" y2="135" stroke="#059669" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#ta)"/>'
+  +'<text x="150" y="160" text-anchor="middle" font-size="8" fill="#059669" font-family="sans-serif">Infiltration dans le remblai</text>'
+  +'<line x1="10" y1="172" x2="290" y2="172" stroke="#0891B2" stroke-width="1.5" stroke-dasharray="5,3"/>'
+  +'<text x="5" y="184" font-size="8" fill="#0891B2" font-family="sans-serif">Nappe / niveau haut</text>'
+  +'<text x="150" y="198" text-anchor="middle" font-size="8" fill="#D97706" font-family="sans-serif">⚠ Remblai imperméabilisé latéralement</text>'
+  +'</svg>',
+
+'filtre-compact': '<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px;height:auto;display:block;margin:0 auto">'
+  +'<rect x="55" y="35" width="190" height="140" rx="8" fill="#F0F9FF" stroke="#0891B2" stroke-width="2"/>'
+  +'<rect x="225" y="38" width="18" height="13" rx="3" fill="#2563EB"/>'
+  +'<text x="234" y="49" text-anchor="middle" font-size="8" fill="white" font-family="sans-serif" font-weight="700">CE</text>'
+  +'<text x="150" y="27" text-anchor="middle" font-size="9" fill="#0369A1" font-family="sans-serif" font-weight="700">Filtre compact agréé CE</text>'
+  +'<rect x="60" y="40" width="180" height="22" fill="#E0F2FE" rx="3"/>'
+  +'<text x="150" y="55" text-anchor="middle" font-size="8" fill="#0369A1" font-family="sans-serif" font-weight="700">Distribution uniforme (tuyaux perforés)</text>'
+  +'<rect x="60" y="62" width="180" height="60" fill="#FEF9C3"/>'
+  +'<text x="150" y="87" text-anchor="middle" font-size="11" fill="#713F12" font-family="sans-serif" font-weight="700">MASSIF FILTRANT</text>'
+  +'<text x="150" y="101" text-anchor="middle" font-size="8" fill="#92400E" font-family="sans-serif">Matériau agréé — dimensions réduites vs. filtre classique</text>'
+  +'<text x="150" y="113" text-anchor="middle" font-size="8" fill="#92400E" font-family="sans-serif">performances selon n° agrément CE</text>'
+  +'<rect x="60" y="122" width="180" height="22" fill="#DCFCE7" rx="3"/>'
+  +'<text x="150" y="137" text-anchor="middle" font-size="8" fill="#166534" font-family="sans-serif" font-weight="700">Collecte drainée + évacuation</text>'
+  +'<rect x="60" y="144" width="180" height="26" fill="#E0F2FE" rx="0 0 6 6"/>'
+  +'<text x="150" y="157" text-anchor="middle" font-size="8" fill="#0369A1" font-family="sans-serif">Regard de contrôle sortie obligatoire</text>'
+  +'<text x="150" y="168" text-anchor="middle" font-size="8" fill="#0369A1" font-family="sans-serif">Exutoire ou infiltration selon contexte</text>'
+  +'<line x1="5" y1="78" x2="55" y2="78" stroke="#1550A0" stroke-width="2.5"/>'
+  +'<polygon points="50,73 50,83 61,78" fill="#1550A0"/>'
+  +'<text x="28" y="70" text-anchor="middle" font-size="8" fill="#1550A0" font-family="sans-serif">Entrée</text>'
+  +'<line x1="245" y1="155" x2="295" y2="155" stroke="#059669" stroke-width="2.5"/>'
+  +'<polygon points="240,150 240,160 251,155" fill="#059669"/>'
+  +'<text x="270" y="147" text-anchor="middle" font-size="8" fill="#059669" font-family="sans-serif">Sortie</text>'
+  +'</svg>',
+
+'filtre-plante-roseaux': '<svg viewBox="0 0 300 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px;height:auto;display:block;margin:0 auto">'
+  +'<defs><marker id="fpr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#059669"/></marker></defs>'
+  +'<rect x="10" y="80" width="280" height="100" fill="#D4A574" opacity="0.3" rx="3"/>'
+  +'<rect x="10" y="80" width="280" height="18" fill="#D9F99D"/>'
+  +'<text x="150" y="93" text-anchor="middle" font-size="8" fill="#365314" font-family="sans-serif" font-weight="700">Mulch / couche surface</text>'
+  +'<rect x="10" y="98" width="280" height="42" fill="#FEF9C3"/>'
+  +'<text x="150" y="117" text-anchor="middle" font-size="10" fill="#713F12" font-family="sans-serif" font-weight="700">GRAVIER — SABLE 0,25–4 mm</text>'
+  +'<text x="150" y="130" text-anchor="middle" font-size="8" fill="#92400E" font-family="sans-serif">Biofilm bactérien — rhizosphère active</text>'
+  +'<rect x="10" y="140" width="280" height="15" fill="#FED7AA"/>'
+  +'<text x="150" y="151" text-anchor="middle" font-size="8" fill="#9A3412" font-family="sans-serif">Drains de collecte Ø 100 — fond imperméabilisé</text>'
+  +'<line x1="70" y1="0" x2="65" y2="82" stroke="#059669" stroke-width="2.5"/>'
+  +'<line x1="67" y1="15" x2="80" y2="8" stroke="#65A30D" stroke-width="1.5"/>'
+  +'<line x1="66" y1="35" x2="82" y2="28" stroke="#65A30D" stroke-width="1.5"/>'
+  +'<line x1="64" y1="55" x2="79" y2="48" stroke="#65A30D" stroke-width="1.5"/>'
+  +'<line x1="150" y1="2" x2="145" y2="82" stroke="#059669" stroke-width="2.5"/>'
+  +'<line x1="147" y1="18" x2="163" y2="11" stroke="#65A30D" stroke-width="1.5"/>'
+  +'<line x1="146" y1="38" x2="162" y2="31" stroke="#65A30D" stroke-width="1.5"/>'
+  +'<line x1="144" y1="58" x2="160" y2="51" stroke="#65A30D" stroke-width="1.5"/>'
+  +'<line x1="230" y1="4" x2="225" y2="82" stroke="#059669" stroke-width="2.5"/>'
+  +'<line x1="227" y1="20" x2="243" y2="13" stroke="#65A30D" stroke-width="1.5"/>'
+  +'<line x1="226" y1="40" x2="242" y2="33" stroke="#65A30D" stroke-width="1.5"/>'
+  +'<line x1="224" y1="60" x2="240" y2="53" stroke="#65A30D" stroke-width="1.5"/>'
+  +'<line x1="65" y1="82" x2="225" y2="82" stroke="#65A30D" stroke-width="1.5" stroke-dasharray="4,2" opacity="0.6"/>'
+  +'<text x="150" y="78" text-anchor="middle" font-size="8" fill="#166534" font-family="sans-serif">Rhizomes Phragmites australis</text>'
+  +'<line x1="0" y1="115" x2="10" y2="115" stroke="#1550A0" stroke-width="2.5"/>'
+  +'<polygon points="5,110 5,120 16,115" fill="#1550A0"/>'
+  +'<text x="5" y="107" font-size="8" fill="#1550A0" font-family="sans-serif">Entrée</text>'
+  +'<line x1="290" y1="147" x2="300" y2="147" stroke="#059669" stroke-width="2.5" marker-end="url(#fpr)"/>'
+  +'<text x="275" y="140" font-size="8" fill="#059669" font-family="sans-serif">Sortie</text>'
+  +'<text x="150" y="172" text-anchor="middle" font-size="8" fill="#78350F" font-family="sans-serif">Surface ≈ 5 m²/EH · Emprise importante</text>'
+  +'<text x="150" y="184" text-anchor="middle" font-size="8" fill="#059669" font-family="sans-serif">🌾 Fauche annuelle · pas d\'entretien mécanique</text>'
+  +'<text x="150" y="198" text-anchor="middle" font-size="8" fill="#D97706" font-family="sans-serif">⚠ Base imperméabilisée obligatoire (géomembrane)</text>'
+  +'</svg>',
+
   };
   return svgs[id] || null;
 }
@@ -462,8 +544,10 @@ function renderANCHome() {
     +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--s-2)">'
     +'<button onclick="renderANCAideChoix()" style="padding:var(--s-3);background:var(--c-anc-l);border:1.5px solid var(--c-anc);border-radius:var(--r-md);font-size:12px;font-weight:700;color:var(--c-anc);cursor:pointer;text-align:left">📐 Dimensionnement<br><span style="font-size:10px;font-weight:400;opacity:.8">Filière · Surfaces · Budget</span></button>'
     +'<button onclick="renderANCConformite()" style="padding:var(--s-3);background:#F0FFF4;border:1.5px solid #059669;border-radius:var(--r-md);font-size:12px;font-weight:700;color:#059669;cursor:pointer;text-align:left">✅ Conformité SPANC<br><span style="font-size:10px;font-weight:400;opacity:.8">Grille de contrôle interactive</span></button>'
+    +'<button onclick="renderANCRapport()" style="padding:var(--s-3);background:#EEF2FF;border:1.5px solid #4F46E5;border-radius:var(--r-md);font-size:12px;font-weight:700;color:#4F46E5;cursor:pointer;text-align:left">📄 Rapport SPANC<br><span style="font-size:10px;font-weight:400;opacity:.8">Saisir · Exporter · Télécharger</span></button>'
+    +'<button onclick="renderANCCalendrier()" style="padding:var(--s-3);background:#FFF7ED;border:1.5px solid #D97706;border-radius:var(--r-md);font-size:12px;font-weight:700;color:#D97706;cursor:pointer;text-align:left">📅 Calendrier entretien<br><span style="font-size:10px;font-weight:400;opacity:.8">Prochaines échéances</span></button>'
     +'<button onclick="showModule(\'calc-anc\')" style="padding:var(--s-3);background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-md);font-size:12px;color:var(--c-text-2);cursor:pointer;text-align:left">⚡ Calculateurs<br><span style="font-size:10px;opacity:.7">Épandage · FTE · Porchet</span></button>'
-    +'<button onclick="renderANCDiag()" style="padding:var(--s-3);background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-md);font-size:12px;color:var(--c-text-2);cursor:pointer;text-align:left">🔍 Diagnostic<br><span style="font-size:10px;opacity:.7">Symptômes · Causes</span></button>'
+    +'<button onclick="renderANCNonConformites()" style="padding:var(--s-3);background:#FFF5F5;border:1.5px solid #DC2626;border-radius:var(--r-md);font-size:12px;font-weight:700;color:#DC2626;cursor:pointer;text-align:left">⚠ NC fréquentes<br><span style="font-size:10px;font-weight:400;opacity:.8">12 non-conformités · solutions</span></button>'
     +'</div>'
   +'</div>';
 
@@ -1253,4 +1337,286 @@ function _ancWizardResult(ans) {
   +'</div>';
   html += '</div>';
   return html;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RAPPORT DE VISITE SPANC
+   ═══════════════════════════════════════════════════════════ */
+function renderANCRapport() {
+  var tb = document.getElementById('tab-bar');
+  if (tb) tb.style.display = 'none';
+  var btn = function(id,label,color,bg){
+    return '<label style="display:flex;gap:var(--s-2);align-items:flex-start;padding:var(--s-2) var(--s-3);background:'+bg+';border:1.5px solid '+color+';border-radius:var(--r-md);cursor:pointer;margin-bottom:var(--s-2)">'
+      +'<input type="radio" name="rp-conclusion" value="'+id+'" style="margin-top:2px;accent-color:'+color+'">'
+      +'<div style="font-size:12px;font-weight:700;color:'+color+'">'+label+'</div></label>';
+  };
+  var field = function(id,label,type,ph){
+    return '<div style="margin-bottom:var(--s-2)">'
+      +'<label style="display:block;font-size:10px;font-weight:700;color:var(--c-text-3);margin-bottom:3px">'+label+'</label>'
+      +'<input id="'+id+'" type="'+type+'" placeholder="'+(ph||'')+'" style="width:100%;box-sizing:border-box;padding:8px 10px;border:1px solid var(--c-border);border-radius:var(--r-sm);font-size:12px;background:var(--c-bg);color:var(--c-text)">'
+      +'</div>';
+  };
+  var section = function(title){ return '<div style="font-size:11px;font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.04em;margin-bottom:var(--s-2)">'+title+'</div>'; };
+  var card = function(content){ return '<div style="background:var(--c-surface-2);border-radius:var(--r-md);padding:var(--s-3);margin-bottom:var(--s-3)">'+content+'</div>'; };
+
+  var html = '<div style="padding:var(--s-3) var(--s-4)">';
+  html += '<div style="display:flex;align-items:center;gap:var(--s-2);margin-bottom:var(--s-3)">'
+    +'<button onclick="renderANCHome()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--c-text-3);padding:0">←</button>'
+    +'<div><div style="font-size:16px;font-weight:800;color:var(--c-text)">Rapport de visite SPANC</div>'
+    +'<div style="font-size:11px;color:var(--c-text-3)">Saisir puis exporter en fichier téléchargeable</div></div></div>';
+
+  html += card(section('Identification')
+    +field('rp-date','Date de visite','date','')
+    +field('rp-ref','N° de dossier','text','SPANC-2026-0001')
+    +field('rp-adresse','Adresse du bien','text','12 rue des Prés, 47000 Agen')
+    +field('rp-proprio','Propriétaire / Occupant','text','Nom Prénom')
+    +field('rp-parcelle','Référence cadastrale','text','AB 0123')
+    +field('rp-agent','Agent SPANC','text','Nom de l\'agent')
+  );
+
+  html += card(section('Installation')
+    +'<div style="margin-bottom:var(--s-2)"><label style="display:block;font-size:10px;font-weight:700;color:var(--c-text-3);margin-bottom:3px">Type de filière</label>'
+    +'<select id="rp-filiere" style="width:100%;padding:8px 10px;border:1px solid var(--c-border);border-radius:var(--r-sm);font-size:12px;background:var(--c-bg);color:var(--c-text)">'
+    +'<option value="">— Sélectionner —</option>'
+    +'<option>Fosse toutes eaux + tranchées d\'épandage</option>'
+    +'<option>Fosse toutes eaux + filtre à sable non drainé</option>'
+    +'<option>Fosse toutes eaux + filtre à sable drainé</option>'
+    +'<option>Fosse toutes eaux + tertre d\'infiltration</option>'
+    +'<option>Filtre planté de roseaux (FPR)</option>'
+    +'<option>Microstation boues activées agréée CE</option>'
+    +'<option>Filtre compact agréé CE</option>'
+    +'<option>Autre (préciser dans observations)</option>'
+    +'</select></div>'
+    +field('rp-annee','Année installation estimée','text','ex: 1998')
+    +field('rp-eh','Capacité (EH)','text','ex: 5 EH')
+    +field('rp-vidange','Dernière vidange fosse','text','ex: 03/2023')
+  );
+
+  html += card(section('Observations')
+    +'<textarea id="rp-obs" rows="4" placeholder="Constats : état général, anomalies observées, points de vérification..." style="width:100%;box-sizing:border-box;padding:8px 10px;border:1px solid var(--c-border);border-radius:var(--r-sm);font-size:12px;background:var(--c-bg);color:var(--c-text);resize:vertical"></textarea>'
+  );
+
+  html += card(section('Conclusion')
+    +btn('CONFORME','✅ Conforme — aucun risque sanitaire ou environnemental','#059669','#F0FFF4')
+    +btn('NON_CONFORME_4ANS','⚠ Non conforme — délai 4 ans (pas de risque immédiat)','#D97706','#FFFBEB')
+    +btn('NON_CONFORME','❌ Non conforme — travaux obligatoires (risque avéré)','#DC2626','#FFF5F5')
+  );
+
+  html += '<button onclick="_ancExportRapport()" style="width:100%;padding:var(--s-3);background:var(--c-anc);color:#fff;border:none;border-radius:var(--r-md);font-size:14px;font-weight:800;cursor:pointer;margin-bottom:var(--s-4)">📄 Télécharger le rapport</button>';
+  html += '<div class="pb-nav"></div></div>';
+  document.getElementById('main-content').innerHTML = html;
+}
+
+function _ancExportRapport() {
+  var g = function(id){ var el = document.getElementById(id); return el ? (el.tagName==='SELECT'?el.options[el.selectedIndex].text:el.value).trim() : ''; };
+  var conclEl = document.querySelector('input[name="rp-conclusion"]:checked');
+  var conclVal = conclEl ? conclEl.value : '';
+  var conclTextes = {
+    'CONFORME':         'CONFORME\nL\'installation ne présente pas de risques sanitaires ou environnementaux.',
+    'NON_CONFORME_4ANS':'NON CONFORME — DÉLAI 4 ANS\nNon-conformité sans risque immédiat. Mise en conformité requise dans un délai de 4 ans.',
+    'NON_CONFORME':     'NON CONFORME — TRAVAUX OBLIGATOIRES\nL\'installation présente des risques sanitaires ou environnementaux avérés.',
+  };
+  if (!conclVal) { alert('Sélectionner une conclusion avant d\'exporter.'); return; }
+  var d = g('rp-date') ? new Date(g('rp-date')).toLocaleDateString('fr-FR') : new Date().toLocaleDateString('fr-FR');
+  var lines = [
+    'RAPPORT DE VISITE SPANC',
+    '═══════════════════════════════════════════════',
+    '',
+    'Date de visite     : '+d,
+    'N° de dossier      : '+(g('rp-ref')||'—'),
+    'Agent SPANC        : '+(g('rp-agent')||'—'),
+    '',
+    '─── IDENTIFICATION ────────────────────────────',
+    'Adresse            : '+(g('rp-adresse')||'—'),
+    'Propriétaire       : '+(g('rp-proprio')||'—'),
+    'Réf. cadastrale    : '+(g('rp-parcelle')||'—'),
+    '',
+    '─── INSTALLATION ──────────────────────────────',
+    'Type de filière    : '+(g('rp-filiere')||'—'),
+    'Année installation : '+(g('rp-annee')||'—'),
+    'Capacité           : '+(g('rp-eh')||'—'),
+    'Dernière vidange   : '+(g('rp-vidange')||'—'),
+    '',
+    '─── OBSERVATIONS ──────────────────────────────',
+    (g('rp-obs')||'Aucune observation particulière.'),
+    '',
+    '─── CONCLUSION ────────────────────────────────',
+    conclTextes[conclVal],
+    '',
+    '─── SIGNATURE ─────────────────────────────────',
+    'Fait le '+d,
+    'L\'agent SPANC : '+(g('rp-agent')||'___________________'),
+    '',
+    '═══════════════════════════════════════════════',
+    'Document généré par HydroCalc — hydrocalc.fr',
+  ];
+  var blob = new Blob([lines.join('\n')], {type:'text/plain;charset=utf-8'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a'); a.href = url;
+  a.download = 'rapport-spanc-'+(g('rp-ref')||d).replace(/[^a-z0-9]/gi,'-').toLowerCase()+'.txt';
+  a.click(); URL.revokeObjectURL(url);
+  _ancShowToast('✅ Rapport téléchargé');
+}
+
+function _ancShowToast(msg) {
+  var t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#059669;color:#fff;padding:10px 22px;border-radius:24px;font-size:13px;font-weight:700;z-index:9999;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none';
+  document.body.appendChild(t);
+  setTimeout(function(){ t.style.opacity='0'; t.style.transition='opacity .4s'; setTimeout(function(){ t.remove(); },400); }, 2600);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CALENDRIER D'ENTRETIEN
+   ═══════════════════════════════════════════════════════════ */
+function renderANCCalendrier() {
+  var tb = document.getElementById('tab-bar');
+  if (tb) tb.style.display = 'none';
+  var html = '<div style="padding:var(--s-3) var(--s-4)">';
+  html += '<div style="display:flex;align-items:center;gap:var(--s-2);margin-bottom:var(--s-3)">'
+    +'<button onclick="renderANCHome()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--c-text-3);padding:0">←</button>'
+    +'<div><div style="font-size:16px;font-weight:800;color:var(--c-text)">Calendrier d\'entretien</div>'
+    +'<div style="font-size:11px;color:var(--c-text-3)">Prochaines échéances de maintenance</div></div></div>';
+
+  html += '<div style="background:var(--c-surface-2);border-radius:var(--r-md);padding:var(--s-3);margin-bottom:var(--s-3)">'
+    +'<div style="font-size:11px;font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.04em;margin-bottom:var(--s-2)">Paramètres de l\'installation</div>'
+    +'<div style="margin-bottom:var(--s-2)"><label style="display:block;font-size:10px;font-weight:700;color:var(--c-text-3);margin-bottom:3px">Type de filière</label>'
+    +'<select id="cal-type" style="width:100%;padding:8px 10px;border:1px solid var(--c-border);border-radius:var(--r-sm);font-size:12px;background:var(--c-bg);color:var(--c-text)">'
+    +'<option value="epandage">Tranchées d\'épandage</option>'
+    +'<option value="fsv-nd">Filtre à sable non drainé</option>'
+    +'<option value="fsv-d">Filtre à sable drainé</option>'
+    +'<option value="tertre">Tertre d\'infiltration</option>'
+    +'<option value="fpr">Filtre planté de roseaux (FPR)</option>'
+    +'<option value="micro">Microstation agréée CE</option>'
+    +'<option value="compact">Filtre compact agréé CE</option>'
+    +'</select></div>'
+    +'<div style="margin-bottom:var(--s-2)"><label style="display:block;font-size:10px;font-weight:700;color:var(--c-text-3);margin-bottom:3px">Dernière vidange fosse</label>'
+    +'<input id="cal-vidange" type="month" style="width:100%;box-sizing:border-box;padding:8px 10px;border:1px solid var(--c-border);border-radius:var(--r-sm);font-size:12px;background:var(--c-bg);color:var(--c-text)"></div>'
+    +'<div style="margin-bottom:var(--s-2)"><label style="display:block;font-size:10px;font-weight:700;color:var(--c-text-3);margin-bottom:3px">Dernier contrôle SPANC</label>'
+    +'<input id="cal-spanc" type="month" style="width:100%;box-sizing:border-box;padding:8px 10px;border:1px solid var(--c-border);border-radius:var(--r-sm);font-size:12px;background:var(--c-bg);color:var(--c-text)"></div>'
+    +'<button onclick="_ancCalcCalendrier()" style="width:100%;padding:var(--s-3);background:var(--c-anc);color:#fff;border:none;border-radius:var(--r-md);font-size:13px;font-weight:700;cursor:pointer">📅 Calculer les échéances</button>'
+    +'</div>';
+  html += '<div id="cal-result"></div>';
+  html += '<div class="pb-nav"></div></div>';
+  document.getElementById('main-content').innerHTML = html;
+}
+
+function _ancCalcCalendrier() {
+  var type = document.getElementById('cal-type');
+  var vidEl = document.getElementById('cal-vidange');
+  var spancEl = document.getElementById('cal-spanc');
+  var typeVal = type ? type.value : 'epandage';
+  var now = new Date();
+
+  var addMonths = function(d, m){ var r=new Date(d); r.setMonth(r.getMonth()+m); return r; };
+  var fmt = function(d){ return d.toLocaleDateString('fr-FR',{month:'long',year:'numeric'}); };
+  var urgency = function(d){ var diff=(d-now)/(1000*60*60*24*30); return diff<0?'danger':(diff<6?'warn':'ok'); };
+
+  var tasks = [];
+
+  var vidBase = vidEl && vidEl.value ? new Date(vidEl.value) : addMonths(now,-18);
+  tasks.push({ label:'Vidange fosse toutes eaux', ico:'🚜', info:'Quand boues > 50 % volume (≈ 3–4 ans)', due: addMonths(vidBase, 36) });
+
+  var spancBase = spancEl && spancEl.value ? new Date(spancEl.value) : addMonths(now,-36);
+  tasks.push({ label:'Contrôle SPANC', ico:'✅', info:'Obligatoire tous les 8–10 ans', due: addMonths(spancBase, 96) });
+
+  if (typeVal === 'micro') {
+    tasks.push({ label:'Contrat de maintenance microstation', ico:'⚙️', info:'Contrat annuel obligatoire (agrément CE)', due: addMonths(now, 10) });
+    tasks.push({ label:'Vérification aérateurs / membranes', ico:'🔧', info:'Selon préconisations constructeur', due: addMonths(now, 12) });
+  }
+  if (typeVal === 'fsv-d' || typeVal === 'tertre') {
+    tasks.push({ label:'Inspection drains de collecte', ico:'🔍', info:'Curage si colmatage — environ tous les 5 ans', due: addMonths(vidBase, 60) });
+  }
+  if (typeVal === 'fpr') {
+    var marsFauche = new Date(now.getFullYear(), 2, 1);
+    if (marsFauche < now) marsFauche.setFullYear(marsFauche.getFullYear()+1);
+    tasks.push({ label:'Fauche des roseaux', ico:'🌾', info:'Annuelle — mars idéalement (après période végétation)', due: marsFauche });
+    tasks.push({ label:'Inspection étanchéité base', ico:'🛡️', info:'Contrôle géomembrane — tous les 5 ans', due: addMonths(spancBase, 60) });
+  }
+  if (typeVal === 'compact') {
+    tasks.push({ label:'Entretien filtre compact', ico:'📦', info:'Selon guide agrément CE — généralement annuel', due: addMonths(now, 11) });
+  }
+  tasks.push({ label:'Vérification sortie de ventilation', ico:'💨', info:'S\'assurer que le tuyau est libre (toiture, faîtage)', due: addMonths(now, 6) });
+  tasks.push({ label:'Inspection regards et tampons', ico:'🔎', info:'Accessibilité, étanchéité, absence de végétation racinaire', due: addMonths(now, 12) });
+
+  tasks.sort(function(a,b){ return a.due - b.due; });
+
+  var colors = { danger:'#DC2626', warn:'#D97706', ok:'#059669' };
+  var bgs =    { danger:'#FFF5F5', warn:'#FFFBEB', ok:'#F0FFF4' };
+
+  var html = '<div style="display:flex;flex-direction:column;gap:var(--s-2);margin-bottom:var(--s-4)">';
+  tasks.forEach(function(t) {
+    var u = urgency(t.due);
+    var retard = t.due < now;
+    html += '<div style="background:'+bgs[u]+';border:1.5px solid '+colors[u]+';border-radius:var(--r-md);padding:var(--s-3)">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:var(--s-2)">'
+        +'<div>'
+          +'<div style="font-size:12px;font-weight:700;color:var(--c-text)">'+t.ico+' '+t.label+'</div>'
+          +'<div style="font-size:10px;color:var(--c-text-3);margin-top:2px">'+t.info+'</div>'
+        +'</div>'
+        +'<div style="text-align:right;flex-shrink:0">'
+          +'<div style="font-size:11px;font-weight:800;color:'+colors[u]+'">'+fmt(t.due)+'</div>'
+          +(retard?'<div style="font-size:9px;font-weight:700;color:#DC2626">EN RETARD</div>':'')
+        +'</div>'
+      +'</div>'
+    +'</div>';
+  });
+  html += '</div>';
+  document.getElementById('cal-result').innerHTML = html;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NON-CONFORMITÉS FRÉQUENTES
+   ═══════════════════════════════════════════════════════════ */
+function renderANCNonConformites() {
+  var tb = document.getElementById('tab-bar');
+  if (tb) tb.style.display = 'none';
+  var ncs = [
+    { risque:'danger', titre:'Absence de prétraitement', cause:'Installation sans fosse ou fosse ancienne hors service', solution:'Mise en place d\'une fosse toutes eaux aux normes (min. 3 m³ pour < 5 EH)', ref:'Art. 6 — Arrêté 07/09/2009' },
+    { risque:'danger', titre:'Raccordement eaux pluviales sur la fosse', cause:'Toiture, cour ou parking raccordés aux eaux usées domestiques', solution:'Déconnexion obligatoire — créer un réseau EP séparatif', ref:'Art. 6 — Arrêté 07/09/2009' },
+    { risque:'danger', titre:'Rejet direct non traité en milieu superficiel', cause:'Absence ou défaillance totale de filière de traitement', solution:'Mise en place immédiate d\'un traitement secondaire adapté', ref:'Art. 4 — Arrêté 07/09/2009' },
+    { risque:'danger', titre:'Fosse enterrée sous construction', cause:'Extension ou construction ultérieure sur la zone d\'épandage ou la fosse', solution:'Déplacement de la filière — emprise dégagée et accessible obligatoire', ref:'Art. 14 — DTU 64.1' },
+    { risque:'warn',   titre:'Ventilation absente ou obstruée', cause:'Siphon condensé, tuyau bouché ou absent, conduit non sorti en toiture', solution:'Installer ou déboucher la colonne de ventilation Ø ≥ 100 mm sortant au-dessus du faîtage', ref:'Art. 7 — Arrêté 07/09/2009' },
+    { risque:'warn',   titre:'Vidange jamais réalisée ou trop rare', cause:'Boues dépassant 50 % du volume — risque de passage vers la filière', solution:'Vidange immédiate par vidangeur agréé — prévoir contrat tous les 3–4 ans', ref:'Art. 9 — Arrêté 07/09/2009' },
+    { risque:'warn',   titre:'Fosse septique (eaux-vannes seules)', cause:'Ouvrage ancien, interdit à neuf depuis 2009 — eaux ménagères non traitées', solution:'Remplacement par fosse toutes eaux — retracer le circuit des eaux ménagères', ref:'Arrêté 07/09/2009 — interdiction nouvelles installations' },
+    { risque:'warn',   titre:'Absence de regard de collecte accessible', cause:'Tampon bétonné, recouvert, introuvable', solution:'Localiser et rendre accessible en permanence tous les regards', ref:'Art. 14 — DTU 64.1' },
+    { risque:'warn',   titre:'Filière dans zone constructible ou sous végétation racinaire', cause:'Plantation d\'arbres sur la filière, construction d\'abri ou terrasse', solution:'Dégager et interdire toute construction / plantation racinaire dans l\'emprise', ref:'DTU 64.1 — zones d\'exclusion' },
+    { risque:'info',   titre:'Absence de préfiltre en sortie de fosse', cause:'Oubli à la conception ou remplacement non effectué', solution:'Installer un préfiltre d\'accès facile — entretien annuel', ref:'DTU 64.1 — recommandation' },
+    { risque:'info',   titre:'Dimensionnement insuffisant (< 3 EH pour usage familial)', cause:'Calcul initial sous-estimé ou charge augmentée (extension habitation)', solution:'Vérifier usage réel — redimensionner si nécessaire avec bureau d\'études', ref:'Art. 6 — Arrêté 07/09/2009' },
+    { risque:'info',   titre:'Contrat de maintenance microstation absent', cause:'Obligation liée à l\'agrément CE non respectée', solution:'Souscrire un contrat annuel auprès du fabricant ou prestataire agréé', ref:'Guide d\'utilisation agrément CE' },
+  ];
+  var colors = { danger:'#DC2626', warn:'#D97706', info:'#0891B2' };
+  var bgs =    { danger:'#FFF5F5', warn:'#FFFBEB', info:'#F0F9FF' };
+  var labels  = { danger:'⛔ Risque élevé', warn:'⚠ Non-conformité', info:'ℹ Attention' };
+
+  var html = '<div style="padding:var(--s-3) var(--s-4)">';
+  html += '<div style="display:flex;align-items:center;gap:var(--s-2);margin-bottom:var(--s-3)">'
+    +'<button onclick="renderANCHome()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--c-text-3);padding:0">←</button>'
+    +'<div><div style="font-size:16px;font-weight:800;color:var(--c-text)">Non-conformités fréquentes</div>'
+    +'<div style="font-size:11px;color:var(--c-text-3)">Référentiel SPANC — Arrêté 07/09/2009</div></div></div>';
+
+  html += '<div style="background:var(--c-surface-2);border-radius:var(--r-md);padding:var(--s-3);margin-bottom:var(--s-3)">'
+    +'<div style="font-size:11px;color:var(--c-text-3);line-height:1.5">'
+    +'⛔ <b>Risque élevé</b> : non-conformité présentant un risque sanitaire ou environnemental avéré — travaux immédiats.<br>'
+    +'⚠ <b>Non-conformité</b> : risque potentiel — travaux requis, délai 4 ans si pas de risque immédiat.<br>'
+    +'ℹ <b>Attention</b> : point de vigilance ou défaut mineur à régulariser.'
+    +'</div></div>';
+
+  html += '<div style="display:flex;flex-direction:column;gap:var(--s-2);margin-bottom:var(--s-4)">';
+  ncs.forEach(function(nc) {
+    html += '<div style="border:1.5px solid '+colors[nc.risque]+';border-radius:var(--r-md);background:'+bgs[nc.risque]+';overflow:hidden">'
+      +'<div style="padding:var(--s-2) var(--s-3);border-bottom:1px solid '+colors[nc.risque]+'20">'
+        +'<span style="font-size:9px;font-weight:800;color:'+colors[nc.risque]+';text-transform:uppercase;letter-spacing:.04em">'+labels[nc.risque]+'</span>'
+        +'<div style="font-size:12px;font-weight:800;color:var(--c-text);margin-top:2px">'+nc.titre+'</div>'
+      +'</div>'
+      +'<div style="padding:var(--s-2) var(--s-3)">'
+        +'<div style="font-size:10px;color:var(--c-text-3);margin-bottom:4px"><span style="font-weight:700;color:var(--c-text-2)">Cause · </span>'+nc.cause+'</div>'
+        +'<div style="font-size:10px;color:var(--c-text-3);margin-bottom:4px"><span style="font-weight:700;color:#059669">Solution · </span>'+nc.solution+'</div>'
+        +'<div style="font-size:9px;color:var(--c-text-4)">📖 '+nc.ref+'</div>'
+      +'</div>'
+    +'</div>';
+  });
+  html += '</div>';
+  html += '<div class="pb-nav"></div></div>';
+  document.getElementById('main-content').innerHTML = html;
 }
