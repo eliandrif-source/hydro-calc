@@ -2,7 +2,7 @@
    SERVICE WORKER â€” HydroCalc PWA
    Cache-first Â· Mode hors-ligne complet
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-var CACHE_NAME = 'hydrocalc-v453';
+var CACHE_NAME = 'hydrocalc-v454';
 
 var ASSETS = [
   './',
@@ -44,6 +44,7 @@ var ASSETS = [
   './images/forum-banner.png',
   './images/dossiers-banner.png',
   './images/bts-gemeau-banner.webp',
+  './images/lp-eau-banner.webp',
 ];
 
 self.addEventListener('install', function(e) {

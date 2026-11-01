@@ -3231,6 +3231,7 @@ const COURS_DATA = {
     ico: '🎓',
     color: '#1550A0',
     colorl: '#E6EEF8',
+    bannerStyle: 'background-image:linear-gradient(to right,#1550A0 38%,rgba(21,80,160,0.88) 54%,rgba(21,80,160,0.35) 75%,transparent 92%),url(\'./images/lp-eau-banner.webp\');background-size:cover;background-position:right center;background-color:#1550A0',
     niveau: 'Bac+3',
     organisme: 'Universités — IUT',
     desc: 'Spécialisation après BTS/BUT : exploitation réseau, traitement avancé, milieux aquatiques, droit de l\'eau. Souvent en alternance.',
