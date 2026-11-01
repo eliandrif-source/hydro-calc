@@ -4604,6 +4604,7 @@ const COURS_DATA = {
     ico: '🏗️',
     color: '#0A5090',
     colorl: '#E6EEF8',
+    bannerStyle: 'background-image:linear-gradient(to right,#0A5090 38%,rgba(10,80,144,0.88) 54%,rgba(10,80,144,0.35) 75%,transparent 92%),url(\'./images/but-gte-banner.webp\');background-size:cover;background-position:right center;background-color:#0A5090',
     niveau: 'Bac+3',
     organisme: 'IUT — Ministère de l\'Enseignement Supérieur',
     desc: 'BUT en 3 ans avec option eau : hydraulique appliquée, systèmes de pompage, instrumentation, exploitation.',
