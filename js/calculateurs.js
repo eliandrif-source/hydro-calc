@@ -3,6 +3,7 @@ var _calcDebitsSub = 0;
 var _calcAEPSub = 0;
 var _calcAssaisSub = 0;
 var _calcFormSub = 0;
+var _calcDimSub = 0;
 
 function renderCalc() {
   loadModuleTabs(CALC_TAB_LBLS, 'switchCalcTab');
@@ -13,13 +14,14 @@ function renderCalc() {
 
 function switchCalcTab(idx) {
   setTabActive('module-tabs', idx);
-  var titles = ['Calculateurs — Débits','Calculateurs — AEP','Calculateurs — Assainissement','Calculateurs — Formules'];
+  var titles = ['Calculateurs — Débits','Calculateurs — AEP','Calculateurs — Assainissement','Calculateurs — Dimensionnement','Calculateurs — Formules'];
   var t = document.getElementById('top-title');
   if (t) t.textContent = titles[idx] || 'Calculateurs';
   if      (idx === 0) renderCalcDebits();
   else if (idx === 1) renderCalcAEP();
   else if (idx === 2) renderCalcAssainis();
-  else if (idx === 3) renderCalcFormules();
+  else if (idx === 3) renderCalcDim();
+  else if (idx === 4) renderCalcFormules();
   scrollToTop();
 }
 
@@ -72,6 +74,19 @@ function renderCalcAssainis() {
 }
 function switchAssainis(i) { _calcAssaisSub = i; renderCalcAssainis(); }
 
+function renderCalcDim() {
+  var subs = ['Station pompage','Bassin rétention EP','Réseau gravitaire','STEP / Lagunage'];
+  var z = document.getElementById('calc-content');
+  if (!z) return;
+  var html = _calcSubPills(subs, _calcDimSub, 'switchDim');
+  if      (_calcDimSub === 0) html += _htmlStationPompage();
+  else if (_calcDimSub === 1) html += _htmlBassinRet();
+  else if (_calcDimSub === 2) html += _htmlReseauGrav();
+  else if (_calcDimSub === 3) html += _htmlSTEP();
+  z.innerHTML = html;
+}
+function switchDim(i) { _calcDimSub = i; renderCalcDim(); }
+
 function renderCalcFormules() {
   var subs = ['Reynolds','Bernoulli','P. ch. singulières'];
   var z = document.getElementById('calc-content');
@@ -88,6 +103,7 @@ function switchFormules(i) { _calcFormSub = i; renderCalcFormules(); }
 
 function _htmlManning() {
   return '<div style="padding:0 var(--s-4)"><div class="card card-p"><div class="calc-zone">'
+    + '<svg viewBox="0 0 280 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px;height:auto;display:block;margin:0 auto 10px"><defs><marker id="mqa" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#059669"/></marker></defs><circle cx="55" cy="48" r="32" fill="#E6EEF8" stroke="#1550A0" stroke-width="2"/><circle cx="55" cy="48" r="20" fill="#BFDBFE"/><text x="55" y="52" text-anchor="middle" font-size="8" fill="#1E40AF" font-family="sans-serif" font-weight="700">D</text><text x="55" y="85" text-anchor="middle" font-size="8" fill="#64748B" font-family="sans-serif">Ks</text><line x1="100" y1="25" x2="260" y2="55" stroke="#92400E" stroke-width="2"/><text x="182" y="20" text-anchor="middle" font-size="9" fill="#92400E" font-family="sans-serif">Pente I</text><line x1="115" y1="43" x2="255" y2="43" stroke="#059669" stroke-width="2.5" marker-end="url(#mqa)"/><text x="185" y="60" text-anchor="middle" font-size="10" fill="#059669" font-family="sans-serif" font-weight="700">Q →</text><text x="185" y="80" text-anchor="middle" font-size="8" fill="#64748B" font-family="sans-serif">Q = Ks · A · R^(2/3) · I^(1/2)</text></svg>'
     + '<div style="font-size:var(--t-xs);font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--s-2)">Manning-Strickler · Q = Ks × A × R²⸝³ × I^½</div>'
     + '<div class="field"><label class="field-label">Diamètre intérieur DN</label><div class="field-row"><input type="number" id="c-dn" value="300" min="10" step="10"><span class="field-unit">mm</span></div></div>'
     + '<div class="field"><label class="field-label">Coefficient de Strickler Ks</label><div class="field-row"><input type="number" id="c-ks" value="70" min="1" max="150" step="1"><span class="field-unit">m^(1/3)/s</span></div></div>'
@@ -125,6 +141,7 @@ function _htmlDarcy() {
 
 function _htmlDeversoir() {
   return '<div style="padding:0 var(--s-4)"><div class="card card-p"><div class="calc-zone">'
+    + '<svg viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px;height:auto;display:block;margin:0 auto 10px"><defs><marker id="deva" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#1550A0"/></marker></defs><rect x="0" y="50" width="280" height="50" fill="#E2E8F0"/><rect x="120" y="20" width="40" height="80" fill="#94A3B8"/><rect x="0" y="20" width="120" height="30" fill="#BFDBFE" opacity="0.8"/><text x="60" y="37" text-anchor="middle" font-size="9" fill="#1E40AF" font-family="sans-serif" font-weight="700">H (charge amont)</text><line x1="30" y1="20" x2="30" y2="50" stroke="#1550A0" stroke-width="1.5" stroke-dasharray="3,2"/><line x1="10" y1="50" x2="120" y2="50" stroke="#1550A0" stroke-width="1.5" stroke-dasharray="3,2"/><line x1="30" y1="34" x2="50" y2="34" stroke="#1550A0" stroke-width="1.5"/><text x="55" y="38" font-size="8" fill="#1550A0" font-family="sans-serif">H</text><line x1="120" y1="72" x2="280" y2="72" stroke="#1550A0" stroke-width="2"/><line x1="200" y1="50" x2="240" y2="72" stroke="#1550A0" stroke-width="2.5" marker-end="url(#deva)"/><text x="230" y="62" font-size="9" fill="#1550A0" font-family="sans-serif">Q →</text><line x1="120" y1="85" x2="160" y2="85" stroke="#64748B" stroke-width="1.5"/><line x1="160" y1="85" x2="160" y2="92" stroke="#64748B" stroke-width="1.5"/><line x1="160" y1="92" x2="280" y2="92" stroke="#64748B" stroke-width="1.5"/><text x="140" y="100" font-size="8" fill="#64748B" font-family="sans-serif">L (seuil)</text></svg>'
     + '<div style="font-size:var(--t-xs);font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--s-2)">Déversoir seuil · Q = μ · L · H^(3/2)</div>'
     + '<div class="field"><label class="field-label">Type de déversoir</label>'
     + '<select id="c-devType" class="field-inp"><option value="rect">Rectangulaire large (μ = 1,70)</option><option value="min">Mince (μ = 1,84)</option><option value="tri">Triangulaire 90° (μ = 1,42)</option></select></div>'
@@ -150,6 +167,7 @@ function _htmlHW() {
 
 function _htmlHMT() {
   return '<div style="padding:0 var(--s-4)"><div class="card card-p"><div class="calc-zone">'
+    + '<svg viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px;height:auto;display:block;margin:0 auto 10px"><defs><marker id="hmta" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#1550A0"/></marker></defs><rect x="5" y="35" width="55" height="60" rx="4" fill="#E6EEF8" stroke="#1550A0" stroke-width="2"/><text x="32" y="68" text-anchor="middle" font-size="8" fill="#1550A0" font-family="sans-serif" font-weight="700">BÂCHE</text><line x1="60" y1="75" x2="90" y2="75" stroke="#1550A0" stroke-width="2.5" marker-end="url(#hmta)"/><rect x="90" y="62" width="45" height="26" rx="4" fill="#1550A0"/><text x="112" y="79" text-anchor="middle" font-size="9" fill="white" font-family="sans-serif" font-weight="700">POMPE</text><line x1="135" y1="75" x2="195" y2="75" stroke="#1550A0" stroke-width="2.5"/><line x1="195" y1="75" x2="195" y2="25" stroke="#1550A0" stroke-width="2.5"/><line x1="195" y1="25" x2="265" y2="25" stroke="#1550A0" stroke-width="2.5" marker-end="url(#hmta)"/><text x="238" y="20" text-anchor="middle" font-size="8" fill="#1550A0" font-family="sans-serif">P résid.</text><line x1="5" y1="35" x2="5" y2="25" stroke="#92400E" stroke-width="1" stroke-dasharray="3,2"/><line x1="5" y1="25" x2="195" y2="25" stroke="#92400E" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/><line x1="112" y1="25" x2="112" y2="62" stroke="#92400E" stroke-width="1.5"/><text x="125" y="48" font-size="8" fill="#92400E" font-family="sans-serif">Hg</text><text x="150" y="105" text-anchor="middle" font-size="8" fill="#64748B" font-family="sans-serif">HMT = Hg + ΔHl + ΔHs + P_aval</text></svg>'
     + '<div style="font-size:var(--t-xs);font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--s-2)">HMT pompe · Hmt = Hg + ΔHl + ΔHs + P_aval/ρg</div>'
     + '<div class="field"><label class="field-label">Hauteur géométrique Hg</label><div class="field-row"><input type="number" id="c-hHg" value="20" min="0" step="0.5"><span class="field-unit">m</span></div></div>'
     + '<div class="field"><label class="field-label">Pertes de charge linéaires ΔHl</label><div class="field-row"><input type="number" id="c-hDhl" value="3" min="0" step="0.1"><span class="field-unit">m</span></div></div>'
@@ -269,6 +287,173 @@ function _htmlPCSing() {
     + '<div class="result-box" id="res-pcsing"><div class="result-value" id="rv-pcsing"></div><div class="result-detail" id="rd-pcsing"></div>'
     + '<div class="result-formula">Δh = n · ξ · V²/(2g) · g = 9,81 m/s²</div><div class="result-src">📖 Idel\'cik (1969) · Handbook of Hydraulic Resistance</div></div>'
     + '</div></div></div>';
+}
+
+function _htmlStationPompage() {
+  var svg = '<svg viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px;height:auto;display:block;margin:0 auto 12px"><defs><marker id="spa" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#1550A0"/></marker><marker id="spb" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#059669"/></marker></defs><rect x="5" y="30" width="70" height="80" rx="4" fill="#E6EEF8" stroke="#1550A0" stroke-width="2"/><text x="40" y="55" text-anchor="middle" font-size="9" fill="#1550A0" font-family="sans-serif" font-weight="700">BÂCHE</text><text x="40" y="68" text-anchor="middle" font-size="8" fill="#1550A0" font-family="sans-serif">V utile</text><line x1="5" y1="70" x2="75" y2="70" stroke="#1550A0" stroke-width="1.5" stroke-dasharray="4,2"/><text x="40" y="90" text-anchor="middle" font-size="8" fill="#64748B" font-family="sans-serif">N max dém/h</text><line x1="75" y1="80" x2="110" y2="80" stroke="#1550A0" stroke-width="2.5" marker-end="url(#spa)"/><rect x="110" y="65" width="50" height="30" rx="5" fill="#1550A0"/><text x="135" y="84" text-anchor="middle" font-size="9" fill="white" font-family="sans-serif" font-weight="700">POMPE</text><text x="135" y="58" text-anchor="middle" font-size="8" fill="#64748B" font-family="sans-serif">HMT · η · P</text><line x1="160" y1="80" x2="220" y2="80" stroke="#059669" stroke-width="2.5" marker-end="url(#spb)"/><line x1="220" y1="80" x2="220" y2="30" stroke="#059669" stroke-width="2.5"/><text x="240" y="58" font-size="8" fill="#059669" font-family="sans-serif">Refoulement</text><line x1="5" y1="18" x2="75" y2="18" stroke="#92400E" stroke-width="1" stroke-dasharray="3,2"/><line x1="75" y1="18" x2="220" y2="18" stroke="#92400E" stroke-width="1" stroke-dasharray="3,2"/><line x1="135" y1="18" x2="135" y2="65" stroke="#92400E" stroke-width="1.5" stroke-dasharray="3,2"/><text x="150" y="14" font-size="8" fill="#92400E" font-family="sans-serif">Hg</text><text x="135" y="125" text-anchor="middle" font-size="8" fill="#D97706" font-family="sans-serif">⚠ Volume utile ≥ Q × 60 / (4 × N_max)</text></svg>';
+  return '<div style="padding:0 var(--s-4)"><div class="card card-p"><div class="calc-zone">'
+    + svg
+    + '<div style="font-size:var(--t-xs);font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--s-2)">Station de pompage — volume bâche & puissance</div>'
+    + '<div class="field"><label class="field-label">Débit nominal Q</label><div class="field-row"><input type="number" id="sp-Q" value="30" min="0.1" step="1"><span class="field-unit">m³/h</span></div></div>'
+    + '<div class="field"><label class="field-label">HMT pompe</label><div class="field-row"><input type="number" id="sp-HMT" value="25" min="1" step="1"><span class="field-unit">m</span></div></div>'
+    + '<div class="field"><label class="field-label">Rendement pompe η</label><div class="field-row"><input type="number" id="sp-eta" value="72" min="10" max="95" step="1"><span class="field-unit">%</span></div></div>'
+    + '<div class="field"><label class="field-label">Nombre max démarrages/h</label><div class="field-row"><input type="number" id="sp-N" value="10" min="1" max="30" step="1"><span class="field-unit">dém/h</span></div></div>'
+    + '<div class="field"><label class="field-label">Coefficient de sécurité volume (≥ 1)</label><div class="field-row"><input type="number" id="sp-coef" value="1.2" min="1" max="3" step="0.1"><span class="field-unit">—</span></div></div>'
+    + '<button class="btn btn-primary" onclick="calcStationPompage()">Calculer</button>'
+    + '<div class="result-box" id="res-sp"><div class="result-value" id="rv-sp"></div><div class="result-detail" id="rd-sp"></div>'
+    + '<div class="result-formula">V_utile = Q × 60 / (4 × N) · P = ρgQH / (3600 × η)</div><div class="result-src">📖 NF EN ISO 9906 · Règles dimensionnement postes de refoulement</div></div>'
+    + '</div></div></div>';
+}
+
+function _htmlBassinRet() {
+  var svg = '<svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px;height:auto;display:block;margin:0 auto 12px"><defs><marker id="bra" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#1550A0"/></marker><marker id="brb" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#059669"/></marker></defs><polygon points="30,15 10,100 290,100 270,15" fill="#BFDBFE" stroke="#1550A0" stroke-width="2"/><text x="150" y="65" text-anchor="middle" font-size="11" fill="#1550A0" font-family="sans-serif" font-weight="700">BASSIN</text><text x="150" y="80" text-anchor="middle" font-size="9" fill="#1E40AF" font-family="sans-serif">V (m³)</text><line x1="0" y1="55" x2="30" y2="55" stroke="#1550A0" stroke-width="2.5" marker-end="url(#bra)"/><text x="15" y="48" text-anchor="middle" font-size="8" fill="#1550A0" font-family="sans-serif">Q_ep</text><line x1="270" y1="55" x2="300" y2="55" stroke="#059669" stroke-width="2.5" marker-end="url(#brb)"/><text x="285" y="48" text-anchor="middle" font-size="8" fill="#059669" font-family="sans-serif">Q_fuite</text><line x1="30" y1="100" x2="270" y2="100" stroke="#1550A0" stroke-width="1.5"/><line x1="30" y1="100" x2="30" y2="55" stroke="#64748B" stroke-width="1" stroke-dasharray="3,2"/><line x1="270" y1="100" x2="270" y2="55" stroke="#64748B" stroke-width="1" stroke-dasharray="3,2"/><text x="150" y="115" text-anchor="middle" font-size="8" fill="#92400E" font-family="sans-serif">V = (Q_ep − Q_fuite) × D_vidange</text></svg>';
+  return '<div style="padding:0 var(--s-4)"><div class="card card-p"><div class="calc-zone">'
+    + svg
+    + '<div style="font-size:var(--t-xs);font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--s-2)">Bassin de rétention EP — volume (méthode des pluies simplifiée)</div>'
+    + '<div class="field"><label class="field-label">Surface active imperméabilisée A</label><div class="field-row"><input type="number" id="br-A" value="2" min="0.01" step="0.1"><span class="field-unit">ha</span></div></div>'
+    + '<div class="field"><label class="field-label">Coefficient de ruissellement C</label><div class="field-row"><input type="number" id="br-C" value="0.80" min="0.01" max="1" step="0.01"><span class="field-unit">—</span></div></div>'
+    + '<div class="field"><label class="field-label">Débit de fuite spécifique admissible</label><div class="field-row"><input type="number" id="br-Qf" value="3" min="0.1" max="50" step="0.5"><span class="field-unit">L/s/ha</span></div></div>'
+    + '<div class="field"><label class="field-label">Période de retour</label>'
+    + '<select id="br-T" class="field-inp"><option value="10">T = 10 ans — i₁₀ ≈ 35 mm/h (durée 1h)</option><option value="30">T = 30 ans — i₃₀ ≈ 45 mm/h</option><option value="100">T = 100 ans — i₁₀₀ ≈ 60 mm/h</option></select></div>'
+    + '<div class="field"><label class="field-label">Durée de vidange autorisée</label><div class="field-row"><input type="number" id="br-D" value="24" min="1" max="72" step="1"><span class="field-unit">h</span></div></div>'
+    + '<button class="btn btn-primary" onclick="calcBassinRet()">Calculer</button>'
+    + '<div class="result-box" id="res-br"><div class="result-value" id="rv-br"></div><div class="result-detail" id="rd-br"></div>'
+    + '<div class="result-formula">V = (Q_ep − Q_fuite) × D_vid · Q_ep = C × i × A</div><div class="result-src">📖 Méthode des pluies · DTU 60.11 · STU local à vérifier</div></div>'
+    + '</div></div></div>';
+}
+
+function _htmlReseauGrav() {
+  var svg = '<svg viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px;height:auto;display:block;margin:0 auto 12px"><defs><marker id="rga" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#059669"/></marker></defs><line x1="10" y1="20" x2="290" y2="55" stroke="#92400E" stroke-width="2"/><text x="150" y="15" text-anchor="middle" font-size="8" fill="#92400E" font-family="sans-serif">Profil en long — pente I</text><rect x="30" y="28" width="240" height="20" rx="3" fill="#E6EEF8" stroke="#1550A0" stroke-width="1.5"/><text x="150" y="42" text-anchor="middle" font-size="8" fill="#1550A0" font-family="sans-serif">DN — conduite gravitaire</text><line x1="30" y1="38" x2="270" y2="38" stroke="#059669" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#rga)"/><text x="150" y="60" text-anchor="middle" font-size="9" fill="#059669" font-family="sans-serif">V — Ks — Q</text><line x1="80" y1="48" x2="80" y2="80" stroke="#64748B" stroke-width="1.5" stroke-dasharray="3,2"/><line x1="220" y1="53" x2="220" y2="80" stroke="#64748B" stroke-width="1.5" stroke-dasharray="3,2"/><line x1="80" y1="75" x2="220" y2="75" stroke="#64748B" stroke-width="1.5"/><text x="150" y="90" text-anchor="middle" font-size="8" fill="#64748B" font-family="sans-serif">Taux de remplissage h/D</text><text x="150" y="105" text-anchor="middle" font-size="8" fill="#D97706" font-family="sans-serif">⚠ V ≥ 0,60 m/s auto-curage / V ≤ 3,0 m/s</text></svg>';
+  return '<div style="padding:0 var(--s-4)"><div class="card card-p"><div class="calc-zone">'
+    + svg
+    + '<div style="font-size:var(--t-xs);font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--s-2)">Réseau gravitaire — débit et vérification auto-curage</div>'
+    + '<div class="field"><label class="field-label">Diamètre intérieur DN</label><div class="field-row"><input type="number" id="rg-DN" value="300" min="80" step="25"><span class="field-unit">mm</span></div></div>'
+    + '<div class="field"><label class="field-label">Coefficient de Strickler Ks</label><div class="field-row"><input type="number" id="rg-Ks" value="70" min="30" max="120" step="5"><span class="field-unit">m^(1/3)/s</span></div></div>'
+    + '<div class="field"><label class="field-label">Pente I</label><div class="field-row"><input type="number" id="rg-I" value="3" min="0.1" step="0.1"><span class="field-unit">‰</span></div></div>'
+    + '<div class="field"><label class="field-label">Taux de remplissage h/D (pleine section = 1)</label><div class="field-row"><input type="number" id="rg-hD" value="0.70" min="0.1" max="1" step="0.05"><span class="field-unit">—</span></div></div>'
+    + '<button class="btn btn-primary" onclick="calcReseauGrav()">Calculer</button>'
+    + '<div class="result-box" id="res-rg"><div class="result-value" id="rv-rg"></div><div class="result-detail" id="rd-rg"></div>'
+    + '<div class="result-formula">Q = Ks · A · R^(2/3) · I^(1/2) · Section partielle par ratio h/D</div><div class="result-src">📖 Manning-Strickler · EN 752 · CCTG fascicule 70</div></div>'
+    + '</div></div></div>';
+}
+
+function _htmlSTEP() {
+  var svg = '<svg viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px;height:auto;display:block;margin:0 auto 12px"><defs><marker id="sta" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#1550A0"/></marker></defs><rect x="5" y="30" width="50" height="55" rx="4" fill="#E6EEF8" stroke="#1550A0" stroke-width="2"/><text x="30" y="52" text-anchor="middle" font-size="8" fill="#1550A0" font-family="sans-serif" font-weight="700">PRÉ-</text><text x="30" y="63" text-anchor="middle" font-size="8" fill="#1550A0" font-family="sans-serif">TRAIT.</text><line x1="55" y1="57" x2="75" y2="57" stroke="#1550A0" stroke-width="2" marker-end="url(#sta)"/><rect x="75" y="25" width="70" height="65" rx="4" fill="#D1FAE5" stroke="#059669" stroke-width="2"/><text x="110" y="52" text-anchor="middle" font-size="8" fill="#065F46" font-family="sans-serif" font-weight="700">RÉACTEUR</text><text x="110" y="63" text-anchor="middle" font-size="8" fill="#065F46" font-family="sans-serif">BIO · V (m³)</text><circle cx="100" cy="78" r="3" fill="none" stroke="#059669" stroke-width="1.5"/><circle cx="115" cy="75" r="2" fill="none" stroke="#059669" stroke-width="1.5"/><circle cx="127" cy="79" r="4" fill="none" stroke="#059669" stroke-width="1.5"/><line x1="145" y1="57" x2="165" y2="57" stroke="#059669" stroke-width="2" marker-end="url(#sta)"/><rect x="165" y="30" width="55" height="55" rx="4" fill="#CFFAFE" stroke="#0891B2" stroke-width="2"/><text x="192" y="52" text-anchor="middle" font-size="8" fill="#0E4F66" font-family="sans-serif" font-weight="700">CLARIF.</text><line x1="220" y1="57" x2="240" y2="57" stroke="#0891B2" stroke-width="2" marker-end="url(#sta)"/><rect x="240" y="43" width="55" height="28" rx="4" fill="#F1F5F9" stroke="#64748B" stroke-width="1.5"/><text x="267" y="60" text-anchor="middle" font-size="8" fill="#64748B" font-family="sans-serif">Rejet</text><text x="150" y="108" text-anchor="middle" font-size="8" fill="#64748B" font-family="sans-serif">Charges entrantes EH → volumes ouvrages</text></svg>';
+  return '<div style="padding:0 var(--s-4)"><div class="card card-p"><div class="calc-zone">'
+    + svg
+    + '<div style="font-size:var(--t-xs);font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--s-2)">STEP — dimensionnement simplifié boues activées</div>'
+    + '<div class="field"><label class="field-label">Capacité nominale</label><div class="field-row"><input type="number" id="st-EH" value="500" min="5" step="5"><span class="field-unit">EH</span></div></div>'
+    + '<div class="field"><label class="field-label">Temps de séjour hydraulique (TSH)</label><div class="field-row"><input type="number" id="st-TSH" value="8" min="4" max="24" step="0.5"><span class="field-unit">h</span></div></div>'
+    + '<div class="field"><label class="field-label">Charge volumique en DBO₅</label><div class="field-row"><input type="number" id="st-Cv" value="0.4" min="0.1" max="2" step="0.05"><span class="field-unit">kg DBO₅/m³·j</span></div></div>'
+    + '<div class="field"><label class="field-label">Ratio effluent journalier</label><div class="field-row"><input type="number" id="st-q" value="200" min="100" max="400" step="10"><span class="field-unit">L/EH·j</span></div></div>'
+    + '<button class="btn btn-primary" onclick="calcSTEP()">Calculer</button>'
+    + '<div class="result-box" id="res-step"><div class="result-value" id="rv-step"></div><div class="result-detail" id="rd-step"></div>'
+    + '<div class="result-formula">V = DBO₅ / Cv · Q = EH × q · Surface clarif. = Q/V_clarif</div><div class="result-src">📖 Arrêté 21/07/2015 · Metcalf & Eddy · ASTEE guide STEP</div></div>'
+    + '</div></div></div>';
+}
+
+/* ── FONCTIONS DE CALCUL ── */
+
+function calcStationPompage() {
+  var Q    = parseFloat(document.getElementById('sp-Q').value)    || 0;
+  var HMT  = parseFloat(document.getElementById('sp-HMT').value)  || 0;
+  var eta  = parseFloat(document.getElementById('sp-eta').value)  || 72;
+  var N    = parseFloat(document.getElementById('sp-N').value)    || 10;
+  var coef = parseFloat(document.getElementById('sp-coef').value) || 1.2;
+  if (!Q || !HMT) { alert('Renseigner Q et HMT.'); return; }
+  var Vutile = Math.round((Q / 3.6) * (60 / (4 * N)) * 1000 * coef);
+  var P_abs  = parseFloat((1000 * 9.81 * (Q / 3600) * HMT / (eta / 100) / 1000).toFixed(2));
+  var P_inst = parseFloat((P_abs * 1.15).toFixed(2));
+  var E      = parseFloat((P_abs / Q).toFixed(3));
+  var res = document.getElementById('res-sp');
+  res.classList.add('show');
+  document.getElementById('rv-sp').textContent = 'V bâche utile = ' + Vutile + ' L';
+  document.getElementById('rd-sp').innerHTML =
+    'Puissance absorbée : <b>' + P_abs + ' kW</b><br>'
+    + 'Puissance installée (×1,15) : <b>' + P_inst + ' kW</b><br>'
+    + 'Énergie spécifique : <b>' + E + ' kWh/m³</b><br>'
+    + 'Débit : ' + Q + ' m³/h · HMT : ' + HMT + ' m · η : ' + eta + ' %';
+}
+
+function calcBassinRet() {
+  var A  = parseFloat(document.getElementById('br-A').value)  || 0;
+  var C  = parseFloat(document.getElementById('br-C').value)  || 0;
+  var Qf = parseFloat(document.getElementById('br-Qf').value) || 3;
+  var D  = parseFloat(document.getElementById('br-D').value)  || 24;
+  var selT = document.getElementById('br-T');
+  var T = selT ? selT.value : '10';
+  if (!A || !C) { alert('Renseigner A et C.'); return; }
+  var iH   = T === '10' ? 35 : (T === '30' ? 45 : 60);
+  var Qep  = C * iH / 1000 / 3600 * A * 10000;
+  var Qf_ms = Qf * A / 1000;
+  var Vbrut = Math.max(0, (Qep - Qf_ms) * D * 3600);
+  var Vutil = Math.round(Vbrut * 1.2);
+  var surf  = parseFloat((Vutil / 2.0).toFixed(0));
+  var res = document.getElementById('res-br');
+  res.classList.add('show');
+  document.getElementById('rv-br').textContent = 'V brut ≈ ' + Math.round(Vbrut) + ' m³  →  V utile (×1,2) = ' + Vutil + ' m³';
+  document.getElementById('rd-br').innerHTML =
+    'Q_ep entrant : ' + (Qep * 1000).toFixed(1) + ' L/s · Q_fuite : ' + (Qf_ms * 1000).toFixed(1) + ' L/s<br>'
+    + 'Surface bassin (h = 2 m) : <b>≈ ' + surf + ' m²</b><br>'
+    + 'Pluie de référence T' + T + ' : i = ' + iH + ' mm/h (indicatif — vérifier données locales)<br>'
+    + '<span style="color:var(--c-warn);font-size:10px">⚠ Résultat indicatif · Ajuster avec l\'abaque de la commune · DTU local</span>';
+}
+
+function calcReseauGrav() {
+  var DN = parseFloat(document.getElementById('rg-DN').value) || 0;
+  var Ks = parseFloat(document.getElementById('rg-Ks').value) || 70;
+  var I  = parseFloat(document.getElementById('rg-I').value)  || 3;
+  var hD = parseFloat(document.getElementById('rg-hD').value) || 0.7;
+  if (!DN) { alert('Renseigner DN.'); return; }
+  var D    = DN / 1000;
+  var A_ps = Math.PI * D * D / 4;
+  var R_ps = D / 4;
+  var Qps  = Ks * A_ps * Math.pow(R_ps, 2 / 3) * Math.pow(I / 1000, 0.5);
+  var Vps  = Qps / A_ps;
+  var hDc  = Math.min(hD, 0.99);
+  var theta   = 2 * Math.acos(1 - 2 * hDc);
+  var A_part  = (D * D / 8) * (theta - Math.sin(theta));
+  var P_part  = D / 2 * theta;
+  var Rh_part = P_part > 0 ? A_part / P_part : 0;
+  var Q_part  = Ks * A_part * Math.pow(Rh_part, 2 / 3) * Math.pow(I / 1000, 0.5);
+  var V_part  = A_part > 0 ? Q_part / A_part : 0;
+  var okAC   = V_part >= 0.60;
+  var okVmax = V_part <= 3.0;
+  var res = document.getElementById('res-rg');
+  res.classList.add('show');
+  document.getElementById('rv-rg').textContent = 'Q = ' + (Q_part * 1000).toFixed(1) + ' L/s · V = ' + V_part.toFixed(2) + ' m/s';
+  document.getElementById('rd-rg').innerHTML =
+    'Pleine section : Q_ps = ' + (Qps * 1000).toFixed(1) + ' L/s · V_ps = ' + Vps.toFixed(2) + ' m/s<br>'
+    + 'Section partielle h/D = ' + hD + ' : Q = ' + (Q_part * 1000).toFixed(1) + ' L/s<br>'
+    + (okAC ? '<span style="color:#059669">✅ Auto-curage OK (V ≥ 0,60 m/s)</span>' : '<span style="color:#DC2626">⛔ V &lt; 0,60 m/s — risque de dépôts</span>') + '<br>'
+    + (!okVmax ? '<span style="color:#DC2626">⛔ V &gt; 3,0 m/s — risque d\'érosion</span><br>' : '')
+    + 'Rh partielle = ' + Rh_part.toFixed(4) + ' m · A partielle = ' + (A_part * 10000).toFixed(1) + ' cm²';
+}
+
+function calcSTEP() {
+  var EH  = parseFloat(document.getElementById('st-EH').value)  || 0;
+  var TSH = parseFloat(document.getElementById('st-TSH').value) || 8;
+  var Cv  = parseFloat(document.getElementById('st-Cv').value)  || 0.4;
+  var q   = parseFloat(document.getElementById('st-q').value)   || 200;
+  if (!EH) { alert('Renseigner la capacité EH.'); return; }
+  var DBO5    = EH * 54 / 1000;
+  var DCO     = EH * 120 / 1000;
+  var MES     = EH * 90 / 1000;
+  var Qj      = EH * q / 1000;
+  var Qpointe = Qj / 24 * 3.5;
+  var V_react  = parseFloat((DBO5 / Cv).toFixed(0));
+  var V_bassin = parseFloat((Qj * TSH / 24).toFixed(0));
+  var S_clarif = parseFloat((Qpointe / 0.8).toFixed(0));
+  var res = document.getElementById('res-step');
+  res.classList.add('show');
+  document.getElementById('rv-step').textContent = 'V réacteur ≈ ' + V_react + ' m³ · Q_j = ' + Math.round(Qj) + ' m³/j';
+  document.getElementById('rd-step').innerHTML =
+    'Charges entrantes : DBO₅ = ' + DBO5.toFixed(1) + ' kg/j · DCO = ' + DCO.toFixed(1) + ' kg/j · MES = ' + MES.toFixed(1) + ' kg/j<br>'
+    + 'Volume réacteur (charge volumique Cv) : <b>' + V_react + ' m³</b><br>'
+    + 'Volume réacteur (TSH = ' + TSH + ' h) : <b>' + V_bassin + ' m³</b><br>'
+    + 'Surface clarificateur (V_asc = 0,8 m/h) : <b>≈ ' + S_clarif + ' m²</b><br>'
+    + 'Débit de pointe estimé : ' + Qpointe.toFixed(1) + ' m³/h<br>'
+    + '<span style="color:var(--c-warn);font-size:10px">⚠ Dimensionnement indicatif — À valider par bureau d\'études · Arrêté 21/07/2015</span>';
 }
 
 /* ── FONCTIONS DE CALCUL ── */

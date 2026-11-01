@@ -559,7 +559,7 @@ function setTabActive(group, idx) {
   }
 }
 
-const CALC_TAB_LBLS = ['Débits','AEP','Assainissement','Formules'];
+const CALC_TAB_LBLS = ['Débits','AEP','Assainissement','Dimensionnement','Formules'];
 
 /* ═══════════════════════════════════════════════════
    BOUTON COPIER + PARTAGER SUR LES RESULT-BOX
