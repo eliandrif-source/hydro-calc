@@ -13,6 +13,7 @@ const COURS_DATA = {
     ico: '💧',
     color: '#0A7460',
     colorl: '#E0F4F0',
+    bannerStyle: 'background-image:linear-gradient(to right,#0A7460 38%,rgba(10,116,96,0.88) 54%,rgba(10,116,96,0.35) 75%,transparent 92%),url(\'./images/bts-gemeau-banner.webp\');background-size:cover;background-position:right center;background-color:#0A7460',
     niveau: 'Bac+2',
     organisme: 'MEN / Ministère de l\'Agriculture',
     desc: 'Formation aux métiers de l\'eau : alimentation en eau potable, assainissement collectif et non collectif, milieux aquatiques, STEU.',
@@ -17190,7 +17191,7 @@ function renderCoursFormation(fId) {
   var f = _coursGetFormation(fId); if (!f) return;
   var html = _coursBreadcrumb([{ label: 'Cours', fn: 'renderCours()' }, { label: f.sigle }]);
 
-  html += '<div style="background:' + f.color + ';padding:20px var(--s-4) 16px">'
+  html += '<div style="' + (f.bannerStyle || 'background:' + f.color) + ';padding:20px var(--s-4) 16px">'
     + '<div style="font-size:28px;margin-bottom:8px">' + f.ico + '</div>'
     + '<div style="font-size:18px;font-weight:800;color:#fff">' + f.name + '</div>'
     + '<div style="font-size:11px;color:rgba(255,255,255,.75);margin-top:4px">' + f.organisme + ' · ' + f.niveau + '</div>'
