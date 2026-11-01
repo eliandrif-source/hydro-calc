@@ -2545,7 +2545,7 @@ function renderRefMat() {
 function renderQCMHub() {
   var _tb = document.getElementById('tab-bar'); if (_tb) _tb.style.display = 'none';
 
-  var html = '<div class="module-hero" style="--cat-color:var(--c-anc)">'
+  var html = '<div class="module-hero" style="--cat-color:var(--c-anc);background-image:linear-gradient(to right,#065F46 38%,rgba(6,95,70,0.88) 54%,rgba(6,95,70,0.35) 75%,transparent 92%),url(\'./images/qcm-banner.png\');background-size:cover;background-position:right center;background-color:#065F46">'
     + '<span class="mh-icon">✅</span>'
     + '<div class="mh-title">QCM</div>'
     + '<div class="mh-sub">720 questions · 36 thèmes · Entraînement par formation</div>'
@@ -2696,7 +2696,7 @@ function renderANCHub() {
 function renderAC() {
   var _tb=document.getElementById('tab-bar'); if(_tb) _tb.style.display='none';
   document.getElementById('main-content').innerHTML = `
-    <div class="module-hero" style="--cat-color:var(--c-ac)">
+    <div class="module-hero" style="--cat-color:var(--c-ac);background-image:linear-gradient(to right,#1550A0 38%,rgba(21,80,160,0.88) 54%,rgba(21,80,160,0.35) 75%,transparent 92%),url('./images/ac-banner.png');background-size:cover;background-position:right center;background-color:#1550A0">
       <button class="mh-back-btn" onclick="goHome()">‹ Accueil</button>
       <span class="mh-icon">🔧</span>
       <div class="mh-title">Assainissement collectif</div>
@@ -2738,7 +2738,7 @@ function renderAC() {
 function renderEP() {
   var _tb=document.getElementById('tab-bar'); if(_tb) _tb.style.display='none';
   document.getElementById('main-content').innerHTML = `
-    <div class="module-hero" style="--cat-color:var(--c-ep)">
+    <div class="module-hero" style="--cat-color:var(--c-ep);background-image:linear-gradient(to right,#886000 38%,rgba(136,96,0,0.88) 54%,rgba(136,96,0,0.35) 75%,transparent 92%),url('./images/ep-banner.png');background-size:cover;background-position:right center;background-color:#886000">
       <button class="mh-back-btn" onclick="goHome()">‹ Accueil</button>
       <span class="mh-icon">💧</span>
       <div class="mh-title">Eau potable</div>
@@ -2779,7 +2779,7 @@ function renderEP() {
 function renderRiv() {
   var _tb=document.getElementById('tab-bar'); if(_tb) _tb.style.display='none';
   document.getElementById('main-content').innerHTML = `
-    <div class="module-hero" style="--cat-color:var(--c-riv)">
+    <div class="module-hero" style="--cat-color:var(--c-riv);background-image:linear-gradient(to right,#0A5090 38%,rgba(10,80,144,0.88) 54%,rgba(10,80,144,0.35) 75%,transparent 92%),url('./images/mn-banner.png');background-size:cover;background-position:right center;background-color:#0A5090">
       <button class="mh-back-btn" onclick="goHome()">‹ Accueil</button>
       <span class="mh-icon">🌊</span>
       <div class="mh-title">Milieu naturel</div>

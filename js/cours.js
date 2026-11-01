@@ -17144,7 +17144,7 @@ function renderCours() {
 
   try {
     var keys = Object.keys(COURS_DATA);
-    var html = '<div class="module-hero" style="--cat-color:var(--c-form)">'
+    var html = '<div class="module-hero" style="--cat-color:var(--c-form);background-image:linear-gradient(to right,#6B4C00 38%,rgba(107,76,0,0.88) 54%,rgba(107,76,0,0.35) 75%,transparent 92%),url(\'./images/cours-banner.png\');background-size:cover;background-position:right center;background-color:#6B4C00">'
       + '<span class="mh-icon">🎓</span>'
       + '<div class="mh-title">Cours & Révisions</div>'
       + '<div class="mh-sub">BTS GEMEAU · Licence Pro · Master · BUT — Fiches & Flashcards</div>'
