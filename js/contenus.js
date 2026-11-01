@@ -2520,7 +2520,7 @@ function openPDF() { window.print(); }
 function renderRefMat() {
   var _tb = document.getElementById('tab-bar'); if (_tb) _tb.style.display = 'none';
   document.getElementById('main-content').innerHTML =
-    '<div class="module-hero" style="--cat-color:var(--c-mat)">'
+    '<div class="module-hero" style="--cat-color:var(--c-mat);background-image:linear-gradient(to right,#2C3A50 38%,rgba(44,58,80,0.88) 54%,rgba(44,58,80,0.35) 75%,transparent 92%),url(\'./images/mat-banner.png\');background-size:cover;background-position:right center;background-color:#2C3A50">'
     + '<span class="mh-icon">🔩</span>'
     + '<div class="mh-title">Références & Matériaux</div>'
     + '<div class="mh-sub">Glossaire · Formules · Acronymes · Matériaux · Équipements</div>'
