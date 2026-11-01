@@ -23,6 +23,30 @@ var OUTILS_DATA = {
         {val:'K = 1–15 mm/min', label:'Sol adapté', t:'ok', action:'Tranchées d\'épandage ou filtre à sable non drainé'},
         {val:'K > 15 mm/min', label:'Sol trop perméable', t:'warn', action:'Filtre à sable drainé obligatoire · Risque pollution nappe'},
       ],
+      svg: '<svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px;height:auto;display:block;margin:0 auto">'
+        +'<defs><marker id="pg1" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#0891B2"/></marker></defs>'
+        +'<rect x="0" y="0" width="280" height="200" fill="none"/>'
+        +'<rect x="20" y="80" width="240" height="120" fill="#D4A574" opacity="0.4" rx="2"/>'
+        +'<text x="140" y="100" text-anchor="middle" font-size="9" fill="#92400E" font-family="sans-serif">Sol en place</text>'
+        +'<rect x="100" y="30" width="80" height="120" rx="4" fill="#E6EEF8" stroke="#1550A0" stroke-width="2"/>'
+        +'<text x="140" y="20" text-anchor="middle" font-size="8" fill="#1550A0" font-family="sans-serif">Trou Ø 10 cm</text>'
+        +'<rect x="102" y="32" width="76" height="50" fill="#BFDBFE" opacity="0.9"/>'
+        +'<text x="140" y="62" text-anchor="middle" font-size="9" fill="#1E40AF" font-family="sans-serif" font-weight="700">Eau</text>'
+        +'<text x="140" y="74" text-anchor="middle" font-size="8" fill="#1E40AF" font-family="sans-serif">H = 30 cm</text>'
+        +'<line x1="80" y1="82" x2="100" y2="82" stroke="#1550A0" stroke-width="1.5" stroke-dasharray="3,2"/>'
+        +'<text x="70" y="86" text-anchor="end" font-size="8" fill="#1550A0" font-family="sans-serif">Niveau initial</text>'
+        +'<line x1="80" y1="102" x2="100" y2="102" stroke="#D97706" stroke-width="1.5" stroke-dasharray="3,2"/>'
+        +'<text x="70" y="106" text-anchor="end" font-size="8" fill="#D97706" font-family="sans-serif">Niveau t+30 min</text>'
+        +'<line x1="140" y1="150" x2="140" y2="175" stroke="#0891B2" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#pg1)"/>'
+        +'<line x1="120" y1="155" x2="120" y2="175" stroke="#0891B2" stroke-width="1" stroke-dasharray="2,2" opacity="0.6" marker-end="url(#pg1)"/>'
+        +'<line x1="160" y1="155" x2="160" y2="175" stroke="#0891B2" stroke-width="1" stroke-dasharray="2,2" opacity="0.6" marker-end="url(#pg1)"/>'
+        +'<text x="210" y="165" font-size="8" fill="#0891B2" font-family="sans-serif">Infiltration K</text>'
+        +'<line x1="185" y1="82" x2="185" y2="102" stroke="#64748B" stroke-width="1.5"/>'
+        +'<line x1="180" y1="82" x2="190" y2="82" stroke="#64748B" stroke-width="1.5"/>'
+        +'<line x1="180" y1="102" x2="190" y2="102" stroke="#64748B" stroke-width="1.5"/>'
+        +'<text x="200" y="95" font-size="9" fill="#64748B" font-family="sans-serif">ΔH = 30 mm</text>'
+        +'<text x="140" y="193" text-anchor="middle" font-size="8" fill="#92400E" font-family="sans-serif">K = 30 / T (mm/min) · T = durée descente de 30 mm</text>'
+        +'</svg>',
       norme:'DTU 64.1 — Annexe E · Arrêté 07/09/2009 · Guide SPANC',
       materiel:'Tarière 10 cm · Seau 10 L · Règle graduée mm · Chronomètre · Carnet de terrain',
       precautions:'Ne pas tester sol gelé ou saturé · Distance min. 5 m entre 2 tests · Réaliser 3 tests minimum par site',
@@ -43,6 +67,28 @@ var OUTILS_DATA = {
         {val:'Nappe entre 0,70 et 1,0 m', label:'Limite', t:'warn', action:'Tertre recommandé · Vérifier en hautes eaux'},
         {val:'Nappe > 1,0 m du fond filière', label:'Conforme', t:'ok', action:'Tranchées ou filtre à sable possible selon K'},
       ],
+      svg: '<svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px;height:auto;display:block;margin:0 auto">'
+        +'<rect x="0" y="0" width="280" height="200" fill="none"/>'
+        +'<rect x="10" y="0" width="260" height="80" fill="#FEF9C3" opacity="0.5" rx="2"/>'
+        +'<text x="140" y="30" text-anchor="middle" font-size="9" fill="#92400E" font-family="sans-serif">Sol non saturé</text>'
+        +'<rect x="10" y="80" width="260" height="10" fill="#92400E" opacity="0.2"/>'
+        +'<text x="25" y="88" font-size="8" fill="#92400E" font-family="sans-serif">Surface du sol</text>'
+        +'<rect x="10" y="130" width="260" height="70" fill="#BFDBFE" opacity="0.4" rx="0 0 2 2"/>'
+        +'<line x1="10" y1="130" x2="270" y2="130" stroke="#0891B2" stroke-width="2" stroke-dasharray="6,3"/>'
+        +'<text x="25" y="125" font-size="9" fill="#0891B2" font-family="sans-serif" font-weight="700">Niveau nappe — mesure critique</text>'
+        +'<rect x="125" y="10" width="10" height="170" rx="3" fill="#E6EEF8" stroke="#1550A0" stroke-width="1.5"/>'
+        +'<rect x="126" y="115" width="8" height="55" fill="none" stroke="#1550A0" stroke-width="1" stroke-dasharray="2,2"/>'
+        +'<text x="140" y="190" text-anchor="middle" font-size="8" fill="#1550A0" font-family="sans-serif">Tube PVC perforé</text>'
+        +'<line x1="135" y1="50" x2="135" y2="130" stroke="#64748B" stroke-width="1.5"/>'
+        +'<text x="145" y="55" font-size="8" fill="#64748B" font-family="sans-serif">Câble sonde</text>'
+        +'<circle cx="135" cy="135" r="6" fill="#0891B2" stroke="#1E40AF" stroke-width="1.5"/>'
+        +'<text x="150" y="140" font-size="8" fill="#1E40AF" font-family="sans-serif">Flotteur</text>'
+        +'<line x1="195" y1="80" x2="195" y2="130" stroke="#DC2626" stroke-width="1.5"/>'
+        +'<line x1="190" y1="80" x2="200" y2="80" stroke="#DC2626" stroke-width="1.5"/>'
+        +'<line x1="190" y1="130" x2="200" y2="130" stroke="#DC2626" stroke-width="1.5"/>'
+        +'<text x="210" y="108" font-size="9" fill="#DC2626" font-family="sans-serif" font-weight="700">h nappe</text>'
+        +'<text x="210" y="118" font-size="8" fill="#DC2626" font-family="sans-serif">≥ 0,70 m requis</text>'
+        +'</svg>',
       norme:'Arrêté 07/09/2009 Art. 7 · DTU 64.1 § 5.2',
       materiel:'Tarière ou foreuse manuelle · Tubes PVC perforés Ø 50–100 mm · Sonde de niveau électroacoustique · Décamètre',
       precautions:'Mesurer obligatoirement en période de hautes eaux · Protéger le piézomètre contre la pollution de surface',
@@ -110,6 +156,26 @@ var OUTILS_DATA = {
         {val:'Défaut fonctionnel (dépôts, contre-pente)', label:'Curage', t:'warn', action:'Curage haute pression + contre-inspection'},
         {val:'Aucun défaut significatif', label:'Bon état', t:'ok', action:'Prochaine ITV selon programme (5–10 ans)'},
       ],
+      svg: '<svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px;height:auto;display:block;margin:0 auto">'
+        +'<defs><marker id="itva" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#1550A0"/></marker></defs>'
+        +'<ellipse cx="150" cy="90" rx="145" ry="60" fill="#E6EEF8" stroke="#1550A0" stroke-width="2"/>'
+        +'<ellipse cx="150" cy="90" rx="130" ry="48" fill="#F8FAFC" stroke="none"/>'
+        +'<rect x="30" y="140" width="240" height="18" fill="#D4A574" opacity="0.5"/>'
+        +'<text x="150" y="152" text-anchor="middle" font-size="8" fill="#92400E" font-family="sans-serif">Fond conduite — dépôts</text>'
+        +'<rect x="55" y="78" width="50" height="24" rx="4" fill="#1550A0"/>'
+        +'<circle cx="70" cy="90" r="7" fill="#3B82F6" stroke="white" stroke-width="1.5"/>'
+        +'<text x="80" y="86" font-size="7" fill="white" font-family="sans-serif">LED</text>'
+        +'<text x="80" y="100" font-size="7" fill="#93C5FD" font-family="sans-serif">CAM</text>'
+        +'<line x1="105" y1="90" x2="45" y2="90" stroke="#64748B" stroke-width="2"/>'
+        +'<text x="30" y="72" text-anchor="middle" font-size="8" fill="#64748B" font-family="sans-serif">Câble</text>'
+        +'<polygon points="148,58 152,58 155,88 145,88" fill="#FEF3C7" stroke="#D97706" stroke-width="1" opacity="0.8"/>'
+        +'<text x="200" y="55" font-size="8" fill="#D97706" font-family="sans-serif">Fissure → code NF EN 13508</text>'
+        +'<line x1="182" y1="57" x2="157" y2="60" stroke="#D97706" stroke-width="1" stroke-dasharray="2,2"/>'
+        +'<rect x="200" y="72" width="30" height="14" rx="3" fill="#FEE2E2" stroke="#DC2626" stroke-width="1"/>'
+        +'<text x="215" y="82" text-anchor="middle" font-size="7" fill="#DC2626" font-family="sans-serif">Racine</text>'
+        +'<line x1="200" y1="78" x2="185" y2="82" stroke="#DC2626" stroke-width="1" stroke-dasharray="2,2"/>'
+        +'<text x="150" y="148" text-anchor="middle" font-size="7" fill="#1550A0" font-family="sans-serif">Vue caméra — cotation défauts NF EN 13508-2</text>'
+        +'</svg>',
       norme:'NF EN 13508-2 · NF EN 752 · DTU 64.1 · Règlement d\'assainissement local',
       materiel:'Robot ITV (tracteur + caméra Ø 150–1200 mm) · Centrale d\'acquisition · Laptop logiciel cotation · Groupes électrogène · EPI réseau',
       precautions:'Neutralisation du réseau obligatoire en amont · Détection gaz (H2S, O2, CH4, CO) · 2 personnes minimum en surface',
@@ -132,6 +198,25 @@ var OUTILS_DATA = {
         {val:'Débit nocturne anormal (forte pluie sèche)', label:'Eaux parasites', t:'warn', action:'Campagne DIRD · Secteur par secteur'},
         {val:'Mesure stable et cohérente', label:'Fiable', t:'ok', action:'Enregistrement en continu possible'},
       ],
+      svg: '<svg viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px;height:auto;display:block;margin:0 auto">'
+        +'<defs><marker id="usa" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><polygon points="0 0,5 2.5,0 5" fill="#1550A0"/></marker>'
+        +'<marker id="usb" markerWidth="5" markerHeight="5" refX="1" refY="2.5" orient="auto"><polygon points="5 0,0 2.5,5 5" fill="#059669"/></marker></defs>'
+        +'<ellipse cx="150" cy="85" rx="140" ry="65" fill="#E6EEF8" stroke="#1550A0" stroke-width="2.5"/>'
+        +'<ellipse cx="150" cy="85" rx="125" ry="52" fill="#BFDBFE" opacity="0.6"/>'
+        +'<text x="150" y="89" text-anchor="middle" font-size="10" fill="#1E40AF" font-family="sans-serif" font-weight="700">Écoulement</text>'
+        +'<line x1="25" y1="85" x2="275" y2="85" stroke="#1550A0" stroke-width="2.5" marker-end="url(#usa)"/>'
+        +'<rect x="10" y="72" width="22" height="26" rx="3" fill="#1550A0"/>'
+        +'<text x="21" y="88" text-anchor="middle" font-size="7" fill="white" font-family="sans-serif" font-weight="700">T1</text>'
+        +'<rect x="268" y="72" width="22" height="26" rx="3" fill="#059669"/>'
+        +'<text x="279" y="88" text-anchor="middle" font-size="7" fill="white" font-family="sans-serif" font-weight="700">T2</text>'
+        +'<line x1="32" y1="80" x2="268" y2="75" stroke="#1550A0" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#usa)"/>'
+        +'<line x1="268" y1="95" x2="32" y2="91" stroke="#059669" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#usb)"/>'
+        +'<text x="150" y="68" text-anchor="middle" font-size="8" fill="#1550A0" font-family="sans-serif">→ t_aval (T1→T2 dans sens écoulement)</text>'
+        +'<text x="150" y="105" text-anchor="middle" font-size="8" fill="#059669" font-family="sans-serif">← t_amont (T2→T1 contre écoulement)</text>'
+        +'<text x="150" y="128" text-anchor="middle" font-size="9" fill="#64748B" font-family="sans-serif" font-weight="700">V = k × (t_amont − t_aval) / (t_amont × t_aval)</text>'
+        +'<text x="150" y="143" text-anchor="middle" font-size="8" fill="#64748B" font-family="sans-serif">Montage Z : capteurs face à face · Montage V : réflexion paroi</text>'
+        +'<text x="150" y="158" text-anchor="middle" font-size="8" fill="#D97706" font-family="sans-serif">⚠ Remplissage > 70 % requis · Profil turbulent stabilisé (10D amont)</text>'
+        +'</svg>',
       norme:'NF EN ISO 6416 · Guide Astee métrologie 2021',
       materiel:'Débitmètre ultrasonique (ex. Flexim, Controlotron) · Capteurs adaptés au DN · Gel couplant · Logger intégré · Câble USB/Bluetooth',
       precautions:'Ne fonctionne pas sur conduite vide ou bimétallique · Bulles d\'air = erreur mesure · Température fluide < 130°C',
@@ -153,6 +238,28 @@ var OUTILS_DATA = {
         {val:'H2S 10–50 ppm ou CH4 > 10% LIE', label:'Risque élevé', t:'warn', action:'Ventilation forcée min. 15 min · Masque ARI'},
         {val:'O2 > 19,5% · H2S < 10 ppm', label:'Sécurisé', t:'ok', action:'Intervention possible avec EPI complets'},
       ],
+      svg: '<svg viewBox="0 0 280 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px;height:auto;display:block;margin:0 auto">'
+        +'<ellipse cx="140" cy="95" rx="130" ry="65" fill="#E6EEF8" stroke="#1550A0" stroke-width="2"/>'
+        +'<ellipse cx="140" cy="95" rx="115" ry="53" fill="#F8FAFC"/>'
+        +'<rect x="25" y="140" width="230" height="18" fill="#D4A574" opacity="0.4"/>'
+        +'<text x="140" y="152" text-anchor="middle" font-size="8" fill="#92400E" font-family="sans-serif">Radier — fond égout</text>'
+        +'<rect x="52" y="58" width="14" height="25" rx="3" fill="#D97706"/>'
+        +'<text x="59" y="52" text-anchor="middle" font-size="7" fill="#D97706" font-family="sans-serif">H₂S</text>'
+        +'<text x="59" y="96" text-anchor="middle" font-size="7" fill="#D97706" font-family="sans-serif">fond</text>'
+        +'<text x="59" y="105" text-anchor="middle" font-size="7" fill="#D97706" font-family="sans-serif">(lourd)</text>'
+        +'<rect x="126" y="40" width="14" height="35" rx="3" fill="#DC2626"/>'
+        +'<text x="133" y="34" text-anchor="middle" font-size="7" fill="#DC2626" font-family="sans-serif">CH₄</text>'
+        +'<text x="133" y="85" text-anchor="middle" font-size="7" fill="#DC2626" font-family="sans-serif">voûte</text>'
+        +'<text x="133" y="94" text-anchor="middle" font-size="7" fill="#DC2626" font-family="sans-serif">(léger)</text>'
+        +'<rect x="190" y="52" width="14" height="28" rx="3" fill="#64748B"/>'
+        +'<text x="197" y="46" text-anchor="middle" font-size="7" fill="#64748B" font-family="sans-serif">CO₂</text>'
+        +'<rect x="90" y="70" width="30" height="48" rx="5" fill="#1550A0"/>'
+        +'<text x="105" y="90" text-anchor="middle" font-size="8" fill="white" font-family="sans-serif" font-weight="700">4 GAZ</text>'
+        +'<text x="105" y="103" text-anchor="middle" font-size="7" fill="#93C5FD" font-family="sans-serif">DÉTECT.</text>'
+        +'<circle cx="105" cy="113" r="4" fill="#4ADE80"/>'
+        +'<text x="80" y="132" font-size="7" fill="#059669" font-family="sans-serif">O₂ LED verte = OK</text>'
+        +'<text x="140" y="165" text-anchor="middle" font-size="8" fill="#DC2626" font-family="sans-serif">⚠ H₂S : seuil d\'alerte 5 ppm · CH₄ LIE 5 % · O₂ mini 19,5 %</text>'
+        +'</svg>',
       norme:'Code du travail R.4412-149 · NF EN 61779 · Recommandation INRS R.447',
       materiel:'Détecteur 4 gaz (O2, H2S, CO, CH4/Ex) · Sonde déportée 1,5 m · Pompe d\'aspiration intégrée · Étalons gaz en coffret',
       precautions:'Jamais entrer dans un réseau sans mesure · Travailleur isolé interdit · Équipement téléphonique obligatoire',
@@ -174,6 +281,27 @@ var OUTILS_DATA = {
         {val:'Pic faible ou multiple', label:'Incertain', t:'warn', action:'Changer la position des capteurs · Essai nuit (moins de bruit)'},
         {val:'Pas de signal', label:'Hors portée', t:'warn', action:'Réduire la distance inter-capteur · Vérifier pression > 2 bar'},
       ],
+      svg: '<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px;height:auto;display:block;margin:0 auto">'
+        +'<rect x="10" y="55" width="280" height="40" rx="8" fill="#E6EEF8" stroke="#1550A0" stroke-width="2.5"/>'
+        +'<text x="155" y="80" text-anchor="middle" font-size="9" fill="#1E40AF" font-family="sans-serif" font-weight="700">Conduite AEP sous pression</text>'
+        +'<rect x="130" y="42" width="10" height="15" fill="#DC2626"/>'
+        +'<circle cx="135" cy="40" r="5" fill="#FCA5A5" stroke="#DC2626" stroke-width="2"/>'
+        +'<text x="135" y="30" text-anchor="middle" font-size="8" fill="#DC2626" font-family="sans-serif" font-weight="700">FUITE</text>'
+        +'<rect x="22" y="40" width="20" height="30" rx="4" fill="#1550A0"/>'
+        +'<text x="32" y="58" text-anchor="middle" font-size="7" fill="white" font-family="sans-serif">C1</text>'
+        +'<rect x="258" y="40" width="20" height="30" rx="4" fill="#059669"/>'
+        +'<text x="268" y="58" text-anchor="middle" font-size="7" fill="white" font-family="sans-serif">C2</text>'
+        +'<path d="M 135 40 Q 80 20 32 55" stroke="#1550A0" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>'
+        +'<path d="M 135 40 Q 190 20 268 55" stroke="#059669" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>'
+        +'<text x="75" y="18" text-anchor="middle" font-size="7" fill="#1550A0" font-family="sans-serif">t₁ → Capteur 1</text>'
+        +'<text x="220" y="18" text-anchor="middle" font-size="7" fill="#059669" font-family="sans-serif">t₂ → Capteur 2</text>'
+        +'<rect x="115" y="100" width="40" height="36" rx="5" fill="#1550A0"/>'
+        +'<text x="135" y="117" text-anchor="middle" font-size="7" fill="white" font-family="sans-serif" font-weight="700">CORRÉLA-</text>'
+        +'<text x="135" y="127" text-anchor="middle" font-size="7" fill="white" font-family="sans-serif" font-weight="700">TEUR</text>'
+        +'<line x1="32" y1="70" x2="115" y2="115" stroke="#1550A0" stroke-width="1" stroke-dasharray="3,2"/>'
+        +'<line x1="268" y1="70" x2="155" y2="115" stroke="#059669" stroke-width="1" stroke-dasharray="3,2"/>'
+        +'<text x="155" y="145" text-anchor="middle" font-size="8" fill="#64748B" font-family="sans-serif">d = (Δt × c) / 2 · c = célérité onde dans conduite (~1200 m/s fonte)</text>'
+        +'</svg>',
       norme:'Guide SHF recherche fuites 2019 · NF EN 805',
       materiel:'Corrélateur (ex. SebaKMT, Gutermann) · 2 capteurs magnétiques · Câbles ou liaison radio · Ordinateur portatif',
       precautions:'Efficacité réduite sur PE et fonte (amortissement élevé) · Nécessite pression de service · Résultats perturbés par bruits mécaniques proches',
@@ -325,6 +453,28 @@ var OUTILS_DATA = {
         {val:'Dérive sonde > 5 cm', label:'Anomalie capteur', t:'warn', action:'Recaler le zéro · Vérifier étanchéité et colmatage du tube'},
         {val:'Signal stable et cohérent', label:'Mesure fiable', t:'ok', action:'Archiver · Alimenter la banque HYDRO'},
       ],
+      svg: '<svg viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px;height:auto;display:block;margin:0 auto">'
+        +'<rect x="0" y="100" width="280" height="80" fill="#BFDBFE" opacity="0.5" rx="0 0 4 4"/>'
+        +'<line x1="0" y1="100" x2="280" y2="100" stroke="#0891B2" stroke-width="2"/>'
+        +'<text x="140" y="125" text-anchor="middle" font-size="9" fill="#0891B2" font-family="sans-serif" font-weight="700">Niveau d\'eau (H)</text>'
+        +'<rect x="0" y="155" width="280" height="25" fill="#D4A574" opacity="0.5"/>'
+        +'<text x="140" y="168" text-anchor="middle" font-size="8" fill="#92400E" font-family="sans-serif">Fond / lit de la rivière</text>'
+        +'<rect x="60" y="10" width="12" height="150" rx="3" fill="#64748B"/>'
+        +'<rect x="56" y="0" width="20" height="12" rx="3" fill="#1550A0"/>'
+        +'<text x="66" y="9" text-anchor="middle" font-size="7" fill="white" font-family="sans-serif">DATA</text>'
+        +'<text x="40" y="18" text-anchor="end" font-size="7" fill="#1550A0" font-family="sans-serif">→ 4G/SCADA</text>'
+        +'<line x1="56" y1="100" x2="30" y2="100" stroke="#64748B" stroke-width="1.5" stroke-dasharray="3,2"/>'
+        +'<line x1="56" y1="155" x2="30" y2="155" stroke="#64748B" stroke-width="1.5" stroke-dasharray="3,2"/>'
+        +'<line x1="35" y1="100" x2="35" y2="155" stroke="#64748B" stroke-width="1.5"/>'
+        +'<text x="18" y="130" text-anchor="middle" font-size="8" fill="#DC2626" font-family="sans-serif" font-weight="700">H</text>'
+        +'<circle cx="66" cy="160" r="6" fill="#1550A0" stroke="#0C4A6E" stroke-width="1.5"/>'
+        +'<text x="85" y="165" font-size="7" fill="#1550A0" font-family="sans-serif">Sonde piézo Ø 22 mm</text>'
+        +'<rect x="185" y="60" width="70" height="50" rx="4" fill="#F1F5F9" stroke="#64748B" stroke-width="1.5"/>'
+        +'<text x="220" y="82" text-anchor="middle" font-size="7" fill="#64748B" font-family="sans-serif" font-weight="700">COURBE</text>'
+        +'<text x="220" y="93" text-anchor="middle" font-size="7" fill="#64748B" font-family="sans-serif">H = f(t)</text>'
+        +'<polyline points="190,105 205,95 215,98 225,85 240,88 250,75" fill="none" stroke="#1550A0" stroke-width="1.5"/>'
+        +'<text x="220" y="125" text-anchor="middle" font-size="8" fill="#64748B" font-family="sans-serif">Enregistrement continu 15 min</text>'
+        +'</svg>',
       norme:'NF ISO 748 · Guide SCHAPI hydrométrie · Réseau HYDRO Banque nationale',
       materiel:'Sonde piézorésistive (ex. OTT CTD, Levelogger) · Câble de communication · Boîtier enregistreur · Barre de guide PVC · Câble anti-vol inox',
       precautions:'Fixer solidement contre les crues (câble inox + cheville béton) · Vérifier colmatage du tube après chaque crue · Étalonner avec manomètre de précision annuellement',
@@ -346,6 +496,26 @@ var OUTILS_DATA = {
         {val:'Incertitude jaugeage > 10%', label:'Mesure peu fiable', t:'warn', action:'Recommencer · Corriger la section · Améliorer le profil'},
         {val:'Jaugeage cohérent avec limnimètre', label:'Fiable', t:'ok', action:'Archiver en banque HYDRO · Alimenter la courbe de tarage'},
       ],
+      svg: '<svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px;height:auto;display:block;margin:0 auto">'
+        +'<defs><marker id="cema" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#1550A0"/></marker></defs>'
+        +'<rect x="0" y="50" width="300" height="110" fill="#BFDBFE" opacity="0.5"/>'
+        +'<line x1="0" y1="50" x2="300" y2="50" stroke="#0891B2" stroke-width="2"/>'
+        +'<text x="150" y="40" text-anchor="middle" font-size="9" fill="#0891B2" font-family="sans-serif">Surface libre</text>'
+        +'<rect x="0" y="160" width="300" height="20" fill="#D4A574" opacity="0.5"/>'
+        +'<text x="150" y="172" text-anchor="middle" font-size="8" fill="#92400E" font-family="sans-serif">Fond de la rivière</text>'
+        +'<line x1="10" y1="50" x2="290" y2="50" stroke="#1550A0" stroke-width="2.5" marker-end="url(#cema)"/>'
+        +'<line x1="10" y1="100" x2="290" y2="100" stroke="#1550A0" stroke-width="2.5" marker-end="url(#cema)"/>'
+        +'<text x="60" y="97" font-size="8" fill="#1550A0" font-family="sans-serif">V (m/s)</text>'
+        +'<line x1="10" y1="150" x2="290" y2="150" stroke="#1550A0" stroke-width="2" marker-end="url(#cema)"/>'
+        +'<rect x="138" y="88" width="24" height="24" rx="4" fill="#1550A0"/>'
+        +'<text x="150" y="103" text-anchor="middle" font-size="8" fill="white" font-family="sans-serif" font-weight="700">EM</text>'
+        +'<line x1="150" y1="40" x2="150" y2="88" stroke="#64748B" stroke-width="2"/>'
+        +'<text x="165" y="75" font-size="8" fill="#64748B" font-family="sans-serif">Perche</text>'
+        +'<line x1="150" y1="112" x2="150" y2="160" stroke="#64748B" stroke-width="2" stroke-dasharray="3,2"/>'
+        +'<text x="180" y="138" font-size="8" fill="#64748B" font-family="sans-serif">h = 0,4×H</text>'
+        +'<text x="180" y="148" font-size="8" fill="#64748B" font-family="sans-serif">(monoponte)</text>'
+        +'<text x="150" y="178" text-anchor="middle" font-size="8" fill="#64748B" font-family="sans-serif">V_moy ≈ V_{0,4H} · Q = V_moy × A_section</text>'
+        +'</svg>',
       norme:'NF ISO 748 · NF EN ISO 6416 · Guide OFB jaugeages de crue',
       materiel:'Courantomètre EM (ex. OTT MF Pro, Seba FlowSens) · Perche télescopique · Télémètre laser · Carnet de terrain waterproof · Moulinet de secours',
       precautions:'Sécurité crue : harnais + corde de sécurité · Ne pas jauger si V > 1,5 m/s à gué · Crue > 2 ans = jaugeage en bateau ou ADCP',
@@ -368,6 +538,27 @@ var OUTILS_DATA = {
         {val:'IBGN 9–12', label:'Qualité moyenne', t:'warn', action:'Pression identifiée · Plan d\'action restauration'},
         {val:'IBGN < 9', label:'Mauvaise qualité', t:'danger', action:'Masse d\'eau dégradée · Mesures correctrices urgentes'},
       ],
+      svg: '<svg viewBox="0 0 280 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px;height:auto;display:block;margin:0 auto">'
+        +'<defs><marker id="surba" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#1550A0"/></marker></defs>'
+        +'<rect x="0" y="40" width="280" height="130" fill="#BFDBFE" opacity="0.4"/>'
+        +'<line x1="0" y1="40" x2="280" y2="40" stroke="#0891B2" stroke-width="2"/>'
+        +'<text x="140" y="30" text-anchor="middle" font-size="9" fill="#0891B2" font-family="sans-serif">Courant →</text>'
+        +'<line x1="50" y1="40" x2="200" y2="40" stroke="#1550A0" stroke-width="2" marker-end="url(#surba)"/>'
+        +'<rect x="90" y="40" width="60" height="60" fill="none" stroke="#059669" stroke-width="2.5"/>'
+        +'<text x="120" y="75" text-anchor="middle" font-size="8" fill="#059669" font-family="sans-serif" font-weight="700">0,09 m²</text>'
+        +'<text x="120" y="87" text-anchor="middle" font-size="7" fill="#059669" font-family="sans-serif">30×30 cm</text>'
+        +'<polygon points="150,40 210,60 210,100 150,100" fill="#D1FAE5" stroke="#059669" stroke-width="2" opacity="0.8"/>'
+        +'<text x="185" y="78" text-anchor="middle" font-size="8" fill="#065F46" font-family="sans-serif">Filet</text>'
+        +'<text x="185" y="88" text-anchor="middle" font-size="7" fill="#065F46" font-family="sans-serif">500 μm</text>'
+        +'<rect x="85" y="95" width="70" height="10" fill="#D4A574" stroke="#92400E" stroke-width="1.5"/>'
+        +'<text x="120" y="120" text-anchor="middle" font-size="8" fill="#92400E" font-family="sans-serif">Substrat — grattage 1 min</text>'
+        +'<rect x="225" y="60" width="40" height="55" rx="4" fill="#065F46" stroke="#059669" stroke-width="1.5"/>'
+        +'<text x="245" y="82" text-anchor="middle" font-size="7" fill="white" font-family="sans-serif" font-weight="700">MACRO-</text>'
+        +'<text x="245" y="92" text-anchor="middle" font-size="7" fill="white" font-family="sans-serif" font-weight="700">INVERT.</text>'
+        +'<text x="245" y="108" text-anchor="middle" font-size="7" fill="#D1FAE5" font-family="sans-serif">IBG-DCE</text>'
+        +'<text x="140" y="155" text-anchor="middle" font-size="8" fill="#64748B" font-family="sans-serif">Cadre 30×30 cm · Filet 500 μm · 3 min grattage/maille</text>'
+        +'<text x="140" y="167" text-anchor="middle" font-size="8" fill="#059669" font-family="sans-serif">Notation IBG-DCE · Indice Biologique Global NF T90-350</text>'
+        +'</svg>',
       norme:'NF T90-333 (IBGN) · Norme NF EN 27828 · Protocole DCE 2000/60/CE · Guide OFB bioévaluation',
       materiel:'Cadre Surber 0,05 m² + filet 500 µm · Bocaux à vis 500 mL · Alcool 70° ou formol 4% · Pincette fine · Loupe binoculaire · Clé de détermination Tachet',
       precautions:'EPI imperméabilisation + gilet de sauvetage · Jamais seul · Congélation rapide si transport > 24 h · Formol : utilisation en extérieur uniquement',
@@ -409,6 +600,30 @@ var OUTILS_DATA = {
         {val:'Variabilité inter-passages > 10%', label:'Incertitude élevée', t:'warn', action:'Recommencer · Vérifier turbulences et chenal de navigation'},
         {val:'Débit ADCP cohérent avec tarage', label:'Fiable', t:'ok', action:'Archiver en banque HYDRO · Exporter pour modélisation'},
       ],
+      svg: '<svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px;height:auto;display:block;margin:0 auto">'
+        +'<rect x="0" y="30" width="300" height="130" fill="#BFDBFE" opacity="0.4"/>'
+        +'<line x1="0" y1="30" x2="300" y2="30" stroke="#0891B2" stroke-width="2"/>'
+        +'<text x="150" y="20" text-anchor="middle" font-size="9" fill="#0891B2" font-family="sans-serif">Surface libre · embarcation ou câble</text>'
+        +'<rect x="0" y="155" width="300" height="25" fill="#D4A574" opacity="0.5"/>'
+        +'<text x="150" y="168" text-anchor="middle" font-size="8" fill="#92400E" font-family="sans-serif">Fond de rivière</text>'
+        +'<rect x="130" y="20" width="40" height="20" rx="4" fill="#1550A0"/>'
+        +'<text x="150" y="34" text-anchor="middle" font-size="8" fill="white" font-family="sans-serif" font-weight="700">ADCP</text>'
+        +'<line x1="150" y1="40" x2="110" y2="110" stroke="#1550A0" stroke-width="1.5" stroke-dasharray="4,2"/>'
+        +'<line x1="150" y1="40" x2="150" y2="120" stroke="#1550A0" stroke-width="1.5" stroke-dasharray="4,2"/>'
+        +'<line x1="150" y1="40" x2="190" y2="110" stroke="#1550A0" stroke-width="1.5" stroke-dasharray="4,2"/>'
+        +'<line x1="150" y1="40" x2="130" y2="130" stroke="#64748B" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>'
+        +'<text x="90" y="125" font-size="8" fill="#1550A0" font-family="sans-serif">Fx1</text>'
+        +'<text x="145" y="135" font-size="8" fill="#1550A0" font-family="sans-serif">Fx2</text>'
+        +'<text x="185" y="125" font-size="8" fill="#1550A0" font-family="sans-serif">Fx3</text>'
+        +'<text x="115" y="55" font-size="7" fill="#64748B" font-family="sans-serif">Cellules de mesure</text>'
+        +'<circle cx="108" cy="60" r="3" fill="#1550A0" opacity="0.6"/>'
+        +'<circle cx="120" cy="72" r="3" fill="#1550A0" opacity="0.6"/>'
+        +'<circle cx="132" cy="84" r="3" fill="#1550A0" opacity="0.6"/>'
+        +'<circle cx="144" cy="96" r="3" fill="#1550A0" opacity="0.6"/>'
+        +'<text x="230" y="70" font-size="7" fill="#1550A0" font-family="sans-serif">Profil de vitesse</text>'
+        +'<polyline points="215,45 230,55 225,70 235,85 228,100 238,115 232,130 242,145" fill="none" stroke="#1550A0" stroke-width="1.5"/>'
+        +'<text x="150" y="178" text-anchor="middle" font-size="7" fill="#64748B" font-family="sans-serif">3–4 faisceaux · profils V par cellules 0,10–1,0 m · Q = Σ Vᵢ × Aᵢ</text>'
+        +'</svg>',
       norme:'ISO/TS 24154 · NF EN ISO 6416 · Guide OFB ADCP 2020 · Protocole SCHAPI',
       materiel:'ADCP (ex. Teledyne RiverPro, SonTek RiverSurveyor) · Catamaran télécommandé ou motorisé · GPS RTK · Logiciel WinRiver II ou QRev · Gilet sauvetage',
       precautions:'Profondeur minimum 0,50 m · Ne pas utiliser si V > 4 m/s · Risques de choc catamaran en crue · Formation obligatoire (certification OFB recommandée)',
@@ -485,6 +700,8 @@ function renderOutilsTerrain(module) {
           + '<div style="font-size:10px;font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--s-2)">Principe de fonctionnement</div>'
           + '<div style="font-size:var(--t-sm);color:var(--c-text-2);line-height:1.7;background:var(--c-surface-2);border-radius:var(--r-md);padding:var(--s-3)">' + o.principe + '</div>'
         + '</div>'
+
+        + (o.svg ? '<div style="margin-bottom:var(--s-3);text-align:center;background:var(--c-surface-2);border-radius:var(--r-md);padding:var(--s-3)">' + o.svg + '</div>' : '')
 
         + '<div style="margin-bottom:var(--s-3)">'
           + '<div style="font-size:10px;font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--s-2)">Protocole terrain</div>'
