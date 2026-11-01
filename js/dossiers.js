@@ -8,7 +8,7 @@ function renderDossiersHub() {
   var mc = document.getElementById('main-content');
   if (!mc) return;
 
-  var html = '<div class="module-hero" style="--cat-color:#7C3AED">'
+  var html = '<div class="module-hero" style="--cat-color:#7C3AED;background-image:linear-gradient(to right,#7C3AED 38%,rgba(124,58,237,0.88) 54%,rgba(124,58,237,0.35) 75%,transparent 92%),url(\'./images/dossiers-banner.png\');background-size:cover;background-position:right center;background-color:#7C3AED">'
     + '<button class="mh-back-btn" onclick="goHome()">‹ Accueil</button>'
     + '<span class="mh-icon">📁</span>'
     + '<div class="mh-title">Dossiers perso</div>'
