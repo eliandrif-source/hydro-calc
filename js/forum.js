@@ -139,7 +139,7 @@ async function _fRenderSalons() {
       +'<div style="font-size:11px;color:var(--c-text-3);line-height:1.5">'+s.desc+'</div>'
       +'</div>';
   }).join('');
-  mc.innerHTML = '<div class="module-hero" style="background:linear-gradient(135deg,#1565C0,#0D47A1)">'
+  mc.innerHTML = '<div class="module-hero" style="background-image:linear-gradient(to right,#1565C0 38%,rgba(21,101,192,0.88) 54%,rgba(21,101,192,0.35) 75%,transparent 92%),url(\'./images/forum-banner.png\');background-size:cover;background-position:right center;background-color:#1565C0">'
     +'<span class="mh-icon">💬</span><div class="mh-title">Forum communautaire</div>'
     +'<div class="mh-sub">Choisissez un salon · Questions · Réponses · Entraide</div></div>'
     +'<div style="padding:var(--s-3) var(--s-4)">'
