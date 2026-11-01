@@ -17404,6 +17404,10 @@ async function renderCoursChapitre(fId, aId, mId, cId) {
     + '<div data-cours-edit data-field="fiche.intro" style="font-size:12px;color:var(--c-text-3);line-height:1.7;font-style:italic">' + _coursAllowedTextHtml(fi.intro) + '</div>'
     + '</div></div>';
 
+  if (fi.schema) {
+    html += '<div style="padding:var(--s-3) var(--s-4) 0;text-align:center">' + fi.schema + '</div>';
+  }
+
   /* Cours complet — layout 2 colonnes desktop */
   var _sectionsHtml = '';
   var _sideHtml = '';
