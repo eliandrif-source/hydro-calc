@@ -4906,6 +4906,7 @@ const COURS_DATA = {
     ico: '🏞️',
     color: '#0E6BA8',
     colorl: '#E3F2FD',
+    bannerStyle: 'background-image:linear-gradient(to right,#0E6BA8 38%,rgba(14,107,168,0.88) 54%,rgba(14,107,168,0.35) 75%,transparent 92%),url(\'./images/gemapi-banner.png\');background-size:cover;background-position:right center;background-color:#0E6BA8',
     niveau: 'Professionnel',
     organisme: 'Formation continue — Collectivités',
     desc: 'Compétence obligatoire des EPCI à fiscalité propre depuis 2018 : gestion des milieux aquatiques et prévention des inondations. 20 chapitres du diagnostic territorial à la conduite de projet.',
