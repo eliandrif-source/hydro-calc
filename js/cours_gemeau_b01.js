@@ -457,7 +457,7 @@ var GEMEAU_B01 = {
         solution: 'Encadrement : Q=1,2 (h=0,68) et Q=2,1 (h=0,90)\nh(1,6) = 0,68 + (1,6-1,2)/(2,1-1,2) × (0,90-0,68)\n= 0,68 + (0,4/0,9) × 0,22 = 0,68 + 0,444 × 0,22 = 0,68 + 0,098 = 0,778 m\nNote : il serait préférable d\'ajuster la courbe de tarage par une loi puissance Q = a×h^n plutôt que par interpolation linéaire, car les courbes de tarage sont rarement linéaires.'
       }
     ]
-  }
+  },
 
   'GEMEAU-005': {
     id: 'GEMEAU-005',

@@ -341,725 +341,151 @@ const COURS_DATA = {
     bannerStyle: 'background-image:linear-gradient(to right,#1550A0 38%,rgba(21,80,160,0.88) 54%,rgba(21,80,160,0.35) 75%,transparent 92%),url(\'./images/lp-eau-banner.webp\');background-size:cover;background-position:right center;background-color:#1550A0',
     niveau: 'Bac+3',
     organisme: 'Universités — IUT',
-    desc: 'Spécialisation après BTS/BUT : exploitation réseau, traitement avancé, milieux aquatiques, droit de l\'eau. Souvent en alternance.',
+    desc: 'Spécialisation après BTS/BUT : hydraulique avancée, traitement des eaux, exploitation des réseaux, instrumentation, maintenance, projets. 90 chapitres Bac+3.',
     annees: [
       {
         id: 'an1',
-        name: 'Année de spécialisation (Bac+3)',
+        name: 'Parcours Licence Pro — 90 chapitres',
         matieres: [
 
-          /* ── Hydrologie appliquée ── */
-          { id: 'hydrologie', name: 'Hydrologie appliquée', ico: '⛰️', color: '#0A5090', colorl: '#E6EEF8', chapitres: [
-            {
-              id: 'hyd-lp-1',
-              titre: 'Cycle de l\'eau et bilans hydrologiques',
-              fiche: {
-                intro: 'Le cycle hydrologique décrit la circulation de l\'eau entre l\'atmosphère, la surface et le sous-sol. Le bilan hydrologique quantifie ces transferts à l\'échelle d\'un bassin versant.',
-                points: [
-                  '🌧️ Cycle : précipitations → interception (végétation) → ruissellement de surface → infiltration → percolation → nappe → exfiltration → cours d\'eau → évapotranspiration → atmosphère',
-                  '📐 Bassin versant (BV) : surface drainée par un cours d\'eau, délimitée par la ligne de partage des eaux (ligne de crête). Unité de gestion hydrologique',
-                  '⚖️ Bilan hydrologique : P = ETR + Q + ΔS',
-                  '   P = précipitations | ETR = évapotranspiration réelle | Q = ruissellement (débit) | ΔS = variation du stock (nappes, neige)',
-                  '💧 Coefficient d\'écoulement Ce = Q/P (sans unité). Varie de 0,05 (milieu aride) à 0,8 (montagne imperméable)',
-                  '🌿 ETP (Évapotranspiration Potentielle) : formule de Penman-Monteith (FAO) — dépend T°, humidité, vent, rayonnement',
-                  '📊 Données hydrométrie : stations de mesure (HYDRO, Vigicrues), courbes de tarage, module (débit moyen interannuel)',
-                  '🗺️ Module spécifique : débit par unité de surface du BV (L/s/km²) — compare les bassins entre eux',
-                ],
-                formules: [
-                  'P = ETR + Q + ΔS — bilan hydrologique (mm ou m³)',
-                  'Ce = Q / P — coefficient d\'écoulement (–)',
-                  'Module = débit moyen interannuel (m³/s ou L/s/km²)',
-                ],
-                sections: [
-                  {
-                    titre: "1. Le cycle hydrologique",
-                    ss: [
-                      {
-                        titre: "1.1. Les grands flux du cycle",
-                        texte: "<p>Le cycle hydrologique décrit la circulation permanente de l'eau entre l'atmosphère, la surface et le sous-sol. Les flux principaux sont : précipitations (P), évapotranspiration réelle (ETR), ruissellement de surface (Q), infiltration vers les nappes, et percolation vers les aquifères profonds.</p><p>L'interception par la végétation retient une partie des précipitations, qui s'évapore sans atteindre le sol. La rétention de surface remplit les dépressions avant le ruissellement. Ces pertes initiales peuvent représenter plusieurs millimètres par événement pluvieux.</p>",
-                      },
-                      {
-                        titre: "1.2. L'évapotranspiration",
-                        texte: "<p>L'<strong>ETP</strong> (évapotranspiration potentielle) est la quantité d'eau évaporée et transpirée si l'eau est disponible en quantité illimitée. La formule de Penman-Monteith (FAO) est la référence internationale — elle intègre température, humidité, vent et rayonnement solaire.</p><p>L'<strong>ETR</strong> (évapotranspiration réelle) est toujours ≤ ETP. Elle est limitée par la disponibilité en eau du sol. En France, ETR annuelle ≈ 400–600 mm selon les régions. La différence ETP − ETR mesure le déficit hydrique.</p>",
-                      },
-                    ],
-                  },
-                  {
-                    titre: "2. Le bilan hydrologique",
-                    ss: [
-                      {
-                        titre: "2.1. L'équation du bilan",
-                        texte: "<p>Le bilan hydrologique s'écrit P = ETR + Q + ΔS, où ΔS est la variation du stock (nappes, neige, humidité du sol). Sur une longue période (> 10 ans) et à l'échelle annuelle, ΔS → 0 et le bilan se réduit à Q = P − ETR.</p><p>Le bassin versant est l'unité naturelle de calcul du bilan. Ses limites sont définies par la ligne de partage des eaux topographique. Pour les bassins karstiques, les limites souterraines peuvent différer des limites topographiques.</p>",
-                      },
-                      {
-                        titre: "2.2. Coefficient d'écoulement et module",
-                        texte: "<p>Le <strong>coefficient d'écoulement</strong> Ce = Q/P est la fraction des précipitations qui s'écoule vers les cours d'eau. Il varie de 0,05 en milieu aride à 0,8 en montagne imperméable. En France métropolitaine, Ce moyen ≈ 0,3–0,5.</p><p>Le <strong>module</strong> est le débit moyen interannuel (m³/s). C'est la référence hydrologique d'une station. Le module spécifique (L/s/km²) permet de comparer des bassins de tailles différentes. Le module sert de base au calcul réglementaire du débit réservé (module/10).</p>",
-                      },
-                    ],
-                  },
-                ],
-                retenir: 'Bilan : P = ETR + Q + ΔS. Ce = Q/P. Le bassin versant = unité de gestion. Module = débit moyen interannuel. Données : banque HYDRO, Vigicrues.',
-              },
-              flashcards: [
-                { q: 'Formule du bilan hydrologique ?', r: 'P = ETR + Q + ΔS  (précipitations = évapotranspiration réelle + débit + variation de stock)', expl: 'Sur une longue période (> 10 ans) et à l\'échelle annuelle, ΔS ≈ 0. On peut alors écrire : Q = P – ETR, ce qui permet d\'estimer la ressource renouvelable.' },
-                { q: 'Comment est délimité un bassin versant ?', r: 'Par la ligne de partage des eaux : ligne reliant les points hauts (crêtes) séparant les eaux vers deux bassins différents. Délimitation sur carte topographique ou MNT', expl: 'Un bassin versant topographique peut différer d\'un bassin versant hydrogéologique (les eaux souterraines peuvent traverser une ligne de crête).' },
-                { q: 'Que représente le coefficient d\'écoulement Ce ?', r: 'Ce = Q/P : fraction des précipitations qui ruisselle vers les cours d\'eau. Ce varie de 0,05 (milieu aride) à 0,8 (montagne granitique imperméable)', expl: 'Le reste (1 – Ce) retourne à l\'atmosphère par évapotranspiration. En France métropolitaine, Ce moyen ≈ 0,3–0,5 selon les régions.' },
-                { q: 'Qu\'est-ce que le module d\'un cours d\'eau ?', r: 'Le débit moyen interannuel (m³/s). Calculé sur une longue série (> 20 ans). C\'est la valeur de référence pour caractériser une rivière', expl: 'Le module sert de base aux calculs réglementaires (débit réservé = module/10) et aux études d\'impact (prélèvements, rejets).' },
-                { q: 'Qu\'est-ce que la banque de données HYDRO ?', r: 'Base nationale des données hydrométriques (débits, niveaux) des cours d\'eau français. Gérée par le SCHAPI et les DREAL. Accès public via hubeau.eaufrance.fr', expl: 'HYDRO contient les chroniques de débits depuis parfois 1880. Indispensable pour les études hydrologiques (fréquence des crues, étiages de référence).' },
-                { q: 'Qu\'est-ce que l\'évapotranspiration potentielle (ETP) ?', r: 'Quantité d\'eau évaporée et transpirée par la végétation si l\'eau est disponible en quantité illimitée. ETP > ETR réelle si déficit hydrique', expl: 'En France : ETP annuelle ≈ 600–800 mm. La formule de Penman-Monteith (FAO) est la référence internationale. Elle intègre température, humidité relative, vent et rayonnement solaire.' },
-              ],
-              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
-  <rect width="280" height="148" rx="8" fill="#E6EEF8"/>
-  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#0A5090">Bilan hydrologique P = ETR + Q + ΔS</text>
-  <rect x="90" y="18" width="100" height="22" rx="4" fill="#0A5090"/>
-  <text x="140" y="33" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff" font-weight="bold">Précipitations P</text>
-  <defs><marker id="ar9" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#0A5090"/></marker></defs>
-  <line x1="140" y1="40" x2="140" y2="52" stroke="#0A5090" stroke-width="1.5" marker-end="url(#ar9)"/>
-  <text x="140" y="64" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#0A5090" font-weight="bold">Ce = Q / P — Coefficient d'écoulement</text>
-  <rect x="4" y="70" width="78" height="30" rx="4" fill="#1976D2" opacity=".85"/>
-  <text x="43" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">ETR</text>
-  <text x="43" y="93" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Évapo-transpiration</text>
-  <rect x="101" y="70" width="78" height="30" rx="4" fill="#0A5090" opacity=".85"/>
-  <text x="140" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Q — Débit</text>
-  <text x="140" y="93" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">vers cours d'eau</text>
-  <rect x="198" y="70" width="78" height="30" rx="4" fill="#1550A0" opacity=".85"/>
-  <text x="237" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">ΔS</text>
-  <text x="237" y="93" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Stock nappes/neige</text>
-  <rect x="8" y="106" width="264" height="36" rx="4" fill="#fff" stroke="#0A5090" stroke-width="1"/>
-  <text x="140" y="119" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A5090" font-weight="bold">Valeurs de référence</text>
-  <text x="140" y="130" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Ce France ≈ 0,3–0,5 · Module = débit moyen interannuel (m³/s)</text>
-  <text x="140" y="140" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">ETP Penman-Monteith · Données : HYDRO / Vigicrues (hubeau)</text>
-</svg>`,
-              exercice: {
-                enonce: 'Sur un bassin versant de 250 km², les mesures annuelles donnent : P = 950 mm, ETR = 580 mm, ΔS = 0. 1) Calculer Q moyen (mm/an). 2) Calculer le coefficient d\'écoulement Ce. 3) Convertir Q en m³/s (module). 4) En déduire le débit réservé légal aval.',
-                solution: '<strong>1) Q :</strong> Q = P − ETR − ΔS = 950 − 580 − 0 = <strong>370 mm/an</strong><br><strong>2) Ce :</strong> Ce = Q/P = 370/950 = <strong>0,39</strong> (39 % des pluies ruissellent)<br><strong>3) Module :</strong> Q = 0,370 m/an × 250×10⁶ m² = 92,5×10⁶ m³/an<br>Module = 92 500 000 / 31 536 000 = <strong>2,93 m³/s</strong><br><strong>4) Débit réservé</strong> (art. L214-18) = Module/10 = <strong>0,29 m³/s</strong>',
-              },
-            },
-            {
-              id: 'hyd-lp-2',
-              titre: 'Précipitations, ruissellement et crues',
-              fiche: {
-                intro: 'Les crues sont les événements hydrologiques extrêmes qui menacent les personnes et les biens. Leur caractérisation statistique et leur prévision reposent sur l\'analyse des précipitations et des modèles pluie-débit.',
-                points: [
-                  '🌧️ Mesure des précipitations : pluviomètre (bague collectrice), pluviographe (enregistreur), radar météo (Doppler — résolution 1 km)',
-                  '📊 Courbes IDF (Intensité-Durée-Fréquence) : outil réglementaire donnant l\'intensité pluviale (mm/h) en fonction de la durée et la période de retour',
-                  '📈 Hydrogramme de crue : débit en fonction du temps. Caractéristiques : temps de montée, débit de pointe Qp, volume, temps de décrue',
-                  '🔢 Période de retour T (ans) : probabilité annuelle de dépassement p = 1/T. Crue T = 100 ans = probabilité 1/100 = 1 % chaque année',
-                  '📐 Méthode rationnelle (BV < 2 km²) : Q = C × i × A / 360 (L/s)',
-                  '🏔️ Méthode GRADEX (grands BV) : extrapolation statistique des débits de crue pour les faibles probabilités (crues rares)',
-                  '💻 Modèles pluie-débit : GR4J (4 paramètres, modèle conceptuel) — MIKE FLOOD — HEC-HMS. Simuler le débit à partir des précipitations',
-                  '⚠️ PPRI (Plan de Prévention des Risques d\'Inondation) : cartographie zones inondables (aléa + enjeux). Opposable aux tiers (annexe PLU)',
-                ],
-                formules: [
-                  'Q = C × i × A / 360 — méthode rationnelle (L/s, A en ha, i en mm/h)',
-                  'p = 1/T — probabilité annuelle de dépassement d\'une crue de période de retour T',
-                ],
-                sections: [
-                  {
-                    titre: "1. Précipitations et ruissellement urbain",
-                    ss: [
-                      {
-                        titre: "1.1. Les courbes IDF et leur utilisation",
-                        texte: "<p>Les courbes Intensité-Durée-Fréquence (IDF) donnent, pour une durée et une fréquence données, l'intensité maximale moyenne de la pluie. Elles sont publiées par Météo-France (système SHYREG) et sont indispensables pour le dimensionnement des réseaux d'eaux pluviales et des ouvrages de rétention.</p><p>Chaque courbe est valable pour une station ou une zone climatique. Il ne faut pas utiliser les valeurs d'une région voisine sans vérification. La durée critique est le temps de concentration du bassin versant drainé.</p>",
-                      },
-                      {
-                        titre: "1.2. Coefficient de ruissellement et imperméabilisation",
-                        texte: "<p>Le coefficient de ruissellement C traduit la proportion de la pluie qui génère du ruissellement. En milieu urbain, C varie entre 0,20 (jardins) et 0,95 (toitures, voiries). Pour un bassin mixte, on calcule un coefficient pondéré par les surfaces : Cm = Σ(Ci × Ai) / Σ Ai.</p><p>L'imperméabilisation croissante des bassins versants urbains augmente les débits de pointe et réduit les temps de concentration. Un bassin urbanisé répond plus vite et avec un débit plus élevé à la même pluie qu'un bassin naturel.</p>",
-                      },
-                    ],
-                  },
-                  {
-                    titre: "2. Dimensionnement des crues de projet",
-                    ss: [
-                      {
-                        titre: "2.1. La méthode rationnelle",
-                        texte: "<p>La méthode rationnelle Q = C × i × A est utilisée pour les petits bassins urbains (< 1 km²). Q est le débit de pointe (m³/s), C le coefficient de ruissellement global, i l'intensité de la pluie pour la durée tc (m/s) et A la superficie du bassin (m²).</p><p>La pluie de projet est choisie avec une fréquence adaptée à l'usage (T = 10 ans pour les réseaux courants, T = 100 ans pour les ouvrages structurants). La durée est le temps de concentration du bassin. La méthode rationnelle ne donne qu'un débit de pointe, pas un volume ni un hydrogramme.</p>",
-                      },
-                      {
-                        titre: "2.2. Crue de projet et dimensionnement",
-                        texte: "<p>La crue de projet est la crue retenue pour le dimensionnement d'un ouvrage. Son choix résulte d'une analyse des enjeux protégés et d'un arbitrage coût/bénéfice. Une prise d'eau sera dimensionnée pour le QMNA5 ; une digue contre les inondations sera dimensionnée pour la crue centennale voire plus.</p><p>Le débit de pointe d'une crue T ne s'additionne pas directement avec celui d'une autre crue T sur un confluent — la simultanéité des pics dépend des temps de réponse respectifs des sous-bassins.</p>",
-                      },
-                    ],
-                  },
-                ],
-                retenir: 'IDF = outil clé pour le dimensionnement EP. Crue T100 = p=1%. Méthode rationnelle pour BV < 2 km². PPRI = zonage réglementaire inondation.',
-              },
-              flashcards: [
-                { q: 'Qu\'est-ce qu\'une courbe IDF ?', r: 'Courbe Intensité-Durée-Fréquence : donne l\'intensité pluviale (mm/h) pour une durée d\'événement et une période de retour donnée', expl: 'Exemple : pour T = 10 ans et durée 1h, une IDF de Paris donne i ≈ 25 mm/h. Utilisée pour dimensionner les réseaux EP, les bassins de rétention, les déversoirs.' },
-                { q: 'Qu\'est-ce que la période de retour d\'une crue ?', r: 'T (ans) = 1/p où p est la probabilité annuelle de dépassement. Une crue T100 a p = 1% chaque année, pas qu\'une fois tous les 100 ans exactement', expl: 'Un événement T100 peut se produire deux fois en 5 ans. La probabilité d\'avoir au moins un T100 en 100 ans est : 1-(1-1/100)^100 ≈ 63 %.' },
-                { q: 'Qu\'est-ce que l\'hydrogramme de crue ?', r: 'Graphique débit = f(temps) pour un événement pluvieux. Comprend : temps de montée → pic Qp → décrue. La forme dépend du BV, du sol et de la pluie', expl: 'Un BV imperméable et dense → montée rapide et pic élevé. Un BV forestier avec sol perméable → montée lente et pic écrêté. La restauration des zones humides réduit les pics.' },
-                { q: 'Pour quels bassins versants la méthode rationnelle est-elle valable ?', r: 'BV < 2 km² (petits bassins urbains ou ruraux). Au-delà, les hypothèses de la méthode ne sont plus valides', expl: 'La méthode rationnelle suppose que la pluie est uniforme et que la durée de la pluie = le temps de concentration du BV. Pour les grands BV, on utilise GRADEX ou des modèles pluie-débit.' },
-                { q: 'Qu\'est-ce que le PPRI et quelle est sa portée juridique ?', r: 'Plan de Prévention des Risques d\'Inondation : cartographie l\'aléa inondation et définit des zones réglementaires. Annexé au PLU → opposable aux tiers', expl: 'En zone rouge (aléa fort), toute construction est en général interdite. En zone bleue (aléa modéré), des prescriptions s\'imposent (plancher surélevé, matériaux adaptés).' },
-                { q: 'Qu\'est-ce que le modèle GR4J ?', r: 'Modèle pluie-débit conceptuel à 4 paramètres (Génie Rural, journalier) — transforme les séries de pluie et ETP en débit journalier calculé', expl: 'GR4J est un modèle simple mais performant, développé par INRAE. Très utilisé en France pour la simulation hydrologique et la prévision des crues.' },
-              ],
-              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
-  <rect width="280" height="148" rx="8" fill="#E6EEF8"/>
-  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#0A5090">Crues — Méthode rationnelle &amp; Hydrogramme</text>
-  <rect x="4" y="18" width="128" height="68" rx="4" fill="#0A5090" opacity=".1" stroke="#0A5090" stroke-width="1"/>
-  <text x="68" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#0A5090" font-weight="bold">Méthode rationnelle</text>
-  <text x="68" y="43" text-anchor="middle" font-family="Arial" font-size="9" fill="#0A5090" font-weight="bold">Q = C × i × A / 360</text>
-  <text x="68" y="54" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">C : coeff. ruissellement</text>
-  <text x="68" y="64" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">i : intensité IDF (mm/h)</text>
-  <text x="68" y="74" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">A : surface (ha) · BV &lt; 2 km²</text>
-  <rect x="136" y="18" width="140" height="68" rx="4" fill="#E6EEF8" stroke="#0A5090" stroke-width="1"/>
-  <text x="206" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#0A5090" font-weight="bold">Hydrogramme de crue</text>
-  <defs><marker id="ar10" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#0A5090"/></marker></defs>
-  <polyline points="145,78 158,78 170,52 190,36 210,52 235,68 270,76" fill="none" stroke="#0A5090" stroke-width="2"/>
-  <line x1="145" y1="78" x2="270" y2="78" stroke="#888" stroke-width="0.8"/>
-  <line x1="145" y1="32" x2="145" y2="78" stroke="#888" stroke-width="0.8"/>
-  <text x="190" y="32" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828" font-weight="bold">Qp (pointe)</text>
-  <text x="162" y="75" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#555">montée</text>
-  <text x="230" y="75" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#555">décrue</text>
-  <text x="270" y="86" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">t →</text>
-  <rect x="8" y="92" width="264" height="50" rx="4" fill="#fff" stroke="#0A5090" stroke-width="1"/>
-  <text x="140" y="104" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A5090" font-weight="bold">Courbes IDF — Période de retour T</text>
-  <text x="140" y="115" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">T (ans) = 1/p · Crue T100 : p = 1 % par an</text>
-  <text x="140" y="126" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Paris T10, 1h : i ≈ 25 mm/h · PPRI = zonage réglementaire (PLU)</text>
-  <text x="140" y="137" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">GR4J = modèle pluie-débit 4 param. (INRAE) · GRADEX pour grands BV</text>
-</svg>`,
-              exercice: {
-                enonce: 'Un parking imperméable de 1,2 ha (C = 0,85) reçoit une pluie d\'intensité T10, durée 30 min : i = 35 mm/h (IDF locale). 1) Calculer le débit de pointe Q (méthode rationnelle). 2) Quelle est la probabilité d\'avoir au moins un événement supérieur en 20 ans ?',
-                solution: '<strong>1) Débit de pointe :</strong> Q = C × i × A / 360 = 0,85 × 35 × 1,2 / 360 = 35,7 / 360 = <strong>0,099 m³/s ≈ 99 L/s</strong><br><strong>2) Probabilité sur 20 ans :</strong> p annuelle = 1/T = 1/10 = 10 %<br>P(au moins 1 en 20 ans) = 1 − (1 − 0,1)²⁰ = 1 − 0,9²⁰ = 1 − 0,122 = <strong>87,8 %</strong><br>→ Quasi certain d\'observer au moins un dépassement T10 sur 20 ans.',
-              },
-            },
-            {
-              id: 'hyd-lp-3',
-              titre: 'Étiages et débits réservés',
-              fiche: {
-                intro: 'Les étiages représentent les périodes de faibles débits, critiques pour les usages de l\'eau (prélèvements, dilution des rejets, vie aquatique). Leur gestion est encadrée par des débits réglementaires minimaux.',
-                points: [
-                  '📉 Étiage : période de basses eaux. En France : principalement été-automne (fonte des neiges passée + déficit estival). Aggravé par le changement climatique',
-                  '📊 VCN10 (m³/s) : débit moyen minimum sur 10 jours consécutifs pour une année donnée. Indicateur couramment utilisé pour caractériser la sévérité d\'un étiage',
-                  '📊 QMNA5 : débit mensuel sec de période de retour 5 ans = débit de référence réglementaire pour les autorisations de prélèvements et de rejets',
-                  '⚖️ Débit réservé (ou débit minimum biologique) : débit à maintenir obligatoirement en aval de tout ouvrage prélevant de l\'eau',
-                  '   Règle générale : 1/10 du module (débit moyen annuel) — ou 1/40 du module si l\'ouvrage existait avant 1984',
-                  '🚨 Seuils d\'alerte sécheresse : DDT fixe par arrêté préfectoral 4 niveaux (vigilance → alerte → alerte renforcée → crise). Restrictions d\'usage progressives',
-                  '🌡️ Changement climatique : augmentation de la fréquence et de la sévérité des étiages. QMNA5 en baisse de 20–40 % d\'ici 2050 selon les scénarios RCP8.5',
-                  '💡 DSA (Débit de Salubrité Aquatique) : débit minimal pour maintenir la vie aquatique — souvent supérieur au débit réservé réglementaire',
-                ],
-                formules: [
-                  'Débit réservé = Module / 10 (règle générale — art. L214-18 Code envt)',
-                  'QMNA5 = débit mensuel minimum dépassé 4 années sur 5 (fréquence de non-dépassement 20 %)',
-                ],
-                sections: [
-                  {
-                    titre: "1. Les étiages : définition et caractérisation",
-                    ss: [
-                      {
-                        titre: "1.1. Définition et indicateurs d'étiage",
-                        texte: "<p>L'étiage est la période de l'année durant laquelle le débit d'un cours d'eau est à son niveau le plus bas. En France, l'étiage estival (juillet-septembre) résulte de la conjonction de faibles précipitations et d'une forte évapotranspiration.</p><p>Le <strong>QMNA5</strong> (débit mensuel minimal annuel de fréquence quinquennale sèche) est le débit mensuel moyen le plus faible susceptible d'être atteint en étiage avec une probabilité de 1/5 par an. C'est la valeur de référence réglementaire pour caractériser un étiage sévère.</p>",
-                      },
-                      {
-                        titre: "1.2. Facteurs aggravants",
-                        texte: "<p>Les étiages sont aggravés par : les prélèvements agricoles intensifs (irrigation par aspersion ou gravitaire), les restitutions différées par les grands barrages, la réduction des zones humides qui jouent un rôle de régulation des débits, et le changement climatique (diminution des précipitations estivales, hausse de l'évapotranspiration).</p><p>L'imperméabilisation des sols réduit la recharge des nappes souterraines, qui alimentent les cours d'eau en étiage (débit de base). Un bassin très imperméabilisé peut être à sec en été alors qu'un bassin naturel équivalent maintient un débit de base.</p>",
-                      },
-                    ],
-                  },
-                  {
-                    titre: "2. Le débit réservé et sa gestion",
-                    ss: [
-                      {
-                        titre: "2.1. La règle du module/10 et les dérogations",
-                        texte: "<p>La loi sur l'eau (art. L.214-18 CE) fixe un débit minimal à maintenir en aval de tout ouvrage ou prélèvement : par défaut, 1/10 du module ou 1/20 dans certains cas. Ce débit réservé garantit un minimum vital pour la vie aquatique en aval.</p><p>Pour les cours d'eau à enjeux environnementaux particuliers (zones Natura 2000, frayères, réservoirs biologiques), le débit réservé peut être fixé à une valeur plus élevée que le module/10 par arrêté préfectoral ou par le SDAGE.</p>",
-                      },
-                      {
-                        titre: "2.2. Enjeux environnementaux des étiages",
-                        texte: "<p>En étiage sévère, la concentration des polluants augmente (dilution réduite), la température de l'eau monte (risque de mortalité piscicole), et l'oxygène dissous peut chuter. Les espèces les plus sensibles (salmonidés notamment) sont les premières affectées.</p><p>La gestion des étiages implique une coordination entre gestionnaires des cours d'eau, agriculteurs, industriels et services de l'État. Les comités sécheresse organisent les restrictions de prélèvements quand les niveaux de crise sont atteints (niveaux d'alerte, d'alerte renforcée et de crise).</p>",
-                      },
-                    ],
-                  },
-                ],
-                retenir: 'QMNA5 = débit de référence réglementaire. Débit réservé = module/10. Étiages aggravés par le CC (-20 à -40% d\'ici 2050). VCN10 = indicateur de sévérité.',
-              },
-              flashcards: [
-                { q: 'Qu\'est-ce que le QMNA5 ?', r: 'Débit Mensuel Minimum de fréquence 5 ans de retour : le débit du mois le plus sec qui n\'est dépassé (vers le bas) qu\'une fois tous les 5 ans', expl: 'C\'est la référence pour fixer les débits réservés et encadrer les prélèvements d\'eau. Les autorisations IOTA vérifient que le prélèvement ne descend pas sous le QMNA5.' },
-                { q: 'Quelle est la règle générale pour le débit réservé ?', r: '1/10 du module (débit moyen interannuel). Valeur minimale à maintenir en aval de tout ouvrage de prélèvement ou de retenue', expl: 'Art. L214-18 du Code de l\'environnement. Si l\'ouvrage existait avant 1984 et n\'a pas fait l\'objet d\'une nouvelle autorisation : débit réservé = module/40.' },
-                { q: 'Qu\'est-ce que le VCN10 ?', r: 'Volume (débit) Caractéristique de crue Négative sur 10 jours : débit minimal moyen sur 10 jours consécutifs, calculé sur une année donnée', expl: 'Le VCN10 quinquennal sec (VQCN10-5) est le VCN10 de période de retour 5 ans = l\'un des indicateurs officiels pour caractériser les étiages sévères.' },
-                { q: 'Quels sont les 4 niveaux d\'alerte sécheresse ?', r: 'Vigilance → Alerte → Alerte renforcée → Crise. Chaque niveau déclenche des restrictions d\'usage (agriculture, industrie, collectivités, particuliers)', expl: 'Les restrictions progressent : en crise, l\'irrigation agricole peut être totalement interdite. Le portail "propluvia" (gouvernement) cartographie les arrêtés en temps réel.' },
-                { q: 'Comment le changement climatique affecte-t-il les étiages en France ?', r: 'Augmentation de la fréquence et de la sévérité. QMNA5 en baisse de 20–40 % d\'ici 2050 sur les bassins méditerranéens et atlantiques selon les scénarios RCP8.5', expl: 'La recharge hivernale des nappes diminue (moins de pluies hivernales, plus d\'évaporation). Les étiages commencent plus tôt et durent plus longtemps, mettant en tension les usages.' },
-                { q: 'Pourquoi le débit réservé peut-il être insuffisant pour la vie aquatique ?', r: 'Le débit réservé (module/10) est un minimum légal, souvent inférieur au Débit de Salubrité Aquatique (DSA) nécessaire pour maintenir les habitats et la faune piscicole', expl: 'Des études montrent qu\'un DSA correspond souvent à 30–40 % du module. Le module/10 ne permet pas toujours le maintien des espèces les plus exigeantes (salmonidés).' },
-              ],
-              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
-  <rect width="280" height="148" rx="8" fill="#E6EEF8"/>
-  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#0A5090">Étiages — QMNA5 · Débit réservé · Sécheresse</text>
-  <rect x="4" y="18" width="130" height="72" rx="4" fill="#0A5090" opacity=".1" stroke="#0A5090" stroke-width="1"/>
-  <text x="69" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#0A5090" font-weight="bold">Débits réglementaires</text>
-  <text x="69" y="42" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">QMNA5 = débit mensuel</text>
-  <text x="69" y="52" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">min · fréquence 1/5 ans</text>
-  <text x="69" y="64" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A5090" font-weight="bold">Débit réservé = Module/10</text>
-  <text x="69" y="74" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">DSA ≈ 30–40 % du module</text>
-  <text x="69" y="83" text-anchor="middle" font-family="Arial" font-size="7" fill="#C62828">(légal &lt; biologique)</text>
-  <rect x="140" y="18" width="136" height="72" rx="4" fill="#fff" stroke="#0A5090" stroke-width="1"/>
-  <text x="208" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#0A5090" font-weight="bold">Niveaux sécheresse</text>
-  <rect x="144" y="34" width="128" height="11" rx="2" fill="#4CAF50"/>
-  <text x="208" y="43" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">1 · Vigilance</text>
-  <rect x="144" y="47" width="128" height="11" rx="2" fill="#FFC107"/>
-  <text x="208" y="56" text-anchor="middle" font-family="Arial" font-size="8" fill="#333" font-weight="bold">2 · Alerte</text>
-  <rect x="144" y="60" width="128" height="11" rx="2" fill="#FF9800"/>
-  <text x="208" y="69" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">3 · Alerte renforcée</text>
-  <rect x="144" y="73" width="128" height="11" rx="2" fill="#C62828"/>
-  <text x="208" y="82" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">4 · Crise (AEP prioritaire)</text>
-  <rect x="8" y="96" width="264" height="46" rx="4" fill="#fff" stroke="#0A5090" stroke-width="1"/>
-  <text x="140" y="108" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A5090" font-weight="bold">VCN10 — indicateur de sévérité</text>
-  <text x="140" y="119" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">VCN10 = débit moyen min sur 10 jours consécutifs</text>
-  <text x="140" y="130" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">QMNA5 en baisse −20 à −40 % d'ici 2050 (RCP8.5)</text>
-  <text x="140" y="140" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Portail propluvia → arrêtés préfectoraux sécheresse</text>
-</svg>`,
-              exercice: {
-                enonce: 'Une rivière a un module de 3,8 m³/s et un QMNA5 de 0,45 m³/s. Un prélèvement agricole de 0,15 m³/s est en cours. 1) Quel est le débit réservé légal ? 2) Le débit résiduel après prélèvement respecte-t-il le débit réservé ? 3) Le QMNA5 sera-t-il respecté en étiage ?',
-                solution: '<strong>1) Débit réservé :</strong> Module/10 = 3,8/10 = <strong>0,38 m³/s</strong><br><strong>2) Débit résiduel hors étiage :</strong> théoriquement le débit moyen >> 0,38 m³/s → ok. Mais le prélèvement doit cesser dès que le débit approche du seuil.<br><strong>3) En étiage (QMNA5 = 0,45 m³/s) :</strong> Débit résiduel = 0,45 − 0,15 = <strong>0,30 m³/s < 0,38 m³/s</strong> → débit réservé <strong>NON respecté</strong>. Le prélèvement doit être interdit ou réduit à 0,45 − 0,38 = <strong>0,07 m³/s max</strong> en période d\'étiage.',
-              },
-            },
+          /* ── Bloc 01 — Hydraulique avancée ── */
+          { id: 'lp-b01', name: 'Hydraulique avancée', ico: '🌊', color: '#1550A0', colorl: '#E6EEF8', chapitres: [
+            { id: 'LP-EAU-001', titre: 'Diagnostic hydraulique d\'une installation existante', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-002', titre: 'Pertes de charge : choix des modèles et analyse de sensibilité', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-003', titre: 'Calcul et équilibrage des réseaux ramifiés et maillés', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-004', titre: 'Modélisation des réseaux sous pression', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-005', titre: 'Dimensionnement et régulation d\'un système de pompage', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-006', titre: 'Transitoires hydrauliques et coups de bélier', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-007', titre: 'Choix des protections hydrauliques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-008', titre: 'Modélisation des écoulements à surface libre', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-009', titre: 'Ouvrages hydrauliques et transitions d\'écoulement', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-010', titre: 'Validation des calculs et incertitudes hydrauliques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
           ]},
 
-          /* ── Droit et gestion de l'eau ── */
-          { id: 'droit-eau', name: 'Droit et gestion de l\'eau', ico: '⚖️', color: '#8B4513', colorl: '#FBF0E6', chapitres: [
-            {
-              id: 'dr-lp-1',
-              titre: 'Domanialité et propriété de l\'eau',
-              fiche: {
-                intro: 'Le statut juridique de l\'eau et des cours d\'eau détermine qui en est propriétaire, qui peut l\'utiliser et selon quelles règles. L\'eau n\'est pas une marchandise ordinaire : c\'est un bien commun à usage réglementé.',
-                points: [
-                  '📜 Art. L210-1 Code envt : "L\'eau fait partie du patrimoine commun de la nation." Son usage appartient à tous dans le respect des lois.',
-                  '🌊 Domaine Public Fluvial (DPF) : cours d\'eau navigables/flottables + lacs domaniaux → propriété de l\'État ou des collectivités. Géré par VNF ou les Départements',
-                  '🏡 Cours d\'eau non domaniaux : lit appartient aux propriétaires riverains (moitié chacun jusqu\'à la ligne médiane). Mais usage de l\'eau = droit d\'usage encadré',
-                  '⛏️ Eaux souterraines : art. 552 Code Civil → propriétaire du terrain est propriétaire de l\'eau, MAIS prélèvements soumis à autorisation IOTA au-delà des seuils',
-                  '💰 Prix de l\'eau : France ≈ 2,10 €/m³ TTC (eau + assainissement). Varie de 1,50 à 5 €/m³ selon les territoires',
-                  '🌍 ODD 6 de l\'ONU (Agenda 2030) : accès universel à l\'eau potable et à l\'assainissement d\'ici 2030',
-                  '🔒 Loi BROTTES (2013) : interdiction de coupure d\'eau aux résidences principales (droit à l\'eau). Avance de trésorerie possible par les CCAS',
-                  '🏛️ Services eau : SPIC (Service Public Industriel et Commercial) — délégués à des entreprises privées (DSP) ou gérés en régie',
-                ],
-                formules: [],
-                sections: [
-                  {
-                    titre: "1. Statut juridique de l'eau et des cours d'eau",
-                    ss: [
-                      {
-                        titre: "1.1. L'eau, patrimoine commun de la nation",
-                        texte: "<p>L'article L.210-1 du Code de l'environnement pose le principe fondateur : « L'eau fait partie du patrimoine commun de la nation. Sa protection, sa mise en valeur et le développement de la ressource utilisable, dans le respect des équilibres naturels, sont d'intérêt général. » Ce principe oriente toute la réglementation de l'eau.</p><p>L'eau n'est pas une propriété privée commercialisable. Son usage est encadré par des droits et des obligations. Les collectivités publiques sont garantes de la protection et de la gestion durable de la ressource pour les générations futures.</p>",
-                      },
-                      {
-                        titre: "1.2. Cours d'eau domaniaux et non domaniaux",
-                        texte: "<p>Les <strong>cours d'eau domaniaux</strong> appartiennent au domaine public fluvial de l'État, des régions ou des départements. Leur lit et leurs berges sont propriété publique. Leur entretien relève du gestionnaire domanial.</p><p>Les <strong>cours d'eau non domaniaux</strong> ont un lit appartenant aux riverains (art. L.215-2 CE) : chaque riverain est propriétaire jusqu'au milieu du cours d'eau (talweg). L'obligation d'entretien régulier incombe aux riverains (art. L.215-14), sous peine de substitution par la collectivité après mise en demeure.</p>",
-                      },
-                    ],
-                  },
-                  {
-                    titre: "2. Propriété des berges et servitudes",
-                    ss: [
-                      {
-                        titre: "2.1. Droits et obligations des riverains",
-                        texte: "<p>Le propriétaire riverain a le droit d'usage de l'eau (usage domestique, irrigation dans certaines limites) et l'obligation d'entretien régulier du cours d'eau (débroussaillage, enlèvement des embâcles). Il ne peut ni dériver le cours d'eau ni modifier son régime sans autorisation.</p><p>Le droit de pêche sur les cours d'eau non domaniaux appartient aux riverains, qui peuvent le louer ou le conférer à une association agréée. Sur les cours d'eau domaniaux, il appartient à l'État.</p>",
-                      },
-                      {
-                        titre: "2.2. Servitudes et droits des tiers",
-                        texte: "<p>Le Code de l'environnement établit des servitudes légales au bénéfice de la collectivité : servitude de marche-pied (3,25 m sur les berges navigables), servitude de passage pour l'entretien des cours d'eau non domaniaux (art. L.215-18), et servitude dans les zones de rétention des crues.</p><p>Un projet de restauration ou d'aménagement sur un cours d'eau non domanial requiert l'accord des propriétaires riverains ou une procédure de déclaration d'utilité publique (DUP). L'intervention sans accord ni procédure constitue une voie de fait.</p>",
-                      },
-                    ],
-                  },
-                ],
-                retenir: 'Eau = patrimoine commun (L210-1). Cours d\'eau domaniaux = État/collectivités. Cours d\'eau non domaniaux = riverains. Eaux souterraines = propriétaire terrain (sous conditions).',
-              },
-              flashcards: [
-                { q: 'Qu\'est-ce que le Domaine Public Fluvial (DPF) ?', r: 'Ensemble des cours d\'eau navigables et flottables + lacs domaniaux appartenant à l\'État ou aux Régions/Départements. Géré par VNF pour les canaux et rivières navigables', expl: 'Les berges et le lit des cours d\'eau du DPF sont inaliénables. Les riverains ont des droits d\'usage mais pas de propriété. Les ports intérieurs font aussi partie du DPF.' },
-                { q: 'Qui est propriétaire du lit d\'un cours d\'eau non domanial ?', r: 'Les propriétaires riverains, chacun jusqu\'à la ligne médiane du cours d\'eau (mi-lit). En l\'absence de riverain identifié : l\'État', expl: 'Cette règle est fixée par l\'art. L215-2 du Code de l\'environnement. Le propriétaire riverain a des obligations : entretien des berges, laissez-passer des engins d\'entretien.' },
-                { q: 'À qui appartiennent les eaux souterraines en France ?', r: 'Au propriétaire du terrain (art. 552 Code Civil), mais les prélèvements sont soumis à autorisation ou déclaration IOTA au-delà de seuils fixés par la nomenclature eau', expl: 'En pratique, un forage domestique (≤ 1 000 m³/an, usage domestique) est libre. Au-delà, déclaration ou autorisation. Un forage industriel ou agricole est très encadré.' },
-                { q: 'Qu\'est-ce que la Loi BROTTES (2013) prévoit pour le droit à l\'eau ?', r: 'Interdiction de coupure d\'eau dans les résidences principales toute l\'année. Maintien d\'un débit minimum si impayé. Aide via les CCAS (avance de trésorerie)', expl: 'Avant 2013, les coupures d\'eau pour impayés étaient possibles. Cette loi reconnaît l\'eau comme droit fondamental. Les factures impayées restent dues : c\'est une avance, pas une remise.' },
-                { q: 'Quelle est la différence entre une régie et une DSP pour les services d\'eau ?', r: 'Régie = la collectivité gère directement le service (agents publics, budget municipal). DSP (Délégation de Service Public) = contrat avec un opérateur privé (Veolia, Suez, Saur…)', expl: 'En France, environ 50 % de la population est en DSP, 50 % en régie. La tendance récente est le retour en régie (Paris, Grenoble, Bordeaux…) pour des raisons de transparence et de coût.' },
-                { q: 'Quel est l\'ODD 6 de l\'ONU et son objectif ?', r: 'Objectif de Développement Durable 6 : garantir l\'accès de tous à l\'eau et à l\'assainissement, et assurer une gestion durable des ressources en eau d\'ici 2030', expl: 'En 2023, 2,2 milliards de personnes n\'avaient pas accès à l\'eau potable gérée de façon sûre. L\'ODD 6 est très loin d\'être atteint à l\'échelle mondiale.' },
-              ],
-              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
-  <rect width="280" height="148" rx="8" fill="#FBF0E6"/>
-  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#8B4513">Droit de l'eau — Propriété &amp; Gestion</text>
-  <rect x="4" y="18" width="83" height="56" rx="4" fill="#8B4513" opacity=".15" stroke="#8B4513" stroke-width="1"/>
-  <text x="45" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#8B4513" font-weight="bold">DPF</text>
-  <text x="45" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Cours d'eau</text>
-  <text x="45" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">navigables</text>
-  <text x="45" y="61" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">État/Régions</text>
-  <text x="45" y="71" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">géré par VNF</text>
-  <rect x="98" y="18" width="83" height="56" rx="4" fill="#8B4513" opacity=".15" stroke="#8B4513" stroke-width="1"/>
-  <text x="140" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#8B4513" font-weight="bold">Non domanial</text>
-  <text x="140" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Lit = riverains</text>
-  <text x="140" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">(½ chacun)</text>
-  <text x="140" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Eau souterraine</text>
-  <text x="140" y="71" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">propriétaire terrain</text>
-  <rect x="192" y="18" width="84" height="56" rx="4" fill="#8B4513" opacity=".15" stroke="#8B4513" stroke-width="1"/>
-  <text x="234" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#8B4513" font-weight="bold">Gestion service</text>
-  <text x="234" y="42" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Régie directe</text>
-  <text x="234" y="52" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">(collectivité)</text>
-  <text x="234" y="63" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">DSP : Veolia</text>
-  <text x="234" y="72" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Suez, Saur…</text>
-  <rect x="8" y="80" width="264" height="62" rx="4" fill="#fff" stroke="#8B4513" stroke-width="1"/>
-  <text x="140" y="92" text-anchor="middle" font-family="Arial" font-size="8" fill="#8B4513" font-weight="bold">Textes fondamentaux</text>
-  <text x="140" y="103" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Art. L210-1 Code env. : eau = patrimoine commun de la nation</text>
-  <text x="140" y="114" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Art. 552 C. Civil : eaux souterraines → propriétaire terrain (sous IOTA)</text>
-  <text x="140" y="124" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Loi BROTTES 2013 : interdiction coupures AEP résidences principales</text>
-  <text x="140" y="135" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">ODD 6 ONU 2030 · Prix France ≈ 2,10 €/m³ TTC</text>
-</svg>`,
-              exercice: {
-                enonce: 'Une commune veut exploiter une source sur une propriété privée riveraine d\'un cours d\'eau non domanial (Q = 15 L/s). 1) La source appartient-elle à la commune ou au propriétaire du terrain ? 2) Quel régime IOTA s\'applique probablement ? 3) La commune préfère gérer le service en régie : quelle différence avec une DSP ?',
-                solution: '<strong>1) Propriété :</strong> selon l\'art. 552 C. Civil, les eaux souterraines appartiennent au propriétaire du terrain. La commune doit acquérir le terrain ou obtenir une servitude de captage.<br><strong>2) Régime IOTA :</strong> 15 L/s = 54 m³/h. Selon la nomenclature eau, un prélèvement sur cours d\'eau < 400 m³/h est en régime de <strong>déclaration</strong>. Une source souterraine ≥ 8 m³/h peut requérir autorisation selon le contexte (hydrogéologie, nappe).<br><strong>3) Régie vs DSP :</strong> en régie, la commune gère directement (agents publics, budget propre, contrôle direct des prix). En DSP, elle délègue à un opérateur privé par contrat (Veolia/Suez/Saur) — service maintenu mais moins de transparence sur les coûts.',
-              },
-            },
-            {
-              id: 'dr-lp-2',
-              titre: 'Police de l\'eau et procédures IOTA',
-              fiche: {
-                intro: 'La police de l\'eau encadre tous les projets susceptibles d\'affecter les milieux aquatiques. La procédure IOTA soumet les travaux à autorisation ou déclaration selon leur impact potentiel.',
-                points: [
-                  '👮 Police de l\'eau : exercée par l\'OFB (Office Français de la Biodiversité) et les DDT(M) (Direction Départementale des Territoires). Pouvoirs de police judiciaire',
-                  '⚙️ IOTA : Installations, Ouvrages, Travaux, Activités soumis à la nomenclature eau (art. R214-1 Code envt)',
-                  '3️⃣ 3 régimes selon l\'impact : Autorisation (dossier complet + enquête publique + arrêté préfectoral) | Déclaration (dossier simplifié, récépissé) | Aucune formalité',
-                  '📋 Dossier loi sur l\'eau (autorisation) : description du projet + état initial + impact sur les eaux + mesures ERC + étude d\'incidence',
-                  '🔍 Enquête publique (autorisation) : obligatoire pour les projets les plus impactants. Commissaire enquêteur indépendant. Durée ≥ 30 jours',
-                  '🚨 Sanctions : arrêt des travaux + remise en état + amende (jusqu\'à 75 000 € et 2 ans de prison pour les infractions graves)',
-                  '📜 DIG (Déclaration d\'Intérêt Général) : procédure permettant à une collectivité d\'intervenir sur des terrains privés pour des travaux d\'entretien ou de restauration de cours d\'eau',
-                  '🌡️ Arrêtés-cadre sécheresse : mesures de restriction des usages de l\'eau par niveau d\'alerte (vigilance → crise). Préfet de département',
-                ],
-                formules: [],
-                sections: [
-                  {
-                    titre: "1. Les procédures IOTA",
-                    ss: [
-                      {
-                        titre: "1.1. Les trois régimes de la nomenclature eau",
-                        texte: "<p>La nomenclature eau (art. R.214-1 CE) classe les Installations, Ouvrages, Travaux et Activités (IOTA) impactant les milieux aquatiques en trois régimes selon leur impact potentiel :</p><ul style=\"margin:6px 0 6px 16px\"><li><strong>Autorisation (A)</strong> : impacts significatifs, arrêté préfectoral requis, enquête publique possible</li><li><strong>Déclaration (D)</strong> : impacts modérés, dossier déposé en préfecture (DDT)</li><li><strong>Aucune formalité</strong> : impacts négligeables</li></ul><p>Un projet peut relever de plusieurs rubriques, dont certaines en A et d'autres en D — c'est le régime le plus contraignant qui s'applique à l'ensemble.</p>",
-                      },
-                      {
-                        titre: "1.2. Contenu du dossier et instruction",
-                        texte: "<p>Le dossier de déclaration ou d'autorisation comprend : description du projet, état initial du site, incidences sur la ressource en eau et les milieux aquatiques, mesures ERC (éviter, réduire, compenser), et pour les autorisations : étude d'impact selon le niveau de risque.</p><p>L'instruction est réalisée par la DDT (Direction Départementale des Territoires) avec avis de l'OFB et des autres services concernés. Une autorisation est assortie de prescriptions que le pétitionnaire doit respecter.</p>",
-                      },
-                    ],
-                  },
-                  {
-                    titre: "2. La police de l'eau",
-                    ss: [
-                      {
-                        titre: "2.1. Organisation de la police de l'eau",
-                        texte: "<p>La police administrative de l'eau est exercée par le préfet, avec l'appui de la DDT et de l'OFB (Office Français de la Biodiversité). Elle vise à prévenir les atteintes aux milieux aquatiques et à faire respecter les prescriptions des autorisations et déclarations.</p><p>L'OFB dispose de gardes de l'environnement assermentés qui exercent des missions de police judiciaire (constatation des infractions, procès-verbaux). Leurs pouvoirs couvrent les milieux aquatiques, la faune et la flore sauvages.</p>",
-                      },
-                      {
-                        titre: "2.2. Sanctions et mise en conformité",
-                        texte: "<p>Les infractions à la police de l'eau peuvent faire l'objet de sanctions administratives (mise en demeure, consignation, travaux d'office) et pénales (amende, voire emprisonnement pour les infractions les plus graves). La mise en demeure impose un délai pour régulariser la situation.</p><p>La régularisation d'un ouvrage existant sans autorisation nécessite un dossier de régularisation déposé à la DDT. L'administration peut accorder une mise en conformité progressive selon le risque environnemental et les difficultés techniques.</p>",
-                      },
-                    ],
-                  },
-                ],
-                retenir: 'IOTA = 3 régimes (autorisation, déclaration, sans formalité). OFB + DDT = police de l\'eau. DIG = intervention collective sur terrain privé. Infraction → remise en état + amende.',
-              },
-              flashcards: [
-                { q: 'Qu\'est-ce qu\'une IOTA ?', r: 'Installation, Ouvrage, Travaux ou Activité susceptible d\'affecter les eaux ou les milieux aquatiques, soumis à la nomenclature eau (R214-1)', expl: 'Exemples : forage, prise d\'eau, rejet en cours d\'eau, remblaiement en zone humide, modification du lit d\'une rivière, construction d\'un barrage.' },
-                { q: 'Quels sont les 3 régimes de la nomenclature eau ?', r: 'Autorisation (impacts forts → enquête publique + arrêté préfectoral) | Déclaration (impacts modérés → récépissé) | Aucune formalité (impact négligeable)', expl: 'Le seuil entre déclaration et autorisation dépend du type d\'ouvrage et de sa taille. Ex : prise d\'eau en rivière < 200 m³/h = déclaration ; > 1 000 m³/h = autorisation.' },
-                { q: 'Qu\'est-ce que la DIG ?', r: 'Déclaration d\'Intérêt Général : arrêté préfectoral qui autorise une collectivité à intervenir sur des propriétés privées (berges, lit) pour des travaux d\'entretien de cours d\'eau', expl: 'Sans DIG, une collectivité ne peut pas travailler sur terrain privé. La DIG est souvent couplée à un plan de gestion pluriannuel (5 ans) financé par les Agences de l\'eau.' },
-                { q: 'Quelles sont les sanctions d\'une infraction à la police de l\'eau ?', r: 'Arrêt immédiat des travaux + obligation de remise en état + amende jusqu\'à 75 000 € + peine d\'emprisonnement jusqu\'à 2 ans (infractions graves)', expl: 'Les agents de l\'OFB ont un statut de police judiciaire : ils peuvent constater des infractions, dresser des PV et déclencher des poursuites pénales.' },
-                { q: 'Quel organisme exerce principalement la police de l\'eau en France ?', r: 'L\'OFB (Office Français de la Biodiversité) et les DDT(M) (Directions Départementales des Territoires et de la Mer)', expl: 'L\'OFB (créé en 2020 par fusion de l\'ONEMA et de l\'AFB) compte environ 2 800 agents. Ses inspecteurs environnementaux contrôlent les installations, les rejets et les prélèvements.' },
-                { q: 'Qu\'est-ce qu\'une enquête publique dans le cadre d\'une autorisation IOTA ?', r: 'Procédure obligatoire pour les projets soumis à autorisation : un commissaire enquêteur indépendant recueille les observations du public pendant ≥ 30 jours, puis rend un avis', expl: 'L\'avis du commissaire enquêteur n\'est pas contraignant pour le préfet, mais un avis défavorable motivé est un signal fort. Il doit être suivi sauf motif impérieux.' },
-              ],
-              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
-  <rect width="280" height="148" rx="8" fill="#FBF0E6"/>
-  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#8B4513">Procédures IOTA — 3 régimes</text>
-  <defs><marker id="ar11" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#8B4513"/></marker></defs>
-  <rect x="4" y="18" width="84" height="54" rx="4" fill="#C62828" opacity=".8"/>
-  <text x="46" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">Autorisation</text>
-  <text x="46" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Impact fort</text>
-  <text x="46" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Enquête pub. ≥30j</text>
-  <text x="46" y="61" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Arrêté préfectoral</text>
-  <text x="46" y="70" text-anchor="middle" font-family="Arial" font-size="7" fill="#FFE0E0">dossier complet</text>
-  <rect x="98" y="18" width="84" height="54" rx="4" fill="#FF9800" opacity=".8"/>
-  <text x="140" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">Déclaration</text>
-  <text x="140" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Impact modéré</text>
-  <text x="140" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Récépissé DDT</text>
-  <text x="140" y="61" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Pas d'enquête</text>
-  <text x="140" y="70" text-anchor="middle" font-family="Arial" font-size="7" fill="#FFF8E0">dossier simplifié</text>
-  <rect x="192" y="18" width="84" height="54" rx="4" fill="#4CAF50" opacity=".8"/>
-  <text x="234" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">Aucune</text>
-  <text x="234" y="41" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">formalité</text>
-  <text x="234" y="52" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Impact</text>
-  <text x="234" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">négligeable</text>
-  <rect x="8" y="78" width="264" height="64" rx="4" fill="#fff" stroke="#8B4513" stroke-width="1"/>
-  <text x="140" y="90" text-anchor="middle" font-family="Arial" font-size="8" fill="#8B4513" font-weight="bold">Acteurs · Outils · Sanctions</text>
-  <text x="140" y="101" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Police de l'eau : OFB + DDT(M) · Pouvoirs judiciaires</text>
-  <text x="140" y="112" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">DIG : intervention collectivité sur terrain privé (entretien rivière)</text>
-  <text x="140" y="122" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Infraction : arrêt travaux + remise en état + 75 000 € + 2 ans prison</text>
-  <text x="140" y="135" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Arrêtés sécheresse : 4 niveaux · Portail propluvia</text>
-</svg>`,
-              exercice: {
-                enonce: 'Un agriculteur veut créer un lac collinaire (retenue de 45 000 m³) par un barrage sur un ruisseau non domanial pour irriguer ses parcelles. 1) Quel régime IOTA s\'applique probablement ? 2) Quelles pièces doit contenir le dossier ? 3) Si les travaux débutent sans autorisation, quelles sanctions risque-t-il ?',
-                solution: '<strong>1) Régime IOTA :</strong> un barrage créant une retenue > 10 000 m³ est en régime d\'<strong>autorisation</strong> (nomenclature eau rubrique 3.2.3.0 — ouvrages constituant obstacle à la continuité écologique). Enquête publique obligatoire.<br><strong>2) Dossier loi sur l\'eau :</strong> description du projet · état initial des eaux et milieux · étude d\'incidence sur les débits/niveaux/espèces aquatiques · mesures ERC · étude hydraulique (crues, sécurité du barrage).<br><strong>3) Sanctions :</strong> arrêt immédiat des travaux + obligation de <strong>remise en état</strong> du cours d\'eau à ses frais + amende jusqu\'à <strong>75 000 €</strong> + risque de peine d\'emprisonnement jusqu\'à 2 ans (art. L216-10 Code env.).',
-              },
-            },
+          /* ── Bloc 02 — Hydrologie et hydrogéologie appliquées ── */
+          { id: 'lp-b02', name: 'Hydrologie et hydrogéologie appliquées', ico: '⛰️', color: '#0A5090', colorl: '#E6EEF8', chapitres: [
+            { id: 'LP-EAU-011', titre: 'Construction et critique d\'une base de données hydrométéorologiques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-012', titre: 'Analyse statistique des débits, crues et étiages', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-013', titre: 'Modélisation pluie-débit à l\'échelle d\'un bassin versant', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-014', titre: 'Bilans de ressource et scénarios de gestion quantitative', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-015', titre: 'Diagnostic hydrogéologique d\'un captage', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-016', titre: 'Essais de pompage et interprétation des rabattements', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-017', titre: 'Vulnérabilité des ressources et transferts de contaminants', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-018', titre: 'Adaptation climatique et robustesse des stratégies de ressource', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
           ]},
 
-          /* ── Exploitation des réseaux ── */
-          { id: 'exploitation', name: 'Exploitation des réseaux AEP', ico: '🔧', color: '#0A7460', colorl: '#E0F4F0', chapitres: [
-            {
-              id: 'exp-lp-1',
-              titre: 'Maintenance préventive et corrective des réseaux AEP',
-              fiche: {
-                intro: 'L\'exploitation d\'un réseau d\'eau potable exige un programme de maintenance rigoureux pour garantir la continuité du service, la qualité de l\'eau et la durabilité des ouvrages.',
-                points: [
-                  '🛠️ Maintenance préventive : interventions planifiées pour éviter les pannes. Ex : vidange/nettoyage réservoirs (1/an), renouvellement joints vannes (5–10 ans), purges réseau',
-                  '🚨 Maintenance corrective : intervention suite à une fuite, une rupture, une panne de pompe ou une contamination. Délai d\'intervention ≤ 4h (astreinte 24h/24)',
-                  '🔄 Taux de renouvellement recommandé : 1–1,5 % du linéaire par an. France : ~0,6 %/an → déficit chronique → vieillissement du parc',
-                  '🔧 Techniques de réhabilitation sans tranchée : gainage (résine projetée à l\'intérieur), chemisage (tubage PEHD ou fibre de verre), éclatement (pipe bursting)',
-                  '📋 RPQS (Rapport sur le Prix et la Qualité du Service) : rapport annuel obligatoire pour toute collectivité. Indicateurs de performance publiés (SISPEA)',
-                  '💧 Indicateurs de performance clés : rendement réseau | ILP (Indice Linéaire de Pertes) | taux de renouvellement | taux de conformité bactériologique et physico-chimique',
-                  '⚠️ Plan de gestion des crises : procédure d\'urgence (contamination, rupture d\'alimentation). ARS notifiée immédiatement en cas d\'alerte qualité',
-                  '🗓️ Plan Pluriannuel de Renouvellement (PPR) : programmation des travaux à 5–10 ans selon l\'état du réseau (données ITV, âge, matériaux, incidents)',
-                ],
-                formules: [
-                  'Taux de renouvellement = km renouvelés / km total × 100 (% par an)',
-                  'Taux de casse = nombre de réparations de fuites / 100 km de réseau / an — indicateur de dégradation',
-                ],
-                sections: [
-                  {
-                    titre: "1. Diagnostic des réseaux et renouvellement",
-                    ss: [
-                      {
-                        titre: "1.1. L'état du réseau français",
-                        texte: "<p>Les réseaux d'eau potable français ont une durée de vie théorique de 50 à 100 ans selon les matériaux (fonte, PVC, polyéthylène). Le taux de renouvellement recommandé est de 1 à 1,5 %/an du linéaire total pour maintenir le patrimoine. En France, le taux réel moyen est d'environ 0,6 %/an — insuffisant pour renouveler l'ensemble du réseau en un siècle.</p><p>Un sous-investissement prolongé conduit à une dégradation progressive du réseau, des pertes par fuites croissantes et un risque sanitaire accru. Le diagnostic patrimonial est indispensable pour prioriser les interventions.</p>",
-                      },
-                      {
-                        titre: "1.2. Techniques de diagnostic",
-                        texte: "<p>Le diagnostic des réseaux d'eau potable combine : inspection caméra (pour les conduites accessibles), écoute acoustique (corrélation de fuites par des géophones), pré-localisation radar (GPR), et analyse des données de pression et de débit (sectorisation).</p><p>L'Indice Linéaire de Pertes (ILP) et le rendement de réseau sont les indicateurs clés. La connaissance du réseau (plan cadastral, matériaux, âges, incidents) est le premier prérequis d'un programme de renouvellement efficace.</p>",
-                      },
-                    ],
-                  },
-                  {
-                    titre: "2. Maintenance préventive et corrective",
-                    ss: [
-                      {
-                        titre: "2.1. Le plan de maintenance préventive",
-                        texte: "<p>La maintenance préventive vise à anticiper les défaillances avant qu'elles surviennent. Elle comprend : nettoyage régulier des conduites (hydrocurage), surveillance des appareils de régulation (vannes, réducteurs de pression, ventouses), entretien des réservoirs (visite annuelle, nettoyage quinquennal) et vérification des poteaux d'incendie.</p><p>Un plan de maintenance est programmé sur plusieurs années, avec des fréquences adaptées à chaque type d'équipement. Il s'intègre dans le Schéma Directeur d'Alimentation en Eau Potable (SDAEP).</p>",
-                      },
-                      {
-                        titre: "2.2. Gestion des incidents",
-                        texte: "<p>La maintenance corrective intervient après une défaillance : réparation de casse, renouvellement d'une section défaillante, remplacement d'un équipement. Chaque incident doit être enregistré (date, localisation, cause, intervention) pour alimenter le système d'information patrimonial.</p><p>La hiérarchisation des urgences dépend du débit de fuite, des enjeux en aval (quartier alimenté, risque d'effondrement, contamination) et des ressources disponibles. Un réseau correctement documenté permet d'intervenir plus rapidement et d'isoler les zones affectées sans couper l'alimentation de quartiers non concernés.</p>",
-                      },
-                    ],
-                  },
-                ],
-                retenir: 'Renouvellement cible : 1–1,5 %/an. France : 0,6 % = insuffisant. Maintenance préventive planifiée > corrective. Techniques sans tranchée pour réhabilitation. RPQS obligatoire.',
-              },
-              flashcards: [
-                { q: 'Quel est le taux de renouvellement recommandé pour un réseau AEP ?', r: '1 à 1,5 % du linéaire par an. La France renouvelle en moyenne ~0,6 %/an, insuffisant pour maintenir l\'état du parc', expl: 'À 0,6 %/an, une conduite dure en moyenne 167 ans avant d\'être renouvelée. De nombreuses canalisations ont déjà 80–100 ans et fuient de plus en plus.' },
-                { q: 'Qu\'est-ce que le gainage et le chemisage d\'une conduite ?', r: 'Techniques de réhabilitation sans tranchée : gainage = résine polymérisée in situ à l\'intérieur (réduction du diamètre de 5–10 %) | chemisage = insertion d\'un tube PEHD ou fibre de verre', expl: 'Ces techniques évitent de creuser des tranchées en voirie (coûteuses, longues, perturbation du trafic). Elles conviennent aux conduites dégradées mais encore structurellement stables.' },
-                { q: 'Qu\'est-ce que le RPQS ?', r: 'Rapport sur le Prix et la Qualité du Service : document annuel obligatoire pour toutes les collectivités. Indicateurs de performance publiés sur le portail SISPEA', expl: 'Le RPQS contient : prix de l\'eau, rendement, taux de renouvellement, taux de conformité, nombre d\'analyses, volumes distribués. Permet la comparaison entre collectivités.' },
-                { q: 'Qu\'est-ce que le taux de casse d\'un réseau ?', r: 'Nombre de réparations de fuites pour 100 km de réseau et par an. Réseau en bon état : < 25 casses/100 km/an. Réseau dégradé : > 100 casses', expl: 'Le taux de casse permet d\'identifier les tronçons à prioriser dans le Plan Pluriannuel de Renouvellement (PPR). Un taux > 100 justifie généralement un renouvellement immédiat.' },
-                { q: 'Qu\'est-ce que le plan de gestion des crises pour un réseau AEP ?', r: 'Procédure documentée déclenchée en cas d\'alerte qualité ou de rupture d\'alimentation : alerte ARS, information abonnés, distribution d\'eau alternative, mesures conservatoires', expl: 'Toute non-conformité microbiologique doit être signalée à l\'ARS sous 24h. L\'ARS peut imposer des restrictions d\'usage (eau non potable) ou l\'arrêt de la distribution.' },
-                { q: 'Qu\'est-ce que le "pipe bursting" (éclatement) ?', r: 'Technique sans tranchée : on tire un outil conique qui éclate l\'ancienne conduite vers l\'extérieur tout en tirant simultanément la nouvelle conduite PEHD', expl: 'L\'éclatement permet d\'augmenter le diamètre de la conduite (car l\'ancienne est fragmentée et poussée dans le sol). Idéal pour les conduites en fonte ou en amiante-ciment.' },
-              ],
-              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
-  <rect width="280" height="148" rx="8" fill="#E0F4F0"/>
-  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#0A7460">Réhabilitation réseau — Techniques sans tranchée</text>
-  <rect x="4" y="18" width="84" height="58" rx="4" fill="#0A7460" opacity=".85"/>
-  <text x="46" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Gainage</text>
-  <text x="46" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Résine projetée</text>
-  <text x="46" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">in situ (CIPP)</text>
-  <text x="46" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#FFF">Ø −5 à −10 %</text>
-  <text x="46" y="73" text-anchor="middle" font-family="Arial" font-size="7" fill="#cce8e0">sol stable requis</text>
-  <rect x="98" y="18" width="84" height="58" rx="4" fill="#147A60" opacity=".85"/>
-  <text x="140" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Chemisage</text>
-  <text x="140" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Tubage PEHD</text>
-  <text x="140" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">ou fibre de verre</text>
-  <text x="140" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Ø légèrement réduit</text>
-  <text x="140" y="73" text-anchor="middle" font-family="Arial" font-size="7" fill="#cce8e0">conduite stable</text>
-  <rect x="192" y="18" width="84" height="58" rx="4" fill="#1B6E55" opacity=".85"/>
-  <text x="234" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">Pipe Bursting</text>
-  <text x="234" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Éclate l'ancienne</text>
-  <text x="234" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">+ tire nouveau PEHD</text>
-  <text x="234" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">Ø possible ↑</text>
-  <text x="234" y="73" text-anchor="middle" font-family="Arial" font-size="7" fill="#cce8e0">fonte/amiante-ciment</text>
-  <rect x="8" y="82" width="264" height="60" rx="4" fill="#fff" stroke="#0A7460" stroke-width="1"/>
-  <text x="140" y="94" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A7460" font-weight="bold">Indicateurs performance réseau</text>
-  <text x="140" y="105" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Renouvellement cible : 1–1,5 %/an · France : ~0,6 %/an (insuffisant)</text>
-  <text x="140" y="116" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Taux de casse : &lt; 25 / 100 km/an = bon · > 100 = renouvellement urgent</text>
-  <text x="140" y="127" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">RPQS obligatoire · Indicateurs sur SISPEA</text>
-  <text x="140" y="137" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">PPR = Plan Pluriannuel de Renouvellement 5–10 ans</text>
-</svg>`,
-              exercice: {
-                enonce: 'Un réseau de 120 km a renouvelé 0,8 km en N et 1,1 km en N+1. Il compte 35 réparations de fuites sur l\'année. 1) Calculer le taux de renouvellement moyen sur 2 ans. 2) Comparer au seuil recommandé. 3) Calculer le taux de casse. 4) Quel programme de réhabilitation préconisez-vous pour une conduite en amiante-ciment Ø 200 mm de 2,5 km ?',
-                solution: '<strong>1) Taux de renouvellement :</strong> km moyen = (0,8 + 1,1)/2 = 0,95 km/an · Taux = 0,95/120 × 100 = <strong>0,79 %/an</strong><br><strong>2) Comparaison :</strong> 0,79 % < 1 % (seuil min) — insuffisant, le parc vieillit.<br><strong>3) Taux de casse :</strong> 35 réparations / 120 km × 100 = <strong>29,2 casses/100 km/an</strong> — légèrement au-dessus du seuil bon (25). Acceptable mais à surveiller.<br><strong>4) Amiante-ciment Ø 200 mm :</strong> le <strong>pipe bursting</strong> est idéal — il éclate l\'ancienne conduite fragile et permet de tirer un PEHD Ø 250 mm (augmentation de capacité). Avantage : pas de tranchée sur 2,5 km de voirie.',
-              },
-            },
-            {
-              id: 'exp-lp-2',
-              titre: 'Rendement de réseau et bilan entrées-sorties',
-              fiche: {
-                intro: 'Le rendement d\'un réseau AEP mesure l\'efficacité du service : plus il est élevé, moins l\'eau produite est perdue en fuites avant d\'arriver aux abonnés. Sa mesure et son amélioration sont des priorités réglementaires.',
-                points: [
-                  '📊 Rendement réseau = Volume consommé autorisé / Volume mis en distribution × 100 (%)',
-                  '   Volume consommé autorisé = facturé aux abonnés + usages municipaux (fontaines, nettoyage voirie) + usages de lutte contre incendies',
-                  '⚠️ Seuil réglementaire (décret 2012-97) : rendement < 50 % (ou ILP > 10) → programme d\'actions obligatoire dans les 2 ans',
-                  '📏 ILP (Indice Linéaire de Pertes) = Volume pertes (m³/j) / longueur réseau (km)',
-                  '   ILP < 3 m³/j/km = très bon | 3–8 = acceptable | > 10 = mauvais',
-                  '🔍 Méthodes de détection des fuites : bruit-corrélation (micro + corrélateur) | prélocalisateur acoustique | gaz traceur (hélium) | thermographie IR',
-                  '🌙 Débit minimum nocturne (0h–4h) : mesure du débit le plus bas de la nuit. Permet d\'estimer les fuites (consommation nocturne légitime ≈ 1,5 L/h/abonné)',
-                  '🗺️ Sectorisation : découpage du réseau en zones étanches mesurées individuellement → localisation des secteurs avec les plus fortes pertes',
-                ],
-                formules: [
-                  'Rendement (%) = V_consommé_autorisé / V_mis_en_distribution × 100',
-                  'ILP (m³/j/km) = Pertes (m³/j) / linéaire réseau (km)',
-                  'Pertes = V_mis_en_distribution – V_consommé_autorisé',
-                ],
-                sections: [
-                  {
-                    titre: "1. Calcul du rendement et indicateurs de pertes",
-                    ss: [
-                      {
-                        titre: "1.1. Le rendement de distribution",
-                        texte: "<p>Le rendement de distribution R = V_consommé / V_produit × 100 (%). V_consommé inclut les volumes facturés aux abonnés, les volumes non-facturés autorisés (défense incendie, lavage des rues, besoins propres du service) et les pertes apparentes (compteurs défaillants, fraudes). V_produit est le volume mis en distribution.</p><p>Seuil réglementaire d'alerte : rendement < 50 % pour les communes rurales (abonnement ≤ 500 m³/j) ou < 65 % pour les communes urbaines. En dessous de ce seuil, l'agence de l'eau peut limiter ses aides.</p>",
-                      },
-                      {
-                        titre: "1.2. L'Indice Linéaire de Pertes (ILP)",
-                        texte: "<p>L'ILP = Volume perdu (m³/j) / longueur du réseau (km) permet de comparer les performances indépendamment de la taille du réseau. Un ILP ≤ 3 m³/j/km est considéré comme performant ; au-delà de 5–8 selon la densité urbaine, des actions correctives s'imposent.</p><p>Les pertes sont de deux types : réelles (fuites visibles ou souterraines) et apparentes (erreurs de comptage, branchements illicites). Une action sur la pression réduit les pertes réelles mais n'améliore pas les pertes apparentes.</p>",
-                      },
-                    ],
-                  },
-                  {
-                    titre: "2. Stratégies d'amélioration du rendement",
-                    ss: [
-                      {
-                        titre: "2.1. Sectorisation et gestion nocturne des débits",
-                        texte: "<p>La sectorisation consiste à diviser le réseau en zones isolées mesurées séparément. La mesure des débits nocturnes (2h-4h du matin, quand la consommation réelle est quasi nulle) permet de détecter les fuites par secteur : un débit nocturne élevé révèle des fuites importantes.</p><p>La sectorisation associée à des débitmètres et des enregistreurs de pression forme un système de surveillance dynamique qui permet de détecter rapidement une casse ou une fuite et de cibler les interventions.</p>",
-                      },
-                      {
-                        titre: "2.2. Gestion de la pression et réhabilitation",
-                        texte: "<p>La pression est le principal facteur d'aggravation des fuites : réduire la pression de service réduit le débit de fuite (relation quasi-linéaire) et prolonge la durée de vie des conduites. Les réducteurs de pression (RP) permettent de créer des zones à pression maîtrisée.</p><p>La réhabilitation des conduites les plus dégradées (gainage, éclatement, remplacement) est complémentaire de la gestion de pression. Elle doit être priorisée par l'analyse des données patrimoniales (âge, matériau, fréquence des casses) et des résultats de la sectorisation.</p>",
-                      },
-                    ],
-                  },
-                ],
-                retenir: 'Rendement = V_consommé/V_produit. ILP = pertes/km. Seuil alerte : rendement < 50 % ou ILP > 10 → plan d\'action obligatoire. Détection : corrélateur acoustique.',
-              },
-              flashcards: [
-                { q: 'Formule du rendement de réseau AEP ?', r: 'Rendement (%) = Volume consommé autorisé / Volume mis en distribution × 100', expl: 'Le "consommé autorisé" inclut les abonnés facturés + usages municipaux (fontaines, arrosage, nettoyage). La différence avec le volume produit = pertes réelles + pertes apparentes.' },
-                { q: 'Quel est le seuil réglementaire déclenchant un programme d\'actions obligatoire ?', r: 'Rendement < 50 % OU ILP > 10 m³/j/km (décret 2012-97). Programme d\'amélioration à déposer dans les 2 ans', expl: 'En dessous de ce seuil, la collectivité ne peut plus augmenter ses prélèvements sans présenter un plan d\'action. Les Agences de l\'eau peuvent aussi conditionner leurs subventions au rendement.' },
-                { q: 'Comment fonctionne la corrélation acoustique pour détecter les fuites ?', r: 'Deux microphones sont posés sur la conduite à distance. La fuite émet un bruit. Le corrélateur calcule l\'écart de temps d\'arrivée du bruit → localise la fuite', expl: 'La précision est de ±1 m sur une conduite en métal, ±5 m sur du PVC. La méthode est rapide et ne nécessite pas de creuser. Elle est indispensable pour les pertes nocturnes.' },
-                { q: 'Qu\'est-ce que le débit minimum nocturne et à quoi sert-il ?', r: 'Débit le plus faible mesuré la nuit (0h–4h). La consommation légitime nocturne ≈ 1,5 L/h/abonné. L\'excédent = estimation des fuites actives', expl: 'Ex : secteur de 500 abonnés, DMN = 5 m³/h. Conso légitime = 500 × 1,5 = 750 L/h = 0,75 m³/h. Fuites estimées = 5 – 0,75 = 4,25 m³/h = 102 m³/j.' },
-                { q: 'Qu\'est-ce que la sectorisation d\'un réseau ?', r: 'Découpage du réseau en secteurs hydrauliquement isolables et mesurables individuellement (compteur sectoriel). Permet d\'identifier les zones à fortes pertes', expl: 'Chaque secteur (500–2 000 abonnés) est équipé d\'un compteur de sectorisation. On compare le volume entrant au volume facturé sur le secteur : l\'écart = pertes du secteur.' },
-                { q: 'Quelle est la différence entre pertes réelles et pertes apparentes ?', r: 'Pertes réelles = fuites physiques (eau quitte le réseau). Pertes apparentes = erreurs de comptage, fraudes, volumes non mesurés (dépassent les compteurs)', expl: 'Les pertes apparentes représentent souvent 1–3 % du volume distribué. Elles sont réduites par le renouvellement des compteurs vieillissants (sous-comptage systématique après 15–20 ans).' },
-              ],
-              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
-  <rect width="280" height="148" rx="8" fill="#E0F4F0"/>
-  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#0A7460">Rendement réseau &amp; Bilan entrées-sorties</text>
-  <rect x="8" y="18" width="264" height="28" rx="4" fill="#0A7460"/>
-  <text x="140" y="29" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#fff" font-weight="bold">Rendement = V_consommé_autorisé / V_mis_en_distribution × 100</text>
-  <text x="140" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#cce8e0">V_consommé = facturé abonnés + usages municipaux + incendies</text>
-  <rect x="4" y="52" width="130" height="38" rx="4" fill="#0A7460" opacity=".12" stroke="#0A7460" stroke-width="1"/>
-  <text x="69" y="63" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A7460" font-weight="bold">ILP (m³/j/km)</text>
-  <text x="69" y="74" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">&lt; 3 = très bon</text>
-  <text x="69" y="84" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">3–10 = acceptable · &gt; 10 = mauvais</text>
-  <rect x="146" y="52" width="130" height="38" rx="4" fill="#0A7460" opacity=".12" stroke="#0A7460" stroke-width="1"/>
-  <text x="211" y="63" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A7460" font-weight="bold">Seuil décret 2012-97</text>
-  <text x="211" y="74" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828" font-weight="bold">Rdt &lt; 50 % ou ILP &gt; 10</text>
-  <text x="211" y="84" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">→ programme d'actions 2 ans</text>
-  <defs><marker id="ar12" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#0A7460"/></marker></defs>
-  <rect x="8" y="96" width="264" height="46" rx="4" fill="#fff" stroke="#0A7460" stroke-width="1"/>
-  <text x="140" y="108" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A7460" font-weight="bold">Détection des fuites</text>
-  <text x="140" y="119" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Corrélation acoustique (±1 m fonte) · Prélocalisateur · Gaz traceur</text>
-  <text x="140" y="130" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">DMN : débit nocturne (0h–4h) − 1,5 L/h/abonné = fuites estimées</text>
-  <text x="140" y="140" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Sectorisation : 500–2 000 abonnés/secteur + compteur sectoriel</text>
-</svg>`,
-              exercice: {
-                enonce: 'Un réseau distribue 3 200 m³/j sur 85 km. Les volumes comptabilisés : abonnés facturés = 2 450 m³/j, usages municipaux = 120 m³/j. La nuit (0h–4h), le débit minimum nocturne est 18 m³/h pour 2 400 abonnés. 1) Calculer le rendement. 2) Calculer l\'ILP. 3) Un plan d\'actions est-il obligatoire ? 4) Estimer les fuites actives depuis le DMN.',
-                solution: '<strong>1) Rendement :</strong> V consommé autorisé = 2 450 + 120 = 2 570 m³/j · Rdt = 2 570 / 3 200 × 100 = <strong>80,3 %</strong><br><strong>2) Pertes :</strong> 3 200 − 2 570 = 630 m³/j · ILP = 630 / 85 = <strong>7,4 m³/j/km</strong> (acceptable, < 10)<br><strong>3) Plan d\'actions :</strong> Rdt = 80 % > 50 % et ILP = 7,4 < 10 → <strong>pas obligatoire</strong>. Mais à surveiller.<br><strong>4) DMN :</strong> Conso légitime nocturne = 2 400 × 1,5 L/h = 3 600 L/h = 3,6 m³/h · Fuites actives ≈ 18 − 3,6 = <strong>14,4 m³/h = 346 m³/j</strong>',
-              },
-            },
-            {
-              id: 'exp-lp-3',
-              titre: 'Sécurité sanitaire et Plan de Gestion des Risques (Water Safety Plan)',
-              fiche: {
-                intro: 'Le Water Safety Plan (WSP) ou Plan de Gestion de la Sécurité Sanitaire de l\'Eau (PGSSE) est l\'approche préventive imposée par la Directive 2020/2184. Il identifie tous les risques de la captation au robinet.',
-                points: [
-                  '📋 PGSSE (Plan de Gestion de la Sécurité Sanitaire de l\'Eau) : version française du Water Safety Plan de l\'OMS. Obligatoire depuis janvier 2023 (Directive 2020/2184)',
-                  '🎯 Principe : approche basée sur les risques (ABR) — identifier et maîtriser les dangers avant qu\'ils n\'atteignent le consommateur (préventif vs réactif)',
-                  '🗺️ Périmètre du PGSSE : de la ressource (bassin versant) → captage → traitement → stockage → distribution → branchement → robinet',
-                  '⚠️ Dangers identifiés : microbiologiques (Cryptosporidium, Legionella) | chimiques (pesticides, PFAS, nitrates) | physiques (turbidité) | radiologiques',
-                  '📊 Évaluation des risques : probabilité × gravité → hiérarchisation des risques → mesures de maîtrise prioritaires',
-                  '🔄 HACCP adapté à l\'eau : Hazard Analysis and Critical Control Points. Identifier les CCP (points critiques de maîtrise) dans la filière',
-                  '👁️ Surveillance opérationnelle : mesures en continu (turbidité, chlore) permettant de réagir en temps réel sans attendre l\'analyse de labo',
-                  '📋 Obligations : producteurs > 1 000 m³/j doivent soumettre leur PGSSE à l\'ARS avant 2026. Mise à jour tous les 6 ans minimum',
-                ],
-                formules: [],
-                sections: [
-                  {
-                    titre: "1. Le Plan de Gestion de la Sécurité Sanitaire de l'Eau",
-                    ss: [
-                      {
-                        titre: "1.1. Objectifs et fondements du PGSSE",
-                        texte: "<p>Le Plan de Gestion de la Sécurité Sanitaire de l'Eau (PGSSE), équivalent français du Water Safety Plan de l'OMS, est obligatoire en France depuis la transposition de la directive européenne 2020/2184 (décret de 2022, application 2023). Il remplace et enrichit l'approche réglementaire classique.</p><p>Son objectif est de passer d'une logique réactive (analyse de l'eau au robinet) à une logique préventive (identification et maîtrise des risques à chaque étape de la chaîne de l'eau, de la ressource au robinet).</p>",
-                      },
-                      {
-                        titre: "1.2. Les étapes du PGSSE",
-                        texte: "<p>Le PGSSE comprend 5 étapes principales : 1) Constitution de l'équipe pluridisciplinaire ; 2) Description du système de production et de distribution ; 3) Identification et analyse des dangers (contaminants, événements anormaux) ; 4) Définition et mise en œuvre des mesures de maîtrise ; 5) Vérification de l'efficacité et amélioration continue.</p><p>Le PGSSE doit être documenté, régulièrement mis à jour (après tout incident significatif, au minimum tous les 5 ans) et partagé avec l'Agence Régionale de Santé (ARS) qui assure la surveillance sanitaire.</p>",
-                      },
-                    ],
-                  },
-                  {
-                    titre: "2. Analyse des risques et mesures barrières",
-                    ss: [
-                      {
-                        titre: "2.1. Identification des dangers et évaluation des risques",
-                        texte: "<p>L'approche ABR (Analyse Basée sur les Risques) consiste à identifier tous les dangers potentiels sur la chaîne de l'eau (contamination microbiologique, chimique, physique), à évaluer leur probabilité et leur gravité, et à classer les risques par niveau de priorité.</p><p>Les sources de contamination à analyser : la ressource (qualité naturelle, pollutions agricoles, industrielles, accidentelles), le captage (protection du périmètre), le traitement (efficacité des barrières, pannes), le stockage (réservoirs) et la distribution (matériaux, stagnation, contamination par refoulement).</p>",
-                      },
-                      {
-                        titre: "2.2. Les mesures barrières et le plan d'urgence",
-                        texte: "<p>Une mesure barrière est toute action technique ou organisationnelle qui empêche ou réduit l'exposition à un danger. Les barrières successives forment la défense en profondeur : protection de la ressource, traitement (chloration, UV, filtration membranaire), surveillance (turbidimétrie, chlore résiduel), et surveillance du réseau.</p><p>Le plan d'urgence (ou plan de continuité d'activité) prévoit les actions à mener en cas de défaillance d'une barrière ou de contamination avérée : avis de non-consommation, alimentation de secours, communication aux abonnés, analyse des causes et remédiation.</p>",
-                      },
-                    ],
-                  },
-                ],
-                retenir: 'PGSSE = Water Safety Plan obligatoire depuis 2023. ABR = identifier les risques de la source au robinet. Surveillance opérationnelle = temps réel. Soumis à l\'ARS avant 2026.',
-              },
-              flashcards: [
-                { q: 'Qu\'est-ce que le PGSSE et depuis quand est-il obligatoire ?', r: 'Plan de Gestion de la Sécurité Sanitaire de l\'Eau (Water Safety Plan) : obligatoire depuis la transposition de la Directive 2020/2184 en droit français (janvier 2023)', expl: 'Il doit être soumis à l\'ARS avant 2026 pour les producteurs > 1 000 m³/j. C\'est une approche préventive systémique qui remplace la simple conformité au robinet.' },
-                { q: 'Quel est le principe de l\'approche basée sur les risques (ABR) ?', r: 'Identifier, évaluer et maîtriser tous les dangers (micro, chimiques, physiques) tout au long du système eau — de la ressource au robinet — avant qu\'ils n\'impactent la qualité', expl: 'L\'ABR est proactive : on ne attend pas le résultat d\'analyse non conforme. On identifie les situations à risque et on met en place des barrières préventives.' },
-                { q: 'Quel est le périmètre du PGSSE ?', r: 'De la ressource (bassin versant) jusqu\'au robinet du consommateur : captage → traitement → réservoirs → réseau de distribution → branchements', expl: 'Le PGSSE est plus large que l\'ancienne surveillance : il inclut le bassin versant (pressions agricoles, industrielles) et les réseaux intérieurs des bâtiments (risque Legionella).' },
-                { q: 'Qu\'est-ce que la surveillance opérationnelle dans le cadre du PGSSE ?', r: 'Mesures en temps réel de paramètres clés (turbidité, chlore résiduel, pH) permettant de détecter immédiatement une anomalie sans attendre une analyse de laboratoire', expl: 'Ex : une montée de turbidité en sortie de filtre > 0,3 NTU déclenche une alarme et peut arrêter la distribution en quelques minutes, avant que l\'eau non conforme n\'atteigne le réseau.' },
-                { q: 'Qu\'est-ce qu\'un CCP (Critical Control Point) dans la logique HACCP appliquée à l\'eau ?', r: 'Point dans la filière de traitement où la maîtrise est essentielle : une défaillance à ce point crée un risque sanitaire inacceptable pour le consommateur', expl: 'Ex : la chloration finale est un CCP (si la dose de chlore est insuffisante, des pathogènes atteignent le réseau). La mesure de maîtrise = chlore résiduel maintenu entre 0,1 et 0,5 mg/L.' },
-                { q: 'Pour quels producteurs le PGSSE est-il obligatoire et quelle est l\'échéance de soumission à l\'ARS ?', r: 'Obligatoire pour tous les producteurs d\'eau > 1 000 m³/j. Soumission à l\'ARS avant le 12 janvier 2026', expl: 'Les petits systèmes (< 1 000 m³/j) ont une approche simplifiée. L\'ARS valide le PGSSE et peut demander des mesures complémentaires. Mise à jour tous les 6 ans minimum.' },
-              ],
-              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
-  <rect width="280" height="148" rx="8" fill="#E0F4F0"/>
-  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#0A7460">PGSSE — Approche basée sur les risques</text>
-  <rect x="8" y="18" width="264" height="16" rx="3" fill="#0A7460"/>
-  <text x="140" y="29" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">De la ressource → captage → traitement → stockage → réseau → robinet</text>
-  <defs><marker id="ar13" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#0A7460"/></marker></defs>
-  <rect x="4" y="38" width="58" height="28" rx="3" fill="#4CAF50" opacity=".85"/>
-  <text x="33" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Identifier</text>
-  <text x="33" y="61" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">les dangers</text>
-  <line x1="62" y1="52" x2="74" y2="52" stroke="#0A7460" stroke-width="1.2" marker-end="url(#ar13)"/>
-  <rect x="74" y="38" width="58" height="28" rx="3" fill="#26A69A" opacity=".85"/>
-  <text x="103" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Évaluer</text>
-  <text x="103" y="61" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">prob × gravité</text>
-  <line x1="132" y1="52" x2="144" y2="52" stroke="#0A7460" stroke-width="1.2" marker-end="url(#ar13)"/>
-  <rect x="144" y="38" width="58" height="28" rx="3" fill="#0A7460" opacity=".85"/>
-  <text x="173" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Maîtriser</text>
-  <text x="173" y="61" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">CCP / barrières</text>
-  <line x1="202" y1="52" x2="214" y2="52" stroke="#0A7460" stroke-width="1.2" marker-end="url(#ar13)"/>
-  <rect x="214" y="38" width="62" height="28" rx="3" fill="#00695C" opacity=".85"/>
-  <text x="245" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Surveiller</text>
-  <text x="245" y="61" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">en continu</text>
-  <rect x="8" y="72" width="264" height="70" rx="4" fill="#fff" stroke="#0A7460" stroke-width="1"/>
-  <text x="140" y="84" text-anchor="middle" font-family="Arial" font-size="8" fill="#0A7460" font-weight="bold">CCP — Points Critiques de Maîtrise (HACCP eau)</text>
-  <text x="140" y="95" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Ex : chloration finale = CCP (chlore résiduel 0,1–0,5 mg/L)</text>
-  <text x="140" y="106" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Surveillance opérationnelle : turbidité, pH, chlore en temps réel</text>
-  <text x="140" y="117" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Dangers : micro (Crypto, Legionella) · chimiques (PFAS, NO₃⁻) · physiques</text>
-  <text x="140" y="128" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Obligatoire > 1 000 m³/j · Soumis à l'ARS avant janv. 2026</text>
-  <text x="140" y="138" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Mise à jour tous les 6 ans · Petits systèmes = approche simplifiée</text>
-</svg>`,
-              exercice: {
-                enonce: 'Un service AEP produit 1 800 m³/j depuis un captage souterrain. Il identifie 3 risques principaux : 1) forte turbidité après pluie (fréquence élevée, gravité faible) 2) dépassement nitrates NO₃⁻ en période printanière (fréquence moyenne, gravité modérée) 3) défaillance du chlorateur (fréquence faible, gravité très élevée). Classer ces risques par priorité et proposer une mesure de maîtrise pour le risque prioritaire.',
-                solution: '<strong>Classification (probabilité × gravité) :</strong><br>· Turbidité : élevée × faible → <strong>risque moyen</strong><br>· Nitrates : moyenne × modérée → <strong>risque moyen</strong><br>· Défaillance chlorateur : faible × très élevée → <strong>risque ÉLEVÉ (CCP)</strong><br><strong>Mesure de maîtrise prioritaire — chlorateur :</strong> doublement du système de chloration (deux chlorateurs en redondance) + alarme 24h/24 sur la mesure de chlore résiduel en réseau (sonde continue) + procédure d\'astreinte pour intervention < 2h. Test de la mesure de sauvegarde mensuel obligatoire.',
-              },
-            },
+          /* ── Bloc 03 — Production et distribution d'eau potable ── */
+          { id: 'lp-b03', name: 'Production et distribution d\'eau potable', ico: '💧', color: '#1565C0', colorl: '#E3F2FD', chapitres: [
+            { id: 'LP-EAU-019', titre: 'Audit d\'une filière de potabilisation', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-020', titre: 'Optimisation de la coagulation, de la floculation et de la clarification', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-021', titre: 'Exploitation des filtres granulaires', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-022', titre: 'Procédés membranaires en potabilisation', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-023', titre: 'Maîtrise de la désinfection et des sous-produits', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-024', titre: 'Traitements spécifiques et stabilité de l\'eau', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-025', titre: 'Gestion des réservoirs et des systèmes de transfert', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-026', titre: 'Diagnostic hydraulique et qualitatif d\'un réseau AEP', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-027', titre: 'Réduction des pertes et gestion patrimoniale', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-028', titre: 'Sécurité sanitaire, incidents et continuité du service', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
           ]},
-        ],
-      },
-    ],
+
+          /* ── Bloc 04 — Assainissement et traitement des eaux usées ── */
+          { id: 'lp-b04', name: 'Assainissement et traitement des eaux usées', ico: '🏭', color: '#2E7D32', colorl: '#E8F5E9', chapitres: [
+            { id: 'LP-EAU-029', titre: 'Audit d\'un système d\'assainissement', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-030', titre: 'Campagnes de mesure et diagnostic des réseaux', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-031', titre: 'Fonctionnement des réseaux par temps de pluie', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-032', titre: 'Exploitation des postes de relevage et conduites de refoulement', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-033', titre: 'Bilans matière et fonctionnement des boues activées', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-034', titre: 'Aération et élimination biologique de l\'azote', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-035', titre: 'Déphosphatation, clarification et séparation membranaire', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-036', titre: 'Traitement et gestion des boues', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-037', titre: 'Eaux industrielles et traitements spécifiques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-038', titre: 'Diagnostic des dysfonctionnements et optimisation d\'une station', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+          ]},
+
+          /* ── Bloc 05 — Eaux pluviales et aménagement ── */
+          { id: 'lp-b05', name: 'Eaux pluviales et aménagement', ico: '🌧️', color: '#00695C', colorl: '#E0F2F1', chapitres: [
+            { id: 'LP-EAU-039', titre: 'Diagnostic du ruissellement et des contraintes d\'un site', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-040', titre: 'Choix des pluies de projet et modélisation des apports', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-041', titre: 'Faisabilité et dimensionnement de l\'infiltration', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-042', titre: 'Dimensionnement des stockages et ouvrages de régulation', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-043', titre: 'Désimperméabilisation et solutions végétalisées', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-044', titre: 'Exploitation et évaluation des aménagements pluviaux', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+          ]},
+
+          /* ── Bloc 06 — Instrumentation, automatisme et supervision ── */
+          { id: 'lp-b06', name: 'Instrumentation, automatisme et supervision', ico: '📡', color: '#4527A0', colorl: '#EDE7F6', chapitres: [
+            { id: 'LP-EAU-045', titre: 'Concevoir une chaîne de mesure', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-046', titre: 'Étalonnage, vérification et incertitude de mesure', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-047', titre: 'Mesure des débits, pressions et niveaux', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-048', titre: 'Analyse en ligne de la qualité de l\'eau', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-049', titre: 'Logiques de commande et automatismes', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-050', titre: 'Régulation des installations hydrotechniques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-051', titre: 'Supervision, alarmes et historique de fonctionnement', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-052', titre: 'Exploitation des données de fonctionnement', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+          ]},
+
+          /* ── Bloc 07 — Maintenance, sécurité et performance énergétique ── */
+          { id: 'lp-b07', name: 'Maintenance, sécurité et performance énergétique', ico: '⚙️', color: '#BF360C', colorl: '#FBE9E7', chapitres: [
+            { id: 'LP-EAU-053', titre: 'Stratégie de maintenance et criticité des équipements', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-054', titre: 'Diagnostic des défaillances mécaniques et hydrauliques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-055', titre: 'Maintenance préventive, conditionnelle et gestion documentaire', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-056', titre: 'Diagnostic énergétique des systèmes de pompage', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-057', titre: 'Optimisation énergétique des installations de traitement', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-058', titre: 'Analyse des risques et préparation des interventions', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-059', titre: 'Organisation de crise et continuité d\'exploitation', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-060', titre: 'Analyse technico-économique des améliorations', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+          ]},
+
+          /* ── Bloc 08 — Qualité de l'eau et environnement ── */
+          { id: 'lp-b08', name: 'Qualité de l\'eau et environnement', ico: '🔬', color: '#00838F', colorl: '#E0F7FA', chapitres: [
+            { id: 'LP-EAU-061', titre: 'Concevoir une stratégie d\'échantillonnage', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-062', titre: 'Interpréter les résultats analytiques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-063', titre: 'Micropolluants et contaminants émergents', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-064', titre: 'Risques microbiologiques et maîtrise des expositions', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-065', titre: 'Évaluer les effets sur les milieux récepteurs', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-066', titre: 'Réutilisation de l\'eau et comparaison environnementale', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+          ]},
+
+          /* ── Bloc 09 — Réglementation, économie et gestion des services ── */
+          { id: 'lp-b09', name: 'Réglementation, économie et gestion des services', ico: '⚖️', color: '#1A237E', colorl: '#E8EAF6', chapitres: [
+            { id: 'LP-EAU-067', titre: 'Gouvernance et organisation des services d\'eau', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-068', titre: 'Exigences applicables à l\'eau potable et à l\'assainissement', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-069', titre: 'Préparer un dossier environnemental', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-070', titre: 'Modes de gestion et relations contractuelles', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-071', titre: 'Indicateurs de performance et pilotage d\'un service', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-072', titre: 'Budget, tarification et programmation des investissements', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-073', titre: 'Consultation des entreprises et analyse des offres', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-074', titre: 'Management opérationnel et relations avec les usagers', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+          ]},
+
+          /* ── Bloc 10 — Projets, outils numériques et communication ── */
+          { id: 'lp-b10', name: 'Projets, outils numériques et communication', ico: '💻', color: '#37474F', colorl: '#ECEFF1', chapitres: [
+            { id: 'LP-EAU-075', titre: 'Conduire une mission technique', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-076', titre: 'SIG et gestion des données patrimoniales', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-077', titre: 'Plans, profils et relevés des installations', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-078', titre: 'Calcul et analyse de données avec tableur ou scripts', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-079', titre: 'Construire une étude de faisabilité', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-080', titre: 'Chiffrer et planifier un projet', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-081', titre: 'Suivre les travaux et préparer la réception', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-082', titre: 'Mettre en service et transférer à l\'exploitation', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-083', titre: 'Rédiger et présenter des documents professionnels', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-084', titre: 'Construire un mémoire professionnel et une soutenance', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+          ]},
+
+          /* ── Bloc 11 — Études de cas transversales ── */
+          { id: 'lp-b11', name: 'Études de cas transversales', ico: '📋', color: '#4A148C', colorl: '#F3E5F5', chapitres: [
+            { id: 'LP-EAU-085', titre: 'Diagnostic et amélioration d\'un réseau d\'eau potable', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-086', titre: 'Audit et optimisation d\'une station de traitement des eaux usées', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-087', titre: 'Conception d\'une gestion intégrée des eaux pluviales', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-088', titre: 'Sécurisation d\'une ressource souterraine et d\'un captage', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-089', titre: 'Rénovation d\'un système de pompage et de son instrumentation', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'LP-EAU-090', titre: 'Projet final : stratégie d\'amélioration d\'un service d\'eau', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+          ]},
+
+        ]
+      }
+    ]
   },
-
   /* ══ MASTER SCIENCES DE L'EAU ══════════════════════════════════════ */
   'master-eau': {
     name: 'Master Sciences de l\'Eau',
@@ -14433,7 +13859,10 @@ function _coursGetBlocData(chapId) {
     window.GEMEAU_B01, window.GEMEAU_B02, window.GEMEAU_B03, window.GEMEAU_B04,
     window.GEMEAU_B05, window.GEMEAU_B06, window.GEMEAU_B07, window.GEMEAU_B08,
     window.GEMEAU_B09, window.GEMEAU_B10, window.GEMEAU_B11, window.GEMEAU_B12,
-    window.GEMEAU_B13, window.GEMEAU_B14
+    window.GEMEAU_B13, window.GEMEAU_B14,
+    window.LP_EAU_B01, window.LP_EAU_B02, window.LP_EAU_B03, window.LP_EAU_B04,
+    window.LP_EAU_B05, window.LP_EAU_B06, window.LP_EAU_B07, window.LP_EAU_B08,
+    window.LP_EAU_B09, window.LP_EAU_B10, window.LP_EAU_B11
   ];
   for (var i = 0; i < blocs.length; i++) {
     if (blocs[i] && blocs[i][chapId]) return blocs[i][chapId];

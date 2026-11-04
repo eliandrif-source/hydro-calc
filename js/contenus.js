@@ -2639,7 +2639,7 @@ function renderQCMHub() {
 function renderANCHub() {
   var _tb=document.getElementById('tab-bar'); if(_tb) _tb.style.display='none';
   document.getElementById('main-content').innerHTML = `
-    <div class="module-hero" style="--cat-color:var(--c-anc)">
+    <div class="module-hero" style="--cat-color:var(--c-anc);background:linear-gradient(135deg,rgba(0,100,70,0.80) 0%,rgba(0,60,40,0.70) 100%),url('./images/anc-banner.webp');background-size:cover;background-position:center;">
       <button class="mh-back-btn" onclick="goHome()">‹ Accueil</button>
       <span class="mh-icon">🏡</span>
       <div class="mh-title">Assainissement non collectif</div>

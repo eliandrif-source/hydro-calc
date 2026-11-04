@@ -559,8 +559,7 @@ var GEMEAU_B07 = {
         solution: 'Étape 1 - Collecte des données : relever les tronçons (DN, longueur, matériau, âge), les nœuds (cote Z, débit prélevé), les pompes (courbe H-Q) et réservoirs (cote du plan d\'eau). Étape 2 - Saisie du modèle : créer les nœuds et tronçons dans Epanet, renseigner les paramètres hydrauliques (rugosité, coefficients), calibrer le modèle sur des mesures de terrain (pression et débit mesurés = calculés). Étape 3 - Simulations : simuler en régime permanent (instantané) et en simulation étendue sur 24h (profil de consommation journalier). Étape 4 - Analyse et préconisations : identifier les nœuds à pression insuffisante ou excessive, les tronçons sous-dimensionnés, les vitesses anormales, et proposer des améliorations (renforcement, création de maille, réducteur de pression).'
       }
     ]
-  }
-
+  },
 
   'GEMEAU-057': {
     id: 'GEMEAU-057',

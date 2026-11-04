@@ -546,6 +546,162 @@ window.GEMEAU_B10 = {
     ]
   },
 
-  /* _APPEND_POINT_ */
+  'GEMEAU-089': {
+    fiche: {
+      intro: 'Les boues activées sont le procédé biologique aérobie de référence pour le traitement des eaux usées urbaines. La maîtrise du fonctionnement repose sur le contrôle de la biomasse et de l\'oxygène dissous.',
+      sections: [
+        { titre: '1. Principe du procédé boues activées', texte: '<p>Le procédé boues activées (BA) associe un bassin d\'aération et un clarificateur. Les micro-organismes (flocs bactériens) dégradent la matière organique en présence d\'oxygène. La recirculation des boues depuis le clarificateur vers le bassin maintient une concentration en biomasse élevée (MES = 2–5 g/L en aération prolongée).</p><p><strong>Paramètres de pilotage :</strong> charge massique Cm [kg DBO5/kg MVS·j], âge des boues θc [jours], indice de boues de Mohlman (IBM) [mL/g], oxygène dissous [mg/L].</p>' },
+        { titre: '2. Bilan matière et dimensionnement', texte: '<p><strong>Charge massique :</strong> Cm = Q·DBO5 / (V·MES·f) avec f = fraction volatile (MVS/MES ≈ 0,75). Cm < 0,1 kg/kg·j = aération prolongée (nitrification spontanée) ; Cm = 0,1–0,3 = charge faible ; Cm > 0,5 = forte charge.</p><p><strong>Production de boues :</strong> Pb = a·DBO5 éliminée – b·MVS (a ≈ 0,5–0,65, b ≈ 0,05–0,07 j⁻¹). En aération prolongée, production faible.</p><p><strong>Besoins en oxygène :</strong> O2 = 1,0–1,5 kg O2/kg DBO5 éliminée (carbonée seule), + 4,57 kg O2/kg N nitrifiée.</p>' },
+        { titre: '3. Clarification et décantation', texte: '<p>Le clarificateur assure la séparation eau clarifiée / boues. Critères : charge surfacique Cs < 1 m/h (pointe), débit de recirculation τ = 0,5–1,5 Qmoyen. L\'IBM mesure l\'aptitude à la décantation : bon si IBM < 100 mL/g ; problèmes si > 150 (bulking filamenteux).</p>' },
+        { titre: '4. Causes de dysfonctionnement', texte: '<p><strong>Bulking filamenteux :</strong> croissance excessive de bactéries filamenteuses (Microthrix, Nocardia) → IBM élevé → boues ne décantent pas. Causes : faible OD, forte charge, rapport C/N/P déséquilibré.</p><p><strong>Foisonnement non filamenteux :</strong> production excessive d\'EPS, boues légères. <strong>Montée des boues :</strong> dénitrification dans le clarificateur → bulles N2 → flottation. <strong>Moussage :</strong> détergents, Nocardia, Microthrix.</p>' },
+        { titre: '5. Fiche de révision', texte: '<p><strong>À retenir :</strong> Cm < 0,1 → aération prolongée (nitrification). IBM > 150 → problème décantation. OD = 1,5–2 mg/L dans le bassin. Recirculation τ = 0,5–1,5. Production boues ≈ 0,3–0,5 kg MS/kg DBO5 éliminée.</p>' },
+      ],
+      points: [
+        'Boues activées = bassin aération + clarificateur + recirculation boues',
+        'Charge massique Cm = Q·C0/(V·MES·f) [kg DBO5/kg MVS·j]',
+        'Aération prolongée : Cm < 0,1 → nitrification spontanée',
+        'OD optimal dans bassin : 1,5–2 mg/L',
+        'IBM < 100 mL/g : bonne décantabilité ; > 150 : bulking',
+        'Recirculation τ = Qr/Q = 0,5 à 1,5',
+        'Bulking filamenteux : OD faible, surcharge, C/N/P déséquilibré',
+        'Montée des boues = dénitrification dans clarificateur',
+      ],
+      formules: [
+        'Cm = Q × DBO5 / (V × MES × f) — charge massique [kg DBO5/kg MVS·j] — f=MVS/MES≈0,75',
+        'θc = V × MES / (Qe × MESe + Qr × MESr) — âge des boues [j]',
+        'O2 carbonée = 1,0–1,5 kg O2/kg DBO5 éliminée',
+        'O2 nitrification = 4,57 × ΔN [kg O2/kg N nitrifiée]',
+        'IBM = volume boues après 30 min sédimentation (mL) / [MES] (g/L) [mL/g]',
+      ],
+      retenir: 'Les boues activées se pilotent via la charge massique, l\'OD et l\'âge des boues. L\'IBM surveille l\'aptitude à la décantation. Les dysfonctionnements (bulking, montée des boues) sont diagnostiquables par analyse des paramètres opératoires.',
+    },
+    exercices: [
+      { n: 1, enonce: 'Une STEP de 10 000 EH traite 2 000 m³/j de débit moyen avec DBO5 = 200 mg/L. Volume bassin V = 1 200 m³, MES = 3,5 g/L, f = 0,75. Calculer Cm.', solution: '<strong>Cm</strong> = Q × C0 / (V × MES × f) = (2 000 × 0,200) / (1 200 × 3,5 × 0,75) = 400 / 3 150 = <strong>0,127 kg DBO5/kg MVS·j</strong> → charge faible. Nitrification possible mais non garantie.' },
+      { n: 2, enonce: 'Calculer les besoins en O2 (carbonés + nitrification) pour : DBO5 = 150 kg/j, N-NH4 à nitrifier = 15 kg/j.', solution: '<strong>O2 carboné :</strong> 1,2 × 150 = 180 kg O2/j. <strong>O2 nitrification :</strong> 4,57 × 15 = 68,6 kg O2/j. <strong>Total :</strong> 248,6 kg O2/j ≈ 250 kg/j.' },
+      { n: 3, enonce: 'L\'IBM mesuré est de 180 mL/g. Quelles en sont les causes probables et les actions correctives ?', solution: 'IBM > 150 → bulking. <strong>Causes probables :</strong> OD < 1 mg/L, surcharge organique, déficit en P. <strong>Vérifications :</strong> mesure OD en continu (sonde), rapport DBO5/P (objectif > 100/1), analyse microscopique des boues (filaments Microthrix ?). <strong>Actions :</strong> augmenter débit air (OD cible 2 mg/L), réduire charge (by-pass si possible), ajout chlore en tête clarificateur (provisoire), sélecteur anoxie.' },
+      { n: 4, enonce: 'Expliquer le phénomène de montée des boues dans un clarificateur et proposer des mesures correctives.', solution: '<strong>Mécanisme :</strong> Si l\'âge des boues est trop élevé et le fond du clarificateur anaérobie, la dénitrification produit du N2 gazeux qui fait remonter les flocons. <strong>Diagnostic :</strong> boues avec bulles, effluent turbide, N-NH4 nul en sortie bassin, NO3 élevé. <strong>Corrections :</strong> augmenter fréquence purge des boues (réduire θc), augmenter recirculation (τ → 1,5), vérifier absence de zone morte dans clarificateur.' },
+      { n: 5, enonce: 'Une STEP fonctionne en aération prolongée avec θc = 20 j, MES = 4 g/L, V = 800 m³. Calculer le débit de purge quotidien si MESboues purgées = 8 g/L.', solution: 'Masse MVS dans bassin = V × MES × f = 800 × 4 × 0,75 = 2 400 kg MVS. Purge quotidienne nécessaire = 2 400 / θc = 2 400 / 20 = 120 kg MVS/j = 160 kg MES/j. Qpurge = 160 / 8 = <strong>20 m³/j</strong>.' },
+    ],
+    flashcards: [
+      { q: 'Quelle est la charge massique d\'une aération prolongée ?', r: 'Cm < 0,1 kg DBO5/kg MVS·j — permet la nitrification spontanée', expl: 'En aération prolongée, l\'âge des boues est long (> 15 j), les bactéries nitrifiantes (croissance lente) peuvent se développer.' },
+      { q: 'Que signifie un IBM de 200 mL/g ?', r: 'Bulking sévère — boues non décantables. IBM correct < 100 mL/g', expl: 'L\'Indice de Boues de Mohlman (IBM) mesure 30 min après décantation. Au-delà de 150, le clarificateur peut déborder.' },
+      { q: 'Quelle est la consommation O2 pour nitrifier 1 kg d\'azote ammoniacal ?', r: '4,57 kg O2/kg N-NH4 — besoins élevés, aération renforcée nécessaire', expl: 'Réaction : NH4+ + 2 O2 → NO3- + 2H+ + H2O. Coefficient stœchiométrique 4,57.' },
+    ],
+  },
+
+  'GEMEAU-090': {
+    fiche: {
+      intro: 'Les cultures fixées (lits bactériens, disques biologiques) et les procédés extensifs (lagunage, FPR) offrent des alternatives aux boues activées pour les petites collectivités, avec des atouts en maintenance et consommation énergétique.',
+      sections: [
+        { titre: '1. Cultures fixées : lits bactériens et disques biologiques', texte: '<p><strong>Lits bactériens :</strong> les eaux usées ruissellent sur un garnissage (plastique alvéolaire, coke) colonisé par un biofilm. L\'aération est naturelle (tirage thermique) ou forcée. Paramètres : charge hydraulique [m³/m²·j], charge organique volumique [kg DBO5/m³·j].</p><p><strong>Disques biologiques :</strong> plateaux tournants immergés à 40 % dans l\'eau. Biofilm sur les deux faces. Avantage : faible consommation électrique, bonne stabilité.</p><p>Les deux procédés produisent moins de boues que les BA, tolèrent mieux les variations de charge, mais sont moins performants pour la nitrification à fortes charges.</p>' },
+        { titre: '2. Lagunage naturel et aéré', texte: '<p><strong>Lagunage naturel :</strong> suite de bassins peu profonds (0,5–1,5 m) où la dépollution est assurée par l\'activité bactérienne, algale et les UV solaires. Adapté aux petites communes (< 2 000 EH). Surface importante (10–15 m²/EH). Bon abattement des pathogènes.</p><p><strong>Lagunage aéré :</strong> aérateurs de surface dans des bassins plus profonds (2–4 m). Plus compact, performances supérieures, applicable jusqu\'à 10 000 EH.</p>' },
+        { titre: '3. Filtres plantés de roseaux (FPR)', texte: '<p>Les FPR (ou CW : constructed wetlands) traitent les eaux usées par percolation dans un massif filtrant (gravier, sable) colonisé par des roseaux (Phragmites australis). La norme DTU est la référence française.</p><p><strong>FPR à flux vertical (FPR-V) :</strong> alimentation par bâchées, bonne nitrification. <strong>FPR à flux horizontal (FPR-H) :</strong> conditions anoxies → dénitrification. Association V+H = traitement N complet.</p><p>Surface minimale réglementaire : 2 m²/EH pour le premier étage (FPR-V). Entretien tous les 10–15 ans (remplacement garnissage si colmaté).</p>' },
+        { titre: '4. Critères de choix', texte: '<p>Facteurs déterminants : taille de la collectivité, contraintes foncières, énergie disponible, compétences locales, objectifs de rejet. Les procédés extensifs conviennent aux zones rurales avec espace disponible ; les cultures fixées sont intermédiaires (moins de foncier que l\'extensif, moins d\'énergie que les BA).</p>' },
+        { titre: '5. Fiche de révision', texte: '<p><strong>Lits bactériens :</strong> biofilm sur garnissage, aération naturelle, peu de boues. <strong>Lagunage :</strong> bassins, UV, algues, grand foncier. <strong>FPR :</strong> massif filtrant + roseaux, 2 m²/EH min. FPR-V = nitrification, FPR-H = dénitrification.</p>' },
+      ],
+      points: [
+        'Lits bactériens = biofilm sur garnissage, aération naturelle ou forcée',
+        'Lagunage naturel : 10–15 m²/EH, abattement pathogènes efficace par UV',
+        'FPR-V (flux vertical) : nitrification ; FPR-H (flux horizontal) : dénitrification',
+        'Surface FPR min réglementaire : 2 m²/EH pour 1er étage FPR-V',
+        'Cultures fixées : moins de boues, moins d\'énergie que boues activées',
+        'FPR : entretien léger, durée de vie 15–20 ans avant remplacement garnissage',
+        'Choix du procédé : taille, foncier, énergie, compétences, objectifs rejet',
+      ],
+      formules: [
+        'Charge hydraulique lits bactériens = Q / S [m³/m²·j] — S = surface du garnissage',
+        'Surface FPR-V ≥ 2 m²/EH (1er étage, selon DTU) — surface totale ≥ 5 m²/EH (2 étages)',
+        'Temps de séjour lagunage naturel = 15–30 jours (série de 3 bassins)',
+      ],
+      retenir: 'Les procédés extensifs (lagunage, FPR) et cultures fixées (lits bactériens) sont adaptés aux petites collectivités. Ils consomment moins d\'énergie que les boues activées mais nécessitent plus de foncier ou sont moins performants pour l\'azote.',
+    },
+    exercices: [
+      { n: 1, enonce: 'Une commune de 500 EH souhaite comparer FPR 2 étages et lagunage naturel. Estimez les surfaces nécessaires pour chaque procédé.', solution: '<strong>FPR 2 étages :</strong> Surface = 5 m²/EH × 500 = 2 500 m² (soit 25 ares). <strong>Lagunage naturel :</strong> Surface = 12 m²/EH × 500 = 6 000 m² (60 ares, soit 3 bassins de 2 000 m² × 0,5–1 m profondeur). Le FPR est 2,5× plus compact mais le lagunage n\'a pas besoin de pompes.' },
+      { n: 2, enonce: 'Expliquer pourquoi un lit bactérien traite moins bien l\'azote qu\'une STEP à boues activées en aération prolongée.', solution: 'La nitrification nécessite des bactéries nitrifiantes (Nitrosomonas, Nitrobacter) à croissance lente, qui s\'établissent bien dans les boues activées à faible charge (long θc). Dans un lit bactérien, l\'épaisseur du biofilm limite la diffusion d\'O2 dans la partie profonde → conditions anoxies → nitrifiants en compétition avec hétérotrophes. La charge organique élevée en tête de garnissage empêche le développement des nitrifiants. Solution : lits bactériens en 2 étages avec recirculation.' },
+      { n: 3, enonce: 'Une STEP de 300 EH utilise des FPR-V + FPR-H. Pourquoi cette association améliore-t-elle l\'élimination de l\'azote par rapport à FPR-V seul ?', solution: 'FPR-V seul : milieu aérobie → nitrification (NH4+ → NO3-) mais pas de dénitrification. L\'azote reste sous forme NO3- dans le rejet. FPR-H : milieu anoxie (pas d\'O2 libre) → dénitrification (NO3- → N2 gazeux par bactéries hétérotrophes utilisant le carbone organique résiduel). Association V+H : NH4+ → NO3- (étage V) → N2 (étage H). Abattement N total > 70 %. Avantage par rapport à FPR-V seul : respect de la directive ERU pour les zones sensibles.' },
+    ],
+    flashcards: [
+      { q: 'Quelle est la surface réglementaire minimale pour un FPR-V premier étage ?', r: '2 m²/EH — surface totale (2 étages) ≥ 5 m²/EH', expl: 'Selon la note technique du MEDDE (2014). Pour un FPR-V seul, prévoir 3 m²/EH minimum.' },
+      { q: 'Quel procédé combine nitrification et dénitrification en FPR ?', r: 'Association FPR-V (vertical, aérobie) + FPR-H (horizontal, anoxie)', expl: 'FPR-V nitrife l\'ammonium en nitrates ; FPR-H dénitrife les nitrates en azote gazeux grâce aux conditions anoxies.' },
+    ],
+  },
+
+  'GEMEAU-091': {
+    fiche: {
+      intro: 'L\'élimination de l\'azote (N) et du phosphore (P) est requise par la directive ERU pour les zones sensibles. Elle repose sur des procédés biologiques couplés à des traitements physico-chimiques pour le phosphore.',
+      sections: [
+        { titre: '1. Cycle de l\'azote dans une STEP', texte: '<p><strong>Nitrification :</strong> NH4+ → NO2- (Nitrosomonas) → NO3- (Nitrobacter). Réaction aérobie, bactéries autotrophes à croissance lente. Conditions : OD > 2 mg/L, T° > 10°C, pH 7–8, âge des boues > 8–10 j.</p><p><strong>Dénitrification :</strong> NO3- → N2 (gaz). Réaction anoxie, bactéries hétérotrophes utilisant le carbone organique des effluents (DBO). Conditions : OD < 0,5 mg/L, présence de source C.</p><p><strong>Configurations :</strong> pré-dénitrification (D/N) = bassin anoxie en tête + recirculation interne ; post-dénitrification (N/D) = bassin anoxie après nitrification avec apport de MeOH.</p>' },
+        { titre: '2. Élimination biologique du phosphore', texte: '<p>Les bactéries PAO (Phosphorus Accumulating Organisms) accumulent le P sous forme de polyphosphates intracellulaires. Mécanisme : en anaérobie, les PAO libèrent le P et stockent du carbone (AGV) ; en aérobie, elles reprennent plus de P qu\'elles n\'en ont libéré → excès de P dans les boues purgées.</p><p>Configurations : procédé A/O (anaérobie/oxique), UCT, Bardenpho 5 étapes. Efficacité limitée (P résiduel 1–3 mg/L) → souvent couplée à une précipitation chimique.</p>' },
+        { titre: '3. Précipitation chimique du phosphore', texte: '<p>Ajout de sels de Fe ou Al (FeCl3, Al2(SO4)3) précipite le phosphate sous forme de FePO4 ou AlPO4. Efficacité : P résiduel < 0,5 mg/L si nécessaire. Doses : ratio molaire Fe/P ≈ 1,5–2. <strong>Inconvénients :</strong> production accrue de boues, coût des réactifs, pH sensible.</p>' },
+        { titre: '4. Gestion des boues', texte: '<p><strong>Épaississement :</strong> gravitaire (silos) ou dynamique (centrifugation, flottation). <strong>Déshydratation :</strong> filtre-presse, centrifugeuse, filtre à bande. Siccité obtenue : 20–35 % selon procédé.</p><p><strong>Stabilisation :</strong> digestion anaérobie (> 15 j, 35°C) → réduction matière organique, production de biogaz (CH4). Ou stabilisation aérobie (aération prolongée). <strong>Valorisation :</strong> épandage agricole (plan d\'épandage), incinération, compostage. Norme NF U 44-095.</p>' },
+        { titre: '5. Fiche de révision', texte: '<p><strong>Nitrification :</strong> aérobie, θc > 10 j, T° > 10°C. <strong>Dénitrification :</strong> anoxie, source C. <strong>P bio :</strong> PAO, phases A/O. <strong>P chimique :</strong> FeCl3 ou Al2SO4, ratio Fe/P ≈ 1,5. <strong>Boues :</strong> épaississement → déshydratation → valorisation (épandage, biogaz).</p>' },
+      ],
+      points: [
+        'Nitrification : NH4+ → NO3-, aérobie, Nitrosomonas/Nitrobacter, OD > 2 mg/L, θc > 8–10 j',
+        'Dénitrification : NO3- → N2, anoxie, source de carbone organique nécessaire',
+        'Pré-déni (D/N) : bassin anoxie en tête + recirculation interne NO3-',
+        'Bio-P (PAO) : phases anaérobie/aérobie, P résiduel 1–3 mg/L',
+        'Précipitation chimique P : FeCl3 ou Al2(SO4)3, P < 0,5 mg/L atteint',
+        'Boues : épaississement → déshydratation (20–35 % siccité) → valorisation',
+        'Digestion anaérobie boues : biogaz (60 % CH4), réduction MO de 40–50 %',
+      ],
+      formules: [
+        'O2 nitrification = 4,57 × N nitrifiée [kg O2/kg N]',
+        'O2 récupérée dénitrification = 2,86 × N dénitrifiée [kg O2/kg N]',
+        'Dose FeCl3 ≈ 2,5–3 mol Fe / mol P à éliminer (masse FeCl3 ≈ 5 g/g P)',
+        'Rendement digestion anaérobie : réduction MO 40–50 %, production biogaz 350–450 L/kg MO détruite',
+      ],
+      retenir: 'L\'élimination N combine nitrification (aérobie) et dénitrification (anoxie) en alternance de zones. Le phosphore est éliminé biologiquement (PAO) ou par précipitation chimique. La gestion des boues (épaississement, déshydratation, valorisation) est un enjeu économique et réglementaire majeur.',
+    },
+    exercices: [
+      { n: 1, enonce: 'Une STEP élimine 20 kg N-NH4/j par nitrification. Calculer (1) les besoins O2 pour la nitrification et (2) les économies O2 si 15 kg N/j sont ensuite dénitrifiés.', solution: '(1) O2 nitrification = 4,57 × 20 = <strong>91,4 kg O2/j</strong>. (2) O2 récupérée dénitrification = 2,86 × 15 = <strong>42,9 kg O2/j</strong> économisés. <strong>Bilan :</strong> besoins nets = 91,4 – 42,9 = 48,5 kg O2/j (réduction de 47 % des besoins en aération pour l\'azote).' },
+      { n: 2, enonce: 'Une STEP doit respecter P < 1 mg/L en sortie (zone sensible). Concentration entrée = 8 mg P/L, débit = 3 000 m³/j. Calculer la masse de FeCl3 à injecter (ratio molaire Fe/P = 1,8).', solution: 'P à éliminer = (8 – 1) × 3 000 / 1 000 = <strong>21 kg P/j</strong>. Moles P = 21 000 / 31 = 677 mol/j. Moles Fe = 1,8 × 677 = 1 219 mol/j. Masse FeCl3 = 1 219 × 162,2 g/mol = <strong>197 700 g/j ≈ 198 kg FeCl3/j</strong>.' },
+      { n: 3, enonce: 'Expliquer pourquoi la dénitrification est généralement placée avant la nitrification (pré-dénitrification) dans les STEP modernes.', solution: '<strong>Avantages de la pré-dénitrification (D/N) :</strong> (1) La DCO des eaux brutes sert de source de carbone pour la dénitrification → pas d\'ajout externe de MeOH ou de vinaigre. (2) L\'alcalinité consommée par la nitrification est partiellement reconstituée par la dénitrification (1,5 mol HCO3- produit/mol NO3- dénitrifié) → économie de réactif. (3) Recirculation interne des nitrates depuis la zone aérobie vers la zone anoxie. <strong>Inconvénient :</strong> ne dénitrifie que la fraction recyclée → rendement limité à 70–80 % sans post-dénitrification.' },
+    ],
+    flashcards: [
+      { q: 'Quelles conditions sont nécessaires à la nitrification ?', r: 'OD > 2 mg/L, T° > 10°C, pH 7–8, âge des boues > 8–10 j', expl: 'En dessous de 10°C, la nitrification ralentit fortement. En dessous de 5°C, elle s\'arrête pratiquement.' },
+      { q: 'Qu\'est-ce que les bactéries PAO ?', r: 'Bactéries accumulant le phosphore (Polyphosphate Accumulating Organisms) — élimination bio-P', expl: 'En anaérobie, les PAO libèrent P et stockent des AGV. En aérobie, elles absorbent plus de P qu\'elles n\'en ont libéré → excès P exporté dans les boues purgées.' },
+      { q: 'Quelle est la consommation d\'O2 économisée par la dénitrification ?', r: '2,86 kg O2/kg N dénitrifié — réduit les besoins en aération de 20–40 %', expl: 'En dénitrification, le nitrate joue le rôle d\'accepteur d\'électrons à la place de l\'O2 → économie réelle sur l\'aération.' },
+    ],
+  },
+
+  'GEMEAU-092': {
+    fiche: {
+      intro: 'L\'exploitation d\'une STEP repose sur la surveillance quotidienne des paramètres opératoires, le diagnostic précoce des dérives et l\'optimisation continue des performances. L\'autosurveillance réglementaire est obligatoire au-delà de 2 000 EH.',
+      sections: [
+        { titre: '1. Paramètres de surveillance quotidienne', texte: '<p><strong>Entrée :</strong> débit (débitmètre électromagnétique), pH, MES, DBO5/DCO (préleveur automatique), N-NH4, Ptotal. <strong>Bassin d\'aération :</strong> OD (sonde en continu), MES, température, pH. <strong>Clarificateur :</strong> hauteur voile de boues, IBM, MES effluent. <strong>Sortie :</strong> MES, DBO5, DCO, NTK, N-NH4, NO3, Ptotal.</p>' },
+        { titre: '2. Autosurveillance réglementaire', texte: '<p>Obligatoire pour les STEP > 2 000 EH (arrêté du 21/07/2015). Exigences : bilans 24h mensuels (entrée + sortie), transmission des données à la police de l\'eau (DDTM/OFB), déclaration des dépassements de seuil.</p><p>Niveaux : surveillance continue (débits, OD, pH), bilans fréquents (NTK, P), bilans semestriels (métaux lourds si rejets industriels). Résultats transmis via VERSEAU ou équivalent.</p>' },
+        { titre: '3. Diagnostic d\'une dérive', texte: '<p><strong>Démarche structurée :</strong> (1) Observer les tendances (courbes historiques) ; (2) Identifier le paramètre déviant (MES effluent ? NH4 sortie ? IBM ?) ; (3) Remonter à la cause (charge d\'entrée anormale ? panne soufflante ? temps de pluie ?) ; (4) Mettre en place une action corrective ; (5) Suivre la réponse.</p><p>Outils : tableau de bord (courbes 7 j, 30 j), seuils d\'alerte, astreinte.</p>' },
+        { titre: '4. Indicateurs de performance et optimisation', texte: '<p><strong>Rendements épuratoires :</strong> R = (Ce – Cs) / Ce × 100 %. Objectifs réglementaires (arrêté du 22/06/2007) : DBO5 ≥ 80 %, DCO ≥ 75 %, MES ≥ 90 % (petites STEP). Zones sensibles : NTK ≥ 70–80 %, P ≥ 80 %.</p><p><strong>Consommation énergétique spécifique :</strong> kWh/m³ ou kWh/kg DBO5. Leviers d\'optimisation : variateurs sur soufflantes, régulation OD, optimisation des pompages, récupération biogaz (> 20 000 EH).</p>' },
+        { titre: '5. Fiche de révision', texte: '<p><strong>Autosurveillance :</strong> obligatoire > 2 000 EH, bilans 24h mensuels, transmission OFB. <strong>Paramètres clés :</strong> OD (1,5–2 mg/L), IBM (< 100), MES effluent (< 35 mg/L). <strong>Rendements réglementaires :</strong> DBO5 ≥ 80 %, MES ≥ 90 %. <strong>Énergie :</strong> optimiser aération = 50–60 % de la conso totale.</p>' },
+      ],
+      points: [
+        'Autosurveillance réglementaire : obligatoire STEP > 2 000 EH, arrêté 21/07/2015',
+        'Bilans 24h mensuels entrée + sortie, transmission DDTM/OFB',
+        'OD bassin = 1,5–2 mg/L (ni trop faible ni trop fort)',
+        'Rendements réglementaires : DBO5 ≥ 80 %, DCO ≥ 75 %, MES ≥ 90 %',
+        'Diagnostic dérive : observer tendances → identifier paramètre → trouver cause → corriger → suivre',
+        'Énergie = 50–60 % de la conso pour l\'aération → premier levier d\'optimisation',
+        'Variateurs de fréquence sur soufflantes = économie 20–40 % conso aération',
+      ],
+      formules: [
+        'Rendement épuratoire R = (Ce – Cs) / Ce × 100 [%]',
+        'Consommation spécifique = Energie [kWh] / Volume traité [m³] ou / masse DBO5 éliminée [kg]',
+        'Flux polluant = Débit [m³/j] × Concentration [mg/L] / 1000 [kg/j]',
+      ],
+      retenir: 'L\'exploitation d\'une STEP repose sur la surveillance des paramètres opératoires (OD, IBM, MES), la transmission réglementaire des données d\'autosurveillance et l\'optimisation continue (énergie, rendements). La démarche de diagnostic doit être structurée : observer, identifier, diagnostiquer, corriger, suivre.',
+    },
+    exercices: [
+      { n: 1, enonce: 'Une STEP de 5 000 EH a les résultats suivants sur un bilan 24h : Entrée DBO5 = 220 mg/L, Sortie DBO5 = 25 mg/L, Entrée MES = 280 mg/L, Sortie MES = 28 mg/L, débit = 1 000 m³/j. Calculer les rendements et vérifier la conformité réglementaire.', solution: 'R(DBO5) = (220 – 25) / 220 × 100 = <strong>88,6 %</strong> ✅ (> 80 %). R(MES) = (280 – 28) / 280 × 100 = <strong>90 %</strong> ✅ (= 90 %). Flux DBO5 sortie = 1 000 × 25 / 1 000 = 25 kg/j. Conformité : OUI sur ces deux paramètres. Rappel : vérifier aussi NTK, Ptotal si zone sensible.' },
+      { n: 2, enonce: 'Une soufflante fonctionne en continu à 15 kW pour une aération fixe. L\'installation d\'un variateur de fréquence permet de réduire la consommation de 30 % en moyenne. Calculer l\'économie annuelle (prix énergie = 0,15 €/kWh).', solution: 'Économie puissance = 15 × 0,30 = 4,5 kW. Économie annuelle = 4,5 × 8 760 h = 39 420 kWh/an × 0,15 €/kWh = <strong>5 913 €/an</strong>. Retour sur investissement : si variateur coûte 8 000 €, ROI = 8 000 / 5 913 ≈ 1,4 an.' },
+      { n: 3, enonce: 'Décrire la démarche de diagnostic si l\'on observe une augmentation soudaine des MES en sortie de STEP.', solution: '<strong>1. Observer :</strong> courbe MES effluent sur 7–30 j (tendance ou pic isolé ?). <strong>2. Identifier :</strong> Le clarificateur déborde-t-il (voile de boues trop haut) ? L\'IBM est-il élevé (> 150) ? Y a-t-il un événement pluvieux (dilution + apport sables) ? <strong>3. Hypothèses et vérifications :</strong> Si IBM élevé → bulking (voir GEMEAU-089). Si voile haut sans IBM élevé → charge hydraulique excessive (temps de pluie). Si MES entrée soudainement très élevée → pollution industrielle ? <strong>4. Corrections :</strong> Réduire charge surfacique clarificateur (réduire Qr si surcharge hydraulique), traiter le bulking (OD, C/N/P), alerter l\'exploitant de la source si pollution industrielle.' },
+    ],
+    flashcards: [
+      { q: 'À partir de quelle taille une STEP est-elle soumise à l\'autosurveillance réglementaire ?', r: '2 000 EH — arrêté du 21 juillet 2015', expl: 'En dessous de 2 000 EH, l\'autosurveillance est allégée (auto-contrôle). Entre 2 000 et 10 000 EH : bilans mensuels. > 10 000 EH : fréquences renforcées.' },
+      { q: 'Quel est le premier levier d\'optimisation énergétique d\'une STEP ?', r: 'L\'aération (soufflantes) = 50–60 % de la consommation totale', expl: 'Installation de variateurs de fréquence sur les soufflantes + régulation OD en continu = économies de 20–40 % sur l\'aération.' },
+      { q: 'Quelle est la démarche face à une dérive des performances ?', r: 'Observer tendances → identifier paramètre déviant → diagnostiquer cause → corriger → suivre', expl: 'Ne pas corriger à l\'aveugle. D\'abord comprendre la cause (charge ? panne ? temps de pluie ?) avant d\'agir.' },
+    ],
+  },
+
 };
 
