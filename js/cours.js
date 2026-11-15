@@ -496,638 +496,222 @@ const COURS_DATA = {
     bannerStyle: 'background-image:linear-gradient(to right,#5A189A 38%,rgba(90,24,154,0.88) 54%,rgba(90,24,154,0.35) 75%,transparent 92%),url(\'./images/master-eau-banner.webp\');background-size:cover;background-position:right center;background-color:#5A189A',
     niveau: 'Bac+5',
     organisme: 'Universités — AgroParisTech — SupAgro',
-    desc: 'Hydrologie, hydrogéologie, modélisation (MODFLOW), qualité des eaux, changement climatique. Débouchés : BRGM, bureaux d\'études, Agences de l\'eau.',
+    desc: 'Hydrologie, hydrogéologie, modélisation avancée, géochimie, qualité, changement climatique, gouvernance. 150 chapitres M1–M2 couvrant les 14 blocs thématiques.',
     annees: [
       {
         id: 'an1',
-        name: 'Master 1',
+        name: 'Parcours Master Sciences de l\'Eau — 150 chapitres',
         matieres: [
-          { id: 'hydrogeologie', name: 'Hydrogéologie', ico: '🗺️', color: '#5A189A', colorl: '#F3E8FF', chapitres: [
-            {
-              id: 'hg-m1-1',
-              titre: 'Aquifères — types, propriétés et paramètres hydrauliques',
-              fiche: {
-                intro: 'Un aquifère est une formation géologique poreuse ou fissurée qui contient et transmet de l\'eau souterraine en quantité exploitable. La connaissance de ses paramètres est indispensable pour dimensionner les captages.',
-                points: [
-                  '🌊 Nappe libre : surface piézométrique à pression atmosphérique. Niveau fluctue avec les recharges. Plus vulnérable aux pollutions de surface',
-                  '🔵 Nappe captive : aquifère coincé entre deux couches imperméables (aquitards). Pression > Patm. Forage artésien si P > Patm au niveau du sol',
-                  '🏖️ Milieu poreux : sables et graviers — porosité d\'interstices (p = 20–35 %). Aquifères alluviaux (Rhin, Rhône, Seine…)',
-                  '🪨 Milieu karstique : calcaires fissurés et dissous — réseau de galeries, circulations rapides (km/j), très vulnérables aux pollutions',
-                  '📐 Perméabilité K (m/s) : facilité d\'écoulement. Gravier = 10⁻³–10⁻¹ | Sable = 10⁻⁵–10⁻³ | Argile = 10⁻¹⁰–10⁻⁸ (imperméable)',
-                  '📊 Transmissivité T = K × e (m²/s) : K × épaisseur mouillée. Paramètre clé pour le débit d\'un forage',
-                  '💾 Coefficient d\'emmagasinement S (–) : volume d\'eau libéré par unité de surface pour une baisse de charge unitaire. Nappe libre S ≈ porosité efficace (0,05–0,25) | Nappe captive S = 10⁻⁵–10⁻³',
-                  '📏 Loi de Darcy : Q = K × i × A (i = Δh/L = gradient hydraulique, A = section)',
-                ],
-                formules: [
-                  'Q = K × i × A — loi de Darcy (m³/s)',
-                  'T = K × e — transmissivité (m²/s)',
-                  'v_réelle = K × i / ω_eff — vitesse réelle de l\'eau (ω_eff = porosité efficace)',
-                ],
-                sections: [
-                  {
-                    titre: "1. Types d'aquifères et paramètres hydrauliques",
-                    ss: [
-                      {
-                        titre: "1.1. Nappe libre, nappe captive et nappe semi-captive",
-                        texte: "<p>Une <strong>nappe libre</strong> (ou phréatique) a sa surface supérieure à pression atmosphérique — le niveau piézométrique coïncide avec la nappe. Une <strong>nappe captive</strong> est confinée entre deux couches imperméables (aquiclude) et se trouve sous pression — le niveau piézométrique s'élève au-dessus du toit de l'aquifère, parfois jusqu'à la surface (puits artésien).</p><p>Une <strong>nappe semi-captive</strong> est surmontée d'un aquitard (couche peu perméable) qui permet des échanges verticaux lents. Ces échanges compliquent l'interprétation des pompages d'essai.</p>",
-                      },
-                      {
-                        titre: "1.2. Perméabilité, transmissivité et coefficient d'emmagasinement",
-                        texte: "<p>La <strong>perméabilité K</strong> (m/s) est la capacité d'un milieu à transmettre l'eau. Elle varie de 10⁻¹⁰ m/s (argiles) à 10⁻² m/s (graviers). La <strong>transmissivité T = K × e</strong> (m²/s) est le produit de K par l'épaisseur saturée e — c'est le paramètre directement mesurable par les pompages d'essai.</p><p>Le <strong>coefficient d'emmagasinement S</strong> (sans dimension) est la fraction du volume d'eau libéré par unité de baisse du niveau piézométrique et par unité de surface. En nappe libre S ≈ 0,01 à 0,30 (porosité efficace) ; en nappe captive S ≈ 10⁻⁵ à 10⁻³ (compressibilité).</p>",
-                      },
-                    ],
-                  },
-                  {
-                    titre: "2. La loi de Darcy et les écoulements souterrains",
-                    ss: [
-                      {
-                        titre: "2.1. Loi de Darcy et gradient hydraulique",
-                        texte: "<p>La loi de Darcy exprime la vitesse de Darcy (ou vitesse de filtration) : v = K × i, où i = dh/dL est le gradient hydraulique (variation de charge hydraulique par unité de longueur). Le débit volumique est Q = K × i × A (A = section transversale).</p><p>La loi de Darcy est valide pour les écoulements laminaires (Re < 10 dans les milieux poreux). Dans les milieux très perméables (graviers grossiers, karst), les écoulements turbulents nécessitent des approches non-linéaires.</p>",
-                      },
-                      {
-                        titre: "2.2. Équation de continuité et surfaces piézométriques",
-                        texte: "<p>En régime permanent et sans source/puits, l'équation de continuité donne : ∂²h/∂x² + ∂²h/∂y² = 0 (équation de Laplace). La carte piézométrique représente les lignes équipotentielles (même charge hydraulique) et les lignes de flux (perpendiculaires aux équipotentielles).</p><p>Les surfaces piézométriques permettent d'identifier les zones de recharge (convergence des flux vers la nappe), les zones de décharge (sources, cours d'eau drainants) et la direction générale des écoulements souterrains.</p>",
-                      },
-                    ],
-                  },
-                ],
-                retenir: 'Nappe libre : surface libre à Patm. Captive : sous pression. K (m/s) = perméabilité. T = K×e = transmissivité. S très petit pour nappe captive.',
-              },
-              flashcards: [
-                { q: 'Quelle est la différence entre nappe libre et nappe captive ?', r: 'Libre : surface piézométrique à pression atmosphérique, fluctue selon les recharges. Captive : sous pression entre deux couches imperméables, niveau piézométrique au-dessus du toit de l\'aquifère', expl: 'Un forage artésien (eau jaillissante) exploite une nappe captive dont la pression est supérieure à la pression atmosphérique au niveau du sol. Ex : bassin de Paris.' },
-                { q: 'Qu\'est-ce que la transmissivité T ?', r: 'T = K × e (m²/s) : produit de la perméabilité par l\'épaisseur saturée. Représente la facilité de transmission horizontale de l\'eau dans l\'aquifère', expl: 'T est le paramètre le plus important pour estimer le débit d\'un forage. T > 10⁻³ m²/s = aquifère productif. T < 10⁻⁵ = aquifère faible rendement.' },
-                { q: 'Quelle est la valeur typique du coefficient d\'emmagasinement S pour une nappe captive ?', r: 'S = 10⁻⁵ à 10⁻³ (très faible). Pour une nappe libre : S ≈ porosité efficace = 0,05 à 0,25 (100× à 1000× plus élevé)', expl: 'La nappe captive libère très peu d\'eau par baisse de charge (compressibilité de l\'eau et de l\'aquifère). C\'est pourquoi les nappes captives se rabattent rapidement sous pompage.' },
-                { q: 'Quelle est la loi de Darcy et ses conditions d\'application ?', r: 'Q = K × i × A. Valable en régime laminaire (Re < 1–10), ce qui correspond à la quasi-totalité des écoulements en milieux poreux', expl: 'En milieu karstique (galeries larges), l\'écoulement peut être turbulent → Darcy non valide. On utilise des traceurs pour caractériser ces aquifères complexes.' },
-                { q: 'Pourquoi les aquifères karstiques sont-ils très vulnérables aux pollutions ?', r: 'Circulation très rapide de l\'eau (galeries, conduits) → pas de filtration naturelle → une pollution de surface peut atteindre un captage en quelques heures à jours', expl: 'Les périmètres de protection des captages karstiques doivent être très larges. Une bactérie introduite en surface peut parcourir plusieurs km avant d\'être détectée en captage.' },
-                { q: 'Quelle est la gamme de perméabilité K pour des sables ?', r: 'K = 10⁻⁵ à 10⁻³ m/s. Graviers : 10⁻³–10⁻¹. Argiles : 10⁻¹⁰–10⁻⁸ (imperméable). Calcaires karstiques : 10⁻²–10⁻¹', expl: 'La perméabilité varie sur 10 ordres de grandeur dans la nature. C\'est l\'un des paramètres les plus difficiles à mesurer et les plus variables spatialement.' },
-              ],
-              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
-  <rect width="280" height="148" rx="8" fill="#F3E8FF"/>
-  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#5A189A">Aquifères — Types &amp; Paramètres hydrauliques</text>
-  <rect x="4" y="18" width="130" height="60" rx="4" fill="#5A189A" opacity=".1" stroke="#5A189A" stroke-width="1"/>
-  <text x="69" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#5A189A" font-weight="bold">Nappe libre</text>
-  <text x="69" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Surface piézométrique à Patm</text>
-  <text x="69" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Fluctue avec les recharges</text>
-  <text x="69" y="61" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">S ≈ porosité efficace (0,05–0,25)</text>
-  <text x="69" y="71" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828">Vulnérable aux pollutions</text>
-  <rect x="146" y="18" width="130" height="60" rx="4" fill="#5A189A" opacity=".1" stroke="#5A189A" stroke-width="1"/>
-  <text x="211" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#5A189A" font-weight="bold">Nappe captive</text>
-  <text x="211" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Sous pression (P > Patm)</text>
-  <text x="211" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Entre 2 aquitards</text>
-  <text x="211" y="61" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">S = 10⁻⁵–10⁻³ (très faible)</text>
-  <text x="211" y="71" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#4CAF50">Forage artésien possible</text>
-  <rect x="8" y="84" width="264" height="58" rx="4" fill="#fff" stroke="#5A189A" stroke-width="1"/>
-  <text x="140" y="96" text-anchor="middle" font-family="Arial" font-size="8" fill="#5A189A" font-weight="bold">Paramètres hydrauliques clés</text>
-  <text x="140" y="107" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">K (m/s) : Graviers 10⁻³–10⁻¹ · Sables 10⁻⁵–10⁻³ · Argiles 10⁻¹⁰–10⁻⁸</text>
-  <text x="140" y="118" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">T = K × e (m²/s) : transmissivité · T > 10⁻³ = aquifère productif</text>
-  <text x="140" y="129" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Loi de Darcy : Q = K × i × A (Re &lt; 10 — régime laminaire)</text>
-  <text x="140" y="140" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Vitesse réelle : v = K×i / ω_eff — Karstique = turbulent (Darcy non valide)</text>
-</svg>`,
-              exercice: {
-                enonce: 'Un aquifère alluvial sableux a K = 4×10⁻⁴ m/s, une épaisseur saturée e = 12 m, un gradient hydraulique i = 0,003. La section d\'écoulement A = 500 m². 1) Calculer T. 2) Calculer Q (loi de Darcy). 3) Calculer la vitesse de Darcy puis la vitesse réelle (porosité efficace ω = 0,20). 4) En quel temps (jours) une pollution à 300 m en amont atteindrait-elle le captage ?',
-                solution: '<strong>1) Transmissivité :</strong> T = K × e = 4×10⁻⁴ × 12 = <strong>4,8×10⁻³ m²/s</strong> (aquifère productif)<br><strong>2) Débit Darcy :</strong> Q = K × i × A = 4×10⁻⁴ × 0,003 × 500 = <strong>6×10⁻⁴ m³/s = 0,6 L/s</strong><br><strong>3) Vitesses :</strong> v_Darcy = K × i = 4×10⁻⁴ × 0,003 = 1,2×10⁻⁶ m/s · v_réelle = v_Darcy/ω = 1,2×10⁻⁶/0,20 = <strong>6×10⁻⁶ m/s</strong><br><strong>4) Temps :</strong> t = 300 / (6×10⁻⁶) = 50 000 000 s = <strong>578 jours ≈ 1,6 an</strong>',
-              },
-            },
-            {
-              id: 'hg-m1-2',
-              titre: 'Pompages d\'essai — méthodes de Theis et Cooper-Jacob',
-              fiche: {
-                intro: 'Le pompage d\'essai est la méthode de référence pour déterminer les paramètres hydrauliques d\'un aquifère (T et S) in situ. L\'interprétation graphique des courbes de rabattement permet d\'identifier le comportement de l\'aquifère.',
-                points: [
-                  '🏗️ Dispositif : forage de pompage à débit constant Q + 1 à 3 piézomètres d\'observation à distance r (m)',
-                  '📉 Rabattement s(r,t) = H₀ – H(r,t) : baisse du niveau piézométrique depuis le début du pompage',
-                  '📐 Méthode de Theis (1935) : s = Q/(4πT) × W(u) avec u = r²S/(4Tt)',
-                  '   W(u) = fonction puits (table ou calcul numérique). Calage graphique courbe observée / courbe type',
-                  '📏 Méthode de Cooper-Jacob (t grand, u < 0,05) : s = Q/(4πT) × [ln(2,25Tt) – ln(r²S)]',
-                  '   Graphe s vs. log(t) → droite. Pente Δs = Q/(4πT) × ln(10). Ordonnée à l\'origine → S',
-                  '🔄 Test de récupération : après arrêt du pompage, la remontée s\' vs. log(t/t\') → droite de pente identique → T',
-                  '⚠️ Limites : homogénéité, isotropie, aquifère infini, régime transitoire → souvent non respectées',
-                  '📊 Effets frontières : barrière imperméable (doublement du rabattement) | limite d\'alimentation (rabattement se stabilise)',
-                ],
-                formules: [
-                  's = Q/(4πT) × W(u) — Theis (u = r²S/4Tt)',
-                  's ≈ Q/(4πT) × [ln(2,25Tt) – ln(r²S)] — Cooper-Jacob (u < 0,05)',
-                  'Pente Cooper-Jacob : Δs = Q × ln(10) / (4πT) = 0,183 × Q / T',
-                ],
-                sections: [
-                  {
-                    titre: "1. Méthodes d'interprétation des pompages d'essai",
-                    ss: [
-                      {
-                        titre: "1.1. Méthode de Theis",
-                        texte: "<p>La solution de Theis (1935) décrit l'évolution du rabattement s en fonction du temps t à distance r d'un puits pompant à débit constant Q dans un aquifère infini, homogène et isotrope en nappe captive : s = (Q/4πT) × W(u), où u = r²S/(4Tt) et W(u) est la fonction de puits.</p><p>L'interprétation graphique superpose la courbe de terrain (s vs t sur papier log-log) avec la courbe type de Theis. Le calage permet de déterminer T et S. C'est la méthode de référence applicable à toutes les configurations au moins approximativement.</p>",
-                      },
-                      {
-                        titre: "1.2. Méthode de Cooper-Jacob",
-                        texte: "<p>Pour des temps suffisamment longs (u < 0,05, soit t > r²S/0,2T), la fonction W(u) se simplifie et le rabattement varie linéairement avec le logarithme du temps : s = (Q/4πT) × ln(2,25Tt/r²S).</p><p>Sur un graphique semi-log (s vs log t), les points s'alignent sur une droite de pente m = Q/(4πT) × ln(10). L'intersection avec l'axe t₀ donne S = 2,25T × t₀/r². La méthode est plus simple à appliquer que Theis mais nécessite de vérifier la condition u < 0,05.</p>",
-                      },
-                    ],
-                  },
-                  {
-                    titre: "2. Courbes de remontée et limites des méthodes",
-                    ss: [
-                      {
-                        titre: "2.1. Interprétation des courbes de remontée",
-                        texte: "<p>Après l'arrêt du pompage, le niveau remonte selon la méthode de Theis-Jacob : le rabattement résiduel s' = (Q/4πT) × ln(t/t'), où t est le temps depuis le début du pompage et t' le temps depuis son arrêt. Sur un graphique semi-log (s' vs log(t/t')), les points s'alignent sur une droite permettant de calculer T indépendamment de S.</p><p>Les courbes de remontée sont moins sensibles aux effets de paroi du puits que les courbes de descente — elles fournissent souvent une estimation de T plus fiable.</p>",
-                      },
-                      {
-                        titre: "2.2. Effets de paroi, limites et incertitudes",
-                        texte: "<p>Les principaux facteurs qui font dévier les courbes d'une solution de Theis simple sont : les effets de paroi (skin) du puits, le stockage dans le puits, la désaturation partielle de la nappe (nappe libre), la présence de barrières ou de limites du domaine aquifère, et la double perméabilité (aquifère fracturé).</p><p>L'interprétation d'un pompage d'essai doit toujours être accompagnée d'une analyse de sensibilité et d'une discussion sur les hypothèses. Les valeurs de T et S issues d'un seul essai sont ponctuelles — elles ne représentent pas nécessairement tout l'aquifère.</p>",
-                      },
-                    ],
-                  },
-                ],
-                retenir: 'Theis = référence (toutes conditions). Cooper-Jacob = approximation graphique simple (t grand). Pente droite → T. Ordonnée origine → S. Récupération → vérification T.',
-              },
-              flashcards: [
-                { q: 'Qu\'est-ce que le rabattement dans un pompage d\'essai ?', r: 's = H₀ – H(t) : différence entre le niveau initial et le niveau mesuré pendant le pompage. Il augmente avec le temps et diminue avec la distance', expl: 'Le rabattement est mesuré dans le forage pompé et dans les piézomètres d\'observation. Plus on est près du forage, plus le rabattement est grand (cône de dépression).' },
-                { q: 'Quelle condition doit être respectée pour appliquer Cooper-Jacob ?', r: 'u = r²S/(4Tt) < 0,05 : cette condition est respectée pour t grand (pompage prolongé) ou r petit (piézomètre proche)', expl: 'En pratique, on attend généralement t > 10 minutes pour les aquifères poreux. Pour un aquifère captif (S petit), la condition est atteinte plus rapidement.' },
-                { q: 'Comment détermine-t-on T avec la méthode de Cooper-Jacob ?', r: 'On trace s vs. log(t). La droite a une pente Δs = Q × 0,183 / T. Donc T = 0,183 × Q / Δs', expl: 'Δs = montée du rabattement par cycle logarithmique de temps (ex : entre t=1 min et t=10 min). Plus Δs est grand, plus T est petit (aquifère peu transmissif).' },
-                { q: 'Comment détermine-t-on S avec Cooper-Jacob ?', r: 'S = 2,25 × T × t₀ / r² où t₀ est le temps pour lequel la droite coupe l\'axe s = 0 (extrapolation)', expl: 'S est déterminé uniquement avec les piézomètres d\'observation (pas dans le forage pompé à cause des pertes de charge). r = distance piézomètre-forage.' },
-                { q: 'Qu\'est-ce qu\'un test de récupération ?', r: 'Après arrêt du pompage, on mesure la remontée du niveau s\' = s(Δt). Graphe s\' vs. log(t/Δt) → droite de pente = Q×0,183/T → calcul T indépendant', expl: 'La récupération est souvent plus fiable que le pompage car moins affectée par les fluctuations du débit pompé. Elle confirme la valeur de T obtenue pendant le pompage.' },
-                { q: 'Qu\'est-ce que l\'effet de barrière imperméable sur une courbe de pompage ?', r: 'Une barrière imperméable proche crée un double rabattement : la courbe s vs. log(t) se redresse (pente double) à partir du moment où le cône d\'influence atteint la barrière', expl: 'En appliquant la méthode des images, on simule un forage virtuel symétrique par rapport à la barrière. La somme des deux rabattements reproduit l\'effet réel observé.' },
-              ],
-              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
-  <rect width="280" height="148" rx="8" fill="#F3E8FF"/>
-  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#5A189A">Cooper-Jacob — Pompage d'essai</text>
-  <rect x="4" y="18" width="176" height="88" rx="4" fill="#F3E8FF" stroke="#5A189A" stroke-width="1"/>
-  <text x="92" y="30" text-anchor="middle" font-family="Arial" font-size="8.5" fill="#5A189A" font-weight="bold">s vs. log(t) → droite</text>
-  <defs><marker id="ar14" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#5A189A"/></marker></defs>
-  <line x1="12" y1="96" x2="172" y2="96" stroke="#888" stroke-width="0.8"/>
-  <line x1="12" y1="96" x2="12" y2="34" stroke="#888" stroke-width="0.8"/>
-  <text x="92" y="104" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">log(t) →</text>
-  <text x="8" y="35" font-family="Arial" font-size="7" fill="#555">s ↑</text>
-  <polyline points="18,88 40,82 70,72 110,60 150,48 168,42" fill="none" stroke="#5A189A" stroke-width="2"/>
-  <line x1="40" y1="82" x2="40" y2="48" stroke="#5A189A" stroke-width="0.8" stroke-dasharray="3,2"/>
-  <line x1="110" y1="60" x2="110" y2="26" stroke="#5A189A" stroke-width="0.8" stroke-dasharray="3,2"/>
-  <text x="90" y="37" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828" font-weight="bold">Δs</text>
-  <line x1="40" y1="48" x2="110" y2="48" stroke="#C62828" stroke-width="1.2"/>
-  <text x="75" y="45" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#C62828">1 cycle log</text>
-  <rect x="184" y="18" width="92" height="88" rx="4" fill="#fff" stroke="#5A189A" stroke-width="1"/>
-  <text x="230" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#5A189A" font-weight="bold">Formules</text>
-  <text x="230" y="42" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">T = 0,183 × Q / Δs</text>
-  <text x="230" y="53" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">S = 2,25 × T × t₀ / r²</text>
-  <text x="230" y="64" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">t₀ = t où s → 0</text>
-  <text x="230" y="76" text-anchor="middle" font-family="Arial" font-size="7" fill="#333">Valide si u&lt;0,05</text>
-  <text x="230" y="87" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">r²S / (4Tt) &lt; 0,05</text>
-  <text x="230" y="101" text-anchor="middle" font-family="Arial" font-size="7" fill="#5A189A">Récup : s' vs log(t/t')</text>
-  <rect x="8" y="112" width="264" height="30" rx="4" fill="#fff" stroke="#5A189A" stroke-width="1"/>
-  <text x="140" y="124" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#5A189A" font-weight="bold">Effets de frontière — Barrière imperméable : pente double</text>
-  <text x="140" y="136" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">Limite d'alimentation : rabattement se stabilise (pente → 0)</text>
-</svg>`,
-              exercice: {
-                enonce: 'Pompage d\'essai à Q = 40 L/s (144 m³/h) sur un piézomètre à r = 50 m. Données Cooper-Jacob (u < 0,05 vérifié) : à t₁ = 10 min, s = 1,20 m ; à t₂ = 100 min, s = 2,55 m. Le graphe s = f(log t) coupe s = 0 à t₀ = 0,8 min. Calculer T et S.',
-                solution: '<strong>Δs :</strong> montée sur 1 cycle log = s(100 min) − s(10 min) = 2,55 − 1,20 = <strong>1,35 m</strong><br><strong>T :</strong> T = 0,183 × Q / Δs = 0,183 × 0,040 / 1,35 = 0,00732 / 1,35 = <strong>5,4×10⁻³ m²/s</strong><br><strong>t₀ en secondes :</strong> t₀ = 0,8 min = 48 s<br><strong>S :</strong> S = 2,25 × T × t₀ / r² = 2,25 × 5,4×10⁻³ × 48 / (50²) = 0,583 / 2 500 = <strong>2,3×10⁻⁴</strong> → nappe captive (S très faible)',
-              },
-            },
-            {
-              id: 'hg-m1-3',
-              titre: 'Modélisation numérique des eaux souterraines — MODFLOW',
-              fiche: {
-                intro: 'La modélisation numérique simule le comportement d\'un aquifère sur des domaines complexes et des longues échéances. MODFLOW (USGS) est le standard mondial des modèles d\'eaux souterraines.',
-                points: [
-                  '💻 MODFLOW (Modular 3D Groundwater Flow Model) : code USGS en domaine public depuis 1984. Standard mondial. Interfaces graphiques : GMS, ModelMuse, FEFLOW',
-                  '📐 Équation résolue : Ss × ∂h/∂t = ∇(K·∇h) + W (Ss = emmagasinement spécifique, W = sources/puits)',
-                  '🗺️ Discrétisation : grille 3D régulière (colonnes × rangées × couches). Chaque maille = K, Ss, recharge',
-                  '🔵 Conditions aux limites : charge imposée (rivière, lac, frontière) | débit imposé (pluie, pompage) | flux nul (limite imperméable)',
-                  '🔧 Packages spéciaux : RIV (rivière) | DRN (drain) | EVT (évapotranspiration) | WEL (forage) | RCH (recharge)',
-                  '📊 Calibration : ajuster K et Ss pour minimiser l\'écart entre h calculés et h observés (piézomètres). Méthode PEST (paramètre estimation)',
-                  '🎯 Utilisations pratiques : gestion des captages | impact d\'un projet (carrière, urbanisation) | délimitation des périmètres de protection | prévision étiages',
-                  '⚠️ Incertitude du modèle : toujours analyser la sensibilité aux paramètres. Un modèle non calibré peut être trompeur',
-                ],
-                formules: [
-                  'Ss × ∂h/∂t = ∂/∂x(Kx·∂h/∂x) + ∂/∂y(Ky·∂h/∂y) + ∂/∂z(Kz·∂h/∂z) + W — équation de diffusivité',
-                  'Résidu = h_calculé – h_observé → minimiser par calibration',
-                ],
-                sections: [
-                  {
-                    titre: "1. Structure d'un modèle MODFLOW",
-                    ss: [
-                      {
-                        titre: "1.1. Grille tridimensionnelle et couches géologiques",
-                        texte: "<p>MODFLOW (USGS) résout l'équation aux dérivées partielles de l'écoulement souterrain en 3D par différences finies sur une grille rectangulaire. Chaque maille est caractérisée par ses paramètres hydrauliques (K, T, S) et ses conditions aux limites.</p><p>La grille doit être assez fine pour représenter les hétérogénéités importantes (failles, changements de faciès) et les structures d'intérêt (puits, cours d'eau), mais pas trop fine pour rester calculable. Un raffinement local est possible pour les zones d'intérêt.</p>",
-                      },
-                      {
-                        titre: "1.2. Conditions aux limites",
-                        texte: "<p>Les conditions aux limites définissent comment le modèle interagit avec son environnement : charge imposée (rivière, lac à cote fixe), flux imposé (recharge pluviale, prélèvement), ou condition mixte (drain qui débite selon le gradient entre aquifère et drain — rivière drainante ou alimentante).</p><p>Le choix des conditions aux limites est crucial. Une limite mal définie à la frontière du modèle peut générer des artefacts numériques et des erreurs significatives, notamment pour les simulations de pompage ou d'impact sur les cours d'eau.</p>",
-                      },
-                    ],
-                  },
-                  {
-                    titre: "2. Calibration et incertitudes",
-                    ss: [
-                      {
-                        titre: "2.1. Procédure de calage",
-                        texte: "<p>La calibration consiste à ajuster les paramètres du modèle (K, T, S par zones, recharge) jusqu'à ce que les charges hydrauliques calculées reproduisent les observations piézométriques. Elle se mesure par des critères statistiques (erreur quadratique moyenne, erreur normalisée) et visuellement par les cartes piézométriques.</p><p>Le calage en régime permanent précède généralement le calage en régime transitoire. Un bon calage en permanent n'implique pas un bon calage en transitoire (les volumes d'emmagasinement S peuvent être mal estimés).</p>",
-                      },
-                      {
-                        titre: "2.2. Analyse de sensibilité et incertitudes",
-                        texte: "<p>L'analyse de sensibilité évalue comment les résultats varient quand un paramètre change de ±20 à ±50 %. Les paramètres auxquels le modèle est le plus sensible méritent une caractérisation de terrain plus poussée.</p><p>Un modèle calibré n'est pas unique — différentes combinaisons de paramètres peuvent reproduire les mêmes observations. L'incertitude sur les prévisions doit être explicitement quantifiée (plage de variation, scénarios). Un modèle numérique ne remplace pas l'expertise hydrogéologique — il la structure et l'objective.</p>",
-                      },
-                    ],
-                  },
-                ],
-                retenir: 'MODFLOW = standard mondial (USGS, gratuit). Grille 3D + conditions limites. Calibration = ajuster K/Ss sur piézomètres réels. Toujours vérifier l\'incertitude.',
-              },
-              flashcards: [
-                { q: 'Qu\'est-ce que MODFLOW et qui le développe ?', r: 'Code de simulation des écoulements souterrains en 3D, développé par l\'USGS (United States Geological Survey). Domaine public, gratuit, standard mondial depuis 1984', expl: 'MODFLOW est utilisé par tous les grands bureaux d\'études en hydrogéologie, le BRGM, les Agences de l\'eau. Des dizaines de versions et extensions existent (MT3DMS pour le transport).' },
-                { q: 'Qu\'est-ce que la calibration d\'un modèle hydrogéologique ?', r: 'Processus d\'ajustement des paramètres (K, Ss) du modèle pour minimiser l\'écart entre les charges calculées et les charges observées aux piézomètres réels', expl: 'La calibration peut être manuelle (essai-erreur) ou automatique (PEST, UCODE). Un modèle bien calibré ne garantit pas qu\'il est juste pour d\'autres conditions (extrapolation risquée).' },
-                { q: 'Quelles sont les principales conditions aux limites utilisées dans MODFLOW ?', r: 'Charge imposée (rivière, lac, frontière connue) | débit imposé (pompage, recharge) | flux nul (limite imperméable, crête de partage)', expl: 'Le choix des conditions aux limites est crucial. Une mauvaise condition peut fausser tout le modèle. La frontière doit être éloignée de la zone d\'intérêt (≥ 5× le rayon d\'influence).' },
-                { q: 'À quoi sert un modèle MODFLOW pour la gestion des captages ?', r: 'Simuler l\'impact de différents scénarios de pompage, délimiter les périmètres de protection (isochrones), prévoir l\'impact d\'un projet sur les niveaux de nappe', expl: 'L\'isochrone 50 jours délimite le périmètre rapproché de protection d\'un captage AEP. Elle est calculée par suivi de particules (MODPATH) dans MODFLOW.' },
-                { q: 'Qu\'est-ce que le package RIV dans MODFLOW ?', r: 'Package Rivière : modélise les échanges hydrauliques entre la rivière et l\'aquifère (exfiltration si nappe haute, infiltration si rivière en charge)', expl: 'La rivière peut alimenter ou drainer la nappe selon les conditions. MODFLOW calcule le débit d\'échange proportionnellement à la différence de charge et à la conductance du lit.' },
-                { q: 'Pourquoi analyse-t-on la sensibilité d\'un modèle ?', r: 'Pour identifier quels paramètres ont le plus d\'influence sur les résultats et évaluer l\'incertitude des prédictions selon l\'incertitude sur les paramètres', expl: 'Si le modèle est très sensible à K (une variation de 20 % change les résultats de 50 %), les prédictions sont incertaines. Il faut alors plus de données terrain pour contraindre K.' },
-              ],
-              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
-  <rect width="280" height="148" rx="8" fill="#F3E8FF"/>
-  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#5A189A">MODFLOW — Modélisation 3D aquifères</text>
-  <rect x="8" y="18" width="264" height="18" rx="3" fill="#5A189A"/>
-  <text x="140" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff" font-weight="bold">USGS · Domaine public depuis 1984 · Standard mondial</text>
-  <rect x="4" y="40" width="84" height="46" rx="4" fill="#5A189A" opacity=".12" stroke="#5A189A" stroke-width="1"/>
-  <text x="46" y="52" text-anchor="middle" font-family="Arial" font-size="8" fill="#5A189A" font-weight="bold">Grille 3D</text>
-  <text x="46" y="63" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Col × Rang × Couche</text>
-  <text x="46" y="73" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Chaque maille = K, Ss</text>
-  <text x="46" y="82" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">GMS / ModelMuse</text>
-  <rect x="98" y="40" width="84" height="46" rx="4" fill="#5A189A" opacity=".12" stroke="#5A189A" stroke-width="1"/>
-  <text x="140" y="52" text-anchor="middle" font-family="Arial" font-size="8" fill="#5A189A" font-weight="bold">Conditions limites</text>
-  <text x="140" y="63" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Charge imposée (RIV)</text>
-  <text x="140" y="73" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Débit imposé (WEL)</text>
-  <text x="140" y="82" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Flux nul (limite imp.)</text>
-  <rect x="192" y="40" width="84" height="46" rx="4" fill="#5A189A" opacity=".12" stroke="#5A189A" stroke-width="1"/>
-  <text x="234" y="52" text-anchor="middle" font-family="Arial" font-size="8" fill="#5A189A" font-weight="bold">Calibration</text>
-  <text x="234" y="63" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Ajuster K, Ss</text>
-  <text x="234" y="73" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Minimiser résidus</text>
-  <text x="234" y="82" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">PEST automatique</text>
-  <rect x="8" y="92" width="264" height="50" rx="4" fill="#fff" stroke="#5A189A" stroke-width="1"/>
-  <text x="140" y="104" text-anchor="middle" font-family="Arial" font-size="8" fill="#5A189A" font-weight="bold">Utilisations pratiques</text>
-  <text x="140" y="115" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Périmètres de protection (isochrone 50j via MODPATH) · Impact carrière</text>
-  <text x="140" y="126" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Prévision étiages · Optimisation débit captages · Scénarios CC</text>
-  <text x="140" y="138" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Équation : Ss×∂h/∂t = ∇(K·∇h) + W · Analyse sensibilité obligatoire</text>
-</svg>`,
-              exercice: {
-                enonce: 'Un modèle MODFLOW d\'un aquifère alluvial est calibré sur 8 piézomètres. Les résidus moyens sont : h_calculé − h_observé = 0,15 m (bon), mais l\'analyse de sensibilité montre que ±20 % sur K change les niveaux de ±40 cm. 1) Le modèle est-il bien calibré ? 2) Peut-on l\'utiliser pour délimiter l\'isochrone 50 jours (périmètre de protection) ? 3) Quelle action s\'impose ?',
-                solution: '<strong>1) Calibration :</strong> résidu moyen 0,15 m est acceptable (< 5–10 % de la plage piézométrique). Le modèle est <strong>bien calibré</strong> sur les charges mesurées.<br><strong>2) Isochrone 50 jours :</strong> <strong>Avec réserves</strong>. La sensibilité à K (±20 % → ±40 cm de charge) introduit une incertitude significative sur les trajectoires de particules (MODPATH). L\'isochrone 50j peut varier de ±20–30 %.<br><strong>3) Action :</strong> réaliser des essais de traçage (traceur fluorescent) pour contraindre K localement + augmenter la densité de piézomètres dans la zone sensible. Appliquer une marge de sécurité (isochrone 60–70j) pour la protection réglementaire.',
-              },
-            },
+
+          /* ── Bloc 01 — Mathématiques, statistiques et incertitudes ── */
+          { id: 'master-b01', name: 'Mathématiques, statistiques et incertitudes', ico: '📐', color: '#2C5282', colorl: '#EBF4FF', chapitres: [
+            { id: 'MASTER-EAU-001', titre: 'Formalisation mathématique des problèmes de sciences de l\'eau', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-002', titre: 'Algèbre linéaire et systèmes d\'équations', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-003', titre: 'Calcul différentiel et intégral appliqué', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-004', titre: 'Équations différentielles et modèles dynamiques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-005', titre: 'Introduction aux équations aux dérivées partielles', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-006', titre: 'Probabilités et variables aléatoires', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-007', titre: 'Estimation statistique et intervalles d\'incertitude', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-008', titre: 'Régression et modèles statistiques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-009', titre: 'Analyse des séries temporelles', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-010', titre: 'Statistique spatiale et géostatistique', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-011', titre: 'Inférence bayésienne et mise à jour des connaissances', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-012', titre: 'Propagation des incertitudes et analyse de sensibilité', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
           ]},
 
-          { id: 'qualite-avancee', name: 'Qualité avancée des eaux', ico: '🧪', color: '#166038', colorl: '#E0F4EC', chapitres: [
-            {
-              id: 'qa-m1-1',
-              titre: 'PFAS — analyse, écotoxicologie et normes 2026',
-              fiche: {
-                intro: 'Les PFAS sont les polluants émergents les plus préoccupants pour les eaux souterraines et potables. Leur extrême persistance et leur toxicité à faible dose justifient les nouvelles normes très strictes de la Directive 2020.',
-                points: [
-                  '🧪 PFAS (Per- et PolyFluoroAlkylated Substances) : famille de 12 000+ composés. Liaison C-F = la plus forte en chimie → quasi-indestructibles dans l\'environnement',
-                  '🏭 Sources principales : mousses AFFF (lutte anti-incendie aéroports, bases militaires) | revêtements antiadhésifs (Téflon) | textiles imperméables (Gore-Tex) | boues d\'épuration épandues',
-                  '⚠️ Toxicité : cancérogènes (PFOA, PFOS classés CMR2) | perturbateurs thyroïdiens et immunitaires | reprotoxiques | transfert mère-enfant (placenta, lait maternel)',
-                  '🌍 "Polluants éternels" (forever chemicals) : aucune biodégradation naturelle. Ubiquitaires : retrouvés dans l\'Arctique, la faune sauvage, le sang humain',
-                  '📋 Directive 2020/2184 : 0,1 µg/L par PFAS individuel (liste 20 PFAS) | 0,5 µg/L pour la somme. Applicable progressivement',
-                  '🔬 Analyse : LC-MS/MS (chromatographie liquide couplée spectrométrie de masse). Limite détection : ng/L. Accréditation COFRAC obligatoire',
-                  '🔵 Traitement : CAG efficace PFAS ≥ C8. Nanofiltration partielle. Osmose inverse = quasi-totale. PFAS à courte chaîne (C4, C6) = difficiles à éliminer',
-                  '🔴 Concentrat OI contenant PFAS : problème majeur → incinération haute température (> 1 100°C) nécessaire pour destruction',
-                ],
-                formules: [],
-                sections: [
-                  {
-                    titre: "1. Propriétés et sources des PFAS",
-                    ss: [
-                      {
-                        titre: "1.1. La liaison C-F et la persistance environnementale",
-                        texte: "<p>Les PFAS (poly- et perfluoroalkyl substances) forment une famille d'environ 12 000 composés caractérisés par des liaisons carbone-fluor (C-F) parmi les plus stables de la chimie organique. Cette liaison confère aux PFAS une résistance à la dégradation chimique, biologique et thermique — d'où leur surnom de « polluants éternels ».</p><p>Les PFAS sont persistants dans l'environnement et bioaccumulables dans les organismes vivants, notamment les longues chaînes (PFOS, PFOA). Ils se retrouvent dans les sols, les eaux souterraines, les eaux de surface et les organismes, parfois loin des sources.</p>",
-                      },
-                      {
-                        titre: "1.2. Sources et voies de contamination",
-                        texte: "<p>Les principales sources de PFAS sont : les mousses anti-incendie AFFF (aéroports, bases militaires, sites industriels), les emballages alimentaires et ustensiles non-adhésifs (Téflon), les textiles imperméabilisés (Gore-Tex), les boues d'épuration agricoles, et certains procédés industriels (galvanoplastie, industrie papetière).</p><p>Les voies de contamination humaine : eau de boisson, alimentation (poissons, légumes irrigués avec eau contaminée), poussières intérieures. La contamination des captages d'eau potable à proximité de sites AFFF est un enjeu majeur en France (cartographie ANSES/BRGM).</p>",
-                      },
-                    ],
-                  },
-                  {
-                    titre: "2. Normes et techniques de traitement",
-                    ss: [
-                      {
-                        titre: "2.1. Valeurs guide et normes 2026",
-                        texte: "<p>La directive européenne 2020/2184 (transposée en France) fixe dès 2026 des valeurs paramétriques pour les PFAS dans l'eau potable : 0,1 µg/L pour chaque PFAS individuellement et 0,5 µg/L pour la somme des 20 PFAS les plus fréquents.</p><p>Ces valeurs sont nettement plus strictes que les anciens seuils. De nombreux captages français (particulièrement en Bretagne, Île-de-France, zones industrielles) nécessiteront des traitements complémentaires ou seront abandonnés. L'ANSES a publié en 2023 ses recommandations sur les PFAS à analyser en priorité.</p>",
-                      },
-                      {
-                        titre: "2.2. Techniques de dépollution",
-                        texte: "<p>Les PFAS sont très difficiles à éliminer par les traitements conventionnels (chloration, UV, coagulation-floculation). Les techniques efficaces sont : le charbon actif en grain (CAG) ou en poudre (CAP), la nanofiltration (NF) et l'osmose inverse (OI), et les procédés d'oxydation avancée (POA) associés à d'autres traitements.</p><p>Chaque technique a ses limites : le charbon actif se sature et génère des résidus concentrés ; l'osmose inverse produit des concentrats chargés en PFAS à traiter. La décontamination des sols saturés reste un défi technique et économique majeur.</p>",
-                      },
-                    ],
-                  },
-                ],
-                retenir: 'PFAS = 12 000 composés, liaison C-F indestructible. Sources : AFFF, Téflon, boues. Norme : 0,1 µg/L/substance. Traitement : CAG (C8+) ou OI. Concentrat = incinération.',
-              },
-              flashcards: [
-                { q: 'Pourquoi les PFAS sont-ils appelés "polluants éternels" ?', r: 'La liaison carbone-fluor (C-F) est la plus forte en chimie organique → aucune enzyme naturelle ne peut la rompre. Les PFAS s\'accumulent dans les organismes et l\'environnement sans se dégrader', expl: 'La demi-vie des PFOS dans le corps humain est de 5–8 ans. Dans les sols, certains PFAS ont des demi-vies de plusieurs décennies. Même à des températures de 500°C, certains survivent.' },
-                { q: 'Quelle est la principale source de contamination des sols et nappes par les PFAS en France ?', r: 'Les mousses AFFF (aqueous film forming foam) utilisées pour l\'entraînement anti-incendie dans les aéroports et bases militaires. Les boues d\'épuration épandues sont la 2e source', expl: 'Les sites aéroportuaires (Roissy, Nice, Bordeaux, bases militaires) sont les zones les plus contaminées. La contamination peut s\'étendre sur plusieurs km en aval hydrogéologique.' },
-                { q: 'Quelle méthode d\'analyse est utilisée pour les PFAS à l\'état de traces ?', r: 'LC-MS/MS (chromatographie liquide à haute performance couplée à la spectrométrie de masse en tandem). Limite de détection : 1–5 ng/L', expl: 'Sans LC-MS/MS, les PFAS sont indétectables. Cette technique permet d\'identifier et quantifier des centaines de PFAS en un seul passage. Elle nécessite une accréditation COFRAC.' },
-                { q: 'Quel traitement élimine le mieux les PFAS de l\'eau potable ?', r: 'L\'osmose inverse (OI) retient quasi 100 % des PFAS. Le CAG est efficace pour les PFAS longue chaîne (≥ C8). La nanofiltration est intermédiaire', expl: 'Les PFAS à courte chaîne (C4, C6) résistent au CAG et à certaines NF. Seule l\'OI les retient. Problème : le concentrat OI contient tous les PFAS → destruction obligatoire par incinération à > 1 100°C.' },
-                { q: 'Quels organes ou systèmes sont principalement affectés par les PFAS ?', r: 'Foie (hépatotoxicité), thyroïde (perturbation hormonale), système immunitaire (immunosuppression), reins et testicules (PFOA/PFOS : cancérogènes CMR2)', expl: 'Les PFAS se fixent aux protéines plasmatiques et s\'accumulent dans le foie. Effets chez l\'enfant : réduction de la réponse vaccinale, perturbation du développement.' },
-                { q: 'Quelle est la norme PFAS dans l\'eau potable fixée par la Directive 2020/2184 ?', r: '0,1 µg/L par substance PFAS individuelle — 0,5 µg/L pour la somme des 20 PFAS réglementés. Applicabilité progressive selon les États membres', expl: 'L\'OMS a proposé en 2022 des valeurs guide encore plus strictes pour PFOS (100 ng/L) et PFOA (100 ng/L). Les États-Unis ont fixé des normes à 4 ng/L pour certains PFAS en 2024.' },
-              ],
-              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
-  <rect width="280" height="148" rx="8" fill="#E0F4EC"/>
-  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#166038">PFAS — Sources · Traitement · Normes</text>
-  <rect x="4" y="18" width="130" height="56" rx="4" fill="#166038" opacity=".12" stroke="#166038" stroke-width="1"/>
-  <text x="69" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">Sources de contamination</text>
-  <text x="69" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Mousses AFFF (aéroports)</text>
-  <text x="69" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Téflon · Gore-Tex · textiles</text>
-  <text x="69" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Boues STEP épandues</text>
-  <text x="69" y="71" text-anchor="middle" font-family="Arial" font-size="7" fill="#C62828" font-weight="bold">Liaison C-F indestructible</text>
-  <rect x="146" y="18" width="130" height="56" rx="4" fill="#166038" opacity=".12" stroke="#166038" stroke-width="1"/>
-  <text x="211" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">Traitement</text>
-  <text x="211" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">CAG : C8+ efficace</text>
-  <text x="211" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Nanofiltration partielle</text>
-  <text x="211" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#1B5E20" font-weight="bold">OI : quasi 100 % rétention</text>
-  <text x="211" y="71" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828">Concentrat → incin. 1 100°C</text>
-  <rect x="8" y="80" width="264" height="62" rx="4" fill="#fff" stroke="#166038" stroke-width="1"/>
-  <text x="140" y="92" text-anchor="middle" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">Normes — Directive 2020/2184</text>
-  <text x="140" y="103" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">0,1 µg/L par substance PFAS individuelle (liste 20 PFAS)</text>
-  <text x="140" y="114" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">0,5 µg/L pour la somme · Analyse : LC-MS/MS (COFRAC obligatoire)</text>
-  <text x="140" y="124" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#555">PFOA · PFOS = CMR2 (cancérogènes) · Effets : thyroïde, foie, immunité</text>
-  <text x="140" y="135" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">C4/C6 (courte chaîne) = difficiles à traiter · Ubiquitaires (Arctique, sang)</text>
-</svg>`,
-              exercice: {
-                enonce: 'Une analyse LC-MS/MS de l\'eau d\'un captage situé en aval d\'une base militaire donne : PFOS = 0,08 µg/L, PFOA = 0,09 µg/L, PFHxA = 0,06 µg/L, PFBS = 0,05 µg/L. 1) Chaque substance respecte-t-elle la norme individuelle ? 2) La norme "somme" est-elle respectée ? 3) Quelle filière de traitement proposez-vous ? 4) Quel problème pose le concentrat ?',
-                solution: '<strong>1) Normes individuelles :</strong> PFOS 0,08 < 0,1 ✓ · PFOA 0,09 < 0,1 ✓ · PFHxA 0,06 < 0,1 ✓ · PFBS 0,05 < 0,1 ✓ → toutes conformes individuellement.<br><strong>2) Norme somme :</strong> 0,08 + 0,09 + 0,06 + 0,05 = <strong>0,28 µg/L < 0,5 µg/L</strong> → conforme (mais à surveiller).<br><strong>3) Filière :</strong> PFHxA et PFBS sont des PFAS courte chaîne (C4/C6) difficiles à éliminer par CAG. Seule l\'<strong>Osmose Inverse</strong> garantit une rétention quasi totale de tous les PFAS.<br><strong>4) Concentrat OI :</strong> contient tous les PFAS concentrés × 4–5. Élimination obligatoire par <strong>incinération à plus de 1 100°C</strong> (température minimum pour casser la liaison C-F). Coût élevé.',
-              },
-            },
-            {
-              id: 'qa-m1-2',
-              titre: 'Perturbateurs endocriniens et microplastiques',
-              fiche: {
-                intro: 'Perturbateurs endocriniens et microplastiques sont deux catégories de polluants émergents qui font l\'objet d\'une surveillance croissante, même en l\'absence de normes complètes.',
-                points: [
-                  '🧬 Perturbateurs endocriniens (PE) : substances qui imitent, bloquent ou modifient les hormones. Effets à très faibles doses (ng/L voire pg/L)',
-                  '💊 PE prioritaires en eau : 17α-éthinylestradiol (EE2 — contraceptif oral) | bisphénol A (BPA) | phtalates | nonylphénols | pesticides organochlorés (DDT, lindane)',
-                  '🐟 Impact aquatique : féminisation des poissons mâles (imposex), réduction de la fertilité, hermaphrodisme. Observé à EE2 ≥ 1 ng/L dans les rivières en aval de STEP',
-                  '⚠️ Élimination STEP : insuffisante pour EE2 (STEP classiques éliminent 50–90 % → résidu actif). Traitement complémentaire : ozonation + CAG',
-                  '🔵 Microplastiques : particules plastiques < 5 mm. Sources : dégradation déchets plastiques | fibres textiles synthétiques (lavage) | granulés de pneus (routes)',
-                  '🔴 Nanoplastiques (< 1 µm) : passent les barrières biologiques (sang-cerveau, placenta). Très préoccupants mais difficiles à analyser',
-                  '💧 Dans l\'eau potable : microplastiques retrouvés dans l\'eau du robinet et en bouteille. Pas encore de normes AEP. Élimination : filtration < 1 µm (UF) efficace',
-                  '🌡️ Effets PE à faible dose : courbe dose-réponse non linéaire (effet cocktail — mélange de PE à faibles doses = synergie toxique)',
-                ],
-                formules: [],
-                sections: [
-                  {
-                    titre: "1. Mécanismes d'action des perturbateurs endocriniens",
-                    ss: [
-                      {
-                        titre: "1.1. Imitation et blocage des hormones",
-                        texte: "<p>Les perturbateurs endocriniens (PE) sont des substances exogènes qui interfèrent avec le système hormonal des organismes. Ils agissent à des concentrations très faibles (ng/L à µg/L) selon plusieurs mécanismes : imitation d'hormones naturelles (agonistes), blocage des récepteurs hormonaux (antagonistes), modification de la synthèse ou du métabolisme des hormones.</p><p>L'éthinylestradiol (EE2), principal contraceptif oral, féminise les poissons à des concentrations de quelques ng/L — effets documentés sur les populations de poissons dans les rivières en aval des rejets urbains.</p>",
-                      },
-                      {
-                        titre: "1.2. Microplastiques et effets cocktail",
-                        texte: "<p>Les microplastiques (< 5 mm) et nanoplastiques (< 1 µm) sont omniprésents dans les milieux aquatiques. Ils ne sont pas directement des PE mais peuvent adsorber des contaminants hydrophobes (PCB, HAP, PFAS) et les transporter jusqu'aux organismes.</p><p>L'effet cocktail décrit la synergie entre plusieurs PE présents simultanément à des concentrations individuellement inférieures aux seuils d'effet. Des mélanges de PE à faibles doses individuelles peuvent produire des effets combinés significatifs — une réglementation basée sur chaque substance isolément peut sous-estimer le risque réel.</p>",
-                      },
-                    ],
-                  },
-                  {
-                    titre: "2. Surveillance et techniques de traitement",
-                    ss: [
-                      {
-                        titre: "2.1. Surveillance et normes réglementaires",
-                        texte: "<p>La directive-cadre sur l'eau (DCE) inclut les PE dans sa liste de substances prioritaires. La surveillance dans les masses d'eau implique des analyses chimiques et des bioessais (tests sur organismes aquatiques) pour détecter les effets endocriniens.</p><p>Pour l'eau potable, les concentrations réglementaires en pesticides (0,1 µg/L par substance) et en certains composés organochlorés existent, mais il n'existe pas encore de valeur paramétriques spécifiques pour la plupart des PE dans l'eau potable en Europe.</p>",
-                      },
-                      {
-                        titre: "2.2. Ozonation, charbon actif et limites du traitement",
-                        texte: "<p>L'ozonation oxyde les molécules organiques et peut détruire les PE à des doses modérées (2–5 mg O₃/L). Elle est souvent couplée au charbon actif biologique (CAB) qui dégrade les sous-produits d'ozonation et piège les résidus. Cette combinaison est efficace sur les PE polaires (EE2, bisphénol A, triclosan).</p><p>Les microplastiques ne sont pas éliminés par les traitements conventionnels ni par l'ozonation — seule la microfiltration membranaire (UF) les retient efficacement. Les nanoplastiques passent même à travers la plupart des membranes. Le traitement des PE et des microplastiques à grande échelle reste coûteux.</p>",
-                      },
-                    ],
-                  },
-                ],
-                retenir: 'PE = hormones mimétiques à ng/L. EE2 féminise les poissons. Traitement : ozonation + CAG. Microplastiques = < 5 mm. Nanoplastiques franchissent les barrières bio.',
-              },
-              flashcards: [
-                { q: 'Qu\'est-ce qu\'un perturbateur endocrinien ?', r: 'Substance exogène qui interfère avec le système hormonal : imite les hormones (agoniste), les bloque (antagoniste) ou modifie leur synthèse/métabolisme', expl: 'Le caractère PE se manifeste souvent à des doses très inférieures aux doses toxiques classiques. La relation dose-réponse peut être non monotone (U inversé).' },
-                { q: 'Quel PE est le plus préoccupant pour les milieux aquatiques ?', r: '17α-éthinylestradiol (EE2) : hormone synthétique des contraceptifs oraux. Féminise les poissons mâles (réduction spermatogenèse, intersex) à des concentrations de 1 ng/L', expl: 'L\'EE2 est éliminé à 50–90 % par les STEP classiques. Le résidu actif dans les rivières françaises en aval de STEP est suffisant pour affecter la reproduction des poissons.' },
-                { q: 'Comment éliminer efficacement l\'EE2 dans une STEP ou une usine de potabilisation ?', r: 'Ozonation (oxydation de l\'EE2) suivie de filtration sur charbon actif en grains (CAG). L\'ozonation seule peut former des produits de transformation encore actifs', expl: 'L\'association O₃ + CAG est la référence pour éliminer les PE. Des études montrent une réduction de > 90 % de l\'activité oestrogénique sur des rivières équipées de cette technologie.' },
-                { q: 'Quelle est la définition des microplastiques ?', r: 'Particules plastiques de taille < 5 mm. Primaires (fabriqués petits : cosmétiques, granulés industriels) ou secondaires (fragmentation de macro-déchets plastiques)', expl: 'On les retrouve dans tous les compartiments : eau douce, eau de mer, sédiments, air, nourriture, corps humain. La contamination est planétaire et irréversible à l\'échelle humaine.' },
-                { q: 'Comment les microplastiques sont-ils éliminés dans l\'eau potable ?', r: 'La filtration membranaire < 1 µm (ultrafiltration) est efficace. Les traitements conventionnels (coagulation-filtration sable) éliminent 70–80 % des microplastiques > 20 µm', expl: 'Les nanoplastiques (< 1 µm) nécessitent des membranes très fines (OI/NF). Ils sont potentiellement plus dangereux car ils traversent les barrières biologiques.' },
-                { q: 'Qu\'est-ce que l\'effet cocktail des perturbateurs endocriniens ?', r: 'Synergie toxique de plusieurs PE présents simultanément à faibles doses individuellement non actives. Le mélange peut produire un effet hormonal significatif', expl: 'C\'est un défi réglementaire majeur : chaque substance respecte la norme, mais la combinaison de 10–20 PE à faibles doses produit un effet global. Les mélanges sont rarement évalués.' },
-              ],
-              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
-  <rect width="280" height="148" rx="8" fill="#E0F4EC"/>
-  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#166038">Perturbateurs endocriniens &amp; Microplastiques</text>
-  <rect x="4" y="18" width="130" height="66" rx="4" fill="#166038" opacity=".12" stroke="#166038" stroke-width="1"/>
-  <text x="69" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">Perturbateurs endocriniens</text>
-  <text x="69" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">EE2 (pilule) → féminise poissons</text>
-  <text x="69" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">BPA, phtalates, pesticides</text>
-  <text x="69" y="61" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Effets à 1–10 ng/L</text>
-  <text x="69" y="71" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#1B5E20" font-weight="bold">Traitement : O₃ + CAG</text>
-  <text x="69" y="82" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">STEP classique : 50–90 % EE2</text>
-  <rect x="146" y="18" width="130" height="66" rx="4" fill="#166038" opacity=".12" stroke="#166038" stroke-width="1"/>
-  <text x="211" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">Microplastiques</text>
-  <text x="211" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Particules &lt; 5 mm</text>
-  <text x="211" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Fibres textiles, pneus</text>
-  <text x="211" y="61" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828" font-weight="bold">Nanoplastiques &lt; 1 µm</text>
-  <text x="211" y="71" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828">Franchissent barrières bio</text>
-  <text x="211" y="82" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Élimination : UF (ultrafilt.)</text>
-  <rect x="8" y="90" width="264" height="52" rx="4" fill="#fff" stroke="#166038" stroke-width="1"/>
-  <text x="140" y="102" text-anchor="middle" font-family="Arial" font-size="8" fill="#166038" font-weight="bold">Effet cocktail</text>
-  <text x="140" y="113" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">10–20 PE à faibles doses → synergie toxique significative</text>
-  <text x="140" y="124" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Courbe dose-réponse non monotone · Mélanges rarement évalués</text>
-  <text x="140" y="136" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Pas de norme AEP microplastiques · Retrouvés eau robinet + bouteille</text>
-</svg>`,
-              exercice: {
-                enonce: 'Une STEP traite 5 000 m³/j d\'eaux usées contenant 15 ng/L d\'EE2. Le traitement conventionnel élimine 75 % de l\'EE2. La rivière réceptrice a un débit d\'étiage de 1 500 m³/j. 1) Quelle concentration d\'EE2 est rejetée par la STEP ? 2) Quelle est la concentration dans la rivière en aval ? 3) Est-ce problématique pour la faune aquatique ?',
-                solution: '<strong>1) EE2 rejeté :</strong> 15 × (1 − 0,75) = <strong>3,75 ng/L</strong><br><strong>2) Concentration rivière :</strong> débit total = 1 500 + 5 000 = 6 500 m³/j<br>EE2 rivière = (3,75 × 5 000) / 6 500 = <strong>2,88 ng/L</strong><br><strong>3) Impact aquatique :</strong> EE2 féminise les poissons dès <strong>1 ng/L</strong>. 2,88 ng/L >> seuil → <strong>risque avéré</strong> de perturbation de la reproduction piscicole. Traitement complémentaire obligatoire : <strong>ozonation + CAG</strong> pour descendre sous 0,5–1 ng/L.',
-              },
-            },
+          /* ── Bloc 02 — Programmation scientifique, données et SIG ── */
+          { id: 'master-b02', name: 'Programmation scientifique, données et SIG', ico: '💻', color: '#37474F', colorl: '#ECEFF1', chapitres: [
+            { id: 'MASTER-EAU-013', titre: 'Organisation et traçabilité des données scientifiques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-014', titre: 'Programmation scientifique appliquée à l\'eau', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-015', titre: 'Préparation et contrôle qualité des données', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-016', titre: 'Visualisation scientifique et communication graphique', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-017', titre: 'Bases de données, services web et acquisition automatisée', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-018', titre: 'SIG, systèmes de coordonnées et analyses spatiales', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-019', titre: 'Modèles numériques de terrain et analyse des bassins versants', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-020', titre: 'Télédétection pour les milieux et ressources en eau', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-021', titre: 'Calcul numérique et résolution des modèles', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-022', titre: 'Reproductibilité et vérification des traitements', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-023', titre: 'Apprentissage automatique appliqué aux données de l\'eau', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-024', titre: 'Couplage de modèles et gestion des simulations', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
           ]},
-        ],
-      },
 
-      {
-        id: 'an2',
-        name: 'Master 2',
-        matieres: [
-          { id: 'climatologie', name: 'Changement climatique et ressources en eau', ico: '🌍', color: '#E85D04', colorl: '#FFF0E0', chapitres: [
-            {
-              id: 'cc-m2-1',
-              titre: 'Impacts du changement climatique sur les débits et la ressource en eau',
-              fiche: {
-                intro: 'Le changement climatique modifie profondément le cycle de l\'eau en France et dans le monde. Les ressources en eau sont menacées par des étiages plus sévères, des crues plus intenses et une modification de la recharge des nappes.',
-                points: [
-                  '🌡️ Scénarios GIEC : RCP2.6 (+2°C) | RCP4.5 (+2,5°C) | RCP8.5 (business as usual : +4 à +5°C d\'ici 2100)',
-                  '🇫🇷 France : T° en hausse de +1,4°C depuis 1900. Projections : +1,5 à +4°C d\'ici 2100 selon scénarios',
-                  '🌧️ Précipitations : moins d\'été (–20 % à –30 % dans le Sud) | plus intenses (pluies extrêmes) | enneigement en forte baisse montagne',
-                  '📉 Modules (débits moyens) : –10 % à –40 % d\'ici 2050 selon bassins. Méditerranée et Sud-Ouest : les plus touchés',
-                  '🏔️ Glaciers alpins : réduction de 70 % du volume depuis 1850. Disparition prévue avant 2100 → perte du "château d\'eau" alpin',
-                  '🌊 Eaux souterraines : recharge hivernale réduite → niveaux piézométriques estivaux plus bas. Sécheresses 2003, 2018, 2022 : records historiques',
-                  '⚖️ Conflits d\'usage exacerbés : agriculture (70 % des prélèvements en été) vs AEP vs hydroélectricité vs milieux aquatiques',
-                  '🔴 Changements qualitatifs : eau de surface plus chaude → prolifération cyanobactéries | concentration des polluants en étiage | efficacité réduite des STEP en chaleur',
-                ],
-                formules: [
-                  'Forçage radiatif (W/m²) = mesure de l\'effet de serre additionnel. +4 W/m² pour RCP8.5',
-                  'Résilience hydrologique = capacité d\'un système eau à absorber les chocs climatiques sans changement de régime',
-                ],
-                sections: [
-                  {
-                    titre: "1. Projections climatiques et impacts hydrologiques",
-                    ss: [
-                      {
-                        titre: "1.1. Les scénarios RCP et SSP",
-                        texte: "<p>Les scénarios climatiques du GIEC (RCP puis SSP) décrivent différentes trajectoires d'émissions de gaz à effet de serre. RCP8.5 (ou SSP5-8.5) correspond au scénario « sans action » : +3 à +5°C en France d'ici 2100. RCP4.5 (SSP2-4.5) correspond à des émissions stabilisées : +1,5 à +2,5°C.</p><p>Ces scénarios sont des outils de planification, pas des prévisions. Ils permettent d'encadrer la gamme des futurs possibles et de tester la robustesse des aménagements face à différentes hypothèses climatiques.</p>",
-                      },
-                      {
-                        titre: "1.2. Impacts sur les modules et les extrêmes",
-                        texte: "<p>En France, les projections convergent vers : une réduction des débits moyens annuels de −10 % à −40 % selon les bassins (Loire, Adour-Garonne les plus affectés), une avance et un allongement des étiages estivaux, une augmentation des extrêmes de précipitations intenses (crues éclairs) dans certaines régions (Méditerranée, Pyrénées).</p><p>Les incertitudes restent importantes à l'échelle locale. Les projections hydrologiques combinent les incertitudes des scénarios d'émissions, des modèles climatiques globaux et des modèles hydrologiques régionaux.</p>",
-                      },
-                    ],
-                  },
-                  {
-                    titre: "2. Vulnérabilité des systèmes hydrologiques",
-                    ss: [
-                      {
-                        titre: "2.1. Étiages prolongés et sécheresses",
-                        texte: "<p>Le changement climatique prolonge et intensifie les sécheresses hydrologiques. En France, les crises d'été 2022 et 2023 (premières ruptures d'alimentation en eau potable sur des communes) illustrent la vulnérabilité croissante des territoires.</p><p>Les impacts en cascade : étiages sévères → hausse des températures de l'eau → mortalité piscicole, prolifération cyanobactéries → restrictions d'usage → conflits d'usages (agriculture, alimentation en eau potable, énergie hydroélectrique, refroidissement nucléaire).</p>",
-                      },
-                      {
-                        titre: "2.2. Crues et précipitations extrêmes",
-                        texte: "<p>Le changement climatique augmente l'intensité des précipitations extrêmes (relation de Clausius-Clapeyron : +7 %/°C d'augmentation de la capacité maximale de l'atmosphère à contenir de la vapeur d'eau). Les crues éclair dans le Sud de la France (épisodes cévenols) pourraient s'intensifier.</p><p>La montée du niveau marin amplifie les risques de submersion côtière et complique l'évacuation gravitaire des eaux de ruissellement. La conception des ouvrages de protection doit intégrer un niveau de la mer futur, pas seulement le niveau actuel.</p>",
-                      },
-                    ],
-                  },
-                ],
-                retenir: 'RCP8.5 = +4°C d\'ici 2100. Modules en baisse de –10 à –40 %. Étiages plus sévères. Glaciers en voie de disparition. Conflits d\'usage agriculture/AEP/milieux.',
-              },
-              flashcards: [
-                { q: 'Qu\'est-ce que le scénario RCP8.5 du GIEC ?', r: 'Scénario "business as usual" : pas de réduction des émissions de GES. Concentration CO₂ > 1 000 ppm en 2100. Hausse T° de +4 à +5°C. Forçage radiatif +8,5 W/m²', expl: 'Le RCP8.5 est le scénario pessimiste de référence pour les études d\'impact. Il est malheureusement proche de la trajectoire réelle d\'émissions des 10 dernières années.' },
-                { q: 'Quel impact le CC a-t-il sur les modules (débits moyens) des rivières françaises ?', r: 'Baisse de 10 à 40 % des modules d\'ici 2050 selon les bassins. Les bassins méditerranéens et sud-atlantiques sont les plus touchés (–25 à –40 %)', expl: 'Certains bassins (Rhône alpin) maintiennent leurs débits à court terme grâce à la fonte glaciaire, mais subiront une chute brutale quand les glaciers auront disparu.' },
-                { q: 'Pourquoi la disparition des glaciers alpins est-elle un enjeu critique ?', r: 'Les glaciers stockent l\'eau en hiver et la restituent en été (étiage naturellement soutenu). Sans eux, les débits d\'été des rivières alpines chuteront drastiquement', expl: 'Le glacier de la Mer de Glace (Chamonix) a perdu 150 m de profondeur depuis 1850. Les glaciers pyrénéens seront probablement disparus avant 2050. L\'Arve, l\'Isère, le Gave en seront affectés.' },
-                { q: 'Pourquoi les étiages sont-ils plus concentrés en polluants lors des sécheresses ?', r: 'Le débit est plus faible → le facteur de dilution diminue → les mêmes rejets de STEP, agricoles et industriels produisent des concentrations plus élevées dans le cours d\'eau', expl: 'En étiage sévère, certains cours d\'eau sont constitués à plus de 50 % d\'effluents de STEP. La DCO, les nitrates, les perturbateurs endocriniens s\'y concentrent au-delà des normes.' },
-                { q: 'Quels usages de l\'eau sont en conflit lors des étiages exacerbés par le CC ?', r: 'Agriculture (irrigation, 70 % des prélèvements estivaux) vs AEP vs hydroélectricité vs maintien des débits réservés pour les milieux aquatiques', expl: 'Les arrêtés sécheresse imposent des restrictions par niveau d\'alerte. En crise, l\'AEP est prioritaire. Les conflits sont particulièrement aigus dans les bassins Adour-Garonne et Rhône-Méditerranée.' },
-                { q: 'Comment le changement climatique affecte-t-il la qualité de l\'eau des STEP ?', r: 'T° élevée réduit la solubilité de l\'O₂ et accélère les processus biologiques → risque de déficit en O₂ dans les bassins d\'aération + prolifération de cyanobactéries dans les réservoirs', expl: 'Les STEP dimensionnées pour T° < 25°C peuvent voir leurs performances se dégrader si la T° des eaux usées dépasse 30°C en été. La nitrification est particulièrement affectée.' },
-              ],
-              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
-  <rect width="280" height="148" rx="8" fill="#FFF0E0"/>
-  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#E85D04">Changement climatique — Impacts sur les débits</text>
-  <rect x="4" y="18" width="83" height="68" rx="4" fill="#E85D04" opacity=".12" stroke="#E85D04" stroke-width="1"/>
-  <text x="45" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#E85D04" font-weight="bold">RCP2.6</text>
-  <text x="45" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">+2°C en 2100</text>
-  <text x="45" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#4CAF50">Objectif Paris</text>
-  <text x="45" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Modules :</text>
-  <text x="45" y="72" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">−10 à −20 %</text>
-  <text x="45" y="83" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">+2,5°C : RCP4.5</text>
-  <rect x="98" y="18" width="84" height="68" rx="4" fill="#E85D04" opacity=".12" stroke="#E85D04" stroke-width="1"/>
-  <text x="140" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#E85D04" font-weight="bold">RCP8.5</text>
-  <text x="140" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828" font-weight="bold">+4 à 5°C</text>
-  <text x="140" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Business as usual</text>
-  <text x="140" y="62" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Modules :</text>
-  <text x="140" y="72" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828" font-weight="bold">−20 à −40 %</text>
-  <text x="140" y="82" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">CO₂ > 1 000 ppm</text>
-  <rect x="192" y="18" width="84" height="68" rx="4" fill="#E85D04" opacity=".12" stroke="#E85D04" stroke-width="1"/>
-  <text x="234" y="30" text-anchor="middle" font-family="Arial" font-size="8" fill="#E85D04" font-weight="bold">Impacts clés</text>
-  <text x="234" y="41" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Glaciers alpins</text>
-  <text x="234" y="51" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828">−70 % vol. depuis</text>
-  <text x="234" y="60" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#C62828">1850 → avant 2100</text>
-  <text x="234" y="71" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Étiages + sévères</text>
-  <text x="234" y="82" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">Conflits usage ↑</text>
-  <rect x="8" y="92" width="264" height="50" rx="4" fill="#fff" stroke="#E85D04" stroke-width="1"/>
-  <text x="140" y="104" text-anchor="middle" font-family="Arial" font-size="8" fill="#E85D04" font-weight="bold">Impacts qualitatifs</text>
-  <text x="140" y="115" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Eau + chaude → cyanobactéries · Étiage = concentration polluants</text>
-  <text x="140" y="126" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">T° STEP > 30°C → nitrification dégradée · Agriculture 70 % prélèvements été</text>
-  <text x="140" y="137" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">France : +1,4°C depuis 1900 · Sécheresses 2003/2018/2022 = records</text>
-</svg>`,
-              exercice: {
-                enonce: 'En été 2022, un cours d\'eau du Sud-Ouest a un débit de 0,8 m³/s (étiage sévère). Deux STEP rejettent : STEP A : 0,25 m³/s, DBO₅ = 15 mg/L ; STEP B : 0,10 m³/s, DBO₅ = 20 mg/L. Le débit naturel de la rivière (sans rejets) serait 0,45 m³/s. 1) Quelle fraction du débit total est constituée de rejets STEP ? 2) Calculer la DBO₅ mélangée en rivière. 3) Quel phénomène est amplifié par le CC dans ce scénario ?',
-                solution: '<strong>1) Fraction rejets STEP :</strong> débit total rivière = 0,45 + 0,25 + 0,10 = 0,80 m³/s<br>Fraction STEP = (0,25 + 0,10) / 0,80 = 0,35/0,80 = <strong>44 %</strong> du débit total<br><strong>2) DBO₅ mélangée :</strong> (0,25×15 + 0,10×20) / (0,45+0,25+0,10) = (3,75 + 2,00) / 0,80 = 5,75 / 0,80 = <strong>7,2 mg/L</strong><br><strong>3) Phénomène CC :</strong> <strong>concentration des polluants en étiage</strong>. Le débit naturel réduit par le CC (-30 %) fait que les rejets représentent une fraction bien plus grande → DBO₅, nutriments, perturbateurs endocriniens concentrés → anoxie, cyanobactéries.',
-              },
-            },
-            {
-              id: 'cc-m2-2',
-              titre: 'Adaptation des systèmes d\'eau potable et d\'assainissement',
-              fiche: {
-                intro: 'L\'adaptation au changement climatique impose de repenser la gestion des ressources en eau : sécurisation des approvisionnements, économies d\'eau, réutilisation et nouvelles technologies.',
-                points: [
-                  '🔀 Sécurisation AEP : diversification des ressources (interconnexions réseaux, nouvelles captations) + augmentation des capacités de stockage (réservoirs, barrages)',
-                  '💧 Économies d\'eau : réduction des fuites (rendement ≥ 85 %) | tarification progressive par blocs (premiers m³ bon marché, suivants plus chers) | compteurs intelligents (AMI)',
-                  '♻️ REUT (Réutilisation des Eaux Usées Traitées) : arrosage espaces verts, toilettes, irrigation agricole, industrie. Règlement UE 2020/741 + décret France 2022',
-                  '   REUT irrigation : qualité requise selon le type de culture (NGL < 10 mg/L, E. coli < 10 UFC/100 mL pour cultures alimentaires)',
-                  '🌧️ Récupération eaux pluviales : usages non potables (WC, arrosage, nettoyage). Réglementation française : citerne + robinet différencié + étiquetage',
-                  '🌊 Dessalement : solution de dernier recours (énergie intensive : 3–10 kWh/m³). Utilisé aux Canaries, en Martinique, dans les DROM. Envisagé pour Paris d\'ici 2050',
-                  '🏗️ Adaptation des STEP : prétraitements renforcés pour les crues (surverses) | biofiltration pour les étiages concentrés | réfrigération artificielle des bassins biologiques',
-                  '📋 Plans de gestion sécheresse (PGS) : obligation pour les collectivités > 5 000 abonnés. Scénarios d\'alimentation alternative, réduction des fuites prioritaire',
-                ],
-                formules: [],
-                sections: [
-                  {
-                    titre: "1. Adapter l'alimentation en eau potable",
-                    ss: [
-                      {
-                        titre: "1.1. Réduction des pertes et REUT",
-                        texte: "<p>La réduction des fuites de réseau est le levier de sobriété le plus efficace à court terme : chaque m³ économisé sur les pertes est un m³ prélevé en moins dans la ressource. Les interconnexions entre réseaux augmentent la résilience en permettant des secours mutuels lors d'une crise de disponibilité.</p><p>La réutilisation des eaux usées traitées (REUT), encadrée par le règlement européen 2020/741, permet d'utiliser des eaux usées traitées de qualité appropriée pour l'irrigation agricole, les espaces verts, les usages industriels. Elle réduit la pression sur les ressources en eau conventionnelles en été.</p>",
-                      },
-                      {
-                        titre: "1.2. Stockage et nouvelles ressources",
-                        texte: "<p>La recharge artificielle des aquifères (RAA) permet de stocker l'eau en période excédentaire pour la mobiliser en étiage. Les retenues collinaires complètent les capacités de stockage pour l'agriculture et l'eau potable. Ces solutions doivent être évaluées au regard de leur impact sur le régime hydrologique local.</p><p>Le dessalement de l'eau de mer est une solution extrême réservée aux zones côtières sans autre ressource — il consomme 4 à 6 kWh/m³, soit 10 à 20 fois plus que le traitement conventionnel, et génère des rejets salins.</p>",
-                      },
-                    ],
-                  },
-                  {
-                    titre: "2. Adapter l'assainissement et protéger les milieux",
-                    ss: [
-                      {
-                        titre: "2.1. Réseaux d'assainissement face aux pluies intenses",
-                        texte: "<p>Les réseaux unitaires et séparatifs dimensionnés pour les pluies historiques sont de plus en plus sollicités par des pluies intenses plus fréquentes. Les surverses des déversoirs d'orage augmentent, rejetant des effluents dilués mais potentiellement chargés en bactéries et polluants dans les cours d'eau ou la mer.</p><p>La désimperméabilisation des surfaces urbaines (jardins, tranchées drainantes, revêtements perméables, toitures végétalisées) réduit à la source le volume entrant dans les réseaux et retarde les pics de crue. Le règlement de service peut imposer des volumes de rétention à la parcelle.</p>",
-                      },
-                      {
-                        titre: "2.2. Rejet en milieu récepteur appauvri",
-                        texte: "<p>L'assainissement est conçu pour rejeter dans un milieu récepteur capable de diluer et de dégrader les effluents traités. Avec des étiages plus sévères, les débits de dilution diminuent et les normes de rejet actuelles peuvent devenir insuffisantes pour protéger le milieu récepteur.</p><p>Des traitements complémentaires (tertiaire : dénitrification poussée, élimination du phosphore, désinfection UV) peuvent être nécessaires sur les STEP rejetant dans des cours d'eau à faible débit d'étiage. La réglementation devra s'adapter à la réduction des débits de dilution attendue.</p>",
-                      },
-                    ],
-                  },
-                ],
-                retenir: 'REUT = réutilisation EUT (règlement UE 2020/741). Économies : fuites + compteurs intelligents. Sécurisation = interconnexions + stockage. Dessalement = dernier recours.',
-              },
-              flashcards: [
-                { q: 'Qu\'est-ce que la REUT et quelle est sa réglementation en France ?', r: 'Réutilisation des Eaux Usées Traitées pour des usages non potables. Règlement UE 2020/741 + décret français n°2022-336. Usages autorisés : irrigation agricole, arrosage espaces verts, nettoyage voirie', expl: 'La REUT est très développée en Espagne (20 % des eaux épurées réutilisées) et en Israël (90 %). France : seulement 1 % pour l\'instant, mais en forte progression post-sécheresses 2022.' },
-                { q: 'Qu\'est-ce qu\'un compteur intelligent (AMI) et quel avantage pour l\'adaptation au CC ?', r: 'Advanced Metering Infrastructure : compteur d\'eau avec transmission à distance des données (horaire ou quotidienne). Détecte les fuites domestiques, alerte les consommateurs et optimise la facturation', expl: 'Un compteur intelligent détecte une consommation nocturne anormale (fuite robinet, WC) et alerte le propriétaire. Les gains sur les pertes domestiques peuvent atteindre 10–15 % de la consommation.' },
-                { q: 'Pourquoi le dessalement est-il considéré comme "solution de dernier recours" ?', r: 'Très énergivore (3–10 kWh/m³ vs 0,3 kWh pour une eau souterraine) → coût élevé et fort impact carbone. Génère un concentrat salin à éliminer', expl: 'Pour produire 1 m³ d\'eau potable par dessalement, on consomme autant d\'énergie que pour produire 10 m³ d\'eau souterraine. Le bilan carbone est très défavorable sans énergie renouvelable.' },
-                { q: 'Quelles mesures concrètes d\'adaptation les STEP doivent-elles adopter face au CC ?', r: 'Gestion des surverses par temps de pluie intense (biofiltres, by-pass contrôlés) + adaptation aux températures élevées estivales (ventilation, ombrage bassins) + traitement tertiaire renforcé en étiage', expl: 'En 2022, plusieurs STEP en France ont eu des difficultés de nitrification en été (T° bassins > 30°C). Des modèles de simulation permettent de prévoir ces situations et d\'adapter le traitement.' },
-                { q: 'Qu\'est-ce que la tarification progressive par blocs ?', r: 'Les premiers m³ consommés (tranche sociale) sont facturés à un tarif bas. Les m³ suivants sont progressivement plus chers. Encourage les économies d\'eau tout en garantissant l\'accès au droit à l\'eau', expl: 'Ce système punit la surconsommation (arrosage intensif, piscines) tout en préservant l\'accès à l\'eau pour les ménages modestes. Dunkerque, Montpellier et d\'autres villes l\'ont adopté.' },
-                { q: 'Qu\'est-ce qu\'un Plan de Gestion de la Sécheresse (PGS) ?', r: 'Document préventif identifiant les ressources alternatives, les mesures d\'économies, les interconnexions de secours et les procédures d\'alerte pour maintenir l\'AEP en situation de sécheresse sévère', expl: 'La sécheresse 2022 a montré que de nombreuses communes n\'avaient pas de PGS. Le gouvernement a rendu ces plans obligatoires pour les collectivités > 5 000 abonnés à partir de 2024.' },
-              ],
-              schema: `<svg viewBox="0 0 280 148" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
-  <rect width="280" height="148" rx="8" fill="#FFF0E0"/>
-  <text x="140" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" font-weight="bold" fill="#E85D04">Adaptation CC — REUT · AMI · PGS · Dessalement</text>
-  <rect x="4" y="18" width="60" height="52" rx="4" fill="#E85D04" opacity=".85"/>
-  <text x="34" y="29" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">REUT</text>
-  <text x="34" y="39" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">EUT réutilisées</text>
-  <text x="34" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">arrosage, WC</text>
-  <text x="34" y="58" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#FFE0B2">UE 2020/741</text>
-  <rect x="72" y="18" width="60" height="52" rx="4" fill="#D84315" opacity=".85"/>
-  <text x="102" y="29" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Compteurs</text>
-  <text x="102" y="39" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff">AMI (smart)</text>
-  <text x="102" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">Détecte fuites</text>
-  <text x="102" y="58" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#FFE0B2">−10–15 % perte</text>
-  <rect x="140" y="18" width="60" height="52" rx="4" fill="#BF360C" opacity=".85"/>
-  <text x="170" y="29" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">PGS</text>
-  <text x="170" y="39" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">Plan Gestion</text>
-  <text x="170" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">Sécheresse</text>
-  <text x="170" y="58" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#FFE0B2">&gt; 5 000 abonn.</text>
-  <rect x="208" y="18" width="68" height="52" rx="4" fill="#8D1A00" opacity=".85"/>
-  <text x="242" y="29" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#fff" font-weight="bold">Dessalement</text>
-  <text x="242" y="39" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">3–10 kWh/m³</text>
-  <text x="242" y="49" text-anchor="middle" font-family="Arial" font-size="7" fill="#fff">Dernier recours</text>
-  <text x="242" y="58" text-anchor="middle" font-family="Arial" font-size="6.5" fill="#FFE0B2">DROM/Canaries</text>
-  <rect x="8" y="76" width="264" height="66" rx="4" fill="#fff" stroke="#E85D04" stroke-width="1"/>
-  <text x="140" y="88" text-anchor="middle" font-family="Arial" font-size="8" fill="#E85D04" font-weight="bold">Stratégies d'adaptation</text>
-  <text x="140" y="99" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Sécurisation AEP : interconnexions + nouveaux stockages (réservoirs)</text>
-  <text x="140" y="110" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">Tarification progressive par blocs : économies + droit à l'eau garanti</text>
-  <text x="140" y="121" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#333">STEP : traitement tertiaire renforcé en étiage + gestion surverses</text>
-  <text x="140" y="134" text-anchor="middle" font-family="Arial" font-size="7" fill="#555">France REUT : 1 % (vs Israël 90 %) · AMI : Dunkerque, Montpellier…</text>
-</svg>`,
-              exercice: {
-                enonce: 'Une commune de 12 000 abonnés consomme 2 200 m³/j. Elle envisage la REUT de 20 % de ses EUT (1 200 m³/j traités) pour arroser les espaces verts et alimenter les WC publics. Elle évalue aussi des compteurs AMI promettant 12 % de réduction des pertes (rendement actuel = 78 %). 1) Volume économisé/j par REUT. 2) Volume supplémentaire économisé par les AMI (sur 2 200 m³/j). 3) Ces deux actions suffisent-elles pour passer le rendement de 78 à 85 % (volume distribué actuel = 2 820 m³/j) ?',
-                solution: '<strong>1) REUT :</strong> 20 % × 1 200 = <strong>240 m³/j</strong> d\'eau potable économisée (substitution)<br><strong>2) AMI :</strong> pertes actuelles = 2 820 − 2 200 = 620 m³/j<br>Gain AMI = 12 % × 620 = <strong>74 m³/j</strong> de pertes réduites<br><strong>3) Rendement :</strong> Pour Rdt = 85 % avec V distribué = 2 820 m³/j :<br>V consommé requis = 0,85 × 2 820 = 2 397 m³/j<br>Gain total REUT + AMI = 240 + 74 = 314 m³/j → V consommé apparent = 2 200 + 314 = 2 514 m³/j<br>Rdt nouveau = 2 514 / 2 820 = <strong>89 %</strong> > 85 % → <strong>oui, largement suffisant</strong>.',
-              },
-            },
+          /* ── Bloc 03 — Hydrologie avancée et modélisation ── */
+          { id: 'master-b03', name: 'Hydrologie avancée et modélisation', ico: '🌧️', color: '#0A5090', colorl: '#E6EEF8', chapitres: [
+            { id: 'MASTER-EAU-025', titre: 'Fonctionnement hydrologique multi-échelle des bassins versants', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-026', titre: 'Mesure et représentation des précipitations', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-027', titre: 'Évapotranspiration et bilans d\'énergie', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-028', titre: 'Infiltration et transferts dans les sols', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-029', titre: 'Production et transfert du ruissellement', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-030', titre: 'Hydrométrie avancée et incertitude des débits', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-031', titre: 'Modèles hydrologiques conceptuels', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-032', titre: 'Calage et évaluation d\'un modèle pluie-débit', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-033', titre: 'Modèles distribués et représentation spatiale', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-034', titre: 'Identifiabilité, équifinalité et régionalisation', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-035', titre: 'Statistique des crues et événements extrêmes', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-036', titre: 'Étiages, sécheresses hydrologiques et tarissement', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-037', titre: 'Prévision hydrologique et assimilation de données', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-038', titre: 'Effets des usages et des aménagements sur les régimes', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
           ]},
-        ],
-      },
-    ],
+
+          /* ── Bloc 04 — Hydrogéologie et modélisation souterraine ── */
+          { id: 'master-b04', name: 'Hydrogéologie et modélisation souterraine', ico: '🗺️', color: '#5A189A', colorl: '#F3E8FF', chapitres: [
+            { id: 'MASTER-EAU-039', titre: 'Modèles conceptuels des systèmes aquifères', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-040', titre: 'Propriétés hydrodynamiques des formations', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-041', titre: 'Équations de l\'écoulement souterrain', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-042', titre: 'Piézométrie et réseaux d\'observation', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-043', titre: 'Essais de pompage et estimation des paramètres', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-044', titre: 'Recharge et transferts dans la zone non saturée', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-045', titre: 'Relations entre nappes, rivières et zones humides', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-046', titre: 'Construction d\'un modèle numérique d\'écoulement souterrain', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-047', titre: 'Calage inverse et évaluation des modèles hydrogéologiques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-048', titre: 'Aquifères karstiques et milieux fracturés', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-049', titre: 'Aquifères côtiers et écoulements à densité variable', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-050', titre: 'Advection, dispersion et transport des solutés', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-051', titre: 'Traçages, isotopes et temps de résidence', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-052', titre: 'Gestion quantitative, vulnérabilité et protection des captages', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+          ]},
+
+          /* ── Bloc 05 — Hydraulique avancée et modélisation ── */
+          { id: 'master-b05', name: 'Hydraulique avancée et modélisation', ico: '🌊', color: '#0A5090', colorl: '#E6EEF8', chapitres: [
+            { id: 'MASTER-EAU-053', titre: 'Équations de conservation et choix d\'une représentation hydraulique', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-054', titre: 'Modélisation des réseaux sous pression', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-055', titre: 'Pompage, régulation et optimisation des réseaux', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-056', titre: 'Transitoires hydrauliques et propagation des ondes', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-057', titre: 'Écoulements à surface libre et équations de Saint-Venant', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-058', titre: 'Modélisation hydraulique unidimensionnelle', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-059', titre: 'Ouvrages, contrôles et transitions hydrauliques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-060', titre: 'Mesures et évaluation des modèles hydrauliques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-061', titre: 'Modélisation bidimensionnelle des écoulements', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-062', titre: 'Écoulements tridimensionnels et turbulence', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-063', titre: 'Transport sédimentaire et morphodynamique', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-064', titre: 'Couplages hydrologiques, hydrauliques et scénarios complexes', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+          ]},
+
+          /* ── Bloc 06 — Géochimie, qualité et contaminants ── */
+          { id: 'master-b06', name: 'Géochimie, qualité et contaminants', ico: '🧪', color: '#6B46C1', colorl: '#F0EBF8', chapitres: [
+            { id: 'MASTER-EAU-065', titre: 'Thermodynamique des systèmes aqueux', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-066', titre: 'Activités chimiques, force ionique et spéciation', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-067', titre: 'Équilibres acido-basiques et système carbonaté', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-068', titre: 'Oxydoréduction et transformations des éléments', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-069', titre: 'Dissolution, précipitation, adsorption et échanges ioniques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-070', titre: 'Cinétique des réactions et interactions biogéochimiques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-071', titre: 'Stratégies analytiques et assurance qualité', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-072', titre: 'Qualité des eaux naturelles et signatures géochimiques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-073', titre: 'Métaux et métalloïdes dans les systèmes aquatiques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-074', titre: 'Pesticides et contaminants organiques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-075', titre: 'PFAS, résidus pharmaceutiques et autres contaminants émergents', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-076', titre: 'Particules, colloïdes et microplastiques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-077', titre: 'Écotoxicologie et évaluation des effets', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-078', titre: 'Modélisation géochimique et transport réactif', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+          ]},
+
+          /* ── Bloc 07 — Procédés avancés et réutilisation ── */
+          { id: 'master-b07', name: 'Procédés avancés et réutilisation', ico: '⚗️', color: '#166038', colorl: '#E0F4EC', chapitres: [
+            { id: 'MASTER-EAU-079', titre: 'Bilans, cinétique et modèles de réacteurs', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-080', titre: 'Transferts gaz-liquide et aération', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-081', titre: 'Adsorption et échange d\'ions', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-082', titre: 'Séparations membranaires avancées', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-083', titre: 'Désinfection et oxydation avancée', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-084', titre: 'Modélisation des procédés biologiques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-085', titre: 'Traitement de l\'azote, du phosphore et récupération des nutriments', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-086', titre: 'Digestion anaérobie et valorisation des résidus', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-087', titre: 'Réutilisation des eaux et adéquation aux usages', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-088', titre: 'Comparaison multicritère des filières avancées', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+          ]},
+
+          /* ── Bloc 08 — Écologie aquatique et restauration ── */
+          { id: 'master-b08', name: 'Écologie aquatique et restauration', ico: '🌿', color: '#2E7D32', colorl: '#E8F5E9', chapitres: [
+            { id: 'MASTER-EAU-089', titre: 'Organisation et fonctionnement des écosystèmes aquatiques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-090', titre: 'Biodiversité, communautés et traits fonctionnels', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-091', titre: 'Hydromorphologie et habitats', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-092', titre: 'Connectivité écologique et dynamique des populations', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-093', titre: 'Bioindication et plans d\'échantillonnage', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-094', titre: 'Zones humides et fonctions écologiques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-095', titre: 'Débits écologiques et besoins des milieux', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-096', titre: 'Conception et priorisation des restaurations', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-097', titre: 'Évaluation causale des opérations de restauration', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-098', titre: 'Gestion adaptative et changements de régime écologique', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+          ]},
+
+          /* ── Bloc 09 — Climat, sécheresses et adaptation ── */
+          { id: 'master-b09', name: 'Climat, sécheresses et adaptation', ico: '🌡️', color: '#BF360C', colorl: '#FBE9E7', chapitres: [
+            { id: 'MASTER-EAU-099', titre: 'Système climatique et cycle de l\'eau', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-100', titre: 'Observations et détection des changements hydroclimatiques', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-101', titre: 'Modèles climatiques et scénarios', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-102', titre: 'Chaînes d\'impact climat-hydrologie', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-103', titre: 'Descente d\'échelle et correction des biais', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-104', titre: 'Évapotranspiration, sols et végétation sous changement climatique', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-105', titre: 'Recharge et ressources souterraines futures', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-106', titre: 'Sécheresses composées et événements concomitants', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-107', titre: 'Usages agricoles, irrigation et sobriété', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-108', titre: 'Prospective territoriale des besoins et des ressources', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-109', titre: 'Adaptation robuste et décisions sous incertitude profonde', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-110', titre: 'Suivi de l\'adaptation et risques de maladaptation', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+          ]},
+
+          /* ── Bloc 10 — Inondations, risques et résilience ── */
+          { id: 'master-b10', name: 'Inondations, risques et résilience', ico: '🌊', color: '#1565C0', colorl: '#E3F2FD', chapitres: [
+            { id: 'MASTER-EAU-111', titre: 'Aléa, exposition, vulnérabilité et risque', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-112', titre: 'Cartographie des inondations et incertitudes', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-113', titre: 'Dommages et vulnérabilité des territoires', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-114', titre: 'Ouvrages de protection et risque résiduel', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-115', titre: 'Ruissellement urbain et inondations pluviales', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-116', titre: 'Submersion marine et interactions littorales', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-117', titre: 'Solutions fondées sur la nature et champs d\'expansion', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-118', titre: 'Analyse économique et multicritère de la prévention', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-119', titre: 'Prévision, alerte et organisation de crise', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-120', titre: 'Résilience, reconstruction et retour d\'expérience', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+          ]},
+
+          /* ── Bloc 11 — Gouvernance, économie et gestion intégrée ── */
+          { id: 'master-b11', name: 'Gouvernance, économie et gestion intégrée', ico: '⚖️', color: '#1A237E', colorl: '#E8EAF6', chapitres: [
+            { id: 'MASTER-EAU-121', titre: 'Institutions, acteurs et échelles de gouvernance', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-122', titre: 'Cadres juridiques et planification de l\'eau', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-123', titre: 'Économie de la ressource et des services', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-124', titre: 'Allocation de l\'eau et instruments de gestion', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-125', titre: 'Concertation, conflits et justice environnementale', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-126', titre: 'Gestion intégrée et interfaces eau-énergie-alimentation-écosystèmes', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-127', titre: 'Évaluation des politiques publiques de l\'eau', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-128', titre: 'Décision territoriale et prospective participative', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+          ]},
+
+          /* ── Bloc 12 — Méthodes de recherche ── */
+          { id: 'master-b12', name: 'Méthodes de recherche', ico: '🔍', color: '#4A148C', colorl: '#F3E5F5', chapitres: [
+            { id: 'MASTER-EAU-129', titre: 'Construire une question de recherche', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-130', titre: 'Recherche bibliographique et lecture critique', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-131', titre: 'Concevoir un protocole scientifique', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-132', titre: 'Expérimentation, puissance et effets détectables', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-133', titre: 'Inférence causale et études observationnelles', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-134', titre: 'Synthèse structurée de la littérature', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-135', titre: 'Intégrité scientifique et science ouverte', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-136', titre: 'Rédaction scientifique et évaluation par les pairs', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+          ]},
+
+          /* ── Bloc 13 — Projets, mémoire et soutenance ── */
+          { id: 'master-b13', name: 'Projets, mémoire et soutenance', ico: '📋', color: '#37474F', colorl: '#ECEFF1', chapitres: [
+            { id: 'MASTER-EAU-137', titre: 'Cadrer un projet scientifique ou professionnel', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-138', titre: 'Gérer les données et les interfaces d\'un projet', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-139', titre: 'Piloter une étude multidisciplinaire', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-140', titre: 'Comparer les solutions et formuler une recommandation', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-141', titre: 'Construire et analyser les résultats d\'un mémoire', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-142', titre: 'Rédiger un mémoire et une synthèse décisionnelle', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-143', titre: 'Présenter les résultats en français et en anglais scientifique', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-144', titre: 'Soutenance, discussion critique et valorisation', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+          ]},
+
+          /* ── Bloc 14 — Études de cas transversales ── */
+          { id: 'master-b14', name: 'Études de cas transversales', ico: '📊', color: '#004D40', colorl: '#E0F2F1', chapitres: [
+            { id: 'MASTER-EAU-145', titre: 'Ressource souterraine soumise à des prélèvements et à une contamination', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-146', titre: 'Bassin versant exposé aux crues et au changement climatique', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-147', titre: 'Filière de traitement confrontée à un contaminant difficile à éliminer', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-148', titre: 'Restauration d\'une rivière et évaluation de ses effets', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-149', titre: 'Stratégie territoriale de sobriété et de réutilisation de l\'eau', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+            { id: 'MASTER-EAU-150', titre: 'Projet final intégré : gestion d\'un bassin sous contraintes multiples', fiche: { intro: 'Cours disponible.', points: [], formules: [], retenir: '' } },
+          ]},
+
+        ]
+      }
+    ]
   },
 
   /* ══ BUT GTE (option eau) ══════════════════════════════════════════ */
@@ -13862,7 +13446,11 @@ function _coursGetBlocData(chapId) {
     window.GEMEAU_B13, window.GEMEAU_B14,
     window.LP_EAU_B01, window.LP_EAU_B02, window.LP_EAU_B03, window.LP_EAU_B04,
     window.LP_EAU_B05, window.LP_EAU_B06, window.LP_EAU_B07, window.LP_EAU_B08,
-    window.LP_EAU_B09, window.LP_EAU_B10, window.LP_EAU_B11
+    window.LP_EAU_B09, window.LP_EAU_B10, window.LP_EAU_B11,
+    window.MASTER_EAU_B01, window.MASTER_EAU_B02, window.MASTER_EAU_B03, window.MASTER_EAU_B04,
+    window.MASTER_EAU_B05, window.MASTER_EAU_B06, window.MASTER_EAU_B07, window.MASTER_EAU_B08,
+    window.MASTER_EAU_B09, window.MASTER_EAU_B10, window.MASTER_EAU_B11, window.MASTER_EAU_B12,
+    window.MASTER_EAU_B13, window.MASTER_EAU_B14
   ];
   for (var i = 0; i < blocs.length; i++) {
     if (blocs[i] && blocs[i][chapId]) return blocs[i][chapId];

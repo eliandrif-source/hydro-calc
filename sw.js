@@ -2,7 +2,7 @@
    SERVICE WORKER â€” HydroCalc PWA
    Cache-first Â· Mode hors-ligne complet
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-var CACHE_NAME = 'hydrocalc-v463';
+var CACHE_NAME = 'hydrocalc-v499';
 
 var ASSETS = [
   './',
@@ -45,6 +45,20 @@ var ASSETS = [
   './js/cours_lp_b09.js',
   './js/cours_lp_b10.js',
   './js/cours_lp_b11.js',
+  './js/cours_master_b01.js',
+  './js/cours_master_b02.js',
+  './js/cours_master_b03.js',
+  './js/cours_master_b04.js',
+  './js/cours_master_b05.js',
+  './js/cours_master_b06.js',
+  './js/cours_master_b07.js',
+  './js/cours_master_b08.js',
+  './js/cours_master_b09.js',
+  './js/cours_master_b10.js',
+  './js/cours_master_b11.js',
+  './js/cours_master_b12.js',
+  './js/cours_master_b13.js',
+  './js/cours_master_b14.js',
   './js/cours.js',
   './js/cours_perso.js',
   './js/messagerie.js',
