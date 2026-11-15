@@ -114,9 +114,19 @@ function _qcmProRemaining() {
   return _qcmProBank();
 }
 
+var _qcmHubFormation = 'bts';
+
+function _getQCMBank(f) {
+  if (f === 'lp')     return typeof QCM_BANK_LP     !== 'undefined' ? QCM_BANK_LP     : [];
+  if (f === 'master') return typeof QCM_BANK_MASTER !== 'undefined' ? QCM_BANK_MASTER : [];
+  if (f === 'but')    return typeof QCM_BANK_BUT    !== 'undefined' ? QCM_BANK_BUT    : [];
+  return typeof QCM_BANK !== 'undefined' ? QCM_BANK : [];
+}
+
 function renderQCMBankTheme(theme) {
-  if (typeof QCM_BANK === 'undefined') return;
-  var list = QCM_BANK.filter(function(q){ return q.theme === theme; });
+  var bank = _getQCMBank(_qcmHubFormation);
+  if (!bank.length) return;
+  var list = bank.filter(function(q){ return q.theme === theme; });
   if (!list.length) return;
   var t0 = list[0];
   var topTitle = document.getElementById('top-title');
@@ -149,8 +159,9 @@ function renderQCMBankTheme(theme) {
 
   var isProf = typeof AUTH !== 'undefined' && AUTH.user && (AUTH.user.plan === 'etab' || AUTH.user.plan === 'admin');
 
+  var bank2 = _getQCMBank(_qcmHubFormation);
   list.forEach(function(q) {
-    var idx = QCM_BANK.indexOf(q);
+    var idx = bank2.indexOf(q);
     html += '<div style="background:var(--c-surface);border:1.5px solid var(--c-border);border-radius:var(--r-md);padding:var(--s-3) var(--s-4)">'
       + '<div style="font-size:13px;font-weight:700;color:var(--c-text);line-height:1.4">' + q.title + '</div>'
       + '<div style="font-size:11px;color:var(--c-text-3);margin-top:3px">' + q.desc + '</div>'
@@ -167,7 +178,8 @@ function renderQCMBankTheme(theme) {
 }
 
 function _startBankQCM(idx) {
-  if (typeof QCM_BANK === 'undefined' || !QCM_BANK[idx]) return;
+  var bank = _getQCMBank(_qcmHubFormation);
+  if (!bank.length || !bank[idx]) return;
   var access = _qcmBankAccess();
   if (access === 'free') {
     var bank = _qcmFreeBank();
@@ -181,7 +193,8 @@ function _startBankQCM(idx) {
     if (_qcmProRemaining() <= 0) { if (typeof authToast === 'function') authToast('Plus de crédits QCM — vous en gagnez 10 par semaine (max 300).'); return; }
     _qcmProUseOne();
   }
-  _startStudentQCM(Object.assign({}, QCM_BANK[idx], { _isBank: true }), true);
+  var bank3 = _getQCMBank(_qcmHubFormation);
+  _startStudentQCM(Object.assign({}, bank3[idx], { _isBank: true }), true);
 }
 
 function _startAdaptiveQCM(theme) {

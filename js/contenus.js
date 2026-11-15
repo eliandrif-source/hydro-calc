@@ -2623,18 +2623,32 @@ function renderQCMHub() {
       + '</div>';
   }
 
-  /* ── Banque de QCM (36 QCM / 720 questions), groupée par thème ── */
+  /* ── Banque de QCM groupée par formation puis par thème ── */
+  if (typeof _qcmHubFormation === 'undefined') window._qcmHubFormation = 'bts';
+  var _formations = [
+    { key:'bts',    label:'BTS GEMEAU',  color:'#1550A0' },
+    { key:'lp',     label:'LP Eau',      color:'#0A6E3A' },
+    { key:'master', label:'Master',      color:'#4A148C' },
+    { key:'but',    label:'BUT GEMAPI',  color:'#01579B' },
+  ];
   html += '<div class="section-header" style="margin-top:var(--s-3)">Banque de QCM par thème</div>';
+  html += '<div style="padding:0 var(--s-4);display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">';
+  _formations.forEach(function(f) {
+    var active = (typeof _qcmHubFormation !== 'undefined' ? _qcmHubFormation : 'bts') === f.key;
+    html += '<button onclick="_switchQCMFormation(\'' + f.key + '\')" style="padding:7px 14px;border-radius:20px;border:2px solid ' + f.color + ';background:' + (active ? f.color : 'transparent') + ';color:' + (active ? '#fff' : f.color) + ';font-size:12px;font-weight:700;cursor:pointer;font-family:var(--f-body)">' + f.label + '</button>';
+  });
+  html += '</div>';
   html += '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">';
-  if (typeof QCM_BANK !== 'undefined') {
+  var _activeBank = typeof _getQCMBank === 'function' ? _getQCMBank(typeof _qcmHubFormation !== 'undefined' ? _qcmHubFormation : 'bts') : (typeof QCM_BANK !== 'undefined' ? QCM_BANK : []);
+  if (_activeBank.length) {
     var themes = [];
-    QCM_BANK.forEach(function(q) {
+    _activeBank.forEach(function(q) {
       if (!themes.some(function(t){ return t.theme === q.theme; })) {
         themes.push({ theme: q.theme, themeName: q.themeName, ico: q.ico, color: q.color, colorl: q.colorl, count: 0 });
       }
     });
     themes.forEach(function(t) {
-      t.count = QCM_BANK.filter(function(q){ return q.theme === t.theme; }).length;
+      t.count = _activeBank.filter(function(q){ return q.theme === t.theme; }).length;
       html += '<div class="mod-list-card" style="--cat-color:' + t.color + '" onclick="renderQCMBankTheme(\'' + t.theme + '\')">'
         + '<div class="mlc-icon" style="background:' + t.colorl + '">' + t.ico + '</div>'
         + '<div class="mlc-body"><div class="mlc-name">' + t.themeName + '</div><div class="mlc-sub">' + t.count + ' QCM · ' + t.theme + '</div></div>'
@@ -2646,6 +2660,11 @@ function renderQCMHub() {
   html += '<div class="pb-nav"></div>';
 
   document.getElementById('main-content').innerHTML = html;
+}
+
+function _switchQCMFormation(key) {
+  window._qcmHubFormation = key;
+  renderQCMHub();
 }
 
 /* ─── ASSAINISSEMENT NON COLLECTIF — Hub de navigation ─── */
