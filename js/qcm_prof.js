@@ -226,28 +226,66 @@ function _startExamTimer() {
   }, 1000);
 }
 
-function _startExamMode() {
+function _startExamMode() { _startExamPicker(); }
+
+function _startExamPicker() {
   if (typeof QCM_BANK === 'undefined') return;
   var access = _qcmBankAccess();
   if (access === 'free') { if (typeof authToast === 'function') authToast('Simulation d\'examen réservée aux plans Pro et Établissement.'); return; }
-  var allQ = [];
+
+  var formations = [
+    { key:'bts',    ico:'🎓', label:'BTS GEMEAU',              sub:'20 questions · 30 min · Toutes UE',       nbQ:20, min:30, ues:null,                   color:'#1550A0' },
+    { key:'lp',     ico:'📘', label:'LP Mention Eau',          sub:'15 questions · 25 min · UE1→UE4',        nbQ:15, min:25, ues:['UE1','UE2','UE3','UE4'], color:'#0A6E3A' },
+    { key:'master', ico:'🔬', label:'Master Sciences de l\'Eau', sub:'25 questions · 45 min · Niveau avancé', nbQ:25, min:45, ues:null,                   color:'#5B1A8A' },
+    { key:'but',    ico:'🌿', label:'BUT GEMAPI',              sub:'20 questions · 30 min · UE1+UE5+UE6',    nbQ:20, min:30, ues:['UE1','UE5','UE6'],     color:'#0A5090' },
+  ];
+
+  var html = '<div style="padding:var(--s-3) var(--s-4) 0">'
+    + '<div style="font-size:var(--t-xs);font-weight:800;color:var(--c-text-4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--s-3)">🎓 Choisir la formation</div>';
+
+  formations.forEach(function(f) {
+    html += '<div class="mod-list-card" style="--cat-color:' + f.color + ';margin-bottom:var(--s-2)" onclick="_launchFormationExam(\'' + f.key + '\')">'
+      + '<div class="mlc-icon" style="background:' + f.color + '20;font-size:24px">' + f.ico + '</div>'
+      + '<div class="mlc-body"><div class="mlc-name">' + f.label + '</div><div class="mlc-sub">' + f.sub + '</div></div>'
+      + '<span class="mlc-arrow">›</span></div>';
+  });
+
+  html += '</div><div class="pb-nav"></div>';
+
+  var _tb = document.getElementById('tab-bar'); if (_tb) _tb.style.display = 'none';
+  var t = document.getElementById('top-title'); if (t) t.textContent = 'Simulation d\'examen';
+  document.getElementById('main-content').innerHTML = html;
+}
+
+function _launchFormationExam(key) {
+  if (typeof QCM_BANK === 'undefined') return;
+  var CFG = {
+    bts:    { title:'🎓 Examen BTS GEMEAU',           nbQ:20, min:30, ues:null },
+    lp:     { title:'📘 Examen LP Mention Eau',        nbQ:15, min:25, ues:['UE1','UE2','UE3','UE4'] },
+    master: { title:'🔬 Examen Master Sciences de l\'Eau', nbQ:25, min:45, ues:null },
+    but:    { title:'🌿 Examen BUT GEMAPI',            nbQ:20, min:30, ues:['UE1','UE5','UE6'] },
+  };
+  var cfg = CFG[key] || CFG.bts;
+  var pool = [];
   QCM_BANK.forEach(function(qcm) {
+    if (cfg.ues && cfg.ues.indexOf(qcm.theme) === -1) return;
     qcm.questions.forEach(function(q) {
-      allQ.push({ q:q.q, choices:q.choices, correct:q.correct, expl:q.expl||'', _theme:qcm.theme, _themeName:qcm.themeName });
+      pool.push({ q:q.q, choices:q.choices, correct:q.correct, expl:q.expl||'', _theme:qcm.theme, _themeName:qcm.themeName });
     });
   });
-  allQ = allQ.sort(function(){ return Math.random() - .5; }).slice(0, 20);
+  if (!pool.length) { if (typeof authToast === 'function') authToast('Aucune question disponible pour cette formation.'); return; }
+  var questions = pool.sort(function(){ return Math.random() - .5; }).slice(0, Math.min(cfg.nbQ, pool.length));
   var session = {
-    id: 'exam-' + Date.now(),
-    title: '🎓 Simulation BTS',
+    id: 'exam-' + key + '-' + Date.now(),
+    title: cfg.title,
     theme: 'EXAM',
     _isBank: true,
     _isExam: true,
-    _examDuration: 30 * 60,
-    questions: allQ,
+    _examDuration: cfg.min * 60,
+    questions: questions,
     style: {},
     profEmail: '',
-    profName: 'Mode examen'
+    profName: 'Simulation'
   };
   _examTimeStart = Date.now();
   _startStudentQCM(session, true);

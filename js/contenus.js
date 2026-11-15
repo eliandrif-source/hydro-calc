@@ -374,26 +374,39 @@ function doConvert(cat) {
   }).join('');
 }
 
-/* ─── CALCULATEURS AVANCÉS — onglets ─── */
-var CALCA_TAB_LBLS = ['Manning partiel','Coup de bélier','Langelier','Shields','Pompe HMT','NPSH'];
+/* ─── CALCULATEURS AVANCÉS — onglets filtrés par contexte ─── */
+var _calcaCtx = '';
+var _CALCA_CTX_TABS = {
+  ac:  ['Manning partiel','Coup de bélier','NPSH','Darcy-Weisbach'],
+  ep:  ['Langelier','Pompe HMT','NPSH','Darcy-Weisbach','Coup de bélier'],
+  riv: ['Shields','Manning naturel','Darcy-Weisbach'],
+  '': ['Manning partiel','Coup de bélier','Langelier','Shields','Pompe HMT','NPSH','Darcy-Weisbach','Manning naturel']
+};
 
-function renderCalcAvances() {
-  loadModuleTabs(['Manning partiel','Coup de bélier','Langelier','Shields','Pompe HMT','NPSH','Darcy-Weisbach','Manning naturel'], 'switchCalcaTab');
+function _renderCalcaByLabel(lbl) {
+  if      (lbl === 'Manning partiel')  renderCalcaManning();
+  else if (lbl === 'Coup de bélier')   renderCalcaBelier();
+  else if (lbl === 'Langelier')        renderCalcaLangelier();
+  else if (lbl === 'Shields')          renderCalcaShields();
+  else if (lbl === 'Pompe HMT')        renderCalcaPompeHMT();
+  else if (lbl === 'NPSH')             renderCalcaNPSH();
+  else if (lbl === 'Darcy-Weisbach')   renderCalcaDarcy();
+  else if (lbl === 'Manning naturel')  renderCalcaManningNat();
+}
+
+function renderCalcAvances(ctx) {
+  _calcaCtx = ctx || '';
+  var tabs = _CALCA_CTX_TABS[_calcaCtx] || _CALCA_CTX_TABS[''];
+  loadModuleTabs(tabs, 'switchCalcaTab');
   document.getElementById('main-content').innerHTML =
     '<div id="calca-content"></div><div class="pb-nav"></div>';
-  renderCalcaManning();
+  _renderCalcaByLabel(tabs[0]);
 }
 
 function switchCalcaTab(idx) {
   setTabActive('module-tabs', idx);
-  if      (idx === 0) renderCalcaManning();
-  else if (idx === 1) renderCalcaBelier();
-  else if (idx === 2) renderCalcaLangelier();
-  else if (idx === 3) renderCalcaShields();
-  else if (idx === 4) renderCalcaPompeHMT();
-  else if (idx === 5) renderCalcaNPSH();
-  else if (idx === 6) renderCalcaDarcy();
-  else if (idx === 7) renderCalcaManningNat();
+  var tabs = _CALCA_CTX_TABS[_calcaCtx] || _CALCA_CTX_TABS[''];
+  _renderCalcaByLabel(tabs[idx]);
   scrollToTop();
 }
 
@@ -2576,8 +2589,8 @@ function renderQCMHub() {
   html += '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">';
   html += '<div class="mod-list-card" style="--cat-color:#6A1B9A' + (examLocked?';opacity:.6':'') + '" onclick="_startExamMode()">'
     + '<div class="mlc-icon" style="background:#F3E5F5;font-size:24px">' + (examLocked?'🔒':'🎓') + '</div>'
-    + '<div class="mlc-body"><div class="mlc-name">Simulation d\'examen BTS</div>'
-    + '<div class="mlc-sub">' + (examLocked ? 'Réservé Pro &amp; Établissement' : '20 questions · 30 min · Mix de toutes les UE · Note /20') + '</div></div>'
+    + '<div class="mlc-body"><div class="mlc-name">Simulation d\'examen</div>'
+    + '<div class="mlc-sub">' + (examLocked ? 'Réservé Pro &amp; Établissement' : 'BTS · LP · Master · BUT · Choisir sa formation') + '</div></div>'
     + '<span class="mlc-arrow">›</span></div>';
   html += '<div class="mod-list-card" style="--cat-color:var(--c-primary)" onclick="showModule(\'stats\')">'
     + '<div class="mlc-icon" style="background:var(--c-primary-l,#E3F2FD);font-size:24px">📊</div>'
@@ -2707,7 +2720,7 @@ function renderAC() {
     <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
       ${[
         {ico:'⚡',name:'Calculateurs principaux',sub:'Manning-Strickler · FTE · EP · Charges',id:'calc'},
-        {ico:'🧮',name:'Calculateurs avancés',sub:'Manning partiel · Coup de bélier · NPSH',id:'calca'},
+        {ico:'🧮',name:'Calculateurs avancés',sub:'Manning partiel · Coup de bélier · NPSH',id:'calca-ac'},
         {ico:'📐',name:'Calculateurs complémentaires',sub:'Réservoir · STEU',id:'calcs'},
         {ico:'🔄',name:'Convertisseur d\'unités',sub:'Débit · Pression · Concentration',id:'conv'},
       ].map(function(m){ return `
@@ -2748,7 +2761,7 @@ function renderEP() {
     <div class="section-header">Outils & calculs</div>
     <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
       ${[
-        {ico:'🧮',name:'Calculs réseau AEP',sub:'Langelier · Pompe HMT · NPSH',id:'calca'},
+        {ico:'🧮',name:'Calculs réseau AEP',sub:'Langelier · Pompe HMT · NPSH',id:'calca-ep'},
         {ico:'📐',name:'Calculateurs eau potable',sub:'Chloration · Réservoir',id:'calcs'},
         {ico:'🔄',name:'Convertisseur d\'unités',sub:'mg/L · m³/h · bar',id:'conv'},
       ].map(function(m){ return `
@@ -2790,7 +2803,7 @@ function renderRiv() {
     <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
       ${[
         {ico:'🌊',name:'Hydraulique à surface libre',sub:'Manning · Froude · Régime fluvial',id:'calc'},
-        {ico:'🧮',name:'Calculateurs avancés',sub:'Manning partiel · Shields · Coup de bélier',id:'calca'},
+        {ico:'🧮',name:'Calculateurs avancés',sub:'Shields · Manning naturel · Darcy-Weisbach',id:'calca-riv'},
         {ico:'🐟',name:'Passes à poissons',sub:'6 types · Bassins · Fentes verticales · Anguilles · Dimensionnement',id:'pap'},
         {ico:'🔄',name:'Convertisseur d\'unités',sub:'m³/s · m³/h · L/s',id:'conv'},
       ].map(function(m){ return `
@@ -2875,7 +2888,7 @@ function renderStats() {
     html += '<div style="padding:var(--s-4);text-align:center">'
       + '<div style="font-size:48px;margin-bottom:8px">🎓</div>'
       + '<div style="font-size:15px;font-weight:700;color:var(--c-text);margin-bottom:6px">Pas encore de statistiques</div>'
-      + '<div style="font-size:13px;color:var(--c-text-3);margin-bottom:var(--s-4)">Lance-toi sur les QCM ou simule un examen BTS pour voir ta progression ici !</div>'
+      + '<div style="font-size:13px;color:var(--c-text-3);margin-bottom:var(--s-4)">Lance-toi sur les QCM ou simule un examen pour voir ta progression ici !</div>'
       + '<div style="display:flex;gap:var(--s-2);justify-content:center;flex-wrap:wrap">'
         + '<button onclick="showModule(\'qcm\')" style="padding:12px 20px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--r-md);font-size:13px;font-weight:700;cursor:pointer;font-family:var(--f-body)">✅ QCM</button>'
         + '<button onclick="_startExamMode()" style="padding:12px 20px;background:#6A1B9A;color:#fff;border:none;border-radius:var(--r-md);font-size:13px;font-weight:700;cursor:pointer;font-family:var(--f-body)">🎓 Examen</button>'

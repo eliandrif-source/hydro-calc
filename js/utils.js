@@ -371,6 +371,9 @@ function showModule(id) {
     gloss:'Formulaire & Glossaire',
     calc:'Calculateurs',
     calca:'Calculateurs avancés',
+    'calca-ac':'Calculateurs avancés',
+    'calca-ep':'Calculateurs avancés',
+    'calca-riv':'Calculateurs avancés',
     calcs:'Calculateurs complémentaires',
     conv:'Convertisseur d\'unités',
     ouv:'Ouvrages AC & EP',
@@ -402,7 +405,10 @@ function showModule(id) {
   else if (id === 'calc-hub') renderCalcHub();
   else if (id === 'calc')   renderCalc();
   else if (id === 'calc-anc') { renderCalc(); if (typeof switchCalcTab === 'function') switchCalcTab(2); }
-  else if (id === 'calca')  renderCalcAvances();
+  else if (id === 'calca')     renderCalcAvances('');
+  else if (id === 'calca-ac')  renderCalcAvances('ac');
+  else if (id === 'calca-ep')  renderCalcAvances('ep');
+  else if (id === 'calca-riv') renderCalcAvances('riv');
   else if (id === 'calcs')  renderCalcSuppl();
   else if (id === 'conv')   renderConv();
   else if (id === 'ouv')    renderOuvrages();

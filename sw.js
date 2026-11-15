@@ -2,7 +2,7 @@
    SERVICE WORKER â€” HydroCalc PWA
    Cache-first Â· Mode hors-ligne complet
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-var CACHE_NAME = 'hydrocalc-v499';
+var CACHE_NAME = 'hydrocalc-v500';
 
 var ASSETS = [
   './',
