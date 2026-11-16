@@ -1625,6 +1625,45 @@ function renderANCNonConformites() {
 function renderANCFilTrad() {
   var tb = document.getElementById('tab-bar'); if (tb) tb.style.display = 'none';
   var fiches = [
+    { ico:'🪣', name:'Fosse toutes eaux', sub:'Prétraitement obligatoire · Décantation anaérobie · 3 m³ mini',
+      schema: `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px;display:block;margin:12px auto 4px">
+  <rect width="320" height="180" fill="#f0fdf4" rx="8"/>
+  <text x="160" y="16" text-anchor="middle" font-size="10" font-weight="bold" fill="#065F46" font-family="sans-serif">Fosse toutes eaux — coupe longitudinale</text>
+  <!-- Corps fosse -->
+  <rect x="30" y="40" width="260" height="110" rx="8" fill="#fff" stroke="#065F46" stroke-width="2.5"/>
+  <!-- Niveau eau -->
+  <rect x="31" y="78" width="258" height="71" rx="0" fill="#bfdbfe" opacity="0.5"/>
+  <!-- Boues fond -->
+  <rect x="31" y="128" width="258" height="21" rx="0" fill="#d4a574" opacity="0.6"/>
+  <!-- Écume surface -->
+  <rect x="31" y="78" width="258" height="12" rx="0" fill="#fef3c7" opacity="0.7"/>
+  <!-- Cloison siphoïde -->
+  <rect x="145" y="50" width="6" height="68" rx="2" fill="#065F46"/>
+  <rect x="145" y="118" width="6" height="12" rx="2" fill="#065F46" opacity="0.3"/>
+  <!-- Entrée eau brute -->
+  <rect x="10" y="60" width="30" height="8" rx="3" fill="#94a3b8"/>
+  <text x="6" y="58" font-size="8" fill="#334155" font-family="sans-serif">EU</text>
+  <!-- Sortie eaux clarifiées -->
+  <rect x="280" y="60" width="30" height="8" rx="3" fill="#2563eb"/>
+  <text x="282" y="58" font-size="8" fill="#1d4ed8" font-family="sans-serif">→ filière</text>
+  <!-- Couvercles / tampons -->
+  <rect x="58" y="30" width="28" height="12" rx="3" fill="#475569"/>
+  <rect x="168" y="30" width="28" height="12" rx="3" fill="#475569"/>
+  <rect x="238" y="30" width="28" height="12" rx="3" fill="#475569"/>
+  <!-- Ventilation amont -->
+  <line x1="72" y1="30" x2="72" y2="10" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="55" y="9" font-size="7.5" fill="#dc2626" font-family="sans-serif">Vent. amont</text>
+  <!-- Ventilation aval -->
+  <line x1="252" y1="30" x2="252" y2="10" stroke="#059669" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="234" y="9" font-size="7.5" fill="#059669" font-family="sans-serif">Vent. aval</text>
+  <!-- Légendes -->
+  <text x="88" y="88" text-anchor="middle" font-size="8" fill="#92400e" font-family="sans-serif">Écume</text>
+  <text x="88" y="110" text-anchor="middle" font-size="8.5" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">Zone liquide</text>
+  <text x="88" y="145" text-anchor="middle" font-size="8" fill="#78350f" font-family="sans-serif">Boues (vidange &lt; 50%)</text>
+  <text x="210" y="102" text-anchor="middle" font-size="8.5" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">Eaux clarifiées</text>
+  <text x="148" y="175" text-anchor="middle" font-size="7.5" fill="#64748b" font-family="sans-serif">Volume mini 3 m³ · Vidange tous les 4 ans max</text>
+</svg>`,
+      specs:{ 'Volume minimum':'3 m³ (1–5 pièces) · +1 m³ / pièce suppl.', 'Matériaux':'Béton NF EN 12566-1 · PEHD / PP agréé', 'Distance habitation':'> 5 m (Arrêté 07/09/2009)', 'Distance limite propriété':'> 3 m', 'Distance puits AEP':'> 35 m', 'Ventilation':'Amont ET aval obligatoires · DTU 64.1', 'Vidange':'≤ 4 ans ou quand boues > 50% volume utile', 'Profondeur tampon':'Accessible en surface · regard étanche', 'Référence':'Arrêté 07/09/2009 mod. 03/12/2021 · NF EN 12566' } },
     { ico:'🌾', name:'Tranchées d\'épandage', sub:'Épandage souterrain · Sol perméable · 200–400 m²',
       specs:{ 'Perméabilité sol':'15–500 mm/h (étude de sol obligatoire)', 'Profondeur':'0,6–0,7 m de recouvrement', 'Drain':'PVC Ø 100 mm perforé · pente max 0,5%', 'Charge hydraulique':'0,04 m/j', 'Référence':'DTU 64.1 · Arrêté 07/09/2009' } },
     { ico:'🟡', name:'Filtre à sable non drainé', sub:'Sable rapporté · Infiltration naturelle · 25–30 m²',
@@ -1652,6 +1691,7 @@ function renderANCFilTrad() {
       + '<span class="fiche-arrow" id="ft-a-' + i + '">›</span>'
       + '</div>'
       + '<div class="fiche-body" id="ft-b-' + i + '">'
+      + (f.schema ? f.schema : '')
       + '<div class="kv-grid">' + Object.entries(f.specs).map(function(e) { return '<div class="kv-item"><div class="kv-key">' + e[0] + '</div><div class="kv-val">' + e[1] + '</div></div>'; }).join('') + '</div>'
       + '<span class="src-pill">📖 DTU 64.1 · Arrêté 07/09/2009 modifié</span>'
       + '</div></div>';
