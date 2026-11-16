@@ -5,6 +5,30 @@ var GEMEAU_B05 = {
     titre: 'Cycle de l\'eau et bilans hydrologiques',
     fiche: {
       intro: 'En charge de la gestion quantitative d\'un bassin versant dans un syndicat de rivière, vous devez chaque année quantifier la ressource disponible et anticiper les déficits estivaux. La maîtrise du cycle de l\'eau et du bilan hydrologique est indispensable pour dimensionner les ouvrages de stockage, gérer les prélèvements autorisés et établir les plans de crise sécheresse imposés par les préfectures.',
+      schema: `<svg viewBox="0 0 260 118" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb35" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#2563eb"/></marker></defs>
+  <rect width="260" height="118" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Cycle de l'eau — équation du bilan</text>
+  <ellipse cx="130" cy="30" rx="40" ry="12" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="130" y="34" text-anchor="middle" font-size="8" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">Précipitations P</text>
+  <line x1="100" y1="42" x2="68" y2="60" stroke="#2563eb" stroke-width="1.5" marker-end="url(#mb35)"/>
+  <text x="72" y="56" font-size="7.5" fill="#2563eb" font-family="sans-serif">ruiss.</text>
+  <line x1="130" y1="42" x2="130" y2="60" stroke="#2563eb" stroke-width="1.5" marker-end="url(#mb35)"/>
+  <text x="134" y="56" font-size="7.5" fill="#2563eb" font-family="sans-serif">infilt.</text>
+  <line x1="160" y1="42" x2="192" y2="60" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#mb35)"/>
+  <text x="178" y="56" font-size="7.5" fill="#94a3b8" font-family="sans-serif">ETP</text>
+  <rect x="40" y="60" width="50" height="18" rx="3" fill="#93c5fd" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="65" y="72" text-anchor="middle" font-size="8" fill="#1d4ed8" font-family="sans-serif">Cours d'eau</text>
+  <rect x="105" y="60" width="50" height="18" rx="3" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="130" y="72" text-anchor="middle" font-size="8" fill="#15803d" font-family="sans-serif">Sol / nappe</text>
+  <rect x="170" y="60" width="50" height="18" rx="3" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="195" y="72" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">Evap./Trans.</text>
+  <line x1="65" y1="78" x2="90" y2="94" stroke="#2563eb" stroke-width="1.5" marker-end="url(#mb35)"/>
+  <line x1="130" y1="78" x2="130" y2="94" stroke="#16a34a" stroke-width="1.5" marker-end="url(#mb35)"/>
+  <line x1="195" y1="78" x2="168" y2="94" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#mb35)"/>
+  <rect x="10" y="94" width="240" height="16" rx="3" fill="#f1f5f9"/>
+  <text x="130" y="105" text-anchor="middle" font-size="8.5" fill="#334155" font-family="sans-serif" font-weight="bold">P = Q + ETR + ΔS  (mm/an)</text>
+</svg>`,
       sections: [
         {
           titre: '1. Les compartiments du cycle hydrologique',
@@ -97,6 +121,20 @@ var GEMEAU_B05 = {
     titre: 'Délimitation et caractérisation d\'un bassin versant',
     fiche: {
       intro: 'Avant tout dimensionnement d\'un barrage, d\'un réseau d\'irrigation ou d\'un système de protection contre les crues, l\'hydrologue délimite et caractérise le bassin versant contributeur. Ces paramètres morphométriques — surface, forme, pente, réseau hydrographique — conditionnent directement les méthodes de calcul des débits et la forme des hydrogrammes de crue.',
+      schema: `<svg viewBox="0 0 260 118" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <rect width="260" height="118" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Bassin versant — délimitation et exutoire</text>
+  <path d="M20,100 C30,55 50,30 80,22 C100,18 120,25 130,30 C140,25 160,18 180,22 C210,30 230,55 240,100 Z" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <path d="M20,100 C60,88 100,82 130,80 C160,82 200,88 240,100" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+  <circle cx="130" cy="100" r="6" fill="#2563eb"/>
+  <text x="130" y="114" text-anchor="middle" font-size="8" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">Exutoire</text>
+  <path d="M80,22 C95,55 112,70 130,80" stroke="#2563eb" stroke-width="1.2" fill="none" stroke-dasharray="3,2"/>
+  <path d="M180,22 C165,55 148,70 130,80" stroke="#2563eb" stroke-width="1.2" fill="none" stroke-dasharray="3,2"/>
+  <text x="130" y="50" text-anchor="middle" font-size="8" fill="#15803d" font-family="sans-serif">Surface = A (km²)</text>
+  <text x="20" y="30" font-size="7.5" fill="#16a34a" font-family="sans-serif" font-weight="bold">ligne</text>
+  <text x="12" y="38" font-size="7.5" fill="#16a34a" font-family="sans-serif" font-weight="bold">de partage</text>
+  <text x="130" y="66" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">Réseau hydrographique</text>
+</svg>`,
       sections: [
         {
           titre: '1. Définition et délimitation du bassin versant topographique',
@@ -189,6 +227,27 @@ var GEMEAU_B05 = {
     titre: 'Précipitations et observation météorologique',
     fiche: {
       intro: 'Chargé d\'une étude hydrologique pour le dimensionnement d\'un bassin de rétention pluvial sur une commune périurbaine, vous devez caractériser les précipitations du site : hauteurs annuelles, intensités maximales et périodes de retour. La maîtrise des réseaux d\'observation, des méthodes de spatialisation et des ajustements fréquentiels est indispensable pour estimer les pluies de projet utilisées dans le dimensionnement des ouvrages hydrauliques.',
+      schema: `<svg viewBox="0 0 260 112" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb37" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#334155"/></marker></defs>
+  <rect width="260" height="112" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Pluviomètre et hyétogramme</text>
+  <rect x="90" y="22" width="30" height="50" rx="2" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <rect x="92" y="46" width="26" height="26" rx="1" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+  <text x="105" y="62" text-anchor="middle" font-size="7.5" fill="#1d4ed8" font-family="sans-serif">mm</text>
+  <line x1="135" y1="45" x2="165" y2="45" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="140" y="40" font-size="7.5" fill="#64748b" font-family="sans-serif">Auget</text>
+  <line x1="165" y1="96" x2="248" y2="96" stroke="#334155" stroke-width="1.5" marker-end="url(#mb37)"/>
+  <line x1="165" y1="96" x2="165" y2="22" stroke="#334155" stroke-width="1.5" marker-end="url(#mb37)"/>
+  <text x="244" y="108" font-size="8" fill="#334155" font-family="sans-serif">t →</text>
+  <rect x="170" y="82" width="8" height="14" fill="#2563eb"/>
+  <rect x="182" y="66" width="8" height="30" fill="#2563eb"/>
+  <rect x="194" y="50" width="8" height="46" fill="#2563eb"/>
+  <rect x="206" y="72" width="8" height="24" fill="#2563eb"/>
+  <rect x="218" y="86" width="8" height="10" fill="#2563eb"/>
+  <rect x="230" y="90" width="8" height="6" fill="#2563eb"/>
+  <text x="206" y="30" text-anchor="middle" font-size="8" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">Hyétogramme</text>
+  <text x="206" y="41" text-anchor="middle" font-size="7.5" fill="#64748b" font-family="sans-serif">(P en mm/h)</text>
+</svg>`,
       sections: [
         {
           titre: '1. Réseaux d\'observation et instruments de mesure',
@@ -281,6 +340,23 @@ var GEMEAU_B05 = {
     titre: 'Infiltration, ruissellement et transferts vers les cours d\'eau',
     fiche: {
       intro: 'Lors du dimensionnement d\'un bassin de rétention ou d\'une étude d\'impact hydraulique d\'un lotissement, vous devez quantifier la fraction des précipitations qui ruisselle et celle qui s\'infiltre. La compréhension des mécanismes d\'infiltration, les méthodes de calcul du ruissellement (méthode SCS-CN) et la construction de l\'hydrogramme de crue sont au cœur du travail du technicien hydraulicien.',
+      schema: `<svg viewBox="0 0 260 118" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb38" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#334155"/></marker></defs>
+  <rect width="260" height="118" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Ruissellement vs infiltration</text>
+  <rect x="10" y="22" width="240" height="10" rx="2" fill="#94a3b8" opacity="0.4"/>
+  <text x="130" y="30" text-anchor="middle" font-size="7.5" fill="#64748b" font-family="sans-serif">Surface du sol</text>
+  <rect x="10" y="32" width="240" height="30" rx="0" fill="#d4a574" opacity="0.6"/>
+  <text x="130" y="52" text-anchor="middle" font-size="8" fill="#78350f" font-family="sans-serif">Zone non saturée (ZNS)</text>
+  <rect x="10" y="62" width="240" height="22" rx="0" fill="#bfdbfe" opacity="0.6"/>
+  <text x="130" y="76" text-anchor="middle" font-size="8" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">Zone saturée / nappe</text>
+  <line x1="30" y1="22" x2="10" y2="62" stroke="#2563eb" stroke-width="2" marker-end="url(#mb38)"/>
+  <text x="8" y="45" font-size="7.5" fill="#2563eb" font-family="sans-serif" transform="rotate(-45,20,42)">Infilt.</text>
+  <line x1="60" y1="22" x2="10" y2="32" stroke="#059669" stroke-width="2" marker-end="url(#mb38)"/>
+  <text x="20" y="24" font-size="7.5" fill="#059669" font-family="sans-serif">Ruis.</text>
+  <text x="130" y="96" text-anchor="middle" font-size="8.5" fill="#334155" font-family="sans-serif" font-weight="bold">Ke = P − ETR − ΔS (mm)</text>
+  <text x="130" y="110" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">Cn (CN SCS) : sol imperméable &gt; 90 / forêt ≈ 55</text>
+</svg>`,
       sections: [
         {
           titre: '1. Mécanismes d\'infiltration et modèles',
@@ -373,6 +449,23 @@ var GEMEAU_B05 = {
     titre: 'Hydrométrie et mesure des débits',
     fiche: {
       intro: 'Gestionnaire d\'une station hydrométrique sur un cours d\'eau moyen, vous êtes chargé de maintenir la qualité des données de débit transmises en temps réel à la Banque Hydro nationale et aux services de prévision des crues. La maîtrise des instruments de mesure de niveau, des techniques de jaugeage et de la courbe de tarage est le quotidien du technicien hydrométrique.',
+      schema: `<svg viewBox="0 0 260 118" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb39" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#334155"/></marker></defs>
+  <rect width="260" height="118" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Courbe de tarage — débit Q = f(H)</text>
+  <line x1="28" y1="100" x2="248" y2="100" stroke="#334155" stroke-width="1.5" marker-end="url(#mb39)"/>
+  <line x1="28" y1="100" x2="28" y2="22" stroke="#334155" stroke-width="1.5" marker-end="url(#mb39)"/>
+  <text x="244" y="112" font-size="8" fill="#334155" font-family="sans-serif">Q →</text>
+  <text x="8" y="32" font-size="7.5" fill="#334155" font-family="sans-serif" transform="rotate(-90,14,70)">H ↑</text>
+  <path d="M38,96 C55,80 75,55 100,38 C120,25 145,22 180,24 C210,26 235,34 244,44" stroke="#2563eb" stroke-width="2.5" fill="none"/>
+  <circle cx="80" cy="68" r="4" fill="#dc2626"/>
+  <circle cx="130" cy="40" r="4" fill="#dc2626"/>
+  <circle cx="170" cy="27" r="4" fill="#dc2626"/>
+  <text x="84" y="66" font-size="7.5" fill="#dc2626" font-family="sans-serif">mesures</text>
+  <text x="130" y="80" text-anchor="middle" font-size="8.5" fill="#334155" font-family="sans-serif" font-weight="bold">Q = a·H^b (loi puissance)</text>
+  <text x="130" y="94" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">H : hauteur limnimètre · Q : m³/s</text>
+  <text x="130" y="110" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">Étalonnage : jaugeages terrain (moulinet, ADCP)</text>
+</svg>`,
       sections: [
         {
           titre: '1. Réseaux hydrométriques et infrastructure de mesure',
@@ -464,6 +557,25 @@ var GEMEAU_B05 = {
     titre: 'Hydrogrammes, régimes hydrologiques et étiages',
     fiche: {
       intro: 'Technicien en charge de la gestion quantitative d\'un grand bassin versant, vous devez analyser les séries de débits pour caractériser les régimes hydrologiques, identifier les étiages et produire les indicateurs réglementaires (QMNA5, VCN10) requis par les arrêtés sécheresse et les SDAGE. L\'analyse des hydrogrammes et des courbes des débits classés est la base de tout diagnostic de l\'état quantitatif d\'un cours d\'eau.',
+      schema: `<svg viewBox="0 0 260 128" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb40" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#334155"/></marker></defs>
+  <rect width="260" height="128" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Hydrogramme de crue — caractéristiques</text>
+  <line x1="22" y1="106" x2="250" y2="106" stroke="#334155" stroke-width="1.5" marker-end="url(#mb40)"/>
+  <line x1="22" y1="106" x2="22" y2="22" stroke="#334155" stroke-width="1.5" marker-end="url(#mb40)"/>
+  <text x="246" y="118" font-size="8" fill="#334155" font-family="sans-serif">t →</text>
+  <line x1="22" y1="90" x2="250" y2="90" stroke="#2563eb" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="10" y="93" font-size="7.5" fill="#2563eb" font-family="sans-serif">Qb</text>
+  <path d="M28,88 C38,88 50,86 62,78 C75,55 88,30 100,22 C110,16 118,22 125,38 C132,55 145,80 165,90 C185,98 215,100 242,101" stroke="#2563eb" stroke-width="2.5" fill="none"/>
+  <path d="M28,88 C38,88 50,86 62,78 C75,55 88,30 100,22 C110,16 118,22 125,38 C132,55 145,80 165,90 L28,90 Z" fill="#bfdbfe" opacity="0.3"/>
+  <circle cx="100" cy="22" r="4" fill="#dc2626"/>
+  <text x="104" y="20" font-size="7.5" fill="#dc2626" font-family="sans-serif" font-weight="bold">Qp (débit pointe)</text>
+  <line x1="100" y1="22" x2="100" y2="106" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="62" y1="88" x2="62" y2="106" stroke="#94a3b8" stroke-width="1"/>
+  <line x1="165" y1="90" x2="165" y2="106" stroke="#94a3b8" stroke-width="1"/>
+  <line x1="62" y1="112" x2="165" y2="112" stroke="#94a3b8" stroke-width="1"/>
+  <text x="113" y="122" text-anchor="middle" font-size="7.5" fill="#94a3b8" font-family="sans-serif">durée de crue</text>
+</svg>`,
       sections: [
         {
           titre: '1. Lecture et analyse d\'un hydrogramme annuel',
@@ -556,6 +668,25 @@ var GEMEAU_B05 = {
     titre: 'Crues et hydrologie des extrêmes',
     fiche: {
       intro: 'Chargé de mission au sein d\'un service de prévention des risques inondation d\'une DDT, vous devez produire les débits de référence (Q10, Q100, Qmax historique) pour instruire les Plans de Prévention des Risques Inondation (PPRI) d\'une communauté de communes traversée par une rivière à forte variabilité hydrologique. L\'analyse statistique des débits extrêmes et la connaissance des méthodes de prédétermination des crues sont au cœur de ce travail.',
+      schema: `<svg viewBox="0 0 260 118" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb41" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#334155"/></marker></defs>
+  <rect width="260" height="118" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Analyse fréquentielle — période de retour T</text>
+  <line x1="22" y1="96" x2="248" y2="96" stroke="#334155" stroke-width="1.5" marker-end="url(#mb41)"/>
+  <line x1="22" y1="96" x2="22" y2="22" stroke="#334155" stroke-width="1.5" marker-end="url(#mb41)"/>
+  <text x="244" y="108" font-size="8" fill="#334155" font-family="sans-serif">T →</text>
+  <text x="8" y="32" font-size="7.5" fill="#334155" font-family="sans-serif" transform="rotate(-90,14,70)">Qmax</text>
+  <path d="M28,90 C50,85 75,72 100,55 C125,40 155,30 200,24" stroke="#2563eb" stroke-width="2.5" fill="none"/>
+  <line x1="85" y1="96" x2="85" y2="62" stroke="#d97706" stroke-width="1.2" stroke-dasharray="3,2"/>
+  <line x1="22" y1="62" x2="85" y2="62" stroke="#d97706" stroke-width="1.2" stroke-dasharray="3,2"/>
+  <text x="85" y="108" text-anchor="middle" font-size="7.5" fill="#d97706" font-family="sans-serif">T=10</text>
+  <text x="8" y="66" font-size="7.5" fill="#d97706" font-family="sans-serif">Q10</text>
+  <line x1="150" y1="96" x2="150" y2="38" stroke="#dc2626" stroke-width="1.2" stroke-dasharray="3,2"/>
+  <line x1="22" y1="38" x2="150" y2="38" stroke="#dc2626" stroke-width="1.2" stroke-dasharray="3,2"/>
+  <text x="150" y="108" text-anchor="middle" font-size="7.5" fill="#dc2626" font-family="sans-serif">T=100</text>
+  <text x="8" y="42" font-size="7.5" fill="#dc2626" font-family="sans-serif">Q100</text>
+  <text x="130" y="80" text-anchor="middle" font-size="8.5" fill="#334155" font-family="sans-serif" font-weight="bold">p = 1/T · Loi Gumbel / GEV</text>
+</svg>`,
       sections: [
         {
           titre: '1. Analyse fréquentielle des crues : ajustement statistique',
@@ -647,6 +778,27 @@ var GEMEAU_B05 = {
     titre: 'Modélisation hydrologique des bassins versants',
     fiche: {
       intro: 'Ingénieur hydrologie dans un bureau d\'études, vous devez choisir et mettre en œuvre un modèle pluie-débit pour simuler les débits d\'un bassin versant peu jaugé de 250 km², afin d\'évaluer l\'impact d\'un changement d\'occupation des sols sur les régimes hydrologiques et d\'estimer les crues de projet. La modélisation hydrologique est un outil incontournable pour compléter l\'analyse statistique lorsque les données d\'observation sont insuffisantes.',
+      schema: `<svg viewBox="0 0 260 112" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb42" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#475569"/></marker></defs>
+  <rect width="260" height="112" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Modèle pluie-débit (GR4J simplifié)</text>
+  <rect x="10" y="26" width="50" height="28" rx="4" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="35" y="43" text-anchor="middle" font-size="8" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">Pluie P</text>
+  <line x1="60" y1="40" x2="80" y2="40" stroke="#475569" stroke-width="1.5" marker-end="url(#mb42)"/>
+  <rect x="80" y="22" width="50" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="105" y="37" text-anchor="middle" font-size="8" fill="#15803d" font-family="sans-serif" font-weight="bold">Réservoir</text>
+  <text x="105" y="49" text-anchor="middle" font-size="7.5" fill="#15803d" font-family="sans-serif">sol (Pr, Pn)</text>
+  <line x1="130" y1="40" x2="150" y2="40" stroke="#475569" stroke-width="1.5" marker-end="url(#mb42)"/>
+  <rect x="150" y="22" width="50" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="175" y="37" text-anchor="middle" font-size="8" fill="#92400e" font-family="sans-serif" font-weight="bold">Routage</text>
+  <text x="175" y="49" text-anchor="middle" font-size="7.5" fill="#92400e" font-family="sans-serif">HU · Nash</text>
+  <line x1="200" y1="40" x2="220" y2="40" stroke="#475569" stroke-width="1.5" marker-end="url(#mb42)"/>
+  <rect x="220" y="26" width="34" height="28" rx="4" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="237" y="43" text-anchor="middle" font-size="8" fill="#334155" font-family="sans-serif" font-weight="bold">Q(t)</text>
+  <text x="130" y="80" text-anchor="middle" font-size="8.5" fill="#334155" font-family="sans-serif" font-weight="bold">Calage → validation sur série obs.</text>
+  <text x="130" y="94" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">Critère Nash-Sutcliffe : NSE → 1 = parfait</text>
+  <text x="130" y="106" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">Modèles : GR4J · HBV · TOPMODEL</text>
+</svg>`,
       sections: [
         {
           titre: '1. Concepts de base de la modélisation pluie-débit',
