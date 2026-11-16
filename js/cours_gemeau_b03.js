@@ -5,6 +5,22 @@ var GEMEAU_B03 = {
     titre: 'Structure de la matière et composition chimique des eaux',
     fiche: {
       intro: 'Dans les métiers de l\'eau, la connaissance de la composition chimique des eaux est fondamentale : un technicien doit lire un bulletin d\'analyse, interpréter les valeurs et décider d\'un traitement adapté. La minéralisation d\'une eau détermine son agressivité pour les canalisations, son goût, et les traitements nécessaires avant distribution.',
+      schema: `<svg viewBox="0 0 260 118" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <rect width="260" height="118" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Molécule d'eau — liaisons et propriétés</text>
+  <circle cx="130" cy="62" r="18" fill="#bfdbfe" stroke="#2563eb" stroke-width="2"/>
+  <text x="130" y="67" text-anchor="middle" font-size="12" font-weight="bold" fill="#1d4ed8" font-family="sans-serif">O</text>
+  <circle cx="90" cy="40" r="10" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="90" y="44" text-anchor="middle" font-size="10" font-weight="bold" fill="#dc2626" font-family="sans-serif">H</text>
+  <circle cx="170" cy="40" r="10" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="170" y="44" text-anchor="middle" font-size="10" font-weight="bold" fill="#dc2626" font-family="sans-serif">H</text>
+  <line x1="112" y1="52" x2="98" y2="47" stroke="#334155" stroke-width="2"/>
+  <line x1="148" y1="52" x2="162" y2="47" stroke="#334155" stroke-width="2"/>
+  <text x="130" y="92" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">Angle 104,5° · Molécule polaire</text>
+  <text x="130" y="104" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">δ⁻ sur O · δ⁺ sur H → liaisons H</text>
+  <text x="55" y="68" font-size="7.5" fill="#059669" font-family="sans-serif" font-weight="bold">104,5°</text>
+  <path d="M100,55 A18,18 0 0,1 160,55" stroke="#059669" stroke-width="1" fill="none" stroke-dasharray="3,2"/>
+</svg>`,
       sections: [
         {
           titre: '1. Structure atomique et tableau périodique',
@@ -70,6 +86,28 @@ var GEMEAU_B03 = {
     titre: 'Concentrations, dilutions et préparation de solutions',
     fiche: {
       intro: 'La préparation de solutions dosées est une opération courante en station de traitement d\'eau : préparation du lait de chaux pour la correction de pH, solution de chlore pour la désinfection, solution de coagulant. Un technicien doit calculer les masses ou volumes de réactif nécessaires et vérifier les concentrations par titrage ou test colorimétrique.',
+      schema: `<svg viewBox="0 0 260 112" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <rect width="260" height="112" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Dilution en série — calcul de concentration</text>
+  <rect x="10" y="30" width="52" height="52" rx="4" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="36" y="52" text-anchor="middle" font-size="9" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">C₁</text>
+  <text x="36" y="65" text-anchor="middle" font-size="8" fill="#1d4ed8" font-family="sans-serif">V₁</text>
+  <rect x="10" y="88" width="52" height="14" rx="2" fill="#f1f5f9"/>
+  <text x="36" y="98" text-anchor="middle" font-size="7.5" fill="#64748b" font-family="sans-serif">Stock</text>
+  <line x1="62" y1="56" x2="104" y2="56" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="83" y="50" text-anchor="middle" font-size="8" fill="#334155" font-family="sans-serif">+eau</text>
+  <rect x="104" y="30" width="52" height="52" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="130" y="52" text-anchor="middle" font-size="9" fill="#15803d" font-family="sans-serif" font-weight="bold">C₂</text>
+  <text x="130" y="65" text-anchor="middle" font-size="8" fill="#15803d" font-family="sans-serif">V₂</text>
+  <rect x="104" y="88" width="52" height="14" rx="2" fill="#f1f5f9"/>
+  <text x="130" y="98" text-anchor="middle" font-size="7.5" fill="#64748b" font-family="sans-serif">Interméd.</text>
+  <line x1="156" y1="56" x2="198" y2="56" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="177" y="50" text-anchor="middle" font-size="8" fill="#334155" font-family="sans-serif">+eau</text>
+  <rect x="198" y="30" width="52" height="52" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="224" y="52" text-anchor="middle" font-size="9" fill="#92400e" font-family="sans-serif" font-weight="bold">C₃</text>
+  <text x="224" y="65" text-anchor="middle" font-size="8" fill="#92400e" font-family="sans-serif">V₃</text>
+  <text x="130" y="109" text-anchor="middle" font-size="9" fill="#334155" font-family="sans-serif" font-weight="bold">C₁·V₁ = C₂·V₂ = C₃·V₃</text>
+</svg>`,
       sections: [
         {
           titre: '1. Expressions de la concentration',
@@ -136,6 +174,28 @@ var GEMEAU_B03 = {
     titre: 'Acides, bases, pH et pouvoir tampon',
     fiche: {
       intro: 'Le pH est le paramètre le plus mesuré dans les métiers de l\'eau : il conditionne la coagulation, la désinfection, l\'équilibre calco-carbonique et la vie aquatique. Un pH trop bas rend l\'eau corrosive pour les canalisations en acier et béton ; un pH trop élevé précipite des incrostations calcaires et réduit l\'efficacité du chlore. Le technicien doit maîtriser les corrections de pH et comprendre le pouvoir tampon naturel des eaux.',
+      schema: `<svg viewBox="0 0 260 118" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb21" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#334155"/></marker></defs>
+  <rect width="260" height="118" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Échelle de pH — acides, neutres, bases</text>
+  <defs><linearGradient id="phg" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#dc2626"/><stop offset="35%" stop-color="#f59e0b"/><stop offset="50%" stop-color="#22c55e"/><stop offset="65%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#7c3aed"/></linearGradient></defs>
+  <rect x="10" y="30" width="240" height="22" rx="4" fill="url(#phg)"/>
+  <text x="10" y="66" font-size="7.5" fill="#dc2626" font-family="sans-serif" font-weight="bold">0</text>
+  <text x="55" y="66" text-anchor="middle" font-size="7.5" fill="#f59e0b" font-family="sans-serif">4</text>
+  <text x="128" y="66" text-anchor="middle" font-size="7.5" fill="#22c55e" font-family="sans-serif">7</text>
+  <text x="202" y="66" text-anchor="middle" font-size="7.5" fill="#3b82f6" font-family="sans-serif">10</text>
+  <text x="248" y="66" font-size="7.5" fill="#7c3aed" font-family="sans-serif">14</text>
+  <line x1="128" y1="30" x2="128" y2="52" stroke="#fff" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="65" y="82" text-anchor="middle" font-size="8" fill="#dc2626" font-family="sans-serif">Acide</text>
+  <text x="128" y="82" text-anchor="middle" font-size="8" fill="#22c55e" font-family="sans-serif">Neutre</text>
+  <text x="195" y="82" text-anchor="middle" font-size="8" fill="#3b82f6" font-family="sans-serif">Basique</text>
+  <text x="20" y="96" font-size="7.5" fill="#64748b" font-family="sans-serif">HCl</text>
+  <text x="45" y="96" font-size="7.5" fill="#64748b" font-family="sans-serif">Vinaigre</text>
+  <text x="90" y="96" font-size="7.5" fill="#64748b" font-family="sans-serif">Eau de pluie</text>
+  <text x="155" y="96" font-size="7.5" fill="#64748b" font-family="sans-serif">Eau potable</text>
+  <text x="210" y="96" font-size="7.5" fill="#64748b" font-family="sans-serif">NaOH</text>
+  <text x="130" y="110" text-anchor="middle" font-size="8.5" fill="#334155" font-family="sans-serif" font-weight="bold">pH = -log[H⁺]  · eau potable : 6,5–9</text>
+</svg>`,
       sections: [
         {
           titre: '1. Théorie acide-base de Brönsted',
@@ -199,6 +259,19 @@ var GEMEAU_B03 = {
     titre: 'Dureté, alcalinité et équilibre calco-carbonique',
     fiche: {
       intro: 'L\'équilibre calco-carbonique est au cœur de la gestion des réseaux d\'eau potable : une eau corrosive ronge les canalisations et libère des métaux (plomb, cuivre) ; une eau entartrante colmate les conduites et réduit les débits. Le technicien évalue cet équilibre par le calcul de l\'index de Langelier à partir des paramètres mesurés sur le terrain (pH, TH, TAC, T°, TDS) et prend les mesures correctives nécessaires.',
+      schema: `<svg viewBox="0 0 260 118" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <rect width="260" height="118" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Équilibre calco-carbonique — entartrage</text>
+  <rect x="10" y="24" width="240" height="58" rx="5" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="130" y="40" text-anchor="middle" font-size="10" fill="#334155" font-family="sans-serif" font-weight="bold">Ca²⁺ + 2 HCO₃⁻ ⇌ CaCO₃↓ + CO₂ + H₂O</text>
+  <line x1="30" y1="52" x2="230" y2="52" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <rect x="20" y="56" width="100" height="20" rx="3" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+  <text x="70" y="70" text-anchor="middle" font-size="8" fill="#92400e" font-family="sans-serif" font-weight="bold">CO₂ ↑ → entartrage</text>
+  <rect x="140" y="56" width="100" height="20" rx="3" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+  <text x="190" y="70" text-anchor="middle" font-size="8" fill="#15803d" font-family="sans-serif" font-weight="bold">CO₂ ↓ → agressivité</text>
+  <text x="130" y="96" text-anchor="middle" font-size="8.5" fill="#334155" font-family="sans-serif" font-weight="bold">TH (°F) = [Ca²⁺] + [Mg²⁺] en mg/L CaCO₃/10</text>
+  <text x="130" y="110" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">Eau dure &gt; 30°F · Eau douce &lt; 15°F</text>
+</svg>`,
       sections: [
         {
           titre: '1. Dureté de l\'eau : définitions et mesure',
@@ -263,6 +336,23 @@ var GEMEAU_B03 = {
     titre: 'Oxydoréduction et corrosion',
     fiche: {
       intro: 'Les réactions d\'oxydoréduction sont omniprésentes dans le traitement de l\'eau : la désinfection au chlore, l\'élimination du fer et du manganèse, l\'ozonation, la dénitrification sont tous des processus redox. La corrosion des réseaux est également un phénomène électrochimique que le technicien doit savoir diagnostiquer et prévenir.',
+      schema: `<svg viewBox="0 0 260 112" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb23" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#dc2626"/></marker><marker id="mb23b" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#059669"/></marker></defs>
+  <rect width="260" height="112" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Oxydoréduction — transfert d'électrons</text>
+  <rect x="15" y="30" width="90" height="36" rx="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="60" y="48" text-anchor="middle" font-size="9" font-weight="bold" fill="#15803d" font-family="sans-serif">Réducteur</text>
+  <text x="60" y="60" text-anchor="middle" font-size="8" fill="#15803d" font-family="sans-serif">Fe²⁺ → Fe³⁺ + e⁻</text>
+  <rect x="155" y="30" width="90" height="36" rx="5" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="200" y="48" text-anchor="middle" font-size="9" font-weight="bold" fill="#dc2626" font-family="sans-serif">Oxydant</text>
+  <text x="200" y="60" text-anchor="middle" font-size="8" fill="#dc2626" font-family="sans-serif">Cl₂ + 2e⁻ → 2Cl⁻</text>
+  <line x1="105" y1="40" x2="155" y2="40" stroke="#dc2626" stroke-width="1.5" marker-end="url(#mb23)"/>
+  <text x="130" y="37" text-anchor="middle" font-size="8" fill="#dc2626" font-family="sans-serif">e⁻</text>
+  <line x1="155" y1="58" x2="105" y2="58" stroke="#059669" stroke-width="1.5" marker-end="url(#mb23b)"/>
+  <text x="130" y="72" text-anchor="middle" font-size="8" fill="#059669" font-family="sans-serif">Cl⁻</text>
+  <text x="130" y="88" text-anchor="middle" font-size="9" fill="#334155" font-family="sans-serif" font-weight="bold">Fe²⁺ + ½ Cl₂ → Fe³⁺ + Cl⁻</text>
+  <text x="130" y="102" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">Oxydation du fer → précipitation + filtration</text>
+</svg>`,
       sections: [
         {
           titre: '1. Principes de l\'oxydoréduction',
@@ -329,6 +419,24 @@ var GEMEAU_B03 = {
     titre: 'Gaz dissous et oxygénation',
     fiche: {
       intro: 'La teneur en oxygène dissous est le premier paramètre de qualité des eaux naturelles : elle conditionne la vie aquatique et signale les pollutions organiques. En traitement, l\'aération est une étape essentielle pour dégazer le CO₂ et H₂S, oxyder Fe²⁺ et Mn²⁺, et transférer de l\'O₂ aux cultures bactériennes des STEP (boues activées). Un technicien doit maîtriser les lois de dissolution des gaz et les systèmes d\'aération.',
+      schema: `<svg viewBox="0 0 260 112" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb24" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#334155"/></marker></defs>
+  <rect width="260" height="112" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Oxygène dissous — saturation et aération</text>
+  <line x1="28" y1="96" x2="248" y2="96" stroke="#334155" stroke-width="1.5" marker-end="url(#mb24)"/>
+  <line x1="28" y1="96" x2="28" y2="22" stroke="#334155" stroke-width="1.5" marker-end="url(#mb24)"/>
+  <text x="244" y="108" font-size="8" fill="#334155" font-family="sans-serif">T°C</text>
+  <text x="8" y="32" font-size="7.5" fill="#334155" font-family="sans-serif" transform="rotate(-90,14,70)">O₂ mg/L</text>
+  <path d="M38,28 C70,32 100,42 150,62 C180,74 210,88 238,96" stroke="#2563eb" stroke-width="2" fill="none"/>
+  <text x="55" y="38" font-size="8" fill="#2563eb" font-family="sans-serif">14,6 mg/L</text>
+  <text x="145" y="58" font-size="8" fill="#2563eb" font-family="sans-serif">à 20°C</text>
+  <text x="225" y="93" font-size="8" fill="#2563eb" font-family="sans-serif">8,2</text>
+  <line x1="130" y1="68" x2="130" y2="96" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="133" y="92" font-size="7.5" fill="#dc2626" font-family="sans-serif">20°</text>
+  <line x1="28" y1="68" x2="130" y2="68" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="30" y="80" font-size="7.5" fill="#dc2626" font-family="sans-serif">9,1</text>
+  <text x="130" y="108" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">Cs(O₂) ↓ si T↑ · Alerte eutrophisation &lt; 3 mg/L</text>
+</svg>`,
       sections: [
         {
           titre: '1. Loi de Henry et dissolution des gaz',
@@ -394,6 +502,18 @@ var GEMEAU_B03 = {
     titre: 'Matière organique, nutriments et micropolluants',
     fiche: {
       intro: 'Les paramètres de pollution organique et les nutriments (azote, phosphore) sont au cœur de la réglementation sur les rejets et la qualité des milieux aquatiques. L\'exploitant d\'une STEP doit surveiller en continu DCO, DBO₅, MES, NTK, NH₄⁺, NO₃⁻ et phosphore total pour s\'assurer du respect des arrêtés de rejet, et comprendre les processus biologiques qui éliminent ces polluants.',
+      schema: `<svg viewBox="0 0 260 112" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <rect width="260" height="112" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">DCO / DBO₅ / COT — hiérarchie des mesures</text>
+  <ellipse cx="130" cy="62" rx="110" ry="36" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="20" y="62" font-size="8.5" fill="#dc2626" font-family="sans-serif" font-weight="bold">DCO (toute MO)</text>
+  <ellipse cx="145" cy="62" rx="80" ry="26" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="85" y="62" font-size="8.5" fill="#92400e" font-family="sans-serif" font-weight="bold">DBO₅ biodégrad.</text>
+  <ellipse cx="158" cy="62" rx="52" ry="17" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="125" y="66" font-size="8" fill="#15803d" font-family="sans-serif" font-weight="bold">COT</text>
+  <text x="130" y="96" text-anchor="middle" font-size="8.5" fill="#334155" font-family="sans-serif" font-weight="bold">DCO/DBO₅ ≈ 2 (eau urbaine) → biodégradable</text>
+  <text x="130" y="108" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">Ratio &gt; 3 : composés réfractaires</text>
+</svg>`,
       sections: [
         {
           titre: '1. Paramètres de la matière organique',
@@ -459,6 +579,32 @@ var GEMEAU_B03 = {
     titre: 'Prélèvement et analyses physico-chimiques',
     fiche: {
       intro: 'La qualité d\'une analyse de l\'eau dépend autant du prélèvement que de l\'analyse en laboratoire. Une mauvaise conservation de l\'échantillon ou un prélèvement non représentatif rend le résultat inutilisable, même avec le meilleur équipement analytique. Le technicien sur le terrain est le garant de la chaîne qualité depuis le robinet de prélèvement jusqu\'au laboratoire.',
+      schema: `<svg viewBox="0 0 260 118" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <rect width="260" height="118" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Chaîne d'analyse physico-chimique terrain</text>
+  <rect x="8" y="24" width="44" height="40" rx="4" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="30" y="40" text-anchor="middle" font-size="8" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">Prélèv.</text>
+  <text x="30" y="54" text-anchor="middle" font-size="7.5" fill="#1d4ed8" font-family="sans-serif">flacon</text>
+  <line x1="52" y1="44" x2="62" y2="44" stroke="#334155" stroke-width="1.5"/>
+  <rect x="62" y="24" width="44" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="84" y="40" text-anchor="middle" font-size="8" fill="#15803d" font-family="sans-serif" font-weight="bold">Terrain</text>
+  <text x="84" y="54" text-anchor="middle" font-size="7.5" fill="#15803d" font-family="sans-serif">pH,T°,O₂</text>
+  <line x1="106" y1="44" x2="116" y2="44" stroke="#334155" stroke-width="1.5"/>
+  <rect x="116" y="24" width="44" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="138" y="40" text-anchor="middle" font-size="8" fill="#92400e" font-family="sans-serif" font-weight="bold">Conserv.</text>
+  <text x="138" y="54" text-anchor="middle" font-size="7.5" fill="#92400e" font-family="sans-serif">4°C/acid.</text>
+  <line x1="160" y1="44" x2="170" y2="44" stroke="#334155" stroke-width="1.5"/>
+  <rect x="170" y="24" width="44" height="40" rx="4" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="192" y="40" text-anchor="middle" font-size="8" fill="#6d28d9" font-family="sans-serif" font-weight="bold">Labo</text>
+  <text x="192" y="54" text-anchor="middle" font-size="7.5" fill="#6d28d9" font-family="sans-serif">DCO/NTK</text>
+  <line x1="214" y1="44" x2="224" y2="44" stroke="#334155" stroke-width="1.5"/>
+  <rect x="224" y="24" width="30" height="40" rx="4" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="239" y="47" text-anchor="middle" font-size="7.5" fill="#334155" font-family="sans-serif" font-weight="bold">Bull.</text>
+  <text x="239" y="58" text-anchor="middle" font-size="7.5" fill="#334155" font-family="sans-serif">résultats</text>
+  <text x="130" y="84" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">Délai max conservation : 24–48 h selon paramètre</text>
+  <text x="130" y="96" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">Incertitude mesure terrain ± 0,1 pH · ± 0,1 mg/L O₂</text>
+  <text x="130" y="108" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">Étalonnage sonde avant chaque campagne</text>
+</svg>`,
       sections: [
         {
           titre: '1. Planification et stratégie de prélèvement',
