@@ -1626,44 +1626,122 @@ function renderANCFilTrad() {
   var tb = document.getElementById('tab-bar'); if (tb) tb.style.display = 'none';
   var fiches = [
     { ico:'🪣', name:'Fosse toutes eaux', sub:'Prétraitement obligatoire · Décantation anaérobie · 3 m³ mini',
-      schema: `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px;display:block;margin:12px auto 4px">
-  <rect width="320" height="180" fill="#f0fdf4" rx="8"/>
-  <text x="160" y="16" text-anchor="middle" font-size="10" font-weight="bold" fill="#065F46" font-family="sans-serif">Fosse toutes eaux — coupe longitudinale</text>
-  <!-- Corps fosse -->
-  <rect x="30" y="40" width="260" height="110" rx="8" fill="#fff" stroke="#065F46" stroke-width="2.5"/>
-  <!-- Niveau eau -->
-  <rect x="31" y="78" width="258" height="71" rx="0" fill="#bfdbfe" opacity="0.5"/>
-  <!-- Boues fond -->
-  <rect x="31" y="128" width="258" height="21" rx="0" fill="#d4a574" opacity="0.6"/>
-  <!-- Écume surface -->
-  <rect x="31" y="78" width="258" height="12" rx="0" fill="#fef3c7" opacity="0.7"/>
-  <!-- Cloison siphoïde -->
-  <rect x="145" y="50" width="6" height="68" rx="2" fill="#065F46"/>
-  <rect x="145" y="118" width="6" height="12" rx="2" fill="#065F46" opacity="0.3"/>
-  <!-- Entrée eau brute -->
-  <rect x="10" y="60" width="30" height="8" rx="3" fill="#94a3b8"/>
-  <text x="6" y="58" font-size="8" fill="#334155" font-family="sans-serif">EU</text>
-  <!-- Sortie eaux clarifiées -->
-  <rect x="280" y="60" width="30" height="8" rx="3" fill="#2563eb"/>
-  <text x="282" y="58" font-size="8" fill="#1d4ed8" font-family="sans-serif">→ filière</text>
-  <!-- Couvercles / tampons -->
-  <rect x="58" y="30" width="28" height="12" rx="3" fill="#475569"/>
-  <rect x="168" y="30" width="28" height="12" rx="3" fill="#475569"/>
-  <rect x="238" y="30" width="28" height="12" rx="3" fill="#475569"/>
-  <!-- Ventilation amont -->
-  <line x1="72" y1="30" x2="72" y2="10" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,2"/>
-  <text x="55" y="9" font-size="7.5" fill="#dc2626" font-family="sans-serif">Vent. amont</text>
-  <!-- Ventilation aval -->
-  <line x1="252" y1="30" x2="252" y2="10" stroke="#059669" stroke-width="1.5" stroke-dasharray="3,2"/>
-  <text x="234" y="9" font-size="7.5" fill="#059669" font-family="sans-serif">Vent. aval</text>
-  <!-- Légendes -->
-  <text x="88" y="88" text-anchor="middle" font-size="8" fill="#92400e" font-family="sans-serif">Écume</text>
-  <text x="88" y="110" text-anchor="middle" font-size="8.5" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">Zone liquide</text>
-  <text x="88" y="145" text-anchor="middle" font-size="8" fill="#78350f" font-family="sans-serif">Boues (vidange &lt; 50%)</text>
-  <text x="210" y="102" text-anchor="middle" font-size="8.5" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">Eaux clarifiées</text>
-  <text x="148" y="175" text-anchor="middle" font-size="7.5" fill="#64748b" font-family="sans-serif">Volume mini 3 m³ · Vidange tous les 4 ans max</text>
-</svg>`,
-      specs:{ 'Volume minimum':'3 m³ (1–5 pièces) · +1 m³ / pièce suppl.', 'Matériaux':'Béton NF EN 12566-1 · PEHD / PP agréé', 'Distance habitation':'> 5 m (Arrêté 07/09/2009)', 'Distance limite propriété':'> 3 m', 'Distance puits AEP':'> 35 m', 'Ventilation':'Amont ET aval obligatoires · DTU 64.1', 'Vidange':'≤ 4 ans ou quand boues > 50% volume utile', 'Profondeur tampon':'Accessible en surface · regard étanche', 'Référence':'Arrêté 07/09/2009 mod. 03/12/2021 · NF EN 12566' } },
+      schema: `<div style="margin:4px 0 8px">
+<svg viewBox="0 0 420 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px;display:block;margin:0 auto 10px;border-radius:8px">
+  <rect width="420" height="230" fill="#f0fdf4" rx="8"/>
+  <text x="210" y="17" text-anchor="middle" font-size="10" font-weight="bold" fill="#065F46" font-family="sans-serif">Coupe de principe — Fosse toutes eaux</text>
+  <rect x="60" y="40" width="300" height="162" rx="18" fill="#e0f2fe" stroke="#065F46" stroke-width="2.5"/>
+  <rect x="61" y="41" width="298" height="28" rx="18" fill="#f0fdf4" opacity="0.9"/>
+  <text x="210" y="59" text-anchor="middle" font-size="9" fill="#059669" font-family="sans-serif" font-weight="bold">Gaz / espace libre</text>
+  <rect x="61" y="69" width="298" height="16" fill="#fbbf24" opacity="0.5"/>
+  <text x="145" y="81" text-anchor="middle" font-size="8" fill="#92400e" font-family="sans-serif" font-weight="bold">Flottants</text>
+  <rect x="61" y="85" width="298" height="60" fill="#93c5fd" opacity="0.35"/>
+  <text x="145" y="103" text-anchor="middle" font-size="9" fill="#1e40af" font-family="sans-serif" font-weight="bold">SÉPARATION</text>
+  <text x="145" y="118" text-anchor="middle" font-size="9" fill="#1e40af" font-family="sans-serif" font-weight="bold">DÉCANTATION</text>
+  <rect x="61" y="145" width="298" height="22" fill="#6366f1" opacity="0.2"/>
+  <text x="145" y="160" text-anchor="middle" font-size="8.5" fill="#4338ca" font-family="sans-serif" font-weight="bold">LIQUÉFACTION</text>
+  <rect x="61" y="167" width="298" height="34" fill="#78350f" opacity="0.45"/>
+  <text x="145" y="188" text-anchor="middle" font-size="9" fill="#451a03" font-family="sans-serif" font-weight="bold">Boues</text>
+  <line x1="308" y1="41" x2="308" y2="201" stroke="#065F46" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.7"/>
+  <circle cx="326" cy="108" r="4" fill="#6b7280" opacity="0.5"/>
+  <circle cx="338" cy="98" r="4" fill="#6b7280" opacity="0.5"/>
+  <circle cx="334" cy="116" r="4" fill="#6b7280" opacity="0.5"/>
+  <circle cx="348" cy="108" r="4" fill="#6b7280" opacity="0.5"/>
+  <circle cx="342" cy="124" r="4" fill="#6b7280" opacity="0.5"/>
+  <circle cx="326" cy="122" r="4" fill="#6b7280" opacity="0.5"/>
+  <text x="337" y="140" text-anchor="middle" font-size="7.5" fill="#374151" font-family="sans-serif">Préfiltre</text>
+  <text x="337" y="92" text-anchor="middle" font-size="7.5" fill="#1e40af" font-family="sans-serif">Zone de clair</text>
+  <rect x="8" y="82" width="54" height="10" rx="3" fill="#94a3b8"/>
+  <line x1="60" y1="87" x2="60" y2="145" stroke="#94a3b8" stroke-width="9" stroke-linecap="round"/>
+  <text x="6" y="77" font-size="8" fill="#1e293b" font-family="sans-serif" font-weight="bold">Entrée</text>
+  <text x="4" y="90" font-size="7" fill="#64748b" font-family="sans-serif">Coude</text>
+  <text x="2" y="100" font-size="7" fill="#64748b" font-family="sans-serif">plongeur</text>
+  <rect x="358" y="104" width="54" height="10" rx="3" fill="#2563eb"/>
+  <line x1="360" y1="87" x2="360" y2="109" stroke="#2563eb" stroke-width="9" stroke-linecap="round"/>
+  <text x="362" y="122" font-size="7.5" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">Sortie</text>
+  <text x="358" y="133" font-size="7" fill="#1d4ed8" font-family="sans-serif">vers filière</text>
+  <rect x="98" y="28" width="44" height="14" rx="4" fill="#374151"/>
+  <text x="120" y="38" text-anchor="middle" font-size="7" fill="#fff" font-family="sans-serif">Tampon</text>
+  <rect x="208" y="28" width="44" height="14" rx="4" fill="#374151"/>
+  <text x="230" y="38" text-anchor="middle" font-size="7" fill="#fff" font-family="sans-serif">Tampon</text>
+  <line x1="318" y1="28" x2="318" y2="6" stroke="#059669" stroke-width="2.5" stroke-dasharray="4,2"/>
+  <polygon points="314,6 322,6 318,1" fill="#059669"/>
+  <text x="295" y="24" font-size="7" fill="#059669" font-family="sans-serif">Vent. aval</text>
+  <text x="210" y="222" text-anchor="middle" font-size="7" fill="#94a3b8" font-family="sans-serif">Schéma pédagogique — dispositifs d'entrée, sortie et ventilation varient selon le modèle</text>
+</svg>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 12px">
+  <div class="fte-pb" style="background:var(--c-surface-2);border-radius:6px;overflow:hidden">
+    <img src="./images/anc-fte-installation-beton.webp" alt="Pose fosse béton" style="width:100%;display:block;border-radius:6px 6px 0 0" onerror="this.closest('.fte-pb').style.display='none'">
+    <div style="font-size:9.5px;color:var(--c-text-3);padding:4px 7px;text-align:center">🧱 Fosse béton — pose à l'engin de levage</div>
+  </div>
+  <div class="fte-pb" style="background:var(--c-surface-2);border-radius:6px;overflow:hidden">
+    <img src="./images/anc-fte-installation-pehd.webp" alt="Pose fosse PEHD" style="width:100%;display:block;border-radius:6px 6px 0 0" onerror="this.closest('.fte-pb').style.display='none'">
+    <div style="font-size:9.5px;color:var(--c-text-3);padding:4px 7px;text-align:center">🪣 Fosse PEHD/PP — manutention facilitée</div>
+  </div>
+</div>
+<svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px;display:block;margin:0 auto 12px;border-radius:8px">
+  <rect width="400" height="210" fill="#f0fdf4" rx="8"/>
+  <text x="200" y="15" text-anchor="middle" font-size="10" font-weight="bold" fill="#065F46" font-family="sans-serif">Ventilation de la fosse toutes eaux</text>
+  <rect x="145" y="155" width="110" height="40" rx="6" fill="#d1fae5" stroke="#065F46" stroke-width="2"/>
+  <text x="200" y="180" text-anchor="middle" font-size="8" fill="#065F46" font-family="sans-serif" font-weight="bold">Fosse toutes eaux</text>
+  <polygon points="20,100 90,55 160,100" fill="#fed7aa" stroke="#c2410c" stroke-width="1.5"/>
+  <rect x="20" y="100" width="140" height="55" fill="#fff7ed" stroke="#c2410c" stroke-width="1.5"/>
+  <text x="90" y="136" text-anchor="middle" font-size="20" font-family="sans-serif">🚽</text>
+  <line x1="90" y1="155" x2="90" y2="175" stroke="#c2410c" stroke-width="2.5"/>
+  <line x1="90" y1="175" x2="145" y2="175" stroke="#c2410c" stroke-width="2.5"/>
+  <rect x="70" y="69" width="10" height="33" fill="#c2410c"/>
+  <circle cx="75" cy="67" r="8" fill="#ef4444" opacity="0.9"/>
+  <text x="75" y="70" text-anchor="middle" font-size="6" fill="#fff" font-family="sans-serif">Ø100</text>
+  <text x="75" y="58" text-anchor="middle" font-size="10" font-family="sans-serif">↓</text>
+  <text x="75" y="52" text-anchor="middle" font-size="7.5" fill="#c2410c" font-family="sans-serif">air</text>
+  <text x="90" y="195" text-anchor="middle" font-size="9" fill="#c2410c" font-family="sans-serif" font-weight="bold">VENTILATION</text>
+  <text x="90" y="207" text-anchor="middle" font-size="9" fill="#c2410c" font-family="sans-serif" font-weight="bold">PRIMAIRE</text>
+  <polygon points="240,100 310,55 380,100" fill="#bbf7d0" stroke="#059669" stroke-width="1.5"/>
+  <rect x="240" y="100" width="140" height="55" fill="#f0fdf4" stroke="#059669" stroke-width="1.5"/>
+  <line x1="255" y1="175" x2="310" y2="175" stroke="#059669" stroke-width="2.5"/>
+  <line x1="310" y1="175" x2="310" y2="155" stroke="#059669" stroke-width="2.5"/>
+  <rect x="303" y="22" width="10" height="35" fill="#059669"/>
+  <line x1="288" y1="55" x2="313" y2="55" stroke="#059669" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="258" y="51" font-size="7.5" fill="#059669" font-family="sans-serif">0,40 m min.</text>
+  <text x="313" y="17" text-anchor="middle" font-size="10" font-family="sans-serif">↑</text>
+  <text x="313" y="10" text-anchor="middle" font-size="7" fill="#059669" font-family="sans-serif">gaz</text>
+  <text x="310" y="195" text-anchor="middle" font-size="9" fill="#059669" font-family="sans-serif" font-weight="bold">VENTILATION</text>
+  <text x="310" y="207" text-anchor="middle" font-size="9" fill="#059669" font-family="sans-serif" font-weight="bold">SECONDAIRE</text>
+</svg>
+<div style="margin:0 0 12px">
+  <div style="font-size:11px;font-weight:700;color:var(--c-text-2);margin-bottom:6px;padding-left:8px;border-left:3px solid var(--c-anc)">Dimensionnement réglementaire</div>
+  <table style="width:100%;border-collapse:collapse;font-size:11px">
+    <thead><tr style="background:rgba(6,95,70,0.08)">
+      <th style="padding:5px 8px;text-align:left;border-bottom:1px solid var(--c-border);font-weight:700">Pièces principales</th>
+      <th style="padding:5px 8px;text-align:right;border-bottom:1px solid var(--c-border);font-weight:700">Volume mini</th>
+    </tr></thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--c-border)"><td style="padding:4px 8px">1 à 5</td><td style="padding:4px 8px;text-align:right;font-weight:700;color:var(--c-anc)">3 000 L</td></tr>
+      <tr style="border-bottom:1px solid var(--c-border)"><td style="padding:4px 8px">6</td><td style="padding:4px 8px;text-align:right;font-weight:700">4 000 L</td></tr>
+      <tr style="border-bottom:1px solid var(--c-border)"><td style="padding:4px 8px">7</td><td style="padding:4px 8px;text-align:right;font-weight:700">5 000 L</td></tr>
+      <tr style="border-bottom:1px solid var(--c-border)"><td style="padding:4px 8px">8</td><td style="padding:4px 8px;text-align:right;font-weight:700">6 000 L</td></tr>
+      <tr style="border-bottom:1px solid var(--c-border)"><td style="padding:4px 8px">9</td><td style="padding:4px 8px;text-align:right;font-weight:700">7 000 L</td></tr>
+      <tr><td style="padding:4px 8px">10</td><td style="padding:4px 8px;text-align:right;font-weight:700">8 000 L</td></tr>
+    </tbody>
+  </table>
+  <div style="font-size:9px;color:var(--c-text-4);margin-top:4px;padding:0 4px">+1 m³ / pièce principale au-delà de 5 · Exemple : 6 PP = 3 + 1 = 4 m³</div>
+</div>
+<div style="margin:0 0 8px">
+  <div style="font-size:11px;font-weight:700;color:var(--c-text-2);margin-bottom:6px;padding-left:8px;border-left:3px solid #ef4444">Diagnostic terrain (SPANC)</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;font-size:9.5px">
+    <div style="font-weight:700;color:var(--c-text-3);padding:3px 6px;background:var(--c-surface-2);border-radius:4px 0 0 0">Symptôme observé</div>
+    <div style="font-weight:700;color:var(--c-text-3);padding:3px 6px;background:var(--c-surface-2);border-radius:0 4px 0 0">Hypothèse principale</div>
+    <div style="padding:3px 6px;background:rgba(239,68,68,0.06);color:#dc2626">Niveau eau anormalement haut</div><div style="padding:3px 6px;background:rgba(239,68,68,0.06)">Obstruction aval · traitement saturé</div>
+    <div style="padding:3px 6px;color:#dc2626">Niveau eau anormalement bas</div><div style="padding:3px 6px">Défaut d'étanchéité · fissure</div>
+    <div style="padding:3px 6px;background:rgba(239,68,68,0.06);color:#dc2626">Boues &gt; 50% volume utile</div><div style="padding:3px 6px;background:rgba(239,68,68,0.06)">Vidange insuffisante · surcharge</div>
+    <div style="padding:3px 6px;color:#dc2626">Flottants en sortie</div><div style="padding:3px 6px">Déflecteur défectueux · surcharge</div>
+    <div style="padding:3px 6px;background:rgba(239,68,68,0.06);color:#dc2626">Odeurs près de l'habitation</div><div style="padding:3px 6px;background:rgba(239,68,68,0.06)">Ventilation défectueuse en priorité</div>
+    <div style="padding:3px 6px;color:#dc2626">Entrées d'eaux pluviales</div><div style="padding:3px 6px">Raccordement parasite à tracer</div>
+  </div>
+</div>
+<div style="font-size:9px;color:var(--c-text-4);text-align:center;padding:6px;background:rgba(239,68,68,0.06);border-radius:6px">⚠ Espace confiné — ne jamais pénétrer sans procédure professionnelle · H₂S toxique · CH₄ inflammable</div>
+</div>`,
+      specs:{ 'Volume minimum':'3 m³ (1–5 pièces) · +1 m³/pièce suppl.', 'Matériaux':'Béton NF EN 12566-1 · PEHD/PP', 'Distance habitation':'> 5 m', 'Distance limite prop.':'> 3 m', 'Distance puits AEP':'> 35 m', 'Ventilation':'Ø ≥ 100 mm · primaire + secondaire', 'Vidange':'≤ 4 ans ou boues > 50% volume utile', 'Préfiltre':'Si présent — entretien selon fabricant', 'Référence':'Arr. 07/09/2009 mod. 03/12/2021 · NF DTU 64.1' } },
     { ico:'🌾', name:'Tranchées d\'épandage', sub:'Épandage souterrain · Sol perméable · 200–400 m²',
       specs:{ 'Perméabilité sol':'15–500 mm/h (étude de sol obligatoire)', 'Profondeur':'0,6–0,7 m de recouvrement', 'Drain':'PVC Ø 100 mm perforé · pente max 0,5%', 'Charge hydraulique':'0,04 m/j', 'Référence':'DTU 64.1 · Arrêté 07/09/2009' } },
     { ico:'🟡', name:'Filtre à sable non drainé', sub:'Sable rapporté · Infiltration naturelle · 25–30 m²',
