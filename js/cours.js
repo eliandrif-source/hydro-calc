@@ -13458,6 +13458,114 @@ function _coursGetBlocData(chapId) {
   return null;
 }
 
+/* ─── Surlignage TOC actif (IntersectionObserver) ─── */
+function _coursActivateToc() {
+  var tocLinks = document.querySelectorAll('.cours-toc-link');
+  if (!tocLinks.length) return;
+  var secs = document.querySelectorAll('[id^="cours-sec-"]');
+  if (!secs.length) return;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        var idx = e.target.id.replace('cours-sec-', '');
+        tocLinks.forEach(function(l, i) { l.classList.toggle('active', String(i) === idx); });
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '-70px 0px -55% 0px' });
+  secs.forEach(function(s) { obs.observe(s); });
+}
+
+/* ─── Lightbox plein écran pour schémas et images ─── */
+function _coursActivateLightbox() {
+  if (!document.getElementById('hc-lightbox')) {
+    var lb = document.createElement('div');
+    lb.id = 'hc-lightbox';
+    lb.setAttribute('role', 'dialog');
+    lb.setAttribute('aria-modal', 'true');
+    lb.setAttribute('aria-label', 'Agrandissement du schéma');
+    lb.style.cssText = 'display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.88);'
+      + 'align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:16px;box-sizing:border-box';
+    lb.innerHTML = '<div id="hc-lb-wrap" style="position:relative;max-width:min(96vw,900px);max-height:85vh;'
+      + 'display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px;'
+      + 'background:#fff;box-shadow:0 8px 40px rgba(0,0,0,.5)">'
+      + '<div id="hc-lb-inner" style="transform-origin:center center;transition:transform .15s;'
+      + 'max-width:100%;max-height:85vh;display:flex;align-items:center;justify-content:center;'
+      + 'overflow:hidden;padding:12px;box-sizing:border-box"></div>'
+      + '</div>'
+      + '<div style="display:flex;align-items:center;gap:10px">'
+      + '<button id="hc-lb-zoom-out" onclick="_hcLbZoom(-0.25)" style="' + _hcLbBtnStyle() + '">−</button>'
+      + '<button id="hc-lb-zoom-rst" onclick="_hcLbZoom(0)" style="' + _hcLbBtnStyle() + '">1:1</button>'
+      + '<button id="hc-lb-zoom-in" onclick="_hcLbZoom(0.25)" style="' + _hcLbBtnStyle() + '">+</button>'
+      + '<button onclick="_hcLbClose()" style="' + _hcLbBtnStyle('danger') + '">✕ Fermer</button>'
+      + '</div>'
+      + '<div id="hc-lb-caption" style="color:rgba(255,255,255,.75);font-size:12px;text-align:center;max-width:600px;line-height:1.5"></div>';
+    document.body.appendChild(lb);
+    lb.addEventListener('click', function(e) { if (e.target === lb) _hcLbClose(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') _hcLbClose(); });
+  }
+  var containers = document.querySelectorAll('#main-content svg, #main-content .data-img-key img, #main-content [data-img-key] img');
+  containers.forEach(function(el) {
+    if (el.dataset.lbBound) return;
+    el.dataset.lbBound = '1';
+    el.style.cursor = 'zoom-in';
+    el.addEventListener('click', function() { _hcLbOpen(el); });
+  });
+  document.querySelectorAll('#main-content [data-img-key]').forEach(function(wrap) {
+    var svg = wrap.querySelector('svg');
+    if (svg && !svg.dataset.lbBound) {
+      svg.dataset.lbBound = '1';
+      svg.style.cursor = 'zoom-in';
+      svg.addEventListener('click', function() { _hcLbOpen(svg); });
+    }
+  });
+}
+function _hcLbBtnStyle(t) {
+  var base = 'padding:8px 16px;border-radius:6px;border:none;cursor:pointer;font-size:13px;font-weight:700;';
+  return t === 'danger' ? base + 'background:#E53E3E;color:#fff' : base + 'background:#fff;color:#1A3A5C';
+}
+var _hcLbScale = 1;
+function _hcLbOpen(el) {
+  _hcLbScale = 1;
+  var lb = document.getElementById('hc-lightbox');
+  var inner = document.getElementById('hc-lb-inner');
+  var cap = document.getElementById('hc-lb-caption');
+  if (!lb || !inner) return;
+  inner.innerHTML = '';
+  inner.style.transform = 'scale(1)';
+  if (el.tagName === 'svg' || el.tagName === 'SVG') {
+    var clone = el.cloneNode(true);
+    clone.style.maxWidth = '100%';
+    clone.style.maxHeight = '75vh';
+    clone.style.height = 'auto';
+    clone.style.cursor = 'default';
+    clone.removeAttribute('style'); // let viewBox control size
+    clone.setAttribute('style', 'max-width:100%;max-height:75vh;height:auto;width:auto');
+    inner.appendChild(clone);
+  } else if (el.tagName === 'IMG') {
+    var img = document.createElement('img');
+    img.src = el.src;
+    img.style.cssText = 'max-width:100%;max-height:75vh;height:auto;border-radius:4px';
+    img.alt = el.alt || '';
+    inner.appendChild(img);
+  }
+  var title = el.closest('[data-img-key]');
+  cap.textContent = (title && title.dataset.imgCaption) ? title.dataset.imgCaption : '';
+  lb.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  lb.querySelector('[id="hc-lb-zoom-rst"]') && (lb.querySelector('#hc-lb-zoom-rst').focus());
+}
+function _hcLbClose() {
+  var lb = document.getElementById('hc-lightbox');
+  if (lb) lb.style.display = 'none';
+  document.body.style.overflow = '';
+}
+function _hcLbZoom(delta) {
+  if (delta === 0) { _hcLbScale = 1; }
+  else { _hcLbScale = Math.min(4, Math.max(0.5, _hcLbScale + delta)); }
+  var inner = document.getElementById('hc-lb-inner');
+  if (inner) inner.style.transform = 'scale(' + _hcLbScale + ')';
+}
+
 /* ─── VUE CHAPITRE (FICHE RÉSUMÉE) ──────────────────────────────── */
 async function renderCoursChapitre(fId, aId, mId, cId) {
   _coursState.fId = fId; _coursState.aId = aId; _coursState.mId = mId; _coursState.cId = cId;
@@ -13559,6 +13667,19 @@ async function renderCoursChapitre(fId, aId, mId, cId) {
       + '</div></div>';
   }
 
+  /* Objectifs pédagogiques (si définis dans fi.objectifs) */
+  if (fi.objectifs && fi.objectifs.length) {
+    html += '<div class="crs-objectifs">'
+      + '<div class="crs-objectifs-title">🎯 Objectifs pédagogiques</div>';
+    fi.objectifs.forEach(function(obj) {
+      html += '<div class="crs-objectifs-item">'
+        + '<span class="crs-objectifs-check">▸</span>'
+        + '<span>' + obj + '</span>'
+        + '</div>';
+    });
+    html += '</div>';
+  }
+
   /* Cours complet — layout 2 colonnes desktop */
   var _sectionsHtml = '';
   var _sideHtml = '';
@@ -13594,7 +13715,18 @@ async function renderCoursChapitre(fId, aId, mId, cId) {
       }
       var _secSubs = sec.sous_sections || sec.ss || [];
       if (_secSubs.length) {
+        var _calloutIcons   = { retenir:'✅', attention:'⚠️', definition:'📖', exemple:'🔧', reglementation:'⚖️', formule:'📐' };
+        var _calloutLabels  = { retenir:'À retenir', attention:'Attention', definition:'Définition', exemple:'Exemple terrain', reglementation:'Réglementation', formule:'Formule clé' };
         _secSubs.forEach(function(ss) {
+          if (ss.type) {
+            _sectionsHtml += '<div class="crs-callout ' + ss.type + '">'
+              + '<div class="crs-callout-icon">' + (_calloutIcons[ss.type] || '📌') + '</div>'
+              + '<div class="crs-callout-body">'
+              + '<div class="crs-callout-label">' + (_calloutLabels[ss.type] || ss.type) + (ss.titre ? ' — ' + ss.titre : '') + '</div>'
+              + '<div class="crs-callout-text">' + (ss.texte || '') + '</div>'
+              + '</div></div>';
+            return;
+          }
           _sectionsHtml += '<div style="margin-top:14px">';
           if (ss.titre) {
             _sectionsHtml += '<div style="font-size:12px;font-weight:700;color:var(--c-primary);margin-bottom:5px;padding-bottom:4px;border-bottom:1px solid var(--c-primary-l)">' + ss.titre + '</div>';
@@ -13814,6 +13946,8 @@ async function renderCoursChapitre(fId, aId, mId, cId) {
   document.getElementById('main-content').innerHTML = html;
   document.getElementById('main-content').scrollTop = 0;
   if (typeof _hcActivateImgBoxes === 'function') setTimeout(_hcActivateImgBoxes, 0);
+  setTimeout(_coursActivateToc, 0);
+  setTimeout(_coursActivateLightbox, 0);
 }
 
 /* ═══════════════════════════════════════════════════

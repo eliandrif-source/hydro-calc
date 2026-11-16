@@ -909,6 +909,14 @@ var GEMEAU_B02 = {
     titre: 'Pertes de charge : origines et mécanismes',
     fiche: {
       intro: 'Les pertes de charge sont la traduction énergétique des frottements internes et des perturbations dans l\'écoulement. Elles déterminent les besoins en pompage, le dimensionnement des conduites, et la pression disponible en chaque point d\'un réseau. Maîtriser leur calcul est une compétence fondamentale du technicien GEMEAU : toute erreur d\'un facteur 2 sur les pertes de charge se répercute directement sur la puissance de pompage (et sur la facture d\'électricité).',
+      objectifs: [
+        'Calculer les pertes de charge régulières (linéaires) avec la formule de Darcy-Weisbach',
+        'Choisir le coefficient λ selon le régime d\'écoulement (abaque de Moody ou Colebrook)',
+        'Calculer les pertes de charge singulières avec le coefficient ξ et la longueur équivalente',
+        'Appliquer les formules de Hazen-Williams et Manning-Strickler selon le contexte',
+        'Établir le bilan complet des pertes de charge d\'une installation de pompage (HMT)',
+        'Dimensionner un diamètre de conduite selon la vitesse économique admissible',
+      ],
       schema: `<svg viewBox="0 0 260 118" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
   <defs><marker id="mb16" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#334155"/></marker></defs>
   <rect width="260" height="118" fill="#f8fafc" rx="6"/>
@@ -933,6 +941,15 @@ var GEMEAU_B02 = {
           texte: 'Les pertes de charge régulières (linéaires) sont dues au frottement du fluide contre les parois sur toute la longueur de la conduite. La formule de Darcy-Weisbach est la référence : Δh = λ × (L/D) × V²/(2g) [m], ou en Pa : ΔP = λ × (L/D) × ρV²/2. Le coefficient λ (facteur de friction de Darcy) dépend du régime d\'écoulement (Re) et de la rugosité relative ε/D.\n\nEn pratique, pour les réseaux d\'eau potable en PVC ou PEHD neuf, on utilise souvent la formule de Hazen-Williams, empirique mais pratique : Q = 0,2785 × C × D^2,63 × J^0,54 [m³/s], où C est le coefficient de Hazen-Williams (C = 150 pour PVC neuf, C = 100-120 pour acier, C = 100 pour béton, C = 80 pour fonte vieillie) et J la pente hydraulique [m/m]. Cette formule est valide pour l\'eau à 10-15°C en régime turbulent.\n\nLa formule de Manning-Strickler est utilisée pour les écoulements à surface libre (canaux, égouts gravitaires) : V = K × R_h^(2/3) × i^(1/2), où K est le coefficient de Strickler [m^(1/3)/s], R_h = S/P_mouillé le rayon hydraulique [m], et i la pente de la ligne d\'énergie. Valeurs de K : béton lisse K=80-90, béton rugueux K=60-70, maçonnerie K=50, rivière naturelle K=20-40.',
           sous_sections: [
             {
+              type: 'definition',
+              texte: '<strong>Perte de charge régulière (linéaire)</strong> : chute d\'énergie du fluide due au frottement visqueux sur toute la longueur d\'une conduite rectiligne. Elle est proportionnelle à la longueur L et au carré de la vitesse. Exprimée en mètres de colonne d\'eau (m.c.e.) ou en pascals.'
+            },
+            {
+              type: 'formule',
+              titre: 'Darcy-Weisbach',
+              texte: '<strong>Δh = λ × (L/D) × V²/(2g)</strong> [m]<br>λ : coefficient de frottement (Darcy) [-] · L : longueur [m] · D : diamètre [m] · V : vitesse moyenne [m/s] · g = 9,81 m/s²<br>En pression : ΔP = λ × (L/D) × ρV²/2 [Pa]'
+            },
+            {
               titre: '1.1 Gradient hydraulique et pente de la ligne de charge',
               texte: 'Le gradient hydraulique J = Δh/L = ΔP/(ρgL) est la perte de charge par mètre de conduite [m/m] ou [‰]. Pour une conduite gravitaire (pas de pompe), J représente aussi la pente minimale de la conduite pour maintenir la vitesse requise. En assainissement gravitaire, J est généralement la pente de la conduite elle-même (approximation valide si l\'écoulement est uniforme). Une pente de 3‰ = J = 0,003 m/m.'
             }
@@ -942,6 +959,10 @@ var GEMEAU_B02 = {
           titre: '2. Pertes de charge singulières (locales)',
           texte: 'Les pertes de charge singulières (locales) sont provoquées par les perturbations géométriques : coudes, tés, réductions, élargissements, vannes, clapets, compteurs. Elles s\'expriment par : Δh_s = ξ × V²/(2g) [m], où ξ (zeta) est le coefficient de perte singulière (sans dimension), caractéristique de chaque singularité et dépendant du rapport de sections et de l\'angle de la singularité.\n\nValeurs typiques de ξ : coude 90° acier ξ = 0,5-1,5 ; coude progressif 90° ξ = 0,2-0,4 ; té passage direct ξ = 0,5 ; té dérivation ξ = 1,2-2,0 ; vanne papillon ouverte ξ = 0,5-1,5 ; clapet anti-retour ξ = 1-3 ; réduction progressive ξ = 0,1-0,3 ; entrée dans un réservoir (bord droit) ξ = 0,5 ; sortie dans un réservoir ξ = 1,0.\n\nL\'équivalent en longueur L_eq = ξ × D / λ [m] permet d\'exprimer la perte singulière comme une longueur équivalente de conduite droite. Par exemple, pour un coude 90° (ξ=0,8) en DN200 avec λ=0,020 : L_eq = 0,8 × 0,200/0,020 = 8 m. Tous les L_eq peuvent être additionnés à la longueur réelle pour un calcul global.',
           sous_sections: [
+            {
+              type: 'attention',
+              texte: 'Ne pas confondre la longueur réelle L et la longueur équivalente totale. Le bilan doit additionner séparément : pertes régulières sur L_réelle + pertes singulières (ΔP_s = ξ × V²/(2g) pour chaque singularité). Ou utiliser L_total = L_réelle + ΣL_eq dans Darcy-Weisbach, avec L_eq = ξ × D/λ.'
+            },
             {
               titre: '2.1 Perte dans un élargissement brusque (coup de bélier non hydraulique)',
               texte: 'Pour un élargissement brusque de section S1 à S2 > S1 (Borda-Carnot) : Δh = (V1-V2)² / (2g). Cette perte est due à la décollement de l\'écoulement au point d\'élargissement et à la formation de zones de recirculation. Avec continuité V1S1 = V2S2 : Δh = V1² × (1 - S1/S2)² / (2g). Pour S2 >> S1 (sortie dans un réservoir) : Δh = V1²/(2g) → ξ = 1,0. Cette formule est exacte pour l\'élargissement brusque (Borda).'
@@ -962,6 +983,11 @@ var GEMEAU_B02 = {
           titre: '4. Calcul pratique : bilan des pertes de charge d\'une installation',
           texte: 'Pour une installation de pompage complète (aspiration + refoulement), la perte de charge totale est : Σ Δh = Σ Δh_rég_asp + Σ Δh_sing_asp + Σ Δh_rég_ref + Σ Δh_sing_ref. Chaque terme est calculé avec les formules appropriées, en distinguant les tronçons de diamètre différent.\n\nUne règle pratique courante : pour les avant-projets, les pertes singulières représentent environ 20-30% des pertes régulières dans un réseau de distribution bien conçu. Cette approximation permet une estimation rapide sans calculer chaque singularité.\n\nL\'objectif du dimensionnement est de trouver le diamètre optimal qui minimise le coût total (investissement tuyaux + coût énergie pompage sur 20-30 ans). En général, une augmentation de diamètre réduit les pertes de charge (et l\'énergie) mais augmente le coût des tuyaux. La vitesse économique est typiquement 0,8-1,2 m/s pour les réseaux de refoulement d\'eau potable.',
           sous_sections: [
+            {
+              type: 'exemple',
+              titre: 'Méthode de calcul HMT',
+              texte: '<strong>HMT = H_géo + Δh_asp + Δh_ref + P_résid</strong><br>H_géo : hauteur géométrique à vaincre [m] · Δh_asp : pertes côté aspiration [m] · Δh_ref : pertes côté refoulement [m] · P_résid : pression résiduelle minimale chez l\'abonné (en m.c.e.)<br>Chaque terme Δh = Σ(Δh_rég) + Σ(Δh_sing) sur le tronçon concerné.'
+            },
             {
               titre: '4.1 Vérification du débit auto-curant en assainissement',
               texte: 'Pour un réseau gravitaire d\'assainissement, la pente de la conduite doit assurer V ≥ 0,6 m/s à la pointe (au moins 2 fois par semaine pour les réseaux séparatifs). Pour une conduite DN200 (K=70), la pente minimale est calculée par Manning : J_min = [V_min/(K × R_h^(2/3))]² = [0,6/(70×0,05^(2/3))]² = [0,6/(70×0,1357)]² = [0,6/9,499]² = 0,0632² = 0,00399 m/m ≈ 4‰. Une pente de 4 à 5‰ est donc recommandée pour les conduites DN200 en béton.'
