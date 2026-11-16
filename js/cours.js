@@ -13551,7 +13551,12 @@ async function renderCoursChapitre(fId, aId, mId, cId) {
     + '</div></div>';
 
   if (fi.schema) {
-    html += '<div style="padding:var(--s-3) var(--s-4) 0;text-align:center">' + fi.schema + '</div>';
+    var _fiImgKey = fId + ':' + aId + ':' + mId + ':' + cId + ':fiche';
+    var _fiImgCid = 'crs-fi-' + (fId + '_' + aId + '_' + mId + '_' + cId).replace(/[^a-zA-Z0-9]/g, '_');
+    html += '<div style="padding:var(--s-3) var(--s-4) 0;text-align:center">'
+      + '<div data-img-key="' + _fiImgKey + '" data-img-cid="' + _fiImgCid + '">'
+      + fi.schema
+      + '</div></div>';
   }
 
   /* Cours complet — layout 2 colonnes desktop */
@@ -13808,6 +13813,7 @@ async function renderCoursChapitre(fId, aId, mId, cId) {
   html += '<div class="pb-nav"></div>';
   document.getElementById('main-content').innerHTML = html;
   document.getElementById('main-content').scrollTop = 0;
+  if (typeof _hcActivateImgBoxes === 'function') setTimeout(_hcActivateImgBoxes, 0);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -14674,6 +14680,7 @@ async function _coursReplaceSchema(schemaKey, cId) {
       );
       if (dbRes.error) throw dbRes.error;
       _courseImageOverrides[schemaKey] = url;
+      if (typeof _hcImgOverrides !== 'undefined') _hcImgOverrides[schemaKey] = url;
       var box = document.getElementById('schema-box-' + cId);
       if (box) {
         var newImg = document.createElement('img');
@@ -14709,6 +14716,7 @@ async function _coursRestoreSchema(schemaKey) {
     var delRes = await SupaDB.from('course_image_overrides').delete().eq('chapter_key', schemaKey);
     if (delRes.error) throw delRes.error;
     delete _courseImageOverrides[schemaKey];
+    if (typeof _hcImgOverrides !== 'undefined') delete _hcImgOverrides[schemaKey];
     await renderCoursChapitre(_coursState.fId, _coursState.aId, _coursState.mId, _coursState.cId);
   } catch(e) {
     alert('❌ Erreur : ' + ((e && e.message) ? e.message : JSON.stringify(e)));
