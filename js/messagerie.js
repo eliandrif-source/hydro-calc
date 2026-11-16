@@ -196,7 +196,7 @@ async function _mDoSearch(q) {
   if (SupaDB && uid) {
     try {
       var [res, frRes] = await Promise.all([
-        SupaDB.from('profiles').select('id,name,email').neq('id', uid).or('name.ilike.*'+q+'*,email.ilike.*'+q+'*').order('name', { ascending: true }).limit(20),
+        SupaDB.from('profiles').select('id,name,prenom').neq('id', uid).or('name.ilike.*'+q+'*,prenom.ilike.*'+q+'*').order('name', { ascending: true }).limit(20),
         SupaDB.from('friend_requests').select('id,sender_id,receiver_id,status').or('sender_id.eq.'+uid+',receiver_id.eq.'+uid)
       ]);
       if (res.error) throw res.error;
@@ -215,7 +215,7 @@ async function _mDoSearch(q) {
     return;
   }
   el.innerHTML = users.map(function(u) {
-    var displayName = u.name || u.email || 'Utilisateur';
+    var displayName = u.prenom || u.name || 'Utilisateur';
     var init = displayName.charAt(0).toUpperCase();
     var fr = frMap[u.id];
     var actionBtn = '';
@@ -437,27 +437,40 @@ async function _mSend() {
   var sendBtn = document.querySelector('[onclick="_mSend()"]');
   if (sendBtn) { sendBtn.disabled = true; sendBtn.innerHTML = '&#x23F3;'; }
   input.value = ''; input.style.height = 'auto';
-  var attachUrl = null; var attachType = null;
+  var attachUrl = null; var attachType = null; var uploadedPath = null;
   if (file) {
     try {
       var ext = file.name.split('.').pop();
       var path = uid + '/' + Date.now() + '_' + Math.random().toString(36).slice(2) + '.' + ext;
+      uploadedPath = path;
       var upRes = await SupaDB.storage.from('message-attachments').upload(path, file, { contentType: file.type, upsert: false });
       if (upRes.error) throw upRes.error;
       var urlRes = SupaDB.storage.from('message-attachments').getPublicUrl(path);
       attachUrl = urlRes.data.publicUrl;
       attachType = file.type;
-    } catch(e) { alert('Erreur envoi fichier : '+(e.message||'')); if (sendBtn) { sendBtn.disabled = false; sendBtn.innerHTML = '&#x27A4;'; } return; }
+    } catch(e) {
+      input.value = text; input.style.height = 'auto';
+      alert('Erreur envoi fichier : '+(e.message||''));
+      if (sendBtn) { sendBtn.disabled = false; sendBtn.innerHTML = '&#x27A4;'; }
+      return;
+    }
     _mClearFile();
   }
   var preview = text || (attachType && attachType.indexOf('image')===0 ? 'Photo' : attachType && attachType.indexOf('video')===0 ? 'Vidéo' : 'Fichier');
-  await Promise.all([
-    SupaDB.from('messages').insert({ thread_id:tid, sender_id:uid, sender_name:_mUserName(), contenu:text, attachment_url:attachUrl, attachment_type:attachType, is_deleted:false }),
-    SupaDB.from('message_threads').update({ last_message:preview.substring(0,100), last_message_at:new Date().toISOString() }).eq('id', tid)
-  ]);
+  try {
+    var msgRes = await SupaDB.from('messages').insert(
+      { thread_id:tid, sender_id:uid, sender_name:_mUserName(), contenu:text, attachment_url:attachUrl, attachment_type:attachType, is_deleted:false }
+    );
+    if (msgRes.error) throw msgRes.error;
+    SupaDB.from('message_threads').update({ last_message:preview.substring(0,100), last_message_at:new Date().toISOString() }).eq('id', tid).then(function(){});
+    _mAppendMsg({ sender_id:uid, sender_name:_mUserName(), contenu:text, attachment_url:attachUrl, attachment_type:attachType, created_at:new Date().toISOString() });
+    setTimeout(_mRenderList, 300);
+  } catch(e) {
+    input.value = text; input.style.height = 'auto';
+    if (uploadedPath) { try { SupaDB.storage.from('message-attachments').remove([uploadedPath]).then(function(){}); } catch(_) {} }
+    alert('Erreur d\'envoi : ' + (e.message || JSON.stringify(e)));
+  }
   if (sendBtn) { sendBtn.disabled = false; sendBtn.innerHTML = '&#x27A4;'; }
-  _mAppendMsg({ sender_id:uid, sender_name:_mUserName(), contenu:text, attachment_url:attachUrl, attachment_type:attachType, created_at:new Date().toISOString() });
-  setTimeout(_mRenderList, 300);
 }
 
 async function _mMarkRead(threadId) {
