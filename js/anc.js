@@ -1670,13 +1670,25 @@ function renderANCFilTrad() {
   <text x="210" y="222" text-anchor="middle" font-size="7" fill="#94a3b8" font-family="sans-serif">Schéma pédagogique — dispositifs d'entrée, sortie et ventilation varient selon le modèle</text>
 </svg>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 12px">
-  <div class="fte-pb" style="background:var(--c-surface-2);border-radius:6px;overflow:hidden">
-    <img src="./images/anc-fte-installation-beton.webp" alt="Pose fosse béton" style="width:100%;display:block;border-radius:6px 6px 0 0" onerror="this.closest('.fte-pb').style.display='none'">
-    <div style="font-size:9.5px;color:var(--c-text-3);padding:4px 7px;text-align:center">🧱 Fosse béton — pose à l'engin de levage</div>
+  <div style="background:var(--c-surface-2);border-radius:6px;overflow:hidden">
+    <div style="position:relative;min-height:90px;background:var(--c-surface-2);display:flex;align-items:center;justify-content:center">
+      <img id="fte-img-beton" src="" style="width:100%;display:none;border-radius:6px 6px 0 0" alt="Fosse béton">
+      <div id="fte-ph-beton" style="text-align:center;padding:14px;color:var(--c-text-4)"><div style="font-size:22px;margin-bottom:3px">🖼</div><div style="font-size:8.5px">Aucune photo</div></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;padding:4px 7px">
+      <span style="font-size:9.5px;color:var(--c-text-3);flex:1">🧱 Fosse béton</span>
+      <button onclick="_ancReplacePhoto('fte-beton','fte-img-beton','fte-ph-beton')" style="font-size:9px;padding:3px 8px;background:var(--c-primary-l,#EBF4FF);border:1px solid var(--c-primary,#2B6CB0);border-radius:20px;cursor:pointer;color:var(--c-primary,#2B6CB0);font-weight:600">📷 Choisir</button>
+    </div>
   </div>
-  <div class="fte-pb" style="background:var(--c-surface-2);border-radius:6px;overflow:hidden">
-    <img src="./images/anc-fte-installation-pehd.webp" alt="Pose fosse PEHD" style="width:100%;display:block;border-radius:6px 6px 0 0" onerror="this.closest('.fte-pb').style.display='none'">
-    <div style="font-size:9.5px;color:var(--c-text-3);padding:4px 7px;text-align:center">🪣 Fosse PEHD/PP — manutention facilitée</div>
+  <div style="background:var(--c-surface-2);border-radius:6px;overflow:hidden">
+    <div style="position:relative;min-height:90px;background:var(--c-surface-2);display:flex;align-items:center;justify-content:center">
+      <img id="fte-img-pehd" src="" style="width:100%;display:none;border-radius:6px 6px 0 0" alt="Fosse PEHD">
+      <div id="fte-ph-pehd" style="text-align:center;padding:14px;color:var(--c-text-4)"><div style="font-size:22px;margin-bottom:3px">🖼</div><div style="font-size:8.5px">Aucune photo</div></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;padding:4px 7px">
+      <span style="font-size:9.5px;color:var(--c-text-3);flex:1">🪣 Fosse PEHD/PP</span>
+      <button onclick="_ancReplacePhoto('fte-pehd','fte-img-pehd','fte-ph-pehd')" style="font-size:9px;padding:3px 8px;background:var(--c-primary-l,#EBF4FF);border:1px solid var(--c-primary,#2B6CB0);border-radius:20px;cursor:pointer;color:var(--c-primary,#2B6CB0);font-weight:600">📷 Choisir</button>
+    </div>
   </div>
 </div>
 <svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px;display:block;margin:0 auto 12px;border-radius:8px">
@@ -1785,6 +1797,7 @@ function renderANCFilTrad() {
   });
   html += '</div><div class="pb-nav"></div>';
   document.getElementById('main-content').innerHTML = html;
+  setTimeout(_ancRestorePhotos, 0);
 }
 
 /* ─── FILIÈRES AGRÉÉES ─── */
@@ -1824,4 +1837,37 @@ function renderANCFilAgree() {
   });
   html += '</div><div class="pb-nav"></div>';
   document.getElementById('main-content').innerHTML = html;
+}
+
+/* ─── PHOTOS ANC : REMPLACER / RESTAURER ─── */
+function _ancReplacePhoto(key, imgId, phId) {
+  var input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/png,image/jpeg,image/webp,image/gif';
+  input.onchange = function() {
+    var file = input.files[0]; if (!file) return;
+    if (file.size > 5*1024*1024) { alert('Image trop lourde (max 5 Mo)'); return; }
+    var reader = new FileReader();
+    reader.onload = function(ev) {
+      var url = ev.target.result;
+      try { localStorage.setItem('hc_anc_photo_' + key, url); } catch(e) {}
+      var img = document.getElementById(imgId);
+      var ph = document.getElementById(phId);
+      if (img) { img.src = url; img.style.display = 'block'; }
+      if (ph) ph.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  };
+  input.click();
+}
+
+function _ancRestorePhotos() {
+  [['fte-beton','fte-img-beton','fte-ph-beton'],['fte-pehd','fte-img-pehd','fte-ph-pehd']].forEach(function(p) {
+    var saved; try { saved = localStorage.getItem('hc_anc_photo_' + p[0]); } catch(e) {}
+    if (saved) {
+      var img = document.getElementById(p[1]); var ph = document.getElementById(p[2]);
+      if (img) { img.src = saved; img.style.display = 'block'; }
+      if (ph) ph.style.display = 'none';
+    }
+  });
 }
