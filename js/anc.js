@@ -1620,3 +1620,81 @@ function renderANCNonConformites() {
   html += '<div class="pb-nav"></div></div>';
   document.getElementById('main-content').innerHTML = html;
 }
+
+/* ─── FILIÈRES TRADITIONNELLES ─── */
+function renderANCFilTrad() {
+  var tb = document.getElementById('tab-bar'); if (tb) tb.style.display = 'none';
+  var fiches = [
+    { ico:'🌾', name:'Tranchées d\'épandage', sub:'Épandage souterrain · Sol perméable · 200–400 m²',
+      specs:{ 'Perméabilité sol':'15–500 mm/h (étude de sol obligatoire)', 'Profondeur':'0,6–0,7 m de recouvrement', 'Drain':'PVC Ø 100 mm perforé · pente max 0,5%', 'Charge hydraulique':'0,04 m/j', 'Référence':'DTU 64.1 · Arrêté 07/09/2009' } },
+    { ico:'🟡', name:'Filtre à sable non drainé', sub:'Sable rapporté · Infiltration naturelle · 25–30 m²',
+      specs:{ 'Condition':'Sol sous-jacent apte à l\'infiltration', 'Épaisseur sable':'0,70 m minimum', 'Granulométrie':'0,25–2 mm (lavé, sans fines)', 'Charge hydraulique':'0,08 m/j', 'Référence':'DTU 64.1' } },
+    { ico:'🟠', name:'Filtre à sable drainé', sub:'Sable rapporté · Collecte et rejet contrôlé · 25–30 m²',
+      specs:{ 'Sol requis':'Sol sans pouvoir infiltrant (argile…)', 'Drain collecte':'Ø 100 mm · pente 0,5%', 'Rejet':'Milieu récepteur autorisé (étude + autorisation)', 'Charge hydraulique':'0,10 m/j', 'Référence':'DTU 64.1' } },
+    { ico:'⛰️', name:'Tertre d\'infiltration', sub:'Massif surélevé · Nappe haute · 0,5–1,5 m au-dessus sol',
+      specs:{ 'Hauteur':'0,5–1,5 m au-dessus du sol naturel', 'Distance nappe':'≥ 0,7 m fond de filière', 'Charge hydraulique':'0,12 m/j', 'Matériau':'Sable 0,25–2 mm importé', 'Référence':'DTU 64.1 art. 8' } },
+  ];
+  var html = '<div class="module-hero" style="--cat-color:var(--c-anc);background-image:linear-gradient(to right,#065F46 38%,rgba(6,95,70,0.88) 54%,rgba(6,95,70,0.30) 75%,transparent 92%),url(\'./images/anc-banner.webp\');background-size:cover;background-position:right center;background-color:#065F46">'
+    + '<button class="mh-back-btn" onclick="showModule(\'anc-home\')">‹ ANC</button>'
+    + '<span class="mh-icon">🏗️</span>'
+    + '<div class="mh-title">Filières traditionnelles</div>'
+    + '<div class="mh-sub">Épandage · Filtres à sable · Tertre · DTU 64.1</div>'
+    + '<div class="mh-tags"><span class="mh-tag">Sans énergie</span><span class="mh-tag">Sol perméable</span><span class="mh-tag">Arrêté 07/09/2009</span></div>'
+    + '</div>';
+  html += '<div class="section-header">Filières<span class="sh-count">' + fiches.length + ' fiches</span></div>';
+  html += '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">';
+  fiches.forEach(function(f, i) {
+    html += '<div class="fiche-card" style="--cat-color:var(--c-anc)" id="ft-' + i + '">'
+      + '<div class="fiche-stripe" style="background:var(--c-anc)"></div>'
+      + '<div class="fiche-head" onclick="toggleFicheANC(\'ft\',' + i + ')">'
+      + '<div class="fiche-icon" style="background:var(--c-anc-l)">' + f.ico + '</div>'
+      + '<div style="flex:1"><div class="fiche-name">' + f.name + '</div><div class="fiche-sub">' + f.sub + '</div></div>'
+      + '<span class="fiche-arrow" id="ft-a-' + i + '">›</span>'
+      + '</div>'
+      + '<div class="fiche-body" id="ft-b-' + i + '">'
+      + '<div class="kv-grid">' + Object.entries(f.specs).map(function(e) { return '<div class="kv-item"><div class="kv-key">' + e[0] + '</div><div class="kv-val">' + e[1] + '</div></div>'; }).join('') + '</div>'
+      + '<span class="src-pill">📖 DTU 64.1 · Arrêté 07/09/2009 modifié</span>'
+      + '</div></div>';
+  });
+  html += '</div><div class="pb-nav"></div>';
+  document.getElementById('main-content').innerHTML = html;
+}
+
+/* ─── FILIÈRES AGRÉÉES ─── */
+function renderANCFilAgree() {
+  var tb = document.getElementById('tab-bar'); if (tb) tb.style.display = 'none';
+  var fiches = [
+    { ico:'⚙️', name:'Microstation d\'épuration', sub:'Dispositif agréé · Cultures libres ou fixées · 4–20 EH',
+      specs:{ 'Agrément':'Arrêté 07/09/2009 modifié (≠ seul marquage CE)', 'Capacité':'4–20 EH', 'Rendement DBO₅':'> 90%', 'Consommation élec.':'100–300 kWh/an', 'Contrat entretien':'Obligatoire selon guide constructeur', 'Durée de vie':'15–25 ans' } },
+    { ico:'🌿', name:'FPR — Filtre planté de roseaux (vertical)', sub:'Phytoépuration · Écoulement vertical · 5 m²/EH',
+      specs:{ 'Charge surfacique':'5 m²/EH (mono-étage)', 'Granulat surface':'Gravier 2–8 mm', 'Alimentation':'Bâchées séquentielles (siphon ou pompe)', 'Végétaux':'Phragmites australis (roseaux)', 'Agrément':'Arrêté 07/09/2009 modifié', 'Durée de vie':'> 30 ans' } },
+    { ico:'🥥', name:'Filtre compact — média filtrant agréé', sub:'Tourbe · Coco · Zéolite · Pouzzolane · compact',
+      specs:{ 'Médias possibles':'Coco, zéolite, pouzzolane, selon agrément', 'Agrément':'Arrêté 07/09/2009 modifié · NF EN 12566-3', 'Remplacement':'Selon guide du fabricant (5–15 ans)', 'Surface':'Variable selon EH et agrément', 'Avantage':'Pas d\'énergie pour le traitement · compact' } },
+    { ico:'🚽', name:'Toilettes sèches (compostage)', sub:'Zéro eau · Compostage des matières · Conditions strictes',
+      specs:{ 'Condition':'Réglementation locale à vérifier (PLU/SPANC)', 'Principe':'Séparation urines / matières · compostage aérobie', 'Rejet':'Eaux ménagères à traiter séparément', 'Avantage':'Zéro eau pour les WC · ressource fertilisante', 'Référence':'Arrêté 07/09/2009 · Guide ASTEE' } },
+  ];
+  var html = '<div class="module-hero" style="--cat-color:var(--c-anc);background-image:linear-gradient(to right,#065F46 38%,rgba(6,95,70,0.88) 54%,rgba(6,95,70,0.30) 75%,transparent 92%),url(\'./images/anc-banner.webp\');background-size:cover;background-position:right center;background-color:#065F46">'
+    + '<button class="mh-back-btn" onclick="showModule(\'anc-home\')">‹ ANC</button>'
+    + '<span class="mh-icon">✅</span>'
+    + '<div class="mh-title">Filières agréées</div>'
+    + '<div class="mh-sub">Microstations · FPR · Filtres compacts · Toilettes sèches</div>'
+    + '<div class="mh-tags"><span class="mh-tag">Arrêté 07/09/2009</span><span class="mh-tag">NF EN 12566-3</span><span class="mh-tag">Agrément ministériel</span></div>'
+    + '</div>';
+  html += '<div class="section-header">Filières agréées<span class="sh-count">' + fiches.length + ' fiches</span></div>';
+  html += '<div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">';
+  fiches.forEach(function(f, i) {
+    html += '<div class="fiche-card" style="--cat-color:var(--c-anc)" id="fa-' + i + '">'
+      + '<div class="fiche-stripe" style="background:var(--c-anc)"></div>'
+      + '<div class="fiche-head" onclick="toggleFicheANC(\'fa\',' + i + ')">'
+      + '<div class="fiche-icon" style="background:var(--c-anc-l)">' + f.ico + '</div>'
+      + '<div style="flex:1"><div class="fiche-name">' + f.name + '</div><div class="fiche-sub">' + f.sub + '</div></div>'
+      + '<span class="fiche-arrow" id="fa-a-' + i + '">›</span>'
+      + '</div>'
+      + '<div class="fiche-body" id="fa-b-' + i + '">'
+      + '<div class="kv-grid">' + Object.entries(f.specs).map(function(e) { return '<div class="kv-item"><div class="kv-key">' + e[0] + '</div><div class="kv-val">' + e[1] + '</div></div>'; }).join('') + '</div>'
+      + '<span class="src-pill">📖 Arrêté 07/09/2009 modifié · NF EN 12566-3</span>'
+      + '</div></div>';
+  });
+  html += '</div><div class="pb-nav"></div>';
+  document.getElementById('main-content').innerHTML = html;
+}

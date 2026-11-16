@@ -2671,12 +2671,24 @@ function _switchQCMFormation(key) {
 function renderANCHub() {
   var _tb=document.getElementById('tab-bar'); if(_tb) _tb.style.display='none';
   document.getElementById('main-content').innerHTML = `
-    <div class="module-hero" style="--cat-color:var(--c-anc);background:linear-gradient(135deg,rgba(0,100,70,0.80) 0%,rgba(0,60,40,0.70) 100%),url('./images/anc-banner.webp');background-size:cover;background-position:center;">
+    <div class="module-hero" style="--cat-color:var(--c-anc);background-image:linear-gradient(to right,#065F46 38%,rgba(6,95,70,0.88) 54%,rgba(6,95,70,0.30) 75%,transparent 92%),url('./images/anc-banner.webp');background-size:cover;background-position:right center;background-color:#065F46;">
       <button class="mh-back-btn" onclick="goHome()">‹ Accueil</button>
       <span class="mh-icon">🏡</span>
       <div class="mh-title">Assainissement non collectif</div>
       <div class="mh-sub">SPANC · Réglementation · Aides · Équipements</div>
       <div class="mh-tags"><span class="mh-tag">101 depts SPANC</span><span class="mh-tag">Aides cumulables</span><span class="mh-tag">Réf. réglementaires</span></div>
+    </div>
+    <div class="section-header">Filières ANC</div>
+    <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
+      ${[
+        {ico:'🏗️',name:'Filières traditionnelles',sub:'Épandage · Filtre à sable · Tertre · Fosse + tranchées',id:'anc-trad'},
+        {ico:'✅',name:'Filières agréées',sub:'Microstations · FPR · Filtres compacts · Toilettes sèches',id:'anc-agree'},
+      ].map(function(m){ return `
+      <div class="mod-list-card" style="--cat-color:var(--c-anc)" onclick="showModule('${m.id}')">
+        <div class="mlc-icon" style="background:var(--c-anc-l)">${m.ico}</div>
+        <div class="mlc-body"><div class="mlc-name">${m.name}</div><div class="mlc-sub">${m.sub}</div></div>
+        <span class="mlc-arrow">›</span>
+      </div>`; }).join('')}
     </div>
     <div class="section-header">Référence & réglementation</div>
     <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">

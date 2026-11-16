@@ -680,7 +680,7 @@ function calcHWMain() {
 const ANC_TAB_LBLS = ['Filières','Comparateur','Prétraitement','Collecte','Rejet','Ventilation'];
 
 function renderANC() {
-  loadModuleTabs(ANC_TAB_LBLS, 'switchANCTab');
+  var tb = document.getElementById('tab-bar'); if (tb) tb.style.display = 'none';
   document.getElementById('main-content').innerHTML =
     '<div style="padding:8px var(--s-4);border-bottom:1px solid var(--c-border);display:flex;align-items:center">'
     + '<button onclick="goHome()" style="border:none;background:none;cursor:pointer;font-size:13px;color:var(--c-text-2);font-weight:600;padding:0">← Accueil</button>'

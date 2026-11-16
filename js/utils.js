@@ -382,6 +382,8 @@ function showModule(id) {
     nc:'Non conformes',
     mat:'Matériaux & Équipements',
     form:'Formations supérieures',
+    'anc-trad':          'ANC — Filières traditionnelles',
+    'anc-agree':         'ANC — Filières agréées',
     'anc-filieres':      'ANC — Filières',
     'anc-comparateur':   'ANC — Comparateur',
     'anc-pretraitement': 'ANC — Prétraitement',
@@ -414,6 +416,8 @@ function showModule(id) {
   else if (id === 'ouv')    renderOuvrages();
   else if (id === 'anc-home') renderANCHub();
   else if (id === 'fiches-anc') renderANCHub();
+  else if (id === 'anc-trad')  renderANCFilTrad();
+  else if (id === 'anc-agree') renderANCFilAgree();
   else if (id.indexOf('fiche-anc-') === 0) renderANCOuvrageDetail(id.slice('fiche-anc-'.length));
   else if (id === 'anc')    renderANC();
   else if (id === 'anc-filieres')      { renderANC(); if (typeof switchANCTab === 'function') switchANCTab(0); }
@@ -455,6 +459,7 @@ function showModule(id) {
     qcm:'nav-anc',
     ac:'nav-ac', calc:'nav-ac', calca:'nav-ac', calcs:'nav-ac', conv:'nav-ac', ouv:'nav-ac',
     'anc-home':'nav-anc', 'fiches-anc':'nav-anc', anc:'nav-anc', nc:'nav-anc', aides:'nav-anc', spanc:'nav-anc', 'outils-anc':'nav-anc',
+    'anc-trad':'nav-anc', 'anc-agree':'nav-anc',
     'anc-filieres':'nav-anc', 'anc-comparateur':'nav-anc', 'anc-pretraitement':'nav-anc', 'anc-collecte':'nav-anc', 'anc-rejet':'nav-anc', 'anc-ventilation':'nav-anc',
     'outils-ac':'nav-ac', 'outils-ep':'nav-ep', 'outils-riv':'nav-riv',
     ep:'nav-ep',
