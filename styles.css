@@ -1751,3 +1751,14 @@ body { font-family: var(--f-body); background: var(--c-bg); color: var(--c-text)
 #hc-lightbox img{max-width:100%;max-height:75vh;height:auto;border-radius:4px}
 #hc-lb-inner{touch-action:none}
 @media(prefers-reduced-motion:reduce){#hc-lb-inner{transition:none}}
+
+/* ─── FEATURES COMING SOON ─── */
+.hc-badge-soon{display:inline-block;font-size:9px;font-weight:800;color:#fff;background:#607D8B;border-radius:20px;padding:1px 6px;letter-spacing:.04em;text-transform:uppercase;vertical-align:middle;margin-left:5px;line-height:1.5}
+.hc-desk-nav-item.hc-feat-disabled{opacity:.5;filter:grayscale(.5);cursor:not-allowed !important}
+.hc-desk-nav-item.hc-feat-disabled:hover{background:rgba(255,255,255,.04);color:rgba(255,255,255,.5)}
+.hc-right-link.hc-feat-disabled{opacity:.55;filter:grayscale(.5);cursor:not-allowed !important}
+.hc-right-link.hc-feat-disabled:hover{background:var(--c-surface)}
+.hc-learn-card.hc-feat-disabled{opacity:.6;filter:grayscale(.5);cursor:not-allowed !important;background:var(--c-surface)}
+.hc-learn-card.hc-feat-disabled:hover{transform:none !important;box-shadow:none !important}
+#hc-coming-soon-toast{position:fixed;bottom:72px;left:50%;transform:translateX(-50%) translateY(16px);background:rgba(20,20,30,.92);color:#fff;padding:10px 20px;border-radius:var(--r-md);font-size:13px;font-weight:500;z-index:9999;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap;max-width:calc(100vw - 32px);text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.35)}
+#hc-coming-soon-toast.visible{opacity:1;transform:translateX(-50%) translateY(0)}

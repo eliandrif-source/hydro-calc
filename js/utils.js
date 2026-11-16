@@ -6,6 +6,27 @@ function getEl(id){ return document.getElementById(id)||null; }
 /* ─── BREADCRUMB (no-op — pas d'élément UI dédié) ─── */
 function setBreadcrumb() {}
 
+/* ─── FEATURE FLAGS — passer à true pour réactiver ─── */
+var FEATURES = {
+  messagerie: false,
+  forum: false
+};
+
+function _showComingSoonToast() {
+  var t = document.getElementById('hc-coming-soon-toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'hc-coming-soon-toast';
+    t.setAttribute('role', 'status');
+    t.setAttribute('aria-live', 'polite');
+    t.textContent = '🛠️ Outil en cours de développement — prochainement disponible !';
+    document.body.appendChild(t);
+  }
+  t.classList.add('visible');
+  clearTimeout(t._hcTimer);
+  t._hcTimer = setTimeout(function() { t.classList.remove('visible'); }, 3000);
+}
+
 /* ─── STORAGE SÉCURISÉ (fallback mémoire si localStorage bloqué) ─── */
 var _memStore = {};
 var _safeStorage = {
@@ -132,7 +153,17 @@ function renderDesktopNav() {
 
   if (user) {
     html += '<div class="hc-desk-nav-section">Communauté</div>';
-    communItems.forEach(function(it) { html += _navBtn(it); });
+    communItems.forEach(function(it) {
+      var disabled = (it.id === 'messagerie' && !FEATURES.messagerie) || (it.id === 'forum' && !FEATURES.forum);
+      if (disabled) {
+        html += '<button class="hc-desk-nav-item hc-feat-disabled" onclick="_showComingSoonToast()" aria-label="' + it.label + ' — prochainement disponible">'
+          + '<span class="hc-desk-nav-ico">' + it.ico + '</span>'
+          + '<span class="hc-desk-nav-label">' + it.label + ' <span class="hc-badge-soon">Bientôt</span></span>'
+          + '</button>';
+      } else {
+        html += _navBtn(it);
+      }
+    });
     html += '<div class="hc-desk-nav-section">Mon espace</div>';
     myItems.forEach(function(it) { html += _navBtn(it); });
   }
@@ -258,11 +289,11 @@ function _buildDesktopHome(user, act) {
 
   if (user) {
     rightHtml += '<div class="hc-right-section-title">Communauté</div>'
-      + '<button class="hc-right-link" onclick="showModule(\'messagerie\')">'
-        + '<span class="hc-right-link-ico">💬</span><span class="hc-right-link-name">Messagerie</span><span class="hc-right-link-arr">›</span>'
+      + '<button class="hc-right-link' + (!FEATURES.messagerie ? ' hc-feat-disabled' : '') + '" onclick="' + (!FEATURES.messagerie ? '_showComingSoonToast()' : "showModule('messagerie')") + '" aria-label="Messagerie' + (!FEATURES.messagerie ? ' — prochainement disponible' : '') + '">'
+        + '<span class="hc-right-link-ico">💬</span><span class="hc-right-link-name">Messagerie' + (!FEATURES.messagerie ? ' <span class="hc-badge-soon">Bientôt</span>' : '') + '</span><span class="hc-right-link-arr">›</span>'
       + '</button>'
-      + '<button class="hc-right-link" onclick="showModule(\'forum\')">'
-        + '<span class="hc-right-link-ico">🗣️</span><span class="hc-right-link-name">Forum</span><span class="hc-right-link-arr">›</span>'
+      + '<button class="hc-right-link' + (!FEATURES.forum ? ' hc-feat-disabled' : '') + '" onclick="' + (!FEATURES.forum ? '_showComingSoonToast()' : "showModule('forum')") + '" aria-label="Forum' + (!FEATURES.forum ? ' — prochainement disponible' : '') + '">'
+        + '<span class="hc-right-link-ico">🗣️</span><span class="hc-right-link-name">Forum' + (!FEATURES.forum ? ' <span class="hc-badge-soon">Bientôt</span>' : '') + '</span><span class="hc-right-link-arr">›</span>'
       + '</button>'
       + '<div class="hc-right-section-title">Mon parcours</div>'
       + '<div class="hc-right-card" onclick="showModule(\'stats\')">'
@@ -275,19 +306,19 @@ function _buildDesktopHome(user, act) {
   var extraMob = '';
   if (user) {
     var extraItems = [
-      { ico:'💬', name:'Messagerie',    sub:'Messages privés · Partage de fichiers', action:"showModule('messagerie')" },
-      { ico:'🗣️', name:'Forum',         sub:'Questions · Réponses · Discussions',    action:"showModule('forum')" },
-      { ico:'📁', name:'Mes dossiers',  sub:'Comptes rendus · Rapports · Documents', action:"showModule('dossiers')" },
-      { ico:'📚', name:'Mes cours perso', sub:'Créer et partager vos cours',         action:"showModule('cours-perso')" },
+      { ico:'💬', name:'Messagerie',    sub:'Messages privés · Partage de fichiers', action: FEATURES.messagerie ? "showModule('messagerie')" : '_showComingSoonToast()', disabled: !FEATURES.messagerie },
+      { ico:'🗣️', name:'Forum',         sub:'Questions · Réponses · Discussions',    action: FEATURES.forum ? "showModule('forum')" : '_showComingSoonToast()', disabled: !FEATURES.forum },
+      { ico:'📁', name:'Mes dossiers',  sub:'Comptes rendus · Rapports · Documents', action:"showModule('dossiers')", disabled: false },
+      { ico:'📚', name:'Mes cours perso', sub:'Créer et partager vos cours',         action:"showModule('cours-perso')", disabled: false },
     ];
     extraMob = '<div class="hc-home-extra-mob">'
       + '<h2 class="hc-home-section-title">Communauté &amp; Mon espace</h2>'
       + '<p class="hc-home-section-sub">Accédez aux fonctionnalités collaboratives et à votre espace personnel.</p>'
       + '<div class="hc-learn-grid">'
       + extraItems.map(function(it) {
-          return '<div class="hc-learn-card" onclick="' + it.action + '">'
+          return '<div class="hc-learn-card' + (it.disabled ? ' hc-feat-disabled' : '') + '" onclick="' + it.action + '"' + (it.disabled ? ' tabindex="0" role="button" aria-label="' + it.name + ' — prochainement disponible" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){' + it.action + '}"' : '') + '>'
             + '<div class="hc-learn-card-ico" style="background:var(--c-surface-2)">' + it.ico + '</div>'
-            + '<div><div class="hc-learn-card-name">' + it.name + '</div>'
+            + '<div><div class="hc-learn-card-name">' + it.name + (it.disabled ? ' <span class="hc-badge-soon">Bientôt</span>' : '') + '</div>'
             + '<div class="hc-learn-card-sub">' + it.sub + '</div></div>'
             + '</div>';
         }).join('')
@@ -341,6 +372,10 @@ function scrollToTop() {
 }
 
 function showModule(id) {
+  if ((id === 'messagerie' && !FEATURES.messagerie) || (id === 'forum' && !FEATURES.forum)) {
+    _showComingSoonToast();
+    return;
+  }
   currentModule = id;
   if (typeof renderDesktopNav === 'function') renderDesktopNav();
   scrollToTop();
