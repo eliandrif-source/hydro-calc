@@ -5,6 +5,23 @@ var GEMEAU_B04 = {
     titre: 'La cellule et les principaux organismes des milieux aquatiques',
     fiche: {
       intro: 'Les organismes vivants peuplant les eaux constituent à la fois des indicateurs de qualité (bio-indicateurs) et des acteurs des processus de traitement (boues biologiques, lagunage). Le technicien des métiers de l\'eau doit savoir reconnaître les grands groupes d\'organismes aquatiques, comprendre leur rôle dans les milieux naturels et dans les filières de traitement.',
+      schema: `<svg viewBox="0 0 260 112" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <rect width="260" height="112" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Procaryote vs Eucaryote</text>
+  <rect x="10" y="22" width="110" height="68" rx="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="65" y="34" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#15803d" font-family="sans-serif">Procaryote (bactérie)</text>
+  <ellipse cx="65" cy="58" rx="38" ry="20" fill="#bbf7d0" stroke="#16a34a" stroke-width="1"/>
+  <circle cx="65" cy="58" r="5" fill="#15803d" opacity="0.6"/>
+  <text x="65" y="61" text-anchor="middle" font-size="7" fill="#fff" font-family="sans-serif">ADN</text>
+  <text x="65" y="82" text-anchor="middle" font-size="7.5" fill="#15803d" font-family="sans-serif">Pas de noyau · 1–10 µm</text>
+  <rect x="140" y="22" width="110" height="68" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="195" y="34" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#1d4ed8" font-family="sans-serif">Eucaryote (algue, proto.)</text>
+  <ellipse cx="195" cy="56" rx="38" ry="22" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+  <ellipse cx="195" cy="56" rx="12" ry="10" fill="#1d4ed8" opacity="0.4"/>
+  <text x="195" y="60" text-anchor="middle" font-size="7" fill="#fff" font-family="sans-serif">noyau</text>
+  <text x="195" y="82" text-anchor="middle" font-size="7.5" fill="#1d4ed8" font-family="sans-serif">Noyau membraneux · 10–100 µm</text>
+  <text x="130" y="102" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">Bact. pathogènes : E.coli, Vibrio, Salmonella...</text>
+</svg>`,
       sections: [
         {
           titre: '1. Organisation cellulaire : procaryotes et eucaryotes',
@@ -69,6 +86,23 @@ var GEMEAU_B04 = {
     titre: 'Métabolisme microbien et croissance des populations',
     fiche: {
       intro: 'La compréhension du métabolisme bactérien est indispensable pour optimiser les traitements biologiques de l\'eau. Le technicien de STEP doit savoir interpréter la courbe de croissance des boues, calculer la charge massique, régler l\'âge des boues et anticiper les problèmes de foisonnement ou d\'inhibition selon les paramètres opératoires.',
+      schema: `<svg viewBox="0 0 260 112" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb28" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#334155"/></marker></defs>
+  <rect width="260" height="112" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Courbe de croissance bactérienne</text>
+  <line x1="22" y1="94" x2="248" y2="94" stroke="#334155" stroke-width="1.5" marker-end="url(#mb28)"/>
+  <line x1="22" y1="94" x2="22" y2="22" stroke="#334155" stroke-width="1.5" marker-end="url(#mb28)"/>
+  <text x="244" y="106" font-size="8" fill="#334155" font-family="sans-serif">t →</text>
+  <text x="8" y="32" font-size="7.5" fill="#334155" font-family="sans-serif" transform="rotate(-90,12,68)">log N</text>
+  <path d="M28,88 C45,86 55,85 68,82 C80,70 95,32 125,25 C155,22 175,25 200,36 C220,46 235,70 242,88" stroke="#2563eb" stroke-width="2.5" fill="none"/>
+  <line x1="68" y1="20" x2="68" y2="94" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <line x1="125" y1="20" x2="125" y2="94" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <line x1="200" y1="20" x2="200" y2="94" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <text x="45" y="100" text-anchor="middle" font-size="7.5" fill="#64748b" font-family="sans-serif">Lag</text>
+  <text x="97" y="100" text-anchor="middle" font-size="7.5" fill="#059669" font-family="sans-serif" font-weight="bold">Log</text>
+  <text x="163" y="100" text-anchor="middle" font-size="7.5" fill="#d97706" font-family="sans-serif">Stat.</text>
+  <text x="225" y="100" text-anchor="middle" font-size="7.5" fill="#dc2626" font-family="sans-serif">Déclin</text>
+</svg>`,
       sections: [
         {
           titre: '1. Modes métaboliques des bactéries',
@@ -135,6 +169,25 @@ var GEMEAU_B04 = {
     titre: 'Microorganismes et transformations biologiques dans les traitements',
     fiche: {
       intro: 'Les STEP à boues activées, biofiltres, lits bactériens et lagunes exploitent des communautés microbiennes complexes pour dégrader la matière organique, nitrifier l\'ammoniaque et déphosphater biologiquement. L\'opérateur doit comprendre les mécanismes biologiques pour optimiser les paramètres opératoires, anticiper les dysfonctionnements et respecter les normes de rejet.',
+      schema: `<svg viewBox="0 0 260 112" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb29" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#475569"/></marker></defs>
+  <rect width="260" height="112" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Boues activées — traitement biologique</text>
+  <rect x="10" y="30" width="52" height="30" rx="3" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="36" y="49" text-anchor="middle" font-size="8" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">Bassin</text>
+  <line x1="62" y1="45" x2="90" y2="45" stroke="#334155" stroke-width="1.5" marker-end="url(#mb29)"/>
+  <rect x="90" y="24" width="80" height="42" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="130" y="40" text-anchor="middle" font-size="8.5" fill="#15803d" font-family="sans-serif" font-weight="bold">Bassin aération</text>
+  <text x="130" y="52" text-anchor="middle" font-size="8" fill="#15803d" font-family="sans-serif">MO + O₂ → CO₂</text>
+  <text x="130" y="62" text-anchor="middle" font-size="8" fill="#15803d" font-family="sans-serif">+ H₂O + boues</text>
+  <line x1="170" y1="45" x2="198" y2="45" stroke="#334155" stroke-width="1.5" marker-end="url(#mb29)"/>
+  <rect x="198" y="30" width="52" height="30" rx="3" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="224" y="49" text-anchor="middle" font-size="8" fill="#334155" font-family="sans-serif" font-weight="bold">Clarific.</text>
+  <line x1="224" y1="60" x2="224" y2="80" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#mb29)"/>
+  <line x1="224" y1="80" x2="130" y2="80" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#mb29)"/>
+  <text x="175" y="78" text-anchor="middle" font-size="7.5" fill="#94a3b8" font-family="sans-serif">Recirculation boues</text>
+  <text x="130" y="100" text-anchor="middle" font-size="8.5" fill="#334155" font-family="sans-serif" font-weight="bold">MES entrée 300 → sortie &lt; 35 mg/L · rendement &gt; 85%</text>
+</svg>`,
       sections: [
         {
           titre: '1. Traitement aérobie de la matière organique',
@@ -200,6 +253,21 @@ var GEMEAU_B04 = {
     titre: 'Risques microbiologiques et indicateurs de contamination',
     fiche: {
       intro: 'La contamination microbiologique de l\'eau potable est la principale cause de maladies hydriques dans le monde. Même dans les pays développés, des incidents (Escherichia coli O157:H7, Cryptosporidium, Legionella) peuvent survenir. Le technicien des métiers de l\'eau est le premier rempart contre ces risques : il surveille les indicateurs de contamination, maintient les traitements de désinfection et déclenche les alertes.',
+      schema: `<svg viewBox="0 0 260 112" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <rect width="260" height="112" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Triangle épidémiologique — contamination hydrique</text>
+  <polygon points="130,22 32,100 228,100" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+  <circle cx="130" cy="22" r="22" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="130" y="19" text-anchor="middle" font-size="8" font-weight="bold" fill="#dc2626" font-family="sans-serif">Agent</text>
+  <text x="130" y="29" text-anchor="middle" font-size="7.5" fill="#dc2626" font-family="sans-serif">E.coli · virus</text>
+  <circle cx="32" cy="100" r="22" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="32" y="97" text-anchor="middle" font-size="8" font-weight="bold" fill="#92400e" font-family="sans-serif">Hôte</text>
+  <text x="32" y="107" text-anchor="middle" font-size="7.5" fill="#92400e" font-family="sans-serif">immunité</text>
+  <circle cx="228" cy="100" r="22" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="228" y="97" text-anchor="middle" font-size="8" font-weight="bold" fill="#15803d" font-family="sans-serif">Env.</text>
+  <text x="228" y="107" text-anchor="middle" font-size="7.5" fill="#15803d" font-family="sans-serif">eau/sol</text>
+  <text x="130" y="68" text-anchor="middle" font-size="8.5" fill="#334155" font-family="sans-serif" font-weight="bold">Maladie = intersection des 3</text>
+</svg>`,
       sections: [
         {
           titre: '1. Principaux agents pathogènes liés à l\'eau',
@@ -266,6 +334,23 @@ var GEMEAU_B04 = {
     titre: 'Fonctionnement des écosystèmes aquatiques',
     fiche: {
       intro: 'Un écosystème aquatique est un ensemble dynamique formé par la communauté des organismes vivants (biocénose) et le milieu physico-chimique (biotope) dans lequel ils évoluent. La compréhension des flux d\'énergie et de matière dans ces systèmes est indispensable pour évaluer l\'impact des rejets, gérer les ressources en eau et piloter des procédés naturels de traitement.',
+      schema: `<svg viewBox="0 0 260 112" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb31" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#475569"/></marker></defs>
+  <rect width="260" height="112" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Réseau trophique aquatique simplifié</text>
+  <rect x="90" y="20" width="80" height="20" rx="3" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="130" y="34" text-anchor="middle" font-size="8.5" fill="#15803d" font-family="sans-serif" font-weight="bold">Algues · Phytopl.</text>
+  <line x1="130" y1="40" x2="90" y2="56" stroke="#475569" stroke-width="1.5" marker-end="url(#mb31)"/>
+  <line x1="130" y1="40" x2="170" y2="56" stroke="#475569" stroke-width="1.5" marker-end="url(#mb31)"/>
+  <rect x="45" y="56" width="80" height="20" rx="3" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="85" y="70" text-anchor="middle" font-size="8" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">Herbivores · Zoo.</text>
+  <rect x="135" y="56" width="80" height="20" rx="3" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="175" y="70" text-anchor="middle" font-size="8" fill="#92400e" font-family="sans-serif" font-weight="bold">Bactéries dégrad.</text>
+  <line x1="85" y1="76" x2="85" y2="92" stroke="#475569" stroke-width="1.5" marker-end="url(#mb31)"/>
+  <line x1="175" y1="76" x2="130" y2="92" stroke="#475569" stroke-width="1.5" marker-end="url(#mb31)"/>
+  <rect x="60" y="92" width="140" height="16" rx="3" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="130" y="103" text-anchor="middle" font-size="8.5" fill="#dc2626" font-family="sans-serif" font-weight="bold">Prédateurs · Poissons</text>
+</svg>`,
       sections: [
         {
           titre: '1. Structure trophique des écosystèmes aquatiques',
@@ -331,6 +416,25 @@ var GEMEAU_B04 = {
     titre: 'Cycles du carbone, de l\'azote et du phosphore',
     fiche: {
       intro: 'Les cycles biogéochimiques du carbone, de l\'azote et du phosphore couplent les compartiments biologiques, chimiques et physiques des écosystèmes aquatiques. Leur perturbation par les activités humaines (agriculture, industrie, urbanisation) est à l\'origine des problèmes majeurs de qualité des eaux : eutrophisation, désoxygénation, contamination des nappes. Le technicien GEMEAU doit maîtriser ces cycles pour comprendre les traitements biologiques et les processus naturels d\'autoépuration.',
+      schema: `<svg viewBox="0 0 260 112" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb32" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#475569"/></marker></defs>
+  <rect width="260" height="112" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Cycle de l'azote — transformations biologiques</text>
+  <ellipse cx="130" cy="30" rx="40" ry="12" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="130" y="34" text-anchor="middle" font-size="8" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">N₂ atmosphérique</text>
+  <ellipse cx="50" cy="70" rx="35" ry="12" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="50" y="74" text-anchor="middle" font-size="8" fill="#15803d" font-family="sans-serif" font-weight="bold">NH₄⁺ (ammon.)</text>
+  <ellipse cx="210" cy="70" rx="35" ry="12" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="210" y="74" text-anchor="middle" font-size="8" fill="#92400e" font-family="sans-serif" font-weight="bold">NO₃⁻ (nitrate)</text>
+  <line x1="90" y1="38" x2="62" y2="58" stroke="#475569" stroke-width="1.5" marker-end="url(#mb32)"/>
+  <text x="62" y="50" font-size="7" fill="#64748b" font-family="sans-serif">Fixation</text>
+  <line x1="50" y1="82" x2="130" y2="92" stroke="#475569" stroke-width="1.5" marker-end="url(#mb32)"/>
+  <text x="82" y="93" font-size="7" fill="#64748b" font-family="sans-serif">Nitrif.</text>
+  <line x1="130" y1="92" x2="210" y2="82" stroke="#475569" stroke-width="1.5" marker-end="url(#mb32)"/>
+  <line x1="210" y1="58" x2="140" y2="38" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#mb32)"/>
+  <text x="185" y="45" font-size="7" fill="#dc2626" font-family="sans-serif">Dénitri.</text>
+  <text x="130" y="108" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">NH₄⁺ → NO₂⁻ → NO₃⁻ (Nitrosomonas · Nitrobacter)</text>
+</svg>`,
       sections: [
         {
           titre: '1. Cycle du carbone dans les milieux aquatiques',
@@ -396,6 +500,26 @@ var GEMEAU_B04 = {
     titre: 'Eutrophisation et déséquilibres écologiques',
     fiche: {
       intro: 'L\'eutrophisation est l\'enrichissement excessif d\'un milieu aquatique en nutriments (azote et phosphore), entraînant une explosion de la production algale, la désoxygénation des couches profondes et la dégradation de la biodiversité. Ce phénomène est l\'un des problèmes environnementaux les plus importants en Europe et dans le monde, étroitement lié aux activités agricoles, urbaines et industrielles.',
+      schema: `<svg viewBox="0 0 260 118" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb33" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#475569"/></marker></defs>
+  <rect width="260" height="118" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Spirale d'eutrophisation</text>
+  <rect x="85" y="20" width="90" height="18" rx="3" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="130" y="32" text-anchor="middle" font-size="8" fill="#15803d" font-family="sans-serif" font-weight="bold">N, P excessifs (agricole…)</text>
+  <line x1="130" y1="38" x2="130" y2="48" stroke="#475569" stroke-width="1.5" marker-end="url(#mb33)"/>
+  <rect x="85" y="48" width="90" height="18" rx="3" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="130" y="60" text-anchor="middle" font-size="8" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">Prolifération algues</text>
+  <line x1="130" y1="66" x2="130" y2="76" stroke="#475569" stroke-width="1.5" marker-end="url(#mb33)"/>
+  <rect x="85" y="76" width="90" height="18" rx="3" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="130" y="88" text-anchor="middle" font-size="8" fill="#92400e" font-family="sans-serif" font-weight="bold">O₂ ↓ (nuit / fond)</text>
+  <line x1="175" y1="85" x2="225" y2="85" stroke="#dc2626" stroke-width="1.5" marker-end="url(#mb33)"/>
+  <rect x="195" y="48" width="60" height="18" rx="3" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="225" y="60" text-anchor="middle" font-size="8" fill="#dc2626" font-family="sans-serif" font-weight="bold">Mortalité</text>
+  <line x1="225" y1="48" x2="225" y2="30" stroke="#dc2626" stroke-width="1.5" marker-end="url(#mb33)"/>
+  <line x1="225" y1="30" x2="175" y2="30" stroke="#dc2626" stroke-width="1.5"/>
+  <line x1="175" y1="30" x2="175" y2="29" stroke="#dc2626" stroke-width="0.5"/>
+  <text x="130" y="110" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">Facteur limitant : P (eau douce) · N (eaux côtières)</text>
+</svg>`,
       sections: [
         {
           titre: '1. Mécanisme de l\'eutrophisation',
@@ -460,6 +584,25 @@ var GEMEAU_B04 = {
     titre: 'Bioindication et suivi biologique',
     fiche: {
       intro: 'Le suivi biologique des cours d\'eau et des plans d\'eau est obligatoire dans le cadre de la directive cadre eau (DCE 2000/60/CE). Il complète les analyses physico-chimiques en intégrant les effets des polluants sur la durée et en évaluant l\'état écologique réel du milieu. La France a développé plusieurs indices biologiques standardisés pour répondre aux exigences de la DCE.',
+      schema: `<svg viewBox="0 0 260 112" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <rect width="260" height="112" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">IBD / IBGN — indice biologique de qualité</text>
+  <defs><linearGradient id="qg" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#dc2626"/><stop offset="25%" stop-color="#f59e0b"/><stop offset="50%" stop-color="#eab308"/><stop offset="75%" stop-color="#22c55e"/><stop offset="100%" stop-color="#16a34a"/></linearGradient></defs>
+  <rect x="10" y="30" width="240" height="22" rx="4" fill="url(#qg)"/>
+  <text x="10" y="66" font-size="7.5" fill="#dc2626" font-family="sans-serif" font-weight="bold">0</text>
+  <text x="68" y="66" text-anchor="middle" font-size="7.5" fill="#f59e0b" font-family="sans-serif">5</text>
+  <text x="128" y="66" text-anchor="middle" font-size="7.5" fill="#eab308" font-family="sans-serif">10</text>
+  <text x="188" y="66" text-anchor="middle" font-size="7.5" fill="#22c55e" font-family="sans-serif">15</text>
+  <text x="246" y="66" font-size="7.5" fill="#16a34a" font-family="sans-serif">20</text>
+  <text x="38" y="82" text-anchor="middle" font-size="8" fill="#dc2626" font-family="sans-serif">Mauvais</text>
+  <text x="100" y="82" text-anchor="middle" font-size="8" fill="#f59e0b" font-family="sans-serif">Médiocre</text>
+  <text x="155" y="82" text-anchor="middle" font-size="8" fill="#eab308" font-family="sans-serif">Moyen</text>
+  <text x="210" y="82" text-anchor="middle" font-size="8" fill="#22c55e" font-family="sans-serif">Bon</text>
+  <text x="38" y="96" text-anchor="middle" font-size="7.5" fill="#64748b" font-family="sans-serif">Chironomus</text>
+  <text x="155" y="96" text-anchor="middle" font-size="7.5" fill="#64748b" font-family="sans-serif">Gammarus</text>
+  <text x="210" y="96" text-anchor="middle" font-size="7.5" fill="#64748b" font-family="sans-serif">Éphémères</text>
+  <text x="130" y="108" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">DCE : atteinte du bon état écologique requis</text>
+</svg>`,
       sections: [
         {
           titre: '1. Principes de la bioindication',
