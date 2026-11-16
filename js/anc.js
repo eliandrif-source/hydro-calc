@@ -1724,7 +1724,16 @@ function renderANCFilTrad() {
       <tr><td style="padding:4px 8px">10</td><td style="padding:4px 8px;text-align:right;font-weight:700">8 000 L</td></tr>
     </tbody>
   </table>
-  <div style="font-size:9px;color:var(--c-text-4);margin-top:4px;padding:0 4px">+1 m³ / pièce principale au-delà de 5 · Exemple : 6 PP = 3 + 1 = 4 m³</div>
+  <div style="font-size:9px;color:var(--c-text-4);margin-top:4px;padding:0 4px">+1 m³ / pièce principale au-delà de 5 · Exemple : 6 PP → V = 3 + 1 = 4 m³</div>
+</div>
+<div style="margin:0 0 12px;background:rgba(6,95,70,0.05);border-radius:8px;padding:10px 12px">
+  <div style="font-size:11px;font-weight:700;color:var(--c-text-2);margin-bottom:8px;padding-left:8px;border-left:3px solid var(--c-anc)">Caractéristiques hydrauliques</div>
+  <div style="font-size:10.5px;color:var(--c-text);margin-bottom:6px">La fosse fonctionne <strong>en charge</strong> : elle reste toujours pleine jusqu'au niveau de sortie. 100 L entrant déplacent 100 L vers l'aval — ce n'est pas une cuve de stockage.</div>
+  <div style="display:grid;grid-template-columns:auto 1fr;gap:6px 12px;align-items:start;font-size:10.5px">
+    <div style="text-align:center;padding:8px 14px;background:var(--c-surface-2);border-radius:8px;font-size:13px;font-weight:700;color:var(--c-anc);font-style:italic">T = V / Q</div>
+    <div style="color:var(--c-text-2)"><strong>T</strong> = temps de séjour (jours)<br><strong>V</strong> = volume hydraulique utile (m³)<br><strong>Q</strong> = débit journalier (m³/j)</div>
+  </div>
+  <div style="font-size:9px;color:var(--c-text-4);margin-top:7px;border-top:1px solid var(--c-border);padding-top:5px">Exemple illustratif : fosse 3 m³ recevant 600 L/j → T ≈ 5 jours · Ce calcul ne remplace pas le dimensionnement réglementaire</div>
 </div>
 <div style="margin:0 0 8px">
   <div style="font-size:11px;font-weight:700;color:var(--c-text-2);margin-bottom:6px;padding-left:8px;border-left:3px solid #ef4444">Diagnostic terrain (SPANC)</div>
