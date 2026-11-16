@@ -5,6 +5,38 @@ var GEMEAU_B01 = {
     titre: 'Grandeurs physiques, unités et conversions',
     fiche: {
       intro: 'Dans les métiers de l\'eau, chaque calcul mobilise des grandeurs physiques issues de disciplines variées : hydraulique, chimie, biologie, thermodynamique. Un technicien GEMEAU est quotidiennement confronté à des relevés exprimés en m³/h sur un compteur, en mg/L sur un rapport d\'analyse, ou en bars sur un manomètre. Maîtriser les unités et leurs conversions est une compétence fondamentale qui conditionne la fiabilité de tout dimensionnement ou diagnostic.',
+      schema: `<svg viewBox="0 0 280 155" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+  <defs><marker id="a1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3z" fill="#475569"/></marker></defs>
+  <rect width="280" height="155" fill="#f8fafc" rx="6"/>
+  <text x="140" y="14" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="system-ui,sans-serif">Conversions essentielles — métiers de l'eau</text>
+  <rect x="8" y="22" width="78" height="32" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.2"/>
+  <text x="47" y="36" text-anchor="middle" font-size="11" font-weight="bold" fill="#1d4ed8" font-family="system-ui,sans-serif">1 L/s</text>
+  <text x="47" y="47" text-anchor="middle" font-size="8" fill="#1d4ed8" font-family="system-ui,sans-serif">litres/seconde</text>
+  <rect x="102" y="22" width="78" height="32" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.2"/>
+  <text x="141" y="36" text-anchor="middle" font-size="11" font-weight="bold" fill="#15803d" font-family="system-ui,sans-serif">3,6 m³/h</text>
+  <text x="141" y="47" text-anchor="middle" font-size="8" fill="#15803d" font-family="system-ui,sans-serif">mètres cube/heure</text>
+  <rect x="196" y="22" width="78" height="32" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.2"/>
+  <text x="235" y="36" text-anchor="middle" font-size="11" font-weight="bold" fill="#b45309" font-family="system-ui,sans-serif">86,4 m³/j</text>
+  <text x="235" y="47" text-anchor="middle" font-size="8" fill="#b45309" font-family="system-ui,sans-serif">mètres cube/jour</text>
+  <line x1="86" y1="38" x2="102" y2="38" stroke="#475569" stroke-width="1.5" marker-end="url(#a1)"/>
+  <line x1="180" y1="38" x2="196" y2="38" stroke="#475569" stroke-width="1.5" marker-end="url(#a1)"/>
+  <text x="94" y="34" text-anchor="middle" font-size="7.5" fill="#64748b" font-family="system-ui,sans-serif">×3,6</text>
+  <text x="188" y="34" text-anchor="middle" font-size="7.5" fill="#64748b" font-family="system-ui,sans-serif">×24</text>
+  <line x1="10" y1="68" x2="270" y2="68" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="140" y="82" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="system-ui,sans-serif">Pression</text>
+  <rect x="8" y="90" width="78" height="32" rx="4" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.2"/>
+  <text x="47" y="104" text-anchor="middle" font-size="11" font-weight="bold" fill="#6d28d9" font-family="system-ui,sans-serif">1 bar</text>
+  <text x="47" y="115" text-anchor="middle" font-size="8" fill="#6d28d9" font-family="system-ui,sans-serif">≈ 1 atm</text>
+  <rect x="102" y="90" width="78" height="32" rx="4" fill="#fce7f3" stroke="#db2777" stroke-width="1.2"/>
+  <text x="141" y="104" text-anchor="middle" font-size="11" font-weight="bold" fill="#be185d" font-family="system-ui,sans-serif">100 000 Pa</text>
+  <text x="141" y="115" text-anchor="middle" font-size="8" fill="#be185d" font-family="system-ui,sans-serif">100 kPa</text>
+  <rect x="196" y="90" width="78" height="32" rx="4" fill="#f1f5f9" stroke="#475569" stroke-width="1.2"/>
+  <text x="235" y="104" text-anchor="middle" font-size="11" font-weight="bold" fill="#334155" font-family="system-ui,sans-serif">10,2 mCE</text>
+  <text x="235" y="115" text-anchor="middle" font-size="8" fill="#334155" font-family="system-ui,sans-serif">m col. d'eau</text>
+  <line x1="86" y1="106" x2="102" y2="106" stroke="#475569" stroke-width="1.5" marker-end="url(#a1)"/>
+  <line x1="180" y1="106" x2="196" y2="106" stroke="#475569" stroke-width="1.5" marker-end="url(#a1)"/>
+  <text x="140" y="145" text-anchor="middle" font-size="8" fill="#94a3b8" font-family="system-ui,sans-serif">1 mg/L = 1 g/m³  ·  T(K) = T(°C) + 273,15</text>
+</svg>`,
       sections: [
         {
           titre: '1. Le Système International d\'unités (SI)',
@@ -126,6 +158,20 @@ var GEMEAU_B01 = {
     titre: 'Proportionnalité, pourcentages et bilans simples',
     fiche: {
       intro: 'Le technicien de l\'eau réalise en permanence des bilans : bilan hydraulique d\'un réseau, bilan de masse sur une filière de traitement, bilan énergétique d\'une station de pompage. Ces calculs reposent sur la proportionnalité et les pourcentages, des outils mathématiques simples mais dont la maîtrise conditionne la qualité des rapports d\'exploitation et des diagnostics.',
+      schema: `<svg viewBox="0 0 260 112" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3z" fill="#475569"/></marker></defs>
+  <rect width="260" height="112" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Bilan de masse — procédé de traitement</text>
+  <rect x="85" y="28" width="90" height="38" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="130" y="50" text-anchor="middle" font-size="9" font-weight="bold" fill="#1d4ed8" font-family="sans-serif">Procédé</text>
+  <line x1="10" y1="47" x2="85" y2="47" stroke="#059669" stroke-width="2" marker-end="url(#mb)"/>
+  <text x="47" y="42" text-anchor="middle" font-size="8" fill="#059669" font-family="sans-serif">Qe · Ce</text>
+  <line x1="175" y1="47" x2="248" y2="47" stroke="#2563eb" stroke-width="2" marker-end="url(#mb)"/>
+  <text x="212" y="42" text-anchor="middle" font-size="8" fill="#2563eb" font-family="sans-serif">Qs · Cs</text>
+  <line x1="130" y1="66" x2="130" y2="92" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#mb)"/>
+  <text x="145" y="85" font-size="7.5" fill="#94a3b8" font-family="sans-serif">boues</text>
+  <text x="130" y="106" text-anchor="middle" font-size="8" fill="#475569" font-family="sans-serif">η = (Ce − Cs) / Ce × 100 %</text>
+</svg>`,
       sections: [
         {
           titre: '1. La proportionnalité et la règle de trois',
@@ -239,6 +285,18 @@ var GEMEAU_B01 = {
     titre: 'Algèbre et résolution d\'équations techniques',
     fiche: {
       intro: 'Les équations algébriques sont l\'outil de base du dimensionnement hydraulique. Que ce soit pour isoler un diamètre dans la formule de Manning-Strickler, calculer la hauteur manométrique totale d\'un système de pompage, ou déterminer la dose de réactif optimale, le technicien GEMEAU doit être capable de manipuler des formules, d\'isoler des inconnues et de résoudre des systèmes d\'équations simples.',
+      schema: `<svg viewBox="0 0 260 118" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <rect width="260" height="118" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Isolation de variable — Manning-Strickler</text>
+  <rect x="10" y="22" width="240" height="22" rx="4" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="130" y="37" text-anchor="middle" font-size="12" font-weight="bold" fill="#334155" font-family="sans-serif">Q = K · S · Rh²&#x2F;³ · i¹&#x2F;²</text>
+  <text x="130" y="57" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">▼ isoler K :</text>
+  <rect x="40" y="62" width="180" height="20" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.2"/>
+  <text x="130" y="76" text-anchor="middle" font-size="11" font-weight="bold" fill="#15803d" font-family="sans-serif">K = Q / (S · Rh²&#x2F;³ · i¹&#x2F;²)</text>
+  <text x="130" y="96" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">▼ isoler i :</text>
+  <rect x="40" y="100" width="180" height="14" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.2"/>
+  <text x="130" y="111" text-anchor="middle" font-size="10" font-weight="bold" fill="#b45309" font-family="sans-serif">i = [ Q / (K · S · Rh²&#x2F;³) ]²</text>
+</svg>`,
       sections: [
         {
           titre: '1. Manipulation et isolement d\'une variable dans une formule',
@@ -352,6 +410,23 @@ var GEMEAU_B01 = {
     titre: 'Fonctions, graphiques et interpolation',
     fiche: {
       intro: 'La lecture et l\'interprétation de graphiques sont des compétences permanentes dans les métiers de l\'eau : les courbes de pompe, les courbes de réseau, les courbes de tarage d\'un déversoir, les graphiques d\'évolution de la qualité de l\'eau dans le temps — tous nécessitent une maîtrise des fonctions mathématiques et de l\'interpolation. Un technicien qui ne sait pas lire correctement une courbe de pompe risque de sélectionner un équipement inadapté.',
+      schema: `<svg viewBox="0 0 260 148" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="m4" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#334155"/></marker></defs>
+  <rect width="260" height="148" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Courbe pompe H-Q et point de fonctionnement</text>
+  <line x1="28" y1="130" x2="248" y2="130" stroke="#334155" stroke-width="1.5" marker-end="url(#m4)"/>
+  <line x1="28" y1="130" x2="28" y2="22" stroke="#334155" stroke-width="1.5" marker-end="url(#m4)"/>
+  <text x="244" y="142" font-size="8.5" fill="#334155" font-family="sans-serif">Q →</text>
+  <text x="8" y="40" font-size="8.5" fill="#334155" font-family="sans-serif" transform="rotate(-90,14,80)">H ↑</text>
+  <path d="M38,36 Q110,46 215,122" stroke="#2563eb" stroke-width="2" fill="none"/>
+  <text x="75" y="43" font-size="8" fill="#2563eb" font-family="sans-serif" font-weight="bold">Pompe</text>
+  <path d="M38,126 Q100,105 215,52" stroke="#dc2626" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
+  <text x="168" y="49" font-size="8" fill="#dc2626" font-family="sans-serif" font-weight="bold">Réseau</text>
+  <circle cx="128" cy="83" r="5" fill="#16a34a" stroke="#fff" stroke-width="1.5"/>
+  <line x1="128" y1="83" x2="128" y2="130" stroke="#16a34a" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="28" y1="83" x2="128" y2="83" stroke="#16a34a" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="134" y="80" font-size="7.5" fill="#16a34a" font-family="sans-serif" font-weight="bold">Pt fonctionnement</text>
+</svg>`,
       sections: [
         {
           titre: '1. Fonctions mathématiques courantes',
@@ -464,6 +539,24 @@ var GEMEAU_B01 = {
     titre: 'Géométrie et trigonométrie appliquées',
     fiche: {
       intro: 'Le technicien GEMEAU calcule des volumes de réservoirs à construire, des surfaces de bassins de décantation, des pentes de caniveaux ou de collecteurs, et des longueurs sur plans topographiques. La géométrie et la trigonométrie sont les outils qui permettent de passer d\'un plan 2D à des quantités physiques réelles : le cubage d\'un ouvrage, l\'emprise foncière d\'une installation, ou l\'inclinaison d\'une conduite de refoulement.',
+      schema: `<svg viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <rect width="260" height="130" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Section circulaire partiellement remplie</text>
+  <circle cx="90" cy="72" r="44" fill="none" stroke="#334155" stroke-width="2"/>
+  <path d="M46,80 A44,44 0 0,0 134,80 Z" fill="#93c5fd" opacity="0.6"/>
+  <path d="M46,80 A44,44 0 0,0 134,80 Z" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+  <line x1="46" y1="80" x2="134" y2="80" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="90" y1="28" x2="90" y2="80" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="93" y="58" font-size="8" fill="#94a3b8" font-family="sans-serif">h</text>
+  <text x="93" y="77" font-size="8" fill="#94a3b8" font-family="sans-serif">D</text>
+  <line x1="90" y1="72" x2="134" y2="80" stroke="#94a3b8" stroke-width="1"/>
+  <text x="113" y="68" font-size="7.5" fill="#64748b" font-family="sans-serif">R</text>
+  <text x="155" y="40" font-size="8" fill="#334155" font-family="sans-serif">θ = 2·arccos(1−2h/D)</text>
+  <text x="155" y="56" font-size="8" fill="#2563eb" font-family="sans-serif">S = R²(θ−sinθ)/2</text>
+  <text x="155" y="72" font-size="8" fill="#059669" font-family="sans-serif">P = R·θ</text>
+  <text x="155" y="88" font-size="8" fill="#7c3aed" font-family="sans-serif">Rh = S / P</text>
+  <text x="130" y="118" text-anchor="middle" font-size="7.5" fill="#94a3b8" font-family="sans-serif">θ en radians</text>
+</svg>`,
       sections: [
         {
           titre: '1. Périmètres, surfaces et volumes des formes courantes',
@@ -577,6 +670,23 @@ var GEMEAU_B01 = {
     titre: 'Dérivation, intégration et évolution des grandeurs',
     fiche: {
       intro: 'La compréhension des taux de variation et des cumuls est essentielle pour l\'exploitation des installations d\'eau. La dérivée décrit la vitesse d\'évolution d\'une grandeur (vitesse de montée d\'un niveau d\'eau, cinétique d\'un traitement), tandis que l\'intégrale cumule une grandeur variable dans le temps pour donner un total (volume consommé, masse de polluant transitée). Ces outils permettent d\'analyser les données de télégestion et de prévoir le comportement des installations.',
+      schema: `<svg viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="m6" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#334155"/></marker></defs>
+  <rect width="260" height="130" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Hydrogramme — volume = aire sous la courbe</text>
+  <line x1="28" y1="110" x2="250" y2="110" stroke="#334155" stroke-width="1.5" marker-end="url(#m6)"/>
+  <line x1="28" y1="110" x2="28" y2="22" stroke="#334155" stroke-width="1.5" marker-end="url(#m6)"/>
+  <text x="244" y="122" font-size="8" fill="#334155" font-family="sans-serif">t →</text>
+  <text x="8" y="38" font-size="8" fill="#334155" font-family="sans-serif" transform="rotate(-90,14,70)">Q ↑</text>
+  <path d="M38,105 C55,70 75,30 100,25 C125,20 145,35 165,65 C185,90 210,105 238,108" stroke="#2563eb" stroke-width="2" fill="none"/>
+  <path d="M38,105 C55,70 75,30 100,25 C125,20 145,35 165,65 C185,90 210,105 238,108 L238,110 L38,110 Z" fill="#bfdbfe" opacity="0.5"/>
+  <text x="130" y="90" text-anchor="middle" font-size="9" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">V = ∫Q·dt</text>
+  <line x1="68" y1="110" x2="68" y2="118" stroke="#94a3b8" stroke-width="1"/>
+  <line x1="208" y1="110" x2="208" y2="118" stroke="#94a3b8" stroke-width="1"/>
+  <text x="68" y="126" text-anchor="middle" font-size="7.5" fill="#64748b" font-family="sans-serif">t₁</text>
+  <text x="208" y="126" text-anchor="middle" font-size="7.5" fill="#64748b" font-family="sans-serif">t₂</text>
+  <text x="130" y="126" text-anchor="middle" font-size="7.5" fill="#059669" font-family="sans-serif">≈ Σ Qi · Δt</text>
+</svg>`,
       sections: [
         {
           titre: '1. La dérivée comme taux de variation',
@@ -690,6 +800,23 @@ var GEMEAU_B01 = {
     titre: 'Statistiques descriptives et probabilités appliquées',
     fiche: {
       intro: 'L\'exploitation des systèmes d\'eau génère de grandes séries de données : débits journaliers, résultats d\'analyses de qualité, relevés de compteurs, mesures de pression. Les statistiques permettent de synthétiser ces données en quelques indicateurs représentatifs (moyenne, médiane, écart-type) et de prendre des décisions éclairées en situation d\'incertitude. Un technicien qui ne sait pas interpréter des statistiques risque de confondre une variation normale avec une anomalie, ou inversement.',
+      schema: `<svg viewBox="0 0 260 128" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="m7" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#334155"/></marker></defs>
+  <rect width="260" height="128" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Distribution des mesures — courbe en cloche</text>
+  <line x1="20" y1="108" x2="248" y2="108" stroke="#334155" stroke-width="1.5" marker-end="url(#m7)"/>
+  <path d="M28,105 C50,105 70,30 130,24 C190,30 210,105 240,105" stroke="#2563eb" stroke-width="2" fill="none"/>
+  <path d="M28,105 C50,105 70,30 130,24 C190,30 210,105 240,105 Z" fill="#dbeafe" opacity="0.4"/>
+  <line x1="130" y1="24" x2="130" y2="108" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="134" y="38" font-size="8" fill="#dc2626" font-family="sans-serif" font-weight="bold">μ (moy.)</text>
+  <line x1="100" y1="52" x2="100" y2="108" stroke="#059669" stroke-width="1.2" stroke-dasharray="3,2"/>
+  <text x="58" y="48" font-size="7.5" fill="#059669" font-family="sans-serif">−σ</text>
+  <line x1="160" y1="52" x2="160" y2="108" stroke="#059669" stroke-width="1.2" stroke-dasharray="3,2"/>
+  <text x="162" y="48" font-size="7.5" fill="#059669" font-family="sans-serif">+σ</text>
+  <path d="M100,52 C115,36 145,36 160,52" stroke="#059669" stroke-width="1" fill="#dcfce7" fill-opacity="0.4"/>
+  <text x="130" y="78" text-anchor="middle" font-size="8" fill="#15803d" font-family="sans-serif">68 %</text>
+  <text x="130" y="118" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">σ = écart-type · NTU, pH, turb...</text>
+</svg>`,
       sections: [
         {
           titre: '1. Indicateurs de position : moyenne, médiane et mode',
@@ -803,6 +930,33 @@ var GEMEAU_B01 = {
     titre: 'Tableur, traitement de données et calcul reproductible',
     fiche: {
       intro: 'Le tableur (Excel, LibreOffice Calc, Google Sheets) est l\'outil de travail quotidien du technicien GEMEAU pour les calculs d\'exploitation, la gestion des résultats d\'analyse, la création de rapports et de graphiques. Maîtriser les fonctions avancées d\'un tableur permet d\'automatiser des tâches répétitives, de réduire les erreurs, et de produire des rapports professionnels en quelques clics. Cette compétence est explicitement recherchée par les employeurs du secteur de l\'eau.',
+      schema: `<svg viewBox="0 0 260 118" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <rect width="260" height="118" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Tableur — calculs hydrauliques automatisés</text>
+  <rect x="10" y="20" width="240" height="88" rx="3" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>
+  <rect x="10" y="20" width="240" height="16" fill="#e2e8f0" rx="3"/>
+  <text x="40" y="31" text-anchor="middle" font-size="8" font-weight="bold" fill="#334155" font-family="sans-serif">D (m)</text>
+  <text x="90" y="31" text-anchor="middle" font-size="8" font-weight="bold" fill="#334155" font-family="sans-serif">i (m/m)</text>
+  <text x="145" y="31" text-anchor="middle" font-size="8" font-weight="bold" fill="#334155" font-family="sans-serif">K (m¹/³/s)</text>
+  <text x="210" y="31" text-anchor="middle" font-size="8" font-weight="bold" fill="#2563eb" font-family="sans-serif">Q (L/s)</text>
+  <line x1="10" y1="36" x2="250" y2="36" stroke="#cbd5e1" stroke-width="0.8"/>
+  <line x1="65" y1="20" x2="65" y2="108" stroke="#cbd5e1" stroke-width="0.8"/>
+  <line x1="115" y1="20" x2="115" y2="108" stroke="#cbd5e1" stroke-width="0.8"/>
+  <line x1="175" y1="20" x2="175" y2="108" stroke="#cbd5e1" stroke-width="0.8"/>
+  <text x="40" y="51" text-anchor="middle" font-size="9" fill="#334155" font-family="sans-serif">0,30</text>
+  <text x="90" y="51" text-anchor="middle" font-size="9" fill="#334155" font-family="sans-serif">0,003</text>
+  <text x="145" y="51" text-anchor="middle" font-size="9" fill="#334155" font-family="sans-serif">70</text>
+  <text x="210" y="51" text-anchor="middle" font-size="9" fill="#2563eb" font-family="sans-serif" font-weight="bold">42,5</text>
+  <line x1="10" y1="56" x2="250" y2="56" stroke="#e2e8f0" stroke-width="0.8"/>
+  <text x="40" y="69" text-anchor="middle" font-size="9" fill="#334155" font-family="sans-serif">0,40</text>
+  <text x="90" y="69" text-anchor="middle" font-size="9" fill="#334155" font-family="sans-serif">0,002</text>
+  <text x="145" y="69" text-anchor="middle" font-size="9" fill="#334155" font-family="sans-serif">70</text>
+  <text x="210" y="69" text-anchor="middle" font-size="9" fill="#2563eb" font-family="sans-serif" font-weight="bold">64,0</text>
+  <line x1="10" y1="74" x2="250" y2="74" stroke="#e2e8f0" stroke-width="0.8"/>
+  <rect x="175" y="80" width="75" height="16" fill="#fef9c3" stroke="#d97706" stroke-width="1"/>
+  <text x="212" y="91" text-anchor="middle" font-size="7.5" fill="#92400e" font-family="sans-serif">=K*A*(A/P)^(2/3)...</text>
+  <text x="130" y="110" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">Manning-Strickler → recalcul automatique</text>
+</svg>`,
       sections: [
         {
           titre: '1. Structure d\'un classeur et fonctions de base',
