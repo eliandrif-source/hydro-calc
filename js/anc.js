@@ -1627,7 +1627,7 @@ function renderANCFilTrad() {
   var fiches = [
     { ico:'🪣', name:'Fosse toutes eaux', sub:'Prétraitement obligatoire · Décantation anaérobie · 3 m³ mini',
       schema: `<div style="margin:4px 0 8px">
-<svg viewBox="0 0 420 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px;display:block;margin:0 auto 10px;border-radius:8px">
+<div data-img-key="anc:fte:coupe" data-img-cid="anc-fte-coupe" style="text-align:center"><svg viewBox="0 0 420 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px;display:block;margin:0 auto 10px;border-radius:8px">
   <rect width="420" height="230" fill="#f0fdf4" rx="8"/>
   <text x="210" y="17" text-anchor="middle" font-size="10" font-weight="bold" fill="#065F46" font-family="sans-serif">Coupe de principe — Fosse toutes eaux</text>
   <rect x="60" y="40" width="300" height="162" rx="18" fill="#e0f2fe" stroke="#065F46" stroke-width="2.5"/>
@@ -1668,27 +1668,19 @@ function renderANCFilTrad() {
   <polygon points="314,6 322,6 318,1" fill="#059669"/>
   <text x="295" y="24" font-size="7" fill="#059669" font-family="sans-serif">Vent. aval</text>
   <text x="210" y="222" text-anchor="middle" font-size="7" fill="#94a3b8" font-family="sans-serif">Schéma pédagogique — dispositifs d'entrée, sortie et ventilation varient selon le modèle</text>
-</svg>
+</svg></div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 12px">
-  <div style="background:var(--c-surface-2);border-radius:6px;overflow:hidden">
-    <div style="position:relative;min-height:90px;background:var(--c-surface-2);display:flex;align-items:center;justify-content:center">
-      <img id="fte-img-beton" src="" style="width:100%;display:none;border-radius:6px 6px 0 0" alt="Fosse béton">
-      <div id="fte-ph-beton" style="text-align:center;padding:14px;color:var(--c-text-4)"><div style="font-size:22px;margin-bottom:3px">🖼</div><div style="font-size:8.5px">Aucune photo</div></div>
+  <div data-img-key="anc:fte:photo-beton" data-img-cid="anc-fte-pb" style="background:var(--c-surface-2);border-radius:6px;overflow:hidden">
+    <div style="min-height:90px;display:flex;align-items:center;justify-content:center;padding:10px">
+      <div style="text-align:center;color:var(--c-text-4)"><div style="font-size:22px;margin-bottom:3px">🖼</div><div style="font-size:8.5px">Photo fosse béton</div></div>
     </div>
-    <div style="display:flex;align-items:center;gap:6px;padding:4px 7px">
-      <span style="font-size:9.5px;color:var(--c-text-3);flex:1">🧱 Fosse béton</span>
-      <button onclick="_ancReplacePhoto('fte-beton','fte-img-beton','fte-ph-beton')" style="font-size:9px;padding:3px 8px;background:var(--c-primary-l,#EBF4FF);border:1px solid var(--c-primary,#2B6CB0);border-radius:20px;cursor:pointer;color:var(--c-primary,#2B6CB0);font-weight:600">📷 Choisir</button>
-    </div>
+    <div style="padding:4px 7px"><span style="font-size:9.5px;color:var(--c-text-3)">🧱 Fosse béton</span></div>
   </div>
-  <div style="background:var(--c-surface-2);border-radius:6px;overflow:hidden">
-    <div style="position:relative;min-height:90px;background:var(--c-surface-2);display:flex;align-items:center;justify-content:center">
-      <img id="fte-img-pehd" src="" style="width:100%;display:none;border-radius:6px 6px 0 0" alt="Fosse PEHD">
-      <div id="fte-ph-pehd" style="text-align:center;padding:14px;color:var(--c-text-4)"><div style="font-size:22px;margin-bottom:3px">🖼</div><div style="font-size:8.5px">Aucune photo</div></div>
+  <div data-img-key="anc:fte:photo-pehd" data-img-cid="anc-fte-pp" style="background:var(--c-surface-2);border-radius:6px;overflow:hidden">
+    <div style="min-height:90px;display:flex;align-items:center;justify-content:center;padding:10px">
+      <div style="text-align:center;color:var(--c-text-4)"><div style="font-size:22px;margin-bottom:3px">🖼</div><div style="font-size:8.5px">Photo fosse PEHD/PP</div></div>
     </div>
-    <div style="display:flex;align-items:center;gap:6px;padding:4px 7px">
-      <span style="font-size:9.5px;color:var(--c-text-3);flex:1">🪣 Fosse PEHD/PP</span>
-      <button onclick="_ancReplacePhoto('fte-pehd','fte-img-pehd','fte-ph-pehd')" style="font-size:9px;padding:3px 8px;background:var(--c-primary-l,#EBF4FF);border:1px solid var(--c-primary,#2B6CB0);border-radius:20px;cursor:pointer;color:var(--c-primary,#2B6CB0);font-weight:600">📷 Choisir</button>
-    </div>
+    <div style="padding:4px 7px"><span style="font-size:9.5px;color:var(--c-text-3)">🪣 Fosse PEHD/PP</span></div>
   </div>
 </div>
 <svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px;display:block;margin:0 auto 12px;border-radius:8px">
@@ -1762,7 +1754,7 @@ function renderANCFilTrad() {
 </div>
 <div style="font-size:9px;color:var(--c-text-4);text-align:center;padding:6px;background:rgba(239,68,68,0.06);border-radius:6px">⚠ Espace confiné — ne jamais pénétrer sans procédure professionnelle · H₂S toxique · CH₄ inflammable</div>
 </div>`,
-      specs:{ 'Volume minimum':'3 m³ (1–5 pièces) · +1 m³/pièce suppl.', 'Matériaux':'Béton NF EN 12566-1 · PEHD/PP', 'Distance habitation':'> 5 m', 'Distance limite prop.':'> 3 m', 'Distance puits AEP':'> 35 m', 'Ventilation':'Ø ≥ 100 mm · primaire + secondaire', 'Vidange':'≤ 4 ans ou boues > 50% volume utile', 'Préfiltre':'Si présent — entretien selon fabricant', 'Référence':'Arr. 07/09/2009 mod. 03/12/2021 · NF DTU 64.1' } },
+      specs:{ 'Volume minimum':'3 m³ utile (≤ 5 PP) · +1 m³/PP suppl.', 'Matériaux':'Béton · PEHD · PP · NF EN 12566-1 (fosses préfab.)', 'Distance habitation':'5 m (réf. technique · vérifier prescription locale)', 'Distance limite prop.':'Variable · vérifier prescription locale/SPANC', 'Distance puits AEP':'> 35 m des captages AEP déclarés', 'Ventilation':'Ø ≥ 100 mm · entrée + sortie en hauteur', 'Hauteur utile eau':'≥ 1 m (prescriptions techniques)', 'Vidange':'Boues > 50% vol. utile · prescriptions fabricant', 'Préfiltre':'Contrôle et nettoyage périodiques · fabricant', 'Référence':'Arr. 07/09/2009 modifié · NF DTU 64.1 · NF EN 12566-1' } },
     { ico:'🌾', name:'Tranchées d\'épandage', sub:'Épandage souterrain · Sol perméable · 200–400 m²',
       specs:{ 'Perméabilité sol':'15–500 mm/h (étude de sol obligatoire)', 'Profondeur':'0,6–0,7 m de recouvrement', 'Drain':'PVC Ø 100 mm perforé · pente max 0,5%', 'Charge hydraulique':'0,04 m/j', 'Référence':'DTU 64.1 · Arrêté 07/09/2009' } },
     { ico:'🟡', name:'Filtre à sable non drainé', sub:'Sable rapporté · Infiltration naturelle · 25–30 m²',
@@ -1797,7 +1789,7 @@ function renderANCFilTrad() {
   });
   html += '</div><div class="pb-nav"></div>';
   document.getElementById('main-content').innerHTML = html;
-  setTimeout(_ancRestorePhotos, 0);
+  setTimeout(_hcActivateImgBoxes, 0);
 }
 
 /* ─── FILIÈRES AGRÉÉES ─── */
@@ -1839,35 +1831,3 @@ function renderANCFilAgree() {
   document.getElementById('main-content').innerHTML = html;
 }
 
-/* ─── PHOTOS ANC : REMPLACER / RESTAURER ─── */
-function _ancReplacePhoto(key, imgId, phId) {
-  var input = document.createElement('input');
-  input.type = 'file';
-  input.accept = 'image/png,image/jpeg,image/webp,image/gif';
-  input.onchange = function() {
-    var file = input.files[0]; if (!file) return;
-    if (file.size > 5*1024*1024) { alert('Image trop lourde (max 5 Mo)'); return; }
-    var reader = new FileReader();
-    reader.onload = function(ev) {
-      var url = ev.target.result;
-      try { localStorage.setItem('hc_anc_photo_' + key, url); } catch(e) {}
-      var img = document.getElementById(imgId);
-      var ph = document.getElementById(phId);
-      if (img) { img.src = url; img.style.display = 'block'; }
-      if (ph) ph.style.display = 'none';
-    };
-    reader.readAsDataURL(file);
-  };
-  input.click();
-}
-
-function _ancRestorePhotos() {
-  [['fte-beton','fte-img-beton','fte-ph-beton'],['fte-pehd','fte-img-pehd','fte-ph-pehd']].forEach(function(p) {
-    var saved; try { saved = localStorage.getItem('hc_anc_photo_' + p[0]); } catch(e) {}
-    if (saved) {
-      var img = document.getElementById(p[1]); var ph = document.getElementById(p[2]);
-      if (img) { img.src = saved; img.style.display = 'block'; }
-      if (ph) ph.style.display = 'none';
-    }
-  });
-}

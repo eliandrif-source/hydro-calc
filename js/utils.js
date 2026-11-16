@@ -809,3 +809,144 @@ function _fmtDebit(ls) {
   return (ls / 1000).toFixed(4) + ' m³/s';
 }
 
+
+/* ═══════════════════════════════════════════════════════════════
+   REMPLACEMENT D'IMAGE GLOBAL — admin + modo
+   Table Supabase : course_image_overrides (chapter_key, image_url, uploaded_by)
+   Bucket Supabase : course-images
+   
+   Pattern pour tout nouveau schéma :
+     <div data-img-key="module:section:id" data-img-cid="container-id">
+       <svg>...</svg>   ← ou n'importe quel contenu visuel
+     </div>
+   Puis appeler _hcActivateImgBoxes() après innerHTML.
+   ═══════════════════════════════════════════════════════════════ */
+
+var _hcImgOverrides = {};
+
+function _hcCanEditImages() {
+  if (typeof AUTH === 'undefined' || !AUTH.user) return false;
+  var p = AUTH.user.plan || '';
+  return p === 'admin' || p === 'modo';
+}
+
+async function _hcLoadImgOverrides() {
+  if (typeof SupaDB === 'undefined') return;
+  try {
+    var res = await SupaDB.from('course_image_overrides').select('chapter_key,image_url');
+    if (!res.error && res.data) {
+      res.data.forEach(function(r) {
+        _hcImgOverrides[r.chapter_key] = r.image_url;
+        if (typeof _courseImageOverrides !== 'undefined') _courseImageOverrides[r.chapter_key] = r.image_url;
+      });
+    }
+  } catch(e) {}
+}
+
+function _hcActivateImgBoxes() {
+  document.querySelectorAll('[data-img-key]').forEach(function(el) {
+    var key = el.getAttribute('data-img-key');
+    var cid = el.getAttribute('data-img-cid');
+    if (!key || !cid) return;
+    el.id = cid;
+    el.removeAttribute('data-img-key');
+    el.removeAttribute('data-img-cid');
+    var override = _hcImgOverrides[key] || null;
+    var tpl = document.createElement('template');
+    tpl.id = cid + '-orig';
+    tpl.innerHTML = el.innerHTML;
+    el.parentNode.insertBefore(tpl, el);
+    if (override) {
+      var newImg = document.createElement('img');
+      newImg.src = override;
+      newImg.style.cssText = 'max-width:100%;height:auto;border-radius:var(--r-sm)';
+      newImg.alt = 'Schéma';
+      el.innerHTML = '';
+      el.appendChild(newImg);
+    }
+    if (_hcCanEditImages()) {
+      var btns = document.createElement('div');
+      btns.style.cssText = 'display:flex;gap:6px;justify-content:flex-end;margin-top:6px';
+      if (override) {
+        var rb = document.createElement('button');
+        rb.setAttribute('onclick', "_hcRestoreImg('" + key + "','" + cid + "')");
+        rb.style.cssText = 'font-size:11px;padding:3px 9px;background:var(--c-danger-l,#FFF0F0);border:1px solid var(--c-danger,#E53E3E);border-radius:var(--r-sm);cursor:pointer;color:var(--c-danger,#E53E3E);font-weight:600';
+        rb.textContent = '↩ Restaurer';
+        btns.appendChild(rb);
+      }
+      var replBtn = document.createElement('button');
+      replBtn.setAttribute('onclick', "_hcReplaceImg('" + key + "','" + cid + "')");
+      replBtn.style.cssText = 'font-size:11px;padding:3px 9px;background:var(--c-primary-l,#EBF4FF);border:1px solid var(--c-primary,#2B6CB0);border-radius:var(--r-sm);cursor:pointer;color:var(--c-primary,#2B6CB0);font-weight:600';
+      replBtn.textContent = '📷 Remplacer l\'image';
+      btns.appendChild(replBtn);
+      el.appendChild(btns);
+    }
+  });
+}
+
+async function _hcReplaceImg(imageKey, containerId) {
+  var input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/png,image/jpeg,image/webp,image/gif,image/svg+xml';
+  input.onchange = async function() {
+    var file = input.files[0]; if (!file) return;
+    if (file.size > 8*1024*1024) { alert('Image trop lourde (max 8 Mo)'); return; }
+    var box = document.getElementById(containerId);
+    var btn = box ? box.querySelector('[onclick*="_hcReplaceImg"]') : null;
+    if (btn) { btn.disabled = true; btn.textContent = '⏳…'; }
+    try {
+      var ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+      var safePath = 'hc-override/' + imageKey.replace(/[^a-zA-Z0-9]/g,'_') + '_' + Date.now() + '.' + ext;
+      var upRes = await SupaDB.storage.from('course-images').upload(safePath, file, { upsert: true, contentType: file.type });
+      if (upRes.error) throw upRes.error;
+      var url = SupaDB.storage.from('course-images').getPublicUrl(safePath).data.publicUrl;
+      var uid = (typeof AUTH !== 'undefined' && AUTH.user) ? AUTH.user.id : null;
+      var dbRes = await SupaDB.from('course_image_overrides').upsert(
+        { chapter_key: imageKey, image_url: url, uploaded_by: uid },
+        { onConflict: 'chapter_key' }
+      );
+      if (dbRes.error) throw dbRes.error;
+      _hcImgOverrides[imageKey] = url;
+      if (typeof _courseImageOverrides !== 'undefined') _courseImageOverrides[imageKey] = url;
+      if (box) {
+        var newImg = document.createElement('img');
+        newImg.src = url; newImg.alt = 'Schéma';
+        newImg.style.cssText = 'max-width:100%;height:auto;border-radius:var(--r-sm)';
+        var old = box.querySelector('svg') || box.querySelector('img') || box.querySelector('div:not([style*="justify"])');
+        if (old) old.replaceWith(newImg); else box.insertBefore(newImg, box.firstChild);
+        var btnRow = box.querySelector('[style*="justify-content"]');
+        if (btnRow && !btnRow.querySelector('[onclick*="_hcRestoreImg"]')) {
+          var rb = document.createElement('button');
+          rb.setAttribute('onclick', "_hcRestoreImg('" + imageKey + "','" + containerId + "')");
+          rb.style.cssText = 'font-size:11px;padding:3px 9px;background:var(--c-danger-l,#FFF0F0);border:1px solid var(--c-danger,#E53E3E);border-radius:var(--r-sm);cursor:pointer;color:var(--c-danger,#E53E3E);font-weight:600';
+          rb.textContent = '↩ Restaurer';
+          btnRow.insertBefore(rb, btnRow.firstChild);
+        }
+      }
+      alert('✅ Image mise à jour !');
+    } catch(e) { alert('❌ ' + ((e && e.message) ? e.message : JSON.stringify(e))); }
+    if (btn) { btn.disabled = false; btn.textContent = '📷 Remplacer l\'image'; }
+  };
+  input.click();
+}
+
+async function _hcRestoreImg(imageKey, containerId) {
+  if (!confirm('Supprimer l\'image personnalisée et restaurer l\'original ?')) return;
+  try {
+    var delRes = await SupaDB.from('course_image_overrides').delete().eq('chapter_key', imageKey);
+    if (delRes.error) throw delRes.error;
+    delete _hcImgOverrides[imageKey];
+    if (typeof _courseImageOverrides !== 'undefined') delete _courseImageOverrides[imageKey];
+    var box = document.getElementById(containerId);
+    var origTpl = document.getElementById(containerId + '-orig');
+    if (box && origTpl) {
+      var temp = document.createElement('div'); temp.innerHTML = origTpl.innerHTML;
+      var origEl = temp.firstElementChild;
+      var oldImg = box.querySelector('img');
+      if (oldImg && origEl) oldImg.replaceWith(origEl);
+      else if (origEl) box.insertBefore(origEl, box.firstChild);
+      var btnRow = box.querySelector('[style*="justify-content"]');
+      if (btnRow) { var rb = btnRow.querySelector('[onclick*="_hcRestoreImg"]'); if (rb) rb.remove(); }
+    }
+  } catch(e) { alert('❌ ' + ((e && e.message) ? e.message : JSON.stringify(e))); }
+}

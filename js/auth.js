@@ -1740,6 +1740,8 @@ function _doEnterApp() {
     }
   }
 
+  if (typeof _hcLoadImgOverrides === 'function') _hcLoadImgOverrides();
+
   /* ── Appliquer le statut d'essai ── */
   _applyTrialPlan();
 

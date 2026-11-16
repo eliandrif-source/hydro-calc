@@ -13498,7 +13498,7 @@ async function renderCoursChapitre(fId, aId, mId, cId) {
   if (_rich && _rich.fiche) fi = Object.assign({}, fi, _rich.fiche);
   if (_rich && _rich.exercices) c.exercices = _rich.exercices;
   if (_rich && _rich.flashcards) c.flashcards = _rich.flashcards;
-  var isAdminUser = typeof AUTH !== 'undefined' && AUTH.user && AUTH.user.plan === 'admin';
+  var isAdminUser = (typeof _hcCanEditImages === 'function') ? _hcCanEditImages() : (typeof AUTH !== 'undefined' && AUTH.user && AUTH.user.plan === 'admin');
   var esc = (typeof CMS !== 'undefined') ? CMS.escapeHtml : function(s) { return String(s||''); };
 
   var html = _coursBreadcrumb([
