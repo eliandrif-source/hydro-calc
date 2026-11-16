@@ -2675,36 +2675,8 @@ function renderANCHub() {
       <button class="mh-back-btn" onclick="goHome()">‹ Accueil</button>
       <span class="mh-icon">🏡</span>
       <div class="mh-title">Assainissement non collectif</div>
-      <div class="mh-sub">Filières · SPANC · Réglementation · Aides · Non conformes</div>
-      <div class="mh-tags"><span class="mh-tag">31 ouvrages</span><span class="mh-tag">101 depts SPANC</span><span class="mh-tag">Aides cumulables</span></div>
-    </div>
-    <div class="section-header">Calculateurs ANC</div>
-    <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
-      ${[
-        {ico:'🏡',name:'Filières ANC',sub:'Dimensionnement · 31 ouvrages · Fosses · FPR · Microstation',id:'anc-filieres'},
-        {ico:'🔍',name:'Comparateur filières',sub:'Comparer filières · Critères techniques · Budget',id:'anc-comparateur'},
-        {ico:'⚙️',name:'Prétraitement',sub:'Fosse toutes eaux · Bac dégraisseur · Volumes réglementaires',id:'anc-pretraitement'},
-        {ico:'🌱',name:'Collecte & distribution',sub:'Canalisations · Regards · Distribution après traitement',id:'anc-collecte'},
-        {ico:'💧',name:'Rejet & exutoire',sub:'Percolation · Rejet sol · Types d\'exutoires admis',id:'anc-rejet'},
-        {ico:'🌬️',name:'Ventilation',sub:'Aération amont/aval · Extraction · Normes DTU 64.1',id:'anc-ventilation'},
-      ].map(function(m){ return `
-      <div class="mod-list-card" style="--cat-color:var(--c-anc)" onclick="showModule('${m.id}')">
-        <div class="mlc-icon" style="background:var(--c-anc-l)">${m.ico}</div>
-        <div class="mlc-body"><div class="mlc-name">${m.name}</div><div class="mlc-sub">${m.sub}</div></div>
-        <span class="mlc-arrow">›</span>
-      </div>`; }).join('')}
-    </div>
-    <div class="section-header">Ouvrages & filières</div>
-    <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">
-      ${[
-        {ico:'📚',name:'Fiches ouvrages ANC',sub:'31 ouvrages détaillés · Filières · Comparateur · Rejet',id:'anc'},
-        {ico:'⚠️',name:'Installations non conformes',sub:'Puisard · Fosse septique · Guide réhabilitation',id:'nc'},
-      ].map(function(m){ return `
-      <div class="mod-list-card" style="--cat-color:var(--c-anc)" onclick="showModule('${m.id}')">
-        <div class="mlc-icon" style="background:var(--c-anc-l)">${m.ico}</div>
-        <div class="mlc-body"><div class="mlc-name">${m.name}</div><div class="mlc-sub">${m.sub}</div></div>
-        <span class="mlc-arrow">›</span>
-      </div>`; }).join('')}
+      <div class="mh-sub">SPANC · Réglementation · Aides · Équipements</div>
+      <div class="mh-tags"><span class="mh-tag">101 depts SPANC</span><span class="mh-tag">Aides cumulables</span><span class="mh-tag">Réf. réglementaires</span></div>
     </div>
     <div class="section-header">Référence & réglementation</div>
     <div style="padding:0 var(--s-4);display:flex;flex-direction:column;gap:var(--s-2)">

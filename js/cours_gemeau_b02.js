@@ -5,6 +5,23 @@ var GEMEAU_B02 = {
     titre: 'Propriétés physiques de l\'eau',
     fiche: {
       intro: 'L\'eau est le fluide de travail universel des métiers de l\'eau, mais ses propriétés physiques varient sensiblement avec la température, la pression et la composition chimique. Un technicien GEMEAU doit connaître ces propriétés pour interpréter correctement les mesures (débit-masse vs débit-volume), dimensionner les conduites en fonction de la viscosité réelle, et anticiper les phénomènes de cavitation, de dilatation ou de gel.',
+      schema: `<svg viewBox="0 0 260 118" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#334155"/></marker></defs>
+  <rect width="260" height="118" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Masse volumique de l'eau selon la température</text>
+  <line x1="30" y1="100" x2="248" y2="100" stroke="#334155" stroke-width="1.5" marker-end="url(#mb2)"/>
+  <line x1="30" y1="100" x2="30" y2="22" stroke="#334155" stroke-width="1.5" marker-end="url(#mb2)"/>
+  <text x="244" y="112" font-size="8" fill="#334155" font-family="sans-serif">T°C</text>
+  <text x="8" y="32" font-size="7.5" fill="#334155" font-family="sans-serif" transform="rotate(-90,14,65)">ρ (kg/m³)</text>
+  <path d="M38,96 C55,52 75,30 95,26 C115,22 130,26 155,42 C175,55 200,78 238,98" stroke="#2563eb" stroke-width="2" fill="none"/>
+  <circle cx="95" cy="26" r="4" fill="#dc2626"/>
+  <text x="98" y="24" font-size="8" fill="#dc2626" font-family="sans-serif">ρ max ≈ 999,97 kg/m³</text>
+  <text x="98" y="34" font-size="7.5" fill="#dc2626" font-family="sans-serif">à 4 °C</text>
+  <text x="38" y="112" font-size="7.5" fill="#64748b" font-family="sans-serif">0</text>
+  <text x="90" y="112" font-size="7.5" fill="#64748b" font-family="sans-serif">4</text>
+  <text x="145" y="112" font-size="7.5" fill="#64748b" font-family="sans-serif">20</text>
+  <text x="225" y="112" font-size="7.5" fill="#64748b" font-family="sans-serif">100</text>
+</svg>`,
       sections: [
         {
           titre: '1. Masse volumique et masse spécifique',
@@ -117,6 +134,25 @@ var GEMEAU_B02 = {
     titre: 'Pression et équilibre hydrostatique',
     fiche: {
       intro: 'La pression est la grandeur centrale de la distribution d\'eau : chaque réseau AEP est conçu pour maintenir une pression minimale de service (généralement 2 à 3 bars chez l\'abonné) et une pression maximale ne dépassant pas 6 bars (risque de fuites et de rupture). Un technicien qui ne maîtrise pas les notions de pression absolue, relative, et de loi hydrostatique ne peut pas interpréter les relevés de manomètre, calculer les charges aux points extrêmes d\'un réseau, ou dimensionner les organes de sécurité.',
+      schema: `<svg viewBox="0 0 260 118" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb3" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#475569"/></marker></defs>
+  <rect width="260" height="118" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Pressions absolue, relative et atmosphérique</text>
+  <rect x="10" y="88" width="240" height="20" rx="2" fill="#e2e8f0"/>
+  <text x="130" y="101" text-anchor="middle" font-size="8" fill="#475569" font-family="sans-serif">Vide parfait (0 Pa absolu)</text>
+  <line x1="130" y1="20" x2="130" y2="108" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="10" y1="62" x2="250" y2="62" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="8" y="60" font-size="8" fill="#2563eb" font-family="sans-serif" font-weight="bold">Patm</text>
+  <text x="175" y="58" font-size="7.5" fill="#2563eb" font-family="sans-serif">(101 325 Pa)</text>
+  <line x1="10" y1="38" x2="250" y2="38" stroke="#059669" stroke-width="1.5"/>
+  <text x="8" y="36" font-size="8" fill="#059669" font-family="sans-serif" font-weight="bold">Pabs</text>
+  <line x1="60" y1="38" x2="60" y2="62" stroke="#dc2626" stroke-width="1.5" marker-end="url(#mb3)"/>
+  <line x1="60" y1="62" x2="60" y2="38" stroke="#dc2626" stroke-width="1.5" marker-end="url(#mb3)"/>
+  <text x="65" y="52" font-size="8" fill="#dc2626" font-family="sans-serif" font-weight="bold">Prel</text>
+  <line x1="195" y1="38" x2="195" y2="88" stroke="#94a3b8" stroke-width="1" marker-end="url(#mb3)"/>
+  <text x="200" y="68" font-size="8" fill="#94a3b8" font-family="sans-serif">Pabs</text>
+  <text x="130" y="80" text-anchor="middle" font-size="9" fill="#334155" font-family="sans-serif" font-weight="bold">Pabs = Patm + Prel</text>
+</svg>`,
       sections: [
         {
           titre: '1. Définitions : pression absolue, relative et pression atmosphérique',
@@ -229,6 +265,21 @@ var GEMEAU_B02 = {
     titre: 'Forces hydrostatiques et poussée d\'Archimède',
     fiche: {
       intro: 'Dès qu\'un fluide est en contact avec une surface (paroi de réservoir, porte de vanne, fond d\'un ouvrage), il exerce des forces de pression sur cette surface. Le calcul de ces forces est indispensable pour dimensionner les structures hydrauliques : un mauvais calcul de la poussée sur une porte étanche peut conduire à la rupture de l\'ouvrage. La poussée d\'Archimède intervient quant à elle dans la flottabilité des ouvrages enterrés et des canalisations vides.',
+      schema: `<svg viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb4" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#2563eb"/></marker><marker id="mb4r" markerWidth="7" markerHeight="7" refX="1" refY="3.5" orient="auto"><path d="M6,0 L6,7 L0,3.5z" fill="#2563eb"/></marker></defs>
+  <rect width="260" height="120" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Poussée d'Archimède — équilibre d'une cuve</text>
+  <rect x="20" y="22" width="220" height="58" rx="3" fill="#bfdbfe" opacity="0.5" stroke="#2563eb" stroke-width="1.2"/>
+  <text x="130" y="34" text-anchor="middle" font-size="8" fill="#1d4ed8" font-family="sans-serif">Eau (ρ = 1000 kg/m³)</text>
+  <rect x="85" y="38" width="90" height="30" rx="3" fill="#fff" stroke="#334155" stroke-width="1.5"/>
+  <text x="130" y="57" text-anchor="middle" font-size="8" fill="#334155" font-family="sans-serif">Cuve V = 0,05 m³</text>
+  <line x1="130" y1="38" x2="130" y2="22" stroke="#2563eb" stroke-width="2" marker-end="url(#mb4)"/>
+  <text x="134" y="33" font-size="8" fill="#2563eb" font-family="sans-serif" font-weight="bold">Fa</text>
+  <line x1="130" y1="68" x2="130" y2="88" stroke="#dc2626" stroke-width="2" marker-end="url(#mb4)"/>
+  <text x="134" y="83" font-size="8" fill="#dc2626" font-family="sans-serif" font-weight="bold">W</text>
+  <text x="130" y="99" text-anchor="middle" font-size="9" fill="#334155" font-family="sans-serif" font-weight="bold">Fa = ρ·g·V = 1000 × 9,81 × 0,05 = 490 N</text>
+  <text x="130" y="112" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">Fa = W → flottaison</text>
+</svg>`,
       sections: [
         {
           titre: '1. Force de pression sur une surface plane horizontale',
@@ -341,6 +392,23 @@ var GEMEAU_B02 = {
     titre: 'Débit, vitesse et conservation de la masse',
     fiche: {
       intro: 'Le débit est la grandeur hydraulique centrale de toute installation de distribution ou d\'assainissement. Le dimensionnement d\'une conduite, le choix d\'un compteur, la conception d\'un ouvrage de mesure : tout repose sur la compréhension du débit, de la vitesse d\'écoulement et du principe de continuité. Un technicien GEMEAU doit pouvoir calculer la vitesse dans une conduite, vérifier que le débit respecte les vitesses limites imposées, et analyser la répartition des débits dans un réseau ramifié.',
+      schema: `<svg viewBox="0 0 260 112" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb5" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#2563eb"/></marker></defs>
+  <rect width="260" height="112" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Équation de continuité — tuyaux en série</text>
+  <rect x="10" y="42" width="60" height="28" rx="4" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <line x1="70" y1="56" x2="100" y2="56" stroke="#334155" stroke-width="10" stroke-linecap="round"/>
+  <rect x="100" y="34" width="60" height="44" rx="4" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <line x1="160" y1="56" x2="190" y2="56" stroke="#334155" stroke-width="6" stroke-linecap="round"/>
+  <rect x="190" y="44" width="60" height="24" rx="4" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="40" y="38" text-anchor="middle" font-size="8" fill="#1d4ed8" font-family="sans-serif">S₁ / V₁</text>
+  <text x="130" y="30" text-anchor="middle" font-size="8" fill="#1d4ed8" font-family="sans-serif">S₂ / V₂</text>
+  <text x="220" y="40" text-anchor="middle" font-size="8" fill="#1d4ed8" font-family="sans-serif">S₃ / V₃</text>
+  <line x1="10" y1="56" x2="10" y2="78" stroke="#dc2626" stroke-width="1.5" marker-end="url(#mb5)"/>
+  <line x1="10" y1="78" x2="250" y2="78" stroke="#dc2626" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="130" y="92" text-anchor="middle" font-size="10" fill="#15803d" font-family="sans-serif" font-weight="bold">Q = S₁·V₁ = S₂·V₂ = S₃·V₃</text>
+  <text x="130" y="106" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">S↓ → V↑ (Venturi)</text>
+</svg>`,
       sections: [
         {
           titre: '1. Débit volumique, débit massique et débit surfacique',
@@ -453,6 +521,24 @@ var GEMEAU_B02 = {
     titre: 'Énergie d\'un écoulement et théorème de Bernoulli',
     fiche: {
       intro: 'Le théorème de Bernoulli est la loi fondamentale de l\'hydraulique des conduites sous pression. Il décrit la transformation des trois formes d\'énergie mécanique d\'un fluide (énergie de pression, énergie cinétique, énergie potentielle) le long d\'une ligne de courant. Sa maîtrise permet de calculer la pression en n\'importe quel point d\'un réseau, de comprendre le fonctionnement des venturis et des orifices, et de dimensionner les pompes selon leur hauteur manométrique.',
+      schema: `<svg viewBox="0 0 260 128" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb6" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#475569"/></marker></defs>
+  <rect width="260" height="128" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Bernoulli — ligne de charge et lignes piézo.</text>
+  <line x1="15" y1="118" x2="248" y2="118" stroke="#334155" stroke-width="1" stroke-dasharray="2,2"/>
+  <text x="250" y="122" font-size="7" fill="#334155" font-family="sans-serif">Référence</text>
+  <ellipse cx="50" cy="75" rx="18" ry="10" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <line x1="50" y1="85" x2="130" y2="92" stroke="#334155" stroke-width="10" stroke-linecap="round"/>
+  <ellipse cx="210" cy="98" rx="12" ry="7" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <line x1="30" y1="75" x2="230" y2="98" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="145" y="45" text-anchor="middle" font-size="8" fill="#2563eb" font-family="sans-serif">Ligne de charge</text>
+  <line x1="50" y1="75" x2="50" y2="118" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="210" y1="98" x2="210" y2="118" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="55" y="100" font-size="7.5" fill="#94a3b8" font-family="sans-serif">z₁+p₁/ρg</text>
+  <text x="215" y="112" font-size="7.5" fill="#94a3b8" font-family="sans-serif">z₂</text>
+  <rect x="10" y="104" width="240" height="11" rx="2" fill="#f1f5f9"/>
+  <text x="130" y="112.5" text-anchor="middle" font-size="8.5" fill="#334155" font-family="sans-serif" font-weight="bold">z + p/ρg + V²/2g = H = cte</text>
+</svg>`,
       sections: [
         {
           titre: '1. Les trois formes d\'énergie d\'un fluide',
