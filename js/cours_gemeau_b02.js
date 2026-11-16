@@ -652,6 +652,22 @@ var GEMEAU_B02 = {
     titre: 'Quantité de mouvement et efforts hydrauliques',
     fiche: {
       intro: 'Le théorème de Bernoulli décrit l\'énergie d\'un fluide, mais il ne rend pas compte des forces exercées sur les obstacles dans l\'écoulement (coudes, tés, vannes, buses). Le théorème de la quantité de mouvement (ou théorème de l\'impulsion) permet de calculer ces forces. Il est indispensable pour dimensionner les butées et ancrages des conduites, et pour comprendre les coups de bélier qui peuvent détruire des installations.',
+      schema: `<svg viewBox="0 0 260 118" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb14" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#dc2626"/></marker><marker id="mb14b" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#334155"/></marker></defs>
+  <rect width="260" height="118" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Coup de bélier — onde de pression transitoire</text>
+  <line x1="20" y1="96" x2="248" y2="96" stroke="#334155" stroke-width="1.5" marker-end="url(#mb14b)"/>
+  <line x1="20" y1="96" x2="20" y2="22" stroke="#334155" stroke-width="1.5" marker-end="url(#mb14b)"/>
+  <text x="244" y="108" font-size="8" fill="#334155" font-family="sans-serif">t →</text>
+  <text x="8" y="32" font-size="7.5" fill="#334155" font-family="sans-serif" transform="rotate(-90,12,70)">ΔP ↑</text>
+  <line x1="20" y1="70" x2="90" y2="70" stroke="#2563eb" stroke-width="1.5"/>
+  <line x1="90" y1="70" x2="92" y2="22" stroke="#dc2626" stroke-width="2"/>
+  <path d="M92,22 C110,30 125,65 145,70 C165,75 185,65 220,72" stroke="#dc2626" stroke-width="2" fill="none"/>
+  <line x1="90" y1="70" x2="90" y2="96" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="93" y="108" font-size="7.5" fill="#94a3b8" font-family="sans-serif">fermeture</text>
+  <text x="93" y="30" font-size="8" fill="#dc2626" font-family="sans-serif" font-weight="bold">ΔP = ρ·a·ΔV</text>
+  <text x="130" y="90" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">a = vitesse onde ≈ 1000–1200 m/s</text>
+</svg>`,
       sections: [
         {
           titre: '1. Théorème de la quantité de mouvement',
@@ -763,6 +779,24 @@ var GEMEAU_B02 = {
     titre: 'Régimes d\'écoulement et nombre de Reynolds',
     fiche: {
       intro: 'Les écoulements en conduite se présentent sous deux régimes fondamentalement différents : laminaire (filets fluides parallèles, organisés) et turbulent (mouvement chaotique tridimensionnel, tourbillons). La transition entre ces régimes est gouvernée par le nombre de Reynolds, adimensionnel. La connaissance du régime d\'écoulement est indispensable pour choisir la bonne formule de perte de charge, interpréter les mesures de débit, et comprendre le transport des polluants ou des sédiments.',
+      schema: `<svg viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <rect width="260" height="120" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Profil de vitesse : laminaire vs turbulent</text>
+  <text x="65" y="28" text-anchor="middle" font-size="8.5" fill="#059669" font-family="sans-serif" font-weight="bold">Laminaire (Re &lt; 2300)</text>
+  <ellipse cx="65" cy="70" rx="12" ry="38" fill="none" stroke="#94a3b8" stroke-width="1.2"/>
+  <path d="M65,32 C95,40 95,100 65,108" stroke="#059669" stroke-width="2" fill="#dcfce7" fill-opacity="0.5"/>
+  <line x1="65" y1="32" x2="65" y2="108" stroke="#94a3b8" stroke-width="1"/>
+  <line x1="65" y1="70" x2="92" y2="70" stroke="#059669" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="96" y="73" font-size="7.5" fill="#059669" font-family="sans-serif">Vmax</text>
+  <text x="195" y="28" text-anchor="middle" font-size="8.5" fill="#dc2626" font-family="sans-serif" font-weight="bold">Turbulent (Re &gt; 4000)</text>
+  <ellipse cx="195" cy="70" rx="12" ry="38" fill="none" stroke="#94a3b8" stroke-width="1.2"/>
+  <path d="M195,32 C220,36 220,104 195,108" stroke="#dc2626" stroke-width="2" fill="#fee2e2" fill-opacity="0.5"/>
+  <line x1="195" y1="32" x2="195" y2="108" stroke="#94a3b8" stroke-width="1"/>
+  <line x1="195" y1="70" x2="220" y2="70" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="224" y="73" font-size="7.5" fill="#dc2626" font-family="sans-serif">Vmoy≈Vmax</text>
+  <rect x="10" y="108" width="240" height="10" rx="2" fill="#f1f5f9"/>
+  <text x="130" y="116" text-anchor="middle" font-size="8" fill="#334155" font-family="sans-serif">Re = V·D/ν · Transition : 2300–4000</text>
+</svg>`,
       sections: [
         {
           titre: '1. Régime laminaire et régime turbulent',
@@ -875,6 +909,24 @@ var GEMEAU_B02 = {
     titre: 'Pertes de charge : origines et mécanismes',
     fiche: {
       intro: 'Les pertes de charge sont la traduction énergétique des frottements internes et des perturbations dans l\'écoulement. Elles déterminent les besoins en pompage, le dimensionnement des conduites, et la pression disponible en chaque point d\'un réseau. Maîtriser leur calcul est une compétence fondamentale du technicien GEMEAU : toute erreur d\'un facteur 2 sur les pertes de charge se répercute directement sur la puissance de pompage (et sur la facture d\'électricité).',
+      schema: `<svg viewBox="0 0 260 118" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb16" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#334155"/></marker></defs>
+  <rect width="260" height="118" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Pertes de charge — ligne piézométrique</text>
+  <rect x="15" y="60" width="230" height="22" rx="3" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="130" y="74" text-anchor="middle" font-size="8" fill="#1d4ed8" font-family="sans-serif">Conduite L, D, rugosité ε</text>
+  <line x1="30" y1="30" x2="230" y2="50" stroke="#dc2626" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="175" y="28" font-size="8" fill="#dc2626" font-family="sans-serif" font-weight="bold">Ligne énergie (H)</text>
+  <line x1="30" y1="38" x2="230" y2="58" stroke="#059669" stroke-width="2" stroke-dasharray="4,2"/>
+  <text x="10" y="37" font-size="7.5" fill="#059669" font-family="sans-serif">Piézo.</text>
+  <line x1="30" y1="30" x2="30" y2="60" stroke="#94a3b8" stroke-width="1"/>
+  <line x1="230" y1="50" x2="230" y2="60" stroke="#94a3b8" stroke-width="1"/>
+  <line x1="30" y1="30" x2="130" y2="30" stroke="#dc2626" stroke-width="1" stroke-dasharray="2,2"/>
+  <line x1="130" y1="30" x2="130" y2="40" stroke="#dc2626" stroke-width="1.5" marker-end="url(#mb16)"/>
+  <text x="134" y="38" font-size="8" fill="#dc2626" font-family="sans-serif">J·L/2</text>
+  <text x="130" y="96" text-anchor="middle" font-size="9" fill="#334155" font-family="sans-serif" font-weight="bold">J = λ·V²/(2g·D)  [Darcy-Weisbach]</text>
+  <text x="130" y="110" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">λ = f(Re, ε/D) — abaque Moody</text>
+</svg>`,
       sections: [
         {
           titre: '1. Pertes de charge régulières (linéaires)',
@@ -988,6 +1040,30 @@ var GEMEAU_B02 = {
     titre: 'Transferts thermiques dans les systèmes à eau',
     fiche: {
       intro: 'Les transferts thermiques sont omniprésents dans les installations liées à l\'eau : réchauffement des eaux usées en STEP (impact sur la biologie), échangeurs thermiques pour la production d\'eau chaude sanitaire, désinfection thermique à 60°C, récupération de chaleur sur les eaux usées (pompe à chaleur sur eaux grises), et équilibre thermique des eaux de surface en été. Un technicien GEMEAU doit pouvoir estimer les échanges thermiques simples et interpréter les bilans énergétiques.',
+      schema: `<svg viewBox="0 0 260 118" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb17" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#dc2626"/></marker></defs>
+  <rect width="260" height="118" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">3 modes de transfert thermique</text>
+  <rect x="10" y="24" width="68" height="82" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="44" y="38" text-anchor="middle" font-size="8" font-weight="bold" fill="#92400e" font-family="sans-serif">Conduction</text>
+  <line x1="20" y1="80" x2="68" y2="80" stroke="#d97706" stroke-width="1"/>
+  <line x1="20" y1="90" x2="68" y2="90" stroke="#d97706" stroke-width="1"/>
+  <text x="44" y="58" text-anchor="middle" font-size="20" fill="#d97706" font-family="sans-serif">→</text>
+  <text x="44" y="100" text-anchor="middle" font-size="7.5" fill="#92400e" font-family="sans-serif">φ=λ·S·ΔT/e</text>
+  <rect x="96" y="24" width="68" height="82" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="130" y="38" text-anchor="middle" font-size="8" font-weight="bold" fill="#15803d" font-family="sans-serif">Convection</text>
+  <path d="M106,55 C115,45 125,65 130,50 C135,35 145,65 155,55" stroke="#16a34a" stroke-width="1.5" fill="none"/>
+  <text x="130" y="80" text-anchor="middle" font-size="20" fill="#16a34a" font-family="sans-serif">↑</text>
+  <text x="130" y="100" text-anchor="middle" font-size="7.5" fill="#15803d" font-family="sans-serif">φ=h·S·ΔT</text>
+  <rect x="182" y="24" width="68" height="82" rx="4" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="216" y="38" text-anchor="middle" font-size="8" font-weight="bold" fill="#6d28d9" font-family="sans-serif">Rayonnement</text>
+  <circle cx="216" cy="60" r="8" fill="#f59e0b" opacity="0.8"/>
+  <line x1="216" y1="45" x2="216" y2="40" stroke="#f59e0b" stroke-width="1.5"/>
+  <line x1="216" y1="75" x2="216" y2="80" stroke="#f59e0b" stroke-width="1.5"/>
+  <line x1="201" y1="60" x2="196" y2="60" stroke="#f59e0b" stroke-width="1.5"/>
+  <line x1="231" y1="60" x2="236" y2="60" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="216" y="100" text-anchor="middle" font-size="7.5" fill="#6d28d9" font-family="sans-serif">φ=ε·σ·S·T⁴</text>
+</svg>`,
       sections: [
         {
           titre: '1. Modes de transfert thermique',
@@ -1100,6 +1176,27 @@ var GEMEAU_B02 = {
     titre: 'Électricité et énergie pour installations hydrotechniques',
     fiche: {
       intro: 'Les installations de traitement et de distribution d\'eau sont parmi les plus grandes consommatrices d\'électricité dans les services publics. Un technicien GEMEAU doit être capable de comprendre une facture d\'électricité, de calculer la consommation d\'un poste de pompage, d\'identifier les leviers d\'économies d\'énergie, et de comprendre les bases du câblage électrique et de la protection des moteurs. Ces compétences sont essentielles pour la maîtrise des coûts d\'exploitation.',
+      schema: `<svg viewBox="0 0 260 118" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;width:100%">
+  <defs><marker id="mb18" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5z" fill="#2563eb"/></marker></defs>
+  <rect width="260" height="118" fill="#f8fafc" rx="6"/>
+  <text x="130" y="13" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a5f" font-family="sans-serif">Circuit moteur de pompe — alimentation</text>
+  <rect x="15" y="22" width="30" height="20" rx="3" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="30" y="35" text-anchor="middle" font-size="8" font-weight="bold" fill="#92400e" font-family="sans-serif">Réseau</text>
+  <line x1="45" y1="32" x2="65" y2="32" stroke="#334155" stroke-width="1.5" marker-end="url(#mb18)"/>
+  <rect x="65" y="22" width="34" height="20" rx="3" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="82" y="35" text-anchor="middle" font-size="8" fill="#334155" font-family="sans-serif">Disj.</text>
+  <line x1="99" y1="32" x2="119" y2="32" stroke="#334155" stroke-width="1.5" marker-end="url(#mb18)"/>
+  <rect x="119" y="22" width="34" height="20" rx="3" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="136" y="35" text-anchor="middle" font-size="8" fill="#334155" font-family="sans-serif">Démar.</text>
+  <line x1="153" y1="32" x2="173" y2="32" stroke="#334155" stroke-width="1.5" marker-end="url(#mb18)"/>
+  <circle cx="196" cy="32" r="18" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="196" y="36" text-anchor="middle" font-size="12" font-weight="bold" fill="#1d4ed8" font-family="sans-serif">M</text>
+  <line x1="196" y1="50" x2="196" y2="68" stroke="#334155" stroke-width="1.5"/>
+  <ellipse cx="196" cy="78" rx="22" ry="12" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="196" y="82" text-anchor="middle" font-size="8" font-weight="bold" fill="#1d4ed8" font-family="sans-serif">Pompe</text>
+  <text x="130" y="100" text-anchor="middle" font-size="9" fill="#334155" font-family="sans-serif" font-weight="bold">P = U·I·cosφ·√3  (triphasé)</text>
+  <text x="130" y="112" text-anchor="middle" font-size="8" fill="#64748b" font-family="sans-serif">cosφ ≈ 0,85 · η moteur ≈ 0,90</text>
+</svg>`,
       sections: [
         {
           titre: '1. Lois de base de l\'électricité',
